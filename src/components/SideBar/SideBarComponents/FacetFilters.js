@@ -15,6 +15,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { toggleCheckBox } from '../../../pages/dashboard/store/dashboardAction';
 import { Typography } from '../../Wrappers/Wrappers';
+import GA from '../../../utils/googleAnalytics';
 
 const FacetPanel = (classes) => {
   // data from store
@@ -31,10 +32,14 @@ const FacetPanel = (classes) => {
   const [groupExpanded, setGroupExpanded] = React.useState(['case']);
 
   const handleChange = (panel) => (event, isExpanded) => {
+    const panelStatus = isExpanded ? 'expand' : 'collapse';
+    GA.sendEvent('Facets', panelStatus, `${panel} Panel`);
     setExpanded(isExpanded ? panel : false);
   };
 
   const handleGroupChange = (panel) => (event, isExpanded) => {
+    const groupStatus = isExpanded ? 'expand' : 'collapse';
+    GA.sendEvent('Facets', groupStatus, `${panel} Group`);
     const groups = _.cloneDeep(groupExpanded);
     if (isExpanded) {
       groups.push(panel);
@@ -50,6 +55,11 @@ const FacetPanel = (classes) => {
 
   const handleToggle = (value) => () => {
     const valueList = value.split('$$');
+
+    // Note: Registering events based on Group Dimension(aka Panel) gets filterd.
+    // We are not tracking which specific values are being filter.
+    GA.sendEvent('Facets', 'Filter', valueList[1]);
+
     // dispatch toggleCheckBox action
     dispatch(toggleCheckBox([{
       groupName: valueList[1],
@@ -64,6 +74,7 @@ const FacetPanel = (classes) => {
   function FacetFilterWrapper(children, name, styles) {
     return (
       <ExpansionPanel
+        key={name}
         expanded={groupExpanded.includes(name)}
         onChange={handleGroupChange(name)}
         classes={{ expanded: classes.classes.expansionPanelExpanded }}
@@ -77,10 +88,10 @@ const FacetPanel = (classes) => {
             expandIcon: classes.classes.expansionPanelSummaryCateRootExpandIcon,
           }}
         >
-          <ListItemText classes={{ primary: classes.classes.expansionPanelSummaryCateTitle }} primary={`Filter By ${name[0].toUpperCase()}${name.slice(1)}s`} />
+          <ListItemText key={name} classes={{ primary: classes.classes.expansionPanelSummaryCateTitle }} primary={`Filter By ${name[0].toUpperCase()}${name.slice(1)}s`} />
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <List component="div" disablePadding dense>
+          <List component="div" disablePadding>
             {children}
           </List>
         </ExpansionPanelDetails>
@@ -101,6 +112,7 @@ const FacetPanel = (classes) => {
     }
     return (
       <ExpansionPanel
+        key={sideBarItem.groupName}
         expanded={expanded === sideBarItem.groupName}
         onChange={handleChange(sideBarItem.groupName)}
         classes={{ expanded: classes.classes.expansionPanelExpanded }}
@@ -118,7 +130,7 @@ const FacetPanel = (classes) => {
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
-          <List component="div" classes={{ root: classes.classes.nested }}>
+          <List key={sideBarItem.groupName} component="div" classes={{ root: classes.classes.nested }}>
             {
             sideBarItem.checkboxItems.map((checkboxItem) => {
               if (checkboxItem.cases === 0 && !checkboxItem.isChecked) {
@@ -140,18 +152,21 @@ const FacetPanel = (classes) => {
               }
               return (
                 <ListItem
+                  id={checkboxItem.name}
                   button
                   onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}$$${sideBarItem.section}$$${sideBarItem.key}`)}
                   className={classes.nested}
+                  key={`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}$$${sideBarItem.section}$$${sideBarItem.key}`}
                 >
                   <Checkbox
+                    id={`checkbox_${checkboxItem.name}`}
                     classes={{ root: styles }}
                     checked={checkboxItem.isChecked}
                     tabIndex={-1}
                     disableRipple
                   />
                   <ListItemText primary={(
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: 'flex' }} id={`content_${checkboxItem.name}`}>
                       <Typography>
                         {checkboxItem.name}
                       </Typography>

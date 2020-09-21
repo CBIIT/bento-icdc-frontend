@@ -28,6 +28,11 @@ const defaultFooterStyles = {
     fontSize: '15px',
     fontFamily: '"Open Sans", sans-serif',
     lineHeight: '22px',
+    marginTop: '-8px',
+    marginBottom: '5px',
+  },
+  paddingLeftRight: {
+    padding: '0 16px',
   },
 };
 
@@ -51,35 +56,37 @@ const CustomFooter = ({
         onChangeRowsPerPage={onChangeRowsPerPage}
       />
     </TableRow>
-    <TableRow>
-      <div className={classes.message} style={{ marginTop: '-8px', marginBottom: '5px' }}>
-        <span>
-          To access and analyze files: select and remove unwanted files,
-          click the “Download Manifest” button, and upload the resulting
-          Manifest file to your
-          {' '}
-          <Link target="_blank" className={classes.link} href="http://www.cancergenomicscloud.org/">
-            Seven Bridges Genomics
-          </Link>
-          <img
-            src={externalIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon}
-          />
-          {' '}
-          account.
-        </span>
+    <TableRow className={classes.comment}>
+      <div className={classes.paddingLeftRight}>
+        <div className={classes.message}>
+          <span>
+            To access and analyze files: select and remove unwanted files,
+            click the “Download Manifest” button, and upload the resulting
+            Manifest file to your
+            {' '}
+            <Link target="_blank" className={classes.link} href="http://www.cancergenomicscloud.org/">
+              Seven Bridges Genomics
+            </Link>
+            <img
+              src={externalIcon}
+              alt="outbounnd web site icon"
+              className={classes.linkIcon}
+            />
+            {' '}
+            account.
+          </span>
+        </div>
+        <TextField
+          id="multiline-user-coments"
+          label={label}
+          multiline
+          rows={6}
+          style={{ minWidth: '500px' }}
+          className={classes.textField}
+          margin="dense"
+          variant="filled"
+        />
       </div>
-      <TextField
-        id="multiline-user-coments"
-        label={label}
-        multiline
-        rows={6}
-        style={{ minWidth: '500px' }}
-        className={classes.textField}
-        margin="dense"
-        variant="filled"
-      />
     </TableRow>
     <TableRow />
   </TableFooter>

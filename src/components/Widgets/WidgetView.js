@@ -26,7 +26,7 @@ const Widget = ({
           props.header
         ) : (
           <>
-            <Typography size="md" weight="bold" family="Raleway" color={color}>
+            <Typography size="md" weight="bold" family="Raleway" classes={ {root :classes.textWithBackground}}>
               {title}
             </Typography>
           </>
@@ -45,6 +45,9 @@ const Widget = ({
 );
 
 const styles = (theme) => ({
+  textWithBackground: {
+    color: theme.palette.textWithBackground.main,
+  },
   widgetWrapper: {
     display: 'flex',
     minHeight: '100%',

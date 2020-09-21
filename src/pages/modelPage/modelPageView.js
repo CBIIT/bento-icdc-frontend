@@ -106,7 +106,6 @@ const ModelPage = ({ classes }) => {
 };
 
 const styles = () => ({
-
   linkIcon: {
     width: '20px',
     verticalAlign: 'sub',

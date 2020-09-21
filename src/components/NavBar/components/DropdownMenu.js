@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import {
   withStyles, Paper,
 } from '@material-ui/core';
+import cn from '../../../utils/classNameConcat';
 
 const CustomDropdownMenu = ({ classes, handleClick }) => (
   <>
@@ -23,6 +24,24 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           onClick={handleClick}
         >
           Steering Committee
+        </NavLink>
+        <NavLink
+          className={cn(classes.sublink, classes.link)}
+          activeStyle={{ color: 'white' }}
+          to="/DGAB"
+          onClick={handleClick}
+        >
+          <div>- Data Governance </div>
+          <div className={classes.paddingLeft10}>Advisory Board (DGAB)</div>
+        </NavLink>
+        <NavLink
+          className={cn(classes.sublink, classes.link)}
+          activeStyle={{ color: 'white' }}
+          to="/BPSC"
+          onClick={handleClick}
+        >
+          <div>- Best Practices</div>
+          <div className={classes.paddingLeft10}> Sub-Committee (BPSC)</div>
         </NavLink>
         <NavLink
           className={classes.link}
@@ -73,28 +92,35 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
 const styles = (theme) => ({
   paper: {
     background: '#309EC4',
-    width: '170px',
-    padding: '0px 16px 16px 16px',
+    width: '200px',
+    padding: '0px 18px 18px 18px',
+    marginLeft: '15px',
     position: 'absolute',
-    marginTop: '-5px',
+    marginTop: '-1px',
     borderRadius: '0',
+  },
+  sublink: {
+    fontWeight: '500 !important',
+  },
+  paddingLeft10: {
+    paddingLeft: '10px',
   },
   link: {
     textDecoration: 'none',
     color: 'black',
     fontFamily: theme.custom.fontFamilyRaleway,
-    fontSize: '13px',
-    fontWeight: '800',
+    fontSize: '14px',
+    fontWeight: '900',
     lineSpacing: '1px',
     display: 'block',
-    marginTop: '13px',
+    marginTop: '10px',
     '&:hover': {
       cursor: 'pointer',
       color: 'white',
     },
   },
   aboutItemsWrapper: {
-    maxWidth: '150px',
+    maxWidth: '180px',
   },
 });
 

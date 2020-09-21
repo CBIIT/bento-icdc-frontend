@@ -106,6 +106,7 @@ const styles = (theme) => ({
     fontSize: '12px',
     lineHeight: '17px',
     minHeight: '50px',
+    paddingBottom: '10px',
   },
 
   paddingLeft15: {

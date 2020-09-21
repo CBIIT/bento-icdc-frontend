@@ -10,7 +10,7 @@ import CustomFooter from './customFooter';
 import { addFiles } from '../../pages/cart/store/cartAction';
 
 const FileGridView = ({
-  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection, bottonText = 'Add Associated Files to My Cart',
+  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection, bottonText = 'Add Associated Files to My Files',
 }) => {
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state

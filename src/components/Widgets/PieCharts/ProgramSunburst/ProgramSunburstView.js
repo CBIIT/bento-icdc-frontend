@@ -42,7 +42,7 @@ function sortData(d) {
 // find the caseSize of a given title
 function findCaseSizeOfTitle(data, title) {
   if (title === '') {
-    return data.caseSize;
+    return data.children.reduce((a, c) => a + c.caseSize, 0);
   }
   if (data.title !== title) {
     if (data.children) {
@@ -92,21 +92,31 @@ class ProgramSunburst extends PureComponent {
     };
   }
 
-  render() {
-    const {
-      caseSize, size, widgetData, title,
-    } = this.state;
-    const {
-      width, height, data, textColor, classes,
-    } = this.props;
-    // update the caseSize  associated with title
+  componentDidUpdate(prevProps) {
+    // eslint-disable-next-line react/destructuring-assignment
+    if (prevProps.data !== this.props.data) {
+      this.updateStateIfNeeded();
+    }
+  }
 
+  updateStateIfNeeded() {
+    const { size, title } = this.state;
+    const { data } = this.props;
     this.setState({
       widgetData: sortData(data),
       size,
       title,
       caseSize: findCaseSizeOfTitle(data, title),
     });
+  }
+
+  render() {
+    const {
+      caseSize, widgetData, title,
+    } = this.state;
+    const {
+      width, height, textColor, classes,
+    } = this.props;
 
     return (
       <>
@@ -147,7 +157,7 @@ class ProgramSunburst extends PureComponent {
               <LabelSeries data={[{
                 x: 0,
                 y: 0,
-                label: caseSize,
+                label: caseSize.toString(),
                 style: {
                   fontSize: '12px',
                   textAnchor: 'middle',

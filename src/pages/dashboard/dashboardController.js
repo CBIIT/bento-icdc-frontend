@@ -18,7 +18,7 @@ class DashboardController extends Component {
 
     if (hasError) {
       return (
-        <Typography variant="headline" color="warning" size="sm">
+        <Typography variant="headline" size="sm">
           { error && `An error has occurred in loading stats component: ${error}`}
         </Typography>
       );
@@ -30,7 +30,7 @@ class DashboardController extends Component {
       return <Dashboard data={widgets} isSidebarOpened={isSidebarOpened} />;
     }
     return (
-      <Typography variant="headline" color="warning" size="sm">
+      <Typography variant="headline" size="sm">
         { error && `An error has occurred in loading stats component: ${error}`}
       </Typography>
     );

@@ -106,7 +106,7 @@ const CaseDetail = ({ classes, data }) => {
               {' '}
               {snackbarState.action}
               {' '}
-              to your cart
+              to your files
 
             </span>
           </div>
@@ -492,7 +492,7 @@ const CaseDetail = ({ classes, data }) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={FileDisableRowSelection}
-              bottonText="Add Selected Files to My Cart"
+              bottonText="Add Selected Files to My Files"
             />
           </Grid>
         </div>
@@ -510,7 +510,7 @@ const styles = (theme) => ({
     paddingBottm: '17px',
   },
   container: {
-    paddingTop: '50px',
+    paddingTop: '120px',
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '32px',
     paddingRight: '32px',

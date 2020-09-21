@@ -25,7 +25,9 @@ const Dashboard = ({
         [classes.contentShift]: isSidebarOpened,
       }, classes.content)}
       >
-        <Stats />
+        <div className={classes.fixStats}>
+          <Stats />
+        </div>
         <div className={classes.widgetsContainer}>
           <div className={classes.widgetsCollapse}>
             <div className={classes.floatLeft} />
@@ -42,7 +44,6 @@ const Dashboard = ({
                   root: classes.switchRoot,
                   switchBase: classes.switchBase,
                   thumb: classes.thumb,
-                  track: classes.track,
                   checked: classes.checked,
                 }}
                 disableRipple
@@ -198,8 +199,14 @@ const styles = (theme) => ({
   content: {
     // padding: theme.spacing.unit * 3,
   },
+  fixStats: {
+    position: 'fixed',
+    width: `calc(100vw - ${theme.custom.drawerWidth})`,
+    zIndex: '999',
+  },
   widgetsContainer: {
     background: theme.palette.widgetBackground.main,
+    paddingTop: '62px',
   },
   contentShift: {
     width: `calc(100vw - ${theme.custom.drawerWidth})`,

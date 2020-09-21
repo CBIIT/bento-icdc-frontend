@@ -39,9 +39,9 @@ export default ({
       minHeight: '40px',
       marginRight: '10px',
       background: '#EAEAEA',
-    },
-    selected: {
-      background: tablecolor,
+      '&$selected': {
+        background: tablecolor,
+      },
     },
     labelContainer: {
       fontSize: '18px',
@@ -56,8 +56,26 @@ export default ({
   overridesObj.MuiTabs = MuiTabs;
   overridesObj.MuiTab = MuiTab;
 
+  const MUIDataTable = {
+    responsiveStacked: {
+      transform: 'rotateX(180deg)',
+    },
+    tableRoot: {
+      transform: 'rotateX(180deg)',
+    },
+  };
+
+  overridesObj.MUIDataTable = MUIDataTable;
   style.push(overridesObj);
-  const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
+
+  const computedTheme = createMuiTheme({
+    ...themes.light,
+    ...overrides,
+    ...style,
+    typography: {
+      useNextVariants: true,
+    },
+  });
 
   return (
     <MuiThemeProvider theme={computedTheme}>

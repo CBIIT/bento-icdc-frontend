@@ -10,6 +10,8 @@ import committeeImg from '../../assets/about/Photo-About_SteeringCommittee.jpg';
 import supportImg from '../../assets/about/About_Support.jpg';
 import submitDataImg from '../../assets/about/Photo-About_SubmittingData.jpg';
 import AboutBody from './aboutBodyView';
+import BPSCImg from '../../assets/about/Photo-About_BPSC.jpg';
+import DAGBImg from '../../assets/about/Photo-About_DGAB.jpg';
 
 const ABOUT_CONTENT_URL = process.env.REACT_APP_ABOUT_CONTENT_URL;
 
@@ -29,6 +31,8 @@ const About = ({ match }) => {
       }
 
       const supportObj = resultData.find(({ page }) => page === match.path);
+      supportObj.imageAlt = supportObj.imageAlt === undefined
+        ? 'about' : supportObj.imageAlt;
 
       switch (match.path) {
         case '/crdc':
@@ -39,9 +43,16 @@ const About = ({ match }) => {
           break;
         case '/purpose':
           supportObj.image = purposeImg;
+          supportObj.imageAlt = 'Man holding dog closely';
           break;
         case '/steeringCommittee':
           supportObj.image = committeeImg;
+          break;
+        case '/DGAB':
+          supportObj.image = DAGBImg;
+          break;
+        case '/BPSC':
+          supportObj.image = BPSCImg;
           break;
         case '/support':
           supportObj.image = supportImg;
@@ -62,12 +73,15 @@ const About = ({ match }) => {
 
   return (
     <>
-      <AboutBody data={{
-        img: data.image ? data.image : '',
-        title: data.title ? data.title : '',
-        content: data.content ? data.content : '',
-        table: data.table ? data.table : '',
-      }}
+      <AboutBody
+        key={match.path + data.title}
+        data={{
+          img: data.image ? data.image : '',
+          imageAlt: data.imageAlt ? data.imageAlt : '',
+          title: data.title ? data.title : '',
+          content: data.content ? data.content : '',
+          table: data.table ? data.table : '',
+        }}
       />
     </>
   );

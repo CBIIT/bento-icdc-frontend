@@ -8,7 +8,9 @@ import submissionGuide from '../../assets/footer/ICDC_DGAB_Guidelines.pdf';
 const AboutBody = ({ classes, data }) => (
   <>
     <Stats />
-    <AboutHeader title={data.title} />
+    <div className={classes.paddingTop60}>
+      <AboutHeader title={data.title} />
+    </div>
     <div className={classes.container}>
       <Grid container spacing={16} direction="row" className={classes.aboutSection}>
         <Grid item lg={3} md={3} sm={12} xs={12} className={classes.leftSection}>
@@ -99,6 +101,9 @@ const AboutBody = ({ classes, data }) => (
 );
 
 const styles = () => ({
+  paddingTop60: {
+    paddingTop: '60px',
+  },
   container: {
     margin: '16px auto 16px auto',
     color: '#000000',

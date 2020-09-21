@@ -12,10 +12,10 @@ import FilesIcon from '../../assets/icons/Icon-files-stats.svg';
 import AliquotsIcon from '../../assets/icons/Icon-aliquots-stats.svg';
 
 const StatsView = ({ classes, data }) => (
-  <Grid container class={classes.statsContainer}>
+  <Grid container className={classes.statsContainer}>
     <Grid item xs={12}>
       <Paper className={classes.paper}>
-        <Grid container class={classes.statsMaxWidth}>
+        <Grid container className={classes.statsMaxWidth}>
           <Grid item xs={1} />
           <Grid item xs={12} sm={4} md={2} lg={2}>
             <div className={classes.statsGroup}>
@@ -133,6 +133,11 @@ const StatsView = ({ classes, data }) => (
 );
 
 const styles = (theme) => ({
+  statsContainer: {
+    position: 'fixed',
+    width: 'inherit !important',
+    zIndex: '999',
+  },
   card: {
     minHeight: '100%',
     display: 'flex',

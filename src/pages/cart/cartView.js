@@ -11,6 +11,7 @@ import MUIDataTable from 'mui-datatables';
 import icon from '../../assets/icons/Icon-MyCases.svg';
 import CustomFooter from './customFooter';
 import SkeletonTable from './components/skeletonTable';
+import GA from '../../utils/googleAnalytics';
 import { deleteFiles } from './store/cartAction';
 
 const tableStyle = (ratio = 1) => ({
@@ -43,6 +44,7 @@ const cartView = ({ classes, data, isLoading }) => {
   }
   function deleteFilesAndCloseModal() {
     closeModal();
+    GA.sendEvent('File', 'Removed', null, `${modalStatus.selectedFiles.length} Files`);
     dispatch(deleteFiles({ files: modalStatus.selectedFiles }));
     selectedFileIDs = [];
   }
@@ -115,6 +117,7 @@ const cartView = ({ classes, data, isLoading }) => {
   }
 
   function downloadJson() {
+    GA.sendEvent('Manifest', 'Download', 'cart');
     const jsonse = JSON.stringify(data);
     const csv = convertToCSV(jsonse);
     const exportData = new Blob([csv], { type: 'text/csv' });
@@ -320,9 +323,10 @@ const cartView = ({ classes, data, isLoading }) => {
   function divStyle() {
     const css = {
       position: 'absolute',
-      marginTop: '-47px',
+      marginTop: '-51px',
       marginLeft: '30px',
       display: 'none',
+      padding: '0 16px',
     };
     if (isLoading === false) {
       css.display = 'block';
@@ -369,7 +373,7 @@ const cartView = ({ classes, data, isLoading }) => {
           <DialogContentText id="alert-dialog-description">
             { modalStatus.selectedFiles.length }
             {' '}
-            File(s) will be removed from your cart
+            File(s) will be removed from your Files
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -420,7 +424,7 @@ const cartView = ({ classes, data, isLoading }) => {
               ref={deleteButton}
               onClick={removeFiles}
             >
-              Remove From Your Cart
+              Remove From Your Files
             </button>
           </div>
         </div>

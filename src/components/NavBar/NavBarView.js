@@ -105,7 +105,6 @@ const NavBar = ({
           <div className={classes.FilterIconPosition}>
             { (location.pathname === '/cases') && (
             <Button
-              variant="h6"
               weight="medium"
               aria-label="open drawer"
               onClick={toggleSidebar}
@@ -125,7 +124,7 @@ const NavBar = ({
           </div>
           {/* End Sidebar button */}
           <div className={classes.buttonContainer}>
-            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -135,7 +134,7 @@ const NavBar = ({
                 home
               </NavLink>
             </Button>
-            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -147,7 +146,7 @@ const NavBar = ({
 
             </Button>
 
-            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -158,7 +157,7 @@ const NavBar = ({
               </NavLink>
             </Button>
 
-            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -173,9 +172,8 @@ const NavBar = ({
 
           <Button
             disableRipple
-            variant="h6"
             weight="medium"
-            className={[classes.logotype, classes.myCasesPosition]}
+            className={classnames(classes.logotype, classes.myCasesPosition)}
             classes={{ root: classes.buttonRootNoRightPadding }}
           >
             <NavLink
@@ -184,7 +182,7 @@ const NavBar = ({
             >
               My Files
 
-              <Tooltip title="Cases" placement="bottom-end">
+              <Tooltip title="Files" placement="bottom-end">
                 <span className={classes.badge}>
                   <img
                     className={classes.cartLogoImg}

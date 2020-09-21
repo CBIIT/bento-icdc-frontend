@@ -7,7 +7,8 @@ import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
 import nciLogo from '../../assets/footer/NCI-footer.logo.svg';
 
-const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
+const BE_VERSION = process.env.REACT_APP_BE_VERSION;
+const FE_VERSION = process.env.REACT_APP_FE_VERSION;
 
 const Footer = ({ classes, data }) => {
   const location = useLocation();
@@ -233,11 +234,18 @@ Accessibility
         >
           <Typography>
             <span className={classes.footorVersiontext}>
-              Version:
+              FE Version:
               {' '}
-              {VERSION}
+              {FE_VERSION}
+            </span>
+            <br />
+            <span className={classes.footorVersiontext}>
+              BE Version:
+              {' '}
+              {BE_VERSION}
             </span>
           </Typography>
+
         </div>
       </div>
       {/* End of Quick and dirty for adding version number in footer */}

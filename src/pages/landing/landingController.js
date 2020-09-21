@@ -108,7 +108,8 @@ const LandingController = ({ classes }) => (
             Canine Data Commons
           </div>
           <div className={classes.headerContent}>
-            Exploring. analyzing, and understanding the biological relationships
+            A public resource for exploring, analyzing,
+            and understanding the biological relationships
             between human and canine cancers.
           </div>
           <div className={classes.headerButtonSection}>

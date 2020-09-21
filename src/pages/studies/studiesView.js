@@ -157,6 +157,7 @@ const styles = (theme) => ({
     maxWidth: '1440px',
     paddingLeft: '36px',
     paddingRight: '36px',
+    paddingTop: '60px',
   },
   paper: {
     textAlign: 'center',

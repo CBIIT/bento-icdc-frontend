@@ -2,7 +2,7 @@
 - 
   content: 
     - 
-      paragraph: "NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of spontaneously-arising canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects. The data is harmonized into an integrated data model and then made available to the research community. The ICDC is part of the Cancer Research Data Commons (CRDC), an initiative from NCI’s Center for Biomedical Informatics and Information Technology (CBIIT). Bioinformatic analysis of the ICDC data is accomplished using the CRDC’s $$[Cloud Resources](target:_self url:/#/crdc type:0)$$."
+      paragraph: "NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects. The data is harmonized into an integrated data model and then made available to the research community. The ICDC is part of the Cancer Research Data Commons (CRDC), an initiative from NCI’s Center for Biomedical Informatics and Information Technology (CBIIT). Bioinformatic analysis of the ICDC data is accomplished using the CRDC’s $$[Cloud Resources](target:_self url:/#/crdc type:0)$$."
     - 
       paragraph: "Within the FNLCR, the Biomedical Informatics and Data Science (BIDS) Directorate is focused on software engineering and data science. The Applied and Developmental Research Directorate (ADRD) is managing the ICDC Steering Committee and providing one of the data sources for the ICDC. Finally, there is also an ICDC Steering Committee (composed of external members, FNLCR and NCI staff) that provides advice to DCTD on the ICDC."
   page: /purpose
@@ -135,13 +135,7 @@
                 - CGCGB/NHGRI
                 - NIH
                 - BPSC
-            -
-              row:
-                - "Anju Singh"
-                - IOB/DTP/DCTD/NCI
-                - NIH
-                - "-"
-            -
+            - 
               row: 
                 - "Connie Sommers"
                 - IOB/DTP/DCTD/NCI
@@ -228,7 +222,7 @@
     - 
       paragraph: "The ICDC will adhere to $$[FAIR](https://www.go-fair.org/fair-principles/)$$ principles of data stewardship: Findable, Accessible, Interoperable, and Reusable. Please credit the ICDC in your manuscript. When citing individual projects, please refer to the attribution policies of the project when available."
     - 
-      paragraph: "$$#LICENSE#$$"
+      paragraph: "$$#LICENCE#$$"
     - 
       paragraph: "Data made available through the ICDC is for research purposes only. The ICDC provides researchers with access to data from canine cancer studies to enable exploratory analysis that cannot be considered definitive for outcomes. All data is publicly available."
     - 
@@ -252,7 +246,7 @@
     - 
       paragraph: "https://caninecommons.cancer.gov/v1/graphql/"
     - 
-      paragraph: "Users do not require authentication to the system - the data are public."
+      paragraph: "Users do not require authentication to the system - the data is public."
     - 
       paragraph: "These APIs are provided “as is”; there are no warranties or conditions arising out of usage of these services."
     - 
@@ -272,14 +266,6 @@
 - 
   content: 
     - 
-      paragraph: "$$@Happy National Dog Day!@$$"
-    -
-      paragraph: "$$*•	Pet owners:*$$ Visit NCI’s $$[Comparative Oncology Program](https://ccr.cancer.gov/comparative-oncology-program)$$ for more resources, blogs, and information about canine clinical trials and how your pet can enroll."
-    -
-      paragraph: "$$*•	Cancer patients:*$$ Learn more about how pet dog’s have $$[shared their data to shed light on cancer treatments](https://www.cancer.gov/news-events/cancer-currents-blog/2019/comparative-oncology-dogs-cancer-clinical-trials)$$ for both dog and human patients."
-    -
-      paragraph:
-    -
       paragraph: "The ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. If a researcher has data that will help this mission and they are willing to share that data in the ICDC, they will make a request through our $${submission request process [PDF]}$$. Please email $$@ICDCHelpDesk@mail.nih.gov@$$ for instructions. All data in the ICDC will be made publicly available."
     - 
       paragraph: "Projects need not be complete to start the request. Indeed, working with the ICDC before defining your data collection processes can be beneficial, as the ICDC can help advise on best practices that will enable more efficient and effective submission of the data."
