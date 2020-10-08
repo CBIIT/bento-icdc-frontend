@@ -6,9 +6,10 @@ import { useLocation } from 'react-router';
 import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
 import nciLogo from '../../assets/footer/NCI-footer.logo.svg';
+import env from '../../utils/env';
 
-const BE_VERSION = process.env.REACT_APP_BE_VERSION;
-const FE_VERSION = process.env.REACT_APP_FE_VERSION;
+const BE_VERSION = env.REACT_APP_BE_VERSION;
+const FE_VERSION = env.REACT_APP_FE_VERSION;
 
 const Footer = ({ classes, data }) => {
   const location = useLocation();

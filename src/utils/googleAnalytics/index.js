@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactGA from 'react-ga';
 import { Route } from 'react-router-dom';
+import env from '../env';
 
 class GoogleAnalytics extends Component {
   componentDidMount() {
@@ -48,7 +49,6 @@ GoogleAnalytics.propTypes = {
 const RouteTracker = () => <Route component={GoogleAnalytics} />;
 
 const init = (options = {}) => {
-  const env = process.env || {};
   const isGAEnabled = !!env.REACT_APP_GA_TRACKING_ID;
 
   if (isGAEnabled) {

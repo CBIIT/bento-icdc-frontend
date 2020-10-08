@@ -12,8 +12,9 @@ import submitDataImg from '../../assets/about/Photo-About_SubmittingData.jpg';
 import AboutBody from './aboutBodyView';
 import BPSCImg from '../../assets/about/Photo-About_BPSC.jpg';
 import DAGBImg from '../../assets/about/Photo-About_DGAB.jpg';
+import env from '../../utils/env';
 
-const ABOUT_CONTENT_URL = process.env.REACT_APP_ABOUT_CONTENT_URL;
+const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
 
 const About = ({ match }) => {
   const [data, setData] = useState([]);
