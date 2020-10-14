@@ -195,7 +195,7 @@ export function getSunburstDataFromDashboardData(data) {
   data.forEach((d) => {
     let existProgram = false;
     let existStudy = false;
-    if (d.program && d.study_code) {
+    if (d.program && d.study_code && d.case_id) {
       widgetData.map((p) => {
         if (p.title === d.program) { // program exist
           existProgram = true;

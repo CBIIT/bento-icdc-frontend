@@ -12,30 +12,24 @@ import {
   Tooltip,
   withStyles,
 } from '@material-ui/core';
-// import {
-//   ColorLens as ColorLensIcon,
-// } from '@material-ui/icons';
 import classnames from 'classnames';
-// import { useTheme } from '../ThemeContext';
 import caseIcon from '../../assets/icons/Icon-MyCases.svg';
 import funnelIconBlue from '../../assets/icons/Icon-funnel-blue.svg';
 import funnelIconWhite from '../../assets/icons/Icon-funnel-white.svg';
-// import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
 import { initCart } from '../../pages/cart/store/cartAction';
 import { toggleCheckBox } from '../../pages/dashboard/store/dashboardAction';
 import { unselectFilters } from '../../utils/dashboardUtilFunctions';
 import AboutMenu from './components/AboutMenu';
+import env from '../../utils/env';
 
 const drawerWidth = 240;
-// const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
-// const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
-const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
+
+const BACKEND_GETUSERINFO_API = env.REACT_APP_BACKEND_GETUSERINFO_API;
 
 const NavBar = ({
   classes, isSidebarOpened, toggleSidebar, location,
 }) => {
-  // const theme = useTheme();
   const [authState, setAuthState] = React.useState({
     isAuthorized: localStorage.getItem('isAuthorized') === 'true',
   });

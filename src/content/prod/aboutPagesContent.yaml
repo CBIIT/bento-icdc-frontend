@@ -10,208 +10,13 @@
 - 
   content: 
     - 
-      paragraph: "The Best Practices SubCommittee (BPSC) has the responsibility for identifying and recommending best practices that the Integrated Canine Data Commons (ICDC) will implement to streamline and harmonize data collection, standardize data formats and platforms, and manage and annotate data (especially clinical data). The ICDC will encompass clinical, pathologic, genomic, biomarker and imaging data. The overall goal of BPSC will be to streamline and standardize data collection and management for canine studies.  The BPSC will examine past and planned studies and will recommend prospective standards for data collection and management including clinical, pathologic, and sequencing data. The BPSC consists of 8 external members, 5 NCI staff, 1 NHGRI staff and is supported by FNLCR staff. The BPSC has focused into four working groups: Imaging, Clinical/Pathology, Genomics, and Immunology."
-    - 
-      paragraph: "$$@Working Group Goals:@$$"
-    - 
-      paragraph: "$$@Imaging@$$: Our overarching objective is to provide the comparative cancer research community with guidelines and best practices for the collection, formatting and reporting of imaging data collected from canine companion animals with naturally-occurring cancers into the Integrated Canine Data Commons (ICDC). This is to facilitate the utilization and analysis of such data by stakeholders in the cancer research community to facilitate dog-to-human translational research and advancement of knowledge in the comparative space."
-    - 
-      paragraph: "$$@Genomics@$$: Provide an overview of next generation sequencing (NGS) study design, assays and analysis approaches (focusing on genomics and transcriptomics) utilized by diverse canine cancer research teams alongside annotation of validation studies, canine-specific tool needs, and parameters; Identify common elements across published analyses; Establish general principles in canine cancer genomics best practices modeled on human cancer genomics best practice principles; Identify gaps in canine cancer genomics best practices and propose solutions."
-    - 
-      table: 
-        - 
-          head: 
-            - name
-            - position
-            - affiliation
-            - "Working Group"
-        - 
-          body: 
-            - 
-              row: 
-                - "$$[Jeff Trent](target:_blank url:/#/crdc)$$"
-                - "Chair, BPSC"
-                - "Translational Genomics Research Institute (TGen)"
-                - "-"
-            - 
-              row: 
-                - "M.R. Chambers"
-                - "Chair, Clin/Path WG"
-                - "University of Alabama at Birmingham"
-                - Clinical/Pathology
-            - 
-              row: 
-                - "Dawn Duval"
-                - Member
-                - "Colorado State University"
-                - Genomics
-            - 
-              row: 
-                - "Heather Gardner"
-                - Member
-                - "Translational Genomics Research Institute (TGen)"
-                - Genomics
-            - 
-              row: 
-                - "Allison Heath"
-                - "Co-Chair, Genomics WG"
-                - "Children’s Hospital of Philadelphia"
-                - Genomics
-            - 
-              row: 
-                - "Toby Hecht"
-                - Member
-                - NIH/NCI/DCTD
-                - Immunology
-            - 
-              row: 
-                - "Paula Jacobs"
-                - "Co-Chair, Imaging WG"
-                - NIH/NCI/DCTD/CIP
-                - Imaging
-            - 
-              row: 
-                - "Amy LeBlanc"
-                - "Co-Chair, Imaging WG"
-                - NIH/NCI/CCR/COP
-                - Imaging
-            - 
-              row: 
-                - "Deborah Knapp"
-                - "Co-Chair, Immunology WG"
-                - "Purdue University"
-                - "Clinical/Pathology, Immunology"
-            - 
-              row: 
-                - "Cheryl London"
-                - "Co-Chair, Clin/Path WG, Co-Chair, Immunology WG"
-                - "Tufts University"
-                - "Clincal/Pathology, Immunology"
-            - 
-              row: 
-                - "Elaine Ostrander"
-                - Member
-                - NIH/NHGRI/CGCGB
-                - Genomics
-            - 
-              row: 
-                - "Anju Singh"
-                - Member
-                - NIH/NCI/DCTD/DTP/IOB
-                - Immunology
-            - 
-              row: 
-                - "Connie Sommers"
-                - Member
-                - NIH/NCI/DCTD/DTP/IOB
-                - Immunology
-            - 
-              row: 
-                - "Shaying Zhao"
-                - "Co-Chair, Genomics WG"
-                - "University of Georgia"
-                - "Genomics, Immunology"
-            - 
-              row: 
-                - "Matthew Beyers"
-                - Coordinator
-                - FNLCR
-                - "-"
-            - 
-              row: 
-                - "Philip Musk"
-                - "Data Subject Matter Expert"
-                - FNLCR
-                - "-"
-  page: /BPSC
-  title: BPSC
-- 
-  content: 
-    - 
-      paragraph: "$$@Background:@$$"
-    - 
-      paragraph: "The Integrated Canine Data Commons (ICDC) will receive data from many projects and provide the community with relevant access to that data. Not all requests to have ICDC receive data can be accommodated due to the ICDC’s focus and the effort and costs associated with bringing the data into the ICDC. Therefore, the ICDC must develop, document and adhere to a Data Governance Process."
-    - 
-      paragraph: "The Data Governance Advisory Board (DGAB) consists of 4 external members (all from ICDC Steering Committee), 2 NIH members (1 of whom is from CBIIT) and is supported by FNLCR staff. When researchers request their data ($${title:submission guide [PDF],link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_DGAB_Guidelines_v1.3.pdf}$$) to be added to the ICDC to be shared with the community, the role of the DGAB is to advise the NCI on the suitability of request. The NCI makes the final decision on the request. The DGAB is chaired by a non-NIH member of ICDC Steering Committee. The DGAB meets at least quarterly to review and prioritize all open and complete requests."
-    - 
-      paragraph: "The $$[current studies](https://wiki.nci.nih.gov/display/ICDC/Study+Priority+Listing)$$ and their priority are listed on the ICDC project wiki. This $${title:template,link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_Data_Submission_Request_Template.docx}$$ can be used as an aid to the submitter."
-    - 
-      paragraph: "$$@DGAB Composition:@$$"
-    - 
-      table: 
-        - 
-          head: 
-            - name
-            - position
-            - affiliation
-        - 
-          body: 
-            - 
-              row: 
-                - "Warren Kibbe"
-                - Chair
-                - "Duke University"
-            - 
-              row: 
-                - "Matthew Breen"
-                - Member
-                - "North Carolina State University"
-            - 
-              row: 
-                - "William Hendricks"
-                - Member
-                - "Translational Genomics Research Institute (TGen)"
-            - 
-              row: 
-                - "Roel Verhaak"
-                - Member
-                - "The Jackson Laboratory"
-            - 
-              row: 
-                - "Greg Tawa"
-                - Member
-                - NIH/TRNDP/NCATS
-            - 
-              row: 
-                - "Erika Kim"
-                - Member
-                - NIH/NCI/CBIIT
-    - 
-      paragraph: "$$@NCI Senior Advisory Committee:@$$"
-    - 
-      paragraph: "The NCI Senior Advisory Committee serves as the final point of approval and prioritization for studies, and as the final deciding point of any re-prioritization that becomes necessary."
-    - 
-      table: 
-        - 
-          head: 
-            - name
-            - position
-            - affiliation
-        - 
-          body: 
-            - 
-              row: 
-                - "Connie Sommers"
-                - Chair
-                - NIH/NCI/DCTD
-            - 
-              row: 
-                - "Amy LeBlanc"
-                - Member
-                - NIH/NCI/CCR/COP
-            - 
-              row: 
-                - "Javed Kahn"
-                - Member
-                - NIH/NCI/CCR/CGB
-  page: /DGAB
-  title: DGAB
-- 
-  content: 
-    - 
       paragraph: "The ICDC (Integrated Canine Data Commons) is community driven and built with input and collaboration from many groups to foster a diversity of ideas and to ensure needs are identified across the broad Research Community . To achieve this collaboration, the ICDC Steering Committee was formed to advise the NCI and FNLCR on the ICDC. The Steering Committee is composed of 11 members from the non-NIH research community, 7 from NCI, 1 from NHGRI and 1 from NCATS. There is also 1 observer from the NCI and 4 ex-officio members who are FNLCR staff. The chairperson is from the non-NIH research community."
     - 
-      paragraph: "The Steering Committee has two sub-committees: the $$[Data Governance Advisory Board](target:_self url:/#/dgab type:0)$$ (DGAB) and the $$[Best Practices Sub-Committee](target:_self url:/#/bpsc type:0)$$ (BPSC)."
+      paragraph: "The Steering Committee has two sub-committees; Data Governance Advisory Board (DGAB) and the Best Practices Sub-Committee (BPSC)."
+    - 
+      paragraph: "The DGAB consists of 4 external members (all from ICDC Steering Committee), 2 NIH members (1 of whom is from CBIIT) and is supported by FNLCR staff. When researchers request their data ($${submission guide [PDF]}$$) to be added to the ICDC to be shared with the community, the role of the DGAB is to advise the NCI on the suitability of request. The NCI makes the final decision on the request. The DGAB is chaired by a non-NIH member of ICDC Steering Committee. The DGAB meets at least quarterly to review and prioritize all open and complete requests."
+    - 
+      paragraph: "The BPSC consists of 7 external members (all from ICDC Steering Committee), 3 NCI staff, 1 NHGRI staff and is supported by FNLCR staff. The overall goal of the BPSC is to streamline and standardize data collection and management for canine studies. The BPSC examines past and planned studies and recommends prospective standards for data collection and management in four main areas; imaging, clinical/pathology, immunology and genomic/sequencing data."
     - 
       table: 
         - 
@@ -224,7 +29,7 @@
           body: 
             - 
               row: 
-                - "$$[Matthew Breen](https://cvm.ncsu.edu/directory/breen-matthew/)$$"
+                - "Matthew Breen"
                 - "North Carolina State University"
                 - External
                 - DGAB
@@ -252,7 +57,7 @@
                 - "Translational Genomics Research Institute (TGen)"
                 - External
                 - DGAB
-            - 
+            -
               row: 
                 - "Warren Kibbe"
                 - "Duke University"
@@ -272,16 +77,16 @@
                 - BPSC
             - 
               row: 
-                - "Jeff Trent"
-                - "Translational Genomics Research Institute (TGen)"
-                - External
-                - BPSC
-            - 
-              row: 
                 - "Roel Verhaak"
                 - "The Jackson Laboratory"
                 - External
                 - DGAB
+            - 
+              row: 
+                - "Jeff Trent"
+                - "Translational Genomics Research Institute (TGen)"
+                - External
+                - BPSC
             - 
               row: 
                 - "Shaying Zhao"
@@ -330,13 +135,13 @@
                 - CGCGB/NHGRI
                 - NIH
                 - BPSC
-            - 
-              row: 
+            -
+              row:
                 - "Anju Singh"
                 - IOB/DTP/DCTD/NCI
                 - NIH
-                - "BPSC"
-            - 
+                - "-"
+            -
               row: 
                 - "Connie Sommers"
                 - IOB/DTP/DCTD/NCI
@@ -468,14 +273,14 @@
   content: 
     - 
       paragraph: "$$@Happy National Dog Day!@$$"
-    - 
-      paragraph: "$$*•  Pet owners:*$$ Visit NCI’s $$[Comparative Oncology Program](https://ccr.cancer.gov/comparative-oncology-program)$$ for more resources, blogs, and information about canine clinical trials and how your pet can enroll."
-    - 
-      paragraph: "$$*•  Cancer patients:*$$ Learn more about how pet dog’s have $$[shared their data to shed light on cancer treatments](https://www.cancer.gov/news-events/cancer-currents-blog/2019/comparative-oncology-dogs-cancer-clinical-trials)$$ for both dog and human patients."
-    - 
-      paragraph: ~
-    - 
-      paragraph: "The ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. If a researcher has data that will help this mission and they are willing to share that data in the ICDC, they will make a request through our $${title:submission request process [PDF],link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_DGAB_Guidelines_v1.3.pdf}$$. Please email $$@ICDCHelpDesk@mail.nih.gov@$$ for instructions. All data in the ICDC will be made publicly available.This $${title:template,link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_Data_Submission_Request_Template.docx}$$ can be used as an aid to the submitter."
+    -
+      paragraph: "$$*•	Pet owners:*$$ Visit NCI’s $$[Comparative Oncology Program](https://ccr.cancer.gov/comparative-oncology-program)$$ for more resources, blogs, and information about canine clinical trials and how your pet can enroll."
+    -
+      paragraph: "$$*•	Cancer patients:*$$ Learn more about how pet dog’s have $$[shared their data to shed light on cancer treatments](https://www.cancer.gov/news-events/cancer-currents-blog/2019/comparative-oncology-dogs-cancer-clinical-trials)$$ for both dog and human patients."
+    -
+      paragraph:
+    -
+      paragraph: "The ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. If a researcher has data that will help this mission and they are willing to share that data in the ICDC, they will make a request through our $${submission request process [PDF]}$$. Please email $$@ICDCHelpDesk@mail.nih.gov@$$ for instructions. All data in the ICDC will be made publicly available."
     - 
       paragraph: "Projects need not be complete to start the request. Indeed, working with the ICDC before defining your data collection processes can be beneficial, as the ICDC can help advise on best practices that will enable more efficient and effective submission of the data."
     - 

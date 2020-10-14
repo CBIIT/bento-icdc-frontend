@@ -40,7 +40,6 @@
     "line-awesome": "github:icons8/line-awesome",
     "lodash": "^4.17.19",
     "mini-css-extract-plugin": "0.5.0",
-    "mui-custom-datatables": "git+https://github.com/skiran86/mui-custom-datatables.git",
     "mui-datatables": "^2.14.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.2.1",

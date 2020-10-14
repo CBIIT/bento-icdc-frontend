@@ -1,5 +1,6 @@
 import * as React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import env from './env';
 
 export default function createSvgIcon(path, displayName) {
   const Component = React.memo(
@@ -10,7 +11,7 @@ export default function createSvgIcon(path, displayName) {
     )),
   );
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (env.NODE_ENV !== 'production') {
     Component.displayName = `${displayName}Icon`;
   }
 
