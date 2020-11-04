@@ -18,6 +18,7 @@ import Cart from '../../pages/cart/cartController';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutController';
 import GA from '../../utils/googleAnalytics';
+import LinkBar from '../LinkBar/LinkBarView';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -29,6 +30,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <CssBaseline />
     <HashRouter>
       <>
+        <LinkBar />
         <Header />
         <NavBar />
         {/* Reminder: Ajay need to replace the ICDC with env variable and

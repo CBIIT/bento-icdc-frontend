@@ -137,6 +137,7 @@ const styles = (theme) => ({
     position: 'fixed',
     width: 'inherit !important',
     zIndex: '999',
+    marginTop: '20px',
   },
   card: {
     minHeight: '100%',

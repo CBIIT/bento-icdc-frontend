@@ -206,7 +206,7 @@ const styles = (theme) => ({
   },
   widgetsContainer: {
     background: theme.palette.widgetBackground.main,
-    paddingTop: '62px',
+    paddingTop: '82px',
   },
   contentShift: {
     width: `calc(100vw - ${theme.custom.drawerWidth})`,

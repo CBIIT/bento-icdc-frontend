@@ -259,7 +259,7 @@ const styles = (theme) => ({
     margin: '0 auto',
   },
   appBar: {
-    marginTop: '100px',
+    marginTop: '120px',
     width: '100vw',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['margin'], {
@@ -380,7 +380,7 @@ const styles = (theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    marginTop: '100px',
+    marginTop: '120px',
     zIndex: '1201',
     height: 'calc(100% - 100px)',
   },
