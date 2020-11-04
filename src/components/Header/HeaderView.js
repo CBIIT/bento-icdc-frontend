@@ -49,7 +49,7 @@ const styles = () => ({
     position: 'fixed',
     minHeight: '100px',
     justifyContent: 'space-between',
-    top: '0px',
+    top: '20px',
     zIndex: '1201',
     background: '#ffffff',
   },
