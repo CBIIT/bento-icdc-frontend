@@ -39,7 +39,7 @@
              row: 
                 - "QA testing DGAB"
                 -  "$$[Cloud Resources - internal link](target:_self url:/#/crdc type:0)$$"
-                - "$$[Comparative Oncology Program] external link (https://ccr.cancer.gov/comparative-oncology-program)$$"
+                - "$$[Comparative Oncology Program - external link](https://ccr.cancer.gov/comparative-oncology-program)$$"
             - 
               row: 
                 - "M.R. Chambers"
@@ -156,7 +156,7 @@
               row: 
                 - "QA testing DGAB"
                 -  "$$[Cloud Resources - internal link](target:_self url:/#/crdc type:0)$$"
-                - "$$[Comparative Oncology Program] external link (https://ccr.cancer.gov/comparative-oncology-program)$$"
+                - "$$[Comparative Oncology Program-external link](https://ccr.cancer.gov/comparative-oncology-program)$$"
             - 
               row: 
                 - "Matthew Breen"
