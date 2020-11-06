@@ -36,6 +36,11 @@
                 - "Translational Genomics Research Institute (TGen)"
                 - ~
             - 
+             row: 
+                - "QA testing DGAB"
+                -  "$$[Cloud Resources - internal link](target:_self url:/#/crdc type:0)$$"
+                - "$$[Comparative Oncology Program] external link (https://ccr.cancer.gov/comparative-oncology-program)$$"
+            - 
               row: 
                 - "M.R. Chambers"
                 - "Chair, Clin/Path WG"
@@ -147,6 +152,11 @@
                 - "Warren Kibbe"
                 - Chair
                 - "Duke University"
+            - 
+              row: 
+                - "QA testing DGAB"
+                -  "$$[Cloud Resources - internal link](target:_self url:/#/crdc type:0)$$"
+                - "$$[Comparative Oncology Program] external link (https://ccr.cancer.gov/comparative-oncology-program)$$"
             - 
               row: 
                 - "Matthew Breen"
