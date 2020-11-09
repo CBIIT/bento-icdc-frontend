@@ -6,7 +6,6 @@
     - 
       paragraph: "Within the FNLCR, the Biomedical Informatics and Data Science (BIDS) Directorate is focused on software engineering and data science. The Applied and Developmental Research Directorate (ADRD) is managing the ICDC Steering Committee and providing one of the data sources for the ICDC. Finally, there is also an ICDC Steering Committee (composed of external members, FNLCR and NCI staff) that provides advice to DCTD on the ICDC."
   page: /purpose
-  title: Purpose
 - 
   content: 
     - 
@@ -471,7 +470,7 @@
     - 
       paragraph: ~
     - 
-      paragraph: "The ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. If a researcher has data that will help this mission and they are willing to share that data in the ICDC, they will make a request through our $${title:submission request process [PDF],link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_DGAB_Guidelines_v1.3.pdf}$$. Please email $$@ICDCHelpDesk@mail.nih.gov@$$}$$. Please email $$@ICDCHelpDesk@mail.nih.gov@$$ for instructions. All data in the ICDC will be made publicly available.This $${title:template,link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_Data_Submission_Request_Template.docx}$$ can be used as an aid to the submitter."
+      paragraph: "The ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. If a researcher has data that will help this mission and they are willing to share that data in the ICDC, they will make a request through our $${title:submission request process [PDF],link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_DGAB_Guidelines_v1.3.pdf}$$. Please email $$@ICDCHelpDesk@mail.nih.gov@$$ for instructions. All data in the ICDC will be made publicly available.This $${title:template,link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_Data_Submission_Request_Template.docx}$$ can be used as an aid to the submitter."
     - 
       paragraph: "Projects need not be complete to start the request. Indeed, working with the ICDC before defining your data collection processes can be beneficial, as the ICDC can help advise on best practices that will enable more efficient and effective submission of the data."
     - 
