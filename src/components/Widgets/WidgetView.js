@@ -9,24 +9,31 @@ import { Typography } from '../Wrappers/Wrappers';
 
 const Widget = ({
   classes,
-  color,
+  color, // Color of text
   children,
-  title,
-  noBodyPadding,
+  title,  // Title of the widget
+  noBodyPadding, // NO padding 
   bodyClass,
   className,
   header,
-  customBackGround,
+  customBackGround, // For customBackground Color
+  titleClass,
+  widgetBorderDivider, // true for add  bottom divider
+  noPaddedTitle, // Padded title
   ...props
 }) => (
   <div className={classes.widgetWrapper}>
     <Paper className={classnames(classes.paper,{[classes.customBackGround]:customBackGround})} classes={{ root: classes.widgetRoot }}>
-      <div className={classes.widgetHeader}>
+      <div id={title} className={classes.widgetHeader}
+        className={classnames(classes.paddedTitle, {
+          [classes.noPaddedTitle]: noPaddedTitle
+      })}
+      >
         {props.header ? (
           props.header
         ) : (
           <>
-            <Typography size="md" weight="bold" family="Raleway" classes={ {root :classes.textWithBackground}}>
+            <Typography className={titleClass} size="md" weight="normal" family="Nunito" color={color} align='center'>
               {title}
             </Typography>
           </>
@@ -40,21 +47,31 @@ const Widget = ({
       >
         {children}
       </div>
+      {widgetBorderDivider && <hr className={classes.widgetDivider} />}
     </Paper>
   </div>
 );
 
 const styles = (theme) => ({
-  textWithBackground: {
-    color: theme.palette.textWithBackground.main,
-  },
   widgetWrapper: {
     display: 'flex',
     minHeight: '100%',
   },
-  widgetHeader: {
-    padding: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit,
+  widgetDivider:{
+    background: theme.custom.widgetDivider,
+    height: '6px',
+    width: '180px',
+    border: 'none',
+    margin: '16px auto 0px auto'
+  },
+  paddedTitle: {
+    margin: '32px 32px 0px 64px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  noPaddedTitle: {
+    margin: '0px 0px 0px 0px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -64,7 +81,6 @@ const styles = (theme) => ({
   },
   widgetBody: {
     margin:'0px auto',
-    paddingBottom: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 3,
   },

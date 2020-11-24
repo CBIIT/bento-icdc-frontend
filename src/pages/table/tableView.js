@@ -3,7 +3,7 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import MUIDataTable from 'mui-datatables';
+import { CustomDataTable } from 'bento-components';
 
 const columns = [{ name: 'program_id', label: 'Program' },
   { name: 'clinical_study_designation', label: 'Study Code' },
@@ -30,7 +30,8 @@ const data = [
 ];
 
 const options = {
-  selectableRows: false,
+  selectableRows: 'none',
+  responsive: 'stacked',
   search: false,
   filter: false,
   searchable: false,
@@ -43,7 +44,7 @@ const Studies = () => (
   <>
     <Grid container spacing={32}>
       <Grid item xs={12}>
-        <MUIDataTable
+        <CustomDataTable
           title="Sample Table"
           data={data}
           columns={columns}

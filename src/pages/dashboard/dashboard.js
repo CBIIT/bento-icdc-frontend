@@ -1,212 +1,167 @@
 import React from 'react';
-import classnames from 'classnames';
 import {
   Grid, withStyles, Button, Switch, Collapse, FormControlLabel,
 } from '@material-ui/core';
+import { ProgramSunburst, CustomActiveDonut } from 'bento-components';
 import { useTheme } from '../../components/ThemeContext';
 import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/DashboardStatsController';
-import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
-import CustomActiveDonut from '../../components/Widgets/PieCharts/CustomActiveDonut/CustomActiveDonutController';
-import Tab from './components/tabController';
+import Cases from './caseTable/caseController';
+// import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
+import SideBar from '../../components/SideBar/SideBarView';
+import { widgetsData } from '../../bento/dashboardData';
+import colors from '../../utils/colors';
+
+const displaywidgets = widgetsData.filter((widget) => widget.show === true).slice(0, 6);
 
 const Dashboard = ({
-  classes, data, isSidebarOpened, theme,
+  classes, data, theme,
 }) => {
-  const [checked, setChecked] = React.useState(true);
+  const [collapse, setCollapse] = React.useState(true);
   const themeChanger = useTheme();
   const handleChange = () => {
-    setChecked((prev) => !prev);
+    setCollapse((prev) => !prev);
   };
 
   return (
     <>
-      <div className={classnames({
-        [classes.contentShift]: isSidebarOpened,
-      }, classes.content)}
-      >
-        <div className={classes.fixStats}>
-          <Stats />
-        </div>
-        <div className={classes.widgetsContainer}>
-          <div className={classes.widgetsCollapse}>
-            <div className={classes.floatLeft} />
-            <div className={classes.floatRight}>
-              <FormControlLabel
-                control={(
-                  <Button className={classes.customButton} onClick={handleChange}>
-                    {checked ? 'Close View' : 'Open View' }
-                  </Button>
-)}
-              />
-              <Switch
-                classes={{
-                  root: classes.switchRoot,
-                  switchBase: classes.switchBase,
-                  thumb: classes.thumb,
-                  checked: classes.checked,
-                }}
-                disableRipple
-                onChange={() => {
-                  themeChanger.toggleTheme();
-                }}
-              />
+      <div className={classes.dashboardContainer}>
+        <Stats />
+        <div>
+          <div className={classes.content}>
+            <div className={classes.sideBar}>
+              <SideBar />
             </div>
-          </div>
-          <Collapse in={checked} className={classes.backgroundShawdowWidgets}>
-            <Grid container spacing={8}>
-              <Grid item lg={4} md={6} sm={12} xs={12}>
-                <Widget
-                  title="Programs and Studies"
-                  upperTitle
-                  bodyClass={classes.fullHeightBody}
-                  className={classes.card}
-                  color="textWithBackground"
-                  customBackGround
-                >
-                  <div className={classes.marginTop18}>
-                    <ProgramSunburst
-                      data={data.studiesByProgram}
-                      width={250}
-                      height={180}
-                      innerRadius={40}
-                      outerRadius={65}
-                      cx="50%"
-                      cy="50%"
-                      textColor={theme.palette.widgetBackground.contrastText}
+            <div className={classes.rightContent}>
+              <div className={classes.widgetsContainer}>
+                <div className={classes.widgetsCollapse}>
+                  <div className={classes.floatLeft} />
+                  <div className={classes.floatRight}>
+                    <FormControlLabel
+                      control={(
+                        <Button className={classes.customButton} onClick={handleChange}>
+                          {collapse ? 'COLLAPSE VIEW' : 'OPEN VIEW' }
+                        </Button>
+)}
+                    />
+                    <Switch
+                      classes={{
+                        root: classes.switchRoot,
+                        switchBase: classes.switchBase,
+                        thumb: classes.thumb,
+                        track: classes.track,
+                        checked: classes.checked,
+                      }}
+                      className={classes.customSwitch}
+                      disableRipple
+                      onChange={() => {
+                        themeChanger.toggleTheme();
+                      }}
                     />
                   </div>
-                </Widget>
-              </Grid>
-              <Grid item lg={4} md={6} sm={12} xs={12}>
-                <Widget
-                  title="Breed"
-                  upperTitle
-                  bodyClass={classes.fullHeightBody}
-                  className={classes.card}
-                  color="textWithBackground"
-                  customBackGround
-                >
-                  <CustomActiveDonut
-                    data={data.caseCountByBreed}
-                    width={400}
-                    height={225}
-                    innerRadius={50}
-                    outerRadius={75}
-                    cx="50%"
-                    cy="50%"
-                    textColor={theme.palette.widgetBackground.contrastText}
-                  />
-                </Widget>
-              </Grid>
-              <Grid item lg={4} md={6} sm={12} xs={12}>
-                <Widget
-                  title="Diagnosis"
-                  upperTitle
-                  bodyClass={classes.fullHeightBody}
-                  className={classes.card}
-                  color="textWithBackground"
-                  customBackGround
-                >
-                  <CustomActiveDonut
-                    data={data.caseCountByDiagnosis}
-                    width={400}
-                    height={225}
-                    innerRadius={50}
-                    outerRadius={75}
-                    cx="50%"
-                    cy="50%"
-                    textColor={theme.palette.widgetBackground.contrastText}
-                  />
-                </Widget>
-              </Grid>
-              {/* </Grid> */}
-              {/* second row Grids */}
-              {/* <Grid container spacing={32}> */}
-              <Grid item lg={4} md={6} sm={12} xs={12}>
-                <Widget
-                  title="Disease Site"
-                  upperTitle
-                  bodyClass={classes.fullHeightBody}
-                  className={classes.card}
-                  color="textWithBackground"
-                  customBackGround
-                >
-                  <CustomActiveDonut
-                    data={data.caseCountByDiseaseSite}
-                    width={400}
-                    height={225}
-                    innerRadius={50}
-                    outerRadius={75}
-                    cx="50%"
-                    cy="50%"
-                    textColor={theme.palette.widgetBackground.contrastText}
-                  />
-                </Widget>
-              </Grid>
-              <Grid item lg={4} md={6} sm={12} xs={12}>
-                <Widget
-                  title="Sex"
-                  upperTitle
-                  bodyClass={classes.fullHeightBody}
-                  className={classes.card}
-                  color="textWithBackground"
-                  customBackGround
-                >
-                  <CustomActiveDonut
-                    data={data.caseCountByGender}
-                    width={400}
-                    height={225}
-                    innerRadius={50}
-                    outerRadius={75}
-                    cx="50%"
-                    cy="50%"
-                    textColor={theme.palette.widgetBackground.contrastText}
-                  />
-                </Widget>
-              </Grid>
-              <Grid item lg={4} md={6} sm={12} xs={12}>
-                <Widget
-                  title="Stage of Disease"
-                  upperTitle
-                  bodyClass={classes.fullHeightBody}
-                  className={classes.card}
-                  color="textWithBackground"
-                  customBackGround
-                >
-                  <CustomActiveDonut
-                    data={data.caseCountByStageOfDisease}
-                    width={400}
-                    height={225}
-                    innerRadius={50}
-                    outerRadius={75}
-                    cx="50%"
-                    cy="50%"
-                    textColor={theme.palette.widgetBackground.contrastText}
-                  />
-                </Widget>
-              </Grid>
-            </Grid>
-          </Collapse>
+                </div>
+                <Collapse in={collapse} className={classes.backgroundWidgets}>
+                  <Grid container>
+                    {displaywidgets.map((widget) => {
+                      if (widget.type === 'sunburst' && widget.show) {
+                        return (
+                          <Grid item lg={4} md={6} sm={12} xs={12}>
+                            <Widget
+                              title={widget.label}
+                              upperTitle
+                              bodyClass={classes.fullHeightBody}
+                              className={classes.card}
+                              color={theme.palette.lochmara.contrastText}
+                              widgetBorderDivider
+                              customBackGround
+                            >
+                              <ProgramSunburst
+                                data={data[widget.dataName]}
+                                width={250}
+                                height={173}
+                                innerRadius={40}
+                                outerRadius={65}
+                                cx="50%"
+                                cy="50%"
+                                textColor={theme.palette.widgetBackground.contrastText}
+                                titleLocation="bottom"
+                                titleAlignment="center"
+                              />
+                            </Widget>
+                          </Grid>
+                        );
+                      }
+                      if (widget.type === 'donut' && widget.show) {
+                        return (
+                          <Grid item lg={4} md={6} sm={12} xs={12}>
+                            <Widget
+                              title={widget.label}
+                              upperTitle
+                              bodyClass={classes.fullHeightBody}
+                              className={classes.card}
+                              color={theme.palette.lochmara.contrastText}
+                              widgetBorderDivider
+                              customBackGround
+                            >
+                              <CustomActiveDonut
+                                data={data[widget.dataName]}
+                                width={400}
+                                height={225}
+                                innerRadius={50}
+                                outerRadius={75}
+                                cx="50%"
+                                cy="50%"
+                                textColor={theme.palette.widgetBackground.contrastText}
+                                colors={colors}
+                                titleLocation="bottom"
+                                titleAlignment="center"
+                              />
+                            </Widget>
+                          </Grid>
+                        );
+                      }
+                      return <></>;
+                    })}
+                  </Grid>
+                </Collapse>
+              </div>
+              { collapse && <div className={classes.dashboardDividerTop} />}
+              { collapse && <div className={classes.dashboardDivider} />}
+              <Cases />
+            </div>
+          </div>
         </div>
-        <Tab />
+        {/* Addingg diclaimer for Dev */}
+        {/* <PositionedSnackbar /> */}
       </div>
     </>
   );
 };
 
 const styles = (theme) => ({
+  dashboardContainer: {
+    backgroundColor: '#FFFFFF',
+    // boxShadow: 'inset 0 0 87px 7px rgba(27,28,28,0.15)',
+  },
+  dashboardDivider: {
+    height: 16,
+    backgroundColor: '#E2E7EC',
+  },
+  dashboardDividerTop: {
+    height: 16,
+    backgroundColor: theme.palette.widgetBackground.main,
+  },
+  rightContent: {
+    maxWidth: 'calc(100% - 250px)',
+  },
   content: {
     // padding: theme.spacing.unit * 3,
-  },
-  fixStats: {
-    position: 'fixed',
-    width: `calc(100vw - ${theme.custom.drawerWidth})`,
-    zIndex: '999',
+    display: 'flex',
+    maxWidth: '1800px',
+    margin: 'auto',
   },
   widgetsContainer: {
     background: theme.palette.widgetBackground.main,
-    paddingTop: '62px',
   },
   contentShift: {
     width: `calc(100vw - ${theme.custom.drawerWidth})`,
@@ -230,8 +185,9 @@ const styles = (theme) => ({
   sunburst: {
     textAlign: 'center',
   },
-  marginTop18: {
-    marginTop: '18px',
+  widgetInner: {
+    marginTop: '-8px',
+    borderBottom: '6px solid #E2E7EC',
   },
   widgetsCollapse: {
     background: theme.palette.widgetBackground.main,
@@ -243,6 +199,9 @@ const styles = (theme) => ({
   floatLeft: {
     float: 'left',
   },
+  customSwitch: {
+    marginTop: '-6px',
+  },
   customButton: {
     borderRadius: '0 0 18px 18px',
     minHeight: '20px',
@@ -252,18 +211,27 @@ const styles = (theme) => ({
     backgroundColor: '#566672',
     marginRight: '4px',
     fontFamily: theme.custom.fontFamilySans,
+    marginTop: '-4px',
     '&:hover': {
       backgroundColor: '#566672',
     },
   },
-  backgroundShawdowWidgets: {
-    background: theme.palette.widgetBackground.lattice,
+  backgroundWidgets: {
+    background: theme.palette.widgetBackground.main,
+  },
+  sideBar: {
+    width: '250px',
+    backgroundColor: '#FFFFFF',
+    boxShadow: 'inset 0 0 87px 7px #E2E7EC',
+    // background: 'linear-gradient(to left, #E2E7EC, #FBFBFB ,)',
+  },
+  statsBar: {
+    position: 'fixed',
   },
   switchBase: {
-    height: '20px',
     color: theme.palette.widgetBackground.contrastText,
     '&$checked': {
-      color: theme.palette.widgetBackground.contrastText,
+      color: theme.palette.widgetBackground.contrastSwicthColor,
     },
     '&$checked + $track': {
       backgroundColor: theme.palette.widgetBackground.contrastText,

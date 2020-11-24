@@ -4,26 +4,46 @@ import {
   Checkbox,
   List,
   ListItem,
-  ListItemText,
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
   withStyles,
+  Divider,
 } from '@material-ui/core';
 import _ from 'lodash';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { toggleCheckBox } from '../../../pages/dashboard/store/dashboardAction';
-import { Typography } from '../../Wrappers/Wrappers';
-import GA from '../../../utils/googleAnalytics';
+import {
+  CheckBox as CheckBoxIcon, CheckBoxOutlineBlank as CheckBoxBlankIcon, ArrowDropDown
+  as ArrowDropDownIcon,
+} from '@material-ui/icons';
+import { toggleCheckBox } from '../../../pages/dashboardTab/store/dashboardReducer';
+import { facetSectionStyling } from '../../../bento/dashboardData';
 
-const FacetPanel = (classes) => {
+const CustomExpansionPanelSummary = withStyles({
+  root: {
+    marginBottom: -1,
+    minHeight: 48,
+    '&$expanded': {
+      minHeight: 48,
+    },
+  },
+  content: {
+    '&$expanded': {
+      margin: '16px 0',
+    },
+  },
+  expanded: {},
+})(ExpansionPanelSummary);
+
+const FacetPanel = ({ classes }) => {
   // data from store
   const sideBarContent = useSelector((state) => (
-    state.dashboard
-    && state.dashboard.checkbox
-    && state.dashboard.checkbox.data
-      ? state.dashboard.checkbox.data : []));
+    state.dashboardTab
+    && state.dashboardTab.checkbox
+      ? state.dashboardTab.checkbox : {
+        data: [],
+        defaultPanel: false,
+      }));
+
   // redux use actions
   const dispatch = useDispatch();
 
@@ -31,15 +51,19 @@ const FacetPanel = (classes) => {
 
   const [groupExpanded, setGroupExpanded] = React.useState(['case']);
 
+  React.useEffect(() => {
+    if (!expanded || !(expanded === `${sideBarContent.defaultPanel}false` || expanded !== false)) {
+      setExpanded(sideBarContent.defaultPanel);
+    }
+  });
+
   const handleChange = (panel) => (event, isExpanded) => {
-    const panelStatus = isExpanded ? 'expand' : 'collapse';
-    GA.sendEvent('Facets', panelStatus, `${panel} Panel`);
-    setExpanded(isExpanded ? panel : false);
+    setExpanded(isExpanded ? panel : `${panel}false`);
+
+    // set height of filters.
   };
 
   const handleGroupChange = (panel) => (event, isExpanded) => {
-    const groupStatus = isExpanded ? 'expand' : 'collapse';
-    GA.sendEvent('Facets', groupStatus, `${panel} Group`);
     const groups = _.cloneDeep(groupExpanded);
     if (isExpanded) {
       groups.push(panel);
@@ -55,11 +79,6 @@ const FacetPanel = (classes) => {
 
   const handleToggle = (value) => () => {
     const valueList = value.split('$$');
-
-    // Note: Registering events based on Group Dimension(aka Panel) gets filterd.
-    // We are not tracking which specific values are being filter.
-    GA.sendEvent('Facets', 'Filter', valueList[1]);
-
     // dispatch toggleCheckBox action
     dispatch(toggleCheckBox([{
       groupName: valueList[1],
@@ -67,217 +86,186 @@ const FacetPanel = (classes) => {
       datafield: valueList[2],
       isChecked: !(valueList[3] === 'true'),
       section: valueList[4],
-      key: valueList[5],
     }]));
   };
 
-  function FacetFilterWrapper(children, name, styles) {
-    return (
-      <ExpansionPanel
-        key={name}
-        expanded={groupExpanded.includes(name)}
-        onChange={handleGroupChange(name)}
-        classes={{ expanded: classes.classes.expansionPanelExpanded }}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ArrowDropDownIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-          classes={{
-            root: styles,
-            expandIcon: classes.classes.expansionPanelSummaryCateRootExpandIcon,
-          }}
-        >
-          <ListItemText key={name} classes={{ primary: classes.classes.expansionPanelSummaryCateTitle }} primary={`Filter By ${name[0].toUpperCase()}${name.slice(1)}s`} />
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <List component="div" disablePadding>
-            {children}
-          </List>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    );
-  }
+  const sideBarDisplay = sideBarContent.data.filter((sideBar) => sideBar.show === true)
+    .slice(0, 15);
 
-  function FacetFilterbuilder(sideBarItem) {
-    // check if this group of filter has at least one be checked.
-    // true-> yes has at least one be checked.
-    const flag = sideBarItem.checkboxItems
-      .map((checkboxItem) => (checkboxItem.isChecked))
-      .includes(true);
+  const arrangeBySections = (arr) => {
+    const sideBar = {};
+    arr.forEach(({ section, ...item }) => {
+      if (!sideBar[section]) {
+        sideBar[section] = { sectionName: section, items: [] };
+      }
+      sideBar[section].items.push({ section, ...item });
+    });
+    return Object.values(sideBar);
+  };
+  const sideBarSections = arrangeBySections(sideBarDisplay);
 
-    let checkedStyle = classes.classes.unCheckedBg;
-    if (flag) {
-      checkedStyle = classes.classes.checkedBg;
-    }
-    return (
-      <ExpansionPanel
-        key={sideBarItem.groupName}
-        expanded={expanded === sideBarItem.groupName}
-        onChange={handleChange(sideBarItem.groupName)}
-        classes={{ expanded: classes.classes.expansionPanelExpanded }}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-          classes={{ root: checkedStyle }}
-        >
-          <ListItemText
-            classes={{ primary: classes.classes.expansionPanelSummaryCateTitle }}
-            primary={sideBarItem.groupName}
+  return (
+    <>
+      {sideBarSections.map((currentSection) => (
+        <>
+          <Divider
+            variant="middle"
+            style={{
+              backgroundColor: facetSectionStyling[currentSection.sectionName]
+                ? facetSectionStyling[currentSection.sectionName].color ? facetSectionStyling[currentSection.sectionName].color : '' : '#000000',
+              margin: '0px',
+              height: facetSectionStyling[currentSection.sectionName]
+                ? facetSectionStyling[currentSection.sectionName].height ? facetSectionStyling[currentSection.sectionName].height : '' : '5px',
+            }}
           />
-        </ExpansionPanelSummary>
+          <ExpansionPanel
+            expanded={groupExpanded.includes(currentSection.sectionName)}
+            onChange={handleGroupChange(currentSection.sectionName)}
+                // className={classes.expansion}
+            classes={{
+              root: classes.expansionPanelRoot,
+            }}
+          >
+            <CustomExpansionPanelSummary
+              expandIcon={<ArrowDropDownIcon classes={{ root: classes.dropDownIconSection }} />}
+              aria-controls={currentSection.sectionName}
+              id={currentSection.sectionName}
+            >
+              {/* <ListItemText primary={sideBarItem.groupName} /> */}
+              <div className={classes.sectionSummaryText}>{currentSection.sectionName}</div>
 
-        <ExpansionPanelDetails>
-          <List key={sideBarItem.groupName} component="div" classes={{ root: classes.classes.nested }}>
-            {
+            </CustomExpansionPanelSummary>
+
+            <ExpansionPanelDetails classes={{ root: classes.expansionPanelDetailsRoot }}>
+              <List component="div" disablePadding dense>
+                {currentSection.items.map((sideBarItem) => (
+                  <>
+                    <ExpansionPanel
+                      expanded={expanded === sideBarItem.groupName}
+                      onChange={handleChange(sideBarItem.groupName)}
+                // className={classes.expansion}
+                      // classes={{ root: classes.expansionPanelRoot }}
+                    >
+                      <CustomExpansionPanelSummary
+                        expandIcon={(
+                          <ArrowDropDownIcon
+                            classes={{ root: classes.dropDownIconSubSection }}
+                          />
+)}
+                        aria-controls={sideBarItem.groupName}
+                        id={sideBarItem.groupName}
+                      >
+                        {/* <ListItemText primary={sideBarItem.groupName} /> */}
+                        <div className={classes.subSectionSummaryText}>{sideBarItem.groupName}</div>
+
+                      </CustomExpansionPanelSummary>
+
+                      <ExpansionPanelDetails classes={{ root: classes.expansionPanelDetailsRoot }}>
+                        <List component="div" disablePadding dense>
+                          {
             sideBarItem.checkboxItems.map((checkboxItem) => {
-              if (checkboxItem.cases === 0 && !checkboxItem.isChecked) {
+              if (checkboxItem.subjects === 0 && !checkboxItem.isChecked) {
                 return '';
-              }
-              let styles = '';
-              switch (sideBarItem.section) {
-                case 'case':
-                  styles = classes.classes.caseCheckBox;
-                  break;
-                case 'file':
-                  styles = classes.classes.fileCheckBox;
-                  break;
-                case 'sample':
-                  styles = classes.classes.sampleCheckBox;
-                  break;
-                default:
-                  styles = classes.classes.caseCheckBox;
               }
               return (
                 <ListItem
-                  id={checkboxItem.name}
                   button
-                  onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}$$${sideBarItem.section}$$${sideBarItem.key}`)}
+                  onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}$$${sideBarItem.section}`)}
                   className={classes.nested}
-                  key={`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}$$${sideBarItem.section}$$${sideBarItem.key}`}
+                  classes={{ gutters: classes.listItemGutters }}
                 >
                   <Checkbox
-                    id={`checkbox_${checkboxItem.name}`}
-                    classes={{ root: styles }}
+                    id={`checkbox_${sideBarItem.groupName}_${checkboxItem.name}`}
+                    icon={<CheckBoxBlankIcon style={{ fontSize: 18 }} />}
+                    checkedIcon={<CheckBoxIcon style={{ fontSize: 18 }} />}
                     checked={checkboxItem.isChecked}
                     tabIndex={-1}
                     disableRipple
+                    color="secondary"
+                    classes={{ root: classes.checkboxRoot }}
                   />
-                  <ListItemText primary={(
-                    <div style={{ display: 'flex' }} id={`content_${checkboxItem.name}`}>
-                      <Typography>
-                        {checkboxItem.name}
-                      </Typography>
-                      <Typography classes={{ root: styles }}>
-                        (
-                        {checkboxItem.cases}
-                        )
-                      </Typography>
-                    </div>
-)}
-                  />
+                  <div className={classes.panelDetailText}>
+                    {`${checkboxItem.name}`}
+                    <span className={classes.panelDetailTextSubjectCount}>
+                      &nbsp;
+                      {`(${checkboxItem.subjects})`}
+                    </span>
+                  </div>
                 </ListItem>
               );
             })
           }
-          </List>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    );
-  }
-
-  //  'case' => [<compent>]
-  const FacetFilterGroup = {};
-  const GroupOrder = [];
-  sideBarContent.forEach((sideBarItem) => {
-    if (sideBarItem.show) {
-      if (sideBarItem.section in FacetFilterGroup) {
-        FacetFilterGroup[sideBarItem.section].push(FacetFilterbuilder(sideBarItem));
-      } else {
-        GroupOrder.push(sideBarItem.section);
-        FacetFilterGroup[sideBarItem.section] = [FacetFilterbuilder(sideBarItem)];
-      }
-    }
-  });
-
-  return (
-    GroupOrder.map((order) => {
-      let styles = '';
-      switch (order) {
-        case 'case':
-          styles = classes.classes.expansionPanelSummaryCateRootCases;
-          break;
-        case 'file':
-          styles = classes.classes.expansionPanelSummaryCateRootFile;
-          break;
-        case 'sample':
-          styles = classes.classes.expansionPanelSummaryCateRootSample;
-          break;
-        default:
-          styles = classes.classes.expansionPanelSummaryCateRootCases;
-      }
-      return FacetFilterWrapper(
-        FacetFilterGroup[order], order, styles,
-      );
-    })
+                        </List>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                  </>
+                ))}
+              </List>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        </>
+      ))}
+    </>
   );
 };
 
 const styles = () => ({
-  nested: {
-    width: '100% !important',
+  expansionPanelRoot: {
+    boxShadow: 'none',
+    background: '#D2D2D2',
+    margin: 'auto',
+    position: 'initial',
+    '&:before': {
+      position: 'initial',
+    },
   },
-  expansionPanelSummaryCateRootCases: {
-    borderTop: '#F48439 solid 4px',
-    background: '#EAEAEA',
-    height: '15px',
+  dropDownIconSection: {
+    fill: '#000000',
   },
-  expansionPanelSummaryCateRootFile: {
-    borderTop: '#2446C6 solid 4px',
-    background: '#EAEAEA',
-    height: '15px',
+  dropDownIconSubSection: {
+    fill: '#3695A9',
   },
-  expansionPanelSummaryCateRootSample: {
-    borderTop: '#05C5CC solid 4px',
-    background: '#EAEAEA',
-    height: '15px',
+  dividerRoot: {
+    backgroundColor: '#B0CFE1',
+    marginLeft: '45px',
+    height: '1px',
   },
-  expansionPanelSummaryCateRootExpandIcon: {
-    right: 'auto',
-    left: '8px',
+  sectionSummaryText: {
+    marginLeft: '-6px',
+    color: '#000000',
+    fontFamily: 'Lato',
+    fontSize: '20px',
+    lineHeight: '26px',
+    letterSpacing: 0,
   },
-  caseCheckBox: {
-    paddingLeft: '5px',
-    color: '#F48439 !important',
+  subSectionSummaryText: {
+    marginLeft: '24px',
+    color: '#000000',
+    fontFamily: 'Lato',
+    fontSize: '14px',
+    textTransform: 'uppercase',
+    lineHeight: 0,
+    letterSpacing: 0,
   },
-  sampleCheckBox: {
-    paddingLeft: '5px',
-    color: '#05C5CC !important',
+  panelDetailText: {
+    color: '#000000',
+    fontFamily: 'Nunito',
+    fontSize: '14px',
+    marginRight: '12px',
   },
-  fileCheckBox: {
-    paddingLeft: '5px',
-    color: '#2446C6 !important',
+  panelDetailTextSubjectCount: {
+    color: '#137fbe',
   },
-  expansionPanelSummaryCateTitle: {
-    height: '15px',
-    color: '#323232',
-    fontFamily: 'Raleway',
-    fontSize: '15px',
-    fontWeight: 'bold',
-    letterSpacing: '0.25px',
-    lineHeight: '18px',
-    paddingLeft: '5px',
-    width: '100%',
+  checkboxRoot: {
+    color: '#344B5A',
+    height: 12,
   },
-  expansionPanelExpanded: {
-    margin: 0,
-    width: '100%',
+  listItemGutters: {
+    padding: '8px 0px 8px 24px',
   },
-  unCheckedBg: {
-  },
-  checkedBg: {
+  expansionPanelDetailsRoot: {
+    paddingBottom: '8px',
+    display: 'unset',
   },
 });
 

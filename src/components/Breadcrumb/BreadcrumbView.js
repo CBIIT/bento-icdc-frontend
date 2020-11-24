@@ -3,12 +3,17 @@ import { withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const CustomBreadcrumb = ({ classes, data }) => (
-  <div className={classes.headerNav}>
+  <div id="bread_crumb" className={classes.headerNav}>
     {
       data.reduce((acc, current, index) => {
         if (current.isALink) {
           acc.push(
-            <Link className={classes.headerNavLink} to={current.to} onClick={current.onClick}>
+            <Link
+              className={classes.headerNavLink}
+              to={current.to}
+              onClick={current.onClick}
+              key={current.to}
+            >
               {current.name}
             </Link>,
           );
@@ -26,19 +31,19 @@ const CustomBreadcrumb = ({ classes, data }) => (
 
 const styles = (theme) => ({
   headerNav: {
-    paddingTop: '8px',
-    color: '#5e8ca5',
-    paddingBottom: '12px',
+    paddingTop: '0px',
+    color: '#00B0BD',
   },
   headerNavLink: {
-    paddingLeft: '6px',
-    paddingRight: '6px',
+    paddingLeft: '3px',
+    paddingRight: '3px',
     textDecoration: 'none',
-    color: '#5e8ca5',
+    color: '#00B0BD',
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '8pt',
+    fontSize: '10px',
     letterSpacing: '0.025em',
+    verticalAlign: 'text-top',
 
   },
 });

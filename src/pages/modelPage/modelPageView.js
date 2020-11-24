@@ -7,8 +7,8 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import yaml from 'js-yaml';
 import axios from 'axios';
 import YAMLData from '../../content/prod/aboutPagesContent.yaml';
-import stockImg from '../../assets/about/Photo-About_ICDC_model.jpg';
-import AboutBody from '../../components/About/AbouBodyView';
+import stockImg from '../../assets/about/About_CTDC_Model.png';
+import AboutBody from '../about/aboutView';
 import CenterIcon from '../../assets/about/Model-Buttons-Center.svg';
 import ZoomInIcon from '../../assets/about/Model-Buttons-ZoomIn.svg';
 import ZoomOutIcon from '../../assets/about/Model-Buttons-ZoomOut.svg';
@@ -44,7 +44,7 @@ const ModelPage = ({ classes }) => {
         const result = await axios(YAMLData);
         resultData = yaml.safeLoad(result.data);
       }
-      const supportObj = resultData.find(({ page }) => page === '/icdc-data-model');
+      const supportObj = resultData.find(({ page }) => page === '/ctdc-data-model');
       setData(supportObj);
     };
     fetchData();
@@ -96,7 +96,7 @@ const ModelPage = ({ classes }) => {
             </div>
             <div className={classes.imgSection}>
               <TransformComponent>
-                <img src="https://cbiit.github.io/icdc-model-tool/model-desc/icdc-model.svg" alt="ICDC schema" className={classes.img} />
+                <img src="https://cbiit.github.io/ctdc-model/model-desc/ctdc-model.svg" alt="ICDC schema" className={classes.img} />
               </TransformComponent>
             </div>
           </div>
@@ -107,6 +107,7 @@ const ModelPage = ({ classes }) => {
 };
 
 const styles = () => ({
+
   linkIcon: {
     width: '20px',
     verticalAlign: 'sub',
@@ -157,8 +158,7 @@ const styles = () => ({
     border: '2px solid #0296C9',
     borderRadius: '23px',
     marginBottom: '20px',
-    height: '800px',
-    maxHeight: '800px',
+    height: 'auto',
     overflow: 'hidden',
     '& .react-transform-element': {
       display: '-webkit-box !important',
