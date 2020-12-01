@@ -30,6 +30,11 @@ export const navBarData = [
     link: '/cases',
   },
   {
+    labelText: 'Studies',
+    type: 'link',
+    link: '/studies',
+  },
+  {
     labelText: 'about',
     type: 'dropdown',
     dropDownLinks: [
