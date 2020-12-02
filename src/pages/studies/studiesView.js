@@ -4,17 +4,17 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-// import MUIDataTable from 'mui-datatables';
 import { CustomDataTable, getOptions, getColumns } from 'bento-components';
 import { Link } from 'react-router-dom';
-
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { useDispatch } from 'react-redux';
+import {
+  table, studyListingIcon, externalLinkIcon,
+} from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
 import { Typography } from '../../components/Wrappers/Wrappers';
-import icon from '../../assets/icons/Icon-StudiesDetail.svg';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 
 const Studies = ({ classes, data }) => {
@@ -106,8 +106,8 @@ const Studies = ({ classes, data }) => {
           <div className={classes.header}>
             <div className={classes.logo}>
               <img
-                src={icon}
-                alt="ICDC case detail header logo"
+                src={studyListingIcon.src}
+                alt={studyListingIcon.alt}
               />
 
             </div>
@@ -126,9 +126,9 @@ const Studies = ({ classes, data }) => {
             <Grid container>
               <Grid item xs={12} id="table_studies">
                 <CustomDataTable
-                  data={data.studiesByProgram}
-                  columns={columns}
-                  options={options(classes)}
+                  data={data[table.dataField]}
+                  columns={getColumns(table, classes, data, externalLinkIcon, '/cases', redirectTo)}
+                  options={getOptions(table, classes)}
                 />
               </Grid>
             </Grid>
@@ -159,7 +159,6 @@ const styles = (theme) => ({
     maxWidth: '1440px',
     paddingLeft: '36px',
     paddingRight: '36px',
-    paddingTop: '60px',
   },
   paper: {
     textAlign: 'center',
@@ -212,6 +211,10 @@ const styles = (theme) => ({
   },
   tableDiv: {
     margin: 'auto',
+    fontSize: '10pt',
+    fontFamily: '"Open Sans", sans-serif',
+    letterSpacing: '0.025em',
+    textAlign: 'left',
   },
 });
 
