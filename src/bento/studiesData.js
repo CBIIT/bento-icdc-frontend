@@ -3,9 +3,9 @@ import gql from 'graphql-tag';
 // --------------- Icons configuration --------------
 // Ideal size for programListingIcon is 100x100 px
 // Ideal size for externalLinkIcon is 16x16 px
-const programListingIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/program/programIcon.svg',
-  alt: 'Bento program logo',
+const studyListingIcon = {
+  src: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento/src/assets/icons/Icon-StudiesDetail.svg',
+  alt: 'ICDC Studies detail header logo',
 };
 
 const externalLinkIcon = {
@@ -18,20 +18,26 @@ const table = {
   // Set 'display' to false to hide the table entirely
   display: true,
   // Table title
-  title: 'Programs',
+  title: 'Studies',
   // Field name for table data, need to be updated only when using a different GraphQL query
-  dataField: 'programInfo',
+  dataField: 'studiesByProgram',
   // Value must be one of the 'field' in columns
   defaultSortField: 'program_acronym',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
+  // showHideColumns 'true' or 'false'
+  showHideColumns: true,
+  // download csv 'true' or 'false'
+  download: true,
+  // downloaded File Name
+  downloadFileName: 'Bento_case_samples_download',
   // Set 'selectableRows' to true to show the row selection
   selectableRows: false,
   // A maximum of 10 columns are allowed
   columns: [
     {
-      dataField: 'program_acronym',
-      header: 'Program Code',
+      dataField: 'clinical_study_designation',
+      header: 'Study Code',
       link: '/program/{program_id}',
       display: true,
     },
@@ -40,29 +46,16 @@ const table = {
       header: 'Program ID',
     },
     {
-      dataField: 'program_name',
-      header: 'Program Name',
+      dataField: 'clinical_study_name',
+      header: 'Study Name',
     },
     {
-      dataField: 'start_date',
-      header: 'Start Date',
+      dataField: 'clinical_study_type',
+      header: 'Study Type',
     },
     {
-      dataField: 'end_date',
-      header: 'End Date',
-    },
-    {
-      dataField: 'pubmed_id',
-      header: 'PubMed ID',
-      link: 'https://pubmed.ncbi.nlm.nih.gov/{pubmed_id}',
-    },
-    {
-      dataField: 'num_studies',
-      header: 'Number of ARMs',
-    },
-    {
-      dataField: 'num_subjects',
-      header: 'Associated Cases',
+      dataField: 'numberOfCases',
+      header: 'Cases',
     },
   ],
 };
@@ -80,7 +73,7 @@ const GET_STUDY_DATA_QUERY = gql`{
   `;
 
 export {
-  programListingIcon,
+  studyListingIcon,
   externalLinkIcon,
   table,
   GET_STUDY_DATA_QUERY,

@@ -1,5 +1,5 @@
 import { GET_GLOBAL_STATS_DATA_QUERY as STATS_QUERY } from '../../bento/globalStatsData';
-import client from '../../utils/graphqlClient';
+import clientBento from '../../utils/graphqlClientTemp';
 
 export const RECIEVE_STATS = 'RECIEVE_STATS';
 export const STATS_QUERY_ERR = 'STATS_QUERY_ERR';
@@ -42,7 +42,7 @@ function errorhandler(error, type) {
 }
 
 function fetchStats(statQuery) {
-  return (dispatch) => client
+  return (dispatch) => clientBento
     .query({
       query: statQuery,
     })
