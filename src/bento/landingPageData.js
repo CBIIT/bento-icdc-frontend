@@ -1,80 +1,55 @@
-import gql from 'graphql-tag';
 // import Test from '../assets/header/CTDC_Logo.svg';
 
 // The ideal image size of landingPageHero 1400x600px
 // Tile1 Tile2 Tile3 images 293x349 px
 // Tile4 image optimum size 600x 436 px
 export const landingPageData = {
-  callToActionTitle: 'Explore, Analyze, Visualize Clinical Trial Data Sets',
-  callToActionDescription: 'Model, Store and Share your Data Sets using the Bento Framework for Data Sharing Platforms.',
-  callToActionButtonText: 'EXPLORE THE SITE',
+  callToActionTitle: 'Integrated Canine Data Commons',
+  callToActionDescription: 'A public resource for exploring, analyzing, and understanding the biological relationships between human and canine cancers.',
+  callToActionButtonText: 'EXPLORE',
   callToActionLink: '/cases',
-  landingPageHero: {
-    alt: 'Alt tag1',
-    img: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/landing/Hero_Graphic.png',
-  },
-  landingPageStatsBar: [
-    {
-      statTitle: 'Programs',
-      statAPI: 'numberOfPrograms',
-    },
-    {
-      statTitle: 'Arms',
-      statAPI: 'numberOfStudies',
-    },
-    {
-      statTitle: 'Cases',
-      statAPI: 'numberOfSubjects',
-    },
-    {
-      statTitle: 'samples',
-      statAPI: 'numberOfSamples',
-    },
-    {
-      statTitle: 'files',
-      statAPI: 'numberOfFiles',
-    },
-  ],
+  landingPageStatsBar: [],
   tile1: {
-    alt: '',
-    img: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/landing/tileAbout.png',
-    titleText: 'The Bento Framework',
-    descriptionText: 'Effective data management is key to scientific discovery. Bento is an open source framework, developed by the Frederick National Laboratory for Cancer Research, to support the creation of data sharing platforms, that adhere to the FAIR principles of scientific data management.',
-    callToActionText: 'Read More',
-    callToActionLink: '/bento', // This links to the "About" static page.
+    alt: 'ICDC about',
+    img: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/landing/LP_About.png',
+    titleText: 'About the Integrated Canine Data Commons (ICDC)',
+    descriptionText: 'NC\'s Division of Cancer Treatment and Diagnosis (DCTD) charged the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects.',
+    callToActionText: 'FULL ARTICLE',
+    callToActionLink: '/purpose', // This links to the "About" static page.
   },
   tile2: {
-    alt: '',
-    img: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/landing/tileProgam.png',
+    alt: 'ICDC program',
+    img: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/landing/LP_Program.png',
     titleText: 'Programs',
-    descriptionText: 'Access data from the TAILORx clinical trial, on this data sharing platform, built on Bento.',
-    callToActionText: 'View',
+    descriptionText: 'Browse the studies within ICDC',
+    callToActionText: 'READ MORE',
     callToActionLink: '/programs', // This links to the Programs Listing Page.
   },
   tile3: {
-    alt: '',
-    img: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/landing/tileAnalytics.png',
-    titleText: 'Resources',
+    alt: 'ICDC studies',
+    img: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/landing/LP_Studies.png',
+    titleText: 'Studies',
     descriptionText: 'Use Bento to build your own data sharing platform.',
-    callToActionText: 'Read More',
-    callToActionLink: '/resources', // Link to the "Resources" Static Page
+    callToActionText: 'READ MORE',
+    callToActionLink: '/studies', // Link to the "Resources" Static Page
   },
   tile4: {
-    alt: '',
-    img: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/landing/tileCases.png',
+    alt: 'ICDC submit',
+    img: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/landing/LP_Submit.png',
+    titleText: 'Submit Data',
+    descriptionText: ' Interested in contributing data to ICDC ?',
+    callToActionText: 'READ MORE',
+    callToActionLink: '/submit', // This links to the cases dashboard.
+  },
+  tile5: {
+    alt: 'ICDC cases',
+    img: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/landing/LP_Cases.png',
     titleText: 'Cases',
-    descriptionText: 'Analyze cases from the TAILORx clinical trial.',
-    callToActionText: 'Explore',
+    descriptionText: 'Search all the Cases and build cohorts from all the Programs/Studies within the ICDC. The data files from these cohorts can then be analyzed in the Cloud Resources.',
+    callToActionText: 'READ MORE',
     callToActionLink: '/cases', // This links to the cases dashboard.
   },
 };
 
 // --------------- GraphQL query - Retrieve Landing page data --------------
-export const GET_LANDING_PAGE_DATA_QUERY = gql`{
-  numberOfPrograms
-  numberOfStudies
-  numberOfSubjects
-  numberOfSamples
-  numberOfFiles
-  }
-  `;
+export const GET_LANDING_PAGE_DATA_QUERY = false;
