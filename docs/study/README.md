@@ -4,10 +4,14 @@ sort: 3
 
 # Studies Page
 ## From Bento Programs page To ICDC Studies page.
+
 **Bento Programs Page**
-![Bento Programs](../assets/bento_programs.png) 
+
+![Bento Programs](../assets/bento_programs.png=600*410)
+ 
 **ICDC  Studies Page** 
-![ICDC Studies](../assets/icdc_studies.png)  
+
+![ICDC Studies](../assets/icdc_studies.png=600*410)  
 
 
 - Cloned View and controller from Original ICDC 
