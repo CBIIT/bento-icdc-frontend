@@ -7,11 +7,11 @@ sort: 3
 
 **Bento Programs Page**
 
-![Bento Programs](../assets/bento_programs.png=600*410)
- 
+![Bento Programs](../assets/bento_programs.png =600*410)
+
 **ICDC  Studies Page** 
 
-![ICDC Studies](../assets/icdc_studies.png=600*410)  
+![ICDC Studies](../assets/icdc_studies.png =600*410)  
 
 
 - Cloned View and controller from Original ICDC 
