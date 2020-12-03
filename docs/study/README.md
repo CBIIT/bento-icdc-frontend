@@ -7,12 +7,11 @@ sort: 3
 
 **Bento Programs Page**
 
-![Bento Programs](../assets/bento_programs.png =600*410)
+<img src="../assets/bento_programs.png" alt="Bento Programs" width="600"/>
 
 **ICDC  Studies Page** 
 
-![ICDC Studies](../assets/icdc_studies.png =600*410)  
-
+<img src="../assets/icdc_studies.png" alt="ICDC Studies" width="600"/>
 
 - Cloned View and controller from Original ICDC 
 - Replaced MUI Tables with Custom Table from Bento-Components 
