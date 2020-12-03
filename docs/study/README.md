@@ -13,6 +13,9 @@ sort: 3
 
 <img src="../assets/icdc_studies.png" alt="ICDC Studies" width="600"/>
 
+
+## Steps
+
 - Cloned View and controller from Original ICDC 
 - Replaced MUI Tables with Custom Table from Bento-Components 
 - Made studyData.js in Bento Folder 
