@@ -122,9 +122,7 @@ updated 35 parts of code.
 
 
 
-## Work Time Estimate: 
-
-4 hours in total
+## Work Time Estimate: 4 hours
 
 - Planning : 1 hour
 - Coding&Custodian : 2 hour

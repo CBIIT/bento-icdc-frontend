@@ -27,9 +27,7 @@ ICDC has it own assets (photos used on the site), copy over to the bento Assets 
 
 
 
-## Work Time Estimate: 
-
-1 hours in total
+## Work Time Estimate:  1 hour
 
 - Coding&Custodian : 0.5 hour
 - documentation : 0.5 hour
