@@ -25,3 +25,12 @@ Create query folder and move graphql schema into this folder.
 ICDC has it own assets (photos used on the site), copy over to the bento Assets folder.  
 
 
+
+
+## Work Time Estimate: 
+
+1 hours in total
+
+- Coding&Custodian : 0.5 hour
+- documentation : 0.5 hour
+
