@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -13,7 +14,8 @@ const Stats = () => {
     return state.stats.data;
   });
 
-  return (!data || data.length === 0 ? (<CircularProgress />) : <StatsView data={data} />);
+  //return (!data || data.length === 0 ? (<CircularProgress />) : <StatsView data={data} />);
+  return '';
 };
 
 export default (Stats);
