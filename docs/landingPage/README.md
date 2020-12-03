@@ -124,10 +124,10 @@ updated 35 parts of code.
 
 ## Work Time Estimate: 
 
-3 hours in total
+4 hours in total
 
-- Planning : 0.5 hour
+- Planning : 1 hour
 - Coding&Custodian : 2 hour
-- Styling : 0
-- documentation : 0.5 hour
+- Styling : ~ 0
+- documentation : 1 hour
 
