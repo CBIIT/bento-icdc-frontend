@@ -4,8 +4,12 @@ sort: 3
 
 # Studies Page
 ## From Bento Programs page To ICDC Studies page.
-![Bento Programs](../assects/Bento_programs.png)  
-![ICDC Studies](../assects/Bento_programs.png)  
+**Bento Programs Page**
+![Bento Programs](../assets/Bento_programs.png) 
+**ICDC  Studies Page** 
+![ICDC Studies](../assets/Bento_programs.png)  
+
+
 - Cloned View and controller from Original ICDC 
 - Replaced MUI Tables with Custom Table from Bento-Components 
 - Made studyData.js in Bento Folder 
