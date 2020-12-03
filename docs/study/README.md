@@ -2,7 +2,20 @@
 sort: 3
 ---
 
-# Study Page
+# Studies Page
+## From Bento Programs page To ICDC Studies page.
+
+**Bento Programs Page**
+
+<img src="../assets/bento_programs.png" alt="Bento Programs" width="600"/>
+
+**ICDC  Studies Page** 
+
+<img src="../assets/icdc_studies.png" alt="ICDC Studies" width="600"/>
+
+
+## Steps
+
 - Cloned View and controller from Original ICDC 
 - Replaced MUI Tables with Custom Table from Bento-Components 
 - Made studyData.js in Bento Folder 
@@ -15,9 +28,7 @@ sort: 3
 - BENTO-Components: Needed to Modify IF condition to support numberOfCase same like num_subjects in tables.js. 
 
 
-# TODO: Studies Page
+## TODO: Studies Page
 - Change fonts Family 
 
-# Questions / Concerns 
-1. How we will be able to Manage fonts for different projects in bento 
-2. How we will be able to modify styling in ICDC which is managed in bento. 
+## Work Time Estimate: 
