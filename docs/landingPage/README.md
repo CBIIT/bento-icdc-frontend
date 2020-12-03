@@ -5,6 +5,10 @@ sort: 2
 # Landing Page
 ## From Bento Landing page To ICDC Landing page.
 
+
+Overwrite Bento's landing page by using ICDC landing page's code, then add custodian configures one by one. That eliminates the time on styling changes. 
+
+
 **Bento Landing Page**
 
 <img src="../assets/bento_landing.png" alt="Bento Landing" width="600"/>
