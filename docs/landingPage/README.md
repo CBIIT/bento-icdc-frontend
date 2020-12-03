@@ -26,11 +26,12 @@ sort: 2
 
 **Copy ICDC landing Page code to overwrite BENTO landing page**
 
-code : install package styled-components - npm install styled-components
+- code : install package styled-components - npm install styled-components
 
 
 **Udpate the style**
-code : update content css margin-top to remove the whith space between nav and rest of content. 
+
+- code : update content css margin-top to remove the whith space between nav and rest of content. 
 code : update read more button position 
 
 
@@ -123,6 +124,6 @@ updated 35 parts of code.
 
 - Planning : 0.5 hour
 - Coding&Custodian : 2 hour
-- Style Updating : 0
+- Styling : 0
 - documentation : 0.5 hour
 
