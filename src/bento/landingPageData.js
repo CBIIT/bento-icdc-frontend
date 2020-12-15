@@ -21,7 +21,7 @@ export const landingPageData = {
     alt: 'ICDC program',
     img: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/landing/LP_Program.png',
     titleText: 'Programs',
-    descriptionText: 'Browse the studies within ICDC',
+    descriptionText: 'Discover the programs in ICDC',
     callToActionText: 'READ MORE',
     callToActionLink: '/programs', // This links to the Programs Listing Page.
   },
@@ -29,7 +29,7 @@ export const landingPageData = {
     alt: 'ICDC studies',
     img: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/landing/LP_Studies.png',
     titleText: 'Studies',
-    descriptionText: 'Use Bento to build your own data sharing platform.',
+    descriptionText: 'Browse the studies within ICDC',
     callToActionText: 'READ MORE',
     callToActionLink: '/studies', // Link to the "Resources" Static Page
   },
