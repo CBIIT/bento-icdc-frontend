@@ -674,6 +674,35 @@ type StudyStat {
   samples: Int
 }
 
+
+type CaseOverview2 {
+  case_id: String
+  study_code: String
+  study_type: String
+  cohort: String
+  breed: String
+  diagnosis: String
+  stage_of_disease: String
+  age: Float
+  sex: String
+  neutered_status: String
+  weight: Float
+  response_to_treatment: String
+  disease_site: String
+  samples: [String]
+  files: [String]
+}
+
+type SearchResult {
+  numberOfStudies: Int
+  numberOfCases: Int
+  numberOfSamples: Int
+  numberOfFiles: Int
+  numberOfAliquots: Int
+  caseIds: [String]
+  firstPage: [CaseOverview2]
+}
+
 type QueryType {
   "Version"
   schemaVersion: String 
@@ -719,6 +748,25 @@ type QueryType {
   filesOfCase(case_id: String!): [FilesOfCase] 
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
+
+  searchCases (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+    first: Int = 100
+  ): SearchResult 
+
   casesInList(case_ids: [String!]!): [CaseOverview] 
   studyDetail(study_code: String!): [StudyDetail] 
 
