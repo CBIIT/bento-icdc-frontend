@@ -220,8 +220,6 @@ type CaseOverview2 {
   weight: Float
   response_to_treatment: String
   disease_site: String
-  samples: [String]
-  files: [String]
 }
 
 type SearchResult {
@@ -231,6 +229,8 @@ type SearchResult {
   numberOfFiles: Int
   numberOfAliquots: Int
   caseIds: [String]
+  sampleIds: [String]
+  fileIds: [String]
   firstPage: [CaseOverview2]
 }
 
@@ -372,15 +372,17 @@ type QueryType {
          demo.neutered_indicator AS neutered_status,
          demo.weight AS weight,
          diag.best_response AS response_to_treatment,
-         collect(DISTINCT(samp.sample_id)) AS samples,
-         collect(DISTINCT(f.uuid)) AS files
+         samp.sample_id AS sample_id,
+         f.uuid AS file_id
     RETURN
          COUNT(DISTINCT study_code) AS numberOfStudies,
          COUNT(DISTINCT case_id) AS numberOfCases,
-         SUM(size(samples)) AS numberOfSamples,
-         SUM(size(files)) AS numberOfFiles,
+         COUNT(DISTINCT sample_id) AS numberOfSamples,
+         COUNT(DISTINCT file_id) AS numberOfFiles,
          0 AS numberOfAliquots,
          COLLECT(DISTINCT case_id) AS caseIds,
+         COLLECT(DISTINCT sample_id) AS sampleIds,
+         COLLECT(DISTINCT file_id) AS fileIds,
          COLLECT(DISTINCT ({
            case_id: case_id,
            study_code: study_code,
@@ -394,9 +396,7 @@ type QueryType {
            neutered_status: neutered_status,
            weight: weight,
            response_to_treatment: response_to_treatment,
-           disease_site: disease_site,
-           samples: samples,
-           files: files
+           disease_site: disease_site
          }))[0..$first] AS firstPage
   """, passThrough:true)
 

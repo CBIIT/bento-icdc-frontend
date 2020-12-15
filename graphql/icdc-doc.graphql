@@ -689,8 +689,6 @@ type CaseOverview2 {
   weight: Float
   response_to_treatment: String
   disease_site: String
-  samples: [String]
-  files: [String]
 }
 
 type SearchResult {
@@ -700,6 +698,8 @@ type SearchResult {
   numberOfFiles: Int
   numberOfAliquots: Int
   caseIds: [String]
+  sampleIds: [String]
+  fileIds: [String]
   firstPage: [CaseOverview2]
 }
 
