@@ -747,7 +747,12 @@ type QueryType {
   studiesByProgram: [StudyOfProgram] 
   filesOfCase(case_id: String!): [FilesOfCase] 
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
+
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
+
+  caseOverviewPaged (case_ids: [String] = [], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] 
+
+  caseOverviewPagedDesc (case_ids: [String] = [], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] 
 
   searchCases (
     study: [String] = [],

@@ -747,6 +747,7 @@ type QueryType {
   studiesByProgram: [StudyOfProgram] @cypher(statement:"MATCH (s:study) OPTIONAL MATCH (p:program)<-[*]-(s) OPTIONAL MATCH (s)<-[*]-(c:case) RETURN p.program_acronym AS program_id, s.clinical_study_id AS clinical_study_id, s.clinical_study_designation AS clinical_study_designation, s.clinical_study_name AS clinical_study_name, s.clinical_study_description AS clinical_study_description, s.clinical_study_type AS clinical_study_type, s.date_of_iacuc_approval AS date_of_iacuc_approval, s.dates_of_conduct AS dates_of_conduct, COUNT(DISTINCT(c)) as numberOfCases ORDER BY clinical_study_designation")
   filesOfCase(case_id: String!): [FilesOfCase] @cypher(statement: "MATCH (f:file)-[*]->(c:case{case_id: $case_id}) WITH DISTINCT(f) AS f MATCH (f)-->(parent) RETURN f.file_status AS file_status,f.file_name AS file_name ,f.file_type AS file_type,f.file_description AS file_description,f.file_format AS file_format,f.file_size AS file_size,f.md5sum AS md5sum,f.uuid AS uuid,f.file_location AS file_location, head(labels(parent)) AS parent, $case_id AS case_id")
   filesOfCases(case_ids: [String!]!): [FilesOfCase] @cypher(statement: "MATCH (f:file)-[*]->(c:case) WITH DISTINCT(f) AS f, c MATCH (f)-->(parent) WHERE c.case_id IN $case_ids RETURN f.file_status AS file_status,f.file_name AS file_name ,f.file_type AS file_type,f.file_description AS file_description,f.file_format AS file_format,f.file_size AS file_size,f.md5sum AS md5sum,f.uuid AS uuid,f.file_location AS file_location, head(labels(parent)) AS parent, c.case_id AS case_id")
+
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] @cypher(statement: """
       MATCH (s:study)
       WITH collect(DISTINCT(s.clinical_study_designation)) AS all_studies
@@ -791,6 +792,88 @@ type QueryType {
              diag AS diagnosis_obj
   """, passThrough:true)
 
+  caseOverviewPaged (case_ids: [String] = [], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
+    MATCH (c:case)
+      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (s:study)<--(c)
+    OPTIONAL MATCH (c)<--(demo:demographic)
+    OPTIONAL MATCH (c)<--(diag:diagnosis)
+    OPTIONAL MATCH (c)-->(co:cohort)
+    WITH DISTINCT c AS c, s, co, demo, diag
+    RETURN c.case_id AS case_id,
+         s.clinical_study_designation AS study_code,
+         s.clinical_study_type AS study_type,
+         co.cohort_description AS cohort,
+         demo.breed AS breed,
+         diag.disease_term AS diagnosis,
+         diag.stage_of_disease AS stage_of_disease,
+         diag.primary_disease_site AS disease_site,
+         demo.patient_age_at_enrollment AS age,
+         demo.sex AS sex,
+         demo.neutered_indicator AS neutered_status,
+         demo.weight AS weight,
+         diag.best_response AS response_to_treatment
+    ORDER BY
+      CASE $order_by
+        WHEN "study_code" THEN study_code
+        WHEN "study_type" THEN study_type
+        WHEN "cohort" THEN cohort
+        WHEN "breed" THEN breed
+        WHEN "diagnosis" THEN diagnosis
+        WHEN "stage_of_disease" THEN stage_of_disease
+        WHEN "disease_site" THEN disease_site
+        WHEN "age" THEN age
+        WHEN "sex" THEN sex
+        WHEN "neutered_status" THEN neutered_status
+        WHEN "weight" THEN weight
+        WHEN "response_to_treatment" THEN response_to_treatment
+        ELSE case_id
+      END
+    SKIP $offset
+    LIMIT $first
+  """, passThrough: true)
+
+  caseOverviewPagedDesc (case_ids: [String] = [], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
+    MATCH (c:case)
+      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (s:study)<--(c)
+    OPTIONAL MATCH (c)<--(demo:demographic)
+    OPTIONAL MATCH (c)<--(diag:diagnosis)
+    OPTIONAL MATCH (c)-->(co:cohort)
+    WITH DISTINCT c AS c, s, co, demo, diag
+    RETURN c.case_id AS case_id,
+         s.clinical_study_designation AS study_code,
+         s.clinical_study_type AS study_type,
+         co.cohort_description AS cohort,
+         demo.breed AS breed,
+         diag.disease_term AS diagnosis,
+         diag.stage_of_disease AS stage_of_disease,
+         diag.primary_disease_site AS disease_site,
+         demo.patient_age_at_enrollment AS age,
+         demo.sex AS sex,
+         demo.neutered_indicator AS neutered_status,
+         demo.weight AS weight,
+         diag.best_response AS response_to_treatment
+    ORDER BY
+      CASE $order_by
+        WHEN "study_code" THEN study_code
+        WHEN "study_type" THEN study_type
+        WHEN "cohort" THEN cohort
+        WHEN "breed" THEN breed
+        WHEN "diagnosis" THEN diagnosis
+        WHEN "stage_of_disease" THEN stage_of_disease
+        WHEN "disease_site" THEN disease_site
+        WHEN "age" THEN age
+        WHEN "sex" THEN sex
+        WHEN "neutered_status" THEN neutered_status
+        WHEN "weight" THEN weight
+        WHEN "response_to_treatment" THEN response_to_treatment
+        ELSE case_id
+      END DESC
+    SKIP $offset
+    LIMIT $first
+  """, passThrough: true)
+
   searchCases (
     study: [String] = [],
     study_type: [String] = [],
@@ -816,7 +899,7 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)--(co:cohort)
+    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
