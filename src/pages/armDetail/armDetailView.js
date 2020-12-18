@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import {
   Grid,
   withStyles,
@@ -15,8 +15,11 @@ import {
   header,
   subsections,
   table,
+  tooltipContent,
 } from '../../bento/armDetailData';
-import { singleCheckBox } from '../dashboard/dashboardState';
+import {
+  singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
+} from '../dashboardTab/store/dashboardReducer';
 import Widget from '../../components/Widgets/WidgetView';
 import PropertySubsection from '../../components/PropertySubsection/armDetailSubsection';
 import NumberOfThings from '../../components/NumberOfThings';
@@ -25,7 +28,7 @@ import colors from '../../utils/colors';
 
 // Main case detail component
 const ArmDetail = ({ data, classes }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
@@ -38,13 +41,16 @@ const ArmDetail = ({ data, classes }) => {
     setsnackbarState({ open: false });
   }
 
-  const redirectTo = async () => {
-    dispatch(singleCheckBox([{
+  const redirectTo = () => {
+    setSideBarToLoading();
+    setDashboardTableLoading();
+    singleCheckBox([{
+      datafield: 'studies',
       groupName: 'Arm',
-      name: data.study_info,
-      datafield: 'study_info',
       isChecked: true,
-    }]));
+      name: data.study_info,
+      section: 'Filter By Cases',
+    }]);
   };
 
   const stat = {
@@ -112,7 +118,7 @@ const ArmDetail = ({ data, classes }) => {
 
           <Grid container className={classes.detailContainer}>
             {/* Left panel */}
-            <Grid item lg={7} sm={6} xs={12} className={classes.detailPanel}>
+            <Grid item lg={7} sm={6} xs={12} className={[classes.detailPanel, classes.leftPanel]}>
               <div className={classes.innerPanel}>
                 <Grid container spacing={2}>
                   { subsections.slice(0, 6).map((section, index) => (
@@ -123,7 +129,7 @@ const ArmDetail = ({ data, classes }) => {
             </Grid>
             {/* Left panel end */}
             {/* Right panel */}
-            <Grid item lg={5} sm={6} xs={12} className={classes.detailPanel}>
+            <Grid item lg={5} sm={6} xs={12} className={[classes.detailPanel, classes.rightPanel]}>
               <div className={classes.innerPanel}>
                 {/* Diagnosis donut */}
                 <div className={classes.widgetContainer}>
@@ -180,7 +186,8 @@ const ArmDetail = ({ data, classes }) => {
                             saveButtonDefaultStyle={table.saveButtonDefaultStyle}
                             ActiveSaveButtonDefaultStyle={table.ActiveSaveButtonDefaultStyle}
                             DeactiveSaveButtonDefaultStyle={table.DeactiveSaveButtonDefaultStyle}
-                            messageData={table.tooltipMessage}
+                            tooltipMessage={table.tooltipMessage}
+                            tooltipContent={tooltipContent}
                           />
                         </Grid>
                         <Grid item xs={8}>
@@ -293,7 +300,7 @@ const styles = (theme) => ({
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
-    padding: '5px 0 10px 10px',
+    padding: '5px 0 10px 0px',
     fontFamily: theme.custom.fontFamily,
     letterSpacing: '0.014em',
     color: '#000000',
@@ -304,13 +311,19 @@ const styles = (theme) => ({
   detailPanel: {
     borderRight: 'solid 1px #81A6BA',
   },
+  leftPanel: {
+    paddingLeft: '0px',
+  },
+  rightPanel: {
+    paddingLeft: '16px !important',
+  },
   innerPanel: {
     height: '100%',
     minHeight: '590px',
     maxHeight: '700px',
     overflowY: 'auto',
     overflowX: 'hidden',
-    paddingLeft: '16px',
+    paddingLeft: '0px',
     paddingRight: '40px',
     scrollbarColor: '#697270',
   },
@@ -364,7 +377,7 @@ const styles = (theme) => ({
   },
   tableContainer: {
     background: '#FFFFFF',
-    padding: '0 117px',
+    padding: '0 0px',
   },
   tableHeader: {
     paddingLeft: '32px',

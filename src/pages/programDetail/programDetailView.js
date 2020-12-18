@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   Grid,
   withStyles,
@@ -9,8 +8,6 @@ import {
   CustomDataTable,
   cn,
   manipulateLinks,
-  filterData,
-  getDonutDataFromDashboardData,
   getOptions,
   getColumns,
   CustomActiveDonut,
@@ -22,7 +19,9 @@ import {
 } from '../../bento/programDetailData';
 import StatsView from '../../components/Stats/StatsView';
 import { Typography } from '../../components/Wrappers/Wrappers';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
+import {
+  singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
+} from '../dashboardTab/store/dashboardReducer';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import Widget from '../../components/Widgets/WidgetView';
 import colors from '../../utils/colors';
@@ -30,65 +29,28 @@ import colors from '../../utils/colors';
 const ProgramView = ({ classes, data, theme }) => {
   const programData = data.programDetail;
 
-  const dispatch = useDispatch();
-
-  const widgetData = useSelector((state) => (
-    state.dashboard
-      && state.dashboard.subjectOverView
-       && state.dashboard.subjectOverView.data
-      ? (
-        function extraData(d) {
-          return {
-            diagnosis: getDonutDataFromDashboardData(d, 'diagnosis'),
-            file: programData.num_files,
-          };
-        }(state.dashboard.subjectOverView.data.filter(
-          (d) => (filterData(d,
-            [{
-              groupName: 'Program',
-              name: programData.program_acronym,
-              datafield: 'program',
-              isChecked: true,
-            }])
-          ),
-        ))
-      )
-      : {
-        diagnosis: [],
-        file: 0,
-      }));
-
-  // initDashboardStatus will be used in dispatch to
-  // make sure dashboard data has be loaded first.
-  const initDashboardStatus = () => () => Promise.resolve(
-    dispatch(fetchDataForDashboardDataTable()),
-  );
-
-  React.useEffect(() => {
-    // Update dashboard first
-    dispatch(initDashboardStatus());
-  }, []);
-
   const redirectTo = () => {
-    dispatch(initDashboardStatus()).then(() => {
-      dispatch(singleCheckBox([{
-        groupName: 'Program',
-        name: programData.program_acronym,
-        datafield: 'program',
-        isChecked: true,
-      }]));
-    });
+    setSideBarToLoading();
+    setDashboardTableLoading();
+    singleCheckBox([{
+      datafield: 'programs',
+      groupName: 'Program',
+      isChecked: true,
+      name: programData.program_acronym,
+      section: 'Filter By Cases',
+    }]);
   };
 
   const redirectToArm = (programArm) => {
-    dispatch(initDashboardStatus()).then(() => {
-      dispatch(singleCheckBox([{
-        groupName: 'Arm',
-        name: `${programArm.rowData[0]}: ${programArm.rowData[1]}`,
-        datafield: 'study_info',
-        isChecked: true,
-      }]));
-    });
+    setSideBarToLoading();
+    setDashboardTableLoading();
+    singleCheckBox([{
+      datafield: 'studies',
+      groupName: 'Arm',
+      isChecked: true,
+      name: `${programArm.rowData[0]}: ${programArm.rowData[1]}`,
+      section: 'Filter By Cases',
+    }]);
   };
 
   const stat = {
@@ -292,7 +254,7 @@ const ProgramView = ({ classes, data, theme }) => {
                       noPaddedTitle
                     >
                       <CustomActiveDonut
-                        data={widgetData[rightPanel.widget[0].dataField]}
+                        data={programData[rightPanel.widget[0].dataField] || []}
                         width={400}
                         height={225}
                         innerRadius={50}
@@ -541,7 +503,7 @@ const styles = (theme) => ({
     margin: 'auto',
     marginBlockEnd: '24px',
     paddingTop: '24px',
-    paddingLeft: '36px',
+    paddingLeft: '5px',
     fontFamily: theme.custom.fontFamily,
     letterSpacing: '0.014em',
     color: '#000000',
@@ -570,7 +532,7 @@ const styles = (theme) => ({
   },
   detailContainerLeft: {
     display: 'block',
-    padding: '5px  20px 5px 2px !important',
+    padding: '5px  20px 5px 0px !important',
     minHeight: '500px',
     maxHeight: '500px',
     overflowY: 'auto',
@@ -582,7 +544,7 @@ const styles = (theme) => ({
     borderRight: '#81a6b9 1px solid',
   },
   detailContainerRight: {
-    padding: '5px 0 5px 20px !important',
+    padding: '5px 0 5px 36px !important',
     minHeight: '500px',
     maxHeight: '500px',
     overflowY: 'auto',
@@ -607,7 +569,7 @@ const styles = (theme) => ({
     maxWidth: '1340px',
     margin: 'auto',
     paddingTop: '50px',
-    paddingLeft: '30px',
+    paddingLeft: '0px',
   },
 
   headerButtonLink: {

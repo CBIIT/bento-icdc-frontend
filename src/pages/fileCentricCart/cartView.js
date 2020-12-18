@@ -10,7 +10,6 @@ import _ from 'lodash';
 import { DeleteOutline as DeleteOutlineIcon, ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
 import CustomDataTable from '../../components/serverPaginatedTable/serverPaginatedTable';
 import client from '../../utils/graphqlClient';
-import SkeletonTable from './components/skeletonTable';
 import {
   myFilesPageData, table, manifestData, GET_MY_CART_DATA_QUERY, GET_MY_CART_DATA_QUERY_DESC,
 } from '../../bento/fileCentricCartWorkflowData';
@@ -21,7 +20,7 @@ import DialogThemeProvider from './dialogThemeConfig';
 import TableThemeProvider from './cartTableThemeConfig';
 
 const cartView = ({
-  classes, data, isLoading, fileIDs = [],
+  classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection,
 }) => {
   const [modalStatus, setModalStatus] = React.useState(false);
   const [TopMessageStatus, setTopMessageStatus] = React.useState(false);
@@ -133,21 +132,6 @@ const cartView = ({
 
   const numberOfFilesBeDeleted = myFilesPageData.popUpWindow.showNumberOfFileBeRemoved ? fileIDs.length : '';
 
-  const dataTable = isLoading ? <SkeletonTable />
-    : (
-      <CustomDataTable
-        data={_.cloneDeep(data)}
-        columns={columns}
-        options={options}
-        className={classes.tableStyle}
-        count={fileIDs.length || 0}
-        overview={GET_MY_CART_DATA_QUERY}
-        overviewDesc={GET_MY_CART_DATA_QUERY_DESC}
-        paginationAPIField="filesInList"
-        paginationAPIFieldDesc="filesInListDesc"
-        queryCustomVaribles={{ file_ids: fileIDs }}
-      />
-    );
   return (
     <Grid>
       <DialogThemeProvider>
@@ -171,10 +155,10 @@ const cartView = ({
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => deleteSubjectsAndCloseModal()} className={classes.okButton}>
+            <Button variant="contained" disableElevation onClick={() => deleteSubjectsAndCloseModal()} className={classes.okButton}>
               {myFilesPageData.popUpWindow.okButtonText}
             </Button>
-            <Button onClick={() => closeModal()} className={classes.cancelButton}>
+            <Button variant="contained" disableElevation onClick={() => closeModal()} className={classes.cancelButton}>
               {myFilesPageData.popUpWindow.cancelButtonText}
             </Button>
           </DialogActions>
@@ -232,7 +216,20 @@ const cartView = ({
           <div id="table_selected_files" className={classes.tableWrapper}>
             {}
             <TableThemeProvider>
-              {dataTable}
+              <CustomDataTable
+                data={_.cloneDeep(data)}
+                columns={columns}
+                options={options}
+                className={classes.tableStyle}
+                count={fileIDs.length || 0}
+                overview={GET_MY_CART_DATA_QUERY}
+                overviewDesc={GET_MY_CART_DATA_QUERY_DESC}
+                paginationAPIField="filesInList"
+                paginationAPIFieldDesc="filesInListDesc"
+                queryCustomVaribles={{ file_ids: fileIDs }}
+                defaultSortCoulmn={defaultSortCoulmn}
+                defaultSortDirection={defaultSortDirection}
+              />
             </TableThemeProvider>
             <div className={classes.manifestTextarea}>
               <textarea
@@ -312,7 +309,7 @@ const styles = (theme) => ({
     marginBottom: '80px',
     marginLeft: '3%',
     marginRight: '3%',
-    paddingBottom: '36px',
+    paddingBottom: '20px',
     background: 'white',
   },
   linkIcon: {
@@ -355,7 +352,7 @@ const styles = (theme) => ({
     float: 'right',
   },
   manifestTextarea: {
-    marginTop: '10px',
+    marginTop: '20px',
   },
   downloadButton: {
     height: '45px',
@@ -384,11 +381,17 @@ const styles = (theme) => ({
     background: '#98A19E',
     color: '#fff',
     cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'rgba(152,161,158,0.6)',
+    },
   },
   cancelButton: {
     background: '#42779A',
     color: '#fff',
     cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'rgba(66,119,154,0.6)',
+    },
   },
   tableDeleteButton: {
     background: '#fff',
@@ -436,13 +439,14 @@ const styles = (theme) => ({
   removeHeadCellIcon: {
     ursor: 'pointer',
     display: 'flex',
+    marginTop: '1px',
     verticalAlign: 'top',
   },
   removeHeadCellIconButton: {
     color: '#A61401',
-    width: '20px',
-    marginTop: '8px',
-    height: '20px',
+    width: '25px',
+    marginTop: '5px',
+    height: '25px',
   },
   removeAllMessage: {
     fontWeight: '500',
