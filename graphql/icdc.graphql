@@ -93,6 +93,7 @@ type case {
   samples: [sample] @relation(name:"of_case", direction:IN)
   visits: [visit] @relation(name:"of_case", direction:IN)
   adverse_events: [adverse_event] @relation(name:"of_case", direction:IN)
+  NONE: [registration] @relation(name:"of_case", direction:IN)
   adverse_event: adverse_event @relation(name:"had_adverse_event", direction:OUT)
   off_study: off_study @relation(name:"went_off_study", direction:OUT)
   off_treatment: off_treatment @relation(name:"went_off_treatment", direction:OUT)
@@ -323,6 +324,13 @@ type program {
   studies: [study] @relation(name:"member_of", direction:IN)
 }
 
+type registration {
+  registration_origin: String
+  registration_id: String
+  is_primary_id: String
+  case: case @relation(name:"of_case", direction:OUT)
+}
+
 type sample {
   sample_id: String
   sample_site: String
@@ -551,19 +559,7 @@ type StudyOfProgram {
   date_of_iacuc_approval: String
   dates_of_conduct: String
   numberOfCases: Int
-}
-
-type FileOverview {
-  parent:String
-  file_name: String
-  file_type: String
-  file_description: String
-  file_format: String
-  file_size: Float
-  md5sum: String
-  file_status: String
-  uuid: String
-  file_location: String
+  case_ids: [String]
 }
 
 type CaseOverview {
@@ -674,9 +670,54 @@ type StudyStat {
   samples: Int
 }
 
+type FileInList {
+  file_type: String
+  association: String
+  file_description: String
+  file_format: String
+  file_size: Float
+  case_id: String
+  breed: String
+  diagnosis: String
+  study_code: String
+  file_uuid: String
+  md5sum: String
+}
+
+
+type FileOverview {
+  file_name: String
+  file_type: String
+  association: String
+  file_description: String
+  file_format: String
+  file_size: Float
+  case_id: String
+  breed: String
+  diagnosis: String
+  study_code: String
+  file_uuid: String
+}
+
+type SampleOverview {
+  sample_id: String
+  case_id: String
+  breed: String
+  diagnosis: String
+  sample_site: String
+  sample_type: String
+  sample_pathology: String
+  tumor_grade: String
+  sample_chronology: String
+  percentage_tumor: String
+  necropsy_sample: String
+  sample_preservation: String
+}
+
+
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.0'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.1'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
@@ -700,19 +741,181 @@ type QueryType {
   sampleCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (c:case {case_id: $case_id})<-[*]-(s:sample) RETURN count(distinct(s))")
 
   "Count by group"
-  caseCountByStudyCode: [StudyCodeCaseCount] @cypher(statement: "MATCH (s:study) OPTIONAL MATCH (s)<-[*]-(c:case) RETURN s.clinical_study_designation AS study_code, count(DISTINCT(c)) AS cases ORDER BY s.clinical_study_designation")
-  caseCountByDiagnosis: [DiagnosisCaseCount] @cypher(statement: "MATCH (d:diagnosis)-[:of_case]->(c:case) RETURN d.disease_term AS diagnosis, count(c) AS cases ORDER BY d.disease_term")
-  caseCountByGender: [GenderCaseCount] @cypher(statement: "MATCH (d:demographic)-[:of_case]->(c:case) RETURN d.sex AS gender, count(c) AS cases ORDER BY d.sex")
-  caseCountByBreed: [BreedCaseCount] @cypher(statement: "MATCH (c:case)<-[:of_case]-(d:demographic) RETURN d.breed AS breed, count(c) AS cases")
-  caseCountByNeuteredStatus :[NeuteredStatusCaseCount] @cypher(statement: " MATCH (c:case)<--(d:demographic) return d.neutered_indicator AS neutered_status, count(c) AS cases ")
-  caseCountByStageOfDisease: [StageOfDiseaseCaseCount] @cypher(statement: "MATCH (d:diagnosis)-[:of_case]->(c:case) RETURN d.stage_of_disease AS stage_of_disease, count(c) AS cases ORDER BY d.stage_of_disease")
-  caseCountByDiseaseSite: [DiseaseSiteCaseCount] @cypher(statement: "MATCH (d:diagnosis)-[:of_case]->(c:case) RETURN d.primary_disease_site AS disease_site, count(c) AS cases ORDER BY d.primary_disease_site")
-  caseCountByStudyType: [StudyTypeCaseCount] @cypher(statement: "MATCH (s:study)<-[*]-(c:case) RETURN s.clinical_study_type AS study_type, COUNT(DISTINCT(c)) AS cases")
-  caseCountByAge: [AgeCaseCount] @cypher(statement: "MATCH (d:demographic)-->(c:case) RETURN d.patient_age_at_enrollment AS age, COUNT(DISTINCT(c)) AS cases ORDER BY age")
-  caseCountByDataType: [FileTypeCaseCount] @cypher(statement: "MATCH (f:file)-[*]->(c:case) RETURN f.file_type AS data_type, COUNT(DISTINCT(c)) AS cases ORDER BY data_type")
-  caseCountByFileFormat: [FileFormatCaseCount] @cypher(statement: "MATCH (f:file)-[*]->(c:case) RETURN f.file_format AS file_format, COUNT(DISTINCT(c)) AS cases ORDER BY file_format")
-  caseCountByProgram: [ProgramCaseCount] @cypher(statement: "MATCH (p:program) OPTIONAL Match (p)<-[*]-(c:case) RETURN  p.program_acronym AS program, COUNT(DISTINCT(c)) AS cases ORDER BY program")
+  caseCountByStudyCode(case_ids: [String] = []): [StudyCodeCaseCount] @cypher(statement: """
+    MATCH (s:study)<-[:member_of]-(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      s.clinical_study_designation AS study_code,
+      count(DISTINCT(c)) AS cases
+  """)
 
+  caseCountByDiagnosis(case_ids: [String] = []): [DiagnosisCaseCount] @cypher(statement: """
+    MATCH (d:diagnosis)-[:of_case]->(c:case)
+      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      d.disease_term AS diagnosis,
+      count(c) AS cases
+  """)
+
+  caseCountByGender(case_ids: [String] = []): [GenderCaseCount] @cypher(statement: """
+    MATCH (d:demographic)-[:of_case]->(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      d.sex AS gender,
+      count(c) AS cases
+  """)
+
+  caseCountByBreed(case_ids: [String] = []): [BreedCaseCount] @cypher(statement: """
+    MATCH (c:case)<-[:of_case]-(d:demographic)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      d.breed AS breed,
+      count(c) AS cases
+  """)
+
+  caseCountByNeuteredStatus(case_ids: [String] = []): [NeuteredStatusCaseCount] @cypher(statement: """
+    MATCH (c:case)<-[:of_case]-(d:demographic)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      d.neutered_indicator AS neutered_status,
+      count(c) AS cases
+  """)
+
+  caseCountByStageOfDisease(case_ids: [String] = []): [StageOfDiseaseCaseCount] @cypher(statement: """
+    MATCH (d:diagnosis)-[:of_case]->(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      d.stage_of_disease AS stage_of_disease,
+      count(c) AS cases
+  """)
+
+  caseCountByDiseaseSite(case_ids: [String] = []): [DiseaseSiteCaseCount] @cypher(statement: """
+    MATCH (d:diagnosis)-[:of_case]->(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      d.primary_disease_site AS disease_site,
+      count(c) AS cases
+  """)
+
+  caseCountByStudyType(case_ids: [String] = []): [StudyTypeCaseCount] @cypher(statement: """
+    MATCH (s:study)<-[:member_of]-(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      s.clinical_study_type AS study_type,
+      COUNT(DISTINCT(c)) AS cases
+  """)
+
+  caseCountByAge(case_ids: [String] = []): [AgeCaseCount] @cypher(statement: """
+    MATCH (d:demographic)-[:of_case]->(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      d.patient_age_at_enrollment AS age,
+      COUNT(DISTINCT(c)) AS cases ORDER BY age
+  """)
+
+  caseCountByDataType(case_ids: [String] = []): [FileTypeCaseCount] @cypher(statement: """
+    MATCH (f:file)-[*]->(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      f.file_type AS data_type,
+      COUNT(DISTINCT(c)) AS cases
+  """)
+
+  caseCountByFileFormat(case_ids: [String] = []): [FileFormatCaseCount] @cypher(statement: """
+    MATCH (f:file)-[*]->(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      f.file_format AS file_format,
+      COUNT(DISTINCT(c)) AS cases
+  """)
+
+  caseCountByProgram(case_ids: [String] = []): [ProgramCaseCount] @cypher(statement: """
+    Match (p:program)<-[:member_of]-(s)<-[:member_of]-(c:case)
+    WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN
+      p.program_acronym AS program,
+      COUNT(DISTINCT(c)) AS cases
+  """)
+
+  filesInList(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] @cypher(statement: """
+    MATCH (f:file)
+      WHERE f.uuid in $uuids
+    OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (f:file)-[*]->(c:case)
+    OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
+    OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
+    OPTIONAL MATCH (s:study)<-[:member_of]-(c)
+    WITH f, parent, c, s, demo, diag
+    RETURN
+      f.file_name AS file_name,
+      f.file_type AS file_type,
+      head(labels(parent)) AS association,
+      f.file_description AS file_description,
+      f.file_format AS file_format,
+      f.file_size AS file_size,
+      c.case_id as case_id,
+      demo.breed as breed,
+      diag.disease_term as diagnosis,
+      s.clinical_study_designation AS study_code,
+      f.uuid as file_uuid,
+      f.md5sum AS md5sum
+    ORDER BY CASE $order_by
+      WHEN 'file_name' THEN file_name
+      WHEN 'file_type' THEN file_type
+      WHEN 'association' THEN association
+      WHEN 'file_description' THEN file_description
+      WHEN 'file_format' THEN file_format
+      WHEN 'file_size' THEN file_size
+      WHEN 'case_id' THEN case_id
+      WHEN 'breed' THEN breed
+      WHEN 'diagnosis' THEN diagnosis
+      WHEN 'study_code' THEN study_code
+      WHEN 'file_uuid' THEN file_uuid
+      WHEN 'md5sum' THEN md5sum
+    ELSE file_uuid END
+    SKIP $offset
+    LIMIT $first
+  """)
+
+  filesInListDesc(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] @cypher(statement: """
+    MATCH (f:file)
+      WHERE f.uuid in $uuids
+    OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (f:file)-[*]->(c:case)
+    OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
+    OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
+    OPTIONAL MATCH (s:study)<-[:member_of]-(c)
+      WITH f, parent, c, s, demo, diag
+    RETURN
+      f.file_name AS file_name,
+      f.file_type AS file_type,
+      head(labels(parent)) AS association,
+      f.file_description AS file_description,
+      f.file_format AS file_format,
+      f.file_size AS file_size,
+      c.case_id as case_id,
+      demo.breed as breed,
+      diag.disease_term as diagnosis,
+      s.clinical_study_designation AS study_code,
+      f.uuid as file_uuid,
+      f.md5sum AS md5sum
+    ORDER BY CASE $order_by
+      WHEN 'file_name' THEN file_name
+      WHEN 'file_type' THEN file_type
+      WHEN 'association' THEN association
+      WHEN 'file_description' THEN file_description
+      WHEN 'file_format' THEN file_format
+      WHEN 'file_size' THEN file_size
+      WHEN 'case_id' THEN case_id
+      WHEN 'breed' THEN breed
+      WHEN 'diagnosis' THEN diagnosis
+      WHEN 'study_code' THEN study_code
+      WHEN 'file_uuid' THEN file_uuid
+      WHEN 'md5sum' THEN md5sum
+      ELSE file_uuid END DESC
+    SKIP $offset
+    LIMIT $first
+  """)
   "Combined info"
   studiesByProgramId(program_id: String!): [StudyOfProgram] @cypher(statement: "MATCH (p:program {program_acronym: $program_id})<-[*]-(s:study) OPTIONAL MATCH (s)<-[*]-(c:case) RETURN p.program_acronym AS program_id, s.clinical_study_id AS clinical_study_id, s.clinical_study_designation AS clinical_study_designation, s.clinical_study_name AS clinical_study_name, s.clinical_study_description AS clinical_study_description, s.clinical_study_type AS clinical_study_type, s.date_of_iacuc_approval AS date_of_iacuc_approval, s.dates_of_conduct AS dates_of_conduct, COUNT(DISTINCT(c)) as numberOfCases ORDER BY clinical_study_designation")
   studiesByProgram: [StudyOfProgram] @cypher(statement:"MATCH (s:study) OPTIONAL MATCH (p:program)<-[*]-(s) OPTIONAL MATCH (s)<-[*]-(c:case) RETURN p.program_acronym AS program_id, s.clinical_study_id AS clinical_study_id, s.clinical_study_designation AS clinical_study_designation, s.clinical_study_name AS clinical_study_name, s.clinical_study_description AS clinical_study_description, s.clinical_study_type AS clinical_study_type, s.date_of_iacuc_approval AS date_of_iacuc_approval, s.dates_of_conduct AS dates_of_conduct, COUNT(DISTINCT(c)) as numberOfCases ORDER BY clinical_study_designation")
@@ -858,5 +1061,161 @@ type QueryType {
               SUM(f.file_size)/1000000 AS totoal_size_MB,
               cases,
               samples
+  """)
+
+  fileOverview(case_ids: [String] = [], file_uuids: [String]=[], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] @cypher(statement: """
+    MATCH (f:file)
+      WHERE (size($file_uuids) = 0 OR f.uuid IN $file_uuids)
+    OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (parent)-[:of_case]->(c:case)
+    WITH f, parent, c
+      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
+    OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
+    OPTIONAL MATCH (c)-[:member_of]->(s:study)
+    RETURN
+      f.file_name as file_name,
+      f.file_type as file_type,
+      head(labels(parent)) as association,
+      f.file_description as file_description,
+      f.file_format as file_format,
+      f.file_size as file_size,
+      c.case_id as case_id,
+      demo.breed as breed,
+      d.disease_term as diagnosis,
+      s.clinical_study_designation as study_code,
+      f.uuid as file_uuid
+    ORDER BY CASE $order_by
+      WHEN 'file_name' THEN file_name
+      WHEN 'file_type' THEN file_type
+      WHEN 'association' THEN association
+      WHEN 'file_description' THEN file_description
+      WHEN 'file_format' THEN file_format
+      WHEN 'file_size' THEN file_size
+      WHEN 'case_id' THEN case_id
+      WHEN 'breed' THEN breed
+      WHEN 'diagnosis' THEN diagnosis
+      WHEN 'study_code' THEN study_code
+      WHEN 'file_uuid' THEN file_uuid
+    ELSE file_name END
+    SKIP $offset
+    LIMIT $first
+  """)
+
+  fileOverviewDesc(case_ids: [String] = [], file_uuids: [String]=[], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] @cypher(statement: """
+    MATCH (f:file)
+      WHERE (size($file_uuids) = 0 OR f.uuid IN $file_uuids)
+    OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (parent)-[:of_case]->(c:case)
+    WITH f, parent, c
+      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
+    OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
+    OPTIONAL MATCH (c)-[:member_of]->(s:study)
+    RETURN
+      f.file_name as file_name,
+      f.file_type as file_type,
+      head(labels(parent)) as association,
+      f.file_description as file_description,
+      f.file_format as file_format,
+      f.file_size as file_size,
+      c.case_id as case_id,
+      demo.breed as breed,
+      d.disease_term as diagnosis,
+      s.clinical_study_designation as study_code,
+      f.uuid as file_uuid
+    ORDER BY CASE $order_by
+      WHEN 'file_name' THEN file_name
+      WHEN 'file_type' THEN file_type
+      WHEN 'association' THEN association
+      WHEN 'file_description' THEN file_description
+      WHEN 'file_format' THEN file_format
+      WHEN 'file_size' THEN file_size
+      WHEN 'case_id' THEN case_id
+      WHEN 'breed' THEN breed
+      WHEN 'diagnosis' THEN diagnosis
+      WHEN 'study_code' THEN study_code
+      WHEN 'file_uuid' THEN file_uuid
+      ELSE file_name END DESC
+    SKIP $offset
+    LIMIT $first
+  """)
+
+  sampleOverview(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] @cypher(statement: """
+    MATCH (s:sample)
+      WHERE (size($sample_ids) = 0 OR s.sample_id IN $sample_ids)
+    OPTIONAL MATCH (s)-[:of_case]->(c:case)
+    WITH s, c
+      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
+    OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
+    RETURN
+      s.sample_id as sample_id,
+      c.case_id as case_id,
+      demo.breed as breed,
+      d.disease_term as diagnosis,
+      s.sample_site as sample_site,
+      s.summarized_sample_type as sample_type,
+      s.specific_sample_pathology as sample_pathology,
+      s.tumor_grade as tumor_grade,
+      s.sample_chronology as sample_chronology,
+      s.percentage_tumor as percentage_tumor,
+      s.necropsy_sample as necropsy_sample,
+      s.sample_preservation as sample_preservation
+    ORDER BY CASE $order_by
+      WHEN 'sample_id' THEN sample_id
+      WHEN 'case_id' THEN case_id
+      WHEN 'breed' THEN breed
+      WHEN 'diagnosis' THEN diagnosis
+      WHEN 'sample_site' THEN sample_site
+      WHEN 'sample_type' THEN sample_type
+      WHEN 'sample_pathology' THEN sample_pathology
+      WHEN 'tumor_grade' THEN tumor_grade
+      WHEN 'sample_chronology' THEN sample_chronology
+      WHEN 'percentage_tumor' THEN percentage_tumor
+      WHEN 'necropsy_sample' THEN necropsy_sample
+      WHEN 'sample_preservation' THEN sample_preservation
+      ELSE sample_id END
+    SKIP $offset
+    LIMIT $first
+  """)
+
+  sampleOverviewDesc(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] @cypher(statement: """
+    MATCH (s:sample)
+      WHERE (size($sample_ids) = 0 OR s.sample_id IN $sample_ids)
+    OPTIONAL MATCH (s)-[:of_case]->(c:case)
+    WITH s, c
+      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
+    OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
+    RETURN
+      s.sample_id as sample_id,
+      c.case_id as case_id,
+      demo.breed as breed,
+      d.disease_term as diagnosis,
+      s.sample_site as sample_site,
+      s.summarized_sample_type as sample_type,
+      s.specific_sample_pathology as sample_pathology,
+      s.tumor_grade as tumor_grade,
+      s.sample_chronology as sample_chronology,
+      s.percentage_tumor as percentage_tumor,
+      s.necropsy_sample as necropsy_sample,
+      s.sample_preservation as sample_preservation
+  ORDER BY CASE $order_by
+      WHEN 'sample_id' THEN sample_id
+      WHEN 'case_id' THEN case_id
+      WHEN 'breed' THEN breed
+      WHEN 'diagnosis' THEN diagnosis
+      WHEN 'sample_site' THEN sample_site
+      WHEN 'sample_type' THEN sample_type
+      WHEN 'sample_pathology' THEN sample_pathology
+      WHEN 'tumor_grade' THEN tumor_grade
+      WHEN 'sample_chronology' THEN sample_chronology
+      WHEN 'percentage_tumor' THEN percentage_tumor
+      WHEN 'necropsy_sample' THEN necropsy_sample
+      WHEN 'sample_preservation' THEN sample_preservation
+      ELSE sample_id END DESC
+    SKIP $offset
+    LIMIT $first
   """)
 }

@@ -93,6 +93,7 @@ type case {
   samples: [sample] 
   visits: [visit] 
   adverse_events: [adverse_event] 
+  NONE: [registration] 
   adverse_event: adverse_event 
   off_study: off_study 
   off_treatment: off_treatment 
@@ -323,6 +324,13 @@ type program {
   studies: [study] 
 }
 
+type registration {
+  registration_origin: String
+  registration_id: String
+  is_primary_id: String
+  case: case 
+}
+
 type sample {
   sample_id: String
   sample_site: String
@@ -551,19 +559,7 @@ type StudyOfProgram {
   date_of_iacuc_approval: String
   dates_of_conduct: String
   numberOfCases: Int
-}
-
-type FileOverview {
-  parent:String
-  file_name: String
-  file_type: String
-  file_description: String
-  file_format: String
-  file_size: Float
-  md5sum: String
-  file_status: String
-  uuid: String
-  file_location: String
+  case_ids: [String]
 }
 
 type CaseOverview {
@@ -674,6 +670,51 @@ type StudyStat {
   samples: Int
 }
 
+type FileInList {
+  file_type: String
+  association: String
+  file_description: String
+  file_format: String
+  file_size: Float
+  case_id: String
+  breed: String
+  diagnosis: String
+  study_code: String
+  file_uuid: String
+  md5sum: String
+}
+
+
+type FileOverview {
+  file_name: String
+  file_type: String
+  association: String
+  file_description: String
+  file_format: String
+  file_size: Float
+  case_id: String
+  breed: String
+  diagnosis: String
+  study_code: String
+  file_uuid: String
+}
+
+type SampleOverview {
+  sample_id: String
+  case_id: String
+  breed: String
+  diagnosis: String
+  sample_site: String
+  sample_type: String
+  sample_pathology: String
+  tumor_grade: String
+  sample_chronology: String
+  percentage_tumor: String
+  necropsy_sample: String
+  sample_preservation: String
+}
+
+
 type QueryType {
   "Version"
   schemaVersion: String 
@@ -700,19 +741,33 @@ type QueryType {
   sampleCountOfCase(case_id: String!): Int 
 
   "Count by group"
-  caseCountByStudyCode: [StudyCodeCaseCount] 
-  caseCountByDiagnosis: [DiagnosisCaseCount] 
-  caseCountByGender: [GenderCaseCount] 
-  caseCountByBreed: [BreedCaseCount] 
-  caseCountByNeuteredStatus :[NeuteredStatusCaseCount] 
-  caseCountByStageOfDisease: [StageOfDiseaseCaseCount] 
-  caseCountByDiseaseSite: [DiseaseSiteCaseCount] 
-  caseCountByStudyType: [StudyTypeCaseCount] 
-  caseCountByAge: [AgeCaseCount] 
-  caseCountByDataType: [FileTypeCaseCount] 
-  caseCountByFileFormat: [FileFormatCaseCount] 
-  caseCountByProgram: [ProgramCaseCount] 
+  caseCountByStudyCode(case_ids: [String] = []): [StudyCodeCaseCount] 
 
+  caseCountByDiagnosis(case_ids: [String] = []): [DiagnosisCaseCount] 
+
+  caseCountByGender(case_ids: [String] = []): [GenderCaseCount] 
+
+  caseCountByBreed(case_ids: [String] = []): [BreedCaseCount] 
+
+  caseCountByNeuteredStatus(case_ids: [String] = []): [NeuteredStatusCaseCount] 
+
+  caseCountByStageOfDisease(case_ids: [String] = []): [StageOfDiseaseCaseCount] 
+
+  caseCountByDiseaseSite(case_ids: [String] = []): [DiseaseSiteCaseCount] 
+
+  caseCountByStudyType(case_ids: [String] = []): [StudyTypeCaseCount] 
+
+  caseCountByAge(case_ids: [String] = []): [AgeCaseCount] 
+
+  caseCountByDataType(case_ids: [String] = []): [FileTypeCaseCount] 
+
+  caseCountByFileFormat(case_ids: [String] = []): [FileFormatCaseCount] 
+
+  caseCountByProgram(case_ids: [String] = []): [ProgramCaseCount] 
+
+  filesInList(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] 
+
+  filesInListDesc(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] 
   "Combined info"
   studiesByProgramId(program_id: String!): [StudyOfProgram] 
   studiesByProgram: [StudyOfProgram] 
@@ -735,4 +790,12 @@ type QueryType {
   fileInfo(file_ids: [String] = []): [FileInfo] 
 
   studyStats: [StudyStat] 
+
+  fileOverview(case_ids: [String] = [], file_uuids: [String]=[], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] 
+
+  fileOverviewDesc(case_ids: [String] = [], file_uuids: [String]=[], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] 
+
+  sampleOverview(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] 
+
+  sampleOverviewDesc(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] 
 }
