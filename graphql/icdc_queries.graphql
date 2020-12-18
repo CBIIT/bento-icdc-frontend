@@ -82,7 +82,6 @@ type StudyOfProgram {
   date_of_iacuc_approval: String
   dates_of_conduct: String
   numberOfCases: Int
-  case_ids: [String]
 }
 
 type CaseOverview {
