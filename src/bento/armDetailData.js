@@ -1,6 +1,12 @@
 import gql from 'graphql-tag';
 import { FileOnRowsSelect } from '../utils/fileTable';
 
+// --------------- Tooltip configuration --------------
+export const tooltipContent = {
+  src: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  alt: 'tooltipIcon',
+};
+
 // -------------- Case ID area configurations --------------
 const header = {
   label: 'Arm',
@@ -91,10 +97,6 @@ const table = {
     {
       dataField: 'file_type',
       header: 'File Type',
-    },
-    {
-      dataField: 'association',
-      header: 'Association',
     },
     {
       dataField: 'file_description',

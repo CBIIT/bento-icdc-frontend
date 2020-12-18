@@ -26,14 +26,19 @@ function TabContainer({ children, dir }) {
 }
 
 const tabController = (classes) => {
+  const currentActiveTabTitle = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.currentActiveTab
+    ? state.dashboardTab.currentActiveTab
+    : tabIndex[0].title));
+  const tabVlaue = tabIndex.map((el) => el.title).indexOf(currentActiveTabTitle) || 0;
   // tab settings
-  const [currentTab, setCurrentTab] = React.useState(0);
+  const [currentTab, setCurrentTab] = React.useState(tabVlaue);
 
   // data from store
   const dashboard = useSelector((state) => (state.dashboardTab
 && state.dashboardTab.datatable
     ? state.dashboardTab.datatable : {}));
-    // data from store
+    // get stats data from store
   const dashboardStats = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.stats ? state.dashboardTab.stats : {}));
 
@@ -143,10 +148,12 @@ const tabController = (classes) => {
   function Type1OnRowsSelect(data, allRowsSelected) {
   // use reduce to combine all the files' id into single array
     return allRowsSelected.reduce((accumulator, currentValue) => {
-      const { files } = data[currentValue.dataIndex];
-      // check if file
-      if (files && files.length > 0) {
-        return accumulator.concat(files.map((f) => f.file_id));
+      if (data[currentValue.dataIndex]) {
+        const { files } = data[currentValue.dataIndex];
+        // check if file exists
+        if (files && files.length > 0) {
+          return accumulator.concat(files.map((f) => f.file_id));
+        }
       }
       return accumulator;
     }, []);
@@ -218,17 +225,17 @@ const tabController = (classes) => {
   ));
 
   // Calculate the properate marginTop value for the tooltip on the top
-  const tooltipStyle = (text) => {
+  function tooltipStyle(text) {
     const marginTopValue = text.length > 40 ? '-25px' : '-3px';
     return { marginTop: marginTopValue };
-  };
+  }
 
   // Tab table Generator
   const TABContainers = tabContainers.map((container) => (
     <TabContainer id={container.id}>
       <TabView
         options={getOptions(container, classes)}
-        data={dashboard[container.dataField] ? dashboard[container.dataField] : []}
+        data={dashboard[container.dataField] ? dashboard[container.dataField] : 'undefined'}
         customColumn={container}
         customOnRowsSelect={onRowsSelectFunction[container.onRowsSelect]}
         openSnack={openSnack}
@@ -249,6 +256,8 @@ const tabController = (classes) => {
         api={container.api}
         paginationAPIField={container.paginationAPIField}
         paginationAPIFieldDesc={container.paginationAPIFieldDesc}
+        defaultSortCoulmn={container.defaultSortField || ''}
+        defaultSortDirection={container.defaultSortDirection || 'asc'}
         dataKey={container.dataKey}
         filteredSubjectIds={filteredSubjectIds}
       />

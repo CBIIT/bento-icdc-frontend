@@ -5,7 +5,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 
-// import { CircularProgress, Typography } from '@material-ui/core';
+import { CircularProgress, Backdrop, withStyles } from '@material-ui/core';
 import { CustomDataTable } from 'bento-components';
 import client from '../../utils/graphqlClient';
 
@@ -14,7 +14,7 @@ class ServerPaginatedTableView extends React.Component {
     count: 1,
     rowsPerPage: 10,
     sortOrder: {},
-    data: [['Loading Data...']],
+    data: 'undefined',
     isLoading: false,
   };
 
@@ -30,9 +30,8 @@ class ServerPaginatedTableView extends React.Component {
 
   // get data
   getData = (url, page) => {
-    this.setState({ isLoading: true });
     this.xhrRequest(url, page).then((res) => {
-      this.setState({ data: res.data, isLoading: false, count: this.props.count });
+      this.setState({ data: res.data, count: this.props.count });
     });
   }
 
@@ -119,14 +118,22 @@ class ServerPaginatedTableView extends React.Component {
   };
 
   async fetchData(offset, rowsRequired, sortOrder = {}) {
+    let sortDirection = 'asc';
+    let sortColumn = 'arm';
+
+    sortDirection = Object.keys(sortOrder).length === 0 ? this.props.defaultSortDirection || 'asc' : sortOrder.direction;
+    sortColumn = Object.keys(sortOrder).length === 0 ? this.props.defaultSortCoulmn || '' : sortOrder.name;
     const fetchResult = await client
       .query({
-        query: sortOrder.direction !== 'asc' ? this.props.overviewDesc : this.props.overview,
+        query: sortDirection !== 'asc' ? this.props.overviewDesc : this.props.overview,
         variables: {
-          offset, first: rowsRequired, order_by: sortOrder.name || '', ...this.props.queryCustomVaribles,
+          offset,
+          first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
+          order_by: sortColumn,
+          ...this.props.queryCustomVaribles,
         },
       })
-      .then((result) => (sortOrder.direction !== 'asc' ? result.data[this.props.paginationAPIFieldDesc] : result.data[this.props.paginationAPIField]));
+      .then((result) => (sortDirection !== 'asc' ? result.data[this.props.paginationAPIFieldDesc] : result.data[this.props.paginationAPIField]));
     return fetchResult;
   }
 
@@ -142,6 +149,18 @@ class ServerPaginatedTableView extends React.Component {
       rowsPerPage,
       rowsPerPageOptions: [],
       sortOrder,
+      onRowSelectionChange: (
+        curr,
+        allRowsSelected,
+        rowsSelected,
+        displayData,
+      ) => this.props.options.onRowSelectionChange(
+        curr,
+        allRowsSelected,
+        rowsSelected,
+        displayData,
+        data,
+      ),
       // eslint-disable-next-line no-shadow
       customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
         <TableFooter>
@@ -180,16 +199,30 @@ class ServerPaginatedTableView extends React.Component {
 
     return (
       <div>
-        <CustomDataTable
-          data={data}
-          isLoading={isLoading}
-          columns={this.props.columns}
-          options={({ ...this.props.options, ...options1 })}
-          className={className}
-        />
+        <Backdrop
+          open={isLoading}
+          className={this.props.classes.backdrop}
+        >
+          <CircularProgress />
+        </Backdrop>
+        {data === 'undefined' ? <CircularProgress /> : (
+          <CustomDataTable
+            data={data}
+            columns={this.props.columns}
+            options={({ ...this.props.options, ...options1 })}
+            className={className}
+          />
+        )}
       </div>
     );
   }
 }
 
-export default ServerPaginatedTableView;
+const styles = () => ({
+  backdrop: {
+    position: 'absolute',
+    zIndex: 99999,
+    background: 'rgba(0, 0, 0, 0.1)',
+  },
+});
+export default withStyles(styles)(ServerPaginatedTableView);

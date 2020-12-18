@@ -1,16 +1,15 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Studies from './studiesView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_STUDY_DATA_QUERY } from '../../bento/studiesData';
 
-const studiesContainer = () => (
-  <Query query={GET_STUDY_DATA_QUERY}>
-    {({ data, loading, error }) => (loading ? <CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
-      : <Studies data={data} />
-    ))}
-  </Query>
-);
+const studiesContainer = () => {
+  const { loading, error, data } = useQuery(GET_STUDY_DATA_QUERY);
+  if (loading) return <CircularProgress />;
+  if (error) return <Typography variant="headline" color="error" size="sm">{error ? `An error has occurred in loading stats component: ${error}` : 'Recieved wrong data'}</Typography>;
+  return <Studies data={data} />;
+};
 
 export default studiesContainer;
