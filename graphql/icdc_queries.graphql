@@ -82,19 +82,7 @@ type StudyOfProgram {
   date_of_iacuc_approval: String
   dates_of_conduct: String
   numberOfCases: Int
-}
-
-type FileOverview {
-  parent:String
-  file_name: String
-  file_type: String
-  file_description: String
-  file_format: String
-  file_size: Float
-  md5sum: String
-  file_status: String
-  uuid: String
-  file_location: String
+  case_ids: [String]
 }
 
 type CaseOverview {
@@ -282,8 +270,6 @@ type QueryType {
     RETURN
       s.clinical_study_designation AS study_code,
       count(DISTINCT(c)) AS cases
-    ORDER BY
-      s.clinical_study_designation
   """)
 
   caseCountByDiagnosis(case_ids: [String] = []): [DiagnosisCaseCount] @cypher(statement: """
@@ -292,8 +278,6 @@ type QueryType {
     RETURN
       d.disease_term AS diagnosis,
       count(c) AS cases
-    ORDER BY
-      d.disease_term
   """)
 
   caseCountByGender(case_ids: [String] = []): [GenderCaseCount] @cypher(statement: """
@@ -302,8 +286,6 @@ type QueryType {
     RETURN
       d.sex AS gender,
       count(c) AS cases
-    ORDER BY
-      d.sex
   """)
 
   caseCountByBreed(case_ids: [String] = []): [BreedCaseCount] @cypher(statement: """
@@ -328,8 +310,6 @@ type QueryType {
     RETURN
       d.stage_of_disease AS stage_of_disease,
       count(c) AS cases
-    ORDER BY
-      d.stage_of_disease
   """)
 
   caseCountByDiseaseSite(case_ids: [String] = []): [DiseaseSiteCaseCount] @cypher(statement: """
@@ -338,8 +318,6 @@ type QueryType {
     RETURN
       d.primary_disease_site AS disease_site,
       count(c) AS cases
-    ORDER BY
-      d.primary_disease_site
   """)
 
   caseCountByStudyType(case_ids: [String] = []): [StudyTypeCaseCount] @cypher(statement: """
@@ -364,8 +342,6 @@ type QueryType {
     RETURN
       f.file_type AS data_type,
       COUNT(DISTINCT(c)) AS cases
-    ORDER BY
-      data_type
   """)
 
   caseCountByFileFormat(case_ids: [String] = []): [FileFormatCaseCount] @cypher(statement: """
@@ -374,8 +350,6 @@ type QueryType {
     RETURN
       f.file_format AS file_format,
       COUNT(DISTINCT(c)) AS cases
-    ORDER BY
-      file_format
   """)
 
   caseCountByProgram(case_ids: [String] = []): [ProgramCaseCount] @cypher(statement: """
@@ -384,15 +358,12 @@ type QueryType {
     RETURN
       p.program_acronym AS program,
       COUNT(DISTINCT(c)) AS cases
-    ORDER BY
-      program
   """)
 
   filesInList(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] @cypher(statement: """
     MATCH (f:file)
       WHERE f.uuid in $uuids
     OPTIONAL MATCH (f)-->(parent)
-      WHERE NOT (parent:laboratory_procedure)
     OPTIONAL MATCH (f:file)-[*]->(c:case)
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
@@ -433,7 +404,6 @@ type QueryType {
     MATCH (f:file)
       WHERE f.uuid in $uuids
     OPTIONAL MATCH (f)-->(parent)
-      WHERE NOT (parent:laboratory_procedure)
     OPTIONAL MATCH (f:file)-[*]->(c:case)
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
@@ -621,6 +591,7 @@ type QueryType {
       WHERE (size($file_uuids) = 0 OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (parent)-[:of_case]->(c:case)
+    WITH f, parent, c
       WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
@@ -659,6 +630,7 @@ type QueryType {
       WHERE (size($file_uuids) = 0 OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (parent)-[:of_case]->(c:case)
+    WITH f, parent, c
       WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
@@ -696,6 +668,7 @@ type QueryType {
     MATCH (s:sample)
       WHERE (size($sample_ids) = 0 OR s.sample_id IN $sample_ids)
     OPTIONAL MATCH (s)-[:of_case]->(c:case)
+    WITH s, c
       WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
@@ -734,6 +707,7 @@ type QueryType {
     MATCH (s:sample)
       WHERE (size($sample_ids) = 0 OR s.sample_id IN $sample_ids)
     OPTIONAL MATCH (s)-[:of_case]->(c:case)
+    WITH s, c
       WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
