@@ -93,7 +93,7 @@ type case {
   samples: [sample] 
   visits: [visit] 
   adverse_events: [adverse_event] 
-  NONE: [registration] 
+  registrations: [registration] 
   adverse_event: adverse_event 
   off_study: off_study 
   off_treatment: off_treatment 

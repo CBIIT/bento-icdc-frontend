@@ -93,7 +93,7 @@ type case {
   samples: [sample] @relation(name:"of_case", direction:IN)
   visits: [visit] @relation(name:"of_case", direction:IN)
   adverse_events: [adverse_event] @relation(name:"of_case", direction:IN)
-  NONE: [registration] @relation(name:"of_case", direction:IN)
+  registrations: [registration] @relation(name:"of_case", direction:IN)
   adverse_event: adverse_event @relation(name:"had_adverse_event", direction:OUT)
   off_study: off_study @relation(name:"went_off_study", direction:OUT)
   off_treatment: off_treatment @relation(name:"went_off_treatment", direction:OUT)
