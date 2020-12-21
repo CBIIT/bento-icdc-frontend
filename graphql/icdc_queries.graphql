@@ -84,6 +84,19 @@ type StudyOfProgram {
   numberOfCases: Int
 }
 
+type FileOverview2 {
+  parent:String
+  file_name: String
+  file_type: String
+  file_description: String
+  file_format: String
+  file_size: Float
+  md5sum: String
+  file_status: String
+  uuid: String
+  file_location: String
+}
+
 type CaseOverview {
   case_id: String
   program: String
@@ -99,7 +112,7 @@ type CaseOverview {
   disease_site: String
   samples: [String]
   sample_list: [sample]
-  files: [FileOverview]
+  files: [FileOverview2]
   file_formats: [String]
   demographic: demographic
   diagnosis_obj: diagnosis
@@ -470,7 +483,7 @@ type QueryType {
     SKIP $offset
     LIMIT $first
   """)
-  
+
   "Facet search counts"
   filterCaseCountByStudyCode(
     study: [String] = [],
