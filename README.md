@@ -1,5 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/92419cae03cf4d769485c065b34efafb)](https://www.codacy.com/manual/FNLCR_2/icdc-codebase?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CBIIT/icdc-codebase&amp;utm_campaign=Badge_Grade) 
-
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/80d54130b4e1471bbc05429d82c66e81)](https://www.codacy.com/gh/CBIIT/bento-icdc-frontend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CBIIT/bento-icdc-frontend&amp;utm_campaign=Badge_Grade)
 #  ![ Image 1](doc/logo.png)
 
 The [Integrated Canine Data Commons (ICDC) project](http://caninecommons.cancer.gov/) is a joint project between FNL's ADRD and BIDS Directorates to develop the ICDC for NCI's DCTD group.
