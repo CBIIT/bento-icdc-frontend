@@ -10,7 +10,7 @@ import icon from '../../assets/landing/LP_ReadMore.svg';
 import iconAbout from '../../assets/landing/LP_About_Fullarticle.Arrow.svg';
 import lbg from '../../assets/landing/LP-Background.1400x1600.jpg';
 import { Button } from '../../components/Wrappers/Wrappers';
-import starImg from '../../assets/LP_FLARE.2.png';
+import starImg from '../../assets/landing/LP_FLARE.2.png';
 import dogImg from '../../assets/landing/dog-bubble.png';
 import humanImg from '../../assets/landing/human-bubble.png';
 import { landingPageData } from '../../bento/landingPageData';
@@ -93,7 +93,7 @@ const Star = styled.div`
   animation: ${star} 20s  0s 1;
 `;
 
-const LandingController = ({ classes }) => (
+const LandingView = ({ classes }) => (
   <div className={classes.page}>
     <div className={classes.container}>
       <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30, classes.paddingLeft50)}>
@@ -612,4 +612,4 @@ const styles = (theme) => ({
   },
 
 });
-export default withStyles(styles, { withTheme: true })(LandingController);
+export default withStyles(styles, { withTheme: true })(LandingView);
