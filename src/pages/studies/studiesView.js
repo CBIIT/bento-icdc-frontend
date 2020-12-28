@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { CustomDataTable, getOptions, getColumns } from 'bento-components';
 import {
-  table, studyListingIcon, externalLinkIcon,
+  pageData,
 } from '../../bento/studiesData';
 
 const Studies = ({ classes, data }) => {
@@ -19,8 +19,8 @@ const Studies = ({ classes, data }) => {
           <div className={classes.header}>
             <div className={classes.logo}>
               <img
-                src={studyListingIcon.src}
-                alt={studyListingIcon.alt}
+                src={pageData.studyListingIcon.src}
+                alt={pageData.studyListingIcon.alt}
               />
 
             </div>
@@ -35,9 +35,9 @@ const Studies = ({ classes, data }) => {
             <Grid container>
               <Grid item xs={12} id="table_studies">
                 <CustomDataTable
-                  data={data[table.dataField]}
-                  columns={getColumns(table, classes, data, externalLinkIcon, '/cases', redirectTo)}
-                  options={getOptions(table, classes)}
+                  data={data[pageData.table.dataField]}
+                  columns={getColumns(pageData.table, classes, data, pageData.externalLinkIcon, '/cases', redirectTo)}
+                  options={getOptions(pageData.table, classes)}
                 />
               </Grid>
             </Grid>
