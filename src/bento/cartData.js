@@ -16,11 +16,10 @@ export const pageData = {
   wizardIconSrc: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/icons/Cart-Wizard-Step3.svg',
   wizardIconAlt: 'Bento MyFiles Wizard',
   manifestFileName: 'BENTO File Manifest',
-};
-
-export const messages = {
-  selectionsAddedMessage: 'Case(s) successfully added to the My Cases list',
-  selectionsRemovedMessage: 'Case(s) successfully removed from the My Cases list',
+  actionMessage: {
+    selectionsAddedMessage: 'Case(s) successfully added to the My Cases list',
+    selectionsRemovedMessage: 'Case(s) successfully removed from the My Cases list',
+  },
 };
 
 export const GET_MY_CASES_DATA_QUERY = gql`
