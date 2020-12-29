@@ -4,49 +4,56 @@ import gql from 'graphql-tag';
 // A maximum of 12 facetSearchData are allowed
 export const facetSearchData = [
   {
-    label: 'Program', field: 'group', api: 'subjectCountByProgram', datafield: 'programs', section: 'Filter By Cases', show: true,
+    label: 'Study', field: 'study', api: 'caseCountByStudyCode', filterAPI: 'filterCaseCountByStudyCode', datafield: 'study', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Arm', field: 'group', api: 'subjectCountByStudy', datafield: 'studies', section: 'Filter By Cases', show: true,
+    label: 'Study Type', field: 'study_type', api: 'caseCountByStudyType', filterAPI: 'filterCaseCountByStudyType', datafield: 'study_type', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Diagnosis', field: 'group', api: 'subjectCountByDiagnoses', datafield: 'diagnoses', section: 'Filter By Cases', show: true,
+    label: 'Breed', field: 'breed', api: 'caseCountByBreed', filterAPI: 'filterCaseCountByBreed', datafield: 'breed', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Recurrence Score', field: 'group', api: 'subjectCountByRecurrenceScore', datafield: 'rc_scores', section: 'Filter By Cases', show: true,
+    label: 'Diagnosis', field: 'diagnosis', api: 'caseCountByDiagnosis', filterAPI: 'filterCaseCountByDiagnosis', datafield: 'diagnosis', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Tumor Size', field: 'group', api: 'subjectCountByTumorSize', datafield: 'tumor_sizes', section: 'Filter By Cases', show: true,
+    label: 'Disease Stage', field: 'disease_site', api: 'caseCountByStageOfDisease', filterAPI: 'filterCaseCountByStageOfDisease', datafield: 'disease_site', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Chemotherapy', field: 'group', api: 'subjectCountByChemotherapyRegimen', datafield: 'chemo_regimen', section: 'Filter By Cases', show: true,
+    label: 'Disease Site', field: 'stage_of_disease', api: 'caseCountByDiseaseSite', filterAPI: 'filterCaseCountByDiseaseSite', datafield: 'stage_of_disease', section: 'Filter By Cases', show: true,
+  },
+  // {
+  //   label: 'Tumor Grade', field: 'cases', api: 'subjectCountByTumorGrade',
+  // filterAPI: 'filterCaseCountByResponseToTreatment',
+  // datafield: 'response_to_treatment', section: 'Filter By Cases', show: true,
+  // },
+  {
+    label: 'Gender', field: 'sex', api: 'caseCountByGender', filterAPI: 'filterCaseCountBySex', datafield: 'sex', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Tumor Grade', field: 'group', api: 'subjectCountByTumorGrade', datafield: 'tumor_grades', section: 'Filter By Cases', show: true,
+    label: 'Neutered Status', field: 'neutered_status', api: 'caseCountByNeuteredStatus', filterAPI: 'filterCaseCountByNeuteredStatus', datafield: 'neutered_status', section: 'Filter By Cases', show: true,
   },
+  // {
+  //   label: 'Tissue Type', field: 'cases', api: 'caseCountByStudyType',
+  // filterAPI: 'filterCaseCountBySampleType',
+  // datafield: 'sample_type', section: 'Filter By Samples', show: true,
+  // },
+  // {
+  //   label: 'Tissue Composition', field: 'cases', api: 'subjectCountByTissueComposition',
+  // filterAPI: 'filterCaseCountBySamplePathology',
+  // datafield: 'sample_pathology', section: 'Filter By Samples', show: true,
+  // },
+  // {
+  //   label: 'File Association', field: 'cases', api: 'subjectCountByFileAssociation',
+  // filterAPI: 'filterCaseCountByFileAssociation',
+  // datafield: 'file_association', section: 'Filter By Files', show: true,
+  // },
+  // {
+  //   label: 'File Type', field: 'cases', api: 'subjectCountByFileType',
+  // filterAPI: 'filterCaseCountByFileType', datafield: 'file_type',
+  // section: 'Filter By Files', show: true,
+  // },
   {
-    label: 'ER Status', field: 'group', api: 'subjectCountByErStatus', datafield: 'er_status', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'PR Status', field: 'group', api: 'subjectCountByPrStatus', datafield: 'pr_status', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Endocrine Therapy', field: 'group', api: 'subjectCountByEndocrineTherapy', datafield: 'endo_therapies', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Menopause Status', field: 'group', api: 'subjectCountByMenopauseStatus', datafield: 'meno_status', section: 'Filter By Cases', show: true,
-  },
-  {
-    label: 'Tissue Type', field: 'group', api: 'subjectCountByTissueType', datafield: 'tissue_type', section: 'Filter By Samples', show: true,
-  },
-  {
-    label: 'Tissue Composition', field: 'group', api: 'subjectCountByTissueComposition', datafield: 'composition', section: 'Filter By Samples', show: true,
-  },
-  {
-    label: 'File Association', field: 'group', api: 'subjectCountByFileAssociation', datafield: 'association', section: 'Filter By Files', show: true,
-  },
-  {
-    label: 'File Type', field: 'group', api: 'subjectCountByFileType', datafield: 'file_type', section: 'Filter By Files', show: true,
+    label: 'File Format', field: 'file_format', api: 'caseCountByFileFormat', filterAPI: 'filterCaseCountByFileFormat', datafield: 'file_format', section: 'Filter By Files', show: true,
   },
 ];
 
@@ -69,47 +76,47 @@ export const facetSectionStyling = {
 // --------------- Dashboard Widgets configuration --------------
 // A maximum of 6 widgets are allowed
 export const widgetsData = [
+  // {
+  //   type: 'sunburst',
+  //   label: 'Programs and Arms',
+  //   dataName: 'armsByPrograms',
+  //   datatable_level1_field: 'program',
+  //   datatable_level2_field: 'study_acronym',
+  //   show: true,
+  // },
   {
-    type: 'sunburst',
-    label: 'Programs and Arms',
-    dataName: 'armsByPrograms',
-    datatable_level1_field: 'program',
-    datatable_level2_field: 'study_acronym',
+    type: 'donut',
+    label: 'Breed',
+    dataName: 'caseCountByBreed',
+    datatable_field: 'breed',
     show: true,
   },
   {
     type: 'donut',
     label: 'Diagnosis',
-    dataName: 'subjectCountByDiagnoses',
+    dataName: 'caseCountByDiagnosis',
     datatable_field: 'diagnosis',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Recurrence Score',
-    dataName: 'subjectCountByRecurrenceScore',
-    datatable_field: 'recurrence_score',
+    label: 'Disease Site',
+    dataName: 'caseCountByDiseaseSite',
+    datatable_field: 'disease_site',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Tumor Size',
-    dataName: 'subjectCountByTumorSize',
-    datatable_field: 'tumor_size',
+    label: 'Sex',
+    dataName: 'caseCountByGender',
+    datatable_field: 'gender',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Chemotherapy',
-    dataName: 'subjectCountByChemotherapyRegimen',
-    datatable_field: 'chemotherapy',
-    show: true,
-  },
-  {
-    type: 'donut',
-    label: 'Endocrine Therapy',
-    dataName: 'subjectCountByEndocrineTherapy',
-    datatable_field: 'endocrine_therapy',
+    label: 'Stage of Disease',
+    dataName: 'caseCountByStageOfDisease',
+    datatable_field: 'stage_of_disease',
     show: true,
   },
 ];
@@ -127,7 +134,7 @@ export const dashboardTable = {
   tableData: [
     // A maximum of 10 columns (tableData) are allowed
     {
-      dataField: 'subject_id',
+      dataField: 'case_id',
       header: 'Case ID',
       sort: 'asc',
       link: '/case/{subject_id}',
@@ -308,27 +315,19 @@ subjectCountByTissueType{
 // --------------- Dashboard Query configuration --------------
 export const GET_DASHBOARD_TABLE_DATA_QUERY = gql`{
 
-  subjectOverViewPaged(first: 1000000) {
-      subject_id
-      program_id
-      study_info
-      samples
-      program
-      study_acronym
-      diagnosis
-      recurrence_score
-      tumor_size
-      tumor_grade
-      er_status
-      pr_status
-      chemotherapy
-      endocrine_therapy
-      menopause_status
-      age_at_index
-      survival_time
-      lab_procedures
-      files{
-        file_id
-      }
+  caseOverviewPaged (first: 10000) {
+    case_id
+    study_code
+    study_type
+    cohort
+    breed
+    diagnosis
+    stage_of_disease
+    age
+    sex
+    neutered_status
+    weight
+    response_to_treatment
+    disease_site
   }
   }`;
