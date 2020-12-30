@@ -96,7 +96,7 @@ const Star = styled.div`
 const LandingController = ({ classes }) => (
   <div className={classes.page}>
     <div className={classes.container}>
-      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30, classes.paddingLeft50)}>
+      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30, classes.paddingLeft85)}>
         <Grid item lg={3} md={3} sm={12} xs={12}>
           <div className={classes.headerTitle}>
             { landingPageData.callToActionTitle }
@@ -315,8 +315,8 @@ const styles = (theme) => ({
     lineHeight: '40px',
 
   },
-  paddingLeft50: {
-    paddingLeft: '50px',
+  paddingLeft85: {
+    paddingLeft: '85px',
   },
   headerContent: {
     height: '98px',
@@ -340,7 +340,7 @@ const styles = (theme) => ({
   icon: {
     width: '20px',
     marginTop: '13px',
-    marginLeft: '36px',
+    marginLeft: '22px',
   },
   headerButton: {
     borderRadius: '10px',
@@ -405,7 +405,7 @@ const styles = (theme) => ({
   },
   image: {
     width: '197px',
-    height: '244px',
+    height: '236px',
   },
   aboutContent: {
     background: '#fff',
@@ -419,7 +419,7 @@ const styles = (theme) => ({
   content: {
     width: '197px',
     background: '#fff',
-    height: '120px',
+    height: '134px',
     paddingLeft: '30px',
     paddingTop: '6px',
   },
@@ -499,7 +499,7 @@ const styles = (theme) => ({
     backgroundSize: 'cover',
   },
   cases: {
-    height: '442px',
+    height: '435px',
     paddingLeft: '400px',
     paddingTop: '40px',
   },
@@ -549,7 +549,7 @@ const styles = (theme) => ({
   greyIcon: {
     width: '20px',
     marginTop: '15px',
-    marginLeft: '33px',
+    marginLeft: '20px',
   },
   greybutton: {
     padding: '15px 5px 0 0',
