@@ -157,7 +157,6 @@ export const tabContainers = [
       opacity: 'unset',
       border: 'unset',
     },
-
     columns: [
       {
         dataField: 'sample_id',
@@ -167,30 +166,16 @@ export const tabContainers = [
         display: true,
       },
       {
-        dataField: 'subject_id',
+        dataField: 'case_id',
         header: 'Case ID',
         sort: 'asc',
-        link: '/case/{subject_id}',
+        link: '/case/{case_id}',
         display: true,
       },
       {
-        dataField: 'program',
-        header: 'Program Code',
+        dataField: 'breed',
+        header: 'Breed',
         sort: 'asc',
-        link: '/program/{program_id}',
-        display: true,
-      },
-      {
-        dataField: 'program_id',
-        header: 'Program ID',
-        sort: 'asc',
-        display: false,
-      },
-      {
-        dataField: 'arm',
-        header: 'Arm',
-        sort: 'asc',
-        link: '/arm/{arm}',
         display: true,
       },
       {
@@ -200,38 +185,49 @@ export const tabContainers = [
         display: true,
       },
       {
-        dataField: 'tissue_type',
-        header: 'Tissue Type',
+        dataField: 'sample_site',
+        header: 'Sample Site',
+        display: true,
+      },
+      {
+        dataField: 'sample_type',
+        header: 'Sample Type',
         sort: 'asc',
         display: true,
       },
       {
-        dataField: 'tumor_size',
-        header: 'Tumor Size (cm)',
+        dataField: 'sample_pathology',
+        header: 'Sample Pathology',
         sort: 'asc',
         display: true,
       },
       {
-        dataField: 'tissue_composition',
-        header: 'Tissue Composition',
+        dataField: 'tumor_grade',
+        header: 'Tumor Grade',
         sort: 'asc',
         display: true,
       },
       {
-        dataField: 'sample_anatomic_site',
-        header: 'Sample Anatomic Site',
+        dataField: 'sample_chronology',
+        header: 'Sample Chronology',
         sort: 'asc',
         display: true,
       },
       {
-        dataField: 'sample_procurement_method',
-        header: 'Sample Procurement Method',
+        dataField: 'percentage_tumor',
+        header: 'Percentage Tumor',
         sort: 'asc',
         display: true,
       },
       {
-        dataField: 'platform',
-        header: 'platform',
+        dataField: 'necropsy_sample',
+        header: 'Necropsy Sample',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'sample_preservation',
+        header: 'Sample Preservation',
         sort: 'asc',
         display: true,
       },
@@ -283,8 +279,8 @@ export const tabContainers = [
         display: true,
       },
       {
-        dataField: 'file_id',
-        header: 'File ID',
+        dataField: 'file_type',
+        header: 'File Type',
         sort: 'asc',
         display: false,
       },
@@ -314,41 +310,27 @@ export const tabContainers = [
         formatBytes: true,
       },
       {
-        dataField: 'program',
-        header: 'Program Code',
+        dataField: 'case_id',
+        header: 'Case Id',
         sort: 'asc',
-        link: '/program/{program_id}',
+        link: '/case/{case_id}',
         display: true,
       },
       {
-        dataField: 'program_id',
-        header: 'Program ID',
+        dataField: 'breed',
+        header: 'Breed',
         sort: 'asc',
         display: false,
       },
       {
-        dataField: 'arm',
-        header: 'Arm',
-        sort: 'asc',
-        link: '/arm/{arm}',
-        display: true,
-      },
-      {
-        dataField: 'subject_id',
-        header: 'Case ID',
-        sort: 'asc',
-        link: '/case/{subject_id}',
-        display: true,
-      },
-      {
-        dataField: 'sample_id',
-        header: 'Sample ID',
-        sort: 'asc',
-        display: true,
-      },
-      {
         dataField: 'diagnosis',
         header: 'Diagnosis',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'study_code',
+        header: 'Study Code',
         sort: 'asc',
         display: true,
       },
@@ -901,21 +883,20 @@ searchCases(
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
-query fileOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+query fileOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
 
-  fileOverview(subject_ids: $subject_ids, offset: $offset,first: $first, order_by: $order_by) {
-    file_id
+  fileOverview(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {
     file_name
+    file_type
     association
     file_description
     file_format
     file_size
-    program
-    program_id
-    arm
-    subject_id
-    sample_id
+    case_id
+    breed
     diagnosis
+    study_code
+    file_uuid
   }
 }
   `;
@@ -923,20 +904,20 @@ query fileOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
-  query sampleOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  sampleOverview(subject_ids: $subject_ids, offset: $offset,first: $first, order_by: $order_by) {
+  query sampleOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+  sampleOverview(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {
     sample_id
-    subject_id
-    program
-    program_id
-    arm
+    case_id
+    breed
     diagnosis
-    tissue_type
-    tissue_composition
-    sample_anatomic_site
-    sample_procurement_method
-    platform
-    files 
+    sample_site
+    sample_type
+    sample_pathology
+    tumor_grade
+    sample_chronology
+    percentage_tumor
+    necropsy_sample
+    sample_preservation
 }
 }
   `;
@@ -975,21 +956,20 @@ export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
 
   `;
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-query fileOverviewDesc($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+query fileOverviewDesc($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
 
-  fileOverviewDesc(subject_ids: $subject_ids, offset: $offset,first: $first, order_by: $order_by) {
-    file_id
+  fileOverviewDesc(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {    
     file_name
+    file_type
     association
     file_description
     file_format
     file_size
-    program
-    program_id
-    arm
-    subject_id
-    sample_id
+    case_id
+    breed
     diagnosis
+    study_code
+    file_uuid
   }
 }
   `;
@@ -997,20 +977,20 @@ query fileOverviewDesc($subject_ids: [String], $offset: Int = 0, $first: Int = 1
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
-  query sampleOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  sampleOverviewDesc(subject_ids: $subject_ids, offset: $offset,first: $first, order_by: $order_by) {
+  query sampleOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+  sampleOverviewDesc(case_ids: $case_ids,, offset: $offset,first: $first, order_by: $order_by) {
     sample_id
-    subject_id
-    program
-    program_id
-    arm
+    case_id
+    breed
     diagnosis
-    tissue_type
-    tissue_composition
-    sample_anatomic_site
-    sample_procurement_method
-    platform
-    files 
+    sample_site
+    sample_type
+    sample_pathology
+    tumor_grade
+    sample_chronology
+    percentage_tumor
+    necropsy_sample
+    sample_preservation
 }
 }
   `;
