@@ -93,6 +93,7 @@ type case {
   samples: [sample] 
   visits: [visit] 
   adverse_events: [adverse_event] 
+  registrations: [registration] 
   adverse_event: adverse_event 
   off_study: off_study 
   off_treatment: off_treatment 
@@ -321,6 +322,13 @@ type program {
   program_external_url: String
   program_sort_order: Int
   studies: [study] 
+}
+
+type registration {
+  registration_origin: String
+  registration_id: String
+  is_primary_id: String
+  case: case 
 }
 
 type sample {
@@ -553,7 +561,7 @@ type StudyOfProgram {
   numberOfCases: Int
 }
 
-type FileOverview {
+type FileOverview2 {
   parent:String
   file_name: String
   file_type: String
@@ -581,7 +589,7 @@ type CaseOverview {
   disease_site: String
   samples: [String]
   sample_list: [sample]
-  files: [FileOverview]
+  files: [FileOverview2]
   file_formats: [String]
   demographic: demographic
   diagnosis_obj: diagnosis
@@ -674,6 +682,83 @@ type StudyStat {
   samples: Int
 }
 
+type FileInList {
+  file_type: String
+  association: String
+  file_description: String
+  file_format: String
+  file_size: Float
+  case_id: String
+  breed: String
+  diagnosis: String
+  study_code: String
+  file_uuid: String
+  md5sum: String
+}
+
+
+type FileOverview {
+  file_name: String
+  file_type: String
+  association: String
+  file_description: String
+  file_format: String
+  file_size: Float
+  case_id: String
+  breed: String
+  diagnosis: String
+  study_code: String
+  file_uuid: String
+}
+
+type SampleOverview {
+  sample_id: String
+  case_id: String
+  breed: String
+  diagnosis: String
+  sample_site: String
+  sample_type: String
+  sample_pathology: String
+  tumor_grade: String
+  sample_chronology: String
+  percentage_tumor: String
+  necropsy_sample: String
+  sample_preservation: String
+}
+
+type CaseOverview2 {
+  case_id: String
+  study_code: String
+  study_type: String
+  cohort: String
+  breed: String
+  diagnosis: String
+  stage_of_disease: String
+  age: Float
+  sex: String
+  neutered_status: String
+  weight: Float
+  response_to_treatment: String
+  disease_site: String
+}
+
+type SearchResult {
+  numberOfStudies: Int
+  numberOfCases: Int
+  numberOfSamples: Int
+  numberOfFiles: Int
+  numberOfAliquots: Int
+  caseIds: [String]
+  sampleIds: [String]
+  fileIds: [String]
+  firstPage: [CaseOverview2]
+}
+
+type GroupCount {
+  group: String
+  count: Int
+}
+
 type QueryType {
   "Version"
   schemaVersion: String 
@@ -700,25 +785,303 @@ type QueryType {
   sampleCountOfCase(case_id: String!): Int 
 
   "Count by group"
-  caseCountByStudyCode: [StudyCodeCaseCount] 
-  caseCountByDiagnosis: [DiagnosisCaseCount] 
-  caseCountByGender: [GenderCaseCount] 
-  caseCountByBreed: [BreedCaseCount] 
-  caseCountByNeuteredStatus :[NeuteredStatusCaseCount] 
-  caseCountByStageOfDisease: [StageOfDiseaseCaseCount] 
-  caseCountByDiseaseSite: [DiseaseSiteCaseCount] 
-  caseCountByStudyType: [StudyTypeCaseCount] 
-  caseCountByAge: [AgeCaseCount] 
-  caseCountByDataType: [FileTypeCaseCount] 
-  caseCountByFileFormat: [FileFormatCaseCount] 
-  caseCountByProgram: [ProgramCaseCount] 
+  caseCountByStudyCode(case_ids: [String] = []): [StudyCodeCaseCount] 
+
+  caseCountByDiagnosis(case_ids: [String] = []): [DiagnosisCaseCount] 
+
+  caseCountByGender(case_ids: [String] = []): [GenderCaseCount] 
+
+  caseCountByBreed(case_ids: [String] = []): [BreedCaseCount] 
+
+  caseCountByNeuteredStatus(case_ids: [String] = []): [NeuteredStatusCaseCount] 
+
+  caseCountByStageOfDisease(case_ids: [String] = []): [StageOfDiseaseCaseCount] 
+
+  caseCountByDiseaseSite(case_ids: [String] = []): [DiseaseSiteCaseCount] 
+
+  caseCountByStudyType(case_ids: [String] = []): [StudyTypeCaseCount] 
+
+  caseCountByAge(case_ids: [String] = []): [AgeCaseCount] 
+
+  caseCountByDataType(case_ids: [String] = []): [FileTypeCaseCount] 
+
+  caseCountByFileFormat(case_ids: [String] = []): [FileFormatCaseCount] 
+
+  caseCountByProgram(case_ids: [String] = []): [ProgramCaseCount] 
+
+  filesInList(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] 
+
+  filesInListDesc(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] 
+
+  "Facet search counts"
+  filterCaseCountByStudyCode(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByStudyType(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByBreed(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByDiagnosis(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByDiseaseSite(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByStageOfDisease(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByResponseToTreatment(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountBySex(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByNeuteredStatus(
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountBySampleType (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountBySamplePathology (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByFileAssociation (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByFileType (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
+
+  filterCaseCountByFileFormat (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] 
 
   "Combined info"
   studiesByProgramId(program_id: String!): [StudyOfProgram] 
   studiesByProgram: [StudyOfProgram] 
   filesOfCase(case_id: String!): [FilesOfCase] 
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
+
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
+
+  caseOverviewPaged (case_ids: [String] = [], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] 
+
+  caseOverviewPagedDesc (case_ids: [String] = [], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] 
+
+  searchCases (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+    first: Int = 100
+  ): SearchResult 
+
   casesInList(case_ids: [String!]!): [CaseOverview] 
   studyDetail(study_code: String!): [StudyDetail] 
 
@@ -735,4 +1098,12 @@ type QueryType {
   fileInfo(file_ids: [String] = []): [FileInfo] 
 
   studyStats: [StudyStat] 
+
+  fileOverview(case_ids: [String] = [], file_uuids: [String]=[], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] 
+
+  fileOverviewDesc(case_ids: [String] = [], file_uuids: [String]=[], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] 
+
+  sampleOverview(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] 
+
+  sampleOverviewDesc(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] 
 }
