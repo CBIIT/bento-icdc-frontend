@@ -477,63 +477,63 @@ caseOverviewPaged(first: 10) {
   }`;
 
 export const FILTER_GROUP_QUERY = gql`
-  query groupCounts($subject_ids: [String]){
-    caseCountByStudyCode(case_ids: $subject_ids){
+  query groupCounts($case_ids: [String]){
+    caseCountByStudyCode(case_ids: $case_ids){
       study_code
       cases
   }
 
-  caseCountByDiagnosis(case_ids: $subject_ids){
+  caseCountByDiagnosis(case_ids: $case_ids){
       diagnosis,
       cases
   }
 
-  caseCountByGender(case_ids: $subject_ids){
+  caseCountByGender(case_ids: $case_ids){
       gender,
       cases
   }
 
-  caseCountByBreed(case_ids: $subject_ids){
+  caseCountByBreed(case_ids: $case_ids){
       breed,
       cases
   }
 
-  caseCountByNeuteredStatus(case_ids: $subject_ids){
+  caseCountByNeuteredStatus(case_ids: $case_ids){
       neutered_status,
       cases
   }
 
-  caseCountByStageOfDisease(case_ids: $subject_ids){
+  caseCountByStageOfDisease(case_ids: $case_ids){
       stage_of_disease,
       cases
   }
 
-  caseCountByDiseaseSite(case_ids: $subject_ids){
+  caseCountByDiseaseSite(case_ids: $case_ids){
       disease_site,
       cases
   }
   
-  caseCountByStudyType(case_ids: $subject_ids){
+  caseCountByStudyType(case_ids: $case_ids){
       study_type,
       cases
   }
 
-  caseCountByAge(case_ids: $subject_ids){
+  caseCountByAge(case_ids: $case_ids){
       age,
       cases
   }
 
-  caseCountByDataType(case_ids: $subject_ids){
+  caseCountByDataType(case_ids: $case_ids){
       data_type,
       cases
   }
 
-  caseCountByFileFormat(case_ids: $subject_ids){
+  caseCountByFileFormat(case_ids: $case_ids){
       file_format,
       cases
   }
 
-  caseCountByProgram(case_ids: $subject_ids){
+  caseCountByProgram(case_ids: $case_ids){
       program,
       cases
   }
@@ -584,285 +584,6 @@ searchCases(
       caseIds
       sampleIds
       fileIds
-      filterCaseCountByStudyCode (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-    }
-  
-      filterCaseCountByStudyType (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByBreed (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByDiagnosis (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByDiseaseSite (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByStageOfDisease (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByResponseToTreatment (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountBySex (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByNeuteredStatus (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountBySampleType (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountBySamplePathology (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByFileAssociation (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByFileType (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
-  
-      filterCaseCountByFileFormat (
-        study: $study, 
-        study_type: $study_type, 
-        breed: $breed, 
-        diagnosis: $diagnosis, 
-        disease_site: $disease_site, 
-        stage_of_disease: $stage_of_disease, 
-        response_to_treatment: $response_to_treatment, 
-        sex: $sex,
-        neutered_status: $neutered_status,
-        sample_type: $sample_type, 
-        sample_pathology: $sample_pathology, 
-        file_association: $file_association, 
-        file_type: $file_type,
-        file_format: $file_format
-      ) {
-          group
-          count
-      }
       firstPage {
           case_id
           study_code
@@ -878,6 +599,285 @@ searchCases(
           response_to_treatment
           disease_site
       }
+}
+filterCaseCountByStudyCode (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByStudyType (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByBreed (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByDiagnosis (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByDiseaseSite (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByStageOfDisease (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByResponseToTreatment (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountBySex (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByNeuteredStatus (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountBySampleType (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountBySamplePathology (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByFileAssociation (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByFileType (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByFileFormat (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
 }
 }`;
 
