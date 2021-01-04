@@ -165,7 +165,7 @@ export const tabContainers = [
         dataField: 'subject_id',
         header: 'Case ID',
         sort: 'asc',
-        link: '/program/{subject_id}',
+        link: '/case/{subject_id}',
         display: true,
       },
       {
@@ -176,10 +176,16 @@ export const tabContainers = [
         display: true,
       },
       {
+        dataField: 'program_id',
+        header: 'Program ID',
+        sort: 'asc',
+        display: false,
+      },
+      {
         dataField: 'arm',
         header: 'Arm',
         sort: 'asc',
-        link: '/arm/{study_acronym}',
+        link: '/arm/{arm}',
         display: true,
       },
       {
@@ -242,6 +248,8 @@ export const tabContainers = [
     api: 'GET_FILES_OVERVIEW_QUERY',
     paginationAPIField: 'fileOverview',
     paginationAPIFieldDesc: 'fileOverviewDesc',
+    defaultSortField: 'file_name',
+    defaultSortDirection: 'asc',
     count: 'numberOfFiles',
     buttonText: 'Add Selected Files',
     dataKey: 'file_id',
@@ -263,18 +271,17 @@ export const tabContainers = [
     },
     columns: [
       {
-        dataField: 'file_id',
-        header: 'File ID',
-        sort: 'asc',
-        display: true,
-      },
-      {
         dataField: 'file_name',
         header: 'File Name',
         sort: 'asc',
-        link: '/program/{program_id}',
         primary: true,
         display: true,
+      },
+      {
+        dataField: 'file_id',
+        header: 'File ID',
+        sort: 'asc',
+        display: false,
       },
       {
         dataField: 'association',
@@ -305,18 +312,27 @@ export const tabContainers = [
         dataField: 'program',
         header: 'Program Code',
         sort: 'asc',
+        link: '/program/{program_id}',
         display: true,
+      },
+      {
+        dataField: 'program_id',
+        header: 'Program ID',
+        sort: 'asc',
+        display: false,
       },
       {
         dataField: 'arm',
         header: 'Arm',
         sort: 'asc',
+        link: '/arm/{arm}',
         display: true,
       },
       {
         dataField: 'subject_id',
         header: 'Case ID',
         sort: 'asc',
+        link: '/case/{subject_id}',
         display: true,
       },
       {
@@ -368,26 +384,26 @@ export const tabs = [
 ];
 
 // --------------- Tabs Header Style configuration --------------
-export const tabIndex = {
-  0: {
+export const tabIndex = [
+  {
     title: 'Cases',
     primaryColor: '#D6F2EA',
     secondaryColor: '#FFDFB8',
     selectedColor: '#10A075',
   },
-  1: {
+  {
     title: 'Samples',
     primaryColor: '#CFEDF9',
     secondaryColor: '#C9F1F1',
     selectedColor: '#0DAFEC',
   },
-  2: {
+  {
     title: 'Files',
     primaryColor: '#F7D7F7',
     secondaryColor: '#86D6F0',
     selectedColor: '#C92EC7',
   },
-};
+];
 
 export const DASHBOARD_QUERY = gql`{
   numberOfPrograms
@@ -497,6 +513,7 @@ export const DASHBOARD_QUERY = gql`{
     sample_id
     subject_id
     program
+    program_id
     arm
     diagnosis
     tissue_type
@@ -514,6 +531,7 @@ fileOverview(first: 10) {
   file_format
   file_size
   program
+  program_id
   arm
   subject_id
   sample_id
@@ -696,7 +714,7 @@ query search (
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
-query fileOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+query fileOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
 
   fileOverview(subject_ids: $subject_ids, offset: $offset,first: $first, order_by: $order_by) {
     file_id
@@ -706,6 +724,7 @@ query fileOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $
     file_format
     file_size
     program
+    program_id
     arm
     subject_id
     sample_id
@@ -722,6 +741,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
     sample_id
     subject_id
     program
+    program_id
     arm
     diagnosis
     tissue_type
@@ -776,7 +796,7 @@ export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
 
   `;
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-query fileOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+query fileOverviewDesc($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
 
   fileOverviewDesc(subject_ids: $subject_ids, offset: $offset,first: $first, order_by: $order_by) {
     file_id
@@ -786,6 +806,7 @@ query fileOverview($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $
     file_format
     file_size
     program
+    program_id
     arm
     subject_id
     sample_id
@@ -802,6 +823,7 @@ export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
     sample_id
     subject_id
     program
+    program_id
     arm
     diagnosis
     tissue_type
