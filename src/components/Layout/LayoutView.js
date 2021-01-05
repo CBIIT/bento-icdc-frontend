@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
+import LinkBar from 'bento-components';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Header from '../Header/HeaderView';
@@ -30,6 +31,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <CssBaseline />
     <HashRouter>
       <>
+        <LinkBar />
         <Header />
         <NavBar />
         {/* Reminder: Ajay need to replace the ICDC with env variable and
