@@ -1,94 +1,51 @@
+/* eslint-disable */
 import gql from 'graphql-tag';
 
 // --------------- Dashboard Sidebar Filters configuration --------------
 // A maximum of 12 facetSearchData are allowed
 export const facetSearchData = [
   {
-    label: 'Study', field: 'study', api: 'caseCountByStudyCode', filterAPI: 'filterCaseCountByStudyCode', datafield: 'study', section: 'Filter By Cases', show: true,
+    label: 'Study', field: 'group', api: 'filterCaseCountByStudyCode', filterAPI: 'filterCaseCountByStudyCode', datafield: 'study', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Study Type', field: 'study_type', api: 'caseCountByStudyType', filterAPI: 'filterCaseCountByStudyType', datafield: 'study_type', section: 'Filter By Cases', show: true,
+    label: 'Study Type', field: 'group', api: 'filterCaseCountByStudyType', filterAPI: 'filterCaseCountByStudyType', datafield: 'study_type', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Breed', field: 'breed', api: 'caseCountByBreed', filterAPI: 'filterCaseCountByBreed', datafield: 'breed', section: 'Filter By Cases', show: true,
+    label: 'Breed', field: 'group', api: 'filterCaseCountByBreed', filterAPI: 'filterCaseCountByBreed', datafield: 'breed', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Diagnosis', field: 'diagnosis', api: 'caseCountByDiagnosis', filterAPI: 'filterCaseCountByDiagnosis', datafield: 'diagnosis', section: 'Filter By Cases', show: true,
+    label: 'Diagnosis', field: 'group', api: 'filterCaseCountByDiagnosis', filterAPI: 'filterCaseCountByDiagnosis', datafield: 'diagnosis', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Disease Stage', field: 'disease_site', api: 'caseCountByStageOfDisease', filterAPI: 'filterCaseCountByStageOfDisease', datafield: 'disease_site', section: 'Filter By Cases', show: true,
+    label: 'Disease Stage', field: 'group', api: 'filterCaseCountByStageOfDisease', filterAPI: 'filterCaseCountByStageOfDisease', datafield: 'disease_site', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Disease Site', field: 'stage_of_disease', api: 'caseCountByDiseaseSite', filterAPI: 'filterCaseCountByDiseaseSite', datafield: 'stage_of_disease', section: 'Filter By Cases', show: true,
-  },
-  // {
-  //   label: 'Tumor Grade',
-  //   field: 'cases',
-  //   api: 'caseCountByStudyCode',
-  //   filterAPI: 'filterCaseCountByResponseToTreatment',
-  //   datafield: 'response_to_treatment',
-  //   section: 'Filter By Cases',
-  //   show: true,
-  // },
-  {
-    label: 'Response to treatment Test', field: 'sex', api: 'caseCountByGender', filterAPI: 'filterCaseCountBySex', datafield: 'response_to_treatment', section: 'Filter By Cases', show: true,
+    label: 'Disease Site', field: 'group', api: 'filterCaseCountByDiseaseSite', filterAPI: 'filterCaseCountByDiseaseSite', datafield: 'stage_of_disease', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Gender', field: 'sex', api: 'caseCountByGender', filterAPI: 'filterCaseCountBySex', datafield: 'sex', section: 'Filter By Cases', show: true,
+    label: 'Response to treatment', field: 'group', api: 'filterCaseCountByResponseToTreatment', filterAPI: 'filterCaseCountByResponseToTreatment', datafield: 'response_to_treatment', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Neutered Status', field: 'neutered_status', api: 'caseCountByNeuteredStatus', filterAPI: 'filterCaseCountByNeuteredStatus', datafield: 'neutered_status', section: 'Filter By Cases', show: true,
-  },
-  // {
-  //   label: 'Tissue Type',
-  //   field: 'cases',
-  //   api: 'caseCountByStudyCode',
-  //   filterAPI: 'filterCaseCountBySampleType',
-  //   datafield: 'sample_type',
-  //   section: 'Filter By Samples',
-  //   show: true,
-  // },
-  // {
-  //   label: 'Tissue Composition',
-  //   field: 'cases',
-  //   api: 'caseCountByStudyCode',
-  //   filterAPI: 'filterCaseCountBySamplePathology',
-  //   datafield: 'sample_pathology',
-  //   section: 'Filter By Samples',
-  //   show: true,
-  // },
-  // {
-  //   label: 'File Association',
-  //   field: 'cases',
-  //   api: 'caseCountByStudyCode',
-  //   filterAPI: 'filterCaseCountByFileAssociation',
-  //   datafield: 'file_association',
-  //   section: 'Filter By Files',
-  //   show: true,
-  // },
-  // {
-  //   label: 'File Type',
-  //   field: 'cases',
-  //   api: 'caseCountByStudyCode',
-  //   filterAPI: 'filterCaseCountByFileType',
-  //   datafield: 'file_type',
-  //   section: 'Filter By Files',
-  //   show: true,
-  // },
-  {
-    label: 'Tissue Type Test', field: 'file_format', api: 'caseCountByFileFormat', filterAPI: 'filterCaseCountByFileFormat', datafield: 'sample_type', section: 'Filter By Samples', show: true,
+    label: 'Gender', field: 'group', api: 'filterCaseCountBySex', filterAPI: 'filterCaseCountBySex', datafield: 'sex', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Tissue Composition Test', field: 'file_format', api: 'caseCountByFileFormat', filterAPI: 'filterCaseCountByFileFormat', datafield: 'sample_pathology', section: 'Filter By Samples', show: true,
+    label: 'Neutered Status', field: 'group', api: 'filterCaseCountByNeuteredStatus', filterAPI: 'filterCaseCountByNeuteredStatus', datafield: 'neutered_status', section: 'Filter By Cases', show: true,
+  },
+
+  {
+    label: 'Sample Type', field: 'group', api: 'filterCaseCountBySampleType', filterAPI: 'filterCaseCountBySampleType', datafield: 'sample_type', section: 'Filter By Samples', show: true,
   },
   {
-    label: 'File Association Test', field: 'file_format', api: 'caseCountByFileFormat', filterAPI: 'filterCaseCountByFileFormat', datafield: 'file_association', section: 'Filter By Files', show: true,
+    label: 'Sample Pathology', field: 'group', api: 'filterCaseCountBySamplePathology', filterAPI: 'filterCaseCountBySamplePathology', datafield: 'sample_pathology', section: 'Filter By Samples', show: true,
   },
   {
-    label: 'File Type Test', field: 'file_format', api: 'caseCountByFileFormat', filterAPI: 'filterCaseCountByFileFormat', datafield: 'file_type', section: 'Filter By Files', show: true,
+    label: 'File Association', field: 'group', api: 'filterCaseCountByFileAssociation', filterAPI: 'filterCaseCountByFileAssociation', datafield: 'file_association', section: 'Filter By Files', show: true,
   },
   {
-    label: 'File Format', field: 'file_format', api: 'caseCountByFileFormat', filterAPI: 'filterCaseCountByFileFormat', datafield: 'file_format', section: 'Filter By Files', show: true,
+    label: 'File Type', field: 'group', api: 'filterCaseCountByFileType', filterAPI: 'filterCaseCountByFileType', datafield: 'file_type', section: 'Filter By Files', show: true,
+  },
+  {
+    label: 'File Format', field: 'group', api: 'filterCaseCountByFileFormat', filterAPI: 'filterCaseCountByFileFormat', datafield: 'file_format', section: 'Filter By Files', show: true,
   },
 ];
 
@@ -113,8 +70,8 @@ export const facetSectionStyling = {
 export const widgetsData = [
   // {
   //   type: 'sunburst',
-  //   label: 'Programs and Arms',
-  //   dataName: 'armsByPrograms',
+  //   label: 'Programs and Studies',
+  //   dataName: 'studiesByProgram',
   //   datatable_level1_field: 'program',
   //   datatable_level2_field: 'study_acronym',
   //   show: true,

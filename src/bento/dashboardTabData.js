@@ -398,66 +398,93 @@ export const DASHBOARD_QUERY = gql`{
   numberOfSamples
   numberOfFiles
   numberOfAliquots
-  caseCountByStudyCode{
-    study_code
-    cases
-}
+
 
 caseCountByDiagnosis{
-    diagnosis,
-    cases
+  group,
+  count
 }
 
 caseCountByGender{
-    gender,
-    cases
+  group,
+  count
 }
 
 caseCountByBreed{
-    breed,
-    cases
+  group,
+  count
 }
 
-caseCountByNeuteredStatus{
-    neutered_status,
-    cases
-}
 
 caseCountByStageOfDisease{
-    stage_of_disease,
-    cases
+  group,
+  count
 }
 
 caseCountByDiseaseSite{
-    disease_site,
-    cases
+  group,
+  count
 }
-
-caseCountByStudyType{
-    study_type,
-    cases
+filterCaseCountByStudyCode{
+  group,
+  count
 }
-
-caseCountByAge{
-    age,
-    cases
+filterCaseCountByStudyCode{
+  group,
+  count
 }
-
-caseCountByDataType{
-    data_type,
-    cases
+filterCaseCountByStudyType{
+  group,
+  count
 }
-
-caseCountByFileFormat{
-    file_format,
-    cases
+filterCaseCountByBreed{
+  group,
+  count
 }
-
-caseCountByProgram{
-    program,
-    cases
+filterCaseCountByDiagnosis{
+  group,
+  count
 }
-
+filterCaseCountByDiseaseSite{
+  group,
+  count
+}
+filterCaseCountByStageOfDisease{
+  group,
+  count
+}
+filterCaseCountByResponseToTreatment{
+  group,
+  count
+}
+filterCaseCountBySex{
+  group,
+  count
+}
+filterCaseCountByNeuteredStatus{
+  group,
+  count
+}
+filterCaseCountBySampleType{
+  group,
+  count
+}
+filterCaseCountBySamplePathology{
+  group,
+  count
+}
+filterCaseCountByFileAssociation{
+  group,
+  count
+}
+filterCaseCountByFileType{
+  group,
+  count
+}
+filterCaseCountByFileFormat{
+  group,
+  count
+}
 caseOverviewPaged(first: 10) {
     case_id
     study_code
@@ -479,63 +506,34 @@ caseOverviewPaged(first: 10) {
 export const FILTER_GROUP_QUERY = gql`
   query groupCounts($case_ids: [String]){
     caseCountByStudyCode(case_ids: $case_ids){
-      study_code
-      cases
+      group
+      count
   }
 
   caseCountByDiagnosis(case_ids: $case_ids){
-      diagnosis,
-      cases
+    group,
+    count
   }
 
   caseCountByGender(case_ids: $case_ids){
-      gender,
-      cases
+    group,
+    count
   }
 
   caseCountByBreed(case_ids: $case_ids){
-      breed,
-      cases
+    group,
+    count
   }
 
-  caseCountByNeuteredStatus(case_ids: $case_ids){
-      neutered_status,
-      cases
-  }
 
   caseCountByStageOfDisease(case_ids: $case_ids){
-      stage_of_disease,
-      cases
+    group,
+    count
   }
 
   caseCountByDiseaseSite(case_ids: $case_ids){
-      disease_site,
-      cases
-  }
-  
-  caseCountByStudyType(case_ids: $case_ids){
-      study_type,
-      cases
-  }
-
-  caseCountByAge(case_ids: $case_ids){
-      age,
-      cases
-  }
-
-  caseCountByDataType(case_ids: $case_ids){
-      data_type,
-      cases
-  }
-
-  caseCountByFileFormat(case_ids: $case_ids){
-      file_format,
-      cases
-  }
-
-  caseCountByProgram(case_ids: $case_ids){
-      program,
-      cases
+    group,
+    count
   }
    
 }
