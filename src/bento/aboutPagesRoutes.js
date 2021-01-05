@@ -1,4 +1,11 @@
 export default [
-  '/bento',
-  '/resources',
+  '/purpose',
+  '/steeringCommittee',
+  '/DGAB',
+  '/BPSC',
+  '/crdc',
+  '/model',
+  '/developers',
+  '/support',
+  '/submit',
 ];

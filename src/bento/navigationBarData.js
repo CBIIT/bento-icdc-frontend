@@ -39,16 +39,40 @@ export const navBarData = [
     type: 'dropdown',
     dropDownLinks: [
       {
-        labelText: 'Bento',
-        link: '/bento',
+        labelText: 'Purpose',
+        link: '/purpose',
       },
       {
-        labelText: 'Resources',
-        link: '/resources',
+        labelText: 'Steering Committee',
+        link: '/steeringCommittee',
       },
       {
-        labelText: 'Graphql',
-        link: '/graphql',
+        labelText: '-Data Governance Advisory Board(DGAB)',
+        link: '/DGAB',
+      },
+      {
+        labelText: '-Best Practices Sub-Committee(BPSC)',
+        link: '/BPSC',
+      },
+      {
+        labelText: 'CRDC & Analysis',
+        link: '/crdc',
+      },
+      {
+        labelText: 'ICDC Data & Model',
+        link: '/model',
+      },
+      {
+        labelText: 'Developers',
+        link: '/developers',
+      },
+      {
+        labelText: 'Support',
+        link: '/support',
+      },
+      {
+        labelText: 'Submitting Data',
+        link: '/submit',
       },
     ],
   },
