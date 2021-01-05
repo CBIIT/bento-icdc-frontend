@@ -1,90 +1,36 @@
 import gql from 'graphql-tag';
 
-// --------------- Icons configuration --------------
-// Ideal size for programListingIcon is 100x100 px
-// Ideal size for externalLinkIcon is 16x16 px
-const programListingIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/program/programIcon.svg',
-  alt: 'Bento program logo',
-};
-
-const externalLinkIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/program/externalLinkIcon.svg',
-  alt: 'External link icon',
-};
-
-// --------------- Table configuration --------------
-const table = {
-  // Set 'display' to false to hide the table entirely
-  display: true,
-  // Table title
-  title: 'Programs',
-  // Field name for table data, need to be updated only when using a different GraphQL query
-  dataField: 'programInfo',
-  // Value must be one of the 'field' in columns
-  defaultSortField: 'program_acronym',
-  // 'asc' or 'desc'
-  defaultSortDirection: 'asc',
-  // Set 'selectableRows' to true to show the row selection
-  selectableRows: false,
-  // A maximum of 10 columns are allowed
-  columns: [
-    {
-      dataField: 'program_acronym',
-      header: 'Program Code',
-      link: '/program/{program_id}',
-      display: true,
-    },
-    {
-      dataField: 'program_id',
-      header: 'Program ID',
-    },
-    {
-      dataField: 'program_name',
-      header: 'Program Name',
-    },
-    {
-      dataField: 'start_date',
-      header: 'Start Date',
-    },
-    {
-      dataField: 'end_date',
-      header: 'End Date',
-    },
-    {
-      dataField: 'pubmed_id',
-      header: 'PubMed ID',
-      link: 'https://pubmed.ncbi.nlm.nih.gov/{pubmed_id}',
-    },
-    {
-      dataField: 'num_studies',
-      header: 'Number of ARMs',
-    },
-    {
-      dataField: 'num_subjects',
-      header: 'Associated Cases',
-    },
-  ],
+const pageData = {
+  headerTitle: 'Programs',
+  headerIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Programs.svg',
+  externalIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Program-ExternalLink.svg',
+  COP: {
+    prgramName: 'COP',
+    primaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cop/copPrimary.png',
+    primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
+    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cop/copSecondary.jpg',
+  },
 };
 
 // --------------- GraphQL query - Retrieve program info --------------
 const GET_PROGRAMS_DATA_QUERY = gql`{
-  programInfo {
- program_acronym
- program_id
- program_name
- start_date
- end_date
- pubmed_id
- num_studies
- num_subjects
- }
+  program(orderBy: program_sort_order_asc)
+  {
+    program_name
+    program_acronym
+    program_full_description
+    program_short_description
+    program_sort_order
+    program_external_url
+    studies
+    {
+      clinical_study_designation
+    }
+  }
 }
  `;
 
 export {
-  programListingIcon,
-  externalLinkIcon,
-  table,
+  pageData,
   GET_PROGRAMS_DATA_QUERY,
 };
