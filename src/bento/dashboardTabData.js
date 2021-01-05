@@ -429,10 +429,6 @@ filterCaseCountByStudyCode{
   group,
   count
 }
-filterCaseCountByStudyCode{
-  group,
-  count
-}
 filterCaseCountByStudyType{
   group,
   count
