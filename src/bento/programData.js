@@ -1,69 +1,36 @@
 import gql from 'graphql-tag';
 
-export const pageData = {
-  studyListingIcon: {
-    src: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento/src/assets/icons/Icon-StudiesDetail.svg',
-    alt: 'ICDC Studies detail header logo',
-  },
-  externalLinkIcon: {
-    src: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/program/externalLinkIcon.svg',
-    alt: 'External link icon',
-  },
-  table: {
-    // Set 'display' to false to hide the table entirely
-    display: true,
-    // Table title
-    title: 'Studies',
-    // Field name for table data, need to be updated only when using a different GraphQL query
-    dataField: 'studiesByProgram',
-    // Value must be one of the 'field' in columns
-    defaultSortField: 'program_acronym',
-    // 'asc' or 'desc'
-    defaultSortDirection: 'asc',
-    // showHideColumns 'true' or 'false'
-    showHideColumns: true,
-    // download csv 'true' or 'false'
-    download: true,
-    // downloaded File Name
-    downloadFileName: 'Bento_case_samples_download',
-    // Set 'selectableRows' to true to show the row selection
-    selectableRows: false,
-    // A maximum of 10 columns are allowed
-    columns: [
-      {
-        dataField: 'clinical_study_designation',
-        header: 'Study Code',
-        link: '/program/{program_id}',
-        display: true,
-      },
-      {
-        dataField: 'program_id',
-        header: 'Program ID',
-      },
-      {
-        dataField: 'clinical_study_name',
-        header: 'Study Name',
-      },
-      {
-        dataField: 'clinical_study_type',
-        header: 'Study Type',
-      },
-      {
-        dataField: 'numberOfCases',
-        header: 'Cases',
-      },
-    ],
+const pageData = {
+  headerTitle: 'Programs',
+  headerIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Programs.svg',
+  externalIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Program-ExternalLink.svg',
+  COP: {
+    prgramName: 'COP',
+    primaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cop/copPrimary.png',
+    primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
+    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cop/copSecondary.jpg',
   },
 };
 
 // --------------- GraphQL query - Retrieve program info --------------
-export const GET_STUDY_DATA_QUERY = gql`{
-    studiesByProgram {
-        program_id
-        clinical_study_designation
-        clinical_study_name
-         clinical_study_type
-         numberOfCases
+const GET_PROGRAMS_DATA_QUERY = gql`{
+  program(orderBy: program_sort_order_asc)
+  {
+    program_name
+    program_acronym
+    program_full_description
+    program_short_description
+    program_sort_order
+    program_external_url
+    studies
+    {
+      clinical_study_designation
     }
   }
-  `;
+}
+ `;
+
+export {
+  pageData,
+  GET_PROGRAMS_DATA_QUERY,
+};

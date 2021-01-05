@@ -493,62 +493,6 @@ type CaseDetail {
   stage_of_disease: String
 }
 
-type StudyCodeCaseCount {
-  study_code: String
-  cases: Int
-}
-
-type DiagnosisCaseCount {
-  diagnosis: String
-  cases: Int
-}
-
-type GenderCaseCount {
-  gender: String
-  cases: Int
-}
-
-
-type DiseaseSiteCaseCount {
-  disease_site: String
-  cases: Int
-}
-
-type NeuteredStatusCaseCount {
-  neutered_status: String
-  cases: Int
-}
-
-type StageOfDiseaseCaseCount {
-  stage_of_disease :String
-  cases :Int
-}
-
-type StudyTypeCaseCount {
-  study_type: String
-  cases: Int
-}
-
-type AgeCaseCount {
-  age: Float
-  cases: Int
-}
-
-type FileTypeCaseCount {
-  data_type: String
-  cases: Int
-}
-
-type ProgramCaseCount {
-  program: String
-  cases: Int
-}
-
-type FileFormatCaseCount {
-  file_format: String
-  cases: Int
-}
-
 type StudyOfProgram {
   program_id: String
   clinical_study_id: String
@@ -785,29 +729,29 @@ type QueryType {
   sampleCountOfCase(case_id: String!): Int 
 
   "Count by group"
-  caseCountByStudyCode(case_ids: [String] = []): [StudyCodeCaseCount] 
+  caseCountByStudyCode(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByDiagnosis(case_ids: [String] = []): [DiagnosisCaseCount] 
+  caseCountByDiagnosis(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByGender(case_ids: [String] = []): [GenderCaseCount] 
+  caseCountByGender(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByBreed(case_ids: [String] = []): [BreedCaseCount] 
+  caseCountByBreed(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByNeuteredStatus(case_ids: [String] = []): [NeuteredStatusCaseCount] 
+  caseCountByNeuteredStatus(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByStageOfDisease(case_ids: [String] = []): [StageOfDiseaseCaseCount] 
+  caseCountByStageOfDisease(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByDiseaseSite(case_ids: [String] = []): [DiseaseSiteCaseCount] 
+  caseCountByDiseaseSite(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByStudyType(case_ids: [String] = []): [StudyTypeCaseCount] 
+  caseCountByStudyType(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByAge(case_ids: [String] = []): [AgeCaseCount] 
+  caseCountByAge(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByDataType(case_ids: [String] = []): [FileTypeCaseCount] 
+  caseCountByDataType(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByFileFormat(case_ids: [String] = []): [FileFormatCaseCount] 
+  caseCountByFileFormat(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByProgram(case_ids: [String] = []): [ProgramCaseCount] 
+  caseCountByProgram(case_ids: [String] = []): [GroupCount] 
 
   filesInList(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] 
 
@@ -1054,9 +998,11 @@ type QueryType {
 
   "Combined info"
   studiesByProgramId(program_id: String!): [StudyOfProgram] 
-  studiesByProgram: [StudyOfProgram] 
   filesOfCase(case_id: String!): [FilesOfCase] 
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
+
+  studiesByProgram(case_ids: [String] = []): [StudyOfProgram] 
+
 
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
 
