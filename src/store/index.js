@@ -2,14 +2,11 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import layout from '../components/Layout/LayoutState';
-import dashboard from '../pages/dashboard/dashboardState';
-import stats from '../components/Stats/StatsState';
 
 const reducers = {
   layout,
-  dashboard,
-  stats,
 };
+
 const loggerMiddleware = createLogger();
 
 const store = createStore(

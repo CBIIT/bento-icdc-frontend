@@ -10,10 +10,10 @@ import icon from '../../assets/landing/LP_ReadMore.svg';
 import iconAbout from '../../assets/landing/LP_About_Fullarticle.Arrow.svg';
 import lbg from '../../assets/landing/LP-Background.1400x1600.jpg';
 import { Button } from '../../components/Wrappers/Wrappers';
-import starImg from '../../assets/LP_FLARE.2.png';
+import starImg from '../../assets/landing/LP_FLARE.2.png';
 import dogImg from '../../assets/landing/dog-bubble.png';
 import humanImg from '../../assets/landing/human-bubble.png';
-import { landingPageData } from '../../bento/landingPageData';
+import { pageData } from '../../bento/landingPageData';
 
 const slideDown = keyframes`
   0% {
@@ -93,22 +93,22 @@ const Star = styled.div`
   animation: ${star} 20s  0s 1;
 `;
 
-const LandingController = ({ classes }) => (
+const LandingView = ({ classes }) => (
   <div className={classes.page}>
     <div className={classes.container}>
-      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30, classes.paddingLeft50)}>
+      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30, classes.paddingLeft85)}>
         <Grid item lg={3} md={3} sm={12} xs={12}>
           <div className={classes.headerTitle}>
-            { landingPageData.callToActionTitle }
+            { pageData.callToActionTitle }
           </div>
           <div className={classes.headerContent}>
-            { landingPageData.callToActionDescription}
+            { pageData.callToActionDescription}
           </div>
           <div className={classes.headerButtonSection}>
 
-            <Link to={landingPageData.callToActionLink} className={classes.headerLink}>
+            <Link to={pageData.callToActionLink} className={classes.headerLink}>
               <Button className={classes.headerButton}>
-                {landingPageData.callToActionButtonText}
+                {pageData.callToActionButtonText}
               </Button>
             </Link>
 
@@ -135,16 +135,16 @@ const LandingController = ({ classes }) => (
           <div className={classes.about}>
             <div className={classes.aboutImageSection}>
               <img
-                src={landingPageData.tile1.img}
+                src={pageData.tile1.img}
                 className={classes.aboutImage}
-                alt={landingPageData.tile1.alt}
+                alt={pageData.tile1.alt}
               />
             </div>
             <div className={classes.icdcWords}>
-              {landingPageData.tile1.titleText}
+              {pageData.tile1.titleText}
             </div>
             <div className={classes.aboutContent}>
-              {landingPageData.tile1.descriptionText}
+              {pageData.tile1.descriptionText}
             </div>
             <div className={classes.aboutButtonSection}>
               <div className={classes.aboutButtonLeft}>
@@ -152,7 +152,7 @@ const LandingController = ({ classes }) => (
               </div>
               <div className={classes.aboutButtonRight}>
                 <Link
-                  to={landingPageData.tile1.callToActionLink}
+                  to={pageData.tile1.callToActionLink}
                   className={classes.aboutButton}
                 >
                   FULL ARTICLE
@@ -167,18 +167,18 @@ const LandingController = ({ classes }) => (
               <div>
                 <img
                   className={classes.image}
-                  src={landingPageData.tile2.img}
-                  alt={landingPageData.tile2.alt}
+                  src={pageData.tile2.img}
+                  alt={pageData.tile2.alt}
                 />
               </div>
               <div className={classes.content}>
                 <div className={classes.contentHeader}>
                   {' '}
-                  {landingPageData.tile2.titleText}
+                  {pageData.tile2.titleText}
                   {' '}
                 </div>
                 <div className={classes.contentMessage}>
-                  {landingPageData.tile2.descriptionText}
+                  {pageData.tile2.descriptionText}
                 </div>
 
               </div>
@@ -188,8 +188,8 @@ const LandingController = ({ classes }) => (
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to={landingPageData.tile2.callToActionLink} className={classes.blueButton}>
-                    {landingPageData.tile2.callToActionText}
+                  <Link to={pageData.tile2.callToActionLink} className={classes.blueButton}>
+                    {pageData.tile2.callToActionText}
                   </Link>
                 </div>
               </div>
@@ -198,18 +198,18 @@ const LandingController = ({ classes }) => (
               <div>
                 <img
                   className={classes.image}
-                  src={landingPageData.tile3.img}
-                  alt={landingPageData.tile3.src}
+                  src={pageData.tile3.img}
+                  alt={pageData.tile3.src}
                 />
               </div>
               <div className={classes.content}>
                 <div className={classes.contentHeader}>
                   {' '}
-                  {landingPageData.tile3.titleText}
+                  {pageData.tile3.titleText}
                   {' '}
                 </div>
                 <div className={classes.contentMessage}>
-                  {landingPageData.tile3.descriptionText}
+                  {pageData.tile3.descriptionText}
                 </div>
 
               </div>
@@ -219,8 +219,8 @@ const LandingController = ({ classes }) => (
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to={landingPageData.tile3.callToActionLink} className={classes.blueButton}>
-                    {landingPageData.tile3.callToActionText}
+                  <Link to={pageData.tile3.callToActionLink} className={classes.blueButton}>
+                    {pageData.tile3.callToActionText}
                   </Link>
                 </div>
               </div>
@@ -229,18 +229,18 @@ const LandingController = ({ classes }) => (
               <div>
                 <img
                   className={classes.image}
-                  src={landingPageData.tile4.img}
-                  alt={landingPageData.tile4.src}
+                  src={pageData.tile4.img}
+                  alt={pageData.tile4.src}
                 />
               </div>
               <div className={classes.content}>
 
                 <div className={classes.contentHeader}>
-                  {landingPageData.tile4.titleText}
+                  {pageData.tile4.titleText}
                   {' '}
                 </div>
                 <div className={classes.contentMessage}>
-                  {landingPageData.tile4.descriptionText}
+                  {pageData.tile4.descriptionText}
                 </div>
 
               </div>
@@ -250,8 +250,8 @@ const LandingController = ({ classes }) => (
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to={landingPageData.tile4.callToActionLink} className={classes.blueButton}>
-                    {landingPageData.tile4.callToActionText}
+                  <Link to={pageData.tile4.callToActionLink} className={classes.blueButton}>
+                    {pageData.tile4.callToActionText}
                   </Link>
                 </div>
               </div>
@@ -261,19 +261,19 @@ const LandingController = ({ classes }) => (
             <div className={classes.cases}>
               <div className={classes.greyContentHeader}>
                 {' '}
-                {landingPageData.tile5.titleText}
+                {pageData.tile5.titleText}
                 {' '}
               </div>
               <div className={classes.greyContent}>
-                {landingPageData.tile5.descriptionText}
+                {pageData.tile5.descriptionText}
               </div>
               <div className={classes.greybuttonSection}>
                 <div className={classes.blueButtonLeft}>
                   <img className={classes.greyIcon} src={icon} alt="ICDC about " />
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to={landingPageData.tile5.callToActionLink} className={classes.greybutton}>
-                    {landingPageData.tile5.callToActionText}
+                  <Link to={pageData.tile5.callToActionLink} className={classes.greybutton}>
+                    {pageData.tile5.callToActionText}
                   </Link>
                 </div>
               </div>
@@ -315,8 +315,8 @@ const styles = (theme) => ({
     lineHeight: '40px',
 
   },
-  paddingLeft50: {
-    paddingLeft: '50px',
+  paddingLeft85: {
+    paddingLeft: '85px',
   },
   headerContent: {
     height: '98px',
@@ -340,7 +340,7 @@ const styles = (theme) => ({
   icon: {
     width: '20px',
     marginTop: '13px',
-    marginLeft: '36px',
+    marginLeft: '22px',
   },
   headerButton: {
     borderRadius: '10px',
@@ -405,7 +405,7 @@ const styles = (theme) => ({
   },
   image: {
     width: '197px',
-    height: '244px',
+    height: '236px',
   },
   aboutContent: {
     background: '#fff',
@@ -419,7 +419,7 @@ const styles = (theme) => ({
   content: {
     width: '197px',
     background: '#fff',
-    height: '120px',
+    height: '134px',
     paddingLeft: '30px',
     paddingTop: '6px',
   },
@@ -494,12 +494,12 @@ const styles = (theme) => ({
     float: 'left',
     width: '610px',
     background: '#fff',
-    backgroundImage: `url(${landingPageData.tile5.img})`,
+    backgroundImage: `url(${pageData.tile5.img})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
   },
   cases: {
-    height: '442px',
+    height: '435px',
     paddingLeft: '400px',
     paddingTop: '40px',
   },
@@ -549,7 +549,7 @@ const styles = (theme) => ({
   greyIcon: {
     width: '20px',
     marginTop: '15px',
-    marginLeft: '33px',
+    marginLeft: '20px',
   },
   greybutton: {
     padding: '15px 5px 0 0',
@@ -612,4 +612,4 @@ const styles = (theme) => ({
   },
 
 });
-export default withStyles(styles, { withTheme: true })(LandingController);
+export default withStyles(styles, { withTheme: true })(LandingView);
