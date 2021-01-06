@@ -7,6 +7,7 @@ import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
 import Home from '../../pages/landing/landingView';
 import Studies from '../../pages/studies/studiesController';
+import Dashboard from '../../pages/dashboardTab/dashboardController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -31,6 +32,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
             <Route path="/studies" component={Studies} />
+            <Route path="/cases" component={Dashboard} />
             <Route component={Error} />
           </Switch>
           <Footer data={{ isSidebarOpened }} />

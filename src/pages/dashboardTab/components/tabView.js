@@ -247,7 +247,7 @@ const TabView = ({
             overviewDesc={getOverviewDescQuery(api)}
             paginationAPIField={paginationAPIField}
             paginationAPIFieldDesc={paginationAPIFieldDesc}
-            queryCustomVaribles={{ case_ids: filteredSubjectIds }}
+            queryCustomVaribles={{ subject_ids: filteredSubjectIds }}
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
           />

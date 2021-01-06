@@ -50,7 +50,7 @@ export const facetSearchData = [
 ];
 
 // --------------- Dashboard Sidebar Sections styling --------------
-export const facetSectionStyling = {
+export const facetSectionVariables = {
   'Filter By Cases': {
     color: '#10A075',
     height: '5px',
