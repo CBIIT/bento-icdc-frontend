@@ -58,68 +58,57 @@ export const tabContainers = [
       {
         dataField: 'study_code',
         header: 'Study Code',
-        sort: 'asc',
         link: '/study/{study_code}',
         display: true,
       },
       {
         dataField: 'study_type',
         header: 'Study Type',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'breed',
         header: 'Breed',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'diagnosis',
         header: 'Diagnosis',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'stage_of_disease',
         header: 'Stage Of Disease',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'age',
         header: 'Age',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'sex',
         header: 'Sex',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'neutered_status',
         header: 'Neutered Status',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'weight',
         header: 'Weight (kg)',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'response_to_treatment',
         header: 'Response to Treatment',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'cohort',
         header: 'Cohort',
-        sort: 'asc',
         display: true,
       },
     ],
@@ -474,6 +463,14 @@ filterCaseCountByFileFormat{
   group,
   count
 }
+programsAndStudies{
+  program
+  caseSize
+  studies{
+      study
+      caseSize
+  }
+}
 caseOverviewPaged(first: 10) {
     case_id
     study_code
@@ -516,6 +513,14 @@ export const FILTER_GROUP_QUERY = gql`
   caseCountByDiseaseSite(case_ids: $case_ids){
     group,
     count
+  }
+  programsAndStudies(case_ids: $case_ids){
+    program
+    caseSize
+    studies{
+        study
+        caseSize
+    }
   }
    
 }

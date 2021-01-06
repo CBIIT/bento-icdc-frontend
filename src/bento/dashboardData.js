@@ -68,14 +68,14 @@ export const facetSectionVariables = {
 // --------------- Dashboard Widgets configuration --------------
 // A maximum of 6 widgets are allowed
 export const widgetsData = [
-  // {
-  //   type: 'sunburst',
-  //   label: 'Programs and Studies',
-  //   dataName: 'studiesByProgram',
-  //   datatable_level1_field: 'program',
-  //   datatable_level2_field: 'study_acronym',
-  //   show: true,
-  // },
+  {
+    type: 'sunburst',
+    label: 'Programs and Studies',
+    dataName: 'programsAndStudies',
+    datatable_level1_field: 'program',
+    datatable_level2_field: 'study',
+    show: true,
+  },
   {
     type: 'donut',
     label: 'Breed',
