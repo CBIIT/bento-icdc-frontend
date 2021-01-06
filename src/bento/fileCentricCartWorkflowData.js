@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const navBarCartData = {
   cartLabel: 'Cart',
   cartLink: '/fileCentricCart',
-  cartIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento/src/assets/icons/Icon-MyCases.svg',
+  cartIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-MyCases.svg',
   cartIconAlt: 'cart_logo',
 };
 
@@ -19,7 +19,7 @@ export const myFilesPageData = {
   mainTitle: 'My Files',
   subTitle: '',
   downButtonText: 'DOWNLOAD MANIFEST',
-  headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento/src/assets/icons/Icon-MyCases.svg',
+  headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-MyCases.svg',
   headerIconAlt: 'Bento MyFiles header logo',
   manifestFileName: 'BENTO File Manifest',
   tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
