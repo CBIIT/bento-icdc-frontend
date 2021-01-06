@@ -412,6 +412,7 @@ export function setDashboardTableLoading() {
 }
 
 const convertCasesToCount = (data) => data.map((item) => ({
+  group: item.group,
   subjects: item.count,
 }));
 
