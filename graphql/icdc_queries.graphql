@@ -141,10 +141,6 @@ type FileInfo {
   url: String
 }
 
-type FileID {
-  uuid: String
-}
-
 type StudyStat {
   study_code: String
   files: Int
@@ -195,7 +191,7 @@ type SampleOverview {
   percentage_tumor: String
   necropsy_sample: String
   sample_preservation: String
-  files: [FileID]
+  files: [String]
 }
 
 type CaseOverview2 {
@@ -1456,7 +1452,7 @@ type QueryType {
       s.percentage_tumor as percentage_tumor,
       s.necropsy_sample as necropsy_sample,
       s.sample_preservation as sample_preservation,
-      collect(DISTINCT(f {.uuid})) AS files
+      collect(DISTINCT(f.uuid)) AS files
     ORDER BY CASE $order_by
       WHEN 'sample_id' THEN sample_id
       WHEN 'case_id' THEN case_id
@@ -1498,7 +1494,7 @@ type QueryType {
       s.percentage_tumor as percentage_tumor,
       s.necropsy_sample as necropsy_sample,
       s.sample_preservation as sample_preservation,
-      collect(DISTINCT(f {.uuid})) AS files
+      collect(DISTINCT(f.uuid)) AS files
   ORDER BY CASE $order_by
       WHEN 'sample_id' THEN sample_id
       WHEN 'case_id' THEN case_id
