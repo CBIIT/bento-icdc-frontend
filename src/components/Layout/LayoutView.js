@@ -9,6 +9,7 @@ import Error from '../../pages/error/Error';
 import Home from '../../pages/landing/landingView';
 import Studies from '../../pages/studies/studiesController';
 import Dashboard from '../../pages/dashboardTab/dashboardController';
+import Cart from '../../pages/fileCentricCart/cartController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -35,6 +36,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/home" component={Home} />
             <Route path="/studies" component={Studies} />
             <Route path="/cases" component={Dashboard} />
+            <Route path="/fileCentricCart" component={Cart} />
             <Route component={Error} />
           </Switch>
           <Footer data={{ isSidebarOpened }} />
