@@ -12,19 +12,14 @@ export const statsStyling = {
 export const globalStatsData = [
   // A maximum of 6 stats are allowed
   {
-    statTitle: 'Programs',
-    type: 'field',
-    statAPI: 'numberOfPrograms',
-  },
-  {
-    statTitle: 'Arms',
+    statTitle: 'Studies',
     type: 'field',
     statAPI: 'numberOfStudies',
   },
   {
     statTitle: 'Cases',
     type: 'field',
-    statAPI: 'numberOfSubjects',
+    statAPI: 'numberOfCases',
   },
   {
     statTitle: 'samples',
@@ -32,14 +27,14 @@ export const globalStatsData = [
     statAPI: 'numberOfSamples',
   },
   {
-    statTitle: 'Assays',
-    type: 'field',
-    statAPI: 'numberOfLabProcedures',
-  },
-  {
     statTitle: 'files',
     type: 'field',
     statAPI: 'numberOfFiles',
+  },
+  {
+    statTitle: 'Aliquots',
+    type: 'field',
+    statAPI: 'numberOfAliquots',
   },
 ];
 

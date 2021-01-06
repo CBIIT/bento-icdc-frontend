@@ -1,9 +1,4 @@
-// import Test from '../assets/header/CTDC_Logo.svg';
-
-// The ideal image size of landingPageHero 1400x600px
-// Tile1 Tile2 Tile3 images 293x349 px
-// Tile4 image optimum size 600x 436 px
-export const landingPageData = {
+export const pageData = {
   callToActionTitle: 'Integrated Canine Data Commons',
   callToActionDescription: 'A public resource for exploring, analyzing, and understanding the biological relationships between human and canine cancers.',
   callToActionButtonText: 'EXPLORE',
