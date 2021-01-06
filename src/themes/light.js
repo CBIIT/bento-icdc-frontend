@@ -1,5 +1,4 @@
 import tinycolor from 'tinycolor2';
-import icdcLightTheme from './icdcLight';
 
 const whisper = '#E7E5E5';
 const midNightBlue = '#142D64';
@@ -507,7 +506,5 @@ export default {
         },
       },
     },
-    // Overriding Bento MUIDatatable properties with exsisting ICDC's MUIDatatable properties
-    ...icdcLightTheme.overrides,
   },
 };
