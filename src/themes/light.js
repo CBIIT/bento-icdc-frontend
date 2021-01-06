@@ -1,4 +1,5 @@
 import tinycolor from 'tinycolor2';
+import icdcLightTheme from './icdcLight';
 
 const whisper = '#E7E5E5';
 const midNightBlue = '#142D64';
@@ -28,7 +29,7 @@ export default {
   custom: {
     maxContentWidth: '1440px',
     maxContent: 'white',
-    bodyBackGround: '#E5F0FA',
+    bodyBackGround: 'white',
     cardBackGround: '#f0f6f8',
     fontFamilySans: '"Open Sans", sans-serif',
     footorBackground: '#325068',
@@ -225,7 +226,7 @@ export default {
       footerText: 'white',
     },
     background: {
-      default: '#E5F0FA',
+      default: '#fafafa',
       light: '#F3F5FF',
     },
   },
@@ -506,5 +507,7 @@ export default {
         },
       },
     },
+    // Overriding Bento MUIDatatable properties with exsisting ICDC's MUIDatatable properties
+    ...icdcLightTheme.overrides,
   },
 };

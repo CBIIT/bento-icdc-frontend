@@ -57,6 +57,6 @@ export const navBarData = [
 export const navBarCartData = {
   cartLabel: 'MY Files',
   cartLink: '/fileCentricCart',
-  cartIcon: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/icons/Icon-Cart-Navbar.svg',
+  cartIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento/src/assets/icons/Icon-MyCases.svg',
   cartIconAlt: 'cart_logo',
 };

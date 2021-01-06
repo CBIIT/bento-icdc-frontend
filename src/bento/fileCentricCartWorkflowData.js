@@ -3,15 +3,23 @@ import gql from 'graphql-tag';
 export const navBarCartData = {
   cartLabel: 'Cart',
   cartLink: '/fileCentricCart',
-  cartIcon: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/icons/Icon-Cart-Navbar.svg',
+  cartIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento/src/assets/icons/Icon-MyCases.svg',
   cartIconAlt: 'cart_logo',
 };
 
+// --------------- Icons configuration --------------
+// Ideal size for externalLinkIcon is 16x16 px
+
+export const externalLinkIcon = {
+  src: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/cart/ExternalLink.svg',
+  alt: 'External link icon',
+};
+
 export const myFilesPageData = {
-  mainTitle: 'Cart >',
-  subTitle: 'Selected Files',
+  mainTitle: 'My Files',
+  subTitle: '',
   downButtonText: 'DOWNLOAD MANIFEST',
-  headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/icons/Icon-Cart-Workflow.svg',
+  headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento/src/assets/icons/Icon-MyCases.svg',
   headerIconAlt: 'Bento MyFiles header logo',
   manifestFileName: 'BENTO File Manifest',
   tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
@@ -72,7 +80,7 @@ export const table = {
       formatBytes: true,
     },
     {
-      dataField: 'subject_id',
+      dataField: 'case_id',
       header: 'Case ID',
     },
     {
@@ -80,7 +88,7 @@ export const table = {
       header: 'Study Code',
     },
     {
-      dataField: 'file_id',
+      dataField: 'file_uuid',
       header: 'UUID',
       display: false,
     },
@@ -94,19 +102,20 @@ export const table = {
 
 // --------------- GraphQL query - Retrieve selected cases info --------------
 export const GET_MY_CART_DATA_QUERY = gql`
-query filesInList($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="") {
-    filesInList(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {
-        study_code
-        subject_id
-        file_name
-        file_type
-        association
-        file_description
-        file_format
-        file_size
-        file_id
-        md5sum
-    }
+query filesInList($uuids: [String]){
+  filesInList(uuids: $uuids){
+      file_type
+      association
+      file_description
+      file_format
+      file_size
+      case_id
+      breed
+      diagnosis
+      study_code
+      file_uuid
+      md5sum
+ }
 }`;
 
 // --------------- GraphQL query - Retrieve selected files info Desc --------------
