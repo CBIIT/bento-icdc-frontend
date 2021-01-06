@@ -398,29 +398,22 @@ export const DASHBOARD_QUERY = gql`{
   numberOfSamples
   numberOfFiles
   numberOfAliquots
-
-
 caseCountByDiagnosis{
   group,
   count
 }
-
 caseCountByGender{
   group,
   count
 }
-
 caseCountByBreed{
   group,
   count
 }
-
-
 caseCountByStageOfDisease{
   group,
   count
 }
-
 caseCountByDiseaseSite{
   group,
   count
@@ -496,7 +489,6 @@ caseOverviewPaged(first: 10) {
     response_to_treatment
     disease_site
   }
-
   }`;
 
 export const FILTER_GROUP_QUERY = gql`
@@ -505,28 +497,22 @@ export const FILTER_GROUP_QUERY = gql`
       group
       count
   }
-
   caseCountByDiagnosis(case_ids: $case_ids){
     group,
     count
   }
-
   caseCountByGender(case_ids: $case_ids){
     group,
     count
   }
-
   caseCountByBreed(case_ids: $case_ids){
     group,
     count
   }
-
-
   caseCountByStageOfDisease(case_ids: $case_ids){
     group,
     count
   }
-
   caseCountByDiseaseSite(case_ids: $case_ids){
     group,
     count
@@ -613,7 +599,6 @@ filterCaseCountByStudyCode (
     group
     count
 }
-
 filterCaseCountByStudyType (
   study: $study, 
   study_type: $study_type, 
@@ -633,7 +618,6 @@ filterCaseCountByStudyType (
     group
     count
 }
-
 filterCaseCountByBreed (
   study: $study, 
   study_type: $study_type, 
@@ -653,7 +637,6 @@ filterCaseCountByBreed (
     group
     count
 }
-
 filterCaseCountByDiagnosis (
   study: $study, 
   study_type: $study_type, 
@@ -673,7 +656,6 @@ filterCaseCountByDiagnosis (
     group
     count
 }
-
 filterCaseCountByDiseaseSite (
   study: $study, 
   study_type: $study_type, 
@@ -693,7 +675,6 @@ filterCaseCountByDiseaseSite (
     group
     count
 }
-
 filterCaseCountByStageOfDisease (
   study: $study, 
   study_type: $study_type, 
@@ -713,7 +694,6 @@ filterCaseCountByStageOfDisease (
     group
     count
 }
-
 filterCaseCountByResponseToTreatment (
   study: $study, 
   study_type: $study_type, 
@@ -733,7 +713,6 @@ filterCaseCountByResponseToTreatment (
     group
     count
 }
-
 filterCaseCountBySex (
   study: $study, 
   study_type: $study_type, 
@@ -753,7 +732,6 @@ filterCaseCountBySex (
     group
     count
 }
-
 filterCaseCountByNeuteredStatus (
   study: $study, 
   study_type: $study_type, 
@@ -773,7 +751,6 @@ filterCaseCountByNeuteredStatus (
     group
     count
 }
-
 filterCaseCountBySampleType (
   study: $study, 
   study_type: $study_type, 
@@ -793,7 +770,6 @@ filterCaseCountBySampleType (
     group
     count
 }
-
 filterCaseCountBySamplePathology (
   study: $study, 
   study_type: $study_type, 
@@ -813,7 +789,6 @@ filterCaseCountBySamplePathology (
     group
     count
 }
-
 filterCaseCountByFileAssociation (
   study: $study, 
   study_type: $study_type, 
@@ -833,7 +808,6 @@ filterCaseCountByFileAssociation (
     group
     count
 }
-
 filterCaseCountByFileType (
   study: $study, 
   study_type: $study_type, 
@@ -853,7 +827,6 @@ filterCaseCountByFileType (
     group
     count
 }
-
 filterCaseCountByFileFormat (
   study: $study, 
   study_type: $study_type, 
@@ -878,7 +851,6 @@ filterCaseCountByFileFormat (
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
 query fileOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-
   fileOverview(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {
     file_name
     file_type
@@ -936,7 +908,6 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
       disease_site
     }
 }
-
   `;
 
 export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
@@ -947,11 +918,9 @@ export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
         }
     }
 }
-
   `;
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
 query fileOverviewDesc($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-
   fileOverviewDesc(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {    
     file_name
     file_type
@@ -1009,5 +978,4 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
       disease_site
     }
 }
-
   `;

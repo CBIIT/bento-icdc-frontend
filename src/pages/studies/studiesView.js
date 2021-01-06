@@ -1,123 +1,32 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   Grid,
   withStyles,
 } from '@material-ui/core';
 import { CustomDataTable, getOptions, getColumns } from 'bento-components';
-import { Link } from 'react-router-dom';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
-import { useDispatch } from 'react-redux';
 import {
-  table, studyListingIcon, externalLinkIcon,
+  pageData,
 } from '../../bento/studiesData';
-import Stats from '../../components/Stats/AllStatsController';
-import { Typography } from '../../components/Wrappers/Wrappers';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 
 const Studies = ({ classes, data }) => {
-  const initDashboardStatus = () => (dispatch) => Promise.resolve(
-    dispatch(fetchDataForDashboardDataTable()),
-  );
-
-  const dispatch = useDispatch();
-  const redirectTo = (study) => {
-    dispatch(initDashboardStatus()).then(() => {
-      dispatch(singleCheckBox([{
-        groupName: 'Study',
-        name: study,
-        datafield: 'study_code',
-        isChecked: true,
-      }]));
-    });
-  };
-
-  const columns = [
-    {
-      name: 'clinical_study_designation',
-      label: 'Study Code',
-      options: {
-        filter: false,
-        customBodyRender: (value) => (
-          <div className="mui_td" style={{ width: '100px' }}>
-            <Link className={classes.link} to={`/study/${value}`}>{value}</Link>
-          </div>
-        ),
-      },
-    },
-    { name: 'program_id', label: 'Program' },
-    { name: 'clinical_study_name', label: 'Study Name' },
-    { name: 'clinical_study_type', label: 'Study Type' },
-    {
-      name: 'numberOfCases',
-      label: 'Cases',
-      options: {
-        customBodyRender: (value, tableMeta) => (
-          <div className="mui_td">
-            {' '}
-            <Link className={classes.link} to={(location) => ({ ...location, pathname: '/cases' })} onClick={() => redirectTo(tableMeta.rowData[0])}>{value}</Link>
-            {' '}
-          </div>
-        ),
-      },
-    },
-  ];
-
-  const options = () => ({
-    selectableRows: false,
-    search: false,
-    filter: false,
-    searchable: false,
-    print: false,
-    download: true,
-    downloadOptions: {
-      filename: 'tableDownload.csv',
-      filterOptions: {
-        useDisplayedColumnsOnly: true,
-      },
-    },
-    viewColumns: true,
-    pagination: true,
-    rowsPerPageOptions: [10, 25, 50, 100],
-    customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-      <TableFooter>
-        <TableRow>
-          <TablePagination
-            className={classes.root}
-            count={count}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-              // eslint-disable-next-line no-shadow
-            onChangePage={(_, page) => changePage(page)}
-          />
-        </TableRow>
-      </TableFooter>
-    ),
-  });
+  // TBD
+  const redirectTo = '';
 
   return (
     <>
-      <Stats />
       <div className={classes.tableContainer}>
         <div className={classes.container}>
           <div className={classes.header}>
             <div className={classes.logo}>
               <img
-                src={studyListingIcon.src}
-                alt={studyListingIcon.alt}
+                src={pageData.studyListingIcon.src}
+                alt={pageData.studyListingIcon.alt}
               />
 
             </div>
             <div className={classes.headerTitle}>
               <div className={classes.headerMainTitle}>
-                <span>
-                  <Typography>
-                    <span className={classes.headerMainTitle}>Studies</span>
-                  </Typography>
-                </span>
+                <span className={classes.headerMainTitle}>Studies</span>
               </div>
             </div>
           </div>
@@ -126,9 +35,9 @@ const Studies = ({ classes, data }) => {
             <Grid container>
               <Grid item xs={12} id="table_studies">
                 <CustomDataTable
-                  data={data[table.dataField]}
-                  columns={getColumns(table, classes, data, externalLinkIcon, '/cases', redirectTo)}
-                  options={getOptions(table, classes)}
+                  data={data[pageData.table.dataField]}
+                  columns={getColumns(pageData.table, classes, data, pageData.externalLinkIcon, '/cases', redirectTo)}
+                  options={getOptions(pageData.table, classes)}
                 />
               </Grid>
             </Grid>

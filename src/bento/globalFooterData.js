@@ -1,5 +1,4 @@
 import env from '../utils/env';
-// footerLogoImage ideal image size 310x80 px
 
 export default {
   footerLogoImage: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/footer/FNL_logo.png',

@@ -306,7 +306,6 @@ subjectCountByTissueType{
 
 // --------------- Dashboard Query configuration --------------
 export const GET_DASHBOARD_TABLE_DATA_QUERY = gql`{
-
   caseOverviewPaged (first: 10000) {
     case_id
     study_code
