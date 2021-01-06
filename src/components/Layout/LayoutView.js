@@ -1,24 +1,13 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
-import Dashboard from '../../pages/dashboardTab/dashboardController';
-import CaseDetail from '../../pages/caseDetail/caseDetailController';
-import ArmDetail from '../../pages/armDetail/armDetailController';
-import modelPage from '../../pages/modelPage/modelPageView';
-import table from '../../pages/table/tableView';
-import Home from '../../pages/landing/landingController';
-import About from '../../pages/about/aboutController';
-import DataDictonary from '../../pages/dataDictionary/dataDictonaryController';
-import Programs from '../../pages/programs/programsController';
-import ProgramDetail from '../../pages/programDetail/programDetailController';
+import Home from '../../pages/landing/landingView';
 import Studies from '../../pages/studies/studiesController';
-import GraphqlClient from '../GraphqlClient/GraphqlView';
-import fileCentricCart from '../../pages/fileCentricCart/cartController';
+import Dashboard from '../../pages/dashboardTab/dashboardController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -42,20 +31,8 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/ICDC/" component={Home} />
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
-            <Route path="/cases" component={Dashboard} />
-            <Route path="/programs" component={Programs} />
             <Route path="/studies" component={Studies} />
-            <Route path="/model" component={modelPage} />
-            <Route path="/table" component={table} />
-            <Route path="/fileCentricCart" component={fileCentricCart} />
-            <Route path="/program/:id" component={ProgramDetail} />
-            <Route path="/case/:id" component={CaseDetail} />
-            <Route path="/arm/:id" component={ArmDetail} />
-            {aboutPageRoutes.map(
-              (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
-            )}
-            <Route path="/data-dictionary" component={DataDictonary} />
-            <Route path="/graphql" component={GraphqlClient} />
+            <Route path="/cases" component={Dashboard} />
             <Route component={Error} />
           </Switch>
           <Footer data={{ isSidebarOpened }} />

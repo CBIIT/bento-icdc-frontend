@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import {
   customCheckBox,
-  updateCheckBox,
   getFilters,
   filterData,
   getCheckBoxData,
@@ -10,6 +9,7 @@ import {
   getDonutDataFromDashboardData,
   setSelectedFilterValues,
   transformInitialDataForSunburst,
+  transformAPIDataIntoCheckBoxData,
 } from 'bento-components';
 import { globalStatsData as statsCount } from '../../../bento/globalStatsData';
 import { widgetsData, facetSearchData } from '../../../bento/dashboardData';
@@ -103,7 +103,12 @@ function getFilteredStat(input, statCountVariables) {
  * @param {object} data
  *  @param {object}
  */
-const removeEmptySubjectsFromDonutData = (data) => data.filter((item) => item.subjects !== 0);
+const removeEmptySubjectsFromDonutData = (data) => {
+  const convertCasesToSubjects = data.map((item) => ({
+    subjects: item.count,
+  }));
+  return convertCasesToSubjects.filter((item) => item.subjects !== 0);
+};
 
 /**
  * Returns the widgets data.
@@ -226,7 +231,7 @@ export function fetchDataForDashboardTab(payload, subjectIDsAfterFilter = null) 
   return client
     .query({
       query: QUERY,
-      variables: { subject_ids: VARIABLES, order_by: sortfield || '' },
+      variables: { case_ids: VARIABLES, order_by: sortfield || '' },
     })
     .then((result) => store.dispatch({ type: 'UPDATE_CURRRENT_TAB_DATA', payload: { currentTab: payload, sortDirection, ..._.cloneDeep(result) } }))
     .catch((error) => store.dispatch(
@@ -246,7 +251,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   const fetchResult = await client
     .query({
       query: GET_ALL_FILEIDS_FOR_SELECT_ALL,
-      variables: { subject_ids: VARIABLES, first: fileCount },
+      variables: { case_ids: VARIABLES, first: fileCount },
     })
     .then((result) => result.data.subjectOverViewPaged);
   return fetchResult;
@@ -315,7 +320,7 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
     })
     .then((result) => client.query({ // request to get the filtered group counts
       query: FILTER_GROUP_QUERY,
-      variables: { subject_ids: result.data.searchSubjects.subjectIds },
+      variables: { case_ids: result.data.searchCases.caseIds },
     })
       .then((result2) => store.dispatch({
         type: 'TOGGGLE_CHECKBOX_WITH_API',
@@ -406,6 +411,35 @@ export function setDashboardTableLoading() {
   store.dispatch({ type: 'SET_DASHBOARDTABLE_LOADING' });
 }
 
+const convertCasesToCount = (data) => data.map((item) => ({
+  group: item.group,
+  subjects: item.count,
+}));
+
+/**
+ *  updateFilteredAPIDataIntoCheckBoxData works for first time init Checkbox,
+that function transforms the data which returns from API into a another format
+so it contains more information and easy for front-end to show it correctly.
+ *  * @param {object} currentGroupCount
+ *  * @param {object} willUpdateGroupCount
+ * * @param {object} currentCheckboxSelection
+ * @return {json}
+ */
+export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromConfig) {
+  return (
+    facetSearchDataFromConfig.map((mapping) => ({
+      groupName: mapping.label,
+      checkboxItems: transformAPIDataIntoCheckBoxData(
+        convertCasesToCount(data[mapping.filterAPI]),
+        mapping.field,
+      ),
+      datafield: mapping.datafield,
+      show: mapping.show,
+      section: mapping.section,
+    }))
+  );
+}
+
 export const getDashboard = () => getState();
 
 // reducers
@@ -425,20 +459,20 @@ const reducers = {
     isDashboardTableLoading: false,
   }),
   TOGGGLE_CHECKBOX_WITH_API: (state, item) => {
-    const updatedCheckboxData1 = updateCheckBox(
-      state.checkbox.data, item.groups.data, item.filter[0], facetSearchData,
+    const updatedCheckboxData1 = updateFilteredAPIDataIntoCheckBoxData(
+      item.data, facetSearchData,
     );
     const checkboxData1 = setSelectedFilterValues(updatedCheckboxData1, item.allFilters);
-    fetchDataForDashboardTab(state.currentActiveTab, item.data.searchSubjects.subjectIds);
+    fetchDataForDashboardTab(state.currentActiveTab, item.data.searchCases.caseIds);
     return {
       ...state,
       setSideBarLoading: false,
       allActiveFilters: item.allFilters,
-      filteredSubjectIds: item.data.searchSubjects.subjectIds,
+      filteredSubjectIds: item.data.searchCases.caseIds,
       checkbox: {
         data: checkboxData1,
       },
-      stats: getFilteredStat(item.data.searchSubjects, statsCount),
+      stats: getFilteredStat(item.data.searchCases, statsCount),
       widgets: getWidgetsInitData(item.groups.data, widgetsData),
     };
   },
@@ -449,7 +483,7 @@ const reducers = {
       currentActiveTab: item.currentTab,
       datatable: {
         ...state.datatable,
-        dataCase: item.sortDirection === 'desc' ? item.data.subjectOverViewPagedDesc : item.data.subjectOverViewPaged,
+        dataCase: item.sortDirection === 'desc' ? item.data.caseOverviewPagedDesc : item.data.caseOverviewPaged,
         dataSample: item.sortDirection === 'desc' ? item.data.sampleOverviewDesc : item.data.sampleOverview,
         dataFile: item.sortDirection === 'desc' ? item.data.fileOverviewDesc : item.data.fileOverview,
       },

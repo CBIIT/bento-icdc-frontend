@@ -3,379 +3,160 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import {
   CustomDataTable,
   cn,
-  manipulateLinks,
   getOptions,
   getColumns,
-  CustomActiveDonut,
 } from 'bento-components';
-import {
-  pageTitle, table, externalLinkIcon,
-  programDetailIcon, breadCrumb, aggregateCount,
-  pageSubTitle, leftPanel, rightPanel,
-} from '../../bento/programDetailData';
 import StatsView from '../../components/Stats/StatsView';
-import { Typography } from '../../components/Wrappers/Wrappers';
+import {
+  table,
+  pageData,
+} from '../../bento/programDetailData';
+import {
+  pageData as ProgramImageConfig,
+} from '../../bento/programData';
 import {
   singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
 } from '../dashboardTab/store/dashboardReducer';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
-import Widget from '../../components/Widgets/WidgetView';
-import colors from '../../utils/colors';
 
-const ProgramView = ({ classes, data, theme }) => {
-  const programData = data.programDetail;
+const ProgramView = ({ classes, data }) => {
+  const programDetail = data.program[0];
 
-  const redirectTo = () => {
+  const redirectTo = (study) => {
     setSideBarToLoading();
     setDashboardTableLoading();
     singleCheckBox([{
-      datafield: 'programs',
-      groupName: 'Program',
+      datafield: 'study_code',
+      groupName: 'Study',
       isChecked: true,
-      name: programData.program_acronym,
-      section: 'Filter By Cases',
-    }]);
-  };
-
-  const redirectToArm = (programArm) => {
-    setSideBarToLoading();
-    setDashboardTableLoading();
-    singleCheckBox([{
-      datafield: 'studies',
-      groupName: 'Arm',
-      isChecked: true,
-      name: `${programArm.rowData[0]}: ${programArm.rowData[1]}`,
+      name: study,
       section: 'Filter By Cases',
     }]);
   };
 
   const stat = {
-    numberOfPrograms: 1,
-    numberOfStudies: programData.num_subjects !== undefined ? programData.studies.length : 'undefined',
-    numberOfSubjects: programData.num_subjects !== undefined ? programData.num_subjects : 'undefined',
-    numberOfSamples: programData.num_samples !== undefined ? programData.num_samples : 'undefined',
-    numberOfLabProcedures: programData.num_lab_procedures !== undefined ? programData.num_lab_procedures : 'undefined',
-    numberOfFiles: programData.num_files !== undefined ? programData.num_files : 'undefined',
+    numberOfStudies: data.studyCountOfProgram,
+    numberOfCases: data.caseCountOfProgram,
+    numberOfSamples: data.sampleCountOfProgram,
+    numberOfFiles: data.fileCountOfProgram,
+    numberOfBiospecimenAliquots: data.aliguotCountOfProgram,
   };
 
   const breadCrumbJson = [{
-    name: `${breadCrumb.label}`,
-    to: `${breadCrumb.link}`,
+    name: 'ALL PROGRAMS',
+    to: '/programs',
+    isALink: true,
+  }, {
+    name: programDetail.program_acronym,
+    to: '/cases',
     isALink: true,
   }];
 
-  const updatedAttributesData = manipulateLinks(leftPanel.attributes);
+  const programConfig = ProgramImageConfig[programDetail.program_acronym];
+  const programImage = programConfig ? programConfig.secondaryImage : '';
 
   return (
     <>
       <StatsView data={stat} />
+
       <div className={classes.container}>
         <div className={classes.header}>
           <div className={classes.logo}>
             <img
-              src={programDetailIcon.src}
-              alt={programDetailIcon.alt}
+              src={pageData.headerIcon}
+              alt="ICDC case detail header logo"
             />
 
           </div>
           <div className={classes.headerTitle}>
-            <div className={classes.headerMainTitle}>
+            <div className={cn(classes.headerMainTitle, classes.marginTop23)}>
               <span>
-                {' '}
-                {pageTitle.label}
-                <span>
-                  {' '}
-                  {' '}
-                  {programData[pageTitle.dataField]}
-                </span>
+                {`${programDetail.program_name} (${programDetail.program_acronym})`}
               </span>
             </div>
-            <div className={cn(classes.headerMSubTitle, classes.headerSubTitleCate)}>
-              <span>
-                {' '}
-                {programData[pageSubTitle.dataField]}
-              </span>
-
-            </div>
-            <CustomBreadcrumb className={classes.breadCrumb} data={breadCrumbJson} />
+            <CustomBreadcrumb data={breadCrumbJson} />
           </div>
 
-          {aggregateCount.display ? (
-            <div className={classes.headerButton}>
-              <span className={classes.headerButtonLinkSpan}>
-                <Link
-                  className={classes.headerButtonLink}
-                  to={(location) => ({ ...location, pathname: `${aggregateCount.link}` })}
-                  onClick={() => redirectTo()}
-                >
-                  {' '}
-                  <span className={classes.headerButtonLinkText}>{aggregateCount.labelText}</span>
-                  <span className={classes.headerButtonColumn}>{': '}</span>
-                  <span className={classes.headerButtonLinkNumber}>
-
-                    {programData[aggregateCount.dataField]}
-
-                  </span>
-                </Link>
-              </span>
-            </div>
-          ) : ''}
         </div>
 
         <div className={classes.detailContainer}>
 
-          <Grid container spacing={5}>
-            <Grid item lg={7} sm={6} xs={12} container>
-              <Grid container spacing={4} direction="row" className={classes.detailContainerLeft}>
-                {updatedAttributesData.slice(0, 6).map((attribute) => (
-                  <Grid item xs={12}>
-                    <div>
-                      {
-                      attribute.internalLink
-                        ? (
-                          <div>
-                            <span className={classes.detailContainerHeader}>{attribute.label}</span>
-                            <div>
-                              <span className={classes.content}>
-                                {' '}
-                                <Link
-                                  className={classes.link}
-                                  to={`${attribute.actualLink}${programData[updatedAttributesData[attribute.actualLinkId].dataField]}`}
-                                >
-                                  {programData[attribute.dataField]}
-                                </Link>
-                                {' '}
-                              </span>
-                            </div>
-                          </div>
-                        )
-                        : attribute.externalLink
-                          ? (
-                            <div>
-                              <span
-                                className={classes.detailContainerHeader}
-                              >
-                                {attribute.label}
-                              </span>
-                              <div>
-                                <span className={classes.content}>
-                                  {' '}
-                                  <a
-                                    href={`${attribute.actualLink}${programData[updatedAttributesData[attribute.actualLinkId].dataField]}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={classes.link}
-                                  >
-                                    {programData[attribute.dataField]}
-                                  </a>
-                                  <img
-                                    src={externalLinkIcon.src}
-                                    alt={externalLinkIcon.alt}
-                                    className={classes.externalLinkIcon}
-                                  />
-                                  {' '}
-                                </span>
-                              </div>
-                            </div>
-                          )
-                          : attribute.internalLinkToLabel
-                            ? (
-                              <div>
-                                <span
-                                  className={classes.detailContainerHeaderLink}
-                                >
-                                  <a href={`${programData[attribute.dataField]}`} rel="noopener noreferrer">{attribute.label}</a>
-                                </span>
-                              </div>
-                            )
-                            : attribute.externalLinkToLabel
-                              ? (
-                                <div>
-                                  <span
-                                    className={classes.detailContainerHeaderLink}
-                                  >
-                                    <a href={`${programData[attribute.dataField]}`} target="_blank" rel="noopener noreferrer">{attribute.label}</a>
-                                    <img
-                                      src={externalLinkIcon.src}
-                                      alt={externalLinkIcon.alt}
-                                      className={classes.externalLinkIcon}
-                                    />
-                                  </span>
-                                </div>
-                              )
-                              : (
-                                <div>
-                                  <span
-                                    className={classes.detailContainerHeader}
-                                  >
-                                    {attribute.label}
-                                  </span>
-                                  <div>
-                                    <span className={classes.content}>
-                                      {' '}
-                                      {programData[attribute.dataField]}
-                                      {' '}
-                                    </span>
-                                  </div>
-                                </div>
-                              )
-}
-                    </div>
-                  </Grid>
-                ))}
-
-              </Grid>
+          <Grid container spacing={8}>
+            <Grid item lg={8} md={8} sm={8} xs={12} className={classes.detailContainerLeft}>
+              <span className={classes.content}>
+                {programDetail.program_full_description
+                  ? programDetail.program_full_description.split('**').map((item, i) => <p key={i}>{item}</p>) : null}
+              </span>
             </Grid>
+            {programConfig && (
+            <Grid item lg={4} md={4} sm={4} xs={12} className={classes.detailContainerRight}>
+              <img
+                src={programImage}
+                alt="dog for program detail"
+                className={classes.dogImage}
+              />
 
-            <Grid
-              item
-              lg={5}
-              sm={6}
-              xs={12}
-            >
-              <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
-                { rightPanel.widget[0].display ? (
-                  <Grid
-                    item
-                    xs={12}
-                    className={classes.marginTopN37}
-                  >
-                    <Widget
-                      title={rightPanel.widget[0].label}
-                      upperTitle
-                      bodyClass={classes.fullHeightBody}
-                      className={classes.card}
-                      color={theme.palette.dodgeBlue.main}
-                      titleClass={classes.widgetTitle}
-                      noPaddedTitle
-                    >
-                      <CustomActiveDonut
-                        data={programData[rightPanel.widget[0].dataField] || []}
-                        width={400}
-                        height={225}
-                        innerRadius={50}
-                        outerRadius={75}
-                        cx="50%"
-                        cy="50%"
-                        fontSize="12px"
-                        colors={colors}
-                        titleLocation="bottom"
-                        titleAlignment="center"
-                      />
-                    </Widget>
-                  </Grid>
-                ) : ''}
-
-                { rightPanel.files[0].display ? (
-                  <Grid item xs={12}>
-                    <div className={classes.fileContainer}>
-                      <span
-                        className={classes.detailContainerHeader}
-                      >
-                        {rightPanel.files[0].label}
-                      </span>
-                      <div className={classes.fileContent}>
-                        <div className={classes.fileIcon}>
-                          <img
-                            src={rightPanel.files[0].fileIconSrc}
-                            alt={rightPanel.files[0].fileIconAlt}
-                          />
-                        </div>
-                        <div className={classes.fileCount}>
-                          {programData[rightPanel.files[0].dataField]}
-                        </div>
-                      </div>
-                    </div>
-                  </Grid>
-                ) : ''}
-              </Grid>
             </Grid>
-
+            )}
           </Grid>
         </div>
       </div>
-      { table.display ? (
-        <div id="table_program_detail" className={classes.tableContainer}>
+      <div className={classes.tableContainer}>
 
-          <div className={classes.tableDiv}>
-            <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>{table.title}</span>
-            </div>
-            <Grid item xs={12}>
-              <Grid container spacing={8}>
-                <Grid item xs={12}>
-                  <Typography>
-                    <CustomDataTable
-                      data={data.programDetail[table.dataField]}
-                      columns={getColumns(table, classes, data, externalLinkIcon, '/cases', redirectToArm)}
-                      options={getOptions(table, classes)}
-                    />
-                  </Typography>
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography />
-                </Grid>
+        <div className={classes.tableDiv}>
+          <div className={classes.tableTitle}>
+            <span className={classes.tableHeader}>STUDIES IN THIS PROGRAM</span>
+          </div>
+          <Grid item xs={12}>
+            <Grid container spacing={8}>
+              <Grid item xs={12} id="table_studies">
+                <CustomDataTable
+                  data={data.studiesByProgramId}
+                  columns={getColumns(table, classes, data, '', '/cases', redirectTo)}
+                  options={getOptions(table, classes)}
+                />
               </Grid>
             </Grid>
-          </div>
+          </Grid>
         </div>
-      ) : ''}
+      </div>
     </>
   );
 };
 
 const styles = (theme) => ({
-  firstColumn: {
-    maxWidth: '45%',
-  },
-  secondColumn: {
-    maxWidth: '30%',
-  },
-  thirdColumn: {
-    maxWidth: '25%',
-  },
-  widgetTitle: {
-    color: '#0296c9',
-    textTransform: 'uppercase',
-    fontFamily: 'Lato !important',
-    fontWeight: '500 !important',
-    fontSize: '17px !important',
-    letterSpacing: '0.025em',
-  },
-  borderLeft: {
-    borderLeft: '#81A6BA 1px solid',
-    paddingLeft: '25px !important',
-  },
   link: {
-    textDecoration: 'none',
     fontWeight: 'bold',
-    color: '#7747FF',
+    textDecoration: 'none',
+    color: '#DC762F',
     '&:hover': {
       textDecoration: 'underline',
     },
   },
+  dogImage: {
+    width: '100%',
+    paddingTop: '15px',
+  },
   paddingLeft8: {
-    paddingLeft: '8px',
+    paddingLeft: '12px',
   },
   paddingBottm17: {
     paddingBottm: '17px',
   },
   container: {
-    paddingTop: '50px',
-    fontFamily: theme.custom.fontFamily,
-    paddingLeft: '32px',
-    paddingRight: '32px',
-    background: '#FFFF',
-    paddingBottom: '16px',
+    paddingTop: '120px',
+    fontFamily: 'Raleway, sans-serif',
+    background: 'white',
   },
   content: {
-    fontSize: '15px',
-    fontFamily: theme.custom.fontFamily,
-    lineHeight: '14px',
+    fontSize: '12px',
+    lineHeight: '17px',
+  },
+  marginTop23: {
+    marginTop: '23px',
   },
   warning: {
     color: theme.palette.warning.main,
@@ -387,57 +168,51 @@ const styles = (theme) => ({
     ...theme.mixins.toolbar,
   },
   root: {
-    fontFamily: theme.custom.fontFamily,
+    textTransform: 'uppercase',
+    fontFamily: '"Open Sans", sans-serif',
     fontSize: '9px',
     letterSpacing: '0.025em',
     color: '#000',
-    background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '21px',
-    paddingRight: '35px',
-    borderBottom: '#4B619A 10px solid',
+    paddingLeft: '32px',
+    paddingRight: '32px',
+    borderBottom: '#81a6b9 4px solid',
     height: '80px',
-    maxWidth: '1340px',
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
+
   headerTitle: {
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
-    marginLeft: '85px',
-    width: 'calc(100% - 265px)',
+    marginLeft: '110px',
+    paddingLeft: '3px',
   },
   headerMainTitle: {
-    '& > span': {
-      fontWeight: '300',
-      letterSpacing: '0.017em',
-    },
-
-    '& > span > span': {
-      fontWeight: 'bold',
-      letterSpacing: '0.025em',
-    },
-    fontFamily: 'Lato',
-    letterSpacing: '0.025em',
-    color: '#274FA5 ',
-    fontSize: '26px',
-    lineHeight: '24px',
-    paddingLeft: '0px',
-
+    fontFamily: theme.custom.fontFamilySans,
+    fontWeight: 'bold',
+    letterSpacing: '0.017em',
+    color: '#1db634',
+    fontSize: '30px',
+    lineHeight: '18px',
+    paddingLeft: '5px',
+    paddingBottom: '8px',
+  },
+  headerMSubTitle: {
+    paddingTop: '8px',
   },
   headerSubTitleCate: {
-    color: '#00B0BD',
-    fontWeight: '300',
-    fontFamily: 'Poppins',
+    color: '#606061',
+    fontWeight: 'bold',
+    fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '15px',
+    fontSize: '12px',
+    maxHeight: '30px',
     overflow: 'hidden',
-    lineHeight: '24px',
-    paddingLeft: '2px',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    paddingRight: '200px',
+    paddingLeft: '3px',
   },
   headerSubTitleContent: {
     color: '#000000',
@@ -445,235 +220,93 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '14px',
+    fontSize: '12px',
+    paddingLeft: '3px',
+  },
 
-  },
-  headerMSubTitle: {
-    paddingTop: '3px',
-  },
-  breadCrumb: {
-    color: '#00B0BD',
-  },
-  headerButton: {
-    fontFamily: theme.custom.fontFamily,
-    float: 'right',
-    marginTop: '15px',
-    width: '104px',
-    height: '33px',
-    background: '#F6F4F4',
-    textAlign: 'center',
-    marginRight: '-20px',
-
-  },
-  headerButtonLinkSpan: {
-    fontFamily: theme.custom.fontFamily,
-    height: '50px',
-    background: '#F5F3EE',
-    width: '200px',
-    fontSize: '8pt',
-  },
-  headerButtonLinkText: {
-    fontFamily: theme.custom.fontFamily,
-    color: '#7747FF',
-    fontSize: '8pt',
-    textTransform: 'uppercase',
-  },
-  headerButtonColumn: {
-    color: '#000000',
-  },
-  headerButtonLinkNumber: {
-    color: '#000000',
-    fontFamily: theme.custom.fontFamily,
-    borderBottom: 'solid #6690AC',
-    lineHeight: '30px',
-    paddingBottom: '3px',
-    margin: '0 4px',
-    fontSize: '8pt',
-  },
   logo: {
     position: 'absolute',
     float: 'left',
-    marginLeft: '-23px',
-    marginTop: '-21px',
-    width: '107px',
-    filter: 'drop-shadow(-3px 2px 6px rgba(27,28,28,0.29))',
+    marginTop: '-14px',
+    width: '100px',
   },
   detailContainer: {
-    maxWidth: '1340px',
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
-    marginBlockEnd: '24px',
-    paddingTop: '24px',
-    paddingLeft: '5px',
-    fontFamily: theme.custom.fontFamily,
+    paddingTop: '12px',
+    paddingLeft: '64px',
+    paddingRight: '64px',
+    fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
-    height: '525px',
-
   },
   detailContainerHeader: {
     textTransform: 'uppercase',
-    fontFamily: 'Lato',
+    fontFamily: theme.custom.fontFamilySans,
     fontSize: '17px',
-    letterSpacing: '0.025em',
-    color: '#0296C9',
-  },
-  detailContainerHeaderLink: {
-    fontFamily: 'Raleway',
-    fontSize: '14px',
-    letterSpacing: '0.025em',
-    color: '#0077E3',
+    letterSpacing: '0.017em',
+    color: '#1db634',
   },
   detailContainerBottom: {
     borderTop: '#81a6b9 1px solid',
-    marginTop: '13px',
-    padding: ' 35px 0 63px 2px !important',
+    marginTop: '8px',
+    padding: ' 35px 2px 63px 2px !important',
   },
   detailContainerLeft: {
-    display: 'block',
-    padding: '5px  20px 5px 0px !important',
-    minHeight: '500px',
-    maxHeight: '500px',
-    overflowY: 'auto',
-    overflowX: 'hidden',
-    width: '103.9%',
-    margin: '0px -8px -5px -21px',
-  },
-  borderRight: {
-    borderRight: '#81a6b9 1px solid',
+    padding: '20px 0px 30px 2px !important',
+    minHeight: '100px',
   },
   detailContainerRight: {
-    padding: '5px 0 5px 36px !important',
-    minHeight: '500px',
-    maxHeight: '500px',
-    overflowY: 'auto',
-    overflowX: 'hidden',
-    height: '500px',
-    width: '105%',
-    borderLeft: '1px solid #81A6BA',
-    borderRight: '1px solid #81A6BA',
-    marginLeft: '-26px',
+    padding: '20px 20px 30px 20px !important',
+    minHeight: '330px',
   },
-
   tableContainer: {
     background: '#f3f3f3',
   },
   tableHeader: {
-    paddingLeft: '30px',
-  },
-  paddingTop12: {
-    paddingTop: '12px',
+    paddingLeft: '64px',
   },
   tableDiv: {
-    maxWidth: '1340px',
-    margin: 'auto',
-    paddingTop: '50px',
-    paddingLeft: '0px',
+    padding: '31px 0px',
+    maxWidth: theme.custom.maxContentWidth,
+    margin: '10px auto',
   },
-
   headerButtonLink: {
     textDecoration: 'none',
-    lineHeight: '14px',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    color: '#c32c2e',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
   },
   button: {
-    borderRadius: '22px',
-    padding: '0 22px',
-    width: '150px',
-    height: '35px',
-    lineHeight: '14px',
+    borderRadius: '10px',
+    width: '178px',
+    height: '27px',
+    lineHeight: '18px',
     fontSize: '10px',
     color: '#ffffff',
     textTransform: 'uppercase',
     backgroundColor: '#ff8a00',
-    fontFamily: theme.custom.fontFamily,
+    fontFamily: theme.custom.fontFamilySans,
     '&:hover': {
       backgroundColor: '#ff8a00',
     },
   },
   detailContainerItems: {
-    paddingTop: '7px',
-    paddingLeft: '7px',
-  },
-  detailContainerItem: {
-    paddingTop: '15px !important',
+    paddingTop: '5px',
+    paddingLeft: '17px',
   },
   title: {
-    color: '#0296c9',
-    fontFamily: theme.custom.fontFamily,
+    color: '#9d9d9c',
+    fontFamily: theme.custom.fontFamilySans,
     fontSize: '12px',
     letterSpacing: '0.017em',
     fontWeight: '600',
     textTransform: 'uppercase',
   },
   tableTitle: {
-    textTransform: 'uppercase',
-    fontFamily: 'Lato',
+    fontFamily: theme.custom.fontFamilySans,
     fontSize: '17px',
-    letterSpacing: '0.025em',
-    color: '#0296c9',
-    paddingBottom: '20px',
-  },
-  fileContainer: {
-    paddingTop: '4px',
-  },
-  fileContent: {
-    backgroundColor: '#F3F3F3',
-    borderRadius: '50%',
-    height: '162px',
-    width: '162px',
-    paddingLeft: '48px',
-    marginLeft: '36%',
-    marginTop: '25px',
-  },
-  fileIcon: {
-    '& img': {
-      width: '163%',
-      padding: '21px 120px 0px 0px',
-    },
-  },
-  fileCount: {
-    lineHeight: '31.7px',
-    fontSize: '30px',
-    color: '#7A297D',
-    fontWeight: '600',
-    borderBottom: '#7A297D solid 5px',
-    fontFamily: 'Oswald',
-    width: 'max-content',
-    padding: '15px 0px 12px 0px',
-  },
-  paddingTop32: {
-    paddingTop: '36px !important',
-  },
-  marginTopN37: {
-    marginTop: '15px',
-  },
-  tableCell1: {
-    paddingLeft: '25px',
-    width: '200px',
-  },
-  tableCell2: {
-    width: '370px',
-  },
-  tableCell3: {
-    width: '370px',
-  },
-  tableCell4: {
-    width: '160px',
-  },
-  tableCell5: {
-    width: '160px',
-  },
-  externalLinkIcon: {
-    width: '16px',
-    verticalAlign: 'sub',
-    marginLeft: '4px',
+    letterSpacing: '0.017em',
+    color: '#1db634',
   },
 });
 

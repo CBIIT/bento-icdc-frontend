@@ -14,7 +14,7 @@ const cobolt = '#FBB35D';
 const warning = '#ff7f0b';
 const success = '#3CD4A0';
 const info = '#3f2b2f';
-const tableHeader = '#ffffff';
+const tableHeader = '#f5f5f5';
 const black = 'black';
 const lochmara = '#B7C5CF';
 const lightenRate = 7.5;
@@ -361,10 +361,10 @@ export default {
         backgroundColor: 'transparent !important',
         '&:nth-child(even)': {
           color: '#004C73',
+          background: '#f3f3f3 !important',
         },
         '&:nth-child(odd)': {
           color: '#004C73 !important',
-          background: '#f3f3f3 !important',
         },
       },
     },

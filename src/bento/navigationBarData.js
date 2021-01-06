@@ -12,22 +12,20 @@ export const navBarstyling = {
 };
 
 export const navBarData = [
-  // A maximum of 5 nav bar items are allowed
-  // A maximum of 9 dropDownLinks items are allowed
   {
     labelText: 'home',
     type: 'link',
     link: '/home',
   },
   {
-    labelText: 'programs',
-    type: 'link',
-    link: '/programs',
-  },
-  {
     labelText: 'cases',
     type: 'link',
     link: '/cases',
+  },
+  {
+    labelText: 'programs',
+    type: 'link',
+    link: '/programs',
   },
   {
     labelText: 'Studies',

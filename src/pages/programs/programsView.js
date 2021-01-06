@@ -3,93 +3,72 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { CustomDataTable, getOptions, getColumns } from 'bento-components';
-import {
-  table, programListingIcon, externalLinkIcon,
-} from '../../bento/programData';
-import Stats from '../../components/Stats/AllStatsController';
-import { Typography } from '../../components/Wrappers/Wrappers';
-import {
-  singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
-} from '../dashboardTab/store/dashboardReducer';
+import { cn } from 'bento-components';
+import { pageData } from '../../bento/programData';
+import ProgramCard from '../../components/ProgramCard/programCard';
 
-const Programs = ({ classes, data }) => {
-  const redirectTo = (program) => {
-    setSideBarToLoading();
-    setDashboardTableLoading();
-    singleCheckBox([{
-      datafield: 'programs',
-      groupName: 'Program',
-      isChecked: true,
-      name: program.rowData[0],
-      section: 'Filter By Cases',
-    }]);
-  };
+const Programs = ({ classes, data }) => (
+  <>
+    <div className={classes.container}>
+      <div className={classes.header}>
+        <div className={classes.logo}>
+          <img
+            src={pageData.headerIcon}
+            alt="ICDC case detail header logo"
+          />
 
-  return (
-    <>
-      <Stats />
-      <div className={classes.tableContainer}>
-        <div className={classes.container}>
-          <div className={classes.header}>
-            <div className={classes.logo}>
-              <img
-                src={programListingIcon.src}
-                alt={programListingIcon.alt}
-              />
-
-            </div>
-            <div className={classes.headerTitle}>
-              <div className={classes.headerMainTitle}>
-                <span>
-                  <Typography>
-                    <span className={classes.headerMainTitle}>{table.title}</span>
-                  </Typography>
-                </span>
-              </div>
-            </div>
+        </div>
+        <div className={classes.headerTitle}>
+          <div className={cn(classes.headerMainTitle, classes.marginTop23)}>
+            <span>
+              {pageData.headerTitle }
+            </span>
           </div>
-
-          { table.display ? (
-            <div id="table_programs" className={classes.tableDiv}>
-              <Grid container>
-                <Grid item xs={12}>
-                  <CustomDataTable
-                    data={data[table.dataField]}
-                    columns={getColumns(table, classes, data, externalLinkIcon, '/cases', redirectTo)}
-                    options={getOptions(table, classes)}
-                  />
-                </Grid>
-              </Grid>
-            </div>
-          ) : ''}
         </div>
 
       </div>
-    </>
-  );
-};
+
+      <div className={classes.detailContainer}>
+
+        <Grid container className={classes.gridContainer}>
+          {data.program.map((programCardData) => (
+            <Grid item lg={12} md={12} sm={12} xs={12} key={programCardData.program_name}>
+              <ProgramCard data={programCardData} />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+    </div>
+  </>
+);
 
 const styles = (theme) => ({
-
-  link: {
-    textDecoration: 'none',
-    fontWeight: 'bold',
-    color: '#7747FF',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
+  dogImage: {
+    width: '100%',
+    paddingTop: '15px',
   },
-  card: {
-    minHeight: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+  paddingLeft8: {
+    paddingLeft: '12px',
+  },
+  paddingBottm17: {
+    paddingBottm: '17px',
+  },
+  gridContainer: {
+    width: 'calc(100% + 8px) !important',
   },
   container: {
-    margin: 'auto',
-    maxWidth: '1440px',
-    paddingLeft: '36px',
-    paddingRight: '36px',
+    paddingTop: '120px',
+    fontFamily: 'Raleway, sans-serif',
+    paddingLeft: '32px',
+    paddingRight: '32px',
+    background: '#f3f3f3',
+
+  },
+  marginTop23: {
+    marginTop: '23px',
+  },
+  warning: {
+    color: theme.palette.warning.main,
   },
   paper: {
     textAlign: 'center',
@@ -98,62 +77,146 @@ const styles = (theme) => ({
     ...theme.mixins.toolbar,
   },
   root: {
-    fontFamily: '"Lato Regular","Open Sans", sans-serif',
-    fontSize: '9pt',
+    textTransform: 'uppercase',
+    fontFamily: '"Open Sans", sans-serif',
+    fontSize: '9px',
     letterSpacing: '0.025em',
     color: '#000',
-    background: '#eee',
+    background: '#f3f3f3',
   },
   header: {
-    background: '#eee',
-    paddingLeft: '20px',
-    paddingRight: '50px',
-    borderBottom: '#42779A 10px solid',
-    height: '128px',
-    paddingTop: '35px',
-  },
-  headerMainTitle: {
-    fontFamily: 'Lato',
-    letterSpacing: '0.025em',
-    color: '#274FA5',
-    fontSize: '24pt',
-    position: 'absolute',
-    marginTop: '16px',
-    lineHeight: '25px',
-    marginLeft: '-3px',
+    paddingLeft: '32px',
+    borderBottom: '#81a6b9 4px solid',
+    height: '80px',
+    maxWidth: theme.custom.maxContentWidth,
+    margin: 'auto',
+    marginLeft: '5px',
+    marginRight: '-4px',
   },
 
   headerTitle: {
-    maxWidth: '1440px',
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
-    marginLeft: '90px',
+    marginLeft: '110px',
+    paddingLeft: '3px',
   },
+  headerMainTitle: {
+    fontFamily: theme.custom.fontFamilySans,
+    fontWeight: 'bold',
+    letterSpacing: '0.017em',
+    color: '#1db634',
+    fontSize: '30px',
+    lineHeight: '18px',
+    paddingLeft: '5px',
+    paddingBottom: '8px',
+  },
+  headerMSubTitle: {
+    paddingTop: '8px',
+  },
+  headerSubTitleCate: {
+    color: '#606061',
+    fontWeight: 'bold',
+    fontFamily: theme.custom.fontFamilyRaleway,
+    textTransform: 'uppercase',
+    letterSpacing: '0.023em',
+    fontSize: '12px',
+    maxHeight: '30px',
+    overflow: 'hidden',
+    paddingLeft: '3px',
+  },
+  headerSubTitleContent: {
+    color: '#000000',
+    fontWeight: 'bold',
+    fontFamily: theme.custom.fontFamilyRaleway,
+    textTransform: 'uppercase',
+    letterSpacing: '0.023em',
+    fontSize: '12px',
+    paddingLeft: '3px',
+  },
+
   logo: {
     position: 'absolute',
     float: 'left',
-    marginLeft: '-17px',
+    marginTop: '-14px',
     width: '100px',
-    filter: 'drop-shadow(-3px 2px 6px rgba(27,28,28,0.29))',
+  },
+  detailContainer: {
+    maxWidth: theme.custom.maxContentWidth,
+    margin: 'auto',
+    paddingTop: '12px',
+    fontFamily: theme.custom.fontFamilySans,
+    letterSpacing: '0.014em',
+    color: '#000000',
+    size: '12px',
+    lineHeight: '23px',
+  },
+  detailContainerHeader: {
+    textTransform: 'uppercase',
+    fontFamily: theme.custom.fontFamilySans,
+    fontSize: '17px',
+    letterSpacing: '0.017em',
+    color: '#1db634',
+  },
+  detailContainerBottom: {
+    borderTop: '#81a6b9 1px solid',
+    marginTop: '8px',
+    padding: ' 35px 2px 63px 2px !important',
+  },
+  detailContainerLeft: {
+    padding: '20px 0px 30px 2px !important',
+    minHeight: '330px',
+  },
+  detailContainerRight: {
+    padding: '20px 20px 30px 20px !important',
+    minHeight: '330px',
   },
   tableContainer: {
-    background: '#eee',
-    paddingBottom: '50px',
+    background: '#f3f3f3',
+  },
+  tableHeader: {
+    paddingLeft: '64px',
   },
   tableDiv: {
-    margin: 'auto',
+    padding: '31px 0px',
+    maxWidth: theme.custom.maxContentWidth,
+    margin: '10px auto',
   },
-  tableCell6: {
-    width: '120px',
+  headerButtonLink: {
+    textDecoration: 'none',
   },
-  externalLinkIcon: {
-    width: '14.5px',
-    verticalAlign: 'sub',
-    marginLeft: '4px',
-    paddingBottom: '2px',
+  button: {
+    borderRadius: '10px',
+    width: '178px',
+    height: '27px',
+    lineHeight: '18px',
+    fontSize: '10px',
+    color: '#ffffff',
+    textTransform: 'uppercase',
+    backgroundColor: '#ff8a00',
+    fontFamily: theme.custom.fontFamilySans,
+    '&:hover': {
+      backgroundColor: '#ff8a00',
+    },
   },
-  linkSpan: {
-    display: '-webkit-box',
+  detailContainerItems: {
+    paddingTop: '5px',
+    paddingLeft: '17px',
+  },
+  title: {
+    color: '#9d9d9c',
+    fontFamily: theme.custom.fontFamilySans,
+    fontSize: '12px',
+    letterSpacing: '0.017em',
+    fontWeight: '600',
+    textTransform: 'uppercase',
+  },
+  tableTitle: {
+    fontFamily: theme.custom.fontFamilySans,
+    fontSize: '17px',
+    letterSpacing: '0.017em',
+    color: '#1db634',
+    paddingBottom: '20px',
   },
 });
 

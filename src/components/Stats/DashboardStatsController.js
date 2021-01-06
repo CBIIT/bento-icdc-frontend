@@ -5,7 +5,7 @@ import StatsView from './StatsView';
 
 const Stats = () => {
   const data = useSelector((state) => (
-    state.dashboard
+    state.dashboardTab
     && state.dashboardTab.stats
       ? state.dashboardTab.stats : []));
 
