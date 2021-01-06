@@ -8,7 +8,7 @@ export const statsStyling = {
     background: '#CBE2EE',
   },
   statsGroup: {
-    margin: '4px 120px',
+    margin: '4px 100px',
   },
   statsIcon: {
     width: '45px',
