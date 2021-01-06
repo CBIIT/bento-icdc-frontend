@@ -240,7 +240,7 @@ type ProgramStudies {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.3'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.4'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
@@ -1034,6 +1034,7 @@ type QueryType {
   programsAndStudies(case_ids: [String] = []): [ProgramStudies] @cypher(statement: """
     MATCH (p:program)
     OPTIONAL MATCH (p)<-[*]-(c:case)
+    WITH DISTINCT c, p
       WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
     WITH p, COUNT(DISTINCT(c)) as caseSize
     MATCH (p)<-[:member_of]-(s:study)<-[*]-(c:case)
