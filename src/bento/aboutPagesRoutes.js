@@ -4,7 +4,7 @@ export default [
   '/DGAB',
   '/BPSC',
   '/crdc',
-  '/model',
+  '/icdc-data-model',
   '/developers',
   '/support',
   '/submit',
