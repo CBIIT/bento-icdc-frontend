@@ -165,7 +165,7 @@ const tabController = (classes) => {
     @output [f.uuid]
   */
   function Type2OnRowsSelect(data, allRowsSelected) {
-    return allRowsSelected.map((row) => data[row.dataIndex].file_id);
+    return allRowsSelected.map((row) => data[row.dataIndex].file_uuid);
   }
 
   /* on row select event

@@ -7,6 +7,27 @@ export const statsStyling = {
     height: '62px',
     background: '#CBE2EE',
   },
+  statsGroup: {
+    margin: '4px 100px',
+  },
+  statsIcon: {
+    width: '45px',
+    height: '45px',
+  },
+  statCount: {
+    color: '#4A4A4A',
+    fontFamily: 'sans-serif',
+    fontSize: '16.8px',
+    margin: '3px 0px 3px 15px',
+    float: 'left',
+  },
+  statTitle: {
+    color: '#0B3556',
+    fontFamily: 'sans-serif',
+    fontSize: '14px',
+    textTransform: 'none',
+    float: 'none',
+  },
 };
 
 export const globalStatsData = [

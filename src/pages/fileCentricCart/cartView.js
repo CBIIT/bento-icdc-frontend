@@ -1,8 +1,10 @@
 import React from 'react';
 import {
-  Grid, withStyles, Dialog, DialogActions, DialogContent, DialogContentText, IconButton,
+  Grid, withStyles, Dialog, DialogActions, DialogContent, DialogContentText,
+  IconButton, Link,
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import {
   getColumns, getOptions, getDefaultCustomFooter,
 } from 'bento-components';
@@ -11,7 +13,12 @@ import { DeleteOutline as DeleteOutlineIcon, ArrowDropDown as ArrowDropDownIcon 
 import CustomDataTable from '../../components/serverPaginatedTable/serverPaginatedTable';
 import client from '../../utils/graphqlClient';
 import {
-  myFilesPageData, table, manifestData, GET_MY_CART_DATA_QUERY, GET_MY_CART_DATA_QUERY_DESC,
+  myFilesPageData,
+  table,
+  manifestData,
+  externalLinkIcon,
+  GET_MY_CART_DATA_QUERY,
+  GET_MY_CART_DATA_QUERY_DESC,
 } from '../../bento/fileCentricCartWorkflowData';
 import { deleteFromCart } from './store/cart';
 import { downloadJson } from './utils';
@@ -20,7 +27,7 @@ import DialogThemeProvider from './dialogThemeConfig';
 import TableThemeProvider from './cartTableThemeConfig';
 
 const cartView = ({
-  classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection,
+  classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading,
 }) => {
   const [modalStatus, setModalStatus] = React.useState(false);
   const [TopMessageStatus, setTopMessageStatus] = React.useState(false);
@@ -69,6 +76,21 @@ const cartView = ({
       myFilesPageData.manifestFileName,
       manifestData,
     );
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  function divStyle() {
+    const css = {
+      position: 'absolute',
+      marginTop: '-51px',
+      marginLeft: '30px',
+      display: 'none',
+      padding: '0 16px',
+    };
+    if (isLoading === false) {
+      css.display = 'block';
+    }
+    return css;
   }
 
   const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_id');
@@ -164,84 +186,125 @@ const cartView = ({
           </DialogActions>
         </Dialog>
       </DialogThemeProvider>
-      <div className={classes.myFilesWrapper}>
-        <Grid item xs={12}>
-          <div className={classes.header}>
-            <div className={classes.logo}>
-              <img
-                src={myFilesPageData.headerIconSrc}
-                alt={myFilesPageData.headerIconAlt}
-              />
+      {/* Section: Header */}
+      <Grid item xs={12}>
+        <div className={classes.header}>
+          <div className={classes.logo}>
+            <img
+              src={myFilesPageData.headerIconSrc}
+              alt={myFilesPageData.headerIconAlt}
+            />
 
+          </div>
+          <div className={classes.headerTitle}>
+            <div className={classes.headerMainTitle}>
+              <span>
+                <span>{myFilesPageData.mainTitle}</span>
+              </span>
+              <span className={classes.headerMainSubTitle}>
+                {' '}
+                {' '}
+                {myFilesPageData.subTitle}
+              </span>
             </div>
-            <div className={classes.headerTitle}>
-              <div className={classes.headerMainTitle}>
-                {myFilesPageData.mainTitle}
-                <span className={classes.headerMainTitleTwo}>
+          </div>
+        </div>
+      </Grid>
+
+      {/* Section: Body */}
+      <Grid item xs={12}>
+        <div id="table_selected_files" className={classes.bodyWrapper}>
+          <div className={classes.tableWrapper}>
+
+            {/* Section: Table */}
+            <div className={classes.tableStyle}>
+              <TableThemeProvider>
+                <CustomDataTable
+                  data={_.cloneDeep(data)}
+                  columns={columns}
+                  options={options}
+                  className={classes.tableStyle}
+                  count={fileIDs.length || 0}
+                  overview={GET_MY_CART_DATA_QUERY}
+                  overviewDesc={GET_MY_CART_DATA_QUERY_DESC}
+                  paginationAPIField="filesInList"
+                  paginationAPIFieldDesc="filesInListDesc"
+                  queryCustomVaribles={{ file_ids: fileIDs }}
+                  defaultSortCoulmn={defaultSortCoulmn}
+                  defaultSortDirection={defaultSortDirection}
+                />
+              </TableThemeProvider>
+            </div>
+
+            {/* Section: Bottom controls */}
+            <div className={classes.paddingLeftRight}>
+              <div className={classes.message}>
+                <span>
+                  To access and analyze files: select and remove unwanted files,
+                  click the “Download Manifest” button, and upload the resulting
+                  Manifest file to your
                   {' '}
+                  <Link target="_blank" className={classes.link} href="http://www.cancergenomicscloud.org/">
+                    Seven Bridges Genomics
+                  </Link>
+                  <img
+                    src={externalLinkIcon.src}
+                    alt={externalLinkIcon.alt}
+                    className={classes.linkIcon}
+                  />
                   {' '}
-                  {myFilesPageData.subTitle}
+                  account.
                 </span>
               </div>
-            </div>
-          </div>
-
-          <div className={classes.topButtonGroup}>
-            <button
-              type="button"
-              className={classes.downloadButton}
-              onClick={() => prepareDownload()}
-            >
-              {myFilesPageData.downButtonText}
-              {' '}
-            </button>
-            <IconButton aria-label="help" onFocus={() => toggleMessageStatus('top', 'open')} onMouseEnter={() => toggleMessageStatus('open')} onMouseOver={() => toggleMessageStatus('open')} onMouseLeave={() => toggleMessageStatus('close')}>
-              <img
-                onMouseEnter={() => toggleMessageStatus('open')}
-                onMouseOver={() => toggleMessageStatus('open')}
-                onFocus={() => toggleMessageStatus('top', 'open')}
-                src={myFilesPageData.tooltipIcon}
-                alt={myFilesPageData.tooltipAlt}
-                className={classes.helpIcon}
-              />
-            </IconButton>
-            { TopMessageStatus ? (
-              <div className={classes.messageTop}>
-                {' '}
-                <Message data={messageData} />
-                {' '}
+              {/* Section: User Comments */}
+              <div className={classes.manifestTextarea}>
+                <TextField
+                  id="multiline-user-coments"
+                  label={myFilesPageData.textareaPlaceholder}
+                  multiline
+                  rows={6}
+                  style={{ minWidth: '550px' }}
+                  className={classes.textField}
+                  margin="dense"
+                  variant="filled"
+                  onChange={(e) => setUserComments(e.target.value)}
+                />
               </div>
-            ) : ''}
-          </div>
-          <div id="table_selected_files" className={classes.tableWrapper}>
-            {}
-            <TableThemeProvider>
-              <CustomDataTable
-                data={_.cloneDeep(data)}
-                columns={columns}
-                options={options}
-                className={classes.tableStyle}
-                count={fileIDs.length || 0}
-                overview={GET_MY_CART_DATA_QUERY}
-                overviewDesc={GET_MY_CART_DATA_QUERY_DESC}
-                paginationAPIField="filesInList"
-                paginationAPIFieldDesc="filesInListDesc"
-                queryCustomVaribles={{ file_ids: fileIDs }}
-                defaultSortCoulmn={defaultSortCoulmn}
-                defaultSortDirection={defaultSortDirection}
-              />
-            </TableThemeProvider>
-            <div className={classes.manifestTextarea}>
-              <textarea
-                id="multiline-user-coments"
-                className={classes.textField}
-                placeholder={myFilesPageData.textareaPlaceholder}
-                onChange={(e) => setUserComments(e.target.value)}
-              />
+
+              {/* Section: Button Group */}
+              <div className={classes.buttonGroup}>
+                <button
+                  type="button"
+                  className={classes.downloadButton}
+                  onClick={() => prepareDownload()}
+                >
+                  {myFilesPageData.downButtonText}
+                  {' '}
+                </button>
+                <IconButton aria-label="help" onFocus={() => toggleMessageStatus('top', 'open')} onMouseEnter={() => toggleMessageStatus('open')} onMouseOver={() => toggleMessageStatus('open')} onMouseLeave={() => toggleMessageStatus('close')}>
+                  <img
+                    onMouseEnter={() => toggleMessageStatus('open')}
+                    onMouseOver={() => toggleMessageStatus('open')}
+                    onFocus={() => toggleMessageStatus('top', 'open')}
+                    src={myFilesPageData.tooltipIcon}
+                    alt={myFilesPageData.tooltipAlt}
+                    className={classes.helpIcon}
+                  />
+                </IconButton>
+                { TopMessageStatus ? (
+                  <div className={classes.messageTop}>
+                    {' '}
+                    <Message data={messageData} />
+                    {' '}
+                  </div>
+                ) : ''}
+              </div>
             </div>
+
           </div>
-        </Grid>
-      </div>
+        </div>
+      </Grid>
+
     </Grid>
 
   );
@@ -251,44 +314,46 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-17.9px',
-    marginLeft: '-10px',
-    width: '101px',
-    filter: 'drop-shadow(-3px 2px 6px rgba(27,28,28,0.29))',
+    marginTop: '14px',
+    width: '100px',
+  },
+  bodyWrapper: {
+    borderBottomLeftRadius: '20px',
+    borderBottomRightRadius: '20px',
+    borderTopLeftRadius: '20px',
+    borderTopRightRadius: '20px',
+    paddingTop: '30px',
+    margin: 'auto auto 30px auto',
+    maxWidth: '1440px',
+    background: '#f3f3f4',
+    paddingBottom: '30px',
   },
   tableWrapper: {
-    margin: 'auto 3% auto 3%',
-    maxWidth: '100%',
-  },
-  tableStyle: {
-    maxWidth: '100%',
+    maxWidth: '1440px',
+    margin: '0 30px',
+    backgroundColor: theme.palette.background.paper,
   },
   customFooterStyle: {
     background: '#f3f3f4',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontWeight: '300',
+    fontWeight: 'bold',
     letterSpacing: '0.017em',
-    color: '#03A383',
-    fontSize: '18pt',
-    lineHeight: '75px',
-    '& $headerMainTitleTwo': {
-      fontWeight: 'bold',
-      letterSpacing: '0.025em',
-    },
+    color: '#ff8a00',
+    fontSize: '25px',
+    lineHeight: '125px',
+    paddingLeft: '5px',
   },
-  headerMainTitleTwo: {
+  headerMainSubTitle: {
 
   },
   headerTitle: {
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
-    marginLeft: '85px',
+    marginLeft: '110px',
     paddingLeft: '3px',
-    marginBottom: '-30px',
-    position: 'absolute',
   },
   tableTitleWizard: {
     width: '400px',
@@ -296,40 +361,26 @@ const styles = (theme) => ({
     paddingTop: '8px',
   },
   header: {
-    borderBottom: '#42779A 10px solid',
-    height: '77px',
-    maxWidth: '100%',
-    marginLeft: '3%',
-    marginRight: '3.05%',
+    paddingLeft: '32px',
+    paddingRight: '32px',
+    borderBottom: '#81a6b9 4px solid',
+    height: '100px',
+    maxWidth: theme.custom.maxContentWidth,
+    margin: 'auto',
+    marginBottom: '25px',
   },
-  myFilesWrapper: {
-    border: '#03A383 4px solid',
-    borderRadius: '35px',
-    marginTop: '200px',
-    marginBottom: '80px',
-    marginLeft: '3%',
-    marginRight: '3%',
-    paddingBottom: '20px',
-    background: 'white',
+  link: {
+    color: '#dc762f',
+    fontWeight: 'bolder',
+    '&:hover': {
+      color: '#dc762f',
+    },
   },
   linkIcon: {
     color: '#dc762f',
     width: '20px',
     verticalAlign: 'sub',
     margin: '0px 0px 0px 2px',
-  },
-  textField: {
-    minWidth: '412px',
-    marginRight: '10px',
-    resize: 'none',
-    borderRadius: '10px',
-    border: '1.5px solid #707070',
-    background: '#EBEBEB',
-    color: '#000',
-    fontFamily: 'Open Sans',
-    height: '170px',
-    padding: '15px',
-    fontSize: '10px',
   },
   helpIcon: {
     verticalAlign: 'top',
@@ -355,11 +406,11 @@ const styles = (theme) => ({
     marginTop: '20px',
   },
   downloadButton: {
-    height: '45px',
+    height: '36px',
     minWidth: '191px',
     color: '#fff',
     boxShadow: 'none',
-    backgroundColor: '#03A383',
+    backgroundColor: '#3890c5',
     padding: '6px 16px',
     fontSize: '0.875rem',
     boxSizing: 'border-box',
@@ -367,7 +418,7 @@ const styles = (theme) => ({
     lineHeight: '1.75',
     fontWeight: '500',
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    borderRadius: '10px',
+    borderRadius: '4px',
     textTransform: 'uppercase',
     border: 'none',
     verticalAlign: 'top',
@@ -461,6 +512,19 @@ const styles = (theme) => ({
     width: '110px',
     height: '48px',
     padding: '5px 0px',
+  },
+  message: {
+    color: '#000000',
+    fontSize: '15px',
+    fontFamily: '"Open Sans", sans-serif',
+    lineHeight: '22px',
+    marginBottom: '5px',
+  },
+  paddingLeftRight: {
+    padding: '0 16px',
+  },
+  buttonGroup: {
+    paddingBottom: '10px',
   },
 });
 export default withStyles(styles, { withTheme: true })(cartView);

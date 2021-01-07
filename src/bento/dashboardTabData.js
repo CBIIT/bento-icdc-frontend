@@ -58,68 +58,57 @@ export const tabContainers = [
       {
         dataField: 'study_code',
         header: 'Study Code',
-        sort: 'asc',
         link: '/study/{study_code}',
         display: true,
       },
       {
         dataField: 'study_type',
         header: 'Study Type',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'breed',
         header: 'Breed',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'diagnosis',
         header: 'Diagnosis',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'stage_of_disease',
         header: 'Stage Of Disease',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'age',
         header: 'Age',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'sex',
         header: 'Sex',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'neutered_status',
         header: 'Neutered Status',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'weight',
         header: 'Weight (kg)',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'response_to_treatment',
         header: 'Response to Treatment',
-        sort: 'asc',
         display: true,
       },
       {
         dataField: 'cohort',
         header: 'Cohort',
-        sort: 'asc',
         display: true,
       },
     ],
@@ -474,6 +463,14 @@ filterCaseCountByFileFormat{
   group,
   count
 }
+programsAndStudies{
+  program
+  caseSize
+  studies{
+      study
+      caseSize
+  }
+}
 caseOverviewPaged(first: 10) {
     case_id
     study_code
@@ -516,6 +513,14 @@ export const FILTER_GROUP_QUERY = gql`
   caseCountByDiseaseSite(case_ids: $case_ids){
     group,
     count
+  }
+  programsAndStudies(case_ids: $case_ids){
+    program
+    caseSize
+    studies{
+        study
+        caseSize
+    }
   }
    
 }
@@ -867,6 +872,24 @@ query fileOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $ord
 }
   `;
 
+export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
+  query fileOverviewDesc($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+    fileOverviewDesc(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {    
+      file_name
+      file_type
+      association
+      file_description
+      file_format
+      file_size
+      case_id
+      breed
+      diagnosis
+      study_code
+      file_uuid
+    }
+  }
+    `;
+
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
@@ -884,6 +907,29 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
     percentage_tumor
     necropsy_sample
     sample_preservation
+    files
+}
+}
+  `;
+
+// --------------- GraphQL query - Retrieve sample tab details --------------
+
+export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
+  query sampleOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+  sampleOverviewDesc(case_ids: $case_ids,, offset: $offset,first: $first, order_by: $order_by) {
+    sample_id
+    case_id
+    breed
+    diagnosis
+    sample_site
+    sample_type
+    sample_pathology
+    tumor_grade
+    sample_chronology
+    percentage_tumor
+    necropsy_sample
+    sample_preservation
+    files
 }
 }
   `;
@@ -909,59 +955,10 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
     }
 }
   `;
-
-export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
-  query subjectOverViewPaged($subject_ids: [String], $first: Int = 10000000){
-    subjectOverViewPaged(subject_ids: $subject_ids, first: $first) {
-        files {
-              file_id
-        }
-    }
-}
-  `;
-export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-query fileOverviewDesc($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-  fileOverviewDesc(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {    
-    file_name
-    file_type
-    association
-    file_description
-    file_format
-    file_size
-    case_id
-    breed
-    diagnosis
-    study_code
-    file_uuid
-  }
-}
-  `;
-
-// --------------- GraphQL query - Retrieve sample tab details --------------
-
-export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
-  query sampleOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  sampleOverviewDesc(case_ids: $case_ids,, offset: $offset,first: $first, order_by: $order_by) {
-    sample_id
-    case_id
-    breed
-    diagnosis
-    sample_site
-    sample_type
-    sample_pathology
-    tumor_grade
-    sample_chronology
-    percentage_tumor
-    necropsy_sample
-    sample_preservation
-}
-}
-  `;
-
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
-  query subjectOverViewPaged($subject_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+  query subjectOverViewPaged($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
     caseOverviewPagedDesc (case_ids: $case_ids, order_by: $order_by, first: $first, offset: $offset) {
       case_id
       study_code
@@ -976,6 +973,16 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
       weight
       response_to_treatment
       disease_site
+    }
+}
+  `;
+
+export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
+  query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
+    subjectOverViewPaged(case_ids: $case_ids, first: $first) {
+        files {
+          file_uuid
+        }
     }
 }
   `;

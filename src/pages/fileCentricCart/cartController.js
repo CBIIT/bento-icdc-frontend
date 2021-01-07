@@ -12,7 +12,7 @@ const cartController = () => {
   const CART_QUERY = defaultSortDirection === 'desc' ? GET_MY_CART_DATA_QUERY_DESC : GET_MY_CART_DATA_QUERY;
 
   const { loading, error, data } = useQuery(CART_QUERY, {
-    variables: { file_ids: ids, order_by: table.defaultSortField || '' },
+    variables: { uuids: ids, order_by: table.defaultSortField || '' },
   });
 
   if (loading) return <CartView isLoading data="undefined" />;

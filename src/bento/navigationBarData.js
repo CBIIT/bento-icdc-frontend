@@ -37,8 +37,40 @@ export const navBarData = [
     type: 'dropdown',
     dropDownLinks: [
       {
-        labelText: 'Bento',
-        link: '/bento',
+        labelText: 'Purpose',
+        link: '/purpose',
+      },
+      {
+        labelText: 'Steering Committee',
+        link: '/steeringCommittee',
+      },
+      {
+        labelText: '-Data Governance Advisory Board(DGAB)',
+        link: '/DGAB',
+      },
+      {
+        labelText: '-Best Practices Sub-Committee(BPSC)',
+        link: '/BPSC',
+      },
+      {
+        labelText: 'CRDC & Analysis',
+        link: '/crdc',
+      },
+      {
+        labelText: 'ICDC Data & Model',
+        link: '/icdc-data-model',
+      },
+      {
+        labelText: 'Developers',
+        link: '/developers',
+      },
+      {
+        labelText: 'Support',
+        link: '/support',
+      },
+      {
+        labelText: 'Submitting Data',
+        link: '/submit',
       },
     ],
   },
@@ -47,6 +79,6 @@ export const navBarData = [
 export const navBarCartData = {
   cartLabel: 'MY Files',
   cartLink: '/fileCentricCart',
-  cartIcon: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/icons/Icon-Cart-Navbar.svg',
+  cartIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-MyCases.svg',
   cartIconAlt: 'cart_logo',
 };

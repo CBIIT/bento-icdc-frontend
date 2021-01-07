@@ -1,16 +1,17 @@
 import React from 'react';
 import { NavBar } from 'bento-components';
+// import { useSelector } from 'react-redux';
 import {
   navBarData, navBarCartData, navBarstyling,
 } from '../../bento/navigationBarData';
 
-const BentoNavBar = () => (
+const BentoNavBar = ({ cartFieldIds }) => (
   <>
     <NavBar
       navBarData={navBarData}
       navBarCartData={navBarCartData}
       navBarstyling={navBarstyling}
-      numberOfCases={0}
+      numberOfCases={cartFieldIds.length || 0}
     />
   </>
 );

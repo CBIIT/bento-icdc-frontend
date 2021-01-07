@@ -1,6 +1,8 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import { LinkBar } from 'bento-components';
+import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
@@ -8,6 +10,10 @@ import Error from '../../pages/error/Error';
 import Home from '../../pages/landing/landingView';
 import Studies from '../../pages/studies/studiesController';
 import Dashboard from '../../pages/dashboardTab/dashboardController';
+import Cart from '../../pages/fileCentricCart/cartController';
+import About from '../../pages/about/aboutController';
+import Programs from '../../pages/programs/programsController';
+import ProgramDetail from '../../pages/programDetail/programDetailController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -19,6 +25,10 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <CssBaseline />
     <HashRouter>
       <>
+
+        <div className={classes.LinkBar}>
+          <LinkBar />
+        </div>
         <Header />
         <NavBar />
         {/* Reminder: Ajay need to replace the ICDC with env variable and
@@ -33,6 +43,12 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/home" component={Home} />
             <Route path="/studies" component={Studies} />
             <Route path="/cases" component={Dashboard} />
+            <Route path="/fileCentricCart" component={Cart} />
+            <Route path="/programs" component={Programs} />
+            <Route path="/program/:id" component={ProgramDetail} />
+            {aboutPageRoutes.map(
+              (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
+            )}
             <Route component={Error} />
           </Switch>
           <Footer data={{ isSidebarOpened }} />
@@ -48,12 +64,16 @@ const styles = (theme) => ({
     maxWidth: '100vw',
     overflowX: 'hidden',
   },
+  LinkBar: {
+    position: 'relative',
+    zIndex: '1222',
+  },
   content: {
     flexGrow: 1,
     // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
     width: 'calc(100%)', // Remove this on adding sidebar
     background: theme.custom.bodyBackGround,
-    marginTop: '185px',
+    marginTop: '200px',
   },
   '@global': {
     '*::-webkit-scrollbar': {
