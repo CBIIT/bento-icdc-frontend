@@ -25,6 +25,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <CssBaseline />
     <HashRouter>
       <>
+
         <div className={classes.LinkBar}>
           <LinkBar />
         </div>
