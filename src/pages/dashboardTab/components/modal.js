@@ -39,7 +39,7 @@ export default function SimpleDialogDemo() {
       const { files } = currentValue;
       // check if file
       if (files && files.length > 0) {
-        return accumulator.concat(files.map((f) => f.file_id));
+        return accumulator.concat(files.map((f) => f));
       }
       return accumulator;
     }, []);

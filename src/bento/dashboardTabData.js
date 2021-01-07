@@ -113,8 +113,8 @@ export const tabContainers = [
       },
     ],
     id: 'case_tab',
-    onRowsSelect: 'type1',
-    disableRowSelection: 'type1',
+    onRowsSelect: 'type3',
+    disableRowSelection: 'type3',
     tableID: 'case_tab_table',
     selectableRows: true,
     tabIndex: '0',
@@ -952,6 +952,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
       weight
       response_to_treatment
       disease_site
+      files
     }
 }
   `;
@@ -973,16 +974,15 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
       weight
       response_to_treatment
       disease_site
+      files
     }
 }
   `;
 
 export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
   query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
-    subjectOverViewPaged(case_ids: $case_ids, first: $first) {
-        files {
-          file_uuid
-        }
+    caseOverviewPaged(case_ids: $case_ids, first: $first) {
+        files 
     }
 }
   `;

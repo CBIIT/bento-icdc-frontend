@@ -253,7 +253,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
       query: GET_ALL_FILEIDS_FOR_SELECT_ALL,
       variables: { case_ids: VARIABLES, first: fileCount },
     })
-    .then((result) => result.data.subjectOverViewPaged);
+    .then((result) => result.data.caseOverviewPaged);
   return fetchResult;
 }
 
