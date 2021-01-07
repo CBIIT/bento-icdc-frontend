@@ -58,7 +58,7 @@ export const navBarData = [
       },
       {
         labelText: 'ICDC Data & Model',
-        link: '/model',
+        link: '/icdc-data-model',
       },
       {
         labelText: 'Developers',
