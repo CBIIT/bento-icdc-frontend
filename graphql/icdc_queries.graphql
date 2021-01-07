@@ -208,6 +208,7 @@ type CaseOverview2 {
   weight: Float
   response_to_treatment: String
   disease_site: String
+  files: [String]
 }
 
 type SearchResult {
@@ -240,7 +241,7 @@ type ProgramStudies {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.4'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.5'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
@@ -1099,7 +1100,9 @@ type QueryType {
     OPTIONAL MATCH (c)<--(demo:demographic)
     OPTIONAL MATCH (c)<--(diag:diagnosis)
     OPTIONAL MATCH (c)-->(co:cohort)
-    WITH DISTINCT c AS c, s, co, demo, diag
+    OPTIONAL MATCH (parent)-[:of_case]->(c)
+    OPTIONAL MATCH (f:file)-->(parent)
+    WITH DISTINCT c AS c, s, co, demo, diag, f
     RETURN c.case_id AS case_id,
          s.clinical_study_designation AS study_code,
          s.clinical_study_type AS study_type,
@@ -1112,7 +1115,8 @@ type QueryType {
          demo.sex AS sex,
          demo.neutered_indicator AS neutered_status,
          demo.weight AS weight,
-         diag.best_response AS response_to_treatment
+         diag.best_response AS response_to_treatment,
+        collect(DISTINCT(f.uuid)) AS files
     ORDER BY
       CASE $order_by
         WHEN "study_code" THEN study_code
@@ -1140,7 +1144,9 @@ type QueryType {
     OPTIONAL MATCH (c)<--(demo:demographic)
     OPTIONAL MATCH (c)<--(diag:diagnosis)
     OPTIONAL MATCH (c)-->(co:cohort)
-    WITH DISTINCT c AS c, s, co, demo, diag
+    OPTIONAL MATCH (parent)-[:of_case]->(c)
+    OPTIONAL MATCH (f:file)-->(parent)
+    WITH DISTINCT c AS c, s, co, demo, diag, f
     RETURN c.case_id AS case_id,
          s.clinical_study_designation AS study_code,
          s.clinical_study_type AS study_type,
@@ -1153,7 +1159,8 @@ type QueryType {
          demo.sex AS sex,
          demo.neutered_indicator AS neutered_status,
          demo.weight AS weight,
-         diag.best_response AS response_to_treatment
+         diag.best_response AS response_to_treatment,
+        collect(DISTINCT(f.uuid)) AS files
     ORDER BY
       CASE $order_by
         WHEN "study_code" THEN study_code
