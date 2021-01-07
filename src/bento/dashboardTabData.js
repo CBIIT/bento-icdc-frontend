@@ -114,7 +114,7 @@ export const tabContainers = [
     ],
     id: 'case_tab',
     onRowsSelect: 'type3',
-    disableRowSelection: 'type2',
+    disableRowSelection: 'type3',
     tableID: 'case_tab_table',
     selectableRows: true,
     tabIndex: '0',
