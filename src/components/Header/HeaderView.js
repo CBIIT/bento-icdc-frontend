@@ -15,7 +15,7 @@ const ICDCHeader = () => (
       easter={headerData.globalHeaderImage}
       alt={headerData.globalHeaderLogoAltText}
       homeLink={headerData.globalHeaderLogoLink}
-      nihLogoImg={nihLogoImgStyle}
+      nihLogoImgStyle={nihLogoImgStyle}
     />
   </>
 );
