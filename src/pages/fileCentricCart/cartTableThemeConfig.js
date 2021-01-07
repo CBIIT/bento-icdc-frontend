@@ -8,12 +8,13 @@ export default ({
   const style = [];
 
   const overridesObj = themes.light.overrides;
-  const tableBorder = '#42779A 3px solid';
+  const tableBorder = '#004c73 3px solid';
   overridesObj.MUIDataTableSelectCell.headerCell.borderTop = tableBorder;
   overridesObj.MUIDataTableSelectCell.headerCell.borderBottom = tableBorder;
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderTop = tableBorder;
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderBottom = tableBorder;
-  overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
+  overridesObj.MUIDataTableFooter.root = {};
+  overridesObj.MuiTableFooter = { root: {} };
   overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px' } };
   overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
 
