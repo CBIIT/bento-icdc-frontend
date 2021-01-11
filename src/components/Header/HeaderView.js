@@ -2,10 +2,17 @@ import React from 'react';
 import { Header } from 'bento-components';
 import headerData from '../../bento/globalHeaderData';
 
-const nihLogoImgStyle = {
-  height: '54px',
-  width: '463px',
-  marginLeft: '9px',
+const customStyle = {
+  nihLogoImg: {
+    height: '54px',
+    width: '463px',
+    marginLeft: '9px',
+    minHeight: '54px',
+  },
+  headerBar: {
+    top: '20px',
+    zIndex: '5',
+  },
 };
 
 const ICDCHeader = () => (
@@ -15,7 +22,7 @@ const ICDCHeader = () => (
       easter={headerData.globalHeaderImage}
       alt={headerData.globalHeaderLogoAltText}
       homeLink={headerData.globalHeaderLogoLink}
-      nihLogoImgStyle={nihLogoImgStyle}
+      customStyle={customStyle}
     />
   </>
 );

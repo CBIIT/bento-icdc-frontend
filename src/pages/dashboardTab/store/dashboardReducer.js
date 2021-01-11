@@ -91,7 +91,7 @@ function getStatInit(input, statCountVariables) {
  *  @param {json} statCountVariables
  * @return {json}
  */
-function getFilteredStat(input, statCountVariables) {
+export function getFilteredStat(input, statCountVariables) {
   const filteredStats = statCountVariables.reduce((acc, stat) => (
     { ...acc, [stat.statAPI]: input[stat.statAPI] }
   ), {});
