@@ -34,7 +34,7 @@ export default ({
       marginTop: '15px',
     },
     flexContainer: {
-      borderBottom: '10px solid #40789C',
+      borderBottom: '1px solid #6B6B6B',
       overflow: 'visible !important',
     },
   };
@@ -46,22 +46,17 @@ export default ({
       minHeight: '40px',
       marginRight: '10px',
       background: '#EAEAEA',
-      fontSize: '18px',
-      fontFamily: 'Raleway',
-      fontWeight: '400',
-      lineHeight: '18px',
-      paddingLeft: '5px',
-      letterSpacing: '0.25px',
-      borderTop: '1px solid black',
-      borderLeft: '1px solid black',
-      borderRight: '1px solid black',
       '&$selected': {
         background: tablecolor,
-        fontWeight: 'bolder',
       },
     },
     labelContainer: {
-
+      fontSize: '18px',
+      fontFamily: 'Raleway',
+      fontWeight: 'bold',
+      lineHeight: '18px',
+      paddingLeft: '5px',
+      letterSpacing: '0.25px',
     },
   };
 

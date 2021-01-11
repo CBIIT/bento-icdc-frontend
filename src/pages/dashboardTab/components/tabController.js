@@ -116,8 +116,8 @@ const tabController = (classes) => {
   }
 
   function getBorderStyle() {
-    const style = '3px solid #42779a';
-    return `${style}`;
+    const style = '3px solid';
+    return `${tabIndex[currentTab].primaryColor} ${style}`;
   }
 
   function getTableColor() {

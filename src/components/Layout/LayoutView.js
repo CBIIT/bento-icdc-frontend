@@ -80,15 +80,14 @@ const styles = (theme) => ({
   },
   '@global': {
     '*::-webkit-scrollbar': {
-      width: '0.7em',
-      height: '0.6em',
+      width: '0.6em',
     },
     '*::-webkit-scrollbar-track': {
       '-webkit-box-shadow': 'inset 0 0 6px #ccc',
       borderRadius: '10px',
     },
     '*::-webkit-scrollbar-thumb': {
-      backgroundColor: '#97b0c0',
+      backgroundColor: 'rgba(94,140,165)',
       outline: '1px solid slategrey',
       borderRadius: '10px',
     },
