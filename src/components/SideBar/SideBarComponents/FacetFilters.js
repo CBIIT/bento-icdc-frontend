@@ -23,9 +23,9 @@ import { facetSectionVariables, facetSearchData } from '../../../bento/dashboard
 const CustomExpansionPanelSummary = withStyles({
   root: {
     marginBottom: -1,
-    minHeight: 48,
+    minHeight: 38,
     '&$expanded': {
-      minHeight: 48,
+      minHeight: 64,
     },
   },
   content: {
@@ -160,6 +160,9 @@ const FacetPanel = ({ classes }) => {
               expandIcon={<ArrowDropDownIcon classes={{ root: classes.dropDownIconSection }} />}
               aria-controls={currentSection.sectionName}
               id={currentSection.sectionName}
+              classes={{
+                expandIcon: classes.ExpansionPaneldropDownIcon,
+              }}
             >
               {/* <ListItemText primary={sideBarItem.groupName} /> */}
               <div className={classes.sectionSummaryText}>{currentSection.sectionName}</div>
@@ -216,6 +219,7 @@ const FacetPanel = ({ classes }) => {
                     disableRipple
                     color="secondary"
                     classes={{ root: classes.checkboxRoot }}
+                    style={{ color: facetSectionVariables[sideBarItem.section].color ? facetSectionVariables[sideBarItem.section].color : '#137fbe' }}
                   />
                   <div className={classes.panelDetailText}>
                     {`${checkboxItem.name}`}
@@ -257,7 +261,7 @@ const styles = () => ({
   },
   expansionPanelsideBarItem: {
     boxShadow: 'none',
-    borderTop: '1px solid #000000',
+    borderTop: '1px solid #D2D2D2',
     borderLeft: '1px solid #D2D2D2',
     borderRight: '1px solid #D2D2D2',
     '&:last-child': {
@@ -282,7 +286,10 @@ const styles = () => ({
     fill: '#000000',
   },
   dropDownIconSubSection: {
-    fill: '#3695A9',
+    marginRight: '9px',
+  },
+  ExpansionPaneldropDownIcon: {
+    left: '-215px',
   },
   sectionSummaryText: {
     color: '#323232',
@@ -290,30 +297,29 @@ const styles = () => ({
     fontSize: '15px',
     fontWeight: 'bold',
     letterSpacing: '0.25px',
-    marginLeft: '-6px',
+    marginLeft: '-1px',
     lineHeight: '26px',
   },
   subSectionSummaryText: {
-    marginLeft: '16px',
+    marginLeft: '-1px',
     lineHeight: 0,
     color: '#323232',
     fontFamily: 'Raleway',
-    fontSize: '15px',
+    fontSize: '13px',
     fontWeight: 'bold',
     letterSpacing: '0.25px',
   },
   panelDetailText: {
     color: '#000000',
     fontFamily: 'Nunito',
-    fontSize: '14px',
+    fontSize: '15px',
     marginRight: '12px',
   },
   checkboxRoot: {
-    color: '#344B5A',
     height: 12,
   },
   listItemGutters: {
-    padding: '8px 0px 8px 15px',
+    padding: '8px 0px 8px 23px',
   },
 });
 
