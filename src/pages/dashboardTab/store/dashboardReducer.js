@@ -526,7 +526,7 @@ const reducers = {
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
-    const checkboxData = customCheckBox(item.data, facetSearchData);
+    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
     fetchDataForDashboardTab(tabIndex[0].title, []);
     return item.data
       ? {
@@ -553,7 +553,7 @@ const reducers = {
       } : { ...state };
   },
   CLEAR_ALL: (state, item) => {
-    const checkboxData = customCheckBox(item.data, facetSearchData);
+    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
     return item.data
       ? {
         ...state.dashboard,
