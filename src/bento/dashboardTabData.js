@@ -31,11 +31,12 @@ export const tabContainers = [
     defaultSortDirection: 'asc',
     buttonText: 'Add Selected Files',
     saveButtonDefaultStyle: {
+      borderRadius: '10px',
+      width: '180px',
+      lineHeight: '36px',
+      fontSize: '10pt',
       color: '#fff',
-      backgroundColor: '#09A175',
-      opacity: '1',
-      border: '0px',
-      cursor: 'pointer',
+      backgroundColor: '#ff7f15',
     },
     ActiveSaveButtonDefaultStyle: {
       cursor: 'pointer',
@@ -113,8 +114,8 @@ export const tabContainers = [
       },
     ],
     id: 'case_tab',
-    onRowsSelect: 'type1',
-    disableRowSelection: 'type1',
+    onRowsSelect: 'type3',
+    disableRowSelection: 'type3',
     tableID: 'case_tab_table',
     selectableRows: true,
     tabIndex: '0',
@@ -131,11 +132,12 @@ export const tabContainers = [
     paginationAPIFieldDesc: 'sampleOverviewDesc',
     dataKey: 'sample_id',
     saveButtonDefaultStyle: {
+      borderRadius: '10px',
+      width: '180px',
+      lineHeight: '36px',
+      fontSize: '10pt',
       color: '#fff',
-      backgroundColor: '#00AEEF',
-      opacity: '1',
-      border: '0px',
-      cursor: 'pointer',
+      backgroundColor: '#ff7f15',
     },
     DeactiveSaveButtonDefaultStyle: {
       opacity: '0.3',
@@ -244,11 +246,12 @@ export const tabContainers = [
     buttonText: 'Add Selected Files',
     dataKey: 'file_id',
     saveButtonDefaultStyle: {
+      borderRadius: '10px',
+      width: '180px',
+      lineHeight: '36px',
+      fontSize: '10pt',
       color: '#fff',
-      backgroundColor: '#DC2FDA',
-      opacity: '1',
-      border: '0px',
-      cursor: 'pointer',
+      backgroundColor: '#ff7f15',
     },
     DeactiveSaveButtonDefaultStyle: {
       opacity: '0.3',
@@ -363,21 +366,21 @@ export const tabs = [
 export const tabIndex = [
   {
     title: 'Cases',
-    primaryColor: '#D6F2EA',
+    primaryColor: '#F48439',
     secondaryColor: '#FFDFB8',
-    selectedColor: '#10A075',
+    selectedColor: '#FFF',
   },
   {
     title: 'Samples',
-    primaryColor: '#CFEDF9',
+    primaryColor: '#05C5CC',
     secondaryColor: '#C9F1F1',
-    selectedColor: '#0DAFEC',
+    selectedColor: '#FFF',
   },
   {
     title: 'Files',
-    primaryColor: '#F7D7F7',
-    secondaryColor: '#86D6F0',
-    selectedColor: '#C92EC7',
+    primaryColor: '#2446C6',
+    secondaryColor: '#E1E5FF',
+    selectedColor: '#FFF',
   },
 ];
 
@@ -952,6 +955,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
       weight
       response_to_treatment
       disease_site
+      files
     }
 }
   `;
@@ -973,16 +977,15 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
       weight
       response_to_treatment
       disease_site
+      files
     }
 }
   `;
 
 export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
   query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
-    subjectOverViewPaged(case_ids: $case_ids, first: $first) {
-        files {
-          file_uuid
-        }
+    caseOverviewPaged(case_ids: $case_ids, first: $first) {
+        files 
     }
 }
   `;

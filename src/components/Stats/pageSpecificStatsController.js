@@ -2,14 +2,14 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { filterData } from 'bento-components';
-import { getFilteredStat, fetchDataForDashboardDataTable } from '../../pages/dashboard/dashboardState';
+import { getFilteredStat, fetchDataForDashboardTabDataTable } from '../../pages/dashboardTab/store/dashboardReducer';
 
 import StatsView from './StatsView';
 
 const Stats = ({ filter }) => {
   const dispatch = useDispatch();
   const initDashboardStatus = () => () => Promise.resolve(
-    dispatch(fetchDataForDashboardDataTable()),
+    dispatch(fetchDataForDashboardTabDataTable()),
   );
 
   const data = useSelector((state) => {

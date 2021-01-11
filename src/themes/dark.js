@@ -370,17 +370,16 @@ export default {
     },
     MUIDataTableFooter: {
       root: {
-        borderBottom: '3px solid #e7e5e5',
         borderTop: '5px solid #e7e5e5',
       },
     },
     MuiTableRow: {
       head: {
-        height: 40,
+        height: '54px',
         borderBottom: '3px solid #42779A',
       },
       root: {
-        height: 40,
+        height: '54px',
       },
     },
     MuiTableCell: {
@@ -393,12 +392,12 @@ export default {
       },
       body: {
         color: 'inherit',
+        fontFamily: '"Open Sans", sans-serif',
         letterSpacing: '0.025em',
         fontStyle: 'normal',
-        fontSize: '16px',
-        fontFamily: 'Nunito',
-        fontWeight: 'normal',
-        paddingLeft: '20px',
+        fontSize: '10pt',
+        fontWeight: 'bold',
+        paddingLeft: '8px',
       },
       head: {
         fontSize: '0.95rem',

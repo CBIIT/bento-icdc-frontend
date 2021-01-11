@@ -14,6 +14,7 @@ import Cart from '../../pages/fileCentricCart/cartController';
 import About from '../../pages/about/aboutController';
 import Programs from '../../pages/programs/programsController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
+import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -26,9 +27,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <HashRouter>
       <>
 
-        <div className={classes.LinkBar}>
-          <LinkBar />
-        </div>
+        <LinkBar />
         <Header />
         <NavBar />
         {/* Reminder: Ajay need to replace the ICDC with env variable and
@@ -46,6 +45,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/fileCentricCart" component={Cart} />
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
+            <Route path="/case/:id" component={CaseDetails} />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
             )}
@@ -68,6 +68,9 @@ const styles = (theme) => ({
     position: 'relative',
     zIndex: '1222',
   },
+  Header: {
+    position: 'relative',
+  },
   content: {
     flexGrow: 1,
     // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
@@ -77,15 +80,14 @@ const styles = (theme) => ({
   },
   '@global': {
     '*::-webkit-scrollbar': {
-      width: '0.7em',
-      height: '0.6em',
+      width: '0.6em',
     },
     '*::-webkit-scrollbar-track': {
       '-webkit-box-shadow': 'inset 0 0 6px #ccc',
       borderRadius: '10px',
     },
     '*::-webkit-scrollbar-thumb': {
-      backgroundColor: '#97b0c0',
+      backgroundColor: 'rgba(94,140,165)',
       outline: '1px solid slategrey',
       borderRadius: '10px',
     },

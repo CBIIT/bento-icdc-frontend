@@ -91,7 +91,7 @@ function getStatInit(input, statCountVariables) {
  *  @param {json} statCountVariables
  * @return {json}
  */
-function getFilteredStat(input, statCountVariables) {
+export function getFilteredStat(input, statCountVariables) {
   const filteredStats = statCountVariables.reduce((acc, stat) => (
     { ...acc, [stat.statAPI]: input[stat.statAPI] }
   ), {});
@@ -253,7 +253,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
       query: GET_ALL_FILEIDS_FOR_SELECT_ALL,
       variables: { case_ids: VARIABLES, first: fileCount },
     })
-    .then((result) => result.data.subjectOverViewPaged);
+    .then((result) => result.data.caseOverviewPaged);
   return fetchResult;
 }
 
@@ -526,7 +526,7 @@ const reducers = {
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
-    const checkboxData = customCheckBox(item.data, facetSearchData);
+    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
     fetchDataForDashboardTab(tabIndex[0].title, []);
     return item.data
       ? {
@@ -553,7 +553,7 @@ const reducers = {
       } : { ...state };
   },
   CLEAR_ALL: (state, item) => {
-    const checkboxData = customCheckBox(item.data, facetSearchData);
+    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
     return item.data
       ? {
         ...state.dashboard,

@@ -307,10 +307,10 @@ export default {
     },
     MuiTableRow: {
       head: {
-        height: 40,
+        height: '54px',
       },
       root: {
-        height: 40,
+        height: '54px',
       },
     },
     MuiTableCell: {
