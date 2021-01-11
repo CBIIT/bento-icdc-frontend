@@ -66,7 +66,6 @@ export const table1 = {
     {
       dataField: 'sample_site',
       header: 'Sample Site',
-      dataFromRoot: true,
     },
     {
       dataField: 'summarized_sample_type',
