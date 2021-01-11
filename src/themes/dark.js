@@ -393,12 +393,12 @@ export default {
       },
       body: {
         color: 'inherit',
+        fontFamily: '"Open Sans", sans-serif',
         letterSpacing: '0.025em',
         fontStyle: 'normal',
-        fontSize: '16px',
-        fontFamily: 'Nunito',
-        fontWeight: 'normal',
-        paddingLeft: '20px',
+        fontSize: '10pt',
+        fontWeight: 'bold',
+        paddingLeft: '8px',
       },
       head: {
         fontSize: '0.95rem',

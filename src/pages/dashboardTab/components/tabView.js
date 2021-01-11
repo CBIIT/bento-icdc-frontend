@@ -166,7 +166,8 @@ const TabView = ({
   // Calculate the properate marginTop value for the tooltip on the top
   function tooltipStyle(text) {
     const marginTopValue = text.length > 40 ? '-148px' : '-118px';
-    return { marginTop: marginTopValue };
+    const marginLeftValue = text.length > 40 ? '0px' : '0px';
+    return { marginTop: marginTopValue, marginLeft: marginLeftValue };
   }
 
   /*
@@ -312,9 +313,8 @@ const TabView = ({
 const styles = () => ({
 
   link: {
-    color: '#7747ff',
+    color: '#DC762F',
     textDecoration: 'none',
-
     '&:hover': {
       textDecoration: 'underline',
     },
@@ -365,13 +365,13 @@ const styles = () => ({
   },
   saveButtonDiv: {
     paddingTop: '5px',
-    paddingRight: '25px',
-    textAlign: 'right',
+    paddingLeft: '18px',
+    textAlign: 'left',
   },
   saveButtonDivBottom: {
     paddingTop: '5px',
-    paddingRight: '25px',
-    textAlign: 'right',
+    paddingLeft: '18px',
+    textAlign: 'left',
     marginBottom: '30px',
     position: 'relative',
   },
@@ -383,7 +383,7 @@ const styles = () => ({
     textTransform: 'uppercase',
     fontFamily: 'Lato',
     color: '#fff',
-    backgroundColor: '#10A075',
+    backgroundColor: '#ff7f15',
     marginTop: '6px',
     marginBottom: '10px',
     marginRight: '5px',
@@ -409,6 +409,90 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     marginLeft: '-5px',
+  },
+  tableCell1: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell2: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell3: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell4: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell5: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell6: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell7: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell8: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell9: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell10: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell11: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
+  },
+  tableCell12: {
+    width: (((document.documentElement.clientWidth * 0.6) / 10)),
+    overflow: 'hidden',
+    wordBreak: 'break-word',
+    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
+    minWidth: '160px',
   },
 });
 
