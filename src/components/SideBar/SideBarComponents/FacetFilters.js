@@ -15,7 +15,7 @@ import {
 import _ from 'lodash';
 import {
   CheckBox as CheckBoxIcon, CheckBoxOutlineBlank as CheckBoxBlankIcon, ArrowDropDown
-  as ArrowDropDownIcon,
+  as ArrowDropDownIcon, ExpandMore as ExpandMoreIcon,
 } from '@material-ui/icons';
 import { toggleCheckBox, setSideBarToLoading, setDashboardTableLoading } from '../../../pages/dashboardTab/store/dashboardReducer';
 import { facetSectionVariables, facetSearchData } from '../../../bento/dashboardData';
@@ -179,7 +179,7 @@ const FacetPanel = ({ classes }) => {
                     >
                       <CustomExpansionPanelSummary
                         expandIcon={(
-                          <ArrowDropDownIcon
+                          <ExpandMoreIcon
                             classes={{ root: classes.dropDownIconSubSection }}
                           />
 )}
@@ -248,7 +248,7 @@ const FacetPanel = ({ classes }) => {
 const styles = () => ({
   expansionPanelRoot: {
     boxShadow: 'none',
-    background: '#D2D2D2',
+    background: '#EAEAEA',
     margin: 'auto',
     position: 'initial',
     '&:before': {
@@ -285,21 +285,22 @@ const styles = () => ({
     fill: '#3695A9',
   },
   sectionSummaryText: {
+    color: '#323232',
+    fontFamily: 'Raleway',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    letterSpacing: '0.25px',
     marginLeft: '-6px',
-    color: '#000000',
-    fontFamily: 'Lato',
-    fontSize: '20px',
     lineHeight: '26px',
-    letterSpacing: 0,
   },
   subSectionSummaryText: {
     marginLeft: '16px',
-    color: '#000000',
-    fontFamily: 'Lato',
-    fontSize: '14px',
-    textTransform: 'uppercase',
     lineHeight: 0,
-    letterSpacing: 0,
+    color: '#323232',
+    fontFamily: 'Raleway',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    letterSpacing: '0.25px',
   },
   panelDetailText: {
     color: '#000000',
