@@ -25,6 +25,7 @@ import { downloadJson } from './utils';
 import Message from '../../components/Message';
 import DialogThemeProvider from './dialogThemeConfig';
 import TableThemeProvider from './cartTableThemeConfig';
+import GA from '../../utils/googleAnalytics';
 
 const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading,
@@ -62,6 +63,7 @@ const cartView = ({
   }
   function deleteSubjectsAndCloseModal() {
     setModalStatus(false);
+    GA.sendEvent('File', 'Removed', null, `${fileIDs.length} Files`);
     deleteFromCart({ fileIds: fileIDs });
   }
 
@@ -70,6 +72,7 @@ const cartView = ({
   }
   async function prepareDownload() {
     const data1 = await fetchData();
+    GA.sendEvent('Manifest', 'Download', 'cart');
     return downloadJson(
       data1,
       userComments,

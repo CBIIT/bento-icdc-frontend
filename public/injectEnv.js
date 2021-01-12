@@ -5,4 +5,5 @@ window.injectedEnv ={
 	REACT_APP_BACKEND_API: 'https://caninecommons-dev.cancer.gov/v1/graphql/',
 	REACT_APP_APPLICATION_VERSION:'YYYY_MM_DD/HH:MM',
 	REACT_APP_ABOUT_CONTENT_URL:'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/content/dev/aboutPagesContent.yaml',
+	REACT_APP_GA_TRACKING_ID: 'UA-154442677-1',
 };
