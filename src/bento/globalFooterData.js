@@ -61,7 +61,8 @@ export default {
       items: [
         {
           text: 'Policies',
-          link: 'https://www.cancer.gov/policies',
+          link: 'https://www.cancer.gov/global/web/policies',
+          title: 'link to NCI policies',
         },
         {
           text: 'Disclaimer',

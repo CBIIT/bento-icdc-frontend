@@ -15,7 +15,7 @@ import {
 import _ from 'lodash';
 import {
   CheckBox as CheckBoxIcon, CheckBoxOutlineBlank as CheckBoxBlankIcon, ArrowDropDown
-  as ArrowDropDownIcon,
+  as ArrowDropDownIcon, ExpandMore as ExpandMoreIcon,
 } from '@material-ui/icons';
 import { toggleCheckBox, setSideBarToLoading, setDashboardTableLoading } from '../../../pages/dashboardTab/store/dashboardReducer';
 import { facetSectionVariables, facetSearchData } from '../../../bento/dashboardData';
@@ -23,9 +23,9 @@ import { facetSectionVariables, facetSearchData } from '../../../bento/dashboard
 const CustomExpansionPanelSummary = withStyles({
   root: {
     marginBottom: -1,
-    minHeight: 48,
+    minHeight: 38,
     '&$expanded': {
-      minHeight: 48,
+      minHeight: 64,
     },
   },
   content: {
@@ -160,6 +160,9 @@ const FacetPanel = ({ classes }) => {
               expandIcon={<ArrowDropDownIcon classes={{ root: classes.dropDownIconSection }} />}
               aria-controls={currentSection.sectionName}
               id={currentSection.sectionName}
+              classes={{
+                expandIcon: classes.ExpansionPaneldropDownIcon,
+              }}
             >
               {/* <ListItemText primary={sideBarItem.groupName} /> */}
               <div className={classes.sectionSummaryText}>{currentSection.sectionName}</div>
@@ -179,7 +182,7 @@ const FacetPanel = ({ classes }) => {
                     >
                       <CustomExpansionPanelSummary
                         expandIcon={(
-                          <ArrowDropDownIcon
+                          <ExpandMoreIcon
                             classes={{ root: classes.dropDownIconSubSection }}
                           />
 )}
@@ -216,6 +219,7 @@ const FacetPanel = ({ classes }) => {
                     disableRipple
                     color="secondary"
                     classes={{ root: classes.checkboxRoot }}
+                    style={{ color: facetSectionVariables[sideBarItem.section].color ? facetSectionVariables[sideBarItem.section].color : '#137fbe' }}
                   />
                   <div className={classes.panelDetailText}>
                     {`${checkboxItem.name}`}
@@ -248,7 +252,7 @@ const FacetPanel = ({ classes }) => {
 const styles = () => ({
   expansionPanelRoot: {
     boxShadow: 'none',
-    background: '#D2D2D2',
+    background: '#EAEAEA',
     margin: 'auto',
     position: 'initial',
     '&:before': {
@@ -257,7 +261,7 @@ const styles = () => ({
   },
   expansionPanelsideBarItem: {
     boxShadow: 'none',
-    borderTop: '1px solid #000000',
+    borderTop: '1px solid #D2D2D2',
     borderLeft: '1px solid #D2D2D2',
     borderRight: '1px solid #D2D2D2',
     '&:last-child': {
@@ -282,37 +286,40 @@ const styles = () => ({
     fill: '#000000',
   },
   dropDownIconSubSection: {
-    fill: '#3695A9',
+    marginRight: '9px',
+  },
+  ExpansionPaneldropDownIcon: {
+    left: '-215px',
   },
   sectionSummaryText: {
-    marginLeft: '-6px',
-    color: '#000000',
-    fontFamily: 'Lato',
-    fontSize: '20px',
+    color: '#323232',
+    fontFamily: 'Raleway',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    letterSpacing: '0.25px',
+    marginLeft: '-1px',
     lineHeight: '26px',
-    letterSpacing: 0,
   },
   subSectionSummaryText: {
-    marginLeft: '16px',
-    color: '#000000',
-    fontFamily: 'Lato',
-    fontSize: '14px',
-    textTransform: 'uppercase',
+    marginLeft: '-1px',
     lineHeight: 0,
-    letterSpacing: 0,
+    color: '#323232',
+    fontFamily: 'Raleway',
+    fontSize: '13px',
+    fontWeight: 'bold',
+    letterSpacing: '0.25px',
   },
   panelDetailText: {
     color: '#000000',
     fontFamily: 'Nunito',
-    fontSize: '14px',
+    fontSize: '15px',
     marginRight: '12px',
   },
   checkboxRoot: {
-    color: '#344B5A',
     height: 12,
   },
   listItemGutters: {
-    padding: '8px 0px 8px 15px',
+    padding: '8px 0px 8px 23px',
   },
 });
 
