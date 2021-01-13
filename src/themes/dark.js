@@ -292,6 +292,9 @@ export default {
       fixedHeader: {
         position: 'relative',
       },
+      fixedLeft: {
+        background: '#000',
+      },
       headerCell: {
         borderBottom: '3px solid #42779A',
         color: tableHeaderFontColor,

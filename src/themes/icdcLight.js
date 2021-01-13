@@ -226,6 +226,9 @@ export default {
         position: 'relative',
 
       },
+      fixedLeft: {
+        background: '#fff',
+      },
       headerCell: {
         borderTop: tableHeaderBorder,
         borderBottom: tableHeaderBorder,
