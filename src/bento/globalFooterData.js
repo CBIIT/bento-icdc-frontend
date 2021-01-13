@@ -39,7 +39,7 @@ export default {
       items: [
         {
           text: 'ICDC Data & Model',
-          link: '/model',
+          link: '/icdc-data-model',
         },
         {
           text: 'Analyzing Data',

@@ -17,11 +17,11 @@ export const pageData = {
     // Field name for table data, need to be updated only when using a different GraphQL query
     dataField: 'studiesByProgram',
     // Value must be one of the 'field' in columns
-    defaultSortField: 'program_acronym',
+    // defaultSortField: 'clinical_study_designation',
     // 'asc' or 'desc'
-    defaultSortDirection: 'asc',
-    // showHideColumns 'true' or 'false'
-    showHideColumns: true,
+    // defaultSortDirection: 'asc',
+    // viewColumns 'true' or 'false'
+    viewColumns: true,
     // download csv 'true' or 'false'
     download: true,
     // downloaded File Name
@@ -38,7 +38,7 @@ export const pageData = {
       },
       {
         dataField: 'program_id',
-        header: 'Program ID',
+        header: 'Program',
       },
       {
         dataField: 'clinical_study_name',

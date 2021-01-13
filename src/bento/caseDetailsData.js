@@ -46,10 +46,10 @@ export const table1 = {
   },
   // Help Icon Message
   tooltipMessage: 'Click button to add selected files associated with the selected sample(s).',
-  // showHideColumns 'true' or 'false'
-  showHideColumns: true,
+  // viewColumns 'true' or 'false'
+  viewColumns: true,
   // download csv
-  download: false,
+  download: true,
   // downloaded File Name
   downloadFileName: 'ICDC_Case_Sample_download',
   // Set 'selectableRows' to true to show the row selection
@@ -110,7 +110,7 @@ export const table2 = {
   // Field name for files data, need to be updated only when using a different GraphQL query
   subjectDetailField: 'files',
   // Value must be one of the 'dataField's in fileTableColumns
-  defaultSortField: 'file_name',
+  defaultSortField: 'sample_id',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
   // Text to appear on Add to cart button
@@ -132,10 +132,10 @@ export const table2 = {
   },
   // Help Icon Message
   tooltipMessage: 'Click button to add selected files.',
-  // showHideColumns 'true' or 'false'
-  showHideColumns: true,
+  // viewColumns 'true' or 'false'
+  viewColumns: true,
   // download csv 'true' or 'false'
-  download: false,
+  download: true,
   // downloaded File Name
   downloadFileName: 'ICDC_Case_File_download',
   // Set 'selectableRows' to true to show the row selection

@@ -26,7 +26,7 @@ const Studies = ({ classes, data }) => {
             </div>
             <div className={classes.headerTitle}>
               <div className={classes.headerMainTitle}>
-                <span className={classes.headerMainTitle}>Studies</span>
+                <span className={classes.headerMainTitle}>{pageData.table.title}</span>
               </div>
             </div>
           </div>
