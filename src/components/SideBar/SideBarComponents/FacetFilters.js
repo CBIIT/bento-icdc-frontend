@@ -19,6 +19,7 @@ import {
 } from '@material-ui/icons';
 import { toggleCheckBox, setSideBarToLoading, setDashboardTableLoading } from '../../../pages/dashboardTab/store/dashboardReducer';
 import { facetSectionVariables, facetSearchData } from '../../../bento/dashboardData';
+import GA from '../../../utils/googleAnalytics';
 
 const CustomExpansionPanelSummary = withStyles({
   root: {
@@ -87,11 +88,13 @@ const FacetPanel = ({ classes }) => {
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : `${panel}false`);
+    GA.sendEvent('Facets', isExpanded ? 'expand' : 'collapse', `${panel} Panel`);
 
     // set height of filters.
   };
 
   const handleGroupChange = (panel) => (event, isExpanded) => {
+    GA.sendEvent('Facets', isExpanded ? 'expand' : 'collapse', `${panel} Group`);
     const groups = _.cloneDeep(groupExpanded);
     if (isExpanded) {
       groups.push(panel);
@@ -107,6 +110,7 @@ const FacetPanel = ({ classes }) => {
 
   const handleToggle = (value) => () => {
     const valueList = value.split('$$');
+    GA.sendEvent('Facets', 'Filter', valueList[1]);
     setSideBarToLoading();
     setDashboardTableLoading();
     // dispatch toggleCheckBox action

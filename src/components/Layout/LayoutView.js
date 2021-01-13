@@ -15,6 +15,7 @@ import About from '../../pages/about/aboutController';
 import Programs from '../../pages/programs/programsController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
 import CaseDetails from '../../pages/caseDetails/caseDetailsController';
+import GA from '../../utils/googleAnalytics';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -36,6 +37,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
           className={classes.content}
         >
           <Route component={ScrollToTop} />
+          { GA.init() && <GA.RouteTracker /> }
           <Switch>
             <Route exact path="/ICDC/" component={Home} />
             <Route exact path="/" component={Home} />
