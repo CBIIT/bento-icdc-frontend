@@ -59,8 +59,8 @@ const Dashboard = ({
                     />
                   </div>
                 </div>
-                <Collapse in={collapse} className={classes.backgroundWidgets}>
-                  <Grid container>
+                <Collapse in={collapse} className={classes.backgroundShawdowWidgets}>
+                  <Grid container spacing={1}>
                     {displaywidgets.map((widget) => {
                       if (widget.type === 'sunburst' && widget.show) {
                         return (
@@ -70,8 +70,7 @@ const Dashboard = ({
                               upperTitle
                               bodyClass={classes.fullHeightBody}
                               className={classes.card}
-                              color={theme.palette.lochmara.contrastText}
-                              widgetBorderDivider
+                              widgetBorderDivider={false}
                               customBackGround
                             >
                               <ProgramSunburst
@@ -83,8 +82,8 @@ const Dashboard = ({
                                 cx="50%"
                                 cy="50%"
                                 textColor={theme.palette.widgetBackground.contrastText}
-                                titleLocation="bottom"
-                                titleAlignment="center"
+                                titleLocation="top"
+                                titleAlignment="left"
                               />
                             </Widget>
                           </Grid>
@@ -98,8 +97,7 @@ const Dashboard = ({
                               upperTitle
                               bodyClass={classes.fullHeightBody}
                               className={classes.card}
-                              color={theme.palette.lochmara.contrastText}
-                              widgetBorderDivider
+                              widgetBorderDivider={false}
                               customBackGround
                             >
                               <CustomActiveDonut
@@ -112,8 +110,8 @@ const Dashboard = ({
                                 cy="50%"
                                 textColor={theme.palette.widgetBackground.contrastText}
                                 colors={colors}
-                                titleLocation="bottom"
-                                titleAlignment="center"
+                                titleLocation="top"
+                                titleAlignment="left"
                               />
                             </Widget>
                           </Grid>
@@ -124,8 +122,6 @@ const Dashboard = ({
                   </Grid>
                 </Collapse>
               </div>
-              { collapse && <div className={classes.dashboardDividerTop} />}
-              { collapse && <div className={classes.dashboardDivider} />}
               <Tab />
             </div>
           </div>
@@ -158,7 +154,7 @@ const styles = (theme) => ({
   content: {
     // padding: theme.spacing.unit * 3,
     display: 'flex',
-    maxWidth: '1800px',
+    // maxWidth: '1800px',
     margin: 'auto',
   },
   widgetsContainer: {
@@ -219,6 +215,9 @@ const styles = (theme) => ({
   },
   backgroundWidgets: {
     background: theme.palette.widgetBackground.main,
+  },
+  backgroundShawdowWidgets: {
+    background: theme.palette.widgetBackground.lattice,
   },
   sideBar: {
     width: '250px',

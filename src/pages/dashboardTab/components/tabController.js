@@ -16,6 +16,7 @@ import {
   tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon,
 } from '../../../bento/dashboardTabData';
 import { fetchDataForDashboardTab } from '../store/dashboardReducer';
+import GA from '../../../utils/googleAnalytics';
 
 function TabContainer({ children, dir }) {
   return (
@@ -98,6 +99,11 @@ const tabController = (classes) => {
   }
 
   const handleTabChange = (event, value) => {
+    if (currentTab !== value) {
+      const currentTabTitle = tabIndex[currentTab].title;
+      const newTabTitle = tabIndex[value].title;
+      GA.sendEvent('Tab Change', tabIndex[value].title, `${currentTabTitle} -> ${newTabTitle}`, null);
+    }
     setCurrentTab(value);
     fetchDataForDashboardTab(tabIndex[value].title);
   };
