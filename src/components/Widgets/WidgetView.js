@@ -24,16 +24,12 @@ const Widget = ({
 }) => (
   <div className={classes.widgetWrapper}>
     <Paper className={classnames(classes.paper,{[classes.customBackGround]:customBackGround})} classes={{ root: classes.widgetRoot }}>
-      <div id={title} className={classes.widgetHeader}
-        className={classnames(classes.paddedTitle, {
-          [classes.noPaddedTitle]: noPaddedTitle
-      })}
-      >
+      <div id={title} className={classes.widgetHeader}>
         {props.header ? (
           props.header
         ) : (
           <>
-            <Typography className={titleClass} size="md" weight="normal" family="Nunito" color={color} align='center'>
+            <Typography className={titleClass} size="md" weight="bold" family="Raleway" classes={ {root :classes.textWithBackground}} >
               {title}
             </Typography>
           </>
@@ -53,25 +49,16 @@ const Widget = ({
 );
 
 const styles = (theme) => ({
+  textWithBackground: {
+    color: theme.palette.textWithBackground.main,
+  },
   widgetWrapper: {
     display: 'flex',
     minHeight: '100%',
   },
-  widgetDivider:{
-    background: theme.custom.widgetDivider,
-    height: '6px',
-    width: '180px',
-    border: 'none',
-    margin: '16px auto 0px auto'
-  },
-  paddedTitle: {
-    margin: '32px 32px 0px 64px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  noPaddedTitle: {
-    margin: '0px 0px 0px 0px',
+  widgetHeader: {
+    padding: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -81,6 +68,7 @@ const styles = (theme) => ({
   },
   widgetBody: {
     margin:'0px auto',
+    paddingBottom: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 3,
   },
