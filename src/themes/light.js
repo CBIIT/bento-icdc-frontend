@@ -229,6 +229,7 @@ export default {
       default: '#fafafa',
       light: '#F3F5FF',
     },
+    ...icdcLightTheme.palette,
   },
   customShadows: {
     widget:
