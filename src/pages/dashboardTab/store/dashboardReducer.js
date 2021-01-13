@@ -106,6 +106,7 @@ export function getFilteredStat(input, statCountVariables) {
 const removeEmptySubjectsFromDonutData = (data) => {
   const convertCasesToSubjects = data.map((item) => ({
     subjects: item.count,
+    group: item.group,
   }));
   return convertCasesToSubjects.filter((item) => item.subjects !== 0);
 };
