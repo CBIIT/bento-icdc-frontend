@@ -4,6 +4,7 @@ export const navBarstyling = {
     height: '39px',
     padding: '9px 20px 0px 20px',
     marginTop: '120px',
+    fontFamily: 'Raleway, sans-serif',
   },
   dropDownIcon: {
     displayIcon: true,
