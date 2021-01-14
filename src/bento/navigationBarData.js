@@ -1,14 +1,39 @@
 export const navBarstyling = {
   global: {
-    backgroundColor: '#142D64',
+    backgroundColor: '#0B3557',
     height: '39px',
     padding: '9px 20px 0px 20px',
     marginTop: '120px',
   },
   dropDownIcon: {
-    displayIcon: false,
+    displayIcon: true,
     fontSize: '18px',
     margin: '0px 0px 0px 0px',
+  },
+  dropdownMenu: {
+    paper: {
+      background: '#309EC4',
+      width: '200px',
+      padding: '5px 18px 18px 18px',
+      marginLeft: '15px',
+      position: 'absolute',
+      marginTop: '-1px',
+      borderRadius: '0',
+    },
+    link: {
+      textDecoration: 'none',
+      color: 'black',
+      fontSize: '14px',
+      fontWeight: '600',
+      lineSpacing: '1px',
+      fontFamily: 'Raleway, sans-serif',
+      display: 'block',
+      marginTop: '12px',
+      '&:hover': {
+        cursor: 'pointer',
+        color: 'white',
+      },
+    },
   },
 };
 
@@ -48,10 +73,13 @@ export const navBarData = [
       {
         labelText: '-Data Governance Advisory Board(DGAB)',
         link: '/DGAB',
+        sublink: true,
+
       },
       {
         labelText: '-Best Practices Sub-Committee(BPSC)',
         link: '/BPSC',
+        sublink: true,
       },
       {
         labelText: 'CRDC & Analysis',
