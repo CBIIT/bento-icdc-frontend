@@ -166,8 +166,7 @@ const TabView = ({
   // Calculate the properate marginTop value for the tooltip on the top
   function tooltipStyle(text) {
     const marginTopValue = text.length > 40 ? '-148px' : '-118px';
-    const marginLeftValue = text.length > 40 ? '0px' : '0px';
-    return { marginTop: marginTopValue, marginLeft: marginLeftValue };
+    return { marginTop: marginTopValue };
   }
 
   /*
@@ -401,7 +400,7 @@ const styles = () => ({
     zIndex: '500',
     position: 'absolute',
     marginTop: '-148px',
-    marginLeft: 'calc(100% - 220px)',
+    marginLeft: '-5px',
   },
   helpIcon: {
     zIndex: '600',

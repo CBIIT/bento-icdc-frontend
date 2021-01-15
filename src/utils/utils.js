@@ -9,7 +9,7 @@ function redirectToStudy(study) {
   setSideBarToLoading();
   setDashboardTableLoading();
   singleCheckBox([{
-    datafield: 'study_code',
+    datafield: 'study',
     groupName: 'Study',
     isChecked: true,
     name: study,

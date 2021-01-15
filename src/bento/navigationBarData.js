@@ -81,7 +81,6 @@ export const navBarData = [
         link: '/DGAB',
         sublink: true,
         linkActiveStyle: 'white',
-
       },
       {
         labelText: '- Best Practices Sub-Committee(BPSC)',
