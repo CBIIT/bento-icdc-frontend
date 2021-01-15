@@ -296,7 +296,7 @@ export default {
         background: '#000',
       },
       headerCell: {
-        borderBottom: '3px solid #42779A',
+        borderBottom: '#004c73 3px solid',
         color: tableHeaderFontColor,
         backgroundColor: tableHeader,
 
@@ -373,7 +373,7 @@ export default {
     },
     MUIDataTableFooter: {
       root: {
-        borderTop: '5px solid #e7e5e5',
+        borderTop: '0px',
       },
     },
     MuiTableRow: {
@@ -481,7 +481,7 @@ export default {
     },
     MuiTableFooter: {
       root: {
-        borderTop: '6px #E7E5E5 solid',
+        borderTop: '0px',
       },
     },
     MUIDataTableBodyCell: {
