@@ -555,6 +555,7 @@ const reducers = {
   },
   CLEAR_ALL: (state, item) => {
     const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
+    fetchDataForDashboardTab(state.currentActiveTab, []);
     return item.data
       ? {
         ...state.dashboard,
