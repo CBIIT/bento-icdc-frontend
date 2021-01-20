@@ -28,7 +28,7 @@ export const navBarstyling = {
       fontSize: '14px',
       fontWeight: '600',
       lineSpacing: '1px',
-      lineHeight: '16px',
+      lineHeight: '20px',
       fontFamily: 'Raleway, sans-serif',
       display: 'block',
       marginTop: '12px',
