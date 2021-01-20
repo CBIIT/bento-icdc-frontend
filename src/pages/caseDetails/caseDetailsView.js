@@ -457,7 +457,7 @@ const CaseDetail = ({ classes, data }) => {
                       DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
                       tooltipMessage={table1.tooltipMessage}
                       tooltipContent={tooltipContent}
-                      showtooltip={false}
+                      showtooltip
                     />
                   </Grid>
                 </Grid>
@@ -491,6 +491,7 @@ const CaseDetail = ({ classes, data }) => {
                         DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
                         tooltipMessage={table2.tooltipMessage}
                         tooltipContent={tooltipContent}
+                        showtooltip
                       />
                     </Grid>
                   </Grid>
