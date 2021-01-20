@@ -7,7 +7,7 @@
 */
 export function FileDisableRowSelection(data, cartData) {
   if (cartData && cartData.length > 0) {
-    if (cartData.includes(data.file_id)) {
+    if (cartData.includes(data.uuid)) {
       return false;
     }
     return true;
@@ -22,5 +22,5 @@ export function FileDisableRowSelection(data, cartData) {
 */
 
 export function FileOnRowsSelect(data, allRowsSelected) {
-  return allRowsSelected.map((row) => data[row.dataIndex].file_id);
+  return allRowsSelected.map((row) => data[row.dataIndex].uuid);
 }

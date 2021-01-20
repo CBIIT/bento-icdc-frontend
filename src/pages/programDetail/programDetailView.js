@@ -72,7 +72,7 @@ const ProgramView = ({ classes, data }) => {
 
           </div>
           <div className={classes.headerTitle}>
-            <div className={cn(classes.headerMainTitle, classes.marginTop23)}>
+            <div className={cn(classes.headerMainTitle, classes.marginTop18)}>
               <span>
                 {`${programDetail.program_name} (${programDetail.program_acronym})`}
               </span>
@@ -155,8 +155,8 @@ const styles = (theme) => ({
     fontSize: '12px',
     lineHeight: '17px',
   },
-  marginTop23: {
-    marginTop: '23px',
+  marginTop18: {
+    marginTop: '18px',
   },
   warning: {
     color: theme.palette.warning.main,

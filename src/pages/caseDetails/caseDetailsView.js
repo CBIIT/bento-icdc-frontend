@@ -170,7 +170,7 @@ const CaseDetail = ({ classes, data }) => {
 
         <div id="case_detail_container" className={classes.detailContainer}>
 
-          <Grid container spacing={4} className={classes.marginTopBottom4}>
+          <Grid container spacing={4} className={classes.marginTopBottom3}>
 
             <Grid item lg={3} md={3} sm={12} xs={12} className={classes.detailContainerLeft}>
               <Grid container spacing={32} direction="column">
@@ -510,8 +510,8 @@ const styles = (theme) => ({
   paddingBottm17: {
     paddingBottm: '17px',
   },
-  marginTopBottom4: {
-    margin: '4px 0px',
+  marginTopBottom3: {
+    margin: '3px 0px',
   },
   container: {
     paddingTop: '120px',

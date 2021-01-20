@@ -29,9 +29,7 @@ const ProgramCard = ({
             {' '}
           </Grid>
           <Grid item lg={12} md={12} sm={12} xs={12}>
-
             <span>
-
               <Button variant="contained" className={classes.button}>
                 <Link to={`/program/${data.program_acronym}`} className={classes.headerButtonLink}>
                   <span className={classes.headerButtonLinkLeft}>VIEW STUDIES </span>
@@ -40,9 +38,7 @@ const ProgramCard = ({
                   </span>
                 </Link>
               </Button>
-
             </span>
-
             <span className={classes.paddingLeft15}>
               <a href={`${data.program_external_url}`} target="icdc" className={classes.outLink}>
                 {data.program_external_url}
@@ -51,11 +47,10 @@ const ProgramCard = ({
             <span className={classes.paddingLeft5}>
               <img
                 src={pageData.externalIcon}
-                alt="dog  for program detail"
+                alt="dog for program detail"
                 className={classes.linkIcon}
               />
             </span>
-
           </Grid>
         </Grid>
         {programConfig && (
@@ -78,7 +73,7 @@ const styles = (theme) => ({
   },
   dogImage: {
     width: '100%',
-    paddingRight: '4px',
+    paddingRight: '6px',
   },
   linkIcon: {
     width: '25px',
@@ -131,12 +126,12 @@ const styles = (theme) => ({
   header: {
     background: '#fff',
     lineHeight: '30px',
-    paddingLeft: '10px !important',
+    padding: '4px 4px 4px 10px !important',
     borderBottom: '4px solid #1db634',
     color: '#1db634',
     fontWeight: 'bold',
     fontSize: '16px',
-    margin: '15px 4px 0px 4px',
+    margin: '15px 6px 0px 0px',
   },
 
   headerTitle: {
