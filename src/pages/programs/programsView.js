@@ -8,38 +8,40 @@ import { pageData } from '../../bento/programData';
 import ProgramCard from '../../components/ProgramCard/programCard';
 
 const Programs = ({ classes, data }) => (
-  <>
-    <div className={classes.container}>
-      <div className={classes.header}>
-        <div className={classes.logo}>
-          <img
-            src={pageData.headerIcon}
-            alt="ICDC case detail header logo"
-          />
-
-        </div>
-        <div className={classes.headerTitle}>
-          <div className={cn(classes.headerMainTitle, classes.marginTop23)}>
-            <span>
-              {pageData.headerTitle }
-            </span>
-          </div>
-        </div>
-
-      </div>
-
-      <div className={classes.detailContainer}>
-
-        <Grid container className={classes.gridContainer}>
-          {data.program.map((programCardData) => (
-            <Grid item lg={12} md={12} sm={12} xs={12} key={programCardData.program_name}>
-              <ProgramCard data={programCardData} />
-            </Grid>
-          ))}
+  <div className={classes.container}>
+    <Grid item lg={12} md={12} sm={12} xs={12} className={classes.header}>
+      <Grid item lg={12} md={12} sm={12} xs={12} className={classes.logo}>
+        <img
+          src={pageData.headerIcon}
+          alt="ICDC case detail header logo"
+        />
+      </Grid>
+      <Grid item lg={12} md={12} sm={12} xs={12} className={classes.headerTitle}>
+        <Grid
+          item
+          lg={12}
+          md={12}
+          sm={12}
+          xs={12}
+          className={cn(classes.headerMainTitle, classes.marginTop23)}
+        >
+          <span>
+            {pageData.headerTitle }
+          </span>
         </Grid>
-      </div>
+      </Grid>
+    </Grid>
+    <div className={classes.detailContainer}>
+
+      <Grid container className={classes.gridContainer}>
+        {data.program.map((programCardData) => (
+          <Grid item lg={12} md={12} sm={12} xs={12} key={programCardData.program_name}>
+            <ProgramCard data={programCardData} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
-  </>
+  </div>
 );
 
 const styles = (theme) => ({
@@ -90,8 +92,6 @@ const styles = (theme) => ({
     height: '80px',
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
-    marginLeft: '5px',
-    marginRight: '-4px',
   },
 
   headerTitle: {

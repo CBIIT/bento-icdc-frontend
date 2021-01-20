@@ -22,11 +22,13 @@ export const navBarstyling = {
       borderRadius: '0',
     },
     link: {
+      overflowWrap: 'normal',
       textDecoration: 'none',
       color: 'black',
       fontSize: '14px',
       fontWeight: '600',
       lineSpacing: '1px',
+      lineHeight: '20px',
       fontFamily: 'Raleway, sans-serif',
       display: 'block',
       marginTop: '12px',
@@ -62,45 +64,54 @@ export const navBarData = [
   {
     labelText: 'about',
     type: 'dropdown',
+
     dropDownLinks: [
       {
         labelText: 'Purpose',
         link: '/purpose',
+        linkActiveStyle: 'white',
       },
       {
         labelText: 'Steering Committee',
         link: '/steeringCommittee',
+        linkActiveStyle: 'white',
       },
       {
-        labelText: '-Data Governance Advisory Board(DGAB)',
+        labelText: '- Data Governance Advisory Board(DGAB)',
         link: '/DGAB',
         sublink: true,
-
+        linkActiveStyle: 'white',
       },
       {
-        labelText: '-Best Practices Sub-Committee(BPSC)',
+        labelText: '- Best Practices Sub-Committee(BPSC)',
         link: '/BPSC',
         sublink: true,
+        linkActiveStyle: 'white',
       },
       {
         labelText: 'CRDC & Analysis',
         link: '/crdc',
+        linkActiveStyle: 'white',
       },
       {
         labelText: 'ICDC Data & Model',
         link: '/icdc-data-model',
+        linkActiveStyle: 'white',
       },
       {
         labelText: 'Developers',
         link: '/developers',
+        linkActiveStyle: 'white',
       },
       {
         labelText: 'Support',
         link: '/support',
+        linkActiveStyle: 'white',
       },
       {
         labelText: 'Submitting Data',
         link: '/submit',
+        linkActiveStyle: 'white',
       },
     ],
   },

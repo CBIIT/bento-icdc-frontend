@@ -10,6 +10,8 @@ const AboutView = ({ classes, data }) => {
     <>
       <AboutHeader title={data.title} />
       <AboutBody data={{
+        fontFamily: '"Open Sans", sans-serif',
+        lineHeight: '25px',
         image: getImage(data.primaryContentImage, data.title),
         imageLocation: 'left',
         title: data.title ? data.title : '',
