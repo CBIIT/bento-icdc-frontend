@@ -96,7 +96,7 @@ const cartView = ({
     return css;
   }
 
-  const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_id');
+  const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_uuid');
 
   const deleteColumn = [{
     name: 'Remove',
