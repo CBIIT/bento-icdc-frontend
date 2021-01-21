@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { customCasesTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV } from './tableDownloadCSV';
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
@@ -119,6 +120,8 @@ export const tabContainers = [
     tableID: 'case_tab_table',
     selectableRows: true,
     tabIndex: '0',
+    tableDownloadCSV: customCasesTabDownloadCSV,
+    viewColumns: true,
     downloadFileName: 'Bento_Dashboard_cases_download',
     headerPagination: true,
     footerPagination: true,
@@ -228,6 +231,8 @@ export const tabContainers = [
     disableRowSelection: 'type2',
     buttonText: 'Add Selected Files',
     tableID: 'sample_tab_table',
+    tableDownloadCSV: customSamplesTabDownloadCSV,
+    viewColumns: true,
     selectableRows: true,
     tabIndex: '1',
     downloadFileName: 'Bento_Dashboard_cases_download',
@@ -332,7 +337,8 @@ export const tabContainers = [
     disableRowSelection: 'type3',
     tableID: 'file_tab_table',
     selectableRows: true,
-
+    tableDownloadCSV: customFilesTabDownloadCSV,
+    viewColumns: true,
     tabIndex: '2',
     downloadFileName: 'Bento_Dashboard_cases_download',
     headerPagination: true,

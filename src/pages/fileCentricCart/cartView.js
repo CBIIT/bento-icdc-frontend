@@ -28,7 +28,7 @@ import TableThemeProvider from './cartTableThemeConfig';
 import GA from '../../utils/googleAnalytics';
 
 const cartView = ({
-  classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading,
+  classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
 }) => {
   const [modalStatus, setModalStatus] = React.useState(false);
   const [TopMessageStatus, setTopMessageStatus] = React.useState(false);
@@ -232,9 +232,10 @@ const cartView = ({
                   overviewDesc={GET_MY_CART_DATA_QUERY_DESC}
                   paginationAPIField="filesInList"
                   paginationAPIFieldDesc="filesInListDesc"
-                  queryCustomVaribles={{ file_ids: fileIDs }}
+                  queryCustomVaribles={{ uuids: fileIDs }}
                   defaultSortCoulmn={defaultSortCoulmn}
                   defaultSortDirection={defaultSortDirection}
+                  tableDownloadCSV={tableDownloadCSV}
                 />
               </TableThemeProvider>
             </div>
