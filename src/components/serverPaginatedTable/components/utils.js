@@ -25,6 +25,7 @@ export function createFileName(fileName) {
 
 export function convertToCSV(jsonse, keysToInclude, header) {
   const objArray = jsonse;
+  // To Do empty object just print headers
   const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
   let str = '';
   array.map((entry, index) => {
