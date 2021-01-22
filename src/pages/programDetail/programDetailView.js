@@ -18,7 +18,6 @@ import {
   pageData as ProgramImageConfig,
 } from '../../bento/programData';
 import redirectToStudy from '../../utils/utils';
-
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 
 const ProgramView = ({ classes, data }) => {
