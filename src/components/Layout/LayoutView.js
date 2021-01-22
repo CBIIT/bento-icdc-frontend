@@ -16,6 +16,7 @@ import Programs from '../../pages/programs/programsController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
 import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 import GA from '../../utils/googleAnalytics';
+import StudyDetail from '../../pages/study/studyDetailController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -27,7 +28,6 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <CssBaseline />
     <HashRouter>
       <>
-
         <LinkBar />
         <Header />
         <NavBar />
@@ -42,6 +42,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/ICDC/" component={Home} />
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
+            <Route path="/study/:id" component={StudyDetail} />
             <Route path="/studies" component={Studies} />
             <Route path="/cases" component={Dashboard} />
             <Route path="/fileCentricCart" component={Cart} />
