@@ -17,24 +17,18 @@ import {
 import {
   pageData as ProgramImageConfig,
 } from '../../bento/programData';
-import {
-  singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
-} from '../dashboardTab/store/dashboardReducer';
+// import {
+//   singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
+// } from '../dashboardTab/store/dashboardReducer';
+import redirectToStudy from '../../utils/utils';
+
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 
 const ProgramView = ({ classes, data }) => {
   const programDetail = data.program[0];
 
   const redirectTo = (study) => {
-    setSideBarToLoading();
-    setDashboardTableLoading();
-    singleCheckBox([{
-      datafield: 'study_code',
-      groupName: 'Study',
-      isChecked: true,
-      name: study,
-      section: 'Filter By Cases',
-    }]);
+    redirectToStudy(study.rowData[1]);
   };
 
   const stat = {
