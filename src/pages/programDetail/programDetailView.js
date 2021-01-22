@@ -17,9 +17,6 @@ import {
 import {
   pageData as ProgramImageConfig,
 } from '../../bento/programData';
-// import {
-//   singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
-// } from '../dashboardTab/store/dashboardReducer';
 import redirectToStudy from '../../utils/utils';
 
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
