@@ -3,99 +3,21 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import Snackbar from '@material-ui/core/Snackbar';
-import MUIDataTable from 'mui-datatables';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
-import StatsView from '../../../components/Stats/StatsView';
-import { Typography } from '../../../components/Wrappers/Wrappers';
-import { customSorting } from '../../../utils/dashboardUtilFunctions';
-import cn from '../../../utils/classNameConcat';
-import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/store/dashboardAction';
-import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
-import SelectedFilesView from '../../../components/FileGridWithCart';
-import { FileOnRowsSelect, FileDisableRowSelection } from '../../../utils/fileTable';
-import FileColumns from './fileConfig';
-
-function studyDetailSorting(a, b) {
-  if (b && !a) {
-    return -1;
-  }
-  if (!b && a) {
-    return 1;
-  }
-  const aNumber = a.match(/(\d+)/) ? a.match(/(\d+)/)[0] : undefined;
-  const bNumber = b.match(/(\d+)/) ? b.match(/(\d+)/)[0] : undefined;
-  if (aNumber && bNumber) {
-    if (parseInt(bNumber, 10) > parseInt(aNumber, 10)) {
-      return -1;
-    }
-    if (parseInt(bNumber, 10) < parseInt(aNumber, 10)) {
-      return 1;
-    }
-  }
-
-  return customSorting(a, b, 'alphabetical', 0);
-}
-
-const columns = [
-  { name: 'arm', label: 'Arms' },
-  {
-    name: 'description',
-    label: 'Description',
-    options: {
-      customBodyRender: (value) => (
-        value.split('#').map((desc) => (desc === '' ? '' : <li style={{ listStyleType: 'none' }}>{desc}</li>))
-      ),
-    },
-  },
-  {
-    name: 'does',
-    label: 'Cohorts',
-    options: {
-      customBodyRender: (value) => (
-        value.split('#').map((desc) => (desc === '' ? '' : <li style={{ listStyleType: 'none' }}>{desc}</li>))
-      ),
-    },
-  },
-];
-
-const options = (classes) => ({
-  selectableRows: false,
-  search: false,
-  filter: false,
-  searchable: false,
-  print: false,
-  download: true,
-  downloadOptions: {
-    filename: 'tableDownload.csv',
-    filterOptions: {
-      useDisplayedColumnsOnly: true,
-    },
-  },
-  viewColumns: true,
-  pagination: true,
-  customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-    <TableFooter>
-      <TableRow>
-        <TablePagination
-          className={classes.root}
-          count={count}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-          // eslint-disable-next-line no-shadow
-          onChangePage={(_, page) => changePage(page)}
-        />
-      </TableRow>
-    </TableFooter>
-  ),
-});
+import {
+  CustomDataTable, getOptions, cn, getColumns,
+} from 'bento-components';
+import Snackbar from '../../components/Snackbar';
+import StatsView from '../../components/Stats/StatsView';
+import GridWithFooter from '../../components/GridWithFooter/GridView';
+import { Typography } from '../../components/Wrappers/Wrappers';
+import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
+import { studyDetailSorting, customSorting, fromArmTOCohorDoes } from './utils';
+import filterCasePageOnStudyCode from '../../utils/utils';
+import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import {
+  table1, table2, tooltipContent, headerIcon,
+} from '../../bento/studyDetailsData';
 
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
@@ -111,58 +33,13 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfBiospecimenAliquots: data.aliguotCountOfStudy,
   };
 
-  const initDashboardStatus = () => (dispatch) => Promise.resolve(
-    dispatch(fetchDataForDashboardDataTable()),
-  );
-
-  const dispatch = useDispatch();
-  const redirectTo = () => {
-    dispatch(initDashboardStatus()).then(() => {
-      dispatch(singleCheckBox([{
-        groupName: 'Study',
-        name: studyData.clinical_study_designation,
-        datafield: 'study_code',
-        isChecked: true,
-      }]));
-    });
-  };
-
-  function fromArmTOCohorDoes(cohorts, cohortDosing) {
-    const cohortAndDosing = cohortDosing;
-    let arrayDoes = [];
-    const arrayCohortDes = [];
-    // get cohort_does and cohort_description
-    cohorts.forEach((cohort) => {
-      // get cohort_does
-      if (cohort.cohort_dose
-              && cohort.cohort_dose !== ''
-              && cohort.cohort_dose !== null) {
-        arrayDoes.push(cohort.cohort_dose);
-      }
-      // get cohort_description
-      if (cohort.cohort_description
-              && cohort.cohort_description !== ''
-                && cohort.cohort_description !== null) {
-        arrayCohortDes.push(cohort.cohort_description);
-      }
-    });
-    if (arrayDoes.length === 0) {
-      if (arrayCohortDes.length === 0) {
-        cohortAndDosing.does = '';
-      } else {
-        // replace cohort does with cohort desc
-        arrayDoes = arrayCohortDes;
-        cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
-      }
-    } else {
-      cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
-    }
-    return cohortAndDosing;
-  }
+  React.useEffect(() => {
+    fetchDataForDashboardTabDataTable();
+  }, []);
 
   const cohortAndDosingTableData = [];
-  const noArmMessage = 'This study is not divided into arms';
-  const noCohortMessage = 'This study is not divided into cohorts';
+  const { noArmMessage } = table1;
+  const { noCohortMessage } = table1;
   if (!studyData.cohorts || studyData.cohorts.length === 0) {
   // no cohort under studyData
     if (studyData.study_arms && studyData.study_arms.length !== 0) {
@@ -225,38 +102,26 @@ const StudyDetailView = ({ classes, data }) => {
     value: 0,
   });
 
-  function openSnack(value, action) {
-    setsnackbarState({ open: true, value, action });
+  function openSnack(value) {
+    setsnackbarState({ open: true, value, action: 'added' });
   }
   function closeSnack() {
     setsnackbarState({ open: false });
   }
 
+  const fileTableData = data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
+    const cFile = { ...file };
+    cFile.parent = 'Study';
+    cFile.studyDesignation = studyData.clinical_study_designation;
+    return cFile;
+  });
   return (
     <>
       <Snackbar
-        className={classes.snackBar}
-        open={snackbarState.open}
-        onClose={closeSnack}
+        snackbarState={snackbarState}
+        closeSnack={closeSnack}
         autoHideDuration={3000}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        message={(
-          <div className={classes.snackBarMessage}>
-            <span className={classes.snackBarMessageIcon}>
-              <SuccessOutlinedIcon />
-              {' '}
-            </span>
-            <span className={classes.snackBarText}>
-              {snackbarState.value}
-              {'    '}
-              File(s) successfully
-              {' '}
-              {snackbarState.action}
-              {' '}
-              your files
-            </span>
-          </div>
-)}
+        classes={classes}
       />
 
       <StatsView data={stat} />
@@ -264,7 +129,7 @@ const StudyDetailView = ({ classes, data }) => {
         <div className={classes.header}>
           <div className={classes.logo}>
             <img
-              src={icon}
+              src={headerIcon}
               alt="ICDC case detail header logo"
             />
 
@@ -295,7 +160,7 @@ const StudyDetailView = ({ classes, data }) => {
               <Link
                 className={classes.headerButtonLink}
                 to={(location) => ({ ...location, pathname: '/cases' })}
-                onClick={() => redirectTo()}
+                onClick={() => filterCasePageOnStudyCode(studyData.clinical_study_designation)}
               >
                 {' '}
                 <span className={classes.headerButtonLinkText}> View </span>
@@ -314,7 +179,7 @@ const StudyDetailView = ({ classes, data }) => {
 
         <div className={classes.detailContainer}>
 
-          <Grid container spacing={8}>
+          <Grid container>
             <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
@@ -333,7 +198,7 @@ const StudyDetailView = ({ classes, data }) => {
                   <div><hr className={classes.hrLine} /></div>
                 </Grid>
 
-                <Grid container spacing={8} className={classes.detailContainerItems}>
+                <Grid container className={classes.detailContainerItems}>
                   <Grid item xs={12} className={classes.detailContainerItem}>
                     <span className={classes.title}> Study Type:</span>
                   </Grid>
@@ -369,7 +234,7 @@ const StudyDetailView = ({ classes, data }) => {
                       <span className={classes.detailContainerHeader}>DIAGNOSES</span>
                     </Grid>
                   </Grid>
-                  <Grid container spacing={8} className={classes.paddingTop12}>
+                  <Grid container className={classes.paddingTop12}>
                     {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis) => (
                       <Grid item xs={12}>
                         <span className={classes.content}>
@@ -387,7 +252,7 @@ const StudyDetailView = ({ classes, data }) => {
                       <span className={classes.detailContainerHeader}>Case File Types</span>
                     </Grid>
                   </Grid>
-                  <Grid container spacing={8} className={classes.paddingTop12}>
+                  <Grid container className={classes.paddingTop12}>
                     {caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
                       <Grid item xs={12}>
                         <span className={classes.content}>{fileType}</span>
@@ -407,15 +272,15 @@ const StudyDetailView = ({ classes, data }) => {
             <span className={classes.tableHeader}>ARMS AND COHORTS</span>
           </div>
           <Grid item xs={12}>
-            <Grid container spacing={8}>
+            <Grid container>
               <Grid item xs={12} id="table_cohort_dosing">
                 <Typography>
-                  <MUIDataTable
+                  <CustomDataTable
                     data={cohortAndDosingTableData.sort(
                       (a, b) => studyDetailSorting(a.arm, b.arm),
                     )}
-                    columns={columns}
-                    options={options(classes)}
+                    columns={table1.columns}
+                    options={getOptions(table1, classes)}
                   />
                 </Typography>
               </Grid>
@@ -434,20 +299,24 @@ const StudyDetailView = ({ classes, data }) => {
             </div>
           </Grid>
           <Grid item xs={12} id="table_associated_files">
-            <SelectedFilesView
-              Columns={FileColumns}
-              customOnRowsSelect={FileOnRowsSelect}
+            <GridWithFooter
+              data={fileTableData}
+              title=""
+              columns={getColumns(table2, classes, fileTableData)}
+              options={getOptions(table2, classes)}
+              customOnRowsSelect={table2.customOnRowsSelect}
               openSnack={openSnack}
               closeSnack={closeSnack}
-              disableRowSelection={FileDisableRowSelection}
-              bottonText="Add Selected Files to My Files"
-              data={data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
-                const cFile = { ...file };
-                cFile.parent = 'Study';
-                cFile.studyDesignation = studyData.clinical_study_designation;
-                return cFile;
-              })}
+              disableRowSelection={table2.disableRowSelection}
+              buttonText={table2.buttonText}
+              saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
+              ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
+              DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
+              tooltipMessage={table2.tooltipMessage}
+              tooltipContent={tooltipContent}
+              showtooltip
             />
+
           </Grid>
         </div>
       </div>
