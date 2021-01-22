@@ -52,6 +52,7 @@ const TabView = ({
   filteredSubjectIds,
   defaultSortCoulmn,
   defaultSortDirection,
+  tableDownloadCSV,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -250,6 +251,7 @@ const TabView = ({
             queryCustomVaribles={{ case_ids: filteredSubjectIds }}
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
+            tableDownloadCSV={tableDownloadCSV}
           />
         </Grid>
       </Grid>
