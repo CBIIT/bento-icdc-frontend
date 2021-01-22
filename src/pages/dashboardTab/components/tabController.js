@@ -266,6 +266,7 @@ const tabController = (classes) => {
         defaultSortDirection={container.defaultSortDirection || 'asc'}
         dataKey={container.dataKey}
         filteredSubjectIds={filteredSubjectIds}
+        tableDownloadCSV={container.tableDownloadCSV || false}
       />
     </TabContainer>
   ));
