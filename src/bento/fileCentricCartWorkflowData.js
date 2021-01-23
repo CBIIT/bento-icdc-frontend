@@ -26,7 +26,7 @@ export const myFilesPageData = {
   tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
   tooltipAlt: 'tooltip icon',
   tooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
-  textareaPlaceholder: 'Please add a description for the XML file you are about to download.',
+  textareaPlaceholder: 'User Comments',
   errorMessage: 'An error has occurred in loading CART',
   popUpWindow: {
     showNumberOfFileBeRemoved: true,
@@ -40,7 +40,7 @@ export const myFilesPageData = {
 };
 
 export const manifestData = {
-  keysToInclude: ['study_code', 'subject_id', 'file_name', 'file_id', 'md5sum'],
+  keysToInclude: ['study_code', 'case_id', 'file_name', 'file_uuid', 'md5sum'],
   header: ['Study Code', 'Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'],
 };
 
@@ -105,8 +105,9 @@ export const table = {
 
 // --------------- GraphQL query - Retrieve selected cases info --------------
 export const GET_MY_CART_DATA_QUERY = gql`
-query filesInList($uuids: [String]){
-  filesInList(uuids: $uuids){
+query filesInList($uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+  filesInList(uuids: $uuids, offset: $offset,first: $first, order_by: $order_by){
+      file_name
       file_type
       association
       file_description
@@ -123,17 +124,19 @@ query filesInList($uuids: [String]){
 
 // --------------- GraphQL query - Retrieve selected files info Desc --------------
 export const GET_MY_CART_DATA_QUERY_DESC = gql`
-query filesInListDesc($file_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="") {
-  filesInListDesc(file_ids: $file_ids, offset: $offset,first: $first, order_by: $order_by) {
-        study_code
-        subject_id
-        file_name
-        file_type
-        association
-        file_description
-        file_format
-        file_size
-        file_id
-        md5sum
-    }
+query filesInListDesc($uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+  filesInListDesc(uuids: $uuids, offset: $offset,first: $first, order_by: $order_by){
+      file_name
+      file_type
+      association
+      file_description
+      file_format
+      file_size
+      case_id
+      breed
+      diagnosis
+      study_code
+      file_uuid
+      md5sum
+ }
 }`;
