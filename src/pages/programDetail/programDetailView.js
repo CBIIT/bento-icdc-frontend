@@ -17,14 +17,14 @@ import {
 import {
   pageData as ProgramImageConfig,
 } from '../../bento/programData';
-import redirectToStudy from '../../utils/utils';
+import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 
 const ProgramView = ({ classes, data }) => {
   const programDetail = data.program[0];
 
   const redirectTo = (study) => {
-    redirectToStudy(study.rowData[1]);
+    filterCasePageOnStudyCode(study.rowData[1]);
   };
 
   const stat = {
