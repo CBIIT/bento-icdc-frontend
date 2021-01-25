@@ -36,7 +36,7 @@ export const pageData = {
       {
         dataField: 'clinical_study_designation',
         header: 'Study Code',
-        link: '/program/{program_id}',
+        link: '/study/{clinical_study_designation}',
         display: true,
       },
       {

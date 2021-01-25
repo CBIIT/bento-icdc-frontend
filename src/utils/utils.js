@@ -5,7 +5,7 @@ import {
 /*
  * redirect to cases page and filter by study code
  */
-function redirectToStudy(study) {
+function filterCasePageOnStudyCode(study) {
   setSideBarToLoading();
   setDashboardTableLoading();
   singleCheckBox([{
@@ -17,4 +17,4 @@ function redirectToStudy(study) {
   }]);
 }
 
-export default redirectToStudy;
+export default filterCasePageOnStudyCode;
