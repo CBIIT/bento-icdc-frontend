@@ -39,7 +39,7 @@ const cartView = ({
       .query({
         query: GET_MY_CART_DATA_QUERY,
         variables: {
-          first: fileIDs.length, ...{ file_ids: fileIDs },
+          first: fileIDs.length, ...{ uuids: fileIDs },
         },
       })
       .then((result) => result.data.filesInList);
