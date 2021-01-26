@@ -16,7 +16,7 @@ import {
 } from '../../bento/caseDetailsData';
 import Snackbar from '../../components/Snackbar';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
-import redirectToStudy from '../../utils/utils';
+import filterCasePageOnStudyCode from '../../utils/utils';
 
 const CaseDetail = ({ classes, data }) => {
   React.useEffect(() => {
@@ -45,7 +45,7 @@ const CaseDetail = ({ classes, data }) => {
   }, {
     name: `${caseDetail.study.clinical_study_designation} CASES`,
     to: '/cases',
-    onClick: () => redirectToStudy(caseDetail.study.clinical_study_designation),
+    onClick: () => filterCasePageOnStudyCode(caseDetail.study.clinical_study_designation),
     isALink: true,
   }, {
     name: caseDetail.case_id,

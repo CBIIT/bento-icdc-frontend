@@ -39,7 +39,7 @@ const cartView = ({
       .query({
         query: GET_MY_CART_DATA_QUERY,
         variables: {
-          first: fileIDs.length, ...{ file_ids: fileIDs },
+          first: fileIDs.length, ...{ uuids: fileIDs },
         },
       })
       .then((result) => result.data.filesInList);
@@ -398,8 +398,8 @@ const styles = (theme) => ({
   },
   messageTop: {
     position: 'absolute',
-    right: '33px',
-    top: '-128px',
+    left: '5px',
+    top: '-140px',
     zIndex: '400',
   },
   manifestButtonGroup: {
@@ -528,6 +528,7 @@ const styles = (theme) => ({
     padding: '0 16px',
   },
   buttonGroup: {
+    position: 'relative',
     paddingBottom: '10px',
   },
 });

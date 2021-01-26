@@ -67,20 +67,24 @@ const GridView = ({
   };
 
   const initSaveButtonDefaultStyle = (button) => {
-    // eslint-disable-next-line no-param-reassign
-    button.current.disabled = true;
-    buildButtonStyle(button, saveButtonDefaultStyle);
+    if (button && button.current != null) {
+      // eslint-disable-next-line no-param-reassign
+      button.current.disabled = true;
+      buildButtonStyle(button, saveButtonDefaultStyle);
+    }
   };
 
   const updateActiveSaveButtonStyle = (flag, button) => {
-    if (flag) {
+    if (button && button.current != null) {
+      if (flag) {
       // eslint-disable-next-line no-param-reassign
-      button.current.disabled = true;
-      buildButtonStyle(button, ActiveSaveButtonDefaultStyle);
-    } else {
+        button.current.disabled = true;
+        buildButtonStyle(button, ActiveSaveButtonDefaultStyle);
+      } else {
       // eslint-disable-next-line no-param-reassign
-      button.current.disabled = false;
-      buildButtonStyle(button, DeactiveSaveButtonDefaultStyle);
+        button.current.disabled = false;
+        buildButtonStyle(button, DeactiveSaveButtonDefaultStyle);
+      }
     }
   };
 
@@ -241,6 +245,20 @@ const GridView = ({
     </>
   );
 
+  const downloadButton = (
+    <div className={classes.topButtonGroup} style={divStyle()}>
+      <button
+        type="button"
+        style={btnStyle}
+        ref={saveButton}
+        onClick={exportFiles}
+      >
+        { buttonText }
+      </button>
+      {showtooltip ? tooltipComponent : ''}
+    </div>
+  );
+
   return (
     <div>
       <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
@@ -253,19 +271,8 @@ const GridView = ({
             options={finalOptions}
           />
         </Grid>
-
       </Grid>
-      <div className={classes.topButtonGroup} style={divStyle()}>
-        <button
-          type="button"
-          style={btnStyle}
-          ref={saveButton}
-          onClick={exportFiles}
-        >
-          { buttonText }
-        </button>
-        {showtooltip ? tooltipComponent : ''}
-      </div>
+      {data.length > 0 ? downloadButton : ''}
     </div>
   );
 };
