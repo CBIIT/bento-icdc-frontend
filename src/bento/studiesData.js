@@ -28,10 +28,6 @@ export const pageData = {
     downloadFileName: 'ICDC_Studies_data',
     // Set 'selectableRows' to true to show the row selection
     selectableRows: false,
-    // A maximum of 10 columns are allowed
-    filterOptions: {
-      useDisplayedColumnsOnly: true,
-    },
     columns: [
       {
         dataField: 'clinical_study_designation',
