@@ -17,7 +17,7 @@ const ProgramCard = ({
 
   return (
     <div className={classes.detailContainer}>
-      <Grid container>
+      <Grid>
         <Grid item lg={12} md={12} sm={12} xs={12} className={classes.header}>
           {data.program_name}
         </Grid>
@@ -101,6 +101,7 @@ const styles = (theme) => ({
     lineHeight: '17px',
     minHeight: '50px',
     paddingBottom: '10px',
+    margin: '0px',
   },
 
   paddingLeft15: {
@@ -161,10 +162,12 @@ const styles = (theme) => ({
   detailContainerLeft: {
     padding: '20px 2px 30px 32px !important',
     minHeight: '230px',
+    float: 'left',
   },
   detailContainerRight: {
     padding: '0px !important',
     minHeight: '230px',
+    float: 'right',
   },
   tableContainer: {
     background: '#f3f3f3',

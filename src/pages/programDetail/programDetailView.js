@@ -101,7 +101,7 @@ const ProgramView = ({ classes, data }) => {
             <span className={classes.tableHeader}>STUDIES IN THIS PROGRAM</span>
           </div>
           <Grid item xs={12}>
-            <Grid container spacing={8}>
+            <Grid>
               <Grid item xs={12} id="table_studies">
                 <CustomDataTable
                   data={data.studiesByProgramId}
@@ -137,7 +137,7 @@ const styles = (theme) => ({
     paddingBottm: '17px',
   },
   container: {
-    paddingTop: '120px',
+    paddingTop: '80px',
     fontFamily: 'Raleway, sans-serif',
     background: 'white',
   },
@@ -245,11 +245,11 @@ const styles = (theme) => ({
     padding: ' 35px 2px 63px 2px !important',
   },
   detailContainerLeft: {
-    padding: '20px 0px 30px 2px !important',
+    padding: '20px 0px 30px 32px !important',
     minHeight: '100px',
   },
   detailContainerRight: {
-    padding: '20px 20px 30px 20px !important',
+    padding: '20px 20px 30px 2px !important',
     minHeight: '330px',
   },
   tableContainer: {

@@ -11,7 +11,7 @@ const customStyle = {
   },
   headerBar: {
     top: '20px',
-    zIndex: '5',
+    zIndex: '999',
   },
 };
 

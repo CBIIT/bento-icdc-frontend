@@ -2,9 +2,11 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import layout from '../components/Layout/LayoutState';
+import stats from '../components/Stats/StatsState';
 
 const reducers = {
   layout,
+  stats,
 };
 
 const loggerMiddleware = createLogger();
