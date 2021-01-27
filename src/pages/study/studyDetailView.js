@@ -27,10 +27,10 @@ const StudyDetailView = ({ classes, data }) => {
     .filter((f) => !studyFileTypes.includes(f)))];
   const stat = {
     numberOfStudies: 1,
-    numberOfCases: data.caseCountOfProgram,
-    numberOfSamples: data.sampleCountOfProgram,
-    numberOfFiles: data.fileCountOfProgram,
-    numberOfAliquots: data.aliguotCountOfProgram ? data.aliguotCountOfProgram : 0,
+    numberOfCases: data.caseCountOfStudy,
+    numberOfSamples: data.sampleCountOfStudy,
+    numberOfFiles: data.fileCountOfStudy,
+    numberOfAliquots: data.aliguotCountOfStudy ? data.aliguotCountOfStudy : 0,
   };
 
   React.useEffect(() => {
