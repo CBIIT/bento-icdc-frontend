@@ -4,44 +4,48 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { cn } from 'bento-components';
+import Stats from '../../components/Stats/AllStatsController';
 import { pageData } from '../../bento/programData';
 import ProgramCard from '../../components/ProgramCard/programCard';
 
 const Programs = ({ classes, data }) => (
-  <div className={classes.container}>
-    <Grid item lg={12} md={12} sm={12} xs={12} className={classes.header}>
-      <Grid item lg={12} md={12} sm={12} xs={12} className={classes.logo}>
-        <img
-          src={pageData.headerIcon}
-          alt="ICDC case detail header logo"
-        />
-      </Grid>
-      <Grid item lg={12} md={12} sm={12} xs={12} className={classes.headerTitle}>
-        <Grid
-          item
-          lg={12}
-          md={12}
-          sm={12}
-          xs={12}
-          className={cn(classes.headerMainTitle, classes.marginTop23)}
-        >
-          <span>
-            {pageData.headerTitle }
-          </span>
+  <>
+    <Stats />
+    <div className={classes.container}>
+      <Grid item lg={12} md={12} sm={12} xs={12} className={classes.header}>
+        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.logo}>
+          <img
+            src={pageData.headerIcon}
+            alt="ICDC case detail header logo"
+          />
+        </Grid>
+        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.headerTitle}>
+          <Grid
+            item
+            lg={12}
+            md={12}
+            sm={12}
+            xs={12}
+            className={cn(classes.headerMainTitle, classes.marginTop23)}
+          >
+            <span>
+              {pageData.headerTitle }
+            </span>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
-    <div className={classes.detailContainer}>
+      <div className={classes.detailContainer}>
 
-      <Grid container className={classes.gridContainer}>
-        {data.program.map((programCardData) => (
-          <Grid item lg={12} md={12} sm={12} xs={12} key={programCardData.program_name}>
-            <ProgramCard data={programCardData} />
-          </Grid>
-        ))}
-      </Grid>
+        <Grid container className={classes.gridContainer}>
+          {data.program.map((programCardData) => (
+            <Grid item lg={12} md={12} sm={12} xs={12} key={programCardData.program_name}>
+              <ProgramCard data={programCardData} />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
     </div>
-  </div>
+  </>
 );
 
 const styles = (theme) => ({
@@ -59,7 +63,7 @@ const styles = (theme) => ({
     width: 'calc(100% + 8px) !important',
   },
   container: {
-    paddingTop: '120px',
+    paddingTop: '80px',
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '32px',
     paddingRight: '32px',

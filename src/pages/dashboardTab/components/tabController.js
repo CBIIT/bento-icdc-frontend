@@ -45,6 +45,10 @@ const tabController = (classes) => {
 
   const filteredSubjectIds = useSelector((state) => (state.dashboardTab
       && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : []));
+  const filteredSampleIds = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : []));
+  const filteredFileIds = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.filteredFileIds ? state.dashboardTab.filteredFileIds : []));
 
   const [TopMessageStatus, setTopMessageStatus] = React.useState({
     text: tooltipContent[currentTab],
@@ -266,6 +270,8 @@ const tabController = (classes) => {
         defaultSortDirection={container.defaultSortDirection || 'asc'}
         dataKey={container.dataKey}
         filteredSubjectIds={filteredSubjectIds}
+        filteredSampleIds={filteredSampleIds}
+        filteredFileIds={filteredFileIds}
         tableDownloadCSV={container.tableDownloadCSV || false}
       />
     </TabContainer>
