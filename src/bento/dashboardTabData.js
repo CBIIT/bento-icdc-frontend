@@ -864,8 +864,8 @@ filterCaseCountByFileFormat (
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
-query fileOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-  fileOverview(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {
+query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
     file_name
     file_type
     association
@@ -882,8 +882,8 @@ query fileOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $ord
   `;
 
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-  query fileOverviewDesc($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-    fileOverviewDesc(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {    
+  query fileOverviewDesc($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+    fileOverviewDesc(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {    
       file_name
       file_type
       association
@@ -902,8 +902,8 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
-  query sampleOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  sampleOverview(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {
+  query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+  sampleOverview(sample_ids: $sample_ids, offset: $offset,first: $first, order_by: $order_by) {
     sample_id
     case_id
     breed
@@ -988,10 +988,26 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
 }
   `;
 
-export const GET_ALL_FILEIDS_FOR_SELECT_ALL = gql`
+export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
   query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
     caseOverviewPaged(case_ids: $case_ids, first: $first) {
         files 
     }
+}
+  `;
+
+export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
+query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+  sampleOverview(sample_ids: $sample_ids, offset: $offset,first: $first, order_by: $order_by) {
+    files
+}
+}
+  `;
+
+export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
+query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+    file_uuid
+  }
 }
   `;
