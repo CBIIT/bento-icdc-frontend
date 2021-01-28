@@ -8,10 +8,13 @@ import {
   pageData,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
+import filterCasePageOnStudyCode from '../../utils/utils';
 
 const Studies = ({ classes, data }) => {
   // TBD
-  const redirectTo = '';
+  const redirectTo = (study) => {
+    filterCasePageOnStudyCode(study.rowData[0]);
+  };
 
   return (
     <>
