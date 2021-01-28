@@ -7,10 +7,13 @@ import { CustomDataTable, getOptions, getColumns } from 'bento-components';
 import {
   pageData,
 } from '../../bento/studiesData';
+import filterCasePageOnStudyCode from '../../utils/utils';
 
 const Studies = ({ classes, data }) => {
   // TBD
-  const redirectTo = '';
+  const redirectTo = (study) => {
+    filterCasePageOnStudyCode(study.rowData[0]);
+  };
 
   return (
     <>
