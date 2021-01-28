@@ -7,6 +7,7 @@ import { CustomDataTable, getOptions, getColumns } from 'bento-components';
 import {
   pageData,
 } from '../../bento/studiesData';
+import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
 
 const Studies = ({ classes, data }) => {
@@ -17,6 +18,7 @@ const Studies = ({ classes, data }) => {
 
   return (
     <>
+      <Stats />
       <div className={classes.tableContainer}>
         <div className={classes.container}>
           <div className={classes.header}>
@@ -115,7 +117,7 @@ const styles = (theme) => ({
     float: 'left',
     marginLeft: '-13px',
     width: '83px',
-    zIndex: '999',
+    zIndex: '10',
   },
   tableContainer: {
     background: '#eee',

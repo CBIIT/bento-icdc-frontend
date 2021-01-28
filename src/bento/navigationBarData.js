@@ -5,6 +5,7 @@ export const navBarstyling = {
     padding: '9px 20px 0px 20px',
     marginTop: '120px',
     fontFamily: 'Raleway, sans-serif',
+    activeLabel: '2px solid  #35b9eb',
   },
   dropDownIcon: {
     displayIcon: true,

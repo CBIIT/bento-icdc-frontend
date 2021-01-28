@@ -30,7 +30,7 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfCases: data.caseCountOfStudy,
     numberOfSamples: data.sampleCountOfStudy,
     numberOfFiles: data.fileCountOfStudy,
-    numberOfBiospecimenAliquots: data.aliguotCountOfStudy,
+    numberOfAliquots: data.aliguotCountOfStudy ? data.aliguotCountOfStudy : 0,
   };
 
   React.useEffect(() => {
@@ -339,7 +339,7 @@ const styles = (theme) => ({
     paddingBottm: '17px',
   },
   container: {
-    paddingTop: '120px',
+    paddingTop: '80px',
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '32px',
     paddingRight: '32px',
