@@ -515,7 +515,7 @@ const styles = (theme) => ({
     margin: '3px 0px',
   },
   container: {
-    paddingTop: '120px',
+    paddingTop: '84px',
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '32px',
     paddingRight: '32px',
