@@ -19,7 +19,7 @@ const CustomToolbar = ({
       .query({
         query: tableDownloadCSV.query,
         variables: {
-          first: 1000,
+          first: 10000,
           ...queryCustomVaribles,
         },
       })
