@@ -241,7 +241,7 @@ type ProgramStudies {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.6'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.7'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
@@ -1032,14 +1032,14 @@ type QueryType {
   filesOfCase(case_id: String!): [FilesOfCase] @cypher(statement: "MATCH (f:file)-[*]->(c:case{case_id: $case_id}) WITH DISTINCT(f) AS f MATCH (f)-->(parent) RETURN f.file_status AS file_status,f.file_name AS file_name ,f.file_type AS file_type,f.file_description AS file_description,f.file_format AS file_format,f.file_size AS file_size,f.md5sum AS md5sum,f.uuid AS uuid,f.file_location AS file_location, head(labels(parent)) AS parent, $case_id AS case_id")
   filesOfCases(case_ids: [String!]!): [FilesOfCase] @cypher(statement: "MATCH (f:file)-[*]->(c:case) WITH DISTINCT(f) AS f, c MATCH (f)-->(parent) WHERE c.case_id IN $case_ids RETURN f.file_status AS file_status,f.file_name AS file_name ,f.file_type AS file_type,f.file_description AS file_description,f.file_format AS file_format,f.file_size AS file_size,f.md5sum AS md5sum,f.uuid AS uuid,f.file_location AS file_location, head(labels(parent)) AS parent, c.case_id AS case_id")
 
-  programsAndStudies(case_ids: [String] = []): [ProgramStudies] @cypher(statement: """
+  programsAndStudies(case_ids: [String]): [ProgramStudies] @cypher(statement: """
     MATCH (p:program)
     OPTIONAL MATCH (p)<-[*]-(c:case)
     WITH DISTINCT c, p
-      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+      WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     WITH p, COUNT(DISTINCT(c)) as caseSize
     MATCH (p)<-[:member_of]-(s:study)<-[*]-(c:case)
-      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+      WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     WITH p, caseSize,
       {study: s.clinical_study_designation, caseSize: COUNT(DISTINCT(c))} as s
     RETURN
