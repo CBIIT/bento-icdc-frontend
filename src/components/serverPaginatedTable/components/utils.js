@@ -37,6 +37,7 @@ export function convertToCSV(jsonse, keysToInclude, header) {
     });
     if (index === 0) {
       str = header.join(',');
+      str += `\r\n${line}\r\n`;
     } else {
       str += `${line}\r\n`;
     }

@@ -24,9 +24,7 @@ import {
   GET_FILES_OVERVIEW_QUERY,
   GET_SAMPLES_OVERVIEW_QUERY,
   GET_CASES_OVERVIEW_QUERY,
-  GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
-  GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
-  GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+  GET_ALL_FILEIDS_SELECT_ALL,
   GET_FILES_OVERVIEW_DESC_QUERY,
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
@@ -259,34 +257,19 @@ export function fetchDataForDashboardTab(
 
 /**
  * Gets all file ids for active subjectIds.
- *
+ * TODO this  functtion can use filtered file IDs except for initial load
  * @param obj fileCoubt
  * @return {json}
  */
 export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
-  const caseIds = getState().filteredSubjectIds;
-  const sampleIds = getState().filteredSampleIds;
-  const fileIds = getState().filteredFileIds;
-  const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[2].title
-    ? GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL
-    : getState().currentActiveTab === tabIndex[1].title
-      ? GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL
-      : GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL;
+  const VARIABLES = getState().filteredSubjectIds;
 
   const fetchResult = await client
     .query({
-      query: SELECT_ALL_QUERY,
-      variables: {
-        case_ids: caseIds, sample_ids: sampleIds, file_uuids: fileIds, first: fileCount,
-      },
+      query: GET_ALL_FILEIDS_SELECT_ALL,
+      variables: { case_ids: VARIABLES, first: fileCount },
     })
-    .then((result) => {
-      const RESULT_DATA = getState().currentActiveTab === tabIndex[2].title ? 'fileOverview' : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverviewPaged';
-      const test = RESULT_DATA === 'fileOverview' ? result.data[RESULT_DATA].map((item) => ({
-        files: [item.file_uuid],
-      })) : result.data[RESULT_DATA] || [];
-      return test;
-    });
+    .then((result) => result.data.caseOverviewPaged);
   return fetchResult;
 }
 
