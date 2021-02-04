@@ -718,7 +718,7 @@ type ProgramStudies {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.5'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.6'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
@@ -742,7 +742,7 @@ type QueryType {
   sampleCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (c:case {case_id: $case_id})<-[*]-(s:sample) RETURN count(distinct(s))")
 
   "Count by group"
-  caseCountByStudyCode(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByStudyCode(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (s:study)<-[:member_of]-(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -750,7 +750,7 @@ type QueryType {
       count(DISTINCT(c)) AS count
   """)
 
-  caseCountByDiagnosis(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByDiagnosis(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (d:diagnosis)-[:of_case]->(c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -758,7 +758,7 @@ type QueryType {
       count(c) AS count
   """)
 
-  caseCountByGender(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByGender(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (d:demographic)-[:of_case]->(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -766,7 +766,7 @@ type QueryType {
       count(c) AS count
   """)
 
-  caseCountByBreed(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByBreed(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (c:case)<-[:of_case]-(d:demographic)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -774,7 +774,7 @@ type QueryType {
       count(c) AS count
   """)
 
-  caseCountByNeuteredStatus(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByNeuteredStatus(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (c:case)<-[:of_case]-(d:demographic)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -782,7 +782,7 @@ type QueryType {
       count(c) AS count
   """)
 
-  caseCountByStageOfDisease(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByStageOfDisease(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (d:diagnosis)-[:of_case]->(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -790,7 +790,7 @@ type QueryType {
       count(c) AS count
   """)
 
-  caseCountByDiseaseSite(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByDiseaseSite(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (d:diagnosis)-[:of_case]->(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -798,7 +798,7 @@ type QueryType {
       count(c) AS count
   """)
 
-  caseCountByStudyType(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByStudyType(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (s:study)<-[:member_of]-(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -806,7 +806,7 @@ type QueryType {
       COUNT(DISTINCT(c)) AS count
   """)
 
-  caseCountByAge(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByAge(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (d:demographic)-[:of_case]->(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -814,7 +814,7 @@ type QueryType {
       COUNT(DISTINCT(c)) AS count ORDER BY group
   """)
 
-  caseCountByDataType(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByDataType(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (f:file)-[*]->(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -822,7 +822,7 @@ type QueryType {
       COUNT(DISTINCT(c)) AS count
   """)
 
-  caseCountByFileFormat(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByFileFormat(case_ids: [String]): [GroupCount] @cypher(statement: """
     MATCH (f:file)-[*]->(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -830,7 +830,7 @@ type QueryType {
       COUNT(DISTINCT(c)) AS count
   """)
 
-  caseCountByProgram(case_ids: [String] = []): [GroupCount] @cypher(statement: """
+  caseCountByProgram(case_ids: [String]): [GroupCount] @cypher(statement: """
     Match (p:program)<-[:member_of]-(s)<-[:member_of]-(c:case)
     WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     RETURN
@@ -1570,7 +1570,7 @@ type QueryType {
              diag AS diagnosis_obj
   """, passThrough:true)
 
-  caseOverviewPaged (case_ids: [String] = [], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
+  caseOverviewPaged (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     OPTIONAL MATCH (s:study)<--(c)
@@ -1614,7 +1614,7 @@ type QueryType {
     LIMIT $first
   """, passThrough: true)
 
-  caseOverviewPagedDesc (case_ids: [String] = [], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
+  caseOverviewPagedDesc (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     OPTIONAL MATCH (s:study)<--(c)
@@ -1838,7 +1838,7 @@ type QueryType {
               samples
   """)
 
-  fileOverview(case_ids: [String] = [], file_uuids: [String]=[], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] @cypher(statement: """
+  fileOverview(case_ids: [String], file_uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] @cypher(statement: """
     MATCH (f:file)
       WHERE ($file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
@@ -1877,7 +1877,7 @@ type QueryType {
     LIMIT $first
   """)
 
-  fileOverviewDesc(case_ids: [String] = [], file_uuids: [String]=[], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] @cypher(statement: """
+  fileOverviewDesc(case_ids: [String], file_uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] @cypher(statement: """
     MATCH (f:file)
       WHERE ($file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
@@ -1916,7 +1916,7 @@ type QueryType {
     LIMIT $first
   """)
 
-  sampleOverview(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] @cypher(statement: """
+  sampleOverview(case_ids: [String], sample_ids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] @cypher(statement: """
     MATCH (s:sample)
       WHERE ($sample_ids IS NULL OR s.sample_id IN $sample_ids)
     OPTIONAL MATCH (s)-[:of_case]->(c:case)
@@ -1958,7 +1958,7 @@ type QueryType {
     LIMIT $first
   """, passThrough: true)
 
-  sampleOverviewDesc(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] @cypher(statement: """
+  sampleOverviewDesc(case_ids: [String], sample_ids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] @cypher(statement: """
     MATCH (s:sample)
       WHERE ($sample_ids IS NULL OR s.sample_id IN $sample_ids)
     OPTIONAL MATCH (s)-[:of_case]->(c:case)
