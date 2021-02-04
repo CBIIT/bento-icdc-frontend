@@ -1015,7 +1015,7 @@ type QueryType {
   filesOfCase(case_id: String!): [FilesOfCase] 
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
 
-  programsAndStudies(case_ids: [String] = []): [ProgramStudies] 
+  programsAndStudies(case_ids: [String]): [ProgramStudies] 
 
 
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
