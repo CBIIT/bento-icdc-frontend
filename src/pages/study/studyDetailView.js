@@ -341,8 +341,8 @@ const styles = (theme) => ({
   container: {
     paddingTop: '80px',
     fontFamily: 'Raleway, sans-serif',
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingLeft: '33px',
+    paddingRight: '33px',
   },
   content: {
     fontSize: '12px',
@@ -369,11 +369,9 @@ const styles = (theme) => ({
     paddingRight: '21px',
     borderBottom: '#81a6b9 4px solid',
     height: '80px',
-    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
   headerTitle: {
-    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
     marginLeft: '110px',
@@ -453,7 +451,6 @@ const styles = (theme) => ({
     width: '100px',
   },
   detailContainer: {
-    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '30px',
     paddingLeft: '36px',
@@ -516,8 +513,7 @@ const styles = (theme) => ({
     paddingTop: '12px',
   },
   tableDiv: {
-    paddingTop: '31px',
-    maxWidth: theme.custom.maxContentWidth,
+    padding: '31px 34px',
     margin: '40px auto auto auto',
   },
 
