@@ -434,69 +434,61 @@ const CaseDetail = ({ classes, data }) => {
 
         {table1.display
           ? (
-            <div className={classes.tableDiv}>
+            <Grid container spacing={4} className={classes.tableDiv}>
               <Grid item xs={12}>
-                <Grid container spacing={4}>
-                  <Grid item xs={12}>
-                    <GridWithFooter
-                      data={data.samplesByCaseId}
-                      title={(
-                        <div className={classes.tableTitle}>
-                          <span className={classes.tableHeader}>{table1.tableTitle}</span>
-                        </div>
+                <GridWithFooter
+                  data={data.samplesByCaseId}
+                  title={(
+                    <div className={classes.tableTitle}>
+                      <span className={classes.tableHeader}>{table1.tableTitle}</span>
+                    </div>
                       )}
-                      columns={getColumns(table1, classes, data, externalLinkIcon)}
-                      options={getOptions(table1, classes)}
-                      customOnRowsSelect={table1.customOnRowsSelect}
-                      openSnack={openSnack}
-                      closeSnack={closeSnack}
-                      disableRowSelection={table1.disableRowSelection}
-                      buttonText={table1.buttonText}
-                      saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
-                      ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
-                      DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
-                      tooltipMessage={table1.tooltipMessage}
-                      tooltipContent={tooltipContent}
-                      showtooltip
-                    />
-                  </Grid>
-                </Grid>
+                  columns={getColumns(table1, classes, data, externalLinkIcon)}
+                  options={getOptions(table1, classes)}
+                  customOnRowsSelect={table1.customOnRowsSelect}
+                  openSnack={openSnack}
+                  closeSnack={closeSnack}
+                  disableRowSelection={table1.disableRowSelection}
+                  buttonText={table1.buttonText}
+                  saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
+                  ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
+                  DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
+                  tooltipMessage={table1.tooltipMessage}
+                  tooltipContent={tooltipContent}
+                  showtooltip
+                />
               </Grid>
-            </div>
+            </Grid>
           ) : ''}
 
         {table2.display
           ? (
             <div id="table_case_detail_samples" className={classes.tableContainer}>
-              <div className={classes.tableDiv}>
+              <Grid container spacing={4} className={classes.tableDiv}>
                 <Grid item xs={12}>
-                  <Grid container spacing={4}>
-                    <Grid item xs={12}>
-                      <GridWithFooter
-                        data={files}
-                        title={(
-                          <div className={classes.tableTitle}>
-                            <span className={classes.tableHeader}>{table2.tableTitle}</span>
-                          </div>
+                  <GridWithFooter
+                    data={files}
+                    title={(
+                      <div className={classes.tableTitle}>
+                        <span className={classes.tableHeader}>{table2.tableTitle}</span>
+                      </div>
                       )}
-                        columns={getColumns(table2, classes, data)}
-                        options={getOptions(table2, classes)}
-                        customOnRowsSelect={table2.customOnRowsSelect}
-                        openSnack={openSnack}
-                        closeSnack={closeSnack}
-                        disableRowSelection={table2.disableRowSelection}
-                        buttonText={table2.buttonText}
-                        saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
-                        ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
-                        DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
-                        tooltipMessage={table2.tooltipMessage}
-                        tooltipContent={tooltipContent}
-                        showtooltip
-                      />
-                    </Grid>
-                  </Grid>
+                    columns={getColumns(table2, classes, data)}
+                    options={getOptions(table2, classes)}
+                    customOnRowsSelect={table2.customOnRowsSelect}
+                    openSnack={openSnack}
+                    closeSnack={closeSnack}
+                    disableRowSelection={table2.disableRowSelection}
+                    buttonText={table2.buttonText}
+                    saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
+                    ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
+                    DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
+                    tooltipMessage={table2.tooltipMessage}
+                    tooltipContent={tooltipContent}
+                    showtooltip
+                  />
                 </Grid>
-              </div>
+              </Grid>
             </div>
           ) : ''}
       </div>
@@ -515,10 +507,11 @@ const styles = (theme) => ({
     margin: '3px 0px',
   },
   container: {
-    paddingTop: '84px',
+    paddingTop: '74px',
     fontFamily: 'Raleway, sans-serif',
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingLeft: '33px',
+    paddingRight: '35px',
+    paddingBottom: '35px',
   },
   content: {
     fontSize: '12px',
@@ -546,12 +539,10 @@ const styles = (theme) => ({
     paddingRight: '32px',
     borderBottom: '#81a6b9 4px solid',
     height: '80px',
-    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
 
   headerTitle: {
-    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
     marginLeft: '110px',
@@ -597,7 +588,6 @@ const styles = (theme) => ({
     width: '100px',
   },
   detailContainer: {
-    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '12px',
     paddingLeft: '60px',
@@ -637,11 +627,9 @@ const styles = (theme) => ({
     color: '#ff8a00',
   },
   tableDiv: {
-    padding: '31px 0px',
-    maxWidth: theme.custom.maxContentWidth,
+    padding: '31px 20px',
     margin: '10px auto 0px auto',
   },
-
   button: {
     borderRadius: '10px',
     width: '178px',

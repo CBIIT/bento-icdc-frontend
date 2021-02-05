@@ -6,6 +6,10 @@ export const navBarstyling = {
     marginTop: '120px',
     fontFamily: 'Raleway, sans-serif',
     activeLabel: '2px solid  #35b9eb',
+    paddingRight: '45px',
+    paddingLeft: '55px',
+    fontWeight: '600',
+    letterSpacing: '1px',
   },
   dropDownIcon: {
     displayIcon: true,
@@ -29,10 +33,10 @@ export const navBarstyling = {
       fontSize: '14px',
       fontWeight: '600',
       lineSpacing: '1px',
-      lineHeight: '20px',
+      lineHeight: '18px',
       fontFamily: 'Raleway, sans-serif',
       display: 'block',
-      marginTop: '12px',
+      marginTop: '10px',
       '&:hover': {
         cursor: 'pointer',
         color: 'white',
