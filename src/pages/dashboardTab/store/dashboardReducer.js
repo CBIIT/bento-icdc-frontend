@@ -259,14 +259,16 @@ export function fetchDataForDashboardTab(
  * @return {json}
  */
 export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
-  const VARIABLES = getState().filteredSubjectIds;
+  const VARIABLES = getState().filteredFileIds;
 
   const fetchResult = await client
     .query({
       query: GET_ALL_FILEIDS_SELECT_ALL,
-      variables: { case_ids: VARIABLES, first: fileCount },
+      variables: { file_uuids: VARIABLES, first: fileCount },
     })
-    .then((result) => result.data.caseOverviewPaged);
+    .then((result) => result.data.fileOverview.map((item) => ({
+      files: [item.file_uuid],
+    })));
   return fetchResult;
 }
 
