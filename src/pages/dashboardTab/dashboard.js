@@ -70,7 +70,7 @@ const Dashboard = ({
                               upperTitle
                               bodyClass={classes.fullHeightBody}
                               className={classes.card}
-                              widgetBorderDivider={false}
+                              widgetBorderDivider
                               customBackGround
                             >
                               <ProgramSunburst
@@ -97,7 +97,7 @@ const Dashboard = ({
                               upperTitle
                               bodyClass={classes.fullHeightBody}
                               className={classes.card}
-                              widgetBorderDivider={false}
+                              widgetBorderDivider
                               customBackGround
                             >
                               <CustomActiveDonut
@@ -156,6 +156,7 @@ const styles = (theme) => ({
     display: 'flex',
     // maxWidth: '1800px',
     margin: 'auto',
+    paddingTop: '20px',
   },
   widgetsContainer: {
     background: theme.palette.widgetBackground.main,
