@@ -372,19 +372,19 @@ export const tabs = [
 export const tabIndex = [
   {
     title: 'Cases',
-    primaryColor: '#F48439',
+    primaryColor: '#C7621E',
     secondaryColor: '#FFDFB8',
     selectedColor: '#FFF',
   },
   {
     title: 'Samples',
-    primaryColor: '#05C5CC',
+    primaryColor: '#3FA604',
     secondaryColor: '#C9F1F1',
     selectedColor: '#FFF',
   },
   {
     title: 'Files',
-    primaryColor: '#2446C6',
+    primaryColor: '#1693C0',
     secondaryColor: '#E1E5FF',
     selectedColor: '#FFF',
   },
@@ -989,9 +989,9 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
   `;
 
 export const GET_ALL_FILEIDS_SELECT_ALL = gql`
-query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
-    file_uuid
+  query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+    fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+      file_uuid
+    }
   }
-}
 `;

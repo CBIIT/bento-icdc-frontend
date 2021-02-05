@@ -56,6 +56,13 @@ const styles = (theme) => ({
     display: 'flex',
     minHeight: '100%',
   },
+  widgetDivider:{
+    background: theme.custom.widgetDivider,
+    height: '6px',
+    width: '180px',
+    border: 'none',
+    margin: '16px auto 0px auto'
+  },
   widgetHeader: {
     padding: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit,
