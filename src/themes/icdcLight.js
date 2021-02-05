@@ -121,7 +121,7 @@ export default {
         .darken(darkenRate)
         .toHexString(),
       contrastText: 'black',
-      lattice: '#E9F1F5',
+      lattice: '#F3F8F8',
     },
     warning: {
       main: warning,
@@ -224,10 +224,6 @@ export default {
     MUIDataTableSelectCell: {
       fixedHeader: {
         position: 'relative',
-
-      },
-      fixedLeft: {
-        background: '#fff',
       },
       headerCell: {
         borderTop: tableHeaderBorder,
@@ -301,9 +297,14 @@ export default {
           color: '#223d4c',
           background: '#f5f5f5 !important',
         },
+        '&:nth-child(even) td': {
+          background: '#f5f5f5',
+        },
         '&:nth-child(odd)': {
           color: '#223d4c !important',
-
+        },
+        '&:nth-child(odd) td': {
+          background: '#fff',
         },
       },
     },
