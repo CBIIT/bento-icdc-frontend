@@ -238,15 +238,12 @@ export function fetchDataForDashboardTab(
   fileIDsAfterFilter = null,
 ) {
   const { QUERY, sortfield, sortDirection } = getQueryAndDefaultSort(payload);
-  const caseIds = subjectIDsAfterFilter || getState().filteredSubjectIds;
-  const sampleIds = sampleIDsAfterFilter || getState().filteredSampleIds;
-  const fileIds = fileIDsAfterFilter || getState().filteredFileIds;
 
   return client
     .query({
       query: QUERY,
       variables: {
-        case_ids: caseIds, sample_ids: sampleIds, file_uuids: fileIds, order_by: sortfield || '',
+        case_ids: subjectIDsAfterFilter, sample_ids: sampleIDsAfterFilter, file_uuids: fileIDsAfterFilter, order_by: sortfield || '',
       },
     })
     .then((result) => store.dispatch({ type: 'UPDATE_CURRRENT_TAB_DATA', payload: { currentTab: payload, sortDirection, ..._.cloneDeep(result) } }))
@@ -547,7 +544,7 @@ const reducers = {
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
     const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
-    fetchDataForDashboardTab(tabIndex[0].title, [], [], []);
+    fetchDataForDashboardTab(tabIndex[0].title, null, null, null);
     return item.data
       ? {
         ...state.dashboard,
@@ -576,7 +573,7 @@ const reducers = {
   },
   CLEAR_ALL: (state, item) => {
     const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
-    fetchDataForDashboardTab(state.currentActiveTab, [], [], []);
+    fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
     return item.data
       ? {
         ...state.dashboard,
