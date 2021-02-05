@@ -288,7 +288,6 @@ export default {
         cursor: 'pointer',
         display: 'inline-flex',
         outline: 'none',
-
       },
     },
     MuiTableSortLabel: {
@@ -320,6 +319,12 @@ export default {
       root: {
         borderBottom: '0px',
         padding: '5px',
+        '&:first-child': {
+          paddingLeft: '38px',
+        },
+        '&:last-child': {
+          paddingRight: '30px',
+        },
       },
       paddingCheckbox: {
         padding: '0px 5px',

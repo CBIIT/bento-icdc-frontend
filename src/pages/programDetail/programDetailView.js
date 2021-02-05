@@ -95,23 +95,18 @@ const ProgramView = ({ classes, data }) => {
         </div>
       </div>
       <div className={classes.tableContainer}>
-
-        <div className={classes.tableDiv}>
+        <Grid container spacing={8} className={classes.tableDiv}>
           <div className={classes.tableTitle}>
             <span className={classes.tableHeader}>STUDIES IN THIS PROGRAM</span>
           </div>
-          <Grid item xs={12}>
-            <Grid>
-              <Grid item xs={12} id="table_studies">
-                <CustomDataTable
-                  data={data.studiesByProgramId}
-                  columns={getColumns(table, classes, data, '', '/cases', redirectTo)}
-                  options={getOptions(table, classes)}
-                />
-              </Grid>
-            </Grid>
+          <Grid item xs={12} lg={12} md={12} sm={12} id="table_studies" className={classes.table}>
+            <CustomDataTable
+              data={data.studiesByProgramId}
+              columns={getColumns(table, classes, data, '', '/cases', redirectTo)}
+              options={getOptions(table, classes)}
+            />
           </Grid>
-        </div>
+        </Grid>
       </div>
     </>
   );
@@ -138,6 +133,7 @@ const styles = (theme) => ({
   },
   container: {
     paddingTop: '80px',
+    paddingBottom: '45px',
     fontFamily: 'Raleway, sans-serif',
     background: 'white',
   },
@@ -150,6 +146,9 @@ const styles = (theme) => ({
   },
   warning: {
     color: theme.palette.warning.main,
+  },
+  table: {
+    paddingTop: '0px !important',
   },
   paper: {
     textAlign: 'center',
@@ -169,8 +168,7 @@ const styles = (theme) => ({
     paddingRight: '32px',
     borderBottom: '#81a6b9 4px solid',
     height: '80px',
-    maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
+    margin: 'auto 33px',
   },
 
   headerTitle: {
@@ -221,11 +219,10 @@ const styles = (theme) => ({
     width: '100px',
   },
   detailContainer: {
-    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '12px',
-    paddingLeft: '64px',
-    paddingRight: '64px',
+    paddingLeft: '97px',
+    paddingRight: '30px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
@@ -256,12 +253,10 @@ const styles = (theme) => ({
     background: '#f3f3f3',
   },
   tableHeader: {
-    paddingLeft: '64px',
+    paddingLeft: '74px',
   },
   tableDiv: {
-    padding: '31px 0px',
-    maxWidth: theme.custom.maxContentWidth,
-    margin: '10px auto',
+    padding: '31px 34px 51px 54px',
   },
   headerButtonLink: {
     textDecoration: 'none',
