@@ -989,9 +989,9 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
   `;
 
 export const GET_ALL_FILEIDS_SELECT_ALL = gql`
-query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
-    file_uuid
-  }
+  query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
+    caseOverviewPaged(case_ids: $case_ids, first: $first) {
+        files 
+    }
 }
-`;
+  `;
