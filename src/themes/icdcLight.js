@@ -398,10 +398,5 @@ export default {
         height: '3px',
       },
     },
-    MuiTablePagination: {
-      actions: {
-        marginRight: '8px',
-      },
-    },
   },
 };
