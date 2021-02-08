@@ -1,4 +1,6 @@
+/* eslint-disable */
 import React from 'react';
+import _ from 'lodash';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import themes, { overrides } from '../../../themes';
 
@@ -7,7 +9,8 @@ export default ({
 }) => {
   const style = [];
 
-  const overridesObj = themes.light.overrides;
+  let themes_light = _.cloneDeep(themes.light);
+  const overridesObj = themes_light.overrides;
 
   if (extraStyles) style.push(extraStyles);
 
@@ -65,7 +68,8 @@ export default ({
   overridesObj.PrivateTabIndicator = PrivateTabIndicator;
 
   style.push(overridesObj);
-  const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
+  
+  const computedTheme = createMuiTheme({ ...themes_light, ...overrides, ...style });
 
   return (
     <MuiThemeProvider theme={computedTheme}>
