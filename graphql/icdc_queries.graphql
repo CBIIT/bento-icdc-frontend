@@ -241,7 +241,7 @@ type ProgramStudies {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.7'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.8'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
@@ -458,29 +458,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (s:study)
+    WITH collect(DISTINCT s.clinical_study_designation) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE //(size($study) = 0 OR s.clinical_study_designation IN $study)
          (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, s
-    RETURN s.clinical_study_designation AS group,
-           count(c) AS count
+    WITH DISTINCT c, s, groups
+    WITH s.clinical_study_designation AS count_group,
+         count(c) AS count,
+         groups
+    UNWIND groups AS group
+    RETURN group,
+         SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByStudyType(
@@ -499,29 +504,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (s:study)
+    WITH collect(DISTINCT s.clinical_study_type) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         //AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, s
-    RETURN s.clinical_study_type AS group,
-           count(c) AS count
+    WITH DISTINCT c, s, groups
+    WITH s.clinical_study_type AS count_group,
+         count(c) AS count,
+         groups
+    UNWIND groups AS group
+    RETURN group,
+         SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByBreed(
@@ -540,29 +550,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (demo:demographic)
+    WITH collect(DISTINCT demo.breed) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         //AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, demo
-    RETURN demo.breed AS group,
-           count(c) AS count
+    WITH DISTINCT c, demo, groups
+    WITH demo.breed AS count_group,
+         count(c) AS count,
+         groups
+    UNWIND groups AS group
+    RETURN group,
+         SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByDiagnosis(
@@ -581,29 +596,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (diag:diagnosis)
+    WITH collect(DISTINCT diag.disease_term) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         //AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, diag
-    RETURN diag.disease_term AS group,
-           count(c) AS count
+    WITH DISTINCT c, diag, groups
+    WITH diag.disease_term AS count_group,
+           count(c) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByDiseaseSite(
@@ -622,29 +642,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (diag:diagnosis)
+    WITH collect(DISTINCT diag.primary_disease_site) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         //AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, diag
-    RETURN diag.primary_disease_site AS group,
-           count(c) AS count
+    WITH DISTINCT c, diag, groups
+    WITH diag.primary_disease_site AS count_group,
+           count(c) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByStageOfDisease(
@@ -663,29 +688,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (diag:diagnosis)
+    WITH collect(DISTINCT diag.stage_of_disease) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         //AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, diag
-    RETURN diag.stage_of_disease AS group,
-           count(c) AS count
+    WITH DISTINCT c, diag, groups
+    WITH diag.stage_of_disease AS count_group,
+           count(c) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByResponseToTreatment(
@@ -704,29 +734,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (diag:diagnosis)
+    WITH collect(DISTINCT COALESCE(diag.best_response, "")) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         //AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, diag
-    RETURN diag.best_response AS group,
-           count(c) AS count
+    WITH DISTINCT c, diag, groups
+    WITH COALESCE(diag.best_response, "") AS count_group,
+           count(c) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN CASE group WHEN "" THEN null ELSE group END AS group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountBySex(
@@ -745,29 +780,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (demo:demographic)
+    WITH collect(DISTINCT demo.sex) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        //AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        //AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, demo
-    RETURN demo.sex AS group,
-           count(c) AS count
+    WITH DISTINCT c, demo, groups
+    WITH demo.sex AS count_group,
+           count(c) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByNeuteredStatus(
@@ -786,29 +826,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (demo:demographic)
+    WITH collect(DISTINCT demo.neutered_indicator) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        //AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        //AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT c, demo
-    RETURN demo.neutered_indicator AS group,
-           count(c) AS count
+    WITH DISTINCT c, demo, groups
+    WITH demo.neutered_indicator AS count_group,
+           count(c) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountBySampleType (
@@ -827,31 +872,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (samp:sample)
+    WITH collect(DISTINCT samp.summarized_sample_type) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE //(size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT samp
-    WITH count(samp) AS count,
-         samp.summarized_sample_type AS group
-      WHERE count > 0
-    RETURN group, count
+    WITH DISTINCT samp, groups
+    WITH samp.summarized_sample_type AS count_group,
+           count(samp) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountBySamplePathology (
@@ -870,31 +918,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (samp:sample)
+    WITH collect(DISTINCT samp.specific_sample_pathology) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         // AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT samp
-    WITH count(samp) AS count,
-         samp.specific_sample_pathology AS group
-      WHERE count > 0
-    RETURN group, count
+    WITH DISTINCT samp, groups
+    WITH samp.specific_sample_pathology AS count_group,
+           count(samp) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByFileAssociation (
@@ -913,31 +964,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (:file)-->(parent)
+    WITH collect(DISTINCT head(labels(parent))) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         //AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT f, parent
-    WITH count(f) AS count,
-         head(labels(parent)) AS group
-      WHERE count > 0
-    RETURN group, count
+    WITH DISTINCT f, parent, groups
+    WITH head(labels(parent)) AS count_group,
+           count(f) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByFileType (
@@ -956,31 +1010,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (f:file)
+    WITH collect(DISTINCT f.file_type) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         //AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT f
-    WITH count(f) AS count,
-         f.file_type AS group
-      WHERE count > 0
-    RETURN group, count
+    WITH DISTINCT f, groups
+    WITH f.file_type AS count_group,
+           count(f) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByFileFormat (
@@ -999,31 +1056,34 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
+    MATCH (f:file)
+    WITH collect(DISTINCT f.file_format) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, co, demo, diag, f, parent, samp
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         //AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
-    WITH DISTINCT f
-    WITH count(f) AS count,
-         f.file_format AS group
-      WHERE count > 0
-    RETURN group, count
+    WITH DISTINCT f, groups
+    WITH f.file_format AS count_group,
+           count(f) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN group,
+           SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   "Combined info"
@@ -1202,6 +1262,8 @@ type QueryType {
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
@@ -1217,8 +1279,6 @@ type QueryType {
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
-        AND (size($sex) = 0 OR demo.sex IN $sex)
-        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
     WITH c.case_id AS case_id,
          s.clinical_study_designation AS study_code,
          s.clinical_study_type AS study_type,
