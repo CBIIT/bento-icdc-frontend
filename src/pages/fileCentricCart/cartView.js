@@ -6,7 +6,7 @@ import {
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {
-  getColumns, getOptions, getDefaultCustomFooter,
+  getColumns, getOptions, getDefaultCustomFooter, cn,
 } from 'bento-components';
 import _ from 'lodash';
 import { DeleteOutline as DeleteOutlineIcon, ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
@@ -158,7 +158,7 @@ const cartView = ({
   const numberOfFilesBeDeleted = myFilesPageData.popUpWindow.showNumberOfFileBeRemoved ? fileIDs.length : '';
 
   return (
-    <Grid>
+    <Grid className={classes.marginTopNegative20}>
       <DialogThemeProvider>
         <Dialog
           open={modalStatus}
@@ -190,7 +190,7 @@ const cartView = ({
         </Dialog>
       </DialogThemeProvider>
       {/* Section: Header */}
-      <Grid item xs={12}>
+      <Grid item xs={12} className={[classes.headerGrid, classes.paddingBottom40]}>
         <div className={classes.header}>
           <div className={classes.logo}>
             <img
@@ -200,7 +200,7 @@ const cartView = ({
 
           </div>
           <div className={classes.headerTitle}>
-            <div className={classes.headerMainTitle}>
+            <div className={cn(classes.headerMainTitle, classes.marginTop80)}>
               <span>
                 <span>{myFilesPageData.mainTitle}</span>
               </span>
@@ -318,7 +318,7 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '14px',
+    marginTop: '46px',
     width: '100px',
   },
   bodyWrapper: {
@@ -345,9 +345,10 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     letterSpacing: '0.017em',
     color: '#ff8a00',
-    fontSize: '25px',
-    lineHeight: '125px',
+    fontSize: '30px',
+    lineHeight: '18px',
     paddingLeft: '5px',
+    paddingBottom: '8px',
   },
   headerMainSubTitle: {
 
@@ -368,10 +369,8 @@ const styles = (theme) => ({
     paddingLeft: '32px',
     paddingRight: '32px',
     borderBottom: '#81a6b9 4px solid',
-    height: '100px',
-    maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
-    marginBottom: '25px',
+    height: '140px',
+    margin: 'auto 33px',
   },
   link: {
     color: '#dc762f',
@@ -458,6 +457,7 @@ const styles = (theme) => ({
     padding: '0',
   },
   tableDeleteButtonDiv: {
+    textAlign: 'center',
   },
   removeCell: {
     cursor: 'pointer',
@@ -530,6 +530,15 @@ const styles = (theme) => ({
   buttonGroup: {
     position: 'relative',
     paddingBottom: '10px',
+  },
+  marginTop80: {
+    marginTop: '80px',
+  },
+  paddingBottom40: {
+    paddingBottom: '40px',
+  },
+  marginTopNegative20: {
+    marginTop: '-38px',
   },
 });
 export default withStyles(styles, { withTheme: true })(cartView);

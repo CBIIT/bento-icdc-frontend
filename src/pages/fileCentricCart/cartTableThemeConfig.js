@@ -13,8 +13,7 @@ export default ({
   overridesObj.MUIDataTableSelectCell.headerCell.borderBottom = tableBorder;
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderTop = tableBorder;
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderBottom = tableBorder;
-  overridesObj.MUIDataTableFooter.root = {};
-  overridesObj.MuiTableFooter = { root: {} };
+  overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
   overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px' } };
   overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
 
