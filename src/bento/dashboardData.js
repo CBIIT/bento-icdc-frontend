@@ -52,15 +52,15 @@ export const facetSearchData = [
 // --------------- Dashboard Sidebar Sections styling --------------
 export const facetSectionVariables = {
   'Filter By Cases': {
-    color: '#EF7638',
+    color: '#C7621E',
     height: '4px',
   },
   'Filter By Samples': {
-    color: '#28BEC4',
+    color: '#3FA604',
     height: '4px',
   },
   'Filter By Files': {
-    color: '#1047BB',
+    color: '#1693C0',
     height: '4px',
   },
 };

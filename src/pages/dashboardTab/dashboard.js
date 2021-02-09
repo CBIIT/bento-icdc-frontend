@@ -81,6 +81,7 @@ const Dashboard = ({
                                 outerRadius={65}
                                 cx="50%"
                                 cy="50%"
+                                marginTop="33px"
                                 textColor={theme.palette.widgetBackground.contrastText}
                                 titleLocation="top"
                                 titleAlignment="left"
@@ -219,6 +220,7 @@ const styles = (theme) => ({
   },
   backgroundShawdowWidgets: {
     background: theme.palette.widgetBackground.lattice,
+    paddingBottom: '40px',
   },
   sideBar: {
     width: '250px',
