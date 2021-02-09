@@ -330,7 +330,7 @@ const styles = () => ({
     fontFamily: 'Lato',
     color: '#3E6886',
     fontSize: '12px',
-    marginRight: '70px',
+    marginLeft: '55px',
     textDecoration: 'none',
     borderBottom: '1px solid #3E6886',
     paddingBottom: '3px',
