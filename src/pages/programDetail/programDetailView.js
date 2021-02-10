@@ -228,6 +228,7 @@ const styles = (theme) => ({
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
+    paddingBottom: '40px',
   },
   detailContainerHeader: {
     textTransform: 'uppercase',

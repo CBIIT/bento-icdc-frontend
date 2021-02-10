@@ -511,7 +511,7 @@ const styles = (theme) => ({
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '33px',
     paddingRight: '35px',
-    paddingBottom: '35px',
+    paddingBottom: '40px',
   },
   content: {
     fontSize: '12px',

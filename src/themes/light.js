@@ -288,6 +288,7 @@ export default {
       tableRoot: {
         transform: 'rotateX(180deg)',
         borderTop: '3px solid #e7e5e5',
+        borderBottom: '3px solid #004c73',
       },
     },
     MUIDataTableSelectCell: {
@@ -473,7 +474,7 @@ export default {
         fontSize: '10px',
       },
       actions: {
-        marginRight: '39px',
+        marginRight: '0px',
       },
     },
     MuiSwitch: {
@@ -505,6 +506,11 @@ export default {
         '&:first-child': {
           color: '#000000',
         },
+      },
+    },
+    MuiToolbar: {
+      gutters: {
+        paddingRight: '1px !important',
       },
     },
     // Overriding Bento MUIDatatable properties with exsisting ICDC's MUIDatatable properties
