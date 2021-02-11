@@ -226,7 +226,7 @@ const StudyDetailView = ({ classes, data }) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
+            <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
                   <Grid container spacing={16}>
@@ -343,6 +343,7 @@ const styles = (theme) => ({
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '33px',
     paddingRight: '33px',
+    paddingBottom: '25px',
   },
   content: {
     fontSize: '12px',
@@ -400,6 +401,9 @@ const styles = (theme) => ({
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     paddingRight: '200px',
+  },
+  borderRight: {
+    borderRight: '#81a6b9 1px solid',
   },
   headerSubTitleContent: {
     color: '#000000',
@@ -486,9 +490,6 @@ const styles = (theme) => ({
     margin: '0px -8px',
 
   },
-  borderRight: {
-    borderRight: '#81a6b9 1px solid',
-  },
   detailContainerRight: {
     padding: '5px 0 5px 20px !important',
     minHeight: '500px',
@@ -544,7 +545,6 @@ const styles = (theme) => ({
   },
   detailContainerItems: {
     paddingTop: '7px',
-    paddingLeft: '7px',
   },
   detailContainerItem: {
     paddingTop: '15px !important',

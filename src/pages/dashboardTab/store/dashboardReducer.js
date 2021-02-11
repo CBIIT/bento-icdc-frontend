@@ -110,6 +110,12 @@ const removeEmptySubjectsFromDonutData = (data) => {
     subjects: item.count,
     group: item.group,
   }));
+  convertCasesToSubjects.sort((a, b) => {
+    if (a.group < b.group) return 1;
+    if (a.group > b.group) return -1;
+    return 0;
+  });
+
   return convertCasesToSubjects.filter((item) => item.subjects !== 0);
 };
 

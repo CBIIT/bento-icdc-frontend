@@ -321,7 +321,7 @@ export default {
         borderBottom: '0px',
         padding: '5px',
         '&:first-child': {
-          paddingLeft: '38px',
+          paddingLeft: '34px',
         },
         '&:last-child': {
           paddingRight: '30px',
