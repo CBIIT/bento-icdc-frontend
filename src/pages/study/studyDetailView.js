@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import {
   CustomDataTable, getOptions, cn, getColumns,
 } from 'bento-components';
+import _ from 'lodash';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Snackbar from '../../components/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import GridWithFooter from '../../components/GridWithFooter/GridView';
@@ -18,6 +20,24 @@ import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
   table1, table2, tooltipContent, headerIcon,
 } from '../../bento/studyDetailsData';
+import themes, { overrides } from '../../themes';
+
+const themesLight = _.cloneDeep(themes.light);
+themesLight.overrides.MuiTableCell = {
+  ...themesLight.overrides.MuiTableCell,
+  root: {
+    '&:first-child': {
+      paddingLeft: '20px',
+    },
+    '&:lastchild': {
+      paddingRight: '20px',
+    },
+  },
+};
+const computedTheme = createMuiTheme({
+  ...themesLight,
+  ...overrides,
+});
 
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
@@ -299,24 +319,25 @@ const StudyDetailView = ({ classes, data }) => {
             </div>
           </Grid>
           <Grid item xs={12} id="table_associated_files">
-            <GridWithFooter
-              data={fileTableData}
-              title=""
-              columns={getColumns(table2, classes, fileTableData)}
-              options={getOptions(table2, classes)}
-              customOnRowsSelect={table2.customOnRowsSelect}
-              openSnack={openSnack}
-              closeSnack={closeSnack}
-              disableRowSelection={table2.disableRowSelection}
-              buttonText={table2.buttonText}
-              saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
-              ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
-              DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
-              tooltipMessage={table2.tooltipMessage}
-              tooltipContent={tooltipContent}
-              showtooltip
-            />
-
+            <MuiThemeProvider theme={computedTheme}>
+              <GridWithFooter
+                data={fileTableData}
+                title=""
+                columns={getColumns(table2, classes, fileTableData)}
+                options={getOptions(table2, classes)}
+                customOnRowsSelect={table2.customOnRowsSelect}
+                openSnack={openSnack}
+                closeSnack={closeSnack}
+                disableRowSelection={table2.disableRowSelection}
+                buttonText={table2.buttonText}
+                saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
+                ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
+                DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
+                tooltipMessage={table2.tooltipMessage}
+                tooltipContent={tooltipContent}
+                showtooltip
+              />
+            </MuiThemeProvider>
           </Grid>
         </div>
       </div>

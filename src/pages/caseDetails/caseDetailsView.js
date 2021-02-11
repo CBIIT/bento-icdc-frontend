@@ -3,6 +3,8 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
+import _ from 'lodash';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { getOptions, getColumns, cn } from 'bento-components';
 import StatsView from '../../components/Stats/StatsView';
 import GridWithFooter from '../../components/GridWithFooter/GridView';
@@ -17,6 +19,24 @@ import {
 import Snackbar from '../../components/Snackbar';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import filterCasePageOnStudyCode from '../../utils/utils';
+import themes, { overrides } from '../../themes';
+
+const themesLight = _.cloneDeep(themes.light);
+themesLight.overrides.MuiTableCell = {
+  ...themesLight.overrides.MuiTableCell,
+  root: {
+    '&:first-child': {
+      paddingLeft: '38px',
+    },
+    '&:last-child': {
+      paddingRight: '38px',
+    },
+  },
+};
+const computedTheme = createMuiTheme({
+  ...themesLight,
+  ...overrides,
+});
 
 const CaseDetail = ({ classes, data }) => {
   React.useEffect(() => {
@@ -436,27 +456,29 @@ const CaseDetail = ({ classes, data }) => {
           ? (
             <Grid container spacing={4} className={classes.tableDiv}>
               <Grid item xs={12}>
-                <GridWithFooter
-                  data={data.samplesByCaseId}
-                  title={(
-                    <div className={classes.tableTitle}>
-                      <span className={classes.tableHeader}>{table1.tableTitle}</span>
-                    </div>
+                <MuiThemeProvider theme={computedTheme}>
+                  <GridWithFooter
+                    data={data.samplesByCaseId}
+                    title={(
+                      <div className={classes.tableTitle}>
+                        <span className={classes.tableHeader}>{table1.tableTitle}</span>
+                      </div>
                       )}
-                  columns={getColumns(table1, classes, data, externalLinkIcon)}
-                  options={getOptions(table1, classes)}
-                  customOnRowsSelect={table1.customOnRowsSelect}
-                  openSnack={openSnack}
-                  closeSnack={closeSnack}
-                  disableRowSelection={table1.disableRowSelection}
-                  buttonText={table1.buttonText}
-                  saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
-                  ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
-                  DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
-                  tooltipMessage={table1.tooltipMessage}
-                  tooltipContent={tooltipContent}
-                  showtooltip
-                />
+                    columns={getColumns(table1, classes, data, externalLinkIcon)}
+                    options={getOptions(table1, classes)}
+                    customOnRowsSelect={table1.customOnRowsSelect}
+                    openSnack={openSnack}
+                    closeSnack={closeSnack}
+                    disableRowSelection={table1.disableRowSelection}
+                    buttonText={table1.buttonText}
+                    saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
+                    ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
+                    DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
+                    tooltipMessage={table1.tooltipMessage}
+                    tooltipContent={tooltipContent}
+                    showtooltip
+                  />
+                </MuiThemeProvider>
               </Grid>
             </Grid>
           ) : ''}
@@ -466,27 +488,29 @@ const CaseDetail = ({ classes, data }) => {
             <div id="table_case_detail_samples" className={classes.tableContainer}>
               <Grid container spacing={4} className={classes.tableDiv}>
                 <Grid item xs={12}>
-                  <GridWithFooter
-                    data={files}
-                    title={(
-                      <div className={classes.tableTitle}>
-                        <span className={classes.tableHeader}>{table2.tableTitle}</span>
-                      </div>
+                  <MuiThemeProvider theme={computedTheme}>
+                    <GridWithFooter
+                      data={files}
+                      title={(
+                        <div className={classes.tableTitle}>
+                          <span className={classes.tableHeader}>{table2.tableTitle}</span>
+                        </div>
                       )}
-                    columns={getColumns(table2, classes, data)}
-                    options={getOptions(table2, classes)}
-                    customOnRowsSelect={table2.customOnRowsSelect}
-                    openSnack={openSnack}
-                    closeSnack={closeSnack}
-                    disableRowSelection={table2.disableRowSelection}
-                    buttonText={table2.buttonText}
-                    saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
-                    ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
-                    DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
-                    tooltipMessage={table2.tooltipMessage}
-                    tooltipContent={tooltipContent}
-                    showtooltip
-                  />
+                      columns={getColumns(table2, classes, data)}
+                      options={getOptions(table2, classes)}
+                      customOnRowsSelect={table2.customOnRowsSelect}
+                      openSnack={openSnack}
+                      closeSnack={closeSnack}
+                      disableRowSelection={table2.disableRowSelection}
+                      buttonText={table2.buttonText}
+                      saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
+                      ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
+                      DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
+                      tooltipMessage={table2.tooltipMessage}
+                      tooltipContent={tooltipContent}
+                      showtooltip
+                    />
+                  </MuiThemeProvider>
                 </Grid>
               </Grid>
             </div>

@@ -9,6 +9,8 @@ import {
   getOptions,
   getColumns,
 } from 'bento-components';
+import _ from 'lodash';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import StatsView from '../../components/Stats/StatsView';
 import {
   table,
@@ -19,6 +21,24 @@ import {
 } from '../../bento/programData';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import themes, { overrides } from '../../themes';
+
+const themesLight = _.cloneDeep(themes.light);
+themesLight.overrides.MuiTableCell = {
+  ...themesLight.overrides.MuiTableCell,
+  root: {
+    '&:first-child': {
+      paddingLeft: '39px',
+    },
+    '&:last-child': {
+      paddingRight: '39px',
+    },
+  },
+};
+const computedTheme = createMuiTheme({
+  ...themesLight,
+  ...overrides,
+});
 
 const ProgramView = ({ classes, data }) => {
   const programDetail = data.program[0];
@@ -100,11 +120,13 @@ const ProgramView = ({ classes, data }) => {
             <span className={classes.tableHeader}>STUDIES IN THIS PROGRAM</span>
           </div>
           <Grid item xs={12} lg={12} md={12} sm={12} id="table_studies" className={classes.table}>
-            <CustomDataTable
-              data={data.studiesByProgramId}
-              columns={getColumns(table, classes, data, '', '/cases', redirectTo)}
-              options={getOptions(table, classes)}
-            />
+            <MuiThemeProvider theme={computedTheme}>
+              <CustomDataTable
+                data={data.studiesByProgramId}
+                columns={getColumns(table, classes, data, '', '/cases', redirectTo)}
+                options={getOptions(table, classes)}
+              />
+            </MuiThemeProvider>
           </Grid>
         </Grid>
       </div>
@@ -247,7 +269,7 @@ const styles = (theme) => ({
     minHeight: '100px',
   },
   detailContainerRight: {
-    padding: '20px 20px 30px 2px !important',
+    padding: '20px 20px 30px 20px !important',
     minHeight: '330px',
   },
   tableContainer: {
