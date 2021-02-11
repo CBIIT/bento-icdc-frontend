@@ -112,7 +112,10 @@ const TabView = ({
 
   function exportFiles() {
     // Find the newly added files by comparing
-    const newFileIDS = fileIDs !== null ? selectedIDs.filter(
+    const selectFileIds = filteredFileIds != null
+      ? selectedIDs.filter((x) => filteredFileIds.includes(x))
+      : selectedIDs;
+    const newFileIDS = fileIDs !== null ? selectFileIds.filter(
       (e) => !fileIDs.find((a) => e === a),
     ).length : selectedIDs.length;
     if (cartWillFull(newFileIDS)) {
@@ -120,7 +123,7 @@ const TabView = ({
       setCartIsFull(true);
       AddToCartAlertDialogRef.current.open();
     } else if (newFileIDS > 0) {
-      addToCart({ fileIds: selectedIDs });
+      addToCart({ fileIds: selectFileIds });
       openSnack(newFileIDS);
       setSelectedIDs([]);
     }
