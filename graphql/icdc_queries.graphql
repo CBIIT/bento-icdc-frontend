@@ -1507,8 +1507,7 @@ type QueryType {
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
-    OPTIONAL MATCH (parent)-[:of_case]->(c)
-    OPTIONAL MATCH (f:file)-->(parent)
+    OPTIONAL MATCH (f:file)-[:of_sample]->(s)
     RETURN
       s.sample_id as sample_id,
       c.case_id as case_id,
@@ -1550,7 +1549,7 @@ type QueryType {
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
     OPTIONAL MATCH (parent)-[:of_case]->(c)
-    OPTIONAL MATCH (f:file)-->(parent)
+    OPTIONAL MATCH (f:file)-[:of_sample]->(s)
     RETURN
       s.sample_id as sample_id,
       c.case_id as case_id,
