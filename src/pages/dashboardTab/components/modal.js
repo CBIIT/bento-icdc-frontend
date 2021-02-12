@@ -35,15 +35,7 @@ export default function SimpleDialogDemo() {
   async function exportFiles() {
     // Find the newly added files by comparing
     const getAllFilesData = await fetchAllFileIDsForSelectAll(getFilesCount());
-    const selectedIDs = getAllFilesData.reduce((accumulator, currentValue) => {
-      const { files } = currentValue;
-      // check if file
-      if (files && files.length > 0) {
-        return accumulator.concat(files.map((f) => f));
-      }
-      return accumulator;
-    }, []);
-    addToCart({ fileIds: selectedIDs });
+    addToCart({ fileIds: getAllFilesData });
     handleClose();
   }
 
