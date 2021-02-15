@@ -126,6 +126,8 @@ const TabView = ({
       addToCart({ fileIds: selectFileIds });
       openSnack(newFileIDS);
       setSelectedIDs([]);
+    } else if (newFileIDS === 0) {
+      openSnack(newFileIDS);
     }
   }
 

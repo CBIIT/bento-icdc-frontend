@@ -312,6 +312,14 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
 }
 
 export const getFilesCount = () => getState().stats.numberOfFiles;
+export function getCountForAddAllFilesModal() {
+  const currentState = getState();
+  const numberCount = currentState.currentActiveTab === tabIndex[0].title
+    ? currentState.stats.numberOfCases
+    : currentState.currentActiveTab === tabIndex[1].title
+      ? currentState.stats.numberOfSamples : currentState.stats.numberOfFiles;
+  return { activeTab: currentState.currentActiveTab || tabIndex[2].title, count: numberCount };
+}
 
 /**
  * Returns the widgets data.

@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import Dialog from '../../../components/AddToCartDialog';
 import { addToCart, cartWillFull } from '../../fileCentricCart/store/cart';
-import { fetchAllFileIDsForSelectAll, getFilesCount } from '../store/dashboardReducer';
+import { fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal, getFilesCount } from '../store/dashboardReducer';
 
 const styles = () => ({
   button: {
@@ -41,7 +41,9 @@ const SimpleDialogDemo = ({ classes, openSnack }) => {
     handleClose();
   }
 
+  const numberOfRowsSelected = getCountForAddAllFilesModal();
   const numberOfFilesSelected = getFilesCount();
+
   const OnYesClick = () => { exportFiles(); };
   const onNoClick = () => { handleClose(); };
 
@@ -54,7 +56,7 @@ const SimpleDialogDemo = ({ classes, openSnack }) => {
         ref={childRef}
         onYesClick={OnYesClick}
         onNoClick={onNoClick}
-        numberOfFilesSelected={numberOfFilesSelected}
+        numberOfRowsSelected={numberOfRowsSelected}
         cartWillFull={cartWillFull(numberOfFilesSelected)}
       />
     </>
