@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  withStyles,
+} from '@material-ui/core';
 import Dialog from '../../../components/AddToCartDialog';
 import { addToCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import { fetchAllFileIDsForSelectAll, getFilesCount } from '../store/dashboardReducer';
 
-const useStyles = makeStyles({
+const styles = () => ({
   button: {
     borderRadius: '10px',
     width: '120px',
@@ -20,8 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleDialogDemo() {
-  const classes = useStyles();
+const SimpleDialogDemo = ({ classes, openSnack }) => {
   const childRef = useRef();
 
   const handleClickOpen = () => {
@@ -35,6 +36,7 @@ export default function SimpleDialogDemo() {
   async function exportFiles() {
     // Find the newly added files by comparing
     const getAllFilesData = await fetchAllFileIDsForSelectAll(getFilesCount());
+    openSnack(getAllFilesData.length || 0);
     addToCart({ fileIds: getAllFilesData });
     handleClose();
   }
@@ -57,4 +59,6 @@ export default function SimpleDialogDemo() {
       />
     </>
   );
-}
+};
+
+export default withStyles(styles, { withTheme: true })(SimpleDialogDemo);
