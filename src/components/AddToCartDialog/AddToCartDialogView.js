@@ -42,7 +42,7 @@ function AddToCartDialogView(props) {
                   {' '}
                   {numberOfRowsSelected.count || 0}
                   {' '}
-                  to your files?
+                  files to your files?
                 </DialogContentText>
               )
           )}

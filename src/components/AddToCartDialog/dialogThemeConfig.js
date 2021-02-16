@@ -12,7 +12,7 @@ export default ({
   const MuiDialog = {
     paper: {
       width: '431px',
-      height: '170px',
+      height: '200px',
       borderRadius: '25px !important',
       textAlign: 'center',
       backgroundColor: '#E8DFDC !important',
