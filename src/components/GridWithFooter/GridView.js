@@ -133,6 +133,8 @@ const GridView = ({
       addToCart({ fileIds: selectedIDs });
       openSnack(newFileIDS);
       setSelectedIDs([]);
+    } else if (newFileIDS === 0) {
+      openSnack(newFileIDS);
     }
   }
 
