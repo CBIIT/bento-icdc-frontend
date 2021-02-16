@@ -24,7 +24,9 @@ import {
   GET_FILES_OVERVIEW_QUERY,
   GET_SAMPLES_OVERVIEW_QUERY,
   GET_CASES_OVERVIEW_QUERY,
-  GET_ALL_FILEIDS_SELECT_ALL,
+  GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
+  GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
+  GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   GET_FILES_OVERVIEW_DESC_QUERY,
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
@@ -265,20 +267,59 @@ export function fetchDataForDashboardTab(
  * @return {json}
  */
 export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
-  const VARIABLES = getState().filteredFileIds;
+  const caseIds = getState().filteredSubjectIds;
+  const sampleIds = getState().filteredSampleIds;
+  const fileIds = getState().filteredFileIds;
+  const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[2].title
+    ? GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL
+    : getState().currentActiveTab === tabIndex[1].title
+      ? GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL
+      : GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL;
 
   const fetchResult = await client
     .query({
-      query: GET_ALL_FILEIDS_SELECT_ALL,
-      variables: { file_uuids: VARIABLES, first: fileCount },
+      query: SELECT_ALL_QUERY,
+      variables: {
+        case_ids: caseIds,
+        sample_ids: sampleIds,
+        file_uuids: fileIds,
+        first: fileCount,
+      },
     })
-    .then((result) => result.data.fileOverview.map((item) => ({
-      files: [item.file_uuid],
-    })));
-  return fetchResult;
+    .then((result) => {
+      const RESULT_DATA = getState().currentActiveTab === tabIndex[2].title ? 'fileOverview' : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverviewPaged';
+      const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? result.data[RESULT_DATA].map((item) => ({
+        files: [item.file_uuid],
+      })) : result.data[RESULT_DATA] || [];
+      return fileIdsFromQuery;
+    });
+  // Restaruting the result Bringing {files} to files
+  const filesArray = fetchResult.reduce((accumulator, currentValue) => {
+    const { files } = currentValue;
+    // check if file
+    if (files && files.length > 0) {
+      return accumulator.concat(files.map((f) => f));
+    }
+    return accumulator;
+  }, []);
+
+  // Removing fileIds that are not in our current list of filtered fileIds
+
+  const filteredFilesArray = fileIds != null
+    ? filesArray.filter((x) => fileIds.includes(x))
+    : filesArray;
+  return filteredFilesArray;
 }
 
 export const getFilesCount = () => getState().stats.numberOfFiles;
+export function getCountForAddAllFilesModal() {
+  const currentState = getState();
+  const numberCount = currentState.currentActiveTab === tabIndex[0].title
+    ? currentState.stats.numberOfCases
+    : currentState.currentActiveTab === tabIndex[1].title
+      ? currentState.stats.numberOfSamples : currentState.stats.numberOfFiles;
+  return { activeTab: currentState.currentActiveTab || tabIndex[2].title, count: numberCount };
+}
 
 /**
  * Returns the widgets data.

@@ -7,7 +7,7 @@ import DialogThemeProvider from './dialogThemeConfig';
 function AddToCartDialogView(props) {
   const {
     open,
-    numberOfFilesSelected,
+    numberOfRowsSelected,
     onYesClick,
     onNoClick,
     classes,
@@ -22,13 +22,30 @@ function AddToCartDialogView(props) {
         className={classes.popUpWindow}
       >
         <DialogContent className={classes.popUpWindowContent}>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure to add All Files
-            {' '}
-            {numberOfFilesSelected}
-            {' '}
-            to cart
-          </DialogContentText>
+          {numberOfRowsSelected !== undefined && (
+            numberOfRowsSelected.activeTab !== 'Files' ? (
+              <DialogContentText id="alert-dialog-description">
+                Add all files for the
+                {' '}
+                {numberOfRowsSelected.count || 0}
+                {' '}
+                selected
+                {' '}
+                {numberOfRowsSelected.activeTab || 'Files'}
+                {' '}
+                to your files?
+              </DialogContentText>
+            )
+              : (
+                <DialogContentText id="alert-dialog-description">
+                  Add all
+                  {' '}
+                  {numberOfRowsSelected.count || 0}
+                  {' '}
+                  to your files?
+                </DialogContentText>
+              )
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => onYesClick()} className={classes.okButton}>

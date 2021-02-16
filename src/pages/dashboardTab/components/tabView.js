@@ -126,6 +126,8 @@ const TabView = ({
       addToCart({ fileIds: selectFileIds });
       openSnack(newFileIDS);
       setSelectedIDs([]);
+    } else if (newFileIDS === 0) {
+      openSnack(newFileIDS);
     }
   }
 
@@ -210,7 +212,7 @@ const TabView = ({
   return (
     <div>
       <Grid item xs={12} className={classes.saveButtonDiv}>
-        <SelectAllModal />
+        <SelectAllModal openSnack={openSnack} />
         <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
         <button
           type="button"

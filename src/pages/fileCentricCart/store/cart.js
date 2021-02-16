@@ -49,7 +49,7 @@ export const initCart = () => {
 
 export const readyCart = () => store.dispatch({ type: 'readyCart' });
 
-export const maximumNumberOfFilesAllowedInTheCart = 1000;
+export const maximumNumberOfFilesAllowedInTheCart = 2000;
 
 export const cartWillFull = (numberOfFilesSelected) => numberOfFilesSelected
 + getState().fileIds.length
