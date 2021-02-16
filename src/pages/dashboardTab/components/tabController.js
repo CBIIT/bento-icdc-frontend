@@ -297,7 +297,7 @@ const tabController = (classes) => {
             <span className={classes.snackBarText}>
               {snackbarState.value}
               {' '}
-              File(s) successfully added to your cart
+              File(s) successfully added to your files.
             </span>
           </div>
 )}

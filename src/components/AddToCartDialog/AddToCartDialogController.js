@@ -61,7 +61,7 @@ const AddToCartDialogController = forwardRef((props, ref) => {
 
   const {
     cartWillFull,
-    numberOfFilesSelected,
+    numberOfRowsSelected,
     onYesClick,
     onNoClick,
   } = props;
@@ -72,7 +72,7 @@ const AddToCartDialogController = forwardRef((props, ref) => {
   return (
     <Dialog
       open={open}
-      numberOfFilesSelected={numberOfFilesSelected}
+      numberOfRowsSelected={numberOfRowsSelected}
       onYesClick={onYesClick}
       onNoClick={onNoClick}
       classes={useStyles()}
