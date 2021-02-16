@@ -264,6 +264,7 @@ const TabView = ({
           />
         </Grid>
       </Grid>
+      <div><hr className={classes.hrLine} /></div>
       <Grid item xs={12} className={classes.saveButtonDivBottom}>
         <button
           type="button"
@@ -379,7 +380,7 @@ const styles = () => ({
     textAlign: 'left',
   },
   saveButtonDivBottom: {
-    paddingTop: '5px',
+    marginTop: '-2px',
     paddingLeft: '18px',
     textAlign: 'left',
     marginBottom: '30px',
@@ -398,15 +399,6 @@ const styles = () => ({
     marginBottom: '10px',
     marginRight: '5px',
   },
-  caseTableBorder: {
-    borderTopColor: '#F48439',
-  },
-  fileTableBorder: {
-    borderTopColor: '#2446C6',
-  },
-  sampleTableBorder: {
-    borderTopColor: '#05C5CC',
-  },
   messageBottom: {
     zIndex: '500',
     position: 'absolute',
@@ -420,89 +412,9 @@ const styles = () => ({
     verticalAlign: 'top',
     marginLeft: '-5px',
   },
-  tableCell1: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell2: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell3: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell4: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell5: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell6: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell7: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell8: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell9: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell10: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell11: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
-  },
-  tableCell12: {
-    width: (((document.documentElement.clientWidth * 0.6) / 10)),
-    overflow: 'hidden',
-    wordBreak: 'break-word',
-    maxWidth: (((document.documentElement.clientWidth * 0.6) / 10)),
-    minWidth: '160px',
+  hrLine: {
+    borderTop: '3px solid #C7621E',
+    marginTop: '1px',
   },
 });
 

@@ -459,7 +459,7 @@ export default {
     MuiTablePagination: {
       toolbar: {
         textTransform: 'uppercase',
-        marginTop: '-11px',
+        marginTop: '-10px',
       },
       select: {
         border: '2px #fff solid',
