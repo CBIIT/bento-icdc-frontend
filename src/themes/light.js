@@ -288,7 +288,6 @@ export default {
       tableRoot: {
         transform: 'rotateX(180deg)',
         borderTop: '3px solid #e7e5e5',
-        borderBottom: '3px solid #004c73',
       },
     },
     MUIDataTableSelectCell: {
@@ -461,7 +460,7 @@ export default {
     MuiTablePagination: {
       toolbar: {
         textTransform: 'uppercase',
-        marginTop: '-11px',
+        marginTop: '-10px',
         paddingTop: '11px',
       },
       select: {
