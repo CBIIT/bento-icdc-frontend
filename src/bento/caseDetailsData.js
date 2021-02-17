@@ -140,7 +140,9 @@ export const table2 = {
   downloadFileName: 'ICDC_Case_File_download',
   // Set 'selectableRows' to true to show the row selection
   selectableRows: true,
-  // A maximum of 10 columns are allowed
+
+  primaryKeyIndex: 7,
+
   columns: [
     {
       dataField: 'sample_id',
@@ -176,6 +178,7 @@ export const table2 = {
       dataField: 'uuid',
       header: 'UUID',
       display: false,
+      primary: true,
       // set formatBytes to true to display file size (in bytes) in a more human readable format
     },
   ],
