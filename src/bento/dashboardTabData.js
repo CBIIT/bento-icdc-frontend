@@ -239,7 +239,7 @@ export const tabContainers = [
     id: 'sample_tab',
     onRowsSelect: 'type3',
     disableRowSelection: 'type2',
-    buttonText: 'Add Selected Files',
+    buttonText: 'Add Associated Files',
     addAllButtonText: 'Add Associated Files for All',
     tableID: 'sample_tab_table',
     tableDownloadCSV: customSamplesTabDownloadCSV,
