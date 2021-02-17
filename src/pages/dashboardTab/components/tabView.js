@@ -415,6 +415,7 @@ const styles = () => ({
   },
   helpIcon: {
     zIndex: '600',
+    width: '17px',
   },
   helpIconButton: {
     verticalAlign: 'top',

@@ -3,7 +3,7 @@ import { customCasesTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabD
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
-  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  icon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento-873-4/src/assets/icons/Icon-Help.svg',
   alt: 'tooltipIcon',
   0: 'Add filtered files associated with selected case(s) to My Files',
   1: 'Add filtered files associated with selected sample(s) to My Files',
@@ -12,7 +12,7 @@ export const tooltipContent = {
 
 // --------------- Tooltip configuration --------------
 export const selectAllToolTip = {
-  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  icon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento-873-4/src/assets/icons/Icon-Help.svg',
   alt: 'tooltipIcon',
   0: 'Add filtered files associated with all cases to My Files',
   1: 'Add filtered files associated with all samples to My Files',

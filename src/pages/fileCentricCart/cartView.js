@@ -387,7 +387,7 @@ const styles = (theme) => ({
   },
   helpIcon: {
     verticalAlign: 'top',
-    width: '20px',
+    width: '17px',
     zIndex: '600',
   },
   topButtonGroup: {

@@ -4,7 +4,7 @@ import { SampleOnRowsSelect } from '../pages/caseDetails/sampleFileTable';
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
-  src: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  src: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento-873-4/src/assets/icons/Icon-Help.svg',
   alt: 'tooltipIcon',
 };
 

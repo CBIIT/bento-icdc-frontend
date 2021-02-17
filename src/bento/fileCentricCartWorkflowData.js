@@ -23,7 +23,7 @@ export const myFilesPageData = {
   headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-MyCases.svg',
   headerIconAlt: 'Bento MyFiles header logo',
   manifestFileName: 'BENTO File Manifest',
-  tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  tooltipIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/bento-873-4/src/assets/icons/Icon-Help.svg',
   tooltipAlt: 'tooltip icon',
   tooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
   textareaPlaceholder: 'User Comments',
