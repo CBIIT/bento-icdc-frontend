@@ -34,12 +34,14 @@ const TabView = ({
   openSnack,
   disableRowSelection,
   buttonText,
+  addAllButtonText,
   tableID,
   saveButtonDefaultStyle,
   DeactiveSaveButtonDefaultStyle,
   ActiveSaveButtonDefaultStyle,
   toggleMessageStatus,
   BottomMessageStatus,
+  selectAllToolTipStatus,
   tabIndex,
   externalLinkIcon,
   options,
@@ -212,7 +214,12 @@ const TabView = ({
   return (
     <div>
       <Grid item xs={12} className={classes.saveButtonDiv}>
-        <SelectAllModal openSnack={openSnack} />
+        <SelectAllModal
+          openSnack={openSnack}
+          addAllButtonText={addAllButtonText}
+          toggleMessageStatus={toggleMessageStatus}
+          selectAllToolTipStatus={selectAllToolTipStatus}
+        />
         <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
         <button
           type="button"
@@ -392,8 +399,7 @@ const styles = () => ({
     borderRadius: '10px',
     width: '156px',
     lineHeight: '37px',
-    fontSize: '12px',
-    textTransform: 'uppercase',
+    fontSize: '16px',
     fontFamily: 'Lato',
     color: '#fff',
     backgroundColor: '#ff7f15',
