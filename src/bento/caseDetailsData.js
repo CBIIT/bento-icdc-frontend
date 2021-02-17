@@ -28,7 +28,7 @@ export const table1 = {
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
   // Text to appear on Add to cart button
-  buttonText: 'Add Associated Files to My Files',
+  buttonText: 'Add Associated Files',
   saveButtonDefaultStyle: {
     color: '#fff',
     opacity: '1',
@@ -45,7 +45,7 @@ export const table1 = {
     border: 'unset',
   },
   // Help Icon Message
-  tooltipMessage: 'Click button to add selected files associated with the selected sample(s).',
+  tooltipMessage: 'Add files associated with selected sample(s) to My Files',
   // viewColumns 'true' or 'false'
   viewColumns: true,
   // download csv
@@ -114,7 +114,7 @@ export const table2 = {
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
   // Text to appear on Add to cart button
-  buttonText: 'Add Selected Files to My Files',
+  buttonText: 'Add Selected Files',
   saveButtonDefaultStyle: {
     color: '#fff',
     opacity: '1',
@@ -131,7 +131,7 @@ export const table2 = {
     border: 'unset',
   },
   // Help Icon Message
-  tooltipMessage: 'Click button to add selected files.',
+  tooltipMessage: 'Add selected files to My Files',
   // viewColumns 'true' or 'false'
   viewColumns: true,
   // download csv 'true' or 'false'

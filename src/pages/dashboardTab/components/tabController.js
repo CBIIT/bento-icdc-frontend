@@ -13,7 +13,7 @@ import TabThemeProvider from './tabThemeConfig';
 import TabLabel from './tabLabel';
 import Message from '../../../components/Message';
 import {
-  tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon,
+  tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon, selectAllToolTip,
 } from '../../../bento/dashboardTabData';
 import { fetchDataForDashboardTab } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
@@ -64,6 +64,13 @@ const tabController = (classes) => {
     isActive: false,
     currentTab,
   });
+  const [selectAllToolTipStatus, setSelectAllToolTipStatus] = React.useState({
+    text: tooltipContent[currentTab],
+    src: tooltipContent.icon,
+    alt: tooltipContent.alt,
+    isActive: false,
+    currentTab,
+  });
 
   function setTooltip(status, tabInfo = '', icon, alt) {
     return {
@@ -91,6 +98,14 @@ const tabController = (classes) => {
           tooltipContent.icon,
           tooltipContent.alt)),
         close: () => setBottomMessageStatus(setTooltip(false, tooltipContent[currentTab],
+          tooltipContent.icon,
+          tooltipContent.alt)),
+      },
+      addAll: {
+        open: () => setSelectAllToolTipStatus(setTooltip(true, selectAllToolTip[currentTab],
+          tooltipContent.icon,
+          tooltipContent.alt)),
+        close: () => setSelectAllToolTipStatus(setTooltip(false, selectAllToolTip[currentTab],
           tooltipContent.icon,
           tooltipContent.alt)),
       },
@@ -239,7 +254,7 @@ const tabController = (classes) => {
 
   // Calculate the properate marginTop value for the tooltip on the top
   function tooltipStyle(text) {
-    const marginTopValue = text.length > 40 ? '-25px' : '-3px';
+    const marginTopValue = text.length > 80 ? '-25px' : '-3px';
     return { marginTop: marginTopValue };
   }
 
@@ -255,6 +270,7 @@ const tabController = (classes) => {
         closeSnack={closeSnack}
         disableRowSelection={disableRowSelectionFunction[container.disableRowSelection]}
         buttonText={container.buttonText}
+        addAllButtonText={container.addAllButtonText}
         tableID={container.tableID}
         saveButtonDefaultStyle={container.saveButtonDefaultStyle}
         ActiveSaveButtonDefaultStyle={container.ActiveSaveButtonDefaultStyle}
@@ -262,6 +278,7 @@ const tabController = (classes) => {
         toggleMessageStatus={toggleMessageStatus}
         BottomMessageStatus={BottomMessageStatus}
         TopMessageStatus={TopMessageStatus}
+        selectAllToolTipStatus={selectAllToolTipStatus}
         // eslint-disable-next-line jsx-a11y/tabindex-no-positive
         tabIndex={container.tabIndex}
         externalLinkIcon={externalLinkIcon}
@@ -297,11 +314,21 @@ const tabController = (classes) => {
             <span className={classes.snackBarText}>
               {snackbarState.value}
               {' '}
-              File(s) successfully added to your files.
+              File(s) successfully added to My Files.
             </span>
           </div>
 )}
       />
+      { selectAllToolTipStatus.isActive ? (
+        <div
+          className={classes.classes.messageSelectAllTop}
+          style={tooltipStyle(selectAllToolTipStatus.text)}
+        >
+          {' '}
+          <Message data={selectAllToolTipStatus.text} />
+          {' '}
+        </div>
+      ) : ' '}
       { TopMessageStatus.isActive ? (
         <div className={classes.classes.messageTop} style={tooltipStyle(TopMessageStatus.text)}>
           {' '}
@@ -348,7 +375,13 @@ const styles = () => ({
   },
   messageTop: {
     position: 'absolute',
-    left: '155px',
+    left: '288px',
+    zIndex: '300',
+    // marginTop: '-10px',
+  },
+  messageSelectAllTop: {
+    position: 'absolute',
+    left: '52px',
     zIndex: '300',
     marginTop: '-10px',
   },
