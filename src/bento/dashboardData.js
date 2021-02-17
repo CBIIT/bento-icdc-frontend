@@ -23,7 +23,7 @@ export const facetSearchData = [
     label: 'Stage of Disease', field: 'group', api: 'filterCaseCountByStageOfDisease', filterAPI: 'filterCaseCountByStageOfDisease', datafield: 'stage_of_disease', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Response to treatment', field: 'group', api: 'filterCaseCountByResponseToTreatment', filterAPI: 'filterCaseCountByResponseToTreatment', datafield: 'response_to_treatment', section: 'Filter By Cases', show: true,
+    label: 'Response to Treatment', field: 'group', api: 'filterCaseCountByResponseToTreatment', filterAPI: 'filterCaseCountByResponseToTreatment', datafield: 'response_to_treatment', section: 'Filter By Cases', show: true,
   },
   {
     label: 'Sex', field: 'group', api: 'filterCaseCountBySex', filterAPI: 'filterCaseCountBySex', datafield: 'sex', section: 'Filter By Cases', show: true,
