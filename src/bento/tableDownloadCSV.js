@@ -87,6 +87,7 @@ export const MY_CART = gql`
 query filesInList($uuids: [String]){
   filesInList(uuids: $uuids){
       file_type
+      file_name
       association
       file_description
       file_format
