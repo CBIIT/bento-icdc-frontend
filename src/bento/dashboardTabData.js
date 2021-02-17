@@ -5,9 +5,18 @@ import { customCasesTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabD
 export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
   alt: 'tooltipIcon',
-  0: 'Click button to add selected files associated with the selected case(s).',
-  1: 'Click button to add selected files associated with the selected sample(s).',
-  2: 'Click button to add selected files.',
+  0: 'Add filtered files associated with selected case(s) to My Files',
+  1: 'Add filtered files associated with selected sample(s) to My Files',
+  2: 'Add selected files to My Files',
+};
+
+// --------------- Tooltip configuration --------------
+export const selectAllToolTip = {
+  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  alt: 'tooltipIcon',
+  0: 'Add filtered files associated with all cases to My Files',
+  1: 'Add filtered files associated with all samples to My Files',
+  2: 'Add all filtered files to My Files',
 };
 
 // --------------- Dahboard Table external link configuration --------------
@@ -30,12 +39,13 @@ export const tabContainers = [
     dataKey: 'subject_id',
     defaultSortField: 'subject_id',
     defaultSortDirection: 'asc',
-    buttonText: 'Add Selected Files',
+    buttonText: 'Add Associated Files',
+    addAllButtonText: 'Add Associated Files for All',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',
-      lineHeight: '36px',
-      fontSize: '10pt',
+      lineHeight: '37px',
+      fontSize: '16px',
       color: '#fff',
       backgroundColor: '#ff7f15',
     },
@@ -137,8 +147,8 @@ export const tabContainers = [
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',
-      lineHeight: '36px',
-      fontSize: '10pt',
+      lineHeight: '37px',
+      fontSize: '16px',
       color: '#fff',
       backgroundColor: '#ff7f15',
     },
@@ -230,6 +240,7 @@ export const tabContainers = [
     onRowsSelect: 'type3',
     disableRowSelection: 'type2',
     buttonText: 'Add Selected Files',
+    addAllButtonText: 'Add Associated Files for All',
     tableID: 'sample_tab_table',
     tableDownloadCSV: customSamplesTabDownloadCSV,
     viewColumns: true,
@@ -249,12 +260,13 @@ export const tabContainers = [
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
     buttonText: 'Add Selected Files',
+    addAllButtonText: 'Add All Filtered Files',
     dataKey: 'file_id',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',
-      lineHeight: '36px',
-      fontSize: '10pt',
+      lineHeight: '37px',
+      fontSize: '16px',
       color: '#fff',
       backgroundColor: '#ff7f15',
     },

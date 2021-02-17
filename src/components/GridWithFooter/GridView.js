@@ -90,17 +90,17 @@ const GridView = ({
 
   // Calculate the properate marginTop value for the tooltip on the top
   function tooltipStyle(text) {
-    const topValue = text.length > 35 ? '-78px' : '-51px';
+    const topValue = text.length > 35 ? '-60px' : '-51px';
     return { top: topValue };
   }
 
   const btnStyle = {
     borderRadius: '10px',
-    width: '260px',
+    width: '180px',
     height: '27px',
     lineHeight: '18px',
-    fontSize: '12px',
-    textTransform: 'uppercase',
+    fontSize: '16px',
+    // textTransform: 'uppercase',
     fontFamily: 'Lato',
     color: '#fff',
     backgroundColor: '#ff7e15',
