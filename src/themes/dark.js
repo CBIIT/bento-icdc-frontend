@@ -35,7 +35,7 @@ export default {
     fontFamily: 'Lato,"Open Sans", sans-serif',
     fontFamilyRaleway: "'Raleway', sans-serif",
     drawerWidth: '240px',
-    widgetDivider: '#181918',
+    widgetDivider: '#4A4A4A',
   },
   palette: {
     primary: {
@@ -208,7 +208,7 @@ export default {
         .toHexString(),
     },
     textWithBackground: {
-      main: 'black',
+      main: 'white',
       light: tinycolor(info)
         .lighten(lightenRate)
         .toHexString(),
