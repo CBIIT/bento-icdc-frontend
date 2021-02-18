@@ -348,6 +348,7 @@ const styles = () => ({
   helpIcon: {
     verticalAlign: 'top',
     zIndex: '600',
+    width: '17px',
   },
   topButtonGroup: {
     textAlign: 'right',
