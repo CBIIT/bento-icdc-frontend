@@ -488,7 +488,7 @@ const CaseDetail = ({ classes, data }) => {
                 <Grid item xs={12}>
                   <MuiThemeProvider theme={computedTheme}>
                     <div className={classes.tableTitle}>
-                      <span className={classes.tableHeader}>{table1.tableTitle}</span>
+                      <span className={classes.tableHeader}>{table2.tableTitle}</span>
                     </div>
                     <GridWithFooter
                       data={files}
