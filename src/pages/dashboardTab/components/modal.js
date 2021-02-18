@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
 import Dialog from '../../../components/AddToCartDialog';
-import { addToCart, cartWillFull } from '../../fileCentricCart/store/cart';
+import { addToCart, cartWillFull, getFilesIdsInCart } from '../../fileCentricCart/store/cart';
 import { fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal, getFilesCount } from '../store/dashboardReducer';
 
 const styles = () => ({
@@ -49,7 +49,13 @@ const SelectAllModalDialog = ({
   async function exportFiles() {
     // Find the newly added files by comparing
     const getAllFilesData = await fetchAllFileIDsForSelectAll(getFilesCount());
-    openSnack(getAllFilesData.length || 0);
+    const currentFileIdsInCart = getFilesIdsInCart();
+
+    const newFileIDSLength = (currentFileIdsInCart !== null || currentFileIdsInCart !== [])
+      ? getAllFilesData.filter(
+        (e) => !currentFileIdsInCart.find((a) => e === a),
+      ).length : getAllFilesData.length;
+    openSnack(newFileIDSLength || 0);
     addToCart({ fileIds: getAllFilesData });
     handleClose();
   }
