@@ -230,7 +230,13 @@ const TabView = ({
         >
           { buttonText }
         </button>
-        <IconButton aria-label="help" className={classes.helpIconButton} onMouseOver={() => toggleMessageStatus('top', 'open')} onMouseEnter={() => toggleMessageStatus('top', 'open')} onMouseLeave={() => toggleMessageStatus('top', 'close')}>
+        <IconButton
+          aria-label="help"
+          className={classes.helpIconButton}
+          onMouseOver={() => toggleMessageStatus('top', 'open')}
+          onMouseEnter={() => toggleMessageStatus('top', 'open')}
+          onMouseLeave={() => toggleMessageStatus('top', 'close')}
+        >
           {TopMessageStatus.src ? (
             <img
               onMouseEnter={() => toggleMessageStatus('top', 'open')}
@@ -242,11 +248,11 @@ const TabView = ({
             />
           ) : (
             <HelpIcon
-              className={classes.helpIcon}
-              fontSize="small"
               onMouseOver={() => toggleMessageStatus('top', 'open')}
               onMouseEnter={() => toggleMessageStatus('top', 'open')}
               onFocus={() => toggleMessageStatus('top', 'open')}
+              className={classes.helpIcon}
+              fontSize="small"
             />
           )}
         </IconButton>
@@ -285,7 +291,13 @@ const TabView = ({
           { buttonText }
         </button>
 
-        <IconButton aria-label="help" className={classes.helpIconButton} onMouseOver={() => toggleMessageStatus('bottom', 'open')} onMouseEnter={() => toggleMessageStatus('bottom', 'open')} onMouseLeave={() => toggleMessageStatus('bottom', 'close')}>
+        <IconButton
+          aria-label="help"
+          className={classes.helpIconButton}
+          onMouseOver={() => toggleMessageStatus('bottom', 'open')}
+          onMouseEnter={() => toggleMessageStatus('bottom', 'open')}
+          onMouseLeave={() => toggleMessageStatus('bottom', 'close')}
+        >
           {BottomMessageStatus.src ? (
             <img
               onMouseEnter={() => toggleMessageStatus('bottom', 'open')}
