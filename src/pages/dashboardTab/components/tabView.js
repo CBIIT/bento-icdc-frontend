@@ -57,6 +57,7 @@ const TabView = ({
   defaultSortCoulmn,
   defaultSortDirection,
   tableDownloadCSV,
+  primaryKeyIndex = 0,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -183,7 +184,7 @@ const TabView = ({
     Presist user selection
   */
   function onRowsSelect(curr, allRowsSelected, rowsSelected, displayData, selectedData) {
-    rowSelectionEvent(displayData.map((d) => d.data[0]), rowsSelected);
+    rowSelectionEvent(displayData.map((d) => d.data[primaryKeyIndex]), rowsSelected);
 
     setSelectedIDs([...new Set(
       customOnRowsSelect(selectedData, allRowsSelected),
@@ -229,7 +230,13 @@ const TabView = ({
         >
           { buttonText }
         </button>
-        <IconButton aria-label="help" className={classes.helpIconButton} onMouseOver={() => toggleMessageStatus('top', 'open')} onMouseEnter={() => toggleMessageStatus('top', 'open')} onMouseLeave={() => toggleMessageStatus('top', 'close')}>
+        <IconButton
+          aria-label="help"
+          className={classes.helpIconButton}
+          onMouseOver={() => toggleMessageStatus('top', 'open')}
+          onMouseEnter={() => toggleMessageStatus('top', 'open')}
+          onMouseLeave={() => toggleMessageStatus('top', 'close')}
+        >
           {TopMessageStatus.src ? (
             <img
               onMouseEnter={() => toggleMessageStatus('top', 'open')}
@@ -241,11 +248,11 @@ const TabView = ({
             />
           ) : (
             <HelpIcon
-              className={classes.helpIcon}
-              fontSize="small"
               onMouseOver={() => toggleMessageStatus('top', 'open')}
               onMouseEnter={() => toggleMessageStatus('top', 'open')}
               onFocus={() => toggleMessageStatus('top', 'open')}
+              className={classes.helpIcon}
+              fontSize="small"
             />
           )}
         </IconButton>
@@ -284,7 +291,13 @@ const TabView = ({
           { buttonText }
         </button>
 
-        <IconButton aria-label="help" className={classes.helpIconButton} onMouseOver={() => toggleMessageStatus('bottom', 'open')} onMouseEnter={() => toggleMessageStatus('bottom', 'open')} onMouseLeave={() => toggleMessageStatus('bottom', 'close')}>
+        <IconButton
+          aria-label="help"
+          className={classes.helpIconButton}
+          onMouseOver={() => toggleMessageStatus('bottom', 'open')}
+          onMouseEnter={() => toggleMessageStatus('bottom', 'open')}
+          onMouseLeave={() => toggleMessageStatus('bottom', 'close')}
+        >
           {BottomMessageStatus.src ? (
             <img
               onMouseEnter={() => toggleMessageStatus('bottom', 'open')}
@@ -415,6 +428,7 @@ const styles = () => ({
   },
   helpIcon: {
     zIndex: '600',
+    width: '17px',
   },
   helpIconButton: {
     verticalAlign: 'top',

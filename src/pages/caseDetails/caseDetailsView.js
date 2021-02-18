@@ -457,13 +457,11 @@ const CaseDetail = ({ classes, data }) => {
             <Grid container spacing={4} className={classes.tableDiv}>
               <Grid item xs={12}>
                 <MuiThemeProvider theme={computedTheme}>
+                  <div className={classes.tableTitle}>
+                    <span className={classes.tableHeader}>{table1.tableTitle}</span>
+                  </div>
                   <GridWithFooter
                     data={data.samplesByCaseId}
-                    title={(
-                      <div className={classes.tableTitle}>
-                        <span className={classes.tableHeader}>{table1.tableTitle}</span>
-                      </div>
-                      )}
                     columns={getColumns(table1, classes, data, externalLinkIcon)}
                     options={getOptions(table1, classes)}
                     customOnRowsSelect={table1.customOnRowsSelect}
@@ -489,13 +487,11 @@ const CaseDetail = ({ classes, data }) => {
               <Grid container spacing={4} className={classes.tableDiv}>
                 <Grid item xs={12}>
                   <MuiThemeProvider theme={computedTheme}>
+                    <div className={classes.tableTitle}>
+                      <span className={classes.tableHeader}>{table1.tableTitle}</span>
+                    </div>
                     <GridWithFooter
                       data={files}
-                      title={(
-                        <div className={classes.tableTitle}>
-                          <span className={classes.tableHeader}>{table2.tableTitle}</span>
-                        </div>
-                      )}
                       columns={getColumns(table2, classes, data)}
                       options={getOptions(table2, classes)}
                       customOnRowsSelect={table2.customOnRowsSelect}
@@ -509,6 +505,7 @@ const CaseDetail = ({ classes, data }) => {
                       tooltipMessage={table2.tooltipMessage}
                       tooltipContent={tooltipContent}
                       showtooltip
+                      primaryKeyIndex={table2.primaryKeyIndex}
                     />
                   </MuiThemeProvider>
                 </Grid>
@@ -685,7 +682,8 @@ const styles = (theme) => ({
     fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#ff17f15',
-    paddingBottom: '20px',
+    marginLeft: '20px',
+    // paddingBottom: '20px',
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,

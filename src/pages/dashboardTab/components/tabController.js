@@ -89,23 +89,28 @@ const tabController = (classes) => {
           tooltipContent[currentTab],
           tooltipContent.icon,
           tooltipContent.alt)),
-        close: () => setTopMessageStatus(setTooltip(false, tooltipContent[currentTab],
+        close: () => setTopMessageStatus(setTooltip(false,
+          tooltipContent[currentTab],
           tooltipContent.icon,
           tooltipContent.alt)),
       },
       bottom: {
-        open: () => setBottomMessageStatus(setTooltip(true, tooltipContent[currentTab],
+        open: () => setBottomMessageStatus(setTooltip(true,
+          tooltipContent[currentTab],
           tooltipContent.icon,
           tooltipContent.alt)),
-        close: () => setBottomMessageStatus(setTooltip(false, tooltipContent[currentTab],
+        close: () => setBottomMessageStatus(setTooltip(false,
+          tooltipContent[currentTab],
           tooltipContent.icon,
           tooltipContent.alt)),
       },
       addAll: {
-        open: () => setSelectAllToolTipStatus(setTooltip(true, selectAllToolTip[currentTab],
+        open: () => setSelectAllToolTipStatus(setTooltip(true,
+          selectAllToolTip[currentTab],
           tooltipContent.icon,
           tooltipContent.alt)),
-        close: () => setSelectAllToolTipStatus(setTooltip(false, selectAllToolTip[currentTab],
+        close: () => setSelectAllToolTipStatus(setTooltip(false,
+          selectAllToolTip[currentTab],
           tooltipContent.icon,
           tooltipContent.alt)),
       },
@@ -254,7 +259,7 @@ const tabController = (classes) => {
 
   // Calculate the properate marginTop value for the tooltip on the top
   function tooltipStyle(text) {
-    const marginTopValue = text.length > 80 ? '-25px' : '-3px';
+    const marginTopValue = text.length > 40 ? '-13px' : '-3px';
     return { marginTop: marginTopValue };
   }
 
