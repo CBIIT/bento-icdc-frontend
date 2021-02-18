@@ -234,7 +234,7 @@ const TabView = ({
           className={classes.helpIconButton}
           onMouseOver={() => toggleMessageStatus('top', 'open')}
           onMouseEnter={() => toggleMessageStatus('top', 'open')}
-          onMouseLeave={() => toggleMessageStatus('top', 'open')}
+          onMouseLeave={() => toggleMessageStatus('top', 'close')}
         >
           {TopMessageStatus.src ? (
             <img
