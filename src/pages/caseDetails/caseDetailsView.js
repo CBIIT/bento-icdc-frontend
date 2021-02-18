@@ -505,6 +505,7 @@ const CaseDetail = ({ classes, data }) => {
                       tooltipMessage={table2.tooltipMessage}
                       tooltipContent={tooltipContent}
                       showtooltip
+                      primaryKeyIndex={table2.primaryKeyIndex}
                     />
                   </MuiThemeProvider>
                 </Grid>

@@ -95,6 +95,8 @@ export const table2 = {
   // Set 'selectableRows' to true to show the row selection
   selectableRows: true,
   // A maximum of 10 columns are allowed
+  primaryKeyIndex: 7,
+
   columns: [
     {
       dataField: 'studyDesignation',
