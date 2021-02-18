@@ -57,6 +57,7 @@ const TabView = ({
   defaultSortCoulmn,
   defaultSortDirection,
   tableDownloadCSV,
+  primaryKeyIndex = 0,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -183,7 +184,7 @@ const TabView = ({
     Presist user selection
   */
   function onRowsSelect(curr, allRowsSelected, rowsSelected, displayData, selectedData) {
-    rowSelectionEvent(displayData.map((d) => d.data[0]), rowsSelected);
+    rowSelectionEvent(displayData.map((d) => d.data[primaryKeyIndex]), rowsSelected);
 
     setSelectedIDs([...new Set(
       customOnRowsSelect(selectedData, allRowsSelected),
@@ -426,7 +427,8 @@ const styles = () => ({
     marginLeft: '-5px',
   },
   helpIcon: {
-    zIndex: '900',
+    zIndex: '600',
+    width: '17px',
   },
   helpIconButton: {
     verticalAlign: 'top',

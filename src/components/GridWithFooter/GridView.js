@@ -28,6 +28,7 @@ const GridView = ({
   saveButtonDefaultStyle,
   DeactiveSaveButtonDefaultStyle,
   ActiveSaveButtonDefaultStyle,
+  primaryKeyIndex = 0,
 }) => {
   // Get the existing files ids from  cart state
   const fileIDs = useSelector((state) => state.cart.fileIds);
@@ -36,6 +37,10 @@ const GridView = ({
   const [rowSelection, setRowSelection] = React.useState({
     selectedRowInfo: [],
     selectedRowIndex: [],
+  });
+  const [sortOrder, setSortOrder] = React.useState({
+    direction: options.sortOrder.direction ? options.sortOrder.direction : '',
+    name: options.sortOrder.name ? options.sortOrder.name : '',
   });
 
   // Store current page selected info
@@ -188,7 +193,7 @@ const GridView = ({
     Presist user selection
   */
   function onRowsSelect(curr, allRowsSelected, rowsSelected, displayData) {
-    rowSelectionEvent(displayData.map((d) => d.data[0]), rowsSelected);
+    rowSelectionEvent(displayData.map((d) => d.data[primaryKeyIndex]), rowsSelected);
     setSelectedIDs([...new Set(
       customOnRowsSelect(data, allRowsSelected),
     )]);
@@ -200,15 +205,19 @@ const GridView = ({
     }
   }
 
+  // to presist sorting
+  function onSortChange(changedColumn, direction) {
+    setSortOrder({
+      direction,
+      name: changedColumn,
+    });
+  }
   // overwrite default options
   const defaultOptions = () => ({
     rowsSelected: rowSelection.selectedRowIndex,
-    onRowSelectionChange: (curr, allRowsSelected, rowsSelected, displayData) => onRowsSelect(
-      curr,
-      allRowsSelected,
-      rowsSelected,
-      displayData,
-    ),
+    onRowSelectionChange: onRowsSelect,
+    onColumnSortChange: onSortChange,
+    sortOrder,
     isRowSelectable: (dataIndex) => (disableRowSelection
       ? disableRowSelection(data[dataIndex], fileIDs) : true),
   });
@@ -339,6 +348,7 @@ const styles = () => ({
   helpIcon: {
     verticalAlign: 'top',
     zIndex: '600',
+    width: '17px',
   },
   topButtonGroup: {
     textAlign: 'right',
