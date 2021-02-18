@@ -22,7 +22,7 @@ const tabLabel = ({
 const styles = () => ({
   defaultStyle: {
     fontFamily: 'Open Sans',
-    textTransform: 'uppercase',
+    textTransform: 'none',
     fontSize: '17px',
   },
 });
