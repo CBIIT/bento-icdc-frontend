@@ -27,10 +27,10 @@ themesLight.overrides.MuiTableCell = {
   ...themesLight.overrides.MuiTableCell,
   root: {
     '&:first-child': {
-      paddingLeft: '20px',
+      paddingLeft: '30px',
     },
     '&:lastchild': {
-      paddingRight: '20px',
+      paddingRight: '30px',
     },
   },
 };
@@ -294,15 +294,17 @@ const StudyDetailView = ({ classes, data }) => {
           <Grid item xs={12}>
             <Grid container>
               <Grid item xs={12} id="table_cohort_dosing">
-                <Typography>
-                  <CustomDataTable
-                    data={cohortAndDosingTableData.sort(
-                      (a, b) => studyDetailSorting(a.arm, b.arm),
-                    )}
-                    columns={table1.columns}
-                    options={getOptions(table1, classes)}
-                  />
-                </Typography>
+                <MuiThemeProvider theme={computedTheme}>
+                  <Typography>
+                    <CustomDataTable
+                      data={cohortAndDosingTableData.sort(
+                        (a, b) => studyDetailSorting(a.arm, b.arm),
+                      )}
+                      columns={table1.columns}
+                      options={getOptions(table1, classes)}
+                    />
+                  </Typography>
+                </MuiThemeProvider>
               </Grid>
               <Grid item xs={8}>
                 <Typography />
