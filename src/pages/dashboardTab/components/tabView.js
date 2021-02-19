@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -7,6 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
 import { getColumns } from 'bento-components';
+import _ from 'lodash';
 import SelectAllModal from './modal';
 import {
   GET_FILES_OVERVIEW_QUERY,
@@ -168,10 +170,21 @@ const TabView = ({
       }, [],
     );
 
-    setRowSelection({
-      selectedRowInfo: newSelectedRowInfo,
-      selectedRowIndex: newSelectedRowIndex,
-    });
+    if (_.differenceWith(
+      newSelectedRowIndex,
+      rowSelection.selectedRowIndex,
+      _.isEqual,
+    ).length !== 0
+      || _.differenceWith(
+        rowSelection.selectedRowIndex,
+        newSelectedRowIndex,
+        _.isEqual,
+      ).length !== 0) {
+      setRowSelection({
+        selectedRowInfo: newSelectedRowInfo,
+        selectedRowIndex: newSelectedRowIndex,
+      });
+    }
   }
 
   // Calculate the properate marginTop value for the tooltip on the top
