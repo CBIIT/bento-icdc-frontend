@@ -84,8 +84,8 @@ export const customFilesTabDownloadCSV = {
 };
 
 export const MY_CART = gql`
-query filesInList($uuids: [String]){
-  filesInList(uuids: $uuids){
+query filesInList($uuids: [String], $first: Int = 2000){
+  filesInList(uuids: $uuids, first: $first){
       file_type
       file_name
       association
