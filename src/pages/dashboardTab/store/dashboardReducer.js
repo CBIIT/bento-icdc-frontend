@@ -1,3 +1,4 @@
+/* eslint-disable */
 import _ from 'lodash';
 import {
   customCheckBox,
@@ -37,6 +38,7 @@ const storeKey = 'dashboardTab';
 
 const initialState = {
   dashboardTab: {
+    clearTableSelection: false,
     isDataTableUptoDate: false,
     isFetched: false,
     isLoading: false,
@@ -504,6 +506,13 @@ export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromC
 
 export const getDashboard = () => getState();
 
+export const needToClearTableSelection = () => getState().clearTableSelection;
+
+
+export function doneTableSelectionClean() {
+  store.dispatch({ type: 'CLEAR_TABLE_SELECTION' });
+}
+
 // reducers
 const reducers = {
   DASHBOARDTAB_QUERY_ERR: (state, item) => ({
@@ -513,12 +522,9 @@ const reducers = {
     isLoading: false,
     isFetched: false,
   }),
-  READY_DASHBOARDTAB: (state) => ({
+  CLEAR_TABLE_SELECTION: (state) => ({
     ...state,
-    isLoading: false,
-    isFetched: true,
-    setSideBarLoading: false,
-    isDashboardTableLoading: false,
+    clearTableSelection: false,
   }),
   TOGGGLE_CHECKBOX_WITH_API: (state, item) => {
     const updatedCheckboxData1 = updateFilteredAPIDataIntoCheckBoxData(
@@ -597,6 +603,7 @@ const reducers = {
     return item.data
       ? {
         ...state.dashboard,
+        clearAllSelection: false,
         isFetched: true,
         isLoading: false,
         hasError: false,
@@ -629,6 +636,7 @@ const reducers = {
         isFetched: true,
         isLoading: false,
         hasError: false,
+        clearTableSelection: true,
         error: '',
         stats: getStatInit(item.data, statsCount),
         allActiveFilters: allFilters(),

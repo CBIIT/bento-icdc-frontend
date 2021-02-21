@@ -20,6 +20,7 @@ import {
 } from '../../../bento/dashboardTabData';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
+import { needToClearTableSelection, doneTableSelectionClean } from '../store/dashboardReducer';
 import Message from '../../../components/Message';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 
@@ -63,6 +64,7 @@ const TabView = ({
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
+
   const fileIDs = cart.fileIds ? cart.fileIds : [];
   const saveButton = useRef(null);
   const saveButton2 = useRef(null);
@@ -105,6 +107,16 @@ const TabView = ({
   useEffect(() => {
     initSaveButtonDefaultStyle(saveButton);
     initSaveButtonDefaultStyle(saveButton2);
+    if (needToClearTableSelection()) {
+      if (rowSelection.selectedRowInfo.length !== 0 || rowSelection.selectedRowIndex.length !== 0) {
+        setRowSelection({
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        });
+      }
+      // tell redux state, done the job.
+      doneTableSelectionClean();
+    }
 
     if (rowSelection.selectedRowIndex.length === 0) {
       updateActiveSaveButtonStyle(true, saveButton);
@@ -170,11 +182,22 @@ const TabView = ({
       }, [],
     );
 
+    // reduce the state chagne, when newSelectedRowIndex and newSelectedRowInfo is same as previous.
     if (_.differenceWith(
       newSelectedRowIndex,
       rowSelection.selectedRowIndex,
       _.isEqual,
     ).length !== 0
+      || _.differenceWith(
+        newSelectedRowInfo,
+        rowSelection.selectedRowInfo,
+        _.isEqual,
+      ).length !== 0
+      || _.differenceWith(
+        rowSelection.selectedRowInfo,
+        newSelectedRowInfo,
+        _.isEqual,
+      ).length !== 0
       || _.differenceWith(
         rowSelection.selectedRowIndex,
         newSelectedRowIndex,
