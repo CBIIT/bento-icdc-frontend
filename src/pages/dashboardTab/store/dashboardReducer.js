@@ -89,18 +89,20 @@ function shouldFetchDataForDashboardTabDataTable(state) {
 }
 
 function setDataCaseSelected(result) {
-  store.dispatch({ type: 'SET_CASES_SELECTION', payload: _.cloneDeep(result) });
+  store.dispatch({ type: 'SET_CASES_SELECTION', payload: result });
 }
 
 function setDataFileSelected(result) {
-  store.dispatch({ type: 'SET_FILE_SELECTION', payload: _.cloneDeep(result) });
+  store.dispatch({ type: 'SET_FILE_SELECTION', payload: result });
 }
 
 function setDataSampleSelected(result) {
-  store.dispatch({ type: 'SET_SAMPLE_SELECTION', payload: _.cloneDeep(result) });
+  store.dispatch({ type: 'SET_SAMPLE_SELECTION', payload: result });
 }
 
-export const getRowSelections = [setDataCaseSelected, setDataSampleSelected, setDataFileSelected];
+export function getTableRowSelectionEvent() {
+  return ([setDataCaseSelected, setDataSampleSelected, setDataFileSelected]);
+}
 
 /**
  * Returns the  stats from inputAPI data.
@@ -527,12 +529,6 @@ export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromC
 
 export const getDashboard = () => getState();
 
-export const needToClearTableSelection = () => getState().clearTableSelection;
-
-export function doneTableSelectionClean() {
-  store.dispatch({ type: 'CLEAR_TABLE_SELECTION' });
-}
-
 // reducers
 const reducers = {
   DASHBOARDTAB_QUERY_ERR: (state, item) => ({
@@ -545,6 +541,13 @@ const reducers = {
   CLEAR_TABLE_SELECTION: (state) => ({
     ...state,
     clearTableSelection: false,
+  }),
+  READY_DASHBOARDTAB: (state) => ({
+    ...state,
+    isLoading: false,
+    isFetched: true,
+    setSideBarLoading: false,
+    isDashboardTableLoading: false,
   }),
   TOGGGLE_CHECKBOX_WITH_API: (state, item) => {
     const updatedCheckboxData1 = updateFilteredAPIDataIntoCheckBoxData(
