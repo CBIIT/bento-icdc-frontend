@@ -691,6 +691,15 @@ const reducers = {
           dataFile: item.data.fileOverview,
           filters: [],
         },
+        dataCaseSelected: {
+          ...state.dataCaseSelected,
+        },
+        dataSampleSelected: {
+          ...state.dataSampleSelected,
+        },
+        dataFileSelected: {
+          ...state.dataFileSelected,
+        },
         widgets: getWidgetsInitData(item.data, widgetsData),
       } : { ...state };
   },
