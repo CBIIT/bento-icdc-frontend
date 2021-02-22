@@ -179,12 +179,12 @@ function fetchDashboardTab() {
   };
 }
 
-function fetchDashboardTabForClearAll() {
+function fetchDashboardTabForClearAllFilters() {
   return () => client
     .query({
       query: DASHBOARD_QUERY,
     })
-    .then((result) => store.dispatch({ type: 'CLEAR_ALL', payload: _.cloneDeep(result) }))
+    .then((result) => store.dispatch({ type: 'CLEAR_ALL_FILTER', payload: _.cloneDeep(result) }))
     .catch((error) => store.dispatch(
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
@@ -430,13 +430,13 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
 }
 
 /**
- * Reducer for clear all
+ * Reducer for clear all filters
  *
  * @return distpatcher
  */
 
 export function clearAllFilters() {
-  store.dispatch(fetchDashboardTabForClearAll());
+  store.dispatch(fetchDashboardTabForClearAllFilters());
 }
 
 /**
@@ -471,10 +471,14 @@ export async function singleCheckBox(payload) {
  * @param {object} payload
  * @return distpatcher
  */
+
 export function toggleCheckBox(payload) {
   return () => {
     const currentAllFilterVariables = payload === {} ? allFilters : createFilterVariables(payload);
-    toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
+    // For performance issue we are using initial dasboardquery instead of fitered for empty filters
+    if (_.isEqual(currentAllFilterVariables, allFilters())) {
+      clearAllFilters();
+    } else toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
   };
 }
 
@@ -655,6 +659,39 @@ const reducers = {
           selectedRowIndex: [],
         },
 
+      } : { ...state };
+  },
+  CLEAR_ALL_FILTER: (state, item) => {
+    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
+    fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
+    return item.data
+      ? {
+        ...state.dashboard,
+        isFetched: true,
+        isLoading: false,
+        hasError: false,
+        error: '',
+        stats: getStatInit(item.data, statsCount),
+        allActiveFilters: allFilters(),
+        filteredSubjectIds: null,
+        filteredSampleIds: null,
+        filteredFileIds: null,
+        subjectOverView: {
+          data: item.data.subjectOverViewPaged,
+        },
+        checkboxForAll: {
+          data: checkboxData,
+        },
+        checkbox: {
+          data: checkboxData,
+        },
+        datatable: {
+          dataCase: item.data.subjectOverViewPaged,
+          dataSample: item.data.sampleOverview,
+          dataFile: item.data.fileOverview,
+          filters: [],
+        },
+        widgets: getWidgetsInitData(item.data, widgetsData),
       } : { ...state };
   },
   CLEAR_ALL: (state, item) => {
