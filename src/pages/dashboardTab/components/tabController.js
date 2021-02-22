@@ -15,7 +15,7 @@ import Message from '../../../components/Message';
 import {
   tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon, selectAllToolTip,
 } from '../../../bento/dashboardTabData';
-import { fetchDataForDashboardTab } from '../store/dashboardReducer';
+import { fetchDataForDashboardTab, getRowSelections } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
 function TabContainer({ children, dir }) {
@@ -39,7 +39,14 @@ const tabController = (classes) => {
   const dashboard = useSelector((state) => (state.dashboardTab
 && state.dashboardTab.datatable
     ? state.dashboardTab.datatable : {}));
-    // get stats data from store
+
+  // get stats data from store
+  const tableRowSelection = [
+    useSelector((state) => (state.dashboardTab.dataCaseSelected)),
+    useSelector((state) => (state.dashboardTab.dataSampleSelected)),
+    useSelector((state) => (state.dashboardTab.dataFileSelected))];
+
+  // get stats data from store
   const dashboardStats = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.stats ? state.dashboardTab.stats : {}));
 
@@ -298,6 +305,10 @@ const tabController = (classes) => {
         filteredSampleIds={filteredSampleIds}
         filteredFileIds={filteredFileIds}
         tableDownloadCSV={container.tableDownloadCSV || false}
+        setRowSelection={getRowSelections[container.tabIndex]}
+        selectedRowInfo={tableRowSelection[container.tabIndex].selectedRowInfo}
+        selectedRowIndex={tableRowSelection[container.tabIndex].selectedRowIndex}
+
       />
     </TabContainer>
   ));

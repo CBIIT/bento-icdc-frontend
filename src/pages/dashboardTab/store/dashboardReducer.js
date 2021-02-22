@@ -1,4 +1,3 @@
-/* eslint-disable */
 import _ from 'lodash';
 import {
   customCheckBox,
@@ -38,7 +37,6 @@ const storeKey = 'dashboardTab';
 
 const initialState = {
   dashboardTab: {
-    clearTableSelection: false,
     isDataTableUptoDate: false,
     isFetched: false,
     isLoading: false,
@@ -67,6 +65,18 @@ const initialState = {
       dataSample: 'undefined',
       dataFile: 'undefined',
     },
+    dataCaseSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataSampleSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataFileSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
     widgets: {},
   },
 };
@@ -77,6 +87,20 @@ const getState = () => store.getState()[storeKey];
 function shouldFetchDataForDashboardTabDataTable(state) {
   return !(state.isFetched);
 }
+
+function setDataCaseSelected(result) {
+  store.dispatch({ type: 'SET_CASES_SELECTION', payload: _.cloneDeep(result) });
+}
+
+function setDataFileSelected(result) {
+  store.dispatch({ type: 'SET_FILE_SELECTION', payload: _.cloneDeep(result) });
+}
+
+function setDataSampleSelected(result) {
+  store.dispatch({ type: 'SET_SAMPLE_SELECTION', payload: _.cloneDeep(result) });
+}
+
+export const getRowSelections = [setDataCaseSelected, setDataSampleSelected, setDataFileSelected];
 
 /**
  * Returns the  stats from inputAPI data.
@@ -448,10 +472,6 @@ export async function singleCheckBox(payload) {
 export function toggleCheckBox(payload) {
   return () => {
     const currentAllFilterVariables = payload === {} ? allFilters : createFilterVariables(payload);
-    // // For performance issue we are using initial dasboardquery instead of fitered for empty filters
-    // if (_.isEqual(currentAllFilterVariables, allFilters())) {
-    //   clearAllFilters();
-    // } else toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
     toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
   };
 }
@@ -508,7 +528,6 @@ export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromC
 export const getDashboard = () => getState();
 
 export const needToClearTableSelection = () => getState().clearTableSelection;
-
 
 export function doneTableSelectionClean() {
   store.dispatch({ type: 'CLEAR_TABLE_SELECTION' });
@@ -604,7 +623,6 @@ const reducers = {
     return item.data
       ? {
         ...state.dashboard,
-        clearAllSelection: false,
         isFetched: true,
         isLoading: false,
         hasError: false,
@@ -625,6 +643,18 @@ const reducers = {
           filters: [],
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
+        dataCaseSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataSampleSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataFileSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
 
       } : { ...state };
   },
@@ -637,7 +667,6 @@ const reducers = {
         isFetched: true,
         isLoading: false,
         hasError: false,
-        clearTableSelection: true,
         error: '',
         stats: getStatInit(item.data, statsCount),
         allActiveFilters: allFilters(),
@@ -659,10 +688,40 @@ const reducers = {
           dataFile: item.data.fileOverview,
           filters: [],
         },
+        dataCaseSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataSampleSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataFileSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
         widgets: getWidgetsInitData(item.data, widgetsData),
 
       } : { ...state };
   },
+  SET_CASES_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataCaseSelected: item,
+    }
+  ),
+  SET_SAMPLE_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataSampleSelected: item,
+    }
+  ),
+  SET_FILE_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataFileSelected: item,
+    }
+  ),
 };
 
 // INJECT-REDUCERS INTO REDUX STORE

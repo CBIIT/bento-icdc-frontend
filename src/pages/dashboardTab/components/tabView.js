@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -20,7 +19,6 @@ import {
 } from '../../../bento/dashboardTabData';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
-import { needToClearTableSelection, doneTableSelectionClean } from '../store/dashboardReducer';
 import Message from '../../../components/Message';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 
@@ -61,6 +59,10 @@ const TabView = ({
   defaultSortDirection,
   tableDownloadCSV,
   primaryKeyIndex = 0,
+  setRowSelection,
+  selectedRowInfo = [],
+  selectedRowIndex = [],
+
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -69,11 +71,6 @@ const TabView = ({
   const saveButton = useRef(null);
   const saveButton2 = useRef(null);
   const AddToCartAlertDialogRef = useRef();
-  // Store current page selected info
-  const [rowSelection, setRowSelection] = React.useState({
-    selectedRowInfo: [],
-    selectedRowIndex: [],
-  });
 
   // Store current page selected info
   const [selectedIDs, setSelectedIDs] = React.useState([]);
@@ -107,18 +104,8 @@ const TabView = ({
   useEffect(() => {
     initSaveButtonDefaultStyle(saveButton);
     initSaveButtonDefaultStyle(saveButton2);
-    if (needToClearTableSelection()) {
-      if (rowSelection.selectedRowInfo.length !== 0 || rowSelection.selectedRowIndex.length !== 0) {
-        setRowSelection({
-          selectedRowInfo: [],
-          selectedRowIndex: [],
-        });
-      }
-      // tell redux state, done the job.
-      doneTableSelectionClean();
-    }
 
-    if (rowSelection.selectedRowIndex.length === 0) {
+    if (selectedRowIndex.length === 0) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);
     } else {
@@ -158,8 +145,8 @@ const TabView = ({
     if (rowsSelected) {
       // Remove the rowInfo from selectedRowInfo if this row currently be
       // displayed and not be selected.
-      if (rowSelection.selectedRowInfo.length > 0) {
-        newSelectedRowInfo = rowSelection.selectedRowInfo.filter((key) => {
+      if (selectedRowInfo.length > 0) {
+        newSelectedRowInfo = selectedRowInfo.filter((key) => {
           if (displayedDataKeies.includes(key)) {
             return false;
           }
@@ -167,7 +154,7 @@ const TabView = ({
         });
       }
     } else {
-      newSelectedRowInfo = rowSelection.selectedRowInfo;
+      newSelectedRowInfo = selectedRowInfo;
     }
     newSelectedRowInfo = newSelectedRowInfo.concat(selectedRowsKey);
 
@@ -185,21 +172,21 @@ const TabView = ({
     // reduce the state chagne, when newSelectedRowIndex and newSelectedRowInfo is same as previous.
     if (_.differenceWith(
       newSelectedRowIndex,
-      rowSelection.selectedRowIndex,
+      selectedRowIndex,
       _.isEqual,
     ).length !== 0
       || _.differenceWith(
         newSelectedRowInfo,
-        rowSelection.selectedRowInfo,
+        selectedRowInfo,
         _.isEqual,
       ).length !== 0
       || _.differenceWith(
-        rowSelection.selectedRowInfo,
+        selectedRowInfo,
         newSelectedRowInfo,
         _.isEqual,
       ).length !== 0
       || _.differenceWith(
-        rowSelection.selectedRowIndex,
+        selectedRowIndex,
         newSelectedRowIndex,
         _.isEqual,
       ).length !== 0) {
@@ -241,7 +228,7 @@ const TabView = ({
       displayData,
       rowsSelected,
     ),
-    rowsSelected: rowSelection.selectedRowIndex,
+    rowsSelected: selectedRowIndex,
     onRowSelectionChange: onRowsSelect,
     isRowSelectable: (dataIndex) => (disableRowSelection
       ? disableRowSelection(data[dataIndex], fileIDs) : true),
