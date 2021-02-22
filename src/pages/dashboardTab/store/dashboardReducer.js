@@ -538,10 +538,6 @@ const reducers = {
     isLoading: false,
     isFetched: false,
   }),
-  CLEAR_TABLE_SELECTION: (state) => ({
-    ...state,
-    clearTableSelection: false,
-  }),
   READY_DASHBOARDTAB: (state) => ({
     ...state,
     isLoading: false,
