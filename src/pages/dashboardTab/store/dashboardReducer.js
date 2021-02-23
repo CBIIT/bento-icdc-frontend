@@ -184,7 +184,7 @@ function fetchDashboardTabForClearAllFilters() {
     .query({
       query: DASHBOARD_QUERY,
     })
-    .then((result) => store.dispatch({ type: 'CLEAR_ALL_FILTER', payload: _.cloneDeep(result) }))
+    .then((result) => store.dispatch({ type: 'CLEAR_ALL', payload: _.cloneDeep(result) }))
     .catch((error) => store.dispatch(
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
