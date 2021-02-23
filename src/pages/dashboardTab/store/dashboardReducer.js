@@ -65,6 +65,18 @@ const initialState = {
       dataSample: 'undefined',
       dataFile: 'undefined',
     },
+    dataCaseSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataSampleSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataFileSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
     widgets: {},
   },
 };
@@ -74,6 +86,22 @@ const getState = () => store.getState()[storeKey];
 
 function shouldFetchDataForDashboardTabDataTable(state) {
   return !(state.isFetched);
+}
+
+function setDataCaseSelected(result) {
+  store.dispatch({ type: 'SET_CASES_SELECTION', payload: result });
+}
+
+function setDataFileSelected(result) {
+  store.dispatch({ type: 'SET_FILE_SELECTION', payload: result });
+}
+
+function setDataSampleSelected(result) {
+  store.dispatch({ type: 'SET_SAMPLE_SELECTION', payload: result });
+}
+
+export function getTableRowSelectionEvent() {
+  return ([setDataCaseSelected, setDataSampleSelected, setDataFileSelected]);
 }
 
 /**
@@ -151,12 +179,12 @@ function fetchDashboardTab() {
   };
 }
 
-function fetchDashboardTabForClearAll() {
+function fetchDashboardTabForClearAllFilters() {
   return () => client
     .query({
       query: DASHBOARD_QUERY,
     })
-    .then((result) => store.dispatch({ type: 'CLEAR_ALL', payload: _.cloneDeep(result) }))
+    .then((result) => store.dispatch({ type: 'CLEAR_ALL_FILTER', payload: _.cloneDeep(result) }))
     .catch((error) => store.dispatch(
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
@@ -403,13 +431,13 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
 }
 
 /**
- * Reducer for clear all
+ * Reducer for clear all filters
  *
  * @return distpatcher
  */
 
 export function clearAllFilters() {
-  store.dispatch(fetchDashboardTabForClearAll());
+  store.dispatch(fetchDashboardTabForClearAllFilters());
 }
 
 /**
@@ -444,6 +472,7 @@ export async function singleCheckBox(payload) {
  * @param {object} payload
  * @return distpatcher
  */
+
 export function toggleCheckBox(payload) {
   return () => {
     const currentAllFilterVariables = payload === {} ? allFilters : createFilterVariables(payload);
@@ -618,7 +647,61 @@ const reducers = {
           filters: [],
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
+        dataCaseSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataSampleSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataFileSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
 
+      } : { ...state };
+  },
+  CLEAR_ALL_FILTER: (state, item) => {
+    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
+    fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
+    return item.data
+      ? {
+        ...state.dashboard,
+        isFetched: true,
+        isLoading: false,
+        hasError: false,
+        error: '',
+        stats: getStatInit(item.data, statsCount),
+        allActiveFilters: allFilters(),
+        filteredSubjectIds: null,
+        filteredSampleIds: null,
+        filteredFileIds: null,
+        subjectOverView: {
+          data: item.data.subjectOverViewPaged,
+        },
+        checkboxForAll: {
+          data: checkboxData,
+        },
+        checkbox: {
+          data: checkboxData,
+        },
+        datatable: {
+          dataCase: item.data.subjectOverViewPaged,
+          dataSample: item.data.sampleOverview,
+          dataFile: item.data.fileOverview,
+          filters: [],
+        },
+        dataCaseSelected: {
+          ...state.dataCaseSelected,
+        },
+        dataSampleSelected: {
+          ...state.dataSampleSelected,
+        },
+        dataFileSelected: {
+          ...state.dataFileSelected,
+        },
+        widgets: getWidgetsInitData(item.data, widgetsData),
       } : { ...state };
   },
   CLEAR_ALL: (state, item) => {
@@ -651,10 +734,40 @@ const reducers = {
           dataFile: item.data.fileOverview,
           filters: [],
         },
+        dataCaseSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataSampleSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataFileSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
         widgets: getWidgetsInitData(item.data, widgetsData),
 
       } : { ...state };
   },
+  SET_CASES_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataCaseSelected: item,
+    }
+  ),
+  SET_SAMPLE_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataSampleSelected: item,
+    }
+  ),
+  SET_FILE_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataFileSelected: item,
+    }
+  ),
 };
 
 // INJECT-REDUCERS INTO REDUX STORE

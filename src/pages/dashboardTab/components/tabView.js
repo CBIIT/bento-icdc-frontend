@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -60,18 +59,18 @@ const TabView = ({
   defaultSortDirection,
   tableDownloadCSV,
   primaryKeyIndex = 0,
+  setRowSelection,
+  selectedRowInfo = [],
+  selectedRowIndex = [],
+
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
+
   const fileIDs = cart.fileIds ? cart.fileIds : [];
   const saveButton = useRef(null);
   const saveButton2 = useRef(null);
   const AddToCartAlertDialogRef = useRef();
-  // Store current page selected info
-  const [rowSelection, setRowSelection] = React.useState({
-    selectedRowInfo: [],
-    selectedRowIndex: [],
-  });
 
   // Store current page selected info
   const [selectedIDs, setSelectedIDs] = React.useState([]);
@@ -106,7 +105,7 @@ const TabView = ({
     initSaveButtonDefaultStyle(saveButton);
     initSaveButtonDefaultStyle(saveButton2);
 
-    if (rowSelection.selectedRowIndex.length === 0) {
+    if (selectedRowIndex.length === 0) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);
     } else {
@@ -146,8 +145,8 @@ const TabView = ({
     if (rowsSelected) {
       // Remove the rowInfo from selectedRowInfo if this row currently be
       // displayed and not be selected.
-      if (rowSelection.selectedRowInfo.length > 0) {
-        newSelectedRowInfo = rowSelection.selectedRowInfo.filter((key) => {
+      if (selectedRowInfo.length > 0) {
+        newSelectedRowInfo = selectedRowInfo.filter((key) => {
           if (displayedDataKeies.includes(key)) {
             return false;
           }
@@ -155,7 +154,7 @@ const TabView = ({
         });
       }
     } else {
-      newSelectedRowInfo = rowSelection.selectedRowInfo;
+      newSelectedRowInfo = selectedRowInfo;
     }
     newSelectedRowInfo = newSelectedRowInfo.concat(selectedRowsKey);
 
@@ -170,13 +169,24 @@ const TabView = ({
       }, [],
     );
 
+    // reduce the state chagne, when newSelectedRowIndex and newSelectedRowInfo is same as previous.
     if (_.differenceWith(
       newSelectedRowIndex,
-      rowSelection.selectedRowIndex,
+      selectedRowIndex,
       _.isEqual,
     ).length !== 0
       || _.differenceWith(
-        rowSelection.selectedRowIndex,
+        newSelectedRowInfo,
+        selectedRowInfo,
+        _.isEqual,
+      ).length !== 0
+      || _.differenceWith(
+        selectedRowInfo,
+        newSelectedRowInfo,
+        _.isEqual,
+      ).length !== 0
+      || _.differenceWith(
+        selectedRowIndex,
         newSelectedRowIndex,
         _.isEqual,
       ).length !== 0) {
@@ -218,7 +228,7 @@ const TabView = ({
       displayData,
       rowsSelected,
     ),
-    rowsSelected: rowSelection.selectedRowIndex,
+    rowsSelected: selectedRowIndex,
     onRowSelectionChange: onRowsSelect,
     isRowSelectable: (dataIndex) => (disableRowSelection
       ? disableRowSelection(data[dataIndex], fileIDs) : true),
