@@ -84,6 +84,15 @@ const initialState = {
 // HELPERS
 const getState = () => store.getState()[storeKey];
 
+const SUNBURST_COLORS = [
+  '#39C0F0',
+  '#004CF3',
+  '#FF7F15',
+  '#4C3112',
+  '#8DE260',
+  '#437200',
+];
+
 function shouldFetchDataForDashboardTabDataTable(state) {
   return !(state.isFetched);
 }
@@ -157,7 +166,7 @@ const removeEmptySubjectsFromDonutData = (data) => {
  */
 function getWidgetsInitData(data, widgetsInfoFromCustConfig) {
   const donut = widgetsInfoFromCustConfig.reduce((acc, widget) => {
-    const Data = widget.type === 'sunburst' ? transformInitialDataForSunburst(data[widget.dataName], widget.datatable_level1_field, widget.datatable_level2_field, 'studies') : removeEmptySubjectsFromDonutData(data[widget.dataName]);
+    const Data = widget.type === 'sunburst' ? transformInitialDataForSunburst(data[widget.dataName], widget.datatable_level1_field, widget.datatable_level2_field, 'studies', SUNBURST_COLORS, SUNBURST_COLORS) : removeEmptySubjectsFromDonutData(data[widget.dataName]);
     const label = widget.dataName;
     return { ...acc, [label]: Data };
   }, {});
