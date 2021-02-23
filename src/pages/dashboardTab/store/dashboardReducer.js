@@ -184,7 +184,7 @@ function fetchDashboardTabForClearAllFilters() {
     .query({
       query: DASHBOARD_QUERY,
     })
-    .then((result) => store.dispatch({ type: 'CLEAR_ALL_FILTER', payload: _.cloneDeep(result) }))
+    .then((result) => store.dispatch({ type: 'CLEAR_ALL_FILTER_AND_TABLE_SELECTION', payload: _.cloneDeep(result) }))
     .catch((error) => store.dispatch(
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
@@ -447,9 +447,9 @@ export function clearAllFilters() {
  */
 export async function setSingleFilter(payload) {
   // test weather there are active dashboard filters if so clear all filters
-  if (!_.isEqual(getState().allActiveFilters, allFilters())) {
-    await clearAllFilters();
-  }
+  // if (!_.isEqual(getState().allActiveFilters, allFilters())) {
+  //   await clearAllFilters();
+  // }
   const singlefiter = createSingleFilterVariables(payload);
   store.dispatch({ type: 'SET_SINGLE_FILTER', payload: singlefiter });
 }
@@ -477,9 +477,10 @@ export function toggleCheckBox(payload) {
   return () => {
     const currentAllFilterVariables = payload === {} ? allFilters : createFilterVariables(payload);
     // For performance issue we are using initial dasboardquery instead of fitered for empty filters
-    if (_.isEqual(currentAllFilterVariables, allFilters())) {
-      clearAllFilters();
-    } else toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
+    // if (_.isEqual(currentAllFilterVariables, allFilters())) {
+    //   clearAllFilters();
+    // } else
+    toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
   };
 }
 
@@ -704,7 +705,7 @@ const reducers = {
         widgets: getWidgetsInitData(item.data, widgetsData),
       } : { ...state };
   },
-  CLEAR_ALL: (state, item) => {
+  CLEAR_ALL_FILTER_AND_TABLE_SELECTION: (state, item) => {
     const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
     fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
     return item.data
