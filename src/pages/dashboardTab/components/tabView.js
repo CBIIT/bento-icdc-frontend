@@ -17,7 +17,7 @@ import {
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
 } from '../../../bento/dashboardTabData';
-import { clearTableSelections } from '../store/dashboardReducer';
+import { clearTableSelections, fetchAllFileIDs, getFilesCount } from '../store/dashboardReducer';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import Message from '../../../components/Message';
@@ -32,7 +32,6 @@ const TabView = ({
   classes,
   data,
   customColumn,
-  customOnRowsSelect,
   openSnack,
   disableRowSelection,
   buttonText,
@@ -63,7 +62,6 @@ const TabView = ({
   setRowSelection,
   selectedRowInfo = [],
   selectedRowIndex = [],
-
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -73,8 +71,6 @@ const TabView = ({
   const saveButton2 = useRef(null);
   const AddToCartAlertDialogRef = useRef();
 
-  // Store current page selected info
-  const [selectedIDs, setSelectedIDs] = React.useState([]);
   const [cartIsFull, setCartIsFull] = React.useState(false);
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
@@ -106,7 +102,7 @@ const TabView = ({
     initSaveButtonDefaultStyle(saveButton);
     initSaveButtonDefaultStyle(saveButton2);
 
-    if (selectedRowIndex.length === 0) {
+    if (selectedRowInfo.length === 0) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);
     } else {
@@ -115,7 +111,8 @@ const TabView = ({
     }
   });
 
-  function exportFiles() {
+  async function exportFiles() {
+    const selectedIDs = await fetchAllFileIDs(getFilesCount(), selectedRowInfo);
     // Find the newly added files by comparing
     const selectFileIds = filteredFileIds != null
       ? selectedIDs.filter((x) => filteredFileIds.includes(x))
@@ -130,7 +127,6 @@ const TabView = ({
     } else if (newFileIDS > 0) {
       addToCart({ fileIds: selectFileIds });
       openSnack(newFileIDS);
-      setSelectedIDs([]);
       // tell the reducer to clear the selection on the table.
       clearTableSelections();
     } else if (newFileIDS === 0) {
@@ -211,12 +207,8 @@ const TabView = ({
   /*
     Presist user selection
   */
-  function onRowsSelect(curr, allRowsSelected, rowsSelected, displayData, selectedData) {
+  function onRowsSelect(curr, allRowsSelected, rowsSelected, displayData) {
     rowSelectionEvent(displayData.map((d) => d.data[primaryKeyIndex]), rowsSelected);
-
-    setSelectedIDs([...new Set(
-      customOnRowsSelect(selectedData, allRowsSelected),
-    )]);
     if (allRowsSelected.length === 0) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);

@@ -110,12 +110,48 @@ function setDataSampleSelected(result) {
 }
 
 export function getTableRowSelectionEvent() {
-  return ([setDataCaseSelected, setDataSampleSelected, setDataFileSelected]);
+  const currentState = getState();
+  const tableRowSelectionEvent = currentState.currentActiveTab === tabIndex[2].title
+    ? setDataFileSelected
+    : currentState.currentActiveTab === tabIndex[1].title
+      ? setDataSampleSelected : setDataCaseSelected;
+  return tableRowSelectionEvent;
+}
+
+function setSelectedFileIdsFromCases(result) {
+  store.dispatch({ type: 'SET_SELECTED_FILE_IDS_FROM_CASES', payload: result });
+}
+
+function setSelectedFileIdsFromSamples(result) {
+  store.dispatch({ type: 'SET_SELECTED_FILE_IDS_FROM_SAMPLES', payload: result });
+}
+
+function setSelectedFileIdsFromFiles(result) {
+  store.dispatch({ type: 'SET_SELECTED_FILE_IDS_FROM_FILES', payload: result });
+}
+
+export function getSetSelectedFileIdsEvent() {
+  const currentState = getState();
+  const setSelectedFileIdsEvent = currentState.currentActiveTab === tabIndex[2].title
+    ? setSelectedFileIdsFromFiles
+    : currentState.currentActiveTab === tabIndex[1].title
+      ? setSelectedFileIdsFromSamples : setSelectedFileIdsFromCases;
+  return setSelectedFileIdsEvent;
 }
 
 export function clearTableSelections() {
   store.dispatch({ type: 'CLEAR_TABLE_SELECTION' });
 }
+
+export function getSelectedInfoField() {
+  const currentState = getState();
+  const selectedFieldInfoField = currentState.currentActiveTab === tabIndex[2].title
+    ? currentState.dataFileSelected
+    : currentState.currentActiveTab === tabIndex[1].title
+      ? currentState.dataSampleSelected : currentState.dataCaseSelected;
+  return selectedFieldInfoField;
+}
+
 /**
  * Returns the  stats from inputAPI data.
  * @param {object} data
@@ -345,6 +381,69 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
 
   // Removing fileIds that are not in our current list of filtered fileIds
 
+  const filteredFilesArray = fileIds != null
+    ? filesArray.filter((x) => fileIds.includes(x))
+    : filesArray;
+  return filteredFilesArray;
+}
+
+/**
+ * Gets all file ids for active subjectIds.
+ * TODO this  functtion can use filtered file IDs except for initial load
+ * @param obj fileCoubt
+ * @return {json}
+ */
+export async function fetchAllFileIDs(fileCount = 100000, selectedIds = []) {
+  let filesArray = [];
+
+  if (getState().currentActiveTab === tabIndex[2].title) { // File tab
+    filesArray = selectedIds;
+  } else {
+    const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[1].title
+      ? GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL
+      : GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL;
+
+    let caseIds = [];
+    let sampleIds = [];
+    if (getState().currentActiveTab === tabIndex[1].title) {
+      caseIds = [];
+      sampleIds = selectedIds;
+    } else {
+      caseIds = selectedIds;
+      sampleIds = [];
+    }
+
+    const fetchResult = await client
+      .query({
+        query: SELECT_ALL_QUERY,
+        variables: {
+          case_ids: caseIds,
+          sample_ids: sampleIds,
+          file_uuids: [],
+          first: fileCount,
+        },
+      })
+      .then((result) => {
+        const RESULT_DATA = getState().currentActiveTab === tabIndex[2].title ? 'fileOverview' : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverviewPaged';
+        const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? result.data[RESULT_DATA].map((item) => ({
+          files: [item.file_uuid],
+        })) : result.data[RESULT_DATA] || [];
+        return fileIdsFromQuery;
+      });
+
+    // Restaruting the result Bringing {files} to files
+    filesArray = fetchResult.reduce((accumulator, currentValue) => {
+      const { files } = currentValue;
+      // check if file
+      if (files && files.length > 0) {
+        return accumulator.concat(files.map((f) => f));
+      }
+      return accumulator;
+    }, []);
+  }
+
+  // Removing fileIds that are not in our current list of filtered fileIds
+  const fileIds = getState().filteredFileIds;
   const filteredFilesArray = fileIds != null
     ? filesArray.filter((x) => fileIds.includes(x))
     : filesArray;
@@ -663,14 +762,17 @@ const reducers = {
         dataCaseSelected: {
           selectedRowInfo: [],
           selectedRowIndex: [],
+          selectedFileIds: [],
         },
         dataSampleSelected: {
           selectedRowInfo: [],
           selectedRowIndex: [],
+          selectedFileIds: [],
         },
         dataFileSelected: {
           selectedRowInfo: [],
           selectedRowIndex: [],
+          selectedFileIds: [],
         },
 
       } : { ...state };
