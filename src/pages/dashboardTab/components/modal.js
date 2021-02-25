@@ -4,11 +4,9 @@ import {
   IconButton,
 } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
-import {
-  clearTableSelections, fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal, getFilesCount,
-} from '../store/dashboardReducer';
 import Dialog from '../../../components/AddToCartDialog';
 import { addToCart, cartWillFull, getFilesIdsInCart } from '../../fileCentricCart/store/cart';
+import { fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal, getFilesCount } from '../store/dashboardReducer';
 
 const styles = () => ({
   button: {
@@ -59,8 +57,6 @@ const SelectAllModalDialog = ({
       ).length : getAllFilesData.length;
     openSnack(newFileIDSLength || 0);
     addToCart({ fileIds: getAllFilesData });
-    // tell the reducer to clear the selection on the table.
-    clearTableSelections();
     handleClose();
   }
 

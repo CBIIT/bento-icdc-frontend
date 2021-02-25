@@ -113,9 +113,6 @@ export function getTableRowSelectionEvent() {
   return ([setDataCaseSelected, setDataSampleSelected, setDataFileSelected]);
 }
 
-export function clearTableSelections() {
-  store.dispatch({ type: 'CLEAR_TABLE_SELECTION' });
-}
 /**
  * Returns the  stats from inputAPI data.
  * @param {object} data
@@ -717,21 +714,6 @@ const reducers = {
         widgets: getWidgetsInitData(item.data, widgetsData),
       } : { ...state };
   },
-  CLEAR_TABLE_SELECTION: (state) => ({
-    ...state,
-    dataCaseSelected: {
-      selectedRowInfo: [],
-      selectedRowIndex: [],
-    },
-    dataSampleSelected: {
-      selectedRowInfo: [],
-      selectedRowIndex: [],
-    },
-    dataFileSelected: {
-      selectedRowInfo: [],
-      selectedRowIndex: [],
-    },
-  }),
   CLEAR_ALL_FILTER_AND_TABLE_SELECTION: (state, item) => {
     const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
     fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
