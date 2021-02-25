@@ -135,6 +135,8 @@ const TabView = ({
       clearTableSelections();
     } else if (newFileIDS === 0) {
       openSnack(newFileIDS);
+      // tell the reducer to clear the selection on the table.
+      clearTableSelections();
     }
   }
 
