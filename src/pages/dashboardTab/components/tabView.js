@@ -17,6 +17,7 @@ import {
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
 } from '../../../bento/dashboardTabData';
+import { clearTableSelections } from '../store/dashboardReducer';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import Message from '../../../components/Message';
@@ -130,6 +131,8 @@ const TabView = ({
       addToCart({ fileIds: selectFileIds });
       openSnack(newFileIDS);
       setSelectedIDs([]);
+      // tell the reducer to clear the selection on the table.
+      clearTableSelections();
     } else if (newFileIDS === 0) {
       openSnack(newFileIDS);
     }
