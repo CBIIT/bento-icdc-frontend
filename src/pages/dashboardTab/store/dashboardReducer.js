@@ -123,15 +123,6 @@ export function clearTableSelections() {
   store.dispatch({ type: 'CLEAR_TABLE_SELECTION' });
 }
 
-export function getSelectedInfoField() {
-  const currentState = getState();
-  const selectedFieldInfoField = currentState.currentActiveTab === tabIndex[2].title
-    ? currentState.dataFileSelected
-    : currentState.currentActiveTab === tabIndex[1].title
-      ? currentState.dataSampleSelected : currentState.dataCaseSelected;
-  return selectedFieldInfoField;
-}
-
 /**
  * Returns the  stats from inputAPI data.
  * @param {object} data
@@ -759,17 +750,14 @@ const reducers = {
         dataCaseSelected: {
           selectedRowInfo: [],
           selectedRowIndex: [],
-          selectedFileIds: [],
         },
         dataSampleSelected: {
           selectedRowInfo: [],
           selectedRowIndex: [],
-          selectedFileIds: [],
         },
         dataFileSelected: {
           selectedRowInfo: [],
           selectedRowIndex: [],
-          selectedFileIds: [],
         },
 
       } : { ...state };
