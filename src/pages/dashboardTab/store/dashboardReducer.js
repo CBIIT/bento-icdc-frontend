@@ -30,6 +30,7 @@ import {
   GET_FILES_OVERVIEW_DESC_QUERY,
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
+  GET_FILE_IDS_FROM_FILE_NAME,
   tabIndex,
 } from '../../../bento/dashboardTabData';
 
@@ -393,12 +394,29 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
  * @param obj fileCoubt
  * @return {json}
  */
-export async function fetchAllFileIDs(fileCount = 100000, selectedIds = []) {
+export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
   let filesArray = [];
 
-  if (getState().currentActiveTab === tabIndex[2].title) { // File tab
-    filesArray = selectedIds;
+  // If in file tab and get file name then, fetch file id from backend.
+  if (getState().currentActiveTab === tabIndex[2].title) {
+    filesArray = await client
+      .query({
+        query: GET_FILE_IDS_FROM_FILE_NAME,
+        variables: {
+          file_name: selectedIds,
+          offset,
+          first,
+          order_by,
+        },
+      })
+      .then((result) => {
+        if (result && result.data && result.data.fileIdsFromFileNameDesc.length > 0) {
+          return result.data.fileIdsFromFileNameDesc.map((d) => d.file_uuid);
+        }
+        return [];
+      });
   } else {
+  // if in sample or case tab, get file id from backend
     const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[1].title
       ? GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL
       : GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL;
