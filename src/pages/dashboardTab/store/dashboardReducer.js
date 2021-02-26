@@ -358,22 +358,14 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   return filteredFilesArray;
 }
 
-/**
- * Gets all file ids for active subjectIds.
- * TODO this  functtion can use filtered file IDs except for initial load
- * @param obj fileCoubt
- * @return {json}
- */
-export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
-  let filesArray = [];
 
-  // If in file tab and get file name then, fetch file id from backend.
-  if (getState().currentActiveTab === tabIndex[2].title) {
-    filesArray = await client
+async function getFileIDsByFileName(fileCount = 100000, file_name = [], offset = 0.0, first = 100000, order_by = 'file_name'){
+
+  await client
       .query({
         query: GET_FILE_IDS_FROM_FILE_NAME,
         variables: {
-          file_name: selectedIds,
+          file_name: file_name,
           offset,
           first,
           order_by,
@@ -385,23 +377,10 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
         }
         return [];
       });
-  } else {
-  // if in sample or case tab, get file id from backend
-    const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[1].title
-      ? GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL
-      : GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL;
+}
 
-    let caseIds = [];
-    let sampleIds = [];
-    if (getState().currentActiveTab === tabIndex[1].title) {
-      caseIds = [];
-      sampleIds = selectedIds;
-    } else {
-      caseIds = selectedIds;
-      sampleIds = [];
-    }
-
-    const fetchResult = await client
+async function getFileIDs(fileCount = 100000, SELECT_ALL_QUERY, caseIds=[], sampleIds=[],cate){
+  const fetchResult = await client
       .query({
         query: SELECT_ALL_QUERY,
         variables: {
@@ -412,15 +391,10 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
         },
       })
       .then((result) => {
-        const RESULT_DATA = getState().currentActiveTab === tabIndex[2].title ? 'fileOverview' : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverviewPaged';
-        const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? result.data[RESULT_DATA].map((item) => ({
-          files: [item.file_uuid],
-        })) : result.data[RESULT_DATA] || [];
-        return fileIdsFromQuery;
+        return result.data[cate] || [];
       });
 
-    // Restaruting the result Bringing {files} to files
-    filesArray = fetchResult.reduce((accumulator, currentValue) => {
+    return fetchResult.reduce((accumulator, currentValue) => {
       const { files } = currentValue;
       // check if file
       if (files && files.length > 0) {
@@ -428,14 +402,37 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
       }
       return accumulator;
     }, []);
-  }
+}
 
-  // Removing fileIds that are not in our current list of filtered fileIds
-  const fileIds = getState().filteredFileIds;
-  const filteredFilesArray = fileIds != null
-    ? filesArray.filter((x) => fileIds.includes(x))
-    : filesArray;
-  return filteredFilesArray;
+
+function filterOutFileIds(fileIds){
+   // Removing fileIds that are not in our current list of filtered fileIds
+  const filteredFileIds = getState().filteredFileIds;
+
+  if(filteredFileIds != null||filteredFileIds.length>0){
+    return fileIds.filter((x) => filteredFileIds.includes(x))
+  }
+  return fileIds;
+}
+/*
+ * Gets all file ids for active subjectIds.
+ * TODO this  functtion can use filtered file IDs except for initial load
+ * @param obj fileCoubt
+ * @return {json}
+ */
+export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
+  let filesIds = [];
+  switch(getState().currentActiveTab) {
+  case tabIndex[2].title:
+    filesIds = getFileIDsByFileName(fileCount, selectedIds, offset, first, order_by);
+    break;
+  case tabIndex[1].title:
+    filesIds = getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
+    break;
+  default:
+     filesIds = getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverviewPaged');
+
+  return filterOutFileIds(filesIds);
 }
 
 export const getFilesCount = () => getState().stats.numberOfFiles;
