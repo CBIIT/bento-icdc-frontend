@@ -1067,4 +1067,8 @@ type QueryType {
   sampleOverview(case_ids: [String], sample_ids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] 
 
   sampleOverviewDesc(case_ids: [String], sample_ids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] 
+
+  fileIdsFromFileName(file_name: [String], offset: Int = 0, first: Int = 10000000, order_by: String ="file_name"): [FileOverview] 
+
+  fileIdsFromFileNameDesc(file_name: [String], offset: Int = 0, first: Int = 10000000, order_by: String ="file_name"): [FileOverview] 
 }
