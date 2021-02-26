@@ -1031,17 +1031,6 @@ query (
     $order_by: String
 )
 {
-    fileIdsFromFileName(
-        file_name:$file_name, 
-        offset:$offset,
-        first:$first,
-        order_by:$order_by
-    )
-    {
-        file_name
-        file_uuid
-    }
-
     fileIdsFromFileNameDesc(
         file_name:$file_name, 
         offset:$offset,
@@ -1049,7 +1038,6 @@ query (
         order_by:$order_by
     )
     {
-        file_name
         file_uuid
     }
 }`;
