@@ -119,27 +119,6 @@ export function getTableRowSelectionEvent() {
   return tableRowSelectionEvent;
 }
 
-function setSelectedFileIdsFromCases(result) {
-  store.dispatch({ type: 'SET_SELECTED_FILE_IDS_FROM_CASES', payload: result });
-}
-
-function setSelectedFileIdsFromSamples(result) {
-  store.dispatch({ type: 'SET_SELECTED_FILE_IDS_FROM_SAMPLES', payload: result });
-}
-
-function setSelectedFileIdsFromFiles(result) {
-  store.dispatch({ type: 'SET_SELECTED_FILE_IDS_FROM_FILES', payload: result });
-}
-
-export function getSetSelectedFileIdsEvent() {
-  const currentState = getState();
-  const setSelectedFileIdsEvent = currentState.currentActiveTab === tabIndex[2].title
-    ? setSelectedFileIdsFromFiles
-    : currentState.currentActiveTab === tabIndex[1].title
-      ? setSelectedFileIdsFromSamples : setSelectedFileIdsFromCases;
-  return setSelectedFileIdsEvent;
-}
-
 export function clearTableSelections() {
   store.dispatch({ type: 'CLEAR_TABLE_SELECTION' });
 }

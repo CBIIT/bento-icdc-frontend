@@ -15,7 +15,7 @@ import Message from '../../../components/Message';
 import {
   tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon, selectAllToolTip,
 } from '../../../bento/dashboardTabData';
-import { fetchDataForDashboardTab, getTableRowSelectionEvent, getSetSelectedFileIdsEvent } from '../store/dashboardReducer';
+import { fetchDataForDashboardTab, getTableRowSelectionEvent } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
 function TabContainer({ children, dir }) {
@@ -253,7 +253,6 @@ const tabController = (classes) => {
         setRowSelection={getTableRowSelectionEvent()}
         selectedRowInfo={tableRowSelectionData[container.tabIndex].selectedRowInfo}
         selectedRowIndex={tableRowSelectionData[container.tabIndex].selectedRowIndex}
-        setSelectedFileIds={getSetSelectedFileIdsEvent()}
       />
     </TabContainer>
   ));
