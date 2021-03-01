@@ -15,7 +15,7 @@ import Message from '../../../components/Message';
 import {
   tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon, selectAllToolTip,
 } from '../../../bento/dashboardTabData';
-import { fetchDataForDashboardTab } from '../store/dashboardReducer';
+import { fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
 function TabContainer({ children, dir }) {
@@ -39,7 +39,13 @@ const tabController = (classes) => {
   const dashboard = useSelector((state) => (state.dashboardTab
 && state.dashboardTab.datatable
     ? state.dashboardTab.datatable : {}));
-    // get stats data from store
+
+  const tableRowSelectionData = [
+    useSelector((state) => (state.dashboardTab.dataCaseSelected)),
+    useSelector((state) => (state.dashboardTab.dataSampleSelected)),
+    useSelector((state) => (state.dashboardTab.dataFileSelected))];
+
+  // get stats data from store
   const dashboardStats = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.stats ? state.dashboardTab.stats : {}));
 
@@ -49,7 +55,6 @@ const tabController = (classes) => {
     && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : null));
   const filteredFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredFileIds ? state.dashboardTab.filteredFileIds : null));
-
   const [TopMessageStatus, setTopMessageStatus] = React.useState({
     text: tooltipContent[currentTab],
     src: tooltipContent.icon,
@@ -173,59 +178,6 @@ const tabController = (classes) => {
     );
   }
 
-  /* on row select event
-    @param  data  data for initial the table  sample -> [files]
-    @param  allRowsSelected : selected rows
-    @output [f.uuid]
-  */
-  function Type1OnRowsSelect(data, allRowsSelected) {
-  // use reduce to combine all the files' id into single array
-    return allRowsSelected.reduce((accumulator, currentValue) => {
-      if (data[currentValue.dataIndex]) {
-        const { files } = data[currentValue.dataIndex];
-        // check if file exists
-        if (files && files.length > 0) {
-          return accumulator.concat(files.map((f) => f.file_id));
-        }
-      }
-      return accumulator;
-    }, []);
-  }
-
-  /* on row select event
-    @param  data  data for initial the table  sample -> [files]
-    @param  allRowsSelected : selected rows
-    @output [f.uuid]
-  */
-  function Type2OnRowsSelect(data, allRowsSelected) {
-    return allRowsSelected.map((row) => data[row.dataIndex].file_uuid);
-  }
-
-  /* on row select event
-    @param  data  data for initial the table  sample -> [files]
-    @param  allRowsSelected : selected rows
-    @output [f.uuid]
-  */
-  function Type3OnRowsSelect(data, allRowsSelected) {
-  // use reduce to combine all the files' id into single array
-    return allRowsSelected.reduce((accumulator, currentValue) => {
-      const { files } = data[currentValue.dataIndex];
-      // check if file
-      if (files && files.length > 0) {
-        return accumulator.concat(files);
-      }
-      return accumulator;
-    }, []);
-  }
-
-  // onRowsSelectFunction contains all the onRowsSelection functions
-  // user can pick one for use.
-  const onRowsSelectFunction = {
-    type1: Type1OnRowsSelect,
-    type2: Type2OnRowsSelect,
-    type3: Type3OnRowsSelect,
-  };
-
   // This function for future use
   /*  To check if this row is selectable or not.
     I want the system to visually communicate ("flag") which of
@@ -270,7 +222,6 @@ const tabController = (classes) => {
         options={getOptions(container, classes)}
         data={dashboard[container.dataField] ? dashboard[container.dataField] : 'undefined'}
         customColumn={container}
-        customOnRowsSelect={onRowsSelectFunction[container.onRowsSelect]}
         openSnack={openSnack}
         closeSnack={closeSnack}
         disableRowSelection={disableRowSelectionFunction[container.disableRowSelection]}
@@ -294,10 +245,14 @@ const tabController = (classes) => {
         defaultSortCoulmn={container.defaultSortField || ''}
         defaultSortDirection={container.defaultSortDirection || 'asc'}
         dataKey={container.dataKey}
+        tableHasSelections={tableHasSelections}
         filteredSubjectIds={filteredSubjectIds}
         filteredSampleIds={filteredSampleIds}
         filteredFileIds={filteredFileIds}
         tableDownloadCSV={container.tableDownloadCSV || false}
+        setRowSelection={getTableRowSelectionEvent()}
+        selectedRowInfo={tableRowSelectionData[container.tabIndex].selectedRowInfo}
+        selectedRowIndex={tableRowSelectionData[container.tabIndex].selectedRowIndex}
       />
     </TabContainer>
   ));

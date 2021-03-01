@@ -7,6 +7,7 @@ import {
 import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
 import { getColumns } from 'bento-components';
+import _ from 'lodash';
 import SelectAllModal from './modal';
 import {
   GET_FILES_OVERVIEW_QUERY,
@@ -16,6 +17,7 @@ import {
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
 } from '../../../bento/dashboardTabData';
+import { clearTableSelections, fetchAllFileIDs, getFilesCount } from '../store/dashboardReducer';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import Message from '../../../components/Message';
@@ -30,7 +32,6 @@ const TabView = ({
   classes,
   data,
   customColumn,
-  customOnRowsSelect,
   openSnack,
   disableRowSelection,
   buttonText,
@@ -58,21 +59,19 @@ const TabView = ({
   defaultSortDirection,
   tableDownloadCSV,
   primaryKeyIndex = 0,
+  setRowSelection,
+  selectedRowInfo = [],
+  selectedRowIndex = [],
+  tableHasSelections,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
+
   const fileIDs = cart.fileIds ? cart.fileIds : [];
   const saveButton = useRef(null);
   const saveButton2 = useRef(null);
   const AddToCartAlertDialogRef = useRef();
-  // Store current page selected info
-  const [rowSelection, setRowSelection] = React.useState({
-    selectedRowInfo: [],
-    selectedRowIndex: [],
-  });
 
-  // Store current page selected info
-  const [selectedIDs, setSelectedIDs] = React.useState([]);
   const [cartIsFull, setCartIsFull] = React.useState(false);
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
@@ -99,21 +98,25 @@ const TabView = ({
       buildButtonStyle(button, ActiveSaveButtonDefaultStyle);
     }
   };
-
-  useEffect(() => {
-    initSaveButtonDefaultStyle(saveButton);
-    initSaveButtonDefaultStyle(saveButton2);
-
-    if (rowSelection.selectedRowIndex.length === 0) {
+  async function updateButtonStatus() {
+    const status = await tableHasSelections();
+    if (!status) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);
     } else {
       updateActiveSaveButtonStyle(false, saveButton);
       updateActiveSaveButtonStyle(false, saveButton2);
     }
+  }
+
+  useEffect(() => {
+    initSaveButtonDefaultStyle(saveButton);
+    initSaveButtonDefaultStyle(saveButton2);
+    updateButtonStatus();
   });
 
-  function exportFiles() {
+  async function exportFiles() {
+    const selectedIDs = await fetchAllFileIDs(getFilesCount(), selectedRowInfo);
     // Find the newly added files by comparing
     const selectFileIds = filteredFileIds != null
       ? selectedIDs.filter((x) => filteredFileIds.includes(x))
@@ -128,9 +131,12 @@ const TabView = ({
     } else if (newFileIDS > 0) {
       addToCart({ fileIds: selectFileIds });
       openSnack(newFileIDS);
-      setSelectedIDs([]);
+      // tell the reducer to clear the selection on the table.
+      clearTableSelections();
     } else if (newFileIDS === 0) {
       openSnack(newFileIDS);
+      // tell the reducer to clear the selection on the table.
+      clearTableSelections();
     }
   }
 
@@ -144,8 +150,8 @@ const TabView = ({
     if (rowsSelected) {
       // Remove the rowInfo from selectedRowInfo if this row currently be
       // displayed and not be selected.
-      if (rowSelection.selectedRowInfo.length > 0) {
-        newSelectedRowInfo = rowSelection.selectedRowInfo.filter((key) => {
+      if (selectedRowInfo.length > 0) {
+        newSelectedRowInfo = selectedRowInfo.filter((key) => {
           if (displayedDataKeies.includes(key)) {
             return false;
           }
@@ -153,7 +159,7 @@ const TabView = ({
         });
       }
     } else {
-      newSelectedRowInfo = rowSelection.selectedRowInfo;
+      newSelectedRowInfo = selectedRowInfo;
     }
     newSelectedRowInfo = newSelectedRowInfo.concat(selectedRowsKey);
 
@@ -168,10 +174,32 @@ const TabView = ({
       }, [],
     );
 
-    setRowSelection({
-      selectedRowInfo: newSelectedRowInfo,
-      selectedRowIndex: newSelectedRowIndex,
-    });
+    // reduce the state chagne, when newSelectedRowIndex and newSelectedRowInfo is same as previous.
+    if (_.differenceWith(
+      newSelectedRowIndex,
+      selectedRowIndex,
+      _.isEqual,
+    ).length !== 0
+      || _.differenceWith(
+        newSelectedRowInfo,
+        selectedRowInfo,
+        _.isEqual,
+      ).length !== 0
+      || _.differenceWith(
+        selectedRowInfo,
+        newSelectedRowInfo,
+        _.isEqual,
+      ).length !== 0
+      || _.differenceWith(
+        selectedRowIndex,
+        newSelectedRowIndex,
+        _.isEqual,
+      ).length !== 0) {
+      setRowSelection({
+        selectedRowInfo: newSelectedRowInfo,
+        selectedRowIndex: newSelectedRowIndex,
+      });
+    }
   }
 
   // Calculate the properate marginTop value for the tooltip on the top
@@ -183,19 +211,8 @@ const TabView = ({
   /*
     Presist user selection
   */
-  function onRowsSelect(curr, allRowsSelected, rowsSelected, displayData, selectedData) {
+  function onRowsSelect(curr, allRowsSelected, rowsSelected, displayData) {
     rowSelectionEvent(displayData.map((d) => d.data[primaryKeyIndex]), rowsSelected);
-
-    setSelectedIDs([...new Set(
-      customOnRowsSelect(selectedData, allRowsSelected),
-    )]);
-    if (allRowsSelected.length === 0) {
-      updateActiveSaveButtonStyle(true, saveButton);
-      updateActiveSaveButtonStyle(true, saveButton2);
-    } else {
-      updateActiveSaveButtonStyle(false, saveButton);
-      updateActiveSaveButtonStyle(false, saveButton2);
-    }
   }
 
   // overwrite default options
@@ -205,7 +222,7 @@ const TabView = ({
       displayData,
       rowsSelected,
     ),
-    rowsSelected: rowSelection.selectedRowIndex,
+    rowsSelected: selectedRowIndex,
     onRowSelectionChange: onRowsSelect,
     isRowSelectable: (dataIndex) => (disableRowSelection
       ? disableRowSelection(data[dataIndex], fileIDs) : true),

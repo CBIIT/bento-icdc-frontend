@@ -25,6 +25,8 @@ const shouldInitCart = (state) => state.fileIds !== JSON.parse(localStorage.getI
 // HELPERS
 const getState = () => store.getState()[storeKey];
 
+export const getFilesIdsInCart = () => getState().fileIds;
+
 /* eslint-disable no-return-assign */
 const subscribe = (f) => {
   let lastState = getState();

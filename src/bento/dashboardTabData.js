@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 import { customCasesTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV } from './tableDownloadCSV';
-
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
@@ -36,8 +35,8 @@ export const tabContainers = [
     paginationAPIField: 'caseOverviewPaged',
     paginationAPIFieldDesc: 'caseOverviewPagedDesc',
     count: 'numberOfCases',
-    dataKey: 'subject_id',
-    defaultSortField: 'subject_id',
+    dataKey: 'case_id',
+    defaultSortField: 'case_id',
     defaultSortDirection: 'asc',
     buttonText: 'Add Associated Files',
     addAllButtonText: 'Add Associated Files for All',
@@ -55,7 +54,7 @@ export const tabContainers = [
       border: 'unset',
     },
     DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.3',
+      opacity: '0.7',
       cursor: 'auto',
     },
     columns: [
@@ -153,7 +152,7 @@ export const tabContainers = [
       backgroundColor: '#ff7f15',
     },
     DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.3',
+      opacity: '0.7',
       cursor: 'auto',
     },
     ActiveSaveButtonDefaultStyle: {
@@ -261,7 +260,7 @@ export const tabContainers = [
     count: 'numberOfFiles',
     buttonText: 'Add Selected Files',
     addAllButtonText: 'Add All Filtered Files',
-    dataKey: 'file_id',
+    dataKey: 'file_name',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',
@@ -271,7 +270,7 @@ export const tabContainers = [
       backgroundColor: '#ff7f15',
     },
     DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.3',
+      opacity: '0.7',
       cursor: 'auto',
     },
     ActiveSaveButtonDefaultStyle: {
@@ -893,6 +892,15 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
 }
   `;
 
+// --------------- GraphQL query - Retrieve files tab details --------------
+export const GET_FILES_NAME_QUERY = gql`
+query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 100000, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+    file_name
+  }
+}
+  `;
+
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
   query fileOverviewDesc($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
     fileOverviewDesc(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {    
@@ -1023,3 +1031,22 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 100000
   }
 }
   `;
+
+export const GET_FILE_IDS_FROM_FILE_NAME = gql`
+query (
+    $file_name: [String],
+    $offset: Int,
+    $first: Int,
+    $order_by: String
+)
+{
+    fileIdsFromFileNameDesc(
+        file_name:$file_name, 
+        offset:$offset,
+        first:$first,
+        order_by:$order_by
+    )
+    {
+        file_uuid
+    }
+}`;

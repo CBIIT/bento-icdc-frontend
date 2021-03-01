@@ -28,10 +28,10 @@ themesLight.overrides.MuiTableCell = {
   ...themesLight.overrides.MuiTableCell,
   root: {
     '&:first-child': {
-      paddingLeft: '39px',
+      paddingLeft: '42px',
     },
     '&:last-child': {
-      paddingRight: '39px',
+      paddingRight: '41px',
     },
   },
 };

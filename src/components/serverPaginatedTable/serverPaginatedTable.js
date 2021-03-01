@@ -118,6 +118,13 @@ class ServerPaginatedTableView extends React.Component {
     });
   };
 
+  onTableInit = (displayData) => {
+    // as sever-side rendering, whatever the actions on table's data change will reinit the table.
+    // which will trigger this function.
+    // then trigger row selection reinit, to have the checkbox at right status.
+    this.rowsSelectedTrigger(displayData);
+  };
+
   async fetchData(offset, rowsRequired, sortOrder = {}) {
     let sortDirection = 'asc';
     let sortColumn = 'arm';
@@ -186,10 +193,8 @@ class ServerPaginatedTableView extends React.Component {
           </TableRow>
         </TableFooter>
       ),
-      // rowsSelected: data.map((item, idx) => idx),
+      onTableInit: () => this.onTableInit(data),
       onTableChange: (action, tableState) => {
-        // console.log(action, tableState);
-
         // a developer could react to change on an action basis or
         // examine the state as a whole and do whatever they want
 

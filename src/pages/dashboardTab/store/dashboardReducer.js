@@ -30,7 +30,9 @@ import {
   GET_FILES_OVERVIEW_DESC_QUERY,
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
+  GET_FILE_IDS_FROM_FILE_NAME,
   tabIndex,
+  GET_FILES_NAME_QUERY,
 } from '../../../bento/dashboardTabData';
 
 const storeKey = 'dashboardTab';
@@ -65,6 +67,18 @@ const initialState = {
       dataSample: 'undefined',
       dataFile: 'undefined',
     },
+    dataCaseSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataSampleSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataFileSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
     widgets: {},
   },
 };
@@ -72,8 +86,42 @@ const initialState = {
 // HELPERS
 const getState = () => store.getState()[storeKey];
 
+const SUNBURST_COLORS = [
+  '#39C0F0',
+  '#004CF3',
+  '#FF7F15',
+  '#4C3112',
+  '#8DE260',
+  '#437200',
+];
+
 function shouldFetchDataForDashboardTabDataTable(state) {
   return !(state.isFetched);
+}
+
+function setDataCaseSelected(result) {
+  store.dispatch({ type: 'SET_CASES_SELECTION', payload: result });
+}
+
+function setDataFileSelected(result) {
+  store.dispatch({ type: 'SET_FILE_SELECTION', payload: result });
+}
+
+function setDataSampleSelected(result) {
+  store.dispatch({ type: 'SET_SAMPLE_SELECTION', payload: result });
+}
+
+export function getTableRowSelectionEvent() {
+  const currentState = getState();
+  const tableRowSelectionEvent = currentState.currentActiveTab === tabIndex[2].title
+    ? setDataFileSelected
+    : currentState.currentActiveTab === tabIndex[1].title
+      ? setDataSampleSelected : setDataCaseSelected;
+  return tableRowSelectionEvent;
+}
+
+export function clearTableSelections() {
+  store.dispatch({ type: 'CLEAR_TABLE_SELECTION' });
 }
 
 /**
@@ -129,7 +177,7 @@ const removeEmptySubjectsFromDonutData = (data) => {
  */
 function getWidgetsInitData(data, widgetsInfoFromCustConfig) {
   const donut = widgetsInfoFromCustConfig.reduce((acc, widget) => {
-    const Data = widget.type === 'sunburst' ? transformInitialDataForSunburst(data[widget.dataName], widget.datatable_level1_field, widget.datatable_level2_field, 'studies') : removeEmptySubjectsFromDonutData(data[widget.dataName]);
+    const Data = widget.type === 'sunburst' ? transformInitialDataForSunburst(data[widget.dataName], widget.datatable_level1_field, widget.datatable_level2_field, 'studies', SUNBURST_COLORS, SUNBURST_COLORS) : removeEmptySubjectsFromDonutData(data[widget.dataName]);
     const label = widget.dataName;
     return { ...acc, [label]: Data };
   }, {});
@@ -151,12 +199,12 @@ function fetchDashboardTab() {
   };
 }
 
-function fetchDashboardTabForClearAll() {
+function fetchDashboardTabForClearAllFilters() {
   return () => client
     .query({
       query: DASHBOARD_QUERY,
     })
-    .then((result) => store.dispatch({ type: 'CLEAR_ALL', payload: _.cloneDeep(result) }))
+    .then((result) => store.dispatch({ type: 'CLEAR_ALL_FILTER_AND_TABLE_SELECTION', payload: _.cloneDeep(result) }))
     .catch((error) => store.dispatch(
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
@@ -174,6 +222,11 @@ function allFilters() {
     { ...acc, [facet.datafield]: [] }
   ), {});
   return emptyFilters;
+}
+
+function hasFilter() {
+  const currentAllActiveFilters = getState().allActiveFilters;
+  return Object.entries(currentAllActiveFilters).filter((item) => item[1].length > 0).length > 0;
 }
 /**
  * Returns filter variable for graphql query using the all filters.
@@ -260,6 +313,47 @@ export function fetchDataForDashboardTab(
     ));
 }
 
+export async function getFileNamesByFileIds(fileIds) {
+  const data = await client
+    .query({
+      query: GET_FILES_NAME_QUERY,
+      variables: {
+        file_uuids: fileIds,
+      },
+    })
+    .then((result) => result.data.fileOverview.map((item) => item.file_name));
+  return data;
+}
+
+export async function tableHasSelections() {
+  let selectedRowInfo = [];
+  let filteredIds = [];
+  const filteredNames = await getFileNamesByFileIds(getState().filteredFileIds);
+  switch (getState().currentActiveTab) {
+    case tabIndex[2].title:
+      filteredIds = filteredNames;
+      selectedRowInfo = getState().dataFileSelected.selectedRowInfo;
+
+      break;
+    case tabIndex[1].title:
+      filteredIds = getState().filteredSampleIds;
+      selectedRowInfo = getState().dataSampleSelected.selectedRowInfo;
+      break;
+    default:
+      filteredIds = getState().filteredSubjectIds;
+      selectedRowInfo = getState().dataCaseSelected.selectedRowInfo;
+  }
+
+  // without the filters, the filteredIds is null
+  if (!hasFilter()) {
+    return selectedRowInfo.length > 0;
+  }
+
+  return selectedRowInfo.filter(
+    (value) => (filteredIds && filteredIds !== null ? filteredIds.includes(value) : false),
+  ).length > 0;
+}
+
 /**
  * Gets all file ids for active subjectIds.
  * TODO this  functtion can use filtered file IDs except for initial load
@@ -311,7 +405,91 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   return filteredFilesArray;
 }
 
+async function getFileIDsByFileName(file_name = [], offset = 0.0, first = 100000, order_by = 'file_name') {
+  const data = await client
+    .query({
+      query: GET_FILE_IDS_FROM_FILE_NAME,
+      variables: {
+        file_name,
+        offset,
+        first,
+        order_by,
+      },
+    })
+    .then((result) => {
+      if (result && result.data && result.data.fileIdsFromFileNameDesc.length > 0) {
+        return result.data.fileIdsFromFileNameDesc.map((d) => d.file_uuid);
+      }
+      return [];
+    });
+  return data;
+}
+
+async function getFileIDs(
+  fileCount = 100000,
+  SELECT_ALL_QUERY,
+  caseIds = [],
+  sampleIds = [],
+  cate,
+) {
+  const fetchResult = await client
+    .query({
+      query: SELECT_ALL_QUERY,
+      variables: {
+        case_ids: caseIds,
+        sample_ids: sampleIds,
+        file_uuids: [],
+        first: fileCount,
+      },
+    })
+    .then((result) => result.data[cate] || []);
+
+  return fetchResult.reduce((accumulator, currentValue) => {
+    const { files } = currentValue;
+    // check if file
+    if (files && files.length > 0) {
+      return accumulator.concat(files.map((f) => f));
+    }
+    return accumulator;
+  }, []);
+}
+
+function filterOutFileIds(fileIds) {
+  // Removing fileIds that are not in our current list of filtered fileIds
+  const { filteredFileIds } = getState();
+
+  if (fileIds
+      && fileIds.length > 0
+       && filteredFileIds
+        && filteredFileIds != null
+        && filteredFileIds.length > 0) {
+    return fileIds.filter((x) => filteredFileIds.includes(x));
+  }
+  return fileIds;
+}
+/*
+ * Gets all file ids for active subjectIds.
+ * TODO this  functtion can use filtered file IDs except for initial load
+ * @param obj fileCoubt
+ * @return {json}
+ */
+export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
+  let filesIds = [];
+  switch (getState().currentActiveTab) {
+    case tabIndex[2].title:
+      filesIds = await getFileIDsByFileName(selectedIds, offset, first, order_by);
+      break;
+    case tabIndex[1].title:
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
+      break;
+    default:
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverviewPaged');
+  }
+  return filterOutFileIds(filesIds);
+}
+
 export const getFilesCount = () => getState().stats.numberOfFiles;
+
 export function getCountForAddAllFilesModal() {
   const currentState = getState();
   const numberCount = currentState.currentActiveTab === tabIndex[0].title
@@ -402,13 +580,13 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
 }
 
 /**
- * Reducer for clear all
+ * Reducer for clear all filters
  *
  * @return distpatcher
  */
 
 export function clearAllFilters() {
-  store.dispatch(fetchDashboardTabForClearAll());
+  store.dispatch(fetchDashboardTabForClearAllFilters());
 }
 
 /**
@@ -418,9 +596,9 @@ export function clearAllFilters() {
  */
 export async function setSingleFilter(payload) {
   // test weather there are active dashboard filters if so clear all filters
-  if (!_.isEqual(getState().allActiveFilters, allFilters())) {
-    await clearAllFilters();
-  }
+  // if (!_.isEqual(getState().allActiveFilters, allFilters())) {
+  //   await clearAllFilters();
+  // }
   const singlefiter = createSingleFilterVariables(payload);
   store.dispatch({ type: 'SET_SINGLE_FILTER', payload: singlefiter });
 }
@@ -443,13 +621,15 @@ export async function singleCheckBox(payload) {
  * @param {object} payload
  * @return distpatcher
  */
+
 export function toggleCheckBox(payload) {
   return () => {
     const currentAllFilterVariables = payload === {} ? allFilters : createFilterVariables(payload);
     // For performance issue we are using initial dasboardquery instead of fitered for empty filters
-    if (_.isEqual(currentAllFilterVariables, allFilters())) {
-      clearAllFilters();
-    } else toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
+    // if (_.isEqual(currentAllFilterVariables, allFilters())) {
+    //   clearAllFilters();
+    // } else
+    toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
   };
 }
 
@@ -617,10 +797,22 @@ const reducers = {
           filters: [],
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
+        dataCaseSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataSampleSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataFileSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
 
       } : { ...state };
   },
-  CLEAR_ALL: (state, item) => {
+  CLEAR_ALL_FILTER: (state, item) => {
     const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
     fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
     return item.data
@@ -650,10 +842,97 @@ const reducers = {
           dataFile: item.data.fileOverview,
           filters: [],
         },
+        dataCaseSelected: {
+          ...state.dataCaseSelected,
+        },
+        dataSampleSelected: {
+          ...state.dataSampleSelected,
+        },
+        dataFileSelected: {
+          ...state.dataFileSelected,
+        },
+        widgets: getWidgetsInitData(item.data, widgetsData),
+      } : { ...state };
+  },
+  CLEAR_TABLE_SELECTION: (state) => ({
+    ...state,
+    dataCaseSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataSampleSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataFileSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+  }),
+  CLEAR_ALL_FILTER_AND_TABLE_SELECTION: (state, item) => {
+    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
+    fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
+    return item.data
+      ? {
+        ...state.dashboard,
+        isFetched: true,
+        isLoading: false,
+        hasError: false,
+        error: '',
+        stats: getStatInit(item.data, statsCount),
+        allActiveFilters: allFilters(),
+        filteredSubjectIds: null,
+        filteredSampleIds: null,
+        filteredFileIds: null,
+        subjectOverView: {
+          data: item.data.subjectOverViewPaged,
+        },
+        checkboxForAll: {
+          data: checkboxData,
+        },
+        checkbox: {
+          data: checkboxData,
+        },
+        datatable: {
+          dataCase: item.data.subjectOverViewPaged,
+          dataSample: item.data.sampleOverview,
+          dataFile: item.data.fileOverview,
+          filters: [],
+        },
+        dataCaseSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataSampleSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataFileSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
         widgets: getWidgetsInitData(item.data, widgetsData),
 
       } : { ...state };
   },
+  SET_CASES_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataCaseSelected: item,
+    }
+  ),
+  SET_SAMPLE_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataSampleSelected: item,
+    }
+  ),
+  SET_FILE_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataFileSelected: item,
+    }
+  ),
 };
 
 // INJECT-REDUCERS INTO REDUX STORE

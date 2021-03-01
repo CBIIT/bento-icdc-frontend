@@ -320,9 +320,6 @@ export default {
       root: {
         borderBottom: '0px',
         padding: '5px',
-        '&:first-child': {
-          paddingLeft: '34px',
-        },
         '&:last-child': {
           paddingRight: '30px',
         },
