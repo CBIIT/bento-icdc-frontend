@@ -32,6 +32,7 @@ import {
   GET_CASES_OVERVIEW_DESC_QUERY,
   GET_FILE_IDS_FROM_FILE_NAME,
   tabIndex,
+  GET_FILES_NAME_QUERY,
 } from '../../../bento/dashboardTabData';
 
 const storeKey = 'dashboardTab';
@@ -222,6 +223,11 @@ function allFilters() {
   ), {});
   return emptyFilters;
 }
+
+function hasFilter() {
+  const currentAllActiveFilters = getState().allActiveFilters;
+  return Object.entries(currentAllActiveFilters).filter((item) => item[1].length > 0).length > 0;
+}
 /**
  * Returns filter variable for graphql query using the all filters.
  *
@@ -307,6 +313,47 @@ export function fetchDataForDashboardTab(
     ));
 }
 
+export async function getFileNamesByFileIds(fileIds) {
+  await client
+    .query({
+      query: GET_FILES_NAME_QUERY,
+      variables: {
+        file_uuids: fileIds,
+      },
+    })
+    .then((result) => result.data.fileOverview.map((item) => item.file_name));
+}
+
+export async function tableHasSelections() {
+  let selectedRowInfo = [];
+  let filteredIds = [];
+
+  switch (getState().currentActiveTab) {
+    case tabIndex[2].title:
+      filteredIds = await getFileNamesByFileIds(getState().dataFileSelected.selectedRowInfo);
+      selectedRowInfo = getState().dataFileSelected.selectedRowInfo;
+
+      break;
+    case tabIndex[1].title:
+      filteredIds = getState().filteredSampleIds;
+      selectedRowInfo = getState().dataSampleSelected.selectedRowInfo;
+
+      break;
+    default:
+      filteredIds = getState().filteredSubjectIds;
+      selectedRowInfo = getState().dataCaseSelected.selectedRowInfo;
+  }
+
+  // without the filters, the filteredIds is null
+  if (!hasFilter()) {
+    return selectedRowInfo.length > 0;
+  }
+
+  return selectedRowInfo.filter(
+    (value) => (filteredIds && filteredIds !== null ? filteredIds.includes(value) : false),
+  ).length > 0;
+}
+
 /**
  * Gets all file ids for active subjectIds.
  * TODO this  functtion can use filtered file IDs except for initial load
@@ -358,59 +405,60 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   return filteredFilesArray;
 }
 
-
-async function getFileIDsByFileName(fileCount = 100000, file_name = [], offset = 0.0, first = 100000, order_by = 'file_name'){
-
+async function getFileIDsByFileName(file_name = [], offset = 0.0, first = 100000, order_by = 'file_name') {
   await client
-      .query({
-        query: GET_FILE_IDS_FROM_FILE_NAME,
-        variables: {
-          file_name: file_name,
-          offset,
-          first,
-          order_by,
-        },
-      })
-      .then((result) => {
-        if (result && result.data && result.data.fileIdsFromFileNameDesc.length > 0) {
-          return result.data.fileIdsFromFileNameDesc.map((d) => d.file_uuid);
-        }
-        return [];
-      });
-}
-
-async function getFileIDs(fileCount = 100000, SELECT_ALL_QUERY, caseIds=[], sampleIds=[],cate){
-  const fetchResult = await client
-      .query({
-        query: SELECT_ALL_QUERY,
-        variables: {
-          case_ids: caseIds,
-          sample_ids: sampleIds,
-          file_uuids: [],
-          first: fileCount,
-        },
-      })
-      .then((result) => {
-        return result.data[cate] || [];
-      });
-
-    return fetchResult.reduce((accumulator, currentValue) => {
-      const { files } = currentValue;
-      // check if file
-      if (files && files.length > 0) {
-        return accumulator.concat(files.map((f) => f));
+    .query({
+      query: GET_FILE_IDS_FROM_FILE_NAME,
+      variables: {
+        file_name,
+        offset,
+        first,
+        order_by,
+      },
+    })
+    .then((result) => {
+      if (result && result.data && result.data.fileIdsFromFileNameDesc.length > 0) {
+        return result.data.fileIdsFromFileNameDesc.map((d) => d.file_uuid);
       }
-      return accumulator;
-    }, []);
+      return [];
+    });
 }
 
+async function getFileIDs(
+  fileCount = 100000,
+  SELECT_ALL_QUERY,
+  caseIds = [],
+  sampleIds = [],
+  cate,
+) {
+  const fetchResult = await client
+    .query({
+      query: SELECT_ALL_QUERY,
+      variables: {
+        case_ids: caseIds,
+        sample_ids: sampleIds,
+        file_uuids: [],
+        first: fileCount,
+      },
+    })
+    .then((result) => result.data[cate] || []);
 
-function filterOutFileIds(fileIds){
-   // Removing fileIds that are not in our current list of filtered fileIds
-  const filteredFileIds = getState().filteredFileIds;
+  return fetchResult.reduce((accumulator, currentValue) => {
+    const { files } = currentValue;
+    // check if file
+    if (files && files.length > 0) {
+      return accumulator.concat(files.map((f) => f));
+    }
+    return accumulator;
+  }, []);
+}
 
-  if(filteredFileIds != null||filteredFileIds.length>0){
-    return fileIds.filter((x) => filteredFileIds.includes(x))
+function filterOutFileIds(fileIds) {
+  // Removing fileIds that are not in our current list of filtered fileIds
+  const { filteredFileIds } = getState();
+
+  if (filteredFileIds != null || filteredFileIds.length > 0) {
+    return fileIds.filter((x) => filteredFileIds.includes(x));
   }
   return fileIds;
 }
@@ -422,16 +470,16 @@ function filterOutFileIds(fileIds){
  */
 export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
   let filesIds = [];
-  switch(getState().currentActiveTab) {
-  case tabIndex[2].title:
-    filesIds = getFileIDsByFileName(fileCount, selectedIds, offset, first, order_by);
-    break;
-  case tabIndex[1].title:
-    filesIds = getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
-    break;
-  default:
-     filesIds = getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverviewPaged');
-
+  switch (getState().currentActiveTab) {
+    case tabIndex[2].title:
+      filesIds = getFileIDsByFileName(selectedIds, offset, first, order_by);
+      break;
+    case tabIndex[1].title:
+      filesIds = getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
+      break;
+    default:
+      filesIds = getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverviewPaged');
+  }
   return filterOutFileIds(filesIds);
 }
 

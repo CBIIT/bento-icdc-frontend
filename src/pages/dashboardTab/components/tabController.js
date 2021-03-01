@@ -15,7 +15,7 @@ import Message from '../../../components/Message';
 import {
   tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon, selectAllToolTip,
 } from '../../../bento/dashboardTabData';
-import { fetchDataForDashboardTab, getTableRowSelectionEvent } from '../store/dashboardReducer';
+import { fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
 function TabContainer({ children, dir }) {
@@ -55,7 +55,6 @@ const tabController = (classes) => {
     && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : null));
   const filteredFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredFileIds ? state.dashboardTab.filteredFileIds : null));
-
   const [TopMessageStatus, setTopMessageStatus] = React.useState({
     text: tooltipContent[currentTab],
     src: tooltipContent.icon,
@@ -246,6 +245,7 @@ const tabController = (classes) => {
         defaultSortCoulmn={container.defaultSortField || ''}
         defaultSortDirection={container.defaultSortDirection || 'asc'}
         dataKey={container.dataKey}
+        tableHasSelections={tableHasSelections}
         filteredSubjectIds={filteredSubjectIds}
         filteredSampleIds={filteredSampleIds}
         filteredFileIds={filteredFileIds}

@@ -62,6 +62,7 @@ const TabView = ({
   setRowSelection,
   selectedRowInfo = [],
   selectedRowIndex = [],
+  tableHasSelections,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -97,18 +98,21 @@ const TabView = ({
       buildButtonStyle(button, ActiveSaveButtonDefaultStyle);
     }
   };
-
-  useEffect(() => {
-    initSaveButtonDefaultStyle(saveButton);
-    initSaveButtonDefaultStyle(saveButton2);
-
-    if (selectedRowInfo.length === 0) {
+  async function updateButtonStatus() {
+    const status = await tableHasSelections();
+    if (!status) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);
     } else {
       updateActiveSaveButtonStyle(false, saveButton);
       updateActiveSaveButtonStyle(false, saveButton2);
     }
+  }
+
+  useEffect(() => {
+    initSaveButtonDefaultStyle(saveButton);
+    initSaveButtonDefaultStyle(saveButton2);
+    updateButtonStatus();
   });
 
   async function exportFiles() {
@@ -209,13 +213,6 @@ const TabView = ({
   */
   function onRowsSelect(curr, allRowsSelected, rowsSelected, displayData) {
     rowSelectionEvent(displayData.map((d) => d.data[primaryKeyIndex]), rowsSelected);
-    if (allRowsSelected.length === 0) {
-      updateActiveSaveButtonStyle(true, saveButton);
-      updateActiveSaveButtonStyle(true, saveButton2);
-    } else {
-      updateActiveSaveButtonStyle(false, saveButton);
-      updateActiveSaveButtonStyle(false, saveButton2);
-    }
   }
 
   // overwrite default options
