@@ -54,7 +54,7 @@ export const tabContainers = [
       border: 'unset',
     },
     DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.3',
+      opacity: '0.7',
       cursor: 'auto',
     },
     columns: [
@@ -152,7 +152,7 @@ export const tabContainers = [
       backgroundColor: '#ff7f15',
     },
     DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.3',
+      opacity: '0.7',
       cursor: 'auto',
     },
     ActiveSaveButtonDefaultStyle: {
@@ -270,7 +270,7 @@ export const tabContainers = [
       backgroundColor: '#ff7f15',
     },
     DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.3',
+      opacity: '0.7',
       cursor: 'auto',
     },
     ActiveSaveButtonDefaultStyle: {
