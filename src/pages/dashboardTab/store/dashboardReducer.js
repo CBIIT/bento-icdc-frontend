@@ -328,10 +328,10 @@ export async function getFileNamesByFileIds(fileIds) {
 export async function tableHasSelections() {
   let selectedRowInfo = [];
   let filteredIds = [];
-  let filteredNames = await getFileNamesByFileIds(getState().filteredFileIds);
+  const filteredNames = await getFileNamesByFileIds(getState().filteredFileIds);
   switch (getState().currentActiveTab) {
     case tabIndex[2].title:
-      filteredIds =filteredNames;
+      filteredIds = filteredNames;
       selectedRowInfo = getState().dataFileSelected.selectedRowInfo;
 
       break;
