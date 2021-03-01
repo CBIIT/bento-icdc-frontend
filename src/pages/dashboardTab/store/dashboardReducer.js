@@ -314,7 +314,7 @@ export function fetchDataForDashboardTab(
 }
 
 export async function getFileNamesByFileIds(fileIds) {
-  await client
+  const data = await client
     .query({
       query: GET_FILES_NAME_QUERY,
       variables: {
@@ -322,6 +322,7 @@ export async function getFileNamesByFileIds(fileIds) {
       },
     })
     .then((result) => result.data.fileOverview.map((item) => item.file_name));
+  return data;
 }
 
 export async function tableHasSelections() {
@@ -330,7 +331,7 @@ export async function tableHasSelections() {
 
   switch (getState().currentActiveTab) {
     case tabIndex[2].title:
-      filteredIds = await getFileNamesByFileIds(getState().dataFileSelected.selectedRowInfo);
+      filteredIds = await getFileNamesByFileIds(getState().filteredFileIds);
       selectedRowInfo = getState().dataFileSelected.selectedRowInfo;
 
       break;
@@ -406,7 +407,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
 }
 
 async function getFileIDsByFileName(file_name = [], offset = 0.0, first = 100000, order_by = 'file_name') {
-  await client
+  const data = await client
     .query({
       query: GET_FILE_IDS_FROM_FILE_NAME,
       variables: {
@@ -422,6 +423,7 @@ async function getFileIDsByFileName(file_name = [], offset = 0.0, first = 100000
       }
       return [];
     });
+  return data;
 }
 
 async function getFileIDs(
@@ -457,7 +459,11 @@ function filterOutFileIds(fileIds) {
   // Removing fileIds that are not in our current list of filtered fileIds
   const { filteredFileIds } = getState();
 
-  if (filteredFileIds != null || filteredFileIds.length > 0) {
+  if (fileIds
+      && fileIds.length > 0
+       && filteredFileIds
+        && filteredFileIds != null
+        && filteredFileIds.length > 0) {
     return fileIds.filter((x) => filteredFileIds.includes(x));
   }
   return fileIds;
@@ -472,13 +478,13 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
   let filesIds = [];
   switch (getState().currentActiveTab) {
     case tabIndex[2].title:
-      filesIds = getFileIDsByFileName(selectedIds, offset, first, order_by);
+      filesIds = await getFileIDsByFileName(selectedIds, offset, first, order_by);
       break;
     case tabIndex[1].title:
-      filesIds = getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
       break;
     default:
-      filesIds = getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverviewPaged');
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverviewPaged');
   }
   return filterOutFileIds(filesIds);
 }
