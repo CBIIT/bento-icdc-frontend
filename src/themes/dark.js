@@ -373,7 +373,7 @@ export default {
     },
     MUIDataTableFooter: {
       root: {
-        borderTop: '0px',
+        borderTop: '#004c73 3px solid',
       },
     },
     MuiTableRow: {
