@@ -157,6 +157,14 @@ class ServerPaginatedTableView extends React.Component {
       rowsPerPage,
       rowsPerPageOptions: [],
       sortOrder,
+      // This is to update the text displayed on row select
+      textLabels: {
+        selectedRows: {
+          text: 'row(s) selected on current page',
+          delete: 'Delete',
+          deleteAria: 'Delete Selected Rows',
+        },
+      },
       customToolbar: () => (
         this.props.tableDownloadCSV && (
         <CSVDownloadToolbar
