@@ -8,6 +8,10 @@ export const navBarCartData = {
   cartIconAlt: 'cart_logo',
 };
 
+// --------------- Files limit configuration --------------
+export const alertMessage = 'The cart is limited to 2000 files. Please narrow the search criteria or remove some files from the cart to add more.';
+export const maximumNumberOfFilesAllowedInTheCart = 2000;
+
 // --------------- Icons configuration --------------
 // Ideal size for externalLinkIcon is 16x16 px
 
