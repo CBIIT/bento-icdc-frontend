@@ -115,7 +115,7 @@ type FileDetail {
   sample_site: String
   date_of_sample_collection: String
   necropsy_sample: Boolean
-  percentage_tumor: Float
+  percentage_tumor: String
   percentage_stroma: Float
   comment: String
   file_name: String
