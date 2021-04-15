@@ -91,7 +91,7 @@ export const table2 = {
   // download csv 'true' or 'false'
   download: true,
   // downloaded File Name
-  downloadFileName: 'ICDC_Study_File_download',
+  downloadFileName: 'ICDC_Study_Files_download',
   // Set 'selectableRows' to true to show the row selection
   selectableRows: true,
   // A maximum of 10 columns are allowed

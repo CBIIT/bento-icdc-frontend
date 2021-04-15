@@ -13,6 +13,7 @@ const table = {
   viewColumns: true,
   title: 'STUDIES IN THIS PROGRAM',
   selectableRows: false,
+  downloadFileName: 'ICDC_Program_Studies_download',
   columns: [
     {
       dataField: 'program_id',
