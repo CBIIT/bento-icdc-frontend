@@ -15,6 +15,7 @@ import {
   table2,
   externalLinkIcon,
   tooltipContent,
+  textLabels,
 } from '../../bento/caseDetailsData';
 import Snackbar from '../../components/Snackbar';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
@@ -93,6 +94,9 @@ const CaseDetail = ({ classes, data }) => {
     return customF;
   });
 
+  const tableOneOptions = getOptions(table1, classes);
+  const tableTwoOptions = getOptions(table2, classes);
+
   return (
     <>
       <Snackbar
@@ -114,7 +118,7 @@ const CaseDetail = ({ classes, data }) => {
           </div>
 
           {(caseDetail.patient_first_name === '' || caseDetail.patient_first_name === null)
-             && !(caseDetail.enrollment && caseDetail.enrollment.initials !== '' && caseDetail.enrollment.initials !== null)
+            && !(caseDetail.enrollment && caseDetail.enrollment.initials !== '' && caseDetail.enrollment.initials !== null)
             ? (
               <div className={classes.headerTitle}>
                 <div className={cn(classes.headerMainTitle, classes.marginTop23)}>
@@ -267,7 +271,7 @@ const CaseDetail = ({ classes, data }) => {
                   <span className={classes.detailContainerHeader}>DIAGNOSIS</span>
                 </Grid>
 
-                { caseDetail.diagnoses.map((diagnosis) => (
+                {caseDetail.diagnoses.map((diagnosis) => (
                   <Grid container className={classes.detailContainerItems}>
                     <Grid item xs={12}>
                       <Grid container spacing={4}>
@@ -437,8 +441,8 @@ const CaseDetail = ({ classes, data }) => {
                       </Grid>
                       <Grid item xs={6} className={classes.content}>
                         {caseDetail.enrollment
-                            && caseDetail.enrollment.site_short_name
-                              && caseDetail.enrollment.site_short_name !== null
+                          && caseDetail.enrollment.site_short_name
+                          && caseDetail.enrollment.site_short_name !== null
                           ? caseDetail.enrollment.site_short_name : notProvided}
                       </Grid>
                     </Grid>
@@ -463,7 +467,7 @@ const CaseDetail = ({ classes, data }) => {
                   <GridWithFooter
                     data={data.samplesByCaseId}
                     columns={getColumns(table1, classes, data, externalLinkIcon)}
-                    options={getOptions(table1, classes)}
+                    options={{ ...tableOneOptions, ...textLabels }}
                     customOnRowsSelect={table1.customOnRowsSelect}
                     openSnack={openSnack}
                     closeSnack={closeSnack}
@@ -493,7 +497,7 @@ const CaseDetail = ({ classes, data }) => {
                     <GridWithFooter
                       data={files}
                       columns={getColumns(table2, classes, data)}
-                      options={getOptions(table2, classes)}
+                      options={{ ...tableTwoOptions, ...textLabels }}
                       customOnRowsSelect={table2.customOnRowsSelect}
                       openSnack={openSnack}
                       closeSnack={closeSnack}

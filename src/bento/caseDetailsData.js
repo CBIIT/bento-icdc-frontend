@@ -187,6 +187,18 @@ export const table2 = {
   customOnRowsSelect: FileOnRowsSelect,
 };
 
+export const textLabels = {
+  textLabels: {
+    toolbar: {
+      search: 'Search',
+      downloadCsv: 'Download Table Contents As CSV',
+      print: 'Print',
+      viewColumns: 'View Columns',
+      filterTable: 'Filter Table',
+    },
+  },
+};
+
 // --------------- GraphQL query configuration --------------
 export const GET_CASE_DETAIL_DATA_QUERY = gql`
   query Case($case_id: String!) {
