@@ -15,6 +15,7 @@ import StatsView from '../../components/Stats/StatsView';
 import {
   table,
   pageData,
+  textLabels,
 } from '../../bento/programDetailData';
 import {
   pageData as ProgramImageConfig,
@@ -67,6 +68,7 @@ const ProgramView = ({ classes, data }) => {
 
   const programConfig = ProgramImageConfig[programDetail.program_acronym];
   const programImage = programConfig ? programConfig.secondaryImage : '';
+  const tableOptions = getOptions(table, classes);
 
   return (
     <>
@@ -124,7 +126,7 @@ const ProgramView = ({ classes, data }) => {
               <CustomDataTable
                 data={data.studiesByProgramId}
                 columns={getColumns(table, classes, data, '', '/cases', redirectTo)}
-                options={getOptions(table, classes)}
+                options={{ ...tableOptions, ...textLabels }}
               />
             </MuiThemeProvider>
           </Grid>
