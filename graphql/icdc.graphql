@@ -94,6 +94,7 @@ type case {
   visits: [visit] @relation(name:"of_case", direction:IN)
   adverse_events: [adverse_event] @relation(name:"of_case", direction:IN)
   registrations: [registration] @relation(name:"of_case", direction:IN)
+  study_arm: study_arm @relation(name:"of_study_arm", direction:OUT)
   adverse_event: adverse_event @relation(name:"had_adverse_event", direction:OUT)
   off_study: off_study @relation(name:"went_off_study", direction:OUT)
   off_treatment: off_treatment @relation(name:"went_off_treatment", direction:OUT)
@@ -102,6 +103,7 @@ type case {
 type cohort {
   cohort_description: String
   cohort_dose: String
+  cohort_id: String
   cases: [case] @relation(name:"member_of", direction:IN)
   study_arm: study_arm @relation(name:"member_of", direction:OUT)
   study: study @relation(name:"member_of", direction:OUT)
@@ -327,7 +329,6 @@ type program {
 type registration {
   registration_origin: String
   registration_id: String
-  is_primary_id: String
   case: case @relation(name:"of_case", direction:OUT)
 }
 
@@ -409,9 +410,11 @@ type study_arm {
   arm: String
   ctep_treatment_assignment_code: String
   arm_description: String
+  arm_id: String
   cohorts: [cohort] @relation(name:"member_of", direction:IN)
   study: study @relation(name:"member_of", direction:OUT)
   agents: [agent] @relation(name:"of_study_arm", direction:IN)
+  cases: [case] @relation(name:"of_study_arm", direction:IN)
 }
 
 type study_site {
@@ -592,7 +595,7 @@ type FileDetail {
   sample_site: String
   date_of_sample_collection: String
   necropsy_sample: Boolean
-  percentage_tumor: Float
+  percentage_tumor: String
   percentage_stroma: Float
   comment: String
   file_name: String
@@ -718,7 +721,7 @@ type ProgramStudies {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.10'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.11'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")

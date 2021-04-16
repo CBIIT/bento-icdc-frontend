@@ -94,6 +94,7 @@ type case {
   visits: [visit] 
   adverse_events: [adverse_event] 
   registrations: [registration] 
+  study_arm: study_arm 
   adverse_event: adverse_event 
   off_study: off_study 
   off_treatment: off_treatment 
@@ -102,6 +103,7 @@ type case {
 type cohort {
   cohort_description: String
   cohort_dose: String
+  cohort_id: String
   cases: [case] 
   study_arm: study_arm 
   study: study 
@@ -327,7 +329,6 @@ type program {
 type registration {
   registration_origin: String
   registration_id: String
-  is_primary_id: String
   case: case 
 }
 
@@ -409,9 +410,11 @@ type study_arm {
   arm: String
   ctep_treatment_assignment_code: String
   arm_description: String
+  arm_id: String
   cohorts: [cohort] 
   study: study 
   agents: [agent] 
+  cases: [case] 
 }
 
 type study_site {
@@ -592,7 +595,7 @@ type FileDetail {
   sample_site: String
   date_of_sample_collection: String
   necropsy_sample: Boolean
-  percentage_tumor: Float
+  percentage_tumor: String
   percentage_stroma: Float
   comment: String
   file_name: String
