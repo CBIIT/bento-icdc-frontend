@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { CustomDataTable, getOptions, getColumns } from 'bento-components';
 import {
-  pageData,
+  pageData, textLabels,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
@@ -15,6 +15,7 @@ const Studies = ({ classes, data }) => {
   const redirectTo = (study) => {
     filterCasePageOnStudyCode(study.rowData[0]);
   };
+  const tableOptions = getOptions(pageData.table, classes);
 
   return (
     <>
@@ -42,7 +43,7 @@ const Studies = ({ classes, data }) => {
                 <CustomDataTable
                   data={data[pageData.table.dataField]}
                   columns={getColumns(pageData.table, classes, data, pageData.externalLinkIcon, '/cases', redirectTo)}
-                  options={getOptions(pageData.table, classes)}
+                  options={{ ...tableOptions, ...textLabels }}
                 />
               </Grid>
             </Grid>

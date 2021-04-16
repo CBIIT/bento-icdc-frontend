@@ -13,6 +13,7 @@ const table = {
   viewColumns: true,
   title: 'STUDIES IN THIS PROGRAM',
   selectableRows: false,
+  downloadFileName: 'ICDC_Program_Studies_download',
   columns: [
     {
       dataField: 'program_id',
@@ -36,6 +37,18 @@ const table = {
       header: 'Cases',
     },
   ],
+};
+
+const textLabels = {
+  textLabels: {
+    toolbar: {
+      search: 'Search',
+      downloadCsv: 'Download Table Contents As CSV',
+      print: 'Print',
+      viewColumns: 'View Columns',
+      filterTable: 'Filter Table',
+    },
+  },
 };
 
 // --------------- GraphQL query - Retrieve program details --------------
@@ -75,4 +88,5 @@ export {
   pageData,
   GET_PROGRAM_DETAIL_DATA_QUERY,
   table,
+  textLabels,
 };

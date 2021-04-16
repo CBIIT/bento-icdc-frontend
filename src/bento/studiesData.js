@@ -25,7 +25,7 @@ export const pageData = {
     // download csv 'true' or 'false'
     download: true,
     // downloaded File Name
-    downloadFileName: 'ICDC_Studies_data',
+    downloadFileName: 'ICDC_Studies_download',
     // Set 'selectableRows' to true to show the row selection
     selectableRows: false,
     columns: [
@@ -52,6 +52,18 @@ export const pageData = {
         header: 'Cases',
       },
     ],
+  },
+};
+
+export const textLabels = {
+  textLabels: {
+    toolbar: {
+      search: 'Search',
+      downloadCsv: 'Download Table Contents As CSV',
+      print: 'Print',
+      viewColumns: 'View Columns',
+      filterTable: 'Filter Table',
+    },
   },
 };
 

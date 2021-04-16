@@ -51,7 +51,7 @@ export const table1 = {
   // download csv
   download: true,
   // downloaded File Name
-  downloadFileName: 'ICDC_Case_Sample_download',
+  downloadFileName: 'ICDC_Case_Samples_download',
   // Set 'selectableRows' to true to show the row selection
   selectableRows: true,
   // A maximum of 10 columns are allowed
@@ -137,7 +137,7 @@ export const table2 = {
   // download csv 'true' or 'false'
   download: true,
   // downloaded File Name
-  downloadFileName: 'ICDC_Case_File_download',
+  downloadFileName: 'ICDC_Case_Files_download',
   // Set 'selectableRows' to true to show the row selection
   selectableRows: true,
 
@@ -185,6 +185,18 @@ export const table2 = {
   // Util Functions
   // Custom function on selct checkbox is selected.
   customOnRowsSelect: FileOnRowsSelect,
+};
+
+export const textLabels = {
+  textLabels: {
+    toolbar: {
+      search: 'Search',
+      downloadCsv: 'Download Table Contents As CSV',
+      print: 'Print',
+      viewColumns: 'View Columns',
+      filterTable: 'Filter Table',
+    },
+  },
 };
 
 // --------------- GraphQL query configuration --------------
