@@ -26,7 +26,7 @@ export const customCasesTabDownloadCSV = {
   header: ['Case ID', 'Study Code', 'Study Type', 'Breed', 'Diagnosis', 'Stage Of Diseasege', 'Age', 'Dex', 'Neutered Status', 'Weight (kg)', 'Response to Treatment', 'Cohort'],
   query: GET_CASES_TAB,
   apiVariable: 'caseOverviewPaged',
-  fileName: 'tableDownload',
+  fileName: 'ICDC_Cases_download',
 };
 
 export const GET_SAMPLES_TAB = gql`
@@ -54,7 +54,7 @@ export const customSamplesTabDownloadCSV = {
   header: ['Sample ID', 'Case Id', 'Breed', 'Diagnosis', 'Sample Site', 'Sample Type', 'Sample Pathology', 'Tumor Grade', 'Sample Chronology', 'Percentage Tumor', 'Necropsy Sample', 'Sample Preservation'],
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',
-  fileName: 'tableDownload',
+  fileName: 'ICDC_Samples_download',
 };
 
 export const GET_FILES_TAB = gql`
@@ -80,7 +80,7 @@ export const customFilesTabDownloadCSV = {
   header: ['File Name', 'File Type', 'Association', 'Description', 'File Format', 'Size', 'Case Id', 'Breed', 'Diagnosis', 'Study Code'],
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
-  fileName: 'tableDownload',
+  fileName: 'ICDC_Files_download',
 };
 
 export const MY_CART = gql`
@@ -106,5 +106,5 @@ export const customMyFilesTabDownloadCSV = {
   header: ['File Name', 'File Type', 'Association', 'Description', 'File Format', 'Size', 'Case Id', 'Breed', 'Diagnosis', 'Study Code'],
   query: MY_CART,
   apiVariable: 'filesInList',
-  fileName: 'tableDownload',
+  fileName: 'ICDC_My_Files_download',
 };
