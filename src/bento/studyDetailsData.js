@@ -147,6 +147,18 @@ export const table2 = {
   disableRowSelection: FileDisableRowSelection,
 };
 
+export const textLabels = {
+  textLabels: {
+    toolbar: {
+      search: 'Search',
+      downloadCsv: 'Download Table Contents As CSV',
+      print: 'Print',
+      viewColumns: 'View Columns',
+      filterTable: 'Filter Table',
+    },
+  },
+};
+
 // --------------- GraphQL query configuration --------------
 export const GET_STUDY_DETAIL_DATA_QUERY = gql`
   query Study($csd: String!) {

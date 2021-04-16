@@ -39,6 +39,18 @@ const table = {
   ],
 };
 
+const textLabels = {
+  textLabels: {
+    toolbar: {
+      search: 'Search',
+      downloadCsv: 'Download Table Contents As CSV',
+      print: 'Print',
+      viewColumns: 'View Columns',
+      filterTable: 'Filter Table',
+    },
+  },
+};
+
 // --------------- GraphQL query - Retrieve program details --------------
 const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
 query program($programTitle: String!) {
@@ -76,4 +88,5 @@ export {
   pageData,
   GET_PROGRAM_DETAIL_DATA_QUERY,
   table,
+  textLabels,
 };

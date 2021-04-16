@@ -55,6 +55,18 @@ export const pageData = {
   },
 };
 
+export const textLabels = {
+  textLabels: {
+    toolbar: {
+      search: 'Search',
+      downloadCsv: 'Download Table Contents As CSV',
+      print: 'Print',
+      viewColumns: 'View Columns',
+      filterTable: 'Filter Table',
+    },
+  },
+};
+
 // --------------- GraphQL query - Retrieve program info --------------
 export const GET_STUDY_DATA_QUERY = gql`{
     studiesByProgram {

@@ -18,7 +18,7 @@ import { studyDetailSorting, customSorting, fromArmTOCohorDoes } from './utils';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
-  table1, table2, tooltipContent, headerIcon,
+  table1, table2, tooltipContent, headerIcon, textLabels,
 } from '../../bento/studyDetailsData';
 import themes, { overrides } from '../../themes';
 
@@ -135,6 +135,8 @@ const StudyDetailView = ({ classes, data }) => {
     cFile.studyDesignation = studyData.clinical_study_designation;
     return cFile;
   });
+  const tableOneOptions = getOptions(table1, classes);
+  const tableTwoOptions = getOptions(table2, classes);
   return (
     <>
       <Snackbar
@@ -301,7 +303,7 @@ const StudyDetailView = ({ classes, data }) => {
                         (a, b) => studyDetailSorting(a.arm, b.arm),
                       )}
                       columns={table1.columns}
-                      options={getOptions(table1, classes)}
+                      options={{ ...tableOneOptions, ...textLabels }}
                     />
                   </Typography>
                 </MuiThemeProvider>
@@ -326,7 +328,7 @@ const StudyDetailView = ({ classes, data }) => {
                 data={fileTableData}
                 title=""
                 columns={getColumns(table2, classes, fileTableData)}
-                options={getOptions(table2, classes)}
+                options={{ ...tableTwoOptions, ...textLabels }}
                 customOnRowsSelect={table2.customOnRowsSelect}
                 openSnack={openSnack}
                 closeSnack={closeSnack}

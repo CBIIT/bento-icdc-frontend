@@ -37,7 +37,7 @@ const CustomToolbar = ({
 
   return (
     <>
-      <Tooltip title="Download Full Table As CSV">
+      <Tooltip title="Download Table Contents As CSV">
         <IconButton
           className={classes.iconButton}
           onClick={() => prepareDownload(tableDownloadCSV)}
