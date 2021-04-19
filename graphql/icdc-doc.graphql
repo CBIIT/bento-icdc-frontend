@@ -97,6 +97,7 @@ type case {
   adverse_event: adverse_event 
   off_study: off_study 
   off_treatment: off_treatment 
+  individual: individual 
 }
 
 type cohort {
@@ -215,6 +216,19 @@ type follow_up {
 
 type image {
   assay: assay 
+}
+
+type image_collection {
+  image_collection_name: String
+  image_type_included: Array
+  image_collection_url: String
+  repository_name: String
+  collection_access: String
+  study: study 
+}
+
+type individual {
+  cases: [case] 
 }
 
 type lab_exam {
@@ -403,6 +417,7 @@ type study {
   study_sites: [study_site] 
   principal_investigators: [principal_investigator] 
   files: [file] 
+  image_collections: [image_collection] 
 }
 
 type study_arm {
