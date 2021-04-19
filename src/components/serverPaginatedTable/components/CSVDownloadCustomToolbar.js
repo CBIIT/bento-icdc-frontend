@@ -8,6 +8,8 @@ import { downloadJson } from './utils';
 
 const defaultToolbarStyles = {
   iconButton: {
+    position: 'absolute',
+    right: '30px',
   },
 };
 
