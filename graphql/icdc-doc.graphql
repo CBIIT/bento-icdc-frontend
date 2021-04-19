@@ -222,7 +222,7 @@ type image {
 
 type image_collection {
   image_collection_name: String
-  image_type_included: Array
+  image_type_included: String
   image_collection_url: String
   repository_name: String
   collection_access: String
