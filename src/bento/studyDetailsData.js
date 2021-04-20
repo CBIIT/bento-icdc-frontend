@@ -9,6 +9,7 @@ export const tooltipContent = {
 };
 
 export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-StudiesDetail.svg';
+export const externalIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/study/Program-ExternalLink.svg';
 
 // --------------- Table 1 configuration --------------
 export const table1 = {
@@ -196,6 +197,13 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
       pi_first_name
       pi_last_name
       pi_middle_initial
+    }
+    image_collections {
+      image_collection_name
+      image_collection_url
+      repository_name
+      image_type_included
+      collection_access
     }
     cases{
       case_id

@@ -9,6 +9,7 @@ import {
 } from 'bento-components';
 import _ from 'lodash';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 import Snackbar from '../../components/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import GridWithFooter from '../../components/GridWithFooter/GridView';
@@ -18,7 +19,7 @@ import { studyDetailSorting, customSorting, fromArmTOCohorDoes } from './utils';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
-  table1, table2, tooltipContent, headerIcon,
+  table1, table2, tooltipContent, headerIcon, textLabels, externalIcon,
 } from '../../bento/studyDetailsData';
 import themes, { overrides } from '../../themes';
 
@@ -135,6 +136,16 @@ const StudyDetailView = ({ classes, data }) => {
     cFile.studyDesignation = studyData.clinical_study_designation;
     return cFile;
   });
+
+  const getImageTypes = (typeString) => {
+    const types = JSON.parse(typeString);
+
+    return types.join(', ');
+  };
+
+  const getAccessTypeString = (accessType) => (accessType === 'Cloud'
+    ? 'Available only via the Cloud' : 'Available for Download');
+
   return (
     <>
       <Snackbar
@@ -220,35 +231,51 @@ const StudyDetailView = ({ classes, data }) => {
 
                 <Grid container className={classes.detailContainerItems}>
                   <Grid item xs={12} className={classes.detailContainerItem}>
-                    <span className={classes.title}> Study Type:</span>
-                  </Grid>
-                  <Grid item xs={12} spacing={0} className={classes.content}>
-                    {studyData.clinical_study_type}
-                  </Grid>
-                  <Grid item xs={12} className={classes.detailContainerItem}>
-                    <span className={classes.title}>Principal Investigators:</span>
-                  </Grid>
-                  <Grid item xs={12} className={classes.content}>
-                    {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => (`${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `)) : ''}
+                    <Grid item container direction="row">
+                      <Grid item xs={12} sm={4} className={classes.title}>
+                        Study Type:
+                      </Grid>
+                      <Grid item xs={12} sm={6} className={classes.content}>
+                        {studyData.clinical_study_type}
+                      </Grid>
+                    </Grid>
                   </Grid>
                   <Grid item xs={12} className={classes.detailContainerItem}>
-                    <span className={classes.title}>Date of IACUC Approval:</span>
-                  </Grid>
-                  <Grid item xs={12} className={classes.content}>
-                    {studyData.date_of_iacuc_approval}
+                    <Grid item container direction="row">
+                      <Grid item xs={12} sm={4} className={classes.title}>
+                        Principal Investigators:
+                      </Grid>
+                      <Grid item xs={12} sm={6} className={classes.content}>
+                        {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => (`${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `)) : ''}
+                      </Grid>
+                    </Grid>
                   </Grid>
                   <Grid item xs={12} className={classes.detailContainerItem}>
-                    <span className={classes.title}>Conducted:</span>
+                    <Grid item container direction="row">
+                      <Grid item xs={12} sm={4} className={classes.title}>
+                        Date of IACUC Approval:
+                      </Grid>
+                      <Grid item xs={12} sm={6} className={classes.content}>
+                        {studyData.date_of_iacuc_approval}
+                      </Grid>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} className={classes.content}>
-                    {studyData.dates_of_conduct}
+                  <Grid item xs={12} className={classes.detailContainerItem}>
+                    <Grid item container direction="row">
+                      <Grid item xs={12} sm={4} className={classes.title}>
+                        Conducted:
+                      </Grid>
+                      <Grid item xs={12} sm={6} className={classes.content}>
+                        {studyData.dates_of_conduct}
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
-                <Grid item lg={6} md={6} sm={6} xs={12}>
+                <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerRightTop}>
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
                       <span className={classes.detailContainerHeader}>DIAGNOSES</span>
@@ -266,7 +293,7 @@ const StudyDetailView = ({ classes, data }) => {
                   </Grid>
                 </Grid>
 
-                <Grid item lg={6} md={6} sm={6} xs={12}>
+                <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerRightTop}>
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
                       <span className={classes.detailContainerHeader}>Case File Types</span>
@@ -280,6 +307,62 @@ const StudyDetailView = ({ classes, data }) => {
                     ))}
                   </Grid>
                 </Grid>
+                <div><hr className={classes.hrLine} /></div>
+              </Grid>
+              <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
+
+                {/* START: Image Collection */}
+                <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
+                  <Grid container spacing={16}>
+                    <Grid item xs={12}>
+                      <span className={classes.detailContainerHeader}> IMAGE COLLECTION </span>
+                    </Grid>
+                  </Grid>
+                  <Grid container className={classes.detailContainerItems}>
+                    {studyData.image_collections.length > 0 ? studyData.image_collections.map(
+                      (imageCollection) => (
+                        <Grid item xs={12} className={classes.detailContainerItem}>
+                          <Grid item container direction="row">
+                            <Grid item xs={12} sm={3} className={classes.title}>
+                              COLLECTION:
+                            </Grid>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={8}
+                              className={[classes.content, classes.marginTopN5]}
+                            >
+                              <Tooltip title={getAccessTypeString(imageCollection.collection_access)} arrow placement="right-end">
+                                <a href={`${imageCollection.image_collection_url}`} target="icdc" className={classes.outLink}>
+                                  {imageCollection.image_collection_name}
+                                  {' - '}
+                                  {imageCollection.repository_name}
+                                  <span className={classes.paddingLeft5}>
+                                    <img
+                                      src={externalIcon}
+                                      alt="imageLink"
+                                      className={classes.linkIcon}
+                                    />
+                                  </span>
+                                </a>
+                              </Tooltip>
+                            </Grid>
+                          </Grid>
+                          <Grid item container direction="row">
+                            <Grid item xs={12} sm={3} className={classes.title}>
+                              IMAGE TYPES:
+                            </Grid>
+                            <Grid item xs={12} sm={8} className={classes.content}>
+                              {imageCollection.image_type_included
+                              && getImageTypes(imageCollection.image_type_included)}
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      ),
+                    ) : (<div>This study currently has no associated Image Collections</div>)}
+                  </Grid>
+                </Grid>
+                {/* END: Image Collection */}
               </Grid>
             </Grid>
           </Grid>
@@ -371,7 +454,6 @@ const styles = (theme) => ({
   },
   content: {
     fontSize: '12px',
-    lineHeight: '14px',
   },
   warning: {
     color: theme.palette.warning.main,
@@ -516,11 +598,9 @@ const styles = (theme) => ({
   },
   detailContainerRight: {
     padding: '5px 0 5px 20px !important',
-    minHeight: '500px',
     maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
-    height: '500px',
     width: 'calc(100% + 8px)',
   },
 
@@ -587,6 +667,27 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#ff17f15',
     paddingBottom: '20px',
+  },
+  detailContainerRightTop: {
+    maxHeight: '250px',
+    overflow: 'auto',
+  },
+  outLink: {
+    color: '#DD752F',
+    textDecoration: 'none',
+    fontSize: '12px',
+  },
+  paddingLeft5: {
+    paddingLeft: '5px',
+  },
+  marginTopN5: {
+    marginTop: '-5px',
+  },
+  marginTop10: {
+    marginTop: '10px',
+  },
+  linkIcon: {
+    width: '20px',
   },
 
 });
