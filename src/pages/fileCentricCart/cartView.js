@@ -31,7 +31,8 @@ const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
 }) => {
   const [modalStatus, setModalStatus] = React.useState(false);
-  const [TopMessageStatus, setTopMessageStatus] = React.useState(false);
+  const [UserCommentsMessageStatus, setUserCommentsMessageStatus] = React.useState(false);
+  const [DownloadBtnMessageStatus, setDownloadBtnMessageStatus] = React.useState(false);
   const [removeAllMessageStatus, setRemoveAllMessageStatus] = React.useState(false);
   const [userComments, setUserComments] = React.useState('');
   async function fetchData() {
@@ -46,8 +47,11 @@ const cartView = ({
     return fetchResult;
   }
 
-  function toggleMessageStatus(status) {
-    return status === 'close' ? setTopMessageStatus(false) : setTopMessageStatus(true);
+  function toggleMessageStatus(type, status) {
+    if (type === 'userComments') {
+      return status === 'close' ? setUserCommentsMessageStatus(false) : setUserCommentsMessageStatus(true);
+    }
+    return status === 'close' ? setDownloadBtnMessageStatus(false) : setDownloadBtnMessageStatus(true);
   }
 
   function toggleRemoveAllMessageStatus(status) {
@@ -148,9 +152,16 @@ const cartView = ({
   const columns = getColumns(table, classes).concat(deleteColumn);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
-  const messageData = (
+  const userCommentsMessageData = (
     <span>
-      {myFilesPageData.tooltipMessage}
+      {myFilesPageData.userCommentsTooltipMessage}
+      {' '}
+    </span>
+  );
+
+  const downloadBtnMessageData = (
+    <span>
+      {myFilesPageData.downloadBtnTooltipMessage}
       {' '}
     </span>
   );
@@ -273,6 +284,23 @@ const cartView = ({
                   variant="filled"
                   onChange={(e) => setUserComments(e.target.value)}
                 />
+                <IconButton aria-label="help" onFocus={() => toggleMessageStatus('userComments', 'open')} onMouseEnter={() => toggleMessageStatus('userComments', 'open')} onMouseOver={() => toggleMessageStatus('userComments', 'open')} onMouseLeave={() => toggleMessageStatus('userComments', 'close')}>
+                  <img
+                    onMouseEnter={() => toggleMessageStatus('userComments', 'open')}
+                    onMouseOver={() => toggleMessageStatus('userComments', 'open')}
+                    onFocus={() => toggleMessageStatus('userComments', 'open')}
+                    src={myFilesPageData.tooltipIcon}
+                    alt={myFilesPageData.tooltipAlt}
+                    className={classes.helpIcon}
+                  />
+                </IconButton>
+                { UserCommentsMessageStatus ? (
+                  <div className={classes.messageTopOne}>
+                    {' '}
+                    <Message data={userCommentsMessageData} />
+                    {' '}
+                  </div>
+                ) : ''}
               </div>
 
               {/* Section: Button Group */}
@@ -285,20 +313,20 @@ const cartView = ({
                   {myFilesPageData.downButtonText}
                   {' '}
                 </button>
-                <IconButton aria-label="help" onFocus={() => toggleMessageStatus('top', 'open')} onMouseEnter={() => toggleMessageStatus('open')} onMouseOver={() => toggleMessageStatus('open')} onMouseLeave={() => toggleMessageStatus('close')}>
+                <IconButton aria-label="help" onFocus={() => toggleMessageStatus('downloadBtn', 'open')} onMouseEnter={() => toggleMessageStatus('downloadBtn', 'open')} onMouseOver={() => toggleMessageStatus('downloadBtn', 'open')} onMouseLeave={() => toggleMessageStatus('downloadBtn', 'close')}>
                   <img
-                    onMouseEnter={() => toggleMessageStatus('open')}
-                    onMouseOver={() => toggleMessageStatus('open')}
-                    onFocus={() => toggleMessageStatus('top', 'open')}
+                    onMouseEnter={() => toggleMessageStatus('downloadBtn', 'open')}
+                    onMouseOver={() => toggleMessageStatus('downloadBtn', 'open')}
+                    onFocus={() => toggleMessageStatus('downloadBtn', 'open')}
                     src={myFilesPageData.tooltipIcon}
                     alt={myFilesPageData.tooltipAlt}
                     className={classes.helpIcon}
                   />
                 </IconButton>
-                { TopMessageStatus ? (
-                  <div className={classes.messageTop}>
+                { DownloadBtnMessageStatus ? (
+                  <div className={classes.messageTopTwo}>
                     {' '}
-                    <Message data={messageData} />
+                    <Message data={downloadBtnMessageData} />
                     {' '}
                   </div>
                 ) : ''}
@@ -395,7 +423,13 @@ const styles = (theme) => ({
     padding: '10px 43px 15px 0px',
     position: 'relative',
   },
-  messageTop: {
+  messageTopOne: {
+    position: 'absolute',
+    left: '360px',
+    top: '-125px',
+    zIndex: '400',
+  },
+  messageTopTwo: {
     position: 'absolute',
     left: '5px',
     top: '-140px',
@@ -406,6 +440,7 @@ const styles = (theme) => ({
     float: 'right',
   },
   manifestTextarea: {
+    position: 'relative',
     marginTop: '20px',
   },
   downloadButton: {
