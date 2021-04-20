@@ -6,7 +6,7 @@ export const navBarstyling = {
     marginTop: '120px',
     fontFamily: 'Raleway, sans-serif',
     activeLabel: '2px solid  #35b9eb',
-    paddingRight: '45px',
+    paddingRight: '65px',
     paddingLeft: '55px',
     fontWeight: '600',
     letterSpacing: '1px',
