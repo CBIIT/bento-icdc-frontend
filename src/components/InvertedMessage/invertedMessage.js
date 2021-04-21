@@ -43,7 +43,7 @@ const styles = () => ({
     fontSize: '12px',
   },
   arrayIcon: {
-    marginLeft: '12px',
+    marginLeft: '190px',
   },
 });
 export default withStyles(styles, { withTheme: true })(invertedMessage);

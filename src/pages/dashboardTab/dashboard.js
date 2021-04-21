@@ -228,9 +228,11 @@ const styles = (theme) => ({
   },
   switchThemeMsg: {
     position: 'absolute',
+    right: '-8px',
     zIndex: '400',
   },
   floatRight: {
+    position: 'relative',
     float: 'right',
     marginRight: '80px',
   },
