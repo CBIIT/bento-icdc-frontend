@@ -8,7 +8,7 @@ import Widget from '../../components/Widgets/WidgetView';
 import InvertedMessage from '../../components/InvertedMessage';
 import Stats from '../../components/Stats/DashboardStatsController';
 import SideBar from '../../components/SideBar/SideBarView';
-import { widgetsData, dashboardData } from '../../bento/dashboardData';
+import { widgetsData, themeToggleTooltip } from '../../bento/dashboardData';
 import Tab from './components/tabController';
 import colors from '../../utils/colors';
 
@@ -30,7 +30,7 @@ const Dashboard = ({
 
   const switchThemeBtnMessageData = (
     <span>
-      {dashboardData.switchThemeButtonMessage}
+      {themeToggleTooltip.switchThemeButtonMessage}
       {' '}
     </span>
   );
@@ -75,8 +75,8 @@ const Dashboard = ({
                         onMouseEnter={() => toggleMessageStatus('open')}
                         onMouseOver={() => toggleMessageStatus('open')}
                         onFocus={() => toggleMessageStatus('open')}
-                        src={dashboardData.tooltipIcon}
-                        alt={dashboardData.tooltipAlt}
+                        src={themeToggleTooltip.tooltipIcon}
+                        alt={themeToggleTooltip.tooltipAlt}
                         className={classes.helpIcon}
                       />
                     </IconButton>
