@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-  Grid, withStyles, Button, Switch, Collapse, FormControlLabel,
+  Grid, withStyles, Button, Switch, Collapse, FormControlLabel, IconButton,
 } from '@material-ui/core';
 import { ProgramSunburst, CustomActiveDonut } from 'bento-components';
 import { useTheme } from '../../components/ThemeContext';
 import Widget from '../../components/Widgets/WidgetView';
+import InvertedMessage from '../../components/InvertedMessage';
 import Stats from '../../components/Stats/DashboardStatsController';
 import SideBar from '../../components/SideBar/SideBarView';
-import { widgetsData } from '../../bento/dashboardData';
+import { widgetsData, dashboardData } from '../../bento/dashboardData';
 import Tab from './components/tabController';
 import colors from '../../utils/colors';
 
@@ -16,11 +17,23 @@ const displaywidgets = widgetsData.filter((widget) => widget.show === true).slic
 const Dashboard = ({
   classes, data, theme,
 }) => {
+  const [SwitchThemeMessageStatus, setSwitchThemeMessageStatus] = React.useState(false);
   const [collapse, setCollapse] = React.useState(true);
   const themeChanger = useTheme();
   const handleChange = () => {
     setCollapse((prev) => !prev);
   };
+
+  function toggleMessageStatus(status) {
+    return status === 'close' ? setSwitchThemeMessageStatus(false) : setSwitchThemeMessageStatus(true);
+  }
+
+  const switchThemeBtnMessageData = (
+    <span>
+      {dashboardData.switchThemeButtonMessage}
+      {' '}
+    </span>
+  );
 
   return (
     <>
@@ -57,6 +70,23 @@ const Dashboard = ({
                         themeChanger.toggleTheme();
                       }}
                     />
+                    <IconButton aria-label="help" onFocus={() => toggleMessageStatus('open')} onMouseEnter={() => toggleMessageStatus('open')} onMouseOver={() => toggleMessageStatus('open')} onMouseLeave={() => toggleMessageStatus('close')}>
+                      <img
+                        onMouseEnter={() => toggleMessageStatus('open')}
+                        onMouseOver={() => toggleMessageStatus('open')}
+                        onFocus={() => toggleMessageStatus('open')}
+                        src={dashboardData.tooltipIcon}
+                        alt={dashboardData.tooltipAlt}
+                        className={classes.helpIcon}
+                      />
+                    </IconButton>
+                    { SwitchThemeMessageStatus ? (
+                      <div className={classes.switchThemeMsg}>
+                        {' '}
+                        <InvertedMessage data={switchThemeBtnMessageData} />
+                        {' '}
+                      </div>
+                    ) : ''}
                   </div>
                 </div>
                 <Collapse in={collapse} className={classes.backgroundShawdowWidgets}>
@@ -190,6 +220,15 @@ const styles = (theme) => ({
   },
   widgetsCollapse: {
     background: theme.palette.widgetBackground.main,
+  },
+  helpIcon: {
+    verticalAlign: 'top',
+    width: '17px',
+    zIndex: '600',
+  },
+  switchThemeMsg: {
+    position: 'absolute',
+    zIndex: '400',
   },
   floatRight: {
     float: 'right',

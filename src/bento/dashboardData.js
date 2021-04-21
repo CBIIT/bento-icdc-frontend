@@ -1,6 +1,13 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
 
+// --------------- Dashboard Data --------------------
+export const dashboardData = {
+  tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  tooltipAlt: 'tooltip icon',
+  switchThemeButtonMessage: 'Change Application Theme',
+}
+
 // --------------- Dashboard Sidebar Filters configuration --------------
 // A maximum of 12 facetSearchData are allowed
 export const facetSearchData = [
