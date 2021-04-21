@@ -315,7 +315,7 @@ const StudyDetailView = ({ classes, data }) => {
                 <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
-                      <span className={classes.detailContainerHeader}> IMAGE COLLECTION </span>
+                      <span className={classes.detailContainerHeader}> IMAGE COLLECTIONS </span>
                     </Grid>
                   </Grid>
                   <Grid container className={classes.detailContainerItems}>
