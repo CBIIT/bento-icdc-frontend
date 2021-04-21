@@ -359,7 +359,13 @@ const StudyDetailView = ({ classes, data }) => {
                           </Grid>
                         </Grid>
                       ),
-                    ) : (<div>This study currently has no associated Image Collections</div>)}
+                    ) : (
+                      <Grid item xs={12} sm={10} className={classes.content}>
+                        <div className={classes.content}>
+                          This study currently has no associated Image Collections
+                        </div>
+                      </Grid>
+                    )}
                   </Grid>
                 </Grid>
                 {/* END: Image Collection */}
