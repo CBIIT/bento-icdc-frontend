@@ -323,7 +323,7 @@ const StudyDetailView = ({ classes, data }) => {
                       (imageCollection) => (
                         <Grid item xs={12} className={classes.detailContainerItem}>
                           <Grid item container direction="row">
-                            <Grid item xs={12} sm={3} className={classes.title}>
+                            <Grid item xs={12} sm={4} className={classes.title}>
                               COLLECTION:
                             </Grid>
                             <Grid
@@ -349,7 +349,7 @@ const StudyDetailView = ({ classes, data }) => {
                             </Grid>
                           </Grid>
                           <Grid item container direction="row">
-                            <Grid item xs={12} sm={3} className={classes.title}>
+                            <Grid item xs={12} sm={4} className={classes.title}>
                               IMAGE TYPES:
                             </Grid>
                             <Grid item xs={12} sm={8} className={classes.content}>
