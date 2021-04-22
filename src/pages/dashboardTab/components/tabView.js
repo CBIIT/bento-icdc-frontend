@@ -73,6 +73,17 @@ const TabView = ({
   const AddToCartAlertDialogRef = useRef();
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
+  const [columns, setColumns] = React.useState('');
+
+  useEffect(() => {
+    const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
+    const index = updateColumns.findIndex((c) => c.label.toLowerCase() === 'case id');
+    if (index !== -1) {
+      updateColumns[index].options.viewColumns = false;
+    }
+    setColumns(updateColumns);
+  }, []);
+
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
     // eslint-disable-next-line  no-restricted-syntax, no-unused-vars
@@ -279,7 +290,7 @@ const TabView = ({
         <Grid item xs={12} id={tableID}>
           <CustomDataTable
             data={data}
-            columns={getColumns(customColumn, classes, data, externalLinkIcon)}
+            columns={columns}
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}
