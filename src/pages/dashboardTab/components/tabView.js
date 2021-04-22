@@ -89,7 +89,7 @@ const TabView = ({
       }
     });
     setColumns(updateColumns);
-  }, []);
+  }, [classes]);
 
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
