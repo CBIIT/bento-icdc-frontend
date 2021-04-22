@@ -76,7 +76,7 @@ const TabView = ({
   const [columns, setColumns] = React.useState();
 
   useEffect(() => {
-    /* hide case_id from viewColumns checkbox */
+    /* set hide/show columns for viewColumns checkbox */
     const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
     customColumn.columns.forEach((s) => {
       if (s.viewColumns !== undefined && !s.viewColumns) {
