@@ -73,7 +73,7 @@ const TabView = ({
   const AddToCartAlertDialogRef = useRef();
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
-  const [columns, setColumns] = React.useState('');
+  const [columns, setColumns] = React.useState();
 
   useEffect(() => {
     /* hide case_id from viewColumns checkbox */
