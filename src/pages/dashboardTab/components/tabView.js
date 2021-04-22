@@ -74,6 +74,7 @@ const TabView = ({
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
 
+  const getUpdatedColumns = () => {
     const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
     const disableViewColumnsList = customColumn.columns
       .filter((c) => c.viewColumns !== undefined && !c.viewColumns);
@@ -84,7 +85,6 @@ const TabView = ({
         updateColumns[index].options.viewColumns = false;
       }
     });
-  }, [classes]);
     return updateColumns;
   };
 
