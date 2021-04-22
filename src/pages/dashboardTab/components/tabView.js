@@ -78,13 +78,14 @@ const TabView = ({
   useEffect(() => {
     /* set hide columns for viewColumns checkbox */
     const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
-    customColumn.columns.forEach((s) => {
-      if (s.viewColumns !== undefined && !s.viewColumns) {
-        const index = updateColumns
-          .findIndex((c) => c.label.toLowerCase() === s.header.toLowerCase());
-        if (index !== -1) {
-          updateColumns[index].options.viewColumns = false;
-        }
+    const disableViewColumnsList = customColumn.columns
+      .filter((c) => c.viewColumns !== undefined && !c.viewColumns);
+
+    disableViewColumnsList.forEach((s) => {
+      const index = updateColumns
+        .findIndex((c) => c.label.toLowerCase() === s.header.toLowerCase());
+      if (index !== -1) {
+        updateColumns[index].options.viewColumns = false;
       }
     });
     setColumns(updateColumns);
