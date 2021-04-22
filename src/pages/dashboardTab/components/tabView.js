@@ -76,6 +76,7 @@ const TabView = ({
   const [columns, setColumns] = React.useState('');
 
   useEffect(() => {
+    /* hide case_id from viewColumns checkbox */
     const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
     const index = updateColumns.findIndex((c) => c.label.toLowerCase() === 'case id');
     if (index !== -1) {
