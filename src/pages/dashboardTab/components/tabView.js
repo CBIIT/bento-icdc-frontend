@@ -78,10 +78,15 @@ const TabView = ({
   useEffect(() => {
     /* hide case_id from viewColumns checkbox */
     const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
-    const index = updateColumns.findIndex((c) => c.label.toLowerCase() === 'case id');
-    if (index !== -1) {
-      updateColumns[index].options.viewColumns = false;
-    }
+    customColumn.columns.forEach((s) => {
+      if (s.viewColumns !== undefined && !s.viewColumns) {
+        const index = updateColumns
+          .findIndex((c) => c.label.toLowerCase() === s.header.toLowerCase());
+        if (index !== -1) {
+          updateColumns[index].options.viewColumns = false;
+        }
+      }
+    });
     setColumns(updateColumns);
   }, []);
 

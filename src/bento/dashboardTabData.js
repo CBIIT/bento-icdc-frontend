@@ -65,6 +65,7 @@ export const tabContainers = [
         link: '/case/{case_id}',
         primary: true,
         display: true,
+        viewColumns: false,
       },
       {
         dataField: 'study_code',
@@ -174,6 +175,7 @@ export const tabContainers = [
         sort: 'asc',
         link: '/case/{case_id}',
         display: true,
+        viewColumns: false,
       },
       {
         dataField: 'breed',
@@ -323,6 +325,7 @@ export const tabContainers = [
         sort: 'asc',
         link: '/case/{case_id}',
         display: true,
+        viewColumns: false,
       },
       {
         dataField: 'breed',
