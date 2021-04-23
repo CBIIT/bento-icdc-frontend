@@ -78,10 +78,10 @@ const TabView = ({
     const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
     const columnList = customColumn.columns;
     const disableViewColumnsList = columnList
-      .filter((c) => c.viewColumns !== undefined && !c.viewColumns);
-    disableViewColumnsList.forEach((s) => {
+      .filter((column) => column.viewColumns !== undefined && !column.viewColumns);
+    disableViewColumnsList.forEach((disabledColumn) => {
       const index = updateColumns
-        .findIndex((c) => c.label.toLowerCase() === s.header.toLowerCase());
+        .findIndex((column) => column.label.toLowerCase() === disabledColumn.header.toLowerCase());
       if (index !== -1) {
         updateColumns[index].options.viewColumns = false;
       }
