@@ -76,7 +76,8 @@ const TabView = ({
 
   const getUpdatedColumns = () => {
     const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
-    const disableViewColumnsList = customColumn.columns
+    const columnList = customColumn.columns;
+    const disableViewColumnsList = columnList
       .filter((c) => c.viewColumns !== undefined && !c.viewColumns);
     disableViewColumnsList.forEach((s) => {
       const index = updateColumns
