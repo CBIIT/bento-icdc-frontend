@@ -1,6 +1,4 @@
 import gql from 'graphql-tag';
-import cmpcProgramImage from '../assets/programs/CMCP.Program_Image.png';
-import cmpcProgramDetailImage from '../assets/programs/CCMP.Program_Detail_Image.jpg';
 
 const pageData = {
   headerTitle: 'Programs',
@@ -13,10 +11,10 @@ const pageData = {
     secondaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cop/copSecondary.jpg',
   },
   CMCP: {
-    prgramName: 'CMPC',
-    primaryImage: cmpcProgramImage,
+    prgramName: 'CMCP',
+    primaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cmcp/CMCP.Program_Image.png',
     primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
-    secondaryImage: cmpcProgramDetailImage,
+    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cmcp/CCMP.Program_Detail_Image.jpg',
   },
 };
 
