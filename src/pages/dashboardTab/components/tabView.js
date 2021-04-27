@@ -243,7 +243,11 @@ const TabView = ({
     isRowSelectable: (dataIndex) => (disableRowSelection
       ? disableRowSelection(data[dataIndex], fileIDs) : true),
   });
-  const finalOptions = { ...options, ...defaultOptions() };
+  const finalOptions = {
+    ...options,
+    ...defaultOptions(),
+    serverTableRowCount: selectedRowInfo.length,
+  };
 
   return (
     <div>
