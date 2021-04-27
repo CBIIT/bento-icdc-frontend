@@ -15,7 +15,9 @@ import Message from '../../../components/Message';
 import {
   tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon, selectAllToolTip,
 } from '../../../bento/dashboardTabData';
-import { fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections } from '../store/dashboardReducer';
+import {
+  fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections, getFilesCount,
+} from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
 function TabContainer({ children, dir }) {
@@ -37,7 +39,7 @@ const tabController = (classes) => {
 
   // data from store
   const dashboard = useSelector((state) => (state.dashboardTab
-&& state.dashboardTab.datatable
+    && state.dashboardTab.datatable
     ? state.dashboardTab.datatable : {}));
 
   const tableRowSelectionData = [
@@ -50,7 +52,7 @@ const tabController = (classes) => {
     && state.dashboardTab.stats ? state.dashboardTab.stats : {}));
 
   const filteredSubjectIds = useSelector((state) => (state.dashboardTab
-      && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : null));
+    && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : null));
   const filteredSampleIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : null));
   const filteredFileIds = useSelector((state) => (state.dashboardTab
@@ -251,6 +253,7 @@ const tabController = (classes) => {
         filteredFileIds={filteredFileIds}
         tableDownloadCSV={container.tableDownloadCSV || false}
         setRowSelection={getTableRowSelectionEvent()}
+        getFilesCount={getFilesCount}
         selectedRowInfo={tableRowSelectionData[container.tabIndex].selectedRowInfo}
         selectedRowIndex={tableRowSelectionData[container.tabIndex].selectedRowIndex}
       />
@@ -277,7 +280,7 @@ const tabController = (classes) => {
               File(s) successfully added to My Files.
             </span>
           </div>
-)}
+        )}
       />
       { selectAllToolTipStatus.isActive ? (
         <div

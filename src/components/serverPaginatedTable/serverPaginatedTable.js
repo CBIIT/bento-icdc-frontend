@@ -160,7 +160,7 @@ class ServerPaginatedTableView extends React.Component {
       // This is to update the text displayed on row select
       textLabels: {
         selectedRows: {
-          text: 'row(s) selected on current page',
+          text: 'row(s) selected',
           delete: 'Delete',
           deleteAria: 'Delete Selected Rows',
         },
