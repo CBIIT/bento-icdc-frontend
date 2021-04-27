@@ -96,7 +96,7 @@ const ProgramView = ({ classes, data }) => {
 
         <div className={classes.detailContainer}>
 
-          <Grid container spacing={8}>
+          <Grid container spacing={0}>
             <Grid item lg={8} md={8} sm={8} xs={12} className={classes.detailContainerLeft}>
               <span className={classes.content}>
                 {programDetail.program_full_description
@@ -271,7 +271,7 @@ const styles = (theme) => ({
     minHeight: '100px',
   },
   detailContainerRight: {
-    padding: '20px 20px 30px 20px !important',
+    padding: '20px 0 30px 20px !important',
     minHeight: '330px',
   },
   tableContainer: {
