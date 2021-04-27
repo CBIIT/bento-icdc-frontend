@@ -271,7 +271,7 @@ const styles = (theme) => ({
     minHeight: '100px',
   },
   detailContainerRight: {
-    padding: '20px 0 30px 20px !important',
+    padding: '20px 4px 30px 20px !important',
     minHeight: '330px',
   },
   tableContainer: {
