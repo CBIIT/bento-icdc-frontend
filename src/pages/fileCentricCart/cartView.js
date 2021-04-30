@@ -149,7 +149,20 @@ const cartView = ({
       ),
     },
   }];
-  const columns = getColumns(table, classes).concat(deleteColumn);
+  const getUpdatedColumns = () => {
+    const updateColumns = getColumns(table, classes).concat(deleteColumn);
+    const columnList = table.columns;
+    const disableViewColumnsList = columnList
+      .filter((column) => column.viewColumns !== undefined && !column.viewColumns);
+    disableViewColumnsList.forEach((disabledColumn) => {
+      const index = updateColumns
+        .findIndex((column) => column.label.toLowerCase() === disabledColumn.header.toLowerCase());
+      if (index !== -1) {
+        updateColumns[index].options.viewColumns = false;
+      }
+    });
+    return updateColumns;
+  };
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
   const userCommentsMessageData = (
@@ -235,7 +248,7 @@ const cartView = ({
               <TableThemeProvider>
                 <CustomDataTable
                   data={_.cloneDeep(data)}
-                  columns={columns}
+                  columns={getUpdatedColumns()}
                   options={options}
                   className={classes.tableStyle}
                   count={fileIDs.length || 0}
