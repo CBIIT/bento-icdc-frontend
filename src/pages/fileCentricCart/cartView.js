@@ -26,6 +26,7 @@ import Message from '../../components/Message';
 import DialogThemeProvider from './dialogThemeConfig';
 import TableThemeProvider from './cartTableThemeConfig';
 import GA from '../../utils/googleAnalytics';
+import updateColumns from '../../utils/columnsUtil';
 
 const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
@@ -149,20 +150,8 @@ const cartView = ({
       ),
     },
   }];
-  const getUpdatedColumns = () => {
-    const updateColumns = getColumns(table, classes).concat(deleteColumn);
-    const columnList = table.columns;
-    const disableViewColumnsList = columnList
-      .filter((column) => column.viewColumns !== undefined && !column.viewColumns);
-    disableViewColumnsList.forEach((disabledColumn) => {
-      const index = updateColumns
-        .findIndex((column) => column.label.toLowerCase() === disabledColumn.header.toLowerCase());
-      if (index !== -1) {
-        updateColumns[index].options.viewColumns = false;
-      }
-    });
-    return updateColumns;
-  };
+
+  const columns = updateColumns(getColumns(table, classes).concat(deleteColumn), table.columns);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
   const userCommentsMessageData = (
@@ -248,7 +237,7 @@ const cartView = ({
               <TableThemeProvider>
                 <CustomDataTable
                   data={_.cloneDeep(data)}
-                  columns={getUpdatedColumns()}
+                  columns={columns}
                   options={options}
                   className={classes.tableStyle}
                   count={fileIDs.length || 0}
