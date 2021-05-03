@@ -28,7 +28,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <CssBaseline />
     <HashRouter>
       <>
-        <LinkBar />
+        <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
         <Header />
         <NavBar />
         {/* Reminder: Ajay need to replace the ICDC with env variable and
