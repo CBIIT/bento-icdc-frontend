@@ -22,6 +22,7 @@ import CustomDataTable from '../../../components/serverPaginatedTable/serverPagi
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import Message from '../../../components/Message';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
+import updateColumns from '../../../utils/columnsUtil';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
 
@@ -74,20 +75,8 @@ const TabView = ({
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
 
-  const getUpdatedColumns = () => {
-    const updateColumns = getColumns(customColumn, classes, data, externalLinkIcon);
-    const columnList = customColumn.columns;
-    const disableViewColumnsList = columnList
-      .filter((column) => column.viewColumns !== undefined && !column.viewColumns);
-    disableViewColumnsList.forEach((disabledColumn) => {
-      const index = updateColumns
-        .findIndex((column) => column.label.toLowerCase() === disabledColumn.header.toLowerCase());
-      if (index !== -1) {
-        updateColumns[index].options.viewColumns = false;
-      }
-    });
-    return updateColumns;
-  };
+  const colums = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon),
+    customColumn.columns);
 
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
@@ -299,7 +288,7 @@ const TabView = ({
         <Grid item xs={12} id={tableID}>
           <CustomDataTable
             data={data}
-            columns={getUpdatedColumns()}
+            columns={colums}
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}

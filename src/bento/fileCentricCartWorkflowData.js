@@ -86,6 +86,7 @@ export const table = {
     {
       dataField: 'case_id',
       header: 'Case ID',
+      viewColumns: false,
     },
     {
       dataField: 'study_code',

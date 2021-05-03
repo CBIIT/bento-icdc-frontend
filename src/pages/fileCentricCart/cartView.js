@@ -26,6 +26,7 @@ import Message from '../../components/Message';
 import DialogThemeProvider from './dialogThemeConfig';
 import TableThemeProvider from './cartTableThemeConfig';
 import GA from '../../utils/googleAnalytics';
+import updateColumns from '../../utils/columnsUtil';
 
 const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
@@ -149,7 +150,8 @@ const cartView = ({
       ),
     },
   }];
-  const columns = getColumns(table, classes).concat(deleteColumn);
+
+  const columns = updateColumns(getColumns(table, classes).concat(deleteColumn), table.columns);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
   const userCommentsMessageData = (
