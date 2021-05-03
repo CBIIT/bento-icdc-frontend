@@ -16,38 +16,27 @@ import humanImg from '../../assets/landing/human-bubble.png';
 import { pageData } from '../../bento/landingPageData';
 
 const slideDown = keyframes`
-  0% {
-    top: 0;
-    left:0;
-  }
-  50% {
-    top: 350px;
-    left: 30px;
-  }
-
-  100% {
-    top: 0;
-    left:0;
-  }
+from {
+  transform: translateY(0px);
+}
+50% {
+  transform: translateY(350px);
+}
+to {
+    transform: translateY(0px);
+}
 `;
 
 const slideUp = keyframes`
-  0% {
-
-    top: 0;
-    left:0;
-  }
-
-  50% {
-    top:-390px;
-    left:0px;
-  }
-
-  
-  100% {
-    top: 0;
-    left:0;
-  }
+from {
+  transform: translateY(0px);
+}
+50% {
+  transform: translateY(-390px);
+}
+to {
+    transform: translateY(0px);
+}
 `;
 
 const star = keyframes`
