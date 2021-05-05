@@ -321,7 +321,7 @@ export const tabContainers = [
       },
       {
         dataField: 'case_id',
-        header: 'Case Id',
+        header: 'Case ID',
         sort: 'asc',
         link: '/case/{case_id}',
         display: true,
