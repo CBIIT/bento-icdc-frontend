@@ -343,7 +343,7 @@ type program {
 type registration {
   registration_origin: String
   registration_id: String
-  case: case 
+  cases: [case] 
 }
 
 type sample {
@@ -704,6 +704,7 @@ type CaseOverview2 {
   response_to_treatment: String
   disease_site: String
   files: [String]
+  other_cases: [String]
 }
 
 type SearchResult {

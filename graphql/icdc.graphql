@@ -343,7 +343,7 @@ type program {
 type registration {
   registration_origin: String
   registration_id: String
-  case: case @relation(name:"of_case", direction:OUT)
+  cases: [case] @relation(name:"of_case", direction:OUT)
 }
 
 type sample {
@@ -704,6 +704,7 @@ type CaseOverview2 {
   response_to_treatment: String
   disease_site: String
   files: [String]
+  other_cases: [String]
 }
 
 type SearchResult {
@@ -736,7 +737,7 @@ type ProgramStudies {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.12'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.13'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
@@ -1651,13 +1652,14 @@ type QueryType {
   caseOverviewPaged (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (c)-->(i:individual)<--(o:case)
     OPTIONAL MATCH (s:study)<--(c)
     OPTIONAL MATCH (c)<--(demo:demographic)
     OPTIONAL MATCH (c)<--(diag:diagnosis)
     OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (parent)-[:of_case]->(c)
     OPTIONAL MATCH (f:file)-->(parent)
-    WITH DISTINCT c AS c, s, co, demo, diag, f
+    WITH DISTINCT c AS c, s, co, demo, diag, f, o
     RETURN c.case_id AS case_id,
          s.clinical_study_designation AS study_code,
          s.clinical_study_type AS study_type,
@@ -1671,7 +1673,8 @@ type QueryType {
          demo.neutered_indicator AS neutered_status,
          demo.weight AS weight,
          diag.best_response AS response_to_treatment,
-        collect(DISTINCT(f.uuid)) AS files
+         collect(DISTINCT(f.uuid)) AS files,
+         collect(DISTINCT o.case_id) AS other_cases
     ORDER BY
       CASE $order_by
         WHEN "study_code" THEN study_code
@@ -1695,13 +1698,14 @@ type QueryType {
   caseOverviewPagedDesc (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (c)-->(i:individual)<--(o:case)
     OPTIONAL MATCH (s:study)<--(c)
     OPTIONAL MATCH (c)<--(demo:demographic)
     OPTIONAL MATCH (c)<--(diag:diagnosis)
     OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (parent)-[:of_case]->(c)
     OPTIONAL MATCH (f:file)-->(parent)
-    WITH DISTINCT c AS c, s, co, demo, diag, f
+    WITH DISTINCT c AS c, s, co, demo, diag, f, o
     RETURN c.case_id AS case_id,
          s.clinical_study_designation AS study_code,
          s.clinical_study_type AS study_type,
@@ -1715,7 +1719,8 @@ type QueryType {
          demo.neutered_indicator AS neutered_status,
          demo.weight AS weight,
          diag.best_response AS response_to_treatment,
-        collect(DISTINCT(f.uuid)) AS files
+         collect(DISTINCT(f.uuid)) AS files,
+         collect(DISTINCT o.case_id) AS other_cases
     ORDER BY
       CASE $order_by
         WHEN "study_code" THEN study_code
