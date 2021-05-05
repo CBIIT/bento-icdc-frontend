@@ -735,6 +735,12 @@ type ProgramStudies {
   studies: [StudyInfo]
 }
 
+type MultiStudyCases {
+    caseIds: [String]
+    sampleIds: [String]
+    fileIds: [String]
+}
+
 type QueryType {
   "Version"
   schemaVersion: String @cypher(statement: "RETURN '0.1.13'")
@@ -1603,6 +1609,16 @@ type QueryType {
       caseSize,
       collect(s) as studies
   """, passThrough: true)
+
+  multiStudyCases(case_id: String): MultiStudyCases @cypher(statement: """
+      MATCH (:case {case_id: $case_id})-->(i:individual)
+      MATCH (i)<--(c:case)
+      OPTIONAL MATCH (c)<--(samp:sample)
+      OPTIONAL MATCH (c)<-[*]-(f:file)
+      RETURN collect(DISTINCT c.case_id) AS caseIds,
+             collect(DISTINCT samp.sample_id) AS sampleIds,
+             collect(DISTINCT f.uuid) AS fileIds
+  """)
 
 
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] @cypher(statement: """

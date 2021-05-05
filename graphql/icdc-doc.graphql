@@ -735,6 +735,12 @@ type ProgramStudies {
   studies: [StudyInfo]
 }
 
+type MultiStudyCases {
+    caseIds: [String]
+    sampleIds: [String]
+    fileIds: [String]
+}
+
 type QueryType {
   "Version"
   schemaVersion: String 
@@ -1035,6 +1041,8 @@ type QueryType {
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
 
   programsAndStudies(case_ids: [String]): [ProgramStudies] 
+
+  multiStudyCases(case_id: String): MultiStudyCases 
 
 
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
