@@ -32,7 +32,7 @@ export function convertToCSV(jsonse, keysToInclude, header) {
     let line = '';
     keysToInclude.map((keyName) => {
       if (line !== '') line += ',';
-      line += entry[keyName] !== null ? entry[keyName] : ' ';
+      line += entry[keyName] !== null ? `"${entry[keyName]}"` : ' ';
       return line;
     });
     if (index === 0) {
