@@ -1136,7 +1136,7 @@ type QueryType {
   """, passThrough: true)
 
   multiStudyCases(case_id: String): MultiStudyCases @cypher(statement: """
-      MATCH (:case {case_id: $case_id})-->(i:individual)
+      MATCH (:case {case_id: $case_id})-->(i:canine_individual)
       MATCH (i)<--(c:case)
       OPTIONAL MATCH (c)<--(samp:sample)
       OPTIONAL MATCH (c)<-[*]-(f:file)
@@ -1226,7 +1226,7 @@ type QueryType {
   caseOverviewPaged (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
-    OPTIONAL MATCH (c)-->(i:individual)<--(o:case)
+    OPTIONAL MATCH (c)-->(i:canine_individual)<--(o:case)
     OPTIONAL MATCH (s:study)<--(c)
     OPTIONAL MATCH (c)<--(demo:demographic)
     OPTIONAL MATCH (c)<--(diag:diagnosis)
@@ -1272,7 +1272,7 @@ type QueryType {
   caseOverviewPagedDesc (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
-    OPTIONAL MATCH (c)-->(i:individual)<--(o:case)
+    OPTIONAL MATCH (c)-->(i:canine_individual)<--(o:case)
     OPTIONAL MATCH (s:study)<--(c)
     OPTIONAL MATCH (c)<--(demo:demographic)
     OPTIONAL MATCH (c)<--(diag:diagnosis)
