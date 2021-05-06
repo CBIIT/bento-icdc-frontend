@@ -343,7 +343,7 @@ type program {
 type registration {
   registration_origin: String
   registration_id: String
-  case: case 
+  cases: [case] 
 }
 
 type sample {
@@ -503,12 +503,32 @@ type BreedCaseCount {
 }
 
 type CaseDetail {
+  program_acronym: String
+  clinical_study_name: String
+  clinical_study_designation: String
+  arm: String
+  ctep_treatment_assignment_code: String
+  cohort_description: String
+  case_id: String
   patient_id: String
+  patient_first_name: String
   breed: String
-  patient_age_at_enrollment: Float
   sex: String
+  patient_age_at_enrollment: Float
+  neutered_indicator: String
+  weight: Float
+  site_short_name: String
+  date_of_registration: String
+  patient_subgroup: String
+  date_of_informed_consent: String
+  initials: String
   disease_term: String
   stage_of_disease: String
+  best_response: String
+  date_of_diagnosis: String
+  primary_disease_site: String
+  histological_grade: String
+  histology_cytopathology: String
 }
 
 type StudyOfProgram {
@@ -704,6 +724,7 @@ type CaseOverview2 {
   response_to_treatment: String
   disease_site: String
   files: [String]
+  other_cases: [String]
 }
 
 type SearchResult {
@@ -732,6 +753,12 @@ type ProgramStudies {
   program: String
   caseSize: Int
   studies: [StudyInfo]
+}
+
+type MultiStudyCases {
+    caseIds: [String]
+    sampleIds: [String]
+    fileIds: [String]
 }
 
 type QueryType {
@@ -1035,6 +1062,9 @@ type QueryType {
 
   programsAndStudies(case_ids: [String]): [ProgramStudies] 
 
+  multiStudyCases(case_id: String): MultiStudyCases 
+
+  caseDetail(case_id: String): CaseDetail 
 
   caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
 
