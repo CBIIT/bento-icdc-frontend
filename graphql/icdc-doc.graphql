@@ -78,6 +78,11 @@ type assay {
   images: [image] 
 }
 
+type canine_individual {
+  canine_individual_id: String
+  cases: [case] 
+}
+
 type case {
   case_id: String
   patient_id: String
@@ -98,7 +103,7 @@ type case {
   adverse_event: adverse_event 
   off_study: off_study 
   off_treatment: off_treatment 
-  individual: individual 
+  canine_individual: canine_individual 
 }
 
 type cohort {
@@ -227,10 +232,6 @@ type image_collection {
   repository_name: String
   collection_access: String
   study: study 
-}
-
-type individual {
-  cases: [case] 
 }
 
 type lab_exam {
@@ -411,6 +412,8 @@ type study {
   clinical_study_type: String
   date_of_iacuc_approval: String
   dates_of_conduct: String
+  accession_id: String
+  study_disposition: String
   study_arms: [study_arm] 
   program: program 
   cases: [case] 
