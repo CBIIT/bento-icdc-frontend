@@ -165,7 +165,7 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
   query Study($csd: String!) {
    sampleCountOfStudy(study_code:$csd)
    fileCountOfStudy(study_code: $csd)
-   aliguotCountOfStudy(study_code: $csd)
+   aliquotCountOfStudy(study_code: $csd)
    caseCountOfStudy(study_code: $csd)
    
    filesOfStudy(study_code: $csd){

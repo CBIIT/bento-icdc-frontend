@@ -51,7 +51,7 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfCases: data.caseCountOfStudy,
     numberOfSamples: data.sampleCountOfStudy,
     numberOfFiles: data.fileCountOfStudy,
-    numberOfAliquots: data.aliguotCountOfStudy ? data.aliguotCountOfStudy : 0,
+    numberOfAliquots: data.aliquotCountOfStudy ? data.aliquotCountOfStudy : 0,
   };
 
   React.useEffect(() => {
