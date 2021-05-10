@@ -784,7 +784,7 @@ type QueryType {
   aliquotCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(c:case {case_id: $case_id}) return count(DISTINCT(a))")
   sampleCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(s))")
   fileCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(f))")
-  aliguotCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(a))")
+  aliquotCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(a))")
   studyCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:study)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(s))")
   caseCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (c:case)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(c))")
   sampleCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (c:case {case_id: $case_id})<-[*]-(s:sample) RETURN count(distinct(s))")

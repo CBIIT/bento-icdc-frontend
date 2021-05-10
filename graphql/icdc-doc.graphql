@@ -784,7 +784,7 @@ type QueryType {
   aliquotCountOfCase(case_id: String!): Int 
   sampleCountOfProgram(program_id: String!): Int 
   fileCountOfProgram(program_id: String!): Int 
-  aliguotCountOfProgram(program_id: String!): Int 
+  aliquotCountOfProgram(program_id: String!): Int 
   studyCountOfProgram(program_id: String!): Int 
   caseCountOfProgram(program_id: String!): Int 
   sampleCountOfCase(case_id: String!): Int 
