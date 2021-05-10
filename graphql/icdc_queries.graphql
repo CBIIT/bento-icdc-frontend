@@ -164,7 +164,7 @@ type FileInfo {
 type StudyStat {
   study_code: String
   files: Int
-  totoal_size_MB: Float
+  total_size_MB: Float
   cases: Int
   samples: Int
 }
@@ -268,7 +268,7 @@ type MultiStudyCases {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.13'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.14'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
@@ -280,7 +280,7 @@ type QueryType {
   "Count with parameter"
   sampleCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(:study {clinical_study_designation: $study_code}) return count(DISTINCT(s))")
   fileCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(:study {clinical_study_designation: $study_code}) return count(distinct(f))")
-  aliguotCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(:study {clinical_study_designation: $study_code}) return count(DISTINCT(a))")
+  aliquotCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(:study {clinical_study_designation: $study_code}) return count(DISTINCT(a))")
   caseCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (c:case)-[*]->(:study {clinical_study_designation: $study_code}) return count(distinct(c))")
   fileCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(c:case {case_id: $case_id}) return count(DISTINCT(f))")
   aliquotCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(c:case {case_id: $case_id}) return count(DISTINCT(a))")
@@ -1490,7 +1490,7 @@ type QueryType {
       WITH DISTINCT f, s, cases, samples
       RETURN  s.clinical_study_designation AS study_code,
               COUNT(f) AS files,
-              SUM(f.file_size)/1000000 AS totoal_size_MB,
+              SUM(f.file_size)/1000000 AS total_size_MB,
               cases,
               samples
   """)
