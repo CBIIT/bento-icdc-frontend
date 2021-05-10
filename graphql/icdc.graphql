@@ -541,6 +541,8 @@ type StudyOfProgram {
   clinical_study_name: String
   clinical_study_description: String
   clinical_study_type: String
+  accession_id: String
+  study_disposition: String
   date_of_iacuc_approval: String
   dates_of_conduct: String
   numberOfCases: Int
@@ -1612,8 +1614,8 @@ type QueryType {
   """)
 
   "Combined info"
-  studiesByProgramId(program_id: String!): [StudyOfProgram] @cypher(statement: "MATCH (p:program {program_acronym: $program_id})<-[*]-(s:study) OPTIONAL MATCH (s)<-[*]-(c:case) RETURN p.program_acronym AS program_id, s.clinical_study_id AS clinical_study_id, s.clinical_study_designation AS clinical_study_designation, s.clinical_study_name AS clinical_study_name, s.clinical_study_description AS clinical_study_description, s.clinical_study_type AS clinical_study_type, s.date_of_iacuc_approval AS date_of_iacuc_approval, s.dates_of_conduct AS dates_of_conduct, COUNT(DISTINCT(c)) as numberOfCases ORDER BY clinical_study_designation")
-  studiesByProgram: [StudyOfProgram] @cypher(statement:"MATCH (s:study) OPTIONAL MATCH (p:program)<-[*]-(s) OPTIONAL MATCH (s)<-[*]-(c:case) RETURN p.program_acronym AS program_id, s.clinical_study_id AS clinical_study_id, s.clinical_study_designation AS clinical_study_designation, s.clinical_study_name AS clinical_study_name, s.clinical_study_description AS clinical_study_description, s.clinical_study_type AS clinical_study_type, s.date_of_iacuc_approval AS date_of_iacuc_approval, s.dates_of_conduct AS dates_of_conduct, COUNT(DISTINCT(c)) as numberOfCases ORDER BY clinical_study_designation")
+  studiesByProgramId(program_id: String!): [StudyOfProgram] @cypher(statement: "MATCH (p:program {program_acronym: $program_id})<-[*]-(s:study) OPTIONAL MATCH (s)<-[*]-(c:case) RETURN p.program_acronym AS program_id, s.clinical_study_id AS clinical_study_id, s.clinical_study_designation AS clinical_study_designation, s.clinical_study_name AS clinical_study_name, s.clinical_study_description AS clinical_study_description, s.clinical_study_type AS clinical_study_type, s.accession_id AS accession_id, s.study_disposition AS study_disposition, s.date_of_iacuc_approval AS date_of_iacuc_approval, s.dates_of_conduct AS dates_of_conduct, COUNT(DISTINCT(c)) as numberOfCases ORDER BY clinical_study_designation")
+  studiesByProgram: [StudyOfProgram] @cypher(statement:"MATCH (s:study) OPTIONAL MATCH (p:program)<-[*]-(s) OPTIONAL MATCH (s)<-[*]-(c:case) RETURN p.program_acronym AS program_id, s.clinical_study_id AS clinical_study_id, s.clinical_study_designation AS clinical_study_designation, s.clinical_study_name AS clinical_study_name, s.clinical_study_description AS clinical_study_description, s.clinical_study_type AS clinical_study_type, s.accession_id AS accession_id, s.study_disposition AS study_disposition, s.date_of_iacuc_approval AS date_of_iacuc_approval, s.dates_of_conduct AS dates_of_conduct, COUNT(DISTINCT(c)) as numberOfCases ORDER BY clinical_study_designation")
   filesOfCase(case_id: String!): [FilesOfCase] @cypher(statement: "MATCH (f:file)-[*]->(c:case{case_id: $case_id}) WITH DISTINCT(f) AS f MATCH (f)-->(parent) RETURN f.file_status AS file_status,f.file_name AS file_name ,f.file_type AS file_type,f.file_description AS file_description,f.file_format AS file_format,f.file_size AS file_size,f.md5sum AS md5sum,f.uuid AS uuid,f.file_location AS file_location, head(labels(parent)) AS parent, $case_id AS case_id")
   filesOfCases(case_ids: [String!]!): [FilesOfCase] @cypher(statement: "MATCH (f:file)-[*]->(c:case) WITH DISTINCT(f) AS f, c MATCH (f)-->(parent) WHERE c.case_id IN $case_ids RETURN f.file_status AS file_status,f.file_name AS file_name ,f.file_type AS file_type,f.file_description AS file_description,f.file_format AS file_format,f.file_size AS file_size,f.md5sum AS md5sum,f.uuid AS uuid,f.file_location AS file_location, head(labels(parent)) AS parent, c.case_id AS case_id")
 
