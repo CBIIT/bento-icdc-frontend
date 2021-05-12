@@ -3,11 +3,12 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
 import {
   CustomDataTable,
   cn,
   getOptions,
-  getColumns,
+  manipulateLinks,
 } from 'bento-components';
 import _ from 'lodash';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -23,6 +24,7 @@ import {
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
+// import updateColumns from '../../utils/columnsUtil';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -44,8 +46,10 @@ const computedTheme = createMuiTheme({
 const ProgramView = ({ classes, data }) => {
   const programDetail = data.program[0];
 
-  const redirectTo = (study) => {
+  const history = useHistory();
+  const redirectTo = (study, link) => {
     filterCasePageOnStudyCode(study.rowData[1]);
+    history.push(link);
   };
 
   const stat = {
@@ -70,6 +74,60 @@ const ProgramView = ({ classes, data }) => {
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const tableOptions = getOptions(table, classes);
 
+  const embargoToolTip = (
+    <span className={classes.embargoToolTip}>
+      {' ('}
+      Embargo
+      {') '}
+      <div className={classes.embargoToolTipMsg}>
+        {' '}
+        This study is
+        {' '}
+        under Embargo.
+        {' '}
+      </div>
+    </span>
+  );
+
+  const customStudyCodeLink = (column, value, tableMeta) => (
+    <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
+      {value}
+      {
+        tableMeta.rowData[column.actualLinkId] && embargoToolTip
+      }
+    </Link>
+  );
+
+  const customCaseNumbLink = (column, value, tableMeta) => (
+    <button type="button" className={classes.buttonCaseNumb} onClick={() => redirectTo(tableMeta, column.actualLink)}>
+      {value}
+      {
+        tableMeta.rowData && embargoToolTip
+      }
+    </button>
+  );
+  const updatedTableWithLinks = manipulateLinks(table.columns);
+  const columns = updatedTableWithLinks.map((column) => ({
+    name: column.dataField,
+    label: column.header,
+    options: {
+      viewColumns: column.viewColumns,
+      customBodyRender: (value, tableMeta) => (
+        <>
+          {
+            column.internalLink ? (
+              column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
+                : customStudyCodeLink(column, value, tableMeta)
+            )
+              : `${value}`
+          }
+        </>
+      ),
+    },
+  }));
+  // const columns = updateColumns(getColumns(table, classes, data,
+  // '', '/cases', redirectTo), table.columns);
+
   return (
     <>
       <StatsView data={stat} />
@@ -91,7 +149,6 @@ const ProgramView = ({ classes, data }) => {
             </div>
             <CustomBreadcrumb data={breadCrumbJson} />
           </div>
-
         </div>
 
         <div className={classes.detailContainer}>
@@ -125,7 +182,7 @@ const ProgramView = ({ classes, data }) => {
             <MuiThemeProvider theme={computedTheme}>
               <CustomDataTable
                 data={data.studiesByProgramId}
-                columns={getColumns(table, classes, data, '', '/cases', redirectTo)}
+                columns={columns}
                 options={{ ...tableOptions, ...textLabels }}
               />
             </MuiThemeProvider>
@@ -141,6 +198,39 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     textDecoration: 'none',
     color: '#DC762F',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  embargoToolTipMsg: {
+    display: 'none',
+    fontWeight: '500',
+    position: 'absolute',
+    zIndex: '999',
+    background: '#fff',
+    border: '2px solid #A61401',
+    borderRadius: '7px',
+    fontSize: '12px',
+    width: '110px',
+    height: '48px',
+    padding: '5px 0px',
+  },
+  embargoToolTip: {
+    '&:hover': {
+      color: '#DC762A',
+      '& $embargoToolTipMsg': {
+        display: 'block',
+      },
+    },
+  },
+  buttonCaseNumb: {
+    background: 'none!important',
+    border: 'none',
+    padding: '0!important',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    color: '#DC762F',
+    cursor: 'pointer',
     '&:hover': {
       textDecoration: 'underline',
     },

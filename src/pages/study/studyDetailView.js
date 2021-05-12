@@ -4,6 +4,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Avatar from '@material-ui/core/Avatar';
 import {
   CustomDataTable, getOptions, cn, getColumns,
 } from 'bento-components';
@@ -22,6 +23,7 @@ import {
   table1, table2, tooltipContent, headerIcon, textLabels, externalIcon,
 } from '../../bento/studyDetailsData';
 import themes, { overrides } from '../../themes';
+import updateColumns from '../../utils/columnsUtil';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -138,6 +140,7 @@ const StudyDetailView = ({ classes, data }) => {
   });
   const tableOneOptions = getOptions(table1, classes);
   const tableTwoOptions = getOptions(table2, classes);
+  const columns2 = updateColumns(getColumns(table2, classes, fileTableData), table2.columns);
 
   const getImageTypes = (typeString) => {
     const types = JSON.parse(typeString);
@@ -161,11 +164,12 @@ const StudyDetailView = ({ classes, data }) => {
       <div className={classes.container}>
         <div className={classes.header}>
           <div className={classes.logo}>
+            {studyData.study_disposition
+            && <Avatar className={classes.embargoIcon}>E</Avatar>}
             <img
               src={headerIcon}
               alt="ICDC case detail header logo"
             />
-
           </div>
           <div className={classes.headerTitle}>
             <div className={classes.headerMainTitle}>
@@ -177,6 +181,17 @@ const StudyDetailView = ({ classes, data }) => {
                   {' '}
                   {studyData.clinical_study_designation}
                 </span>
+                {
+              studyData.study_disposition
+              && (
+                <span>
+                  {' '}
+                  {' ('}
+                  Embargo
+                  {') '}
+                </span>
+              )
+              }
               </span>
             </div>
             <div className={cn(classes.headerMSubTitle, classes.headerSubTitleCate)}>
@@ -187,26 +202,47 @@ const StudyDetailView = ({ classes, data }) => {
 
             </div>
             <CustomBreadcrumb data={breadCrumbJson} />
+            {
+              studyData.clinical_study_designation
+              && (
+                <div className={classes.headerItemAccessionId}>
+                  <span>
+                    Accession Id :
+                    {studyData.clinical_study_designation}
+                  </span>
+                </div>
+              )
+            }
           </div>
-          <div className={classes.headerButton}>
-            <span className={classes.headerButtonLinkSpan}>
-              <Link
-                className={classes.headerButtonLink}
-                to={(location) => ({ ...location, pathname: '/cases' })}
-                onClick={() => filterCasePageOnStudyCode(studyData.clinical_study_designation)}
-              >
-                {' '}
-                <span className={classes.headerButtonLinkText}> View </span>
-                <span className={classes.headerButtonLinkNumber}>
+          <div className={classes.headerItems}>
+            <div className={classes.headerButton}>
+              <span className={classes.headerButtonLinkSpan}>
+                <Link
+                  className={classes.headerButtonLink}
+                  to={(location) => ({ ...location, pathname: '/cases' })}
+                  onClick={() => filterCasePageOnStudyCode(studyData.clinical_study_designation)}
+                >
                   {' '}
-                  {' '}
-                  {data.caseCountOfStudy}
-                  {' '}
-                  {' '}
-                </span>
-                <span className={classes.headerButtonLinkText}>CASES</span>
-              </Link>
-            </span>
+                  <span className={classes.headerButtonLinkText}> View </span>
+                  <span className={classes.headerButtonLinkNumber}>
+                    {' '}
+                    {' '}
+                    {data.caseCountOfStudy}
+                    {' '}
+                    {' '}
+                  </span>
+                  <span className={classes.headerButtonLinkText}>CASES</span>
+                </Link>
+              </span>
+            </div>
+            {
+              studyData.study_disposition
+              && (
+              <div className={classes.embargo}>
+                UNDER EMBARGO
+              </div>
+              )
+            }
           </div>
         </div>
 
@@ -416,7 +452,7 @@ const StudyDetailView = ({ classes, data }) => {
               <GridWithFooter
                 data={fileTableData}
                 title=""
-                columns={getColumns(table2, classes, fileTableData)}
+                columns={columns2}
                 options={{ ...tableTwoOptions, ...textLabels }}
                 customOnRowsSelect={table2.customOnRowsSelect}
                 openSnack={openSnack}
@@ -446,6 +482,34 @@ const styles = (theme) => ({
     marginTop: '30px',
     border: '#81a6b9 2px solid',
     background: '#81a6b9',
+  },
+  headerItems: {
+    width: '250px',
+    float: 'right',
+  },
+  headerItemAccessionId: {
+    paddingTop: '10px',
+    '& span': {
+      margin: '40px 80px',
+      color: '#5e8ca5',
+    },
+  },
+  embargoIcon: {
+    position: 'absolute',
+    color: 'white',
+    top: '-12px',
+    backgroundColor: '#de7328',
+  },
+  embargo: {
+    float: 'right',
+    color: '#de7328',
+    marginTop: '15px',
+    width: '125px',
+    height: '33px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+    fontSize: '20px',
+    fontWeight: 'bolder',
   },
   paddingLeft8: {
     paddingLeft: '8px',
@@ -490,7 +554,7 @@ const styles = (theme) => ({
     margin: 'auto',
     float: 'left',
     marginLeft: '110px',
-    width: 'calc(100% - 265px)',
+    width: 'calc(100% - 465px)',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
@@ -533,8 +597,8 @@ const styles = (theme) => ({
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
-    float: 'right',
     marginTop: '15px',
+    float: 'right',
     width: '125px',
     height: '33px',
     background: '#F6F4F4',

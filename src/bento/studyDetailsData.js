@@ -34,7 +34,13 @@ export const table1 = {
   selectableRows: false,
   // A maximum of 10 columns are allowed
   columns: [
-    { name: 'arm', label: 'Arms' },
+    {
+      name: 'arm',
+      label: 'Arms',
+      options: {
+        viewColumns: false,
+      },
+    },
     {
       name: 'description',
       label: 'Description',
@@ -110,6 +116,7 @@ export const table2 = {
       sort: 'asc',
       primary: true,
       display: true,
+      viewColumns: false,
     },
     {
       dataField: 'file_type',
@@ -165,7 +172,6 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
   query Study($csd: String!) {
    sampleCountOfStudy(study_code:$csd)
    fileCountOfStudy(study_code: $csd)
-   aliguotCountOfStudy(study_code: $csd)
    caseCountOfStudy(study_code: $csd)
    
    filesOfStudy(study_code: $csd){
@@ -192,6 +198,8 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
     clinical_study_description
     clinical_study_type
     date_of_iacuc_approval
+    accession_id
+    study_disposition
     dates_of_conduct
     cohorts{
         cohort_dose

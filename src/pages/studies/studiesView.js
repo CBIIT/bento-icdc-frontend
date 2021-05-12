@@ -3,7 +3,8 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { CustomDataTable, getOptions, getColumns } from 'bento-components';
+import { Link, useHistory } from 'react-router-dom';
+import { CustomDataTable, getOptions, manipulateLinks } from 'bento-components';
 import {
   pageData, textLabels,
 } from '../../bento/studiesData';
@@ -12,10 +13,71 @@ import filterCasePageOnStudyCode from '../../utils/utils';
 
 const Studies = ({ classes, data }) => {
   // TBD
-  const redirectTo = (study) => {
+  const history = useHistory();
+  const redirectTo = (study, link) => {
     filterCasePageOnStudyCode(study.rowData[0]);
+    history.push(link);
   };
   const tableOptions = getOptions(pageData.table, classes);
+  // const columns = updateColumns(getColumns(pageData.table, classes, data,
+  // pageData.externalLinkIcon, '/cases', redirectTo), pageData.table.columns);
+  const toolTipMarginTop = (index) => (10 + index * 20).toString().concat('%');
+  const toolTipIcon = (styleClass, index) => (
+    <span className={classes.embargoTip}>
+      <span className={styleClass} style={{ top: toolTipMarginTop(index) }}>
+        {' '}
+        This study is
+        {' '}
+        under Embargo.
+        {' '}
+      </span>
+      {' ('}
+      Embargo
+      {') '}
+    </span>
+  );
+  console.log(data);
+
+  const customStudyCodeLink = (column, value, tableMeta) => (
+    <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
+      {value}
+      {
+        tableMeta.rowData[5]
+          && toolTipIcon(classes.embargoToolTipMsgLeft,
+            tableMeta.rowIndex)
+      }
+    </Link>
+  );
+
+  const customCaseNumbLink = (column, value, tableMeta) => (
+    <button type="button" className={classes.button} onClick={() => redirectTo(tableMeta, column.actualLink)}>
+      {value}
+      {
+        tableMeta.rowData[5] && toolTipIcon(classes.embargoToolTipMsgRight,
+          tableMeta.rowIndex)
+      }
+    </button>
+  );
+
+  const updatedTableWithLinks = manipulateLinks(pageData.table.columns);
+  const columns = updatedTableWithLinks.map((column) => ({
+    name: column.dataField,
+    label: column.header,
+    options: {
+      viewColumns: column.viewColumns,
+      customBodyRender: (value, tableMeta) => (
+        <>
+          {
+            column.internalLink ? (
+              column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
+                : customStudyCodeLink(column, value, tableMeta)
+            )
+              : `${value}`
+          }
+        </>
+      ),
+    },
+  }));
 
   return (
     <>
@@ -42,7 +104,7 @@ const Studies = ({ classes, data }) => {
               <Grid item xs={12} id="table_studies">
                 <CustomDataTable
                   data={data[pageData.table.dataField]}
-                  columns={getColumns(pageData.table, classes, data, pageData.externalLinkIcon, '/cases', redirectTo)}
+                  columns={columns}
                   options={{ ...tableOptions, ...textLabels }}
                 />
               </Grid>
@@ -60,6 +122,56 @@ const styles = (theme) => ({
     textDecoration: 'none',
     fontWeight: 'bold',
     color: '#DC762F',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  embargoToolTipMsgLeft: {
+    display: 'none',
+    left: '150px',
+    fontWeight: '500',
+    position: 'absolute',
+    zIndex: '400',
+    background: '#fff',
+    border: '2px solid #A61401',
+    borderRadius: '7px',
+    fontSize: '12px',
+    width: '110px',
+    height: '48px',
+    padding: '5px 0px 0px 2px',
+  },
+  embargoToolTipMsgRight: {
+    display: 'none',
+    fontWeight: '500',
+    position: 'absolute',
+    zIndex: '400',
+    background: '#fff',
+    border: '2px solid #A61401',
+    borderRadius: '7px',
+    fontSize: '12px',
+    width: '110px',
+    height: '48px',
+    padding: '5px 0px 0px 2px',
+  },
+  embargoTip: {
+    '&:hover': {
+      color: '#DC762A',
+      '& $embargoToolTipMsgLeft': {
+        display: 'block',
+      },
+      '& $embargoToolTipMsgRight': {
+        display: 'block',
+      },
+    },
+  },
+  button: {
+    background: 'none!important',
+    border: 'none',
+    padding: '0!important',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    color: '#DC762F',
+    cursor: 'pointer',
     '&:hover': {
       textDecoration: 'underline',
     },

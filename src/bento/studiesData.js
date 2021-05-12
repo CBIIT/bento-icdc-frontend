@@ -38,6 +38,7 @@ export const pageData = {
       {
         dataField: 'program_id',
         header: 'Program',
+        viewColumns: false,
       },
       {
         dataField: 'clinical_study_name',
@@ -48,8 +49,18 @@ export const pageData = {
         header: 'Study Type',
       },
       {
+        dataField: 'accession_id',
+        header: 'Acceesion Id',
+      },
+      {
+        dataField: 'study_disposition',
+        header: 'study disposition',
+      },
+      {
         dataField: 'numberOfCases',
         header: 'Cases',
+        link: '/cases',
+        totalNumberOfCases: true,
       },
     ],
   },
@@ -73,8 +84,12 @@ export const GET_STUDY_DATA_QUERY = gql`{
         program_id
         clinical_study_designation
         clinical_study_name
-         clinical_study_type
-         numberOfCases
+        clinical_study_type
+        numberOfCases
+        accession_id
+        study_disposition
+        date_of_iacuc_approval
+        dates_of_conduct
     }
   }
   `;

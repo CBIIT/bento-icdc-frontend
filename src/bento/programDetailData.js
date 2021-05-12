@@ -23,6 +23,7 @@ const table = {
       dataField: 'clinical_study_designation',
       header: 'Study Code',
       link: '/study/{clinical_study_designation}',
+      viewColumns: false,
     },
     {
       dataField: 'clinical_study_name',
@@ -33,8 +34,14 @@ const table = {
       header: 'Study Type',
     },
     {
+      dataField: 'studyAccession',
+      header: 'Accession ID',
+    },
+    {
       dataField: 'numberOfCases',
       header: 'Cases',
+      link: '/cases',
+      totalNumberOfCases: true,
     },
   ],
 };
@@ -56,7 +63,6 @@ const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
 query program($programTitle: String!) {
   sampleCountOfProgram(program_id: $programTitle)
   fileCountOfProgram(program_id: $programTitle)
-  aliguotCountOfProgram(program_id: $programTitle)
   studyCountOfProgram(program_id: $programTitle)
   caseCountOfProgram(program_id: $programTitle)
  
@@ -78,6 +84,8 @@ query program($programTitle: String!) {
       clinical_study_name
       clinical_study_description
       clinical_study_type
+      accession_id
+      study_disposition
       date_of_iacuc_approval
       dates_of_conduct
       numberOfCases
