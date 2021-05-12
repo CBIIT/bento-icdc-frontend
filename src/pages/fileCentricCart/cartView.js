@@ -1,16 +1,14 @@
 import React from 'react';
 import {
-  Grid, withStyles, Dialog, DialogActions, DialogContent, DialogContentText,
+  Grid, withStyles,
   IconButton, Link,
 } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import {
-  getColumns, getOptions, getDefaultCustomFooter, cn,
-} from 'bento-components';
-import _ from 'lodash';
 import { DeleteOutline as DeleteOutlineIcon, ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
-import CustomDataTable from '../../components/serverPaginatedTable/serverPaginatedTable';
+import CartBody from './components/body/cartBody';
+import CartHeader from './components/header/cartHeader';
+import DialogBox from './components/dialogBox/dialogBox';
+import Styles from './cartView.style';
 import client from '../../utils/graphqlClient';
 import {
   myFilesPageData,
@@ -18,15 +16,11 @@ import {
   manifestData,
   externalLinkIcon,
   GET_MY_CART_DATA_QUERY,
-  GET_MY_CART_DATA_QUERY_DESC,
 } from '../../bento/fileCentricCartWorkflowData';
 import { deleteFromCart } from './store/cart';
 import { downloadJson } from './utils';
 import Message from '../../components/Message';
-import DialogThemeProvider from './dialogThemeConfig';
-import TableThemeProvider from './cartTableThemeConfig';
 import GA from '../../utils/googleAnalytics';
-import updateColumns from '../../utils/columnsUtil';
 
 const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
@@ -59,22 +53,17 @@ const cartView = ({
     return status === 'close' ? setRemoveAllMessageStatus(false) : setRemoveAllMessageStatus(true);
   }
 
-  function closeModal() {
-    setModalStatus(false);
-  }
+  // ================= Dialogbox Functions =================
+  const openDialogBox = () => setModalStatus(true);
+  const closeDialogBox = () => setModalStatus(false);
 
-  function removeSubjects() {
-    setModalStatus(true);
-  }
   function deleteSubjectsAndCloseModal() {
-    setModalStatus(false);
+    closeDialogBox(false);
     GA.sendEvent('File', 'Removed', null, `${fileIDs.length} Files`);
     deleteFromCart({ fileIds: fileIDs });
   }
 
-  function onRowSelectionChange(curr, allRowsSelected) {
-    return (curr, allRowsSelected);
-  }
+  // =========== Downlaod Manifest Functions ===========
   async function prepareDownload() {
     const data1 = await fetchData();
     GA.sendEvent('Manifest', 'Download', 'cart');
@@ -130,7 +119,7 @@ const cartView = ({
               </div>
               <div className={classes.removeHeadCellIcon}>
                 <IconButton aria-label="help" className={classes.removeHeadCellIconButton}>
-                  <ArrowDropDownIcon onClick={() => removeSubjects()} onMouseEnter={() => toggleRemoveAllMessageStatus('open')} onMouseLeave={() => toggleRemoveAllMessageStatus('close')} />
+                  <ArrowDropDownIcon onClick={() => openDialogBox()} onMouseEnter={() => toggleRemoveAllMessageStatus('open')} onMouseLeave={() => toggleRemoveAllMessageStatus('close')} />
                 </IconButton>
                 { removeAllMessageStatus ? (
                   <div className={classes.removeAllMessage}>
@@ -151,9 +140,6 @@ const cartView = ({
     },
   }];
 
-  const columns = updateColumns(getColumns(table, classes).concat(deleteColumn), table.columns);
-  const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
-
   const userCommentsMessageData = (
     <span>
       {myFilesPageData.userCommentsTooltipMessage}
@@ -172,59 +158,23 @@ const cartView = ({
 
   return (
     <Grid className={classes.marginTopNegative20}>
-      <DialogThemeProvider>
-        <Dialog
-          open={modalStatus}
-          onClose={() => closeModal()}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          className={classes.popUpWindow}
-        >
-          <DialogContent className={classes.popUpWindowContent}>
-            <DialogContentText id="alert-dialog-description">
-              { myFilesPageData.popUpWindow.messagePart1 }
-              <b>
-                { myFilesPageData.popUpWindow.messagePart2 }
-                { numberOfFilesBeDeleted }
-                { myFilesPageData.popUpWindow.messagePart3 }
-              </b>
-              { myFilesPageData.popUpWindow.messagePart4 }
-              {' '}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button variant="contained" disableElevation onClick={() => deleteSubjectsAndCloseModal()} className={classes.okButton}>
-              {myFilesPageData.popUpWindow.okButtonText}
-            </Button>
-            <Button variant="contained" disableElevation onClick={() => closeModal()} className={classes.cancelButton}>
-              {myFilesPageData.popUpWindow.cancelButtonText}
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </DialogThemeProvider>
+      {/* Section: DialogBox */}
+      <DialogBox
+        isOpen={modalStatus}
+        acceptAction={deleteSubjectsAndCloseModal}
+        closeModal={closeDialogBox}
+        messageData={myFilesPageData.popUpWindow}
+        numberOfFilesBeDeleted={numberOfFilesBeDeleted}
+      />
+
       {/* Section: Header */}
       <Grid item xs={12} className={[classes.headerGrid, classes.paddingBottom40]}>
-        <div className={classes.header}>
-          <div className={classes.logo}>
-            <img
-              src={myFilesPageData.headerIconSrc}
-              alt={myFilesPageData.headerIconAlt}
-            />
-
-          </div>
-          <div className={classes.headerTitle}>
-            <div className={cn(classes.headerMainTitle, classes.marginTop80)}>
-              <span>
-                <span>{myFilesPageData.mainTitle}</span>
-              </span>
-              <span className={classes.headerMainSubTitle}>
-                {' '}
-                {' '}
-                {myFilesPageData.subTitle}
-              </span>
-            </div>
-          </div>
-        </div>
+        <CartHeader
+          headerIconSrc={myFilesPageData.headerIconSrc}
+          headerIconAlt={myFilesPageData.headerIconAlt}
+          mainTitle={myFilesPageData.mainTitle}
+          subTitle={myFilesPageData.subTitle}
+        />
       </Grid>
 
       {/* Section: Body */}
@@ -233,25 +183,14 @@ const cartView = ({
           <div className={classes.tableWrapper}>
 
             {/* Section: Table */}
-            <div className={classes.tableStyle}>
-              <TableThemeProvider>
-                <CustomDataTable
-                  data={_.cloneDeep(data)}
-                  columns={columns}
-                  options={options}
-                  className={classes.tableStyle}
-                  count={fileIDs.length || 0}
-                  overview={GET_MY_CART_DATA_QUERY}
-                  overviewDesc={GET_MY_CART_DATA_QUERY_DESC}
-                  paginationAPIField="filesInList"
-                  paginationAPIFieldDesc="filesInListDesc"
-                  queryCustomVaribles={{ uuids: fileIDs }}
-                  defaultSortCoulmn={defaultSortCoulmn}
-                  defaultSortDirection={defaultSortDirection}
-                  tableDownloadCSV={tableDownloadCSV}
-                />
-              </TableThemeProvider>
-            </div>
+            <CartBody
+              data={data}
+              deleteColumn={deleteColumn}
+              fileIDs={fileIDs}
+              defaultSortCoulmn={defaultSortCoulmn}
+              defaultSortDirection={defaultSortDirection}
+              tableDownloadCSV={tableDownloadCSV}
+            />
 
             {/* Section: Bottom controls */}
             <div className={classes.paddingLeftRight}>
@@ -344,238 +283,4 @@ const cartView = ({
   );
 };
 
-const styles = (theme) => ({
-  logo: {
-    position: 'absolute',
-    float: 'left',
-    marginTop: '46px',
-    width: '100px',
-  },
-  bodyWrapper: {
-    borderBottomLeftRadius: '20px',
-    borderBottomRightRadius: '20px',
-    borderTopLeftRadius: '20px',
-    borderTopRightRadius: '20px',
-    paddingTop: '30px',
-    margin: 'auto auto 30px auto',
-    maxWidth: '1440px',
-    background: '#f3f3f4',
-    paddingBottom: '30px',
-  },
-  tableWrapper: {
-    maxWidth: '1440px',
-    margin: '0 30px',
-    backgroundColor: theme.palette.background.paper,
-  },
-  customFooterStyle: {
-    background: '#f3f3f4',
-  },
-  headerMainTitle: {
-    fontFamily: theme.custom.fontFamilySans,
-    fontWeight: 'bold',
-    letterSpacing: '0.017em',
-    color: '#ff8a00',
-    fontSize: '30px',
-    lineHeight: '18px',
-    paddingLeft: '5px',
-    paddingBottom: '8px',
-  },
-  headerMainSubTitle: {
-
-  },
-  headerTitle: {
-    maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
-    float: 'left',
-    marginLeft: '110px',
-    paddingLeft: '3px',
-  },
-  tableTitleWizard: {
-    width: '400px',
-    float: 'right',
-    paddingTop: '8px',
-  },
-  header: {
-    paddingLeft: '32px',
-    paddingRight: '32px',
-    borderBottom: '#81a6b9 4px solid',
-    height: '140px',
-    margin: 'auto 33px',
-  },
-  link: {
-    color: '#dc762f',
-    fontWeight: 'bolder',
-    '&:hover': {
-      color: '#dc762f',
-    },
-  },
-  linkIcon: {
-    color: '#dc762f',
-    width: '20px',
-    verticalAlign: 'sub',
-    margin: '0px 0px 0px 2px',
-  },
-  helpIcon: {
-    verticalAlign: 'top',
-    width: '17px',
-    zIndex: '600',
-  },
-  topButtonGroup: {
-    textAlign: 'right',
-    padding: '10px 43px 15px 0px',
-    position: 'relative',
-  },
-  messageTopOne: {
-    position: 'absolute',
-    left: '360px',
-    top: '-125px',
-    zIndex: '400',
-  },
-  messageTopTwo: {
-    position: 'absolute',
-    left: '5px',
-    top: '-140px',
-    zIndex: '400',
-  },
-  manifestButtonGroup: {
-    marginTop: '10px',
-    float: 'right',
-  },
-  manifestTextarea: {
-    position: 'relative',
-    marginTop: '20px',
-  },
-  downloadButton: {
-    height: '36px',
-    minWidth: '191px',
-    color: '#fff',
-    boxShadow: 'none',
-    backgroundColor: '#3890c5',
-    padding: '6px 16px',
-    fontSize: '0.875rem',
-    boxSizing: 'border-box',
-    transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-    lineHeight: '1.75',
-    fontWeight: '500',
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    borderRadius: '4px',
-    textTransform: 'uppercase',
-    border: 'none',
-    verticalAlign: 'top',
-    marginTop: '6px',
-  },
-  popUpWindowText: {
-    fontFamily: 'Lato',
-    size: '16px',
-  },
-  okButton: {
-    background: '#98A19E',
-    color: '#fff',
-    cursor: 'pointer',
-    '&:hover': {
-      backgroundColor: 'rgba(152,161,158,0.6)',
-    },
-  },
-  cancelButton: {
-    background: '#42779A',
-    color: '#fff',
-    cursor: 'pointer',
-    '&:hover': {
-      backgroundColor: 'rgba(66,119,154,0.6)',
-    },
-  },
-  tableDeleteButton: {
-    background: '#fff',
-    border: '1px solid #ccc',
-    width: '29px',
-    cursor: 'pointer',
-    height: '26px',
-    borderRadius: '15%',
-    padding: '0',
-  },
-  tableDeleteButtonDiv: {
-    textAlign: 'center',
-  },
-  removeCell: {
-    cursor: 'pointer',
-    display: 'inline-flex',
-    outline: 'none',
-  },
-  removeThCell: {
-    top: '0px',
-    color: '#A61401',
-    zIndex: '100',
-    position: 'relative',
-    fontSize: '11pt',
-    borderTop: '#024466 3px solid',
-    fontStyle: 'normal',
-    fontFamily: "'Lato Regular','Raleway', sans-serif",
-    fontWeight: 'bold',
-    paddingLeft: '20px',
-    borderBottom: '#024466 3px solid',
-    letterSpacing: '0.06em',
-    backgroundColor: '#f5f5f5',
-    width: '120px',
-    textAlign: 'center',
-  },
-  removeHeadCell: {
-    cursor: 'pointer',
-    display: 'flex',
-    verticalAlign: 'top',
-  },
-  removeHeadCellText: {
-    display: 'inline-block',
-    cursor: 'default',
-    lineHeight: '37px',
-  },
-  removeHeadCellIcon: {
-    ursor: 'pointer',
-    display: 'flex',
-    marginTop: '1px',
-    verticalAlign: 'top',
-  },
-  removeHeadCellIconButton: {
-    color: '#A61401',
-    width: '25px',
-    marginTop: '5px',
-    height: '25px',
-  },
-  removeAllMessage: {
-    fontWeight: '500',
-    position: 'absolute',
-    top: '36px',
-    right: '0',
-    zIndex: '400',
-    background: '#fff',
-    border: '2px solid #A61401',
-    borderRadius: '7px',
-    fontSize: '12px',
-    width: '110px',
-    height: '48px',
-    padding: '5px 0px',
-  },
-  message: {
-    color: '#000000',
-    fontSize: '15px',
-    fontFamily: '"Open Sans", sans-serif',
-    lineHeight: '22px',
-    marginBottom: '5px',
-  },
-  paddingLeftRight: {
-    padding: '0 16px',
-  },
-  buttonGroup: {
-    position: 'relative',
-    paddingBottom: '10px',
-  },
-  marginTop80: {
-    marginTop: '80px',
-  },
-  paddingBottom40: {
-    paddingBottom: '40px',
-  },
-  marginTopNegative20: {
-    marginTop: '-38px',
-  },
-});
-export default withStyles(styles, { withTheme: true })(cartView);
+export default withStyles(Styles, { withTheme: true })(cartView);
