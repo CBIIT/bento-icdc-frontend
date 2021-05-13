@@ -771,7 +771,7 @@ type QueryType {
   schemaVersion: String @cypher(statement: "RETURN '0.1.14'")
 
   "Simple count"
-  numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
+  numberOfStudies: Int @cypher(statement: "MATCH (n:study) WHERE NOT n.study_disposition = 'Under Embargo' RETURN  count (n)")
   numberOfCases: Int @cypher(statement: "MATCH (n:case) RETURN  count (n)")
   numberOfSamples:Int @cypher(statement: "MATCH (n:sample) RETURN  count (n)")
   numberOfFiles: Int @cypher(statement: "MATCH (n:file) RETURN  count (n)")
@@ -986,6 +986,7 @@ type QueryType {
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
     MATCH (s:study)
+    WHERE NOT s.study_disposition = 'Under Embargo'
     WITH collect(DISTINCT s.clinical_study_designation) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE //(size($study) = 0 OR s.clinical_study_designation IN $study)
@@ -1627,6 +1628,7 @@ type QueryType {
     WITH p, COUNT(DISTINCT(c)) as caseSize
     MATCH (p)<-[:member_of]-(s:study)<-[*]-(c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
+      AND s.study_disposition = 'Unrestricted'
     WITH p, caseSize,
       {study: s.clinical_study_designation, caseSize: COUNT(DISTINCT(c))} as s
     RETURN
