@@ -24,12 +24,17 @@ import {
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
-  table1, table2, tooltipContent, headerIcon, textLabels, externalIcon,
+  table1,
+  table2,
+  tooltipContent,
+  headerIcon,
+  textLabels,
+  externalIcon,
+  embargoHeaderIcon,
+  embargoFileIcon,
 } from '../../bento/studyDetailsData';
 import themes, { overrides } from '../../themes';
 import updateColumns from '../../utils/columnsUtil';
-import embargoHeaderIcon from '../../assets/icons/EmbargoStudies.icon.svg';
-import embargoFileIcon from '../../assets/icons/EmbargoFileIcon.svg';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {

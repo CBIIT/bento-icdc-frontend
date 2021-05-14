@@ -8,6 +8,8 @@ export const tooltipContent = {
   alt: 'tooltipIcon',
 };
 
+export const embargoFileIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/embargo_images/src/assets/icons/Icon-Embargo-File.svg';
+export const embargoHeaderIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/embargo_images/src/assets/icons/Icon-embargo-study-header.svg';
 export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-StudiesDetail.svg';
 export const externalIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/study/Program-ExternalLink.svg';
 

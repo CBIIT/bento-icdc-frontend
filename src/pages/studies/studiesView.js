@@ -15,7 +15,6 @@ import {
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
-import embargoFileIcon from '../../assets/icons/EmbargoFileIcon.svg';
 import { isStudyUnderEmbargo } from '../study/utils';
 
 const Studies = ({ classes, data }) => {
@@ -25,7 +24,7 @@ const Studies = ({ classes, data }) => {
   // pageData.externalLinkIcon, '/cases', redirectTo), pageData.table.columns);
   const toolTipIcon = () => (
     <span dataText="Under Embargo" dataAttr="" className={classes.embargoIcon}>
-      <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+      <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </span>
   );
 

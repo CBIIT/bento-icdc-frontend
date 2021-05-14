@@ -24,7 +24,6 @@ import {
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
-import embargoFileIcon from '../../assets/icons/EmbargoFileIcon.svg';
 import { isStudyUnderEmbargo } from '../study/utils';
 
 const themesLight = _.cloneDeep(themes.light);
@@ -71,7 +70,7 @@ const ProgramView = ({ classes, data }) => {
 
   const toolTipIcon = () => (
     <span dataText="Under Embargo" dataAttr="" className={classes.embargoIcon}>
-      <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+      <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </span>
   );
 
