@@ -75,6 +75,7 @@ const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
 query program($programTitle: String!) {
   sampleCountOfProgram(program_id: $programTitle)
   fileCountOfProgram(program_id: $programTitle)
+  aliquotCountOfProgram(program_id: $programTitle)
   studyCountOfProgram(program_id: $programTitle)
   caseCountOfProgram(program_id: $programTitle)
  

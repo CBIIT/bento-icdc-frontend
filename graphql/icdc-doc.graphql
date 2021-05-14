@@ -664,7 +664,7 @@ type FileInfo {
 type StudyStat {
   study_code: String
   files: Int
-  totoal_size_MB: Float
+  total_size_MB: Float
   cases: Int
   samples: Int
 }
@@ -780,13 +780,13 @@ type QueryType {
   "Count with parameter"
   sampleCountOfStudy(study_code: String!): Int 
   fileCountOfStudy(study_code: String!): Int 
-  aliguotCountOfStudy(study_code: String!): Int 
+  aliquotCountOfStudy(study_code: String!): Int 
   caseCountOfStudy(study_code: String!): Int 
   fileCountOfCase(case_id: String!): Int 
   aliquotCountOfCase(case_id: String!): Int 
   sampleCountOfProgram(program_id: String!): Int 
   fileCountOfProgram(program_id: String!): Int 
-  aliguotCountOfProgram(program_id: String!): Int 
+  aliquotCountOfProgram(program_id: String!): Int 
   studyCountOfProgram(program_id: String!): Int 
   caseCountOfProgram(program_id: String!): Int 
   sampleCountOfCase(case_id: String!): Int 

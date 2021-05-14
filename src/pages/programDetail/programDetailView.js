@@ -51,7 +51,7 @@ const ProgramView = ({ classes, data }) => {
     numberOfCases: data.caseCountOfProgram,
     numberOfSamples: data.sampleCountOfProgram,
     numberOfFiles: data.fileCountOfProgram,
-    numberOfAliquots: data.aliguotCountOfProgram ? data.aliguotCountOfProgram : 0,
+    numberOfAliquots: data.aliquotCountOfProgram ? data.aliquotCountOfProgram : 0,
   };
 
   const breadCrumbJson = [{
