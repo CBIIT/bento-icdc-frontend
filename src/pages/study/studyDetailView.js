@@ -4,7 +4,6 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
 import {
   CustomDataTable, getOptions, cn, getColumns,
 } from 'bento-components';
@@ -16,7 +15,12 @@ import StatsView from '../../components/Stats/StatsView';
 import GridWithFooter from '../../components/GridWithFooter/GridView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
-import { studyDetailSorting, customSorting, fromArmTOCohorDoes } from './utils';
+import {
+  studyDetailSorting,
+  customSorting,
+  fromArmTOCohorDoes,
+  isStudyUnderEmbargo,
+} from './utils';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
@@ -24,6 +28,8 @@ import {
 } from '../../bento/studyDetailsData';
 import themes, { overrides } from '../../themes';
 import updateColumns from '../../utils/columnsUtil';
+import embargoHeaderIcon from '../../assets/icons/EmbargoStudies.icon.svg';
+import embargoFileIcon from '../../assets/icons/EmbargoFileIcon.svg';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -164,12 +170,21 @@ const StudyDetailView = ({ classes, data }) => {
       <div className={classes.container}>
         <div className={classes.header}>
           <div className={classes.logo}>
-            {studyData.study_disposition
-            && <Avatar className={classes.embargoIcon}>E</Avatar>}
-            <img
-              src={headerIcon}
-              alt="ICDC case detail header logo"
-            />
+            {
+              isStudyUnderEmbargo(studyData.study_disposition)
+                ? (
+                  <img
+                    src={embargoHeaderIcon}
+                    alt="ICDC case detail header logo"
+                  />
+                )
+                : (
+                  <img
+                    src={headerIcon}
+                    alt="ICDC case detail header logo"
+                  />
+                )
+            }
           </div>
           <div className={classes.headerTitle}>
             <div className={classes.headerMainTitle}>
@@ -181,18 +196,19 @@ const StudyDetailView = ({ classes, data }) => {
                   {' '}
                   {studyData.clinical_study_designation}
                 </span>
-                {
-              studyData.study_disposition
+              </span>
+              {
+              (studyData.accession_id !== null && studyData.accession_id !== undefined && studyData.accession_id !== '')
               && (
-                <span>
-                  {' '}
-                  {' ('}
-                  Embargo
-                  {') '}
-                </span>
+                <>
+                  <span className={classes.headerBar}> | </span>
+                  <span className={classes.headerAccessionItem}>
+                    <span className={classes.accessionLabel}>{'Accession Id : '}</span>
+                    <span className={classes.accessionValue}>{studyData.accession_id}</span>
+                  </span>
+                </>
               )
               }
-              </span>
             </div>
             <div className={cn(classes.headerMSubTitle, classes.headerSubTitleCate)}>
               <span>
@@ -202,48 +218,39 @@ const StudyDetailView = ({ classes, data }) => {
 
             </div>
             <CustomBreadcrumb data={breadCrumbJson} />
-            {
-              studyData.clinical_study_designation
-              && (
-                <div className={classes.headerItemAccessionId}>
-                  <span>
-                    Accession Id :
-                    {studyData.clinical_study_designation}
+          </div>
+          {
+            isStudyUnderEmbargo(studyData.study_disposition)
+              ? (
+                <div className={classes.embargo}>
+                  <span className={classes.embarLabel}> UNDER EMBARGO </span>
+                  <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+                </div>
+              )
+              : (
+                <div className={classes.headerButton}>
+                  <span className={classes.headerButtonLinkSpan}>
+                    <Link
+                      className={classes.headerButtonLink}
+                      to={(location) => ({ ...location, pathname: '/cases' })}
+                      onClick={() => filterCasePageOnStudyCode(studyData
+                        .clinical_study_designation)}
+                    >
+                      {' '}
+                      <span className={classes.headerButtonLinkText}> View </span>
+                      <span className={classes.headerButtonLinkNumber}>
+                        {' '}
+                        {' '}
+                        {data.caseCountOfStudy}
+                        {' '}
+                        {' '}
+                      </span>
+                      <span className={classes.headerButtonLinkText}>CASES</span>
+                    </Link>
                   </span>
                 </div>
               )
             }
-          </div>
-          <div className={classes.headerItems}>
-            <div className={classes.headerButton}>
-              <span className={classes.headerButtonLinkSpan}>
-                <Link
-                  className={classes.headerButtonLink}
-                  to={(location) => ({ ...location, pathname: '/cases' })}
-                  onClick={() => filterCasePageOnStudyCode(studyData.clinical_study_designation)}
-                >
-                  {' '}
-                  <span className={classes.headerButtonLinkText}> View </span>
-                  <span className={classes.headerButtonLinkNumber}>
-                    {' '}
-                    {' '}
-                    {data.caseCountOfStudy}
-                    {' '}
-                    {' '}
-                  </span>
-                  <span className={classes.headerButtonLinkText}>CASES</span>
-                </Link>
-              </span>
-            </div>
-            {
-              studyData.study_disposition
-              && (
-              <div className={classes.embargo}>
-                UNDER EMBARGO
-              </div>
-              )
-            }
-          </div>
         </div>
 
         <div className={classes.detailContainer}>
@@ -490,7 +497,7 @@ const styles = (theme) => ({
   headerItemAccessionId: {
     paddingTop: '10px',
     '& span': {
-      margin: '40px 80px',
+      margin: '40px 20px',
       color: '#5e8ca5',
     },
   },
@@ -501,15 +508,45 @@ const styles = (theme) => ({
     backgroundColor: '#de7328',
   },
   embargo: {
+    color: '#6E6E6E',
     float: 'right',
-    color: '#de7328',
-    marginTop: '15px',
-    width: '125px',
+    background: '#f3f3f3',
+    width: '180px',
     height: '33px',
+    fontSize: '15px',
+    marginTop: '25px',
+    fontWight: 'bolder',
     paddingLeft: '10px',
     paddingRight: '10px',
-    fontSize: '20px',
-    fontWeight: 'bolder',
+    paddingTop: '5px',
+    textAlign: 'center',
+  },
+  embargoFileIcon: {
+    width: '20px',
+    float: 'right',
+    marginLeft: '5px',
+  },
+  headerBar: {
+    fontWeight: '10',
+    color: '#5e8ca5',
+    margin: '0px 15px 0 15px',
+  },
+  headerAccessionItem: {
+    borderRadius: '100px',
+    border: '2px solid',
+    textAlign: 'center',
+    padding: '0 16px',
+    background: 'rgb(203 226 238 / 11%)',
+    fontSize: '15px',
+  },
+  accessionLabel: {
+    fontSize: '14px',
+    fontWeight: '100',
+    color: '#5e8ca5',
+  },
+  accessionValue: {
+    fontSize: '13px',
+    fontWeight: '800',
   },
   paddingLeft8: {
     paddingLeft: '8px',

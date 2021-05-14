@@ -98,3 +98,11 @@ export function FileDisableRowSelection() {
 export function FileOnRowsSelect(data, allRowsSelected) {
   return allRowsSelected.map((row) => data[row.dataIndex].uuid);
 }
+
+export function isStudyUnderEmbargo(value) {
+  const studyDisposition = 'under embargo';
+  if (value === null || value === undefined) {
+    return false;
+  }
+  return value.toLowerCase() === studyDisposition;
+}

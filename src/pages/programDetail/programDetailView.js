@@ -3,7 +3,7 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   CustomDataTable,
   cn,
@@ -24,7 +24,8 @@ import {
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
-// import updateColumns from '../../utils/columnsUtil';
+import embargoFileIcon from '../../assets/icons/EmbargoFileIcon.svg';
+import { isStudyUnderEmbargo } from '../study/utils';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -45,12 +46,6 @@ const computedTheme = createMuiTheme({
 
 const ProgramView = ({ classes, data }) => {
   const programDetail = data.program[0];
-
-  const history = useHistory();
-  const redirectTo = (study, link) => {
-    filterCasePageOnStudyCode(study.rowData[1]);
-    history.push(link);
-  };
 
   const stat = {
     numberOfStudies: data.studyCountOfProgram,
@@ -74,43 +69,46 @@ const ProgramView = ({ classes, data }) => {
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const tableOptions = getOptions(table, classes);
 
-  const embargoToolTip = (
-    <span className={classes.embargoToolTip}>
-      {' ('}
-      Embargo
-      {') '}
-      <div className={classes.embargoToolTipMsg}>
-        {' '}
-        This study is
-        {' '}
-        under Embargo.
-        {' '}
-      </div>
+  const toolTipIcon = () => (
+    <span dataText="Under Embargo" dataAttr="" className={classes.embargoIcon}>
+      <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </span>
   );
 
   const customStudyCodeLink = (column, value, tableMeta) => (
-    <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
-      {value}
+    <>
+      <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
+        {value}
+      </Link>
       {
-        tableMeta.rowData[column.actualLinkId] && embargoToolTip
+        isStudyUnderEmbargo(tableMeta.rowData[5])
+          && toolTipIcon(cn(classes.embargoToolTip))
       }
-    </Link>
+    </>
   );
 
   const customCaseNumbLink = (column, value, tableMeta) => (
-    <button type="button" className={classes.buttonCaseNumb} onClick={() => redirectTo(tableMeta, column.actualLink)}>
-      {value}
-      {
-        tableMeta.rowData && embargoToolTip
-      }
-    </button>
+    isStudyUnderEmbargo(tableMeta.rowData[5])
+      ? (
+        toolTipIcon(cn(classes.embargoToolTip))
+      )
+      : (
+        <Link
+          to={(location) => ({ ...location, pathname: '/cases' })}
+          className={classes.buttonCaseNumb}
+          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[1])}
+        >
+          {value}
+        </Link>
+      )
   );
+
   const updatedTableWithLinks = manipulateLinks(table.columns);
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     label: column.header,
     options: {
+      display: column.display,
       viewColumns: column.viewColumns,
       customBodyRender: (value, tableMeta) => (
         <>
@@ -119,7 +117,9 @@ const ProgramView = ({ classes, data }) => {
               column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
                 : customStudyCodeLink(column, value, tableMeta)
             )
-              : `${value}`
+              : (
+                (`${value}` !== 'null') ? `${value}` : ''
+              )
           }
         </>
       ),
@@ -198,27 +198,65 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     textDecoration: 'none',
     color: '#DC762F',
+    float: 'left',
+    marginRight: '5px',
     '&:hover': {
       textDecoration: 'underline',
     },
   },
-  embargoToolTipMsg: {
-    display: 'none',
+  embargoFileIcon: {
+    width: '20px',
+  },
+  embargoToolTip: {
+    visibility: 'hidden',
     fontWeight: '500',
-    position: 'absolute',
-    zIndex: '999',
+    zIndex: '400',
     background: '#fff',
     border: '2px solid #A61401',
     borderRadius: '7px',
     fontSize: '12px',
     width: '110px',
-    height: '48px',
-    padding: '5px 0px',
+    padding: '5px 0px 0px 2px',
+    marginTop: '-30px',
+    marginLeft: '-100px',
   },
-  embargoToolTip: {
+  embargoIcon: {
+    position: 'relative',
+    textAlign: 'center',
+    '&:before': {
+      content: 'attr(dataText)',
+      position: 'absolute',
+      transform: 'translateY(-50%)',
+      left: '100%',
+      marginLeft: '15px',
+      width: '150px',
+      fontSize: '15px',
+      padding: '0 10px 0 10px',
+      border: '2px solid #708090d4',
+      background: '#fff',
+      color: '#194563d9',
+      textAlign: 'center',
+      display: 'none',
+    },
+    '&:after': {
+      content: 'attr(dataAttr)',
+      position: 'absolute',
+      width: '10px',
+      left: '100%',
+      color: '#fff',
+      top: '-32%',
+      transform: 'translateY(-50%)',
+      borderTop: '5px solid transparent',
+      borderRight: '10px solid #708090d4',
+      borderBottom: '5px solid transparent',
+      marginLeft: '6px',
+      display: 'none',
+    },
     '&:hover': {
-      color: '#DC762A',
-      '& $embargoToolTipMsg': {
+      '&:before': {
+        display: 'block',
+      },
+      '&:after': {
         display: 'block',
       },
     },

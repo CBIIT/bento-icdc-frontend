@@ -18,30 +18,41 @@ const table = {
     {
       dataField: 'program_id',
       header: 'Program',
+      display: true,
     },
     {
       dataField: 'clinical_study_designation',
       header: 'Study Code',
       link: '/study/{clinical_study_designation}',
       viewColumns: false,
+      display: true,
     },
     {
       dataField: 'clinical_study_name',
       header: 'Study Name',
+      display: true,
     },
     {
       dataField: 'clinical_study_type',
       header: 'Study Type',
+      display: true,
     },
     {
-      dataField: 'studyAccession',
+      dataField: 'accession_id',
       header: 'Accession ID',
+      display: true,
+    },
+    {
+      dataField: 'study_disposition',
+      header: 'Study Disposition',
+      display: false,
     },
     {
       dataField: 'numberOfCases',
       header: 'Cases',
       link: '/cases',
       totalNumberOfCases: true,
+      display: true,
     },
   ],
 };

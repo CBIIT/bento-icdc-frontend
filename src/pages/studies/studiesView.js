@@ -3,60 +3,59 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
-import { CustomDataTable, getOptions, manipulateLinks } from 'bento-components';
+import { Link } from 'react-router-dom';
+import {
+  CustomDataTable,
+  getOptions,
+  manipulateLinks,
+  cn,
+} from 'bento-components';
 import {
   pageData, textLabels,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
+import embargoFileIcon from '../../assets/icons/EmbargoFileIcon.svg';
+import { isStudyUnderEmbargo } from '../study/utils';
 
 const Studies = ({ classes, data }) => {
   // TBD
-  const history = useHistory();
-  const redirectTo = (study, link) => {
-    filterCasePageOnStudyCode(study.rowData[0]);
-    history.push(link);
-  };
   const tableOptions = getOptions(pageData.table, classes);
   // const columns = updateColumns(getColumns(pageData.table, classes, data,
   // pageData.externalLinkIcon, '/cases', redirectTo), pageData.table.columns);
-  const toolTipMarginTop = (index) => (10 + index * 20).toString().concat('%');
-  const toolTipIcon = (styleClass, index) => (
-    <span className={classes.embargoTip}>
-      <span className={styleClass} style={{ top: toolTipMarginTop(index) }}>
-        {' '}
-        This study is
-        {' '}
-        under Embargo.
-        {' '}
-      </span>
-      {' ('}
-      Embargo
-      {') '}
+  const toolTipIcon = () => (
+    <span dataText="Under Embargo" dataAttr="" className={classes.embargoIcon}>
+      <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </span>
   );
-  console.log(data);
 
   const customStudyCodeLink = (column, value, tableMeta) => (
-    <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
-      {value}
+    <>
+      <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
+        {value}
+      </Link>
       {
-        tableMeta.rowData[5]
-          && toolTipIcon(classes.embargoToolTipMsgLeft,
-            tableMeta.rowIndex)
+        isStudyUnderEmbargo(tableMeta.rowData[5])
+          && toolTipIcon(cn(classes.embargoToolTipMsgLeft, classes.embargoToolTip))
       }
-    </Link>
+    </>
   );
 
   const customCaseNumbLink = (column, value, tableMeta) => (
-    <button type="button" className={classes.button} onClick={() => redirectTo(tableMeta, column.actualLink)}>
-      {value}
-      {
-        tableMeta.rowData[5] && toolTipIcon(classes.embargoToolTipMsgRight,
-          tableMeta.rowIndex)
-      }
-    </button>
+    isStudyUnderEmbargo(tableMeta.rowData[5])
+      ? (
+        toolTipIcon(cn(classes.embargoToolTipMsgRight,
+          classes.embargoToolTip))
+      )
+      : (
+        <Link
+          to={(location) => ({ ...location, pathname: '/cases' })}
+          className={classes.button}
+          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[0])}
+        >
+          {value}
+        </Link>
+      )
   );
 
   const updatedTableWithLinks = manipulateLinks(pageData.table.columns);
@@ -64,6 +63,7 @@ const Studies = ({ classes, data }) => {
     name: column.dataField,
     label: column.header,
     options: {
+      display: column.display,
       viewColumns: column.viewColumns,
       customBodyRender: (value, tableMeta) => (
         <>
@@ -72,7 +72,9 @@ const Studies = ({ classes, data }) => {
               column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
                 : customStudyCodeLink(column, value, tableMeta)
             )
-              : `${value}`
+              : (
+                (`${value}` !== 'null') ? `${value}` : ''
+              )
           }
         </>
       ),
@@ -122,44 +124,70 @@ const styles = (theme) => ({
     textDecoration: 'none',
     fontWeight: 'bold',
     color: '#DC762F',
+    float: 'left',
+    marginRight: '5px',
     '&:hover': {
       textDecoration: 'underline',
     },
   },
-  embargoToolTipMsgLeft: {
-    display: 'none',
-    left: '150px',
+  embargoFileIcon: {
+    width: '20px',
+  },
+  embargoToolTip: {
+    visibility: 'hidden',
     fontWeight: '500',
-    position: 'absolute',
     zIndex: '400',
     background: '#fff',
     border: '2px solid #A61401',
     borderRadius: '7px',
     fontSize: '12px',
     width: '110px',
-    height: '48px',
     padding: '5px 0px 0px 2px',
+    marginTop: '-30px',
+    marginLeft: '-100px',
+  },
+  embargoToolTipMsgLeft: {
+
   },
   embargoToolTipMsgRight: {
-    display: 'none',
-    fontWeight: '500',
-    position: 'absolute',
-    zIndex: '400',
-    background: '#fff',
-    border: '2px solid #A61401',
-    borderRadius: '7px',
-    fontSize: '12px',
-    width: '110px',
-    height: '48px',
-    padding: '5px 0px 0px 2px',
   },
-  embargoTip: {
+  embargoIcon: {
+    position: 'relative',
+    textAlign: 'center',
+    '&:before': {
+      content: 'attr(dataText)',
+      position: 'absolute',
+      transform: 'translateY(-50%)',
+      left: '100%',
+      marginLeft: '15px',
+      width: '150px',
+      fontSize: '15px',
+      padding: '0 10px 0 10px',
+      border: '2px solid #708090d4',
+      background: '#fff',
+      color: '#194563d9',
+      textAlign: 'center',
+      display: 'none',
+    },
+    '&:after': {
+      content: 'attr(dataAttr)',
+      position: 'absolute',
+      width: '10px',
+      left: '100%',
+      color: '#fff',
+      top: '-32%',
+      transform: 'translateY(-50%)',
+      borderTop: '5px solid transparent',
+      borderRight: '10px solid #708090d4',
+      borderBottom: '5px solid transparent',
+      marginLeft: '6px',
+      display: 'none',
+    },
     '&:hover': {
-      color: '#DC762A',
-      '& $embargoToolTipMsgLeft': {
+      '&:before': {
         display: 'block',
       },
-      '& $embargoToolTipMsgRight': {
+      '&:after': {
         display: 'block',
       },
     },
