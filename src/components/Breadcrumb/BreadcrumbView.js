@@ -26,8 +26,6 @@ const CustomBreadcrumb = ({ classes, data }) => (
 
 const styles = (theme) => ({
   headerNav: {
-    width: '450px',
-    float: 'left',
     paddingTop: '8px',
     color: '#5e8ca5',
     paddingBottom: '12px',

@@ -95,8 +95,6 @@ export const GET_STUDY_DATA_QUERY = gql`{
         numberOfCases
         accession_id
         study_disposition
-        date_of_iacuc_approval
-        dates_of_conduct
     }
   }
   `;
