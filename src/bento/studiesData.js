@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const pageData = {
-  embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/embargo_images/src/assets/icons/Icon-Embargo-File.svg',
+  embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Embargo-File.svg',
   studyListingIcon: {
     src: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-StudiesDetail.svg',
     alt: 'ICDC Studies detail header logo',

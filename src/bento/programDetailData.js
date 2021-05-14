@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 // A maximum of 6 leftPanelattributes are allowed
 const pageData = {
   headerIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Programs.svg',
-  embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/embargo_images/src/assets/icons/Icon-Embargo-File.svg',
+  embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Embargo-File.svg',
 };
 
 // --------------- Table configuration --------------
