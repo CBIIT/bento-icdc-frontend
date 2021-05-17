@@ -768,10 +768,10 @@ type MultiStudyCases {
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '0.1.14'")
+  schemaVersion: String @cypher(statement: "RETURN '0.1.15'")
 
   "Simple count"
-  numberOfStudies: Int @cypher(statement: "MATCH (n:study) RETURN  count (n)")
+  numberOfStudies: Int @cypher(statement: "MATCH (n:study) WHERE n.study_disposition = 'Unrestricted' RETURN  count (n)")
   numberOfCases: Int @cypher(statement: "MATCH (n:case) RETURN  count (n)")
   numberOfSamples:Int @cypher(statement: "MATCH (n:sample) RETURN  count (n)")
   numberOfFiles: Int @cypher(statement: "MATCH (n:file) RETURN  count (n)")
@@ -986,6 +986,7 @@ type QueryType {
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
     MATCH (s:study)
+    WHERE s.study_disposition = 'Unrestricted'
     WITH collect(DISTINCT s.clinical_study_designation) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE //(size($study) = 0 OR s.clinical_study_designation IN $study)
@@ -1037,6 +1038,7 @@ type QueryType {
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         //AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (s.study_disposition = 'Unrestricted')
         AND (size($sex) = 0 OR demo.sex IN $sex)
         AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
         AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
@@ -1627,6 +1629,7 @@ type QueryType {
     WITH p, COUNT(DISTINCT(c)) as caseSize
     MATCH (p)<-[:member_of]-(s:study)<-[*]-(c:case)
       WHERE ($case_ids IS NULL OR c.case_id IN $case_ids)
+      AND s.study_disposition = 'Unrestricted'
     WITH p, caseSize,
       {study: s.clinical_study_designation, caseSize: COUNT(DISTINCT(c))} as s
     RETURN
@@ -1834,6 +1837,7 @@ type QueryType {
   ): SearchResult @cypher(statement: """
     MATCH (p:program)<--(s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+        AND (s.study_disposition = 'Unrestricted')
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
         AND (size($sex) = 0 OR demo.sex IN $sex)
