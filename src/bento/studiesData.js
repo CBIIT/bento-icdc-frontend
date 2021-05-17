@@ -54,7 +54,7 @@ export const pageData = {
       },
       {
         dataField: 'accession_id',
-        header: 'Acceesion ID',
+        header: 'Accession ID',
         display: true,
       },
       {
