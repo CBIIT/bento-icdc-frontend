@@ -578,7 +578,27 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
 }
+/**
+ * function to set code to checkbox Item (accession id) for filterCountByStudyCode likewise
+ *
+ * @return checkboxItem
+ */
 
+function setCodeToCheckBoxItem(checkboxData, item) {
+  const checkBoxitems = [];
+  const updateCheckBoxData = checkboxData;
+  item.data.filterCaseCountByStudyCode.forEach((filterItem) => {
+    checkboxData[0].checkboxItems.forEach((checkboxItem) => {
+      if (filterItem.group === checkboxItem.name) {
+        const updatecheckBoxItem = checkboxItem;
+        updatecheckBoxItem.code = (filterItem.code !== null) ? ` (${filterItem.code})` : filterItem.code;
+        checkBoxitems.push(updatecheckBoxItem);
+      }
+    });
+  });
+  updateCheckBoxData[0].checkboxItems = checkBoxitems;
+  return updateCheckBoxData;
+}
 /**
  * Reducer for clear all filters
  *
@@ -704,7 +724,9 @@ const reducers = {
     const updatedCheckboxData1 = updateFilteredAPIDataIntoCheckBoxData(
       item.data, facetSearchData,
     );
-    const checkboxData1 = setSelectedFilterValues(updatedCheckboxData1, item.allFilters);
+    const checkboxData1 = setCodeToCheckBoxItem(setSelectedFilterValues(updatedCheckboxData1,
+      item.allFilters), item);
+    // checkboxData1[0].checkboxItems = setCodeToCheckBoxItem(checkboxData1[0].checkboxItems, item);
     fetchDataForDashboardTab(state.currentActiveTab,
       item.data.searchCases.caseIds, item.data.searchCases.sampleIds,
       item.data.searchCases.fileIds);
@@ -772,7 +794,8 @@ const reducers = {
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
-    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
+    const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data,
+      facetSearchData, 'count'), item);
     fetchDataForDashboardTab(tabIndex[0].title, null, null, null);
     return item.data
       ? {

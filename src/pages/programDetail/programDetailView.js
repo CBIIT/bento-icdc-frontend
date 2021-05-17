@@ -235,6 +235,7 @@ const styles = (theme) => ({
       background: '#fff',
       color: '#194563d9',
       textAlign: 'center',
+      borderRadius: '5px',
       display: 'none',
     },
     '&:after': {
