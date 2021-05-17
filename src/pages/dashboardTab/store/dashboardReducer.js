@@ -726,7 +726,6 @@ const reducers = {
     );
     const checkboxData1 = setCodeToCheckBoxItem(setSelectedFilterValues(updatedCheckboxData1,
       item.allFilters), item);
-    // checkboxData1[0].checkboxItems = setCodeToCheckBoxItem(checkboxData1[0].checkboxItems, item);
     fetchDataForDashboardTab(state.currentActiveTab,
       item.data.searchCases.caseIds, item.data.searchCases.sampleIds,
       item.data.searchCases.fileIds);
