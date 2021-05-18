@@ -15,13 +15,26 @@ import StatsView from '../../components/Stats/StatsView';
 import GridWithFooter from '../../components/GridWithFooter/GridView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
-import { studyDetailSorting, customSorting, fromArmTOCohorDoes } from './utils';
+import {
+  studyDetailSorting,
+  customSorting,
+  fromArmTOCohorDoes,
+  isStudyUnderEmbargo,
+} from './utils';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
-  table1, table2, tooltipContent, headerIcon, textLabels, externalIcon,
+  table1,
+  table2,
+  tooltipContent,
+  headerIcon,
+  textLabels,
+  externalIcon,
+  embargoHeaderIcon,
+  embargoFileIcon,
 } from '../../bento/studyDetailsData';
 import themes, { overrides } from '../../themes';
+import updateColumns from '../../utils/columnsUtil';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -138,6 +151,7 @@ const StudyDetailView = ({ classes, data }) => {
   });
   const tableOneOptions = getOptions(table1, classes);
   const tableTwoOptions = getOptions(table2, classes);
+  const columns2 = updateColumns(getColumns(table2, classes, fileTableData), table2.columns);
 
   const getImageTypes = (typeString) => {
     const types = JSON.parse(typeString);
@@ -161,11 +175,21 @@ const StudyDetailView = ({ classes, data }) => {
       <div className={classes.container}>
         <div className={classes.header}>
           <div className={classes.logo}>
-            <img
-              src={headerIcon}
-              alt="ICDC case detail header logo"
-            />
-
+            {
+              isStudyUnderEmbargo(studyData.study_disposition)
+                ? (
+                  <img
+                    src={embargoHeaderIcon}
+                    alt="ICDC case detail header logo"
+                  />
+                )
+                : (
+                  <img
+                    src={headerIcon}
+                    alt="ICDC case detail header logo"
+                  />
+                )
+            }
           </div>
           <div className={classes.headerTitle}>
             <div className={classes.headerMainTitle}>
@@ -178,6 +202,18 @@ const StudyDetailView = ({ classes, data }) => {
                   {studyData.clinical_study_designation}
                 </span>
               </span>
+              {
+              (studyData.accession_id !== null && studyData.accession_id !== undefined && studyData.accession_id !== '')
+              && (
+                <>
+                  <span className={classes.headerBar}> | </span>
+                  <span className={classes.headerAccessionItem}>
+                    <span className={classes.accessionLabel}>{'Accession Id : '}</span>
+                    <span className={classes.accessionValue}>{studyData.accession_id}</span>
+                  </span>
+                </>
+              )
+              }
             </div>
             <div className={cn(classes.headerMSubTitle, classes.headerSubTitleCate)}>
               <span>
@@ -188,26 +224,38 @@ const StudyDetailView = ({ classes, data }) => {
             </div>
             <CustomBreadcrumb data={breadCrumbJson} />
           </div>
-          <div className={classes.headerButton}>
-            <span className={classes.headerButtonLinkSpan}>
-              <Link
-                className={classes.headerButtonLink}
-                to={(location) => ({ ...location, pathname: '/cases' })}
-                onClick={() => filterCasePageOnStudyCode(studyData.clinical_study_designation)}
-              >
-                {' '}
-                <span className={classes.headerButtonLinkText}> View </span>
-                <span className={classes.headerButtonLinkNumber}>
-                  {' '}
-                  {' '}
-                  {data.caseCountOfStudy}
-                  {' '}
-                  {' '}
-                </span>
-                <span className={classes.headerButtonLinkText}>CASES</span>
-              </Link>
-            </span>
-          </div>
+          {
+            isStudyUnderEmbargo(studyData.study_disposition)
+              ? (
+                <div className={classes.embargo}>
+                  <h4 className={classes.embarLabel}> UNDER EMBARGO </h4>
+                  <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+                </div>
+              )
+              : (
+                <div className={classes.headerButton}>
+                  <span className={classes.headerButtonLinkSpan}>
+                    <Link
+                      className={classes.headerButtonLink}
+                      to={(location) => ({ ...location, pathname: '/cases' })}
+                      onClick={() => filterCasePageOnStudyCode(studyData
+                        .clinical_study_designation)}
+                    >
+                      {' '}
+                      <span className={classes.headerButtonLinkText}> View </span>
+                      <span className={classes.headerButtonLinkNumber}>
+                        {' '}
+                        {' '}
+                        {data.caseCountOfStudy}
+                        {' '}
+                        {' '}
+                      </span>
+                      <span className={classes.headerButtonLinkText}>CASES</span>
+                    </Link>
+                  </span>
+                </div>
+              )
+            }
         </div>
 
         <div className={classes.detailContainer}>
@@ -275,6 +323,9 @@ const StudyDetailView = ({ classes, data }) => {
                 </Grid>
               </Grid>
             </Grid>
+            {
+            (!isStudyUnderEmbargo(studyData.study_disposition))
+            && (
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerRightTop}>
@@ -373,68 +424,76 @@ const StudyDetailView = ({ classes, data }) => {
                 {/* END: Image Collection */}
               </Grid>
             </Grid>
+            )
+            }
           </Grid>
         </div>
       </div>
-      <div className={classes.tableContainer}>
-
-        <div className={classes.tableDiv}>
-          <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>ARMS AND COHORTS</span>
-          </div>
-          <Grid item xs={12}>
-            <Grid container>
-              <Grid item xs={12} id="table_cohort_dosing">
-                <MuiThemeProvider theme={computedTheme}>
-                  <Typography>
-                    <CustomDataTable
-                      data={cohortAndDosingTableData.sort(
-                        (a, b) => studyDetailSorting(a.arm, b.arm),
-                      )}
-                      columns={table1.columns}
-                      options={{ ...tableOneOptions, ...textLabels }}
-                    />
-                  </Typography>
-                </MuiThemeProvider>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography />
+      {
+      (!isStudyUnderEmbargo(studyData.study_disposition))
+      && (
+      <>
+        <div className={classes.tableContainer}>
+          <div className={classes.tableDiv}>
+            <div className={classes.tableTitle}>
+              <span className={classes.tableHeader}>ARMS AND COHORTS</span>
+            </div>
+            <Grid item xs={12}>
+              <Grid container>
+                <Grid item xs={12} id="table_cohort_dosing">
+                  <MuiThemeProvider theme={computedTheme}>
+                    <Typography>
+                      <CustomDataTable
+                        data={cohortAndDosingTableData.sort(
+                          (a, b) => studyDetailSorting(a.arm, b.arm),
+                        )}
+                        columns={table1.columns}
+                        options={{ ...tableOneOptions, ...textLabels }}
+                      />
+                    </Typography>
+                  </MuiThemeProvider>
+                </Grid>
+                <Grid item xs={8}>
+                  <Typography />
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </div>
         </div>
-      </div>
-      <div className={classes.tableContainer2}>
-        <div className={classes.tableDiv}>
-          <Grid item xs={12}>
-            <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
-            </div>
-          </Grid>
-          <Grid item xs={12} id="table_associated_files">
-            <MuiThemeProvider theme={computedTheme}>
-              <GridWithFooter
-                data={fileTableData}
-                title=""
-                columns={getColumns(table2, classes, fileTableData)}
-                options={{ ...tableTwoOptions, ...textLabels }}
-                customOnRowsSelect={table2.customOnRowsSelect}
-                openSnack={openSnack}
-                closeSnack={closeSnack}
-                disableRowSelection={table2.disableRowSelection}
-                buttonText={table2.buttonText}
-                saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
-                ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
-                DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
-                tooltipMessage={table2.tooltipMessage}
-                tooltipContent={tooltipContent}
-                showtooltip
-                primaryKeyIndex={table2.primaryKeyIndex}
-              />
-            </MuiThemeProvider>
-          </Grid>
+        <div className={classes.tableContainer2}>
+          <div className={classes.tableDiv}>
+            <Grid item xs={12}>
+              <div className={classes.tableTitle}>
+                <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
+              </div>
+            </Grid>
+            <Grid item xs={12} id="table_associated_files">
+              <MuiThemeProvider theme={computedTheme}>
+                <GridWithFooter
+                  data={fileTableData}
+                  title=""
+                  columns={columns2}
+                  options={{ ...tableTwoOptions, ...textLabels }}
+                  customOnRowsSelect={table2.customOnRowsSelect}
+                  openSnack={openSnack}
+                  closeSnack={closeSnack}
+                  disableRowSelection={table2.disableRowSelection}
+                  buttonText={table2.buttonText}
+                  saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
+                  ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
+                  DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
+                  tooltipMessage={table2.tooltipMessage}
+                  tooltipContent={tooltipContent}
+                  showtooltip
+                  primaryKeyIndex={table2.primaryKeyIndex}
+                />
+              </MuiThemeProvider>
+            </Grid>
+          </div>
         </div>
-      </div>
+      </>
+      )
+    }
     </>
   );
 };
@@ -446,6 +505,68 @@ const styles = (theme) => ({
     marginTop: '30px',
     border: '#81a6b9 2px solid',
     background: '#81a6b9',
+  },
+  headerItems: {
+    width: '250px',
+    float: 'right',
+  },
+  headerItemAccessionId: {
+    paddingTop: '10px',
+    '& span': {
+      margin: '40px 20px',
+      color: '#5e8ca5',
+    },
+  },
+  embargoIcon: {
+    position: 'absolute',
+    color: 'white',
+    top: '-12px',
+    backgroundColor: '#de7328',
+  },
+  embargo: {
+    color: '#BB2040',
+    float: 'right',
+    background: '#fff6f6',
+    width: '180px',
+    height: '33px',
+    marginTop: '25px',
+    fontWight: 'bolder',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+    paddingTop: '5px',
+    textAlign: 'center',
+    border: '3px solid #BB2040',
+    '& h4': {
+      display: 'inline ! important',
+      fontWeight: '900',
+    },
+  },
+  embargoFileIcon: {
+    width: '20px',
+    float: 'right',
+    marginLeft: '5px',
+  },
+  headerBar: {
+    fontWeight: '10',
+    color: '#5e8ca5',
+    margin: '0px 15px 0 15px',
+  },
+  headerAccessionItem: {
+    borderRadius: '100px',
+    border: '2px solid',
+    textAlign: 'center',
+    padding: '0 16px',
+    background: 'rgb(203 226 238 / 11%)',
+    fontSize: '15px',
+  },
+  accessionLabel: {
+    fontSize: '14px',
+    fontWeight: '100',
+    color: '#5e8ca5',
+  },
+  accessionValue: {
+    fontSize: '13px',
+    fontWeight: '800',
   },
   paddingLeft8: {
     paddingLeft: '8px',
@@ -490,7 +611,7 @@ const styles = (theme) => ({
     margin: 'auto',
     float: 'left',
     marginLeft: '110px',
-    width: 'calc(100% - 265px)',
+    width: 'calc(100% - 465px)',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
@@ -533,8 +654,8 @@ const styles = (theme) => ({
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
-    float: 'right',
     marginTop: '15px',
+    float: 'right',
     width: '125px',
     height: '33px',
     background: '#F6F4F4',

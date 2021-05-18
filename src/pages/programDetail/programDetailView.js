@@ -3,11 +3,12 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import {
   CustomDataTable,
   cn,
   getOptions,
-  getColumns,
+  manipulateLinks,
 } from 'bento-components';
 import _ from 'lodash';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -23,6 +24,7 @@ import {
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
+import { isStudyUnderEmbargo } from '../study/utils';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -43,10 +45,6 @@ const computedTheme = createMuiTheme({
 
 const ProgramView = ({ classes, data }) => {
   const programDetail = data.program[0];
-
-  const redirectTo = (study) => {
-    filterCasePageOnStudyCode(study.rowData[1]);
-  };
 
   const stat = {
     numberOfStudies: data.studyCountOfProgram,
@@ -70,6 +68,65 @@ const ProgramView = ({ classes, data }) => {
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const tableOptions = getOptions(table, classes);
 
+  const toolTipIcon = () => (
+    <span dataText="Under Embargo" dataAttr="" className={classes.embargoIcon}>
+      <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+    </span>
+  );
+
+  const customStudyCodeLink = (column, value, tableMeta) => (
+    <>
+      <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
+        {value}
+      </Link>
+      {
+        isStudyUnderEmbargo(tableMeta.rowData[5])
+          && toolTipIcon(cn(classes.embargoToolTip))
+      }
+    </>
+  );
+
+  const customCaseNumbLink = (column, value, tableMeta) => (
+    isStudyUnderEmbargo(tableMeta.rowData[5])
+      ? (
+        toolTipIcon(cn(classes.embargoToolTip))
+      )
+      : (
+        <Link
+          to={(location) => ({ ...location, pathname: '/cases' })}
+          className={classes.buttonCaseNumb}
+          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[1])}
+        >
+          {value}
+        </Link>
+      )
+  );
+
+  const updatedTableWithLinks = manipulateLinks(table.columns);
+  const columns = updatedTableWithLinks.map((column) => ({
+    name: column.dataField,
+    label: column.header,
+    options: {
+      display: column.display,
+      viewColumns: column.viewColumns,
+      customBodyRender: (value, tableMeta) => (
+        <>
+          {
+            column.internalLink ? (
+              column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
+                : customStudyCodeLink(column, value, tableMeta)
+            )
+              : (
+                (`${value}` !== 'null') ? `${value}` : ''
+              )
+          }
+        </>
+      ),
+    },
+  }));
+  // const columns = updateColumns(getColumns(table, classes, data,
+  // '', '/cases', redirectTo), table.columns);
+
   return (
     <>
       <StatsView data={stat} />
@@ -91,7 +148,6 @@ const ProgramView = ({ classes, data }) => {
             </div>
             <CustomBreadcrumb data={breadCrumbJson} />
           </div>
-
         </div>
 
         <div className={classes.detailContainer}>
@@ -125,7 +181,7 @@ const ProgramView = ({ classes, data }) => {
             <MuiThemeProvider theme={computedTheme}>
               <CustomDataTable
                 data={data.studiesByProgramId}
-                columns={getColumns(table, classes, data, '', '/cases', redirectTo)}
+                columns={columns}
                 options={{ ...tableOptions, ...textLabels }}
               />
             </MuiThemeProvider>
@@ -141,6 +197,78 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     textDecoration: 'none',
     color: '#DC762F',
+    float: 'left',
+    marginRight: '5px',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  embargoFileIcon: {
+    width: '20px',
+  },
+  embargoToolTip: {
+    visibility: 'hidden',
+    fontWeight: '500',
+    zIndex: '400',
+    background: '#fff',
+    border: '2px solid #A61401',
+    borderRadius: '7px',
+    fontSize: '12px',
+    width: '110px',
+    padding: '5px 0px 0px 2px',
+    marginTop: '-30px',
+    marginLeft: '-100px',
+  },
+  embargoIcon: {
+    position: 'relative',
+    textAlign: 'center',
+    '&:before': {
+      content: 'attr(dataText)',
+      position: 'absolute',
+      transform: 'translateY(-50%)',
+      left: '100%',
+      marginLeft: '15px',
+      width: '150px',
+      fontSize: '15px',
+      padding: '0 10px 0 10px',
+      border: '2px solid #708090d4',
+      background: '#fff',
+      color: '#194563d9',
+      textAlign: 'center',
+      borderRadius: '5px',
+      display: 'none',
+    },
+    '&:after': {
+      content: 'attr(dataAttr)',
+      position: 'absolute',
+      width: '10px',
+      left: '100%',
+      color: '#fff',
+      top: '-32%',
+      transform: 'translateY(-50%)',
+      borderTop: '5px solid transparent',
+      borderRight: '10px solid #708090d4',
+      borderBottom: '5px solid transparent',
+      marginLeft: '6px',
+      display: 'none',
+    },
+    '&:hover': {
+      '&:before': {
+        display: 'block',
+      },
+      '&:after': {
+        display: 'block',
+      },
+    },
+  },
+  buttonCaseNumb: {
+    background: 'none!important',
+    border: 'none',
+    padding: '0!important',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    color: '#DC762F',
+    cursor: 'pointer',
     '&:hover': {
       textDecoration: 'underline',
     },

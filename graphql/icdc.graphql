@@ -747,6 +747,7 @@ type SearchResult {
 type GroupCount {
   group: String
   count: Int
+  code: String
 }
 
 type StudyInfo {
@@ -987,7 +988,7 @@ type QueryType {
   ): [GroupCount] @cypher(statement: """
     MATCH (s:study)
     WHERE s.study_disposition = 'Unrestricted'
-    WITH collect(DISTINCT s.clinical_study_designation) AS groups
+    WITH collect(DISTINCT s) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE //(size($study) = 0 OR s.clinical_study_designation IN $study)
          (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
@@ -1008,12 +1009,13 @@ type QueryType {
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
     WITH DISTINCT c, s, groups
-    WITH s.clinical_study_designation AS count_group,
+    WITH s AS count_group,
          count(c) AS count,
          groups
     UNWIND groups AS group
-    RETURN group,
-         SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
+    RETURN  group.clinical_study_designation AS group,
+            group.accession_id AS code,
+            SUM(CASE count_group WHEN group THEN count ELSE 0 END) AS count
   """)
 
   filterCaseCountByStudyType(

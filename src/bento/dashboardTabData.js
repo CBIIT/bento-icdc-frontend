@@ -432,7 +432,8 @@ caseCountByDiseaseSite{
 }
 filterCaseCountByStudyCode{
   group,
-  count
+  count,
+  code
 }
 filterCaseCountByStudyType{
   group,
@@ -516,6 +517,7 @@ export const FILTER_GROUP_QUERY = gql`
     caseCountByStudyCode(case_ids: $case_ids){
       group
       count
+      code
   }
   caseCountByDiagnosis(case_ids: $case_ids){
     group,
@@ -626,6 +628,7 @@ filterCaseCountByStudyCode (
 ) {
     group
     count
+    code
 }
 filterCaseCountByStudyType (
   study: $study, 

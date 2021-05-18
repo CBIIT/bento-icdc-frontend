@@ -284,6 +284,7 @@ export default {
       },
       responsiveBase: {
         transform: 'rotateX(180deg)',
+        overflow: 'none',
       },
       tableRoot: {
         transform: 'rotateX(180deg)',

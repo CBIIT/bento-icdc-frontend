@@ -226,6 +226,8 @@ const FacetPanel = ({ classes }) => {
                   />
                   <div className={classes.panelDetailText}>
                     {`${checkboxItem.name}`}
+                    { checkboxItem.code
+                    && checkboxItem.code }
                     <span style={{ color: facetSectionVariables[sideBarItem.section].color ? facetSectionVariables[sideBarItem.section].color : '#137fbe' }}>
                       &nbsp;
                       {`(${checkboxItem.subjects})`}

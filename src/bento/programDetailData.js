@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 // A maximum of 6 leftPanelattributes are allowed
 const pageData = {
   headerIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Programs.svg',
+  embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Embargo-File.svg',
 };
 
 // --------------- Table configuration --------------
@@ -18,23 +19,41 @@ const table = {
     {
       dataField: 'program_id',
       header: 'Program',
+      display: true,
     },
     {
       dataField: 'clinical_study_designation',
       header: 'Study Code',
       link: '/study/{clinical_study_designation}',
+      viewColumns: false,
+      display: true,
     },
     {
       dataField: 'clinical_study_name',
       header: 'Study Name',
+      display: true,
     },
     {
       dataField: 'clinical_study_type',
       header: 'Study Type',
+      display: true,
+    },
+    {
+      dataField: 'accession_id',
+      header: 'Accession ID',
+      display: true,
+    },
+    {
+      dataField: 'study_disposition',
+      header: 'Study Disposition',
+      display: false,
     },
     {
       dataField: 'numberOfCases',
       header: 'Cases',
+      link: '/cases',
+      totalNumberOfCases: true,
+      display: true,
     },
   ],
 };
@@ -78,6 +97,8 @@ query program($programTitle: String!) {
       clinical_study_name
       clinical_study_description
       clinical_study_type
+      accession_id
+      study_disposition
       date_of_iacuc_approval
       dates_of_conduct
       numberOfCases
