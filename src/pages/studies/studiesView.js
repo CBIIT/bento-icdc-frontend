@@ -16,6 +16,7 @@ import {
 import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import { isStudyUnderEmbargo } from '../study/utils';
+import arrowIcon from '../../assets/icons/arrow-icon.png';
 
 const Studies = ({ classes, data }) => {
   // TBD
@@ -23,7 +24,7 @@ const Studies = ({ classes, data }) => {
   // const columns = updateColumns(getColumns(pageData.table, classes, data,
   // pageData.externalLinkIcon, '/cases', redirectTo), pageData.table.columns);
   const toolTipIcon = () => (
-    <span dataText="Under Embargo" dataAttr="" className={classes.embargoIcon}>
+    <span dataText="Under Embargo" dataAttr="UE" className={classes.embargoIcon}>
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </span>
   );
@@ -162,9 +163,9 @@ const styles = (theme) => ({
       width: '150px',
       fontSize: '15px',
       padding: '0 10px 0 10px',
-      border: '2px solid #708090d4',
+      border: '3px solid #3131314a',
       background: '#fff',
-      color: '#194563d9',
+      color: '##35373b',
       textAlign: 'center',
       borderRadius: '5px',
       display: 'none',
@@ -172,15 +173,14 @@ const styles = (theme) => ({
     '&:after': {
       content: 'attr(dataAttr)',
       position: 'absolute',
-      width: '10px',
+      width: '25px',
       left: '100%',
-      color: '#fff',
+      color: '#fff0',
       top: '-32%',
       transform: 'translateY(-50%)',
-      borderTop: '5px solid transparent',
-      borderRight: '10px solid #708090d4',
-      borderBottom: '5px solid transparent',
-      marginLeft: '6px',
+      marginLeft: '-7px',
+      backgroundImage: `url(${arrowIcon})`,
+      backgroundSize: '30px 20px',
       display: 'none',
     },
     '&:hover': {
