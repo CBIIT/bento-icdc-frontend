@@ -228,7 +228,7 @@ const StudyDetailView = ({ classes, data }) => {
             isStudyUnderEmbargo(studyData.study_disposition)
               ? (
                 <div className={classes.embargo}>
-                  <span className={classes.embarLabel}> UNDER EMBARGO </span>
+                  <h4 className={classes.embarLabel}> UNDER EMBARGO </h4>
                   <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
                 </div>
               )
@@ -323,6 +323,9 @@ const StudyDetailView = ({ classes, data }) => {
                 </Grid>
               </Grid>
             </Grid>
+            {
+            (!isStudyUnderEmbargo(studyData.study_disposition))
+            && (
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerRightTop}>
@@ -421,68 +424,76 @@ const StudyDetailView = ({ classes, data }) => {
                 {/* END: Image Collection */}
               </Grid>
             </Grid>
+            )
+            }
           </Grid>
         </div>
       </div>
-      <div className={classes.tableContainer}>
-
-        <div className={classes.tableDiv}>
-          <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>ARMS AND COHORTS</span>
-          </div>
-          <Grid item xs={12}>
-            <Grid container>
-              <Grid item xs={12} id="table_cohort_dosing">
-                <MuiThemeProvider theme={computedTheme}>
-                  <Typography>
-                    <CustomDataTable
-                      data={cohortAndDosingTableData.sort(
-                        (a, b) => studyDetailSorting(a.arm, b.arm),
-                      )}
-                      columns={table1.columns}
-                      options={{ ...tableOneOptions, ...textLabels }}
-                    />
-                  </Typography>
-                </MuiThemeProvider>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography />
+      {
+      (!isStudyUnderEmbargo(studyData.study_disposition))
+      && (
+      <>
+        <div className={classes.tableContainer}>
+          <div className={classes.tableDiv}>
+            <div className={classes.tableTitle}>
+              <span className={classes.tableHeader}>ARMS AND COHORTS</span>
+            </div>
+            <Grid item xs={12}>
+              <Grid container>
+                <Grid item xs={12} id="table_cohort_dosing">
+                  <MuiThemeProvider theme={computedTheme}>
+                    <Typography>
+                      <CustomDataTable
+                        data={cohortAndDosingTableData.sort(
+                          (a, b) => studyDetailSorting(a.arm, b.arm),
+                        )}
+                        columns={table1.columns}
+                        options={{ ...tableOneOptions, ...textLabels }}
+                      />
+                    </Typography>
+                  </MuiThemeProvider>
+                </Grid>
+                <Grid item xs={8}>
+                  <Typography />
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </div>
         </div>
-      </div>
-      <div className={classes.tableContainer2}>
-        <div className={classes.tableDiv}>
-          <Grid item xs={12}>
-            <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
-            </div>
-          </Grid>
-          <Grid item xs={12} id="table_associated_files">
-            <MuiThemeProvider theme={computedTheme}>
-              <GridWithFooter
-                data={fileTableData}
-                title=""
-                columns={columns2}
-                options={{ ...tableTwoOptions, ...textLabels }}
-                customOnRowsSelect={table2.customOnRowsSelect}
-                openSnack={openSnack}
-                closeSnack={closeSnack}
-                disableRowSelection={table2.disableRowSelection}
-                buttonText={table2.buttonText}
-                saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
-                ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
-                DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
-                tooltipMessage={table2.tooltipMessage}
-                tooltipContent={tooltipContent}
-                showtooltip
-                primaryKeyIndex={table2.primaryKeyIndex}
-              />
-            </MuiThemeProvider>
-          </Grid>
+        <div className={classes.tableContainer2}>
+          <div className={classes.tableDiv}>
+            <Grid item xs={12}>
+              <div className={classes.tableTitle}>
+                <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
+              </div>
+            </Grid>
+            <Grid item xs={12} id="table_associated_files">
+              <MuiThemeProvider theme={computedTheme}>
+                <GridWithFooter
+                  data={fileTableData}
+                  title=""
+                  columns={columns2}
+                  options={{ ...tableTwoOptions, ...textLabels }}
+                  customOnRowsSelect={table2.customOnRowsSelect}
+                  openSnack={openSnack}
+                  closeSnack={closeSnack}
+                  disableRowSelection={table2.disableRowSelection}
+                  buttonText={table2.buttonText}
+                  saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
+                  ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
+                  DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
+                  tooltipMessage={table2.tooltipMessage}
+                  tooltipContent={tooltipContent}
+                  showtooltip
+                  primaryKeyIndex={table2.primaryKeyIndex}
+                />
+              </MuiThemeProvider>
+            </Grid>
+          </div>
         </div>
-      </div>
+      </>
+      )
+    }
     </>
   );
 };
@@ -513,18 +524,22 @@ const styles = (theme) => ({
     backgroundColor: '#de7328',
   },
   embargo: {
-    color: '#6E6E6E',
+    color: '#BB2040',
     float: 'right',
-    background: '#f3f3f3',
+    background: '#fff6f6',
     width: '180px',
     height: '33px',
-    fontSize: '15px',
     marginTop: '25px',
     fontWight: 'bolder',
     paddingLeft: '10px',
     paddingRight: '10px',
     paddingTop: '5px',
     textAlign: 'center',
+    border: '3px solid #BB2040',
+    '& h4': {
+      display: 'inline ! important',
+      fontWeight: '900',
+    },
   },
   embargoFileIcon: {
     width: '20px',
