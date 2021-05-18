@@ -489,8 +489,8 @@ type QueryType {
     file_format: [String] = [],
   ): [GroupCount] @cypher(statement: """
     MATCH (s:study)
-    WITH collect(DISTINCT s) AS groups
     WHERE s.study_disposition = 'Unrestricted'
+    WITH collect(DISTINCT s) AS groups
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE //(size($study) = 0 OR s.clinical_study_designation IN $study)
          (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
