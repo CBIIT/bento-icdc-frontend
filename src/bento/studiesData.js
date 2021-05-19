@@ -35,11 +35,11 @@ export const pageData = {
         header: 'Study Code',
         link: '/study/{clinical_study_designation}',
         display: true,
+        viewColumns: false,
       },
       {
         dataField: 'program_id',
         header: 'Program',
-        viewColumns: false,
         display: true,
       },
       {

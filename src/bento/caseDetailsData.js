@@ -62,6 +62,7 @@ export const table1 = {
       sort: 'asc',
       primary: true,
       display: true,
+      viewColumns: false,
     },
     {
       dataField: 'sample_site',
@@ -151,6 +152,7 @@ export const table2 = {
     {
       dataField: 'file_name',
       header: 'File Name',
+      viewColumns: false,
     },
     {
       dataField: 'file_type',
