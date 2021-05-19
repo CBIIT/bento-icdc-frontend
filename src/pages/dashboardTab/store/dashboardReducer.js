@@ -892,7 +892,7 @@ const reducers = {
     },
   }),
   CLEAR_ALL_FILTER_AND_TABLE_SELECTION: (state, item) => {
-    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
+    const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data, facetSearchData, 'count'), item);
     fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
     return item.data
       ? {
