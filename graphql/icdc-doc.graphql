@@ -1095,7 +1095,8 @@ type QueryType {
     sample_pathology: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
-    file_format: [String] = []
+    file_format: [String] = [],
+    first: Int = 100
   ): SearchResult 
 
   casesInList(case_ids: [String!]!): [CaseOverview] 

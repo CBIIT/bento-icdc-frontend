@@ -1529,7 +1529,8 @@ type QueryType {
     sample_pathology: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
-    file_format: [String] = []
+    file_format: [String] = [],
+    first: Int = 100
   ): SearchResult @cypher(statement: """
     MATCH (p:program)<--(s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
@@ -1592,7 +1593,7 @@ type QueryType {
            weight: weight,
            response_to_treatment: response_to_treatment,
            disease_site: disease_site
-         }))
+         }))[0..$first]
     }
   """, passThrough:true)
 
