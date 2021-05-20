@@ -793,17 +793,17 @@ type QueryType {
   sampleCountOfCase(case_id: String!): Int 
 
   "Count by group"
-  caseCountByStudyCode(case_ids: [String] = []): [GroupCount] 
+  caseCountByStudyCode(case_ids: [String] = [""]): [GroupCount] 
 
-  caseCountByDiagnosis(case_ids: [String] = []): [GroupCount] 
+  caseCountByDiagnosis(case_ids: [String] = [""]): [GroupCount] 
 
-  caseCountByGender(case_ids: [String] = []): [GroupCount] 
+  caseCountByGender(case_ids: [String] = [""]): [GroupCount] 
 
-  caseCountByBreed(case_ids: [String] = []): [GroupCount] 
+  caseCountByBreed(case_ids: [String] = [""]): [GroupCount] 
 
-  caseCountByNeuteredStatus(case_ids: [String] = []): [GroupCount] 
+  caseCountByNeuteredStatus(case_ids: [String] = [""]): [GroupCount] 
 
-  caseCountByStageOfDisease(case_ids: [String] = []): [GroupCount] 
+  caseCountByStageOfDisease(case_ids: [String] = [""]): [GroupCount] 
 
   caseCountByDiseaseSite(case_ids: [String] = []): [GroupCount] 
 
@@ -1075,11 +1075,11 @@ type QueryType {
 
   caseDetail(case_id: String): CaseDetail 
 
-  caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
+  caseOverview(study_codes: [String] = [""], breeds: [String] = [""], diagnoses: [String] = [""], sexes: [String] = [""]): [CaseOverview] 
 
-  caseOverviewPaged (case_ids: [String] = [], order_by: String = ""): [CaseOverview2] 
+  caseOverviewPaged (case_ids: [String] = [""], order_by: String = ""): [CaseOverview2] 
 
-  caseOverviewPagedDesc (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] 
+  caseOverviewPagedDesc (case_ids: [String] = [""], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] 
 
   searchCases (
     study: [String] = [],
@@ -1122,15 +1122,15 @@ type QueryType {
 
   studyStats: [StudyStat] 
 
-  fileOverview(case_ids: [String] = [], file_uuids: [String] = [], order_by: String = ""): [FileOverview] 
+  fileOverview(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] 
 
-  fileOverviewDesc(case_ids: [String] = [], file_uuids: [String] = [], order_by: String = ""): [FileOverview] 
+  fileOverviewDesc(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] 
 
-  sampleOverview(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = ""): [SampleOverview] 
+  sampleOverview(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] 
 
-  sampleOverviewDesc(case_ids: [String] = [], sample_ids: [String] = [], order_by: String = ""): [SampleOverview] 
+  sampleOverviewDesc(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] 
 
-  fileIdsFromFileName(file_name: [String] = [], order_by: String ="file_name"): [FileOverview] 
+  fileIdsFromFileName(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
 
-  fileIdsFromFileNameDesc(file_name: [String] = [], order_by: String ="file_name"): [FileOverview] 
+  fileIdsFromFileNameDesc(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
 }
