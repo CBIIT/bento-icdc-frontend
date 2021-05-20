@@ -10,8 +10,8 @@ export const tooltipContent = {
 
 export const embargoFileIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Embargo-File.svg';
 export const embargoHeaderIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-embargo-study-header.svg';
-export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-StudiesDetail.svg';
-export const externalIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/study/Program-ExternalLink.svg';
+export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg';
+export const externalIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/cart_ExternalLink.svg';
 
 // --------------- Table 1 configuration --------------
 export const table1 = {

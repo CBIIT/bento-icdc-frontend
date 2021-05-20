@@ -8,7 +8,7 @@ export const tooltipContent = {
   alt: 'tooltipIcon',
 };
 
-export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-CaseDetail.svg';
+export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-CaseDetail.svg';
 
 // Ideal size for externalLinkIcon is 16x16 px
 export const externalLinkIcon = {
