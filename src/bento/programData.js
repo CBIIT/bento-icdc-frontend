@@ -2,25 +2,25 @@ import gql from 'graphql-tag';
 
 const pageData = {
   headerTitle: 'Programs',
-  headerIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-Programs.svg',
-  externalIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/program_ExternalLink.svg',
+  headerIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Programs.svg',
+  externalIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Program-ExternalLink.svg',
   COP: {
     prgramName: 'COP',
-    primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png',
+    primaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cop/Program_Image.COP.png',
     primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
-    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.cop.jpg',
+    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cop/copSecondary.jpg',
   },
   CMCP: {
     prgramName: 'CMCP',
-    primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png',
+    primaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cmcp/CMCP.Program_Image.png',
     primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
-    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg',
+    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/cmcp/CCMP.Program_Detail_Image.jpg',
   },
   PCCR: {
     prgramName: 'PCCR',
-    primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png',
+    primaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/pccr/Perdue.ProgramListing_Image.png',
     primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
-    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg',
+    secondaryImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/programCards/pccr/Perdue.ProgramDetail_Image.jpg',
   },
 };
 

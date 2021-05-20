@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const pageData = {
   embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Embargo-File.svg',
   studyListingIcon: {
-    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg',
+    src: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-StudiesDetail.svg',
     alt: 'ICDC Studies detail header logo',
   },
   externalLinkIcon: {
