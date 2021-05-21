@@ -1,6 +1,6 @@
 export default {
-  globalHeaderLogo: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/header/icdc_nih_logo.svg',
+  globalHeaderLogo: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/icdc_nih_logo.svg',
   globalHeaderLogoLink: '/',
   globalHeaderLogoAltText: 'ICDC Logo',
-  globalHeaderImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/header/Canine3000.png',
+  globalHeaderImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/header_Canine3000.png',
 };
