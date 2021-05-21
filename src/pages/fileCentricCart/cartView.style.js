@@ -39,8 +39,6 @@ export default (theme) => ({
     margin: '0px 0px 0px 2px',
   },
   helpIcon: {
-    position: 'absolute',
-    right: '60%',
     verticalAlign: 'top',
     width: '17px',
     zIndex: '600',
@@ -179,5 +177,8 @@ export default (theme) => ({
   },
   marginTopNegative20: {
     marginTop: '-38px',
+  },
+  helpBtn: {
+    padding: '0px',
   },
 });

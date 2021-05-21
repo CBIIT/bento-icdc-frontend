@@ -225,7 +225,7 @@ const cartView = ({
                   variant="filled"
                   onChange={(e) => setUserComments(e.target.value)}
                 />
-                <IconButton aria-label="help" onFocus={() => toggleMessageStatus('userComments', 'open')} onMouseEnter={() => toggleMessageStatus('userComments', 'open')} onMouseOver={() => toggleMessageStatus('userComments', 'open')} onMouseLeave={() => toggleMessageStatus('userComments', 'close')}>
+                <IconButton className={classes.helpBtn} aria-label="help" onFocus={() => toggleMessageStatus('userComments', 'open')} onMouseEnter={() => toggleMessageStatus('userComments', 'open')} onMouseOver={() => toggleMessageStatus('userComments', 'open')} onMouseLeave={() => toggleMessageStatus('userComments', 'close')}>
                   <img
                     onMouseEnter={() => toggleMessageStatus('userComments', 'open')}
                     onMouseOver={() => toggleMessageStatus('userComments', 'open')}
@@ -254,7 +254,7 @@ const cartView = ({
                   {myFilesPageData.downButtonText}
                   {' '}
                 </button>
-                <IconButton aria-label="help" onFocus={() => toggleMessageStatus('downloadBtn', 'open')} onMouseEnter={() => toggleMessageStatus('downloadBtn', 'open')} onMouseOver={() => toggleMessageStatus('downloadBtn', 'open')} onMouseLeave={() => toggleMessageStatus('downloadBtn', 'close')}>
+                <IconButton className={classes.helpBtn} aria-label="help" onFocus={() => toggleMessageStatus('downloadBtn', 'open')} onMouseEnter={() => toggleMessageStatus('downloadBtn', 'open')} onMouseOver={() => toggleMessageStatus('downloadBtn', 'open')} onMouseLeave={() => toggleMessageStatus('downloadBtn', 'close')}>
                   <img
                     onMouseEnter={() => toggleMessageStatus('downloadBtn', 'open')}
                     onMouseOver={() => toggleMessageStatus('downloadBtn', 'open')}
