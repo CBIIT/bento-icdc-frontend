@@ -118,26 +118,21 @@ export default (theme) => ({
     fontStyle: 'normal',
     fontFamily: "'Lato Regular','Raleway', sans-serif",
     fontWeight: 'bold',
-    paddingLeft: '50px',
+    paddingRight: '-15px',
     borderBottom: '#024466 3px solid',
     letterSpacing: '0.06em',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F5F5F5',
     width: '120px',
     textAlign: 'center',
   },
   removeHeadCell: {
-    cursor: 'pointer',
     display: 'flex',
-    verticalAlign: 'top',
+    alignContent: 'space-around',
   },
   removeHeadCellText: {
-    display: 'inline-block',
-    cursor: 'default',
     lineHeight: '37px',
   },
   removeHeadCellIcon: {
-    ursor: 'pointer',
-    display: 'flex',
     marginTop: '1px',
     verticalAlign: 'top',
   },
@@ -169,7 +164,8 @@ export default (theme) => ({
     marginBottom: '5px',
   },
   paddingLeftRight: {
-    padding: '7px',
+    paddingLeft: '30px',
+    paddingRight: '30px',
   },
   buttonGroup: {
     position: 'relative',
@@ -181,5 +177,4 @@ export default (theme) => ({
   marginTopNegative20: {
     marginTop: '-38px',
   },
-
 });
