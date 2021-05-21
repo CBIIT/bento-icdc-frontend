@@ -208,7 +208,7 @@ const StudyDetailView = ({ classes, data }) => {
                 <>
                   <span className={classes.headerBar}> | </span>
                   <span className={classes.headerAccessionItem}>
-                    <span className={classes.accessionLabel}>{'Accession Id : '}</span>
+                    <span className={classes.accessionLabel}>{'Accession ID : '}</span>
                     <span className={classes.accessionValue}>{studyData.accession_id}</span>
                   </span>
                 </>
