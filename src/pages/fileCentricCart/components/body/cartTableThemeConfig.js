@@ -16,6 +16,7 @@ export default ({
   overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
   overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px' } };
   overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
+  overridesObj.MuiTablePagination.actions.marginRight = '-5px';
 
   style.push(overridesObj);
   const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });

@@ -6,12 +6,11 @@ export default (theme) => ({
     borderTopRightRadius: '20px',
     paddingTop: '30px',
     margin: 'auto auto 30px auto',
-    maxWidth: '1440px',
+    maxWidth: '93%',
     background: '#f3f3f4',
     paddingBottom: '30px',
   },
   tableWrapper: {
-    maxWidth: '1440px',
     margin: '0 30px',
     backgroundColor: theme.palette.background.paper,
   },
@@ -119,7 +118,7 @@ export default (theme) => ({
     fontStyle: 'normal',
     fontFamily: "'Lato Regular','Raleway', sans-serif",
     fontWeight: 'bold',
-    paddingLeft: '20px',
+    paddingLeft: '50px',
     borderBottom: '#024466 3px solid',
     letterSpacing: '0.06em',
     backgroundColor: '#f5f5f5',
@@ -170,7 +169,7 @@ export default (theme) => ({
     marginBottom: '5px',
   },
   paddingLeftRight: {
-    padding: '0 16px',
+    padding: '7px',
   },
   buttonGroup: {
     position: 'relative',
