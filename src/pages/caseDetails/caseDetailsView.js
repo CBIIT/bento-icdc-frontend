@@ -21,6 +21,7 @@ import Snackbar from '../../components/Snackbar';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import themes, { overrides } from '../../themes';
+import updateColumns from '../../utils/columnsUtil';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -96,6 +97,9 @@ const CaseDetail = ({ classes, data }) => {
 
   const tableOneOptions = getOptions(table1, classes);
   const tableTwoOptions = getOptions(table2, classes);
+  const tableOneColumns = updateColumns(getColumns(table1, classes,
+    data, externalLinkIcon), table1.columns);
+  const tableTwoColumns = updateColumns(getColumns(table2, classes, data), table2.columns);
 
   return (
     <>
@@ -466,7 +470,7 @@ const CaseDetail = ({ classes, data }) => {
                   </div>
                   <GridWithFooter
                     data={data.samplesByCaseId}
-                    columns={getColumns(table1, classes, data, externalLinkIcon)}
+                    columns={tableOneColumns}
                     options={{ ...tableOneOptions, ...textLabels }}
                     customOnRowsSelect={table1.customOnRowsSelect}
                     openSnack={openSnack}
@@ -496,7 +500,7 @@ const CaseDetail = ({ classes, data }) => {
                     </div>
                     <GridWithFooter
                       data={files}
-                      columns={getColumns(table2, classes, data)}
+                      columns={tableTwoColumns}
                       options={{ ...tableTwoOptions, ...textLabels }}
                       customOnRowsSelect={table2.customOnRowsSelect}
                       openSnack={openSnack}

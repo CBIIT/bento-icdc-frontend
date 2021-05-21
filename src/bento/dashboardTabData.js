@@ -343,6 +343,7 @@ export const tabContainers = [
         dataField: 'study_code',
         header: 'Study Code',
         sort: 'asc',
+        link: '/study/{study_code}',
         display: true,
       },
     ],
