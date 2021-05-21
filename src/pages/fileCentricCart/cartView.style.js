@@ -39,6 +39,8 @@ export default (theme) => ({
     margin: '0px 0px 0px 2px',
   },
   helpIcon: {
+    position: 'absolute',
+    right: '60%',
     verticalAlign: 'top',
     width: '17px',
     zIndex: '600',
@@ -161,6 +163,7 @@ export default (theme) => ({
     fontSize: '15px',
     fontFamily: '"Open Sans", sans-serif',
     lineHeight: '22px',
+    width: '35%',
     marginBottom: '5px',
   },
   paddingLeftRight: {
