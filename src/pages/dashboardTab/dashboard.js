@@ -70,7 +70,7 @@ const Dashboard = ({
                         themeChanger.toggleTheme();
                       }}
                     />
-                    <IconButton aria-label="help" onFocus={() => toggleMessageStatus('open')} onMouseEnter={() => toggleMessageStatus('open')} onMouseOver={() => toggleMessageStatus('open')} onMouseLeave={() => toggleMessageStatus('close')}>
+                    <IconButton className={classes.iconButton} aria-label="help" onFocus={() => toggleMessageStatus('open')} onMouseEnter={() => toggleMessageStatus('open')} onMouseOver={() => toggleMessageStatus('open')} onMouseLeave={() => toggleMessageStatus('close')}>
                       <img
                         onMouseEnter={() => toggleMessageStatus('open')}
                         onMouseOver={() => toggleMessageStatus('open')}

@@ -6,12 +6,11 @@ export default (theme) => ({
     borderTopRightRadius: '20px',
     paddingTop: '30px',
     margin: 'auto auto 30px auto',
-    maxWidth: '1440px',
+    maxWidth: '93%',
     background: '#f3f3f4',
     paddingBottom: '30px',
   },
   tableWrapper: {
-    maxWidth: '1440px',
     margin: '0 30px',
     backgroundColor: theme.palette.background.paper,
   },
@@ -87,6 +86,7 @@ export default (theme) => ({
     border: 'none',
     verticalAlign: 'top',
     marginTop: '6px',
+    marginBottom: '19px',
   },
   popUpWindowText: {
     fontFamily: 'Lato',
@@ -119,28 +119,26 @@ export default (theme) => ({
     fontStyle: 'normal',
     fontFamily: "'Lato Regular','Raleway', sans-serif",
     fontWeight: 'bold',
-    paddingLeft: '20px',
+    paddingRight: '-15px',
     borderBottom: '#024466 3px solid',
     letterSpacing: '0.06em',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F5F5F5',
     width: '120px',
     textAlign: 'center',
   },
   removeHeadCell: {
-    cursor: 'pointer',
     display: 'flex',
-    verticalAlign: 'top',
   },
   removeHeadCellText: {
-    display: 'inline-block',
-    cursor: 'default',
     lineHeight: '37px',
+    position: 'relative',
+    left: '15px',
   },
   removeHeadCellIcon: {
-    ursor: 'pointer',
-    display: 'flex',
     marginTop: '1px',
     verticalAlign: 'top',
+    left: '15px',
+    position: 'relative',
   },
   removeHeadCellIconButton: {
     color: '#A61401',
@@ -167,10 +165,12 @@ export default (theme) => ({
     fontSize: '15px',
     fontFamily: '"Open Sans", sans-serif',
     lineHeight: '22px',
+    width: '35%',
     marginBottom: '5px',
   },
   paddingLeftRight: {
-    padding: '0 16px',
+    paddingLeft: '30px',
+    paddingRight: '30px',
   },
   buttonGroup: {
     position: 'relative',
@@ -182,5 +182,7 @@ export default (theme) => ({
   marginTopNegative20: {
     marginTop: '-38px',
   },
-
+  helpBtn: {
+    padding: '0px',
+  },
 });
