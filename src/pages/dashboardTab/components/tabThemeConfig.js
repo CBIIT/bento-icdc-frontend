@@ -22,6 +22,7 @@ export default ({
     overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
     overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px' } };
     overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
+    overridesObj.MUIDataTableFooter.root.borderBottom = tableBorder;
   }
 
   const PrivateTabIndicator = {
