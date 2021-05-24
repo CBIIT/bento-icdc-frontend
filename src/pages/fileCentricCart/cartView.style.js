@@ -86,6 +86,7 @@ export default (theme) => ({
     border: 'none',
     verticalAlign: 'top',
     marginTop: '6px',
+    marginBottom: '19px',
   },
   popUpWindowText: {
     fontFamily: 'Lato',
@@ -127,14 +128,17 @@ export default (theme) => ({
   },
   removeHeadCell: {
     display: 'flex',
-    alignContent: 'space-around',
   },
   removeHeadCellText: {
     lineHeight: '37px',
+    position: 'relative',
+    left: '15px',
   },
   removeHeadCellIcon: {
     marginTop: '1px',
     verticalAlign: 'top',
+    left: '15px',
+    position: 'relative',
   },
   removeHeadCellIconButton: {
     color: '#A61401',

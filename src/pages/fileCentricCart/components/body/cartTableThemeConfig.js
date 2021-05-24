@@ -16,9 +16,8 @@ export default ({
   overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
   overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px' } };
   overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
-  overridesObj.MuiTablePagination.actions.marginRight = '-5px';
+  overridesObj.MuiTablePagination.actions.marginRight = '30px';
   overridesObj.MuiTableCell.head.paddingLeft = '30px';
-  overridesObj.MuiIconButton.root.padding = '2px 28px';
   overridesObj.MuiTableCell.body.paddingLeft = '30px';
 
   style.push(overridesObj);
