@@ -92,7 +92,7 @@ const styles = (theme) => ({
     '*::-webkit-scrollbar-thumb': {
       backgroundColor: 'rgba(94,140,165)',
       outline: '1px solid slategrey',
-      borderRadius: '10px',
+      borderRadius: '0px',
     },
   },
 });
