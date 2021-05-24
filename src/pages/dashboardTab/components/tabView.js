@@ -306,7 +306,6 @@ const TabView = ({
           />
         </Grid>
       </Grid>
-      <div><hr className={classes.hrLine} /></div>
       <Grid item xs={12} className={classes.saveButtonDivBottom}>
         <button
           type="button"
@@ -459,10 +458,6 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     marginLeft: '-5px',
-  },
-  hrLine: {
-    borderTop: '3px solid #C7621E',
-    marginTop: '1px',
   },
 });
 
