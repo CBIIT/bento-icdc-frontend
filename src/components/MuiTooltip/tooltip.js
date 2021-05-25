@@ -10,9 +10,10 @@ const tooltip = withStyles((theme) => ({
     border: '2px solid #A7AFB3',
     fontFamily: 'Open Sans',
     fontWeight: '600',
-    textAlign: 'center',
+    textAlign: 'justify',
+    textJustify: 'inter-character',
     lineHeight: '1.6',
-    padding: '10px 5px 10px 5px',
+    padding: '10px 12px 10px 12px',
   },
   arrow: {
     color: '#FFFFFF',
