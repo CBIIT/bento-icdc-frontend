@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart';
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';
+import Tooltip from '../MuiTooltip';
 
 const GridView = ({
   classes,
@@ -280,6 +281,9 @@ const GridView = ({
             columns={columns}
             title={title}
             options={finalOptions}
+            components={{
+              Tooltip,
+            }}
           />
         </Grid>
       </Grid>

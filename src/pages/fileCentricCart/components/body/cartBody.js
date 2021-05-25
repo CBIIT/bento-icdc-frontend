@@ -13,6 +13,7 @@ import {
 } from '../../../../bento/fileCentricCartWorkflowData';
 import TableThemeProvider from './cartTableThemeConfig';
 import updateColumns from '../../../../utils/columnsUtil';
+import Tooltip from '../../../../components/MuiTooltip';
 
 const CartHeader = ({
   classes,
@@ -46,6 +47,9 @@ const CartHeader = ({
         defaultSortCoulmn={defaultSortCoulmn}
         defaultSortDirection={defaultSortDirection}
         tableDownloadCSV={tableDownloadCSV}
+        components={{
+          Tooltip,
+        }}
       />
     </TableThemeProvider>
   );

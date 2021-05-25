@@ -8,7 +8,6 @@ import {
   CustomDataTable,
   getOptions,
   manipulateLinks,
-  cn,
 } from 'bento-components';
 import {
   pageData, textLabels,
@@ -17,6 +16,7 @@ import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import { isStudyUnderEmbargo } from '../study/utils';
 import arrowIcon from '../../assets/icons/arrow-icon.png';
+import Tooltip from '../../components/MuiTooltip';
 
 const Studies = ({ classes, data }) => {
   // TBD
@@ -24,9 +24,9 @@ const Studies = ({ classes, data }) => {
   // const columns = updateColumns(getColumns(pageData.table, classes, data,
   // pageData.externalLinkIcon, '/cases', redirectTo), pageData.table.columns);
   const toolTipIcon = () => (
-    <span dataText="Under Embargo" dataAttr="UE" className={classes.embargoIcon}>
+    <Tooltip title="Under Embargo" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
-    </span>
+    </Tooltip>
   );
 
   const customStudyCodeLink = (column, value, tableMeta) => (
@@ -36,7 +36,7 @@ const Studies = ({ classes, data }) => {
       </Link>
       {
         isStudyUnderEmbargo(tableMeta.rowData[5])
-          && toolTipIcon(cn(classes.embargoToolTipMsgLeft, classes.embargoToolTip))
+          && toolTipIcon()
       }
     </>
   );
@@ -44,8 +44,7 @@ const Studies = ({ classes, data }) => {
   const customCaseNumbLink = (column, value, tableMeta) => (
     isStudyUnderEmbargo(tableMeta.rowData[5])
       ? (
-        toolTipIcon(cn(classes.embargoToolTipMsgRight,
-          classes.embargoToolTip))
+        toolTipIcon()
       )
       : (
         <Link
@@ -108,6 +107,9 @@ const Studies = ({ classes, data }) => {
                   data={data[pageData.table.dataField]}
                   columns={columns}
                   options={{ ...tableOptions, ...textLabels }}
+                  components={{
+                    Tooltip,
+                  }}
                 />
               </Grid>
             </Grid>

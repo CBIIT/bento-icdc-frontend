@@ -5,35 +5,23 @@ import {
 import { ProgramSunburst, CustomActiveDonut } from 'bento-components';
 import { useTheme } from '../../components/ThemeContext';
 import Widget from '../../components/Widgets/WidgetView';
-import InvertedMessage from '../../components/InvertedMessage';
 import Stats from '../../components/Stats/DashboardStatsController';
 import SideBar from '../../components/SideBar/SideBarView';
 import { widgetsData, themeToggleTooltip } from '../../bento/dashboardData';
 import Tab from './components/tabController';
 import colors from '../../utils/colors';
+import Tooltip from '../../components/MuiTooltip';
 
 const displaywidgets = widgetsData.filter((widget) => widget.show === true).slice(0, 6);
 
 const Dashboard = ({
   classes, data, theme,
 }) => {
-  const [SwitchThemeMessageStatus, setSwitchThemeMessageStatus] = React.useState(false);
   const [collapse, setCollapse] = React.useState(true);
   const themeChanger = useTheme();
   const handleChange = () => {
     setCollapse((prev) => !prev);
   };
-
-  function toggleMessageStatus(status) {
-    return status === 'close' ? setSwitchThemeMessageStatus(false) : setSwitchThemeMessageStatus(true);
-  }
-
-  const switchThemeBtnMessageData = (
-    <span>
-      {themeToggleTooltip.switchThemeButtonMessage}
-      {' '}
-    </span>
-  );
 
   return (
     <>
@@ -52,9 +40,9 @@ const Dashboard = ({
                     <FormControlLabel
                       control={(
                         <Button className={classes.customButton} onClick={handleChange}>
-                          {collapse ? 'COLLAPSE VIEW' : 'OPEN VIEW' }
+                          {collapse ? 'COLLAPSE VIEW' : 'OPEN VIEW'}
                         </Button>
-)}
+                      )}
                     />
                     <Switch
                       classes={{
@@ -70,23 +58,15 @@ const Dashboard = ({
                         themeChanger.toggleTheme();
                       }}
                     />
-                    <IconButton className={classes.iconButton} aria-label="help" onFocus={() => toggleMessageStatus('open')} onMouseEnter={() => toggleMessageStatus('open')} onMouseOver={() => toggleMessageStatus('open')} onMouseLeave={() => toggleMessageStatus('close')}>
-                      <img
-                        onMouseEnter={() => toggleMessageStatus('open')}
-                        onMouseOver={() => toggleMessageStatus('open')}
-                        onFocus={() => toggleMessageStatus('open')}
-                        src={themeToggleTooltip.tooltipIcon}
-                        alt={themeToggleTooltip.tooltipAlt}
-                        className={classes.helpIcon}
-                      />
-                    </IconButton>
-                    { SwitchThemeMessageStatus ? (
-                      <div className={classes.switchThemeMsg}>
-                        {' '}
-                        <InvertedMessage data={switchThemeBtnMessageData} />
-                        {' '}
-                      </div>
-                    ) : ''}
+                    <Tooltip title={themeToggleTooltip.switchThemeButtonMessage} arrow placement="bottom">
+                      <IconButton className={classes.iconButton} aria-label="help">
+                        <img
+                          src={themeToggleTooltip.tooltipIcon}
+                          alt={themeToggleTooltip.tooltipAlt}
+                          className={classes.helpIcon}
+                        />
+                      </IconButton>
+                    </Tooltip>
                   </div>
                 </div>
                 <Collapse in={collapse} className={classes.backgroundShawdowWidgets}>

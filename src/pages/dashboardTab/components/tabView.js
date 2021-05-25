@@ -16,13 +16,14 @@ import {
   GET_FILES_OVERVIEW_DESC_QUERY,
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
+  tooltipContent,
 } from '../../../bento/dashboardTabData';
 import { clearTableSelections, fetchAllFileIDs, getFilesCount } from '../store/dashboardReducer';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
-import Message from '../../../components/Message';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 import updateColumns from '../../../utils/columnsUtil';
+import Tooltip from '../../../components/MuiTooltip';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
 
@@ -44,7 +45,6 @@ const TabView = ({
   toggleMessageStatus,
   BottomMessageStatus,
   selectAllToolTipStatus,
-  tabIndex,
   externalLinkIcon,
   options,
   TopMessageStatus,
@@ -207,12 +207,6 @@ const TabView = ({
     }
   }
 
-  // Calculate the properate marginTop value for the tooltip on the top
-  function tooltipStyle(text) {
-    const marginTopValue = text.length > 40 ? '-148px' : '-118px';
-    return { marginTop: marginTopValue };
-  }
-
   /*
     Presist user selection
   */
@@ -254,35 +248,27 @@ const TabView = ({
           onClick={exportFiles}
           className={classes.button}
         >
-          { buttonText }
+          {buttonText}
         </button>
-        <IconButton
-          aria-label="help"
-          className={classes.helpIconButton}
-          onMouseOver={() => toggleMessageStatus('top', 'open')}
-          onMouseEnter={() => toggleMessageStatus('top', 'open')}
-          onMouseLeave={() => toggleMessageStatus('top', 'close')}
-        >
-          {TopMessageStatus.src ? (
-            <img
-              onMouseEnter={() => toggleMessageStatus('top', 'open')}
-              onMouseOver={() => toggleMessageStatus('top', 'open')}
-              onFocus={() => toggleMessageStatus('top', 'open')}
-              src={TopMessageStatus.src}
-              alt={TopMessageStatus.alt}
-              className={classes.helpIcon}
-            />
-          ) : (
-            <HelpIcon
-              onMouseOver={() => toggleMessageStatus('top', 'open')}
-              onMouseEnter={() => toggleMessageStatus('top', 'open')}
-              onFocus={() => toggleMessageStatus('top', 'open')}
-              className={classes.helpIcon}
-              fontSize="small"
-            />
-          )}
-        </IconButton>
-
+        <Tooltip title={tooltipContent[0]} arrow placement="bottom">
+          <IconButton
+            aria-label="help"
+            className={classes.helpIconButton}
+          >
+            {TopMessageStatus.src ? (
+              <img
+                src={TopMessageStatus.src}
+                alt={TopMessageStatus.alt}
+                className={classes.helpIcon}
+              />
+            ) : (
+              <HelpIcon
+                className={classes.helpIcon}
+                fontSize="small"
+              />
+            )}
+          </IconButton>
+        </Tooltip>
       </Grid>
       <Grid container>
         <Grid item xs={12} id={tableID}>
@@ -303,6 +289,9 @@ const TabView = ({
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
             tableDownloadCSV={tableDownloadCSV}
+            components={{
+              Tooltip,
+            }}
           />
         </Grid>
       </Grid>
@@ -313,44 +302,28 @@ const TabView = ({
           onClick={exportFiles}
           className={classes.button}
         >
-          { buttonText }
+          {buttonText}
         </button>
-
-        <IconButton
-          aria-label="help"
-          className={classes.helpIconButton}
-          onMouseOver={() => toggleMessageStatus('bottom', 'open')}
-          onMouseEnter={() => toggleMessageStatus('bottom', 'open')}
-          onMouseLeave={() => toggleMessageStatus('bottom', 'close')}
-        >
-          {BottomMessageStatus.src ? (
-            <img
-              onMouseEnter={() => toggleMessageStatus('bottom', 'open')}
-              onMouseOver={() => toggleMessageStatus('bottom', 'open')}
-              onFocus={() => toggleMessageStatus('bottom', 'open')}
-              src={BottomMessageStatus.src}
-              alt={BottomMessageStatus.alt}
-              className={classes.helpIcon}
-            />
-          ) : (
-            <HelpIcon
-              onMouseEnter={() => toggleMessageStatus('bottom', 'open')}
-              onMouseOver={() => toggleMessageStatus('bottom', 'open')}
-              onFocus={() => toggleMessageStatus('bottom', 'open')}
-              className={classes.helpIcon}
-              fontSize="small"
-            />
-          )}
-        </IconButton>
+        <Tooltip title={tooltipContent[0]} arrow placement="bottom">
+          <IconButton
+            aria-label="help"
+            className={classes.helpIconButton}
+          >
+            {BottomMessageStatus.src ? (
+              <img
+                src={BottomMessageStatus.src}
+                alt={BottomMessageStatus.alt}
+                className={classes.helpIcon}
+              />
+            ) : (
+              <HelpIcon
+                className={classes.helpIcon}
+                fontSize="small"
+              />
+            )}
+          </IconButton>
+        </Tooltip>
         <div style={{ position: 'relative' }}>
-          { BottomMessageStatus.isActive
-            && tabIndex === BottomMessageStatus.currentTab.toString() ? (
-              <div className={classes.messageBottom} style={tooltipStyle(BottomMessageStatus.text)}>
-                {' '}
-                <Message data={BottomMessageStatus.text} />
-                {' '}
-              </div>
-            ) : ''}
           <Link
             rel="noreferrer"
             to={(location) => ({ ...location, pathname: '/fileCentricCart' })}

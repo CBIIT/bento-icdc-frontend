@@ -19,15 +19,13 @@ import {
 } from '../../bento/fileCentricCartWorkflowData';
 import { deleteFromCart } from './store/cart';
 import { downloadJson } from './utils';
-import Message from '../../components/Message';
 import GA from '../../utils/googleAnalytics';
+import Tooltip from '../../components/MuiTooltip';
 
 const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
 }) => {
   const [modalStatus, setModalStatus] = React.useState(false);
-  const [UserCommentsMessageStatus, setUserCommentsMessageStatus] = React.useState(false);
-  const [DownloadBtnMessageStatus, setDownloadBtnMessageStatus] = React.useState(false);
   const [removeAllMessageStatus, setRemoveAllMessageStatus] = React.useState(false);
   const [userComments, setUserComments] = React.useState('');
   async function fetchData() {
@@ -40,13 +38,6 @@ const cartView = ({
       })
       .then((result) => result.data.filesInList);
     return fetchResult;
-  }
-
-  function toggleMessageStatus(type, status) {
-    if (type === 'userComments') {
-      return status === 'close' ? setUserCommentsMessageStatus(false) : setUserCommentsMessageStatus(true);
-    }
-    return status === 'close' ? setDownloadBtnMessageStatus(false) : setDownloadBtnMessageStatus(true);
   }
 
   function toggleRemoveAllMessageStatus(status) {
@@ -121,7 +112,7 @@ const cartView = ({
                 <IconButton aria-label="help" className={classes.removeHeadCellIconButton}>
                   <ArrowDropDownIcon onClick={() => openDialogBox()} onMouseEnter={() => toggleRemoveAllMessageStatus('open')} onMouseLeave={() => toggleRemoveAllMessageStatus('close')} />
                 </IconButton>
-                { removeAllMessageStatus ? (
+                {removeAllMessageStatus ? (
                   <div className={classes.removeAllMessage}>
                     {' '}
                     Remove
@@ -140,21 +131,19 @@ const cartView = ({
     },
   }];
 
-  const userCommentsMessageData = (
-    <span>
-      {myFilesPageData.userCommentsTooltipMessage}
-      {' '}
-    </span>
-  );
-
-  const downloadBtnMessageData = (
-    <span>
-      {myFilesPageData.downloadBtnTooltipMessage}
-      {' '}
-    </span>
-  );
-
   const numberOfFilesBeDeleted = myFilesPageData.popUpWindow.showNumberOfFileBeRemoved ? fileIDs.length : '';
+
+  const toolTipIcon = ({ title, placement }) => (
+    <Tooltip arrow title={title} placement={placement}>
+      <IconButton className={classes.helpBtn} aria-label="help">
+        <img
+          src={myFilesPageData.tooltipIcon}
+          alt={myFilesPageData.tooltipAlt}
+          className={classes.helpIcon}
+        />
+      </IconButton>
+    </Tooltip>
+  );
 
   return (
     <Grid className={classes.marginTopNegative20}>
@@ -225,23 +214,7 @@ const cartView = ({
                   variant="filled"
                   onChange={(e) => setUserComments(e.target.value)}
                 />
-                <IconButton className={classes.helpBtn} aria-label="help" onFocus={() => toggleMessageStatus('userComments', 'open')} onMouseEnter={() => toggleMessageStatus('userComments', 'open')} onMouseOver={() => toggleMessageStatus('userComments', 'open')} onMouseLeave={() => toggleMessageStatus('userComments', 'close')}>
-                  <img
-                    onMouseEnter={() => toggleMessageStatus('userComments', 'open')}
-                    onMouseOver={() => toggleMessageStatus('userComments', 'open')}
-                    onFocus={() => toggleMessageStatus('userComments', 'open')}
-                    src={myFilesPageData.tooltipIcon}
-                    alt={myFilesPageData.tooltipAlt}
-                    className={classes.helpIcon}
-                  />
-                </IconButton>
-                { UserCommentsMessageStatus ? (
-                  <div className={classes.messageTopOne}>
-                    {' '}
-                    <Message data={userCommentsMessageData} />
-                    {' '}
-                  </div>
-                ) : ''}
+                {toolTipIcon({ title: myFilesPageData.userCommentsTooltipMessage, placement: 'right' })}
               </div>
 
               {/* Section: Button Group */}
@@ -254,23 +227,7 @@ const cartView = ({
                   {myFilesPageData.downButtonText}
                   {' '}
                 </button>
-                <IconButton className={classes.helpBtn} aria-label="help" onFocus={() => toggleMessageStatus('downloadBtn', 'open')} onMouseEnter={() => toggleMessageStatus('downloadBtn', 'open')} onMouseOver={() => toggleMessageStatus('downloadBtn', 'open')} onMouseLeave={() => toggleMessageStatus('downloadBtn', 'close')}>
-                  <img
-                    onMouseEnter={() => toggleMessageStatus('downloadBtn', 'open')}
-                    onMouseOver={() => toggleMessageStatus('downloadBtn', 'open')}
-                    onFocus={() => toggleMessageStatus('downloadBtn', 'open')}
-                    src={myFilesPageData.tooltipIcon}
-                    alt={myFilesPageData.tooltipAlt}
-                    className={classes.helpIcon}
-                  />
-                </IconButton>
-                { DownloadBtnMessageStatus ? (
-                  <div className={classes.messageTopTwo}>
-                    {' '}
-                    <Message data={downloadBtnMessageData} />
-                    {' '}
-                  </div>
-                ) : ''}
+                {toolTipIcon({ title: myFilesPageData.downloadBtnTooltipMessage, placement: 'right' })}
               </div>
             </div>
 

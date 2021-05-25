@@ -25,6 +25,7 @@ import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
 import { isStudyUnderEmbargo } from '../study/utils';
+import Tooltip from '../../components/MuiTooltip';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -69,9 +70,9 @@ const ProgramView = ({ classes, data }) => {
   const tableOptions = getOptions(table, classes);
 
   const toolTipIcon = () => (
-    <span dataText="Under Embargo" dataAttr="" className={classes.embargoIcon}>
+    <Tooltip title="Under Embargo" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
-    </span>
+    </Tooltip>
   );
 
   const customStudyCodeLink = (column, value, tableMeta) => (
@@ -81,7 +82,7 @@ const ProgramView = ({ classes, data }) => {
       </Link>
       {
         isStudyUnderEmbargo(tableMeta.rowData[5])
-          && toolTipIcon(cn(classes.embargoToolTip))
+          && toolTipIcon()
       }
     </>
   );
@@ -89,7 +90,7 @@ const ProgramView = ({ classes, data }) => {
   const customCaseNumbLink = (column, value, tableMeta) => (
     isStudyUnderEmbargo(tableMeta.rowData[5])
       ? (
-        toolTipIcon(cn(classes.embargoToolTip))
+        toolTipIcon()
       )
       : (
         <Link
@@ -183,6 +184,9 @@ const ProgramView = ({ classes, data }) => {
                 data={data.studiesByProgramId}
                 columns={columns}
                 options={{ ...tableOptions, ...textLabels }}
+                components={{
+                  Tooltip,
+                }}
               />
             </MuiThemeProvider>
           </Grid>
