@@ -16,11 +16,11 @@ export default ({
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderTop = tableBorder;
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderBottom = tableBorder;
   overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
-  overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px' } };
+  overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px', paddingTop: '20px' }, actions: { '& span': { '& button': { right: '60px' } } } };
   overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
   overridesObj.MuiTablePagination.actions.marginRight = '14px';
-  overridesObj.MuiTableCell.head.paddingLeft = '30px';
-  overridesObj.MuiTableCell.body.paddingLeft = '30px';
+  overridesObj.MuiTableCell.head.paddingLeft = '37px';
+  overridesObj.MuiTableCell.body.paddingLeft = '37px';
 
   style.push(overridesObj);
   const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });

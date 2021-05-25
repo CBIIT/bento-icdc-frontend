@@ -167,6 +167,7 @@ export default (theme) => ({
     lineHeight: '22px',
     width: '35%',
     marginBottom: '5px',
+    paddingLeft: '7px',
   },
   paddingLeftRight: {
     paddingLeft: '30px',
