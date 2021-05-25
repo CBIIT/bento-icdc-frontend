@@ -11,8 +11,8 @@ const tooltip = withStyles((theme) => ({
     fontFamily: 'Open Sans',
     fontWeight: '600',
     textAlign: 'center',
-    lineHeight: '12px',
-    padding: '4px 11px 4px 11px',
+    lineHeight: '1.6',
+    padding: '10px 5px 10px 5px',
   },
   arrow: {
     color: '#FFFFFF',
