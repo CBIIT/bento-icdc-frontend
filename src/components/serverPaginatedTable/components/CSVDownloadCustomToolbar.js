@@ -1,8 +1,8 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 import DownloadIcon from '@material-ui/icons/CloudDownload';
 import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '../../MuiTooltip';
 import client from '../../../utils/graphqlClient';
 import { downloadJson } from './utils';
 
@@ -39,7 +39,7 @@ const CustomToolbar = ({
 
   return (
     <>
-      <Tooltip title="Download Table Contents As CSV">
+      <Tooltip title="Download Table Contents As CSV" placement="bottom">
         <IconButton
           className={classes.iconButton}
           onClick={() => prepareDownload(tableDownloadCSV)}

@@ -25,6 +25,7 @@ import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
 import { isStudyUnderEmbargo } from '../study/utils';
+import Tooltip from '../../components/AddToCartDialog';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -183,6 +184,9 @@ const ProgramView = ({ classes, data }) => {
                 data={data.studiesByProgramId}
                 columns={columns}
                 options={{ ...tableOptions, ...textLabels }}
+                components={{
+                  Tooltip,
+                }}
               />
             </MuiThemeProvider>
           </Grid>

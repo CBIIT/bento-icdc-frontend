@@ -9,6 +9,7 @@ import { CircularProgress, Backdrop, withStyles } from '@material-ui/core';
 import { CustomDataTable } from 'bento-components';
 import client from '../../utils/graphqlClient';
 import CSVDownloadToolbar from './components/CSVDownloadCustomToolbar';
+import Tooltip from '../MuiTooltip';
 
 class ServerPaginatedTableView extends React.Component {
   state = {
@@ -233,6 +234,9 @@ class ServerPaginatedTableView extends React.Component {
             columns={this.props.columns}
             options={({ ...this.props.options, ...options1 })}
             className={className}
+            components={{
+              Tooltip,
+            }}
           />
         )}
       </div>

@@ -9,6 +9,8 @@ import {
 } from '../store/dashboardReducer';
 import Dialog from '../../../components/AddToCartDialog';
 import { addToCart, cartWillFull, getFilesIdsInCart } from '../../fileCentricCart/store/cart';
+import Tooltip from '../../../components/MuiTooltip';
+import { selectAllToolTip } from '../../../bento/dashboardTabData';
 
 const styles = () => ({
   button: {
@@ -36,7 +38,7 @@ const styles = () => ({
 });
 
 const SelectAllModalDialog = ({
-  classes, openSnack, addAllButtonText, selectAllToolTipStatus, toggleMessageStatus,
+  classes, openSnack, addAllButtonText, selectAllToolTipStatus,
 }) => {
   const childRef = useRef();
 
@@ -75,26 +77,22 @@ const SelectAllModalDialog = ({
       <button type="button" onClick={handleClickOpen} className={classes.button}>
         {addAllButtonText}
       </button>
-      <IconButton aria-label="help" className={classes.helpIconButton} onMouseOver={() => toggleMessageStatus('addAll', 'open')} onMouseEnter={() => toggleMessageStatus('addAll', 'open')} onMouseLeave={() => toggleMessageStatus('addAll', 'close')}>
-        {selectAllToolTipStatus.src ? (
-          <img
-            onMouseEnter={() => toggleMessageStatus('addAll', 'open')}
-            onMouseOver={() => toggleMessageStatus('addAll', 'open')}
-            onFocus={() => toggleMessageStatus('addAll', 'open')}
-            src={selectAllToolTipStatus.src}
-            alt={selectAllToolTipStatus.alt}
-            className={classes.helpIcon}
-          />
-        ) : (
-          <HelpIcon
-            className={classes.helpIcon}
-            fontSize="small"
-            onMouseOver={() => toggleMessageStatus('addAll', 'open')}
-            onMouseEnter={() => toggleMessageStatus('addAll', 'open')}
-            onFocus={() => toggleMessageStatus('addAll', 'open')}
-          />
-        )}
-      </IconButton>
+      <Tooltip title={selectAllToolTip[0]} arrow placement="bottom">
+        <IconButton aria-label="help" className={classes.helpIconButton}>
+          {selectAllToolTipStatus.src ? (
+            <img
+              src={selectAllToolTipStatus.src}
+              alt={selectAllToolTipStatus.alt}
+              className={classes.helpIcon}
+            />
+          ) : (
+            <HelpIcon
+              className={classes.helpIcon}
+              fontSize="small"
+            />
+          )}
+        </IconButton>
+      </Tooltip>
       <Dialog
         ref={childRef}
         onYesClick={OnYesClick}

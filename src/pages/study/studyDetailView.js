@@ -9,7 +9,7 @@ import {
 } from 'bento-components';
 import _ from 'lodash';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '../../components/MuiTooltip';
 import Snackbar from '../../components/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import GridWithFooter from '../../components/GridWithFooter/GridView';
@@ -385,7 +385,7 @@ const StudyDetailView = ({ classes, data }) => {
                               sm={8}
                               className={[classes.content, classes.marginTopN5]}
                             >
-                              <Tooltip title={getAccessTypeString(imageCollection.collection_access)} arrow placement="right-end">
+                              <Tooltip title={getAccessTypeString(imageCollection.collection_access)} arrow placement="top">
                                 <a href={`${imageCollection.image_collection_url}`} target="icdc" className={classes.outLink}>
                                   {imageCollection.image_collection_name}
                                   {' - '}
@@ -449,6 +449,9 @@ const StudyDetailView = ({ classes, data }) => {
                         )}
                         columns={table1.columns}
                         options={{ ...tableOneOptions, ...textLabels }}
+                        components={{
+                          Tooltip,
+                        }}
                       />
                     </Typography>
                   </MuiThemeProvider>
