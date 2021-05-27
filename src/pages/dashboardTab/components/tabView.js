@@ -24,6 +24,7 @@ import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/ca
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 import updateColumns from '../../../utils/columnsUtil';
 import Tooltip from '../../../components/MuiTooltip';
+import DocumentDownload from '../../../components/DocumentDownload';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
 
@@ -75,7 +76,7 @@ const TabView = ({
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
 
-  const colums = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon),
+  const colums = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload),
     customColumn.columns);
 
   const buildButtonStyle = (button, styleObject) => {
