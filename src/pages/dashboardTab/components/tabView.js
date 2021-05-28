@@ -76,9 +76,6 @@ const TabView = ({
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
 
-  const colums = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload),
-    customColumn.columns);
-
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
     // eslint-disable-next-line  no-restricted-syntax, no-unused-vars
@@ -275,7 +272,8 @@ const TabView = ({
         <Grid item xs={12} id={tableID}>
           <CustomDataTable
             data={data}
-            columns={colums}
+            columns={updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload),
+              customColumn.columns)}
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}
