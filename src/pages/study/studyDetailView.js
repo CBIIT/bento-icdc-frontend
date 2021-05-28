@@ -1,4 +1,5 @@
 import React from 'react';
+import SwipeableViews from 'react-swipeable-views';
 import {
   Grid,
   withStyles,
@@ -57,13 +58,20 @@ const StudyDetailView = ({ classes, data }) => {
     value: 0,
   });
 
-  // function openSnack(value) {
-  //   setsnackbarState({ open: true, value, action: 'added' });
-  // }
+  function openSnack(value) {
+    setsnackbarState({ open: true, value, action: 'added' });
+  }
 
   function closeSnack() {
     setsnackbarState({ open: false });
   }
+
+  const [currentTab, setCurrentTab] = React.useState(0);
+  const handleTabChange = (event, value) => {
+    console.log('value');
+    console.log(value);
+    setCurrentTab(value);
+  };
 
   return (
     <>
@@ -167,86 +175,24 @@ const StudyDetailView = ({ classes, data }) => {
               <Tab
                 styleClasses={classes}
                 tabItems={tab.items}
+                currentTab={currentTab}
+                handleTabChange={handleTabChange}
               />
             </Grid>
           </Grid>
         </div>
       </div>
-      <Overview
-        studyData={studyData}
-        diagnoses={diagnoses}
-        caseFileTypes={caseFileTypes}
-        closeSnack={closeSnack}
-        data={data}
-      />
-      {
-      // (!isStudyUnderEmbargo(studyData.study_disposition))
-      // && (
-      // <>
-      //   <div className={classes.tableContainer}>
-      //     <div className={classes.tableDiv}>
-      //       <div className={classes.tableTitle}>
-      //         <span className={classes.tableHeader}>ARMS AND COHORTS</span>
-      //       </div>
-      //       <Grid item xs={12}>
-      //         <Grid container>
-      //           <Grid item xs={12} id="table_cohort_dosing">
-      //             <MuiThemeProvider theme={computedTheme}>
-      //               <Typography>
-      //                 <CustomDataTable
-      //                   data={cohortAndDosingTableData.sort(
-      //                     (a, b) => studyDetailSorting(a.arm, b.arm),
-      //                   )}
-      //                   columns={table1.columns}
-      //                   options={{ ...tableOneOptions, ...textLabels }}
-      //                   components={{
-      //                     Tooltip,
-      //                   }}
-      //                 />
-      //               </Typography>
-      //             </MuiThemeProvider>
-      //           </Grid>
-      //           <Grid item xs={8}>
-      //             <Typography />
-      //           </Grid>
-      //         </Grid>
-      //       </Grid>
-      //     </div>
-      //   </div>
-      //   <div className={classes.tableContainer2}>
-      //     <div className={classes.tableDiv}>
-      //       <Grid item xs={12}>
-      //         <div className={classes.tableTitle}>
-      //           <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
-      //         </div>
-      //       </Grid>
-      //       <Grid item xs={12} id="table_associated_files">
-      //         <MuiThemeProvider theme={computedTheme}>
-      //           <GridWithFooter
-      //             data={fileTableData}
-      //             title=""
-      //             columns={columns2}
-      //             options={{ ...tableTwoOptions, ...textLabels }}
-      //             customOnRowsSelect={table2.customOnRowsSelect}
-      //             openSnack={openSnack}
-      //             closeSnack={closeSnack}
-      //             disableRowSelection={table2.disableRowSelection}
-      //             buttonText={table2.buttonText}
-      //             saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
-      //             ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
-      //             DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
-      //             tooltipMessage={table2.tooltipMessage}
-      //             tooltipContent={tooltipContent}
-      //             showtooltip
-      //             primaryKeyIndex={table2.primaryKeyIndex}
-      //           />
-      //         </MuiThemeProvider>
-      //       </Grid>
-      //     </div>
-      //   </div>
-      // </>
-      // )
-    }
+      <SwipeableViews index={currentTab}>
+        <Overview
+          studyData={studyData}
+          diagnoses={diagnoses}
+          caseFileTypes={caseFileTypes}
+          closeSnack={closeSnack}
+          openSnack={openSnack}
+          data={data}
+        />
+        <h2>hello</h2>
+      </SwipeableViews>
     </>
   );
 };
@@ -466,55 +412,6 @@ const styles = (theme) => ({
     lineHeight: '23px',
 
   },
-  detailContainerHeader: {
-    textTransform: 'uppercase',
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
-    letterSpacing: '0.017em',
-    color: '#0296c9',
-  },
-  detailContainerBottom: {
-    borderTop: '#81a6b9 1px solid',
-    marginTop: '13px',
-    padding: ' 35px 0 63px 2px !important',
-  },
-  detailContainerLeft: {
-    display: 'block',
-    padding: '5px  20px 5px 2px !important',
-    minHeight: '500px',
-    maxHeight: '500px',
-    overflowY: 'auto',
-    overflowX: 'hidden',
-    width: 'calc(100% + 8px) !important',
-    margin: '0px -8px',
-
-  },
-  detailContainerRight: {
-    padding: '5px 0 5px 20px !important',
-    maxHeight: '500px',
-    overflowY: 'auto',
-    overflowX: 'hidden',
-    width: 'calc(100% + 8px)',
-  },
-
-  tableContainer: {
-    background: '#f3f3f3',
-  },
-  tableContainer2: {
-    background: '#fff',
-  },
-  tableHeader: {
-    paddingLeft: '32px',
-    color: '#0296c9',
-  },
-  paddingTop12: {
-    paddingTop: '12px',
-  },
-  tableDiv: {
-    padding: '31px 34px',
-    margin: '40px auto auto auto',
-  },
-
   headerButtonLink: {
     textDecoration: 'none',
     lineHeight: '14px',
@@ -540,12 +437,6 @@ const styles = (theme) => ({
       backgroundColor: '#ff8a00',
     },
   },
-  detailContainerItems: {
-    paddingTop: '7px',
-  },
-  detailContainerItem: {
-    paddingTop: '15px !important',
-  },
   title: {
     color: '#0296c9',
     fontFamily: theme.custom.fontFamilySans,
@@ -553,34 +444,6 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     fontWeight: '600',
     textTransform: 'uppercase',
-  },
-  tableTitle: {
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
-    letterSpacing: '0.017em',
-    color: '#ff17f15',
-    paddingBottom: '20px',
-  },
-  detailContainerRightTop: {
-    maxHeight: '250px',
-    overflow: 'auto',
-  },
-  outLink: {
-    color: '#DD752F',
-    textDecoration: 'none',
-    fontSize: '12px',
-  },
-  paddingLeft5: {
-    paddingLeft: '5px',
-  },
-  marginTopN5: {
-    marginTop: '-5px',
-  },
-  marginTop10: {
-    marginTop: '10px',
-  },
-  linkIcon: {
-    width: '20px',
   },
 
 });

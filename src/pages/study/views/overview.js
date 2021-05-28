@@ -36,6 +36,7 @@ const Overview = ({
   caseFileTypes,
   data,
   closeSnack,
+  openSnack,
 }) => {
   const getImageTypes = (typeString) => {
     const types = JSON.parse(typeString);
@@ -363,6 +364,7 @@ const Overview = ({
                   options={{ ...tableTwoOptions, ...textLabels }}
                   customOnRowsSelect={table2.customOnRowsSelect}
                   closeSnack={closeSnack}
+                  openSnack={openSnack}
                   disableRowSelection={table2.disableRowSelection}
                   buttonText={table2.buttonText}
                   saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
@@ -484,6 +486,12 @@ const styles = (theme) => ({
   tableHeader: {
     paddingLeft: '32px',
     color: '#0296c9',
+  },
+  paddingLeft5: {
+    paddingLeft: '5px',
+  },
+  tableContainer2: {
+    background: '#fff',
   },
 });
 

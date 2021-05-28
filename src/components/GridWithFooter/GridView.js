@@ -55,6 +55,7 @@ const GridView = ({
   }
 
   function closeMessage() {
+    console.log('set message');
     return setMessageStatus(false);
   }
 

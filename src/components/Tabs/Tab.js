@@ -8,8 +8,9 @@ const TabItems = ({
   classes,
   tabItems,
   styleClasses,
+  handleTabChange,
+  currentTab,
 }) => {
-  const [currentTab, setCurrentTab] = React.useState(0);
   function getTabLalbel(title, id) {
     return (
       <TabLabel
@@ -19,17 +20,6 @@ const TabItems = ({
       />
     );
   }
-
-  const handleTabChange = (event, value) => {
-    console.log(value);
-    if (currentTab !== value) {
-      const currentTabTitle = tabItems[currentTab].value;
-      const newTabTitle = tabItems[value].value;
-      console.log(currentTabTitle);
-      console.log(newTabTitle);
-    }
-    setCurrentTab(value);
-  };
 
   const TABs = tabItems.map((tab) => (
     <Tab
@@ -43,7 +33,7 @@ const TabItems = ({
   return (
     <>
       <Tabs
-        onChange={handleTabChange}
+        onChange={(event, value) => handleTabChange(event, value)}
         value={currentTab}
         classes={{
           indicator: styleClasses.tabHighlight,
