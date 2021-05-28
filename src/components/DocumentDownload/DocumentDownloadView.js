@@ -7,7 +7,7 @@ import env from '../../utils/env';
 
 const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_API;
 
-export function fetchFileToDownload(fileURL = '') {
+const fetchFileToDownload = (fileURL = '') => {
   fetch(`${FILE_SERVICE_API}${fileURL}`, {
     method: 'GET',
     headers: {
@@ -29,7 +29,7 @@ export function fetchFileToDownload(fileURL = '') {
       link.click();
       link.parentNode.removeChild(link);
     });
-}
+};
 
 const DocumentDownload = ({
   fileSize = 0,
