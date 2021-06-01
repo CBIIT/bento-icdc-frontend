@@ -69,8 +69,6 @@ const StudyDetailView = ({ classes, data }) => {
 
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
-    console.log('value');
-    console.log(value);
     setCurrentTab(value);
   };
 
