@@ -11,11 +11,11 @@ const TabItems = ({
   handleTabChange,
   currentTab,
 }) => {
-  function getTabLalbel(title, id) {
+  function getTabLalbel(title, index) {
     return (
       <TabLabel
         title={title}
-        primaryColorClass={(currentTab === id)
+        primaryColorClass={(currentTab === index)
           ? styleClasses.tabHighlightColor : styleClasses.tabPrimaryColor}
       />
     );
@@ -23,9 +23,9 @@ const TabItems = ({
 
   const TABs = tabItems.map((tab) => (
     <Tab
-      id={tab.id}
+      index={tab.index}
       label={
-        getTabLalbel(tab.label, tab.id)
+        getTabLalbel(tab.label, tab.index)
       }
     />
   ));
