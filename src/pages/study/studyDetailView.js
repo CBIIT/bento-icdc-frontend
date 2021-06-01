@@ -22,8 +22,9 @@ import {
   embargoFileIcon,
   tab,
 } from '../../bento/studyDetailsData';
-import Tab from '../../components/Tabs/Tab';
-import Overview from './views/overview';
+import Tab from './components/Tab';
+import Overview from './views/Overview';
+import Publication from './views/Publication';
 
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
@@ -182,7 +183,11 @@ const StudyDetailView = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
-      <SwipeableViews index={currentTab}>
+      <SwipeableViews
+        index={currentTab}
+        animateTransitions={false}
+        style={{ overflowX: 'hidden' }}
+      >
         <Overview
           studyData={studyData}
           diagnoses={diagnoses}
@@ -191,7 +196,7 @@ const StudyDetailView = ({ classes, data }) => {
           openSnack={openSnack}
           data={data}
         />
-        <h2>hello</h2>
+        <Publication />
       </SwipeableViews>
     </>
   );
@@ -290,7 +295,6 @@ const styles = (theme) => ({
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '33px',
     paddingRight: '33px',
-    paddingBottom: '25px',
   },
   content: {
     fontSize: '12px',

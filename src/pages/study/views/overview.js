@@ -395,7 +395,6 @@ const styles = (theme) => ({
   },
   detailContainer: {
     margin: 'auto',
-    paddingTop: '30px',
     paddingLeft: '36px',
     paddingRight: '36px',
     fontFamily: theme.custom.fontFamilySans,
@@ -417,7 +416,7 @@ const styles = (theme) => ({
   },
   detailContainerLeft: {
     display: 'block',
-    padding: '5px  20px 5px 2px !important',
+    padding: '15px 20px 5px 10px !important',
     minHeight: '500px',
     maxHeight: '500px',
     overflowY: 'auto',
