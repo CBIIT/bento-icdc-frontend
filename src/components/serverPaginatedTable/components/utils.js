@@ -1,3 +1,5 @@
+import { formatBytes } from 'bento-components';
+
 export function createFileName(fileName) {
   const date = new Date();
   const yyyy = date.getFullYear();
@@ -32,7 +34,11 @@ export function convertToCSV(jsonse, keysToInclude, header) {
     let line = '';
     keysToInclude.map((keyName) => {
       if (line !== '') line += ',';
-      line += entry[keyName] !== null ? `"${entry[keyName]}"` : ' ';
+      if (keyName === 'file_size') {
+        line += entry[keyName] !== null ? `"${formatBytes(entry[keyName])}"` : ' ';
+      } else {
+        line += entry[keyName] !== null ? `"${entry[keyName]}"` : ' ';
+      }
       return line;
     });
     if (index === 0) {
