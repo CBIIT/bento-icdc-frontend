@@ -14,10 +14,12 @@ import {
 import TableThemeProvider from './cartTableThemeConfig';
 import updateColumns from '../../../../utils/columnsUtil';
 import Tooltip from '../../../../components/MuiTooltip';
+import DocumentDownload from '../../../../components/DocumentDownload';
 
 const CartHeader = ({
   classes,
   data,
+  externalLinkIcon,
   deleteColumn,
   fileIDs,
   defaultSortCoulmn,
@@ -28,7 +30,7 @@ const CartHeader = ({
     return (curr, allRowsSelected);
   }
 
-  const columns = updateColumns(getColumns(table, classes).concat(deleteColumn), table.columns);
+  const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(deleteColumn), table.columns);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
   return (
