@@ -2362,7 +2362,7 @@ type QueryType {
       WHEN 'study_code' THEN study_code
       WHEN 'file_uuid' THEN file_uuid
       ELSE file_name END DESC
-  """)
+  """, passThrough: true)
 
   sampleOverview(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] @cypher(statement: """
     MATCH (s:sample)
