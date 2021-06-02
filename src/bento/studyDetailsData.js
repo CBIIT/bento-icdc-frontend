@@ -12,7 +12,20 @@ export const embargoFileIcon = 'https://raw.githubusercontent.com/CBIIT/bento-ic
 export const embargoHeaderIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-embargo-study-header.svg';
 export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg';
 export const externalIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/cart_ExternalLink.svg';
-
+export const tab = {
+  items: [
+    {
+      index: 0,
+      label: 'OVERVIEW',
+      value: 'overview',
+    },
+    {
+      index: 1,
+      label: 'PUBLICATION',
+      value: 'publication',
+    },
+  ],
+};
 // --------------- Table 1 configuration --------------
 export const table1 = {
   // Set 'display' to false to hide the table entirely
