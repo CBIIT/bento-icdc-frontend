@@ -183,6 +183,22 @@ export const table2 = {
       primary: true,
       // set formatBytes to true to display file size (in bytes) in a more human readable format
     },
+    {
+      dataField: '',
+      header: 'Access',
+      sort: 'asc',
+      display: true,
+      downloadDocument: true,
+      documentDownloadProps: {
+        maxFileSize: 12000000,
+        toolTipTextFileDownload: 'Download a copy of this file',
+        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+        fileSizeColumn: 'file_size',
+        fileLocationColumn: 'uuid',
+        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+      },
+    },
   ],
   // Util Functions
   // Custom function on selct checkbox is selected.
