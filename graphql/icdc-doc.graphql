@@ -341,16 +341,6 @@ type program {
   studies: [study] 
 }
 
-type publication {
-  publication_title: String
-  authorship: String
-  year_of_publication: Float
-  journal_citation: String
-  digital_object_id: String
-  pubmed_id: Float
-  study: study 
-}
-
 type registration {
   registration_origin: String
   registration_id: String
@@ -431,8 +421,7 @@ type study {
   study_sites: [study_site] 
   principal_investigators: [principal_investigator] 
   files: [file] 
-  image_collections: [image_collection] 
-  NONE: [publication] 
+  image_collections: [image_collection]
 }
 
 type study_arm {
