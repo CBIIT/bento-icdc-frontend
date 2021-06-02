@@ -421,7 +421,7 @@ type study {
   study_sites: [study_site] 
   principal_investigators: [principal_investigator] 
   files: [file] 
-  image_collections: [image_collection]
+  image_collections: [image_collection] 
 }
 
 type study_arm {
