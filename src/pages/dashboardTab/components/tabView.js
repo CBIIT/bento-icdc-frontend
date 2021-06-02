@@ -24,6 +24,7 @@ import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/ca
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 import updateColumns from '../../../utils/columnsUtil';
 import Tooltip from '../../../components/MuiTooltip';
+import DocumentDownload from '../../../components/DocumentDownload';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
 
@@ -74,9 +75,6 @@ const TabView = ({
   const AddToCartAlertDialogRef = useRef();
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
-
-  const colums = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon),
-    customColumn.columns);
 
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
@@ -274,7 +272,8 @@ const TabView = ({
         <Grid item xs={12} id={tableID}>
           <CustomDataTable
             data={data}
-            columns={colums}
+            columns={updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload),
+              customColumn.columns)}
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}
