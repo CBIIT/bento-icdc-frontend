@@ -35,6 +35,7 @@ import {
 } from '../../bento/studyDetailsData';
 import themes, { overrides } from '../../themes';
 import updateColumns from '../../utils/columnsUtil';
+import DocumentDownload from '../../components/DocumentDownload';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -151,7 +152,7 @@ const StudyDetailView = ({ classes, data }) => {
   });
   const tableOneOptions = getOptions(table1, classes);
   const tableTwoOptions = getOptions(table2, classes);
-  const columns2 = updateColumns(getColumns(table2, classes, fileTableData), table2.columns);
+  const columns2 = updateColumns(getColumns(table2, classes, fileTableData, externalIcon, '', () => {}, DocumentDownload), table2.columns);
 
   const getImageTypes = (typeString) => {
     const types = JSON.parse(typeString);
