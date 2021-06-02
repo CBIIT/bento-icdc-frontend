@@ -328,7 +328,7 @@ export const tabContainers = [
       },
       {
         dataField: '',
-        header: 'Download',
+        header: 'Access',
         sort: 'asc',
         display: true,
         downloadDocument: true,
