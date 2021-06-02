@@ -84,6 +84,22 @@ export const table = {
       formatBytes: true,
     },
     {
+      dataField: '',
+      header: 'Access',
+      sort: 'asc',
+      display: true,
+      downloadDocument: true,
+      documentDownloadProps: {
+        maxFileSize: 12000000,
+        toolTipTextFileDownload: 'Download a copy of this file',
+        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+        fileSizeColumn: 'file_size',
+        fileLocationColumn: 'file_uuid',
+        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+      },
+    },
+    {
       dataField: 'case_id',
       header: 'Case ID',
       viewColumns: false,
