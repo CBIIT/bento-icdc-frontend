@@ -157,7 +157,7 @@ export const table2 = {
     {
       dataField: 'uuid',
       header: 'UUID',
-      display: false,
+      display: true,
     },
     {
       dataField: 'md5sum',

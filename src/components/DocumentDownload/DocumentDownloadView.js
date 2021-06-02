@@ -1,5 +1,5 @@
 import React from 'react';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '../MuiTooltip';
 // import { CustomIcon } from 'bento-components';
 
 import CustomIcon from '../CustomIcon';
