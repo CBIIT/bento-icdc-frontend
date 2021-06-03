@@ -449,7 +449,7 @@ const styles = (theme) => ({
     paddingTop: '15px !important',
   },
   detailContainerRight: {
-    padding: '5px 0 5px 20px !important',
+    padding: '20px 0 5px 20px !important',
     maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
@@ -488,6 +488,11 @@ const styles = (theme) => ({
   },
   paddingLeft5: {
     paddingLeft: '5px',
+  },
+  outLink: {
+    color: '#DD752F',
+    textDecoration: 'none',
+    fontSize: '12px',
   },
   tableContainer2: {
     background: '#fff',

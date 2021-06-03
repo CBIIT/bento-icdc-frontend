@@ -21,10 +21,43 @@ export const tab = {
     },
     {
       index: 1,
-      label: 'PUBLICATION',
-      value: 'publication',
+      label: 'PUBLICATIONS',
+      value: 'publications',
     },
   ],
+  publication: {
+    doiLink: 'https://doi.org/',
+    numbOfPublishPerView: 2,
+    views: [
+      {
+        label: 'AUTHORSHIP',
+        key: 'authorship',
+        type: 'text',
+      },
+      {
+        label: 'YEAR OF PUBLICATION',
+        key: 'year_of_publication',
+        type: 'text',
+      },
+      {
+        label: 'JOURNAL',
+        key: 'journal_citation',
+        type: 'text',
+      },
+      {
+        label: 'DOI',
+        key: 'digital_object_id',
+        type: 'link',
+        url: 'https://doi.org/',
+      },
+      {
+        label: 'PUBMED ID',
+        key: 'pubmed_id',
+        type: 'link',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/',
+      },
+    ],
+  },
 };
 // --------------- Table 1 configuration --------------
 export const table1 = {
@@ -240,6 +273,14 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
       repository_name
       image_type_included
       collection_access
+    }
+    NONE {
+      publication_title
+      authorship
+      year_of_publication
+      journal_citation
+      digital_object_id
+      pubmed_id
     }
     cases{
       case_id
