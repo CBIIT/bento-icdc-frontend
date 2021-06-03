@@ -282,20 +282,20 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
       pi_last_name
       pi_middle_initial
     }
-    image_collections {
-      image_collection_name
-      image_collection_url
-      repository_name
-      image_type_included
-      collection_access
-    }
-    publications {
+    publications{
       publication_title
       authorship
       year_of_publication
       journal_citation
       digital_object_id
       pubmed_id
+    }
+    image_collections {
+      image_collection_name
+      image_collection_url
+      repository_name
+      image_type_included
+      collection_access
     }
     cases{
       case_id
