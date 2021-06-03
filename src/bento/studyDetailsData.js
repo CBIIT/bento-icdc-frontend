@@ -26,7 +26,6 @@ export const tab = {
     },
   ],
   publication: {
-    doiLink: 'https://doi.org/',
     numbOfPublishPerView: 2,
     views: [
       {
