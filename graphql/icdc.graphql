@@ -432,7 +432,7 @@ type study {
   principal_investigators: [principal_investigator] @relation(name:"of_study", direction:IN)
   files: [file] @relation(name:"of_study", direction:IN)
   image_collections: [image_collection] @relation(name:"of_study", direction:IN)
-  NONE: [publication] @relation(name:"of_study", direction:IN)
+  publications: [publication] @relation(name:"of_study", direction:IN)
 }
 
 type study_arm {

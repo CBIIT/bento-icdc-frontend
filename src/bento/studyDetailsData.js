@@ -289,7 +289,7 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
       image_type_included
       collection_access
     }
-    NONE {
+    publications {
       publication_title
       authorship
       year_of_publication

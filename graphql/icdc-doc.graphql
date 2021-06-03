@@ -432,7 +432,7 @@ type study {
   principal_investigators: [principal_investigator] 
   files: [file] 
   image_collections: [image_collection] 
-  NONE: [publication] 
+  publications: [publication] 
 }
 
 type study_arm {
