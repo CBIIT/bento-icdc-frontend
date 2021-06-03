@@ -28,6 +28,7 @@ import {
 import themes, { overrides } from '../../../themes';
 import updateColumns from '../../../utils/columnsUtil';
 import Tooltip from '../../../components/MuiTooltip';
+import DocumentDownload from '../../../components/DocumentDownload';
 
 const Overview = ({
   classes,
@@ -124,7 +125,7 @@ const Overview = ({
 
   const tableOneOptions = getOptions(table1, classes);
   const tableTwoOptions = getOptions(table2, classes);
-  const columns2 = updateColumns(getColumns(table2, classes, fileTableData), table2.columns);
+  const columns2 = updateColumns(getColumns(table2, classes, fileTableData, externalIcon, '', () => {}, DocumentDownload), table2.columns);
 
   return (
     <>

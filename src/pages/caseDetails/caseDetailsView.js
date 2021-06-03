@@ -22,6 +22,7 @@ import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboa
 import filterCasePageOnStudyCode from '../../utils/utils';
 import themes, { overrides } from '../../themes';
 import updateColumns from '../../utils/columnsUtil';
+import DocumentDownload from '../../components/DocumentDownload';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -99,7 +100,7 @@ const CaseDetail = ({ classes, data }) => {
   const tableTwoOptions = getOptions(table2, classes);
   const tableOneColumns = updateColumns(getColumns(table1, classes,
     data, externalLinkIcon), table1.columns);
-  const tableTwoColumns = updateColumns(getColumns(table2, classes, data), table2.columns);
+  const tableTwoColumns = updateColumns(getColumns(table2, classes, data, externalLinkIcon, '', () => {}, DocumentDownload), table2.columns);
 
   return (
     <>

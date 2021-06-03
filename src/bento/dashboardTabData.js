@@ -289,6 +289,13 @@ export const tabContainers = [
         display: true,
       },
       {
+        dataField: 'file_uuid',
+        header: 'File uuid',
+        sort: 'asc',
+        primary: true,
+        display: false,
+      },
+      {
         dataField: 'file_type',
         header: 'File Type',
         sort: 'asc',
@@ -308,7 +315,7 @@ export const tabContainers = [
       },
       {
         dataField: 'file_format',
-        header: 'File Format',
+        header: 'Format',
         sort: 'asc',
         display: true,
       },
@@ -318,6 +325,22 @@ export const tabContainers = [
         sort: 'asc',
         display: true,
         formatBytes: true,
+      },
+      {
+        dataField: '',
+        header: 'Access',
+        sort: 'asc',
+        display: true,
+        downloadDocument: true,
+        documentDownloadProps: {
+          maxFileSize: 12000000,
+          toolTipTextFileDownload: 'Download a copy of this file',
+          toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+          fileSizeColumn: 'file_size',
+          fileLocationColumn: 'file_uuid',
+          iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+          iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        },
       },
       {
         dataField: 'case_id',

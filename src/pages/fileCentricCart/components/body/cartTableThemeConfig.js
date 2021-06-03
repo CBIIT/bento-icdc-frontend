@@ -1,14 +1,12 @@
 import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import _ from 'lodash';
 import themes, { overrides } from '../../../../themes';
 
 export default ({
   children,
 }) => {
   const style = [];
-  const themesLight = _.cloneDeep(themes.light);
-  const overridesObj = themesLight.overrides;
+  const overridesObj = themes.light.overrides;
 
   const tableBorder = '#004c73 3px solid';
   overridesObj.MUIDataTableSelectCell.headerCell.borderTop = tableBorder;

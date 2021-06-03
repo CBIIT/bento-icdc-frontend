@@ -804,33 +804,33 @@ type QueryType {
   sampleCountOfCase(case_id: String!): Int 
 
   "Count by group"
-  caseCountByStudyCode(case_ids: [String]): [GroupCount] 
+  caseCountByStudyCode(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByDiagnosis(case_ids: [String]): [GroupCount] 
+  caseCountByDiagnosis(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByGender(case_ids: [String]): [GroupCount] 
+  caseCountByGender(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByBreed(case_ids: [String]): [GroupCount] 
+  caseCountByBreed(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByNeuteredStatus(case_ids: [String]): [GroupCount] 
+  caseCountByNeuteredStatus(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByStageOfDisease(case_ids: [String]): [GroupCount] 
+  caseCountByStageOfDisease(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByDiseaseSite(case_ids: [String]): [GroupCount] 
+  caseCountByDiseaseSite(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByStudyType(case_ids: [String]): [GroupCount] 
+  caseCountByStudyType(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByAge(case_ids: [String]): [GroupCount] 
+  caseCountByAge(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByDataType(case_ids: [String]): [GroupCount] 
+  caseCountByDataType(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByFileFormat(case_ids: [String]): [GroupCount] 
+  caseCountByFileFormat(case_ids: [String] = []): [GroupCount] 
 
-  caseCountByProgram(case_ids: [String]): [GroupCount] 
+  caseCountByProgram(case_ids: [String] = []): [GroupCount] 
 
-  filesInList(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] 
+  filesInList(uuids: [String], order_by: String = ""): [FileInList] 
 
-  filesInListDesc(uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileInList] 
+  filesInListDesc(uuids: [String], order_by: String = ""): [FileInList] 
 
   "Facet search counts"
   filterCaseCountByStudyCode(
@@ -1073,21 +1073,24 @@ type QueryType {
 
   "Combined info"
   studiesByProgramId(program_id: String!): [StudyOfProgram] 
+  
   studiesByProgram: [StudyOfProgram] 
+  
   filesOfCase(case_id: String!): [FilesOfCase] 
+ 
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
 
-  programsAndStudies(case_ids: [String]): [ProgramStudies] 
+  programsAndStudies(case_ids: [String] = []): [ProgramStudies] 
 
   multiStudyCases(case_id: String): MultiStudyCases 
 
   caseDetail(case_id: String): CaseDetail 
 
-  caseOverview(study_codes: [String] = [], breeds: [String] = [], diagnoses: [String] = [], sexes: [String] = []): [CaseOverview] 
+  caseOverview(study_codes: [String] = [""], breeds: [String] = [""], diagnoses: [String] = [""], sexes: [String] = [""]): [CaseOverview] 
 
-  caseOverviewPaged (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] 
+  caseOverviewPaged (case_ids: [String] = [""], order_by: String = ""): [CaseOverview2] 
 
-  caseOverviewPagedDesc (case_ids: [String], order_by: String = "", first: Int = 10, offset: Int = 0): [CaseOverview2] 
+  caseOverviewPagedDesc (case_ids: [String] = [""], order_by: String = ""): [CaseOverview2] 
 
   searchCases (
     study: [String] = [],
@@ -1108,13 +1111,18 @@ type QueryType {
   ): SearchResult 
 
   casesInList(case_ids: [String!]!): [CaseOverview] 
+
   studyDetail(study_code: String!): [StudyDetail] 
 
   "Find nodes with parameters"
   casesByStudyId(study_id: String!): [case] 
+
   samplesByCaseId(case_id: String!): [sample] 
+
   filesBySampleId(sample_id: String!): [file] 
+
   filesOfStudy(study_code: String!): [file] 
+
   studyFiles(study_codes: [String!]): [file] 
 
   "For SBG to replace manifest"
@@ -1125,15 +1133,15 @@ type QueryType {
 
   studyStats: [StudyStat] 
 
-  fileOverview(case_ids: [String], file_uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] 
+  fileOverview(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] 
 
-  fileOverviewDesc(case_ids: [String], file_uuids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [FileOverview] 
+  fileOverviewDesc(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] 
 
-  sampleOverview(case_ids: [String], sample_ids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] 
+  sampleOverview(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] 
 
-  sampleOverviewDesc(case_ids: [String], sample_ids: [String], order_by: String = "", first: Int = 100, offset: Int = 0): [SampleOverview] 
+  sampleOverviewDesc(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] 
 
-  fileIdsFromFileName(file_name: [String], offset: Int = 0, first: Int = 10000000, order_by: String ="file_name"): [FileOverview] 
+  fileIdsFromFileName(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
 
-  fileIdsFromFileNameDesc(file_name: [String], offset: Int = 0, first: Int = 10000000, order_by: String ="file_name"): [FileOverview] 
+  fileIdsFromFileNameDesc(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
 }
