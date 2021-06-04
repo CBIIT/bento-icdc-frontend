@@ -191,7 +191,7 @@ const styles = (theme) => ({
     paddingLeft: '5px',
   },
   noAssociatedPublicatn: {
-    fontSize: '12px',
+    fontSize: '18px',
     fontWeight: '900',
   },
 });
