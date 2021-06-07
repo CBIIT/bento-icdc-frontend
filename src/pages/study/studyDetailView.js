@@ -386,7 +386,6 @@ const styles = (theme) => ({
   headerButtonLinkText: {
     fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
-    fontSize: '14px',
   },
   headerButtonLinkNumber: {
     fontFamily: theme.custom.fontFamilySans,
