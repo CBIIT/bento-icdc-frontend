@@ -79,9 +79,9 @@ const Publication = ({
                     (publications && publications.length > 1)
                       ? publicationList(0, display.numbOfPublishPerView)
                       : (
-                        <span className={classes.noAssociatedPublicatn}>
-                          This study currently has no associated Publications.
-                        </span>
+                        <div className={classes.noAssociatedPublication}>
+                          This study currently has no associated Publications
+                        </div>
                       )
                   }
                 </Grid>
@@ -190,9 +190,9 @@ const styles = (theme) => ({
   paddingLeft5: {
     paddingLeft: '5px',
   },
-  noAssociatedPublicatn: {
-    fontSize: '18px',
-    fontWeight: '900',
+  noAssociatedPublication: {
+    marginTop: '20px',
+    fontSize: '12px',
   },
 });
 
