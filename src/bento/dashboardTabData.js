@@ -25,6 +25,12 @@ export const externalLinkIcon = {
   alt: 'External link icon',
 };
 
+export const multiStudyData = {
+  icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/icon-multiStudy.svg',
+  alt: 'MultiStudy icon',
+  toolTipText: 'Study participant is enrolled in multiple studies:',
+};
+
 // --------------- Tabs Table configuration --------------
 export const tabContainers = [
   {
@@ -66,6 +72,11 @@ export const tabContainers = [
         primary: true,
         display: true,
         viewColumns: false,
+      },
+      {
+        dataField: 'other_cases',
+        header: 'Other Cases',
+        display: false,
       },
       {
         dataField: 'study_code',
@@ -1012,6 +1023,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
       response_to_treatment
       disease_site
       files
+      other_cases
     }
 }
   `;
@@ -1034,6 +1046,7 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
       response_to_treatment
       disease_site
       files
+      other_cases
     }
 }
   `;

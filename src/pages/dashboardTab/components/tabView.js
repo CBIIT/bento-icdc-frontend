@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import {
   Grid,
   IconButton,
+  Typography,
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -17,12 +18,13 @@ import {
   GET_SAMPLES_OVERVIEW_DESC_QUERY,
   GET_CASES_OVERVIEW_DESC_QUERY,
   tooltipContent,
+  multiStudyData,
 } from '../../../bento/dashboardTabData';
 import { clearTableSelections, fetchAllFileIDs, getFilesCount } from '../store/dashboardReducer';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
-import updateColumns from '../../../utils/columnsUtil';
+import updateColumns, { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
 import Tooltip from '../../../components/MuiTooltip';
 import DocumentDownload from '../../../components/DocumentDownload';
 
@@ -75,6 +77,7 @@ const TabView = ({
   const AddToCartAlertDialogRef = useRef();
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
+  // const [caseId, setCaseId] = React.useState('');
 
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
@@ -230,6 +233,59 @@ const TabView = ({
     serverTableRowCount: selectedRowInfo.length,
   };
 
+  const renderMultiStudyTooltipText = (tableMeta) => (
+    <>
+      <Typography align="center" color="inherit">{multiStudyData.toolTipText}</Typography>
+      {tableMeta.map((elem) => (
+        <ul className={classes.ul}>
+          <li>
+            <Link className={classes.link} to={`case/${elem}`}>
+              {`Case ${elem}`}
+            </Link>
+          </li>
+        </ul>
+      ))}
+    </>
+  );
+
+  const toolTipIcon = (tableMeta) => (
+    <Tooltip title={renderMultiStudyTooltipText(tableMeta)} arrow placement="bottom" interactive>
+      <img src={multiStudyData.icon} className={classes.multiStudyIcon} alt="Multistudy participants icon" />
+    </Tooltip>
+  );
+
+  const customCaseIdLink = (column, value, tableMeta) => (
+    <div className={classes.caseIdContainer}>
+      <Link className={classes.link} to={`case/${value}`}>
+        {value}
+      </Link>
+      {
+        hasMultiStudyParticipants(tableMeta.rowData[1])
+        && toolTipIcon(tableMeta.rowData[1])
+      }
+    </div>
+  );
+
+  const columns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).map((column) => {
+    if (column.name === 'case_id') {
+      return {
+        name: column.name,
+        label: column.label,
+        options: {
+          display: true,
+          viewColumns: column.viewColumns,
+          customBodyRender: (value, tableMeta) => (
+            <>
+              {customCaseIdLink(column, value, tableMeta)}
+            </>
+          ),
+        },
+      };
+    }
+    return column;
+  }),
+  customColumn.columns);
+
   return (
     <div>
       <Grid item xs={12} className={classes.saveButtonDiv}>
@@ -272,8 +328,7 @@ const TabView = ({
         <Grid item xs={12} id={tableID}>
           <CustomDataTable
             data={data}
-            columns={updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload),
-              customColumn.columns)}
+            columns={columns}
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}
@@ -430,6 +485,15 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     marginLeft: '-5px',
+  },
+  multiStudyIcon: {
+    width: '30px',
+  },
+  caseIdContainer: {
+    display: 'flex',
+  },
+  ul: {
+    listStyleType: 'none',
   },
 });
 

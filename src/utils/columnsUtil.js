@@ -13,4 +13,11 @@ function updateColumns(columns, columnList) {
   return viewColumns;
 }
 
+export const hasMultiStudyParticipants = (tableMeta) => {
+  if (tableMeta.length === 0) {
+    return false;
+  }
+  return true;
+};
+
 export default updateColumns;
