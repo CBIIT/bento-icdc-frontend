@@ -69,7 +69,7 @@ const MultiStudyCases = ({ classes, cases, caseID }) => {
         className={classes.link}
         onClick={closeHandler}
       >
-        {id}
+        <span>{id}</span>
       </Link>
     </MuiMenuItem>
   );
