@@ -1,0 +1,1 @@
+This is sample workflow to test workflow copying of prod related static data.
