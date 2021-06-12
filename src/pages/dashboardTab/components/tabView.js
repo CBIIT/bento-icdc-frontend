@@ -250,7 +250,7 @@ const TabView = ({
 
   const toolTipIcon = (tableMeta) => (
     <Tooltip title={renderMultiStudyTooltipText(tableMeta)} arrow placement="bottom" interactive>
-      <img src={multiStudyData.icon} className={classes.multiStudyIcon} alt="Multistudy participants icon" />
+      <img src={multiStudyData.icon} className={classes.multiStudyIcon} alt={multiStudyData.alt} />
     </Tooltip>
   );
 
