@@ -236,8 +236,8 @@ const TabView = ({
   const renderMultiStudyTooltipText = (tableMeta) => (
     <>
       <Typography align="center" color="inherit">{multiStudyData.toolTipText}</Typography>
-      {tableMeta.map((elem) => (
-        <ul className={classes.ul}>
+      {tableMeta.map((elem, elemIdx) => (
+        <ul className={classes.ul} key={elemIdx}>
           <li>
             <Link className={classes.link} to={`case/${elem}`}>
               {`Case ${elem}`}
