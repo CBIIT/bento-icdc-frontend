@@ -15,6 +15,14 @@ export const externalLinkIcon = {
   src: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/program/externalLinkIcon.svg',
   alt: 'External link icon',
 };
+
+// multi study icon
+
+export const multiStudyIcon = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/icon-multiStudy.svg',
+  alt: 'multi study icon',
+};
+
 // --------------- Table 1 configuration --------------
 export const table1 = {
   // Set 'display' to false to hide the table entirely
@@ -224,6 +232,9 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
     fileCountOfCase(case_id: $case_id)
     aliquotCountOfCase(case_id: $case_id)
     fileCountOfCase(case_id: $case_id)
+    multiStudyCases(case_id: $case_id){
+      caseIds
+    }
     case(case_id:$case_id){
         case_id
         patient_id

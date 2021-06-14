@@ -23,6 +23,7 @@ import filterCasePageOnStudyCode from '../../utils/utils';
 import themes, { overrides } from '../../themes';
 import updateColumns from '../../utils/columnsUtil';
 import DocumentDownload from '../../components/DocumentDownload';
+import MultiStudyCases from './components/multiStudyCases';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -194,7 +195,17 @@ const CaseDetail = ({ classes, data }) => {
               </div>
 
             )}
-
+          {
+            (data.multiStudyCases.caseIds.length > 1)
+              && (
+                <div className={classes.multiCaseStudy}>
+                  <MultiStudyCases
+                    cases={data.multiStudyCases.caseIds}
+                    caseID={caseDetail.case_id}
+                  />
+                </div>
+              )
+          }
         </div>
 
         <div id="case_detail_container" className={classes.detailContainer}>
@@ -722,6 +733,9 @@ const styles = (theme) => ({
   },
   snackBarMessageIcon: {
     verticalAlign: 'middle',
+  },
+  multiCaseStudy: {
+    float: 'right',
   },
 });
 
