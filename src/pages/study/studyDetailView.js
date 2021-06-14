@@ -1,5 +1,4 @@
 import React from 'react';
-import SwipeableViews from 'react-swipeable-views';
 import {
   Grid,
   withStyles,
@@ -25,6 +24,7 @@ import {
 import Tab from './components/Tab';
 import Overview from './views/Overview';
 import Publication from './views/Publication';
+import TabPanel from './components/TabPanel';
 
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
@@ -181,11 +181,7 @@ const StudyDetailView = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
-      <SwipeableViews
-        index={currentTab}
-        animateTransitions={false}
-        style={{ overflowX: 'hidden' }}
-      >
+      <TabPanel value={currentTab} index={0}>
         <Overview
           studyData={studyData}
           diagnoses={diagnoses}
@@ -194,8 +190,13 @@ const StudyDetailView = ({ classes, data }) => {
           openSnack={openSnack}
           data={data}
         />
-        <Publication />
-      </SwipeableViews>
+      </TabPanel>
+      <TabPanel value={currentTab} index={1}>
+        <Publication
+          publications={studyData.publications}
+          display={tab.publication}
+        />
+      </TabPanel>
     </>
   );
 };
@@ -386,7 +387,6 @@ const styles = (theme) => ({
   headerButtonLinkText: {
     fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
-    fontSize: '14px',
   },
   headerButtonLinkNumber: {
     fontFamily: theme.custom.fontFamilySans,
