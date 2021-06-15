@@ -2,7 +2,6 @@ import React from 'react';
 import {
   withStyles,
 } from '@material-ui/core';
-import { createMuiTheme } from '@material-ui/core/styles';
 import {
   getColumns, getOptions, getDefaultCustomFooter,
 } from 'bento-components';
@@ -16,7 +15,6 @@ import TableThemeProvider from './cartTableThemeConfig';
 import updateColumns from '../../../../utils/columnsUtil';
 import Tooltip from '../../../../components/MuiTooltip';
 import DocumentDownload from '../../../../components/DocumentDownload';
-import themes, { overrides } from '../../../../themes';
 
 const CartHeader = ({
   classes,
@@ -32,30 +30,11 @@ const CartHeader = ({
     return (curr, allRowsSelected);
   }
 
-  const overridesObj = themes.light.overrides;
-  overridesObj.MUIDataTableToolbar = {
-    actions: {
-      '& span': {
-        '& button': {
-          right: '30px',
-          position: 'relative',
-        },
-      },
-      '& button': {
-        position: 'absolute',
-        right: '65px',
-      },
-    },
-  };
-  const style = [];
-  style.push(overridesObj);
-  const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
-
   const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(deleteColumn), table.columns);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
   return (
-    <TableThemeProvider theme={computedTheme}>
+    <TableThemeProvider>
       <CustomDataTable
         data={_.cloneDeep(data)}
         columns={columns}
