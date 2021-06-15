@@ -58,6 +58,17 @@ const Overview = ({
     },
   };
 
+  themesLight.overrides.MUIDataTableToolbar = {
+    ...themesLight.overrides.MUIDataTableToolbar,
+    actions: {
+      '& span': {
+        '& button': {
+          right: '0px',
+        },
+      },
+    },
+  };
+
   const computedTheme = createMuiTheme({
     ...themesLight,
     ...overrides,
