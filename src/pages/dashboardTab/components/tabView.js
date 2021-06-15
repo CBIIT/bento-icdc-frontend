@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import {
+  Badge,
   Grid,
   IconButton,
   Typography,
@@ -32,6 +33,14 @@ const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SA
 
 // Due to cypher limitation we have to send seperate query get descending list
 const getOverviewDescQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_DESC_QUERY);
+
+const StyledBadge = withStyles(() => ({
+  badge: {
+    border: '2px solid #A7AFB3',
+    backgroundColor: 'white',
+    color: 'black',
+  },
+}))(Badge);
 
 const TabView = ({
   classes,
@@ -250,7 +259,15 @@ const TabView = ({
 
   const toolTipIcon = (tableMeta) => (
     <Tooltip title={renderMultiStudyTooltipText(tableMeta)} arrow placement="bottom" interactive>
-      <img src={multiStudyData.icon} className={classes.multiStudyIcon} alt={multiStudyData.alt} />
+      <StyledBadge
+        badgeContent={tableMeta.length + 1}
+      >
+        <img
+          src={multiStudyData.icon}
+          className={classes.multiStudyIcon}
+          alt={multiStudyData.alt}
+        />
+      </StyledBadge>
     </Tooltip>
   );
 
@@ -266,8 +283,8 @@ const TabView = ({
     </div>
   );
 
-  const columns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).map((column) => {
-    if (column.name === 'case_id') {
+  const columns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).map((column, index) => {
+    if (column.name === 'case_id' && index === 0) {
       return {
         name: column.name,
         label: column.label,
@@ -494,6 +511,9 @@ const styles = () => ({
   },
   ul: {
     listStyleType: 'none',
+  },
+  badge: {
+
   },
 });
 
