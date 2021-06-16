@@ -3,7 +3,10 @@ import {
   withStyles,
 } from '@material-ui/core';
 import {
-  getColumns, getOptions, getDefaultCustomFooter,
+  getColumns,
+  getOptions,
+  getDefaultCustomFooter,
+  ToolTip as Tooltip,
 } from 'bento-components';
 import _ from 'lodash';
 import CustomDataTable from '../../../../components/serverPaginatedTable/serverPaginatedTable';
@@ -13,7 +16,6 @@ import {
 } from '../../../../bento/fileCentricCartWorkflowData';
 import TableThemeProvider from './cartTableThemeConfig';
 import updateColumns from '../../../../utils/columnsUtil';
-import Tooltip from '../../../../components/MuiTooltip';
 import DocumentDownload from '../../../../components/DocumentDownload';
 
 const CartHeader = ({

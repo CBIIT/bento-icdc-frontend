@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { DeleteOutline as DeleteOutlineIcon, ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
+import { ToolTip as Tooltip } from 'bento-components';
 import CartBody from './components/body/cartBody';
 import CartHeader from './components/header/cartHeader';
 import DialogBox from './components/dialogBox/dialogBox';
@@ -20,7 +21,6 @@ import {
 import { deleteFromCart } from './store/cart';
 import { downloadJson } from './utils';
 import GA from '../../utils/googleAnalytics';
-import Tooltip from '../../components/MuiTooltip';
 
 const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,

@@ -8,6 +8,7 @@ import {
   CustomDataTable,
   getOptions,
   manipulateLinks,
+  ToolTip as Tooltip,
 } from 'bento-components';
 import {
   pageData, textLabels,
@@ -16,7 +17,6 @@ import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import { isStudyUnderEmbargo } from '../study/utils';
 import arrowIcon from '../../assets/icons/arrow-icon.png';
-import Tooltip from '../../components/MuiTooltip';
 
 const Studies = ({ classes, data }) => {
   // TBD

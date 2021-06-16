@@ -1,6 +1,5 @@
 import React from 'react';
-import Tooltip from '../MuiTooltip';
-// import { CustomIcon } from 'bento-components';
+import { ToolTip as Tooltip } from 'bento-components';
 
 import CustomIcon from '../CustomIcon';
 import env from '../../utils/env';

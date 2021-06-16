@@ -8,6 +8,7 @@ import {
   CustomDataTable,
   getOptions,
   getColumns,
+  ToolTip as Tooltip,
 } from 'bento-components';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Typography } from '../../../components/Wrappers/Wrappers';
@@ -27,7 +28,6 @@ import {
 } from '../../../bento/studyDetailsData';
 import themes, { overrides } from '../../../themes';
 import updateColumns from '../../../utils/columnsUtil';
-import Tooltip from '../../../components/MuiTooltip';
 import DocumentDownload from '../../../components/DocumentDownload';
 
 const Overview = ({

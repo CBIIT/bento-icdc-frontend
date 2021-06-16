@@ -4,12 +4,12 @@ import {
   IconButton,
 } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
+import { ToolTip as Tooltip } from 'bento-components';
 import {
   clearTableSelections, fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal, getFilesCount,
 } from '../store/dashboardReducer';
 import Dialog from '../../../components/AddToCartDialog';
 import { addToCart, cartWillFull, getFilesIdsInCart } from '../../fileCentricCart/store/cart';
-import Tooltip from '../../../components/MuiTooltip';
 import { selectAllToolTip } from '../../../bento/dashboardTabData';
 
 const styles = () => ({
