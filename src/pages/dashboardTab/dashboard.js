@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Grid, withStyles, Button, Switch, Collapse, FormControlLabel, IconButton,
 } from '@material-ui/core';
-import { ProgramSunburst, CustomActiveDonut } from 'bento-components';
+import { ProgramSunburst, CustomActiveDonut, ToolTip as Tooltip } from 'bento-components';
 import { useTheme } from '../../components/ThemeContext';
 import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/DashboardStatsController';
@@ -10,7 +10,6 @@ import SideBar from '../../components/SideBar/SideBarView';
 import { widgetsData, themeToggleTooltip } from '../../bento/dashboardData';
 import Tab from './components/tabController';
 import colors from '../../utils/colors';
-import Tooltip from '../../components/MuiTooltip';
 
 const displaywidgets = widgetsData.filter((widget) => widget.show === true).slice(0, 6);
 

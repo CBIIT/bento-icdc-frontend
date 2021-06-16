@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
-import { getColumns } from 'bento-components';
+import { getColumns, ToolTip as Tooltip } from 'bento-components';
 import _ from 'lodash';
 import SelectAllModal from './modal';
 import {
@@ -26,7 +26,6 @@ import CustomDataTable from '../../../components/serverPaginatedTable/serverPagi
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 import updateColumns, { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
-import Tooltip from '../../../components/MuiTooltip';
 import DocumentDownload from '../../../components/DocumentDownload';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);

@@ -6,10 +6,9 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 
 import { CircularProgress, Backdrop, withStyles } from '@material-ui/core';
-import { CustomDataTable } from 'bento-components';
+import { CustomDataTable, ToolTip as Tooltip } from 'bento-components';
 import client from '../../utils/graphqlClient';
 import CSVDownloadToolbar from './components/CSVDownloadCustomToolbar';
-import Tooltip from '../MuiTooltip';
 
 class ServerPaginatedTableView extends React.Component {
   state = {

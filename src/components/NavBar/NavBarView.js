@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBar } from 'bento-components';
+import { NavBar, ToolTip as Tooltip } from 'bento-components';
 import {
   navBarData, navBarCartData, navBarstyling,
 } from '../../bento/navigationBarData';
@@ -11,6 +11,9 @@ const BentoNavBar = ({ cartFieldIds }) => (
       navBarCartData={navBarCartData}
       navBarstyling={navBarstyling}
       numberOfCases={cartFieldIds.length || 0}
+      components={{
+        Tooltip,
+      }}
     />
   </>
 );

@@ -9,6 +9,7 @@ import {
   cn,
   getOptions,
   manipulateLinks,
+  ToolTip as Tooltip,
 } from 'bento-components';
 import _ from 'lodash';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -25,7 +26,6 @@ import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
 import { isStudyUnderEmbargo } from '../study/utils';
-import Tooltip from '../../components/MuiTooltip';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
