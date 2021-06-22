@@ -98,12 +98,110 @@ query filesInList($uuids: [String], $first: Int = 2000){
       study_code
       file_uuid
       md5sum
+      sample_site
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      summarized_sample_type
+      specific_sample_pathology
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      disease_term
+      primary_disease_site
+      stage_of_disease
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      canine_individual_id
  }
 }`;
 
 export const customMyFilesTabDownloadCSV = {
-  keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'case_id', 'breed', 'diagnosis', 'study_code'],
-  header: ['File Name', 'File Type', 'Association', 'Description', 'File Format', 'Size', 'Case ID', 'Breed', 'Diagnosis', 'Study Code'],
+  keysToInclude: [
+    'file_name',
+    'file_type',
+    'association',
+    'file_description',
+    'file_format',
+    'file_size',
+    'case_id',
+    'breed',
+    'diagnosis',
+    'study_code',
+    'sample_site',
+    'physical_sample_type',
+    'general_sample_pathology',
+    'tumor_sample_origin',
+    'summarized_sample_type',
+    'specific_sample_pathology',
+    'tumor_grade',
+    'sample_chronology',
+    'percentage_tumor',
+    'necropsy_sample',
+    'sample_preservation',
+    'patient_age_at_enrollment',
+    'sex',
+    'neutered_indicator',
+    'weight',
+    'disease_term',
+    'primary_disease_site',
+    'stage_of_disease',
+    'best_response',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'cohort_description',
+    'canine_individual_id',
+  ],
+  header: [
+    'file_name',
+    'file_type',
+    'association',
+    'file_description',
+    'file_format',
+    'file_size',
+    'case_id',
+    'breed',
+    'diagnosis',
+    'study_code',
+    'Sample Site',
+    'Physical Sample Type',
+    'General Sample Pathology',
+    'Tumor Sample Origin',
+    'Sample Type',
+    'Pathology/Morphology',
+    'Tumor Grade',
+    'Sample Chronology',
+    'Percentage Tumor',
+    'Necropsy Sample',
+    'Sample Preservation',
+    'Age',
+    'Sex',
+    'Neutered Status',
+    'Weight (kg)',
+    'Diagnosis',
+    'primary_disease_site',
+    'Stage of Disease',
+    'Response to Treatment',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'Cohort',
+    'canine_individual_id',
+  ],
   query: MY_CART,
   apiVariable: 'filesInList',
   fileName: 'ICDC_My_Files_download',
