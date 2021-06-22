@@ -341,16 +341,6 @@ type program {
   studies: [study] 
 }
 
-type publication {
-  publication_title: String
-  authorship: String
-  year_of_publication: Float
-  journal_citation: String
-  digital_object_id: String
-  pubmed_id: Float
-  study: study 
-}
-
 type registration {
   registration_origin: String
   registration_id: String
@@ -432,7 +422,6 @@ type study {
   principal_investigators: [principal_investigator] 
   files: [file] 
   image_collections: [image_collection] 
-  publications: [publication] 
 }
 
 type study_arm {
@@ -776,6 +765,14 @@ type MultiStudyCases {
     caseIds: [String]
     sampleIds: [String]
     fileIds: [String]
+}
+
+type UnifiedCounts{
+  numberOfStudies: Int
+  numberOfCases: Int
+  numberOfFiles: Int
+  numberOfSamples: Int
+  numberOfAliquots: Int
 }
 
 type QueryType {
@@ -1144,4 +1141,7 @@ type QueryType {
   fileIdsFromFileName(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
 
   fileIdsFromFileNameDesc(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
+
+  unifiedViewData(case_ids: [String] = [""]): UnifiedCounts 
+
 }

@@ -341,16 +341,6 @@ type program {
   studies: [study] @relation(name:"member_of", direction:IN)
 }
 
-type publication {
-  publication_title: String
-  authorship: String
-  year_of_publication: Float
-  journal_citation: String
-  digital_object_id: String
-  pubmed_id: Float
-  study: study @relation(name:"of_study", direction:OUT)
-}
-
 type registration {
   registration_origin: String
   registration_id: String
@@ -432,7 +422,6 @@ type study {
   principal_investigators: [principal_investigator] @relation(name:"of_study", direction:IN)
   files: [file] @relation(name:"of_study", direction:IN)
   image_collections: [image_collection] @relation(name:"of_study", direction:IN)
-  publications: [publication] @relation(name:"of_study", direction:IN)
 }
 
 type study_arm {
@@ -778,9 +767,17 @@ type MultiStudyCases {
     fileIds: [String]
 }
 
+type UnifiedCounts{
+  numberOfStudies: Int
+  numberOfCases: Int
+  numberOfFiles: Int
+  numberOfSamples: Int
+  numberOfAliquots: Int
+}
+
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '1.0.0'")
+  schemaVersion: String @cypher(statement: "RETURN '1.1.0'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) WHERE n.study_disposition = 'Unrestricted' RETURN  count (n)")
@@ -2514,4 +2511,22 @@ type QueryType {
       WHEN 'file_uuid' THEN file_uuid
       ELSE file_name END DESC
   """, passThrough: true)
+
+  unifiedViewData(case_ids: [String] = [""]): UnifiedCounts @cypher(statement: """
+    MATCH (c:case)
+      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (s:study)<--(c)
+    OPTIONAL MATCH (parent)-[:of_case]->(c)
+    OPTIONAL MATCH (f:file)-->(parent)
+    OPTIONAL MATCH (samp:sample)-->(c)
+    OPTIONAL MATCH (a:aliquot)-[*]->(c)
+    RETURN{
+      numberOfStudies: COUNT(DISTINCT s),
+      numberOfCases: COUNT(DISTINCT c),
+      numberOfFiles: COUNT(DISTINCT f),
+      numberOfSamples: COUNT(DISTINCT samp),
+      numberOfAliquots: COUNT(DISTINCT a)
+    }
+  """, passThrough: true)
+
 }

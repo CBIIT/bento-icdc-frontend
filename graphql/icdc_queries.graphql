@@ -269,9 +269,17 @@ type MultiStudyCases {
     fileIds: [String]
 }
 
+type UnifiedCounts{
+  numberOfStudies: Int
+  numberOfCases: Int
+  numberOfFiles: Int
+  numberOfSamples: Int
+  numberOfAliquots: Int
+}
+
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '1.0.0'")
+  schemaVersion: String @cypher(statement: "RETURN '1.1.0'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) WHERE n.study_disposition = 'Unrestricted' RETURN  count (n)")
@@ -2005,4 +2013,22 @@ type QueryType {
       WHEN 'file_uuid' THEN file_uuid
       ELSE file_name END DESC
   """, passThrough: true)
+
+  unifiedViewData(case_ids: [String] = [""]): UnifiedCounts @cypher(statement: """
+    MATCH (c:case)
+      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
+    OPTIONAL MATCH (s:study)<--(c)
+    OPTIONAL MATCH (parent)-[:of_case]->(c)
+    OPTIONAL MATCH (f:file)-->(parent)
+    OPTIONAL MATCH (samp:sample)-->(c)
+    OPTIONAL MATCH (a:aliquot)-[*]->(c)
+    RETURN{
+      numberOfStudies: COUNT(DISTINCT s),
+      numberOfCases: COUNT(DISTINCT c),
+      numberOfFiles: COUNT(DISTINCT f),
+      numberOfSamples: COUNT(DISTINCT samp),
+      numberOfAliquots: COUNT(DISTINCT a)
+    }
+  """, passThrough: true)
+
 }
