@@ -279,7 +279,7 @@ type UnifiedCounts{
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '1.1.0'")
+  schemaVersion: String @cypher(statement: "RETURN '1.1.1'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) WHERE n.study_disposition = 'Unrestricted' RETURN  count (n)")
@@ -2018,8 +2018,7 @@ type QueryType {
     MATCH (c:case)
       WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
     OPTIONAL MATCH (s:study)<--(c)
-    OPTIONAL MATCH (parent)-[:of_case]->(c)
-    OPTIONAL MATCH (f:file)-->(parent)
+    OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (samp:sample)-->(c)
     OPTIONAL MATCH (a:aliquot)-[*]->(c)
     RETURN{
