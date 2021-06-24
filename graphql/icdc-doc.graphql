@@ -778,6 +778,14 @@ type MultiStudyCases {
     fileIds: [String]
 }
 
+type UnifiedCounts{
+  numberOfStudies: Int
+  numberOfCases: Int
+  numberOfFiles: Int
+  numberOfSamples: Int
+  numberOfAliquots: Int
+}
+
 type QueryType {
   "Version"
   schemaVersion: String 
@@ -1144,4 +1152,7 @@ type QueryType {
   fileIdsFromFileName(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
 
   fileIdsFromFileNameDesc(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
+
+  unifiedViewData(case_ids: [String] = [""]): UnifiedCounts 
+
 }
