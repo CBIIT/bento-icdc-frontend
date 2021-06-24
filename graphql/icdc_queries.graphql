@@ -190,11 +190,13 @@ type FileInList {
   tumor_sample_origin: String
   summarized_sample_type: String
   specific_sample_pathology: String
+  date_of_sample_collection: String
   tumor_grade: String
   sample_chronology: String
   percentage_tumor: String
   necropsy_sample: String
   sample_preservation: String
+  comment: String
   patient_age_at_enrollment: String
   sex: String
   neutered_indicator: String
@@ -203,6 +205,9 @@ type FileInList {
   disease_term: String
   primary_disease_site: String
   stage_of_disease: String
+  date_of_diagnosis: String
+  histology_cytopathology: String
+  histological_grade: String
   best_response: String
   pathology_report: String
   treatment_data: String
@@ -210,7 +215,7 @@ type FileInList {
   concurrent_disease: String
   concurrent_disease_type: String
   cohort_description: String
-  canine_individual_id: String
+  arm: String
 }
 
 type FileOverview {
@@ -440,7 +445,8 @@ type QueryType {
     OPTIONAL MATCH (enroll:enrollment)-[:of_case]->(c)
     OPTIONAL MATCH (samp:sample)-[:of_case]->(c)
     OPTIONAL MATCH (s:study)<-[:member_of]-(c)
-    OPTIONAL MATCH (i:canine_individual) <--(c)
+    OPTIONAL MATCH (c)-->(co:cohort)
+    OPTIONAL MATCH (co)-->(a:study_arm)
     WITH
       f.file_name AS file_name,
       f.file_type AS file_type,
@@ -460,11 +466,13 @@ type QueryType {
       samp.tumor_sample_origin as tumor_sample_origin,
       samp.summarized_sample_type as summarized_sample_type,
       samp.specific_sample_pathology as specific_sample_pathology,
+      samp.date_of_sample_collection as date_of_sample_collection,
       samp.tumor_grade as tumor_grade,
       samp.sample_chronology as sample_chronology,
       samp.percentage_tumor as percentage_tumor,
       samp.necropsy_sample as necropsy_sample,
       samp.sample_preservation as sample_preservation,
+      samp.comment as comment,
       demo.patient_age_at_enrollment as patient_age_at_enrollment,
       demo.sex as sex,
       demo.neutered_indicator as neutered_indicator,
@@ -473,14 +481,17 @@ type QueryType {
       diag.disease_term as disease_term,
       diag.primary_disease_site as primary_disease_site,
       diag.stage_of_disease as stage_of_disease,
+      diag.date_of_diagnosis as date_of_diagnosis,
+      diag.histology_cytopathology as histology_cytopathology,
+      diag.histological_grade as histological_grade,
       diag.best_response as best_response,
       diag.pathology_report as pathology_report,
       diag.treatment_data as treatment_data,
       diag.follow_up_data as follow_up_data,
       diag.concurrent_disease as concurrent_disease,
       diag.concurrent_disease_type as concurrent_disease_type,
-      enroll.cohort_description as cohort_description,
-      i.canine_individual as canine_individual_id
+      co.cohort_description as cohort_description,
+      a.arm as arm
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -500,11 +511,13 @@ type QueryType {
       tumor_sample_origin: tumor_sample_origin,
       summarized_sample_type: summarized_sample_type,
       specific_sample_pathology: specific_sample_pathology,
+      date_of_sample_collection: date_of_sample_collection,
       tumor_grade: tumor_grade,
       sample_chronology: sample_chronology,
       percentage_tumor: percentage_tumor,
       necropsy_sample: necropsy_sample,
       sample_preservation: sample_preservation,
+      comment: comment,
       patient_age_at_enrollment: patient_age_at_enrollment,
       sex: sex,
       neutered_indicator: neutered_indicator,
@@ -513,6 +526,9 @@ type QueryType {
       disease_term: disease_term,
       primary_disease_site: primary_disease_site,
       stage_of_disease: stage_of_disease,
+      date_of_diagnosis: date_of_diagnosis,
+      histology_cytopathology: histology_cytopathology,
+      histological_grade: histological_grade,
       best_response: best_response,
       pathology_report: pathology_report,
       treatment_data: treatment_data,
@@ -520,7 +536,7 @@ type QueryType {
       concurrent_disease: concurrent_disease,
       concurrent_disease_type: concurrent_disease_type,
       cohort_description: cohort_description,
-      canine_individual_id: canine_individual_id
+      arm: arm
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -545,8 +561,11 @@ type QueryType {
     OPTIONAL MATCH (f:file)-[*]->(c:case)
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
+    OPTIONAL MATCH (enroll:enrollment)-[:of_case]->(c)
+    OPTIONAL MATCH (samp:sample)-[:of_case]->(c)
     OPTIONAL MATCH (s:study)<-[:member_of]-(c)
-    OPTIONAL MATCH (i:canine_individual) <--(c)
+    OPTIONAL MATCH (c)-->(co:cohort)
+    OPTIONAL MATCH (co)-->(a:study_arm)
     WITH
       f.file_name AS file_name,
       f.file_type AS file_type,
@@ -559,18 +578,20 @@ type QueryType {
       diag.disease_term as diagnosis,
       s.clinical_study_designation AS study_code,
       f.uuid as file_uuid,
-      f.md5sum AS md5sum
-    samp.sample_site as sample_site,
+      f.md5sum AS md5sum,
+      samp.sample_site as sample_site,
       samp.physical_sample_type as physical_sample_type,
       samp.general_sample_pathology as general_sample_pathology,
       samp.tumor_sample_origin as tumor_sample_origin,
       samp.summarized_sample_type as summarized_sample_type,
       samp.specific_sample_pathology as specific_sample_pathology,
+      samp.date_of_sample_collection as date_of_sample_collection,
       samp.tumor_grade as tumor_grade,
       samp.sample_chronology as sample_chronology,
       samp.percentage_tumor as percentage_tumor,
       samp.necropsy_sample as necropsy_sample,
-      samp.sample_preservation as sample_preservation
+      samp.sample_preservation as sample_preservation,
+      samp.comment as comment,
       demo.patient_age_at_enrollment as patient_age_at_enrollment,
       demo.sex as sex,
       demo.neutered_indicator as neutered_indicator,
@@ -579,14 +600,17 @@ type QueryType {
       diag.disease_term as disease_term,
       diag.primary_disease_site as primary_disease_site,
       diag.stage_of_disease as stage_of_disease,
+      diag.date_of_diagnosis as date_of_diagnosis,
+      diag.histology_cytopathology as histology_cytopathology,
+      diag.histological_grade as histological_grade,
       diag.best_response as best_response,
       diag.pathology_report as pathology_report,
       diag.treatment_data as treatment_data,
       diag.follow_up_data as follow_up_data,
       diag.concurrent_disease as concurrent_disease,
       diag.concurrent_disease_type as concurrent_disease_type,
-      enroll.cohort_description as cohort_description,
-      i.canine_individual as canine_individual_id
+      co.cohort_description as cohort_description,
+      a.arm as arm
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -606,11 +630,13 @@ type QueryType {
       tumor_sample_origin: tumor_sample_origin,
       summarized_sample_type: summarized_sample_type,
       specific_sample_pathology: specific_sample_pathology,
+      date_of_sample_collection: date_of_sample_collection,
       tumor_grade: tumor_grade,
       sample_chronology: sample_chronology,
       percentage_tumor: percentage_tumor,
       necropsy_sample: necropsy_sample,
       sample_preservation: sample_preservation,
+      comment: comment,
       patient_age_at_enrollment: patient_age_at_enrollment,
       sex: sex,
       neutered_indicator: neutered_indicator,
@@ -619,6 +645,9 @@ type QueryType {
       disease_term: disease_term,
       primary_disease_site: primary_disease_site,
       stage_of_disease: stage_of_disease,
+      date_of_diagnosis: date_of_diagnosis,
+      histology_cytopathology: histology_cytopathology,
+      histological_grade: histological_grade,
       best_response: best_response,
       pathology_report: pathology_report,
       treatment_data: treatment_data,
@@ -626,7 +655,7 @@ type QueryType {
       concurrent_disease: concurrent_disease,
       concurrent_disease_type: concurrent_disease_type,
       cohort_description: cohort_description,
-      canine_individual_id: canine_individual_id
+      arm: arm
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name

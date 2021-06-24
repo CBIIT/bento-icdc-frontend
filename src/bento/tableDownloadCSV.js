@@ -104,11 +104,13 @@ query filesInList($uuids: [String], $first: Int = 2000){
       tumor_sample_origin
       summarized_sample_type
       specific_sample_pathology
+      date_of_sample_collection
       tumor_grade
       sample_chronology
       percentage_tumor
       necropsy_sample
       sample_preservation
+      comment
       patient_age_at_enrollment
       sex
       neutered_indicator
@@ -116,6 +118,9 @@ query filesInList($uuids: [String], $first: Int = 2000){
       disease_term
       primary_disease_site
       stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
       best_response
       pathology_report
       treatment_data
@@ -123,7 +128,7 @@ query filesInList($uuids: [String], $first: Int = 2000){
       concurrent_disease
       concurrent_disease_type
       cohort_description
-      canine_individual_id
+      arm
  }
 }`;
 
@@ -145,11 +150,13 @@ export const customMyFilesTabDownloadCSV = {
     'tumor_sample_origin',
     'summarized_sample_type',
     'specific_sample_pathology',
+    'date_of_sample_collection',
     'tumor_grade',
     'sample_chronology',
     'percentage_tumor',
     'necropsy_sample',
     'sample_preservation',
+    'comment',
     'patient_age_at_enrollment',
     'sex',
     'neutered_indicator',
@@ -157,13 +164,17 @@ export const customMyFilesTabDownloadCSV = {
     'disease_term',
     'primary_disease_site',
     'stage_of_disease',
+    'date_of_diagnosis',
+    'histology_cytopathology',
+    'histological_grade',
     'best_response',
+    'pathology_report',
     'treatment_data',
     'follow_up_data',
     'concurrent_disease',
     'concurrent_disease_type',
     'cohort_description',
-    'canine_individual_id',
+    'arm',
   ],
   header: [
     'file_name',
@@ -182,25 +193,31 @@ export const customMyFilesTabDownloadCSV = {
     'Tumor Sample Origin',
     'Sample Type',
     'Pathology/Morphology',
+    'Sample Collection Date',
     'Tumor Grade',
     'Sample Chronology',
     'Percentage Tumor',
     'Necropsy Sample',
     'Sample Preservation',
+    'Comment',
     'Age',
     'Sex',
     'Neutered Status',
     'Weight (kg)',
     'Diagnosis',
-    'primary_disease_site',
+    'Disease Site',
     'Stage of Disease',
+    'Date of Diagnosis',
+    'Histology/Cytopathology',
+    'Histological Grade',
     'Response to Treatment',
-    'treatment_data',
-    'follow_up_data',
-    'concurrent_disease',
-    'concurrent_disease_type',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
     'Cohort',
-    'canine_individual_id',
+    'Arm',
   ],
   query: MY_CART,
   apiVariable: 'filesInList',

@@ -699,11 +699,13 @@ type FileInList {
   tumor_sample_origin: String
   summarized_sample_type: String
   specific_sample_pathology: String
+  date_of_sample_collection: String
   tumor_grade: String
   sample_chronology: String
   percentage_tumor: String
   necropsy_sample: String
   sample_preservation: String
+  comment: String
   patient_age_at_enrollment: String
   sex: String
   neutered_indicator: String
@@ -712,6 +714,9 @@ type FileInList {
   disease_term: String
   primary_disease_site: String
   stage_of_disease: String
+  date_of_diagnosis: String
+  histology_cytopathology: String
+  histological_grade: String
   best_response: String
   pathology_report: String
   treatment_data: String
@@ -719,7 +724,7 @@ type FileInList {
   concurrent_disease: String
   concurrent_disease_type: String
   cohort_description: String
-  canine_individual_id: String
+  arm: String
 }
 
 type FileOverview {
