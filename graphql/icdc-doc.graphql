@@ -773,6 +773,7 @@ type ProgramStudies {
 }
 
 type MultiStudyCases {
+    individualId: Int
     caseIds: [String]
     sampleIds: [String]
     fileIds: [String]
@@ -1081,11 +1082,11 @@ type QueryType {
 
   "Combined info"
   studiesByProgramId(program_id: String!): [StudyOfProgram] 
-  
+
   studiesByProgram: [StudyOfProgram] 
-  
+
   filesOfCase(case_id: String!): [FilesOfCase] 
- 
+
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
 
   programsAndStudies(case_ids: [String] = []): [ProgramStudies] 

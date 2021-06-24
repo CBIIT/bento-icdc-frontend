@@ -773,6 +773,7 @@ type ProgramStudies {
 }
 
 type MultiStudyCases {
+    individualId: Int
     caseIds: [String]
     sampleIds: [String]
     fileIds: [String]
@@ -1070,7 +1071,7 @@ type QueryType {
       group: group.clinical_study_designation,
       code: group.accession_id,
       count: SUM(CASE count_group WHEN group THEN count ELSE 0 END)
-    }      
+    }
   """, passThrough: true)
 
   filterCaseCountByStudyType(
@@ -1407,7 +1408,7 @@ type QueryType {
     RETURN{
       group: group,
       count: SUM(CASE count_group WHEN group THEN count ELSE 0 END)
-    } 
+    }
   """, passThrough: true)
 
   filterCaseCountByNeuteredStatus(
@@ -1700,30 +1701,8 @@ type QueryType {
 
   "Combined info"
   studiesByProgramId(program_id: String!): [StudyOfProgram] @cypher(statement: """
-    MATCH (p:program {program_acronym: $program_id})<-[*]-(s:study) 
-    OPTIONAL MATCH (s)<-[*]-(c:case) 
-    WITH p, s,
-      COUNT(DISTINCT(c)) AS numberOfCases
-    RETURN{
-      program_id: p.program_acronym,
-      clinical_study_id: s.clinical_study_id,
-      clinical_study_designation: s.clinical_study_designation,
-      clinical_study_name: s.clinical_study_name,
-      clinical_study_description: s.clinical_study_description,
-      clinical_study_type: s.clinical_study_type,
-      accession_id: s.accession_id,
-      study_disposition: s.study_disposition,
-      date_of_iacuc_approval: s.date_of_iacuc_approval,
-      dates_of_conduct: s.dates_of_conduct,
-      numberOfCases: numberOfCases
-    } 
-    ORDER BY s.clinical_study_designation
-  """, passThrough: true)
-  
-  studiesByProgram: [StudyOfProgram] @cypher(statement:"""
-    MATCH (s:study) 
-    OPTIONAL MATCH (p:program)<-[*]-(s) 
-    OPTIONAL MATCH (s)<-[*]-(c:case) 
+    MATCH (p:program {program_acronym: $program_id})<-[*]-(s:study)
+    OPTIONAL MATCH (s)<-[*]-(c:case)
     WITH p, s,
       COUNT(DISTINCT(c)) AS numberOfCases
     RETURN{
@@ -1741,11 +1720,33 @@ type QueryType {
     }
     ORDER BY s.clinical_study_designation
   """, passThrough: true)
-  
+
+  studiesByProgram: [StudyOfProgram] @cypher(statement:"""
+    MATCH (s:study)
+    OPTIONAL MATCH (p:program)<-[*]-(s)
+    OPTIONAL MATCH (s)<-[*]-(c:case)
+    WITH p, s,
+      COUNT(DISTINCT(c)) AS numberOfCases
+    RETURN{
+      program_id: p.program_acronym,
+      clinical_study_id: s.clinical_study_id,
+      clinical_study_designation: s.clinical_study_designation,
+      clinical_study_name: s.clinical_study_name,
+      clinical_study_description: s.clinical_study_description,
+      clinical_study_type: s.clinical_study_type,
+      accession_id: s.accession_id,
+      study_disposition: s.study_disposition,
+      date_of_iacuc_approval: s.date_of_iacuc_approval,
+      dates_of_conduct: s.dates_of_conduct,
+      numberOfCases: numberOfCases
+    }
+    ORDER BY s.clinical_study_designation
+  """, passThrough: true)
+
   filesOfCase(case_id: String!): [FilesOfCase] @cypher(statement: """
-    MATCH (f:file)-[*]->(c:case{case_id: $case_id}) 
-    WITH DISTINCT(f) AS f 
-    MATCH (f)-->(parent) 
+    MATCH (f:file)-[*]->(c:case{case_id: $case_id})
+    WITH DISTINCT(f) AS f
+    MATCH (f)-->(parent)
     RETURN{
       file_status: f.file_status,
       file_name: f.file_name,
@@ -1760,13 +1761,13 @@ type QueryType {
       case_id: $case_id
     }
   """, passThrough: true)
- 
+
   filesOfCases(case_ids: [String!]!): [FilesOfCase] @cypher(statement: """
-    MATCH (f:file)-[*]->(c:case) 
-    WITH 
-      DISTINCT(f) AS f, 
-      c MATCH (f)-->(parent) 
-    WHERE c.case_id IN $case_ids 
+    MATCH (f:file)-[*]->(c:case)
+    WITH
+      DISTINCT(f) AS f,
+      c MATCH (f)-->(parent)
+    WHERE c.case_id IN $case_ids
     RETURN{
       file_status: f.file_status,
       file_name: f.file_name,
@@ -1779,7 +1780,7 @@ type QueryType {
       file_location: f.file_location,
       parent: head(labels(parent)),
       case_id: c.case_id
-    } 
+    }
   """, passThrough: true)
 
   programsAndStudies(case_ids: [String] = []): [ProgramStudies] @cypher(statement: """
@@ -1806,6 +1807,7 @@ type QueryType {
       OPTIONAL MATCH (c)<--(samp:sample)
       OPTIONAL MATCH (c)<-[*]-(f:file)
       RETURN{
+        individualId: i.canine_individual_id,
         caseIds: collect(DISTINCT c.case_id),
         sampleIds: collect(DISTINCT samp.sample_id),
         fileIds: collect(DISTINCT f.uuid)
@@ -1818,7 +1820,7 @@ type QueryType {
     OPTIONAL MATCH (c)<--(demo:demographic)
     OPTIONAL MATCH (c)<--(diag:diagnosis)
     OPTIONAL MATCH (c)<--(e:enrollment)
-    RETURN{ 
+    RETURN{
       program_acronym: p.program_acronym,
       clinical_study_name: s.clinical_study_name,
       clinical_study_designation: s.clinical_study_designation,
@@ -1845,7 +1847,7 @@ type QueryType {
       primary_disease_site: diag.primary_disease_site,
       histological_grade: diag.histological_grade,
       histology_cytopathology: diag.histology_cytopathology
-    }  
+    }
   """, passThrough: true)
 
   caseOverview(study_codes: [String] = [""], breeds: [String] = [""], diagnoses: [String] = [""], sexes: [String] = [""]): [CaseOverview] @cypher(statement: """
@@ -1856,30 +1858,30 @@ type QueryType {
       MATCH (d:diagnosis)
       WITH collect(DISTINCT(d.disease_term)) AS all_diseases, all_breeds, all_sexes, all_studies
       MATCH (p:program)<-[*]-(s:study)<-[*]-(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
-        WHERE 
-          s.clinical_study_designation IN 
-            CASE 
+        WHERE
+          s.clinical_study_designation IN
+            CASE
               WHEN ($study_codes = [""] OR $study_codes IS NULL)
               THEN all_studies
               ELSE $study_codes
             END
-        AND 
-          demo.breed IN 
-          CASE  
+        AND
+          demo.breed IN
+          CASE
             WHEN ($breeds = [""] OR $breeds IS NULL)
             THEN all_breeds
             ELSE $breeds
           END
-        AND 
-          diag.disease_term IN 
-            CASE  
+        AND
+          diag.disease_term IN
+            CASE
               WHEN ($diagnoses = [""] OR $diagnoses IS NULL)
               THEN all_diseases
               ELSE $diagnoses
             END
-        AND 
-          demo.sex IN 
-            CASE  
+        AND
+          demo.sex IN
+            CASE
               WHEN ($sexes = [""] OR $sexes IS NULL)
               THEN all_sexes
               ELSE $sexes
@@ -1907,7 +1909,7 @@ type QueryType {
         sample_list: collect(DISTINCT(samp{.*})),
         demographic: demo,
         diagnosis_obj: diag
-      } 
+      }
   """, passThrough:true)
 
   caseOverviewPaged (case_ids: [String] = [""], order_by: String = ""): [CaseOverview2] @cypher(statement: """
@@ -1952,7 +1954,7 @@ type QueryType {
       response_to_treatment: response_to_treatment,
       files: files,
       other_cases: other_cases
-    } 
+    }
     ORDER BY
       CASE $order_by
         WHEN "study_code" THEN study_code
@@ -2013,7 +2015,7 @@ type QueryType {
       response_to_treatment: response_to_treatment,
       files: files,
       other_cases: other_cases
-    } 
+    }
     ORDER BY
       CASE $order_by
         WHEN "study_code" THEN study_code
@@ -2115,13 +2117,13 @@ type QueryType {
   """, passThrough:true)
 
   casesInList(case_ids: [String!]!): [CaseOverview] @cypher(statement: """
-    MATCH 
+    MATCH
       (p:program)<-[*]-(s:study)<-[*]-(c:case)<--(demo:demographic),
-      (c)<--(diag:diagnosis) 
-    WHERE c.case_id IN $case_ids 
-    OPTIONAL MATCH (f:file)-[*]->(c) 
-    OPTIONAL MATCH (samp:sample)-[*]->(c) 
-    WITH DISTINCT c AS c, p, s, demo, diag, f, samp 
+      (c)<--(diag:diagnosis)
+    WHERE c.case_id IN $case_ids
+    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (samp:sample)-[*]->(c)
+    WITH DISTINCT c AS c, p, s, demo, diag, f, samp
     RETURN{
       case_id: c.case_id,
       study_code: s.clinical_study_designation,
@@ -2139,48 +2141,48 @@ type QueryType {
       files: collect(DISTINCT(f{.*})),
       samples: collect(DISTINCT(samp.sample_id)),
       sample_list: collect(DISTINCT(samp{.*}))
-    } 
+    }
   """, passThrough:true)
 
   studyDetail(study_code: String!): [StudyDetail] @cypher(statement: """
-    MATCH (s:study {clinical_study_designation: $study_code})<-[*]-(p)<--(f:file) 
-    WITH DISTINCT(f), s, p 
+    MATCH (s:study {clinical_study_designation: $study_code})<-[*]-(p)<--(f:file)
+    WITH DISTINCT(f), s, p
     RETURN{
       study_code: s.clinical_study_designation,
       file_name: f.file_name,
-      file_type: f.file_type, 
-      association: head(labels(p)), 
-      description: f.file_description, 
-      format: f.file_format, 
-      size: f.file_size, 
+      file_type: f.file_type,
+      association: head(labels(p)),
+      description: f.file_description,
+      format: f.file_format,
+      size: f.file_size,
       MD5: f.md5sum
-    } 
+    }
   """, passThrough: true)
 
   "Find nodes with parameters"
   casesByStudyId(study_id: String!): [case] @cypher(statement: """
-    MATCH (s:study {clinical_study_designation: $study_id})<-[*]-(c:case) 
+    MATCH (s:study {clinical_study_designation: $study_id})<-[*]-(c:case)
     RETURN DISTINCT(c)
   """)
 
   samplesByCaseId(case_id: String!): [sample] @cypher(statement: """
-    MATCH (c:case {case_id: $case_id})<-[*]-(s:sample) 
+    MATCH (c:case {case_id: $case_id})<-[*]-(s:sample)
     RETURN s
   """)
 
   filesBySampleId(sample_id: String!): [file] @cypher(statement: """
-    MATCH (s:sample {sample_id: $sample_id})<-[*]-(f:file) 
+    MATCH (s:sample {sample_id: $sample_id})<-[*]-(f:file)
     RETURN f
   """)
 
   filesOfStudy(study_code: String!): [file] @cypher(statement: """
-    MATCH (f:file)-[*]->(:study {clinical_study_designation: $study_code}) 
+    MATCH (f:file)-[*]->(:study {clinical_study_designation: $study_code})
     RETURN DISTINCT(f)
   """)
 
   studyFiles(study_codes: [String!]): [file] @cypher(statement: """
-    MATCH (s:study)<--(f:file) 
-    WHERE s.clinical_study_designation IN $study_codes 
+    MATCH (s:study)<--(f:file)
+    WHERE s.clinical_study_designation IN $study_codes
     RETURN f{.*}
   """, passThrough: true)
 
@@ -2245,7 +2247,7 @@ type QueryType {
       md5: f.md5sum,
       size: f.file_size,
       url: f.file_location
-    } 
+    }
     ORDER BY file_type, case_id
   """, passThrough: true)
 
@@ -2262,7 +2264,7 @@ type QueryType {
       size: f.file_size,
       acl: f.acl,
       url: f.file_location
-    } 
+    }
     ORDER BY url
   """, passThrough: true)
 
@@ -2280,7 +2282,7 @@ type QueryType {
         total_size_MB: SUM(f.file_size)/1000000,
         cases: cases,
         samples: samples
-      }  
+      }
   """, passThrough: true)
 
   fileOverview(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] @cypher(statement: """
@@ -2293,7 +2295,7 @@ type QueryType {
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
-    WITH 
+    WITH
       f.file_name as file_name,
       f.file_type as file_type,
       head(labels(parent)) as association,
@@ -2317,7 +2319,7 @@ type QueryType {
       diagnosis: diagnosis,
       study_code: study_code,
       file_uuid: file_uuid
-    } 
+    }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
       WHEN 'file_type' THEN file_type
@@ -2343,7 +2345,7 @@ type QueryType {
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
-    WITH 
+    WITH
       f.file_name as file_name,
       f.file_type as file_type,
       head(labels(parent)) as association,
@@ -2367,7 +2369,7 @@ type QueryType {
       diagnosis: diagnosis,
       study_code: study_code,
       file_uuid: file_uuid
-    } 
+    }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
       WHEN 'file_type' THEN file_type
@@ -2500,7 +2502,7 @@ type QueryType {
     RETURN{
       file_name: file_name,
       file_uuid: file_uuid
-    } 
+    }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
       WHEN 'file_uuid' THEN file_uuid
@@ -2516,7 +2518,7 @@ type QueryType {
     RETURN{
       file_name: file_name,
       file_uuid: file_uuid
-    } 
+    }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
       WHEN 'file_uuid' THEN file_uuid
