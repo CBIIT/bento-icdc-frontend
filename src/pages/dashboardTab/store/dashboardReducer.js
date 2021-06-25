@@ -596,7 +596,8 @@ function setCodeToCheckBoxItem(checkboxData, item) {
       }
     });
   });
-  updateCheckBoxData[0].checkboxItems = checkBoxitems;
+  updateCheckBoxData[0].checkboxItems = checkBoxitems
+    .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
   return updateCheckBoxData;
 }
 /**
