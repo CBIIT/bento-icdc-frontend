@@ -184,6 +184,7 @@ type FileInList {
   study_code: String
   file_uuid: String
   md5sum: String
+  sample_id: String
 }
 
 type FileOverview {
@@ -198,6 +199,7 @@ type FileOverview {
   diagnosis: String
   study_code: String
   file_uuid: String
+  sample_id: String
 }
 
 type SampleOverview {
@@ -280,7 +282,7 @@ type UnifiedCounts{
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '1.1.1'")
+  schemaVersion: String @cypher(statement: "RETURN '1.1.2'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) WHERE n.study_disposition = 'Unrestricted' RETURN  count (n)")
@@ -416,6 +418,7 @@ type QueryType {
     MATCH (f:file)
       WHERE f.uuid in $uuids
     OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (f)-[*]->(samp:sample)
     OPTIONAL MATCH (f:file)-[*]->(c:case)
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
@@ -432,7 +435,8 @@ type QueryType {
       diag.disease_term as diagnosis,
       s.clinical_study_designation AS study_code,
       f.uuid as file_uuid,
-      f.md5sum AS md5sum
+      f.md5sum AS md5sum,
+      samp.sample_id AS sample_id
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -445,7 +449,8 @@ type QueryType {
       diagnosis: diagnosis,
       study_code: study_code,
       file_uuid: file_uuid,
-      md5sum: md5sum
+      md5sum: md5sum,
+      sample_id: sample_id
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -467,6 +472,7 @@ type QueryType {
     MATCH (f:file)
       WHERE f.uuid in $uuids
     OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (f)-[*]->(samp:sample)
     OPTIONAL MATCH (f:file)-[*]->(c:case)
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
@@ -483,7 +489,8 @@ type QueryType {
       diag.disease_term as diagnosis,
       s.clinical_study_designation AS study_code,
       f.uuid as file_uuid,
-      f.md5sum AS md5sum
+      f.md5sum AS md5sum,
+      samp.sample_id AS sample_id
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -496,7 +503,8 @@ type QueryType {
       diagnosis: diagnosis,
       study_code: study_code,
       file_uuid: file_uuid,
-      md5sum: md5sum
+      md5sum: md5sum,
+      sample_id: sample_id
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -1786,6 +1794,7 @@ type QueryType {
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
+    OPTIONAL MATCH (f)-[*]->(samp:sample)
     WITH
       f.file_name as file_name,
       f.file_type as file_type,
@@ -1797,7 +1806,8 @@ type QueryType {
       demo.breed as breed,
       d.disease_term as diagnosis,
       s.clinical_study_designation as study_code,
-      f.uuid as file_uuid
+      f.uuid as file_uuid,
+      samp.sample_id AS sample_id
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -1809,7 +1819,8 @@ type QueryType {
       breed: breed,
       diagnosis: diagnosis,
       study_code: study_code,
-      file_uuid: file_uuid
+      file_uuid: file_uuid,
+      sample_id: sample_id
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -1836,6 +1847,7 @@ type QueryType {
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(d:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
+    OPTIONAL MATCH (f)-[*]->(samp:sample)
     WITH
       f.file_name as file_name,
       f.file_type as file_type,
@@ -1847,7 +1859,8 @@ type QueryType {
       demo.breed as breed,
       d.disease_term as diagnosis,
       s.clinical_study_designation as study_code,
-      f.uuid as file_uuid
+      f.uuid as file_uuid,
+      samp.sample_id AS sample_id
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -1859,7 +1872,8 @@ type QueryType {
       breed: breed,
       diagnosis: diagnosis,
       study_code: study_code,
-      file_uuid: file_uuid
+      file_uuid: file_uuid,
+      sample_id: sample_id
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -1873,7 +1887,7 @@ type QueryType {
       WHEN 'diagnosis' THEN diagnosis
       WHEN 'study_code' THEN study_code
       WHEN 'file_uuid' THEN file_uuid
-      ELSE file_name END DESC
+    ELSE file_name END DESC
   """, passThrough: true)
 
   sampleOverview(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] @cypher(statement: """

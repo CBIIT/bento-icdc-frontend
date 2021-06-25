@@ -693,6 +693,7 @@ type FileInList {
   study_code: String
   file_uuid: String
   md5sum: String
+  sample_id: String
 }
 
 type FileOverview {
@@ -707,6 +708,7 @@ type FileOverview {
   diagnosis: String
   study_code: String
   file_uuid: String
+  sample_id: String
 }
 
 type SampleOverview {
