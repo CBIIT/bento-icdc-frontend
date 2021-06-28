@@ -343,7 +343,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12px',
+    fontSize: '14px',
     maxHeight: '35px',
     overflow: 'hidden',
     paddingLeft: '3px',
@@ -364,7 +364,7 @@ const styles = (theme) => ({
 
   },
   headerMSubTitle: {
-    paddingTop: '12px',
+    paddingTop: '15px',
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
