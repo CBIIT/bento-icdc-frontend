@@ -9,7 +9,7 @@ import { clearAllFilters } from '../../pages/dashboardTab/store/dashboardReducer
 
 const drawerWidth = 240;
 
-const SideBarContent = ({ classes }) => {
+const SideBarContent = ({ classes, unifiedViewFlag }) => {
   const activeFilters = useSelector((state) => (
     state.dashboardTab
       && state.dashboardTab.allActiveFilters
@@ -35,24 +35,39 @@ const SideBarContent = ({ classes }) => {
       }}
     >
       { countFilters > 0 && (
-      <div>
+      <div className={classes.test}>
         <div>
           <div className={classes.floatRight}>
-            <Button
-              id="button_sidebar_clear_all_filters"
-              variant="outlined"
-              disabled={activeFiltersCount === 0}
-              className={classes.customButton}
-              classes={{ root: classes.clearAllButtonRoot }}
-              onClick={() => clearAllFilters()}
-              disableRipple
-            >
-              CLEAR ALL
-            </Button>
+            {
+             !unifiedViewFlag ? (
+               <Button
+                 id="button_sidebar_clear_all_filters"
+                 variant="outlined"
+                 disabled={activeFiltersCount === 0}
+                 className={classes.customButton}
+                 classes={{ root: classes.clearAllButtonRoot }}
+                 onClick={() => clearAllFilters()}
+                 disableRipple
+               >
+                 CLEAR ALL
+               </Button>
+             ) : (
+               <Button
+                 id="button_sidebar_clear_all_filters"
+                 variant="outlined"
+                 className={classes.unifiedButton}
+                 classes={{ root: classes.clearAllButtonRoot }}
+                 onClick={() => window.location.reload()}
+                 disableRipple
+               >
+                 RESET QUERY
+               </Button>
+             )
+           }
           </div>
         </div>
         <List component="nav" aria-label="filter cases" classes={{ root: classes.listRoot, divider: classes.dividerRoot }}>
-          <FacetFilter />
+          {!unifiedViewFlag ? <FacetFilter /> : null}
         </List>
       </div>
       )}
@@ -67,6 +82,8 @@ const styles = (theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+  },
+  test: {
   },
   drawerPaper: {
     width: '250px',
@@ -106,6 +123,20 @@ const styles = (theme) => ({
     textTransform: 'none',
     color: '#3d4241',
     marginLeft: '16px',
+    fontFamily: theme.custom.fontFamily,
+    '&:hover': {
+      backgroundColor: '#566672',
+      color: 'white',
+    },
+  },
+  unifiedButton: {
+    borderRadius: '100px',
+    marginTop: '4px',
+    minHeight: '20px',
+    fontSize: 9,
+    textTransform: 'none',
+    color: '#3d4241',
+    marginLeft: '60px',
     fontFamily: theme.custom.fontFamily,
     '&:hover': {
       backgroundColor: '#566672',

@@ -703,6 +703,10 @@ export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromC
   );
 }
 
+export function getUnifiedViewStats(data) {
+  store.dispatch({ type: 'SET_UNIFIED_VIEW_STATS', payload: { data } });
+}
+
 export const getDashboard = () => getState();
 
 // reducers
@@ -713,6 +717,12 @@ const reducers = {
     error: item,
     isLoading: false,
     isFetched: false,
+  }),
+  SET_UNIFIED_VIEW_STATS: (state, item) => ({
+    ...state,
+    stats: {
+      ...item.data,
+    },
   }),
   READY_DASHBOARDTAB: (state) => ({
     ...state,
