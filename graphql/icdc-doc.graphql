@@ -694,6 +694,7 @@ type FileInList {
   file_uuid: String
   md5sum: String
   sample_id: String
+  individual_id: Int
 }
 
 type FileOverview {

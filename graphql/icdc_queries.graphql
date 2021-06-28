@@ -185,6 +185,7 @@ type FileInList {
   file_uuid: String
   md5sum: String
   sample_id: String
+  individual_id: Int
 }
 
 type FileOverview {
@@ -423,6 +424,7 @@ type QueryType {
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
     OPTIONAL MATCH (s:study)<-[:member_of]-(c)
+    OPTIONAL MATCH (c)-->(i:canine_individual)
     WITH
       f.file_name AS file_name,
       f.file_type AS file_type,
@@ -436,7 +438,8 @@ type QueryType {
       s.clinical_study_designation AS study_code,
       f.uuid as file_uuid,
       f.md5sum AS md5sum,
-      samp.sample_id AS sample_id
+      samp.sample_id AS sample_id,
+      i.canine_individual_id AS individual_id
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -450,7 +453,8 @@ type QueryType {
       study_code: study_code,
       file_uuid: file_uuid,
       md5sum: md5sum,
-      sample_id: sample_id
+      sample_id: sample_id,
+      individual_id: individual_id
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -477,6 +481,7 @@ type QueryType {
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
     OPTIONAL MATCH (s:study)<-[:member_of]-(c)
+    OPTIONAL MATCH (c)-->(i:canine_individual)
     WITH
       f.file_name AS file_name,
       f.file_type AS file_type,
@@ -490,7 +495,8 @@ type QueryType {
       s.clinical_study_designation AS study_code,
       f.uuid as file_uuid,
       f.md5sum AS md5sum,
-      samp.sample_id AS sample_id
+      samp.sample_id AS sample_id,
+      i.canine_individual_id AS individual_id
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -504,7 +510,8 @@ type QueryType {
       study_code: study_code,
       file_uuid: file_uuid,
       md5sum: md5sum,
-      sample_id: sample_id
+      sample_id: sample_id,
+      individual_id: individual_id
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
