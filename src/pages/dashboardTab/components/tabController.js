@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React from 'react';
-import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import {
   Tabs, Tab, withStyles,
@@ -17,7 +14,6 @@ import TabLabel from './tabLabel';
 import Message from '../../../components/Message';
 import {
   tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon, selectAllToolTip,
-  GET_CASES_OVERVIEW_QUERY,
 } from '../../../bento/dashboardTabData';
 import {
   fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections, getFilesCount,
@@ -34,7 +30,6 @@ function TabContainer({ children, dir }) {
 }
 
 const tabController = ({ classes, multiStudyData }) => {
-  console.log('From tabController', multiStudyData);
   const currentActiveTabTitle = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.currentActiveTab
     ? state.dashboardTab.currentActiveTab
@@ -61,7 +56,6 @@ const tabController = ({ classes, multiStudyData }) => {
   const dashboard = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.datatable
     ? state.dashboardTab.datatable : {}));
-  console.log('dashboard', dashboard);
 
   const tableRowSelectionData = [
     useSelector((state) => (state.dashboardTab.dataCaseSelected)),
@@ -89,7 +83,6 @@ const tabController = ({ classes, multiStudyData }) => {
 
   // get stats data from store
   const dashboardStats = getDashboardStats();
-  console.log('dashboardStats', dashboardStats);
 
   const filteredSubjectIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : null));
@@ -170,7 +163,6 @@ const tabController = ({ classes, multiStudyData }) => {
   }
 
   const handleTabChange = (event, value) => {
-    console.log('WORKING!!!');
     if (currentTab !== value) {
       const currentTabTitle = tabIndex[currentTab].title;
       const newTabTitle = tabIndex[value].title;

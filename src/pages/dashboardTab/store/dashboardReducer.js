@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import _ from 'lodash';
 import {
   customCheckBox,
@@ -554,7 +553,6 @@ function createSingleFilterVariables(payload) {
  * @return distpatcher
  */
 function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
-  console.log('toggle payload:', payload);
   return client
     .query({ // request to get the filtered subjects
       query: FILTER_QUERY,

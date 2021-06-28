@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useRef, useEffect } from 'react';
 import {
   Badge,
@@ -87,7 +86,6 @@ const TabView = ({
   const AddToCartAlertDialogRef = useRef();
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
-  // const [caseId, setCaseId] = React.useState('');
 
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
@@ -306,7 +304,6 @@ const TabView = ({
   customColumn.columns);
 
   const unifiedViewColumns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload), customColumn.columns);
-  console.log('Columns tabview', columns);
 
   return (
     <div>

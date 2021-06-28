@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -59,7 +57,7 @@ const SideBarContent = ({ classes, unifiedViewFlag }) => {
                  variant="outlined"
                  className={classes.unifiedButton}
                  classes={{ root: classes.clearAllButtonRoot }}
-                 onClick={() => clearAllFilters()}
+                 onClick={() => window.location.reload()}
                  disableRipple
                >
                  RESET QUERY

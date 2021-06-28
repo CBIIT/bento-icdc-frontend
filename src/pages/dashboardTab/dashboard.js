@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import React from 'react';
 import {
   Grid, withStyles, Button, Switch, Collapse, FormControlLabel, IconButton,
 } from '@material-ui/core';
 import { ProgramSunburst, CustomActiveDonut, ToolTip as Tooltip } from 'bento-components';
+import Chip from '@material-ui/core/Chip';
 import { useTheme } from '../../components/ThemeContext';
 import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/DashboardStatsController';
@@ -19,10 +19,6 @@ const displaywidgets = widgetsData.filter((widget) => widget.show === true).slic
 const Dashboard = ({
   classes, data, theme, multiStudyData,
 }) => {
-  if (multiStudyData) {
-    console.log('multiStudyDataDashboard', multiStudyData);
-  }
-
   const [collapse, setCollapse] = React.useState(true);
   const [unifiedViewFlag, setUnifiedViewFlag] = React.useState(false);
   const themeChanger = useTheme();
@@ -162,6 +158,7 @@ const Dashboard = ({
                         <Typography variant="h1" className={classes.multiStudyHeaderText} size="sm">
                           Multi-study Participants
                         </Typography>
+                        <Chip className={classes.chip} size="small" label={`Canine Individual: ${multiStudyData.individualId}`} />
                       </div>
                       <hr className={classes.divider} />
                     </div>
@@ -187,6 +184,18 @@ const styles = (theme) => ({
   },
   multiStudyHeader: {
     display: 'flex',
+  },
+  headerBar: {
+    fontWeight: '10',
+    color: '#5e8ca5',
+    margin: '0px 15px 0 15px',
+  },
+  chip: {
+    marginTop: '15px',
+    marginLeft: '10px',
+    backgroundColor: '#FFFFFF',
+    border: '2px solid #CF6A1A',
+    color: '#CF6A1A',
   },
   multiStudyHeaderText: {
     color: '#CF6A1A',

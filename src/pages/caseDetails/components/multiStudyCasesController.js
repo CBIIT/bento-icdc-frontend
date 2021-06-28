@@ -1,11 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable arrow-body-style */
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Typography } from '../../../components/Wrappers/Wrappers';
-import { GET_CASES_OVERVIEW_QUERY } from '../../../bento/dashboardTabData';
 import { GET_UNIFIED_VIEW_DATA } from '../../../bento/multiStudyData';
 import MultiStudyCases from './multiStudyCases';
 
@@ -21,24 +17,7 @@ const multiStudyCasesController = ({ cases, caseID, multiStudyData }) => {
       </Typography>
     );
   }
-  // const studiesArray = data.caseOverviewPaged.map((element) => element.study_code);
-  // const getStudyCount = (array) => {
-  //   const map = {};
-  //   let total = 0;
-  //   array.forEach((study) => {
-  //     if (map[study]) {
-  //       map[study] += 1;
-  //     } else {
-  //       map[study] = 1;
-  //     }
-  //   });
-  //   Object.keys(map).forEach((study) => {
-  //     total += map[study];
-  //   });
-  //   return total;
-  // };
-  // const studies = getStudyCount(studiesArray);
-  // console.log('getStudyCount', studies);
+
   return (
     <MultiStudyCases
       cases={cases}
