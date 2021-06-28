@@ -162,8 +162,8 @@ const removeEmptySubjectsFromDonutData = (data) => {
     group: item.group,
   }));
   convertCasesToSubjects.sort((a, b) => {
-    if (a.group < b.group) return 1;
-    if (a.group > b.group) return -1;
+    if (a.group > b.group) return 1;
+    if (a.group < b.group) return -1;
     return 0;
   });
 
@@ -598,7 +598,8 @@ function setCodeToCheckBoxItem(checkboxData, item) {
       }
     });
   });
-  updateCheckBoxData[0].checkboxItems = checkBoxitems;
+  updateCheckBoxData[0].checkboxItems = checkBoxitems
+    .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
   return updateCheckBoxData;
 }
 /**
