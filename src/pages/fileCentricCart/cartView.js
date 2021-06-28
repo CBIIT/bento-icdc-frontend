@@ -41,6 +41,7 @@ const cartView = ({
 
   // ================= Dialogbox Functions =================
   const closeDialogBox = () => setModalStatus(false);
+  const openDialogBox = () => setModalStatus(true);
 
   function deleteSubjectsAndCloseModal() {
     closeDialogBox(false);
@@ -104,7 +105,7 @@ const cartView = ({
               </div>
               <div className={classes.removeHeadCellIcon}>
                 <Tooltip title="Remove all items in cart" arrow placement="bottom">
-                  <IconButton aria-label="help" className={classes.removeHeadCellIconButton}>
+                  <IconButton onClick={() => openDialogBox()} aria-label="help" className={classes.removeHeadCellIconButton}>
                     <ArrowDropDownIcon />
                   </IconButton>
                 </Tooltip>
