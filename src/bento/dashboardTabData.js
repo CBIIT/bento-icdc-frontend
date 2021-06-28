@@ -354,6 +354,12 @@ export const tabContainers = [
         },
       },
       {
+        dataField: 'sample_id',
+        header: 'Sample ID',
+        sort: 'asc',
+        display: true,
+      },
+      {
         dataField: 'case_id',
         header: 'Case ID',
         sort: 'asc',
@@ -920,6 +926,7 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
   fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
     file_name
     file_type
+    sample_id
     association
     file_description
     file_format
@@ -948,6 +955,7 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
       file_name
       file_type
       association
+      sample_id
       file_description
       file_format
       file_size
