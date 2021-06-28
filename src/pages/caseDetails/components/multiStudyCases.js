@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -46,7 +47,10 @@ const MuiMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const MultiStudyCases = ({ classes, cases, caseID }) => {
+const MultiStudyCases = ({
+  classes, cases, caseID, multiStudyData,
+}) => {
+  console.log('from MultiStudyCases', multiStudyData);
   const [anchorElement, setAnchorElement] = React.useState(null);
 
   const clickHandler = (event) => {
@@ -101,7 +105,13 @@ const MultiStudyCases = ({ classes, cases, caseID }) => {
           <Link
             rel="noreferrer"
             color="inherit"
-            to={(location) => ({ ...location, pathname: '/cases' })}
+            to={{
+              pathname: '/cases',
+              state: {
+                fromCaseDetails: true,
+                data: multiStudyData,
+              },
+            }}
             className={classes.link}
           >
             View All Related Cases via Dashboard

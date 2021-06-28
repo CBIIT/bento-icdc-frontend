@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useRef, useEffect } from 'react';
 import {
   Badge,
@@ -75,6 +76,7 @@ const TabView = ({
   selectedRowInfo = [],
   selectedRowIndex = [],
   tableHasSelections,
+  unifiedViewFlag,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -282,6 +284,7 @@ const TabView = ({
     </div>
   );
 
+  // const flag = true;
   const columns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).map((column, index) => {
     if (column.name === 'case_id' && index === 0) {
       return {
@@ -301,6 +304,9 @@ const TabView = ({
     return column;
   }),
   customColumn.columns);
+
+  const unifiedViewColumns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload), customColumn.columns);
+  console.log('Columns tabview', columns);
 
   return (
     <div>
@@ -344,7 +350,7 @@ const TabView = ({
         <Grid item xs={12} id={tableID}>
           <CustomDataTable
             data={data}
-            columns={columns}
+            columns={unifiedViewFlag ? unifiedViewColumns : columns}
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import {
   Grid,
@@ -6,6 +7,7 @@ import {
 import _ from 'lodash';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { getOptions, getColumns, cn } from 'bento-components';
+import { useSelector } from 'react-redux';
 import StatsView from '../../components/Stats/StatsView';
 import GridWithFooter from '../../components/GridWithFooter/GridView';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
@@ -23,7 +25,9 @@ import filterCasePageOnStudyCode from '../../utils/utils';
 import themes, { overrides } from '../../themes';
 import updateColumns from '../../utils/columnsUtil';
 import DocumentDownload from '../../components/DocumentDownload';
-import MultiStudyCases from './components/multiStudyCases';
+import MultiStudyCases from './components/multiStudyCasesController';
+// import client from '../../utils/graphqlClient';
+// import { GET_CASES_OVERVIEW_QUERY } from '../../bento/dashboardTabData';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -55,6 +59,14 @@ const CaseDetail = ({ classes, data }) => {
     numberOfBiospecimenAliquots: data.aliquotCountOfCase,
   };
   const caseDetail = data.case[0];
+  console.log('caseDetail', caseDetail);
+  console.log('data', data);
+  // console.log(client.query({
+  //   query: GET_CASES_OVERVIEW_QUERY,
+  //   variables: { case_ids: data.multiStudyCases.caseIds },
+  // }));
+
+  useSelector((state) => { console.log('state', state); });
 
   const notProvided = '';
 
@@ -202,6 +214,7 @@ const CaseDetail = ({ classes, data }) => {
                   <MultiStudyCases
                     cases={data.multiStudyCases.caseIds}
                     caseID={caseDetail.case_id}
+                    multiStudyData={data.multiStudyCases}
                   />
                 </div>
               )

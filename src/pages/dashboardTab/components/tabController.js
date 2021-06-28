@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import React from 'react';
+import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import {
   Tabs, Tab, withStyles,
@@ -14,9 +17,11 @@ import TabLabel from './tabLabel';
 import Message from '../../../components/Message';
 import {
   tabs, tooltipContent, tabContainers, tabIndex, externalLinkIcon, selectAllToolTip,
+  GET_CASES_OVERVIEW_QUERY,
 } from '../../../bento/dashboardTabData';
 import {
   fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections, getFilesCount,
+  getUnifiedViewStats,
 } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
@@ -28,7 +33,8 @@ function TabContainer({ children, dir }) {
   );
 }
 
-const tabController = (classes) => {
+const tabController = ({ classes, multiStudyData }) => {
+  console.log('From tabController', multiStudyData);
   const currentActiveTabTitle = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.currentActiveTab
     ? state.dashboardTab.currentActiveTab
@@ -37,19 +43,53 @@ const tabController = (classes) => {
   // tab settings
   const [currentTab, setCurrentTab] = React.useState(tabVlaue);
 
+  React.useEffect(() => {
+    if (multiStudyData) {
+      fetchDataForDashboardTab('Cases', multiStudyData.caseIds, multiStudyData.sampleIds, multiStudyData.fileIds);
+      const obj = {
+        numberOfStudies: multiStudyData.numberOfStudies,
+        numberOfCases: multiStudyData.numberOfCases,
+        numberOfFiles: multiStudyData.numberOfFiles,
+        numberOfSamples: multiStudyData.numberOfSamples,
+        numberOfAliquots: multiStudyData.numberOfAliquots,
+      };
+      getUnifiedViewStats(obj);
+    }
+  }, []);
+
   // data from store
   const dashboard = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.datatable
     ? state.dashboardTab.datatable : {}));
+  console.log('dashboard', dashboard);
 
   const tableRowSelectionData = [
     useSelector((state) => (state.dashboardTab.dataCaseSelected)),
     useSelector((state) => (state.dashboardTab.dataSampleSelected)),
     useSelector((state) => (state.dashboardTab.dataFileSelected))];
 
+  const getDashboardStats = () => {
+    if (multiStudyData) {
+      return (
+        {
+          numberOfStudies: multiStudyData.studies,
+          numberOfCases: multiStudyData.caseIds.length,
+          numberOfFiles: multiStudyData.fileIds.length,
+          numberOfSamples: multiStudyData.sampleIds.length,
+          numberOfAliquots: 0,
+        }
+      );
+    }
+
+    return (
+      useSelector((state) => (state.dashboardTab
+        && state.dashboardTab.stats ? state.dashboardTab.stats : {}))
+    );
+  };
+
   // get stats data from store
-  const dashboardStats = useSelector((state) => (state.dashboardTab
-    && state.dashboardTab.stats ? state.dashboardTab.stats : {}));
+  const dashboardStats = getDashboardStats();
+  console.log('dashboardStats', dashboardStats);
 
   const filteredSubjectIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : null));
@@ -130,16 +170,24 @@ const tabController = (classes) => {
   }
 
   const handleTabChange = (event, value) => {
+    console.log('WORKING!!!');
     if (currentTab !== value) {
       const currentTabTitle = tabIndex[currentTab].title;
       const newTabTitle = tabIndex[value].title;
       GA.sendEvent('Tab Change', tabIndex[value].title, `${currentTabTitle} -> ${newTabTitle}`, null);
     }
     setCurrentTab(value);
-    fetchDataForDashboardTab(tabIndex[value].title,
-      filteredSubjectIds,
-      filteredSampleIds,
-      filteredFileIds);
+    if (multiStudyData) {
+      fetchDataForDashboardTab(tabIndex[value].title,
+        multiStudyData.caseIds,
+        multiStudyData.sampleIds,
+        multiStudyData.fileIds);
+    } else {
+      fetchDataForDashboardTab(tabIndex[value].title,
+        filteredSubjectIds,
+        filteredSampleIds,
+        filteredFileIds);
+    }
   };
 
   const [snackbarState, setsnackbarState] = React.useState({
@@ -223,6 +271,7 @@ const tabController = (classes) => {
       <TabView
         options={getOptions(container, classes)}
         data={dashboard[container.dataField] ? dashboard[container.dataField] : 'undefined'}
+        unifiedViewFlag={!!multiStudyData}
         customColumn={container}
         openSnack={openSnack}
         closeSnack={closeSnack}

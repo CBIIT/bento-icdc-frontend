@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -15,8 +16,9 @@ class DashboardController extends Component {
 
   render() {
     const {
-      isLoading, hasError, error, widgets, isFetched, isSidebarOpened,
+      isLoading, hasError, error, widgets, isFetched, isSidebarOpened, history,
     } = this.props;
+    console.log('this.props', this.props);
 
     if (hasError) {
       return (
@@ -34,6 +36,7 @@ class DashboardController extends Component {
         <Dashboard
           data={widgets}
           isSidebarOpened={isSidebarOpened}
+          multiStudyData={history.location.state ? history.location.state.data : undefined}
         />
       );
     }
