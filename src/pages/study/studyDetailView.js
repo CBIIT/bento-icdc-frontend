@@ -264,7 +264,7 @@ const styles = (theme) => ({
   },
   accessionLabel: {
     fontSize: '14px',
-    fontWeight: '100',
+    fontWeight: '900',
     color: '#5e8ca5',
   },
   accessionValue: {
