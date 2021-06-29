@@ -105,6 +105,10 @@ export const table = {
       viewColumns: false,
     },
     {
+      dataField: 'individual_id',
+      header: 'Canine ID',
+    },
+    {
       dataField: 'study_code',
       header: 'Study Code',
     },
@@ -137,6 +141,7 @@ query filesInList($uuids: [String], $offset: Int = 0, $first: Int = 10, $order_b
       study_code
       file_uuid
       md5sum
+      individual_id
  }
 }`;
 
@@ -156,5 +161,6 @@ query filesInListDesc($uuids: [String], $offset: Int = 0, $first: Int = 10, $ord
       study_code
       file_uuid
       md5sum
+      individual_id
  }
 }`;
