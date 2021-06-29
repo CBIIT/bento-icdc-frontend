@@ -46,6 +46,9 @@ export const facetSearchData = [
     label: 'Sample Pathology', field: 'group', api: 'filterCaseCountBySamplePathology', filterAPI: 'filterCaseCountBySamplePathology', datafield: 'sample_pathology', section: 'Filter By Samples', show: true,
   },
   {
+    label: 'Sample Site', field: 'group', api: 'filterCaseCountBySampleSite', filterAPI: 'filterCaseCountBySampleSite', datafield: 'sample_site', section: 'Filter By Samples', show: true,
+  },
+  {
     label: 'File Association', field: 'group', api: 'filterCaseCountByFileAssociation', filterAPI: 'filterCaseCountByFileAssociation', datafield: 'file_association', section: 'Filter By Files', show: true,
   },
   {

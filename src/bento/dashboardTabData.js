@@ -516,6 +516,10 @@ filterCaseCountBySamplePathology{
   group,
   count
 }
+filterCaseCountBySampleSite{
+  group,
+  count
+}
 filterCaseCountByFileAssociation{
   group,
   count
@@ -605,6 +609,7 @@ query searchCases(
   $neutered_status: [String], 
   $sample_type: [String], 
   $sample_pathology: [String], 
+  $sample_site:[String],
   $file_association: [String], 
   $file_type: [String], 
   $file_format: [String],
@@ -622,6 +627,7 @@ searchCases(
     neutered_status: $neutered_status,
     sample_type: $sample_type, 
     sample_pathology: $sample_pathology, 
+    sample_site: $sample_site, 
     file_association: $file_association, 
     file_type: $file_type,
     file_format: $file_format
@@ -663,6 +669,7 @@ filterCaseCountByStudyCode (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -683,6 +690,7 @@ filterCaseCountByStudyType (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -702,6 +710,7 @@ filterCaseCountByBreed (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -721,6 +730,7 @@ filterCaseCountByDiagnosis (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -740,6 +750,7 @@ filterCaseCountByDiseaseSite (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -759,6 +770,7 @@ filterCaseCountByStageOfDisease (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -778,6 +790,7 @@ filterCaseCountByResponseToTreatment (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -797,6 +810,7 @@ filterCaseCountBySex (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -816,6 +830,7 @@ filterCaseCountByNeuteredStatus (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -835,6 +850,7 @@ filterCaseCountBySampleType (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -853,9 +869,30 @@ filterCaseCountBySamplePathology (
   sex: $sex,
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
+  sample_pathology: $sample_pathology,
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
+  file_format: $file_format
+) {
+    group
+    count
+}
+filterCaseCountBySampleSite (
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology,
+  sample_site: $sample_site, 
+  file_association: $file_association, 
+  file_type: $file_type, 
   file_format: $file_format
 ) {
     group
@@ -869,10 +906,11 @@ filterCaseCountByFileAssociation (
   disease_site: $disease_site, 
   stage_of_disease: $stage_of_disease, 
   response_to_treatment: $response_to_treatment, 
-  sex: $sex,
+  sex: $sex, 
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -892,6 +930,7 @@ filterCaseCountByFileType (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format
@@ -911,6 +950,7 @@ filterCaseCountByFileFormat (
   neutered_status: $neutered_status,
   sample_type: $sample_type, 
   sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
   file_format: $file_format

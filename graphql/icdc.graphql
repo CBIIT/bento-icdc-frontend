@@ -1203,6 +1203,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1253,6 +1254,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1302,6 +1304,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1350,6 +1353,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1398,6 +1402,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1420,6 +1425,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1446,6 +1452,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1468,6 +1475,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1494,6 +1502,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1542,6 +1551,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1590,6 +1600,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1638,6 +1649,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1660,6 +1672,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE //(size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1686,6 +1699,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1707,12 +1721,63 @@ type QueryType {
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
-        // AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
+        //AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
     WITH DISTINCT samp, groups
     WITH samp.specific_sample_pathology AS count_group,
+           count(samp) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN{
+      group: group,
+      count: SUM(CASE count_group WHEN group THEN count ELSE 0 END)
+    }
+  """, passThrough: true)
+
+  filterCaseCountBySampleSite (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    sample_site: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] @cypher(statement: """
+    MATCH (samp:sample)
+    WITH collect(DISTINCT samp.sample_site) AS groups
+    MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
+      WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+        AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
+        AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
+        AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
+        AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
+        AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
+        AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
+    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (samp:sample)-->(c)
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
+      WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
+        AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        //AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
+        AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
+        AND (size($file_type) = 0 OR f.file_type IN $file_type)
+        AND (size($file_format) = 0 OR f.file_format IN $file_format)
+    WITH DISTINCT samp, groups
+    WITH samp.sample_site AS count_group,
            count(samp) AS count,
            groups
     UNWIND groups AS group
@@ -1734,6 +1799,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1756,6 +1822,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         //AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1782,6 +1849,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1804,6 +1872,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         //AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1830,6 +1899,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1852,6 +1922,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         //AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -2212,6 +2283,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -2236,6 +2308,7 @@ type QueryType {
     WITH DISTINCT c AS c, p, s, co, demo, diag, f, parent, samp, al
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
