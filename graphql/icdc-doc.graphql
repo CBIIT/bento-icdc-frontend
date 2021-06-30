@@ -693,6 +693,8 @@ type FileInList {
   study_code: String
   file_uuid: String
   md5sum: String
+  sample_id: String
+  individual_id: Int
   sample_site: String
   physical_sample_type: String
   general_sample_pathology: String
@@ -739,6 +741,7 @@ type FileOverview {
   diagnosis: String
   study_code: String
   file_uuid: String
+  sample_id: String
 }
 
 type SampleOverview {
@@ -805,6 +808,7 @@ type ProgramStudies {
 }
 
 type MultiStudyCases {
+    individualId: Int
     caseIds: [String]
     sampleIds: [String]
     fileIds: [String]
@@ -1145,11 +1149,11 @@ type QueryType {
 
   "Combined info"
   studiesByProgramId(program_id: String!): [StudyOfProgram] 
-  
+
   studiesByProgram: [StudyOfProgram] 
-  
+
   filesOfCase(case_id: String!): [FilesOfCase] 
- 
+
   filesOfCases(case_ids: [String!]!): [FilesOfCase] 
 
   programsAndStudies(case_ids: [String] = []): [ProgramStudies] 
