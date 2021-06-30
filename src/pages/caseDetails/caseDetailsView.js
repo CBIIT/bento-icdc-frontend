@@ -23,7 +23,7 @@ import filterCasePageOnStudyCode from '../../utils/utils';
 import themes, { overrides } from '../../themes';
 import updateColumns from '../../utils/columnsUtil';
 import DocumentDownload from '../../components/DocumentDownload';
-import MultiStudyCases from './components/multiStudyCases';
+import MultiStudyCases from './components/multiStudyCasesController';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -202,6 +202,7 @@ const CaseDetail = ({ classes, data }) => {
                   <MultiStudyCases
                     cases={data.multiStudyCases.caseIds}
                     caseID={caseDetail.case_id}
+                    multiStudyData={data.multiStudyCases}
                   />
                 </div>
               )

@@ -186,6 +186,38 @@ type FileInList {
   md5sum: String
   sample_id: String
   individual_id: Int
+  sample_site: String
+  physical_sample_type: String
+  general_sample_pathology: String
+  tumor_sample_origin: String
+  summarized_sample_type: String
+  specific_sample_pathology: String
+  date_of_sample_collection: String
+  tumor_grade: String
+  sample_chronology: String
+  percentage_tumor: String
+  necropsy_sample: String
+  sample_preservation: String
+  comment: String
+  patient_age_at_enrollment: String
+  sex: String
+  neutered_indicator: String
+  weight: String
+  weight_unit: String
+  disease_term: String
+  primary_disease_site: String
+  stage_of_disease: String
+  date_of_diagnosis: String
+  histology_cytopathology: String
+  histological_grade: String
+  best_response: String
+  pathology_report: String
+  treatment_data: String
+  follow_up_data: String
+  concurrent_disease: String
+  concurrent_disease_type: String
+  cohort_description: String
+  arm: String
 }
 
 type FileOverview {
@@ -423,8 +455,12 @@ type QueryType {
     OPTIONAL MATCH (f:file)-[*]->(c:case)
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
+    OPTIONAL MATCH (enroll:enrollment)-[:of_case]->(c)
+    OPTIONAL MATCH (samp:sample)-[:of_case]->(c)
     OPTIONAL MATCH (s:study)<-[:member_of]-(c)
     OPTIONAL MATCH (c)-->(i:canine_individual)
+    OPTIONAL MATCH (c)-->(co:cohort)
+    OPTIONAL MATCH (co)-->(a:study_arm)
     WITH
       f.file_name AS file_name,
       f.file_type AS file_type,
@@ -439,7 +475,39 @@ type QueryType {
       f.uuid as file_uuid,
       f.md5sum AS md5sum,
       samp.sample_id AS sample_id,
-      i.canine_individual_id AS individual_id
+      i.canine_individual_id AS individual_id,
+      samp.sample_site as sample_site,
+      samp.physical_sample_type as physical_sample_type,
+      samp.general_sample_pathology as general_sample_pathology,
+      samp.tumor_sample_origin as tumor_sample_origin,
+      samp.summarized_sample_type as summarized_sample_type,
+      samp.specific_sample_pathology as specific_sample_pathology,
+      samp.date_of_sample_collection as date_of_sample_collection,
+      samp.tumor_grade as tumor_grade,
+      samp.sample_chronology as sample_chronology,
+      samp.percentage_tumor as percentage_tumor,
+      samp.necropsy_sample as necropsy_sample,
+      samp.sample_preservation as sample_preservation,
+      samp.comment as comment,
+      demo.patient_age_at_enrollment as patient_age_at_enrollment,
+      demo.sex as sex,
+      demo.neutered_indicator as neutered_indicator,
+      demo.weight as weight,
+      demo.weight_unit as weight_unit,
+      diag.disease_term as disease_term,
+      diag.primary_disease_site as primary_disease_site,
+      diag.stage_of_disease as stage_of_disease,
+      diag.date_of_diagnosis as date_of_diagnosis,
+      diag.histology_cytopathology as histology_cytopathology,
+      diag.histological_grade as histological_grade,
+      diag.best_response as best_response,
+      diag.pathology_report as pathology_report,
+      diag.treatment_data as treatment_data,
+      diag.follow_up_data as follow_up_data,
+      diag.concurrent_disease as concurrent_disease,
+      diag.concurrent_disease_type as concurrent_disease_type,
+      co.cohort_description as cohort_description,
+      a.arm as arm
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -454,7 +522,39 @@ type QueryType {
       file_uuid: file_uuid,
       md5sum: md5sum,
       sample_id: sample_id,
-      individual_id: individual_id
+      individual_id: individual_id,
+      sample_site: sample_site,
+      physical_sample_type: physical_sample_type,
+      general_sample_pathology: general_sample_pathology,
+      tumor_sample_origin: tumor_sample_origin,
+      summarized_sample_type: summarized_sample_type,
+      specific_sample_pathology: specific_sample_pathology,
+      date_of_sample_collection: date_of_sample_collection,
+      tumor_grade: tumor_grade,
+      sample_chronology: sample_chronology,
+      percentage_tumor: percentage_tumor,
+      necropsy_sample: necropsy_sample,
+      sample_preservation: sample_preservation,
+      comment: comment,
+      patient_age_at_enrollment: patient_age_at_enrollment,
+      sex: sex,
+      neutered_indicator: neutered_indicator,
+      weight: weight,
+      weight_unit: weight_unit,
+      disease_term: disease_term,
+      primary_disease_site: primary_disease_site,
+      stage_of_disease: stage_of_disease,
+      date_of_diagnosis: date_of_diagnosis,
+      histology_cytopathology: histology_cytopathology,
+      histological_grade: histological_grade,
+      best_response: best_response,
+      pathology_report: pathology_report,
+      treatment_data: treatment_data,
+      follow_up_data: follow_up_data,
+      concurrent_disease: concurrent_disease,
+      concurrent_disease_type: concurrent_disease_type,
+      cohort_description: cohort_description,
+      arm: arm
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -480,8 +580,12 @@ type QueryType {
     OPTIONAL MATCH (f:file)-[*]->(c:case)
     OPTIONAL MATCH (diag:diagnosis)-[:of_case]->(c)
     OPTIONAL MATCH (demo:demographic)-[:of_case]->(c)
+    OPTIONAL MATCH (enroll:enrollment)-[:of_case]->(c)
+    OPTIONAL MATCH (samp:sample)-[:of_case]->(c)
     OPTIONAL MATCH (s:study)<-[:member_of]-(c)
     OPTIONAL MATCH (c)-->(i:canine_individual)
+    OPTIONAL MATCH (c)-->(co:cohort)
+    OPTIONAL MATCH (co)-->(a:study_arm)
     WITH
       f.file_name AS file_name,
       f.file_type AS file_type,
@@ -496,7 +600,39 @@ type QueryType {
       f.uuid as file_uuid,
       f.md5sum AS md5sum,
       samp.sample_id AS sample_id,
-      i.canine_individual_id AS individual_id
+      i.canine_individual_id AS individual_id,
+      samp.sample_site as sample_site,
+      samp.physical_sample_type as physical_sample_type,
+      samp.general_sample_pathology as general_sample_pathology,
+      samp.tumor_sample_origin as tumor_sample_origin,
+      samp.summarized_sample_type as summarized_sample_type,
+      samp.specific_sample_pathology as specific_sample_pathology,
+      samp.date_of_sample_collection as date_of_sample_collection,
+      samp.tumor_grade as tumor_grade,
+      samp.sample_chronology as sample_chronology,
+      samp.percentage_tumor as percentage_tumor,
+      samp.necropsy_sample as necropsy_sample,
+      samp.sample_preservation as sample_preservation,
+      samp.comment as comment,
+      demo.patient_age_at_enrollment as patient_age_at_enrollment,
+      demo.sex as sex,
+      demo.neutered_indicator as neutered_indicator,
+      demo.weight as weight,
+      demo.weight_unit as weight_unit,
+      diag.disease_term as disease_term,
+      diag.primary_disease_site as primary_disease_site,
+      diag.stage_of_disease as stage_of_disease,
+      diag.date_of_diagnosis as date_of_diagnosis,
+      diag.histology_cytopathology as histology_cytopathology,
+      diag.histological_grade as histological_grade,
+      diag.best_response as best_response,
+      diag.pathology_report as pathology_report,
+      diag.treatment_data as treatment_data,
+      diag.follow_up_data as follow_up_data,
+      diag.concurrent_disease as concurrent_disease,
+      diag.concurrent_disease_type as concurrent_disease_type,
+      co.cohort_description as cohort_description,
+      a.arm as arm
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -511,7 +647,39 @@ type QueryType {
       file_uuid: file_uuid,
       md5sum: md5sum,
       sample_id: sample_id,
-      individual_id: individual_id
+      individual_id: individual_id,
+      sample_site: sample_site,
+      physical_sample_type: physical_sample_type,
+      general_sample_pathology: general_sample_pathology,
+      tumor_sample_origin: tumor_sample_origin,
+      summarized_sample_type: summarized_sample_type,
+      specific_sample_pathology: specific_sample_pathology,
+      date_of_sample_collection: date_of_sample_collection,
+      tumor_grade: tumor_grade,
+      sample_chronology: sample_chronology,
+      percentage_tumor: percentage_tumor,
+      necropsy_sample: necropsy_sample,
+      sample_preservation: sample_preservation,
+      comment: comment,
+      patient_age_at_enrollment: patient_age_at_enrollment,
+      sex: sex,
+      neutered_indicator: neutered_indicator,
+      weight: weight,
+      weight_unit: weight_unit,
+      disease_term: disease_term,
+      primary_disease_site: primary_disease_site,
+      stage_of_disease: stage_of_disease,
+      date_of_diagnosis: date_of_diagnosis,
+      histology_cytopathology: histology_cytopathology,
+      histological_grade: histological_grade,
+      best_response: best_response,
+      pathology_report: pathology_report,
+      treatment_data: treatment_data,
+      follow_up_data: follow_up_data,
+      concurrent_disease: concurrent_disease,
+      concurrent_disease_type: concurrent_disease_type,
+      cohort_description: cohort_description,
+      arm: arm
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -542,6 +710,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -592,6 +761,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -641,6 +811,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -689,6 +860,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -737,6 +909,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -785,6 +958,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -833,6 +1007,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -881,6 +1056,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -929,6 +1105,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -977,6 +1154,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -999,6 +1177,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE //(size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1025,6 +1204,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1046,12 +1226,63 @@ type QueryType {
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
-        // AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
+        //AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
     WITH DISTINCT samp, groups
     WITH samp.specific_sample_pathology AS count_group,
+           count(samp) AS count,
+           groups
+    UNWIND groups AS group
+    RETURN{
+      group: group,
+      count: SUM(CASE count_group WHEN group THEN count ELSE 0 END)
+    }
+  """, passThrough: true)
+
+  filterCaseCountBySampleSite (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    sample_site: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+  ): [GroupCount] @cypher(statement: """
+    MATCH (samp:sample)
+    WITH collect(DISTINCT samp.sample_site) AS groups
+    MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
+      WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+        AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
+        AND (size($breed) = 0 OR demo.breed IN $breed)
+        AND (size($sex) = 0 OR demo.sex IN $sex)
+        AND (size($neutered_status) = 0 OR demo.neutered_indicator IN $neutered_status)
+        AND (size($diagnosis) = 0 OR diag.disease_term IN $diagnosis)
+        AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
+        AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
+        AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
+    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (samp:sample)-->(c)
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
+      WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
+        AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        //AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
+        AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
+        AND (size($file_type) = 0 OR f.file_type IN $file_type)
+        AND (size($file_format) = 0 OR f.file_format IN $file_format)
+    WITH DISTINCT samp, groups
+    WITH samp.sample_site AS count_group,
            count(samp) AS count,
            groups
     UNWIND groups AS group
@@ -1073,6 +1304,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1095,6 +1327,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         //AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1121,6 +1354,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1143,6 +1377,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         //AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1169,6 +1404,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1191,6 +1427,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         //AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1552,6 +1789,7 @@ type QueryType {
     neutered_status: [String] = [],
     sample_type: [String] = [],
     sample_pathology: [String] = [],
+    sample_site: [String] = [],
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
@@ -1576,6 +1814,7 @@ type QueryType {
     WITH DISTINCT c AS c, p, s, co, demo, diag, f, parent, samp, al
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)

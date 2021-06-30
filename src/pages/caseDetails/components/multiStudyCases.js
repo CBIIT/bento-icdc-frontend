@@ -46,7 +46,9 @@ const MuiMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const MultiStudyCases = ({ classes, cases, caseID }) => {
+const MultiStudyCases = ({
+  classes, cases, caseID, multiStudyData,
+}) => {
   const [anchorElement, setAnchorElement] = React.useState(null);
 
   const clickHandler = (event) => {
@@ -101,7 +103,13 @@ const MultiStudyCases = ({ classes, cases, caseID }) => {
           <Link
             rel="noreferrer"
             color="inherit"
-            to={(location) => ({ ...location, pathname: '/cases' })}
+            to={{
+              pathname: '/cases',
+              state: {
+                fromCaseDetails: true,
+                data: multiStudyData,
+              },
+            }}
             className={classes.link}
           >
             View All Related Cases via Dashboard

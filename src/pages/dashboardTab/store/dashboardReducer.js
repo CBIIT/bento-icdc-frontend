@@ -161,8 +161,8 @@ const removeEmptySubjectsFromDonutData = (data) => {
     group: item.group,
   }));
   convertCasesToSubjects.sort((a, b) => {
-    if (a.group < b.group) return 1;
-    if (a.group > b.group) return -1;
+    if (a.group > b.group) return 1;
+    if (a.group < b.group) return -1;
     return 0;
   });
 
@@ -596,7 +596,8 @@ function setCodeToCheckBoxItem(checkboxData, item) {
       }
     });
   });
-  updateCheckBoxData[0].checkboxItems = checkBoxitems;
+  updateCheckBoxData[0].checkboxItems = checkBoxitems
+    .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
   return updateCheckBoxData;
 }
 /**
@@ -702,6 +703,10 @@ export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromC
   );
 }
 
+export function getUnifiedViewStats(data) {
+  store.dispatch({ type: 'SET_UNIFIED_VIEW_STATS', payload: { data } });
+}
+
 export const getDashboard = () => getState();
 
 // reducers
@@ -712,6 +717,12 @@ const reducers = {
     error: item,
     isLoading: false,
     isFetched: false,
+  }),
+  SET_UNIFIED_VIEW_STATS: (state, item) => ({
+    ...state,
+    stats: {
+      ...item.data,
+    },
   }),
   READY_DASHBOARDTAB: (state) => ({
     ...state,

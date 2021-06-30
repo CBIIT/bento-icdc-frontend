@@ -62,6 +62,7 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
     fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
       file_name
       file_type
+      sample_id
       association
       file_description
       file_format
@@ -76,8 +77,8 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
 `;
 
 export const customFilesTabDownloadCSV = {
-  keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'case_id', 'breed', 'diagnosis', 'study_code'],
-  header: ['File Name', 'File Type', 'Association', 'Description', 'File Format', 'Size', 'Case ID', 'Breed', 'Diagnosis', 'Study Code'],
+  keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'sample_id', 'case_id', 'breed', 'diagnosis', 'study_code'],
+  header: ['File Name', 'File Type', 'Association', 'Description', 'File Format', 'Size', 'Sample ID', 'Case ID', 'Breed', 'Diagnosis', 'Study Code'],
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
   fileName: 'ICDC_Files_download',
@@ -98,12 +99,91 @@ query filesInList($uuids: [String], $first: Int = 2000){
       study_code
       file_uuid
       md5sum
+      sample_site
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      summarized_sample_type
+      specific_sample_pathology
+      date_of_sample_collection
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      comment
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      disease_term
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      arm
  }
 }`;
 
+const customMyFilesOptionalDataFields = {
+  keysToInclude: [
+    'sample_site',
+    'physical_sample_type',
+    'general_sample_pathology',
+    'tumor_sample_origin',
+  ],
+  header: [
+    'Sample Site',
+    'Physical Sample Type',
+    'General Sample Pathology',
+    'Tumor Sample Origin',
+  ],
+};
+
+const customMyFilesCoreDataFields = {
+  keysToInclude: [
+    'file_name',
+    'file_type',
+    'association',
+    'file_description',
+    'file_format',
+    'file_size',
+    'case_id',
+    'breed',
+    'diagnosis',
+    'study_code',
+  ],
+  header: [
+    'file_name',
+    'file_type',
+    'association',
+    'file_description',
+    'file_format',
+    'file_size',
+    'case_id',
+    'breed',
+    'diagnosis',
+    'study_code',
+  ],
+};
+
 export const customMyFilesTabDownloadCSV = {
-  keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'case_id', 'breed', 'diagnosis', 'study_code'],
-  header: ['File Name', 'File Type', 'Association', 'Description', 'File Format', 'Size', 'Case ID', 'Breed', 'Diagnosis', 'Study Code'],
+  keysToInclude: [
+    ...customMyFilesCoreDataFields.keysToInclude,
+    ...customMyFilesOptionalDataFields.keysToInclude,
+  ],
+  header: [
+    ...customMyFilesCoreDataFields.header,
+    ...customMyFilesOptionalDataFields.header,
+  ],
   query: MY_CART,
   apiVariable: 'filesInList',
   fileName: 'ICDC_My_Files_download',

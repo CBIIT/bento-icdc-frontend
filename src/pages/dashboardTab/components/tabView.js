@@ -75,6 +75,7 @@ const TabView = ({
   selectedRowInfo = [],
   selectedRowIndex = [],
   tableHasSelections,
+  unifiedViewFlag,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -85,7 +86,6 @@ const TabView = ({
   const AddToCartAlertDialogRef = useRef();
 
   const [cartIsFull, setCartIsFull] = React.useState(false);
-  // const [caseId, setCaseId] = React.useState('');
 
   const buildButtonStyle = (button, styleObject) => {
     const styleKV = Object.entries(styleObject);
@@ -282,6 +282,7 @@ const TabView = ({
     </div>
   );
 
+  // const flag = true;
   const columns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).map((column, index) => {
     if (column.name === 'case_id' && index === 0) {
       return {
@@ -301,6 +302,8 @@ const TabView = ({
     return column;
   }),
   customColumn.columns);
+
+  const unifiedViewColumns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload), customColumn.columns);
 
   return (
     <div>
@@ -344,7 +347,7 @@ const TabView = ({
         <Grid item xs={12} id={tableID}>
           <CustomDataTable
             data={data}
-            columns={columns}
+            columns={unifiedViewFlag ? unifiedViewColumns : columns}
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}
