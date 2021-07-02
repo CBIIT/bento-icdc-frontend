@@ -37,7 +37,7 @@ const CustomExpansionPanelSummary = withStyles({
   expanded: {},
 })(ExpansionPanelSummary);
 
-const FacetPanel = ({ classes }) => {
+const FacetPanel = ({ classes, disabled }) => {
   // data from store
   const sideBarContent = useSelector((state) => (
     state.dashboardTab
@@ -152,6 +152,7 @@ const FacetPanel = ({ classes }) => {
             }}
           />
           <ExpansionPanel
+            disabled={disabled}
             expanded={groupExpanded.includes(currentSection.sectionName)}
             onChange={handleGroupChange(currentSection.sectionName)}
                 // className={classes.expansion}

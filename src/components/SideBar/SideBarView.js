@@ -57,7 +57,7 @@ const SideBarContent = ({ classes, unifiedViewFlag }) => {
                  variant="outlined"
                  className={classes.unifiedButton}
                  classes={{ root: classes.clearAllButtonRoot }}
-                 onClick={() => window.location.reload()}
+                 onClick={() => { clearAllFilters(); window.location.reload(); }}
                  disableRipple
                >
                  RESET QUERY
@@ -67,7 +67,7 @@ const SideBarContent = ({ classes, unifiedViewFlag }) => {
           </div>
         </div>
         <List component="nav" aria-label="filter cases" classes={{ root: classes.listRoot, divider: classes.dividerRoot }}>
-          {!unifiedViewFlag ? <FacetFilter /> : null}
+          {!unifiedViewFlag ? <FacetFilter /> : <FacetFilter disabled /> }
         </List>
       </div>
       )}

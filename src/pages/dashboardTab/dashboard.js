@@ -13,6 +13,7 @@ import { multiStudyData as custodianMultiStudyData } from '../../bento/dashboard
 import Tab from './components/tabController';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import colors from '../../utils/colors';
+import unifiedViewIcon from '../../assets/unifiedViewIcon.svg';
 
 const displaywidgets = widgetsData.filter((widget) => widget.show === true).slice(0, 6);
 
@@ -151,7 +152,7 @@ const Dashboard = ({
                     <div>
                       <div className={classes.multiStudyHeader}>
                         <img
-                          src={custodianMultiStudyData.icon}
+                          src={unifiedViewIcon}
                           className={classes.multiStudyIcon}
                           alt={custodianMultiStudyData.alt}
                         />

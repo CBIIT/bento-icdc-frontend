@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -17,7 +18,7 @@ import {
 } from '../../../bento/dashboardTabData';
 import {
   fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections, getFilesCount,
-  getUnifiedViewStats,
+  getUnifiedViewStats, clearAllFilters,
 } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
@@ -30,6 +31,7 @@ function TabContainer({ children, dir }) {
 }
 
 const tabController = ({ classes, multiStudyData }) => {
+  console.log('multistudydata', multiStudyData);
   const currentActiveTabTitle = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.currentActiveTab
     ? state.dashboardTab.currentActiveTab
@@ -50,6 +52,9 @@ const tabController = ({ classes, multiStudyData }) => {
       };
       getUnifiedViewStats(obj);
     }
+    return () => {
+      clearAllFilters();
+    };
   }, []);
 
   // data from store
