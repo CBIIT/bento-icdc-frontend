@@ -103,7 +103,10 @@ const ProgramView = ({ classes, data }) => {
       )
   );
 
-  const updatedTableWithLinks = manipulateLinks(table.columns);
+  const updatedTableWithLinks = manipulateLinks([
+    ...table.columns,
+    ...table.optionalColumns,
+  ]);
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     label: column.header,

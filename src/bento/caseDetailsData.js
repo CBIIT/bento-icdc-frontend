@@ -105,6 +105,8 @@ export const table1 = {
       header: 'Sample Preservation',
     },
   ],
+  optionalColumns: [
+  ],
   // Util Functions
   // Custom function on selct checkbox is selected.
   customOnRowsSelect: SampleOnRowsSelect,
@@ -207,6 +209,8 @@ export const table2 = {
         iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
       },
     },
+  ],
+  optionalColumns: [
   ],
   // Util Functions
   // Custom function on selct checkbox is selected.

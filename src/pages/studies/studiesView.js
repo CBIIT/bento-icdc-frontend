@@ -57,7 +57,11 @@ const Studies = ({ classes, data }) => {
       )
   );
 
-  const updatedTableWithLinks = manipulateLinks(pageData.table.columns);
+  const updatedTableWithLinks = manipulateLinks([
+    ...pageData.table.columns,
+    ...pageData.table.optionalColumns,
+  ]);
+
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     label: column.header,
