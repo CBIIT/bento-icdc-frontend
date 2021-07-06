@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -31,7 +30,6 @@ function TabContainer({ children, dir }) {
 }
 
 const tabController = ({ classes, multiStudyData }) => {
-  console.log('multistudydata', multiStudyData);
   const currentActiveTabTitle = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.currentActiveTab
     ? state.dashboardTab.currentActiveTab
