@@ -156,7 +156,7 @@ const Dashboard = ({
                           alt={custodianMultiStudyData.alt}
                         />
                         <Typography variant="h1" className={classes.multiStudyHeaderText} size="sm">
-                          Multi-study Participants
+                          Multi-study Participant
                         </Typography>
                         <Chip className={classes.chip} size="small" label={`Canine Individual: ${multiStudyData.individualId}`} />
                       </div>
