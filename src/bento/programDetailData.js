@@ -56,6 +56,8 @@ const table = {
       display: true,
     },
   ],
+  optionalColumns: [
+  ],
 };
 
 const textLabels = {

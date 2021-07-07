@@ -20,10 +20,25 @@ query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
   }
 }
 `;
+const customCasesOptionalDataFields = {
+  keysToInclude: [],
+  header: [],
+};
 
-export const customCasesTabDownloadCSV = {
+const customCasesTabCoreDataFields = {
   keysToInclude: ['case_id', 'study_code', 'study_type', 'breed', 'diagnosis', 'stage_of_disease', 'age', 'sex', 'neutered_status', 'weight', 'response_to_treatment', 'cohort'],
   header: ['Case ID', 'Study Code', 'Study Type', 'Breed', 'Diagnosis', 'Stage Of Disease', 'Age', 'Sex', 'Neutered Status', 'Weight (kg)', 'Response to Treatment', 'Cohort'],
+};
+
+export const customCasesTabDownloadCSV = {
+  keysToInclude: [
+    ...customCasesTabCoreDataFields.keysToInclude,
+    ...customCasesOptionalDataFields.keysToInclude,
+  ],
+  header: [
+    ...customCasesTabCoreDataFields.header,
+    ...customCasesOptionalDataFields.header,
+  ],
   query: GET_CASES_TAB,
   apiVariable: 'caseOverviewPaged',
   fileName: 'ICDC_Cases_download',
@@ -49,9 +64,25 @@ query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 10, 
   }
 `;
 
-export const customSamplesTabDownloadCSV = {
+const customSamplesOptionalDataFields = {
+  keysToInclude: [],
+  header: [],
+};
+
+const customSampleTabCoreDataFields = {
   keysToInclude: ['sample_id', 'case_id', 'breed', 'diagnosis', 'sample_site', 'sample_type', 'sample_pathology', 'tumor_grade', 'sample_chronology', 'percentage_tumor', 'necropsy_sample', 'sample_preservation'],
   header: ['Sample ID', 'Case ID', 'Breed', 'Diagnosis', 'Sample Site', 'Sample Type', 'Pathology/Morphology', 'Tumor Grade', 'Sample Chronology', 'Percentage Tumor', 'Necropsy Sample', 'Sample Preservation'],
+};
+
+export const customSamplesTabDownloadCSV = {
+  keysToInclude: [
+    ...customSampleTabCoreDataFields.keysToInclude,
+    ...customSamplesOptionalDataFields.keysToInclude,
+  ],
+  header: [
+    ...customSampleTabCoreDataFields.header,
+    ...customSamplesOptionalDataFields.header,
+  ],
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',
   fileName: 'ICDC_Samples_download',
@@ -76,9 +107,28 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
   }
 `;
 
-export const customFilesTabDownloadCSV = {
+// extended metadata attributes for file download
+const customFilesTabOptionalDataFields = {
+  keysToInclude: [
+  ],
+  header: [
+  ],
+};
+
+const customFilesTabCoreDataFields = {
   keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'sample_id', 'case_id', 'breed', 'diagnosis', 'study_code'],
   header: ['File Name', 'File Type', 'Association', 'Description', 'File Format', 'Size', 'Sample ID', 'Case ID', 'Breed', 'Diagnosis', 'Study Code'],
+};
+
+export const customFilesTabDownloadCSV = {
+  keysToInclude: [
+    ...customFilesTabCoreDataFields.keysToInclude,
+    ...customFilesTabOptionalDataFields.keysToInclude,
+  ],
+  header: [
+    ...customFilesTabCoreDataFields.header,
+    ...customFilesTabOptionalDataFields.header,
+  ],
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
   fileName: 'ICDC_Files_download',

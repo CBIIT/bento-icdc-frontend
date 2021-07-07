@@ -70,6 +70,8 @@ export const pageData = {
         display: true,
       },
     ],
+    optionalColumns: [
+    ],
   },
 };
 
