@@ -26,6 +26,7 @@ const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
 }) => {
   const [modalStatus, setModalStatus] = React.useState(false);
+  const [removeAllMessageStatus, setRemoveAllMessageStatus] = React.useState(false);
   const [userComments, setUserComments] = React.useState('');
   async function fetchData() {
     const fetchResult = await client
@@ -37,6 +38,10 @@ const cartView = ({
       })
       .then((result) => result.data.filesInList);
     return fetchResult;
+  }
+
+  function toggleRemoveAllMessageStatus(status) {
+    return status === 'close' ? setRemoveAllMessageStatus(false) : setRemoveAllMessageStatus(true);
   }
 
   // ================= Dialogbox Functions =================
@@ -104,11 +109,20 @@ const cartView = ({
                 Remove
               </div>
               <div className={classes.removeHeadCellIcon}>
-                <Tooltip title="Remove all items in cart" arrow placement="bottom">
-                  <IconButton onClick={() => openDialogBox()} aria-label="help" className={classes.removeHeadCellIconButton}>
-                    <ArrowDropDownIcon />
-                  </IconButton>
-                </Tooltip>
+                <IconButton aria-label="help" className={classes.removeHeadCellIconButton}>
+                  <ArrowDropDownIcon onClick={() => openDialogBox()} onMouseEnter={() => toggleRemoveAllMessageStatus('open')} onMouseLeave={() => toggleRemoveAllMessageStatus('close')} />
+                </IconButton>
+                {removeAllMessageStatus ? (
+                  <div className={classes.removeAllMessage}>
+                    {' '}
+                    Remove
+                    {' '}
+                    <b>All</b>
+                    {' '}
+                    items in cart.
+                    {' '}
+                  </div>
+                ) : ''}
               </div>
             </div>
           </span>
