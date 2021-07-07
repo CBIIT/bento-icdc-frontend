@@ -67,7 +67,7 @@ const SideBarContent = ({ classes, unifiedViewFlag }) => {
           </div>
         </div>
         <List component="nav" aria-label="filter cases" classes={{ root: classes.listRoot, divider: classes.dividerRoot }}>
-          {!unifiedViewFlag ? <FacetFilter /> : null}
+          {!unifiedViewFlag ? <FacetFilter /> : <FacetFilter disabled /> }
         </List>
       </div>
       )}

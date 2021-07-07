@@ -17,7 +17,7 @@ import {
 } from '../../../bento/dashboardTabData';
 import {
   fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections, getFilesCount,
-  getUnifiedViewStats,
+  getUnifiedViewStats, clearAllFilters,
 } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
@@ -50,6 +50,9 @@ const tabController = ({ classes, multiStudyData }) => {
       };
       getUnifiedViewStats(obj);
     }
+    return () => {
+      clearAllFilters();
+    };
   }, []);
 
   // data from store
