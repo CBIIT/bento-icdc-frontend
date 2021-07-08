@@ -571,6 +571,9 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
           ..._.cloneDeep(result),
         },
       }))
+      .then(() => store.dispatch({
+        type: 'SORT_ALL_GROUP_CHECKBOX',
+      }))
       .catch((error) => store.dispatch(
         { type: 'DASHBOARDTAB_QUERY_ERR', error },
       )))
@@ -578,6 +581,42 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
 }
+
+/**
+ * Sort checkboxes by Checked
+ *
+ * @param {object} checkboxData
+ * @return {json}
+ */
+
+function sortByCheckboxByIsChecked(checkboxData) {
+  checkboxData.sort((a, b) => b.isChecked - a.isChecked);
+  return checkboxData;
+}
+
+/**
+ * Sort checkboxes by Alphabet
+ *
+ * @param {object} checkboxData
+ * @return {json}
+ */
+
+function sortByCheckboxItemsByAlphabet(checkboxData) {
+  checkboxData.sort(((a, b) => (a.name > b.name || -(a.name < b.name))));
+  return sortByCheckboxByIsChecked(checkboxData);
+}
+/**
+ * Sort checkboxes by Count
+ *
+ * @param {object} checkboxData
+ * @return {json}
+ */
+
+function sortByCheckboxItemsByCount(checkboxData) {
+  checkboxData.sort((a, b) => b.subjects - a.subjects);
+  return sortByCheckboxByIsChecked(checkboxData);
+}
+
 /**
  * function to set code to checkbox Item (accession id) for filterCountByStudyCode likewise
  *
@@ -672,6 +711,38 @@ export function setSideBarToLoading() {
 
 export function setDashboardTableLoading() {
   store.dispatch({ type: 'SET_DASHBOARDTABLE_LOADING' });
+}
+
+/**
+ * Reducer for setting dashboardtable loading loading
+ *
+ * @return distpatcher
+ */
+
+export function sortGroupCheckboxByAlphabet(groupName) {
+  store.dispatch({
+    type: 'SORT_SINGLE_GROUP_CHECKBOX',
+    payload: {
+      groupName,
+      sortBy: 'alphabet',
+    },
+  });
+}
+
+/**
+ * Reducer for setting dashboardtable loading loading
+ *
+ * @return distpatcher
+ */
+
+export function sortGroupCheckboxByCount(groupName) {
+  store.dispatch({
+    type: 'SORT_SINGLE_GROUP_CHECKBOX',
+    payload: {
+      groupName,
+      sortBy: 'count',
+    },
+  });
 }
 
 const convertCasesToCount = (data) => data.map((item) => ({
@@ -966,6 +1037,42 @@ const reducers = {
       dataFileSelected: item,
     }
   ),
+  SORT_SINGLE_GROUP_CHECKBOX: (state, item) => {
+    const groupData = state.checkbox.data.filter((group) => item.groupName === group.groupName)[0];
+    let { sortByList } = state;
+    sortByList = sortByList || {};
+    const sortedCheckboxItems = item.sortBy === 'count'
+      ? sortByCheckboxItemsByCount(groupData.checkboxItems)
+      : sortByCheckboxItemsByAlphabet(groupData.checkboxItems);
+
+    sortByList[groupData.groupName] = item.sortBy;
+    const data = state.checkbox.data.map((group) => {
+      if (group.groupName === groupData.groupName) {
+        const updatedGroupData = group;
+        updatedGroupData.checkboxItems = sortedCheckboxItems;
+        return updatedGroupData;
+      }
+
+      return group;
+    });
+
+    return { ...state, checkbox: { data }, sortByList };
+  },
+  SORT_ALL_GROUP_CHECKBOX: (state) => {
+    const { sortByList = {} } = state;
+    const { data } = state.checkbox;
+
+    data.map((group) => {
+      const checkboxItems = sortByList[group.groupName] === 'count'
+        ? sortByCheckboxItemsByCount(group.checkboxItems)
+        : sortByCheckboxItemsByAlphabet(group.checkboxItems);
+      const updatedGroupData = group;
+      updatedGroupData.checkboxItems = checkboxItems;
+      return updatedGroupData;
+    });
+
+    return { ...state, checkbox: { data } };
+  },
 };
 
 // INJECT-REDUCERS INTO REDUX STORE
