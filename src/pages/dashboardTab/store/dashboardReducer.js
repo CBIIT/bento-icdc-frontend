@@ -583,6 +583,27 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
 }
 
 /**
+ * Returns active filter list while removing the param group.
+ *
+ * @param {object} data
+ * @return {json}
+ */
+function clearGroup(data) {
+  const currentAllActiveFilters = getState().allActiveFilters;
+  currentAllActiveFilters[data] = [];
+  return currentAllActiveFilters;
+}
+
+export function clearSectionSort(groupName) {
+  store.dispatch({
+    type: 'CLEAR_SECTION_SORT',
+    payload: {
+      groupName,
+    },
+  });
+}
+
+/**
  * Sort checkboxes by Checked
  *
  * @param {object} checkboxData
@@ -647,6 +668,25 @@ function setCodeToCheckBoxItem(checkboxData, item) {
 
 export function clearAllFilters() {
   store.dispatch(fetchDashboardTabForClearAllFilters());
+}
+
+/**
+ * Resets the group selections
+ *
+ * @param {object} payload
+ * @return distpatcher
+ */
+export function resetGroupSelections(payload) {
+  return () => {
+    const { dataField, groupName } = payload;
+    const currentAllFilterVariables = clearGroup(dataField);
+    clearSectionSort(groupName);
+
+    // For performance issue we are using initial dasboardquery instead of fitered for empty filters
+    if (_.isEqual(currentAllFilterVariables, allFilters())) {
+      clearAllFilters();
+    } else toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
+  };
 }
 
 /**
