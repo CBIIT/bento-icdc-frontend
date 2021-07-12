@@ -62,19 +62,34 @@ export const facetSearchData = [
 export const facetSectionVariables = {
   'Filter By Cases': {
     color: '#f48439',
+    checkBoxColorsOne: '#E8F7DC',
+    checkBoxColorsTwo: '#F5FDEE',
     height: '4px',
     isExpanded: false,
   },
   'Filter By Samples': {
     color: '#37d1d6',
+    checkBoxColorsOne: '#C9EBF7',
+    checkBoxColorsTwo: '#E8F8FE',
     height: '4px',
     isExpanded: false,
   },
   'Filter By Files': {
     color: '#2446c6',
+    checkBoxColorsOne: '#FBE3FB',
+    checkBoxColorsTwo: '#FFF2FF',
     height: '4px',
     isExpanded: false,
   },
+};
+
+// --------------- Default Dashboard Sidebar Sections styling --------------
+export const defaultFacetSectionVariables = {
+  color: '#000000',
+  checkBoxColorsOne: '#E8F7DC',
+  checkBoxColorsTwo: '#F5FDEE',
+  height: '5px',
+  isExpanded: false,
 };
 
 // --------------- Dashboard Widgets configuration --------------
@@ -135,6 +150,11 @@ export const externalLinkIcon = {
 // --------------- Facet resetIcon link configuration --------------
 // Ideal size for resetIcon is 16x16 px
 export const resetIcon = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
+  alt: 'Reset icon',
+  size: '12 px',
+};
+export const resetIconFilter = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
   alt: 'Reset icon',
   size: '12 px',

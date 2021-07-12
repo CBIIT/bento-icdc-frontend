@@ -224,6 +224,22 @@ function allFilters() {
   return emptyFilters;
 }
 
+/**
+ * Reducer for sorting checkboxes.
+ *
+ * @return distpatcher
+ */
+
+export function sortSection(groupName, sortBy) {
+  store.dispatch({
+    type: 'SORT_SINGLE_GROUP_CHECKBOX',
+    payload: {
+      groupName,
+      sortBy,
+    },
+  });
+}
+
 function hasFilter() {
   const currentAllActiveFilters = getState().allActiveFilters;
   return Object.entries(currentAllActiveFilters).filter((item) => item[1].length > 0).length > 0;
