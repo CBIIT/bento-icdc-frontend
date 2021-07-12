@@ -252,6 +252,64 @@ function createFilterVariables(data) {
 }
 
 /**
+ * Reducer for clear all filters
+ *
+ * @return distpatcher
+ */
+
+export function clearAllFilters() {
+  store.dispatch(fetchDashboardTabForClearAllFilters());
+}
+
+/**
+ * Helper function to query and get filtered values for dashboard
+ * @param {object} payload ingeneral its a single filter variable used to set the checkbox
+ * @param {obj} currentAllFilterVariables gets the current active filters
+ * @return distpatcher
+ */
+function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
+  return client
+    .query({ // request to get the filtered subjects
+      query: FILTER_QUERY,
+      variables: { ...currentAllFilterVariables, first: 100 },
+    })
+    .then((result) => client.query({ // request to get the filtered group counts
+      query: FILTER_GROUP_QUERY,
+      variables: { case_ids: result.data.searchCases.caseIds },
+    })
+      .then((result2) => store.dispatch({
+        type: 'TOGGGLE_CHECKBOX_WITH_API',
+        payload: {
+          filter: payload,
+          allFilters: currentAllFilterVariables,
+          groups: _.cloneDeep(result2),
+          ..._.cloneDeep(result),
+        },
+      }))
+      .then(() => store.dispatch({
+        type: 'SORT_ALL_GROUP_CHECKBOX',
+      }))
+      .catch((error) => store.dispatch(
+        { type: 'DASHBOARDTAB_QUERY_ERR', error },
+      )))
+    .catch((error) => store.dispatch(
+      { type: 'DASHBOARDTAB_QUERY_ERR', error },
+    ));
+}
+
+/**
+ * Returns active filter list while removing the param group.
+ *
+ * @param {object} data
+ * @return {json}
+ */
+function clearGroup(data) {
+  const currentAllActiveFilters = getState().allActiveFilters;
+  currentAllActiveFilters[data] = [];
+  return currentAllActiveFilters;
+}
+
+/**
  * Switch to get query sort dorection and sort field .
  *
  * @param {string} payload
@@ -546,54 +604,6 @@ function createSingleFilterVariables(payload) {
   return filter;
 }
 
-/**
- * Helper function to query and get filtered values for dashboard
- * @param {object} payload ingeneral its a single filter variable used to set the checkbox
- * @param {obj} currentAllFilterVariables gets the current active filters
- * @return distpatcher
- */
-function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
-  return client
-    .query({ // request to get the filtered subjects
-      query: FILTER_QUERY,
-      variables: { ...currentAllFilterVariables, first: 100 },
-    })
-    .then((result) => client.query({ // request to get the filtered group counts
-      query: FILTER_GROUP_QUERY,
-      variables: { case_ids: result.data.searchCases.caseIds },
-    })
-      .then((result2) => store.dispatch({
-        type: 'TOGGGLE_CHECKBOX_WITH_API',
-        payload: {
-          filter: payload,
-          allFilters: currentAllFilterVariables,
-          groups: _.cloneDeep(result2),
-          ..._.cloneDeep(result),
-        },
-      }))
-      .then(() => store.dispatch({
-        type: 'SORT_ALL_GROUP_CHECKBOX',
-      }))
-      .catch((error) => store.dispatch(
-        { type: 'DASHBOARDTAB_QUERY_ERR', error },
-      )))
-    .catch((error) => store.dispatch(
-      { type: 'DASHBOARDTAB_QUERY_ERR', error },
-    ));
-}
-
-/**
- * Returns active filter list while removing the param group.
- *
- * @param {object} data
- * @return {json}
- */
-function clearGroup(data) {
-  const currentAllActiveFilters = getState().allActiveFilters;
-  currentAllActiveFilters[data] = [];
-  return currentAllActiveFilters;
-}
-
 export function clearSectionSort(groupName) {
   store.dispatch({
     type: 'CLEAR_SECTION_SORT',
@@ -659,15 +669,6 @@ function setCodeToCheckBoxItem(checkboxData, item) {
   updateCheckBoxData[0].checkboxItems = checkBoxitems
     .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
   return updateCheckBoxData;
-}
-/**
- * Reducer for clear all filters
- *
- * @return distpatcher
- */
-
-export function clearAllFilters() {
-  store.dispatch(fetchDashboardTabForClearAllFilters());
 }
 
 /**

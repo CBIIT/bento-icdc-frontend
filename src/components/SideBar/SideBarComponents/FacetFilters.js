@@ -175,11 +175,11 @@ const FacetPanel = ({ classes, disabled }) => {
     }]));
   };
 
-  const handleGroupReset = (value) => () => {
+  const handleGroupReset = (dataField, groupName) => () => {
     setSideBarToLoading();
     setDashboardTableLoading();
     // dispatch toggleCheckBox action
-    dispatch(resetGroupSelections(value));
+    dispatch(resetGroupSelections({ dataField, groupName }));
   };
 
   const sideBarDisplay = sideBarContent.data.filter((sideBar) => sideBar.show === true)
@@ -308,7 +308,9 @@ const FacetPanel = ({ classes, disabled }) => {
                               style={{ paddingLeft: '5px' }}
                             >
                               <Icon
-                                onClick={handleGroupReset(sideBarItem.datafield)}
+                                onClick={
+                                  handleGroupReset(sideBarItem.datafield, sideBarItem.groupName)
+                                }
                               >
                                 <img
                                   src={resetIcon.src}
