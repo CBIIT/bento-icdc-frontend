@@ -87,6 +87,7 @@ export default (theme) => ({
     verticalAlign: 'top',
     marginTop: '6px',
     marginBottom: '19px',
+    cursor: 'pointer',
   },
   popUpWindowText: {
     fontFamily: 'Lato',
