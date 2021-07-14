@@ -28,7 +28,7 @@ export const externalLinkIcon = {
 export const multiStudyData = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/icon-multiStudy.svg',
   alt: 'Multi-study icon',
-  toolTipText: 'Study participant is enrolled in multiple studies:',
+  toolTipText: 'This multi-study participant is also enrolled as:',
 };
 
 // --------------- Tabs Table configuration --------------
