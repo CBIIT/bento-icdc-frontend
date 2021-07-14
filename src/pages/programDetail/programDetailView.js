@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   Grid,
@@ -25,7 +26,7 @@ import {
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
-import { isStudyUnderEmbargo } from '../study/utils';
+import { studyDisposition } from '../study/utils';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -69,11 +70,28 @@ const ProgramView = ({ classes, data }) => {
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const tableOptions = getOptions(table, classes);
 
-  const toolTipIcon = () => (
-    <Tooltip title="Under Embargo" arrow placement="bottom">
+  const embargoToolTipIcon = () => (
+    <Tooltip title="Under Embargo!!!" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </Tooltip>
   );
+
+  const pendingToolTipIcon = () => (
+    <Tooltip title="Pending" arrow placement="bottom">
+      <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+    </Tooltip>
+  );
+
+  const renderSwitch = (param) => {
+    switch (param) {
+      case 'embargo':
+        return embargoToolTipIcon();
+      case 'pending':
+        return pendingToolTipIcon();
+      default:
+        return false;
+    }
+  };
 
   const customStudyCodeLink = (column, value, tableMeta) => (
     <>
@@ -81,18 +99,16 @@ const ProgramView = ({ classes, data }) => {
         {value}
       </Link>
       {
-        isStudyUnderEmbargo(tableMeta.rowData[5])
-          && toolTipIcon()
+        renderSwitch(studyDisposition(tableMeta.rowData[5]))
       }
     </>
   );
 
   const customCaseNumbLink = (column, value, tableMeta) => (
-    isStudyUnderEmbargo(tableMeta.rowData[5])
+    renderSwitch(studyDisposition(tableMeta.rowData[5]))
       ? (
-        toolTipIcon()
-      )
-      : (
+        renderSwitch(studyDisposition(tableMeta.rowData[5]))
+      ) : (
         <Link
           to={(location) => ({ ...location, pathname: '/cases' })}
           className={classes.buttonCaseNumb}

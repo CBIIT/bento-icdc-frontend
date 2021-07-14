@@ -100,9 +100,21 @@ export function FileOnRowsSelect(data, allRowsSelected) {
 }
 
 export function isStudyUnderEmbargo(value) {
-  const studyDisposition = 'under embargo';
+  const studyDispositionn = 'under embargo';
   if (value === null || value === undefined) {
     return false;
   }
-  return value.toLowerCase() === studyDisposition;
+  return value.toLowerCase() === studyDispositionn;
+}
+
+export function studyDisposition(value) {
+  const embargo = 'under embargo';
+  const pending = 'pending';
+  if (value.toLowerCase() === embargo) {
+    return 'embargo';
+  }
+  if (value.toLowerCase() === pending) {
+    return 'pending';
+  }
+  return undefined;
 }
