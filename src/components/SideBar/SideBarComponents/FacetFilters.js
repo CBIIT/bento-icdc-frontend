@@ -291,6 +291,7 @@ const FacetPanel = ({ classes, disabled }) => {
                 {currentSection.items.map((sideBarItem) => (
                   <>
                     <ExpansionPanel
+                      square
                       expanded={groupsExpanded.includes(sideBarItem.groupName)}
                       onChange={handleGroupsChange(sideBarItem.groupName)}
                       classes={{

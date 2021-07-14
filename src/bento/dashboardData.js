@@ -64,21 +64,21 @@ export const facetSectionVariables = {
     color: '#f48439',
     checkBoxColorsOne: '#E8F7DC',
     checkBoxColorsTwo: '#F5FDEE',
-    height: '4px',
+    height: '5px',
     isExpanded: false,
   },
   'Filter By Samples': {
     color: '#37d1d6',
     checkBoxColorsOne: '#C9EBF7',
     checkBoxColorsTwo: '#E8F8FE',
-    height: '4px',
+    height: '5px',
     isExpanded: false,
   },
   'Filter By Files': {
     color: '#2446c6',
     checkBoxColorsOne: '#FBE3FB',
     checkBoxColorsTwo: '#FFF2FF',
-    height: '4px',
+    height: '5px',
     isExpanded: false,
   },
 };
@@ -240,8 +240,8 @@ export const dashboardTable = {
 
 // --------------- Sorting related labels configuration --------------
 export const sortLabels = {
-  sortAlphabetically: 'Sort Alphabetically',
-  sortByCount: 'Sort by Counts',
+  sortAlphabetically: 'Sort alphabetically',
+  sortByCount: 'Sort by counts',
   showMore: '...expand to see all selections',
 };
 
