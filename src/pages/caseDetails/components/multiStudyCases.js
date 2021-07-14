@@ -89,7 +89,7 @@ const MultiStudyCases = ({
           <img src={multiStudyIcon.src} alt={multiStudyIcon.alt} className={classes.canineIcon} />
           <Avatar className={classes.noOfStudies}>{menuItems.length - 1}</Avatar>
         </div>
-        Study Participant also enrolled as
+        This multi-study participant is also enrolled as:
         <ArrowDropDownIcon className={classes.arrowDropDown} />
       </Button>
       <MuiMenu
