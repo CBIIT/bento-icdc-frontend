@@ -146,7 +146,8 @@ const styles = (theme) => ({
   listRoot: {
     paddingTop: 0,
     paddingBottom: 1,
-    height: '900px',
+    maxHeight: '1300px',
+    maxWidth: '100%',
     overflowX: 'hidden',
     overflowY: 'auto',
   },
