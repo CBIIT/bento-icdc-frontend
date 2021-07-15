@@ -224,6 +224,22 @@ function allFilters() {
   return emptyFilters;
 }
 
+/**
+ * Reducer for sorting checkboxes.
+ *
+ * @return distpatcher
+ */
+
+export function sortSection(groupName, sortBy) {
+  store.dispatch({
+    type: 'SORT_SINGLE_GROUP_CHECKBOX',
+    payload: {
+      groupName,
+      sortBy,
+    },
+  });
+}
+
 function hasFilter() {
   const currentAllActiveFilters = getState().allActiveFilters;
   return Object.entries(currentAllActiveFilters).filter((item) => item[1].length > 0).length > 0;
@@ -249,6 +265,64 @@ function createFilterVariables(data) {
   }, {});
 
   return filter;
+}
+
+/**
+ * Reducer for clear all filters
+ *
+ * @return distpatcher
+ */
+
+export function clearAllFilters() {
+  store.dispatch(fetchDashboardTabForClearAllFilters());
+}
+
+/**
+ * Helper function to query and get filtered values for dashboard
+ * @param {object} payload ingeneral its a single filter variable used to set the checkbox
+ * @param {obj} currentAllFilterVariables gets the current active filters
+ * @return distpatcher
+ */
+function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
+  return client
+    .query({ // request to get the filtered subjects
+      query: FILTER_QUERY,
+      variables: { ...currentAllFilterVariables, first: 100 },
+    })
+    .then((result) => client.query({ // request to get the filtered group counts
+      query: FILTER_GROUP_QUERY,
+      variables: { case_ids: result.data.searchCases.caseIds },
+    })
+      .then((result2) => store.dispatch({
+        type: 'TOGGGLE_CHECKBOX_WITH_API',
+        payload: {
+          filter: payload,
+          allFilters: currentAllFilterVariables,
+          groups: _.cloneDeep(result2),
+          ..._.cloneDeep(result),
+        },
+      }))
+      .then(() => store.dispatch({
+        type: 'SORT_ALL_GROUP_CHECKBOX',
+      }))
+      .catch((error) => store.dispatch(
+        { type: 'DASHBOARDTAB_QUERY_ERR', error },
+      )))
+    .catch((error) => store.dispatch(
+      { type: 'DASHBOARDTAB_QUERY_ERR', error },
+    ));
+}
+
+/**
+ * Returns active filter list while removing the param group.
+ *
+ * @param {object} data
+ * @return {json}
+ */
+function clearGroup(data) {
+  const currentAllActiveFilters = getState().allActiveFilters;
+  currentAllActiveFilters[data] = [];
+  return currentAllActiveFilters;
 }
 
 /**
@@ -546,38 +620,50 @@ function createSingleFilterVariables(payload) {
   return filter;
 }
 
-/**
- * Helper function to query and get filtered values for dashboard
- * @param {object} payload ingeneral its a single filter variable used to set the checkbox
- * @param {obj} currentAllFilterVariables gets the current active filters
- * @return distpatcher
- */
-function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
-  return client
-    .query({ // request to get the filtered subjects
-      query: FILTER_QUERY,
-      variables: { ...currentAllFilterVariables, first: 100 },
-    })
-    .then((result) => client.query({ // request to get the filtered group counts
-      query: FILTER_GROUP_QUERY,
-      variables: { case_ids: result.data.searchCases.caseIds },
-    })
-      .then((result2) => store.dispatch({
-        type: 'TOGGGLE_CHECKBOX_WITH_API',
-        payload: {
-          filter: payload,
-          allFilters: currentAllFilterVariables,
-          groups: _.cloneDeep(result2),
-          ..._.cloneDeep(result),
-        },
-      }))
-      .catch((error) => store.dispatch(
-        { type: 'DASHBOARDTAB_QUERY_ERR', error },
-      )))
-    .catch((error) => store.dispatch(
-      { type: 'DASHBOARDTAB_QUERY_ERR', error },
-    ));
+export function clearSectionSort(groupName) {
+  store.dispatch({
+    type: 'CLEAR_SECTION_SORT',
+    payload: {
+      groupName,
+    },
+  });
 }
+
+/**
+ * Sort checkboxes by Checked
+ *
+ * @param {object} checkboxData
+ * @return {json}
+ */
+
+function sortByCheckboxByIsChecked(checkboxData) {
+  checkboxData.sort((a, b) => b.isChecked - a.isChecked);
+  return checkboxData;
+}
+
+/**
+ * Sort checkboxes by Alphabet
+ *
+ * @param {object} checkboxData
+ * @return {json}
+ */
+
+function sortByCheckboxItemsByAlphabet(checkboxData) {
+  checkboxData.sort(((a, b) => (a.name > b.name || -(a.name < b.name))));
+  return sortByCheckboxByIsChecked(checkboxData);
+}
+/**
+ * Sort checkboxes by Count
+ *
+ * @param {object} checkboxData
+ * @return {json}
+ */
+
+function sortByCheckboxItemsByCount(checkboxData) {
+  checkboxData.sort((a, b) => b.subjects - a.subjects);
+  return sortByCheckboxByIsChecked(checkboxData);
+}
+
 /**
  * function to set code to checkbox Item (accession id) for filterCountByStudyCode likewise
  *
@@ -600,14 +686,24 @@ function setCodeToCheckBoxItem(checkboxData, item) {
     .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
   return updateCheckBoxData;
 }
+
 /**
- * Reducer for clear all filters
+ * Resets the group selections
  *
+ * @param {object} payload
  * @return distpatcher
  */
+export function resetGroupSelections(payload) {
+  return () => {
+    const { dataField, groupName } = payload;
+    const currentAllFilterVariables = clearGroup(dataField);
+    clearSectionSort(groupName);
 
-export function clearAllFilters() {
-  store.dispatch(fetchDashboardTabForClearAllFilters());
+    // For performance issue we are using initial dasboardquery instead of fitered for empty filters
+    if (_.isEqual(currentAllFilterVariables, allFilters())) {
+      clearAllFilters();
+    } else toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
+  };
 }
 
 /**
@@ -672,6 +768,38 @@ export function setSideBarToLoading() {
 
 export function setDashboardTableLoading() {
   store.dispatch({ type: 'SET_DASHBOARDTABLE_LOADING' });
+}
+
+/**
+ * Reducer for setting dashboardtable loading loading
+ *
+ * @return distpatcher
+ */
+
+export function sortGroupCheckboxByAlphabet(groupName) {
+  store.dispatch({
+    type: 'SORT_SINGLE_GROUP_CHECKBOX',
+    payload: {
+      groupName,
+      sortBy: 'alphabet',
+    },
+  });
+}
+
+/**
+ * Reducer for setting dashboardtable loading loading
+ *
+ * @return distpatcher
+ */
+
+export function sortGroupCheckboxByCount(groupName) {
+  store.dispatch({
+    type: 'SORT_SINGLE_GROUP_CHECKBOX',
+    payload: {
+      groupName,
+      sortBy: 'count',
+    },
+  });
 }
 
 const convertCasesToCount = (data) => data.map((item) => ({
@@ -966,6 +1094,42 @@ const reducers = {
       dataFileSelected: item,
     }
   ),
+  SORT_SINGLE_GROUP_CHECKBOX: (state, item) => {
+    const groupData = state.checkbox.data.filter((group) => item.groupName === group.groupName)[0];
+    let { sortByList } = state;
+    sortByList = sortByList || {};
+    const sortedCheckboxItems = item.sortBy === 'count'
+      ? sortByCheckboxItemsByCount(groupData.checkboxItems)
+      : sortByCheckboxItemsByAlphabet(groupData.checkboxItems);
+
+    sortByList[groupData.groupName] = item.sortBy;
+    const data = state.checkbox.data.map((group) => {
+      if (group.groupName === groupData.groupName) {
+        const updatedGroupData = group;
+        updatedGroupData.checkboxItems = sortedCheckboxItems;
+        return updatedGroupData;
+      }
+
+      return group;
+    });
+
+    return { ...state, checkbox: { data }, sortByList };
+  },
+  SORT_ALL_GROUP_CHECKBOX: (state) => {
+    const { sortByList = {} } = state;
+    const { data } = state.checkbox;
+
+    data.map((group) => {
+      const checkboxItems = sortByList[group.groupName] === 'count'
+        ? sortByCheckboxItemsByCount(group.checkboxItems)
+        : sortByCheckboxItemsByAlphabet(group.checkboxItems);
+      const updatedGroupData = group;
+      updatedGroupData.checkboxItems = checkboxItems;
+      return updatedGroupData;
+    });
+
+    return { ...state, checkbox: { data } };
+  },
 };
 
 // INJECT-REDUCERS INTO REDUX STORE
