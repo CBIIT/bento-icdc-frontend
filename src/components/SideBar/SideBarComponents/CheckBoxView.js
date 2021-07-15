@@ -63,7 +63,6 @@ function CheckBoxView(props) {
             />
           )}
           style={{ color: facetSectionVariables[sideBarItem.section].color ? facetSectionVariables[sideBarItem.section].color : '#137fbe' }}
-
           checked={checkboxItem.isChecked}
           tabIndex={-1}
           disableRipple
