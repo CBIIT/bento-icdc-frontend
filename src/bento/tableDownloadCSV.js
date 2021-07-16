@@ -144,6 +144,7 @@ query filesInList($uuids: [String], $first: Int = 2000){
       file_format
       file_size
       case_id
+      individual_id
       breed
       diagnosis
       study_code
@@ -202,7 +203,6 @@ const customMyFilesOptionalDataFields = {
     'sex',
     'neutered_indicator',
     'weight',
-    'disease_term',
     'primary_disease_site',
     'stage_of_disease',
     'date_of_diagnosis',
@@ -230,12 +230,11 @@ const customMyFilesOptionalDataFields = {
     'Percentage Tumor',
     'Necropsy Sample',
     'Sample Preservation',
-    'Comment',
+    'Sample Comments',
     'Age',
     'Sex',
     'Neutered Status',
     'Weight (kg)',
-    'Diagnosis',
     'Disease Site',
     'Stage of Disease',
     'Date of Diagnosis',
@@ -261,21 +260,23 @@ const customMyFilesCoreDataFields = {
     'file_format',
     'file_size',
     'case_id',
+    'individual_id',
     'breed',
     'diagnosis',
     'study_code',
   ],
   header: [
-    'file_name',
-    'file_type',
-    'association',
-    'file_description',
-    'file_format',
-    'file_size',
-    'case_id',
-    'breed',
-    'diagnosis',
-    'study_code',
+    'File Name',
+    'File Type',
+    'Association',
+    'Description',
+    'Format',
+    'Size',
+    'Case ID',
+    'Canine ID',
+    'Breed',
+    'Diagnosis',
+    'Study Code',
   ],
 };
 

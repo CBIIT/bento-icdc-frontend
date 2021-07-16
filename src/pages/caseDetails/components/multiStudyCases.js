@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Avatar from '@material-ui/core/Avatar';
 import { multiStudyIcon } from '../../../bento/caseDetailsData';
+import { Typography } from '../../../components/Wrappers/Wrappers';
 
 const MuiMenu = withStyles({
   paper: {
@@ -89,7 +90,9 @@ const MultiStudyCases = ({
           <img src={multiStudyIcon.src} alt={multiStudyIcon.alt} className={classes.canineIcon} />
           <Avatar className={classes.noOfStudies}>{menuItems.length - 1}</Avatar>
         </div>
-        Multi-study participant also enrolled as:
+        <Typography>
+           Multi-study participant also enrolled as:
+        </Typography>
         <ArrowDropDownIcon className={classes.arrowDropDown} />
       </Button>
       <MuiMenu

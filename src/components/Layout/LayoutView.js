@@ -88,6 +88,7 @@ const styles = (theme) => ({
     '*::-webkit-scrollbar-track': {
       '-webkit-box-shadow': 'inset 0 0 6px #ccc',
       borderRadius: '10px',
+      backgroundColor: '#FFFFFF',
     },
     '*::-webkit-scrollbar-thumb': {
       backgroundColor: 'rgba(94,140,165)',

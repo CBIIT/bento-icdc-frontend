@@ -100,6 +100,10 @@ export const table = {
       },
     },
     {
+      dataField: 'sample_id',
+      header: 'Sample ID',
+    },
+    {
       dataField: 'case_id',
       header: 'Case ID',
       viewColumns: false,
@@ -131,6 +135,7 @@ query filesInList($uuids: [String], $offset: Int = 0, $first: Int = 10, $order_b
   filesInList(uuids: $uuids, offset: $offset,first: $first, order_by: $order_by){
       file_name
       file_type
+      sample_id
       association
       file_description
       file_format
@@ -151,6 +156,7 @@ query filesInListDesc($uuids: [String], $offset: Int = 0, $first: Int = 10, $ord
   filesInListDesc(uuids: $uuids, offset: $offset,first: $first, order_by: $order_by){
       file_name
       file_type
+      sample_id
       association
       file_description
       file_format

@@ -8,6 +8,15 @@ export const themeToggleTooltip = {
   switchThemeButtonMessage: 'Change the background theme',
 }
 
+// --------------- Default Dashboard Sidebar Sections styling --------------
+export const defaultFacetSectionVariables = {
+  color: '#000000',
+  checkBoxColorsOne: '#E8F7DC',
+  checkBoxColorsTwo: '#F5FDEE',
+  height: '5px',
+  isExpanded: false,
+};
+
 // --------------- Dashboard Sidebar Filters configuration --------------
 // A maximum of 12 facetSearchData are allowed
 export const facetSearchData = [
@@ -62,15 +71,24 @@ export const facetSearchData = [
 export const facetSectionVariables = {
   'Filter By Cases': {
     color: '#f48439',
+    checkBoxColorsOne: '#fdf1e8',
+    checkBoxColorsTwo: '#fff9f5',
     height: '4px',
+    isExpanded: false,
   },
   'Filter By Samples': {
     color: '#37d1d6',
+    checkBoxColorsOne: '#dafafb',
+    checkBoxColorsTwo: '#eafafb',
     height: '4px',
+    isExpanded: false,
   },
   'Filter By Files': {
     color: '#2446c6',
+    checkBoxColorsOne: '#d4ddf7',
+    checkBoxColorsTwo: '#e9eefb',
     height: '4px',
+    isExpanded: false,
   },
 };
 
@@ -127,6 +145,20 @@ export const widgetsData = [
 export const externalLinkIcon = {
   src: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/program/externalLinkIcon.svg',
   alt: 'External link icon',
+};
+
+// --------------- Facet resetIcon link configuration --------------
+// Ideal size for resetIcon is 16x16 px
+export const resetIcon = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
+  alt: 'Reset icon',
+  size: '12 px',
+};
+
+export const resetIconFilter = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
+  alt: 'Reset icon',
+  size: '12 px',
 };
 
 // --------------- Dashboard Table configuration --------------
@@ -206,6 +238,17 @@ export const dashboardTable = {
     },
   ],
 };
+
+// --------------- Sorting related labels configuration --------------
+export const sortLabels = {
+  sortAlphabetically: 'Sort alphabetically',
+  sortByCount: 'Sort by counts',
+  showMore: '...expand to see all selections',
+};
+
+export const showCheckboxCount = 5;
+
+
 
 // --------------- Dashboard Query configuration --------------
 export const GET_DASHBOARD_DATA_QUERY = gql`{
