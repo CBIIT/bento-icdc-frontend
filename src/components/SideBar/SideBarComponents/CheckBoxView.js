@@ -12,32 +12,30 @@ import {
 
 const styles = {
   listItemGutters: {
-    padding: '10px 0px 5px 0px',
+    padding: '10px 0px 10px 0px',
   },
   checkboxRoot: {
-    marginLeft: '3px',
+    marginLeft: '5px',
     height: 12,
   },
   panelDetailText: {
-    marginTop: '1.5px',
     color: '#000000',
-    lineHeight: '120%',
     fontFamily: 'Nunito',
     fontSize: '14px',
   },
   panelSubjectText: {
     color: '#000000',
     fontFamily: 'Nunito',
-    fontSize: '12px',
-    marginRight: '12px',
+    fontSize: '14px',
+    marginRight: '20px',
   },
 };
 const alignment = 'flex-start';
 
 function CheckBoxView(props) {
   const {
-    classes, checkboxItem, handleToggle, sideBarItem, facetSectionVariables, backgroundColor,
-    checkColor,
+    classes, checkboxItem, handleToggle, sideBarItem, facetSectionVariables,
+    defaultFacetSectionVariables, backgroundColor,
   } = props;
 
   return (
@@ -60,12 +58,11 @@ function CheckBoxView(props) {
           checkedIcon={(
             <CheckBoxIcon
               style={{
-                fontSize: 16,
-                backgroundColor: checkColor,
-                color: '#FFFFFF',
+                fontSize: 18,
               }}
             />
           )}
+          style={{ color: facetSectionVariables[sideBarItem.section].color ? facetSectionVariables[sideBarItem.section].color : '#137fbe' }}
           checked={checkboxItem.isChecked}
           tabIndex={-1}
           disableRipple
@@ -75,12 +72,14 @@ function CheckBoxView(props) {
         <div className={classes.panelDetailText}>
           <span>
             {`${checkboxItem.name}`}
+            { checkboxItem.code
+                    && `${checkboxItem.code}`}
           </span>
         </div>
         <ListItemText />
         <div className={classes.panelSubjectText}>
           <span
-            style={{ color: facetSectionVariables[sideBarItem.section].color ? facetSectionVariables[sideBarItem.section].color : '#137fbe' }}
+            style={{ color: facetSectionVariables[sideBarItem.section] ? facetSectionVariables[sideBarItem.section].color ? facetSectionVariables[sideBarItem.section].color : '' : defaultFacetSectionVariables.color }}
             edge="end"
           >
             &nbsp;
