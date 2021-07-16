@@ -91,7 +91,7 @@ const MultiStudyCases = ({
           <Avatar className={classes.noOfStudies}>{menuItems.length - 1}</Avatar>
         </div>
         <Typography>
-           Multi-study participant also enrolled as:
+          Multi-study participant also enrolled as:
         </Typography>
         <ArrowDropDownIcon className={classes.arrowDropDown} />
       </Button>
