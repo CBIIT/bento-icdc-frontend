@@ -250,7 +250,9 @@ const TabView = ({
         <ul className={classes.ul} key={elemIdx}>
           <li>
             <Link className={classes.link} to={`case/${elem}`}>
-              {`Case ${elem}`}
+              <Typography align="left" className={classes.multiStudyTooltip}>
+                {`Case: ${elem}`}
+              </Typography>
             </Link>
           </li>
         </ul>
@@ -424,6 +426,9 @@ const styles = () => ({
     '&:hover': {
       textDecoration: 'underline',
     },
+  },
+  multiStudyTooltip: {
+    fontSize: '12px',
   },
   cartlink: {
     fontFamily: 'Lato',
