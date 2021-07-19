@@ -181,6 +181,7 @@ query filesInList($uuids: [String], $first: Int = 2000){
       concurrent_disease_type
       cohort_description
       arm
+      sample_id
  }
 }`;
 
@@ -264,6 +265,7 @@ const customMyFilesCoreDataFields = {
     'breed',
     'diagnosis',
     'study_code',
+    'sample_id',
   ],
   header: [
     'File Name',
@@ -277,6 +279,7 @@ const customMyFilesCoreDataFields = {
     'Breed',
     'Diagnosis',
     'Study Code',
+    'Sample ID',
   ],
 };
 
