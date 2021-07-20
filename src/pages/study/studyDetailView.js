@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   Grid,
@@ -12,6 +13,7 @@ import StatsView from '../../components/Stats/StatsView';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import {
   isStudyUnderEmbargo,
+  studyDisposition,
 } from './utils';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
@@ -25,6 +27,8 @@ import Tab from './components/Tab';
 import Overview from './views/Overview';
 import Publication from './views/Publication';
 import TabPanel from './components/TabPanel';
+import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
+import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
@@ -72,6 +76,70 @@ const StudyDetailView = ({ classes, data }) => {
     setCurrentTab(value);
   };
 
+  const renderEmbargoHeaderIcon = () => (
+    <img
+      src={embargoHeaderIcon}
+      alt="ICDC case detail header logo"
+    />
+  );
+
+  const renderPendingHeaderIcon = () => (
+    <img
+      src={pendingHeaderIcon}
+      alt="ICDC case detail header logo"
+    />
+  );
+
+  const renderDefaultHeaderIcon = () => (
+    <img
+      src={headerIcon}
+      alt="ICDC case detail header logo"
+    />
+  );
+
+  const renderEmbargoLabel = () => (
+    <div className={classes.embargo}>
+      <h4 className={classes.embarLabel}> UNDER EMBARGO </h4>
+      <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+    </div>
+  );
+
+  const renderPendingLabel = () => (
+    <div className={classes.pending}>
+      <h4 className={classes.pendLabel}>RELEASE PENDING</h4>
+      <img src={pendingFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+    </div>
+  );
+
+  const renderSwitch = (param, embargoFunction, pendingFunction) => {
+    switch (param) {
+      case 'embargo':
+        return embargoFunction;
+      case 'pending':
+        return pendingFunction;
+      default:
+        return undefined;
+    }
+  };
+
+  const getHeaderIcon = renderSwitch(
+    studyDisposition(studyData.study_disposition), renderEmbargoHeaderIcon, renderPendingHeaderIcon,
+  ) ? (
+      renderSwitch(
+        studyDisposition(
+          studyData.study_disposition,
+        ), renderEmbargoHeaderIcon, renderPendingHeaderIcon,
+      )
+    ) : (
+      renderDefaultHeaderIcon
+    );
+
+  const getLabel = renderSwitch(
+    studyDisposition(
+      studyData.study_disposition,
+    ), renderEmbargoLabel, renderPendingLabel,
+  );
+
   return (
     <>
       <Snackbar
@@ -86,19 +154,7 @@ const StudyDetailView = ({ classes, data }) => {
         <div className={classes.header}>
           <div className={classes.logo}>
             {
-              isStudyUnderEmbargo(studyData.study_disposition)
-                ? (
-                  <img
-                    src={embargoHeaderIcon}
-                    alt="ICDC case detail header logo"
-                  />
-                )
-                : (
-                  <img
-                    src={headerIcon}
-                    alt="ICDC case detail header logo"
-                  />
-                )
+              getHeaderIcon()
             }
           </div>
           <div className={classes.headerTitle}>
@@ -135,12 +191,13 @@ const StudyDetailView = ({ classes, data }) => {
             <CustomBreadcrumb data={breadCrumbJson} />
           </div>
           {
-            isStudyUnderEmbargo(studyData.study_disposition)
+            renderSwitch(
+              studyDisposition(
+                studyData.study_disposition,
+              ), renderEmbargoLabel, renderPendingLabel,
+            )
               ? (
-                <div className={classes.embargo}>
-                  <h4 className={classes.embarLabel}> UNDER EMBARGO </h4>
-                  <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
-                </div>
+                getLabel()
               )
               : (
                 <div className={classes.headerButton}>
@@ -239,6 +296,24 @@ const styles = (theme) => ({
     paddingTop: '5px',
     textAlign: 'center',
     border: '3px solid #BB2040',
+    '& h4': {
+      display: 'inline ! important',
+      fontWeight: '900',
+    },
+  },
+  pending: {
+    color: '#BB2040',
+    float: 'right',
+    background: '#fff6f6',
+    width: '180px',
+    height: '33px',
+    marginTop: '25px',
+    fontWight: 'bolder',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+    paddingTop: '5px',
+    textAlign: 'center',
+    border: '3px solid #FF8C20',
     '& h4': {
       display: 'inline ! important',
       fontWeight: '900',

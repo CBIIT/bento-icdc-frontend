@@ -17,6 +17,7 @@ import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
 import { studyDisposition } from '../study/utils';
 import arrowIcon from '../../assets/icons/arrow-icon.png';
+import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
 
 const Studies = ({ classes, data }) => {
   // TBD
@@ -31,8 +32,8 @@ const Studies = ({ classes, data }) => {
   );
 
   const pendingToolTipIcon = () => (
-    <Tooltip title="Pending Release" arrow placement="bottom">
-      <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+    <Tooltip title="Release Pending" arrow placement="bottom">
+      <img src={pendingFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </Tooltip>
   );
 
