@@ -77,11 +77,16 @@ const ProgramView = ({ classes, data }) => {
   );
 
   const pendingToolTipIcon = () => (
-    <Tooltip title="Pending" arrow placement="bottom">
+    <Tooltip title="Pending Release" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </Tooltip>
   );
 
+  /**
+ * Conditionally returns a tooltip based on study disposition.
+ * @param {String} param
+ * @return {function}
+ */
   const renderSwitch = (param) => {
     switch (param) {
       case 'embargo':

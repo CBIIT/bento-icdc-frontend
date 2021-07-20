@@ -107,6 +107,11 @@ export function isStudyUnderEmbargo(value) {
   return value.toLowerCase() === studyDispositionn;
 }
 
+/**
+ * Returns study disposition of a study
+ * @param {String} value
+ * @return {String}
+ */
 export function studyDisposition(value) {
   const embargo = 'under embargo';
   const pending = 'pending';
