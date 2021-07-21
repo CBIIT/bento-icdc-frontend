@@ -290,10 +290,12 @@ const FacetPanel = ({ classes, disabled }) => {
                         expandIcon={(
                           <ExpandMoreIcon
                             classes={{ root: classes.dropDownIconSubSection }}
+                            style={{ fontSize: 26 }}
                           />
 )}
                         aria-controls={sideBarItem.groupName}
                         id={sideBarItem.groupName}
+                        className={classes.customExpansionPanelSummaryRoot}
                       >
                         {/* <ListItemText primary={sideBarItem.groupName} /> */}
                         <div
@@ -407,7 +409,12 @@ const styles = () => ({
     fill: '#000000',
   },
   dropDownIconSubSection: {
-    marginRight: '9px',
+    marginLeft: '0px',
+    fill: '#000000',
+  },
+  customExpansionPanelSummaryRoot: {
+    flexDirection: 'row-reverse',
+    paddingLeft: 0,
   },
   ExpansionPaneldropDownIcon: {
     left: '-215px',
@@ -422,7 +429,7 @@ const styles = () => ({
     lineHeight: '26px',
   },
   subSectionSummaryText: {
-    marginLeft: '-1px',
+    marginLeft: '10px',
     lineHeight: 0,
     color: '#323232',
     fontFamily: 'Raleway',
