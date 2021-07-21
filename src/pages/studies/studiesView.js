@@ -15,19 +15,43 @@ import {
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
 import filterCasePageOnStudyCode from '../../utils/utils';
-import { isStudyUnderEmbargo } from '../study/utils';
+import { studyDisposition } from '../study/utils';
 import arrowIcon from '../../assets/icons/arrow-icon.png';
+import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
 
 const Studies = ({ classes, data }) => {
   // TBD
   const tableOptions = getOptions(pageData.table, classes);
   // const columns = updateColumns(getColumns(pageData.table, classes, data,
   // pageData.externalLinkIcon, '/cases', redirectTo), pageData.table.columns);
-  const toolTipIcon = () => (
+
+  const embargoToolTipIcon = () => (
     <Tooltip title="Under Embargo" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </Tooltip>
   );
+
+  const pendingToolTipIcon = () => (
+    <Tooltip title="Release Pending" arrow placement="bottom">
+      <img src={pendingFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+    </Tooltip>
+  );
+
+  /**
+ * Conditionally returns a tooltip based on study disposition.
+ * @param {String} param
+ * @return {function}
+ */
+  const renderSwitch = (param) => {
+    switch (param) {
+      case 'embargo':
+        return embargoToolTipIcon();
+      case 'pending':
+        return pendingToolTipIcon();
+      default:
+        return false;
+    }
+  };
 
   const customStudyCodeLink = (column, value, tableMeta) => (
     <>
@@ -35,22 +59,20 @@ const Studies = ({ classes, data }) => {
         {value}
       </Link>
       {
-        isStudyUnderEmbargo(tableMeta.rowData[5])
-          && toolTipIcon()
-      }
+      renderSwitch(studyDisposition(tableMeta.rowData[5]))
+    }
     </>
   );
 
   const customCaseNumbLink = (column, value, tableMeta) => (
-    isStudyUnderEmbargo(tableMeta.rowData[5])
+    renderSwitch(studyDisposition(tableMeta.rowData[5]))
       ? (
-        toolTipIcon()
-      )
-      : (
+        renderSwitch(studyDisposition(tableMeta.rowData[5]))
+      ) : (
         <Link
           to={(location) => ({ ...location, pathname: '/cases' })}
-          className={classes.button}
-          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[0])}
+          className={classes.buttonCaseNumb}
+          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[1])}
         >
           {value}
         </Link>

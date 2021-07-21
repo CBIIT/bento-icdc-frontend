@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 const pageData = {
   headerIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-Programs.svg',
   embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-Embargo-File.svg',
+  pendingFileIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/PendingRelease-icons.Studies-Listing.svg',
 };
 
 // --------------- Table configuration --------------
