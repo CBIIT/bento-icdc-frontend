@@ -185,7 +185,7 @@ type FileInList {
   file_uuid: String
   md5sum: String
   sample_id: String
-  individual_id: Int
+  individual_id: String
   sample_site: String
   physical_sample_type: String
   general_sample_pathology: String
@@ -299,7 +299,7 @@ type ProgramStudies {
 }
 
 type MultiStudyCases {
-    individualId: Int
+    individualId: String
     caseIds: [String]
     sampleIds: [String]
     fileIds: [String]
