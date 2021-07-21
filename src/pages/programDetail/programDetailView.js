@@ -26,6 +26,7 @@ import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
 import { studyDisposition } from '../study/utils';
+import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -70,14 +71,14 @@ const ProgramView = ({ classes, data }) => {
   const tableOptions = getOptions(table, classes);
 
   const embargoToolTipIcon = () => (
-    <Tooltip title="Under Embargo!!!" arrow placement="bottom">
+    <Tooltip title="Under Embargo" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </Tooltip>
   );
 
   const pendingToolTipIcon = () => (
-    <Tooltip title="Pending Release" arrow placement="bottom">
-      <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
+    <Tooltip title="Release Pending" arrow placement="bottom">
+      <img src={pendingFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </Tooltip>
   );
 

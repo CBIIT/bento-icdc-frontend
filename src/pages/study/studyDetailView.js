@@ -302,7 +302,7 @@ const styles = (theme) => ({
     },
   },
   pending: {
-    color: '#BB2040',
+    color: '#6D6E71',
     float: 'right',
     background: '#fff6f6',
     width: '180px',
@@ -313,7 +313,8 @@ const styles = (theme) => ({
     paddingRight: '10px',
     paddingTop: '5px',
     textAlign: 'center',
-    border: '3px solid #FF8C20',
+    fontFamily: 'Open Sans',
+    border: '3px solid #F3A933',
     '& h4': {
       display: 'inline ! important',
       fontWeight: '900',
