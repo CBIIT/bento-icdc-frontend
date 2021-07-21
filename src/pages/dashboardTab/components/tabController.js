@@ -37,9 +37,11 @@ const tabController = ({ classes, multiStudyData }) => {
   const tabVlaue = tabIndex.map((el) => el.title).indexOf(currentActiveTabTitle) || 0;
   // tab settings
   const [currentTab, setCurrentTab] = React.useState(tabVlaue);
+  let prevMultistudyProp;
 
   React.useEffect(() => {
     if (multiStudyData) {
+      prevMultistudyProp = multiStudyData;
       fetchDataForDashboardTab('Cases', multiStudyData.caseIds, multiStudyData.sampleIds, multiStudyData.fileIds);
       const obj = {
         numberOfStudies: multiStudyData.numberOfStudies,
@@ -50,10 +52,16 @@ const tabController = ({ classes, multiStudyData }) => {
       };
       getUnifiedViewStats(obj);
     }
+
+    // check multiStudyData prop.
+    // If multistudyData was present in prev prop
+    // then run clearAllFilters()
     return () => {
-      clearAllFilters();
+      if (prevMultistudyProp) {
+        clearAllFilters();
+      }
     };
-  }, []);
+  }, [multiStudyData]);
 
   // data from store
   const dashboard = useSelector((state) => (state.dashboardTab
