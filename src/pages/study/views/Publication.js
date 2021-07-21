@@ -12,11 +12,14 @@ const Publication = ({
   publications,
   display,
 }) => {
+  const sortPublicationList = ([...publications])
+    .sort((a, b) => b.year_of_publication - a.year_of_publication
+    || a.publication_title.localeCompare(b.publication_title));
   const getURL = (id, url) => url.concat(id);
   const publicationList = (startIndex, endIndex) => {
     const finalIndex = (publications.length - startIndex > display.numbOfPublishPerView)
       ? endIndex : publications.length;
-    const publist = publications.slice(startIndex, finalIndex);
+    const publist = sortPublicationList.slice(startIndex, finalIndex);
     return publist.map((publication, index) => (
       <>
         {(index > 0) && <div><hr className={classes.hrLine} /></div>}
