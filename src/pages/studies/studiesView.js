@@ -179,6 +179,18 @@ const styles = (theme) => ({
   },
   embargoToolTipMsgRight: {
   },
+  buttonCaseNumb: {
+    background: 'none!important',
+    border: 'none',
+    padding: '0!important',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    color: '#DC762F',
+    cursor: 'pointer',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
   embargoIcon: {
     position: 'relative',
     textAlign: 'center',
