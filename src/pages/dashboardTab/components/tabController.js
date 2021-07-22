@@ -47,6 +47,9 @@ const tabController = ({ classes, multiStudyData }) => {
         numberOfFiles: multiStudyData.numberOfFiles,
         numberOfSamples: multiStudyData.numberOfSamples,
         numberOfAliquots: multiStudyData.numberOfAliquots,
+        caseIds: multiStudyData.caseIds,
+        sampleIds: multiStudyData.sampleIds,
+        fileIds: multiStudyData.fileIds,
       };
       getUnifiedViewStats(obj);
     }
