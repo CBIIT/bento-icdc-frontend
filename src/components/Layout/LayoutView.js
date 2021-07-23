@@ -87,14 +87,13 @@ const styles = (theme) => ({
     },
     '*::-webkit-scrollbar-track': {
       '-webkit-box-shadow': 'inset 0 0 6px #ccc',
-      borderRadius: '10px',
+      borderRadius: '0px',
       backgroundColor: '#FFFFFF',
     },
     '*::-webkit-scrollbar-thumb': {
       backgroundColor: 'rgba(94,140,165)',
-      // outline: '1px solid slategrey',
-      boxShadow: '0 0 1px slategrey',
-      borderRadius: '10px',
+      outline: '1px solid slategrey',
+      borderRadius: '0px',
     },
   },
 });
