@@ -246,7 +246,7 @@ export const sortLabels = {
   showMore: '...expand to see all selections',
 };
 
-export const showCheckboxCount = 5;
+export const showCheckboxCount = 6;
 
 
 

@@ -444,7 +444,7 @@ const styles = () => ({
     padding: '8px 0px 8px 23px',
   },
   selectedCheckboxDisplay: {
-    maxHeight: '200px',
+    maxHeight: '300px',
     overflow: 'auto',
   },
   sortGroup: {
