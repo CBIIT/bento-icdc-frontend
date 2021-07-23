@@ -843,6 +843,9 @@ const reducers = {
     stats: {
       ...item.data,
     },
+    filteredSubjectIds: item.data.caseIds,
+    filteredSampleIds: item.data.sampleIds,
+    filteredFileIds: item.data.fileIds,
   }),
   READY_DASHBOARDTAB: (state) => ({
     ...state,
