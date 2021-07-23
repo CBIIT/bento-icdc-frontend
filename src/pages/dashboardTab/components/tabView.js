@@ -76,6 +76,7 @@ const TabView = ({
   selectedRowIndex = [],
   tableHasSelections,
   unifiedViewFlag,
+  tabIndex,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -317,6 +318,7 @@ const TabView = ({
           addAllButtonText={addAllButtonText}
           toggleMessageStatus={toggleMessageStatus}
           selectAllToolTipStatus={selectAllToolTipStatus}
+          tabIndex={tabIndex}
         />
         <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
         <button
@@ -327,7 +329,7 @@ const TabView = ({
         >
           {buttonText}
         </button>
-        <Tooltip title={tooltipContent[0]} arrow placement="bottom">
+        <Tooltip title={tooltipContent[tabIndex]} arrow placement="bottom">
           <IconButton
             aria-label="help"
             className={classes.helpIconButton}
@@ -381,7 +383,7 @@ const TabView = ({
         >
           {buttonText}
         </button>
-        <Tooltip title={tooltipContent[0]} arrow placement="bottom">
+        <Tooltip title={tooltipContent[tabIndex]} arrow placement="bottom">
           <IconButton
             aria-label="help"
             className={classes.helpIconButton}
