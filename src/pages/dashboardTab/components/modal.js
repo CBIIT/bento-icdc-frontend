@@ -38,7 +38,7 @@ const styles = () => ({
 });
 
 const SelectAllModalDialog = ({
-  classes, openSnack, addAllButtonText, selectAllToolTipStatus,
+  classes, openSnack, addAllButtonText, selectAllToolTipStatus, tabIndex,
 }) => {
   const childRef = useRef();
 
@@ -77,7 +77,7 @@ const SelectAllModalDialog = ({
       <button type="button" onClick={handleClickOpen} className={classes.button}>
         {addAllButtonText}
       </button>
-      <Tooltip title={selectAllToolTip[0]} arrow placement="bottom">
+      <Tooltip title={selectAllToolTip[tabIndex]} arrow placement="bottom">
         <IconButton aria-label="help" className={classes.helpIconButton}>
           {selectAllToolTipStatus.src ? (
             <img
