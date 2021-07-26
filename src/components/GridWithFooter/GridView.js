@@ -226,26 +226,25 @@ const GridView = ({
 
   const tooltipComponent = (
     <>
-      <IconButton aria-label="help" className={classes.helpIconButton} onMouseOver={() => toggleMessageStatus('top', 'open')} onMouseEnter={() => toggleMessageStatus('top', 'open')} onMouseLeave={() => toggleMessageStatus('top', 'close')}>
-        {tooltipContent.src ? (
-          <img
-            onMouseEnter={() => toggleMessageStatus('top', 'open')}
-            onMouseOver={() => toggleMessageStatus('top', 'open')}
-            onFocus={() => toggleMessageStatus('top', 'open')}
-            src={tooltipContent.src}
-            alt={tooltipContent.alt}
-            className={classes.helpIcon}
-          />
-        ) : (
-          <HelpIcon
-            className={classes.helpIcon}
-            fontSize="small"
-            onMouseOver={() => toggleMessageStatus('top', 'open')}
-            onMouseEnter={() => toggleMessageStatus('top', 'open')}
-            onFocus={() => toggleMessageStatus('top', 'open')}
-          />
-        )}
-      </IconButton>
+      <Tooltip title={tooltipMessage} arrow placement="bottom" interactive>
+        <IconButton aria-label="help" className={classes.helpIconButton}>
+          {tooltipContent.src ? (
+            <img
+              src={tooltipContent.src}
+              alt={tooltipContent.alt}
+              className={classes.helpIcon}
+            />
+          ) : (
+            <HelpIcon
+              className={classes.helpIcon}
+              fontSize="small"
+              onMouseOver={() => toggleMessageStatus('top', 'open')}
+              onMouseEnter={() => toggleMessageStatus('top', 'open')}
+              onFocus={() => toggleMessageStatus('top', 'open')}
+            />
+          )}
+        </IconButton>
+      </Tooltip>
       { messageStatus ? (
         <div className={classes.messageBottom} style={tooltipStyle(tooltipMessage)}>
           {' '}
