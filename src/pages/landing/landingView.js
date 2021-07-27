@@ -19,23 +19,29 @@ const slideDown = keyframes`
 from {
   transform: translateY(0px);
 }
-50% {
+33.3% {
   transform: translateY(350px);
 }
+66.6% {
+  transform: translateY(0px);
+}
 to {
-    transform: translateY(0px);
+    transform: translateY(175px);
 }
 `;
 
 const slideUp = keyframes`
 from {
-  transform: translateY(0px);
+  transform: translateY(-800px);
 }
-50% {
-  transform: translateY(-390px);
+33.3% {
+  transform: translateY(-1200px);
+}
+66.6% {
+  transform: translateY(-800px);
 }
 to {
-    transform: translateY(0px);
+  transform: translateY(-1030px);
 }
 `;
 
@@ -48,20 +54,24 @@ const star = keyframes`
     opacity: 0;
   }
 
+  13%{
+    opacity: 1;
+  }
+
   25%{
+    opacity: 0;
+  }
+  
+  40%{
+    opacity: 0;
+  } 
+
+  46% {
     opacity: 1;
   }
 
-  32%{
+  55% {
     opacity: 0;
-  }
-
-  58%{
-    opacity: 0;
-  }
-
-  65% {
-    opacity: 1;
   }
 
   80% {
@@ -71,15 +81,15 @@ const star = keyframes`
 `;
 
 const SlideDown = styled.div`
-  animation: ${slideDown} 15s  0s 1;
+  animation: ${slideDown} 20s  0s 1;
 `;
 
 const SlideUp = styled.div`
-  animation: ${slideUp} 15s  0s 1;
+  animation: ${slideUp} 20s 0s;
 `;
 
 const Star = styled.div`
-  animation: ${star} 15s  0s 1;
+  animation: ${star} 20s  0s 1;
 `;
 
 const LandingView = ({ classes }) => (
@@ -572,7 +582,6 @@ const styles = (theme) => ({
   },
   humanImg: {
     position: 'absolute',
-    top: '-800px',
     left: '350px',
   },
   starImg: {
@@ -585,16 +594,18 @@ const styles = (theme) => ({
   dog: {
     position: 'relative',
     height: '1200px',
+    animationFillMode: 'forwards',
   },
   human: {
-    position: 'relative',
-    height: '1200px',
-
+    // position: 'relative',
+    // height: '1200px',
+    animationFillMode: 'forwards',
   },
   star: {
     position: 'relative',
     height: '1200px',
     opacity: '0',
+    marginTop: '1200px',
   },
   paddingLeft2: {
     paddingLeft: '2px',
