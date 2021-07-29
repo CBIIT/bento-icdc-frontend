@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import {
   withStyles, Drawer, List, Button,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import FacetFilter from './SideBarComponents/FacetFilters';
 import { facetSearchData } from '../../bento/dashboardData';
 import { clearAllFilters } from '../../pages/dashboardTab/store/dashboardReducer';
@@ -52,16 +53,21 @@ const SideBarContent = ({ classes, unifiedViewFlag }) => {
                  CLEAR ALL
                </Button>
              ) : (
-               <Button
-                 id="button_sidebar_clear_all_filters"
-                 variant="outlined"
-                 className={classes.unifiedButton}
-                 classes={{ root: classes.clearAllButtonRoot }}
-                 onClick={() => window.location.reload()}
-                 disableRipple
+               <Link
+                 to="/cases"
                >
-                 RESET QUERY
-               </Button>
+                 <Button
+                   id="button_sidebar_clear_all_filters"
+                   variant="outlined"
+                   className={classes.unifiedButton}
+                   classes={{ root: classes.clearAllButtonRoot }}
+                //  onClick={() => window.location.reload()}
+                   disableRipple
+                 >
+                   RESET QUERY
+                 </Button>
+               </Link>
+
              )
            }
           </div>

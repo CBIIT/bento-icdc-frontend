@@ -241,27 +241,53 @@ const TabView = ({
     serverTableRowCount: selectedRowInfo.length,
   };
 
-  const renderMultiStudyTooltipText = (tableMeta) => (
-    <>
-      <Typography align="center" color="inherit">
-        {multiStudyData.toolTipText}
-      </Typography>
-      {tableMeta.map((elem, elemIdx) => (
-        <ul className={classes.ul} key={elemIdx}>
-          <li>
-            <Link className={classes.link} to={`case/${elem}`}>
-              <Typography align="left" className={classes.multiStudyTooltip}>
-                {`Case: ${elem}`}
-              </Typography>
-            </Link>
-          </li>
-        </ul>
-      ))}
-    </>
-  );
+  /**
+ * Returns a string version of the unified view data to be passed through
+ * the url.
+ * @return {json}
+ */
+  const stringyfyData = (dataObj) => JSON.stringify(dataObj);
 
-  const toolTipIcon = (tableMeta) => (
-    <Tooltip title={renderMultiStudyTooltipText(tableMeta)} arrow placement="bottom" interactive>
+  const renderMultiStudyTooltipText = (tableMeta, value) => {
+    const cases = [...tableMeta, value];
+    const caseID = value;
+    return (
+      <>
+        <Typography align="center" color="inherit">
+          {multiStudyData.toolTipText}
+        </Typography>
+        {tableMeta.map((elem, elemIdx) => (
+          <ul className={classes.ul} key={elemIdx}>
+            <li>
+              <Link className={classes.link} to={`case/${elem}`}>
+                <Typography align="left" className={classes.multiStudyTooltip}>
+                  {`Case: ${elem}`}
+                </Typography>
+              </Link>
+            </li>
+          </ul>
+        ))}
+
+        <div className={classes.dashboarLink}>
+          <Link
+            rel="noreferrer"
+            color="inherit"
+            to={{
+              pathname: `/unifiedView/${stringyfyData({ ...cases, caseID })}`,
+            }}
+            className={classes.link}
+          >
+            <Typography align="left" className={classes.multiStudyTooltip}>
+              View All Related Cases via Dashboard
+            </Typography>
+          </Link>
+        </div>
+      </>
+    );
+  };
+
+  const toolTipIcon = (tableMeta, value) => (
+    <Tooltip title={renderMultiStudyTooltipText(tableMeta, value)} arrow placement="bottom" interactive>
       <StyledBadge
         badgeContent={tableMeta.length + 1}
       >
@@ -281,7 +307,7 @@ const TabView = ({
       </Link>
       {
         hasMultiStudyParticipants(tableMeta.rowData[1])
-        && toolTipIcon(tableMeta.rowData[1])
+        && toolTipIcon(tableMeta.rowData[1], value)
       }
     </div>
   );

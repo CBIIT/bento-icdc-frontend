@@ -29,7 +29,7 @@ function TabContainer({ children, dir }) {
   );
 }
 
-const tabController = ({ classes, multiStudyData }) => {
+const tabController = ({ classes, unifiedViewData }) => {
   const currentActiveTabTitle = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.currentActiveTab
     ? state.dashboardTab.currentActiveTab
@@ -40,18 +40,18 @@ const tabController = ({ classes, multiStudyData }) => {
   let prevMultistudyProp;
 
   React.useEffect(() => {
-    if (multiStudyData) {
-      prevMultistudyProp = multiStudyData;
-      fetchDataForDashboardTab('Cases', multiStudyData.caseIds, multiStudyData.sampleIds, multiStudyData.fileIds);
+    if (unifiedViewData) {
+      prevMultistudyProp = unifiedViewData;
+      fetchDataForDashboardTab('Cases', unifiedViewData.caseIds, unifiedViewData.sampleIds, unifiedViewData.fileIds);
       const obj = {
-        numberOfStudies: multiStudyData.numberOfStudies,
-        numberOfCases: multiStudyData.numberOfCases,
-        numberOfFiles: multiStudyData.numberOfFiles,
-        numberOfSamples: multiStudyData.numberOfSamples,
-        numberOfAliquots: multiStudyData.numberOfAliquots,
-        caseIds: multiStudyData.caseIds,
-        sampleIds: multiStudyData.sampleIds,
-        fileIds: multiStudyData.fileIds,
+        numberOfStudies: unifiedViewData.numberOfStudies,
+        numberOfCases: unifiedViewData.numberOfCases,
+        numberOfFiles: unifiedViewData.numberOfFiles,
+        numberOfSamples: unifiedViewData.numberOfSamples,
+        numberOfAliquots: unifiedViewData.numberOfAliquots,
+        caseIds: unifiedViewData.caseIds,
+        sampleIds: unifiedViewData.sampleIds,
+        fileIds: unifiedViewData.fileIds,
       };
       getUnifiedViewStats(obj);
     }
@@ -64,7 +64,7 @@ const tabController = ({ classes, multiStudyData }) => {
         clearAllFilters();
       }
     };
-  }, [multiStudyData]);
+  }, [unifiedViewData]);
 
   // data from store
   const dashboard = useSelector((state) => (state.dashboardTab
@@ -77,13 +77,13 @@ const tabController = ({ classes, multiStudyData }) => {
     useSelector((state) => (state.dashboardTab.dataFileSelected))];
 
   const getDashboardStats = () => {
-    if (multiStudyData) {
+    if (unifiedViewData) {
       return (
         {
-          numberOfStudies: multiStudyData.studies,
-          numberOfCases: multiStudyData.caseIds.length,
-          numberOfFiles: multiStudyData.fileIds.length,
-          numberOfSamples: multiStudyData.sampleIds.length,
+          numberOfStudies: unifiedViewData.studies,
+          numberOfCases: unifiedViewData.caseIds.length,
+          numberOfFiles: unifiedViewData.fileIds.length,
+          numberOfSamples: unifiedViewData.sampleIds.length,
           numberOfAliquots: 0,
         }
       );
@@ -183,11 +183,11 @@ const tabController = ({ classes, multiStudyData }) => {
       GA.sendEvent('Tab Change', tabIndex[value].title, `${currentTabTitle} -> ${newTabTitle}`, null);
     }
     setCurrentTab(value);
-    if (multiStudyData) {
+    if (unifiedViewData) {
       fetchDataForDashboardTab(tabIndex[value].title,
-        multiStudyData.caseIds,
-        multiStudyData.sampleIds,
-        multiStudyData.fileIds);
+        unifiedViewData.caseIds,
+        unifiedViewData.sampleIds,
+        unifiedViewData.fileIds);
     } else {
       fetchDataForDashboardTab(tabIndex[value].title,
         filteredSubjectIds,
@@ -277,7 +277,7 @@ const tabController = ({ classes, multiStudyData }) => {
       <TabView
         options={getOptions(container, classes)}
         data={dashboard[container.dataField] ? dashboard[container.dataField] : 'undefined'}
-        unifiedViewFlag={!!multiStudyData}
+        unifiedViewFlag={!!unifiedViewData}
         customColumn={container}
         openSnack={openSnack}
         closeSnack={closeSnack}
