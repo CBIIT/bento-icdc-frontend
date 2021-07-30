@@ -14,7 +14,7 @@ class DashboardController extends Component {
 
   render() {
     const {
-      isLoading, hasError, error, widgets, isFetched, isSidebarOpened, history,
+      isLoading, hasError, error, widgets, isFetched, isSidebarOpened, unifiedViewData,
     } = this.props;
 
     if (hasError) {
@@ -33,7 +33,7 @@ class DashboardController extends Component {
         <Dashboard
           data={widgets}
           isSidebarOpened={isSidebarOpened}
-          multiStudyData={history.location.state ? history.location.state.data : undefined}
+          unifiedViewData={unifiedViewData}
         />
       );
     }

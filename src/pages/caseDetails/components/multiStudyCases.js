@@ -48,7 +48,7 @@ const MuiMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 const MultiStudyCases = ({
-  classes, cases, caseID, multiStudyData,
+  classes, cases, caseID,
 }) => {
   const [anchorElement, setAnchorElement] = React.useState(null);
 
@@ -58,6 +58,20 @@ const MultiStudyCases = ({
 
   const closeHandler = () => {
     setAnchorElement(null);
+  };
+
+  /**
+ * Returns a string version of the unified view data to be passed through
+ * the url.
+ * @return {json}
+ */
+  const stringfyData = () => {
+    const obj = {
+      caseID,
+      ...cases,
+    };
+
+    return JSON.stringify(obj);
   };
 
   const navigateToCase = (caseId) => '/case/'.concat(caseId);
@@ -107,11 +121,7 @@ const MultiStudyCases = ({
             rel="noreferrer"
             color="inherit"
             to={{
-              pathname: '/cases',
-              state: {
-                fromCaseDetails: true,
-                data: multiStudyData,
-              },
+              pathname: `/unifiedView/${stringfyData()}`,
             }}
             className={classes.link}
           >

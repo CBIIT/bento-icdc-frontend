@@ -18,7 +18,7 @@ import unifiedViewIcon from '../../assets/unifiedViewIcon.svg';
 const displaywidgets = widgetsData.filter((widget) => widget.show === true).slice(0, 6);
 
 const Dashboard = ({
-  classes, data, theme, multiStudyData,
+  classes, data, theme, unifiedViewData,
 }) => {
   const [collapse, setCollapse] = React.useState(true);
   const [unifiedViewFlag, setUnifiedViewFlag] = React.useState(false);
@@ -28,10 +28,10 @@ const Dashboard = ({
   };
 
   React.useEffect(() => {
-    if (multiStudyData) {
+    if (unifiedViewData) {
       handleChange(); setUnifiedViewFlag(true);
     } else { setUnifiedViewFlag(false); }
-  }, [multiStudyData]);
+  }, [unifiedViewData]);
 
   return (
     <>
@@ -44,7 +44,7 @@ const Dashboard = ({
             </div>
             <div className={classes.rightContent}>
               {
-                !multiStudyData ? (
+                !unifiedViewData ? (
                   <div className={classes.widgetsContainer}>
                     <div className={classes.widgetsCollapse}>
                       <div className={classes.floatLeft} />
@@ -148,7 +148,7 @@ const Dashboard = ({
                 ) : null
               }
               {
-                  multiStudyData ? (
+                  unifiedViewData ? (
                     <div>
                       <div className={classes.multiStudyHeader}>
                         <img
@@ -159,14 +159,14 @@ const Dashboard = ({
                         <Typography variant="h1" className={classes.multiStudyHeaderText} size="sm">
                           Multi-study Participant
                         </Typography>
-                        <Chip className={classes.chip} size="small" label={`Canine Individual: ${multiStudyData.individualId}`} />
+                        <Chip className={classes.chip} size="small" label={`Canine Individual: ${unifiedViewData.individualId}`} />
                       </div>
                       <hr className={classes.divider} />
                     </div>
                   ) : null
                 }
               <Tab
-                multiStudyData={multiStudyData}
+                unifiedViewData={unifiedViewData}
               />
             </div>
           </div>

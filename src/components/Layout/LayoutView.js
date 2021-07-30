@@ -17,6 +17,7 @@ import ProgramDetail from '../../pages/programDetail/programDetailController';
 import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
+import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -45,6 +46,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/studies" component={Studies} />
             <Route path="/cases" component={Dashboard} />
+            <Route path="/unifiedView/:id" component={UnifiedView} />
             <Route path="/fileCentricCart" component={Cart} />
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />

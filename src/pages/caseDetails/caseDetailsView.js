@@ -203,7 +203,6 @@ const CaseDetail = ({ classes, data }) => {
                   <MultiStudyCases
                     cases={data.multiStudyCases.caseIds}
                     caseID={caseDetail.case_id}
-                    multiStudyData={data.multiStudyCases}
                   />
                 </div>
               )
