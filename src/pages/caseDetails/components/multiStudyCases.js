@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -6,6 +8,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Avatar from '@material-ui/core/Avatar';
+import Badge from '@material-ui/core/Badge';
 import { multiStudyIcon } from '../../../bento/caseDetailsData';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 
@@ -34,6 +37,19 @@ const MuiMenu = withStyles({
     {...props}
   />
 ));
+
+const StyledBadge = withStyles(() => ({
+  badge: {
+    right: -3,
+    top: 5,
+    border: '1px solid #708090',
+    borderRadius: '14px',
+    backgroundColor: '#FFFFFF',
+    padding: '0 4px',
+    height: '14px',
+    width: '14px',
+  },
+}))(Badge);
 
 const MuiMenuItem = withStyles((theme) => ({
   root: {
@@ -86,14 +102,35 @@ const MultiStudyCases = ({
         onClick={clickHandler}
         className={classes.studyDisplayBtn}
       >
-        <div className={classes.icon}>
-          <img src={multiStudyIcon.src} alt={multiStudyIcon.alt} className={classes.canineIcon} />
-          <Avatar className={classes.noOfStudies}>{menuItems.length - 1}</Avatar>
+        <div className={classes.flexContainer}>
+
+          <div className={classes.icon}>
+            <StyledBadge badgeContent={1}>
+              <Avatar src={multiStudyIcon.src} className={classes.canineIcon} />
+            </StyledBadge>
+          </div>
+
+          <div className={classes.textContainer}>
+            Study participant also enrolled as
+          </div>
+
+          <div>
+            <ArrowDropDownIcon className={classes.arrowDropDown} />
+          </div>
+
         </div>
-        <Typography>
-          Multi-study participant also enrolled as:
-        </Typography>
-        <ArrowDropDownIcon className={classes.arrowDropDown} />
+
+        {/* <div className={classes.flexContainer}>
+          <div className={classes.icon}>
+            <StyledBadge badgeContent={1}>
+              <Avatar src={multiStudyIcon.src} className={classes.canineIcon} />
+            </StyledBadge>
+          </div>
+          <div className={classes.textContainer}>
+            Study participant also enrolled as
+          </div>
+        </div>
+        <ArrowDropDownIcon className={classes.arrowDropDown} /> */}
       </Button>
       <MuiMenu
         anchorEl={anchorElement}
@@ -124,35 +161,73 @@ const MultiStudyCases = ({
 };
 
 const styles = (theme) => ({
+  // icon: {
+  //   marginTop: '7px',
+  // },
   studyDisplayBtn: {
-    textTransform: 'none',
-    borderRadius: '0px',
-    backgroundColor: '#f3f3f3',
-    fontSize: '12px',
-    border: '2px solid #d3d4d5',
-    padding: '5px 0px 0px 5px',
-    height: '50px',
-    width: '289px',
-    '&:hover': {
-      cursor: 'pointer',
-    },
+    boxSizing: 'border-box',
+    height: '39px',
+    width: '281px',
+    border: '2.5px solid #C2C2C2',
+    backgroundColor: '#F2F3F3',
   },
-  icon: {
-    marginRight: '20px',
+  textContainer: {
+    fontSize: '10px',
+    marginTop: '10px',
+    textAlign: 'center',
   },
-  noOfStudies: {
-    position: 'absolute',
-    top: '2px',
-    left: '28px',
-    border: '1px solid #708090',
-    borderRadius: '18px',
-    backgroundColor: '#ffffff',
-    width: '18px',
-    height: '18px',
-    fontSize: '12px',
-    fontWeight: '700',
-    color: '#000001',
+  flexContainer: {
+    display: 'flex',
+    flexDirection: 'row',
   },
+  canineIcon: {
+    height: '29px',
+    width: '29px',
+  },
+  // studyDisplayBtn: {
+  //   textTransform: 'none',
+  //   borderRadius: '0px',
+  //   backgroundColor: '#f3f3f3',
+  //   fontSize: '12px',
+  //   border: '2px solid #d3d4d5',
+  //   padding: '5px 0px 0px 5px',
+  //   height: '39px',
+  //   width: '290px',
+  //   '&:hover': {
+  //     cursor: 'pointer',
+  //   },
+  // },
+  // studyDisplayBtnText: {
+  //   fontSize: '12px',
+  //   // height: '12px',
+  //   textAlign: 'center',
+  //   letterSpacing: '0',
+  //   overflow: 'hidden',
+  //   whiteSpace: 'nowrap',
+  //   color: '#525252',
+  //   fontFamily: 'Open Sans',
+  //   fontWeight: '600',
+  //   marginBottom: '7px',
+  // },
+  // icon: {
+  //   marginRight: '20px',
+  //   marginBottom: '15px',
+  //   height: '33px',
+  //   width: '35px',
+  // },
+  // noOfStudies: {
+  //   position: 'absolute',
+  //   top: '2px',
+  //   left: '28px',
+  //   border: '1px solid #708090',
+  //   borderRadius: '18px',
+  //   backgroundColor: '#ffffff',
+  //   width: '18px',
+  //   height: '18px',
+  //   fontSize: '12px',
+  //   fontWeight: '700',
+  //   color: '#000001',
+  // },
   menuItem: {
     color: '#DC762F',
     fontSize: '12px',
@@ -179,11 +254,12 @@ const styles = (theme) => ({
   arrowDropDown: {
     fontSize: '35px',
     color: '#DC762F',
+    marginBottom: '5px',
   },
-  canineIcon: {
-    width: '35px',
-    marginTop: '5px',
-  },
+  // canineIcon: {
+  //   width: '35px',
+  //   marginTop: '5px',
+  // },
 });
 
 export default withStyles(styles, { withTheme: true })(MultiStudyCases);
