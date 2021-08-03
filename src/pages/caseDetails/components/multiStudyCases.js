@@ -61,7 +61,8 @@ const StyledBadge = withStyles((theme) => ({
     fontSize: '8px',
     fontFamily: 'Open Sans',
     backgroundColor: '#FFF',
-    fontWeight: '600',
+    fontWeight: '700',
+    color: '#000000',
   },
 }))(Badge);
 
