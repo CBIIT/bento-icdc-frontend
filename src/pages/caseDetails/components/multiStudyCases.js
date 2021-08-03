@@ -55,9 +55,12 @@ const StyledBadge = withStyles((theme) => ({
     top: 7,
     border: '1px solid #708090',
     padding: '0 4px',
-    height: '16px',
-    width: '16px',
-    borderRadius: '16px',
+    height: '14px',
+    width: '14px',
+    borderRadius: '14px',
+    fontSize: '8px',
+    fontFamily: 'Open Sans',
+    backgroundColor: '#FFF',
   },
 }))(Badge);
 
