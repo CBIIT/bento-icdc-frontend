@@ -38,6 +38,9 @@ const StyledBadge = withStyles(() => ({
     border: '2px solid #A7AFB3',
     backgroundColor: 'white',
     color: 'black',
+    height: '18px',
+    width: '18px',
+    borderRadius: '18px',
   },
 }))(Badge);
 
@@ -291,6 +294,7 @@ const TabView = ({
     <Tooltip title={renderMultiStudyTooltipText(tableMeta, value)} arrow placement="bottom" interactive>
       <StyledBadge
         badgeContent={tableMeta.length + 1}
+        className={classes.badge}
       >
         <img
           src={multiStudyData.icon}
@@ -541,16 +545,17 @@ const styles = () => ({
     marginLeft: '-5px',
   },
   multiStudyIcon: {
-    width: '30px',
+    width: '34px',
+    height: '24px',
+  },
+  badge: {
+    // borderRadius: '13px',
   },
   caseIdContainer: {
     display: 'flex',
   },
   ul: {
     listStyleType: 'none',
-  },
-  badge: {
-
   },
 });
 
