@@ -257,34 +257,38 @@ const TabView = ({
     const caseID = value;
     return (
       <>
-        <Typography align="center" color="inherit">
+        <Typography align="center" color="inherit" className={classes.descripText}>
           {multiStudyData.toolTipText}
         </Typography>
-        {tableMeta.map((elem, elemIdx) => (
-          <ul className={classes.ul} key={elemIdx}>
-            <li>
-              <Link className={classes.link} to={`case/${elem}`}>
-                <Typography align="left" className={classes.multiStudyTooltip}>
-                  {`Case: ${elem}`}
-                </Typography>
-              </Link>
-            </li>
-          </ul>
-        ))}
 
-        <div className={classes.dashboarLink}>
-          <Link
-            rel="noreferrer"
-            color="inherit"
-            to={{
-              pathname: `/unifiedView/${stringyfyData({ ...cases, caseID })}`,
-            }}
-            className={classes.link}
-          >
-            <Typography align="left" className={classes.multiStudyTooltip}>
-              View All Related Cases via Dashboard
-            </Typography>
-          </Link>
+        <div className={classes.casesText}>
+          {tableMeta.map((elem, elemIdx) => (
+            <ul className={classes.ul} key={elemIdx}>
+              <li>
+                <Link className={classes.link} to={`case/${elem}`}>
+                  <Typography align="center" className={classes.multiStudyTooltip}>
+                    {`Case: ${elem}`}
+                  </Typography>
+                </Link>
+              </li>
+            </ul>
+          ))}
+
+          <div className={classes.dashboardLink}>
+            <Link
+              rel="noreferrer"
+              color="inherit"
+              to={{
+                pathname: `/unifiedView/${stringyfyData({ ...cases, caseID })}`,
+              }}
+              className={classes.link}
+            >
+              <Typography align="center" className={classes.multiStudyTooltip}>
+                View All Related Cases via Dashboard
+              </Typography>
+            </Link>
+          </div>
+
         </div>
       </>
     );
@@ -296,7 +300,7 @@ const TabView = ({
       arrow
       placement="bottom"
       interactive
-      maxWidth="200px"
+      classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
     >
       <StyledBadge
         badgeContent={tableMeta.length + 1}
@@ -465,8 +469,23 @@ const styles = () => ({
       textDecoration: 'underline',
     },
   },
+  descripText: {
+    fontWeight: '600',
+    fontSize: '16px',
+  },
   multiStudyTooltip: {
-    fontSize: '12px',
+    fontSize: '18px',
+  },
+  customTooltip: {
+    borderRadius: '5%',
+    padding: 'auto',
+    maxWidth: '250px',
+  },
+  dashboardLink: {
+    padding: 'auto',
+  },
+  casesText: {
+    marginTop: '-10px',
   },
   cartlink: {
     fontFamily: 'Lato',
@@ -562,6 +581,7 @@ const styles = () => ({
   },
   ul: {
     listStyleType: 'none',
+    padding: '0px',
   },
 });
 
