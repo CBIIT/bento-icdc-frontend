@@ -291,7 +291,13 @@ const TabView = ({
   };
 
   const toolTipIcon = (tableMeta, value) => (
-    <Tooltip title={renderMultiStudyTooltipText(tableMeta, value)} arrow placement="bottom" interactive>
+    <Tooltip
+      title={renderMultiStudyTooltipText(tableMeta, value)}
+      arrow
+      placement="bottom"
+      interactive
+      maxWidth="200px"
+    >
       <StyledBadge
         badgeContent={tableMeta.length + 1}
         className={classes.badge}
