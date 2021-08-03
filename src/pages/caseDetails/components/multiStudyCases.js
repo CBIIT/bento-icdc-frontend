@@ -51,7 +51,7 @@ const MuiMenuItem = withStyles((theme) => ({
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
-    right: -3,
+    right: -1,
     top: 7,
     border: '1px solid #708090',
     padding: '0 4px',
