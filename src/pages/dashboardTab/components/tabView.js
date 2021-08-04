@@ -307,7 +307,6 @@ const TabView = ({
   const toolTipIcon = (tableMeta, value) => (
     <Tooltip
       title={renderMultiStudyTooltipText(tableMeta, value)}
-      arrow
       placement="bottom"
       interactive
       classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
