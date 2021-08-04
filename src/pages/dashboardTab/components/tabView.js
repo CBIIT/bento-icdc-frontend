@@ -36,8 +36,21 @@ const getOverviewDescQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GE
 const StyledBadge = withStyles(() => ({
   badge: {
     border: '2px solid #A7AFB3',
-    backgroundColor: 'white',
-    color: 'black',
+    backgroundColor: '#FFF',
+    color: '#000',
+    height: '17px',
+    width: '13px',
+    borderRadius: '100%',
+    fontSize: '8px',
+    fontFamily: 'Open Sans',
+    fontWeight: '700',
+    top: 3,
+    right: 5,
+    padding: '0px',
+    boxShadow: '0px 8px 17px 2px rgba(0,0,0,0.14) , 0px 3px 14px 2px rgba(0,0,0,0.12) , 0px 5px 5px -3px rgba(0,0,0,0.2) ',
+  },
+  root: {
+    marginTop: '5px',
   },
 }))(Badge);
 
@@ -254,41 +267,50 @@ const TabView = ({
     const caseID = value;
     return (
       <>
-        <Typography align="center" color="inherit">
+        <Typography align="center" color="inherit" className={classes.descripText}>
           {multiStudyData.toolTipText}
         </Typography>
-        {tableMeta.map((elem, elemIdx) => (
-          <ul className={classes.ul} key={elemIdx}>
-            <li>
-              <Link className={classes.link} to={`case/${elem}`}>
-                <Typography align="left" className={classes.multiStudyTooltip}>
-                  {`Case: ${elem}`}
-                </Typography>
-              </Link>
-            </li>
-          </ul>
-        ))}
 
-        <div className={classes.dashboarLink}>
-          <Link
-            rel="noreferrer"
-            color="inherit"
-            to={{
-              pathname: `/unifiedView/${stringyfyData({ ...cases, caseID })}`,
-            }}
-            className={classes.link}
-          >
-            <Typography align="left" className={classes.multiStudyTooltip}>
-              View All Related Cases via Dashboard
-            </Typography>
-          </Link>
+        <div className={classes.casesText}>
+          {tableMeta.map((elem, elemIdx) => (
+            <ul className={classes.ul} key={elemIdx}>
+              <li>
+                <Link className={classes.link} to={`case/${elem}`}>
+                  <Typography align="center" className={classes.multiStudyTooltip}>
+                    {`Case: ${elem}`}
+                  </Typography>
+                </Link>
+              </li>
+            </ul>
+          ))}
+
+          <div className={classes.dashboardLink}>
+            <Link
+              rel="noreferrer"
+              color="inherit"
+              to={{
+                pathname: `/unifiedView/${stringyfyData({ ...cases, caseID })}`,
+              }}
+              className={classes.link}
+            >
+              <Typography align="center" className={classes.multiStudyTooltip}>
+                View All Related Cases via Dashboard
+              </Typography>
+            </Link>
+          </div>
+
         </div>
       </>
     );
   };
 
   const toolTipIcon = (tableMeta, value) => (
-    <Tooltip title={renderMultiStudyTooltipText(tableMeta, value)} arrow placement="bottom" interactive>
+    <Tooltip
+      title={renderMultiStudyTooltipText(tableMeta, value)}
+      placement="bottom"
+      interactive
+      classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
+    >
       <StyledBadge
         badgeContent={tableMeta.length + 1}
       >
@@ -455,8 +477,23 @@ const styles = () => ({
       textDecoration: 'underline',
     },
   },
+  descripText: {
+    fontWeight: '600',
+    fontSize: '16px',
+  },
   multiStudyTooltip: {
-    fontSize: '12px',
+    fontSize: '18px',
+  },
+  customTooltip: {
+    borderRadius: '5%',
+    padding: 'auto',
+    maxWidth: '250px',
+  },
+  dashboardLink: {
+    padding: 'auto',
+  },
+  casesText: {
+    marginTop: '-10px',
   },
   cartlink: {
     fontFamily: 'Lato',
@@ -541,16 +578,18 @@ const styles = () => ({
     marginLeft: '-5px',
   },
   multiStudyIcon: {
-    width: '30px',
+    width: '34px',
+    height: '24px',
+  },
+  badge: {
+    // borderRadius: '13px',
   },
   caseIdContainer: {
     display: 'flex',
   },
   ul: {
     listStyleType: 'none',
-  },
-  badge: {
-
+    padding: '0px',
   },
 });
 
