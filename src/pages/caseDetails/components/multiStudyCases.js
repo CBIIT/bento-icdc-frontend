@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -9,7 +8,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 import { multiStudyIcon } from '../../../bento/caseDetailsData';
-import { Typography } from '../../../components/Wrappers/Wrappers';
 
 const MuiMenu = withStyles({
   paper: {
@@ -49,7 +47,7 @@ const MuiMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const StyledBadge = withStyles((theme) => ({
+const StyledBadge = withStyles(() => ({
   badge: {
     right: -1,
     top: 7,
