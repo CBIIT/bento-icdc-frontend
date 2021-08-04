@@ -36,11 +36,21 @@ const getOverviewDescQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GE
 const StyledBadge = withStyles(() => ({
   badge: {
     border: '2px solid #A7AFB3',
-    backgroundColor: 'white',
-    color: 'black',
-    height: '18px',
-    width: '18px',
-    borderRadius: '18px',
+    backgroundColor: '#FFF',
+    color: '#000',
+    height: '17px',
+    width: '13px',
+    borderRadius: '100%',
+    fontSize: '8px',
+    fontFamily: 'Open Sans',
+    fontWeight: '700',
+    top: 3,
+    right: 5,
+    padding: '0px',
+    boxShadow: '0px 8px 17px 2px rgba(0,0,0,0.14) , 0px 3px 14px 2px rgba(0,0,0,0.12) , 0px 5px 5px -3px rgba(0,0,0,0.2) ',
+  },
+  root: {
+    marginTop: '5px',
   },
 }))(Badge);
 
@@ -304,7 +314,6 @@ const TabView = ({
     >
       <StyledBadge
         badgeContent={tableMeta.length + 1}
-        className={classes.badge}
       >
         <img
           src={multiStudyData.icon}
