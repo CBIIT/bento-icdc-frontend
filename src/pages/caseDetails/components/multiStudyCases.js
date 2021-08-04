@@ -6,8 +6,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Avatar from '@material-ui/core/Avatar';
+import Badge from '@material-ui/core/Badge';
 import { multiStudyIcon } from '../../../bento/caseDetailsData';
-import { Typography } from '../../../components/Wrappers/Wrappers';
 
 const MuiMenu = withStyles({
   paper: {
@@ -46,6 +46,26 @@ const MuiMenuItem = withStyles((theme) => ({
     },
   },
 }))(MenuItem);
+
+const StyledBadge = withStyles(() => ({
+  badge: {
+    right: -1,
+    top: 7,
+    border: '1px solid #708090',
+    padding: '0 4px',
+    height: '18px',
+    width: '14px',
+    borderRadius: '14px',
+    fontSize: '8px',
+    fontFamily: 'Open Sans',
+    backgroundColor: '#FFF',
+    fontWeight: '700',
+    color: '#000000',
+  },
+  root: {
+    marginTop: '1px',
+  },
+}))(Badge);
 
 const MultiStudyCases = ({
   classes, cases, caseID,
@@ -100,14 +120,25 @@ const MultiStudyCases = ({
         onClick={clickHandler}
         className={classes.studyDisplayBtn}
       >
-        <div className={classes.icon}>
+        <div className={classes.test}>
+          <StyledBadge badgeContent={menuItems.length - 1}>
+            <Avatar
+              src={multiStudyIcon.src}
+              alt={multiStudyIcon.alt}
+              className={classes.canineIcon}
+            />
+          </StyledBadge>
+        </div>
+        Other studies subject is enrolled in
+        <ArrowDropDownIcon className={classes.arrowDropDown} />
+        {/* <div className={classes.icon}>
           <img src={multiStudyIcon.src} alt={multiStudyIcon.alt} className={classes.canineIcon} />
           <Avatar className={classes.noOfStudies}>{menuItems.length - 1}</Avatar>
         </div>
         <Typography>
           Multi-study participant also enrolled as:
         </Typography>
-        <ArrowDropDownIcon className={classes.arrowDropDown} />
+        <ArrowDropDownIcon className={classes.arrowDropDown} /> */}
       </Button>
       <MuiMenu
         anchorEl={anchorElement}
@@ -136,16 +167,25 @@ const MultiStudyCases = ({
 const styles = (theme) => ({
   studyDisplayBtn: {
     textTransform: 'none',
+    textAlign: 'center',
     borderRadius: '0px',
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#f2f3f3',
     fontSize: '12px',
-    border: '2px solid #d3d4d5',
+    fontFamily: 'Open Sans',
+    fontWeight: '600',
+    letterSpacing: '0',
+    lineHeight: '0',
+    border: '2.5px solid #c2c2c2',
     padding: '5px 0px 0px 5px',
-    height: '50px',
+    boxSizing: 'border-box',
+    height: '36px',
     width: '289px',
     '&:hover': {
       cursor: 'pointer',
     },
+  },
+  test: {
+    marginRight: '15px',
   },
   icon: {
     marginRight: '20px',
@@ -191,8 +231,9 @@ const styles = (theme) => ({
     color: '#DC762F',
   },
   canineIcon: {
-    width: '35px',
-    marginTop: '5px',
+    width: theme.spacing(3.5),
+    height: theme.spacing(3.5),
+    marginBottom: '3px',
   },
 });
 
