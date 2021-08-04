@@ -1223,5 +1223,9 @@ type QueryType {
   fileIdsFromFileNameDesc(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
 
   unifiedViewData(case_ids: [String] = [""]): UnifiedCounts 
+  studySampleSiteCount(study_code: String): [GroupCount] 
 
+  studySampleTypeCount(study_code: String): [GroupCount] 
+
+  studySamplePathologyCount(study_code: String): [GroupCount] 
 }

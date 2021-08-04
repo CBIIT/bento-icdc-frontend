@@ -2800,5 +2800,39 @@ type QueryType {
       numberOfAliquots: COUNT(DISTINCT a)
     }
   """, passThrough: true)
+  studySampleSiteCount(study_code: String): [GroupCount] @cypher(statement: """
+    MATCH (s:study)
+      WHERE s.clinical_study_designation = $study_code
+    OPTIONAL MATCH (c:case) --> (s)
+    OPTIONAL MATCH (c) <-- (samp: sample)
+    WITH DISTINCT(samp.sample_site) AS group, COUNT(samp) AS counts where counts > 0
+    RETURN {
+      group: group,
+      count: counts
+   }
+  """, passThrough: true)
 
+  studySampleTypeCount(study_code: String): [GroupCount] @cypher(statement: """
+    MATCH (s:study)
+      WHERE s.clinical_study_designation = $study_code
+    OPTIONAL MATCH (c:case) --> (s)
+    OPTIONAL MATCH (c) <-- (samp: sample)
+    WITH DISTINCT(samp.summarized_sample_type) AS group, COUNT(samp) AS counts where counts > 0
+    RETURN {
+      group: group,
+      count: counts
+   }
+  """, passThrough: true)
+
+  studySamplePathologyCount(study_code: String): [GroupCount] @cypher(statement: """
+    MATCH (s:study)
+      WHERE s.clinical_study_designation = $study_code
+    OPTIONAL MATCH (c:case) --> (s)
+    OPTIONAL MATCH (c) <-- (samp: sample)
+    WITH DISTINCT(samp.specific_sample_pathology) AS group, COUNT(samp) AS counts where counts > 0
+    RETURN {
+      group: group,
+      count: counts
+   }
+  """, passThrough: true)
 }
