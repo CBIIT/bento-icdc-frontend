@@ -159,7 +159,7 @@ const Dashboard = ({
                         <Typography variant="h1" className={classes.multiStudyHeaderText} size="sm">
                           Multi-study Participant
                         </Typography>
-                        <Chip className={classes.chip} size="small" label={`Canine Individual: ${unifiedViewData.individualId}`} />
+                        <Chip className={classes.chip} size="small" label={`Canine ID: ${unifiedViewData.individualId}`} />
                       </div>
                       <hr className={classes.divider} />
                     </div>
