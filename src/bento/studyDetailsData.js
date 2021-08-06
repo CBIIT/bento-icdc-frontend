@@ -237,7 +237,18 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
    fileCountOfStudy(study_code: $csd)
    aliquotCountOfStudy(study_code: $csd)
    caseCountOfStudy(study_code: $csd)
-   
+   studySampleSiteCount(study_code: $csd){
+    group,
+    count
+   }
+   studySampleTypeCount(study_code: $csd){
+    group,
+    count
+  }
+  studySamplePathologyCount(study_code: $csd){
+    group,
+    count
+  }
    filesOfStudy(study_code: $csd){
     file_type
    }
