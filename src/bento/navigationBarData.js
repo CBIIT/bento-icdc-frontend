@@ -47,7 +47,7 @@ export const navBarstyling = {
 
 export const navBarData = [
   {
-    labelText: 'home',
+    labelText: 'hXme',
     type: 'link',
     link: '/home',
   },
