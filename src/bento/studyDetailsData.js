@@ -12,6 +12,28 @@ export const embargoFileIcon = 'https://raw.githubusercontent.com/CBIIT/bento-ic
 export const embargoHeaderIcon = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/icons/Icon-embargo-study-header.svg';
 export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg';
 export const externalIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/cart_ExternalLink.svg';
+export const sampleProfile = {
+  tabs: [
+    {
+      index: 0,
+      label: 'SAMPLE SITE',
+      value: 'studySampleSiteCount',
+    },
+    {
+      index: 1,
+      label: 'SAMPLE TYPE',
+      value: 'studySampleTypeCount',
+    },
+    {
+      index: 2,
+      label: 'SAMPLE PATHOLOGY',
+      value: 'studySamplePathologyCount',
+    },
+  ],
+};
+
+export const palette = ['#39c0f0', '#437200', '#8ee260', '#4c3112', '#ff7e15', '#004df3'];
+
 export const tab = {
   items: [
     {
