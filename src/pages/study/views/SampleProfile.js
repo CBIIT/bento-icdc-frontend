@@ -41,9 +41,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 const SampleChart = (data) => {
-  const list = [];
-  data.map((item) => list.push({ group: item.group, count: item.count }));
-
   const content = ({ argument, originalValue, point }) => {
     const color = point.series.getColor();
     return (
@@ -75,7 +72,7 @@ const SampleChart = (data) => {
     <>
       <Chart
         palette={palette}
-        dataSource={list}
+        dataSource={data}
       >
         <Size
           height={300}
