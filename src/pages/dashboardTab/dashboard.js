@@ -11,7 +11,6 @@ import SideBar from '../../components/SideBar/SideBarView';
 import { widgetsData, themeToggleTooltip } from '../../bento/dashboardData';
 import { multiStudyData as custodianMultiStudyData } from '../../bento/dashboardTabData';
 import Tab from './components/tabController';
-import { Typography } from '../../components/Wrappers/Wrappers';
 import colors from '../../utils/colors';
 import unifiedViewIcon from '../../assets/unifiedViewIcon.svg';
 
@@ -156,9 +155,9 @@ const Dashboard = ({
                           className={classes.multiStudyIcon}
                           alt={custodianMultiStudyData.alt}
                         />
-                        <Typography variant="h1" className={classes.multiStudyHeaderText} size="sm">
+                        <div className={classes.multiStudyHeaderText}>
                           Multi-study Participant
-                        </Typography>
+                        </div>
                         <Chip className={classes.chip} size="small" label={`Canine Individual: ${unifiedViewData.individualId}`} />
                       </div>
                       <hr className={classes.divider} />
@@ -192,24 +191,26 @@ const styles = (theme) => ({
     margin: '0px 15px 0 15px',
   },
   chip: {
-    marginTop: '15px',
+    marginTop: '17px',
     marginLeft: '10px',
     backgroundColor: '#FFFFFF',
     border: '2px solid #CF6A1A',
     color: '#CF6A1A',
+    textTransform: 'uppercase',
   },
   multiStudyHeaderText: {
     color: '#CF6A1A',
     fontFamily: 'Open Sans',
-    fontSize: '21px',
+    fontSize: '24px',
     lineHeight: '17px',
     height: '21px',
-    paddingTop: '17px',
+    marginTop: '20px',
   },
   divider: {
     backgroundColor: '#81A6BA',
     height: '4px',
     width: '100%',
+    marginTop: '8px',
   },
   dashboardDivider: {
     height: 16,
@@ -223,6 +224,7 @@ const styles = (theme) => ({
   rightContent: {
     maxWidth: 'calc(100% - 250px)',
     position: 'relative',
+    marginLeft: '20px',
   },
   content: {
     // padding: theme.spacing.unit * 3,
@@ -274,7 +276,9 @@ const styles = (theme) => ({
     zIndex: '400',
   },
   multiStudyIcon: {
-    width: '50px',
+    width: '36px',
+    height: '36px',
+    margin: '10px 8px 4px 0px',
   },
   floatRight: {
     position: 'relative',
