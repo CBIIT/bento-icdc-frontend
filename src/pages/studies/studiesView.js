@@ -72,7 +72,7 @@ const Studies = ({ classes, data }) => {
         <Link
           to={(location) => ({ ...location, pathname: '/cases' })}
           className={classes.buttonCaseNumb}
-          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[1])}
+          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[0])}
         >
           {value}
         </Link>
