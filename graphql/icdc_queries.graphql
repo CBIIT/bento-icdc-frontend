@@ -2296,7 +2296,7 @@ type QueryType {
       WHERE s.clinical_study_designation in $study_codes
     OPTIONAL MATCH (c:case) --> (s)
     OPTIONAL MATCH (c) <-- (samp: sample)
-    WITH DISTINCT(samp.sample_site) AS group, COUNT(samp) AS counts where counts > 0
+    WITH DISTINCT(samp.sample_site) AS group, COUNT(DISTINCT samp) AS counts where counts > 0
     RETURN {
       group: group,
       count: counts
@@ -2308,7 +2308,7 @@ type QueryType {
       WHERE s.clinical_study_designation in $study_codes
     OPTIONAL MATCH (c:case) --> (s)
     OPTIONAL MATCH (c) <-- (samp: sample)
-    WITH DISTINCT(samp.summarized_sample_type) AS group, COUNT(samp) AS counts where counts > 0
+    WITH DISTINCT(samp.summarized_sample_type) AS group, COUNT(DISTINCT samp) AS counts where counts > 0
     RETURN {
       group: group,
       count: counts
@@ -2320,7 +2320,7 @@ type QueryType {
       WHERE s.clinical_study_designation in $study_codes
     OPTIONAL MATCH (c:case) --> (s)
     OPTIONAL MATCH (c) <-- (samp: sample)
-    WITH DISTINCT(samp.specific_sample_pathology) AS group, COUNT(samp) AS counts where counts > 0
+    WITH DISTINCT(samp.specific_sample_pathology) AS group, COUNT(DISTINCT samp) AS counts where counts > 0
     RETURN {
       group: group,
       count: counts
