@@ -157,7 +157,7 @@ const Dashboard = ({
                         />
                         <div className={classes.multiStudyHeaderText}>
                           Multi-study Participant
-                        </Typography>
+                        </div>
                         <Chip className={classes.chip} size="small" label={`Canine ID: ${unifiedViewData.individualId}`} />
                       </div>
                       <hr className={classes.divider} />
