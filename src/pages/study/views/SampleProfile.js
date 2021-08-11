@@ -5,6 +5,7 @@ import {
   Tabs,
   Tab,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Chart, {
   CommonSeriesSettings,
@@ -24,6 +25,10 @@ import {
   palette,
 } from '../../../bento/studyDetailsData';
 import TabPanel from '../components/TabPanel';
+import filterCasePageOnStudyCode from '../../../utils/utils';
+import {
+  fetchDataForDashboardTab,
+} from '../../dashboardTab/store/dashboardReducer';
 
 const enable = true;
 
@@ -32,6 +37,17 @@ const useStyles = makeStyles(() => ({
     '& .MuiTab-wrapper': {
       flexDirection: 'row',
       justifyContent: 'flex-start',
+      paddingLeft: '5px',
+    },
+    '& .studySampleSiteCount': {
+      '& .MuiTab-wrapper': {
+        borderRight: '1px solid #6E6E6E',
+      },
+    },
+    '& .studySampleTypeCount': {
+      '& .MuiTab-wrapper': {
+        borderRight: '1px solid #6E6E6E',
+      },
     },
     '& .Mui-selected': {
       color: '#0296c9',
@@ -130,12 +146,18 @@ const SampleChart = (data) => {
 };
 
 const SampleProfile = ({ classes, data }) => {
+  const studyCode = data.study[0].clinical_study_designation;
   const [currentTab, setCurrentTab] = useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
   };
   const tabCount = sampleProfile.tabs.filter((tab) => (data[tab.value]
     && data[tab.value].length > 0));
+
+  const linkToDashboard = () => {
+    fetchDataForDashboardTab('Samples', null, null, null);
+    filterCasePageOnStudyCode(studyCode);
+  };
 
   const tabItem = (items) => (
     <Tabs
@@ -151,7 +173,7 @@ const SampleProfile = ({ classes, data }) => {
     >
       { items.map((item) => (
         <Tab
-          id={item.value}
+          className={item.value}
           classes={{
             root: (item.value === 'studySamplePathologyCount') ? classes.tab2 : classes.tab,
             labelContainer: classes.labelContainer,
@@ -171,6 +193,28 @@ const SampleProfile = ({ classes, data }) => {
       </Grid>
       {(tabCount !== undefined && tabCount.length > 0) ? (
         <>
+          <Grid container spacing={16}>
+            <div className={classes.headerButton}>
+              <span className={classes.headerButtonLinkSpan}>
+                <Link
+                  className={classes.headerButtonLink}
+                  to={(location) => ({ ...location, pathname: '/cases' })}
+                  onClick={() => linkToDashboard()}
+                >
+                  {' '}
+                  <span className={classes.headerButtonLinkText}> View </span>
+                  <span className={classes.headerButtonLinkNumber}>
+                    {' '}
+                    {' '}
+                    {data.sampleCountOfStudy}
+                    {' '}
+                    {' '}
+                  </span>
+                  <span className={classes.headerButtonLinkText}>SAMPLES</span>
+                </Link>
+              </span>
+            </div>
+          </Grid>
           <Grid item xs={12}>
             { tabItem(sampleProfile.tabs) }
           </Grid>
@@ -230,6 +274,8 @@ const styles = (theme) => ({
     padding: '0',
     fontSize: '12px',
     fontWeight: '700',
+    paddingLeft: '6px',
+    marginRight: '6px',
   },
   tab2: {
     minWidth: '150px',
@@ -237,6 +283,46 @@ const styles = (theme) => ({
     padding: '0',
     fontSize: '12px',
     fontWeight: '700',
+    paddingLeft: '10px',
+  },
+  headerButton: {
+    fontFamily: theme.custom.fontFamilySans,
+    marginTop: '15px',
+    float: 'right',
+    height: '33px',
+    background: '#F6F4F4',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+
+  },
+  headerButtonLinkSpan: {
+    fontFamily: theme.custom.fontFamilySans,
+    height: '50px',
+    background: '#F5F3EE',
+    width: '200px',
+    fontSize: '14px',
+  },
+  headerButtonLinkText: {
+    fontFamily: theme.custom.fontFamilySans,
+    color: '#0B3556',
+  },
+  headerButtonLinkNumber: {
+    fontFamily: theme.custom.fontFamilySans,
+    borderBottom: 'solid',
+    lineHeight: '30px',
+    paddingBottom: '3px',
+    margin: '0 4px',
+    fontSize: '14px',
+  },
+  headerButtonLink: {
+    textDecoration: 'none',
+    lineHeight: '14px',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    color: '#0296c9',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
 });
 
