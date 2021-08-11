@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
-import { getColumns, ToolTip as Tooltip } from 'bento-components';
+import { getColumns, ToolTip as Tooltip, cn } from 'bento-components';
 import _ from 'lodash';
 import SelectAllModal from './modal';
 import {
@@ -427,7 +427,7 @@ const TabView = ({
           type="button"
           ref={saveButton}
           onClick={exportFiles}
-          className={classes.button}
+          className={cn(classes.button, classes.bottomBtn)}
         >
           {buttonText}
         </button>
@@ -502,7 +502,7 @@ const styles = () => ({
     marginLeft: '55px',
     textDecoration: 'none',
     borderBottom: '1px solid #3E6886',
-    paddingBottom: '3px',
+    // paddingBottom: '3px',
   },
   caseTitle: {
     color: '#194563',
@@ -562,6 +562,10 @@ const styles = () => ({
     marginTop: '6px',
     marginBottom: '10px',
     marginRight: '5px',
+  },
+  bottomBtn: {
+    marginTop: '13px',
+    marginBottom: '8px',
   },
   messageBottom: {
     zIndex: '500',
