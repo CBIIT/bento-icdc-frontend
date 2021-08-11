@@ -843,7 +843,7 @@ type QueryType {
   sampleCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(s))")
   fileCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(f))")
   aliquotCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(a))")
-  studyCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:study)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(s))")
+  studyCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:study)-[*]->(:program {program_acronym: $program_id}) WHERE s.study_disposition = 'Unrestricted' return count(DISTINCT(s))")
   caseCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (c:case)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(c))")
   sampleCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (c:case {case_id: $case_id})<-[*]-(s:sample) RETURN count(distinct(s))")
 

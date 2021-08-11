@@ -1,0 +1,22 @@
+<14>1 2021-08-11T15:29:52.012Z - - 5243 - - DEBUG: (Model Converter) Schema file input: ../../ICDC/icdc-model-tool/model-desc/icdc-model.yml
+<14>1 2021-08-11T15:29:52.013Z - - 5243 - - DEBUG: (Model Converter) Schema file input: ../../ICDC/icdc-model-tool/model-desc/icdc-model-props.yml
+<14>1 2021-08-11T15:29:52.013Z - - 5243 - - DEBUG: (Model Converter) Properties file input: ../../ICDC/icdc-dataloader/config/props-icdc-pmvp.yml
+<14>1 2021-08-11T15:29:52.013Z - - 5243 - - DEBUG: (Model Converter) Query file input: graphql/icdc_queries.graphql
+<14>1 2021-08-11T15:29:52.013Z - - 5243 - - DEBUG: (Model Converter) Specified output file: graphql/icdc.graphql
+<14>1 2021-08-11T15:29:52.021Z - - 5243 - - INFO: (Model Converter) Properties successfully initialized
+<14>1 2021-08-11T15:29:52.022Z - - 5243 - - INFO: (ICDC Schema) Reading schema file: ../../ICDC/icdc-model-tool/model-desc/icdc-model.yml ...
+<14>1 2021-08-11T15:29:52.067Z - - 5243 - - INFO: (ICDC Schema) Reading schema file: ../../ICDC/icdc-model-tool/model-desc/icdc-model-props.yml ...
+<14>1 2021-08-11T15:29:52.177Z - - 5243 - - DEBUG: (ICDC Schema) -------------processing nodes-----------------
+<14>1 2021-08-11T15:29:52.177Z - - 5243 - - DEBUG: (ICDC Schema) -------------processing edges-----------------
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - DEBUG: (ICDC Schema) End point multiplier: "one_to_one" overriding relationship multiplier: "many_to_one"
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - DEBUG: (ICDC Schema) End point multiplier: "one_to_one" overriding relationship multiplier: "many_to_one"
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - DEBUG: (ICDC Schema) End point multiplier: "many_to_many" overriding relationship multiplier: "many_to_one"
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - DEBUG: (ICDC Schema) End point multiplier: "many_to_one" overriding relationship multiplier: "many_to_many"
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - DEBUG: (ICDC Schema) End point multiplier: "many_to_one" overriding relationship multiplier: "many_to_many"
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - DEBUG: (ICDC Schema) End point multiplier: "many_to_one" overriding relationship multiplier: "many_to_many"
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - DEBUG: (ICDC Schema) End point multiplier: "many_to_one" overriding relationship multiplier: "many_to_many"
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - INFO: (Model Converter) Schema successfully initialized
+<14>1 2021-08-11T15:29:52.178Z - - 5243 - - INFO: (Model Converter) Types: 32, Relationships: 48
+<14>1 2021-08-11T15:29:52.180Z - - 5243 - - INFO: (Model Converter) GraphQL schema successfully generated
+<14>1 2021-08-11T15:29:52.182Z - - 5243 - - INFO: (Model Converter) Schema documentation file successfully generated
+<14>1 2021-08-11T15:29:52.182Z - - 5243 - - INFO: (Model Converter) Conversion complete
