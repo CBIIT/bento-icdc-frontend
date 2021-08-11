@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
-import { getColumns, ToolTip as Tooltip } from 'bento-components';
+import { getColumns, ToolTip as Tooltip, cn } from 'bento-components';
 import _ from 'lodash';
 import SelectAllModal from './modal';
 import {
@@ -427,7 +427,7 @@ const TabView = ({
           type="button"
           ref={saveButton}
           onClick={exportFiles}
-          className={[classes.button, classes.bottomBtn].join(' ')}
+          className={cn(classes.button, classes.bottomBtn)}
         >
           {buttonText}
         </button>
