@@ -196,7 +196,6 @@ const styles = (theme) => ({
     backgroundColor: '#FFFFFF',
     border: '2px solid #CF6A1A',
     color: '#CF6A1A',
-    textTransform: 'uppercase',
   },
   multiStudyHeaderText: {
     color: '#CF6A1A',
