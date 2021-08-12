@@ -742,6 +742,7 @@ type FileOverview {
   study_code: String
   file_uuid: String
   sample_id: String
+  sample_site: String
 }
 
 type SampleOverview {
@@ -2562,7 +2563,8 @@ type QueryType {
       d.disease_term as diagnosis,
       s.clinical_study_designation as study_code,
       f.uuid as file_uuid,
-      samp.sample_id AS sample_id
+      samp.sample_id AS sample_id,
+      samp.sample_site AS sample_site,
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -2575,7 +2577,8 @@ type QueryType {
       diagnosis: diagnosis,
       study_code: study_code,
       file_uuid: file_uuid,
-      sample_id: sample_id
+      sample_id: sample_id,
+      sample_site: sample_site,
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name

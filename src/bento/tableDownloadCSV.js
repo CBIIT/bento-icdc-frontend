@@ -103,6 +103,7 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
       diagnosis
       study_code
       file_uuid
+      sample_site
     }
   }
 `;
@@ -110,8 +111,10 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
 // extended metadata attributes for file download
 const customFilesTabOptionalDataFields = {
   keysToInclude: [
+    'sample_site',
   ],
   header: [
+    'Sample Site',
   ],
 };
 

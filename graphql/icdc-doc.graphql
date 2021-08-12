@@ -742,6 +742,7 @@ type FileOverview {
   study_code: String
   file_uuid: String
   sample_id: String
+  sample_site: String
 }
 
 type SampleOverview {
