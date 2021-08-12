@@ -37,7 +37,6 @@ const useStyles = makeStyles(() => ({
     '& .MuiTab-wrapper': {
       flexDirection: 'row',
       justifyContent: 'flex-start',
-      paddingLeft: '5px',
     },
     '& .studySampleSiteCount': {
       '& .MuiTab-wrapper': {
@@ -92,7 +91,7 @@ const SampleChart = (data) => {
       >
         <Size
           height={300}
-          width={400}
+          width={300}
         />
         <CommonSeriesSettings
           argumentField="group"
@@ -269,21 +268,21 @@ const styles = (theme) => ({
     outline: 'none !important',
   },
   tab: {
-    minWidth: '120px',
-    width: '120px',
+    minWidth: '90px',
+    width: '90px',
     padding: '0',
-    fontSize: '12px',
+    fontSize: '11px',
     fontWeight: '700',
-    paddingLeft: '6px',
-    marginRight: '6px',
+    paddingLeft: '2px',
+    marginRight: '2px',
   },
   tab2: {
-    minWidth: '150px',
-    width: '150px',
+    minWidth: '125px',
+    width: '125px',
     padding: '0',
-    fontSize: '12px',
+    fontSize: '11px',
     fontWeight: '700',
-    paddingLeft: '10px',
+    paddingLeft: '2px',
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
