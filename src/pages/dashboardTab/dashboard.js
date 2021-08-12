@@ -223,6 +223,7 @@ const styles = (theme) => ({
   rightContent: {
     maxWidth: 'calc(100% - 250px)',
     position: 'relative',
+    marginLeft: '20px',
   },
   content: {
     // padding: theme.spacing.unit * 3,

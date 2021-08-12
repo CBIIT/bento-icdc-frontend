@@ -153,7 +153,7 @@ const styles = (theme) => ({
     paddingTop: 0,
     paddingBottom: 1,
     maxHeight: '1300px',
-    // maxWidth: '96%',
+    maxWidth: '96%',
     overflowX: 'hidden',
     overflowY: 'auto',
   },
