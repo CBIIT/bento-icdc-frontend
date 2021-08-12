@@ -37,6 +37,11 @@ const tabController = ({ classes, unifiedViewData }) => {
   const tabVlaue = tabIndex.map((el) => el.title).indexOf(currentActiveTabTitle) || 0;
   // tab settings
   const [currentTab, setCurrentTab] = React.useState(tabVlaue);
+
+  React.useEffect(() => {
+    setCurrentTab(tabVlaue);
+  }, [tabVlaue]);
+
   let prevMultistudyProp;
 
   React.useEffect(() => {

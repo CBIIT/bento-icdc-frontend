@@ -29,6 +29,7 @@ import {
 import themes, { overrides } from '../../../themes';
 import updateColumns from '../../../utils/columnsUtil';
 import DocumentDownload from '../../../components/DocumentDownload';
+import SampleProfile from './SampleProfile';
 
 const Overview = ({
   classes,
@@ -319,6 +320,7 @@ const Overview = ({
                     </Grid>
                   </Grid>
                   {/* END: Image Collection */}
+                  <SampleProfile data={data} />
                 </Grid>
               </Grid>
               )
