@@ -294,7 +294,7 @@ const TabView = ({
               className={classes.link}
             >
               <Typography align="center" className={classes.multiStudyTooltip}>
-                View All Related Cases via Dashboard
+                View All Related Cases
               </Typography>
             </Link>
           </div>
