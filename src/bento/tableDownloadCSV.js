@@ -103,6 +103,37 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
       diagnosis
       study_code
       file_uuid
+      sample_site
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      summarized_sample_type
+      specific_sample_pathology
+      date_of_sample_collection
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      comment
+      individual_id
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      arm
     }
   }
 `;
@@ -110,8 +141,70 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
 // extended metadata attributes for file download
 const customFilesTabOptionalDataFields = {
   keysToInclude: [
+    'sample_site',
+    'physical_sample_type',
+    'general_sample_pathology',
+    'tumor_sample_origin',
+    'summarized_sample_type',
+    'specific_sample_pathology',
+    'date_of_sample_collection',
+    'tumor_grade',
+    'sample_chronology',
+    'percentage_tumor',
+    'necropsy_sample',
+    'sample_preservation',
+    'comment',
+    'individual_id',
+    'patient_age_at_enrollment',
+    'sex',
+    'neutered_indicator',
+    'weight',
+    'primary_disease_site',
+    'stage_of_disease',
+    'date_of_diagnosis',
+    'histology_cytopathology',
+    'histological_grade',
+    'best_response',
+    'pathology_report',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'cohort_description',
+    'arm',
   ],
   header: [
+    'Sample Site',
+    'Physical Sample Type',
+    'General Sample Pathology',
+    'Tumor Sample Origin',
+    'Sample Type',
+    'Pathology/Morphology',
+    'Sample Collection Date',
+    'Tumor Grade',
+    'Sample Chronology',
+    'Percentage Tumor',
+    'Necropsy Sample',
+    'Sample Preservation',
+    'Sample Comments',
+    'Canine ID',
+    'Age',
+    'Sex',
+    'Neutered Status',
+    'Weight (kg)',
+    'Disease Site',
+    'Stage of Disease',
+    'Date of Diagnosis',
+    'Histology/Cytopathology',
+    'Histological Grade',
+    'Response to Treatment',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
+    'Cohort',
+    'Arm',
   ],
 };
 
