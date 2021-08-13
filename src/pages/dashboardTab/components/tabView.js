@@ -323,40 +323,39 @@ const TabView = ({
     </Tooltip>
   );
 
-  const customCaseIdLink = (column, value, tableMeta) => (
+  const customLink = (path, column, value, tableMeta) => (
     <div className={classes.caseIdContainer}>
-      <Link className={classes.link} to={`case/${value}`}>
+      <Link className={classes.link} to={`${path}/${value}`}>
         {value}
       </Link>
       {
-        hasMultiStudyParticipants(tableMeta.rowData[1])
+        (column.dataField === 'case_id' && !unifiedViewFlag)
+        && hasMultiStudyParticipants(tableMeta.rowData[1])
         && toolTipIcon(tableMeta.rowData[1], value)
       }
     </div>
   );
 
-  // const flag = true;
-  const columns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).map((column, index) => {
-    if (column.name === 'case_id' && index === 0) {
-      return {
-        name: column.name,
-        label: column.label,
-        options: {
-          display: true,
-          viewColumns: column.viewColumns,
-          customBodyRender: (value, tableMeta) => (
-            <>
-              {customCaseIdLink(column, value, tableMeta)}
-            </>
-          ),
-        },
-      };
-    }
-    return column;
-  }),
-  customColumn.columns);
+  const getPath = (dataField) => (dataField === 'case_id' ? 'case' : 'study');
 
-  const unifiedViewColumns = updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload), customColumn.columns);
+  // const flag = true;
+  const getTabColumns = ({ columns }) => columns.map((column) => ({
+    name: column.dataField,
+    label: column.header,
+    options: {
+      display: column.display,
+      viewColumns: column.viewColumns,
+      customBodyRender: (value, tableMeta) => (
+        <>
+          { (column.link) ? customLink(getPath(column.dataField),
+            column, value, tableMeta) : value }
+        </>
+      ),
+    },
+  }));
+
+  const columns = (customColumn.name === 'Cases') ? getTabColumns(customColumn)
+    : updateColumns(getColumns(customColumn, classes, data, externalLinkIcon, '', () => {}, DocumentDownload), customColumn.columns);
 
   return (
     <div>
@@ -401,7 +400,7 @@ const TabView = ({
         <Grid item xs={12} id={tableID}>
           <CustomDataTable
             data={data}
-            columns={unifiedViewFlag ? unifiedViewColumns : columns}
+            columns={columns}
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}
