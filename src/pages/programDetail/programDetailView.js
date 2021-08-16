@@ -318,8 +318,8 @@ const styles = (theme) => ({
     background: 'white',
   },
   content: {
-    fontSize: '12px',
-    lineHeight: '17px',
+    fontSize: '16px',
+    lineHeight: '25px',
   },
   marginTop18: {
     marginTop: '18px',
@@ -401,7 +401,7 @@ const styles = (theme) => ({
   detailContainer: {
     margin: 'auto',
     paddingTop: '12px',
-    paddingLeft: '97px',
+    paddingLeft: '87px',
     paddingRight: '30px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
@@ -423,11 +423,13 @@ const styles = (theme) => ({
     padding: ' 35px 2px 63px 2px !important',
   },
   detailContainerLeft: {
-    padding: '20px 0px 30px 32px !important',
+    padding: '20px 25px 30px 0px !important',
     minHeight: '100px',
+    maxHeight: '450px',
+    overflowY: 'auto',
   },
   detailContainerRight: {
-    padding: '20px 3px 30px 20px !important',
+    padding: '20px 15px 30px 20px !important',
     minHeight: '330px',
   },
   tableContainer: {
