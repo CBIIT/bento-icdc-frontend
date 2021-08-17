@@ -1,8 +1,6 @@
 <!--
-Make sure to follow the DEV guidelines (https://gen3.org/resources/developer/dev-introduction/) before asking for review.
-
 - Describe what this pull request does.
-- Add short descriptive bullet points for each section if relevant. Keep in mind that they will be parsed automatically to generate official release notes.
+- Add short descriptive bullet points for each section if relevant.
 - Test manually.
 - Maintain or increase the test coverage (if relevant).
 - Update the documentation, or justify if not needed.
