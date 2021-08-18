@@ -99,6 +99,7 @@ const SampleChart = (data) => {
           type="bar"
           ignoreEmptyPoints={enable}
           showInLegend={!enable}
+          barWidth={80}
         >
           <Label visible={!enable} />
         </CommonSeriesSettings>
