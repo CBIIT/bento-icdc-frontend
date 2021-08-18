@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   Grid,
@@ -12,7 +11,6 @@ import Snackbar from '../../components/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import {
-  isStudyUnderEmbargo,
   studyDisposition,
 } from './utils';
 import filterCasePageOnStudyCode from '../../utils/utils';
@@ -415,10 +413,10 @@ const styles = (theme) => ({
   },
   headerSubTitleCate: {
     color: '#606061',
-    fontWeight: 'bold',
-    fontFamily: theme.custom.fontFamilyRaleway,
+    fontWeight: '400',
+    fontFamily: 'Sans-Serif',
     textTransform: 'uppercase',
-    letterSpacing: '0.023em',
+    letterSpacing: '0.2em',
     fontSize: '14px',
     maxHeight: '35px',
     overflow: 'hidden',
