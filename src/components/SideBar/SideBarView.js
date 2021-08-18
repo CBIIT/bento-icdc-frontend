@@ -61,7 +61,7 @@ const SideBarContent = ({ classes, unifiedViewFlag }) => {
                    variant="outlined"
                    className={classes.unifiedButton}
                    classes={{ root: classes.clearAllButtonRoot }}
-                //  onClick={() => window.location.reload()}
+                   onClick={() => clearAllFilters()}
                    disableRipple
                  >
                    RESET QUERY
