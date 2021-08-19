@@ -336,7 +336,7 @@ const TabView = ({
     </div>
   );
 
-  const getPath = (dataField) => (dataField === 'case_id' ? 'case' : 'study');
+  const getPath = (dataField) => (dataField === 'case_id' ? '/case' : '/study');
 
   // const flag = true;
   const getTabColumns = ({ columns }) => columns.map((column) => ({
