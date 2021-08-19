@@ -37,6 +37,7 @@ const tabController = ({ classes, unifiedViewData }) => {
   const tabVlaue = tabIndex.map((el) => el.title).indexOf(currentActiveTabTitle) || 0;
   // tab settings
   const [currentTab, setCurrentTab] = React.useState(tabVlaue);
+  const [currentUnifiedViewData, setCurrentUnifiedViewData] = React.useState(null);
 
   React.useEffect(() => {
     setCurrentTab(tabVlaue);
@@ -61,11 +62,14 @@ const tabController = ({ classes, unifiedViewData }) => {
       getUnifiedViewStats(obj);
     }
 
+    if (currentUnifiedViewData !== prevMultistudyProp) {
+      setCurrentUnifiedViewData(prevMultistudyProp);
+    }
     // check multiStudyData prop.
     // If multistudyData was present in prev prop
     // then run clearAllFilters()
     return () => {
-      if (prevMultistudyProp) {
+      if (prevMultistudyProp && currentUnifiedViewData) {
         clearAllFilters();
       }
     };
