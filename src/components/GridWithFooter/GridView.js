@@ -216,10 +216,19 @@ const GridView = ({
   const defaultOptions = () => ({
     rowsSelected: rowSelection.selectedRowIndex,
     onRowSelectionChange: onRowsSelect,
-    onColumnSortChange: onSortChange,
+    // onColumnSortChange: onSortChange,
     sortOrder,
     isRowSelectable: (dataIndex) => (disableRowSelection
       ? disableRowSelection(data[dataIndex], fileIDs) : true),
+    onTableChange: (action, tableState) => {
+      switch (action) {
+        case 'changePage':
+          onSortChange(tableState.sortOrder.name, tableState.sortOrder.direction);
+          break;
+        default:
+          break;
+      }
+    },
   });
 
   const finalOptions = { ...options, ...defaultOptions() };
