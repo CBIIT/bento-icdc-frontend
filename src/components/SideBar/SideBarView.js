@@ -156,6 +156,7 @@ const styles = (theme) => ({
     maxWidth: '96%',
     overflowX: 'hidden',
     overflowY: 'auto',
+    scrollbarWidth: 'thin',
   },
   dividerRoot: {
     backgroundColor: '#B0CFE1',
