@@ -84,7 +84,7 @@ export const table = {
       formatBytes: true,
     },
     {
-      dataField: '',
+      dataField: 'access_file',
       header: 'Access',
       sort: 'asc',
       display: true,

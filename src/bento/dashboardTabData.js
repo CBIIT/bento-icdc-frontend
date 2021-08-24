@@ -338,7 +338,7 @@ export const tabContainers = [
         formatBytes: true,
       },
       {
-        dataField: '',
+        dataField: 'access_file',
         header: 'Access',
         sort: 'asc',
         display: true,
