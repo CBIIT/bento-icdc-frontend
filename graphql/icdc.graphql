@@ -1110,6 +1110,7 @@ type QueryType {
       WHEN 'file_uuid' THEN file_uuid
       WHEN 'md5sum' THEN md5sum
       WHEN 'individual_id' THEN individual_id
+      WHEN 'access_file' THEN (CASE file_size < 12000000 WHEN TRUE THEN 0 ELSE 1 END)
       ELSE file_uuid END
   """, passThrough: true)
 
@@ -1236,6 +1237,7 @@ type QueryType {
       WHEN 'file_uuid' THEN file_uuid
       WHEN 'md5sum' THEN md5sum
       WHEN 'individual_id' THEN individual_id
+      WHEN 'access_file' THEN (CASE file_size > 12000000 WHEN TRUE THEN 1 ELSE 0 END)
       ELSE file_uuid END DESC
   """, passThrough: true)
 
@@ -2690,6 +2692,7 @@ type QueryType {
       WHEN 'diagnosis' THEN diagnosis
       WHEN 'study_code' THEN study_code
       WHEN 'file_uuid' THEN file_uuid
+      WHEN 'access_file' THEN (CASE file_size < 12000000 WHEN TRUE THEN 0 ELSE 1 END)
     ELSE file_name END
   """, passThrough: true)
 
@@ -2809,6 +2812,7 @@ type QueryType {
       WHEN 'diagnosis' THEN diagnosis
       WHEN 'study_code' THEN study_code
       WHEN 'file_uuid' THEN file_uuid
+      WHEN 'access_file' THEN (CASE file_size > 12000000 WHEN TRUE THEN 1 ELSE 0 END)
     ELSE file_name END DESC
   """, passThrough: true)
 
