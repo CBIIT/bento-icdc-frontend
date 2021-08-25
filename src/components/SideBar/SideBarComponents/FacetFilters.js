@@ -36,6 +36,7 @@ const CustomExpansionPanelSummary = withStyles({
   root: {
     marginBottom: -1,
     minHeight: 48,
+    marginLeft: 35,
     '&$expanded': {
       minHeight: 48,
     },
@@ -418,6 +419,7 @@ const styles = () => ({
   },
   ExpansionPaneldropDownIcon: {
     left: '-215px',
+    marginRight: '-56px',
   },
   sectionSummaryText: {
     color: '#323232',

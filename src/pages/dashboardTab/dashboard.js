@@ -102,7 +102,7 @@ const Dashboard = ({
                                     outerRadius={65}
                                     cx="50%"
                                     cy="50%"
-                                    marginTop="33px"
+                                    marginTop="5000px"
                                     textColor={theme.palette.widgetBackground.contrastText}
                                     titleLocation="top"
                                     titleAlignment="left"
@@ -268,6 +268,10 @@ const styles = (theme) => ({
     verticalAlign: 'top',
     width: '17px',
     zIndex: '600',
+  },
+  iconButton: {
+    marginTop: '-5px',
+    marginRight: '10px',
   },
   switchThemeMsg: {
     position: 'absolute',
