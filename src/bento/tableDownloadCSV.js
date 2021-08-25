@@ -210,7 +210,7 @@ const customFilesTabOptionalDataFields = {
 
 const customFilesTabCoreDataFields = {
   keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'sample_id', 'case_id', 'breed', 'diagnosis', 'study_code'],
-  header: ['File Name', 'File Type', 'Association', 'Description', 'File Format', 'Size', 'Sample ID', 'Case ID', 'Breed', 'Diagnosis', 'Study Code'],
+  header: ['File Name', 'File Type', 'Association', 'Description', 'Format', 'Size', 'Sample ID', 'Case ID', 'Breed', 'Diagnosis', 'Study Code'],
 };
 
 export const customFilesTabDownloadCSV = {

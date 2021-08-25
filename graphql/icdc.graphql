@@ -1237,7 +1237,7 @@ type QueryType {
       WHEN 'file_uuid' THEN file_uuid
       WHEN 'md5sum' THEN md5sum
       WHEN 'individual_id' THEN individual_id
-      WHEN 'access_file' THEN (CASE file_size > 12000000 WHEN TRUE THEN 1 ELSE 0 END) 
+      WHEN 'access_file' THEN (CASE file_size > 12000000 WHEN TRUE THEN 1 ELSE 0 END)
       ELSE file_uuid END DESC
   """, passThrough: true)
 
@@ -2256,6 +2256,7 @@ type QueryType {
         WHEN "neutered_status" THEN neutered_status
         WHEN "weight" THEN weight
         WHEN "response_to_treatment" THEN response_to_treatment
+        WHEN "other_cases" THEN other_cases
         ELSE case_id
       END
   """, passThrough: true)
@@ -2317,6 +2318,7 @@ type QueryType {
         WHEN "neutered_status" THEN neutered_status
         WHEN "weight" THEN weight
         WHEN "response_to_treatment" THEN response_to_treatment
+        WHEN "other_cases" THEN other_cases
         ELSE case_id
       END DESC
   """, passThrough: true)
