@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart';
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';
+import TableThemeProvider from './tableThemeConfig';
 
 const GridView = ({
   classes,
@@ -282,16 +283,19 @@ const GridView = ({
     <div>
       <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
       <Grid container>
-        <Grid item xs={12} id="table_file">
-          <CustomDataTable
-            data={_.cloneDeep(data)}
-            columns={columns}
-            title={title}
-            options={finalOptions}
-            components={{
-              Tooltip,
-            }}
-          />
+        <Grid item xs={12} id="table_file" className={classes.tableGrid}>
+          <TableThemeProvider>
+            <CustomDataTable
+              data={_.cloneDeep(data)}
+              columns={columns}
+              title={title}
+              options={finalOptions}
+              components={{
+                Tooltip,
+              }}
+            />
+          </TableThemeProvider>
+
         </Grid>
       </Grid>
       {data.length > 0 ? downloadButton : ''}
@@ -384,6 +388,10 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     marginLeft: '-5px',
+  },
+  tableGrid: {
+    marginRight: '47px',
+    marginLeft: '47px',
   },
 });
 
