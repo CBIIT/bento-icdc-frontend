@@ -416,7 +416,7 @@ const styles = (theme) => ({
     fontWeight: '400',
     fontFamily: 'Sans-Serif',
     textTransform: 'uppercase',
-    letterSpacing: '0.2em',
+    letterSpacing: '0.025em',
     fontSize: '14px',
     maxHeight: '35px',
     overflow: 'hidden',
