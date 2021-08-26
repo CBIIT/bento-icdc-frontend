@@ -5,8 +5,8 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import Avatar from '@material-ui/core/Avatar';
-import Badge from '@material-ui/core/Badge';
+// import Avatar from '@material-ui/core/Avatar';
+// import Badge from '@material-ui/core/Badge';
 import { multiStudyIcon } from '../../../bento/caseDetailsData';
 
 const MuiMenu = withStyles({
@@ -47,25 +47,25 @@ const MuiMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const StyledBadge = withStyles(() => ({
-  badge: {
-    right: -1,
-    top: 7,
-    border: '1px solid #708090',
-    padding: '0 4px',
-    height: '20px',
-    width: '20px',
-    borderRadius: '50%',
-    fontSize: '8px',
-    fontFamily: 'Open Sans',
-    backgroundColor: '#FFF',
-    fontWeight: '700',
-    color: '#000000',
-  },
-  root: {
-    marginTop: '1px',
-  },
-}))(Badge);
+// const StyledBadge = withStyles(() => ({
+//   badge: {
+//     right: -1,
+//     top: 7,
+//     border: '1px solid #708090',
+//     padding: '0 4px',
+//     height: '20px',
+//     width: '20px',
+//     borderRadius: '50%',
+//     fontSize: '8px',
+//     fontFamily: 'Open Sans',
+//     backgroundColor: '#FFF',
+//     fontWeight: '700',
+//     color: '#000000',
+//   },
+//   root: {
+//     marginTop: '1px',
+//   },
+// }))(Badge);
 
 const MultiStudyCases = ({
   classes, cases, caseID,
@@ -121,13 +121,23 @@ const MultiStudyCases = ({
         className={classes.studyDisplayBtn}
       >
         <div className={classes.test}>
-          <StyledBadge badgeContent={menuItems.length - 1}>
+          {/* <StyledBadge badgeContent={menuItems.length - 1}>
             <Avatar
               src={multiStudyIcon.src}
               alt={multiStudyIcon.alt}
               className={classes.canineIcon}
             />
-          </StyledBadge>
+          </StyledBadge> */}
+          <span className={classes.badge}>
+            <img
+              className={classes.cartIcon}
+              src={multiStudyIcon.src}
+              alt={multiStudyIcon.alt}
+            />
+            <span className={classes.cartCounter}>
+              {menuItems.length - 1}
+            </span>
+          </span>
         </div>
         Other studies subject is enrolled in
         <ArrowDropDownIcon className={classes.arrowDropDown} />
@@ -186,6 +196,16 @@ const styles = (theme) => ({
   },
   test: {
     marginRight: '15px',
+  },
+  cartIcon: {
+    height: '28px',
+    width: '28px',
+    margin: '0px 0px 0px 6px',
+  },
+  badge: {
+    display: 'inline-flex',
+    position: 'relative',
+    verticalAlign: 'middle',
   },
   icon: {
     marginRight: '20px',
