@@ -103,7 +103,7 @@ const GridView = ({
   const btnStyle = {
     borderRadius: '10px',
     width: '180px',
-    height: '27px',
+    height: '43px',
     lineHeight: '18px',
     fontSize: '16px',
     // textTransform: 'uppercase',
@@ -391,8 +391,8 @@ const styles = () => ({
     verticalAlign: 'top',
     marginLeft: '-5px',
     position: 'relative',
-    top: '-50px',
-    right: '-20px',
+    top: '-60px',
+    right: '-25px',
   },
   tableGrid: {
     marginRight: '10.95px',

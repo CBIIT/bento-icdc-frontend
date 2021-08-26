@@ -19,6 +19,7 @@ export default ({
     root: {
       minHeight: '15px',
       paddingTop: '20px',
+      backgroundColor: '#f3f3f3',
     },
     actions: {
       '& span': {
@@ -32,7 +33,7 @@ export default ({
     },
   };
   overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
-  overridesObj.MuiTablePagination.actions.marginRight = '-10px';
+  overridesObj.MuiTablePagination.actions.marginRight = '6px';
   overridesObj.MuiTableCell.head.paddingLeft = '37px';
   overridesObj.MuiTableCell.body.paddingLeft = '37px';
 

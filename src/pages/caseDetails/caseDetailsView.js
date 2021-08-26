@@ -714,6 +714,8 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#ff17f15',
     marginLeft: '20px',
+    marginBottom: '24px',
+    marginTop: '5px',
     // paddingBottom: '20px',
   },
   headerButton: {
