@@ -502,6 +502,8 @@ const CaseDetail = ({ classes, data }) => {
             </Grid>
           ) : ''}
 
+        <div className={classes.tableSpacer} />
+
         {table2.display
           ? (
             <div id="table_case_detail_samples" className={classes.tableContainer}>
@@ -588,7 +590,10 @@ const styles = (theme) => ({
     height: '80px',
     margin: 'auto',
   },
-
+  tableSpacer: {
+    height: '25px',
+    width: '100%',
+  },
   headerTitle: {
     margin: 'auto',
     float: 'left',

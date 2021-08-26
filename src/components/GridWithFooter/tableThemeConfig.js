@@ -15,6 +15,9 @@ export default ({
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderBottom = tableBorder;
   overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
   overridesObj.MuiTableCell.paddingCheckbox.padding = '0px 31px';
+  overridesObj.MUIDataTableToolbarSelect.root = {
+    backgroundColor: '#FFFFFF',
+  };
   overridesObj.MUIDataTableToolbar = {
     root: {
       minHeight: '15px',
@@ -25,10 +28,12 @@ export default ({
       '& span': {
         '& button': {
           right: '10px',
+          top: '-10px',
         },
       },
       '& button': {
         right: '10px',
+        top: '-10px',
       },
     },
   };
