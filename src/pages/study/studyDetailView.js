@@ -215,7 +215,7 @@ const StudyDetailView = ({ classes, data }) => {
                         {' '}
                         {' '}
                       </span>
-                      <span className={classes.headerButtonLinkText}>CASES</span>
+                      <span className={classes.headerButtonLinkText}>Cases</span>
                     </Link>
                   </span>
                 </div>

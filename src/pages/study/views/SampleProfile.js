@@ -19,6 +19,7 @@ import Chart, {
   Shadow,
   Size,
   Font,
+  Title,
 } from 'devextreme-react/chart';
 import {
   sampleProfile,
@@ -82,12 +83,14 @@ const SampleChart = (data) => {
       </>
     );
   };
-
+  const customPallete = [].concat(...new Array(Math
+    .ceil(data.length / palette.length)).fill(palette));
   return (
     <>
       <Chart
-        palette={palette}
+        palette={customPallete}
         dataSource={data}
+        paletteExtensionMode="extrapolate"
       >
         <Size
           height={300}
@@ -100,6 +103,7 @@ const SampleChart = (data) => {
           ignoreEmptyPoints={enable}
           showInLegend={!enable}
           barWidth={80}
+          hoverMode="none"
         >
           <Label visible={!enable} />
         </CommonSeriesSettings>
@@ -110,10 +114,21 @@ const SampleChart = (data) => {
         <ValueAxis
           allowDecimals={!enable}
         >
+          <Title
+            text="Sample Count"
+          >
+            <Font
+              size="12"
+            />
+          </Title>
           <ChartGrid visible={!enable} />
           <Label
             position="outside"
-          />
+          >
+            <Font
+              size="12"
+            />
+          </Label>
         </ValueAxis>
         <ArgumentAxis>
           <Label
@@ -210,7 +225,7 @@ const SampleProfile = ({ classes, data }) => {
                     {' '}
                     {' '}
                   </span>
-                  <span className={classes.headerButtonLinkText}>SAMPLES</span>
+                  <span className={classes.headerButtonLinkText}>Samples</span>
                 </Link>
               </span>
             </div>
@@ -269,21 +284,21 @@ const styles = (theme) => ({
     outline: 'none !important',
   },
   tab: {
+    minWidth: '43px',
+    width: '43px',
+    padding: '0',
+    fontSize: '11px',
+    fontWeight: '700',
+    paddingLeft: '2px',
+    marginRight: '10px',
+  },
+  tab2: {
     minWidth: '90px',
     width: '90px',
     padding: '0',
     fontSize: '11px',
     fontWeight: '700',
-    paddingLeft: '2px',
-    marginRight: '2px',
-  },
-  tab2: {
-    minWidth: '125px',
-    width: '125px',
-    padding: '0',
-    fontSize: '11px',
-    fontWeight: '700',
-    paddingLeft: '2px',
+    paddingLeft: '5px',
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
