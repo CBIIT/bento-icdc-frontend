@@ -128,7 +128,7 @@ const styles = (theme) => ({
     fontSize: 9,
     textTransform: 'none',
     color: '#3d4241',
-    marginLeft: '47px',
+    marginLeft: '16px',
     fontFamily: theme.custom.fontFamily,
     '&:hover': {
       backgroundColor: '#566672',
