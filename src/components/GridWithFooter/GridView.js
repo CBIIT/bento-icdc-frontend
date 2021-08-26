@@ -369,7 +369,9 @@ const styles = () => ({
     textAlign: 'right',
     padding: '10px 0px 0px 0px',
     position: 'absolute',
-    marginTop: '-57px',
+    marginTop: '-3px',
+    width: '180px',
+    height: '43px',
     marginLeft: '37px',
 
   },
@@ -388,10 +390,13 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     marginLeft: '-5px',
+    position: 'relative',
+    top: '-50px',
+    right: '-20px',
   },
   tableGrid: {
-    marginRight: '47px',
-    marginLeft: '47px',
+    marginRight: '10.95px',
+    marginLeft: '10.5px',
   },
 });
 
