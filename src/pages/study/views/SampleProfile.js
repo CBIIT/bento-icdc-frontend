@@ -83,8 +83,8 @@ const SampleChart = (data) => {
       </>
     );
   };
-  const customPallete = [].concat(...new Array(Math
-    .ceil(data.length / palette.length)).fill(palette));
+  const count = Math.ceil(data.length / palette.length);
+  const customPallete = (count > 1) ? [].concat(...new Array(count).fill(palette)) : palette;
   return (
     <>
       <Chart
