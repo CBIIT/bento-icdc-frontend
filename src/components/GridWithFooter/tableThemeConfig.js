@@ -19,7 +19,7 @@ export default ({
     root: {
       minHeight: '15px',
       paddingTop: '20px',
-      backgroundColor: '#f3f3f3',
+      backgroundColor: '#fffff',
     },
     actions: {
       '& span': {
