@@ -2981,6 +2981,7 @@ type QueryType {
       group: group,
       count: counts
    }
+   ORDER BY group
   """, passThrough: true)
 
   studySampleTypeCount(study_codes: [String]): [GroupCount] @cypher(statement: """
@@ -2993,6 +2994,7 @@ type QueryType {
       group: group,
       count: counts
    }
+   ORDER BY group
   """, passThrough: true)
 
   studySamplePathologyCount(study_codes: [String]): [GroupCount] @cypher(statement: """
@@ -3005,5 +3007,6 @@ type QueryType {
       group: group,
       count: counts
    }
+   ORDER BY group
   """, passThrough: true)
 }

@@ -75,7 +75,7 @@ export const tabContainers = [
       },
       {
         dataField: 'other_cases',
-        header: 'Other Cases',
+        header: 'Matching Cases',
         display: false,
       },
       {

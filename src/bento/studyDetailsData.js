@@ -16,23 +16,23 @@ export const sampleProfile = {
   tabs: [
     {
       index: 0,
-      label: 'SAMPLE SITE',
+      label: 'SITE',
       value: 'studySampleSiteCount',
     },
     {
       index: 1,
-      label: 'SAMPLE TYPE',
+      label: 'TYPE',
       value: 'studySampleTypeCount',
     },
     {
       index: 2,
-      label: 'SAMPLE PATHOLOGY',
+      label: 'PATHOLOGY',
       value: 'studySamplePathologyCount',
     },
   ],
 };
 
-export const palette = ['#39c0f0', '#437200', '#8ee260', '#4c3112', '#ff7e15', '#004df3'];
+export const palette = ['#62beeb', '#1651ea', '#a1df71', '#72d1d5', '#d98548'];
 
 export const tab = {
   items: [
