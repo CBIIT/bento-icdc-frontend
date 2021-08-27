@@ -186,7 +186,9 @@ const StudyDetailView = ({ classes, data }) => {
               </span>
 
             </div>
-            <CustomBreadcrumb data={breadCrumbJson} />
+            <div>
+              <CustomBreadcrumb data={breadCrumbJson} />
+            </div>
           </div>
           {
             renderSwitch(
@@ -392,7 +394,7 @@ const styles = (theme) => ({
     paddingLeft: '21px',
     paddingRight: '21px',
     borderBottom: '#81a6b9 4px solid',
-    height: '80px',
+    height: '94px',
     margin: 'auto',
   },
   headerTitle: {
@@ -418,11 +420,9 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '0.025em',
     fontSize: '14px',
-    maxHeight: '35px',
-    overflow: 'hidden',
+    maxHeight: '45px',
     paddingLeft: '3px',
     textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
     paddingRight: '200px',
   },
   borderRight: {
@@ -473,7 +473,7 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-13px',
+    // marginTop: '-4px',
     width: '100px',
   },
   detailContainer: {
