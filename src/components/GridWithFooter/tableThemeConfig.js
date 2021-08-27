@@ -15,8 +15,13 @@ export default ({
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderBottom = tableBorder;
   overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
   overridesObj.MuiTableCell.paddingCheckbox.padding = '0px 31px';
-  overridesObj.MUIDataTableToolbarSelect.root = {
-    backgroundColor: '#FFFFFF',
+  overridesObj.MUIDataTableToolbarSelect = {
+    root: {
+      backgroundColor: '#FFFFFF',
+    },
+    title: {
+      marginLeft: '15px',
+    },
   };
   overridesObj.MUIDataTableToolbar = {
     root: {

@@ -636,7 +636,7 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-14px',
+    marginTop: '5px',
     width: '82px',
     height: '82px',
     marginLeft: '8px',
@@ -754,6 +754,7 @@ const styles = (theme) => ({
   },
   multiCaseStudy: {
     float: 'right',
+    marginTop: '30px',
   },
 });
 

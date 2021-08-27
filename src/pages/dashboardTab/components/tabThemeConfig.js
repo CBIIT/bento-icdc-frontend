@@ -22,7 +22,8 @@ export default ({
     overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
     overridesObj.MUIDataTableToolbar = {
       root: {
-        minHeight: '15px',
+        minHeight: '0px',
+        maxHeight: '0px',
       },
       actions: {
         '& span': {
@@ -33,7 +34,7 @@ export default ({
         },
         '& button': {
           right: '72px',
-          bottom: '80px',
+          bottom: '65px',
         },
       },
     };

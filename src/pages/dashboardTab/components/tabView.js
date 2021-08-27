@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import {
-  Badge,
+  // Badge,
   Grid,
   IconButton,
   Typography,
@@ -33,26 +33,27 @@ const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SA
 // Due to cypher limitation we have to send seperate query get descending list
 const getOverviewDescQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_DESC_QUERY);
 
-const StyledBadge = withStyles(() => ({
-  badge: {
-    border: '2px solid #A7AFB3',
-    backgroundColor: '#FFF',
-    color: '#000',
-    height: '17px',
-    width: '13px',
-    borderRadius: '100%',
-    fontSize: '8px',
-    fontFamily: 'Open Sans',
-    fontWeight: '700',
-    top: 3,
-    right: 5,
-    padding: '0px',
-    boxShadow: '0px 8px 17px 2px rgba(0,0,0,0.14) , 0px 3px 14px 2px rgba(0,0,0,0.12) , 0px 5px 5px -3px rgba(0,0,0,0.2) ',
-  },
-  root: {
-    marginTop: '5px',
-  },
-}))(Badge);
+// const StyledBadge = withStyles(() => ({
+//   badge: {
+//     border: '2px solid #A7AFB3',
+//     backgroundColor: '#FFF',
+//     color: '#000',
+//     height: '17px',
+//     width: '13px',
+//     borderRadius: '100%',
+//     fontSize: '8px',
+//     fontFamily: 'Open Sans',
+//     fontWeight: '700',
+//     top: 3,
+//     right: 5,
+//     padding: '0px',
+// eslint-disable-next-line max-len
+//     boxShadow: '0px 8px 17px 2px rgba(0,0,0,0.14) , 0px 3px 14px 2px rgba(0,0,0,0.12) , 0px 5px 5px -3px rgba(0,0,0,0.2) ',
+//   },
+//   root: {
+//     marginTop: '5px',
+//   },
+// }))(Badge);
 
 const TabView = ({
   classes,
@@ -311,7 +312,7 @@ const TabView = ({
       interactive
       classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
     >
-      <StyledBadge
+      {/* <StyledBadge
         badgeContent={tableMeta.length + 1}
       >
         <img
@@ -319,7 +320,17 @@ const TabView = ({
           className={classes.multiStudyIcon}
           alt={multiStudyData.alt}
         />
-      </StyledBadge>
+      </StyledBadge> */}
+      <span className={classes.badge}>
+        <img
+          className={classes.cartIcon}
+          src={multiStudyData.icon}
+          alt={multiStudyData.alt}
+        />
+        <span className={classes.cartCounter}>
+          {tableMeta.length + 1}
+        </span>
+      </span>
     </Tooltip>
   );
 
@@ -477,6 +488,22 @@ const styles = () => ({
       textDecoration: 'underline',
     },
   },
+  cartIcon: {
+    height: '24px',
+    width: '24px',
+    margin: '0px 0px 0px 6px',
+  },
+  cartCounter: {
+    position: 'relative',
+    top: '-4px',
+    right: '0px',
+  },
+  badge: {
+    display: 'inline-flex',
+    position: 'relative',
+    verticalAlign: 'middle',
+    bottom: '3px',
+  },
   spacer: {
     height: '52px',
     width: '100%',
@@ -484,17 +511,22 @@ const styles = () => ({
   descripText: {
     fontWeight: '600',
     fontSize: '16px',
+    letterSpacing: '0.05px',
+    lineHeight: '18px',
+    paddingBottom: '5px',
   },
   multiStudyTooltip: {
-    fontSize: '18px',
+    fontSize: '15px',
+    lineHeight: '18px',
   },
   customTooltip: {
-    borderRadius: '5%',
+    borderRadius: '8%',
     padding: 'auto',
     maxWidth: '250px',
   },
   dashboardLink: {
     padding: 'auto',
+    marginTop: '-5px',
   },
   casesText: {
     marginTop: '-10px',
@@ -588,9 +620,6 @@ const styles = () => ({
   multiStudyIcon: {
     width: '34px',
     height: '24px',
-  },
-  badge: {
-    // borderRadius: '13px',
   },
   caseIdContainer: {
     display: 'flex',
