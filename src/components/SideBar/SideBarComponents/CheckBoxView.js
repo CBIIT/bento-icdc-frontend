@@ -83,7 +83,7 @@ function CheckBoxView(props) {
             edge="end"
           >
             &nbsp;
-            {`(${checkboxItem.subjects})`}
+            {checkboxItem.subjects}
           </span>
         </div>
       </ListItem>
