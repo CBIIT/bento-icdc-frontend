@@ -268,6 +268,7 @@ const tabController = ({ classes, unifiedViewData }) => {
   const TABs = tabs.map((tab) => (
     <Tab
       id={tab.id}
+      disableRipple
       label={
         getTabLalbel(tab.title, dashboardStats[tab.count] ? dashboardStats[tab.count] : 0)
       }

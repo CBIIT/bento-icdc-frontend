@@ -20,8 +20,25 @@ export default ({
     overridesObj.MUIDataTableHeadCell.fixedHeader.borderTop = tableBorder;
     overridesObj.MUIDataTableHeadCell.fixedHeader.borderBottom = tableBorder;
     overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
-    overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px' } };
+    overridesObj.MUIDataTableToolbar = {
+      root: {
+        minHeight: '15px',
+      },
+      actions: {
+        '& span': {
+          '& button': {
+            right: '37px',
+            bottom: '80px',
+          },
+        },
+        '& button': {
+          right: '72px',
+          bottom: '80px',
+        },
+      },
+    };
     overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
+    overridesObj.MuiTablePagination.actions.marginRight = '32px';
     overridesObj.MUIDataTableFooter.root.borderBottom = tableBorder;
   }
 

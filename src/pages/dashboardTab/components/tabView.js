@@ -461,6 +461,7 @@ const TabView = ({
             {'>'}
           </Link>
         </div>
+        <div className={classes.spacer} />
 
       </Grid>
     </div>
@@ -475,6 +476,10 @@ const styles = () => ({
     '&:hover': {
       textDecoration: 'underline',
     },
+  },
+  spacer: {
+    height: '52px',
+    width: '100%',
   },
   descripText: {
     fontWeight: '600',

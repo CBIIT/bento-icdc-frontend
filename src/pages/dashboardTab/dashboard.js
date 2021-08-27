@@ -269,6 +269,10 @@ const styles = (theme) => ({
     width: '17px',
     zIndex: '600',
   },
+  iconButton: {
+    marginTop: '-5px',
+    marginRight: '10px',
+  },
   switchThemeMsg: {
     position: 'absolute',
     right: '-8px',

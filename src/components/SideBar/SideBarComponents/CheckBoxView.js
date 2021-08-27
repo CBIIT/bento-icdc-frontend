@@ -13,6 +13,7 @@ import {
 const styles = {
   listItemGutters: {
     padding: '10px 0px 10px 0px',
+    marginLeft: '-5px',
   },
   checkboxRoot: {
     marginLeft: '5px',

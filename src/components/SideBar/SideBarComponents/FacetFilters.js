@@ -36,6 +36,7 @@ const CustomExpansionPanelSummary = withStyles({
   root: {
     marginBottom: -1,
     minHeight: 48,
+    // marginLeft: 35,
     '&$expanded': {
       minHeight: 48,
     },
@@ -418,6 +419,7 @@ const styles = () => ({
   },
   ExpansionPaneldropDownIcon: {
     left: '-215px',
+    marginRight: '-20px',
   },
   sectionSummaryText: {
     color: '#323232',
@@ -442,6 +444,7 @@ const styles = () => ({
   },
   listItemGutters: {
     padding: '8px 0px 8px 23px',
+    // marginLeft: '-5px',
   },
   selectedCheckboxDisplay: {
     maxHeight: '300px',
@@ -452,6 +455,7 @@ const styles = () => ({
     marginBottom: '5px',
     borderTop: '1px solid #B1B1B1',
     textAlign: 'left',
+    marginLeft: '-5px',
   },
   sortGroupItem: {
     cursor: 'pointer',
