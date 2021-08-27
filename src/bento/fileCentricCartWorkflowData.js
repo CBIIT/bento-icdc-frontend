@@ -12,7 +12,7 @@ export const navBarCartData = {
 // Ideal size for externalLinkIcon is 16x16 px
 
 export const externalLinkIcon = {
-  src: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/cart/ExternalLink.svg',
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg',
   alt: 'External link icon',
 };
 
