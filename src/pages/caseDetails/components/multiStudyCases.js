@@ -19,6 +19,10 @@ const MuiMenu = withStyles({
       marginTop: '0px',
     },
   },
+  list: {
+    paddingBottom: '0px',
+    paddingTop: '0px',
+  },
 })((props) => (
   <Menu
     elevation={0}
@@ -139,7 +143,9 @@ const MultiStudyCases = ({
             </span>
           </span>
         </div>
-        Other studies subject is enrolled in
+        <div className={classes.dropDownText}>
+          Other studies subject is enrolled in
+        </div>
         <ArrowDropDownIcon className={classes.arrowDropDown} />
         {/* <div className={classes.icon}>
           <img src={multiStudyIcon.src} alt={multiStudyIcon.alt} className={classes.canineIcon} />
@@ -166,7 +172,7 @@ const MultiStudyCases = ({
             }}
             className={classes.link}
           >
-            View All Related Cases via Dashboard
+            View all related cases via dashboard
           </Link>
         </div>
       </MuiMenu>
@@ -202,10 +208,21 @@ const styles = (theme) => ({
     width: '28px',
     margin: '0px 0px 0px 6px',
   },
+  cartCounter: {
+    position: 'relative',
+    top: '5px',
+    right: '3px',
+  },
   badge: {
     display: 'inline-flex',
     position: 'relative',
     verticalAlign: 'middle',
+    bottom: '3px',
+  },
+  dropDownText: {
+    position: 'relative',
+    bottom: '3px',
+    right: '6px',
   },
   icon: {
     marginRight: '20px',
@@ -234,6 +251,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '12px',
     fontWeight: '700',
+    verticalAlign: 'bottom',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',
@@ -249,6 +267,8 @@ const styles = (theme) => ({
   arrowDropDown: {
     fontSize: '35px',
     color: '#DC762F',
+    position: 'relative',
+    bottom: '3px',
   },
   canineIcon: {
     width: theme.spacing(3.5),
