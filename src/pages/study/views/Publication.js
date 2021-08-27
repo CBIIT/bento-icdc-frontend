@@ -79,7 +79,7 @@ const Publication = ({
               <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   {
-                    (publications && publications.length > 1)
+                    (publications && publications.length > 0)
                       ? publicationList(0, display.numbOfPublishPerView)
                       : (
                         <div className={classes.noAssociatedPublication}>
