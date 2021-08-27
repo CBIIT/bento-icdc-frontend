@@ -283,7 +283,7 @@ const CaseDetail = ({ classes, data }) => {
             </Grid>
 
             <Grid item lg={4} md={4} sm={12} xs={12} className={classes.detailContainerRight}>
-              <Grid container spacing={32} direction="column">
+              <Grid container spacing={32} direction="column" className={classes.gridText}>
                 <Grid item xs={12}>
                   <span className={classes.detailContainerHeader}>DIAGNOSIS</span>
                 </Grid>
@@ -502,6 +502,8 @@ const CaseDetail = ({ classes, data }) => {
             </Grid>
           ) : ''}
 
+        <div className={classes.tableSpacer} />
+
         {table2.display
           ? (
             <div id="table_case_detail_samples" className={classes.tableContainer}>
@@ -533,6 +535,7 @@ const CaseDetail = ({ classes, data }) => {
               </Grid>
             </div>
           ) : ''}
+        <div className={classes.spacer} />
       </div>
     </>
   );
@@ -547,6 +550,10 @@ const styles = (theme) => ({
   },
   marginTopBottom3: {
     margin: '3px 0px',
+  },
+  spacer: {
+    height: '76px',
+    width: '100%',
   },
   container: {
     paddingTop: '74px',
@@ -583,11 +590,14 @@ const styles = (theme) => ({
     height: '80px',
     margin: 'auto',
   },
-
+  tableSpacer: {
+    height: '25px',
+    width: '100%',
+  },
   headerTitle: {
     margin: 'auto',
     float: 'left',
-    marginLeft: '110px',
+    marginLeft: '96px',
     paddingLeft: '3px',
   },
   headerMainTitle: {
@@ -595,7 +605,7 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     letterSpacing: '0.017em',
     color: '#ff8a00',
-    fontSize: '19px',
+    fontSize: '21px',
     lineHeight: '18px',
     paddingLeft: '5px',
   },
@@ -627,7 +637,9 @@ const styles = (theme) => ({
     position: 'absolute',
     float: 'left',
     marginTop: '-14px',
-    width: '100px',
+    width: '82px',
+    height: '82px',
+    marginLeft: '8px',
   },
   detailContainer: {
     margin: 'auto',
@@ -646,6 +658,8 @@ const styles = (theme) => ({
     fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#ff8a00',
+    position: 'relative',
+    top: '-8px',
   },
   detailContainerBottom: {
     borderTop: '#81a6b9 1px solid',
@@ -663,6 +677,7 @@ const styles = (theme) => ({
   },
   tableContainer: {
     background: '#f3f3f3',
+    marginTop: '-9px',
   },
   tableHeader: {
     paddingLeft: '32px',
@@ -704,6 +719,8 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#ff17f15',
     marginLeft: '20px',
+    marginBottom: '24px',
+    marginTop: '5px',
     // paddingBottom: '20px',
   },
   headerButton: {

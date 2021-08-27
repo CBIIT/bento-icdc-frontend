@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart';
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';
+import TableThemeProvider from './tableThemeConfig';
 
 const GridView = ({
   classes,
@@ -102,7 +103,7 @@ const GridView = ({
   const btnStyle = {
     borderRadius: '10px',
     width: '180px',
-    height: '27px',
+    height: '43px',
     lineHeight: '18px',
     fontSize: '16px',
     // textTransform: 'uppercase',
@@ -282,16 +283,19 @@ const GridView = ({
     <div>
       <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
       <Grid container>
-        <Grid item xs={12} id="table_file">
-          <CustomDataTable
-            data={_.cloneDeep(data)}
-            columns={columns}
-            title={title}
-            options={finalOptions}
-            components={{
-              Tooltip,
-            }}
-          />
+        <Grid item xs={12} id="table_file" className={classes.tableGrid}>
+          <TableThemeProvider>
+            <CustomDataTable
+              data={_.cloneDeep(data)}
+              columns={columns}
+              title={title}
+              options={finalOptions}
+              components={{
+                Tooltip,
+              }}
+            />
+          </TableThemeProvider>
+
         </Grid>
       </Grid>
       {data.length > 0 ? downloadButton : ''}
@@ -365,7 +369,9 @@ const styles = () => ({
     textAlign: 'right',
     padding: '10px 0px 0px 0px',
     position: 'absolute',
-    marginTop: '-57px',
+    marginTop: '-3px',
+    width: '180px',
+    height: '43px',
     marginLeft: '37px',
 
   },
@@ -384,6 +390,13 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     marginLeft: '-5px',
+    position: 'relative',
+    top: '-60px',
+    right: '-25px',
+  },
+  tableGrid: {
+    marginRight: '10.95px',
+    marginLeft: '10.5px',
   },
 });
 
