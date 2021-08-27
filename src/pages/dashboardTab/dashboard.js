@@ -191,7 +191,7 @@ const styles = (theme) => ({
     margin: '0px 15px 0 15px',
   },
   chip: {
-    marginTop: '17px',
+    marginTop: '26px',
     marginLeft: '10px',
     backgroundColor: '#FFFFFF',
     border: '2px solid #CF6A1A',
@@ -203,13 +203,13 @@ const styles = (theme) => ({
     fontSize: '24px',
     lineHeight: '17px',
     height: '21px',
-    marginTop: '20px',
+    marginTop: '29px',
   },
   divider: {
     backgroundColor: '#81A6BA',
     height: '4px',
     width: '100%',
-    marginTop: '8px',
+    marginTop: '-1px',
   },
   dashboardDivider: {
     height: 16,
@@ -277,7 +277,8 @@ const styles = (theme) => ({
   multiStudyIcon: {
     width: '36px',
     height: '36px',
-    margin: '10px 8px 4px 0px',
+    margin: '19px 8px 4px 0px',
+    padding: '0px',
   },
   floatRight: {
     position: 'relative',
