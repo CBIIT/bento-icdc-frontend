@@ -28,7 +28,7 @@ const styles = {
     color: '#000000',
     fontFamily: 'Nunito',
     fontSize: '14px',
-    marginRight: '20px',
+    marginRight: '0px',
   },
 };
 const alignment = 'flex-start';
