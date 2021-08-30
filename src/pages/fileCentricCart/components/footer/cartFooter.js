@@ -26,18 +26,6 @@ const CartFooter = ({
       </IconButton>
     </Tooltip>
   );
-  const downloadButton = (
-    <div className={classes.buttonGroup}>
-      <button
-        type="button"
-        className={classes.downloadButton}
-        onClick={preparedownload}
-      >
-        {myFilesPageData.downButtonText}
-      </button>
-      {toolTipIcon({ title: myFilesPageData.downloadBtnTooltipMessage, placement: 'right' })}
-    </div>
-  );
 
   return (
     <div className={classes.paddingLeftRight}>
@@ -75,7 +63,16 @@ const CartFooter = ({
         {toolTipIcon({ title: myFilesPageData.userCommentsTooltipMessage, placement: 'right' })}
       </div>
       {/* Section: Button Group */}
-      {downloadButton}
+      <div className={classes.buttonGroup}>
+        <button
+          type="button"
+          className={classes.downloadButton}
+          onClick={preparedownload}
+        >
+          DOWNLOAD MANIFEST
+        </button>
+        {toolTipIcon({ title: myFilesPageData.downloadBtnTooltipMessage, placement: 'right' })}
+      </div>
     </div>
   );
 };
