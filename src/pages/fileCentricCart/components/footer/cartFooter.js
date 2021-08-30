@@ -69,7 +69,6 @@ const CartFooter = ({
           onClick={preparedownload}
         >
           {myFilesPageData.downButtonText}
-          {' '}
         </button>
         {toolTipIcon({ title: myFilesPageData.downloadBtnTooltipMessage, placement: 'right' })}
       </div>
