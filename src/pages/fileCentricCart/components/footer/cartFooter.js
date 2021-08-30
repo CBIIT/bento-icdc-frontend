@@ -15,12 +15,21 @@ const CartFooter = ({
   preparedownload,
   externalLinkIcon,
 }) => {
+  const {
+    tooltipIcon,
+    tooltipAlt,
+    textareaPlaceholder,
+    userCommentsTooltipMessage,
+    downButtonText,
+    downloadBtnTooltipMessage,
+  } = myFilesPageData;
+
   const toolTipIcon = ({ title, placement }) => (
     <Tooltip arrow title={title} placement={placement}>
       <IconButton className={classes.helpBtn} aria-label="help">
         <img
-          src={myFilesPageData.tooltipIcon}
-          alt={myFilesPageData.tooltipAlt}
+          src={tooltipIcon}
+          alt={tooltipAlt}
           className={classes.helpIcon}
         />
       </IconButton>
@@ -50,7 +59,7 @@ const CartFooter = ({
       <div className={classes.manifestTextarea}>
         <TextField
           id="multiline-user-coments"
-          label={myFilesPageData.textareaPlaceholder}
+          label={textareaPlaceholder}
           multiline
           rows={6}
           style={{ minWidth: '550px' }}
@@ -59,7 +68,7 @@ const CartFooter = ({
           variant="filled"
           onChange={setUserComment}
         />
-        {toolTipIcon({ title: myFilesPageData.userCommentsTooltipMessage, placement: 'right' })}
+        {toolTipIcon({ title: userCommentsTooltipMessage, placement: 'right' })}
       </div>
       {/* Section: Button Group */}
       <div className={classes.buttonGroup}>
@@ -68,9 +77,9 @@ const CartFooter = ({
           className={classes.downloadButton}
           onClick={preparedownload}
         >
-          {myFilesPageData.downButtonText}
+          {downButtonText}
         </button>
-        {toolTipIcon({ title: myFilesPageData.downloadBtnTooltipMessage, placement: 'right' })}
+        {toolTipIcon({ title: downloadBtnTooltipMessage, placement: 'right' })}
       </div>
     </div>
   );
