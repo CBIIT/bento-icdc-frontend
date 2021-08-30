@@ -15,26 +15,30 @@ const CartFooter = ({
   preparedownload,
   externalLinkIcon,
 }) => {
-  const {
-    tooltipIcon,
-    tooltipAlt,
-    textareaPlaceholder,
-    userCommentsTooltipMessage,
-    downButtonText,
-    downloadBtnTooltipMessage,
-  } = myFilesPageData;
-
   const toolTipIcon = ({ title, placement }) => (
     <Tooltip arrow title={title} placement={placement}>
       <IconButton className={classes.helpBtn} aria-label="help">
         <img
-          src={tooltipIcon}
-          alt={tooltipAlt}
+          src={myFilesPageData.tooltipIcon}
+          alt={myFilesPageData.tooltipAlt}
           className={classes.helpIcon}
         />
       </IconButton>
     </Tooltip>
   );
+  const downloadButton = (
+    <div className={classes.buttonGroup}>
+      <button
+        type="button"
+        className={classes.downloadButton}
+        onClick={preparedownload}
+      >
+        {myFilesPageData.downButtonText}
+      </button>
+      {toolTipIcon({ title: myFilesPageData.downloadBtnTooltipMessage, placement: 'right' })}
+    </div>
+  );
+
   return (
     <div className={classes.paddingLeftRight}>
       <div className={classes.message}>
@@ -59,7 +63,7 @@ const CartFooter = ({
       <div className={classes.manifestTextarea}>
         <TextField
           id="multiline-user-coments"
-          label={textareaPlaceholder}
+          label={myFilesPageData.textareaPlaceholder}
           multiline
           rows={6}
           style={{ minWidth: '550px' }}
@@ -68,19 +72,10 @@ const CartFooter = ({
           variant="filled"
           onChange={setUserComment}
         />
-        {toolTipIcon({ title: userCommentsTooltipMessage, placement: 'right' })}
+        {toolTipIcon({ title: myFilesPageData.userCommentsTooltipMessage, placement: 'right' })}
       </div>
       {/* Section: Button Group */}
-      <div className={classes.buttonGroup}>
-        <button
-          type="button"
-          className={classes.downloadButton}
-          onClick={preparedownload}
-        >
-          {downButtonText}
-        </button>
-        {toolTipIcon({ title: downloadBtnTooltipMessage, placement: 'right' })}
-      </div>
+      {downloadButton}
     </div>
   );
 };
