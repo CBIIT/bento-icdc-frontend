@@ -13,7 +13,7 @@ const MuiMenu = withStyles({
   paper: {
     border: '2px solid #d3d4d5',
     borderTop: '0',
-    width: '289px',
+    width: '292px',
     borderRadius: '0px',
     '& .MuiList': {
       marginTop: '0px',
@@ -124,7 +124,7 @@ const MultiStudyCases = ({
         onClick={clickHandler}
         className={classes.studyDisplayBtn}
       >
-        <div className={classes.test}>
+        <div className={classes.icon}>
           {/* <StyledBadge badgeContent={menuItems.length - 1}>
             <Avatar
               src={multiStudyIcon.src}
@@ -195,18 +195,15 @@ const styles = (theme) => ({
     padding: '5px 0px 0px 5px',
     boxSizing: 'border-box',
     height: '36px',
-    width: '289px',
+    width: '292px',
     '&:hover': {
       cursor: 'pointer',
     },
   },
-  test: {
-    marginRight: '15px',
-  },
   cartIcon: {
     height: '28px',
     width: '28px',
-    margin: '0px 0px 0px 6px',
+    margin: '0px 0px 0px 2px',
   },
   cartCounter: {
     position: 'relative',
@@ -223,9 +220,12 @@ const styles = (theme) => ({
     position: 'relative',
     bottom: '3px',
     right: '6px',
+    marginLeft: '8px',
+    marginRight: '-10px',
   },
   icon: {
-    marginRight: '20px',
+    marginRight: '5px',
+    marginLeft: '-5px',
   },
   noOfStudies: {
     position: 'absolute',
@@ -269,6 +269,8 @@ const styles = (theme) => ({
     color: '#DC762F',
     position: 'relative',
     bottom: '3px',
+    width: '40px',
+    marginRight: '-10px',
   },
   canineIcon: {
     width: theme.spacing(3.5),
