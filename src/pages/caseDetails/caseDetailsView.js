@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import {
   Grid,
@@ -47,12 +48,14 @@ const CaseDetail = ({ classes, data }) => {
     fetchDataForDashboardTabDataTable();
   }, []);
 
+  console.log('data', data);
+
   const stat = {
     numberOfStudies: 1,
     numberOfCases: 1,
+    numberOfAliquots: data.aliquotCountOfCase,
     numberOfSamples: data.sampleCountOfCase,
     numberOfFiles: data.fileCountOfCase,
-    numberOfBiospecimenAliquots: data.aliquotCountOfCase,
   };
   const caseDetail = data.case[0];
 
