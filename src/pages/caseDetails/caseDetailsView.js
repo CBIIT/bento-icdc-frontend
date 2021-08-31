@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import {
   Grid,
@@ -47,8 +46,6 @@ const CaseDetail = ({ classes, data }) => {
   React.useEffect(() => {
     fetchDataForDashboardTabDataTable();
   }, []);
-
-  console.log('data', data);
 
   const stat = {
     numberOfStudies: 1,
