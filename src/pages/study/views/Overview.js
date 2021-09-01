@@ -396,6 +396,7 @@ const Overview = ({
       </>
       )
       }
+      <div className={classes.spacer} />
     </>
   );
 };
@@ -406,6 +407,11 @@ const styles = (theme) => ({
     paddingLeft: '33px',
     paddingRight: '33px',
     paddingBottom: '25px',
+  },
+  spacer: {
+    marginTop: '50px',
+    height: '80px',
+    width: '100%',
   },
   detailContainer: {
     margin: 'auto',
