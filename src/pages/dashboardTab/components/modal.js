@@ -61,8 +61,10 @@ const SelectAllModalDialog = ({
       ? allFilesData.filter(
         (e) => !currentFileIdsInCart.find((a) => e === a),
       ).length : allFilesData.length;
-
-    return { allFilesData, newFileIDSLength };
+    const filesData = {};
+    filesData.allFilesData = allFilesData;
+    filesData.newFileIDSLength = newFileIDSLength;
+    return filesData;
   }
 
   async function exportFiles() {
