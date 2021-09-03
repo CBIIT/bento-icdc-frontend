@@ -144,7 +144,7 @@ const MultiStudyCases = ({
           </span>
         </div>
         <div className={classes.dropDownText}>
-          Other studies subject is enrolled in
+          Multi-study participant also enrolled as:
         </div>
         <ArrowDropDownIcon className={classes.arrowDropDown} />
         {/* <div className={classes.icon}>
@@ -222,6 +222,7 @@ const styles = (theme) => ({
     right: '6px',
     marginLeft: '8px',
     marginRight: '-10px',
+    lineHeight: '1',
   },
   icon: {
     marginRight: '5px',
