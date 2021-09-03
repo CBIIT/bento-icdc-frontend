@@ -38,7 +38,7 @@ const Publication = ({
                         :
                       </Grid>
                       <Grid item xs={12} sm={6} className={classes.content}>
-                        <a href={getURL(publication[attr.key], attr.url)} target="_blank" rel="noreferrer" className={classes.outLink}>
+                        <a href={getURL(publication[attr.key], attr.url)} target="icdc" className={classes.outLink}>
                           {publication[attr.key]}
                           <span className={classes.paddingLeft5}>
                             <img
