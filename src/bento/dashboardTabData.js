@@ -427,19 +427,19 @@ export const tabs = [
 export const tabIndex = [
   {
     title: 'Cases',
-    primaryColor: '#f48439',
+    primaryColor: '#FF9742',
     secondaryColor: '#FFDFB8',
     selectedColor: '#FFF',
   },
   {
     title: 'Samples',
-    primaryColor: '#37d1d6',
+    primaryColor: '#9DC1D9',
     secondaryColor: '#C9F1F1',
     selectedColor: '#FFF',
   },
   {
     title: 'Files',
-    primaryColor: '#2446c6',
+    primaryColor: '#667A87',
     secondaryColor: '#E1E5FF',
     selectedColor: '#FFF',
   },
