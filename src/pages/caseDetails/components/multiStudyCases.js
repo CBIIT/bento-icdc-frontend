@@ -270,7 +270,7 @@ const styles = (theme) => ({
     color: '#DC762F',
     fontSize: '12px',
     fontWeight: '700',
-    paddingLeft: '60px',
+    paddingLeft: '55px',
   },
   link: {
     marginLeft: '5px',
@@ -285,7 +285,7 @@ const styles = (theme) => ({
     },
   },
   dashboarLink: {
-    paddingLeft: '55px',
+    paddingLeft: '50px',
     height: '30px',
     '&:hover': {
       backgroundColor: '#f3f3f3',
