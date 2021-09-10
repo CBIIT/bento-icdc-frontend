@@ -285,7 +285,8 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
           md5sum
           uuid
    }
-  study(clinical_study_designation: $csd){
+
+  study(filter:{OR : [{clinical_study_designation: $csd }, {accession_id: $csd}]}){
     program{
       program_acronym
     }
