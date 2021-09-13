@@ -248,7 +248,7 @@ const StudyDetailView = ({ classes, data }) => {
           data={data}
         />
       </TabPanel>
-      <TabPanel value={currentTab} index={1}>
+      <TabPanel value={currentTab} index={3}>
         <Publication
           publications={studyData.publications}
           display={tab.publication}

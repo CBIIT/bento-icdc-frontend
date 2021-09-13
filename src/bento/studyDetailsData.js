@@ -43,6 +43,16 @@ export const tab = {
     },
     {
       index: 1,
+      label: 'ARMS & COHORTS',
+      value: 'arms_cohorts',
+    },
+    {
+      index: 2,
+      label: 'STUDY FILES',
+      value: 'study_files',
+    },
+    {
+      index: 3,
       label: 'PUBLICATIONS',
       value: 'publications',
     },
