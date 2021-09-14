@@ -36,7 +36,6 @@ const StudyFiles = ({
     cFile.studyDesignation = studyData.clinical_study_designation;
     return cFile;
   });
-  console.log(fileTableData);
   const tableTwoOptions = getOptions(table2, classes);
   const columns2 = updateColumns(getColumns(table2, classes, fileTableData, externalIcon, '', () => {}, DocumentDownload), table2.columns);
   const themesLight = _.cloneDeep(themes.light);

@@ -26,8 +26,6 @@ const ArmsAndCohort = ({
   classes,
   studyData,
 }) => {
-  console.log(studyData);
-  // const [noArmsAndCohort, setNoArmsAndCohort] = React.useState(false);
   const cohortAndDosingTableData = [];
   const {
     noArmMessage,
