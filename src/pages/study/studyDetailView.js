@@ -24,6 +24,8 @@ import {
 import Tab from './components/Tab';
 import Overview from './views/Overview';
 import Publication from './views/Publication';
+import ArmsAndCohort from './views/ArmsAndCohort';
+import StudyFiles from './views/StudyFiles';
 import TabPanel from './components/TabPanel';
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
@@ -246,6 +248,19 @@ const StudyDetailView = ({ classes, data }) => {
           closeSnack={closeSnack}
           openSnack={openSnack}
           data={data}
+        />
+      </TabPanel>
+      <TabPanel value={currentTab} index={1}>
+        <ArmsAndCohort
+          studyData={studyData}
+        />
+      </TabPanel>
+      <TabPanel value={currentTab} index={2}>
+        <StudyFiles
+          closeSnack={closeSnack}
+          openSnack={openSnack}
+          data={data}
+          studyData={studyData}
         />
       </TabPanel>
       <TabPanel value={currentTab} index={3}>

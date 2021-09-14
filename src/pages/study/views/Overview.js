@@ -5,30 +5,16 @@ import {
 } from '@material-ui/core';
 import _ from 'lodash';
 import {
-  CustomDataTable,
-  getOptions,
-  getColumns,
   ToolTip as Tooltip,
 } from 'bento-components';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { Typography } from '../../../components/Wrappers/Wrappers';
-import GridWithFooter from '../../../components/GridWithFooter/GridView';
 import {
-  studyDetailSorting,
   customSorting,
   isStudyUnderEmbargo,
-  fromArmTOCohorDoes,
 } from '../utils';
 import {
-  table1,
-  table2,
   externalIcon,
-  textLabels,
-  tooltipContent,
 } from '../../../bento/studyDetailsData';
-import themes, { overrides } from '../../../themes';
-import updateColumns from '../../../utils/columnsUtil';
-import DocumentDownload from '../../../components/DocumentDownload';
+import themes from '../../../themes';
 import SampleProfile from './SampleProfile';
 
 const Overview = ({
@@ -37,12 +23,9 @@ const Overview = ({
   diagnoses,
   caseFileTypes,
   data,
-  closeSnack,
-  openSnack,
 }) => {
   const getImageTypes = (typeString) => {
     const types = JSON.parse(typeString);
-
     return types.join(', ');
   };
 
@@ -70,74 +53,8 @@ const Overview = ({
     },
   };
 
-  const computedTheme = createMuiTheme({
-    ...themesLight,
-    ...overrides,
-  });
-
   const getAccessTypeString = (accessType) => (accessType === 'Cloud'
     ? 'Available only via the Cloud' : 'Available for Download');
-
-  const cohortAndDosingTableData = [];
-  const { noArmMessage } = table1;
-  const { noCohortMessage } = table1;
-  if (!studyData.cohorts || studyData.cohorts.length === 0) {
-  // no cohort under studyData
-    if (studyData.study_arms && studyData.study_arms.length !== 0) {
-    // no cohort under studyData , has arms
-      studyData.study_arms.forEach((arm) => {
-      // decide arm
-        let cohortAndDosing = {
-          arm: arm.arm || arm.arm === '' ? arm.arm : '',
-          description: arm.description ? arm.description : '',
-          does: '',
-          cohortDescription: '',
-        };
-        cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
-        cohortAndDosingTableData.push(cohortAndDosing);
-      });
-    } else { // no cohort under studyData no arms
-      cohortAndDosingTableData.push({
-        arm: noArmMessage,
-        description: '',
-        does: noCohortMessage,
-        cohortDescription: '',
-      });
-    }
-  } else if (studyData.study_arms && studyData.study_arms.length !== 0) {
-    // has cohort under studyData and arms
-    studyData.study_arms.forEach((arm) => {
-      // decide arm
-      let cohortAndDosing = {
-        arm: arm.arm || arm.arm === '' ? arm.arm : '',
-        description: arm.description ? arm.description : '',
-        does: '',
-        cohortDescription: '',
-      };
-      cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
-      cohortAndDosingTableData.push(cohortAndDosing);
-    });
-  } else { // has cohort under studyData , no arms
-    let cohortAndDosing = {
-      arm: noArmMessage,
-      description: '',
-      does: '',
-      cohortDescription: '',
-    };
-    cohortAndDosing = fromArmTOCohorDoes(studyData.cohorts, cohortAndDosing);
-    cohortAndDosingTableData.push(cohortAndDosing);
-  }
-
-  const fileTableData = data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
-    const cFile = { ...file };
-    cFile.parent = 'Study';
-    cFile.studyDesignation = studyData.clinical_study_designation;
-    return cFile;
-  });
-
-  const tableOneOptions = getOptions(table1, classes);
-  const tableTwoOptions = getOptions(table2, classes);
-  const columns2 = updateColumns(getColumns(table2, classes, fileTableData, externalIcon, '', () => {}, DocumentDownload), table2.columns);
 
   return (
     <>
@@ -328,74 +245,6 @@ const Overview = ({
           </Grid>
         </div>
       </div>
-      {
-      (!isStudyUnderEmbargo(studyData.study_disposition))
-      && (
-      <>
-        <div className={classes.tableContainer}>
-          <div className={classes.tableDiv}>
-            <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>ARMS AND COHORTS</span>
-            </div>
-            <Grid item xs={12}>
-              <Grid container>
-                <Grid item xs={12} id="table_cohort_dosing">
-                  <MuiThemeProvider theme={computedTheme}>
-                    <Typography>
-                      <CustomDataTable
-                        data={cohortAndDosingTableData.sort(
-                          (a, b) => studyDetailSorting(a.arm, b.arm),
-                        )}
-                        columns={table1.columns}
-                        options={{ ...tableOneOptions, ...textLabels }}
-                        components={{
-                          Tooltip,
-                        }}
-                      />
-                    </Typography>
-                  </MuiThemeProvider>
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography />
-                </Grid>
-              </Grid>
-            </Grid>
-          </div>
-        </div>
-        <div className={classes.tableContainer2}>
-          <div className={classes.tableDiv}>
-            <Grid item xs={12}>
-              <div className={classes.tableTitle}>
-                <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
-              </div>
-            </Grid>
-            <Grid item xs={12} id="table_associated_files">
-              <MuiThemeProvider theme={computedTheme}>
-                <GridWithFooter
-                  data={fileTableData}
-                  title=""
-                  columns={columns2}
-                  options={{ ...tableTwoOptions, ...textLabels }}
-                  customOnRowsSelect={table2.customOnRowsSelect}
-                  closeSnack={closeSnack}
-                  openSnack={openSnack}
-                  disableRowSelection={table2.disableRowSelection}
-                  buttonText={table2.buttonText}
-                  saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
-                  ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
-                  DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
-                  tooltipMessage={table2.tooltipMessage}
-                  tooltipContent={tooltipContent}
-                  showtooltip
-                  primaryKeyIndex={table2.primaryKeyIndex}
-                />
-              </MuiThemeProvider>
-            </Grid>
-          </div>
-        </div>
-      </>
-      )
-      }
     </>
   );
 };
@@ -484,21 +333,6 @@ const styles = (theme) => ({
   },
   tableContainer: {
     background: '#f3f3f3',
-  },
-  tableDiv: {
-    padding: '31px 34px',
-    margin: '40px auto auto auto',
-  },
-  tableTitle: {
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
-    letterSpacing: '0.017em',
-    color: '#ff17f15',
-    paddingBottom: '20px',
-  },
-  tableHeader: {
-    paddingLeft: '32px',
-    color: '#0296c9',
   },
   paddingLeft5: {
     paddingLeft: '5px',
