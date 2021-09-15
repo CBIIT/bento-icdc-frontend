@@ -356,10 +356,10 @@ type QueryType {
   numberOfAliquots: Int @cypher(statement: "MATCH (n:aliquot) return count(n)")
 
   "Count with parameter"
-  sampleCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(:study {clinical_study_designation: $study_code}) return count(DISTINCT(s))")
-  fileCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(:study {clinical_study_designation: $study_code}) return count(distinct(f))")
-  aliquotCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(:study {clinical_study_designation: $study_code}) return count(DISTINCT(a))")
-  caseCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (c:case)-[*]->(:study {clinical_study_designation: $study_code}) return count(distinct(c))")
+  sampleCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code return count(DISTINCT(s))")
+  fileCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code return count(distinct(f))")
+  aliquotCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code  return count(DISTINCT(a))")
+  caseCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (c:case)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code return count(distinct(c))")
   fileCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(c:case {case_id: $case_id}) return count(DISTINCT(f))")
   aliquotCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(c:case {case_id: $case_id}) return count(DISTINCT(a))")
   sampleCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(s))")
@@ -1958,13 +1958,13 @@ type QueryType {
   """)
 
   filesOfStudy(study_code: String!): [file] @cypher(statement: """
-    MATCH (f:file)-[*]->(:study {clinical_study_designation: $study_code})
+    MATCH (f:file)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code
     RETURN DISTINCT(f)
   """)
 
   studyFiles(study_codes: [String!]): [file] @cypher(statement: """
     MATCH (s:study)<--(f:file)
-    WHERE s.clinical_study_designation IN $study_codes
+    WHERE s.clinical_study_designation IN $study_codes OR s.accession_id IN $study_codes
     RETURN f{.*}
   """, passThrough: true)
 
@@ -2464,7 +2464,7 @@ type QueryType {
   """, passThrough: true)
   studySampleSiteCount(study_codes: [String]): [GroupCount] @cypher(statement: """
     MATCH (s:study)
-      WHERE s.clinical_study_designation in $study_codes
+      WHERE s.clinical_study_designation in $study_codes OR s.accession_id in $study_codes
     OPTIONAL MATCH (c:case) --> (s)
     OPTIONAL MATCH (c) <-- (samp: sample)
     WITH DISTINCT(samp.sample_site) AS group, COUNT(DISTINCT samp) AS counts where counts > 0
@@ -2477,7 +2477,7 @@ type QueryType {
 
   studySampleTypeCount(study_codes: [String]): [GroupCount] @cypher(statement: """
     MATCH (s:study)
-      WHERE s.clinical_study_designation in $study_codes
+      WHERE s.clinical_study_designation in $study_codes OR s.accession_id in $study_codes
     OPTIONAL MATCH (c:case) --> (s)
     OPTIONAL MATCH (c) <-- (samp: sample)
     WITH DISTINCT(samp.summarized_sample_type) AS group, COUNT(DISTINCT samp) AS counts where counts > 0
@@ -2490,7 +2490,7 @@ type QueryType {
 
   studySamplePathologyCount(study_codes: [String]): [GroupCount] @cypher(statement: """
     MATCH (s:study)
-      WHERE s.clinical_study_designation in $study_codes
+      WHERE s.clinical_study_designation in $study_codes OR s.accession_id in $study_codes
     OPTIONAL MATCH (c:case) --> (s)
     OPTIONAL MATCH (c) <-- (samp: sample)
     WITH DISTINCT(samp.specific_sample_pathology) AS group, COUNT(DISTINCT samp) AS counts where counts > 0
