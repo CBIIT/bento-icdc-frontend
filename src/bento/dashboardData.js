@@ -70,24 +70,24 @@ export const facetSearchData = [
 // --------------- Dashboard Sidebar Sections styling --------------
 export const facetSectionVariables = {
   'Filter By Cases': {
-    color: '#f48439',
+    color: '#FF9742',
     checkBoxColorsOne: '#fdf1e8',
     checkBoxColorsTwo: '#fff9f5',
-    height: '4px',
+    height: '7px',
     isExpanded: false,
   },
   'Filter By Samples': {
-    color: '#37d1d6',
+    color: '#9DC1D9',
     checkBoxColorsOne: '#dafafb',
     checkBoxColorsTwo: '#eafafb',
-    height: '4px',
+    height: '7px',
     isExpanded: false,
   },
   'Filter By Files': {
-    color: '#2446c6',
+    color: '#667A87',
     checkBoxColorsOne: '#d4ddf7',
     checkBoxColorsTwo: '#e9eefb',
-    height: '4px',
+    height: '7px',
     isExpanded: false,
   },
 };
