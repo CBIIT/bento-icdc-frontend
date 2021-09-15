@@ -43,6 +43,16 @@ export const tab = {
     },
     {
       index: 1,
+      label: 'ARMS & COHORTS',
+      value: 'arms_cohorts',
+    },
+    {
+      index: 2,
+      label: 'STUDY FILES',
+      value: 'study_files',
+    },
+    {
+      index: 3,
       label: 'PUBLICATIONS',
       value: 'publications',
     },
@@ -131,6 +141,8 @@ export const table1 = {
   ],
   noArmMessage: 'This study is not divided into arms',
   noCohortMessage: 'This study is not divided into cohorts',
+  noArmsCohort: 'This study is not divided into Arms or Cohorts',
+  noArmsCohort2: 'This study is not currently divided into Arms or Cohorts',
 };
 
 // --------------- Table 2 configuration --------------//
@@ -238,6 +250,7 @@ export const table2 = {
   ],
   customOnRowsSelect: FileOnRowsSelect,
   disableRowSelection: FileDisableRowSelection,
+  noAssociatedFiles: 'This study currently has no Files directly associated with it',
 };
 
 export const textLabels = {
