@@ -13,7 +13,7 @@ const MuiMenu = withStyles({
   paper: {
     border: '2px solid #d3d4d5',
     borderTop: '0',
-    width: '289px',
+    width: '295px',
     borderRadius: '0px',
     '& .MuiList': {
       marginTop: '0px',
@@ -124,7 +124,7 @@ const MultiStudyCases = ({
         onClick={clickHandler}
         className={classes.studyDisplayBtn}
       >
-        <div className={classes.test}>
+        <div className={classes.icon}>
           {/* <StyledBadge badgeContent={menuItems.length - 1}>
             <Avatar
               src={multiStudyIcon.src}
@@ -144,7 +144,7 @@ const MultiStudyCases = ({
           </span>
         </div>
         <div className={classes.dropDownText}>
-          Other studies subject is enrolled in
+          Multi-study participant also enrolled as:
         </div>
         <ArrowDropDownIcon className={classes.arrowDropDown} />
         {/* <div className={classes.icon}>
@@ -181,37 +181,59 @@ const MultiStudyCases = ({
 };
 
 const styles = (theme) => ({
+  // studyDisplayBtn: {
+  //   textTransform: 'none',
+  //   textAlign: 'center',
+  //   borderRadius: '0px',
+  //   backgroundColor: '#f2f3f3',
+  //   fontSize: '12px',
+  //   fontFamily: 'Open Sans',
+  //   fontWeight: '600',
+  //   letterSpacing: '0',
+  //   lineHeight: '0',
+  //   border: '2.5px solid #c2c2c2',
+  //   padding: '5px 0px 0px 5px',
+  //   boxSizing: 'border-box',
+  //   height: '40px',
+  //   width: '315px',
+  //   '&:hover': {
+  //     cursor: 'pointer',
+  //   },
+  // },
   studyDisplayBtn: {
-    textTransform: 'none',
-    textAlign: 'center',
-    borderRadius: '0px',
-    backgroundColor: '#f2f3f3',
-    fontSize: '12px',
-    fontFamily: 'Open Sans',
-    fontWeight: '600',
-    letterSpacing: '0',
-    lineHeight: '0',
-    border: '2.5px solid #c2c2c2',
-    padding: '5px 0px 0px 5px',
+    width: '295px',
+    height: '40px',
+    padding: '4px 14px 2px 12px',
     boxSizing: 'border-box',
-    height: '36px',
-    width: '289px',
+    border: '2.5px solid #C2C2C2',
+    backgroundColor: '#F2F3F3',
+    textTransform: 'none',
     '&:hover': {
       cursor: 'pointer',
     },
   },
-  test: {
-    marginRight: '15px',
+  dropDownText: {
+    lineHeight: '1.05',
+    fontSize: '12px',
+    fontFamily: 'Open Sans',
+    fontWeight: '600',
+    color: '#525252',
+    textAlign: 'left',
+    position: 'relative',
+  },
+  arrowDropDown: {
+    fontSize: '30px',
+    color: '#DC762F',
   },
   cartIcon: {
     height: '28px',
     width: '28px',
-    margin: '0px 0px 0px 6px',
+    margin: '0px 3px 0px 2px',
   },
   cartCounter: {
     position: 'relative',
-    top: '5px',
-    right: '3px',
+    top: '-3px',
+    right: '7px',
   },
   badge: {
     display: 'inline-flex',
@@ -219,14 +241,18 @@ const styles = (theme) => ({
     verticalAlign: 'middle',
     bottom: '3px',
   },
-  dropDownText: {
-    position: 'relative',
-    bottom: '3px',
-    right: '6px',
-  },
-  icon: {
-    marginRight: '20px',
-  },
+  // dropDownText: {
+  //   position: 'relative',
+  //   bottom: '3px',
+  //   right: '6px',
+  //   marginLeft: '8px',
+  //   marginRight: '-10px',
+  //   lineHeight: '1',
+  // },
+  // icon: {
+  //   marginRight: '5px',
+  //   marginLeft: '-5px',
+  // },
   noOfStudies: {
     position: 'absolute',
     top: '2px',
@@ -244,6 +270,7 @@ const styles = (theme) => ({
     color: '#DC762F',
     fontSize: '12px',
     fontWeight: '700',
+    paddingLeft: '55px',
   },
   link: {
     marginLeft: '5px',
@@ -258,18 +285,20 @@ const styles = (theme) => ({
     },
   },
   dashboarLink: {
-    paddingLeft: '30px',
+    paddingLeft: '50px',
     height: '30px',
     '&:hover': {
       backgroundColor: '#f3f3f3',
     },
   },
-  arrowDropDown: {
-    fontSize: '35px',
-    color: '#DC762F',
-    position: 'relative',
-    bottom: '3px',
-  },
+  // arrowDropDown: {
+  //   fontSize: '35px',
+  //   color: '#DC762F',
+  //   position: 'relative',
+  //   bottom: '3px',
+  //   width: '40px',
+  //   marginRight: '-10px',
+  // },
   canineIcon: {
     width: theme.spacing(3.5),
     height: theme.spacing(3.5),

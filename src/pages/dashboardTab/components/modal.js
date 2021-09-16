@@ -50,27 +50,38 @@ const SelectAllModalDialog = ({
     childRef.current.close();
   };
 
-  async function exportFiles() {
-    // Find the newly added files by comparing
-    const getAllFilesData = await fetchAllFileIDsForSelectAll(getFilesCount());
-    const currentFileIdsInCart = getFilesIdsInCart();
+  const numberOfRowsSelected = getCountForAddAllFilesModal();
+  // const numberOfFilesSelected = getFilesCount();
 
+  async function getAllFilesData() {
+    // Find the newly added files by comparing
+    const allFilesData = await fetchAllFileIDsForSelectAll(getFilesCount());
+    const currentFileIdsInCart = getFilesIdsInCart();
     const newFileIDSLength = (currentFileIdsInCart !== null || currentFileIdsInCart !== [])
-      ? getAllFilesData.filter(
+      ? allFilesData.filter(
         (e) => !currentFileIdsInCart.find((a) => e === a),
-      ).length : getAllFilesData.length;
+      ).length : allFilesData.length;
+    const filesData = {};
+    filesData.allFilesData = allFilesData;
+    filesData.newFileIDSLength = newFileIDSLength;
+    return filesData;
+  }
+
+  async function exportFiles() {
+    const { allFilesData, newFileIDSLength } = await getAllFilesData();
     openSnack(newFileIDSLength || 0);
-    addToCart({ fileIds: getAllFilesData });
+    addToCart({ fileIds: allFilesData });
     // tell the reducer to clear the selection on the table.
     clearTableSelections();
     handleClose();
   }
 
-  const numberOfRowsSelected = getCountForAddAllFilesModal();
-  const numberOfFilesSelected = getFilesCount();
-
   const OnYesClick = () => { exportFiles(); };
   const onNoClick = () => { handleClose(); };
+  const isCartFull = () => {
+    const { newFileIDSLength } = getAllFilesData();
+    return cartWillFull(newFileIDSLength);
+  };
 
   return (
     <>
@@ -98,7 +109,7 @@ const SelectAllModalDialog = ({
         onYesClick={OnYesClick}
         onNoClick={onNoClick}
         numberOfRowsSelected={numberOfRowsSelected}
-        cartWillFull={cartWillFull(numberOfFilesSelected)}
+        cartWillFull={isCartFull()}
       />
     </>
   );

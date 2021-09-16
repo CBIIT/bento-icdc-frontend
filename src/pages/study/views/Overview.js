@@ -256,6 +256,11 @@ const styles = (theme) => ({
     paddingRight: '33px',
     paddingBottom: '25px',
   },
+  spacer: {
+    marginTop: '50px',
+    height: '80px',
+    width: '100%',
+  },
   detailContainer: {
     margin: 'auto',
     paddingLeft: '36px',
