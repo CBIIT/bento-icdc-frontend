@@ -50,9 +50,9 @@ const CaseDetail = ({ classes, data }) => {
   const stat = {
     numberOfStudies: 1,
     numberOfCases: 1,
+    numberOfAliquots: data.aliquotCountOfCase,
     numberOfSamples: data.sampleCountOfCase,
     numberOfFiles: data.fileCountOfCase,
-    numberOfBiospecimenAliquots: data.aliquotCountOfCase,
   };
   const caseDetail = data.case[0];
 
