@@ -134,6 +134,7 @@ const Dashboard = ({
                                     colors={colors}
                                     titleLocation="top"
                                     titleAlignment="left"
+                                    paddingSpace={2}
                                   />
                                 </Widget>
                               </Grid>

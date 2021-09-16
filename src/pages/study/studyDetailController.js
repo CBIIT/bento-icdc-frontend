@@ -7,10 +7,20 @@ import {
   GET_STUDY_DETAIL_DATA_QUERY,
 } from '../../bento/studyDetailsData';
 
-const StudyDetailContainer = ({ match }) => {
+const StudyDetailContainer = ({ match, history }) => {
   const { loading, error, data } = useQuery(GET_STUDY_DETAIL_DATA_QUERY, {
     variables: { csd: match.params.id },
   });
+
+  // redirect url from Identifiers.org (replace accession_id with study designation - icdc_2072
+  if (data && data.study) {
+    const { study } = data;
+    if (study.length > 0
+      && study[0].clinical_study_designation !== match.params.id) {
+      const redirectUrl = '/study/'.concat(study[0].clinical_study_designation);
+      history.push(redirectUrl);
+    }
+  }
 
   if (loading) return <CircularProgress />;
   if (error) {

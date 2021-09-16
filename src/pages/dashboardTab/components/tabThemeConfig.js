@@ -67,8 +67,10 @@ export default ({
       minHeight: '40px',
       marginRight: '10px',
       background: '#EAEAEA',
+      borderTop: '7px solid #c6c9cd',
       '&$selected': {
-        background: tablecolor,
+        borderTop: `7px solid ${tablecolor}`,
+        color: tablecolor,
       },
     },
     labelContainer: {
