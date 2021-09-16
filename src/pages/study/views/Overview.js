@@ -9,7 +9,7 @@ import {
 } from 'bento-components';
 import {
   customSorting,
-  isStudyUnderEmbargo,
+  studyDisposition,
 } from '../utils';
 import {
   externalIcon,
@@ -121,7 +121,7 @@ const Overview = ({
               </Grid>
             </Grid>
             {
-              (!isStudyUnderEmbargo(studyData.study_disposition))
+              (!studyDisposition(studyData.study_disposition))
               && (
               <Grid item lg={6} md={6} sm={6} xs={12}>
                 <Grid

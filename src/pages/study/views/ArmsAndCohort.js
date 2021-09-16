@@ -20,6 +20,7 @@ import {
   studyDetailSorting,
   fromArmTOCohorDoes,
   studyDisposition,
+  isStudyUnderEmbargo,
 } from '../utils';
 
 const ArmsAndCohort = ({
@@ -114,7 +115,7 @@ const ArmsAndCohort = ({
   return (
     <>
       {
-      (!studyDisposition(studyData.study_disposition) && (studyData.cohorts.length > 0
+      (!isStudyUnderEmbargo(studyData.study_disposition) && (studyData.cohorts.length > 0
         || studyData.study_arms.length > 0))
         ? (
           <div className={classes.tableContainer}>
