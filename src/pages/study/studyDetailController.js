@@ -9,7 +9,7 @@ import {
 
 const StudyDetailContainer = ({ match, history }) => {
   const { loading, error, data } = useQuery(GET_STUDY_DETAIL_DATA_QUERY, {
-    variables: { csd: match.params.id },
+    variables: { csd: match.params.id, accessionId: match.params.id },
   });
 
   // redirect url from Identifiers.org (replace accession_id with study designation - icdc_2072

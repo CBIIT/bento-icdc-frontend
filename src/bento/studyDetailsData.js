@@ -267,7 +267,7 @@ export const textLabels = {
 
 // --------------- GraphQL query configuration --------------
 export const GET_STUDY_DETAIL_DATA_QUERY = gql`
-  query Study($csd: String!) {
+  query Study($csd: String!, $accessionId: String!) {
    sampleCountOfStudy(study_code:$csd)
    fileCountOfStudy(study_code: $csd)
    aliquotCountOfStudy(study_code: $csd)
@@ -299,7 +299,7 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
           uuid
    }
 
-  study(filter:{OR : [{clinical_study_designation: $csd }, {accession_id: $csd}]}){
+  study(filter:{OR : [{clinical_study_designation: $csd }, {accession_id: $accessionId}]}){
     program{
       program_acronym
     }
