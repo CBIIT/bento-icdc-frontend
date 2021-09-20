@@ -106,6 +106,7 @@ const Dashboard = ({
                                     textColor={theme.palette.widgetBackground.contrastText}
                                     titleLocation="top"
                                     titleAlignment="left"
+                                    padAngle={0.02}
                                   />
                                 </Widget>
                               </Grid>
