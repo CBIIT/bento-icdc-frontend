@@ -815,6 +815,7 @@ type SearchResult {
   numberOfSamples: Int
   numberOfFiles: Int
   numberOfAliquots: Int
+  numberOfStudyFiles: Int
   caseIds: [String]
   sampleIds: [String]
   fileIds: [String]
@@ -850,6 +851,7 @@ type UnifiedCounts{
   numberOfCases: Int
   numberOfFiles: Int
   numberOfSamples: Int
+  numberOfStudyFiles: Int
   numberOfAliquots: Int
 }
 
@@ -862,17 +864,20 @@ type QueryType {
   numberOfCases: Int @cypher(statement: "MATCH (n:case) RETURN  count (n)")
   numberOfSamples:Int @cypher(statement: "MATCH (n:sample) RETURN  count (n)")
   numberOfFiles: Int @cypher(statement: "MATCH (n:file) RETURN  count (n)")
+  numberOfStudyFiles: Int @cypher(statement: "MATCH (n:file)-->(sd:study) RETURN count (n)")
   numberOfAliquots: Int @cypher(statement: "MATCH (n:aliquot) return count(n)")
 
   "Count with parameter"
   sampleCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code return count(DISTINCT(s))")
   fileCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code return count(distinct(f))")
+  fileCountOfStudyFiles(study_code: String!): Int @cypher(statement: "MATCH (f:file)-->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code return count(distinct(f))")
   aliquotCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code  return count(DISTINCT(a))")
   caseCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (c:case)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code return count(distinct(c))")
   fileCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(c:case {case_id: $case_id}) return count(DISTINCT(f))")
   aliquotCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(c:case {case_id: $case_id}) return count(DISTINCT(a))")
   sampleCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(s))")
   fileCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (f:file)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(f))")
+  studyFileCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:study)-[*]->(:program {program_acronym: $program_id}) OPTIONAL MATCH (s) <-- (f:file) return count(DISTINCT(f))")
   aliquotCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (a:aliquot)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(a))")
   studyCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (s:study)-[*]->(:program {program_acronym: $program_id}) WHERE s.study_disposition = 'Unrestricted' return count(DISTINCT(s))")
   caseCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (c:case)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(c))")
@@ -2355,9 +2360,10 @@ type QueryType {
     OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (f)-->(parent)
+    OPTIONAL MATCH (sf: file)-->(s)
     OPTIONAL MATCH (samp:sample)-->(c)
     OPTIONAL MATCH (samp)<--(al:aliquot)
-    WITH DISTINCT c AS c, p, s, co, demo, diag, f, parent, samp, al
+    WITH DISTINCT c AS c, p, s, co, demo, diag, f, parent, samp, al, sf
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
@@ -2379,12 +2385,14 @@ type QueryType {
          diag.best_response AS response_to_treatment,
          samp.sample_id AS sample_id,
          f.uuid AS file_id,
+         sf.uuid AS study_file_id,
          al
     RETURN{
          numberOfStudies: COUNT(DISTINCT study_code),
          numberOfCases: COUNT(DISTINCT case_id),
          numberOfSamples: COUNT(DISTINCT sample_id),
          numberOfFiles: COUNT(DISTINCT file_id),
+         numberOfStudyFiles: COUNT(DISTINCT study_file_id),
          numberOfAliquots: COUNT(DISTINCT al),
          caseIds: COLLECT(DISTINCT case_id),
          sampleIds: COLLECT(DISTINCT sample_id),
@@ -2961,6 +2969,7 @@ type QueryType {
       WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
     OPTIONAL MATCH (s:study)<--(c)
     OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (s)<--(sf:file)
     OPTIONAL MATCH (samp:sample)-->(c)
     OPTIONAL MATCH (a:aliquot)-[*]->(c)
     RETURN{
@@ -2968,7 +2977,8 @@ type QueryType {
       numberOfCases: COUNT(DISTINCT c),
       numberOfFiles: COUNT(DISTINCT f),
       numberOfSamples: COUNT(DISTINCT samp),
-      numberOfAliquots: COUNT(DISTINCT a)
+      numberOfAliquots: COUNT(DISTINCT a),
+      numberOfStudyFiles: COUNT(DISTINCT sf)
     }
   """, passThrough: true)
   studySampleSiteCount(study_codes: [String]): [GroupCount] @cypher(statement: """
