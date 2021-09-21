@@ -9,7 +9,7 @@ export const statsStyling = {
     top: '159px',
   },
   statsGroup: {
-    margin: '4px 100px',
+    margin: '4px 60px',
   },
   statsIcon: {
     width: '45px',
@@ -55,7 +55,7 @@ export const globalStatsData = [
     statIconAlt: 'Samples Stats Bar Icon',
   },
   {
-    statTitle: 'Files',
+    statTitle: 'Case Files',
     type: 'field',
     statAPI: 'numberOfFiles',
     statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-files-stats.svg',
@@ -65,7 +65,7 @@ export const globalStatsData = [
     statTitle: 'Study Files',
     type: 'field',
     statAPI: 'numberOfStudyFiles',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-files-stats.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-StudyFile.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
   {
