@@ -87,12 +87,9 @@ const initialState = {
 const getState = () => store.getState()[storeKey];
 
 const SUNBURST_COLORS = [
-  '#39C0F0',
-  '#004CF3',
-  '#FF7F15',
-  '#4C3112',
-  '#8DE260',
-  '#437200',
+  '#1F4B87',
+  '#AD1919',
+  '#DA6B2E',
 ];
 
 function shouldFetchDataForDashboardTabDataTable(state) {
