@@ -204,7 +204,7 @@ const SampleProfile = ({ classes, data }) => {
     <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
       <Grid container spacing={16}>
         <Grid item xs={12}>
-          <span className={classes.detailContainerHeader}> SAMPLE PROFILE </span>
+          <span className={classes.detailContainerHeader}> SAMPLE PROFILES </span>
         </Grid>
       </Grid>
       {(tabCount !== undefined && tabCount.length > 0) ? (
