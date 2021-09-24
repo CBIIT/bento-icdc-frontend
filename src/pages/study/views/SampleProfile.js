@@ -248,7 +248,7 @@ const SampleProfile = ({ classes, data }) => {
         <Grid container spacing={16}>
           <Grid item xs={12} sm={10} className={classes.detailContainerItems}>
             <div className={classes.content}>
-              This study currently has no associated samples
+              This study currently has no associated Samples
             </div>
           </Grid>
         </Grid>
