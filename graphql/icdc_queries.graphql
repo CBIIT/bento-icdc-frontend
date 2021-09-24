@@ -768,7 +768,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -819,7 +822,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -868,7 +874,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -917,7 +926,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -966,7 +978,10 @@ type QueryType {
         //AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1015,7 +1030,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         //AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1064,7 +1082,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         //AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1113,7 +1134,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1162,7 +1186,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1211,7 +1238,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1261,7 +1291,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1311,7 +1344,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1361,7 +1397,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1411,7 +1450,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1461,7 +1503,10 @@ type QueryType {
         AND (size($disease_site) = 0 OR diag.primary_disease_site IN $disease_site)
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
@@ -1849,7 +1894,10 @@ type QueryType {
         AND (size($stage_of_disease) = 0 OR diag.stage_of_disease IN $stage_of_disease)
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
     OPTIONAL MATCH (c)-->(co:cohort)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (f1:file)-[*]->(c)
+    OPTIONAL MATCH (f2:file)-->(s)
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, p, s, co, c, diag, demo
+    UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (sf: file)-->(s)
     OPTIONAL MATCH (samp:sample)-->(c)
