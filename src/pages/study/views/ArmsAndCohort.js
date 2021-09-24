@@ -97,6 +97,9 @@ const ArmsAndCohort = ({
 
   themesLight.overrides.MUIDataTableToolbar = {
     ...themesLight.overrides.MUIDataTableToolbar,
+    root: {
+      backgroundColor: '#ffffff',
+    },
     actions: {
       '& span': {
         '& button': {
@@ -121,7 +124,7 @@ const ArmsAndCohort = ({
           <div className={classes.tableContainer}>
             <div className={classes.tableDiv}>
               <div className={classes.tableTitle}>
-                <span className={classes.tableHeader}>ARMS AND COHORTS</span>
+                <span className={classes.tableHeader}>This study is organized as follows:</span>
               </div>
               <Grid item xs={12}>
                 <Grid container>
@@ -166,12 +169,11 @@ const ArmsAndCohort = ({
 
 const styles = (theme) => ({
   tableContainer: {
-    background: '#f3f3f3',
     minHeight: '500px',
   },
   tableDiv: {
-    padding: '31px 34px',
-    margin: '40px auto auto auto',
+    padding: '10px 34px',
+    margin: '20px auto auto auto',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
