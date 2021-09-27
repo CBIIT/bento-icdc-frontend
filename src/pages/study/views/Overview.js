@@ -171,11 +171,15 @@ const Overview = ({
                       </Grid>
                     </Grid>
                     <Grid container className={classes.paddingTop12}>
-                      {caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
+                      {(caseFileTypes.length > 0) ? caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
                         <Grid item xs={12}>
                           <span className={classes.content}>{fileType}</span>
                         </Grid>
-                      ))}
+                      )) : (
+                        <div className={classes.content}>
+                          This study currently has no Files associated with its cases
+                        </div>
+                      )}
                     </Grid>
                   </Grid>
                   <div><hr className={classes.hrLine} /></div>
