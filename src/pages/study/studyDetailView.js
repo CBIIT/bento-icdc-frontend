@@ -376,9 +376,6 @@ const styles = (theme) => ({
   tabHighlightColor: {
     color: '#0B3556',
     fontWeight: '700',
-  },
-  tabHighlight: {
-    color: '#0B3556',
     borderBottom: '5px solid rgb(53, 185, 235)',
   },
   container: {

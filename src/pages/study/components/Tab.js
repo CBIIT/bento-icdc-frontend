@@ -35,10 +35,8 @@ const TabItems = ({
       <Tabs
         onChange={(event, value) => handleTabChange(event, value)}
         value={currentTab}
-        classes={{
-          indicator: styleClasses.tabHighlight,
-        }}
         textColor="primary"
+        TabIndicatorProps={{ style: { background: 'none' } }}
       >
         {TABs}
       </Tabs>

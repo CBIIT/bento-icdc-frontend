@@ -75,7 +75,9 @@ const StudyFiles = ({
             <div className={classes.tableDiv}>
               <Grid item xs={12}>
                 <div className={classes.tableTitle}>
-                  <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
+                  <span className={classes.tableHeader}>
+                    This study currently has the following Study Files directly associated with it:
+                  </span>
                 </div>
               </Grid>
               <Grid item xs={12} id="table_associated_files">
@@ -124,14 +126,14 @@ const styles = (theme) => ({
     minHeight: '500px',
   },
   tableDiv: {
-    padding: '31px 34px',
-    margin: '40px auto auto auto',
+    padding: '20px 34px',
+    margin: '10px auto auto auto',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '17px',
     letterSpacing: '0.017em',
-    color: '#ff17f15',
+    // color: '#ff17f15',
     paddingBottom: '20px',
   },
   tableHeader: {
@@ -139,7 +141,7 @@ const styles = (theme) => ({
     color: '#0296c9',
   },
   tableContainer: {
-    background: '#f3f3f3',
+    // background: '#f3f3f3',
     minHeight: '500px',
   },
   detailContainer: {

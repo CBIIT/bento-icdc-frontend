@@ -1,11 +1,12 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
+import { cn } from 'bento-components';
 
 const tabLabel = ({
   classes, title, primaryColorClass,
 }) => (
-  <div className={classes.defaultStyle}>
-    <span className={primaryColorClass}>
+  <div className={cn(classes.defaultStyle, primaryColorClass)}>
+    <span>
       {title}
       {' '}
 
@@ -18,6 +19,8 @@ const styles = () => ({
     fontFamily: 'Open Sans',
     textTransform: 'none',
     fontSize: '17px',
+    height: '45px',
+    marginBottom: '-5px',
   },
 });
 

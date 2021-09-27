@@ -44,6 +44,9 @@ const Overview = ({
 
   themesLight.overrides.MUIDataTableToolbar = {
     ...themesLight.overrides.MUIDataTableToolbar,
+    root: {
+      backgroundColor: '#ffffff',
+    },
     actions: {
       '& span': {
         '& button': {
