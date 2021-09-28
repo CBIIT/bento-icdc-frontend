@@ -14,6 +14,7 @@ import { Typography } from '../../../components/Wrappers/Wrappers';
 import {
   table1,
   textLabels,
+  title,
 } from '../../../bento/studyDetailsData';
 import themes, { overrides } from '../../../themes';
 import {
@@ -99,6 +100,7 @@ const ArmsAndCohort = ({
     ...themesLight.overrides.MUIDataTableToolbar,
     root: {
       backgroundColor: '#ffffff',
+      paddingLeft: '0px',
     },
     actions: {
       '& span': {
@@ -106,6 +108,9 @@ const ArmsAndCohort = ({
           right: '0px',
         },
       },
+    },
+    titleText: {
+      fontSize: '1.142rem',
     },
   };
 
@@ -123,15 +128,13 @@ const ArmsAndCohort = ({
         ? (
           <div className={classes.tableContainer}>
             <div className={classes.tableDiv}>
-              <div className={classes.tableTitle}>
-                <span className={classes.tableHeader}>This study is organized as follows:</span>
-              </div>
               <Grid item xs={12}>
                 <Grid container>
                   <Grid item xs={12} id="table_cohort_dosing">
                     <MuiThemeProvider theme={computedTheme}>
                       <Typography>
                         <CustomDataTable
+                          title={title.armsAndCohort}
                           data={cohortAndDosingTableData.sort(
                             (a, b) => studyDetailSorting(a.arm, b.arm),
                           )}
@@ -172,7 +175,7 @@ const styles = (theme) => ({
     minHeight: '500px',
   },
   tableDiv: {
-    padding: '10px 34px',
+    padding: '20px 70px 0px 65px',
     margin: '20px auto auto auto',
   },
   tableTitle: {
@@ -183,7 +186,6 @@ const styles = (theme) => ({
     paddingBottom: '20px',
   },
   tableHeader: {
-    paddingLeft: '32px',
     color: '#0296c9',
   },
   detailContainer: {

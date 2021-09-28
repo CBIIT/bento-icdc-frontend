@@ -14,6 +14,7 @@ import {
   externalIcon,
   textLabels,
   tooltipContent,
+  title,
 } from '../../../bento/studyDetailsData';
 import DocumentDownload from '../../../components/DocumentDownload';
 import GridWithFooter from '../../../components/GridWithFooter/GridView';
@@ -66,6 +67,7 @@ const StudyFiles = ({
     ...themesLight,
     ...overrides,
   });
+
   return (
     <>
       {
@@ -73,18 +75,11 @@ const StudyFiles = ({
         ? (
           <div className={classes.tableContainer}>
             <div className={classes.tableDiv}>
-              <Grid item xs={12}>
-                <div className={classes.tableTitle}>
-                  <span className={classes.tableHeader}>
-                    This study currently has the following Study Files directly associated with it:
-                  </span>
-                </div>
-              </Grid>
               <Grid item xs={12} id="table_associated_files">
                 <MuiThemeProvider theme={computedTheme}>
                   <GridWithFooter
                     data={fileTableData}
-                    title=""
+                    title={title.studyFile}
                     columns={columns2}
                     options={{ ...tableTwoOptions, ...textLabels }}
                     customOnRowsSelect={table2.customOnRowsSelect}
@@ -126,7 +121,7 @@ const styles = (theme) => ({
     minHeight: '500px',
   },
   tableDiv: {
-    padding: '20px 34px',
+    padding: '20px 55px 0px 55px',
     margin: '10px auto auto auto',
   },
   tableTitle: {
@@ -137,7 +132,6 @@ const styles = (theme) => ({
     paddingBottom: '20px',
   },
   tableHeader: {
-    paddingLeft: '32px',
     color: '#0296c9',
   },
   tableContainer: {
