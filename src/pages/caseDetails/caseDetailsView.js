@@ -53,6 +53,7 @@ const CaseDetail = ({ classes, data }) => {
     numberOfAliquots: data.aliquotCountOfCase,
     numberOfSamples: data.sampleCountOfCase,
     numberOfFiles: data.fileCountOfCase,
+    numberOfStudyFiles: 0,
   };
   const caseDetail = data.case[0];
 
