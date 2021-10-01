@@ -96,6 +96,7 @@ type case {
   cycles: [cycle] 
   follow_ups: [follow_up] 
   samples: [sample] 
+  files: [file] 
   visits: [visit] 
   adverse_events: [adverse_event] 
   registrations: [registration] 
@@ -202,6 +203,7 @@ type file {
   file_status: String
   uuid: String
   file_location: String
+  case: case 
   study: study 
   sample: sample 
   assay: assay 
