@@ -1918,7 +1918,7 @@ type QueryType {
          numberOfAliquots: COUNT(DISTINCT al),
          caseIds: COLLECT(DISTINCT c.case_id),
          sampleIds: COLLECT(DISTINCT samp.sample_id),
-         fileIds: COLLECT(DISTINCT f.file_id),
+         fileIds: COLLECT(DISTINCT f.uuid),
          firstPage: COLLECT(DISTINCT ({
            case_id: c.case_id,
            study_code: s.clinical_study_designation,
