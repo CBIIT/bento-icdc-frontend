@@ -1899,10 +1899,9 @@ type QueryType {
     WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, p, s, co, c, diag, demo
     UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
-    OPTIONAL MATCH (sf: file)-->(s)
     OPTIONAL MATCH (samp:sample)-->(c)
     OPTIONAL MATCH (samp)<--(al:aliquot)
-    WITH DISTINCT c AS c, p, s, co, demo, diag, f, parent, samp, al, sf
+    WITH DISTINCT c AS c, p, s, co, demo, diag, f, parent, samp, al
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
@@ -1924,14 +1923,14 @@ type QueryType {
          diag.best_response AS response_to_treatment,
          samp.sample_id AS sample_id,
          f.uuid AS file_id,
-         sf.uuid AS study_file_id,
+         CASE head(labels(parent)) WHEN 'study' THEN f ELSE null END AS sf,
          al
     RETURN{
          numberOfStudies: COUNT(DISTINCT study_code),
          numberOfCases: COUNT(DISTINCT case_id),
          numberOfSamples: COUNT(DISTINCT sample_id),
          numberOfFiles: COUNT(DISTINCT file_id),
-         numberOfStudyFiles: COUNT(DISTINCT study_file_id),
+         numberOfStudyFiles: COUNT(DISTINCT sf),
          numberOfAliquots: COUNT(DISTINCT al),
          caseIds: COLLECT(DISTINCT case_id),
          sampleIds: COLLECT(DISTINCT sample_id),
