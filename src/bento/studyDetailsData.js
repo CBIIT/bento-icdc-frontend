@@ -8,6 +8,11 @@ export const tooltipContent = {
   alt: 'tooltipIcon',
 };
 
+export const title = {
+  studyFile: 'This study currently has the following Study Files directly associated with it:',
+  armsAndCohort: 'This study is organized as follows:',
+};
+
 export const embargoFileIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-Embargo-File.svg';
 export const embargoHeaderIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-embargo-study-header.svg';
 export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg';
