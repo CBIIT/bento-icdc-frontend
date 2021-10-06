@@ -93,7 +93,8 @@
     "collectCoverage": true,
     "moduleNameMapper": {
       "^.+.(svg)$": "jest-svg-transformer"
-    }
+    },
+    "testMatch": ["**/__test__/**.test.js"]
   },
   "browserslist": [
     ">0.2%",
