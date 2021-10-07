@@ -19,8 +19,6 @@
     "bento-components": "^0.1.90",
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
-    "devextreme": "21.1.4",
-    "devextreme-react": "21.1.4",
     "dotenv": "^6.0.0",
     "dotenv-expand": "4.2.0",
     "eslint-config-react-app": "^3.0.7",
@@ -94,7 +92,9 @@
     "moduleNameMapper": {
       "^.+.(svg)$": "jest-svg-transformer"
     },
-    "testMatch": ["**/__test__/**.test.js"]
+    "testMatch": [
+      "**/__test__/**.test.js"
+    ]
   },
   "browserslist": [
     ">0.2%",
