@@ -39,6 +39,37 @@ export const sampleProfile = {
 
 export const palette = ['#62beeb', '#1651ea', '#a1df71', '#72d1d5', '#d98548'];
 
+export const argumentConfiguration = {
+  field: 'group',
+  visible: false,
+  position: 'inside',
+  size: 12,
+  title: {
+    text: '',
+  },
+  label: {
+    size: 20,
+    position: 'inside',
+    staggeringSpacing: 10,
+  },
+};
+export const valueConfiguration = {
+  field: 'count',
+  size: 12,
+  allowDecimals: false,
+  title: {
+    text: 'Sample count',
+    size: 12,
+  },
+  chartGrid: {
+    visible: false,
+  },
+  label: {
+    size: 12,
+    position: 'outside',
+  },
+};
+
 export const tab = {
   items: [
     {
