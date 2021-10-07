@@ -14,6 +14,8 @@ const ProgramCard = ({
   const programConfig = pageData[data.program_acronym];
   const programImage = programConfig ? programConfig.primaryImage : '';
   const primaryImageAlt = programConfig ? programConfig.primaryImageAlt : '';
+  // eslint-disable-next-line no-console
+  console.log('data', data);
 
   return (
     <div className={classes.detailContainer}>
@@ -30,7 +32,7 @@ const ProgramCard = ({
           </Grid>
           <Grid item lg={12} md={12} sm={12} xs={12}>
             <span>
-              <Button variant="contained" className={classes.button}>
+              <Button data-testid="button" variant="contained" className={classes.button}>
                 <Link to={`/program/${data.program_acronym}`} className={classes.headerButtonLink}>
                   <span className={classes.headerButtonLinkLeft}>VIEW STUDIES </span>
                   <span className={classes.headerButtonLinkBadge}>
