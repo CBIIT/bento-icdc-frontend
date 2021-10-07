@@ -7,31 +7,18 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Chart, {
-  CommonSeriesSettings,
-  SeriesTemplate,
-  Tooltip,
-  Grid as ChartGrid,
-  Label,
-  ValueAxis,
-  ArgumentAxis,
-  Border,
-  Shadow,
-  Size,
-  Font,
-  Title,
-} from 'devextreme-react/chart';
+import { BarChart } from 'bento-components';
 import {
   sampleProfile,
   palette,
+  valueConfiguration,
+  argumentConfiguration,
 } from '../../../bento/studyDetailsData';
 import TabPanel from '../components/TabPanel';
 import filterCasePageOnStudyCode from '../../../utils/utils';
 import {
   fetchDataForDashboardTab,
 } from '../../dashboardTab/store/dashboardReducer';
-
-const enable = true;
 
 const useStyles = makeStyles(() => ({
   tabs: {
@@ -56,107 +43,29 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SampleChart = (data) => {
-  const content = ({ argument, originalValue, point }) => {
-    const color = point.series.getColor();
-    return (
-      <>
-        <div>
-          <span
-            style={{
-              fontWeight: 600,
-              color: '#1C2023',
-            }}
-          >
-            {argument}
-            {', '}
-          </span>
-          <span
-            style={{
-              color: color.toString(),
-              fontWeight: 900,
-            }}
-          >
-            {originalValue}
-          </span>
-        </div>
-      </>
-    );
-  };
-  const { length } = data;
-  const customPallete = [].concat(...new Array(Math
-    .ceil(length / palette.length)).fill(palette));
+const tooltipContent = ({ argument, originalValue, point }) => {
+  const color = point.series.getColor();
   return (
     <>
-      <Chart
-        palette={customPallete}
-        dataSource={data}
-        paletteExtensionMode="extrapolate"
-      >
-        <Size
-          height={300}
-          width={300}
-        />
-        <CommonSeriesSettings
-          argumentField="group"
-          valueField="count"
-          type="bar"
-          ignoreEmptyPoints={enable}
-          showInLegend={!enable}
-          barWidth={80}
-          hoverMode="none"
+      <div>
+        <span
+          style={{
+            fontWeight: 600,
+            color: '#1C2023',
+          }}
         >
-          <Label visible={!enable} />
-        </CommonSeriesSettings>
-        <SeriesTemplate
-          nameField="group"
-          type="bar"
-        />
-        <ValueAxis
-          allowDecimals={!enable}
+          {argument}
+          {', '}
+        </span>
+        <span
+          style={{
+            color: color.toString(),
+            fontWeight: 900,
+          }}
         >
-          <Title
-            text="Sample Count"
-          >
-            <Font
-              size="12"
-            />
-          </Title>
-          <ChartGrid visible={!enable} />
-          <Label
-            position="outside"
-          >
-            <Font
-              size="12"
-            />
-          </Label>
-        </ValueAxis>
-        <ArgumentAxis>
-          <Label
-            visible={!enable}
-            position="inside"
-          />
-        </ArgumentAxis>
-        <Tooltip
-          enabled={enable}
-          contentRender={content}
-          arrowLength="9"
-        >
-          <Font
-            family="Open Sans"
-            size="12"
-          />
-          <Border
-            color="#A7AFB3"
-            width="2"
-          />
-          <Shadow
-            blur="0"
-            offsetY="0"
-            opacity="0"
-          />
-        </Tooltip>
-      </Chart>
+          {originalValue}
+        </span>
+      </div>
     </>
   );
 };
@@ -238,7 +147,13 @@ const SampleProfile = ({ classes, data }) => {
             { sampleProfile.tabs.map((item) => (
               <>
                 <TabPanel index={item.index} value={currentTab}>
-                  {SampleChart(data[item.value])}
+                  <BarChart
+                    data={data[item.value]}
+                    palette={palette}
+                    tooltipContent={tooltipContent}
+                    argument={argumentConfiguration}
+                    value={valueConfiguration}
+                  />
                 </TabPanel>
               </>
             ))}
