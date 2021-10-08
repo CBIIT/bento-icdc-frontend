@@ -14,18 +14,16 @@ const ProgramCard = ({
   const programConfig = pageData[data.program_acronym];
   const programImage = programConfig ? programConfig.primaryImage : '';
   const primaryImageAlt = programConfig ? programConfig.primaryImageAlt : '';
-  // eslint-disable-next-line no-console
-  console.log('data', data);
 
   return (
     <div className={classes.detailContainer}>
       <Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.header}>
+        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.header} data-testid="header">
           {data.program_name}
         </Grid>
         <Grid item lg={8} md={8} sm={8} xs={12} className={classes.detailContainerLeft}>
 
-          <Grid item lg={12} md={12} sm={12} xs={12} className={classes.content}>
+          <Grid item lg={12} md={12} sm={12} xs={12} className={classes.content} data-testid="content">
             {' '}
             {data.program_short_description}
             {' '}
@@ -36,13 +34,13 @@ const ProgramCard = ({
                 <Link to={`/program/${data.program_acronym}`} className={classes.headerButtonLink}>
                   <span className={classes.headerButtonLinkLeft}>VIEW STUDIES </span>
                   <span className={classes.headerButtonLinkBadge}>
-                    <Badge color="primary" badgeContent={data.studies.length}> </Badge>
+                    <Badge color="primary" badgeContent={data.studies.length} data-testid="badge"> </Badge>
                   </span>
                 </Link>
               </Button>
             </span>
             <span className={classes.paddingLeft15}>
-              <a href={`${data.program_external_url}`} target="icdc" className={classes.outLink}>
+              <a href={`${data.program_external_url}`} target="icdc" className={classes.outLink} data-testid="outlink">
                 {data.program_external_url}
               </a>
             </span>
