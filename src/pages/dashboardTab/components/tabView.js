@@ -91,6 +91,7 @@ const TabView = ({
   tableHasSelections,
   unifiedViewFlag,
   tabIndex,
+  studyAssociations,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -429,6 +430,7 @@ const TabView = ({
             components={{
               Tooltip,
             }}
+            fileAssociations={studyAssociations}
           />
         </Grid>
       </Grid>

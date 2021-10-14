@@ -282,7 +282,19 @@ const querySwitch = (payload, tabContainer) => {
     case ('Samples'):
       return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : GET_SAMPLES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
     case ('Files'):
-      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
+      return {
+        QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY,
+        sortfield: tabContainer.defaultSortField || '',
+        sortDirection: tabContainer.defaultSortDirection || '',
+        association: tabContainer.associations,
+      };
+    case ('StudyFiles'):
+      return {
+        QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY,
+        sortfield: tabContainer.defaultSortField || '',
+        sortDirection: tabContainer.defaultSortDirection || '',
+        association: tabContainer.associations,
+      };
     default:
       return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_CASES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
   }
@@ -316,13 +328,22 @@ export function fetchDataForDashboardTab(
   sampleIDsAfterFilter = null,
   fileIDsAfterFilter = null,
 ) {
-  const { QUERY, sortfield, sortDirection } = getQueryAndDefaultSort(payload);
+  const {
+    QUERY,
+    sortfield,
+    sortDirection,
+    association,
+  } = getQueryAndDefaultSort(payload);
 
   return client
     .query({
       query: QUERY,
       variables: {
-        case_ids: subjectIDsAfterFilter, sample_ids: sampleIDsAfterFilter, file_uuids: fileIDsAfterFilter, order_by: sortfield || '',
+        case_ids: subjectIDsAfterFilter,
+        sample_ids: sampleIDsAfterFilter,
+        file_uuids: fileIDsAfterFilter,
+        order_by: sortfield || '',
+        file_association: association,
       },
     })
     .then((result) => store.dispatch({ type: 'UPDATE_CURRRENT_TAB_DATA', payload: { currentTab: payload, sortDirection, ..._.cloneDeep(result) } }))
@@ -331,12 +352,14 @@ export function fetchDataForDashboardTab(
     ));
 }
 
-export async function getFileNamesByFileIds(fileIds) {
+export async function getFileNamesByFileIds(fileIds, association) {
+  console.log('test');
   const data = await client
     .query({
       query: GET_FILES_NAME_QUERY,
       variables: {
         file_uuids: fileIds,
+        file_association: association,
       },
     })
     .then((result) => result.data.fileOverview.map((item) => item.file_name));
@@ -346,7 +369,10 @@ export async function getFileNamesByFileIds(fileIds) {
 export async function tableHasSelections() {
   let selectedRowInfo = [];
   let filteredIds = [];
-  const filteredNames = await getFileNamesByFileIds(getState().filteredFileIds);
+  const association = (getState().currentActiveTab === tabIndex[2].title)
+    ? tabIndex[2].associations : tabIndex[3].associations;
+  console.log(association);
+  const filteredNames = await getFileNamesByFileIds(getState().filteredFileIds, association);
   switch (getState().currentActiveTab) {
     case tabIndex[2].title:
       filteredIds = filteredNames;
@@ -396,6 +422,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
         sample_ids: sampleIds,
         file_uuids: fileIds,
         first: fileCount,
+        file_association: 'other',
       },
     })
     .then((result) => {

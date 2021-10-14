@@ -170,6 +170,7 @@ class ServerPaginatedTableView extends React.Component {
 
     sortDirection = Object.keys(sortOrder).length === 0 ? this.props.defaultSortDirection || 'asc' : sortOrder.direction;
     sortColumn = Object.keys(sortOrder).length === 0 ? this.props.defaultSortCoulmn || '' : sortOrder.name;
+
     const fetchResult = await client
       .query({
         query: sortDirection !== 'asc' ? this.props.overviewDesc : this.props.overview,
@@ -177,6 +178,7 @@ class ServerPaginatedTableView extends React.Component {
           offset,
           first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
           order_by: sortColumn,
+          file_association: this.props.fileAssociations,
           ...this.props.queryCustomVaribles,
         },
       })
@@ -208,7 +210,7 @@ class ServerPaginatedTableView extends React.Component {
         this.props.tableDownloadCSV && (
         <CSVDownloadToolbar
           tableDownloadCSV={this.props.tableDownloadCSV}
-          queryCustomVaribles={this.props.queryCustomVaribles}
+          queryCustomVaribles={{ ...this.props.queryCustomVaribles }}
         />
         )
       ),

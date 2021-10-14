@@ -84,6 +84,7 @@ const tabController = ({ classes, unifiedViewData }) => {
   const tableRowSelectionData = [
     useSelector((state) => (state.dashboardTab.dataCaseSelected)),
     useSelector((state) => (state.dashboardTab.dataSampleSelected)),
+    useSelector((state) => (state.dashboardTab.dataFileSelected)),
     useSelector((state) => (state.dashboardTab.dataFileSelected))];
 
   const getDashboardStats = () => {
@@ -322,6 +323,7 @@ const tabController = ({ classes, unifiedViewData }) => {
         getFilesCount={getFilesCount}
         selectedRowInfo={tableRowSelectionData[container.tabIndex].selectedRowInfo}
         selectedRowIndex={tableRowSelectionData[container.tabIndex].selectedRowIndex}
+        studyAssociations={container.associations}
       />
     </TabContainer>
   ));

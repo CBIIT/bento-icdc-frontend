@@ -274,6 +274,7 @@ export const tabContainers = [
     buttonText: 'Add Selected Files',
     addAllButtonText: 'Add All Filtered Files',
     dataKey: 'file_name',
+    associations: 'other',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',
@@ -399,6 +400,102 @@ export const tabContainers = [
     headerPagination: true,
     footerPagination: true,
   },
+  {
+    name: 'StudyFiles',
+    dataField: 'dataFile',
+    api: 'GET_FILES_OVERVIEW_QUERY',
+    paginationAPIField: 'fileOverview',
+    paginationAPIFieldDesc: 'fileOverviewDesc',
+    defaultSortField: 'file_name',
+    defaultSortDirection: 'asc',
+    count: 'numberOfFiles',
+    buttonText: 'Add Selected Files',
+    addAllButtonText: 'Add All Filtered Files',
+    dataKey: 'file_name',
+    associations: null,
+    saveButtonDefaultStyle: {
+      borderRadius: '10px',
+      width: '180px',
+      lineHeight: '37px',
+      fontSize: '16px',
+      color: '#fff',
+      backgroundColor: '#ff7f15',
+    },
+    DeactiveSaveButtonDefaultStyle: {
+      opacity: '0.7',
+      cursor: 'auto',
+    },
+    ActiveSaveButtonDefaultStyle: {
+      cursor: 'pointer',
+      opacity: 'unset',
+      border: 'unset',
+    },
+    columns: [
+      {
+        dataField: 'file_name',
+        header: 'File Name',
+        sort: 'asc',
+        primary: true,
+        display: true,
+      },
+      {
+        dataField: 'file_uuid',
+        header: 'File uuid',
+        sort: 'asc',
+        primary: true,
+        display: false,
+      },
+      {
+        dataField: 'file_type',
+        header: 'File Type',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'association',
+        header: 'Association',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'file_description',
+        header: 'Description',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'file_format',
+        header: 'Format',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'file_size',
+        header: 'Size',
+        sort: 'asc',
+        display: true,
+        formatBytes: true,
+      },
+      {
+        dataField: 'study_code',
+        header: 'Study Code',
+        sort: 'asc',
+        link: '/study/{study_code}',
+        display: true,
+      },
+    ],
+    id: 'file_tab',
+    onRowsSelect: 'type2',
+    disableRowSelection: 'type3',
+    tableID: 'file_tab_table',
+    selectableRows: true,
+    tableDownloadCSV: customFilesTabDownloadCSV,
+    viewColumns: true,
+    tabIndex: '3',
+    downloadFileName: 'Bento_Dashboard_cases_download',
+    headerPagination: true,
+    footerPagination: true,
+  },
 ];
 
 // --------------- Tabs Header Data configuration --------------
@@ -421,6 +518,12 @@ export const tabs = [
     dataField: 'dataFile',
     count: 'numberOfFiles',
   },
+  {
+    id: 'study_file_tab',
+    title: 'StudyFiles',
+    dataField: 'dataFile',
+    count: 'numberOfStudyFiles',
+  },
 ];
 
 // --------------- Tabs Header Style configuration --------------
@@ -439,6 +542,12 @@ export const tabIndex = [
   },
   {
     title: 'Files',
+    primaryColor: '#667A87',
+    secondaryColor: '#E1E5FF',
+    selectedColor: '#667A87',
+  },
+  {
+    title: 'StudyFiles',
     primaryColor: '#667A87',
     secondaryColor: '#E1E5FF',
     selectedColor: '#667A87',
@@ -643,6 +752,7 @@ searchCases(
       caseIds
       sampleIds
       fileIds
+      studyFileIds
       firstPage {
           case_id
           study_code
@@ -964,8 +1074,8 @@ filterCaseCountByFileFormat (
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
-query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
     file_name
     file_type
     sample_id
@@ -984,16 +1094,16 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_NAME_QUERY = gql`
-query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 100000, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
     file_name
   }
 }
   `;
 
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-  query fileOverviewDesc($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-    fileOverviewDesc(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {    
+  query fileOverviewDesc($file_uuids: [String],$file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+    fileOverviewDesc(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {    
       file_name
       file_type
       association
@@ -1036,7 +1146,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 
 export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
   query sampleOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  sampleOverviewDesc(case_ids: $case_ids,, offset: $offset,first: $first, order_by: $order_by) {
+  sampleOverviewDesc(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {
     sample_id
     case_id
     breed
@@ -1118,8 +1228,8 @@ query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000
   `;
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
-query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10000000, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10000000, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
     file_uuid
   }
 }
