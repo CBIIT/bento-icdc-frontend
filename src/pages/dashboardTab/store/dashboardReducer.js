@@ -66,6 +66,7 @@ const initialState = {
       dataCase: 'undefined',
       dataSample: 'undefined',
       dataFile: 'undefined',
+      dataStudyFile: 'undefined',
     },
     dataCaseSelected: {
       selectedRowInfo: [],
@@ -76,6 +77,10 @@ const initialState = {
       selectedRowIndex: [],
     },
     dataFileSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
+    dataStudyFileSelected: {
       selectedRowInfo: [],
       selectedRowIndex: [],
     },
@@ -104,16 +109,21 @@ function setDataFileSelected(result) {
   store.dispatch({ type: 'SET_FILE_SELECTION', payload: result });
 }
 
+function setDataStudyFileSelected(result) {
+  store.dispatch({ type: 'SET_STUDY_FILE_SELECTION', payload: result });
+}
+
 function setDataSampleSelected(result) {
   store.dispatch({ type: 'SET_SAMPLE_SELECTION', payload: result });
 }
 
 export function getTableRowSelectionEvent() {
   const currentState = getState();
-  const tableRowSelectionEvent = currentState.currentActiveTab === tabIndex[2].title
-    ? setDataFileSelected
-    : currentState.currentActiveTab === tabIndex[1].title
-      ? setDataSampleSelected : setDataCaseSelected;
+  const tableRowSelectionEvent = currentState.currentActiveTab === tabIndex[3].title
+    ? setDataStudyFileSelected : currentState.currentActiveTab === tabIndex[2].title
+      ? setDataFileSelected
+      : currentState.currentActiveTab === tabIndex[1].title
+        ? setDataSampleSelected : setDataCaseSelected;
   return tableRowSelectionEvent;
 }
 
@@ -281,14 +291,14 @@ const querySwitch = (payload, tabContainer) => {
   switch (payload) {
     case ('Samples'):
       return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : GET_SAMPLES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
-    case ('Files'):
+    case ('StudyFiles'):
       return {
         QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY,
         sortfield: tabContainer.defaultSortField || '',
         sortDirection: tabContainer.defaultSortDirection || '',
         association: tabContainer.associations,
       };
-    case ('StudyFiles'):
+    case ('Files'):
       return {
         QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY,
         sortfield: tabContainer.defaultSortField || '',
@@ -327,6 +337,7 @@ export function fetchDataForDashboardTab(
   subjectIDsAfterFilter = null,
   sampleIDsAfterFilter = null,
   fileIDsAfterFilter = null,
+  studyFileIDsAfterFilter = null,
 ) {
   const {
     QUERY,
@@ -334,14 +345,15 @@ export function fetchDataForDashboardTab(
     sortDirection,
     association,
   } = getQueryAndDefaultSort(payload);
-
+  const fileIds = (payload === tabIndex[2].title) ? fileIDsAfterFilter
+    : studyFileIDsAfterFilter;
   return client
     .query({
       query: QUERY,
       variables: {
         case_ids: subjectIDsAfterFilter,
         sample_ids: sampleIDsAfterFilter,
-        file_uuids: fileIDsAfterFilter,
+        file_uuids: fileIds,
         order_by: sortfield || '',
         file_association: association,
       },
@@ -353,7 +365,6 @@ export function fetchDataForDashboardTab(
 }
 
 export async function getFileNamesByFileIds(fileIds, association) {
-  console.log('test');
   const data = await client
     .query({
       query: GET_FILES_NAME_QUERY,
@@ -370,10 +381,16 @@ export async function tableHasSelections() {
   let selectedRowInfo = [];
   let filteredIds = [];
   const association = (getState().currentActiveTab === tabIndex[2].title)
-    ? tabIndex[2].associations : tabIndex[3].associations;
-  console.log(association);
-  const filteredNames = await getFileNamesByFileIds(getState().filteredFileIds, association);
+    ? 'other' : 'study';
+  const fileIds = (getState().currentActiveTab === tabIndex[2].title) ? getState().filteredFileIds
+    : getState().filteredStudyFileIds;
+  const filteredNames = await getFileNamesByFileIds(fileIds, association);
   switch (getState().currentActiveTab) {
+    case tabIndex[3].title:
+      filteredIds = filteredNames;
+      selectedRowInfo = getState().dataStudyFileSelected.selectedRowInfo;
+
+      break;
     case tabIndex[2].title:
       filteredIds = filteredNames;
       selectedRowInfo = getState().dataFileSelected.selectedRowInfo;
@@ -405,14 +422,16 @@ export async function tableHasSelections() {
  * @return {json}
  */
 export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
+  const association = getState().currentActiveTab === tabIndex[2].title ? 'other' : 'study';
   const caseIds = getState().filteredSubjectIds;
   const sampleIds = getState().filteredSampleIds;
-  const fileIds = getState().filteredFileIds;
-  const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[2].title
-    ? GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL
+  const fileIds = (getState().currentActiveTab === tabIndex[2].title) ? getState().filteredFileIds
+    : getState().filteredStudyFileIds;
+  const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[0].title
+    ? GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL
     : getState().currentActiveTab === tabIndex[1].title
       ? GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL
-      : GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL;
+      : GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL;
 
   const fetchResult = await client
     .query({
@@ -422,11 +441,13 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
         sample_ids: sampleIds,
         file_uuids: fileIds,
         first: fileCount,
-        file_association: 'other',
+        file_association: association,
       },
     })
     .then((result) => {
-      const RESULT_DATA = getState().currentActiveTab === tabIndex[2].title ? 'fileOverview' : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverviewPaged';
+      const RESULT_DATA = (getState().currentActiveTab === tabIndex[2].title
+        || getState().currentActiveTab === tabIndex[3].title) ? 'fileOverview'
+        : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverviewPaged';
       const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? result.data[RESULT_DATA].map((item) => ({
         files: [item.file_uuid],
       })) : result.data[RESULT_DATA] || [];
@@ -556,6 +577,9 @@ function filterOutFileIds(fileIds) {
 export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
   let filesIds = [];
   switch (getState().currentActiveTab) {
+    case tabIndex[3].title:
+      filesIds = await getFileIDsByFileName(selectedIds, offset, first, order_by);
+      break;
     case tabIndex[2].title:
       filesIds = await getFileIDsByFileName(selectedIds, offset, first, order_by);
       break;
@@ -568,14 +592,20 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
   return filterOutFileIds(filesIds);
 }
 
-export const getFilesCount = () => getState().stats.numberOfFiles;
+export const getFilesCount = () => {
+  const fileCount = (getState().currentActiveTab === tabIndex[2].title)
+    ? getState().stats.numberOfFiles : getState().stats.numberOfStudyFiles;
+  return fileCount;
+};
 
 export function getCountForAddAllFilesModal() {
   const currentState = getState();
   const numberCount = currentState.currentActiveTab === tabIndex[0].title
     ? currentState.stats.numberOfCases
     : currentState.currentActiveTab === tabIndex[1].title
-      ? currentState.stats.numberOfSamples : currentState.stats.numberOfFiles;
+      ? currentState.stats.numberOfSamples
+      : currentState.currentActiveTab === tabIndex[2].title
+        ? currentState.stats.numberOfFiles : currentState.stats.numberOfStudyFiles;
   return { activeTab: currentState.currentActiveTab || tabIndex[2].title, count: numberCount };
 }
 
@@ -886,7 +916,7 @@ const reducers = {
       item.allFilters), item);
     fetchDataForDashboardTab(state.currentActiveTab,
       item.data.searchCases.caseIds, item.data.searchCases.sampleIds,
-      item.data.searchCases.fileIds);
+      item.data.searchCases.fileIds, item.data.searchCases.studyFileIds);
     return {
       ...state,
       setSideBarLoading: false,
@@ -894,6 +924,7 @@ const reducers = {
       filteredSubjectIds: item.data.searchCases.caseIds,
       filteredSampleIds: item.data.searchCases.sampleIds,
       filteredFileIds: item.data.searchCases.fileIds,
+      filteredStudyFileIds: item.data.searchCases.studyFileIds,
       checkbox: {
         data: checkboxData1,
       },
@@ -910,7 +941,10 @@ const reducers = {
         ...state.datatable,
         dataCase: item.sortDirection === 'desc' ? item.data.caseOverviewPagedDesc : item.data.caseOverviewPaged,
         dataSample: item.sortDirection === 'desc' ? item.data.sampleOverviewDesc : item.data.sampleOverview,
-        dataFile: item.sortDirection === 'desc' ? item.data.fileOverviewDesc : item.data.fileOverview,
+        dataFile: (item.currentTab === tabContainers[3].name) ? undefined : item.sortDirection === 'desc'
+          ? item.data.fileOverviewDesc : item.data.fileOverview,
+        dataStudyFile: (item.currentTab === tabContainers[2].name) ? undefined : item.sortDirection === 'desc'
+          ? item.data.fileOverviewDesc : item.data.fileOverview,
       },
     }
   ),
@@ -953,7 +987,7 @@ const reducers = {
   RECEIVE_DASHBOARDTAB: (state, item) => {
     const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data,
       facetSearchData, 'count'), item);
-    fetchDataForDashboardTab(tabIndex[0].title, null, null, null);
+    fetchDataForDashboardTab(tabIndex[0].title, null, null, null, null);
     return item.data
       ? {
         ...state.dashboard,
@@ -967,6 +1001,7 @@ const reducers = {
         filteredSubjectIds: null,
         filteredSampleIds: null,
         filteredFileIds: null,
+        filteredStudyFileIds: null,
         checkboxForAll: {
           data: checkboxData,
         },
@@ -989,12 +1024,15 @@ const reducers = {
           selectedRowInfo: [],
           selectedRowIndex: [],
         },
-
+        dataStudyFileSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
       } : { ...state };
   },
   CLEAR_ALL_FILTER: (state, item) => {
     const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
-    fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
+    fetchDataForDashboardTab(state.currentActiveTab, null, null, null, null);
     return item.data
       ? {
         ...state.dashboard,
@@ -1007,6 +1045,7 @@ const reducers = {
         filteredSubjectIds: null,
         filteredSampleIds: null,
         filteredFileIds: null,
+        filteredStudyFileIds: null,
         subjectOverView: {
           data: item.data.subjectOverViewPaged,
         },
@@ -1030,6 +1069,9 @@ const reducers = {
         },
         dataFileSelected: {
           ...state.dataFileSelected,
+        },
+        dataStudyFileSelected: {
+          ...state.dataStudyFileSelected,
         },
         sortByList: {
           ...state.sortByList,
@@ -1087,10 +1129,14 @@ const reducers = {
       selectedRowInfo: [],
       selectedRowIndex: [],
     },
+    dataStudyFileSelected: {
+      selectedRowInfo: [],
+      selectedRowIndex: [],
+    },
   }),
   CLEAR_ALL_FILTER_AND_TABLE_SELECTION: (state, item) => {
     const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data, facetSearchData, 'count'), item);
-    fetchDataForDashboardTab(state.currentActiveTab, null, null, null);
+    fetchDataForDashboardTab(state.currentActiveTab, null, null, null, null);
     return item.data
       ? {
         ...state.dashboard,
@@ -1103,6 +1149,7 @@ const reducers = {
         filteredSubjectIds: null,
         filteredSampleIds: null,
         filteredFileIds: null,
+        filteredStudyFileIds: null,
         subjectOverView: {
           data: item.data.subjectOverViewPaged,
         },
@@ -1127,6 +1174,10 @@ const reducers = {
           selectedRowIndex: [],
         },
         dataFileSelected: {
+          selectedRowInfo: [],
+          selectedRowIndex: [],
+        },
+        dataStudyFileSelected: {
           selectedRowInfo: [],
           selectedRowIndex: [],
         },
@@ -1161,6 +1212,12 @@ const reducers = {
     {
       ...state,
       dataFileSelected: item,
+    }
+  ),
+  SET_STUDY_FILE_SELECTION: (state, item) => (
+    {
+      ...state,
+      dataStudyFileSelected: item,
     }
   ),
 };

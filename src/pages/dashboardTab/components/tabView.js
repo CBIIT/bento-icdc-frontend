@@ -91,7 +91,7 @@ const TabView = ({
   tableHasSelections,
   unifiedViewFlag,
   tabIndex,
-  studyAssociations,
+  association,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -423,6 +423,7 @@ const TabView = ({
               case_ids: filteredSubjectIds,
               sample_ids: filteredSampleIds,
               file_uuids: filteredFileIds,
+              file_association: association,
             }}
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
@@ -430,7 +431,6 @@ const TabView = ({
             components={{
               Tooltip,
             }}
-            fileAssociations={studyAssociations}
           />
         </Grid>
       </Grid>
