@@ -1110,7 +1110,7 @@ query fileOverview($file_uuids: [String], $file_association: String, $offset: In
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_NAME_QUERY = gql`
-query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 100000, $order_by:String ="file_name"){
   fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
     file_name
   }
