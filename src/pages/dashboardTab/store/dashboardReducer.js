@@ -52,6 +52,7 @@ const initialState = {
     filteredSubjectIds: null,
     filteredSampleIds: null,
     filteredFileIds: null,
+    filteredStudyFileIds: null,
     checkboxForAll: {
       data: [],
     },
@@ -289,24 +290,17 @@ function createFilterVariables(data) {
 
 const querySwitch = (payload, tabContainer) => {
   switch (payload) {
+    case ('Cases'):
+      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_CASES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
     case ('Samples'):
       return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : GET_SAMPLES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
-    case ('StudyFiles'):
-      return {
-        QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY,
-        sortfield: tabContainer.defaultSortField || '',
-        sortDirection: tabContainer.defaultSortDirection || '',
-        association: tabContainer.associations,
-      };
-    case ('Files'):
-      return {
-        QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY,
-        sortfield: tabContainer.defaultSortField || '',
-        sortDirection: tabContainer.defaultSortDirection || '',
-        association: tabContainer.associations,
-      };
     default:
-      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_CASES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
+      return {
+        QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY,
+        sortfield: tabContainer.defaultSortField || '',
+        sortDirection: tabContainer.defaultSortDirection || '',
+        association: tabContainer.associations,
+      };
   }
 };
 
@@ -345,8 +339,8 @@ export function fetchDataForDashboardTab(
     sortDirection,
     association,
   } = getQueryAndDefaultSort(payload);
-  const fileIds = (payload === tabIndex[2].title) ? fileIDsAfterFilter
-    : studyFileIDsAfterFilter;
+  const fileIds = (payload === tabIndex[3].title) ? studyFileIDsAfterFilter
+    : fileIDsAfterFilter;
   return client
     .query({
       query: QUERY,
@@ -382,8 +376,8 @@ export async function tableHasSelections() {
   let filteredIds = [];
   const association = (getState().currentActiveTab === tabIndex[2].title)
     ? 'other' : 'study';
-  const fileIds = (getState().currentActiveTab === tabIndex[2].title) ? getState().filteredFileIds
-    : getState().filteredStudyFileIds;
+  const fileIds = (getState().currentActiveTab === tabIndex[3].title)
+    ? getState().filteredStudyFileIds : getState().filteredFileIds;
   const filteredNames = await getFileNamesByFileIds(fileIds, association);
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:
@@ -425,8 +419,8 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   const association = getState().currentActiveTab === tabIndex[2].title ? 'other' : 'study';
   const caseIds = getState().filteredSubjectIds;
   const sampleIds = getState().filteredSampleIds;
-  const fileIds = (getState().currentActiveTab === tabIndex[2].title) ? getState().filteredFileIds
-    : getState().filteredStudyFileIds;
+  const fileIds = (getState().currentActiveTab === tabIndex[3].title)
+    ? getState().filteredStudyFileIds : getState().filteredFileIds;
   const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[0].title
     ? GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL
     : getState().currentActiveTab === tabIndex[1].title
@@ -592,9 +586,20 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
   return filterOutFileIds(filesIds);
 }
 
+/*
+ * case file count - deduct study files from total file count
+ * @param file counts
+ * @return {int}
+ */
+export function getCaseFileCount(numberOfFiles, numberOfStudyFiles) {
+  const count = numberOfFiles - numberOfStudyFiles;
+  return (count < 0) ? 0 : count;
+}
+
 export const getFilesCount = () => {
-  const fileCount = (getState().currentActiveTab === tabIndex[2].title)
-    ? getState().stats.numberOfFiles : getState().stats.numberOfStudyFiles;
+  const fileCount = (getState().currentActiveTab === tabIndex[3].title)
+    ? getState().stats.numberOfStudyFiles
+    : getCaseFileCount(getState().stats.numberOfFiles, getState().stats.numberOfStudyFiles);
   return fileCount;
 };
 
@@ -605,7 +610,8 @@ export function getCountForAddAllFilesModal() {
     : currentState.currentActiveTab === tabIndex[1].title
       ? currentState.stats.numberOfSamples
       : currentState.currentActiveTab === tabIndex[2].title
-        ? currentState.stats.numberOfFiles : currentState.stats.numberOfStudyFiles;
+        ? getCaseFileCount(currentState.stats.numberOfFiles, currentState.stats.numberOfStudyFiles)
+        : currentState.stats.numberOfStudyFiles;
   return { activeTab: currentState.currentActiveTab || tabIndex[2].title, count: numberCount };
 }
 

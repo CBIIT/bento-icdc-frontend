@@ -208,7 +208,7 @@ class ServerPaginatedTableView extends React.Component {
         this.props.tableDownloadCSV && (
         <CSVDownloadToolbar
           tableDownloadCSV={this.props.tableDownloadCSV}
-          queryCustomVaribles={{ ...this.props.queryCustomVaribles }}
+          queryCustomVaribles={this.props.queryCustomVaribles}
         />
         )
       ),

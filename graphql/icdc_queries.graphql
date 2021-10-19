@@ -1919,6 +1919,7 @@ type QueryType {
          caseIds: COLLECT(DISTINCT c.case_id),
          sampleIds: COLLECT(DISTINCT samp.sample_id),
          fileIds: COLLECT(DISTINCT f.uuid),
+         studyFileIds: COLLECT(DISTINCT sf.uuid),
          firstPage: COLLECT(DISTINCT ({
            case_id: c.case_id,
            study_code: s.clinical_study_designation,
@@ -2111,8 +2112,9 @@ type QueryType {
       WHERE ($file_uuids = [""] OR $file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (parent)-[:of_case]->(c:case)
-    WITH f, parent, c
-      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
+    WITH f, parent, c,
+    CASE head(labels(parent)) WHEN 'study' THEN 'study' ELSE 'other' END AS association
+      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids) AND association = $file_association
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(diag:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
@@ -2231,8 +2233,9 @@ type QueryType {
       WHERE ($file_uuids = [""] OR $file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (parent)-[:of_case]->(c:case)
-    WITH f, parent, c
-      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
+    WITH f, parent, c,
+    CASE head(labels(parent)) WHEN 'study' THEN 'study' ELSE 'other' END AS association
+      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids) AND association = $file_association
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(diag:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)

@@ -17,7 +17,7 @@ import {
 } from '../../../bento/dashboardTabData';
 import {
   fetchDataForDashboardTab, getTableRowSelectionEvent, tableHasSelections, getFilesCount,
-  getUnifiedViewStats, clearAllFilters,
+  getUnifiedViewStats, clearAllFilters, getCaseFileCount,
 } from '../store/dashboardReducer';
 import GA from '../../../utils/googleAnalytics';
 
@@ -115,6 +115,8 @@ const tabController = ({ classes, unifiedViewData }) => {
     && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : null));
   const filteredFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredFileIds ? state.dashboardTab.filteredFileIds : null));
+  const filteredStudyFileIds = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.filteredStudyFileIds ? state.dashboardTab.filteredStudyFileIds : null));
   const [TopMessageStatus, setTopMessageStatus] = React.useState({
     text: tooltipContent[currentTab],
     src: tooltipContent.icon,
@@ -203,7 +205,7 @@ const tabController = ({ classes, unifiedViewData }) => {
       fetchDataForDashboardTab(tabIndex[value].title,
         filteredSubjectIds,
         filteredSampleIds,
-        filteredFileIds);
+        filteredFileIds, filteredStudyFileIds);
     }
   };
 
@@ -232,8 +234,8 @@ const tabController = ({ classes, unifiedViewData }) => {
   function getTabLalbel(title, count) {
     const tabObj = tabIndex[currentTab];
     // NOTE: refactor white color to theme's white color.
-    const primaryColor = (tabObj.title === title) ? tabIndex[currentTab].selectedColor : undefined;
-    const secondaryColor = (tabObj.title === title) ? tabObj.secondaryColor : undefined;
+    const primaryColor = (tabObj.title === title.split(' ').join('')) ? tabIndex[currentTab].selectedColor : undefined;
+    const secondaryColor = (tabObj.title === title.split(' ').join('')) ? tabObj.secondaryColor : undefined;
 
     return (
       <TabLabel
@@ -267,15 +269,20 @@ const tabController = ({ classes, unifiedViewData }) => {
   };
 
   // Tab Header Generator
-  const TABs = tabs.map((tab) => (
-    <Tab
-      id={tab.id}
-      disableRipple
-      label={
-        getTabLalbel(tab.title, dashboardStats[tab.count] ? dashboardStats[tab.count] : 0)
-      }
-    />
-  ));
+  const TABs = tabs.map((tab) => {
+    const count = (tab.count === 'numberOfFiles')
+      ? getCaseFileCount(dashboardStats.numberOfFiles, dashboardStats.numberOfStudyFiles)
+      : dashboardStats[tab.count] ? dashboardStats[tab.count] : 0;
+    return (
+      <Tab
+        id={tab.id}
+        disableRipple
+        label={
+          getTabLalbel(tab.title, count)
+        }
+      />
+    );
+  });
 
   // Calculate the properate marginTop value for the tooltip on the top
   function tooltipStyle(text) {

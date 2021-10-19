@@ -455,7 +455,7 @@ export const tabContainers = [
         dataField: 'association',
         header: 'Association',
         sort: 'asc',
-        display: false,
+        display: true,
       },
       {
         dataField: 'file_description',
@@ -491,18 +491,6 @@ export const tabContainers = [
           iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
           iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
         },
-      },
-      {
-        dataField: 'breed',
-        header: 'Breed',
-        sort: 'asc',
-        display: false,
-      },
-      {
-        dataField: 'diagnosis',
-        header: 'Diagnosis',
-        sort: 'asc',
-        display: false,
       },
       {
         dataField: 'study_code',
@@ -542,7 +530,7 @@ export const tabs = [
   },
   {
     id: 'file_tab',
-    title: 'Files',
+    title: 'Case Files',
     dataField: 'dataFile',
     count: 'numberOfFiles',
   },
@@ -576,9 +564,9 @@ export const tabIndex = [
   },
   {
     title: 'StudyFiles',
-    primaryColor: '#667A87',
-    secondaryColor: '#E1E5FF',
-    selectedColor: '#667A87',
+    primaryColor: '#39C0F0',
+    secondaryColor: '#39C0F0',
+    selectedColor: '#39C0F0',
   },
 ];
 
