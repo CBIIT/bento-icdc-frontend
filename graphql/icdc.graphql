@@ -1016,7 +1016,9 @@ type QueryType {
       c.case_id as case_id,
       demo.breed as breed,
       diag.disease_term as diagnosis,
-      s.clinical_study_designation AS study_code,
+      CASE WHEN s.clinical_study_designation IS NULL 
+      THEN parent.clinical_study_designation 
+      ELSE s.clinical_study_designation END AS study_code,
       f.uuid as file_uuid,
       f.md5sum AS md5sum,
       samp.sample_id AS sample_id,
@@ -1143,7 +1145,9 @@ type QueryType {
       c.case_id as case_id,
       demo.breed as breed,
       diag.disease_term as diagnosis,
-      s.clinical_study_designation AS study_code,
+      CASE WHEN s.clinical_study_designation IS NULL 
+      THEN parent.clinical_study_designation 
+      ELSE s.clinical_study_designation END AS study_code,
       f.uuid as file_uuid,
       f.md5sum AS md5sum,
       samp.sample_id AS sample_id,
@@ -2642,7 +2646,9 @@ type QueryType {
       c.case_id as case_id,
       demo.breed as breed,
       diag.disease_term as diagnosis,
-      s.clinical_study_designation as study_code,
+      CASE WHEN s.clinical_study_designation IS NULL 
+      THEN parent.clinical_study_designation 
+      ELSE s.clinical_study_designation END AS study_code,
       f.uuid as file_uuid,
       samp.sample_id AS sample_id,
       samp.sample_site as sample_site,
@@ -2763,7 +2769,9 @@ type QueryType {
       c.case_id as case_id,
       demo.breed as breed,
       diag.disease_term as diagnosis,
-      s.clinical_study_designation as study_code,
+      CASE WHEN s.clinical_study_designation IS NULL 
+      THEN parent.clinical_study_designation 
+      ELSE s.clinical_study_designation END AS study_code,
       f.uuid as file_uuid,
       samp.sample_id AS sample_id,
       samp.sample_site as sample_site,
