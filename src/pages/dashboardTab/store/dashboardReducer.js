@@ -375,7 +375,7 @@ export async function tableHasSelections() {
   let selectedRowInfo = [];
   let filteredIds = [];
   const association = (getState().currentActiveTab === tabIndex[2].title)
-    ? 'other' : 'study';
+    ? tabContainers[2].associations : tabContainers[3].associations;
   const fileIds = (getState().currentActiveTab === tabIndex[3].title)
     ? getState().filteredStudyFileIds : getState().filteredFileIds;
   const filteredNames = await getFileNamesByFileIds(fileIds, association);
@@ -416,7 +416,8 @@ export async function tableHasSelections() {
  * @return {json}
  */
 export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
-  const association = getState().currentActiveTab === tabIndex[2].title ? 'other' : 'study';
+  const association = getState().currentActiveTab === tabIndex[2].title
+    ? tabContainers[2].associations : tabContainers[3].associations;
   const caseIds = getState().filteredSubjectIds;
   const sampleIds = getState().filteredSampleIds;
   const fileIds = (getState().currentActiveTab === tabIndex[3].title)
