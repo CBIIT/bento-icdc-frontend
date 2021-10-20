@@ -2149,11 +2149,15 @@ type QueryType {
       MATCH (i)<--(c:case)
       OPTIONAL MATCH (c)<--(samp:sample)
       OPTIONAL MATCH (c)<-[*]-(f:file)
+      OPTIONAL MATCH (c) -[:member_of]->(s:study)
+      OPTIONAL MATCH (sf:file)-->(s)
+      WITH i, c, f, samp, sf
       RETURN{
         individualId: i.canine_individual_id,
         caseIds: collect(DISTINCT c.case_id),
         sampleIds: collect(DISTINCT samp.sample_id),
-        fileIds: collect(DISTINCT f.uuid)
+        fileIds: collect(DISTINCT f.uuid),
+        studyFileIds: collect(DISTINCT sf.uuid)
       }
   """, passThrough: true)
 
@@ -3011,15 +3015,16 @@ type QueryType {
   unifiedViewData(case_ids: [String] = [""]): UnifiedCounts @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
-    OPTIONAL MATCH (s:study)<--(c)
+    OPTIONAL MATCH (s:study)<-[:member_of]-(c)
     OPTIONAL MATCH (f:file)-[*]->(c)
-    OPTIONAL MATCH (s)<--(sf:file)
     OPTIONAL MATCH (samp:sample)-->(c)
     OPTIONAL MATCH (a:aliquot)-[*]->(c)
+    OPTIONAL MATCH (sf:file)-->(s)
+    WITH a, s, c, f, samp, sf
     RETURN{
       numberOfStudies: COUNT(DISTINCT s),
       numberOfCases: COUNT(DISTINCT c),
-      numberOfFiles: COUNT(DISTINCT f),
+      numberOfFiles: COUNT(DISTINCT f) + COUNT(DISTINCT sf),
       numberOfSamples: COUNT(DISTINCT samp),
       numberOfAliquots: COUNT(DISTINCT a),
       numberOfStudyFiles: COUNT(DISTINCT sf)

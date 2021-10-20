@@ -48,7 +48,7 @@ const tabController = ({ classes, unifiedViewData }) => {
   React.useEffect(() => {
     if (unifiedViewData) {
       prevMultistudyProp = unifiedViewData;
-      fetchDataForDashboardTab('Cases', unifiedViewData.caseIds, unifiedViewData.sampleIds, unifiedViewData.fileIds);
+      fetchDataForDashboardTab('Cases', unifiedViewData.caseIds, unifiedViewData.sampleIds, unifiedViewData.fileIds, unifiedViewData.studyFileIds);
       const obj = {
         numberOfStudies: unifiedViewData.numberOfStudies,
         numberOfCases: unifiedViewData.numberOfCases,
@@ -59,6 +59,7 @@ const tabController = ({ classes, unifiedViewData }) => {
         caseIds: unifiedViewData.caseIds,
         sampleIds: unifiedViewData.sampleIds,
         fileIds: unifiedViewData.fileIds,
+        studyFileIds: unifiedViewData.studyFileIds,
       };
       getUnifiedViewStats(obj);
     }
@@ -92,9 +93,10 @@ const tabController = ({ classes, unifiedViewData }) => {
       return (
         {
           numberOfStudies: unifiedViewData.studies,
-          numberOfCases: unifiedViewData.caseIds.length,
-          numberOfFiles: unifiedViewData.fileIds.length,
-          numberOfSamples: unifiedViewData.sampleIds.length,
+          numberOfCases: unifiedViewData.numberOfCases,
+          numberOfFiles: unifiedViewData.numberOfFiles,
+          numberOfSamples: unifiedViewData.numberOfSamples,
+          numberOfStudyFiles: unifiedViewData.numberOfStudyFiles,
           numberOfAliquots: 0,
         }
       );
@@ -200,7 +202,8 @@ const tabController = ({ classes, unifiedViewData }) => {
       fetchDataForDashboardTab(tabIndex[value].title,
         unifiedViewData.caseIds,
         unifiedViewData.sampleIds,
-        unifiedViewData.fileIds);
+        unifiedViewData.fileIds,
+        unifiedViewData.studyFileIds);
     } else {
       fetchDataForDashboardTab(tabIndex[value].title,
         filteredSubjectIds,
@@ -269,8 +272,7 @@ const tabController = ({ classes, unifiedViewData }) => {
   };
 
   // Tab Header Generator
-  const tabItems = (unifiedViewData) ? tabs.slice(0, 3) : tabs;
-  const TABs = tabItems.map((tab) => {
+  const TABs = tabs.map((tab) => {
     const count = (tab.count === 'numberOfFiles')
       ? getCaseFileCount(dashboardStats.numberOfFiles, dashboardStats.numberOfStudyFiles)
       : dashboardStats[tab.count] ? dashboardStats[tab.count] : 0;

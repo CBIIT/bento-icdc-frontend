@@ -240,6 +240,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
       caseIds
       sampleIds
       fileIds
+      studyFileIds
       individualId
     }
     case(case_id:$case_id){

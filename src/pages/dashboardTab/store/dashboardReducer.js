@@ -910,6 +910,7 @@ const reducers = {
     filteredSubjectIds: item.data.caseIds,
     filteredSampleIds: item.data.sampleIds,
     filteredFileIds: item.data.fileIds,
+    filteredStudyFileIds: item.data.studyFileIds,
   }),
   READY_DASHBOARDTAB: (state) => ({
     ...state,
