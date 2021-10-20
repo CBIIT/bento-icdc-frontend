@@ -269,7 +269,8 @@ const tabController = ({ classes, unifiedViewData }) => {
   };
 
   // Tab Header Generator
-  const TABs = tabs.map((tab) => {
+  const tabItems = (unifiedViewData) ? tabs.slice(0, 3) : tabs;
+  const TABs = tabItems.map((tab) => {
     const count = (tab.count === 'numberOfFiles')
       ? getCaseFileCount(dashboardStats.numberOfFiles, dashboardStats.numberOfStudyFiles)
       : dashboardStats[tab.count] ? dashboardStats[tab.count] : 0;
