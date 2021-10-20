@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import { submission, ddgraph, versionInfo } from 'bento-components';
 import layout from '../components/Layout/LayoutState';
 import stats from '../components/Stats/StatsState';
-import { submission, ddgraph, versionInfo } from '../components/DataDictionaryComponent/reducers';
 
 const reducers = {
   layout,

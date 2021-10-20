@@ -58,16 +58,16 @@ async function init() {
 
   const icdcMData = await getData('https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model.yml');
   const icdcMPData = await getData('https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model-props.yml');
-  console.log('icdcMData', icdcMData);
-  console.log('icdcMPData', icdcMPData);
+  // console.log('icdcMData', icdcMData);
+  // console.log('icdcMPData', icdcMPData);
 
   // translate the json file here
   const dataList = {};
 
   // using the following code the convert MDF to Gen3 format
   for (const [key, value] of Object.entries(icdcMData.Nodes)) {
-    console.log('key', key);
-    console.log('value', value);
+    // console.log('key', key);
+    // console.log('value', value);
     const item = {};
     item.$schema = 'http://json-schema.org/draft-06/schema#';
     item.id = key;

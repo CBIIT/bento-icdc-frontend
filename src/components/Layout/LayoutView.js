@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import { LinkBar } from 'bento-components';
+import { LinkBar, ReduxDataDictionary } from 'bento-components';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
@@ -18,7 +18,7 @@ import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
 import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
-import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
+// import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
