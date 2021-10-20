@@ -593,8 +593,11 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
  * @return {int}
  */
 export function getCaseFileCount(numberOfFiles, numberOfStudyFiles) {
-  const count = numberOfFiles - numberOfStudyFiles;
-  return (count < 0) ? 0 : count;
+  if (numberOfStudyFiles && numberOfStudyFiles > 0) {
+    const count = numberOfFiles - numberOfStudyFiles;
+    return (count < 0) ? 0 : count;
+  }
+  return numberOfFiles;
 }
 
 export const getFilesCount = () => {
