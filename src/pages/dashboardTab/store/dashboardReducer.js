@@ -574,7 +574,7 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:
       filesIds = await getFileIDsByFileName(selectedIds, offset, first, order_by);
-      break;
+      return filesIds;
     case tabIndex[2].title:
       filesIds = await getFileIDsByFileName(selectedIds, offset, first, order_by);
       break;
