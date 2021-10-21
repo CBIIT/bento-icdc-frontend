@@ -1018,7 +1018,9 @@ type QueryType {
       c.case_id as case_id,
       demo.breed as breed,
       diag.disease_term as diagnosis,
-      s.clinical_study_designation AS study_code,
+      CASE WHEN s.clinical_study_designation IS NULL 
+      THEN parent.clinical_study_designation 
+      ELSE s.clinical_study_designation END AS study_code,
       f.uuid as file_uuid,
       f.md5sum AS md5sum,
       samp.sample_id AS sample_id,
@@ -1145,7 +1147,9 @@ type QueryType {
       c.case_id as case_id,
       demo.breed as breed,
       diag.disease_term as diagnosis,
-      s.clinical_study_designation AS study_code,
+      CASE WHEN s.clinical_study_designation IS NULL 
+      THEN parent.clinical_study_designation 
+      ELSE s.clinical_study_designation END AS study_code,
       f.uuid as file_uuid,
       f.md5sum AS md5sum,
       samp.sample_id AS sample_id,
@@ -2145,11 +2149,15 @@ type QueryType {
       MATCH (i)<--(c:case)
       OPTIONAL MATCH (c)<--(samp:sample)
       OPTIONAL MATCH (c)<-[*]-(f:file)
+      OPTIONAL MATCH (c) -[:member_of]->(s:study)
+      OPTIONAL MATCH (sf:file)-->(s)
+      WITH i, c, f, samp, sf
       RETURN{
         individualId: i.canine_individual_id,
         caseIds: collect(DISTINCT c.case_id),
         sampleIds: collect(DISTINCT samp.sample_id),
-        fileIds: collect(DISTINCT f.uuid)
+        fileIds: collect(DISTINCT f.uuid),
+        studyFileIds: collect(DISTINCT sf.uuid)
       }
   """, passThrough: true)
 
@@ -2430,6 +2438,7 @@ type QueryType {
          caseIds: COLLECT(DISTINCT c.case_id),
          sampleIds: COLLECT(DISTINCT samp.sample_id),
          fileIds: COLLECT(DISTINCT f.uuid),
+         studyFileIds: COLLECT(DISTINCT sf.uuid),
          firstPage: COLLECT(DISTINCT ({
            case_id: c.case_id,
            study_code: s.clinical_study_designation,
@@ -2622,8 +2631,9 @@ type QueryType {
       WHERE ($file_uuids = [""] OR $file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (parent)-[:of_case]->(c:case)
-    WITH f, parent, c
-      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
+    WITH f, parent, c,
+    CASE head(labels(parent)) WHEN 'study' THEN 'study' ELSE 'other' END AS association
+      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids) AND association = $file_association
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(diag:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
@@ -2642,7 +2652,9 @@ type QueryType {
       c.case_id as case_id,
       demo.breed as breed,
       diag.disease_term as diagnosis,
-      s.clinical_study_designation as study_code,
+      CASE WHEN s.clinical_study_designation IS NULL 
+      THEN parent.clinical_study_designation 
+      ELSE s.clinical_study_designation END AS study_code,
       f.uuid as file_uuid,
       samp.sample_id AS sample_id,
       samp.sample_site as sample_site,
@@ -2742,8 +2754,9 @@ type QueryType {
       WHERE ($file_uuids = [""] OR $file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (parent)-[:of_case]->(c:case)
-    WITH f, parent, c
-      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
+    WITH f, parent, c,
+    CASE head(labels(parent)) WHEN 'study' THEN 'study' ELSE 'other' END AS association
+      WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids) AND association = $file_association
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(diag:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
@@ -2762,7 +2775,9 @@ type QueryType {
       c.case_id as case_id,
       demo.breed as breed,
       diag.disease_term as diagnosis,
-      s.clinical_study_designation as study_code,
+      CASE WHEN s.clinical_study_designation IS NULL 
+      THEN parent.clinical_study_designation 
+      ELSE s.clinical_study_designation END AS study_code,
       f.uuid as file_uuid,
       samp.sample_id AS sample_id,
       samp.sample_site as sample_site,
@@ -3000,15 +3015,16 @@ type QueryType {
   unifiedViewData(case_ids: [String] = [""]): UnifiedCounts @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
-    OPTIONAL MATCH (s:study)<--(c)
+    OPTIONAL MATCH (s:study)<-[:member_of]-(c)
     OPTIONAL MATCH (f:file)-[*]->(c)
-    OPTIONAL MATCH (s)<--(sf:file)
     OPTIONAL MATCH (samp:sample)-->(c)
     OPTIONAL MATCH (a:aliquot)-[*]->(c)
+    OPTIONAL MATCH (sf:file)-->(s)
+    WITH a, s, c, f, samp, sf
     RETURN{
       numberOfStudies: COUNT(DISTINCT s),
       numberOfCases: COUNT(DISTINCT c),
-      numberOfFiles: COUNT(DISTINCT f),
+      numberOfFiles: COUNT(DISTINCT f) + COUNT(DISTINCT sf),
       numberOfSamples: COUNT(DISTINCT samp),
       numberOfAliquots: COUNT(DISTINCT a),
       numberOfStudyFiles: COUNT(DISTINCT sf)
