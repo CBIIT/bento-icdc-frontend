@@ -809,6 +809,16 @@ type CaseOverview2 {
   disease_site: String
   files: [String]
   other_cases: [String]
+  individual_id: String
+  primary_disease_site: String
+  date_of_diagnosis: String
+  histological_grade: String
+  pathology_report: String
+  treatment_data: String
+  follow_up_data: String
+  concurrent_disease: String
+  concurrent_disease_type: String
+  arm: String
 }
 
 type SearchResult {
@@ -2284,7 +2294,17 @@ type QueryType {
       demo.weight AS weight,
       diag.best_response AS response_to_treatment,
       collect(DISTINCT(f.uuid)) AS files,
-      collect(DISTINCT o.case_id) AS other_cases
+      collect(DISTINCT o.case_id) AS other_cases,
+      i.canine_individual_id as individual_id,
+      diag.primary_disease_site as primary_disease_site,
+      diag.date_of_diagnosis as date_of_diagnosis,
+      diag.histological_grade as histological_grade,
+      diag.pathology_report as pathology_report,
+      diag.treatment_data as treatment_data,
+      diag.follow_up_data as follow_up_data,
+      diag.concurrent_disease as concurrent_disease,
+      diag.concurrent_disease_type as concurrent_disease_type,
+      a.arm as arm
     RETURN{
       case_id: case_id,
       study_code: study_code,
@@ -2300,7 +2320,17 @@ type QueryType {
       weight: weight,
       response_to_treatment: response_to_treatment,
       files: files,
-      other_cases: other_cases
+      other_cases: other_cases,
+      individual_id: individual_id,
+      primary_disease_site: primary_disease_site,
+      date_of_diagnosis : date_of_diagnosis,
+      histological_grade : histological_grade,
+      pathology_report : pathology_report,
+      treatment_data : treatment_data,
+      follow_up_data : follow_up_data,
+      concurrent_disease : concurrent_disease,
+      concurrent_disease_type : concurrent_disease_type,
+      arm : arm
     }
     ORDER BY
       CASE $order_by

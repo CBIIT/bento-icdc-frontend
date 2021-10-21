@@ -809,6 +809,16 @@ type CaseOverview2 {
   disease_site: String
   files: [String]
   other_cases: [String]
+  individual_id: String
+  primary_disease_site: String
+  date_of_diagnosis: String
+  histological_grade: String
+  pathology_report: String
+  treatment_data: String
+  follow_up_data: String
+  concurrent_disease: String
+  concurrent_disease_type: String
+  arm: String
 }
 
 type SearchResult {

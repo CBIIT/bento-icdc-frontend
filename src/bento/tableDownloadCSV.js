@@ -16,13 +16,47 @@ query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
     weight
     response_to_treatment
     disease_site
-    files 
+    files
+    other_cases
+    individual_id
+    primary_disease_site
+    date_of_diagnosis
+    histological_grade
+    pathology_report
+    treatment_data
+    follow_up_data
+    concurrent_disease
+    concurrent_disease_type
+    arm
   }
 }
 `;
 const customCasesOptionalDataFields = {
-  keysToInclude: [],
-  header: [],
+  keysToInclude: [
+    'individual_id',
+    'other_cases',
+    'primary_disease_site',
+    'date_of_diagnosis',
+    'histological_grade',
+    'pathology_report',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'arm'],
+  header: [
+    'Canine ID',
+    'Matching Cases',
+    'Disease Site',
+    'Date of Diagnosis',
+    'Histological Grade',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
+    'Arm',
+  ],
 };
 
 const customCasesTabCoreDataFields = {
