@@ -2626,7 +2626,7 @@ type QueryType {
       }
   """, passThrough: true)
 
-  fileOverview(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] @cypher(statement: """
+  fileOverview(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = "", file_association: String): [FileOverview] @cypher(statement: """
     MATCH (f:file)
       WHERE ($file_uuids = [""] OR $file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
@@ -2749,7 +2749,7 @@ type QueryType {
     ELSE file_name END
   """, passThrough: true)
 
-  fileOverviewDesc(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] @cypher(statement: """
+  fileOverviewDesc(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = "", file_association: String): [FileOverview] @cypher(statement: """
     MATCH (f:file)
       WHERE ($file_uuids = [""] OR $file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)

@@ -1248,9 +1248,9 @@ type QueryType {
 
   studyStats: [StudyStat] 
 
-  fileOverview(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] 
+  fileOverview(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = "", file_association: String): [FileOverview] 
 
-  fileOverviewDesc(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = ""): [FileOverview] 
+  fileOverviewDesc(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = "", file_association: String): [FileOverview] 
 
   sampleOverview(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] 
 
