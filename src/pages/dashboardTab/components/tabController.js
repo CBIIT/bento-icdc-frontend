@@ -328,6 +328,7 @@ const tabController = ({ classes, unifiedViewData }) => {
         filteredSubjectIds={filteredSubjectIds}
         filteredSampleIds={filteredSampleIds}
         filteredFileIds={filteredFileIds}
+        filteredStudyFileIds={filteredStudyFileIds}
         tableDownloadCSV={container.tableDownloadCSV || false}
         setRowSelection={getTableRowSelectionEvent()}
         getFilesCount={getFilesCount}
