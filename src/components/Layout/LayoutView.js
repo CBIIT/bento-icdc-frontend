@@ -19,6 +19,7 @@ import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
 import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
+// eslint-disable-next-line no-unused-vars
 import init from './utils';
 
 const ScrollToTop = () => {
@@ -55,6 +56,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/case/:id" component={CaseDetails} />
             <Route
               path="/icdc-data-model"
+              // eslint-disable-next-line arrow-body-style
               render={() => {
                 // get data
                 init();

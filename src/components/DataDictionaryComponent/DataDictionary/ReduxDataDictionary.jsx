@@ -17,9 +17,7 @@ import DataDictionary from './DataDictionary';
 
 // export default ReduxDataDictionary;
 
-const ReduxDataDictionary = (props) => (
-  <DataDictionary {...props} />
-);
+const ReduxDataDictionary = (props) => (<DataDictionary {...props} />);
 
 const mapStateToProps = (state) => ({
   isGraphView: state.ddgraph.isGraphView,
