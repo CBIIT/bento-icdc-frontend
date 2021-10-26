@@ -154,7 +154,7 @@ const LandingView = ({ classes }) => (
                   to={pageData.tile1.callToActionLink}
                   className={classes.aboutButton}
                 >
-                  FULL ARTICLE
+                  READ MORE
                 </Link>
               </div>
             </div>

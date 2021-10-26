@@ -9,7 +9,7 @@ export const pageData = {
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_About.png',
     titleText: 'About the Integrated Canine Data Commons (ICDC)',
     descriptionText: 'NC\'s Division of Cancer Treatment and Diagnosis (DCTD) charged the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects.',
-    callToActionText: 'FULL ARTICLE',
+    callToActionText: 'READ MORE',
     callToActionLink: '/purpose', // This links to the "About" static page.
   },
   tile2: {
@@ -17,7 +17,7 @@ export const pageData = {
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_Program.png',
     titleText: 'Programs',
     descriptionText: 'Discover the programs in ICDC',
-    callToActionText: 'READ MORE',
+    callToActionText: 'EXPLORE',
     callToActionLink: '/programs', // This links to the Programs Listing Page.
   },
   tile3: {
@@ -25,8 +25,8 @@ export const pageData = {
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_Studies.png',
     titleText: 'Studies',
     descriptionText: 'Browse the studies within ICDC',
-    callToActionText: 'READ MORE',
-    callToActionLink: '/studies', // Link to the "Resources" Static Page
+    callToActionText: 'EXPLORE',
+    callToActionLink: '/studies', // Link to the Studies page
   },
   tile4: {
     alt: 'ICDC submit',
@@ -34,14 +34,14 @@ export const pageData = {
     titleText: 'Submit Data',
     descriptionText: ' Interested in contributing data to ICDC ?',
     callToActionText: 'READ MORE',
-    callToActionLink: '/submit', // This links to the cases dashboard.
+    callToActionLink: '/submit', // This links to the Submitting Data static page.
   },
   tile5: {
     alt: 'ICDC cases',
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_Cases.png',
     titleText: 'Cases',
     descriptionText: 'Search all the Cases and build cohorts from all the Programs/Studies within the ICDC. The data files from these cohorts can then be analyzed in the Cloud Resources.',
-    callToActionText: 'READ MORE',
+    callToActionText: 'EXPLORE',
     callToActionLink: '/cases', // This links to the cases dashboard.
   },
 };
