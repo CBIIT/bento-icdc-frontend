@@ -19,6 +19,7 @@ import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
 import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
+import init from './utils';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -52,7 +53,15 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
-            <Route path="/icdc-data-model" component={ReduxDataDictionary} />
+            <Route
+              path="/icdc-data-model"
+              render={() => {
+                // get data
+                init();
+                // return component
+                return <ReduxDataDictionary />;
+              }}
+            />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
             )}
