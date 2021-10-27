@@ -68,13 +68,13 @@ export const globalStatsData = [
     statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-StudyFile.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
-  {
-    statTitle: 'Aliquots',
-    type: 'field',
-    statAPI: 'numberOfAliquots',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-aliquots-stats.svg',
-    statIconAlt: 'Aliquots Stats Bar Icon',
-  },
+  // {
+  //   statTitle: 'Aliquots',
+  //   type: 'field',
+  //   statAPI: 'numberOfAliquots',
+  //   statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-aliquots-stats.svg',
+  //   statIconAlt: 'Aliquots Stats Bar Icon',
+  // },
 ];
 
 // --------------- GraphQL query - Retrieve stats details --------------
