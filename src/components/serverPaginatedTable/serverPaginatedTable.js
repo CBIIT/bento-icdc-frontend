@@ -4,7 +4,7 @@ import React from 'react';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
-
+import cloneDeep from 'lodash/cloneDeep';
 import { CircularProgress, Backdrop, withStyles } from '@material-ui/core';
 import { CustomDataTable, ToolTip as Tooltip } from 'bento-components';
 import client from '../../utils/graphqlClient';
@@ -19,15 +19,42 @@ class ServerPaginatedTableView extends React.Component {
     isLoading: false,
     // Init an array updatedColumns - helps in tracking onViewColumnsChange
     updatedColumns: [],
+    page: 0,
+    columns: [],
   };
 
   componentDidMount() {
     this.getData('', 0);
+    localStorage.setItem('page', String(0));
+    localStorage.setItem('rowsPerPage', String(10));
+    localStorage.setItem('sortColumn', this.props.defaultSortCoulmn);
+    localStorage.setItem('sortDirection', this.props.defaultSortDirection);
+    localStorage.setItem('data', JSON.stringify(this.props.data));
+    this.setState({
+      sortOrder: {
+        name: this.props.defaultSortCoulmn,
+        direction: this.props.defaultSortDirection,
+      },
+      columns: cloneDeep(this.props.columns),
+    });
+    if (this.props.updateSortOrder) {
+      if (this.props.localRowsPerPage !== null) {
+        const localRowsPerPage = parseInt(this.props.localRowsPerPage, 10);
+        const localPage = parseInt(this.props.localPage, 10);
+        this.setState({
+          rowsPerPage: localRowsPerPage,
+          page: localPage,
+        });
+      }
+    }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.data !== prevProps.data) {
+    if (this.props.data !== prevProps.data && this.props.data !== 'undefined') {
       this.getData('', 0);
+    }
+    if (this.props.data !== prevProps.data && this.props.data === 'undefined' && prevProps.data !== 'undefined' && this.props.updateSortOrder) {
+      this.changeToPrevDataState(prevProps);
     }
   }
 
@@ -35,7 +62,27 @@ class ServerPaginatedTableView extends React.Component {
   getData = (url, page) => {
     this.xhrRequest(url, page).then((res) => {
       this.setState({ data: res.data, count: this.props.count });
+      if (this.props.updateSortOrder) {
+        if (this.props.localRowsPerPage !== null) {
+          const localRowsPerPage = parseInt(this.props.localRowsPerPage, 10);
+          const localPage = parseInt(this.props.localPage, 10);
+          if (localRowsPerPage !== this.state.rowsPerPage) {
+            this.setState({
+              rowsPerPage: localRowsPerPage,
+            });
+          }
+          if (localPage !== this.state.page) {
+            this.setState({
+              page: localPage,
+            });
+          }
+        }
+      }
     });
+  }
+
+  changeToPrevDataState = (prevProps) => {
+    this.setState({ data: prevProps.data, count: prevProps.count });
   }
 
   getSrcData = () => this.props.data;
@@ -90,6 +137,8 @@ class ServerPaginatedTableView extends React.Component {
         });
       }
 
+      const localPage = page;
+
       // eslint-disable-next-line max-len
       const srcData = fullData.slice(page * this.state.rowsPerPage, (page + 1) * this.state.rowsPerPage);
       if (srcData !== 'undefined' && srcData.length !== this.state.rowsPerPage && this.props.count > this.state.rowsPerPage) {
@@ -101,9 +150,13 @@ class ServerPaginatedTableView extends React.Component {
           });
         }
         const data = srcData;
+        if (this.props.updateSortOrder) {
+          localStorage.setItem('dataLength', String(srcData.length));
+          localStorage.setItem('data', JSON.stringify(srcData));
+        }
         setTimeout(() => {
           resolve({
-            data, total, page,
+            data, total, localPage,
           });
         }, 500);
       }
@@ -143,6 +196,7 @@ class ServerPaginatedTableView extends React.Component {
           sortOrder,
           data: res,
           count: this.props.count,
+          page,
         });
       });
     };
@@ -164,29 +218,59 @@ class ServerPaginatedTableView extends React.Component {
     this.rowsSelectedTrigger(displayData);
   };
 
+  changeColumnView = (changedColumn, action) => {
+    const { columns } = this.state;
+    const colIndex = columns.findIndex((col) => col.name === changedColumn);
+    columns[colIndex].options.display = action === 'add';
+    this.setState({ columns });
+  };
+
   async fetchData(offset, rowsRequired, sortOrder = {}) {
     let sortDirection = 'asc';
     let sortColumn = 'arm';
+    let offsetReal = offset;
+    let page = offset / rowsRequired;
+    // if the offset value is bigger that the count, then change offset value
+    if (offset >= this.props.count) {
+      page = this.props.count % rowsRequired !== 0 ? Math.floor(this.props.count / rowsRequired)
+        : Math.floor(this.props.count / rowsRequired) - 1;
+      offsetReal = page * rowsRequired;
+      localStorage.setItem('page', String(page));
+      this.setState({
+        page,
+      });
+    }
 
     sortDirection = Object.keys(sortOrder).length === 0 ? this.props.defaultSortDirection || 'asc' : sortOrder.direction;
     sortColumn = Object.keys(sortOrder).length === 0 ? this.props.defaultSortCoulmn || '' : sortOrder.name;
+    if (this.props.updateSortOrder) {
+      localStorage.setItem('page', String(page));
+      localStorage.setItem('rowsPerPage', String(rowsRequired));
+      this.setState({
+        page,
+      });
+    }
     const fetchResult = await client
       .query({
         query: sortDirection !== 'asc' ? this.props.overviewDesc : this.props.overview,
         variables: {
-          offset,
+          offset: offsetReal,
           first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
           order_by: sortColumn,
           ...this.props.queryCustomVaribles,
         },
       })
       .then((result) => (sortDirection !== 'asc' ? result.data[this.props.paginationAPIFieldDesc] : result.data[this.props.paginationAPIField]));
+    if (this.props.updateSortOrder) {
+      localStorage.setItem('dataLength', String(fetchResult.length));
+      localStorage.setItem('data', JSON.stringify(fetchResult));
+    }
     return fetchResult;
   }
 
   render() {
     const {
-      data, count, isLoading, rowsPerPage, sortOrder, className,
+      data, count, isLoading, rowsPerPage, sortOrder, className, page, columns,
     } = this.state;
     const options1 = {
       filterType: 'dropdown',
@@ -257,25 +341,35 @@ class ServerPaginatedTableView extends React.Component {
         }
       },
       onViewColumnsChange: (changedColumn, action) => {
-        // Track user interaction with ViewColumns and build an array updatedColumns
-        // updatedColumns shall Save label, status for every interaction
-        const index = this.state.updatedColumns.findIndex((x) => x.label === changedColumn);
-        if (index === -1) {
-          this.state.updatedColumns.push({
-            label: changedColumn,
-            status: action,
-          });
-        } else if (changedColumn[index] !== undefined && changedColumn[index].status !== action) {
-          this.state.updatedColumns.splice(index, 1);
-          this.state.updatedColumns.push({
-            label: changedColumn,
-            status: action,
-          });
-        }
-        return '';
+        // // Track user interaction with ViewColumns and build an array updatedColumns
+        // // updatedColumns shall Save label, status for every interaction
+        // const index = this.state.updatedColumns.findIndex((x) => x.label === changedColumn);
+        // if (index === -1) {
+        //   this.state.updatedColumns.push({
+        //     label: changedColumn,
+        //     status: action,
+        //   });
+        // eslint-disable-next-line max-len
+        // } else if (changedColumn[index] !== undefined && changedColumn[index].status !== action) {
+        //   this.state.updatedColumns.splice(index, 1);
+        //   this.state.updatedColumns.push({
+        //     label: changedColumn,
+        //     status: action,
+        //   });
+        // }
+        // return '';
+        this.changeColumnView(changedColumn, action);
       },
     };
-
+    if (this.props.updateSortOrder) {
+      const offset = page * rowsPerPage;
+      let newPage = page;
+      const localPage = parseInt(this.props.localPage, 10);
+      if (offset >= this.props.count) {
+        newPage = localPage;
+      }
+      options1.page = newPage;
+    }
     return (
       <div>
         <Backdrop
@@ -287,7 +381,7 @@ class ServerPaginatedTableView extends React.Component {
         {data === 'undefined' ? <CircularProgress /> : (
           <CustomDataTable
             data={data}
-            columns={this.props.columns}
+            columns={columns}
             options={({ ...this.props.options, ...options1 })}
             className={className}
             components={{
