@@ -19,6 +19,7 @@ import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
 import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
+import OverlayWindow from '../OverlayWindow/OverlayWindow';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -32,6 +33,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
       <>
         <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
         <Header />
+        <OverlayWindow />
         <NavBar />
         {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
