@@ -8,7 +8,7 @@ export const pageData = {
     alt: 'ICDC about',
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_About.png',
     titleText: 'About the Integrated Canine Data Commons (ICDC)',
-    descriptionText: 'NC\'s Division of Cancer Treatment and Diagnosis (DCTD) charged the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects.',
+    descriptionText: 'NCI\'s Division of Cancer Treatment and Diagnosis (DCTD) designated the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects.',
     callToActionText: 'FULL ARTICLE',
     callToActionLink: '/purpose', // This links to the "About" static page.
   },
@@ -24,7 +24,7 @@ export const pageData = {
     alt: 'ICDC studies',
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_Studies.png',
     titleText: 'Studies',
-    descriptionText: 'Browse the studies within ICDC',
+    descriptionText: 'Browse the studies in ICDC',
     callToActionText: 'READ MORE',
     callToActionLink: '/studies', // Link to the "Resources" Static Page
   },
@@ -32,7 +32,7 @@ export const pageData = {
     alt: 'ICDC submit',
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_Submit.png',
     titleText: 'Submit Data',
-    descriptionText: ' Interested in contributing data to ICDC ?',
+    descriptionText: ' Interested in contributing data to ICDC?',
     callToActionText: 'READ MORE',
     callToActionLink: '/submit', // This links to the cases dashboard.
   },
@@ -40,7 +40,7 @@ export const pageData = {
     alt: 'ICDC cases',
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_Cases.png',
     titleText: 'Cases',
-    descriptionText: 'Search all the Cases and build cohorts from all the Programs/Studies within the ICDC. The data files from these cohorts can then be analyzed in the Cloud Resources.',
+    descriptionText: 'Search across cases and build cohorts from the programs and studies in ICDC. The data files from these cohorts can then be analyzed in the Cloud Resources.',
     callToActionText: 'READ MORE',
     callToActionLink: '/cases', // This links to the cases dashboard.
   },
