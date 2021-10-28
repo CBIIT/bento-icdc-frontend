@@ -854,6 +854,7 @@ type SearchResult {
   caseIds: [String]
   sampleIds: [String]
   fileIds: [String]
+  studyFileIds: [String]
   firstPage: [CaseOverview2]
 }
 
@@ -879,6 +880,7 @@ type MultiStudyCases {
     caseIds: [String]
     sampleIds: [String]
     fileIds: [String]
+    studyFileIds: [String]
 }
 
 type UnifiedCounts{
@@ -3117,11 +3119,12 @@ type QueryType {
   unifiedViewData(case_ids: [String] = [""]): UnifiedCounts @cypher(statement: """
     MATCH (c:case)
       WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids)
-    OPTIONAL MATCH (s:study)<-[:member_of]-(c)
+    OPTIONAL MATCH (s:study)<--(c)
     OPTIONAL MATCH (f:file)-[*]->(c)
     OPTIONAL MATCH (samp:sample)-->(c)
     OPTIONAL MATCH (a:aliquot)-[*]->(c)
-    OPTIONAL MATCH (sf:file)-->(s)
+    OPTIONAL MATCH (c)-[:member_of]->(sd:study)
+    OPTIONAL MATCH (sf:file)-->(sd)
     WITH a, s, c, f, samp, sf
     RETURN{
       numberOfStudies: COUNT(DISTINCT s),
