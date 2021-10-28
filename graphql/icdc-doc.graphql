@@ -854,6 +854,7 @@ type SearchResult {
   caseIds: [String]
   sampleIds: [String]
   fileIds: [String]
+  studyFileIds: [String]
   firstPage: [CaseOverview2]
 }
 
@@ -879,6 +880,7 @@ type MultiStudyCases {
     caseIds: [String]
     sampleIds: [String]
     fileIds: [String]
+    studyFileIds: [String]
 }
 
 type UnifiedCounts{
