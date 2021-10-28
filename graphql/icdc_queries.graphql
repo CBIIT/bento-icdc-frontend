@@ -1792,6 +1792,7 @@ type QueryType {
     OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (parent)-[:of_case]->(c)
     OPTIONAL MATCH (f:file)-->(parent)
+    OPTIONAL MATCH (co)-->(a:study_arm)
     WITH
       DISTINCT c.case_id as case_id,
       s.clinical_study_designation AS study_code,
