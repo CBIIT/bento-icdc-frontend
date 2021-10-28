@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@gen3/ui-component/dist/components/Button';
+// eslint-disable-next-line no-unused-vars
 import { downloadTemplate, SearchResultItemShape } from '../../utils';
 import { getCategoryIconSVG } from '../../NodeCategories/helper';
 import {
@@ -94,7 +95,9 @@ class OverlayPropertyTable extends React.Component {
                   Close
                   <i className="overlay-property-table__close-icon g3-icon g3-icon--cross g3-icon--sm" />
                 </span>
-                <Button
+                {
+                // Fix Download buttons
+                /* <Button
                   className="overlay-property-table__download-button"
                   onClick={() => { downloadTemplate('tsv', this.props.node.id); }}
                   label="TSV"
@@ -107,7 +110,7 @@ class OverlayPropertyTable extends React.Component {
                   label="JSON"
                   buttonType="secondary"
                   rightIcon="download"
-                />
+                /> */}
               </div>
 
             </div>
