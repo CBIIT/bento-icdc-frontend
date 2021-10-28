@@ -791,6 +791,29 @@ type SampleOverview {
   necropsy_sample: String
   sample_preservation: String
   files: [String]
+  physical_sample_type: String
+  general_sample_pathology: String
+  tumor_sample_origin: String
+  comment: String
+  individual_id: String
+  other_cases: [String]
+  patient_age_at_enrollment: String
+  sex: String
+  neutered_indicator: String
+  weight: String
+  primary_disease_site: String
+  stage_of_disease: String
+  date_of_diagnosis: String
+  histology_cytopathology: String
+  histological_grade: String
+  best_response: String
+  pathology_report: String
+  treatment_data: String
+  follow_up_data: String
+  concurrent_disease: String
+  concurrent_disease_type: String
+  cohort_description: String
+  arm: String
 }
 
 type CaseOverview2 {
