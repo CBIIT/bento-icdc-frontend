@@ -1,15 +1,17 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import DictionarySearcher from './DictionarySearcher';
+import GraphCalculator from './GraphCalculator';
 
 const DictionarySearcherController = (props) => {
-  if (!props.dictionary) {
+  if (!props.dictionary && !props.linksSearch && !props.countsSearch) {
     return <CircularProgress />;
   }
 
   // eslint-disable-next-line no-console
-  console.log(props);
-  return <DictionarySearcher {...props} />;
+  console.log('GraphCalculatorController.js', props);
+
+  return <GraphCalculator {...props} />;
 };
 
 export default DictionarySearcherController;

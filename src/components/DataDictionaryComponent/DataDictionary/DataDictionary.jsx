@@ -10,6 +10,8 @@ import './DataDictionary.css';
 class DataDictionary extends React.Component {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-console
+    console.log('from DataDictionary.jsx', props);
     this.dictionarySearcherRef = React.createRef();
   }
 
@@ -24,6 +26,10 @@ class DataDictionary extends React.Component {
   handleClearSearchResult = () => {
     this.dictionarySearcherRef.current.launchClearSearchFromOutside();
   };
+
+  componentDidMount = () => {
+    this.setGraphView(false);
+  }
 
   render() {
     return (
