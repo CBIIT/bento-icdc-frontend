@@ -218,6 +218,7 @@ type FileInList {
   concurrent_disease_type: String
   cohort_description: String
   arm: String
+  other_cases: [String]
 }
 
 type FileOverview {
@@ -264,6 +265,7 @@ type FileOverview {
   concurrent_disease_type: String
   cohort_description: String
   arm: String
+  other_cases: [String]
 }
 
 type SampleOverview {
@@ -494,7 +496,7 @@ type QueryType {
     OPTIONAL MATCH (enroll:enrollment)-[:of_case]->(c)
     OPTIONAL MATCH (samp:sample)-[:of_case]->(c)
     OPTIONAL MATCH (s:study)<-[:member_of]-(c)
-    OPTIONAL MATCH (c)-->(i:canine_individual)
+    OPTIONAL MATCH (c)-->(i:canine_individual)<--(o:case)
     OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (co)-->(a:study_arm)
     WITH
@@ -545,7 +547,8 @@ type QueryType {
       diag.concurrent_disease as concurrent_disease,
       diag.concurrent_disease_type as concurrent_disease_type,
       co.cohort_description as cohort_description,
-      a.arm as arm
+      a.arm as arm,
+      collect(DISTINCT o.case_id) AS other_cases
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -592,7 +595,8 @@ type QueryType {
       concurrent_disease: concurrent_disease,
       concurrent_disease_type: concurrent_disease_type,
       cohort_description: cohort_description,
-      arm: arm
+      arm: arm,
+      other_cases: other_cases
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -623,7 +627,7 @@ type QueryType {
     OPTIONAL MATCH (enroll:enrollment)-[:of_case]->(c)
     OPTIONAL MATCH (samp:sample)-[:of_case]->(c)
     OPTIONAL MATCH (s:study)<-[:member_of]-(c)
-    OPTIONAL MATCH (c)-->(i:canine_individual)
+    OPTIONAL MATCH (c)-->(i:canine_individual)<--(o:case)
     OPTIONAL MATCH (c)-->(co:cohort)
     OPTIONAL MATCH (co)-->(a:study_arm)
     WITH
@@ -674,7 +678,8 @@ type QueryType {
       diag.concurrent_disease as concurrent_disease,
       diag.concurrent_disease_type as concurrent_disease_type,
       co.cohort_description as cohort_description,
-      a.arm as arm
+      a.arm as arm,
+      collect(DISTINCT o.case_id) AS other_cases
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -721,7 +726,8 @@ type QueryType {
       concurrent_disease: concurrent_disease,
       concurrent_disease_type: concurrent_disease_type,
       cohort_description: cohort_description,
-      arm: arm
+      arm: arm,
+      other_cases: other_cases
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -2126,7 +2132,7 @@ type QueryType {
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(diag:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
-    OPTIONAL MATCH (c)-->(i:canine_individual)
+    OPTIONAL MATCH (c)-->(i:canine_individual)<--(o:case)
     OPTIONAL MATCH (f)-[*]->(samp:sample)
     OPTIONAL MATCH (enroll:enrollment)-[:of_case]->(c)
     OPTIONAL MATCH (c)-->(co:cohort)
@@ -2176,7 +2182,8 @@ type QueryType {
       diag.concurrent_disease as concurrent_disease,
       diag.concurrent_disease_type as concurrent_disease_type,
       co.cohort_description as cohort_description,
-      a.arm as arm
+      a.arm as arm,
+      collect(DISTINCT o.case_id) AS other_cases
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -2220,7 +2227,8 @@ type QueryType {
       concurrent_disease: concurrent_disease,
       concurrent_disease_type: concurrent_disease_type,
       cohort_description: cohort_description,
-      arm: arm
+      arm: arm,
+      other_cases: other_cases
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
@@ -2249,7 +2257,7 @@ type QueryType {
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
     OPTIONAL MATCH (c)<-[:of_case]-(diag:diagnosis)
     OPTIONAL MATCH (c)-[:member_of]->(s:study)
-    OPTIONAL MATCH (c)-->(i:canine_individual)
+    OPTIONAL MATCH (c)-->(i:canine_individual)<--(o:case)
     OPTIONAL MATCH (f)-[*]->(samp:sample)
     OPTIONAL MATCH (enroll:enrollment)-[:of_case]->(c)
     OPTIONAL MATCH (c)-->(co:cohort)
@@ -2299,7 +2307,8 @@ type QueryType {
       diag.concurrent_disease as concurrent_disease,
       diag.concurrent_disease_type as concurrent_disease_type,
       co.cohort_description as cohort_description,
-      a.arm as arm
+      a.arm as arm,
+      collect(DISTINCT o.case_id) AS other_cases
     RETURN{
       file_name: file_name,
       file_type: file_type,
@@ -2343,7 +2352,8 @@ type QueryType {
       concurrent_disease: concurrent_disease,
       concurrent_disease_type: concurrent_disease_type,
       cohort_description: cohort_description,
-      arm: arm
+      arm: arm,
+      other_cases: other_cases
     }
     ORDER BY CASE $order_by
       WHEN 'file_name' THEN file_name
