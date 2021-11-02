@@ -5,13 +5,11 @@ import { statsStyling, globalStatsData } from '../../bento/globalStatsData';
 /* subtract study file count from total files count */
 const updateStat = (stat) => {
   const { numberOfStudyFiles, numberOfFiles } = stat;
-  if (numberOfStudyFiles > 0) {
-    return {
-      ...stat,
-      numberOfFiles: numberOfFiles - numberOfStudyFiles,
-    };
-  }
-  return stat;
+  const numberOfCaseFiles = numberOfFiles - numberOfStudyFiles;
+  return {
+    ...stat,
+    numberOfFiles: (numberOfCaseFiles > 0) ? numberOfCaseFiles : 0,
+  };
 };
 
 const StatsView = ({ data }) => (

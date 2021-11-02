@@ -21,6 +21,7 @@ import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
 // eslint-disable-next-line no-unused-vars
 import init from './utils';
+import OverlayWindow from '../OverlayWindow/OverlayWindow';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -34,6 +35,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
       <>
         <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
         <Header />
+        <OverlayWindow />
         <NavBar />
         {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
