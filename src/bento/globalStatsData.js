@@ -12,7 +12,7 @@ export const statsStyling = {
     margin: '4px 60px',
   },
   statsIcon: {
-    width: '45px',
+    width: '40px',
     height: '45px',
   },
   statCount: {
@@ -37,7 +37,7 @@ export const globalStatsData = [
     statTitle: 'Data Volume',
     type: 'field',
     statAPI: 'volumeOfData',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-StudyFile.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-DataVolume.svg',
     statIconAlt: 'Data Volume Stats Bar Icon',
   },
   {
