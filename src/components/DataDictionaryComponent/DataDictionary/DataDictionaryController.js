@@ -1,15 +1,13 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import DictionarySearcher from './DictionarySearcher';
+import DataDictionary from './DataDictionary';
 
 const DictionarySearcherController = (props) => {
   if (!props.dictionary) {
     return <CircularProgress />;
   }
 
-  // eslint-disable-next-line no-console
-  console.log(props);
-  return <DictionarySearcher {...props} />;
+  return <DataDictionary {...props} />;
 };
 
 export default DictionarySearcherController;

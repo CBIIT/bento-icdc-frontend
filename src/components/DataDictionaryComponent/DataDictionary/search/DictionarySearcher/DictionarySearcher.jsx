@@ -11,6 +11,8 @@ import './DictionarySearcher.css';
 class DictionarySearcher extends React.Component {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line no-console
+    console.log('props', props);
     this.searchData = prepareSearchData(props.dictionary);
     this.autoCompleteRef = React.createRef();
     this.state = {

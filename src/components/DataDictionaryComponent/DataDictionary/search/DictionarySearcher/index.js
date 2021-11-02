@@ -7,7 +7,7 @@ import {
   saveCurrentSearchKeyword,
   resetGraphHighlight,
 } from '../../action';
-import DictionarySearcherController from './DictionarySearcherController';
+import DictionarySearcher from './DictionarySearcher';
 
 const ReduxDictionarySearcher = (() => {
   const mapStateToProps = (state) => ({
@@ -28,7 +28,7 @@ const ReduxDictionarySearcher = (() => {
 
   return connect(
     mapStateToProps, mapDispatchToProps, null, { forwardRef: true },
-  )(DictionarySearcherController);
+  )(DictionarySearcher);
 })();
 
 export default ReduxDictionarySearcher;

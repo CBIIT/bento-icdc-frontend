@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import GraphCalculatorController from './GraphCalculatorController';
+import GraphCalculator from './GraphCalculator';
 import {
   setGraphLayout,
   setGraphLegend,
@@ -47,7 +47,7 @@ const ReduxGraphCalculator = (() => {
     )),
   });
 
-  return connect(mapStateToProps, mapDispatchToProps)(GraphCalculatorController);
+  return connect(mapStateToProps, mapDispatchToProps)(GraphCalculator);
 })();
 
 export default ReduxGraphCalculator;
