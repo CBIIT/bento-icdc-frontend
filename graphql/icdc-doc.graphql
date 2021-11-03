@@ -835,6 +835,7 @@ type CaseOverview2 {
   individual_id: String
   primary_disease_site: String
   date_of_diagnosis: String
+  histology_cytopathology: String
   histological_grade: String
   pathology_report: String
   treatment_data: String
