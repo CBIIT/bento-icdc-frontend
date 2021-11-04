@@ -851,6 +851,7 @@ type SearchResult {
   numberOfSamples: Int
   numberOfFiles: Int
   numberOfAliquots: Int
+  volumeOfData: Float
   numberOfStudyFiles: Int
   caseIds: [String]
   sampleIds: [String]
@@ -891,6 +892,7 @@ type UnifiedCounts{
   numberOfSamples: Int
   numberOfStudyFiles: Int
   numberOfAliquots: Int
+  volumeOfData: Float
 }
 
 type QueryType {
@@ -904,6 +906,7 @@ type QueryType {
   numberOfFiles: Int 
   numberOfStudyFiles: Int 
   numberOfAliquots: Int 
+  volumeOfData: Float 
 
   "Count with parameter"
   sampleCountOfStudy(study_code: String!): Int 

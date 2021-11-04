@@ -12,7 +12,7 @@ export const statsStyling = {
     margin: '4px 60px',
   },
   statsIcon: {
-    width: '45px',
+    width: '40px',
     height: '45px',
   },
   statCount: {
@@ -33,6 +33,13 @@ export const statsStyling = {
 
 export const globalStatsData = [
   // A maximum of 6 stats are allowed
+  {
+    statTitle: 'Data Volume',
+    type: 'field',
+    statAPI: 'volumeOfData',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-DataVolume.svg',
+    statIconAlt: 'Data Volume Stats Bar Icon',
+  },
   {
     statTitle: 'Studies',
     type: 'field',
@@ -85,5 +92,6 @@ export const GET_GLOBAL_STATS_DATA_QUERY = gql`{
   numberOfFiles
   numberOfStudyFiles
   numberOfAliquots
+  volumeOfData
   }
   `;

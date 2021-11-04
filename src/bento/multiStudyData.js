@@ -10,6 +10,7 @@ export const GET_UNIFIED_VIEW_DATA = gql`
             numberOfSamples
             numberOfStudyFiles
             numberOfAliquots
+            volumeOfData
         }
     }
 `;

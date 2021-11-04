@@ -340,6 +340,7 @@ type SearchResult {
   numberOfSamples: Int
   numberOfFiles: Int
   numberOfAliquots: Int
+  volumeOfData: Float
   numberOfStudyFiles: Int
   caseIds: [String]
   sampleIds: [String]
@@ -380,6 +381,7 @@ type UnifiedCounts{
   numberOfSamples: Int
   numberOfStudyFiles: Int
   numberOfAliquots: Int
+  volumeOfData: Float
 }
 
 type QueryType {
@@ -393,6 +395,7 @@ type QueryType {
   numberOfFiles: Int @cypher(statement: "MATCH (n:file) RETURN  count (n)")
   numberOfStudyFiles: Int @cypher(statement: "MATCH (n:file)-->(sd:study) RETURN count (n)")
   numberOfAliquots: Int @cypher(statement: "MATCH (n:aliquot) return count(n)")
+  volumeOfData: Float @cypher(statement: "MATCH (f:file) return sum(DISTINCT f.file_size)")
 
   "Count with parameter"
   sampleCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (s:sample)-[*]->(sd:study) WHERE sd.clinical_study_designation = $study_code OR sd.accession_id = $study_code return count(DISTINCT(s))")
@@ -1982,6 +1985,7 @@ type QueryType {
          numberOfCases: COUNT(DISTINCT c),
          numberOfSamples: COUNT(DISTINCT samp),
          numberOfFiles: COUNT(DISTINCT f),
+         volumeOfData: SUM(DISTINCT f.file_size),
          numberOfStudyFiles: COUNT(DISTINCT sf),
          numberOfAliquots: COUNT(DISTINCT al),
          caseIds: COLLECT(DISTINCT c.case_id),
@@ -2625,6 +2629,7 @@ type QueryType {
       numberOfSamples: COUNT(DISTINCT samp),
       numberOfAliquots: COUNT(DISTINCT a),
       numberOfStudyFiles: COUNT(DISTINCT sf)
+      volumeOfData: SUM(f.file_size)
     }
   """, passThrough: true)
   studySampleSiteCount(study_codes: [String]): [GroupCount] @cypher(statement: """
