@@ -19,7 +19,6 @@ import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
 import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
-// eslint-disable-next-line no-unused-vars
 import init from './utils';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 
