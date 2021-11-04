@@ -21,12 +21,62 @@ import { deleteFromCart } from './store/cart';
 import { downloadJson } from './utils';
 import GA from '../../utils/googleAnalytics';
 
+const CustomHeaderRemove = ({
+  openDialogBox,
+  classes: {
+    removeThCell,
+    removeHeadCell,
+    removeAllMessage,
+    removeHeadCellText,
+    removeHeadCellIcon,
+    removeHeadCellIconButton,
+  },
+}) => {
+  const [popUpStatus, setPopUpStatus] = React.useState(false);
+  const showPopUp = (status) => setPopUpStatus(status === 'open');
+
+  return (
+    <th className={removeThCell}>
+      <span role="button">
+        <div className={removeHeadCell}>
+          <div
+            id="cart_remove_button_text"
+            className={removeHeadCellText}
+          >
+            Remove
+          </div>
+          <div className={removeHeadCellIcon}>
+            <IconButton aria-label="help" className={removeHeadCellIconButton}>
+              <ArrowDropDownIcon
+                onClick={openDialogBox}
+                onMouseEnter={() => showPopUp('open')}
+                onMouseLeave={() => showPopUp('close')}
+              />
+            </IconButton>
+            { popUpStatus ? (
+              <div className={removeAllMessage}>
+                {' '}
+                Remove
+                {' '}
+                <b>All</b>
+                {' '}
+                items in cart.
+                {' '}
+              </div>
+            ) : ''}
+          </div>
+        </div>
+      </span>
+    </th>
+  );
+};
+
 const cartView = ({
   classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
 }) => {
   const [modalStatus, setModalStatus] = React.useState(false);
-  const [removeAllMessageStatus, setRemoveAllMessageStatus] = React.useState(false);
-  const [userComments, setUserComments] = React.useState('');
+  const commentRef = React.useRef();
+  // const [userComments, setUserComments] = React.useState('');
   async function fetchData() {
     const fetchResult = await client
       .query({
@@ -39,9 +89,10 @@ const cartView = ({
     return fetchResult;
   }
 
-  function toggleRemoveAllMessageStatus(status) {
-    return status === 'close' ? setRemoveAllMessageStatus(false) : setRemoveAllMessageStatus(true);
-  }
+  // function toggleRemoveAllMessageStatus(status) {
+  //   return status === 'close'
+  // ? setRemoveAllMessageStatus(false) : setRemoveAllMessageStatus(true);
+  // }
 
   // ================= Dialogbox Functions =================
   const closeDialogBox = () => setModalStatus(false);
@@ -55,6 +106,7 @@ const cartView = ({
 
   // =========== Downlaod Manifest Functions ===========
   async function prepareDownload() {
+    const userComments = commentRef.current.getValue();
     const data1 = await fetchData();
     GA.sendEvent('Manifest', 'Download', 'cart');
     return downloadJson(
@@ -99,33 +151,10 @@ const cartView = ({
         </div>
       ),
       customHeadRender: () => (
-        <th className={classes.removeThCell}>
-          <span role="button">
-            <div className={classes.removeHeadCell}>
-              <div
-                className={classes.removeHeadCellText}
-              >
-                Remove
-              </div>
-              <div className={classes.removeHeadCellIcon}>
-                <IconButton aria-label="help" className={classes.removeHeadCellIconButton}>
-                  <ArrowDropDownIcon onClick={() => openDialogBox()} onMouseEnter={() => toggleRemoveAllMessageStatus('open')} onMouseLeave={() => toggleRemoveAllMessageStatus('close')} />
-                </IconButton>
-                {removeAllMessageStatus ? (
-                  <div className={classes.removeAllMessage}>
-                    {' '}
-                    Remove
-                    {' '}
-                    <b>All</b>
-                    {' '}
-                    items in cart.
-                    {' '}
-                  </div>
-                ) : ''}
-              </div>
-            </div>
-          </span>
-        </th>
+        <CustomHeaderRemove
+          classes={classes}
+          openDialogBox={openDialogBox}
+        />
       ),
     },
   }];
@@ -172,7 +201,7 @@ const cartView = ({
             <CartFooter
               myFilesPageData={myFilesPageData}
               externalLinkIcon={externalLinkIcon}
-              setUserComment={(e) => setUserComments(e.target.value)}
+              ref={commentRef}
               preparedownload={() => prepareDownload()}
             />
           </div>

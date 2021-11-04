@@ -8,13 +8,19 @@ import TextField from '@material-ui/core/TextField';
 import { ToolTip as Tooltip } from 'bento-components';
 import Styles from './cartFooter.style';
 
-const CartFooter = ({
+const CartFooter = React.forwardRef(({
   classes,
   myFilesPageData,
-  setUserComment,
   preparedownload,
   externalLinkIcon,
-}) => {
+}, ref) => {
+  const [commentText, setcommentText] = React.useState('');
+  const onChange = ({ target: { value } }) => setcommentText(value);
+  React.useImperativeHandle(ref, () => ({
+    getValue() {
+      return commentText;
+    },
+  }));
   const toolTipIcon = ({ title, placement }) => (
     <Tooltip arrow title={title} placement={placement}>
       <IconButton className={classes.helpBtn} aria-label="help">
@@ -54,11 +60,12 @@ const CartFooter = ({
           label={myFilesPageData.textareaPlaceholder}
           multiline
           rows={6}
+          value={commentText}
           style={{ minWidth: '550px' }}
           className={classes.textField}
           margin="dense"
           variant="filled"
-          onChange={setUserComment}
+          onChange={onChange}
         />
         {toolTipIcon({ title: myFilesPageData.userCommentsTooltipMessage, placement: 'right' })}
       </div>
@@ -75,6 +82,6 @@ const CartFooter = ({
       </div>
     </div>
   );
-};
+});
 
 export default withStyles(Styles, { withTheme: true })(CartFooter);
