@@ -10,8 +10,6 @@ import './DataDictionary.css';
 class DataDictionary extends React.Component {
   constructor(props) {
     super(props);
-    // eslint-disable-next-line no-console
-    console.log('from DataDictionary.jsx', props);
     this.dictionarySearcherRef = React.createRef();
   }
 

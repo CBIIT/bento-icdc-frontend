@@ -12,8 +12,6 @@ import {
 class GraphCalculator extends React.Component {
   constructor(props) {
     super(props);
-    // eslint-disable-next-line no-console
-    console.log('graphCalc', props);
     this.oldHighlightingNode = null;
     this.oldSecondHighlightingNodeID = null;
   }
