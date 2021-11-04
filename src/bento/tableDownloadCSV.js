@@ -16,13 +16,50 @@ query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
     weight
     response_to_treatment
     disease_site
-    files 
+    files
+    other_cases
+    individual_id
+    primary_disease_site
+    date_of_diagnosis
+    histology_cytopathology
+    histological_grade
+    pathology_report
+    treatment_data
+    follow_up_data
+    concurrent_disease
+    concurrent_disease_type
+    arm
   }
 }
 `;
 const customCasesOptionalDataFields = {
-  keysToInclude: [],
-  header: [],
+  keysToInclude: [
+    'individual_id',
+    'other_cases',
+    'primary_disease_site',
+    'date_of_diagnosis',
+    'histology_cytopathology',
+    'histological_grade',
+    'pathology_report',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'arm'],
+  header: [
+    'Canine ID',
+    'Matching Cases',
+    'Disease Site',
+    'Date of Diagnosis',
+    'Histology/Cytopathology',
+    'Histological Grade',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
+    'Arm',
+  ],
 };
 
 const customCasesTabCoreDataFields = {
@@ -60,13 +97,84 @@ query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 10, 
       necropsy_sample
       sample_preservation
       files
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      comment
+      individual_id
+      other_cases
+      sex
+      neutered_indicator
+      weight
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      patient_age_at_enrollment
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      arm
   }
   }
 `;
 
 const customSamplesOptionalDataFields = {
-  keysToInclude: [],
-  header: [],
+  keysToInclude: [
+    'physical_sample_type',
+    'general_sample_pathology',
+    'tumor_sample_origin',
+    'comment',
+    'individual_id',
+    'other_cases',
+    'patient_age_at_enrollment',
+    'sex',
+    'neutered_indicator',
+    'weight',
+    'primary_disease_site',
+    'stage_of_disease',
+    'date_of_diagnosis',
+    'histology_cytopathology',
+    'histological_grade',
+    'best_response',
+    'pathology_report',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'cohort_description',
+    'arm',
+  ],
+  header: [
+    'Physical Sample Type',
+    'General Sample Pathology',
+    'Tumor Sample Origin',
+    'Sample Comments',
+    'Canine ID',
+    'Matching Cases',
+    'Age',
+    'Sex',
+    'Neutered Status',
+    'Weight (kg)',
+    'Disease Site',
+    'Stage of Disease',
+    'Date of Diagnosis',
+    'Histology/Cytopathology',
+    'Histological Grade',
+    'Response to Treatment',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
+    'Cohort',
+    'Arm',
+  ],
 };
 
 const customSampleTabCoreDataFields = {

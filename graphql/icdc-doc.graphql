@@ -791,6 +791,29 @@ type SampleOverview {
   necropsy_sample: String
   sample_preservation: String
   files: [String]
+  physical_sample_type: String
+  general_sample_pathology: String
+  tumor_sample_origin: String
+  comment: String
+  individual_id: String
+  other_cases: [String]
+  patient_age_at_enrollment: String
+  sex: String
+  neutered_indicator: String
+  weight: String
+  primary_disease_site: String
+  stage_of_disease: String
+  date_of_diagnosis: String
+  histology_cytopathology: String
+  histological_grade: String
+  best_response: String
+  pathology_report: String
+  treatment_data: String
+  follow_up_data: String
+  concurrent_disease: String
+  concurrent_disease_type: String
+  cohort_description: String
+  arm: String
 }
 
 type CaseOverview2 {
@@ -809,6 +832,17 @@ type CaseOverview2 {
   disease_site: String
   files: [String]
   other_cases: [String]
+  individual_id: String
+  primary_disease_site: String
+  date_of_diagnosis: String
+  histology_cytopathology: String
+  histological_grade: String
+  pathology_report: String
+  treatment_data: String
+  follow_up_data: String
+  concurrent_disease: String
+  concurrent_disease_type: String
+  arm: String
 }
 
 type SearchResult {
@@ -817,10 +851,12 @@ type SearchResult {
   numberOfSamples: Int
   numberOfFiles: Int
   numberOfAliquots: Int
+  volumeOfData: Float
   numberOfStudyFiles: Int
   caseIds: [String]
   sampleIds: [String]
   fileIds: [String]
+  studyFileIds: [String]
   firstPage: [CaseOverview2]
 }
 
@@ -846,6 +882,7 @@ type MultiStudyCases {
     caseIds: [String]
     sampleIds: [String]
     fileIds: [String]
+    studyFileIds: [String]
 }
 
 type UnifiedCounts{
@@ -855,6 +892,7 @@ type UnifiedCounts{
   numberOfSamples: Int
   numberOfStudyFiles: Int
   numberOfAliquots: Int
+  volumeOfData: Float
 }
 
 type QueryType {
@@ -868,6 +906,7 @@ type QueryType {
   numberOfFiles: Int 
   numberOfStudyFiles: Int 
   numberOfAliquots: Int 
+  volumeOfData: Float 
 
   "Count with parameter"
   sampleCountOfStudy(study_code: String!): Int 
@@ -876,6 +915,7 @@ type QueryType {
   aliquotCountOfStudy(study_code: String!): Int 
   caseCountOfStudy(study_code: String!): Int 
   fileCountOfCase(case_id: String!): Int 
+  studyFileCountOfCase(case_id: String!): Int 
   aliquotCountOfCase(case_id: String!): Int 
   sampleCountOfProgram(program_id: String!): Int 
   fileCountOfProgram(program_id: String!): Int 

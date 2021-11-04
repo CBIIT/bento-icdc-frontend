@@ -16,7 +16,11 @@ class DataDictionaryCategory extends React.Component {
           <span>
             {capitalizeFirstLetter(this.props.category)}
           </span>
-          <span className="data-dictionary-category__download_template">Download Template</span>
+          {
+          // Fix Download buttons
+          // eslint-disable-next-line max-len
+          /* <span className="data-dictionary-category__download_template">Download Template</span> */
+          }
         </div>
         {
         this.props.nodes.map(

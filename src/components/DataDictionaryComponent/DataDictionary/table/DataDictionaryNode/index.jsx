@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line no-unused-vars
 import Button from '@gen3/ui-component/dist/components/Button';
 import { downloadTemplate } from '../../utils';
 import { getCategoryColor } from '../../NodeCategories/helper';
@@ -50,7 +51,9 @@ class DataDictionaryNode extends React.Component {
           </span>
           <div className="data-dictionary-node__download-group">
             <span className="data-dictionary-node__button-wrap">
-              <Button
+              {
+              // Fix Download buttons
+              /* <Button
                 className="data-dictionary-node__download-button"
                 onClick={(e) => { this.handleDownloadTemplate(e, 'json'); }}
                 label="JSON"
@@ -65,7 +68,7 @@ class DataDictionaryNode extends React.Component {
                 label="TSV"
                 rightIcon="download"
                 buttonType="secondary"
-              />
+              /> */}
             </span>
           </div>
         </div>
