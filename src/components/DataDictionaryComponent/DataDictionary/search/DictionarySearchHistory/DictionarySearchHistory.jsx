@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 import './DictionarySearchHistory.css';
 
 class DictionarySearchHistory extends React.Component {
-  componentDidMount() {
-    console.log('diMount SearchHistory', this.props);
-  }
-
   handleClick = (keyword) => {
     this.props.onClickSearchHistoryItem(keyword);
   }
