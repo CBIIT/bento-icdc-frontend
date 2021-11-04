@@ -324,6 +324,7 @@ type CaseOverview2 {
   individual_id: String
   primary_disease_site: String
   date_of_diagnosis: String
+  histology_cytopathology: String
   histological_grade: String
   pathology_report: String
   treatment_data: String
@@ -1814,6 +1815,7 @@ type QueryType {
       i.canine_individual_id as individual_id,
       diag.primary_disease_site as primary_disease_site,
       diag.date_of_diagnosis as date_of_diagnosis,
+      diag.histology_cytopathology as histology_cytopathology,
       diag.histological_grade as histological_grade,
       diag.pathology_report as pathology_report,
       diag.treatment_data as treatment_data,
@@ -1840,6 +1842,7 @@ type QueryType {
       individual_id: individual_id,
       primary_disease_site: primary_disease_site,
       date_of_diagnosis : date_of_diagnosis,
+      histology_cytopathology: histology_cytopathology,
       histological_grade : histological_grade,
       pathology_report : pathology_report,
       treatment_data : treatment_data,

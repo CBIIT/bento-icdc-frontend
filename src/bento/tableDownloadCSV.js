@@ -21,6 +21,7 @@ query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
     individual_id
     primary_disease_site
     date_of_diagnosis
+    histology_cytopathology
     histological_grade
     pathology_report
     treatment_data
@@ -37,6 +38,7 @@ const customCasesOptionalDataFields = {
     'other_cases',
     'primary_disease_site',
     'date_of_diagnosis',
+    'histology_cytopathology',
     'histological_grade',
     'pathology_report',
     'treatment_data',
@@ -49,6 +51,7 @@ const customCasesOptionalDataFields = {
     'Matching Cases',
     'Disease Site',
     'Date of Diagnosis',
+    'Histology/Cytopathology',
     'Histological Grade',
     'Detailed Pathology Evaluation Available',
     'Treatment Data Available',
