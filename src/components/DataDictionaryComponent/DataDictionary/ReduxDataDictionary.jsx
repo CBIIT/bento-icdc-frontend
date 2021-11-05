@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import { setGraphView } from './action';
-import DataDictionary from './DataDictionary';
+import DataDictionaryController from './DataDictionaryController';
 
 // const ReduxDataDictionary = (() => {
 //   const mapStateToProps = state => ({
@@ -17,12 +17,11 @@ import DataDictionary from './DataDictionary';
 
 // export default ReduxDataDictionary;
 
-const ReduxDataDictionary = (props) => (
-  <DataDictionary {...props} />
-);
+const ReduxDataDictionary = (props) => (<DataDictionaryController {...props} />);
 
 const mapStateToProps = (state) => ({
   isGraphView: state.ddgraph.isGraphView,
+  dictionary: state.submission.dictionary,
 });
 
 const mapDispatchToProps = (dispatch) => ({

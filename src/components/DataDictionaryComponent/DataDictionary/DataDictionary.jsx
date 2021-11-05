@@ -25,6 +25,10 @@ class DataDictionary extends React.Component {
     this.dictionarySearcherRef.current.launchClearSearchFromOutside();
   };
 
+  componentDidMount = () => {
+    this.setGraphView(false);
+  }
+
   render() {
     return (
       <div className="data-dictionary">
