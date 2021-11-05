@@ -32,7 +32,6 @@ class GraphCalculator extends React.Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillUpdate(nextProps) {
-    // eslint-disable-next-line no-console
     // if the highlighted node is updated, calculate related highlighted nodes
     const newHighlightingNode = nextProps.highlightingNode;
     const newSecondHighlightingNodeID = nextProps.secondHighlightingNodeID;
