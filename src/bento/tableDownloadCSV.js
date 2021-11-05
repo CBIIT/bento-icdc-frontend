@@ -242,6 +242,7 @@ query fileOverview($file_uuids: [String], $file_association: String, $offset: In
       concurrent_disease_type
       cohort_description
       arm
+      other_cases
     }
   }
 `;
@@ -280,6 +281,7 @@ const customFilesTabOptionalDataFields = {
     'concurrent_disease_type',
     'cohort_description',
     'arm',
+    'other_cases',
   ],
   header: [
     'Sample Site',
@@ -313,6 +315,7 @@ const customFilesTabOptionalDataFields = {
     'Concurrent Disease Specifics',
     'Cohort',
     'Arm',
+    'Matching Cases',
   ],
 };
 
@@ -383,6 +386,7 @@ query filesInList($uuids: [String], $first: Int = 2000){
       cohort_description
       arm
       sample_id
+      other_cases
  }
 }`;
 
@@ -418,6 +422,7 @@ const customMyFilesOptionalDataFields = {
     'concurrent_disease_type',
     'cohort_description',
     'arm',
+    'other_cases',
   ],
   header: [
     'Sample Site',
@@ -450,6 +455,7 @@ const customMyFilesOptionalDataFields = {
     'Concurrent Disease Specifics',
     'Cohort',
     'Arm',
+    'Matching Cases',
   ],
 };
 
