@@ -56,7 +56,21 @@ class ServerPaginatedTableView extends React.Component {
     if (this.props.data !== prevProps.data && this.props.data === 'undefined' && prevProps.data !== 'undefined' && this.props.updateSortOrder) {
       this.changeToPrevDataState(prevProps);
     }
+
+    // update columns state to the current props
+    if ((this.props.columns !== prevProps.columns
+      && (prevProps.data === 'undefined' || this.props.data === prevProps.data))
+      || (this.props.data !== prevProps.data
+        && this.props.queryCustomVaribles.case_ids !== undefined)) {
+      this.setColumnState(this.props.columns);
+    }
   }
+
+  setColumnState = (columns) => {
+    this.setState({
+      columns: cloneDeep(columns),
+    });
+  };
 
   // get data
   getData = (url, page) => {
