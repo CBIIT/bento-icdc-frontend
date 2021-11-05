@@ -14,7 +14,7 @@ class NodeTooltip extends React.Component {
     const gap = 10;
     const tooltipLeft = (svgBoundingBox.left - this.props.canvasBoundingRect.left)
       + (svgBoundingBox.width / 2);
-    const tooltipBottom = (window.innerHeight - svgBoundingBox.top) + gap;
+    const tooltipBottom = (window.innerHeight - svgBoundingBox.top) + gap + 200;
     return (
       <div
         className="node-tooltip"
