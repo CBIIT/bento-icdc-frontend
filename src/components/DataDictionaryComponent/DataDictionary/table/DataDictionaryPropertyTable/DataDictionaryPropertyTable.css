@@ -8,6 +8,8 @@
   padding: 10px;
   border: 1px solid var(--dictionary-border-color);
   text-align: left;
+  font-family: raleway;
+  font-weight: 300;
   vertical-align: top;
 }
 
@@ -41,6 +43,8 @@
 
 .data-dictionary-property-table__span {
   display: inline;
+  font-family: raleway;
+  font-weight: 300;
 }
 
 .data-dictionary-property-table__span--highlight {
