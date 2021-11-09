@@ -67,6 +67,9 @@ const FacetPanel = ({ classes, disabled }) => {
     && state.dashboardTab.isDashboardTableLoading
     ? state.dashboardTab.isDashboardTableLoading
     : false));
+  const biobankList = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.biobank ? state.dashboardTab.biobank : state));
+
   // redux use actions
   const dispatch = useDispatch();
 
@@ -154,7 +157,7 @@ const FacetPanel = ({ classes, disabled }) => {
   };
 
   const sideBarDisplay = sideBarContent.data.filter((sideBar) => sideBar.show === true)
-    .slice(0, 15);
+    .slice(0, 16);
 
   const arrangeBySections = (arr) => {
     const sideBar = {};
@@ -173,6 +176,9 @@ const FacetPanel = ({ classes, disabled }) => {
       ? '#B2C6D6' : '#4A4A4A');
   }
 
+  const getBioRepository = (value) => biobankList
+    .filter((item) => item.biospecimen_repository_full_name === value
+    || item.biospecimen_repository_acronym === value)[0];
   function getCheckBoxColor(index, currentSection) {
     return index % 2 ? facetSectionVariables[currentSection.sectionName] ? facetSectionVariables[currentSection.sectionName].checkBoxColorsTwo ? facetSectionVariables[currentSection.sectionName].checkBoxColorsTwo : '' : defaultFacetSectionVariables.checkBoxColorsTwo
       : facetSectionVariables[currentSection.sectionName] ? facetSectionVariables[currentSection.sectionName].checkBoxColorsOne ? facetSectionVariables[currentSection.sectionName].checkBoxColorsOne : '' : defaultFacetSectionVariables.checkBoxColorsOne;
@@ -180,7 +186,12 @@ const FacetPanel = ({ classes, disabled }) => {
 
   const getCheckBoxView = (sideBarItem, currentSection) => {
     const showItems = sideBarItem.checkboxItems.filter((item) => item !== undefined
-      && item.subjects > 0);
+      && item.subjects > 0).map((item) => (
+      {
+        ...item,
+        title: sideBarItem.tooltip ? getBioRepository(item.name) : undefined,
+      }
+    ));
     return showItems.map(
       (item, index) => (
         <CheckBoxView
@@ -207,7 +218,12 @@ const FacetPanel = ({ classes, disabled }) => {
 
   const showSelectedChecbox = (sideBarItem, currentSection) => {
     const selectedItems = sideBarItem.checkboxItems.filter((item) => (item.isChecked
-      && item.subjects > 0));
+      && item.subjects > 0)).map((item) => (
+      {
+        ...item,
+        title: sideBarItem.tooltip ? getBioRepository(item.name) : undefined,
+      }
+    ));
     const selectedCheckbox = selectedItems.slice(0, showCheckboxCount)
       .map((item, index) => (
         <CheckBoxView

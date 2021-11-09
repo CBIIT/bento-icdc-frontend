@@ -9,6 +9,9 @@ import {
 import {
   CheckBox as CheckBoxIcon, CheckBoxOutlineBlank as CheckBoxBlankIcon,
 } from '@material-ui/icons';
+import {
+  ToolTip as Tooltip,
+} from 'bento-components';
 
 const styles = {
   listItemGutters: {
@@ -70,13 +73,26 @@ function CheckBoxView(props) {
           color="secondary"
           classes={{ root: classes.checkboxRoot }}
         />
-        <div className={classes.panelDetailText}>
-          <span>
-            {`${checkboxItem.name}`}
-            { checkboxItem.code
-                    && `${checkboxItem.code}`}
-          </span>
-        </div>
+        { (checkboxItem.title) ? (
+          <>
+            <Tooltip title={checkboxItem.title.biospecimen_repository_full_name}>
+              <div className={classes.panelDetailText}>
+                <span>
+                  {`${checkboxItem.title.biospecimen_repository_acronym}`}
+                </span>
+              </div>
+            </Tooltip>
+          </>
+        ) : (
+          <div className={classes.panelDetailText}>
+            <span>
+              {`${checkboxItem.name}`}
+              { checkboxItem.code
+                      && `${checkboxItem.code}`}
+            </span>
+          </div>
+        )}
+        {/* {label(checkboxItem)} */}
         <ListItemText />
         <div className={classes.panelSubjectText}>
           <span
