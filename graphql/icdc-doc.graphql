@@ -78,11 +78,6 @@ type assay {
   images: [image] 
 }
 
-type biospecimen_source {
-  biospecimen_repository_acronym: String
-  biospecimen_repository_full_name: String
-}
-
 type canine_individual {
   canine_individual_id: String
   cases: [case] 
