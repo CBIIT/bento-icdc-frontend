@@ -78,6 +78,11 @@ type assay {
   images: [image] 
 }
 
+type biospecimen_source {
+  biospecimen_repository_acronym: String
+  biospecimen_repository_full_name: String
+}
+
 type canine_individual {
   canine_individual_id: String
   cases: [case] 
@@ -890,6 +895,11 @@ type UnifiedCounts{
   numberOfSamples: Int
   numberOfStudyFiles: Int
   numberOfAliquots: Int
+}
+
+type biospecimen_source {
+  biospecimen_repository_acronym: String
+  biospecimen_repository_full_name: String
 }
 
 type QueryType {
