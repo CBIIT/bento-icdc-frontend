@@ -117,7 +117,7 @@ class ServerPaginatedTableView extends React.Component {
       const sortColumn = sortOrder.name;
       this.props.updateSortOrder({ sortColumn, sortDirection });
     }
-    this.fetchData(page * this.state.rowsPerPage, this.state.rowsPerPage, sortOrder).then((res) => {
+    this.fetchData(page * rowsPerPageSort, rowsPerPageSort, sortOrder).then((res) => {
       this.rowsSelectedTrigger(res);
       // call setUpdatedColumnsDisplay to update columns display true/false after changePage
       if (this.props.options.viewColumns && this.state.updatedColumns.length) {
@@ -138,7 +138,6 @@ class ServerPaginatedTableView extends React.Component {
       let fullData = this.getSrcData() !== {} ? this.getSrcData() : [{}];
       // mock record count from server - normally this would be a number attached to the return data
       const total = 60;
-
       const sortField = sortOrder.name;
       const sortDir = sortOrder.direction;
 
@@ -156,7 +155,8 @@ class ServerPaginatedTableView extends React.Component {
       const localPage = page;
 
       // eslint-disable-next-line max-len
-      const srcData = fullData.slice(page * this.state.rowsPerPage, (page + 1) * this.state.rowsPerPage);
+      // const srcData = fullData.slice(page * this.state.rowsPerPage, (page + 1) * this.state.rowsPerPage);
+      const srcData = fullData;
       if (srcData !== 'undefined' && srcData.length !== this.state.rowsPerPage && this.props.count > this.state.rowsPerPage && this.props.localRowsPerPage === null) {
         this.changePage(0, {});
       } else {

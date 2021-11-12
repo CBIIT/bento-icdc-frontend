@@ -93,6 +93,8 @@ const reducers = {
     return {
       ...state,
       fileIds: uniqueFileIds,
+      sortColumn: localStorage.getItem('sortColumn'),
+      sortDirection: localStorage.getItem('sortDirection'),
     };
   },
   deleteFiles: (state, item) => {
