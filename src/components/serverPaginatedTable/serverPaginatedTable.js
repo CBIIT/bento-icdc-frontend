@@ -62,6 +62,7 @@ class ServerPaginatedTableView extends React.Component {
       && (prevProps.data === 'undefined' || this.props.data === prevProps.data))
       || (this.props.data !== prevProps.data
         && this.props.queryCustomVaribles.case_ids !== undefined)) {
+      console.log('set columns');
       this.setColumnState(this.props.columns);
     }
   }
@@ -111,11 +112,14 @@ class ServerPaginatedTableView extends React.Component {
 
   sort = (page, sortOrder) => {
     this.setState({ isLoading: true });
+    const rowsPerPageSort = this.state.rowsPerPage;
     if (this.props.updateSortOrder) {
       const sortDirection = sortOrder.direction;
       const sortColumn = sortOrder.name;
       this.props.updateSortOrder({ sortColumn, sortDirection });
     }
+    console.log('sort');
+    console.log(this.state.rowsPerPage);
     this.fetchData(page * this.state.rowsPerPage, this.state.rowsPerPage, sortOrder).then((res) => {
       this.rowsSelectedTrigger(res);
       // call setUpdatedColumnsDisplay to update columns display true/false after changePage
@@ -126,6 +130,7 @@ class ServerPaginatedTableView extends React.Component {
         isLoading: false,
         sortOrder,
         data: res,
+        rowsPerPage: rowsPerPageSort,
       });
     });
   }
@@ -240,9 +245,11 @@ class ServerPaginatedTableView extends React.Component {
   };
 
   async fetchData(offset, rowsRequired, sortOrder = {}) {
+    console.log('fetch data');
     let sortDirection = 'asc';
     let sortColumn = 'arm';
     let offsetReal = offset;
+    console.log(offsetReal);
     let page = offset / rowsRequired;
     // if the offset value is bigger that the count, then change offset value
     if (offset >= this.props.count) {

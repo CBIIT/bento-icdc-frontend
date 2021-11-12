@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { getCart } from './store/cart';
+import { getCart, updateSortOrder } from './store/cart';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_MY_CART_DATA_QUERY, GET_MY_CART_DATA_QUERY_DESC, table } from '../../bento/fileCentricCartWorkflowData';
 import CartView from './cartView';
@@ -10,12 +10,42 @@ const cartController = () => {
   const ids = cart.fileIds ? cart.fileIds : [];
   const defaultSortDirection = table.defaultSortDirection || 'asc';
   const CART_QUERY = defaultSortDirection === 'desc' ? GET_MY_CART_DATA_QUERY_DESC : GET_MY_CART_DATA_QUERY;
+  const defaultSortColumnValue = cart.sortColumn === '' || !cart.sortColumn ? table.defaultSortField || '' : cart.sortColumn;
+
+  // if the user open the webpage for the first time.
+  if (!localStorage.getItem('sortColumn') || !localStorage.getItem('page') || !localStorage.getItem('rowsPerPage')) {
+    localStorage.setItem('sortColumn', defaultSortColumnValue);
+    localStorage.setItem('page', '0');
+    localStorage.setItem('rowsPerPage', '10');
+  }
+  const localPage = localStorage.getItem('page');
+  const localRowsPerPage = localStorage.getItem('rowsPerPage');
+  const page = parseInt(localPage, 10);
+  const rowsPerPage = parseInt(localRowsPerPage, 10);
+  const offset = page * rowsPerPage;
+  console.log('offset');
+  console.log(offset);
+  const count = ids.length || 0;
 
   const { loading, error, data } = useQuery(CART_QUERY, {
-    variables: { uuids: ids, order_by: table.defaultSortField || '' },
+    variables: {
+      offset,
+      first: count < rowsPerPage ? count : rowsPerPage,
+      uuids: ids,
+      order_by: cart.sortColumn === '' ? table.defaultSortField || '' : cart.sortColumn,
+    },
   });
 
-  if (loading) return <CartView isLoading data="undefined" />;
+  if (loading) {
+    return (
+      <CartView
+        isLoading
+        data="undefined"
+        defaultSortCoulmn={defaultSortColumnValue}
+        defaultSortDirection={defaultSortDirection}
+      />
+    );
+  }
   if (error || !data) {
     return (
       <Typography variant="headline" color="error" size="sm">{error && `An error has occurred in loading CART : ${error}`}</Typography>
@@ -26,9 +56,14 @@ const cartController = () => {
     <CartView
       isLoading={false}
       fileIDs={ids}
-      defaultSortCoulmn={table.defaultSortField || ''}
+      updateSortOrder={updateSortOrder}
+      defaultSortCoulmn={defaultSortColumnValue}
       defaultSortDirection={defaultSortDirection}
+      paginationAPIField={table.paginationAPIField}
+      paginationAPIFieldDesc={table.paginationAPIFieldDesc}
       tableDownloadCSV={table.tableDownloadCSV || false}
+      localPage={localPage}
+      localRowsPerPage={localRowsPerPage}
       data={
         defaultSortDirection === 'desc'
           ? data.filesInListDesc === null || data.filesInListDesc === '' ? [] : data.filesInListDesc
