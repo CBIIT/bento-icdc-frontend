@@ -23,8 +23,6 @@ const cartController = () => {
   const page = parseInt(localPage, 10);
   const rowsPerPage = parseInt(localRowsPerPage, 10);
   const offset = page * rowsPerPage;
-  console.log('offset');
-  console.log(offset);
   const count = ids.length || 0;
 
   const { loading, error, data } = useQuery(CART_QUERY, {

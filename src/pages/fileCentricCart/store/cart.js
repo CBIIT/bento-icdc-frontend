@@ -102,8 +102,6 @@ const reducers = {
     let sortDirectionValue = localStorage.getItem('sortDirection');
     const dataLength = parseInt(localStorage.getItem('dataLength'), 10);
     const page = parseInt(localStorage.getItem('page'), 10);
-    console.log('deleteFiles');
-    console.log(page);
     // if all ids get removed, reset the sortorder value back to default
     if (fileIdsAfterDeletion.length === 0) {
       sortColumnValue = '';
