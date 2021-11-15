@@ -75,6 +75,13 @@ export const globalStatsData = [
     statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-StudyFile.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
+  {
+    statTitle: 'Study Files',
+    type: 'field',
+    statAPI: 'numberOfStudyFiles',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-StudyFile.svg',
+    statIconAlt: 'Study Files Stats Bar Icon',
+  },
   // {
   //   statTitle: 'Aliquots',
   //   type: 'field',
