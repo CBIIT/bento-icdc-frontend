@@ -76,9 +76,9 @@ export const globalStatsData = [
     statIconAlt: 'Study Files Stats Bar Icon',
   },
   {
-    statTitle: 'Study Files',
+    statTitle: 'Programs',
     type: 'field',
-    statAPI: 'numberOfStudyFiles',
+    statAPI: 'numberOfPrograms',
     statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-StudyFile.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
@@ -98,6 +98,7 @@ export const GET_GLOBAL_STATS_DATA_QUERY = gql`{
   numberOfSamples
   numberOfFiles
   numberOfStudyFiles
+  numberOfPrograms
   numberOfAliquots
   volumeOfData
   }

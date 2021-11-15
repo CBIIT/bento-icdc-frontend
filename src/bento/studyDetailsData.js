@@ -307,6 +307,7 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
    sampleCountOfStudy(study_code:$csd)
    fileCountOfStudy(study_code: $csd)
    fileCountOfStudyFiles(study_code: $csd)
+   programCountOfStudy(study_code: $csd)
    aliquotCountOfStudy(study_code: $csd)
    caseCountOfStudy(study_code: $csd)
    studySampleSiteCount(study_codes: [$csd]){

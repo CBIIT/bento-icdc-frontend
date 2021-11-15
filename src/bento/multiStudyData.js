@@ -9,6 +9,7 @@ export const GET_UNIFIED_VIEW_DATA = gql`
             numberOfFiles
             numberOfSamples
             numberOfStudyFiles
+            numberOfPrograms
             numberOfAliquots
             volumeOfData
         }
