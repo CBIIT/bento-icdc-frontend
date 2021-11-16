@@ -3512,7 +3512,7 @@ type QueryType {
       numberOfFiles: COUNT(DISTINCT f) + COUNT(DISTINCT sf),
       numberOfSamples: COUNT(DISTINCT samp),
       numberOfAliquots: COUNT(DISTINCT a),
-      numberOfStudyFiles: COUNT(DISTINCT sf)
+      numberOfStudyFiles: COUNT(DISTINCT sf),
       volumeOfData: SUM(f.file_size)
     }
   """, passThrough: true)
