@@ -655,6 +655,10 @@ filterCaseCountByFileType{
   group,
   count
 }
+filterCaseCountByBiobank{
+  group,
+  count
+}
 filterCaseCountByFileFormat{
   group,
   count
@@ -666,6 +670,10 @@ programsAndStudies{
       study
       caseSize
   }
+}
+biospecimen_source {
+  biospecimen_repository_acronym
+  biospecimen_repository_full_name
 }
 caseOverviewPaged(first: 10) {
     case_id
@@ -740,6 +748,7 @@ query searchCases(
   $file_association: [String], 
   $file_type: [String], 
   $file_format: [String],
+  $biobank: [String],
   $first: Int
 ){
 searchCases(
@@ -757,7 +766,8 @@ searchCases(
     sample_site: $sample_site, 
     file_association: $file_association, 
     file_type: $file_type,
-    file_format: $file_format
+    file_format: $file_format,
+    biobank: $biobank, 
     first: $first
   ) {
       numberOfStudies
@@ -802,6 +812,7 @@ filterCaseCountByStudyCode (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
+  biobank: $biobank,
   file_format: $file_format
 ) {
     group
@@ -823,7 +834,8 @@ filterCaseCountByStudyType (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
@@ -843,7 +855,8 @@ filterCaseCountByBreed (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
 ) {
     group
     count
@@ -863,7 +876,8 @@ filterCaseCountByDiagnosis (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
 ) {
     group
     count
@@ -883,7 +897,8 @@ filterCaseCountByDiseaseSite (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
 ) {
     group
     count
@@ -903,7 +918,8 @@ filterCaseCountByStageOfDisease (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
@@ -923,7 +939,8 @@ filterCaseCountByResponseToTreatment (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
@@ -943,7 +960,8 @@ filterCaseCountBySex (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
@@ -963,14 +981,15 @@ filterCaseCountByNeuteredStatus (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
 }
 filterCaseCountBySampleType (
   study: $study, 
-  study_type: $study_type, 
+  study_type: $study_type,
   breed: $breed, 
   diagnosis: $diagnosis, 
   disease_site: $disease_site, 
@@ -983,7 +1002,8 @@ filterCaseCountBySampleType (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
@@ -1003,7 +1023,8 @@ filterCaseCountBySamplePathology (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
@@ -1023,7 +1044,8 @@ filterCaseCountBySampleSite (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type, 
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
@@ -1043,7 +1065,8 @@ filterCaseCountByFileAssociation (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
@@ -1063,12 +1086,35 @@ filterCaseCountByFileType (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count
 }
 filterCaseCountByFileFormat (
+  study: $study, 
+  study_type: $study_type,
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format,
+  biobank: $biobank
+) {
+    group
+    count
+}
+
+filterCaseCountByBiobank (
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -1083,7 +1129,8 @@ filterCaseCountByFileFormat (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank
 ) {
     group
     count

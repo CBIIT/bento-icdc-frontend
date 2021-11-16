@@ -386,6 +386,11 @@ type UnifiedCounts{
   volumeOfData: Float
 }
 
+type biospecimen_source {
+  biospecimen_repository_acronym: String
+  biospecimen_repository_full_name: String
+}
+
 type QueryType {
   "Version"
   schemaVersion: String @cypher(statement: "RETURN '1.1.3'")
