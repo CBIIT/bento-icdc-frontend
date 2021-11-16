@@ -27,6 +27,12 @@ const CartHeader = ({
   defaultSortCoulmn,
   defaultSortDirection,
   tableDownloadCSV,
+  updateSortOrder,
+  paginationAPIField,
+  paginationAPIFieldDesc,
+  localPage,
+  localRowsPerPage,
+  isLoading,
 }) => {
   function onRowSelectionChange(curr, allRowsSelected) {
     return (curr, allRowsSelected);
@@ -45,8 +51,8 @@ const CartHeader = ({
         count={fileIDs.length || 0}
         overview={GET_MY_CART_DATA_QUERY}
         overviewDesc={GET_MY_CART_DATA_QUERY_DESC}
-        paginationAPIField="filesInList"
-        paginationAPIFieldDesc="filesInListDesc"
+        paginationAPIField={paginationAPIField}
+        paginationAPIFieldDesc={paginationAPIFieldDesc}
         queryCustomVaribles={{ uuids: fileIDs }}
         defaultSortCoulmn={defaultSortCoulmn}
         defaultSortDirection={defaultSortDirection}
@@ -54,6 +60,10 @@ const CartHeader = ({
         components={{
           Tooltip,
         }}
+        updateSortOrder={updateSortOrder}
+        localPage={localPage}
+        localRowsPerPage={localRowsPerPage}
+        isLoading={isLoading}
       />
     </TableThemeProvider>
   );
