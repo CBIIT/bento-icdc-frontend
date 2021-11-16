@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ToolTip } from 'bento-components';
 import { getCategoryIconSVG } from '../../NodeCategories/helper';
 import { MatchedIndicesShape } from '../../utils';
 import { getNodeTitleSVGFragment } from '../../highlightHelper';
@@ -36,32 +37,33 @@ class GraphNode extends React.Component {
       ? 'graph-drawer__node--current-highlighting' : '';
     const IconSVG = getCategoryIconSVG(this.props.node.type);
     return (
-      <g
-        ref={this.svgElement}
-        key={this.props.node.id}
-        transform={`translate(${this.props.node.topCenterX}, ${this.props.node.topCenterY}) `}
-        className={`graph-node 
+      <ToolTip title={this.props.node.id} arrow>
+        <g
+          ref={this.svgElement}
+          key={this.props.node.id}
+          transform={`translate(${this.props.node.topCenterX}, ${this.props.node.topCenterY}) `}
+          className={`graph-node 
           ${nodeFadedClassModifier} 
           ${nodeHalfFadedClassModifier} 
           ${nodeDashedClassModifier} 
           ${nodeClickableClassModifier} 
           ${nodeIsCurrentHighlightingClassModifier}`}
-        onMouseOver={this.props.onMouseOver}
-        onMouseOut={this.props.onMouseOut}
-        onClick={this.props.onClick}
-        id={this.props.node.id}
-      >
-        <rect
-          className="graph-node__rect"
-          x={-this.props.node.width / 2}
-          y={0}
-          width={this.props.node.width}
-          height={this.props.node.height}
-          rx={4}
-          ry={4}
-          stroke={this.props.node.color}
-        />
-        {
+          onMouseOver={this.props.onMouseOver}
+          onMouseOut={this.props.onMouseOut}
+          onClick={this.props.onClick}
+          id={this.props.node.id}
+        >
+          <rect
+            className="graph-node__rect"
+            x={-this.props.node.width / 2}
+            y={0}
+            width={this.props.node.width}
+            height={this.props.node.height}
+            rx={4}
+            ry={4}
+            stroke={this.props.node.color}
+          />
+          {
           getNodeTitleSVGFragment(
             this.props.node.names,
             this.props.matchedNodeNameIndices,
@@ -70,11 +72,11 @@ class GraphNode extends React.Component {
             this.props.node.textLineGap,
           )
         }
-        {
-          <g
-            transform={`translate(${-this.props.node.iconRadius}, ${-this.props.node.iconRadius})`}
-          >
-            {
+          {
+            <g
+              transform={`translate(${-this.props.node.iconRadius}, ${-this.props.node.iconRadius})`}
+            >
+              {
               IconSVG ? <IconSVG /> : (
                 <circle
                   cx={this.props.node.iconRadius}
@@ -84,9 +86,10 @@ class GraphNode extends React.Component {
                 />
               )
             }
-          </g>
+            </g>
         }
-      </g>
+        </g>
+      </ToolTip>
 
     );
   }
