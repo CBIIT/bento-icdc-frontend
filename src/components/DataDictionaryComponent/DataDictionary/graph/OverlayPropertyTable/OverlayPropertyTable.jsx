@@ -12,7 +12,7 @@ import {
 } from '../../highlightHelper';
 import DataDictionaryPropertyTable from '../../table/DataDictionaryPropertyTable';
 import './OverlayPropertyTable.css';
-import PdfDocument from './Node';
+import PdfDocument from '../../NodePDF';
 
 class OverlayPropertyTable extends React.Component {
   getTitle = () => {
@@ -67,8 +67,6 @@ class OverlayPropertyTable extends React.Component {
     const IconSVG = getCategoryIconSVG(this.props.node.category);
     const searchedNodeNotOpened = this.props.isSearchMode && !this.props.isSearchResultNodeOpened;
     const needHighlightSearchResult = this.props.isSearchMode;
-    // eslint-disable-next-line no-console
-    console.log('overLay props', this.props.node);
     return (
       <div className="overlay-property-table">
         <div className="overlay-property-table__background" />
@@ -109,11 +107,12 @@ class OverlayPropertyTable extends React.Component {
                   rightIcon="download"
                 /> */}
                 <PDFDownloadLink
-                  document={<PdfDocument />}
+                  document={<PdfDocument node={this.props.node} />}
+                  className="overlay-property-table__download-button"
                 >
                   {({
                     loading,
-                  }) => (loading ? 'Loading document...' : 'Download Pdf')}
+                  }) => (loading ? 'Loading document...' : <div className="overlay-property-table__download-text">PDF</div>)}
                 </PDFDownloadLink>
               </div>
 
