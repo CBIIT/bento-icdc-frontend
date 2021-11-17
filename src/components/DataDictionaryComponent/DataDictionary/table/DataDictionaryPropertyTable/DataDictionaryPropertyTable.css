@@ -13,6 +13,11 @@
   vertical-align: top;
 }
 
+td.data-dictionary-property-table__data:nth-child(2) > p {
+  width: 300px;
+  word-wrap: break-word;
+}
+
 .data-dictionary-property-table--without-border tr:first-child th.data-dictionary-property-table__data {
   border-top: 0;
 }
