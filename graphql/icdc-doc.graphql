@@ -959,6 +959,8 @@ type QueryType {
 
   caseCountByBiobank(case_ids: [String] = []): [GroupCount] 
 
+  caseCountByStudyParticipation(case_ids: [String] = []): [GroupCount] 
+
   filesInList(uuids: [String], order_by: String = ""): [FileInList] 
 
   filesInListDesc(uuids: [String], order_by: String = ""): [FileInList] 
@@ -980,7 +982,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByStudyType(
@@ -999,7 +1002,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByBreed(
@@ -1018,7 +1022,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByDiagnosis(
@@ -1037,7 +1042,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByDiseaseSite(
@@ -1056,7 +1062,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByStageOfDisease(
@@ -1075,7 +1082,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByResponseToTreatment(
@@ -1094,7 +1102,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountBySex(
@@ -1113,7 +1122,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByNeuteredStatus(
@@ -1132,7 +1142,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountBySampleType (
@@ -1151,7 +1162,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountBySamplePathology (
@@ -1170,7 +1182,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountBySampleSite (
@@ -1189,7 +1202,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByFileAssociation (
@@ -1208,7 +1222,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByFileType (
@@ -1227,7 +1242,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByFileFormat (
@@ -1246,7 +1262,8 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   filterCaseCountByBiobank (
@@ -1265,7 +1282,28 @@ type QueryType {
     file_association: [String] = [],
     file_type: [String] = [],
     file_format: [String] = [],
-    biobank: [String] = []
+    biobank: [String] = [],
+    study_participation: [String] = []
+  ): [GroupCount] 
+
+  filterCaseCountByStudyParticipation (
+    study: [String] = [],
+    study_type: [String] = [],
+    breed: [String] = [],
+    diagnosis: [String] = [],
+    disease_site: [String] = [],
+    stage_of_disease: [String] = [],
+    response_to_treatment: [String] = [],
+    sex: [String] = [],
+    neutered_status: [String] = [],
+    sample_type: [String] = [],
+    sample_pathology: [String] = [],
+    sample_site: [String] = [],
+    file_association: [String] = [],
+    file_type: [String] = [],
+    file_format: [String] = [],
+    biobank: [String] = [],
+    study_participation: [String] = []
   ): [GroupCount] 
 
   "Combined info"
@@ -1306,6 +1344,7 @@ type QueryType {
     file_type: [String] = [],
     file_format: [String] = [],
     biobank: [String] = [],
+    study_participation: [String] = [],
     first: Int = 100
   ): SearchResult 
 
