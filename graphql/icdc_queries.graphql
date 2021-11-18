@@ -870,6 +870,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -941,6 +942,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1010,6 +1012,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1079,6 +1082,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1148,6 +1152,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1217,6 +1222,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1286,6 +1292,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1355,6 +1362,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
@@ -1424,6 +1432,7 @@ type QueryType {
     WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
+        AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
         AND (size($file_association) = 0 OR head(labels(parent)) IN $file_association)
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
