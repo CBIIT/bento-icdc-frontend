@@ -424,7 +424,7 @@ const TabView = ({
             queryCustomVaribles={{
               case_ids: filteredSubjectIds,
               sample_ids: filteredSampleIds,
-              file_uuids: filteredFileIds,
+              file_uuids: (tabIndex === '3') ? filteredStudyFileIds : filteredFileIds,
               file_association: association,
             }}
             defaultSortCoulmn={defaultSortCoulmn}

@@ -197,7 +197,7 @@ const CaseDetail = ({ classes, data }) => {
 
             )}
           {
-            data.multiStudyCases
+            data.multiStudyCases && data.multiStudyCases.caseIds
             && (data.multiStudyCases.caseIds.length > 1)
               && (
                 <div className={classes.multiCaseStudy}>
