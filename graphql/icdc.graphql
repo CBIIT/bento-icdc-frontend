@@ -1559,7 +1559,7 @@ type QueryType {
     MATCH (diag:diagnosis)
     WITH collect(DISTINCT diag.disease_term) AS groups, biobank_cases
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
-    OPTIONAL MATCH (c)<--(diag:diagnosis), (c)<--(r:registration)
+    OPTIONAL MATCH (c)<--(r:registration)
     WITH diag, s, c, demo, r, groups, biobank_cases
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
