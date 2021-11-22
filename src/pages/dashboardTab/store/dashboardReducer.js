@@ -86,6 +86,7 @@ const initialState = {
       selectedRowIndex: [],
     },
     widgets: {},
+    biobank: [],
   },
 };
 
@@ -861,6 +862,7 @@ export function sortGroupCheckboxByCount(groupName) {
 const convertCasesToCount = (data) => data.map((item) => ({
   group: item.group,
   subjects: item.count,
+  tooltip: item.tooltip,
 }));
 
 /**
@@ -883,6 +885,7 @@ export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromC
       datafield: mapping.datafield,
       show: mapping.show,
       section: mapping.section,
+      tooltip: mapping.tooltip,
     }))
   );
 }
@@ -993,6 +996,7 @@ const reducers = {
       },
       filters: dataTableFilters,
       widgets: getWidgetsData(tableData, widgetsData),
+      biobank: item.data.biospecimen_source,
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
@@ -1039,6 +1043,7 @@ const reducers = {
           selectedRowInfo: [],
           selectedRowIndex: [],
         },
+        biobank: item.data.biospecimen_source,
       } : { ...state };
   },
   CLEAR_ALL_FILTER: (state, item) => {
@@ -1088,6 +1093,7 @@ const reducers = {
           ...state.sortByList,
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
+        biobank: item.data.biospecimen_source,
       } : { ...state };
   },
   SORT_SINGLE_GROUP_CHECKBOX: (state, item) => {
@@ -1196,7 +1202,7 @@ const reducers = {
           ...state.sortByList,
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
-
+        biobank: item.data.biospecimen_source,
       } : { ...state };
   },
   CLEAR_SECTION_SORT: (state, item) => {

@@ -37,18 +37,22 @@ const Publication = ({
                         {attr.label}
                         :
                       </Grid>
-                      <Grid item xs={12} sm={6} className={classes.content}>
-                        <a href={getURL(publication[attr.key], attr.url)} target="_blank" rel="noreferrer" className={classes.outLink}>
-                          {publication[attr.key]}
-                          <span className={classes.paddingLeft5}>
-                            <img
-                              src={externalIcon}
-                              alt="imageLink"
-                              className={classes.linkIcon}
-                            />
-                          </span>
-                        </a>
-                      </Grid>
+                      {
+                        (publication[attr.key] !== null && publication[attr.key] !== undefined) ? (
+                          <Grid item xs={12} sm={6} className={classes.content}>
+                            <a href={getURL(publication[attr.key], attr.url)} target="_blank" rel="noreferrer" className={classes.outLink}>
+                              {publication[attr.key]}
+                              <span className={classes.paddingLeft5}>
+                                <img
+                                  src={externalIcon}
+                                  alt="imageLink"
+                                  className={classes.linkIcon}
+                                />
+                              </span>
+                            </a>
+                          </Grid>
+                        ) : null
+                      }
                     </>
                   ) : (
                     <>

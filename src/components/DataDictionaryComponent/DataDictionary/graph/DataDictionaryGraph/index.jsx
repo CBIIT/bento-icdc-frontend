@@ -5,7 +5,7 @@ import ReduxGraphCalculator from '../GraphCalculator';
 import ReduxLegend from '../Legend';
 import ReduxCanvas from '../Canvas';
 import ReduxGraphDrawer from '../GraphDrawer';
-import ReduxNodeTooltip from '../NodeTooltip';
+// import ReduxNodeTooltip from '../NodeTooltip';
 import ReduxNodePopup from '../NodePopup';
 import ReduxOverlayPropertyTable from '../OverlayPropertyTable';
 import ReduxActionLayer from '../ActionLayer';
@@ -19,7 +19,7 @@ class DataDictionaryGraph extends React.Component {
         <ReduxCanvas>
           <ReduxGraphDrawer />
         </ReduxCanvas>
-        <ReduxNodeTooltip />
+        {/* <ReduxNodeTooltip /> */}
         <ReduxNodePopup />
         <ReduxOverlayPropertyTable />
         <ReduxActionLayer onClearSearchResult={this.props.onClearSearchResult} />
