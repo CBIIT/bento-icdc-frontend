@@ -62,7 +62,11 @@ class OverlayPropertyTable extends React.Component {
 
   render() {
     if (!this.props.node || this.props.hidden) return (<></>);
+    // eslint-disable-next-line no-console
+    console.log('props', this.props.node);
     const IconSVG = getCategoryIconSVG(this.props.node.category);
+    // eslint-disable-next-line no-console
+    console.log('category', this.props.node.category);
     const searchedNodeNotOpened = this.props.isSearchMode && !this.props.isSearchResultNodeOpened;
     const needHighlightSearchResult = this.props.isSearchMode;
     return (
