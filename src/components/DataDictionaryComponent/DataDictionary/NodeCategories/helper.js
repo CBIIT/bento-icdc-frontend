@@ -3,6 +3,9 @@
 import IconAdministrative from '-!react-svg-loader!./icons/Administrative.svg';
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-webpack-loader-syntax
+import IconStudy from '-!react-svg-loader!./icons/Study.svg';
+/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-webpack-loader-syntax
 import IconClinicalTrial from '-!react-svg-loader!./icons/Clinical_Trial.svg';
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -63,6 +66,10 @@ const nodeCategoryList = {
   },
   case: {
     icon: IconCase,
+    color: '#AD91FF',
+  },
+  study: {
+    icon: IconStudy,
     color: '#AD91FF',
   },
   clinical_trial: {
