@@ -85,7 +85,7 @@ export const globalStatsData = [
     statTitle: 'Programs',
     type: 'field',
     statAPI: 'numberOfPrograms',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/add_program_icon/icdc/images/svgs/Programs_.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Programs_.svg',
     // statIconSrc: '../assets/glo-icons/Programs.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
