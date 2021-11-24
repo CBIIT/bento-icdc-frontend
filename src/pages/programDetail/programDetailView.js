@@ -54,6 +54,7 @@ const ProgramView = ({ classes, data }) => {
     numberOfSamples: data.sampleCountOfProgram,
     numberOfFiles: data.fileCountOfProgram,
     numberOfStudyFiles: data.studyFileCountOfProgram,
+    numberOfPrograms: 1,
     numberOfAliquots: data.aliquotCountOfProgram ? data.aliquotCountOfProgram : 0,
   };
 

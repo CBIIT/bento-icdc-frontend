@@ -344,6 +344,7 @@ type SearchResult {
   numberOfAliquots: Int
   volumeOfData: Float
   numberOfStudyFiles: Int
+  numberOfPrograms: Int
   caseIds: [String]
   studyFileIds: [String]
   sampleIds: [String]
@@ -382,6 +383,7 @@ type UnifiedCounts{
   numberOfFiles: Int
   numberOfSamples: Int
   numberOfStudyFiles: Int
+  numberOfPrograms: Int
   numberOfAliquots: Int
   volumeOfData: Float
 }
@@ -401,6 +403,7 @@ type QueryType {
   numberOfSamples:Int @cypher(statement: "MATCH (n:sample) RETURN  count (n)")
   numberOfFiles: Int @cypher(statement: "MATCH (n:file) RETURN  count (n)")
   numberOfStudyFiles: Int @cypher(statement: "MATCH (n:file)-->(sd:study) RETURN count (n)")
+  numberOfPrograms: Int @cypher(statement: "MATCH (n:program) RETURN count (n)")
   numberOfAliquots: Int @cypher(statement: "MATCH (n:aliquot) return count(n)")
   volumeOfData: Float @cypher(statement: "MATCH (f:file) return sum(DISTINCT f.file_size)")
 
@@ -421,6 +424,10 @@ type QueryType {
   caseCountOfProgram(program_id: String!): Int @cypher(statement: "MATCH (c:case)-[*]->(:program {program_acronym: $program_id}) return count(DISTINCT(c))")
   sampleCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (c:case {case_id: $case_id})<-[*]-(s:sample) RETURN count(distinct(s))")
 
+  programCountOfStudy(study_code: String!): Int @cypher(statement: "MATCH (s:study {clinical_study_designation: $study_code}) OPTIONAL MATCH (s)-[:member_of]->(p: program)  return count(DISTINCT(p))")
+  programsCountOfCase(case_id: String!): Int @cypher(statement: "MATCH (c:case {case_id: $case_id}) OPTIONAL MATCH (c)-[:member_of]->(s:study) OPTIONAL MATCH (s)-[:member_of]->(p:program) return count(DISTINCT(p))")
+
+  
   "Count by group"
   caseCountByStudyCode(case_ids: [String] = []): [GroupCount] @cypher(statement: """
     MATCH (s:study)<-[:member_of]-(c:case)
@@ -2368,6 +2375,7 @@ type QueryType {
          numberOfFiles: COUNT(DISTINCT f),
          volumeOfData: SUM(DISTINCT f.file_size),
          numberOfStudyFiles: COUNT(DISTINCT sf),
+         numberOfPrograms: COUNT(DISTINCT p),
          numberOfAliquots: COUNT(DISTINCT al),
          caseIds: COLLECT(DISTINCT c.case_id),
          sampleIds: COLLECT(DISTINCT samp.sample_id),
@@ -3006,7 +3014,8 @@ type QueryType {
     OPTIONAL MATCH (a:aliquot)-[*]->(c)
     OPTIONAL MATCH (c)-[:member_of]->(sd:study)
     OPTIONAL MATCH (sf:file)-->(sd)
-    WITH a, s, c, f, samp, sf
+    OPTIONAL MATCH (s)-[:member_of]->(p: program)
+    WITH a, s, c, f, samp, sf, p
     RETURN{
       numberOfStudies: COUNT(DISTINCT s),
       numberOfCases: COUNT(DISTINCT c),
@@ -3014,6 +3023,7 @@ type QueryType {
       numberOfSamples: COUNT(DISTINCT samp),
       numberOfAliquots: COUNT(DISTINCT a),
       numberOfStudyFiles: COUNT(DISTINCT sf),
+      numberOfPrograms: COUNT(DISTINCT p),
       volumeOfData: SUM(f.file_size)
     }
   """, passThrough: true)

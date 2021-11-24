@@ -578,6 +578,7 @@ export const DASHBOARD_QUERY = gql`{
   numberOfSamples
   numberOfFiles
   numberOfStudyFiles
+  numberOfPrograms
   numberOfAliquots
   volumeOfData
 caseCountByDiagnosis{
@@ -777,6 +778,7 @@ searchCases(
       numberOfSamples
       numberOfFiles
       numberOfStudyFiles
+      numberOfPrograms
       numberOfAliquots
       volumeOfData
       caseIds
