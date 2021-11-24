@@ -2396,14 +2396,17 @@ type QueryType {
     file_format: [String] = [],
     biobank: [String] = []
   ): [GroupCount] @cypher(statement: """
+    MATCH (r:registration)-->(c:case)-->(s:study)
+    WHERE NOT r.registration_origin = s.clinical_study_designation
+    WITH COLLECT(DISTINCT c.case_id) as biobank_cases
     MATCH (s:study)
-    WITH COLLECT(DISTINCT s.clinical_study_designation) AS clinical_study_designations
+    WITH COLLECT(DISTINCT s.clinical_study_designation) AS clinical_study_designations, biobank_cases
     MATCH (r:registration)
       WHERE NOT r.registration_origin IN clinical_study_designations
-    WITH COLLECT(DISTINCT r.registration_origin) + 'Not Applicable' AS groups
+    WITH COLLECT(DISTINCT r.registration_origin) + 'Not Applicable' AS groups, biobank_cases
     MATCH (s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
     OPTIONAL MATCH (c)<--(r:registration)
-    WITH s, c, demo, diag, groups, r
+    WITH s, c, demo, diag, groups, r, biobank_cases
       WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
         AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
         AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -2415,11 +2418,11 @@ type QueryType {
         AND (size($response_to_treatment) = 0 OR diag.best_response IN $response_to_treatment)
     OPTIONAL MATCH (f1:file)-[*]->(c)
     OPTIONAL MATCH (f2:file)-->(s)
-    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups, r
+    WITH COLLECT(DISTINCT f1) + COLLECT(DISTINCT f2) AS files, s, c, diag, demo, groups, r, biobank_cases
     UNWIND CASE files WHEN [] THEN [null] ELSE files END AS f
     OPTIONAL MATCH (f)-->(parent)
     OPTIONAL MATCH (samp:sample)-->(c)
-    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups, r
+    WITH DISTINCT c AS c, s, demo, diag, f, parent, samp, groups, r, biobank_cases
       WHERE (size($sample_type) = 0 OR samp.summarized_sample_type IN $sample_type)
         AND (size($sample_pathology) = 0 OR samp.specific_sample_pathology IN $sample_pathology)
         AND (size($sample_site) = 0 OR samp.sample_site IN $sample_site)
@@ -2427,14 +2430,14 @@ type QueryType {
         AND (size($file_type) = 0 OR f.file_type IN $file_type)
         AND (size($file_format) = 0 OR f.file_format IN $file_format)
     WITH 
-        DISTINCT c, groups, r,
-        r.registration_origin = s.clinical_study_designation AS is_placeholder
+        c, groups, r,
+        NOT c.case_id IN biobank_cases AS not_applicable
     WITH 
-        CASE is_placeholder
+        CASE not_applicable
             WHEN true THEN 'Not Applicable'
             ELSE r.registration_origin
         END AS count_group,
-       count(c) AS count,
+       count(DISTINCT c) AS count,
        groups
     UNWIND groups AS group
     RETURN{
