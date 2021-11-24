@@ -87,7 +87,7 @@ async function init() {
             propertiesItem.type = icdcMPData.PropDefinitions[propertyName].Type;
             propertiesItem.src = icdcMPData.PropDefinitions[propertyName].Src;
 
-            if (icdcMPData.PropDefinitions[propertyName].Req === true) {
+            if (icdcMPData.PropDefinitions[propertyName].Req === 'Yes') {
               pRequired.push(nodeP);
             }
           }
