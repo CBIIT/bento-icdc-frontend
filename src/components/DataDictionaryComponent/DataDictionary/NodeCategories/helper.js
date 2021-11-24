@@ -1,6 +1,15 @@
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import IconAdministrative from '-!react-svg-loader!./icons/icon_administrative.svg';
+import IconAdministrative from '-!react-svg-loader!./icons/Administrative.svg';
+/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import IconStudy from '-!react-svg-loader!./icons/Study.svg';
+/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import IconClinicalTrial from '-!react-svg-loader!./icons/Clinical_Trial.svg';
+/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import IconCase from '-!react-svg-loader!./icons/Case.svg';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import IconAnalysis from '-!react-svg-loader!./icons/icon_analysis.svg';
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -54,6 +63,18 @@ const nodeCategoryList = {
   administrative: {
     icon: IconAdministrative,
     color: '#AD91FF',
+  },
+  case: {
+    icon: IconCase,
+    color: '#AD91FF',
+  },
+  study: {
+    icon: IconStudy,
+    color: '#AD91FF',
+  },
+  clinical_trial: {
+    icon: IconClinicalTrial,
+    color: '#05B8EE',
   },
   notation: {
     icon: IconNotation,
