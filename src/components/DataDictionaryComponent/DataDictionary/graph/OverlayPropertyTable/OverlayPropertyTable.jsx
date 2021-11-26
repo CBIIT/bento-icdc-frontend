@@ -108,6 +108,7 @@ class OverlayPropertyTable extends React.Component {
                 /> */}
                 <PDFDownloadLink
                   document={<PdfDocument node={this.props.node} />}
+                  fileName={`${this.props.node.id}.pdf`}
                   className="overlay-property-table__download-button"
                 >
                   {({

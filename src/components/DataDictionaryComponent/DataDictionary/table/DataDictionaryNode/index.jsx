@@ -73,6 +73,7 @@ class DataDictionaryNode extends React.Component {
               /> */}
               <PDFDownloadLink
                 document={<PdfDocument node={this.props.node} />}
+                fileName={`${this.props.node.id}.pdf`}
                 className="data-dictionary-node__download-button"
               >
                 {({
