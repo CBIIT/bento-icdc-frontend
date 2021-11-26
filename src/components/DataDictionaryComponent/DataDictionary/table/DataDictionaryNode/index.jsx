@@ -1,12 +1,14 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 // eslint-disable-next-line no-unused-vars
 import Button from '@gen3/ui-component/dist/components/Button';
 import { downloadTemplate } from '../../utils';
 import { getCategoryColor } from '../../NodeCategories/helper';
 import DataDictionaryPropertyTable from '../DataDictionaryPropertyTable';
 import './DataDictionaryNode.css';
+import PdfDocument from '../../NodePDF';
 
 class DataDictionaryNode extends React.Component {
   handleClickNode(nodeID) {
@@ -69,6 +71,15 @@ class DataDictionaryNode extends React.Component {
                 rightIcon="download"
                 buttonType="secondary"
               /> */}
+              <PDFDownloadLink
+                document={<PdfDocument node={this.props.node} />}
+                fileName={`${this.props.node.id}.pdf`}
+                className="data-dictionary-node__download-button"
+              >
+                {({
+                  loading,
+                }) => (loading ? 'Loading document...' : 'PDF')}
+              </PDFDownloadLink>
             </span>
           </div>
         </div>
