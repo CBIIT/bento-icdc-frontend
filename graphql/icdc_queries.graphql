@@ -2697,8 +2697,8 @@ type QueryType {
     MATCH (f:file)
       WHERE ($file_uuids = [""] OR $file_uuids IS NULL OR f.uuid IN $file_uuids)
     OPTIONAL MATCH (f)-->(parent)
-    OPTIONAL MATCH (parent)-[:of_case]->(c:case)
-    WITH f, parent, c,
+    OPTIONAL MATCH (parent)-[:of_case]->(cf :case)
+    WITH f, parent, CASE cf WHEN NULL THEN parent ELSE cf END AS c,
     CASE head(labels(parent)) WHEN 'study' THEN 'study' ELSE 'other' END AS association
       WHERE ($case_ids = [""] OR $case_ids IS NULL OR c.case_id IN $case_ids) AND association = $file_association
     OPTIONAL MATCH (c)<-[:of_case]-(demo:demographic)
