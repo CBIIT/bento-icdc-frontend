@@ -7,6 +7,7 @@ export const tooltipContent = {
   0: 'Add filtered files associated with selected case(s) to My Files',
   1: 'Add filtered files associated with selected sample(s) to My Files',
   2: 'Add selected files to My Files',
+  3: 'Add selected study files to My Files',
 };
 
 // --------------- Tooltip configuration --------------
@@ -16,6 +17,7 @@ export const selectAllToolTip = {
   0: 'Add filtered files associated with all cases to My Files',
   1: 'Add filtered files associated with all samples to My Files',
   2: 'Add all filtered files to My Files',
+  3: 'Add all filtered study files to My Files',
 };
 
 // --------------- Dahboard Table external link configuration --------------
@@ -576,6 +578,7 @@ export const DASHBOARD_QUERY = gql`{
   numberOfSamples
   numberOfFiles
   numberOfStudyFiles
+  numberOfPrograms
   numberOfAliquots
   volumeOfData
 caseCountByDiagnosis{
@@ -775,6 +778,7 @@ searchCases(
       numberOfSamples
       numberOfFiles
       numberOfStudyFiles
+      numberOfPrograms
       numberOfAliquots
       volumeOfData
       caseIds

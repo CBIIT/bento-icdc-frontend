@@ -66,11 +66,19 @@
   padding: unset; /* override .g3-button's paddings */
   font-weight: normal;
   display: inline;
+  background-color: #0B3557;
+  color: var(--g3-color__white);
+  padding: 5px 6px 5px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
 }
 
 .data-dictionary-node__download-button:hover,
 .data-dictionary-node__download-button:active {
   color: white;
+  background-color: var(--g3-color__base-blue);
 }
 
 .data-dictionary-node__download-button .g3-icon {

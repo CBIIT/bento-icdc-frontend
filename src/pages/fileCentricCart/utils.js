@@ -26,7 +26,7 @@ export function createFileName(fileName) {
 export function convertToCSV(jsonse, comments, keysToInclude, header) {
   const objArray = jsonse;
   const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-  let str = '';
+  let str = header.join(',');
   array.map((entry, index) => {
     let line = '';
     keysToInclude.map((keyName) => {
@@ -38,7 +38,7 @@ export function convertToCSV(jsonse, comments, keysToInclude, header) {
       return line;
     });
     if (index === 0) {
-      str = header.join(',');
+      // str = header.join(',');
       let commentResult = comments.replace(/"/g, '""');
       if (commentResult.search(/("|,|\n)/g) >= 0) commentResult = `"${commentResult}"`;
       str += `\r\n${line},${commentResult}\r\n`;

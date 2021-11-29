@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@gen3/ui-component/dist/components/Button';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 // eslint-disable-next-line no-unused-vars
 import { downloadTemplate, SearchResultItemShape } from '../../utils';
 import { getCategoryIconSVG } from '../../NodeCategories/helper';
@@ -11,6 +12,7 @@ import {
 } from '../../highlightHelper';
 import DataDictionaryPropertyTable from '../../table/DataDictionaryPropertyTable';
 import './OverlayPropertyTable.css';
+import PdfDocument from '../../NodePDF';
 
 class OverlayPropertyTable extends React.Component {
   getTitle = () => {
@@ -62,7 +64,11 @@ class OverlayPropertyTable extends React.Component {
 
   render() {
     if (!this.props.node || this.props.hidden) return (<></>);
+    // eslint-disable-next-line no-console
+    console.log('props', this.props.node);
     const IconSVG = getCategoryIconSVG(this.props.node.category);
+    // eslint-disable-next-line no-console
+    console.log('category', this.props.node.category);
     const searchedNodeNotOpened = this.props.isSearchMode && !this.props.isSearchResultNodeOpened;
     const needHighlightSearchResult = this.props.isSearchMode;
     return (
@@ -103,14 +109,16 @@ class OverlayPropertyTable extends React.Component {
                   label="TSV"
                   buttonType="secondary"
                   rightIcon="download"
-                />
-                <Button
-                  className="overlay-property-table__download-button"
-                  onClick={() => { downloadTemplate('json', this.props.node.id); }}
-                  label="JSON"
-                  buttonType="secondary"
-                  rightIcon="download"
                 /> */}
+                <PDFDownloadLink
+                  document={<PdfDocument node={this.props.node} />}
+                  fileName={`${this.props.node.id}.pdf`}
+                  className="overlay-property-table__download-button"
+                >
+                  {({
+                    loading,
+                  }) => (loading ? 'Loading document...' : <div className="overlay-property-table__download-text">PDF</div>)}
+                </PDFDownloadLink>
               </div>
 
             </div>

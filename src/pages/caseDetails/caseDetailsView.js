@@ -54,6 +54,7 @@ const CaseDetail = ({ classes, data }) => {
     numberOfSamples: data.sampleCountOfCase,
     numberOfFiles: data.fileCountOfCase,
     numberOfStudyFiles: data.studyFileCountOfCase,
+    numberOfPrograms: data.programsCountOfCase,
   };
   const caseDetail = data.case[0];
 
@@ -197,7 +198,7 @@ const CaseDetail = ({ classes, data }) => {
 
             )}
           {
-            data.multiStudyCases
+            data.multiStudyCases && data.multiStudyCases.caseIds
             && (data.multiStudyCases.caseIds.length > 1)
               && (
                 <div className={classes.multiCaseStudy}>

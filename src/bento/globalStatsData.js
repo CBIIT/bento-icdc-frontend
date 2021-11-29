@@ -37,54 +37,63 @@ export const statsStyling = {
 };
 
 export const globalStatsData = [
-  // A maximum of 6 stats are allowed
+  // A maximum of 7 stats are allowed
   {
     statTitle: 'Data Volume',
     type: 'field',
     statAPI: 'volumeOfData',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-DataVolume.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Data_Vol_.svg',
     statIconAlt: 'Data Volume Stats Bar Icon',
   },
   {
     statTitle: 'Studies',
     type: 'field',
     statAPI: 'numberOfStudies',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-studies-stats.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Studies_.svg',
     statIconAlt: 'Studies Stats Bar Icon',
   },
   {
     statTitle: 'Cases',
     type: 'field',
     statAPI: 'numberOfCases',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-cases-stats.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Cases_.svg',
     statIconAlt: 'Studies Stats Bar Icon',
   },
   {
     statTitle: 'Samples',
     type: 'field',
     statAPI: 'numberOfSamples',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-samples-stats.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Samples_.svg',
     statIconAlt: 'Samples Stats Bar Icon',
   },
   {
     statTitle: 'Case Files',
     type: 'field',
     statAPI: 'numberOfFiles',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-files-stats.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/CaseFiles_.svg',
     statIconAlt: 'Files Stats Bar Icon',
   },
   {
     statTitle: 'Study Files',
     type: 'field',
     statAPI: 'numberOfStudyFiles',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StatsBar-StudyFile.svg',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
+    // statIconSrc: 'http://localhost:3000/src/assets/glo-icons/StudyFiles.svg',
+    statIconAlt: 'Study Files Stats Bar Icon',
+  },
+  {
+    statTitle: 'Programs',
+    type: 'field',
+    statAPI: 'numberOfPrograms',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Programs_.svg',
+    // statIconSrc: '../assets/glo-icons/Programs.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
   // {
   //   statTitle: 'Aliquots',
   //   type: 'field',
   //   statAPI: 'numberOfAliquots',
-  //   statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-aliquots-stats.svg',
+  //   statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/add_program_icon/icdc/images/svgs/Icon-aliquots-stats.svg',
   //   statIconAlt: 'Aliquots Stats Bar Icon',
   // },
 ];
@@ -96,6 +105,7 @@ export const GET_GLOBAL_STATS_DATA_QUERY = gql`{
   numberOfSamples
   numberOfFiles
   numberOfStudyFiles
+  numberOfPrograms
   numberOfAliquots
   volumeOfData
   }

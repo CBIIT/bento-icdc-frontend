@@ -89,14 +89,31 @@
 }
 
 .overlay-property-table__download-button {
-  width: 80px;
   min-width: unset; /* override .g3-button's 152px min-width */
   height: 30px;
   margin: 5px 0 0 15px;
   padding: unset; /* override .g3-button's paddings */
   float: right;
   font-weight: normal;
-  border: none;
+  background-color: #0B3557;
+  color: var(--g3-color__white);
+  padding: 0px 6px 0px 6px;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+  border-color: #0B3557;
+  text-align: center;
+}
+
+.overlay-property-table__download-button:hover,
+.overlay-property-table__download-button:active {
+  color: white;
+  background-color: var(--g3-color__base-blue);
+}
+
+.overlay-property-table__download-text {
+  margin-bottom: 100px;
 }
 
 .overlay-property-table__download-button .g3-icon {
