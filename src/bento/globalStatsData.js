@@ -4,30 +4,35 @@ export const statsStyling = {
   global: {
     horizontalStyle: false,
     statTitleFirst: false,
-    height: '62px',
+    height: '75px',
     background: '#CBE2EE',
     top: '159px',
   },
   statsGroup: {
-    margin: '4px 60px',
+    margin: '10px 0px',
+    padding: '0.5% 6% 2% 7%',
+    borderRight: '4px solid #0B3556',
   },
   statsIcon: {
     width: '40px',
     height: '45px',
+    margin: '2px 0px 0px -45px',
   },
   statCount: {
     color: '#4A4A4A',
     fontFamily: 'sans-serif',
     fontSize: '16.8px',
-    margin: '0px 0px 0px 15px',
+    margin: '0px 0px -4px 8px',
     float: 'left',
+    padding: '4px 60px',
   },
   statTitle: {
     color: '#0B3556',
     fontFamily: 'sans-serif',
     fontSize: '14px',
     textTransform: 'none',
-    float: 'none',
+    margin: '0px 0px 0px 8px',
+    float: 'left',
   },
 };
 
