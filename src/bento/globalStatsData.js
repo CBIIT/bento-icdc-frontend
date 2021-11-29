@@ -19,7 +19,7 @@ export const statsStyling = {
     margin: '2px 0px 0px -45px',
   },
   statCount: {
-    color: '#4A4A4A',
+    color: '#263960',
     fontFamily: 'sans-serif',
     fontSize: '16.8px',
     margin: '0px 0px -4px 8px',
