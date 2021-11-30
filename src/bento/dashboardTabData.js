@@ -1,5 +1,10 @@
 import gql from 'graphql-tag';
-import { customCasesTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV } from './tableDownloadCSV';
+import {
+  customCasesTabDownloadCSV,
+  customFilesTabDownloadCSV,
+  customSamplesTabDownloadCSV,
+  customStudyFilesTabDownloadCSV,
+} from './tableDownloadCSV';
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
@@ -507,7 +512,7 @@ export const tabContainers = [
     disableRowSelection: 'type3',
     tableID: 'file_tab_table',
     selectableRows: true,
-    tableDownloadCSV: customFilesTabDownloadCSV,
+    tableDownloadCSV: customStudyFilesTabDownloadCSV,
     viewColumns: true,
     tabIndex: '3',
     downloadFileName: 'Bento_Dashboard_cases_download',
