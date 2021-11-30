@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -129,7 +130,7 @@ class OverlayPropertyTable extends React.Component {
                 hasBorder={false}
                 onlyShowMatchedProperties={searchedNodeNotOpened}
                 needHighlightSearchResult={needHighlightSearchResult}
-                hideIsRequired={searchedNodeNotOpened}
+                // hideIsRequired={searchedNodeNotOpened}
                 matchedResult={this.props.matchedResult}
               />
             </div>
