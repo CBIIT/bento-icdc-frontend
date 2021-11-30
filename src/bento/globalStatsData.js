@@ -10,8 +10,8 @@ export const statsStyling = {
   },
   statsGroup: {
     margin: '10px 0px',
-    padding: '0.5% 6% 2% 7%',
-    borderRight: '4px solid #0B3556',
+    padding: '0.5% 6% 2% 6%',
+    borderRight: '1px solid #0B3556',
   },
   statsIcon: {
     width: '40px',
