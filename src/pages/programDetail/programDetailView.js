@@ -22,14 +22,11 @@ import {
 import {
   pageData as ProgramImageConfig,
 } from '../../bento/programData';
-import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
 import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
-import {
-  fetchDataForDashboardTab,
-} from '../dashboardTab/store/dashboardReducer';
+import { navigatedToDashboard } from '../../utils/utils';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -87,11 +84,6 @@ const ProgramView = ({ classes, data }) => {
     </Tooltip>
   );
 
-  const linkToDashboard = (studyCode) => {
-    fetchDataForDashboardTab('Cases', null, null, null);
-    filterCasePageOnStudyCode(studyCode);
-  };
-
   /**
  * Conditionally returns a tooltip based on study disposition.
  * @param {String} param
@@ -127,7 +119,7 @@ const ProgramView = ({ classes, data }) => {
         <Link
           to={(location) => ({ ...location, pathname: '/cases' })}
           className={classes.buttonCaseNumb}
-          onClick={() => linkToDashboard(tableMeta.rowData[1])}
+          onClick={() => navigatedToDashboard(tableMeta.rowData[1], 'Cases')}
         >
           {value}
         </Link>

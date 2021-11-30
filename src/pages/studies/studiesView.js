@@ -14,10 +14,7 @@ import {
   pageData, textLabels,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
-import filterCasePageOnStudyCode from '../../utils/utils';
-import {
-  fetchDataForDashboardTab,
-} from '../dashboardTab/store/dashboardReducer';
+import { navigatedToDashboard } from '../../utils/utils';
 import { studyDisposition } from '../study/utils';
 import arrowIcon from '../../assets/icons/arrow-icon.png';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
@@ -56,11 +53,6 @@ const Studies = ({ classes, data }) => {
     }
   };
 
-  const linkToDashboard = (studyCode) => {
-    fetchDataForDashboardTab('Cases', null, null, null);
-    filterCasePageOnStudyCode(studyCode);
-  };
-
   const customStudyCodeLink = (column, value, tableMeta) => (
     <>
       <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
@@ -80,7 +72,7 @@ const Studies = ({ classes, data }) => {
         <Link
           className={classes.buttonCaseNumb}
           to={(location) => ({ ...location, pathname: '/cases' })}
-          onClick={() => linkToDashboard(tableMeta.rowData[0])}
+          onClick={() => navigatedToDashboard(tableMeta.rowData[0], 'Cases')}
         >
           {value}
         </Link>
