@@ -460,7 +460,7 @@ const styles = (theme) => ({
     marginTop: '15px',
     float: 'right',
     width: '220px',
-    height: '40px',
+    height: '35px',
     textAlign: 'center',
     background: '#f6f4f482',
     paddingLeft: '10px',
