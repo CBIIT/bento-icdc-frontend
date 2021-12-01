@@ -99,7 +99,7 @@ export const navBarData = [
         linkActiveStyle: 'white',
       },
       {
-        labelText: 'ICDC Data & Model',
+        labelText: 'Data Model Viewer',
         link: '/icdc-data-model',
         linkActiveStyle: 'white',
       },
