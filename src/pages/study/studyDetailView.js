@@ -13,7 +13,7 @@ import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboa
 import {
   studyDisposition,
 } from './utils';
-import filterCasePageOnStudyCode from '../../utils/utils';
+import { navigatedToDashboard } from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
   headerIcon,
@@ -206,22 +206,21 @@ const StudyDetailView = ({ classes, data }) => {
               : (
                 <div className={classes.headerButton}>
                   <span className={classes.headerButtonLinkSpan}>
+                    {/* <span className={classes.headerButtonLinkText}> View </span> */}
                     <Link
                       className={classes.headerButtonLink}
                       to={(location) => ({ ...location, pathname: '/cases' })}
-                      onClick={() => filterCasePageOnStudyCode(studyData
-                        .clinical_study_designation)}
+                      onClick={() => navigatedToDashboard(studyData
+                        .clinical_study_designation, 'Cases')}
                     >
-                      {' '}
-                      <span className={classes.headerButtonLinkText}> View </span>
-                      <span className={classes.headerButtonLinkNumber}>
+                      <div className={classes.headerButtonLinkNumber}>
                         {' '}
                         {' '}
                         {data.caseCountOfStudy}
                         {' '}
                         {' '}
-                      </span>
-                      <span className={classes.headerButtonLinkText}>Cases</span>
+                      </div>
+                      <span className={classes.headerButtonLinkText}>Associated Cases</span>
                     </Link>
                   </span>
                 </div>
@@ -308,9 +307,9 @@ const styles = (theme) => ({
     height: '33px',
     marginTop: '25px',
     fontWight: 'bolder',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-    paddingTop: '5px',
+    paddingLeft: '5px',
+    paddingRight: '5px',
+    paddingTop: '0px',
     textAlign: 'center',
     border: '3px solid #BB2040',
     '& h4': {
@@ -326,9 +325,9 @@ const styles = (theme) => ({
     height: '33px',
     marginTop: '25px',
     fontWight: 'bolder',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-    paddingTop: '5px',
+    paddingLeft: '5px',
+    paddingRight: '5px',
+    paddingTop: '0px',
     textAlign: 'center',
     fontFamily: 'Open Sans',
     border: '3px solid #F3A933',
@@ -341,6 +340,7 @@ const styles = (theme) => ({
     width: '20px',
     float: 'right',
     marginLeft: '5px',
+    marginTop: '4px',
   },
   headerBar: {
     fontWeight: '10',
@@ -456,33 +456,39 @@ const styles = (theme) => ({
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
+    border: '3px solid #81a6b9',
     marginTop: '15px',
     float: 'right',
-    width: '125px',
+    width: '220px',
     height: '33px',
-    background: '#F6F4F4',
-    paddingLeft: '10px',
-    paddingRight: '10px',
+    textAlign: 'center',
+    background: '#f6f4f482',
+    padding: '5px 10px 5px 10px',
 
   },
   headerButtonLinkSpan: {
     fontFamily: theme.custom.fontFamilySans,
-    height: '50px',
-    background: '#F5F3EE',
     width: '200px',
     fontSize: '14px',
+    display: 'inherit',
+    height: '15px',
+    marginTop: '-2px',
   },
   headerButtonLinkText: {
     fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
+    fontSize: '14px',
   },
   headerButtonLinkNumber: {
-    fontFamily: theme.custom.fontFamilySans,
-    borderBottom: 'solid',
-    lineHeight: '30px',
+    fontFamily: 'sans-serif',
+    // borderBottom: 'solid',
+    // lineHeight: '30px',
     paddingBottom: '3px',
-    margin: '0 4px',
-    fontSize: '14px',
+    margin: '0',
+    fontSize: '16px',
+    display: 'inherit',
+    fontWeight: '900',
+    marginRight: '4px',
   },
   logo: {
     position: 'absolute',
@@ -507,9 +513,9 @@ const styles = (theme) => ({
     lineHeight: '14px',
     fontSize: '12px',
     fontWeight: 'bold',
-    color: '#DC762F',
+    color: '#FF9742',
     '&:hover': {
-      textDecoration: 'underline',
+      textDecoration: 'none',
     },
   },
   button: {
