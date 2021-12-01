@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable block-scoped-var */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
@@ -101,6 +102,10 @@ async function init() {
       item.properties = {};
     }
 
+    if (key === 'cohort') {
+      console.log('prop.relationship', icdcMData.Relationships);
+    }
+
     for (const property in icdcMData.Relationships) {
       const linkItem = {};
 
@@ -113,11 +118,18 @@ async function init() {
           const name = icdcMData.Relationships[property].Ends[i].Dst;
           const target = icdcMData.Relationships[property].Ends[i].Dst;
 
+          if (key === 'cohort') {
+            console.log('backref name target', backref, name, target);
+          }
+
           linkItem.name = name;
           linkItem.backref = backref;
           linkItem.label = label;
           linkItem.target_type = target;
           linkItem.required = required;
+          if (key === 'cohort') {
+            console.log('linkItem', linkItem);
+          }
 
           link.push(linkItem);
         }
@@ -129,6 +141,7 @@ async function init() {
   }
 
   const newDataList = dataList;
+  console.log('dataList', newDataList);
 
   await Promise.all(
     [
