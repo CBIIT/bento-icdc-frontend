@@ -22,11 +22,11 @@ import {
 import {
   pageData as ProgramImageConfig,
 } from '../../bento/programData';
-import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
 import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+import { navigatedToDashboard } from '../../utils/utils';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -119,7 +119,7 @@ const ProgramView = ({ classes, data }) => {
         <Link
           to={(location) => ({ ...location, pathname: '/cases' })}
           className={classes.buttonCaseNumb}
-          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[1])}
+          onClick={() => navigatedToDashboard(tableMeta.rowData[1], 'Cases')}
         >
           {value}
         </Link>

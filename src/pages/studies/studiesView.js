@@ -14,7 +14,7 @@ import {
   pageData, textLabels,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
-import filterCasePageOnStudyCode from '../../utils/utils';
+import { navigatedToDashboard } from '../../utils/utils';
 import { studyDisposition } from '../study/utils';
 import arrowIcon from '../../assets/icons/arrow-icon.png';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
@@ -70,9 +70,9 @@ const Studies = ({ classes, data }) => {
         renderSwitch(studyDisposition(tableMeta.rowData[5]))
       ) : (
         <Link
-          to={(location) => ({ ...location, pathname: '/cases' })}
           className={classes.buttonCaseNumb}
-          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[0])}
+          to={(location) => ({ ...location, pathname: '/cases' })}
+          onClick={() => navigatedToDashboard(tableMeta.rowData[0], 'Cases')}
         >
           {value}
         </Link>
