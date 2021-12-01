@@ -46,7 +46,7 @@ const nodeCategoryList = {
   },
   biospecimen: {
     icon: IconBiospecimen,
-    color: '#27AE60',
+    color: '#28AE60',
   },
   data_file: {
     icon: IconDataFile,
@@ -62,11 +62,11 @@ const nodeCategoryList = {
   },
   administrative: {
     icon: IconAdministrative,
-    color: '#AD91FF',
+    color: '#9B2D20',
   },
   case: {
     icon: IconCase,
-    color: '#AD91FF',
+    color: '#FF7F15',
   },
   study: {
     icon: IconStudy,
@@ -74,7 +74,7 @@ const nodeCategoryList = {
   },
   clinical_trial: {
     icon: IconClinicalTrial,
-    color: '#05B8EE',
+    color: '#1C75BC',
   },
   notation: {
     icon: IconNotation,

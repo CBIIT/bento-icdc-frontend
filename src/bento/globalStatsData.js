@@ -10,19 +10,19 @@ export const statsStyling = {
   },
   statsGroup: {
     margin: '10px 0px',
-    padding: '4px 40px 10px 60px',
-    borderRight: '2px solid #0B3556',
+    padding: '0.5% 6% 2% 6%',
+    borderRight: '1px solid #0B3556',
   },
   statsIcon: {
     width: '40px',
     height: '45px',
-    margin: '2px 0px 0px -28px',
+    margin: '2px 0px 0px -45px',
   },
   statCount: {
-    color: '#4A4A4A',
+    color: '#263960',
     fontFamily: 'sans-serif',
     fontSize: '16.8px',
-    margin: '0px 0px 0px 20px',
+    margin: '0px 0px -4px 8px',
     float: 'left',
     padding: '4px 60px',
   },
@@ -31,8 +31,8 @@ export const statsStyling = {
     fontFamily: 'sans-serif',
     fontSize: '14px',
     textTransform: 'none',
-    margin: '0px 0px 0px 20px',
-    float: 'none',
+    margin: '0px 0px 0px 8px',
+    float: 'left',
   },
 };
 

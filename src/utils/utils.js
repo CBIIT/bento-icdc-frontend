@@ -1,5 +1,5 @@
 import {
-  singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
+  singleCheckBox, setSideBarToLoading, setDashboardTableLoading, fetchDataForDashboardTab,
 } from '../pages/dashboardTab/store/dashboardReducer';
 
 /*
@@ -18,3 +18,8 @@ function filterCasePageOnStudyCode(study) {
 }
 
 export default filterCasePageOnStudyCode;
+
+export function navigatedToDashboard(studyCode, tab) {
+  fetchDataForDashboardTab(tab, null, null, null);
+  filterCasePageOnStudyCode(studyCode);
+}

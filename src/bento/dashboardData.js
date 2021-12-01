@@ -30,6 +30,9 @@ export const facetSearchData = [
     label: 'Biobank', field: 'group', api: 'filterCaseCountByBiobank', filterAPI: 'filterCaseCountByBiobank', datafield: 'biobank', section: 'Filter By Cases', tooltip: true, show: true,
   },
   {
+    label: 'Study Participation', field: 'group', api: 'filterCaseCountByStudyParticipation', filterAPI: 'filterCaseCountByStudyParticipation', datafield: 'study_participation', section: 'Filter By Cases', show: true,
+  },
+  {
     label: 'Breed', field: 'group', api: 'filterCaseCountByBreed', filterAPI: 'filterCaseCountByBreed', datafield: 'breed', section: 'Filter By Cases', show: true,
   },
   {

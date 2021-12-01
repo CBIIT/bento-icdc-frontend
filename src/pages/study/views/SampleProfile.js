@@ -15,10 +15,7 @@ import {
   argumentConfiguration,
 } from '../../../bento/studyDetailsData';
 import TabPanel from '../components/TabPanel';
-import filterCasePageOnStudyCode from '../../../utils/utils';
-import {
-  fetchDataForDashboardTab,
-} from '../../dashboardTab/store/dashboardReducer';
+import { navigatedToDashboard } from '../../../utils/utils';
 
 const useStyles = makeStyles(() => ({
   tabs: {
@@ -80,8 +77,7 @@ const SampleProfile = ({ classes, data }) => {
     && data[tab.value].length > 0));
 
   const linkToDashboard = () => {
-    fetchDataForDashboardTab('Samples', null, null, null);
-    filterCasePageOnStudyCode(studyCode);
+    navigatedToDashboard(studyCode, 'Samples');
   };
 
   const tabItem = (items) => (
