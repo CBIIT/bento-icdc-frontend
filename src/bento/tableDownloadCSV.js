@@ -338,6 +338,23 @@ export const customFilesTabDownloadCSV = {
   fileName: 'ICDC_Files_download',
 };
 
+const customStudyFilesTabCoreDataFields = {
+  keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'study_code'],
+  header: ['File Name', 'File Type', 'Association', 'Description', 'Format', 'Size', 'Study Code'],
+};
+
+export const customStudyFilesTabDownloadCSV = {
+  keysToInclude: [
+    ...customStudyFilesTabCoreDataFields.keysToInclude,
+  ],
+  header: [
+    ...customStudyFilesTabCoreDataFields.header,
+  ],
+  query: GET_FILES_TAB,
+  apiVariable: 'fileOverview',
+  fileName: 'ICDC_Study_Files_download',
+};
+
 export const MY_CART = gql`
 query filesInList($uuids: [String], $first: Int = 2000){
   filesInList(uuids: $uuids, first: $first){
