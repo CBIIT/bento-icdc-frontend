@@ -64,7 +64,7 @@ const ProgramView = ({ classes, data }) => {
     isALink: true,
   }, {
     name: programDetail.program_acronym,
-    to: '/cases',
+    to: '/explore',
     isALink: true,
   }];
 
@@ -117,7 +117,7 @@ const ProgramView = ({ classes, data }) => {
         renderSwitch(studyDisposition(tableMeta.rowData[5]))
       ) : (
         <Link
-          to={(location) => ({ ...location, pathname: '/cases' })}
+          to={(location) => ({ ...location, pathname: '/explore' })}
           className={classes.buttonCaseNumb}
           onClick={() => navigatedToDashboard(tableMeta.rowData[1], 'Cases')}
         >
@@ -151,8 +151,6 @@ const ProgramView = ({ classes, data }) => {
       ),
     },
   }));
-  // const columns = updateColumns(getColumns(table, classes, data,
-  // '', '/cases', redirectTo), table.columns);
 
   return (
     <>

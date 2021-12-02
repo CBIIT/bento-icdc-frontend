@@ -20,10 +20,7 @@ import arrowIcon from '../../assets/icons/arrow-icon.png';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
 
 const Studies = ({ classes, data }) => {
-  // TBD
   const tableOptions = getOptions(pageData.table, classes);
-  // const columns = updateColumns(getColumns(pageData.table, classes, data,
-  // pageData.externalLinkIcon, '/cases', redirectTo), pageData.table.columns);
 
   const embargoToolTipIcon = () => (
     <Tooltip title="Under Embargo" arrow placement="bottom">
@@ -71,7 +68,7 @@ const Studies = ({ classes, data }) => {
       ) : (
         <Link
           className={classes.buttonCaseNumb}
-          to={(location) => ({ ...location, pathname: '/cases' })}
+          to={(location) => ({ ...location, pathname: '/explore' })}
           onClick={() => navigatedToDashboard(tableMeta.rowData[0], 'Cases')}
         >
           {value}

@@ -70,7 +70,7 @@ const CaseDetail = ({ classes, data }) => {
     isALink: true,
   }, {
     name: `${caseDetail.study.clinical_study_designation} CASES`,
-    to: '/cases',
+    to: '/explore',
     onClick: () => filterCasePageOnStudyCode(caseDetail.study.clinical_study_designation),
     isALink: true,
   }, {
