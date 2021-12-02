@@ -22,7 +22,7 @@ export const myFilesPageData = {
   downButtonText: 'DOWNLOAD MANIFEST',
   headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
   headerIconAlt: 'Bento MyFiles header logo',
-  manifestFileName: 'ICDC File Manifest',
+  manifestFileName: 'BENTO File Manifest',
   tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
   tooltipAlt: 'tooltip icon',
   downloadBtnTooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
