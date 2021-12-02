@@ -107,12 +107,11 @@ async function init() {
     }
 
     for (const property in icdcMData.Relationships) {
-      const linkItem = {};
-
       const label = propertyName;
       // const multiplicity = icdcMData.Relationships[propertyName].Mul;
       const required = false;
       for (let i = 0; i < icdcMData.Relationships[property].Ends.length; i++) {
+        const linkItem = {};
         if (icdcMData.Relationships[property].Ends[i].Src === key) {
           const backref = icdcMData.Relationships[property].Ends[i].Src;
           const name = icdcMData.Relationships[property].Ends[i].Dst;
