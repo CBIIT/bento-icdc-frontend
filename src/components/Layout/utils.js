@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable block-scoped-var */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
@@ -9,8 +8,11 @@
 import axios from 'axios';
 import yaml from 'js-yaml';
 import store from '../../store';
+import env from '../../utils/env';
 
 const version = { commit: '913161064b02bcef024d072873e77c8c79cc1a68', dictionary: { commit: '520a25999fd183f6c5b7ddef2980f3e839517da5', version: '0.2.1-9-g520a259' }, version: '4.0.0-44-g9131610' };
+const DATA_MODEL = env.REACT_APP_DATA_MODEL;
+const DATA_MODEL_PROPS = env.RAECT_APP_DATA_MODEL_PROPS;
 
 const getData = async (url) => {
   const response = await axios.get(url);
@@ -43,21 +45,17 @@ const getData = async (url) => {
 // {$ref: "#/UUID"}
 
 async function init() {
-  // console.log(store);
-
   // let url = 'https://wfy1997.s3.amazonaws.com/schema.json';
   // if (window.location.hash) url = window.location.hash.slice(1);
 
-  const icdcMData = await getData('https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model.yml');
-  const icdcMPData = await getData('https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model-props.yml');
+  const icdcMData = await getData(DATA_MODEL);
+  const icdcMPData = await getData(DATA_MODEL_PROPS);
 
   // translate the json file here
   const dataList = {};
 
   // using the following code the convert MDF to Gen3 format
   for (const [key, value] of Object.entries(icdcMData.Nodes)) {
-    // console.log('key', key);
-    // console.log('value', value);
     const item = {};
     item.$schema = 'http://json-schema.org/draft-06/schema#';
     item.id = key;
@@ -102,10 +100,6 @@ async function init() {
       item.properties = {};
     }
 
-    if (key === 'cohort') {
-      console.log('prop.relationship', icdcMData.Relationships);
-    }
-
     for (const property in icdcMData.Relationships) {
       const label = propertyName;
       // const multiplicity = icdcMData.Relationships[propertyName].Mul;
@@ -117,18 +111,11 @@ async function init() {
           const name = icdcMData.Relationships[property].Ends[i].Dst;
           const target = icdcMData.Relationships[property].Ends[i].Dst;
 
-          if (key === 'cohort') {
-            console.log('backref name target', backref, name, target);
-          }
-
           linkItem.name = name;
           linkItem.backref = backref;
           linkItem.label = label;
           linkItem.target_type = target;
           linkItem.required = required;
-          if (key === 'cohort') {
-            console.log('linkItem', linkItem);
-          }
 
           link.push(linkItem);
         }
@@ -140,7 +127,6 @@ async function init() {
   }
 
   const newDataList = dataList;
-  console.log('dataList', newDataList);
 
   await Promise.all(
     [
