@@ -49,7 +49,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/home" component={Home} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/studies" component={Studies} />
-            <Route path="/cases" component={Dashboard} />
+            <Route path="/explore" component={Dashboard} />
             <Route path="/unifiedView/:id" component={UnifiedView} />
             <Route path="/fileCentricCart" component={Cart} />
             <Route path="/programs" component={Programs} />

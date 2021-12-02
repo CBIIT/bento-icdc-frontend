@@ -2,7 +2,7 @@ export const pageData = {
   callToActionTitle: 'Integrated Canine Data Commons',
   callToActionDescription: 'A public resource for exploring, analyzing, and understanding the biological relationships between human and canine cancers.',
   callToActionButtonText: 'EXPLORE',
-  callToActionLink: '/cases',
+  callToActionLink: '/explore',
   landingPageStatsBar: [],
   tile1: {
     alt: 'ICDC about',
@@ -42,7 +42,7 @@ export const pageData = {
     titleText: 'Cases',
     descriptionText: 'Search across cases and build cohorts from the programs and studies in ICDC. The data files from these cohorts can then be analyzed in the Cloud Resources.',
     callToActionText: 'EXPLORE',
-    callToActionLink: '/cases', // This links to the cases dashboard.
+    callToActionLink: '/explore', // This links to the cases dashboard.
   },
 };
 

@@ -208,7 +208,7 @@ const StudyDetailView = ({ classes, data }) => {
                   <span className={classes.headerButtonLinkSpan}>
                     <Link
                       className={classes.headerButtonLink}
-                      to={(location) => ({ ...location, pathname: '/cases' })}
+                      to={(location) => ({ ...location, pathname: '/explore' })}
                       onClick={() => filterCasePageOnStudyCode(studyData
                         .clinical_study_designation)}
                     >
