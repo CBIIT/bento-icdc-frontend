@@ -69,7 +69,7 @@ class DataDictionaryPropertyTable extends React.Component {
                 className="data-dictionary-property-table__data
                 data-dictionary-property-table__data--term"
               >
-                Src
+                Source
               </th>
             </tr>
           </thead>
