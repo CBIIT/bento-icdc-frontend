@@ -320,8 +320,8 @@ const customFilesTabOptionalDataFields = {
 };
 
 const customFilesTabCoreDataFields = {
-  keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'sample_id', 'case_id', 'breed', 'diagnosis', 'study_code'],
-  header: ['File Name', 'File Type', 'Association', 'Description', 'Format', 'Size', 'Sample ID', 'Case ID', 'Breed', 'Diagnosis', 'Study Code'],
+  keysToInclude: ['file_name', 'file_type', 'association', 'file_description', 'file_format', 'file_size', 'sample_id', 'case_id', 'file_uuid', 'breed', 'diagnosis', 'study_code'],
+  header: ['File Name', 'File Type', 'Association', 'Description', 'Format', 'Size', 'Sample ID', 'Case ID', 'File UUID', 'Breed', 'Diagnosis', 'Study Code'],
 };
 
 export const customFilesTabDownloadCSV = {
@@ -485,6 +485,7 @@ const customMyFilesCoreDataFields = {
     'file_format',
     'file_size',
     'case_id',
+    'file_uuid',
     'individual_id',
     'breed',
     'diagnosis',
@@ -499,6 +500,7 @@ const customMyFilesCoreDataFields = {
     'Format',
     'Size',
     'Case ID',
+    'File UUID',
     'Canine ID',
     'Breed',
     'Diagnosis',
