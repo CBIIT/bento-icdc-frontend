@@ -2372,7 +2372,8 @@ type QueryType {
     OPTIONAL MATCH (c)<--(demo:demographic)
     OPTIONAL MATCH (c)<--(diag:diagnosis)
     OPTIONAL MATCH (c)-->(co:cohort)
-    OPTIONAL MATCH (f:file)-[*]->(c)
+    OPTIONAL MATCH (parent)-[:of_case]->(c)
+    OPTIONAL MATCH (f:file)-->(parent)
     OPTIONAL MATCH (co)-->(a:study_arm)
     WITH
       DISTINCT c.case_id as case_id,
