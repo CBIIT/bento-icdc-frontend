@@ -274,11 +274,16 @@ const tabController = ({ classes, unifiedViewData }) => {
     type3: disableRowSelection,
   };
 
-  // Tab Header Generator
-  const TABs = tabs.map((tab) => {
+  const getCount = (tab) => {
     const count = (tab.count === 'numberOfFiles')
       ? getCaseFileCount(dashboardStats.numberOfFiles, dashboardStats.numberOfStudyFiles)
       : dashboardStats[tab.count] ? dashboardStats[tab.count] : 0;
+    return count;
+  };
+
+  // Tab Header Generator
+  const TABs = tabs.map((tab) => {
+    const count = getCount(tab);
     return (
       <Tab
         id={tab.id}
@@ -320,7 +325,7 @@ const tabController = ({ classes, unifiedViewData }) => {
         // eslint-disable-next-line jsx-a11y/tabindex-no-positive
         tabIndex={container.tabIndex}
         externalLinkIcon={externalLinkIcon}
-        count={dashboardStats[container.count] ? dashboardStats[container.count] : 0}
+        count={dashboardStats[container.count] ? getCount(container) : 0}
         api={container.api}
         paginationAPIField={container.paginationAPIField}
         paginationAPIFieldDesc={container.paginationAPIFieldDesc}
