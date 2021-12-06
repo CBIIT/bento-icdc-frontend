@@ -101,14 +101,14 @@ const StudyDetailView = ({ classes, data }) => {
 
   const renderEmbargoLabel = () => (
     <div className={classes.embargo}>
-      <h4 className={classes.embarLabel}> UNDER EMBARGO </h4>
+      <p className={classes.embarLabel}> UNDER EMBARGO </p>
       <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </div>
   );
 
   const renderPendingLabel = () => (
     <div className={classes.pending}>
-      <h4 className={classes.pendLabel}>RELEASE PENDING</h4>
+      <p className={classes.pendLabel}>RELEASE PENDING</p>
       <img src={pendingFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </div>
   );
@@ -303,44 +303,49 @@ const styles = (theme) => ({
     color: '#BB2040',
     float: 'right',
     background: '#fff6f6',
-    width: '180px',
+    width: '220px',
     height: '33px',
     marginTop: '25px',
     fontWight: 'bolder',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    paddingTop: '0px',
+    paddingLeft: '15px',
+    paddingRight: '15px',
+    paddingTop: '4px',
     textAlign: 'center',
     border: '3px solid #BB2040',
-    '& h4': {
+    '& p': {
       display: 'inline ! important',
-      fontWeight: '900',
+      fontWeight: '600',
+      width: '122px',
+      fontSize: '13px',
+      marginTop: '3px',
     },
   },
   pending: {
     color: '#6D6E71',
     float: 'right',
     background: '#fff6f6',
-    width: '180px',
+    width: '220px',
     height: '33px',
     marginTop: '25px',
     fontWight: 'bolder',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    paddingTop: '0px',
+    paddingLeft: '15px',
+    paddingRight: '14px',
+    paddingTop: '3px',
     textAlign: 'center',
     fontFamily: 'Open Sans',
     border: '3px solid #F3A933',
-    '& h4': {
+    '& p': {
       display: 'inline ! important',
-      fontWeight: '900',
+      fontWeight: '600',
+      width: '122px',
+      fontSize: '13px',
+      marginTop: '3px',
     },
   },
   embargoFileIcon: {
     width: '20px',
     float: 'right',
     marginLeft: '5px',
-    marginTop: '4px',
   },
   headerBar: {
     fontWeight: '10',
