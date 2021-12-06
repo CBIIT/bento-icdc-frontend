@@ -52,7 +52,7 @@ const table = {
     {
       dataField: 'numberOfCases',
       header: 'Cases',
-      link: '/cases',
+      link: '/explore',
       totalNumberOfCases: true,
       display: true,
     },

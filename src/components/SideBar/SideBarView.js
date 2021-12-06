@@ -54,7 +54,7 @@ const SideBarContent = ({ classes, unifiedViewFlag }) => {
                </Button>
              ) : (
                <Link
-                 to="/cases"
+                 to="/explore"
                >
                  <Button
                    id="button_sidebar_clear_all_filters"

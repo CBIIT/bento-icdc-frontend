@@ -209,7 +209,7 @@ const StudyDetailView = ({ classes, data }) => {
                     {/* <span className={classes.headerButtonLinkText}> View </span> */}
                     <Link
                       className={classes.headerButtonLink}
-                      to={(location) => ({ ...location, pathname: '/cases' })}
+                      to={(location) => ({ ...location, pathname: '/explore' })}
                       onClick={() => navigatedToDashboard(studyData
                         .clinical_study_designation, 'Cases')}
                     >
