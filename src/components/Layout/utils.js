@@ -12,7 +12,7 @@ import env from '../../utils/env';
 
 const version = { commit: '913161064b02bcef024d072873e77c8c79cc1a68', dictionary: { commit: '520a25999fd183f6c5b7ddef2980f3e839517da5', version: '0.2.1-9-g520a259' }, version: '4.0.0-44-g9131610' };
 const DATA_MODEL = env.REACT_APP_DATA_MODEL;
-const DATA_MODEL_PROPS = env.RAECT_APP_DATA_MODEL_PROPS;
+const DATA_MODEL_PROPS = env.REACT_APP_DATA_MODEL_PROPS;
 
 const getData = async (url) => {
   const response = await axios.get(url);
