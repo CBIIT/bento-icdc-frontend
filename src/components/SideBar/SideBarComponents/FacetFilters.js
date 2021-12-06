@@ -156,8 +156,7 @@ const FacetPanel = ({ classes, disabled }) => {
     }]));
   };
 
-  const sideBarDisplay = sideBarContent.data.filter((sideBar) => sideBar.show === true)
-    .slice(0, 16);
+  const sideBarDisplay = sideBarContent.data.filter((sideBar) => sideBar.show === true);
 
   const arrangeBySections = (arr) => {
     const sideBar = {};
