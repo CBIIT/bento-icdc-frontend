@@ -25,8 +25,8 @@ export const myFilesPageData = {
   manifestFileName: 'ICDC File Manifest',
   tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
   tooltipAlt: 'tooltip icon',
-  downloadBtnTooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
-  userCommentsTooltipMessage: 'If you wish to annotate the file manifest with comments regarding the files included, enter them here. Comments will be saved as part of the manifest.',
+  downloadBtnTooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download File Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
+  userCommentsTooltipMessage: 'If you wish to annotate the file manifest with comments regarding the files included, enter them here. Comments will be saved as part of the file manifest.',
   textareaPlaceholder: 'User Comments',
   errorMessage: 'An error has occurred in loading CART',
   popUpWindow: {
