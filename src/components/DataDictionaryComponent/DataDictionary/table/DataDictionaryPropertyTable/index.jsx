@@ -12,8 +12,29 @@ import {
 } from '../../highlightHelper';
 import './DataDictionaryPropertyTable.css';
 
+const required = (requiredFlag, preferredFlag) => {
+  if (requiredFlag) {
+    return (
+      <span className="data-dictionary-property-table__required">
+        <i className="g3-icon g3-icon--star data-dictionary-property-table__required-icon" />
+        Required
+      </span>
+    );
+  }
+  if (preferredFlag) {
+    return (
+      <span>Preferred</span>
+    );
+  }
+  return (
+    <span>No</span>
+  );
+};
+
 class DataDictionaryPropertyTable extends React.Component {
   render() {
+    // eslint-disable-next-line no-console
+    console.log(this.props);
     const borderModifier = this.props.hasBorder ? ''
       : 'data-dictionary-property-table--without-border';
     const propertyKeysList = this.props.hideIsRequired ? Object.keys(this.props.properties)
@@ -98,7 +119,7 @@ class DataDictionaryPropertyTable extends React.Component {
                   try {
                     termID = property.src;
                     termLink = property.term.termDef && property.term.termDef.term_url;
-                  } catch (err) {}
+                  } catch (err) { }
                 }
                 const propertyNameFragment = getPropertyNameFragment(
                   propertyKey,
@@ -108,7 +129,7 @@ class DataDictionaryPropertyTable extends React.Component {
                 if ('type' in property) {
                   try {
                     type = property.type;
-                  } catch (err) {}
+                  } catch (err) { }
                 }
 
                 const propertyDescriptionFragment = getPropertyDescriptionFragment(
@@ -117,6 +138,7 @@ class DataDictionaryPropertyTable extends React.Component {
                   'data-dictionary-property-table__span',
                 );
                 const isRequired = this.props.requiredProperties.includes(propertyKey);
+                const isPreferred = this.props.preferredProperties.includes(propertyKey);
                 return (
                   <tr key={propertyKey}>
                     <td className="data-dictionary-property-table__data">
@@ -128,14 +150,7 @@ class DataDictionaryPropertyTable extends React.Component {
                     {
                       !this.props.hideIsRequired && (
                         <td className="data-dictionary-property-table__data">
-                          { isRequired ? (
-                            <span className="data-dictionary-property-table__required">
-                              <i className="g3-icon g3-icon--star data-dictionary-property-table__required-icon" />
-                              Required
-                            </span>
-                          ) : (
-                            <span>No</span>
-                          )}
+                          {required(isRequired, isPreferred)}
                         </td>
                       )
                     }

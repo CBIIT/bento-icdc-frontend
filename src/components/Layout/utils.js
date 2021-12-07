@@ -75,6 +75,7 @@ async function init() {
     const link = [];
     const properties = {};
     const pRequired = [];
+    const pPreffered = [];
 
     if (icdcMData.Nodes[key].Props != null) {
       for (let i = 0; i < icdcMData.Nodes[key].Props.length; i++) {
@@ -88,6 +89,8 @@ async function init() {
 
             if (icdcMPData.PropDefinitions[propertyName].Req === 'Yes') {
               pRequired.push(nodeP);
+            } else if (icdcMPData.PropDefinitions[propertyName].Req === 'Preferred') {
+              pPreffered.push(nodeP);
             }
           }
         }
@@ -96,6 +99,7 @@ async function init() {
 
       item.properties = properties;
       item.required = pRequired;
+      item.preferred = pPreffered;
     } else {
       item.properties = {};
     }
