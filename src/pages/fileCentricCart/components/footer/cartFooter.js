@@ -38,7 +38,7 @@ const CartFooter = React.forwardRef(({
       <div className={classes.message}>
         <span>
           To access and analyze files: select and remove unwanted files,
-          click the “Download Manifest” button, and upload the resulting
+          click the “Download File Manifest” button, and upload the resulting
           Manifest file to your
           {' '}
           <Link target="_blank" className={classes.link} href="http://www.cancergenomicscloud.org/">
@@ -76,7 +76,7 @@ const CartFooter = React.forwardRef(({
           className={classes.downloadButton}
           onClick={preparedownload}
         >
-          DOWNLOAD MANIFEST
+          DOWNLOAD FILE MANIFEST
         </button>
         {toolTipIcon({ title: myFilesPageData.downloadBtnTooltipMessage, placement: 'right' })}
       </div>

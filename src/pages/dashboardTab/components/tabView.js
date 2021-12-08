@@ -471,7 +471,7 @@ const TabView = ({
             color="inherit"
             className={classes.cartlink}
           >
-            Go to Cart
+            Go to My File
             {' '}
             {'>'}
           </Link>
