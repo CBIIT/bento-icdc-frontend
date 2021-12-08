@@ -45,22 +45,22 @@ const PdfTableRow = ({ node }) => {
     return 'No';
   };
 
-  const rows = keys.map((elem) => (
-    <View style={styles.row} key={elem}>
+  const rows = keys.map((key) => (
+    <View style={styles.row} key={key}>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{elem}</Text>
+        <Text style={styles.tableCell}>{key}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{validateType(node.properties[elem].type)}</Text>
+        <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{required(elem)}</Text>
+        <Text style={styles.tableCell}>{required(key)}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{node.properties[elem].description}</Text>
+        <Text style={styles.tableCell}>{node.properties[key].description}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{node.properties[elem].src}</Text>
+        <Text style={styles.tableCell}>{node.properties[key].src}</Text>
       </View>
     </View>
   ));
