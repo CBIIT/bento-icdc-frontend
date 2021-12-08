@@ -65,8 +65,6 @@ class OverlayPropertyTable extends React.Component {
 
   render() {
     if (!this.props.node || this.props.hidden) return (<></>);
-    // eslint-disable-next-line no-console
-    console.log('props', this.props.node);
     const IconSVG = getCategoryIconSVG(this.props.node.category);
     // eslint-disable-next-line no-console
     console.log('category', this.props.node.category);
@@ -127,6 +125,7 @@ class OverlayPropertyTable extends React.Component {
               <DataDictionaryPropertyTable
                 properties={this.props.node.properties}
                 requiredProperties={this.props.node.required}
+                preferredProperties={this.props.node.preferred}
                 hasBorder={false}
                 onlyShowMatchedProperties={searchedNodeNotOpened}
                 needHighlightSearchResult={needHighlightSearchResult}

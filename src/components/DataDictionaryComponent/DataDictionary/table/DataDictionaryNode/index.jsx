@@ -105,6 +105,7 @@ class DataDictionaryNode extends React.Component {
               <DataDictionaryPropertyTable
                 properties={this.props.node.properties}
                 requiredProperties={this.props.node.required}
+                preferredProperties={this.props.node.preferred}
               />
             </div>
           )
