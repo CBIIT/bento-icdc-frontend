@@ -46,6 +46,14 @@ export const globalStatsData = [
     statIconAlt: 'Data Volume Stats Bar Icon',
   },
   {
+    statTitle: 'Programs',
+    type: 'field',
+    statAPI: 'numberOfPrograms',
+    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Programs_.svg',
+    // statIconSrc: '../assets/glo-icons/Programs.svg',
+    statIconAlt: 'Study Files Stats Bar Icon',
+  },
+  {
     statTitle: 'Studies',
     type: 'field',
     statAPI: 'numberOfStudies',
@@ -79,14 +87,6 @@ export const globalStatsData = [
     statAPI: 'numberOfStudyFiles',
     statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
     // statIconSrc: 'http://localhost:3000/src/assets/glo-icons/StudyFiles.svg',
-    statIconAlt: 'Study Files Stats Bar Icon',
-  },
-  {
-    statTitle: 'Programs',
-    type: 'field',
-    statAPI: 'numberOfPrograms',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Programs_.svg',
-    // statIconSrc: '../assets/glo-icons/Programs.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
   // {
