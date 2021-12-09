@@ -21,7 +21,6 @@ import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
 import init from './utils';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
-import ReleaseNotes from '../ReleaseNotes/ReleaseNotes';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -67,16 +66,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
               }}
             />
             {aboutPageRoutes.map(
-              (aboutPageRoute) => {
-                // eslint-disable-next-line no-console
-                console.log(aboutPageRoute);
-                if (aboutPageRoute === '/release-notes') {
-                  return (
-                    <Route path={aboutPageRoute} component={ReleaseNotes} />
-                  );
-                }
-                return <Route path={aboutPageRoute} component={About} />;
-              },
+              (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
 
             )}
             <Route component={Error} />

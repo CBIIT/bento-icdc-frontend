@@ -104,11 +104,6 @@ export const navBarData = [
         linkActiveStyle: 'white',
       },
       {
-        labelText: 'Release Notes',
-        link: '/release-notes',
-        linkActiveStyle: 'white',
-      },
-      {
         labelText: 'Developers',
         link: '/developers',
         linkActiveStyle: 'white',
