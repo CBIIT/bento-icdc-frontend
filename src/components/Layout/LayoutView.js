@@ -67,7 +67,6 @@ const Layout = ({ classes, isSidebarOpened }) => (
             />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
-
             )}
             <Route component={Error} />
           </Switch>
