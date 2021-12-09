@@ -6,7 +6,6 @@ import { ApolloProvider } from '@apollo/client'
 import { Provider } from 'react-redux';
 import store from './store';
 import client from './utils/graphqlClient';
-import env from './utils/env'
 // ReactDOM.render(
 //   <ApolloProvider client={client}>
 //       <Provider store={store}>
@@ -15,7 +14,6 @@ import env from './utils/env'
 //   </ApolloProvider>,
 //   document.getElementById("root")
 // );
-console.log(env.REACT_APP_APPLICATION_VERSION)
 
 ReactDOM.render(
 
