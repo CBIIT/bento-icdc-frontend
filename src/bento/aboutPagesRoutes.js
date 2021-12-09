@@ -8,5 +8,4 @@ export default [
   '/developers',
   '/support',
   '/submit',
-  '/release-notes',
 ];
