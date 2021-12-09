@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 });
 
 const PdfTableRow = ({ node }) => {
-  const keys = Object.keys(node);
+  const keys = Object.keys(node.properties);
 
   const validateType = (property) => {
     const type = typeof property;
@@ -33,22 +33,34 @@ const PdfTableRow = ({ node }) => {
     return property;
   };
 
-  const rows = keys.map((elem) => (
-    <View style={styles.row} key={elem}>
+  const required = (key) => {
+    if (node.required.includes(key)) {
+      return 'Required';
+    }
+
+    if (node.preferred.includes(key)) {
+      return 'Preferred';
+    }
+
+    return 'No';
+  };
+
+  const rows = keys.map((key) => (
+    <View style={styles.row} key={key}>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{elem}</Text>
+        <Text style={styles.tableCell}>{key}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{validateType(node[elem].type)}</Text>
+        <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>No</Text>
+        <Text style={styles.tableCell}>{required(key)}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{node[elem].description}</Text>
+        <Text style={styles.tableCell}>{node.properties[key].description}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{node[elem].src}</Text>
+        <Text style={styles.tableCell}>{node.properties[key].src}</Text>
       </View>
     </View>
   ));

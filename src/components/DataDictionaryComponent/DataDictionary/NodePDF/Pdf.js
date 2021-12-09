@@ -27,7 +27,7 @@ const PdfDocument = ({ node }) => (
     <Page style={styles.page} size="A2">
       <Image style={styles.logo} src={logo} />
       <PdfTitle title={node.id} />
-      <PdfTable node={node.properties} />
+      <PdfTable node={node} />
     </Page>
   </Document>
 );
