@@ -99,6 +99,11 @@ export const navBarData = [
         linkActiveStyle: 'white',
       },
       {
+        labelText: 'Graphql',
+        link: '/graphql',
+        linkActiveStyle: 'white',
+      },
+      {
         labelText: 'Data Model Viewer',
         link: '/icdc-data-model',
         linkActiveStyle: 'white',
