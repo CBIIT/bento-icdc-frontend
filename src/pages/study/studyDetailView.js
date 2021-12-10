@@ -302,7 +302,7 @@ const styles = (theme) => ({
   embargo: {
     color: '#BB2040',
     float: 'right',
-    background: '#fff6f6',
+    background: '#F6F4F4',
     width: '220px',
     height: '33px',
     marginTop: '25px',
