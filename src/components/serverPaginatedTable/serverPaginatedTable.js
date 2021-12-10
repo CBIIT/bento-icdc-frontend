@@ -160,7 +160,7 @@ class ServerPaginatedTableView extends React.Component {
       if (srcData !== 'undefined' && srcData.length !== this.state.rowsPerPage && this.props.count > this.state.rowsPerPage && this.props.localRowsPerPage === null) {
         this.changePage(0, {});
       } else {
-        if (this.props.count < this.state.rowsPerPage) {
+        if (this.props.count < this.state.rowsPerPage || srcData.length < this.state.rowsPerPage) {
           this.setState({
             rowsPerPage: 10,
           });
