@@ -468,7 +468,7 @@ const styles = (theme) => ({
     height: '33px',
     textAlign: 'center',
     background: '#f6f4f482',
-    padding: '5px 10px 5px 10px',
+    padding: '5px 10px 5px 5px',
 
   },
   headerButtonLinkSpan: {
