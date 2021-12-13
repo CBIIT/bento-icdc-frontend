@@ -14,7 +14,7 @@ function graphQLFetcher(graphQLParams) {
   }).then((response) => response.json());
 }
 
-var GraphqlView = function({ classes }) {
+const GraphqlView = ({ classes }) => (<div className={classes.grapqhQlContainer}><GraphiQL editorTheme="solarized light" fetcher={graphQLFetcher} /></div>);
 
 const styles = () => ({
   grapqhQlContainer: {
