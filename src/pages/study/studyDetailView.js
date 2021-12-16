@@ -467,7 +467,7 @@ const styles = (theme) => ({
     width: '220px',
     height: '33px',
     textAlign: 'center',
-    background: '#f6f4f482',
+    background: '#f6f4f4',
     padding: '5px 10px 5px 5px',
 
   },
