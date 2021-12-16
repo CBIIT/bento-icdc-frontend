@@ -259,15 +259,7 @@ const TabView = ({
     serverTableRowCount: selectedRowInfo.length,
   };
 
-  /**
- * Returns a string version of the unified view data to be passed through
- * the url.
- * @return {json}
- */
-  const stringyfyData = (dataObj) => JSON.stringify(dataObj);
-
   const renderMultiStudyTooltipText = (tableMeta, value) => {
-    const cases = [...tableMeta, value];
     const caseID = value;
     return (
       <>
@@ -293,7 +285,7 @@ const TabView = ({
               rel="noreferrer"
               color="inherit"
               to={{
-                pathname: `/unifiedView/${stringyfyData({ ...cases, caseID })}`,
+                pathname: `/unifiedView/${caseID}`,
               }}
               className={classes.link}
             >
@@ -315,15 +307,6 @@ const TabView = ({
       interactive
       classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
     >
-      {/* <StyledBadge
-        badgeContent={tableMeta.length + 1}
-      >
-        <img
-          src={multiStudyData.icon}
-          className={classes.multiStudyIcon}
-          alt={multiStudyData.alt}
-        />
-      </StyledBadge> */}
       <span className={classes.badge}>
         <img
           className={classes.cartIcon}
