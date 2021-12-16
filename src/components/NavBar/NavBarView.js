@@ -3,6 +3,9 @@ import { NavBar, ToolTip as Tooltip } from 'bento-components';
 import {
   navBarData, navBarCartData, navBarstyling,
 } from '../../bento/navigationBarData';
+import env from '../../utils/env';
+
+const releaseNotesLink = `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_APPLICATION_VERSION}`;
 
 const BentoNavBar = ({ cartFieldIds }) => (
   <>
@@ -11,6 +14,8 @@ const BentoNavBar = ({ cartFieldIds }) => (
       navBarCartData={navBarCartData}
       navBarstyling={navBarstyling}
       numberOfCases={cartFieldIds.length || 0}
+      releaseNotesFlag
+      releaseNotesLink={releaseNotesLink}
       components={{
         Tooltip,
       }}
