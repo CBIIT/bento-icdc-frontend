@@ -21,6 +21,7 @@ import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
 import init from './utils';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
+import GraphqlClient from '../GraphqlClient/GraphqlView';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -68,6 +69,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
             )}
+            <Route path="/graphql" component={GraphqlClient} />
             <Route component={Error} />
           </Switch>
           <Footer data={{ isSidebarOpened }} />
