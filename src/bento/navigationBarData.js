@@ -7,7 +7,6 @@ export const navBarstyling = {
     fontFamily: 'Raleway, sans-serif',
     activeLabel: '2px solid  #35b9eb',
     paddingRight: '65px',
-    paddingLeft: '55px',
     fontWeight: '600',
     letterSpacing: '1px',
   },
@@ -65,6 +64,11 @@ export const navBarData = [
     labelText: 'Studies',
     type: 'link',
     link: '/studies',
+  },
+  {
+    labelText: 'Data Dictionary',
+    type: 'link',
+    link: '/icdc-data-model',
   },
   {
     labelText: 'about',

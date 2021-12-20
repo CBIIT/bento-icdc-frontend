@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 
 const TabPanel = ({
   children,
@@ -10,9 +9,7 @@ const TabPanel = ({
     role="tabpanel"
     hidden={value !== index}
   >
-    {value === index && (
-      <Typography>{children}</Typography>
-    )}
+    {value === index && (children)}
   </div>
 );
 

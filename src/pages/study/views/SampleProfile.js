@@ -14,7 +14,7 @@ import {
   valueConfiguration,
   argumentConfiguration,
 } from '../../../bento/studyDetailsData';
-import TabPanel from '../components/TabPanel';
+import TabPanel from '../../../components/Tab/TabPanel';
 import { navigatedToDashboard } from '../../../utils/utils';
 
 const useStyles = makeStyles(() => ({
@@ -92,7 +92,7 @@ const SampleProfile = ({ classes, data }) => {
         },
       }}
     >
-      { items.map((item) => (
+      { items.map((item, index) => (
         <Tab
           className={item.value}
           classes={{
@@ -100,6 +100,7 @@ const SampleProfile = ({ classes, data }) => {
             labelContainer: classes.labelContainer,
           }}
           label={item.label}
+          key={index}
         />
       )) }
     </Tabs>
@@ -107,14 +108,14 @@ const SampleProfile = ({ classes, data }) => {
 
   return (
     <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
-      <Grid container spacing={16}>
+      <Grid container spacing={1}>
         <Grid item xs={12}>
           <span className={classes.detailContainerHeader}> SAMPLE PROFILES </span>
         </Grid>
       </Grid>
       {(tabCount !== undefined && tabCount.length > 0) ? (
         <>
-          <Grid container spacing={16}>
+          <Grid container spacing={1}>
             <div className={classes.headerButton}>
               <span className={classes.headerButtonLinkSpan}>
                 <Link
@@ -140,9 +141,9 @@ const SampleProfile = ({ classes, data }) => {
             { tabItem(sampleProfile.tabs) }
           </Grid>
           <Grid container className={classes.detailContainerItems}>
-            { sampleProfile.tabs.map((item) => (
+            { sampleProfile.tabs.map((item, index) => (
               <>
-                <TabPanel index={item.index} value={currentTab}>
+                <TabPanel index={item.index} value={currentTab} key={index}>
                   <BarChart
                     data={data[item.value]}
                     palette={palette}
@@ -156,7 +157,7 @@ const SampleProfile = ({ classes, data }) => {
           </Grid>
         </>
       ) : (
-        <Grid container spacing={16}>
+        <Grid container spacing={1}>
           <Grid item xs={12} sm={10} className={classes.detailContainerItems}>
             <div className={classes.content}>
               This study currently has no associated Samples

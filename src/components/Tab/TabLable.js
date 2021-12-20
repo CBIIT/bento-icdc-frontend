@@ -3,9 +3,10 @@ import { withStyles } from '@material-ui/core';
 import { cn } from 'bento-components';
 
 const tabLabel = ({
-  classes, title, primaryColorClass,
+  classes, title, primaryColorClass, icon,
 }) => (
   <div className={cn(classes.defaultStyle, primaryColorClass)}>
+    {(icon && (<img src={icon} alt="icdc_carousel_tabs" />))}
     <span>
       {title}
       {' '}
