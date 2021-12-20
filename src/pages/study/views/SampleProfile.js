@@ -6,7 +6,6 @@ import {
   Tab,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import { BarChart } from 'bento-components';
 import {
   sampleProfile,
@@ -16,29 +15,6 @@ import {
 } from '../../../bento/studyDetailsData';
 import TabPanel from '../components/TabPanel';
 import { navigatedToDashboard } from '../../../utils/utils';
-
-const useStyles = makeStyles(() => ({
-  tabs: {
-    '& .MuiTab-wrapper': {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-    },
-    '& .studySampleSiteCount': {
-      '& .MuiTab-wrapper': {
-        borderRight: '1px solid #6E6E6E',
-      },
-    },
-    '& .studySampleTypeCount': {
-      '& .MuiTab-wrapper': {
-        borderRight: '1px solid #6E6E6E',
-      },
-    },
-    '& .Mui-selected': {
-      color: '#0296c9',
-      fontWeight: '900',
-    },
-  },
-}));
 
 const tooltipContent = ({ argument, originalValue, point }) => {
   const color = point.series.getColor();
@@ -84,7 +60,7 @@ const SampleProfile = ({ classes, data }) => {
     <Tabs
       value={currentTab}
       onChange={handleTabChange}
-      className={useStyles().tabs}
+      className={classes.tabs}
       textColor="primary"
       TabIndicatorProps={{
         style: {
@@ -249,6 +225,26 @@ const styles = (theme) => ({
     color: '#0296c9',
     '&:hover': {
       textDecoration: 'underline',
+    },
+  },
+  tabs: {
+    '& .MuiTab-wrapper': {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    },
+    '& .studySampleSiteCount': {
+      '& .MuiTab-wrapper': {
+        borderRight: '1px solid #6E6E6E',
+      },
+    },
+    '& .studySampleTypeCount': {
+      '& .MuiTab-wrapper': {
+        borderRight: '1px solid #6E6E6E',
+      },
+    },
+    '& .Mui-selected': {
+      color: '#0296c9',
+      fontWeight: '900',
     },
   },
 });
