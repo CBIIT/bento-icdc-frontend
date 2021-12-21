@@ -10,9 +10,10 @@ import styled, { keyframes } from 'styled-components';
 import { cn } from 'bento-components';
 import lbg from '../../assets/landing/Background.png';
 import { Button } from '../../components/Wrappers/Wrappers';
-import starImg from '../../assets/landing/LP_FLARE.2.png';
-import dogImg from '../../assets/landing/dog-bubble.png';
-import humanImg from '../../assets/landing/human-bubble.png';
+import starImg from '../../assets/landing/Spark.png';
+import flare from '../../assets/landing/flare_bkgd.png';
+import dogImg from '../../assets/landing/canine_bubble.png';
+import humanImg from '../../assets/landing/human_bubble.png';
 import { pageData } from '../../bento/landingPageData';
 import Widgets from './views/widgets.component';
 import Tab from '../../components/Tab/Tab';
@@ -133,6 +134,7 @@ const LandingView = ({ classes }) => {
             <Grid item lg={2} md={2} sm={12} xs={12} className={classes.carouselTabs}>
               <Tab
                 styleClasses={classes}
+                disableRipple
                 tabItems={pageData.tabs}
                 currentTab={currentTab}
                 handleTabChange={handleTabChange}
@@ -174,6 +176,7 @@ const LandingView = ({ classes }) => {
                             </SlideUp>
                             <Star className={classes.star}>
                               <img className={classes.starImg} src={starImg} alt="star" />
+                              <img className={classes.starImg} src={flare} alt="flare" />
                             </Star>
                           </div>
                         </div>
@@ -189,7 +192,7 @@ const LandingView = ({ classes }) => {
                           </div>
                         )}
                         { (index === 3) && (
-                          <div className={classes.carouselImgContainer}>
+                          <div className={classes.carouselImgContainerSpotlight}>
                             <img src={item.content.image} alt="icdc_studies" />
                           </div>
                         )}
@@ -270,6 +273,17 @@ const styles = (theme) => ({
       width: '660px',
     },
   },
+  carouselImgContainerSpotlight: {
+    position: 'relative',
+    height: '800px',
+    maxHeight: '800px',
+    overflow: 'hidden',
+    '& img': {
+      width: '860px',
+      marginLeft: '-100px',
+      marginTop: '-120px',
+    },
+  },
   headerButtonSection: {
   },
   headerButton: {
@@ -326,7 +340,7 @@ const styles = (theme) => ({
   },
   datadictionaryContainer: {
     position: 'relative',
-    height: '800px',
+    height: '900px',
     maxHeight: '800px',
     overflow: 'hidden',
     marginLeft: '-50px',
@@ -336,10 +350,11 @@ const styles = (theme) => ({
     // backgroundSize: '1200px',
     '& img': {
       // width: '90%',
-      width: '1300px',
-      marginLeft: '-380px',
-      marginRight: '-100px',
-      marginTop: '-180px',
+      width: '990px',
+      heigh: '700px',
+      marginLeft: '-80px',
+      marginRight: '-90px',
+      marginTop: '-20px',
     },
   },
   dogImg: {
@@ -391,7 +406,7 @@ const styles = (theme) => ({
     color: '#ffffff',
     fontWeight: '700',
     fontSize: '18px',
-    height: '150px',
+    height: '175px',
     '& img': {
       margin: 'auto',
       width: '113px',

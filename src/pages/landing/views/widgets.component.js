@@ -72,7 +72,7 @@ const styles = (theme) => ({
   },
   description: {
     fontSize: '13px',
-    padding: '3px 5px 8px 5px',
+    padding: '1px 5px 10px 5px',
     color: '#000000',
     height: '25px',
   },

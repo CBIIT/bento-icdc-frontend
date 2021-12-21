@@ -29,6 +29,7 @@ const TabItems = ({
         getTabLalbel(tab.label, tab.icon, tab.index)
       }
       key={index}
+      disableRipple
     />
   ));
 

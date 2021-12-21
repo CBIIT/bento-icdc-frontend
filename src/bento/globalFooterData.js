@@ -21,6 +21,10 @@ export default {
           link: '/purpose',
         },
         {
+          text: 'News',
+          link: '/news',
+        },
+        {
           text: 'Steering Committee',
           link: '/steeringCommittee',
         },

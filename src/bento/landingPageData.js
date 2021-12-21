@@ -4,11 +4,12 @@ import Programs from '../assets/landing/Programs.png';
 import icdcNews from '../assets/landing/ICDC_News.png';
 import studies from '../assets/landing/studies.png';
 import spotlightStudy from '../assets/landing/Spotlight_Studies.png';
-import datadictionary from '../assets/landing/Carousel.Dictionary.png';
+import datadictionary from '../assets/landing/carousel.datadic.v2.png';
 import dogIcon from '../assets/landing/Button.Explore.Active.png';
 import studyActive from '../assets/landing/Button.Studies.Active.png';
 import spotLight from '../assets/landing/Button.Spotlight.Active.png';
 import datadictionaryIcon from '../assets/landing/Button.DataDictionary.Open.png';
+// import dogImage from '../assets/landing/dog-bubble.png';
 
 export const pageData = {
   callToActionTitle: 'Integrated Canine Data Commons',
@@ -90,7 +91,7 @@ export const pageData = {
       icon: studyActive,
       content: {
         callToActionTitle: 'ICDC\n Studies',
-        callToActionDescription: 'Browse the ICDC Studies with\n detailed overviews, sample profiles,\n associated publications and\n additional information.',
+        callToActionDescription: 'Browse the ICDC Studies with\n detailed overviews, sample\n profiles, associated publications\n and additional information.',
         callToActionButtonText: 'STUDIES LISTING',
         callToActionLink: '/studies',
         image: studies,
@@ -141,7 +142,7 @@ export const pageData = {
       titleText: 'ICDC News',
       descriptionText: 'Updates and announcements',
       callToActionText: 'EXPLORE',
-      callToActionLink: '/studies', // Link to the "Resources" Static Page
+      callToActionLink: '/news', // Link to the "Resources" Static Page
     },
   ],
 };
