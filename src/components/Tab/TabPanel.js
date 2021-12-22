@@ -9,7 +9,7 @@ const TabPanel = ({
     role="tabpanel"
     hidden={value !== index}
   >
-    {value === index && (children)}
+    {children}
   </div>
 );
 
