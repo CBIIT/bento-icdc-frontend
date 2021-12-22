@@ -15,7 +15,7 @@ import flare from '../../assets/landing/flare_bkgd.png';
 import dogImg from '../../assets/landing/canine_bubble.png';
 import humanImg from '../../assets/landing/human_bubble.png';
 import { pageData } from '../../bento/landingPageData';
-import Widgets from './views/widgets.component';
+import Widgets from './views/widgets';
 import Tab from '../../components/Tab/Tab';
 import TabPanel from '../../components/Tab/TabPanel';
 // import themes from '../../themes';
@@ -120,7 +120,9 @@ function LineText(props) {
   return text.split('\n').map((str) => <div>{str}</div>);
 }
 
-const LandingView = ({ classes }) => {
+const LandingView = ({
+  classes,
+}) => {
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
