@@ -115,14 +115,12 @@ const custumTheme = createTheme({
   },
 });
 
-function LineText(props) {
+const LineText = (props) => {
   const { text } = props;
   return text.split('\n').map((str) => <div>{str}</div>);
 }
 
-const LandingView = ({
-  classes,
-}) => {
+const LandingView = function ({ classes }) {
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
@@ -147,7 +145,7 @@ const LandingView = ({
               {
                 pageData.tabs.map((item, index) => (
                   <TabPanel value={currentTab} index={index}>
-                    <Grid container className={classes.tabContainer} spacing={16}>
+                    <Grid container className={classes.tabContainer} spacing={1}>
                       <Grid item lg={3} md={3} sm={12} xs={12} className={classes.carouselType}>
                         <div className={classes.carouselTitle}>
                           <LineText text={item.content.callToActionTitle} />

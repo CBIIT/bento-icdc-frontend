@@ -8,14 +8,15 @@ import {
 import { Link } from 'react-router-dom';
 import { pageData } from '../../../bento/landingPageData';
 
-const Widgets = ({ classes }) => {
-  const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    borderRadius: '13px',
-    marginTop: '50px',
-  }));
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  borderRadius: '13px',
+  marginTop: '50px',
+}));
+
+const Widgets = function ({ classes }) {
 
   return (
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
