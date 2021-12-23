@@ -118,9 +118,9 @@ const custumTheme = createTheme({
 const LineText = (props) => {
   const { text } = props;
   return text.split('\n').map((str) => <div>{str}</div>);
-}
+};
 
-const LandingView = function ({ classes }) {
+const LandingView = ({ classes }) => {
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);

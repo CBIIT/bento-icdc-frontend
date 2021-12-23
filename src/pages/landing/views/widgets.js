@@ -16,34 +16,31 @@ const Item = styled(Paper)(({ theme }) => ({
   marginTop: '50px',
 }));
 
-const Widgets = function ({ classes }) {
-
-  return (
-    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
-      {
-        pageData.widgets.map((widget) => (
-          <Grid item xs={3} className={classes.widget}>
-            <Item>
-              <Link to={widget.callToActionLink}>
-                <div className={classes.container}>
-                  <div className={classes.title}>
-                    {widget.titleText}
-                  </div>
-                  <div className={classes.image}>
-                    <img src={widget.img} alt={widget.alt} />
-                  </div>
-                  <div className={classes.description}>
-                    {widget.descriptionText}
-                  </div>
+const Widgets = ({ classes }) => (
+  <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
+    {
+      pageData.widgets.map((widget) => (
+        <Grid item xs={3} className={classes.widget}>
+          <Item>
+            <Link to={widget.callToActionLink}>
+              <div className={classes.container}>
+                <div className={classes.title}>
+                  {widget.titleText}
                 </div>
-              </Link>
-            </Item>
-          </Grid>
-        ))
-      }
-    </Grid>
-  );
-};
+                <div className={classes.image}>
+                  <img src={widget.img} alt={widget.alt} />
+                </div>
+                <div className={classes.description}>
+                  {widget.descriptionText}
+                </div>
+              </div>
+            </Link>
+          </Item>
+        </Grid>
+      ))
+    }
+  </Grid>
+);
 
 const styles = (theme) => ({
   widget: {
