@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import { pageData } from '../../../bento/landingPageData';
 
-function Widgets({ classes }) {
+const Widgets = ({ classes }) => {
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     textAlign: 'center',
@@ -42,7 +42,7 @@ function Widgets({ classes }) {
       }
     </Grid>
   );
-}
+};
 
 const styles = (theme) => ({
   widget: {
