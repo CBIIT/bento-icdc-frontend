@@ -52,7 +52,6 @@ class Canvas extends React.Component {
 
   componentDidUpdate() {
     if (this.props.needReset) {
-      console.log('update rect box');
       this.handleReset();
       this.props.onResetCanvasFinished();
     }

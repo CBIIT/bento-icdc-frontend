@@ -24,15 +24,9 @@ class NodePopup extends React.Component {
       : {
         top: 0, left: 0, width: 0, bottom: 0,
       };
-    console.log(highlightingNodeSVGElement.transform);
-    console.log(highlightingNodeSVGElement.getBoundingClientRect());
-    console.log(svgBoundingBox);
-    // console.log(this.props.canvasBoundingRect);
     const popupLeft = (svgBoundingBox.left - this.props.canvasBoundingRect.left)
       + (svgBoundingBox.width / 2);
     const popupTop = svgBoundingBox.bottom - this.props.canvasBoundingRect.top;
-    console.log(popupLeft);
-    console.log(popupTop);
     return (
       <div
         className="node-popup"

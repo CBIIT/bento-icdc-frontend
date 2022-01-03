@@ -137,7 +137,7 @@ const ddgraph = (state = ddgraphInitialState, action) => {
 
           // if is clicking the same node
           if (state.highlightingNode.id === action.nodeID) {
-            // if no second node is selected, regard this as cancel selecting
+          // if no second node is selected, regard this as cancel selecting
             if (!state.secondHighlightingNodeID) {
               newHighlightingNode = null;
             }
