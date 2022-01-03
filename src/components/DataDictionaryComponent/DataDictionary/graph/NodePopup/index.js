@@ -6,7 +6,6 @@ import {
 import NodePopup from './NodePopup';
 
 const ReduxNodePopup = (() => {
-  console.log('redux node pop up');
   const mapStateToProps = (state) => ({
     highlightingNode: state.ddgraph.highlightingNode,
     canvasBoundingRect: state.ddgraph.canvasBoundingRect,

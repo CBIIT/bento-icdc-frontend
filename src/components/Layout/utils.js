@@ -71,8 +71,6 @@ async function init() {
     item.submittable = true;
     item.constraints = null;
     item.type = 'object';
-    item.class = value.Tags.Class;
-    item.assignment = value.Tags.Assignment;
 
     const link = [];
     const properties = {};

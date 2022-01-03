@@ -2,13 +2,10 @@ export const clickBlankSpace = () => ({
   type: 'GRAPH_CLICK_BLANK_SPACE',
 });
 
-export const setCanvasBoundingRect = (canvasBoundingRect) => {
-  console.log(canvasBoundingRect);
-  return {
-    type: 'GRAPH_UPDATE_CANVAS_BOUNDING_RECT',
-    canvasBoundingRect,
-  };
-};
+export const setCanvasBoundingRect = (canvasBoundingRect) => ({
+  type: 'GRAPH_UPDATE_CANVAS_BOUNDING_RECT',
+  canvasBoundingRect,
+});
 
 export const setSecondHighlightingNodeCandidateIDs = (secondHighlightingNodeCandidateIDs) => ({
   type: 'GRAPH_UPDATE_SECOND_HIGHLIGHTING_NODE_CANDIDATES',
