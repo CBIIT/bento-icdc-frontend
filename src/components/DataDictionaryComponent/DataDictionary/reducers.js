@@ -131,14 +131,18 @@ const ddgraph = (state = ddgraphInitialState, action) => {
       if (action.nodeID) {
       // if no node is selected, select this node as highlight node
         if (!state.highlightingNode) {
+          console.log('!state.highlighting_Node');
           newHighlightingNode = state.nodes.find((n) => n.id === action.nodeID);
         } else if (state.highlightingNode) {
+          console.log('state.highlighting_Node');
           newHighlightingNode = state.highlightingNode;
 
           // if is clicking the same node
           if (state.highlightingNode.id === action.nodeID) {
-          // if no second node is selected, regard this as cancel selecting
+            console.log('state.highlighting_Node_id');
+            // if no second node is selected, regard this as cancel selecting
             if (!state.secondHighlightingNodeID) {
+              console.log('!state.highlighting_Node_id');
               newHighlightingNode = null;
             }
           } else if (state.secondHighlightingNodeCandidateIDs.length > 1

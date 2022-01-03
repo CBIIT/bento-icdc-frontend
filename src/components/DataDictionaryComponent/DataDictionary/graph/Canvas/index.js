@@ -8,12 +8,15 @@ const ReduxCanvas = (() => {
     needReset: state.ddgraph.needReset,
   });
 
-  const mapDispatchToProps = (dispatch) => ({
-    onClickBlankSpace: () => dispatch(clickBlankSpace()),
-    onCanvasBoundingBoxUpdate:
-      (canvasBoundingRect) => dispatch(setCanvasBoundingRect(canvasBoundingRect)),
-    onResetCanvasFinished: () => dispatch(setNeedReset(false)),
-  });
+  const mapDispatchToProps = (dispatch) => {
+    console.log('dispatch');
+    return {
+      onClickBlankSpace: () => dispatch(clickBlankSpace()),
+      onCanvasBoundingBoxUpdate:
+        (canvasBoundingRect) => dispatch(setCanvasBoundingRect(canvasBoundingRect)),
+      onResetCanvasFinished: () => dispatch(setNeedReset(false)),
+    };
+  };
 
   return connect(mapStateToProps, mapDispatchToProps)(Canvas);
 })();

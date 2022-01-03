@@ -37,6 +37,7 @@ class Canvas extends React.Component {
       .scaleExtent([this.props.minZoom, this.props.maxZoom])
       .translateExtent([this.props.topLeftTranslateLimit, this.props.bottomRightTranslateLimit])
       .on('zoom', () => {
+        console.log('on zoom');
         this.handleCanvasUpdate();
         this.zoomTarget
           .attr('transform', d3.event.transform);
@@ -45,13 +46,16 @@ class Canvas extends React.Component {
     this.zoomCatcher = d3.select('.canvas__overlay')
       .style('fill', 'none')
       .style('pointer-events', 'all')
+      .style('onwheel', 'zoom')
       .call(this.zoomBehavior);
     this.updateCanvasSize();
+    console.log('on window resize');
     window.addEventListener('resize', this.handleResize);
   }
 
   componentDidUpdate() {
     if (this.props.needReset) {
+      console.log('update rect box');
       this.handleReset();
       this.props.onResetCanvasFinished();
     }
@@ -71,6 +75,8 @@ class Canvas extends React.Component {
 
   handleCanvasUpdate = () => {
     const canvasBoundingRect = this.canvasElement.current.getBoundingClientRect();
+    console.log('get canvas client react');
+    // console.log(canvasBoundingRect.g);
     this.props.onCanvasBoundingBoxUpdate(canvasBoundingRect);
   }
 

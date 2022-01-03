@@ -71,12 +71,13 @@ async function init() {
     item.submittable = true;
     item.constraints = null;
     item.type = 'object';
+    item.class = value.Tags.Class;
+    item.assignment = value.Tags.Assignment;
 
     const link = [];
     const properties = {};
     const pRequired = [];
     const pPreffered = [];
-
     if (icdcMData.Nodes[key].Props != null) {
       for (let i = 0; i < icdcMData.Nodes[key].Props.length; i++) {
         const nodeP = icdcMData.Nodes[key].Props[i];

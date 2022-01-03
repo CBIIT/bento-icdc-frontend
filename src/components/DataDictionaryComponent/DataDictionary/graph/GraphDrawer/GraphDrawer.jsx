@@ -17,6 +17,7 @@ class GraphDrawer extends React.Component {
   componentDidUpdate() {
     // check if need update all node's svg elements
     // this only happens once, at the first time graph is rendered
+    console.log('Graph Drawer');
     if (this.props.isGraphView
        && this.props.layoutInitialized
        && !this.nodeSVGElementInitialized) {
@@ -28,6 +29,7 @@ class GraphDrawer extends React.Component {
           acc[cur.nodeID] = cur.svgElement;
           return acc;
         }, {});
+      console.log(graphNodesSVGElements);
       this.nodeSVGElementInitialized = true;
       this.props.onGraphNodesSVGElementsUpdated(graphNodesSVGElements);
     }
@@ -46,6 +48,7 @@ class GraphDrawer extends React.Component {
   }
 
   getNodeRef = (nodeID) => {
+    console.log('get node ref');
     if (!this.graphNodeRefs[nodeID]) {
       this.graphNodeRefs[nodeID] = React.createRef();
     }
