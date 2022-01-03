@@ -2,8 +2,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './DataDictionaryTable.css';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import styled from 'styled-components';
 import { parseDictionaryNodes } from '../../utils';
 import DataDictionaryCategory from '../DataDictionaryCategory';
+import PdfDocument from '../../MultiplePDF';
+
+const DownloadLinkWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 /**
  * Just exported for testing
@@ -61,16 +69,29 @@ const DataDictionaryTable = ({
 }) => {
   const c2nl = category2NodeList(dictionary);
   const { nodesCount, propertiesCount } = getNodePropertyCount(dictionary);
+  // eslint-disable-next-line no-console
+  console.log('Dictionary', dictionary);
   return (
     <>
-      <p>
-        <span>{dictionaryName}</span>
-        <span> dictionary has </span>
-        <span>{nodesCount}</span>
-        <span> nodes and </span>
-        <span>{propertiesCount}</span>
-        <span> properties </span>
-      </p>
+      <DownloadLinkWrapper>
+        <p>
+          <span>{dictionaryName}</span>
+          <span> dictionary has </span>
+          <span>{nodesCount}</span>
+          <span> nodes and </span>
+          <span>{propertiesCount}</span>
+          <span> properties </span>
+        </p>
+        <PDFDownloadLink
+          document={<PdfDocument data={dictionary} />}
+          fileName="file.pdf"
+          className="data-dictionary-node__multiple-download-button"
+        >
+          {({
+            loading,
+          }) => (loading ? 'Loading document...' : 'DOWNLOAD DICTIONARY')}
+        </PDFDownloadLink>
+      </DownloadLinkWrapper>
       {Object.keys(c2nl).map((category) => (
         <DataDictionaryCategory
           key={category}
