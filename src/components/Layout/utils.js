@@ -76,7 +76,6 @@ async function init() {
     const properties = {};
     const pRequired = [];
     const pPreffered = [];
-
     if (icdcMData.Nodes[key].Props != null) {
       for (let i = 0; i < icdcMData.Nodes[key].Props.length; i++) {
         const nodeP = icdcMData.Nodes[key].Props[i];

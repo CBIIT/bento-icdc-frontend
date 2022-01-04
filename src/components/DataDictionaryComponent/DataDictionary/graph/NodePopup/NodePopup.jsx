@@ -47,7 +47,7 @@ class NodePopup extends React.Component {
                 <li className="node-popup__list-item">
                   {this.props.highlightingNode.optionalPropertiesCount}
                   {' '}
-                  optional properties
+                  preferred properties
                 </li>
                 <Button
                   className="node-popup__button"
