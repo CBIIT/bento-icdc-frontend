@@ -5,28 +5,31 @@ import {
 import TabLabel from './TabLable';
 
 const TabItems = ({
-  classes,
   tabItems,
   styleClasses,
   handleTabChange,
   currentTab,
+  orientation,
 }) => {
-  function getTabLalbel(title, index) {
+  function getTabLalbel(title, image, index) {
     return (
       <TabLabel
         title={title}
+        icon={image}
         primaryColorClass={(currentTab === index)
           ? styleClasses.tabHighlightColor : styleClasses.tabPrimaryColor}
       />
     );
   }
 
-  const TABs = tabItems.map((tab) => (
+  const TABs = tabItems.map((tab, index) => (
     <Tab
       index={tab.index}
       label={
-        getTabLalbel(tab.label, tab.index)
+        getTabLalbel(tab.label, tab.icon, tab.index)
       }
+      key={index}
+      disableRipple
     />
   ));
 
@@ -35,12 +38,12 @@ const TabItems = ({
       <Tabs
         onChange={(event, value) => handleTabChange(event, value)}
         value={currentTab}
-        textColor="primary"
         TabIndicatorProps={{ style: { background: 'none' } }}
+        orientation={orientation}
       >
         {TABs}
       </Tabs>
-      <hr className={classes.hrLine} />
+      <hr className={styleClasses.hrLine} />
     </>
   );
 };
@@ -51,10 +54,14 @@ const styles = () => ({
     textTransform: 'none',
     fontSize: '17px',
   },
-  hrLine: {
-    marginTop: '-2px',
-    marginBottom: '0',
-    borderTop: '1px solid #81a6b9',
+  flexContainer: {
+    flexDirection: 'column',
+  },
+  indicator: {
+    display: 'none',
+  },
+  tabHighlightColor: {
+    color: '#ffffff',
   },
 });
 
