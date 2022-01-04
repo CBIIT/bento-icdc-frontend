@@ -69,8 +69,6 @@ const DataDictionaryTable = ({
 }) => {
   const c2nl = category2NodeList(dictionary);
   const { nodesCount, propertiesCount } = getNodePropertyCount(dictionary);
-  // eslint-disable-next-line no-console
-  console.log('Dictionary', dictionary);
   return (
     <>
       <DownloadLinkWrapper>
