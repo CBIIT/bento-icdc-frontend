@@ -37,9 +37,9 @@ class Canvas extends React.Component {
       .scaleExtent([this.props.minZoom, this.props.maxZoom])
       .translateExtent([this.props.topLeftTranslateLimit, this.props.bottomRightTranslateLimit])
       .on('zoom', () => {
-        this.handleCanvasUpdate();
         this.zoomTarget
           .attr('transform', d3.event.transform);
+        this.handleCanvasUpdate();
       });
     this.zoomTarget = d3.select('.canvas__container');
     this.zoomCatcher = d3.select('.canvas__overlay')
