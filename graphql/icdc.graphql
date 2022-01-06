@@ -18,7 +18,6 @@ type adverse_event {
   ae_other: String
   dose_limiting_toxicity: String
   unexpected_adverse_event: String
-  crf_id: String
   case: case @relation(name:"of_case", direction:OUT)
   agent: agent @relation(name:"of_agent", direction:OUT)
   cases: [case] @relation(name:"had_adverse_event", direction:IN)
@@ -67,7 +66,6 @@ type agent_administration {
   missed_dose_units_of_measure: String
   medication_course_number: String
   comment: String
-  crf_id: String
   agent: agent @relation(name:"of_agent", direction:OUT)
   visit: visit @relation(name:"on_visit", direction:OUT)
 }
@@ -92,7 +90,6 @@ type case {
   case_id: String
   patient_id: String
   patient_first_name: String
-  crf_id: String
   cohort: cohort @relation(name:"member_of", direction:OUT)
   study: study @relation(name:"member_of", direction:OUT)
   enrollment: enrollment @relation(name:"of_case", direction:IN)
@@ -142,7 +139,6 @@ type demographic {
   weight_original: Float
   weight_original_unit: String
   neutered_indicator: String
-  crf_id: String
   case: case @relation(name:"of_case", direction:OUT)
 }
 
@@ -160,13 +156,11 @@ type diagnosis {
   follow_up_data: String
   concurrent_disease: String
   concurrent_disease_type: String
-  crf_id: String
   case: case @relation(name:"of_case", direction:OUT)
   files: [file] @relation(name:"from_diagnosis", direction:IN)
 }
 
 type disease_extent {
-  crf_id: String
   lesion_number: String
   lesion_site: String
   lesion_description: String
@@ -189,7 +183,6 @@ type enrollment {
   date_of_informed_consent: String
   site_short_name: String
   veterinary_medical_center: String
-  enrollment_document_number: String
   cohort_description: String
   patient_subgroup: String
   case: case @relation(name:"of_case", direction:OUT)
@@ -224,7 +217,6 @@ type follow_up {
   treatment_since_last_contact: Boolean
   physical_exam_performed: Boolean
   physical_exam_changes: String
-  crf_id: String
   case: case @relation(name:"of_case", direction:OUT)
 }
 
@@ -278,7 +270,6 @@ type physical_exam {
   pe_comment: String
   phase_pe: String
   assessment_timepoint: Int
-  crf_id: String
   enrollment: enrollment @relation(name:"at_enrollment", direction:OUT)
   visit: visit @relation(name:"on_visit", direction:OUT)
 }
@@ -297,7 +288,6 @@ type prior_surgery {
   surgical_finding: String
   residual_disease: String
   therapeutic_indicator: String
-  crf_id: String
   enrollment: enrollment @relation(name:"at_enrollment", direction:OUT)
   next_prior_surgery: prior_surgery @relation(name:"next", direction:OUT)
   prior_prior_surgery: prior_surgery @relation(name:"next", direction:IN)
@@ -489,7 +479,6 @@ type vital_signs {
   ecg: Boolean
   assessment_timepoint: Int
   phase: String
-  crf_id: String
   visit: visit @relation(name:"on_visit", direction:OUT)
 }
 
@@ -3323,7 +3312,7 @@ type QueryType {
       visit_number: v.visit_number,
       day_in_cycle: v.day_in_cycle,
       sample_id: samp.sample_id,
-      sample_type: samp.sample_type,
+      sample_type: samp.physical_sample_type,
       general_sample_pathology: samp.general_sample_pathology,
       specific_sample_pathology: samp.specific_sample_pathology,
       sample_site: samp.sample_site,
