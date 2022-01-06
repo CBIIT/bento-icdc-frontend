@@ -1,6 +1,6 @@
 .data-dictionary-node {
   /* background: var(--g3-color__white); */
-  background-color: #F4F5F5;
+  background-color: #f4f5f5;
   border-bottom: 1px solid var(--dictionary-border-color);
   border-right: 1px solid var(--dictionary-border-color);
   display: flex;
@@ -8,7 +8,6 @@
   padding: 15px 5px 10px 10px;
   border-left-width: 5px;
   border-left-style: solid;
-  /* color: var(--dictionary-border-color); */
   border-left-color: var(--dictionary-border-color);
   cursor: pointer;
   margin-bottom: 5px;
@@ -51,18 +50,19 @@
   max-height: 60px;
   overflow: hidden;
   text-overflow: ellipsis;
-
+  padding-top: 10px;
+  padding-left: 0;
 }
 
 .data-dictionary-node__label {
-  color: #8E8E8E;
+  color: #8e8e8e;
   font-weight: 900;
   margin-right: 5px;
   border-radius: 100px;
-  border: 1px solid #CDCDCD;
+  border: 1px solid #cdcdcd;
   text-align: center;
   padding: 2px 12px;
-  background: #ffffff;
+  background: #fff;
   font-size: 12px;
 }
 
@@ -73,7 +73,7 @@
 .data-dictionary-node__class,
 .data-dictionary-node__assignment {
   margin-left: 5px;
-  color: #000000;
+  color: #000;
   font-weight: 500;
 }
 
@@ -91,12 +91,6 @@
   flex-grow: 0;
   flex-shrink: 0;
   padding-left: 5px;
-  /* border-left: 1px solid var(--dictionary-border-color); */
-}
-
-.data-dictionary-node__description {
-  padding-top: 10px;
-  padding-left: 0px;
 }
 
 .data-dictionary-node__button-wrap {
@@ -110,7 +104,7 @@
 }
 
 .data-dictionary-node__download-button_tsv {
-  padding: 0px;
+  padding: 0;
   width: 35px;
   border: none;
   background-color: inherit;
@@ -119,7 +113,7 @@
 
 .data-dictionary-node__download-button-group_loading {
   opacity: 0.5;
-  color: #F4F5F5;
+  color: #f4f5f5;
   background-color: #0A4A6D;
   float: left;
   width: 400px;
@@ -127,7 +121,7 @@
 
 .data-dictionary-node__download-button_pdf {
   height: 30px;
-  margin: 5px 6px 0px 6px;
+  margin: 5px 6px 0 6px;
   padding: unset; /* override .g3-button's paddings */
   font-weight: normal;
   display: block;
@@ -147,8 +141,6 @@
 
 .data-dictionary-node__download-button_tsv:hover,
 .data-dictionary-node__download-button:active {
-  /* color: white; */
-  /* background-color: var(--g3-color__base-blue); */
   cursor: pointer;
 }
 

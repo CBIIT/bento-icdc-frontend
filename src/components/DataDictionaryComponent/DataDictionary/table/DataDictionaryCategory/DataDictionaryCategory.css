@@ -13,7 +13,7 @@
   font-weight: 900;
   font-size: 18px;
   border-left: 5px solid var(--dictionary-border-color);
-  box-shadow:inset -2px -5px 0px -2px var(--dictionary-border-color);
+  box-shadow: inset -2px -5px 0 -2px var(--dictionary-border-color);
 }
 
 .data-dictionary-category__download_template {
