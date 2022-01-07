@@ -2828,7 +2828,7 @@ type QueryType {
       visit_number: v.visit_number,
       day_in_cycle: v.day_in_cycle,
       sample_id: samp.sample_id,
-      sample_type: samp.sample_type,
+      sample_type: samp.physical_sample_type,
       general_sample_pathology: samp.general_sample_pathology,
       specific_sample_pathology: samp.specific_sample_pathology,
       sample_site: samp.sample_site,
