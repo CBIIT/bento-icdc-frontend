@@ -86,7 +86,7 @@ const initialState = {
       selectedRowIndex: [],
     },
     widgets: {},
-    biobank: [],
+    tooltip: [],
   },
 };
 
@@ -712,7 +712,7 @@ function setCodeToCheckBoxItem(checkboxData, item) {
   const checkBoxitems = [];
   const updateCheckBoxData = checkboxData;
   item.data.filterCaseCountByStudyCode.forEach((filterItem) => {
-    checkboxData[0].checkboxItems.forEach((checkboxItem) => {
+    checkboxData[1].checkboxItems.forEach((checkboxItem) => {
       if (filterItem.group === checkboxItem.name) {
         const updatecheckBoxItem = checkboxItem;
         updatecheckBoxItem.code = (filterItem.code !== null) ? ` (${filterItem.code})` : filterItem.code;
@@ -720,7 +720,7 @@ function setCodeToCheckBoxItem(checkboxData, item) {
       }
     });
   });
-  updateCheckBoxData[0].checkboxItems = checkBoxitems
+  updateCheckBoxData[1].checkboxItems = checkBoxitems
     .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
   return updateCheckBoxData;
 }
@@ -996,7 +996,7 @@ const reducers = {
       },
       filters: dataTableFilters,
       widgets: getWidgetsData(tableData, widgetsData),
-      biobank: item.data.biospecimen_source,
+      tooltip: [...item.data.biospecimen_source, ...item.data.program],
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
@@ -1043,7 +1043,7 @@ const reducers = {
           selectedRowInfo: [],
           selectedRowIndex: [],
         },
-        biobank: item.data.biospecimen_source,
+        tooltip: [...item.data.biospecimen_source, ...item.data.program],
       } : { ...state };
   },
   CLEAR_ALL_FILTER: (state, item) => {
@@ -1093,7 +1093,7 @@ const reducers = {
           ...state.sortByList,
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
-        biobank: item.data.biospecimen_source,
+        tooltip: [...item.data.biospecimen_source, ...item.data.program],
       } : { ...state };
   },
   SORT_SINGLE_GROUP_CHECKBOX: (state, item) => {
@@ -1202,7 +1202,7 @@ const reducers = {
           ...state.sortByList,
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
-        biobank: item.data.biospecimen_source,
+        tooltip: [...item.data.biospecimen_source, ...item.data.program],
       } : { ...state };
   },
   CLEAR_SECTION_SORT: (state, item) => {

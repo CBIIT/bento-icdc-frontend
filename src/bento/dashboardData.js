@@ -21,6 +21,9 @@ export const defaultFacetSectionVariables = {
 // A maximum of 12 facetSearchData are allowed
 export const facetSearchData = [
   {
+    label: 'Program', field: 'group', api: 'filterCaseCountByProgram', filterAPI: 'filterCaseCountByProgram', datafield: 'program', section: 'Filter By Cases', tooltip: true, show: true,
+  },
+  {
     label: 'Study', field: 'group', api: 'filterCaseCountByStudyCode', filterAPI: 'filterCaseCountByStudyCode', datafield: 'study', section: 'Filter By Cases', show: true,
   },
   {

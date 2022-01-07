@@ -75,10 +75,10 @@ function CheckBoxView(props) {
         />
         { (checkboxItem.title) ? (
           <>
-            <Tooltip title={checkboxItem.title.biospecimen_repository_full_name}>
+            <Tooltip title={checkboxItem.title.name}>
               <div className={classes.panelDetailText}>
                 <span>
-                  {`${checkboxItem.title.biospecimen_repository_acronym}`}
+                  {`${checkboxItem.title.acronym}`}
                 </span>
               </div>
             </Tooltip>
