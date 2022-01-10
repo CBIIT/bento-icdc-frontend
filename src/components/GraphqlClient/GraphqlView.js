@@ -3,6 +3,7 @@ import GraphiQL from 'graphiql';
 import { withStyles } from '@material-ui/core';
 import fetch from 'isomorphic-fetch';
 import env from '../../utils/env';
+import './graphiql.css';
 
 const BACKEND = env.REACT_APP_BACKEND_API;
 
@@ -24,6 +25,9 @@ const styles = () => ({
   grapqhQlContainer: {
     height: '600px',
     marginTop: '-44px',
+    docExplorerTitle: {
+      padding: '0px',
+    },
   },
 });
 
