@@ -1222,7 +1222,7 @@ const reducers = {
           ...state.sortByList,
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
-        tooltip: getTooltipContent(item.data),
+        tooltip: getTooltipContent(item.data, tooltipFields),
       } : { ...state };
   },
   CLEAR_SECTION_SORT: (state, item) => {
