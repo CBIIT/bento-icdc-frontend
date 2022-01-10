@@ -21,7 +21,7 @@ export const defaultFacetSectionVariables = {
 // A maximum of 12 facetSearchData are allowed
 export const facetSearchData = [
   {
-    label: 'Program', field: 'group', api: 'filterCaseCountByProgram', filterAPI: 'filterCaseCountByProgram', datafield: 'program', section: 'Filter By Cases', tooltip: true, show: true,
+    label: 'Program', field: 'group', api: 'filterCaseCountByProgram', filterAPI: 'filterCaseCountByProgram', datafield: 'program', section: 'Filter By Cases', tooltip: 'program', show: true,
   },
   {
     label: 'Study', field: 'group', api: 'filterCaseCountByStudyCode', filterAPI: 'filterCaseCountByStudyCode', datafield: 'study', section: 'Filter By Cases', show: true,
@@ -30,7 +30,7 @@ export const facetSearchData = [
     label: 'Study Type', field: 'group', api: 'filterCaseCountByStudyType', filterAPI: 'filterCaseCountByStudyType', datafield: 'study_type', section: 'Filter By Cases', show: true,
   },
   {
-    label: 'Biobank', field: 'group', api: 'filterCaseCountByBiobank', filterAPI: 'filterCaseCountByBiobank', datafield: 'biobank', section: 'Filter By Cases', tooltip: true, show: true,
+    label: 'Biobank', field: 'group', api: 'filterCaseCountByBiobank', filterAPI: 'filterCaseCountByBiobank', datafield: 'biobank', section: 'Filter By Cases', tooltip: 'biospecimen_source', show: true,
   },
   {
     label: 'Study Participation', field: 'group', api: 'filterCaseCountByStudyParticipation', filterAPI: 'filterCaseCountByStudyParticipation', datafield: 'study_participation', section: 'Filter By Cases', show: true,
@@ -148,6 +148,19 @@ export const widgetsData = [
     show: true,
   },
 ];
+
+export const tooltipFields = [
+  {
+    type: 'program',
+    acronym: 'program_acronym',
+    name: 'program_name'
+  },
+  {
+    type: 'biospecimen_source',
+    acronym: 'biospecimen_repository_acronym',
+    name: 'biospecimen_repository_full_name'
+  }
+]
 
 // --------------- Dahboard Table external link configuration --------------
 // Ideal size for externalLinkIcon is 16x16 px

@@ -688,13 +688,10 @@ programsAndStudies{
   }
 }
 biospecimen_source {
-  acronym: biospecimen_repository_acronym
-  name: biospecimen_repository_full_name
+  biospecimen_repository_acronym
+  biospecimen_repository_full_name
 }
-program {
-  acronym: program_acronym
-  name: program_name
-}
+
 caseOverviewPaged(first: 10) {
     case_id
     study_code
@@ -709,6 +706,11 @@ caseOverviewPaged(first: 10) {
     weight
     response_to_treatment
     disease_site
+  }
+
+  program {
+    program_acronym
+    program_name
   }
   }`;
 

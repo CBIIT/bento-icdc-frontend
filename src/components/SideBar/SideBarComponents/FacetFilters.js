@@ -175,8 +175,9 @@ const FacetPanel = ({ classes, disabled }) => {
       ? '#B2C6D6' : '#4A4A4A');
   }
 
-  const getTooltipContent = (value) => tooltipContent.filter((item) => item.name === value.name
-      || item.acronym === value.name)[0];
+  const getTooltipContent = (value, type) => tooltipContent
+    .filter((item) => (item.name === value.name
+      && type === item.type) || (item.acronym === value.name && type === item.type))[0];
 
   function getCheckBoxColor(index, currentSection) {
     return index % 2 ? facetSectionVariables[currentSection.sectionName] ? facetSectionVariables[currentSection.sectionName].checkBoxColorsTwo ? facetSectionVariables[currentSection.sectionName].checkBoxColorsTwo : '' : defaultFacetSectionVariables.checkBoxColorsTwo
@@ -188,7 +189,7 @@ const FacetPanel = ({ classes, disabled }) => {
       && item.subjects > 0).map((item) => (
       {
         ...item,
-        title: sideBarItem.tooltip ? getTooltipContent(item) : undefined,
+        title: sideBarItem.tooltip ? getTooltipContent(item, sideBarItem.tooltip) : undefined,
       }
     ));
     return showItems.map(
@@ -220,7 +221,7 @@ const FacetPanel = ({ classes, disabled }) => {
       && item.subjects > 0)).map((item) => (
       {
         ...item,
-        title: sideBarItem.tooltip ? getTooltipContent(item.name) : undefined,
+        title: sideBarItem.tooltip ? getTooltipContent(item.name, sideBarItem.tooltip) : undefined,
       }
     ));
     const selectedCheckbox = selectedItems.slice(0, showCheckboxCount)
