@@ -25,9 +25,6 @@ const styles = () => ({
   grapqhQlContainer: {
     height: '600px',
     marginTop: '-44px',
-    docExplorerTitle: {
-      padding: '0px',
-    },
   },
 });
 
