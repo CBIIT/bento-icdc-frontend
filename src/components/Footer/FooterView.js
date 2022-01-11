@@ -11,7 +11,7 @@ const ICDCFooter = () => {
 
   useEffect(() => {
     const getSystems = async () => {
-      const response = await axios.get(FILE_SERVICE_API.concat('version'));
+      const response = await axios.get(`${FILE_SERVICE_API}version`);
       try {
         const { data } = response;
         const FSverison = { FileServiceVersion: data.version || '' };
