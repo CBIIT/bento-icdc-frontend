@@ -6,6 +6,7 @@ import { Typography } from '../../components/Wrappers/Wrappers';
 import {
   GET_STUDY_DETAIL_DATA_QUERY,
 } from '../../bento/studyDetailsData';
+import Error from '../error/Error';
 
 const StudyDetailContainer = ({ match, history }) => {
   const { loading, error, data } = useQuery(GET_STUDY_DETAIL_DATA_QUERY, {
@@ -19,6 +20,9 @@ const StudyDetailContainer = ({ match, history }) => {
       && study[0].clinical_study_designation !== match.params.id) {
       const redirectUrl = '/study/'.concat(study[0].clinical_study_designation);
       history.push(redirectUrl);
+    }
+    if (study.length === 0) {
+      return <Error />;
     }
   }
 
