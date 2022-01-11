@@ -80,7 +80,7 @@ const Publication = ({
         <div className={classes.detailContainer}>
           <Grid container className={classes.gridContainer}>
             <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
-              <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
+              <Grid container spacing={1} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   {
                     (publications && publications.length > 0)
@@ -97,7 +97,7 @@ const Publication = ({
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid
                 container
-                spacing={16}
+                spacing={1}
                 direction="row"
                 className={classes.detailContainerRight}
               >

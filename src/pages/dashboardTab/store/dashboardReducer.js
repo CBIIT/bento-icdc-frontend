@@ -12,7 +12,7 @@ import {
   transformAPIDataIntoCheckBoxData,
 } from 'bento-components';
 import { globalStatsData as statsCount } from '../../../bento/globalStatsData';
-import { widgetsData, facetSearchData } from '../../../bento/dashboardData';
+import { widgetsData, facetSearchData, tooltipFields } from '../../../bento/dashboardData';
 
 import store from '../../../store';
 import client from '../../../utils/graphqlClient';
@@ -86,7 +86,7 @@ const initialState = {
       selectedRowIndex: [],
     },
     widgets: {},
-    biobank: [],
+    tooltip: [],
   },
 };
 
@@ -668,6 +668,26 @@ function createSingleFilterVariables(payload) {
 }
 
 /**
+ * Helper function to create tooltip content
+ * @param {object} payload
+ * @return tooltip content
+ */
+function getTooltipContent(data, items) {
+  const content = [];
+  items.forEach((item) => {
+    const objects = data[item.type];
+    objects.forEach((object) => {
+      const contentItem = {};
+      Object.entries(item).forEach(([key, value]) => {
+        contentItem[key] = object[value] ? object[value] : value;
+      });
+      content.push(contentItem);
+    });
+  });
+  return content;
+}
+
+/**
  * Helper function to query and get filtered values for dashboard
  * @param {object} payload ingeneral its a single filter variable used to set the checkbox
  * @param {obj} currentAllFilterVariables gets the current active filters
@@ -712,7 +732,7 @@ function setCodeToCheckBoxItem(checkboxData, item) {
   const checkBoxitems = [];
   const updateCheckBoxData = checkboxData;
   item.data.filterCaseCountByStudyCode.forEach((filterItem) => {
-    checkboxData[0].checkboxItems.forEach((checkboxItem) => {
+    checkboxData[1].checkboxItems.forEach((checkboxItem) => {
       if (filterItem.group === checkboxItem.name) {
         const updatecheckBoxItem = checkboxItem;
         updatecheckBoxItem.code = (filterItem.code !== null) ? ` (${filterItem.code})` : filterItem.code;
@@ -720,7 +740,7 @@ function setCodeToCheckBoxItem(checkboxData, item) {
       }
     });
   });
-  updateCheckBoxData[0].checkboxItems = checkBoxitems
+  updateCheckBoxData[1].checkboxItems = checkBoxitems
     .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
   return updateCheckBoxData;
 }
@@ -996,7 +1016,7 @@ const reducers = {
       },
       filters: dataTableFilters,
       widgets: getWidgetsData(tableData, widgetsData),
-      biobank: item.data.biospecimen_source,
+      tooltip: getTooltipContent(item.data, tooltipFields),
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
@@ -1043,7 +1063,7 @@ const reducers = {
           selectedRowInfo: [],
           selectedRowIndex: [],
         },
-        biobank: item.data.biospecimen_source,
+        tooltip: getTooltipContent(item.data, tooltipFields),
       } : { ...state };
   },
   CLEAR_ALL_FILTER: (state, item) => {
@@ -1093,7 +1113,7 @@ const reducers = {
           ...state.sortByList,
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
-        biobank: item.data.biospecimen_source,
+        tooltip: getTooltipContent(item.data, tooltipFields),
       } : { ...state };
   },
   SORT_SINGLE_GROUP_CHECKBOX: (state, item) => {
@@ -1202,7 +1222,7 @@ const reducers = {
           ...state.sortByList,
         },
         widgets: getWidgetsInitData(item.data, widgetsData),
-        biobank: item.data.biospecimen_source,
+        tooltip: getTooltipContent(item.data, tooltipFields),
       } : { ...state };
   },
   CLEAR_SECTION_SORT: (state, item) => {

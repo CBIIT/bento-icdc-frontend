@@ -33,8 +33,6 @@ const required = (requiredFlag, preferredFlag) => {
 
 class DataDictionaryPropertyTable extends React.Component {
   render() {
-    // eslint-disable-next-line no-console
-    console.log(this.props);
     const borderModifier = this.props.hasBorder ? ''
       : 'data-dictionary-property-table--without-border';
     const propertyKeysList = this.props.hideIsRequired ? Object.keys(this.props.properties)

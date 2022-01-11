@@ -9,7 +9,6 @@ export const navBarstyling = {
     fontFamily: 'Raleway, sans-serif',
     activeLabel: '2px solid  #35b9eb',
     paddingRight: '65px',
-    paddingLeft: '55px',
     fontWeight: '600',
     letterSpacing: '1px',
   },
@@ -69,6 +68,11 @@ export const navBarData = [
     link: '/studies',
   },
   {
+    labelText: 'Data Dictionary',
+    type: 'link',
+    link: '/icdc-data-model',
+  },
+  {
     labelText: 'about',
     type: 'dropdown',
 
@@ -98,6 +102,11 @@ export const navBarData = [
       {
         labelText: 'CRDC & Analysis',
         link: '/crdc',
+        linkActiveStyle: 'white',
+      },
+      {
+        labelText: 'Graphql',
+        link: '/graphql',
         linkActiveStyle: 'white',
       },
       {

@@ -21,12 +21,12 @@ import {
   embargoFileIcon,
   tab,
 } from '../../bento/studyDetailsData';
-import Tab from './components/Tab';
+import Tab from '../../components/Tab/Tab';
 import Overview from './views/Overview';
 import Publication from './views/Publication';
 import ArmsAndCohort from './views/ArmsAndCohort';
 import StudyFiles from './views/StudyFiles';
-import TabPanel from './components/TabPanel';
+import TabPanel from '../../components/Tab/TabPanel';
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 
@@ -275,13 +275,6 @@ const StudyDetailView = ({ classes, data }) => {
 };
 
 const styles = (theme) => ({
-  hrLine: {
-    width: '50px',
-    float: 'left',
-    marginTop: '30px',
-    border: '#81a6b9 2px solid',
-    background: '#81a6b9',
-  },
   headerItems: {
     width: '250px',
     float: 'right',
@@ -302,7 +295,7 @@ const styles = (theme) => ({
   embargo: {
     color: '#BB2040',
     float: 'right',
-    background: '#fff6f6',
+    background: '#F6F4F4',
     width: '220px',
     height: '33px',
     marginTop: '25px',
@@ -383,6 +376,11 @@ const styles = (theme) => ({
     color: '#0B3556',
     fontWeight: '700',
     borderBottom: '5px solid rgb(53, 185, 235)',
+  },
+  hrLine: {
+    marginTop: '-2px',
+    marginBottom: '0',
+    borderTop: '1px solid #81a6b9',
   },
   container: {
     paddingTop: '80px',
@@ -467,8 +465,8 @@ const styles = (theme) => ({
     width: '220px',
     height: '33px',
     textAlign: 'center',
-    background: '#f6f4f482',
-    padding: '5px 10px 5px 10px',
+    background: '#f6f4f4',
+    padding: '5px 10px 5px 5px',
 
   },
   headerButtonLinkSpan: {

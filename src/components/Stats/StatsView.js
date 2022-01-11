@@ -14,18 +14,14 @@ const updateStat = (stat) => {
   };
 };
 
-const StatsView = ({ data }) => {
-  // eslint-disable-next-line no-console
-  console.log('data', data);
-  return (
-    <>
-      <StatsBar
-        data={updateStat(data)}
-        globalStatsData={globalStatsData}
-        statsStyling={statsStyling}
-      />
-    </>
-  );
-};
+const StatsView = ({ data }) => (
+  <>
+    <StatsBar
+      data={updateStat(data)}
+      globalStatsData={globalStatsData}
+      statsStyling={statsStyling}
+    />
+  </>
+);
 
 export default StatsView;

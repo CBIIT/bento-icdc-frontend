@@ -75,10 +75,10 @@ function CheckBoxView(props) {
         />
         { (checkboxItem.title) ? (
           <>
-            <Tooltip title={checkboxItem.title.biospecimen_repository_full_name}>
+            <Tooltip title={checkboxItem.title.name}>
               <div className={classes.panelDetailText}>
                 <span>
-                  {`${checkboxItem.title.biospecimen_repository_acronym}`}
+                  {`${checkboxItem.title.acronym}`}
                 </span>
               </div>
             </Tooltip>
@@ -108,7 +108,7 @@ function CheckBoxView(props) {
         variant="middle"
         style={{
           backgroundColor: checkboxItem.isChecked ? '#FFFFFF' : '#B1B1B1',
-          margin: checkboxItem.isChecked ? '0px' : '-1px',
+          margin: '0px',
           height: checkboxItem.isChecked ? '2px' : '1px',
         }}
       />

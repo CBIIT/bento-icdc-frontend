@@ -71,12 +71,14 @@ async function init() {
     item.submittable = true;
     item.constraints = null;
     item.type = 'object';
+    item.assignment = value.Tags.Assignment;
+    item.class = value.Tags.Class;
+    item.desc = value.Desc;
 
     const link = [];
     const properties = {};
     const pRequired = [];
     const pPreffered = [];
-
     if (icdcMData.Nodes[key].Props != null) {
       for (let i = 0; i < icdcMData.Nodes[key].Props.length; i++) {
         const nodeP = icdcMData.Nodes[key].Props[i];
@@ -84,7 +86,8 @@ async function init() {
         for (var propertyName in icdcMPData.PropDefinitions) {
           if (propertyName === nodeP) {
             propertiesItem.description = icdcMPData.PropDefinitions[propertyName].Desc;
-            propertiesItem.type = icdcMPData.PropDefinitions[propertyName].Type;
+            propertiesItem.type = icdcMPData.PropDefinitions[propertyName].Type
+              || icdcMPData.PropDefinitions[propertyName].Enum;
             propertiesItem.src = icdcMPData.PropDefinitions[propertyName].Src;
 
             if (icdcMPData.PropDefinitions[propertyName].Req === 'Yes') {

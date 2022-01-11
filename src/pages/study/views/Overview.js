@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import _ from 'lodash';
 import {
+  cn,
   ToolTip as Tooltip,
 } from 'bento-components';
 import {
@@ -65,7 +66,7 @@ const Overview = ({
         <div className={classes.detailContainer}>
           <Grid container>
             <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
-              <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
+              <Grid container spacing={1} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   <span className={classes.detailContainerHeader}>Description</span>
                 </Grid>
@@ -129,7 +130,7 @@ const Overview = ({
               <Grid item lg={6} md={6} sm={6} xs={12}>
                 <Grid
                   container
-                  spacing={16}
+                  spacing={1}
                   direction="row"
                   className={classes.detailContainerRight}
                 >
@@ -141,14 +142,14 @@ const Overview = ({
                     xs={12}
                     className={classes.detailContainerRightTop}
                   >
-                    <Grid container spacing={16}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <span className={classes.detailContainerHeader}>DIAGNOSES</span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.paddingTop12}>
-                      {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis) => (
-                        <Grid item xs={12}>
+                      {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis, index) => (
+                        <Grid item xs={12} key={index}>
                           <span className={classes.content}>
                             {' '}
                             {diagnosis}
@@ -165,14 +166,14 @@ const Overview = ({
                     xs={12}
                     className={classes.detailContainerRightTop}
                   >
-                    <Grid container spacing={16}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <span className={classes.detailContainerHeader}>Case File Types</span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.paddingTop12}>
-                      {(caseFileTypes.length > 0) ? caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
-                        <Grid item xs={12}>
+                      {(caseFileTypes.length > 0) ? caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType, index) => (
+                        <Grid item xs={12} key={index}>
                           <span className={classes.content}>{fileType}</span>
                         </Grid>
                       )) : (
@@ -184,19 +185,19 @@ const Overview = ({
                   </Grid>
                   <div><hr className={classes.hrLine} /></div>
                 </Grid>
-                <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
+                <Grid container spacing={1} direction="row" className={classes.detailContainerRight}>
 
                   {/* START: Image Collection */}
                   <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
-                    <Grid container spacing={16}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <span className={classes.detailContainerHeader}> IMAGE COLLECTIONS </span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.detailContainerItems}>
                       {studyData.image_collections.length > 0 ? studyData.image_collections.map(
-                        (imageCollection) => (
-                          <Grid item xs={12} className={classes.detailContainerItem}>
+                        (imageCollection, index) => (
+                          <Grid item xs={12} className={classes.detailContainerItem} key={index}>
                             <Grid item container direction="row">
                               <Grid item xs={12} sm={4} className={classes.title}>
                                 COLLECTION:
@@ -205,7 +206,7 @@ const Overview = ({
                                 item
                                 xs={12}
                                 sm={8}
-                                className={[classes.content, classes.marginTopN5]}
+                                className={cn(classes.content, classes.marginTopN5)}
                               >
                                 <Tooltip title={getAccessTypeString(imageCollection.collection_access)} arrow placement="top">
                                   <a href={`${imageCollection.image_collection_url}`} target="icdc" className={classes.outLink}>

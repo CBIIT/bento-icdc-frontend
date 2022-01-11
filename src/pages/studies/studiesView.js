@@ -16,7 +16,6 @@ import {
 import Stats from '../../components/Stats/AllStatsController';
 import { navigatedToDashboard } from '../../utils/utils';
 import { studyDisposition } from '../study/utils';
-import arrowIcon from '../../assets/icons/arrow-icon.png';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
 
 const Studies = ({ classes, data }) => {
@@ -186,47 +185,6 @@ const styles = (theme) => ({
     cursor: 'pointer',
     '&:hover': {
       textDecoration: 'underline',
-    },
-  },
-  embargoIcon: {
-    position: 'relative',
-    textAlign: 'center',
-    '&:before': {
-      content: 'attr(dataText)',
-      position: 'absolute',
-      transform: 'translateY(-50%)',
-      left: '100%',
-      marginLeft: '15px',
-      width: '150px',
-      fontSize: '15px',
-      padding: '0 10px 0 10px',
-      border: '3px solid #3131314a',
-      background: '#fff',
-      color: '##35373b',
-      textAlign: 'center',
-      borderRadius: '5px',
-      display: 'none',
-    },
-    '&:after': {
-      content: 'attr(dataAttr)',
-      position: 'absolute',
-      width: '25px',
-      left: '100%',
-      color: '#fff0',
-      top: '-32%',
-      transform: 'translateY(-50%)',
-      marginLeft: '-7px',
-      backgroundImage: `url(${arrowIcon})`,
-      backgroundSize: '30px 20px',
-      display: 'none',
-    },
-    '&:hover': {
-      '&:before': {
-        display: 'block',
-      },
-      '&:after': {
-        display: 'block',
-      },
     },
   },
   button: {
