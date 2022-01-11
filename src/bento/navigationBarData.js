@@ -136,11 +136,7 @@ export const navBarData = [
 export const extraLinks = [
   {
     title: 'Release Notes',
-    link: `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_APPLICATION_VERSION}`,
-  },
-  {
-    title: 'Test Link',
-    link: 'https://google.com',
+    link: `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_FE_VERSION}`,
   },
 ];
 
