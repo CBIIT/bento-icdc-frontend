@@ -606,6 +606,10 @@ caseCountByDiseaseSite{
   group,
   count
 }
+filterCaseCountByProgram{
+  group,
+  count
+}
 filterCaseCountByStudyCode{
   group,
   count,
@@ -687,6 +691,7 @@ biospecimen_source {
   biospecimen_repository_acronym
   biospecimen_repository_full_name
 }
+
 caseOverviewPaged(first: 10) {
     case_id
     study_code
@@ -701,6 +706,11 @@ caseOverviewPaged(first: 10) {
     weight
     response_to_treatment
     disease_site
+  }
+
+  program {
+    program_acronym
+    program_name
   }
   }`;
 
@@ -745,6 +755,7 @@ export const FILTER_GROUP_QUERY = gql`
 
 export const FILTER_QUERY = gql`
 query searchCases(
+  $program: [String] = [],
   $study: [String], 
   $study_type: [String], 
   $breed: [String], 
@@ -765,6 +776,7 @@ query searchCases(
   $first: Int
 ){
 searchCases(
+    program: $program,
     study: $study, 
     study_type: $study_type, 
     breed: $breed, 
@@ -812,7 +824,33 @@ searchCases(
           disease_site
       }
 }
+
+filterCaseCountByProgram (
+  program: $program,
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  biobank: $biobank,
+  study_participation: $study_participation,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
 filterCaseCountByStudyCode (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -836,6 +874,7 @@ filterCaseCountByStudyCode (
     code
 }
 filterCaseCountByStudyType (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -858,6 +897,7 @@ filterCaseCountByStudyType (
     count
 }
 filterCaseCountByBreed (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -880,6 +920,7 @@ filterCaseCountByBreed (
     count
 }
 filterCaseCountByDiagnosis (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -902,6 +943,7 @@ filterCaseCountByDiagnosis (
     count
 }
 filterCaseCountByDiseaseSite (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -924,6 +966,7 @@ filterCaseCountByDiseaseSite (
     count
 }
 filterCaseCountByStageOfDisease (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -946,6 +989,7 @@ filterCaseCountByStageOfDisease (
     count
 }
 filterCaseCountByResponseToTreatment (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -968,6 +1012,7 @@ filterCaseCountByResponseToTreatment (
     count
 }
 filterCaseCountBySex (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -990,6 +1035,7 @@ filterCaseCountBySex (
     count
 }
 filterCaseCountByNeuteredStatus (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -1012,6 +1058,7 @@ filterCaseCountByNeuteredStatus (
     count
 }
 filterCaseCountBySampleType (
+  program: $program,
   study: $study, 
   study_type: $study_type,
   breed: $breed, 
@@ -1034,6 +1081,7 @@ filterCaseCountBySampleType (
     count
 }
 filterCaseCountBySamplePathology (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -1056,6 +1104,7 @@ filterCaseCountBySamplePathology (
     count
 }
 filterCaseCountBySampleSite (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -1078,6 +1127,7 @@ filterCaseCountBySampleSite (
     count
 }
 filterCaseCountByFileAssociation (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -1100,6 +1150,7 @@ filterCaseCountByFileAssociation (
     count
 }
 filterCaseCountByFileType (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -1122,6 +1173,7 @@ filterCaseCountByFileType (
     count
 }
 filterCaseCountByFileFormat (
+  program: $program,
   study: $study, 
   study_type: $study_type,
   breed: $breed, 
@@ -1145,6 +1197,7 @@ filterCaseCountByFileFormat (
 }
 
 filterCaseCountByBiobank (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -1167,6 +1220,7 @@ filterCaseCountByBiobank (
     count
 }
 filterCaseCountByStudyParticipation(
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
