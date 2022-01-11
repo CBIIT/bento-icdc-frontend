@@ -3,3 +3,8 @@
   --dictionary-border-color: var(--g3-color__silver);
   --dictionary-border-color--hover: var(--g3-color__lightgray);
 }
+
+.data-dictionary-node__table_body {
+  border: 0.75px solid #C1C1C1;
+  padding: 24px 23px;
+}

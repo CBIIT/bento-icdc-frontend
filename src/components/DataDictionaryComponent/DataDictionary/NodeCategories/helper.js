@@ -62,7 +62,7 @@ const nodeCategoryList = {
   },
   administrative: {
     icon: IconAdministrative,
-    color: '#9B2D20',
+    color: '#9B2C1F',
   },
   case: {
     icon: IconCase,

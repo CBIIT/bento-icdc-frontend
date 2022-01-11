@@ -14,7 +14,7 @@
   min-width: var(--data-dictionary__sidebar-width);
   height: 100%;
   background-color: var(--g3-color__white);
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   border-right: 1px solid var(--g3-color__smoke);
 }
 
