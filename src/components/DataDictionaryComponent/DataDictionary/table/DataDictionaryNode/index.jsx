@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 // import Button from '@gen3/ui-component/dist/components/Button';
 import { downloadTemplate } from '../../utils';
-import { capitalizeFirstLetter } from '../../../utils';
+import { capitalizeFirstLetter, createFileName } from '../../../utils';
 import { getCategoryColor } from '../../NodeCategories/helper';
 import DataDictionaryPropertyTable from '../DataDictionaryPropertyTable';
 import './DataDictionaryNode.css';
@@ -93,7 +93,7 @@ class DataDictionaryNode extends React.Component {
                 /> */}
                 <PDFDownloadLink
                   document={<PdfDocument node={this.props.node} />}
-                  fileName={`${this.props.node.id}.pdf`}
+                  fileName={createFileName(this.props.node.id, true, '.pdf')}
                   className="data-dictionary-node__download-button_pdf"
                 >
                   {({
