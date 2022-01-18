@@ -5,6 +5,7 @@ import './DataDictionaryTable.css';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import styled from 'styled-components';
 import { parseDictionaryNodes } from '../../utils';
+import { createFileName } from '../../../utils';
 import DataDictionaryCategory from '../DataDictionaryCategory';
 import PdfDocument from '../../MultiplePDF';
 
@@ -82,7 +83,7 @@ const DataDictionaryTable = ({
         </p>
         <PDFDownloadLink
           document={<PdfDocument data={dictionary} />}
-          fileName="file.pdf"
+          fileName={createFileName('ICDC_Data_Model', false, '.pdf')}
           className="data-dictionary-node__multiple-download-button"
         >
           {({
