@@ -6,16 +6,21 @@
 
 .data-dictionary-property-table__data {
   padding: 10px;
-  border: 1px solid var(--dictionary-border-color);
+  /* border: 1px solid var(--dictionary-border-color); */
   text-align: left;
   font-family: raleway;
-  font-weight: 300;
+  /* font-weight: 300; */
   vertical-align: top;
 }
 
 td.data-dictionary-property-table__data:nth-child(2) > p {
-  width: 300px;
+  max-width: 300px;
+  min-width: 100px;
   word-wrap: break-word;
+}
+
+td.data-dictionary-property-table__data > p {
+  margin: auto;
 }
 
 .data-dictionary-property-table--without-border tr:first-child th.data-dictionary-property-table__data {
@@ -34,12 +39,26 @@ td.data-dictionary-property-table__data:nth-child(2) > p {
 }
 
 .data-dictionary-property-table__head {
-  background-color: var(--dictionary-header-color);
-  color: var(--g3-color__white);
+  /* background-color: var(--dictionary-header-color); */
+  color: #606060;
+  font-size: 13px;
+  font-weight: 800;
+  border-top: 2px solid #606060;
+  border-bottom: 2px solid #606060;
+}
+
+.data-dictionary-property-table__row:nth-child(odd) {
+  background: #f4f5f5;
+}
+
+.data-dictionary-property-table__row:nth-child(even) {
+  background: #ffffff;
 }
 
 .data-dictionary-property-table__required {
-  color: var(--g3-color__highlight-orange);
+  color: #FF5A20;
+  font-size: 13px;
+  font-weight: 900;
 }
 
 .data-dictionary-property-table__required-icon {

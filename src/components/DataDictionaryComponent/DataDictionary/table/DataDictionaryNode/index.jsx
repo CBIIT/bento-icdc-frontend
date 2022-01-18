@@ -129,14 +129,15 @@ class DataDictionaryNode extends React.Component {
                 role="button"
                 tabIndex={0}
               >
-                Close tab
                 <i className="g3-icon g3-icon--cross data-dictionary-node__property-close-icon" />
               </span>
               <div className="data-dictionary-node__property-summary">
-                <span>{this.props.node.title}</span>
-                <span> has </span>
-                <span>{Object.keys(this.props.node.properties).length}</span>
-                <span> properties. </span>
+                <i>
+                  <span>{this.props.node.title}</span>
+                  <span> has </span>
+                  <span>{Object.keys(this.props.node.properties).length}</span>
+                  <span> properties. </span>
+                </i>
               </div>
               <DataDictionaryPropertyTable
                 properties={this.props.node.properties}

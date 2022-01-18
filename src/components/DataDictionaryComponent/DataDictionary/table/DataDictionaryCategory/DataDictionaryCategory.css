@@ -1,7 +1,7 @@
 .data-dictionary-category {
-  margin: 20px 0;
+  margin: 20px 0px 0px 0px;
   border-top: 1px solid var(--dictionary-border-color);
-  border-right: 1px solid var(--dictionary-border-color);
+  border: 1px solid var(--dictionary-border-color);
 }
 
 .data-dictionary-category__head {
