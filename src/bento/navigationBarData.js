@@ -1,3 +1,5 @@
+import env from '../utils/env';
+
 export const navBarstyling = {
   global: {
     backgroundColor: '#0B3557',
@@ -128,6 +130,13 @@ export const navBarData = [
         linkActiveStyle: 'white',
       },
     ],
+  },
+];
+
+export const extraLinks = [
+  {
+    title: 'Release Notes',
+    link: `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_FE_VERSION}`,
   },
 ];
 
