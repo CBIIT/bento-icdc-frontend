@@ -3,11 +3,11 @@ import {
   Page,
   Document,
   StyleSheet,
-  Image,
 } from '@react-pdf/renderer';
 import PdfTitle from './PdfTitle';
 import PdfTable from './PdfTable';
-import logo from './assets/icdc_nih_logo.png';
+import PdfHeader from './PdfHeader';
+import Sgv from './assets/Cases.svg';
 
 const styles = StyleSheet.create({
   page: {
@@ -16,16 +16,16 @@ const styles = StyleSheet.create({
     lineHeight: 1.5,
   },
   logo: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '80%',
+    float: 'left',
+    width: '46%',
   },
 });
 
 const PdfDocument = ({ node }) => (
   <Document>
     <Page style={styles.page} size="A2">
-      <Image style={styles.logo} src={logo} />
+      <PdfHeader />
+      <Sgv />
       <PdfTitle title={node.id} />
       <PdfTable node={node} />
     </Page>
