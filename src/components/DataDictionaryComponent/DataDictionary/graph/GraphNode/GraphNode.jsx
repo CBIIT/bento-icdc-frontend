@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ToolTip } from 'bento-components';
-import { getCategoryIconSVG } from '../../NodeCategories/helper';
+import { getGraphCategoryIconSVG } from '../../NodeCategories/helper';
 import { MatchedIndicesShape } from '../../utils';
 import { getNodeTitleSVGFragment } from '../../highlightHelper';
 import './GraphNode.css';
@@ -35,7 +35,7 @@ class GraphNode extends React.Component {
       ? 'graph-node--clickable' : 'graph-node--not-clickable';
     const nodeIsCurrentHighlightingClassModifier = this.props.isHighlightingNode
       ? 'graph-drawer__node--current-highlighting' : '';
-    const IconSVG = getCategoryIconSVG(this.props.node.type);
+    const IconSVG = getGraphCategoryIconSVG(this.props.node.type);
     return (
       <ToolTip title={this.props.node.id} arrow>
         <g

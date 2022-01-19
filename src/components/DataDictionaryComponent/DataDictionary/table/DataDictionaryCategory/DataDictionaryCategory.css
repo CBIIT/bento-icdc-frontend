@@ -6,14 +6,22 @@
 
 .data-dictionary-category__head {
   /* background: var(--dictionary-header-color); */
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 10px;
+  padding-top: 6px;
+  padding-bottom: 10px;
+  padding-left: 12px;
   padding-right: 10px;
   font-weight: 900;
   font-size: 18px;
+  height: 54px;
   border-left: 5px solid var(--dictionary-border-color);
-  box-shadow: inset -2px -5px 0 -2px var(--dictionary-border-color);
+  /* box-shadow: inset -2px -4px 0 -2px var(--dictionary-border-color); */
+}
+
+.data-dictionary-category__divider{
+  height: 4px;
+  display: block;
+  background-color: #E7E5E5;
+  border-left: 5px solid var(--dictionary-border-color);
 }
 
 .data-dictionary-category__download_template {
