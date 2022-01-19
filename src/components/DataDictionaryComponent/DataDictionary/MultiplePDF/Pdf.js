@@ -4,6 +4,7 @@ import {
   Document,
   StyleSheet,
   Image,
+  Text,
 } from '@react-pdf/renderer';
 import PdfTable from './PdfTable';
 import logo from './assets/icdc_nih_logo.png';
@@ -26,6 +27,10 @@ const PdfDocument = ({ data }) => (
     <Page style={styles.page} size="A2">
       <Image style={styles.logo} src={logo} />
       <PdfTable data={Object.values(data)} />
+      <Text
+        render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
+        fixed
+      />
     </Page>
   </Document>
 );
