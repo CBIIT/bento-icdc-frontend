@@ -22,6 +22,7 @@ class DataDictionaryCategory extends React.Component {
           /* <span className="data-dictionary-category__download_template">Download Template</span> */
           }
         </div>
+        <div className="data-dictionary-category__divider" style={{ borderLeftColor: getCategoryColor(this.props.category) }} />
         {
         this.props.nodes.map(
           (node) => (

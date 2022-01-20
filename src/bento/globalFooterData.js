@@ -33,6 +33,10 @@ export default {
           link: '/crdc',
         },
         {
+          text: 'Release Notes',
+          link: `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_FE_VERSION}`,
+        },
+        {
           text: 'Contact Us',
           link: 'icdchelpdesk@nih.gov',
         },

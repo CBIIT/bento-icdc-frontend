@@ -91,15 +91,17 @@ const DataDictionaryTable = ({
           }) => (loading ? 'Loading document...' : 'DOWNLOAD DICTIONARY')}
         </PDFDownloadLink>
       </DownloadLinkWrapper>
-      {Object.keys(c2nl).map((category) => (
-        <DataDictionaryCategory
-          key={category}
-          nodes={c2nl[category]}
-          category={category}
-          highlightingNodeID={highlightingNodeID}
-          onExpandNode={onExpandNode}
-        />
-      ))}
+      <div className="data-dictionary-node__table_body">
+        {Object.keys(c2nl).map((category) => (
+          <DataDictionaryCategory
+            key={category}
+            nodes={c2nl[category]}
+            category={category}
+            highlightingNodeID={highlightingNodeID}
+            onExpandNode={onExpandNode}
+          />
+        ))}
+      </div>
     </>
   );
 };
