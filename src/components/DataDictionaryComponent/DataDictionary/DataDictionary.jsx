@@ -26,7 +26,7 @@ class DataDictionary extends React.Component {
   };
 
   componentDidMount = () => {
-    this.setGraphView(false);
+    this.setGraphView(true);
   }
 
   render() {
