@@ -3,22 +3,28 @@ import { Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const styles = StyleSheet.create({
   row: {
-    margin: 'auto',
     flexDirection: 'row',
+    paddingLeft: '30px',
+  },
+  evenRow: {
+    backgroundColor: '#f4f5f5',
   },
   tableCol: {
-    width: '20%',
-    borderStyle: 'solid',
-    borderColor: '#bfbfbf',
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
+    width: '15%',
+  },
+  tableColDesc: {
+    textAlign: 'left',
+    width: '40%',
   },
   tableCell: {
-    margin: 'auto',
-    fontSize: 12,
+    fontSize: 10,
     overflowWrap: 'break-word',
-    padding: '5px',
+    paddingLeft: '10px',
+    paddingTop: '10px',
+    paddingBottom: '10px',
+  },
+  required: {
+    color: '#ff5a20',
   },
 });
 
@@ -34,19 +40,18 @@ const PdfTableRow = ({ node }) => {
   };
 
   const required = (key) => {
-    if (node.required.includes(key)) {
-      return 'Required';
+    if (node.required.includes(key) || node.preferred.includes(key)) {
+      return (
+        <Text style={{ ...styles.tableCell, ...styles.required }}>Required</Text>
+      );
     }
-
-    if (node.preferred.includes(key)) {
-      return 'Preferred';
-    }
-
-    return 'No';
+    return <Text style={styles.tableCell}>No</Text>;
   };
 
-  const rows = keys.map((key) => (
-    <View style={styles.row} key={key}>
+  const getStyles = (classes, index) => ((index % 2 === 0)
+    ? { ...classes, ...styles.evenRow } : { ...classes });
+  const rows = keys.map((key, index) => (
+    <View style={getStyles(styles.row, index)} key={key}>
       <View style={styles.tableCol}>
         <Text style={styles.tableCell}>{key}</Text>
       </View>
@@ -54,9 +59,9 @@ const PdfTableRow = ({ node }) => {
         <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
       </View>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{required(key)}</Text>
+        {required(key)}
       </View>
-      <View style={styles.tableCol}>
+      <View style={styles.tableColDesc}>
         <Text style={styles.tableCell}>{node.properties[key].description}</Text>
       </View>
       <View style={styles.tableCol}>

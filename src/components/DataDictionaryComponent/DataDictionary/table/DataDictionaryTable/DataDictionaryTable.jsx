@@ -13,7 +13,7 @@ import DownloadButton from '../../NodePDF/DownloadButton';
 const pdfDownloadConfig = {
   class: 'data-dictionary-node__multiple-download-button',
   loading: 'data-dictionary-node__loading',
-  multi: true,
+  type: 'full',
 };
 
 const DownloadLinkWrapper = styled.div`

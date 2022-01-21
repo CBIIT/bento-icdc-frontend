@@ -1,18 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from '@react-pdf/renderer';
-import PdfTableHeader from './PdfTableHeader';
-import PdfTableRow from './PdfTableRow';
-import PdfTitle from './PdfTitle';
+import PdfTitle from '../NodePDF/PdfTitle';
+import NodePdfTable from '../NodePDF/PdfTable';
 
 const styles = StyleSheet.create({
   tableContainer: {
-    display: 'table',
-    width: 'auto',
-    borderStyle: 'solid',
-    borderColor: '#bfbfbf',
-    borderWidth: 1,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
+    border: '1px solid #C1C1C1',
+    marginTop: '50px',
   },
   spacer: {
     height: '20px',
@@ -20,19 +14,21 @@ const styles = StyleSheet.create({
 });
 
 const PdfTable = ({ data }) => (
-  data.map((elem) => (
+  data.map((node) => (
     <View style={styles.tableContainer}>
       <PdfTitle
-        title={elem.id}
-        nodeClass={elem.class}
-        assignment={elem.assignment}
-        desc={elem.desc}
+        title={node.id}
+        nodeClass={node.class}
+        assignment={node.assignment}
+        desc={node.desc}
+        category={node.category}
       />
-      <PdfTableHeader />
-      <PdfTableRow node={elem} />
+      {/* <PdfTableHeader />
+      <PdfTableRow node={node} /> */}
       <div style={styles.spacer} />
+      <NodePdfTable node={node} />
     </View>
-  ))
-);
+  )
+));
 
 export default PdfTable;

@@ -13,6 +13,10 @@
   margin-bottom: 5px;
 }
 
+.data-dictionary-node:last-child {
+  margin-bottom: 0px;
+}
+
 .data-dictionary-node__title {
   width: 260px;
   flex-grow: 0;
@@ -50,7 +54,7 @@
   max-height: 65px;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-top: 15px;
+  padding-top: 10px;
   padding-left: 0;
 }
 
@@ -84,7 +88,7 @@
 .data-dictionary-node__download-button-group {
   text-align: right;
   margin-top: -5px;
-  padding-right: 10px;
+  padding-right: 15px;
 }
 
 .data-dictionary-node__download-group {
@@ -127,11 +131,13 @@
   display: block;
   color: var(--g3-color__white);
   text-align: right;
+  border: none;
 }
 
 .data-dictionary-node__loading {
   padding: 5px 5px;
   background-color: #0B3557;
+  color: #fff;
 }
 
 .data-dictionary-node__download-button_pdf > img {
