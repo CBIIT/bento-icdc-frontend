@@ -33,7 +33,7 @@ const DownloadButton = ({
   });
 
   const generatePdfDocument = async (object) => {
-    const document = (config.type === 'full') ? Object.values(object) : [object];
+    const document = (config.type === 'document') ? Object.values(object) : [object];
     const blob = await pdf((
       <PdfDocument nodes={document} />
     )).toBlob();
@@ -48,7 +48,7 @@ const DownloadButton = ({
     }, 50);
   };
 
-  const btnClass = (config.type === 'full')
+  const btnClass = (config.type === 'document')
     ? cn(classes.headerButton, classes.documentDownloadBtn)
     : cn(classes.headerButton, classes.nodeDownloadBtn);
 
