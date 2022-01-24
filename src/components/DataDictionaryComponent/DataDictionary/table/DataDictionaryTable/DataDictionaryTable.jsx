@@ -100,7 +100,7 @@ const DataDictionaryTable = ({
         <DownloadButton
           config={pdfDownloadConfig}
           documentData={dictionary}
-          fileName={createFileName('ICDC_Data_Model', false, '.pdf')}
+          fileName={createFileName('ICDC_Data_Model', false, 'pdf')}
         />
       </DownloadLinkWrapper>
       <div className="data-dictionary-node__table_body">

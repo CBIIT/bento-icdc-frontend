@@ -119,7 +119,7 @@ class DataDictionaryNode extends React.Component {
                 <DownloadButton
                   config={pdfDownloadConfig}
                   documentData={this.props.node}
-                  fileName={createFileName(this.props.node.id, true, '.pdf')}
+                  fileName={createFileName(this.props.node.id, true, 'pdf')}
                 />
               </div>
               <div className="data-dictionary-node__button-wrap">

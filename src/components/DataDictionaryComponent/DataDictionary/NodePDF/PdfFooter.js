@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 150,
     textAlign: 'right',
+    color: '#606060',
   },
   link: {
     position: 'absolute',
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     left: 150,
     right: 0,
     textTransform: 'uppercase',
+    color: '#606060',
   },
 });
 
