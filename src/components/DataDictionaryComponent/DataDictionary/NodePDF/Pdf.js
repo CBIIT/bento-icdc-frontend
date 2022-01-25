@@ -12,7 +12,7 @@ import PdfFooter from './PdfFooter';
 
 const styles = StyleSheet.create({
   page: {
-    padding: '130px 150px 100px 150px',
+    // padding: '130px 150px 100px 150px',
     fontFamily: 'Helvetica',
     lineHeight: 1.5,
   },
@@ -33,7 +33,7 @@ const PdfDocument = ({
   nodes,
 }) => (
   <Document>
-    <Page style={styles.page} size="A2">
+    <Page style={styles.page} size="A4">
       <PdfHeader />
       <View style={styles.body}>
         {
