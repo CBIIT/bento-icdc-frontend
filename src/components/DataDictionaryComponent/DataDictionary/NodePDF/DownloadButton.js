@@ -11,41 +11,13 @@ import { cn } from 'bento-components';
 import PdfDocument from './Pdf';
 
 export function convertToCSV(jsonse) {
-  // const objArray = jsonse;
-  // To Do empty object just print headers
-  // const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-  // jsonse.map((entry) => {
-  //   console.log(entry);
-  //   return null;
-  // });
-  console.log(jsonse);
-  let line = 'type'.join(',');
+  let line = 'type';
   Object.keys(jsonse).forEach((key) => {
-    line += `${key}`.concat(',');
+    line += (',').concat(`${key}`);
   });
+  const str = `${line}\r\n study`;
   console.log(line);
-  // let str = header.join(',');
-  // array.map((entry, index) => {
-  //   let line = '';
-  //   keysToInclude.map((keyName) => {
-  //     if (line !== '') line += ',';
-  //     if (keyName === 'file_size') {
-  //       line += entry[keyName] !== null ? `"${formatBytes(entry[keyName])}"` : ' ';
-  //     } else {
-  //       line += entry[keyName] !== null ? `"${entry[keyName]}"` : ' ';
-  //     }
-  //     return line;
-  //   });
-  //   if (index === 0) {
-  //     // str = header.join(',');
-  //     str += `\r\n${line}\r\n`;
-  //   } else {
-  //     str += `${line}\r\n`;
-  //   }
-  //   return str;
-  // });
-
-  return line;
+  return str;
 }
 
 const DownloadButton = ({
