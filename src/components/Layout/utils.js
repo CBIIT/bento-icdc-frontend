@@ -74,6 +74,7 @@ async function init() {
     item.assignment = value.Tags.Assignment;
     item.class = value.Tags.Class;
     item.desc = value.Desc;
+    item.template = value.Tags.Template;
 
     const link = [];
     const properties = {};

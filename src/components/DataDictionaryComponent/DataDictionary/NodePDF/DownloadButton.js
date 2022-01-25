@@ -10,6 +10,44 @@ import { pdf } from '@react-pdf/renderer';
 import { cn } from 'bento-components';
 import PdfDocument from './Pdf';
 
+export function convertToCSV(jsonse) {
+  // const objArray = jsonse;
+  // To Do empty object just print headers
+  // const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+  // jsonse.map((entry) => {
+  //   console.log(entry);
+  //   return null;
+  // });
+  console.log(jsonse);
+  let line = 'type'.join(',');
+  Object.keys(jsonse).forEach((key) => {
+    line += `${key}`.concat(',');
+  });
+  console.log(line);
+  // let str = header.join(',');
+  // array.map((entry, index) => {
+  //   let line = '';
+  //   keysToInclude.map((keyName) => {
+  //     if (line !== '') line += ',';
+  //     if (keyName === 'file_size') {
+  //       line += entry[keyName] !== null ? `"${formatBytes(entry[keyName])}"` : ' ';
+  //     } else {
+  //       line += entry[keyName] !== null ? `"${entry[keyName]}"` : ' ';
+  //     }
+  //     return line;
+  //   });
+  //   if (index === 0) {
+  //     // str = header.join(',');
+  //     str += `\r\n${line}\r\n`;
+  //   } else {
+  //     str += `${line}\r\n`;
+  //   }
+  //   return str;
+  // });
+
+  return line;
+}
+
 const DownloadButton = ({
   classes,
   config,
@@ -41,11 +79,27 @@ const DownloadButton = ({
     saveAs(blob, `${fileName}.pdf`);
   };
 
-  const download = () => {
+  const downloadPdf = () => {
     setLoading(true);
     setTimeout(() => {
       generatePdfDocument(documentData);
     }, 50);
+  };
+
+  const downloadTsv = () => {
+    console.log('download TSv');
+    console.log(documentData);
+    const csv = convertToCSV(documentData.properties);
+    const exportData = new Blob([csv], { type: 'text/csv' });
+    saveAs(exportData, 'test_file.txt');
+  };
+
+  const download = () => {
+    if (config.fileType === 'pdf') {
+      downloadPdf();
+    } else {
+      downloadTsv();
+    }
   };
 
   const btnClass = (config.type === 'document')
