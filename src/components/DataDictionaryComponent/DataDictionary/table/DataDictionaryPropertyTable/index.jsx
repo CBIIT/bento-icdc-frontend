@@ -31,6 +31,17 @@ const required = (requiredFlag, preferredFlag) => {
   );
 };
 
+const formatEnumValues = (enums) => {
+  if (Array.isArray(enums)) {
+    let concatEnums = '';
+    enums.forEach((value) => {
+      concatEnums += "'{}'; ".replace('{}', value);
+    });
+    return concatEnums;
+  }
+  return JSON.stringify(enums);
+};
+
 class DataDictionaryPropertyTable extends React.Component {
   render() {
     const borderModifier = this.props.hasBorder ? ''
@@ -113,6 +124,7 @@ class DataDictionaryPropertyTable extends React.Component {
                 let termID = '';
                 let termLink = '';
                 let type = '';
+                let enums = '';
                 if ('src' in property) {
                   try {
                     termID = property.src;
@@ -129,6 +141,9 @@ class DataDictionaryPropertyTable extends React.Component {
                     type = property.type;
                   } catch (err) { }
                 }
+                if ('enum' in property) {
+                  enums = property.enum;
+                }
 
                 const propertyDescriptionFragment = getPropertyDescriptionFragment(
                   property,
@@ -143,7 +158,15 @@ class DataDictionaryPropertyTable extends React.Component {
                       {propertyNameFragment}
                     </td>
                     <td className="data-dictionary-property-table__data">
-                      <p>{JSON.stringify(type)}</p>
+                      { (enums) ? (
+                        <p>
+                          Acceptable Values:
+                          {' '}
+                          {formatEnumValues(enums)}
+                        </p>
+                      ) : (
+                        <p>{JSON.stringify(type)}</p>
+                      )}
                     </td>
                     {
                       !this.props.hideIsRequired && (
