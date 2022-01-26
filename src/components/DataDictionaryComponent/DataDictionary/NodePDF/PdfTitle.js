@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import renderSvgElement from './RenderSvg';
 import { getCategoryColor } from '../NodeCategories/helper';
 import { capitalizeFirstLetter } from '../../utils';
+import { FontRegistry } from './util';
 
 const styles = StyleSheet.create({
   row: {
@@ -11,8 +12,7 @@ const styles = StyleSheet.create({
   },
   categoryStyle: {
     flexDirection: 'row',
-    padding: '10px 0px 10px 30px',
-    height: '64px',
+    padding: '7px 0px 7px 12px',
   },
   hr: {
     height: '4px',
@@ -20,44 +20,47 @@ const styles = StyleSheet.create({
   },
   nodeInfo: {
     flexDirection: 'row',
-    padding: '10px 0px 10px 30px',
+    padding: '6px 0px 2px 20px',
     backgroundColor: '#f4f5f5',
   },
   nodeTitle: {
     color: '#000000',
-    fontSize: '11px',
-    paddingLeft: '20px',
-    fontWeight: '900',
+    fontSize: '9px',
+    fontWeight: 'heavy',
     width: '25%',
+    fontFamily: FontRegistry('NunitoBold'),
   },
   nodeDesc: {
     color: '#000000',
     fontSize: '9px',
-    paddingLeft: '20px',
-    paddingRight: '57px',
+    paddingRight: '20px',
+    paddingTop: '-2px',
+    fontFamily: FontRegistry('NunitoNormal'),
   },
   categoryHeader: {
-    marginLeft: '25px',
-    fontWeight: '900',
-    fontSize: '18px',
-    paddingTop: '15px',
-    float: 'left',
+    marginLeft: '10px',
+    fontWeight: 'heavy',
+    fontSize: '11.25px',
+    paddingTop: '8px',
+    fontFamily: FontRegistry('NunitoExtraBold'),
   },
   nodeAssignment: {
-    width: '13%',
+    width: '20%',
     float: 'right',
+    paddingTop: '4px',
   },
   label: {
     fontWeight: '900',
-    fontSize: '9px',
-    paddingTop: '15px',
+    fontSize: '7px',
+    paddingTop: '0px',
+    paddingBottom: '2px',
     float: 'left',
     color: '#8e8e8e',
+    fontFamily: FontRegistry('NunitoExtraBold'),
   },
   assignment: {
-    fontWeight: '600',
-    fontSize: '9px',
-    paddingTop: '5px',
+    fontSize: '7px',
+    paddingTop: '2px',
     marginRight: '10px',
     border: '1px solid #cdcdcd',
     borderRadius: '2px',
@@ -65,13 +68,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   nodeClass: {
-    width: '10%',
+    width: '16%',
     textAlign: 'center',
+    paddingTop: '4px',
   },
   class: {
-    fontWeight: '600',
-    fontSize: '9px',
-    paddingTop: '5px',
+    fontSize: '7px',
+    paddingTop: '2px',
     border: '1px solid #cdcdcd',
     borderRadius: '2px',
     backgroundColor: '#fff',

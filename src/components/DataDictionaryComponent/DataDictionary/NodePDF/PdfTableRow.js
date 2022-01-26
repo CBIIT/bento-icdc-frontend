@@ -1,30 +1,38 @@
 import React, { Fragment } from 'react';
-import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import {
+  Text,
+  View,
+  StyleSheet,
+} from '@react-pdf/renderer';
+import { FontRegistry } from './util';
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    paddingLeft: '30px',
+    paddingLeft: '10px',
   },
   evenRow: {
     backgroundColor: '#f4f5f5',
   },
   tableCol: {
-    width: '15%',
+    width: '16%',
   },
   tableColDesc: {
     textAlign: 'left',
-    width: '40%',
+    width: '36%',
   },
   tableCell: {
-    fontSize: 10,
+    fontSize: 8,
+    // lineHeight: '9px',
     overflowWrap: 'break-word',
-    paddingLeft: '10px',
-    paddingTop: '10px',
-    paddingBottom: '10px',
+    paddingLeft: '5px',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    fontFamily: FontRegistry('NunitoNormal'),
   },
   required: {
     color: '#ff5a20',
+    fontFamily: FontRegistry('NunitoExtraBold'),
   },
 });
 
@@ -34,7 +42,7 @@ const PdfTableRow = ({ node }) => {
   const validateType = (property) => {
     const type = typeof property;
     if (type === 'object') {
-      return property.pattern;
+      return JSON.stringify(property);
     }
     return property;
   };

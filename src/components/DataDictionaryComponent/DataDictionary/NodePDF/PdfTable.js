@@ -1,21 +1,26 @@
 import React from 'react';
-import { View, StyleSheet, Text } from '@react-pdf/renderer';
+import {
+  View,
+  StyleSheet,
+  Text,
+} from '@react-pdf/renderer';
 import PdfTableHeader from './PdfTableHeader';
 import PdfTableRow from './PdfTableRow';
+import { FontRegistry } from './util';
 
 const styles = StyleSheet.create({
   tableContainer: {
     display: 'table',
     width: 'auto',
-    paddingTop: '20px',
-    paddingLeft: '55px',
-    paddingRight: '54px',
+    paddingTop: '10px',
+    paddingLeft: '25px',
+    paddingRight: '20px',
   },
   properties: {
     color: '#7a7a7a',
     fontSize: '8px',
-    marginLeft: '41px',
-    fontStyle: 'italic',
+    marginLeft: '15px',
+    fontFamily: FontRegistry('NunitoExtraLightItalic'),
   },
 });
 
