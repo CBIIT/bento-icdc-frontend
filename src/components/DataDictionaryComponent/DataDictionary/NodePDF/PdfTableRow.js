@@ -15,11 +15,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f5f5',
   },
   tableCol: {
-    width: '16%',
+    width: '18%',
   },
   tableColDesc: {
     textAlign: 'left',
     width: '36%',
+  },
+  tableColRequired: {
+    width: '10%',
   },
   tableCell: {
     fontSize: 8,
@@ -66,7 +69,7 @@ const PdfTableRow = ({ node }) => {
       <View style={styles.tableCol}>
         <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
       </View>
-      <View style={styles.tableCol}>
+      <View style={styles.tableColRequired}>
         {required(key)}
       </View>
       <View style={styles.tableColDesc}>

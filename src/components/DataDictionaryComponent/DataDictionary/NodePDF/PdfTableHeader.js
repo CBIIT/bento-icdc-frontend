@@ -23,7 +23,10 @@ const styles = StyleSheet.create({
     fontFamily: FontRegistry('NunitoExtraBold'),
   },
   tableColHeader: {
-    width: '16%',
+    width: '18%',
+  },
+  tableColRequired: {
+    width: '10%',
   },
   tableColDesc: {
     width: '36%',
@@ -45,7 +48,7 @@ const PdfTableHeader = () => (
     <View style={styles.tableColHeader}>
       <Text style={styles.tableCellHeader}>Type</Text>
     </View>
-    <View style={styles.tableColHeader}>
+    <View style={styles.tableColRequired}>
       <Text style={styles.tableCellHeader}>Required</Text>
     </View>
     <View style={styles.tableColDesc}>
