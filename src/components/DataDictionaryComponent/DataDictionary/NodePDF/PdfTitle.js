@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     borderRadius: '2px',
     textAlign: 'center',
     backgroundColor: '#fff',
+    color: '#2982af',
   },
   nodeClass: {
     width: '16%',
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
     border: '1px solid #cdcdcd',
     borderRadius: '2px',
     backgroundColor: '#fff',
+    color: '#2982af',
   },
 });
 
