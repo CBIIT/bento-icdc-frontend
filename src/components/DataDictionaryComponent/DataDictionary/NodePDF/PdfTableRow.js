@@ -39,10 +39,27 @@ const styles = StyleSheet.create({
   },
 });
 
+const splitText = (value, limit) => {
+  const val = String(value);
+  return val.substring(0, limit).concat('\n')
+    .concat(val.substring(limit, val.length));
+};
+
 const PdfTableRow = ({ node }) => {
   const keys = Object.keys(node.properties);
 
   const validateType = (property) => {
+    if (Array.isArray(property)) {
+      let concatEnums = '';
+      property.forEach((value) => {
+        let item = value;
+        if (value.length > 20) {
+          item = splitText(value, 15);
+        }
+        concatEnums += "'{}'; ".replace('{}', item);
+      });
+      return concatEnums;
+    }
     const type = typeof property;
     if (type === 'object') {
       return JSON.stringify(property);
