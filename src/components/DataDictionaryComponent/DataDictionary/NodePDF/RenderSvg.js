@@ -20,9 +20,9 @@ const getSvgAttributes = (node) => {
       if (numericAttrs.includes(attr.nodeName)) {
         if (node.tagName === 'svg'
           && (attr.nodeName === 'height' || attr.nodeName === 'width')) {
-          objects[`${attr.nodeName}`] = parseInt(30);
+          objects[`${attr.nodeName}`] = parseInt(30, 10);
         } else {
-          objects[`${attr.nodeName}`] = parseInt(attr.nodeValue);
+          objects[`${attr.nodeName}`] = parseInt(attr.nodeValue, 10);
         }
       } else {
         objects[`${attr.nodeName}`] = attr.nodeValue;

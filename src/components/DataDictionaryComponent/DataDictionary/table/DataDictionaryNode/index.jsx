@@ -153,7 +153,7 @@ class DataDictionaryNode extends React.Component {
                 role="button"
                 tabIndex={0}
               >
-                <i className="g3-icon g3-icon--cross data-dictionary-node__property-close-icon" />
+                <i className="g3-icon g3-icon--sm g3-icon--cross data-dictionary-node__property-close-icon" />
               </span>
               <div className="data-dictionary-node__property-summary">
                 <i>

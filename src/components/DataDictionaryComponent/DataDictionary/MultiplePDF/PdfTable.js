@@ -29,6 +29,6 @@ const PdfTable = ({ data }) => (
       <NodePdfTable node={node} />
     </View>
   )
-));
+  ));
 
 export default PdfTable;

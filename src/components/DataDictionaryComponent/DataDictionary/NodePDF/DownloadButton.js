@@ -53,20 +53,18 @@ const DownloadButton = ({
     : cn(classes.headerButton, classes.nodeDownloadBtn);
 
   return (
-    <>
-      <MuiThemeProvider theme={theme}>
-        <Button
-          type="button"
-          disableRipple
-          // className={isLoading ? config.loading : config.class}
-          className={btnClass}
-          onClick={() => download()}
-        >
-          {isLoading ? ' Loading document... '
-            : config.image ? <img className={classes.image} src={config.image} alt="download pdf" /> : 'DOWNLOAD DICTIONARY'}
-        </Button>
-      </MuiThemeProvider>
-    </>
+    <MuiThemeProvider theme={theme}>
+      <Button
+        type="button"
+        disableRipple
+        // className={isLoading ? config.loading : config.class}
+        className={btnClass}
+        onClick={() => download()}
+      >
+        {isLoading ? ' Loading document... '
+          : config.image ? <img className={classes.image} src={config.image} alt="download pdf" /> : 'DOWNLOAD DICTIONARY'}
+      </Button>
+    </MuiThemeProvider>
   );
 };
 

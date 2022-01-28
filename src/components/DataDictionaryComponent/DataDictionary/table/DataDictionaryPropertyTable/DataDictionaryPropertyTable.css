@@ -6,21 +6,19 @@
 
 .data-dictionary-property-table__data {
   padding: 10px;
-  /* border: 1px solid var(--dictionary-border-color); */
   text-align: left;
   font-family: raleway;
-  /* font-weight: 300; */
   vertical-align: top;
+}
+
+td.data-dictionary-property-table__data > p {
+  margin: auto;
 }
 
 td.data-dictionary-property-table__data:nth-child(2) > p {
   max-width: 300px;
   min-width: 100px;
   word-wrap: break-word;
-}
-
-td.data-dictionary-property-table__data > p {
-  margin: auto;
 }
 
 .data-dictionary-property-table--without-border tr:first-child th.data-dictionary-property-table__data {
@@ -52,11 +50,11 @@ td.data-dictionary-property-table__data > p {
 }
 
 .data-dictionary-property-table__row:nth-child(even) {
-  background: #ffffff;
+  background: #fff;
 }
 
 .data-dictionary-property-table__required {
-  color: #FF5A20;
+  color: #ff5a20;
   font-size: 13px;
   font-weight: 900;
 }
