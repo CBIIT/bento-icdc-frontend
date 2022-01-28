@@ -10,16 +10,6 @@ import { pdf } from '@react-pdf/renderer';
 import { cn } from 'bento-components';
 import PdfDocument from './Pdf';
 
-export function convertToCSV(jsonse) {
-  let line = 'type';
-  Object.keys(jsonse).forEach((key) => {
-    line += (',').concat(`${key}`);
-  });
-  const str = `${line}\r\n study`;
-  console.log(line);
-  return str;
-}
-
 const DownloadButton = ({
   classes,
   config,
@@ -27,7 +17,6 @@ const DownloadButton = ({
   fileName,
 }) => {
   const [isLoading, setLoading] = React.useState(false);
-
   const theme = createTheme({
     overrides: {
       MuiButton: {
@@ -41,6 +30,23 @@ const DownloadButton = ({
       },
     },
   });
+
+  const convertToCSV = (node) => {
+    let line = 'type';
+    const { links } = node;
+    if (links && links.length) {
+      links.forEach((c) => {
+        if (c.targetId) {
+          line += `${'      '} ${c.target_type}.${c.targetId}`;
+        }
+      });
+    }
+    Object.keys(node.properties).forEach((key) => {
+      line += ('      ').concat(`${key}`);
+    });
+    const text = `${line}\r\n${node.title}`;
+    return text;
+  };
 
   const generatePdfDocument = async (object) => {
     const document = (config.type === 'document') ? Object.values(object) : [object];
@@ -59,18 +65,16 @@ const DownloadButton = ({
   };
 
   const downloadTsv = () => {
-    console.log('download TSv');
-    console.log(documentData);
-    const csv = convertToCSV(documentData.properties);
-    const exportData = new Blob([csv], { type: 'text/csv' });
-    saveAs(exportData, 'test_file.txt');
+    const csv = convertToCSV(documentData);
+    const exportData = new Blob([csv], { type: 'text/plain;csv' });
+    saveAs(exportData, `${fileName}.txt`);
   };
 
   const download = () => {
-    if (config.fileType === 'pdf') {
-      downloadPdf();
-    } else {
+    if (config.fileType === 'txt') {
       downloadTsv();
+    } else {
+      downloadPdf();
     }
   };
 

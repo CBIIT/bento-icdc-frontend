@@ -260,8 +260,7 @@ export const isFooterHidden = (pathname) => (!!((pathname
   || pathname.toLowerCase().startsWith('/dd/')
   ))));
 
-export function createFileName(fileName, isNode, fileType) {
-  const filePreFix = isNode ? 'ICDC_Data_Model_' : '';
+export function createFileName(fileName, filePreFix) {
   const date = new Date();
   const yyyy = date.getFullYear();
   let dd = date.getDate();
@@ -282,5 +281,5 @@ export function createFileName(fileName, isNode, fileType) {
 
   if (seconds < 10) { seconds = `0${seconds}`; }
 
-  return `${filePreFix}${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}${fileType}`;
+  return `${filePreFix}${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}`;
 }

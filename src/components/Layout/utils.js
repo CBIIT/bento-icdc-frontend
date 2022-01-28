@@ -53,6 +53,7 @@ async function init() {
 
   // translate the json file here
   const dataList = {};
+  const keyMaps = new Set();
 
   // using the following code the convert MDF to Gen3 format
   for (const [key, value] of Object.entries(icdcMData.Nodes)) {
@@ -86,6 +87,9 @@ async function init() {
         const propertiesItem = {};
         for (var propertyName in icdcMPData.PropDefinitions) {
           if (propertyName === nodeP) {
+            if (icdcMPData.PropDefinitions[propertyName].Key) {
+              keyMaps.add({ props: propertyName, node: key });
+            }
             propertiesItem.description = icdcMPData.PropDefinitions[propertyName].Desc;
             propertiesItem.type = icdcMPData.PropDefinitions[propertyName].Type
               || icdcMPData.PropDefinitions[propertyName].Enum;
@@ -134,6 +138,18 @@ async function init() {
     dataList[key] = item;
   }
 
+  // map parent key for the node
+  const keyMapList = Array.from(keyMaps);
+  for (const [key, value] of Object.entries(dataList)) {
+    if (value.links.length > 0) {
+      value.links.forEach((c, index) => {
+        const targetId = keyMapList.find((item) => item.node === c.target_type);
+        if (targetId) {
+          value.links[index].targetId = targetId.props;
+        }
+      });
+    }
+  }
   const newDataList = dataList;
 
   await Promise.all(
