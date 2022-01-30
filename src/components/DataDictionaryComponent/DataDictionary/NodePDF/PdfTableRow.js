@@ -15,20 +15,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f5f5',
   },
   tableCol: {
+    width: '24%',
+  },
+  tableColType: {
     width: '18%',
+  },
+  tableColSource: {
+    width: '14%',
   },
   tableColDesc: {
     textAlign: 'left',
-    width: '36%',
+    width: '30%',
   },
   tableColRequired: {
-    width: '10%',
+    width: '12%',
   },
   tableCell: {
     fontSize: 8,
     // lineHeight: '9px',
     overflowWrap: 'break-word',
-    paddingLeft: '5px',
+    paddingLeft: '8px',
     paddingTop: '5px',
     paddingBottom: '5px',
     fontFamily: FontRegistry('NunitoNormal'),
@@ -39,30 +45,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitText = (value, limit) => {
-  const val = String(value);
-  return val.substring(0, limit).concat('\n')
-    .concat(val.substring(limit, val.length));
-};
-
 const PdfTableRow = ({ node }) => {
   const keys = Object.keys(node.properties);
 
   const validateType = (property) => {
     if (Array.isArray(property)) {
-      let concatEnums = '';
-      property.forEach((value) => {
-        let item = value;
-        if (value.length > 20) {
-          item = splitText(value, 15);
-        }
-        concatEnums += "'{}'; ".replace('{}', item);
-      });
-      return concatEnums;
+      if (property.length > 10) {
+        return JSON.stringify(property, undefined, 2);
+      }
+      return property;
     }
     const type = typeof property;
     if (type === 'object') {
-      return JSON.stringify(property);
+      return JSON.stringify(property, undefined, 2);
     }
     return property;
   };
@@ -83,7 +78,7 @@ const PdfTableRow = ({ node }) => {
       <View style={styles.tableCol}>
         <Text style={styles.tableCell}>{key}</Text>
       </View>
-      <View style={styles.tableCol}>
+      <View style={styles.tableColType}>
         <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
       </View>
       <View style={styles.tableColRequired}>
@@ -92,7 +87,7 @@ const PdfTableRow = ({ node }) => {
       <View style={styles.tableColDesc}>
         <Text style={styles.tableCell}>{node.properties[key].description}</Text>
       </View>
-      <View style={styles.tableCol}>
+      <View style={styles.tableColSource}>
         <Text style={styles.tableCell}>{node.properties[key].src}</Text>
       </View>
     </View>

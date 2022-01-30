@@ -18,22 +18,30 @@ const styles = StyleSheet.create({
     fontWeight: 900,
     color: '#606060',
     paddingTop: '5px',
-    paddingLeft: '5px',
+    paddingRight: '5px',
+    paddingLeft: '10px',
     paddingBottom: '5px',
     fontFamily: FontRegistry('NunitoExtraBold'),
   },
   tableColHeader: {
+    width: '24%',
+  },
+  tableColType: {
     width: '18%',
   },
+  tableColSource: {
+    width: '14%',
+  },
   tableColRequired: {
-    width: '10%',
+    width: '12%',
   },
   tableColDesc: {
-    width: '36%',
+    width: '30%',
   },
   tableCellHeader: {
     // margin: 'auto',
-    marginLeft: '10px',
+    overflowWrap: 'break-word',
+    paddingLeft: '10px',
     fontWeight: 'heavy',
     color: '#606060',
     fontFamily: FontRegistry('NunitoExtraBold'),
@@ -45,7 +53,7 @@ const PdfTableHeader = () => (
     <View style={styles.tableColHeader}>
       <Text style={styles.tableCellHeader}>Property</Text>
     </View>
-    <View style={styles.tableColHeader}>
+    <View style={styles.tableColType}>
       <Text style={styles.tableCellHeader}>Type</Text>
     </View>
     <View style={styles.tableColRequired}>
@@ -54,7 +62,7 @@ const PdfTableHeader = () => (
     <View style={styles.tableColDesc}>
       <Text style={styles.tableCellHeader}>Description</Text>
     </View>
-    <View style={styles.tableColHeader}>
+    <View style={styles.tableColSource}>
       <Text style={styles.tableCellHeader}>Source</Text>
     </View>
   </View>
