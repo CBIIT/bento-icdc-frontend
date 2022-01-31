@@ -1335,12 +1335,6 @@ type QueryType {
 
   caseDetail(case_id: String): CaseDetail 
 
-  caseOverview(study_codes: [String] = [""], breeds: [String] = [""], diagnoses: [String] = [""], sexes: [String] = [""]): [CaseOverview] 
-
-  caseOverviewPaged (case_ids: [String] = [""], order_by: String = ""): [CaseOverview2] 
-
-  caseOverviewPagedDesc (case_ids: [String] = [""], order_by: String = ""): [CaseOverview2] 
-
   searchCases (
     program: [String] = [],
     study: [String] = [],
@@ -1385,14 +1379,6 @@ type QueryType {
   fileInfo(file_ids: [String] = []): [FileInfo] 
 
   studyStats: [StudyStat] 
-
-  fileOverview(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = "", file_association: String): [FileOverview] 
-
-  fileOverviewDesc(case_ids: [String] = [""], file_uuids: [String] = [""], order_by: String = "", file_association: String): [FileOverview] 
-
-  sampleOverview(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] 
-
-  sampleOverviewDesc(case_ids: [String] = [""], sample_ids: [String] = [""], order_by: String = ""): [SampleOverview] 
 
   fileIdsFromFileName(file_name: [String] = [""], order_by: String ="file_name"): [FileOverview] 
 
