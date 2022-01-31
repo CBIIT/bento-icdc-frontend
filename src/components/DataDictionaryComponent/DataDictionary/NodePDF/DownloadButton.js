@@ -31,18 +31,18 @@ const DownloadButton = ({
     },
   });
 
-  const convertToCSV = (node) => {
+  const convertToTSV = (node) => {
     let line = 'type';
     const { links } = node;
     if (links && links.length) {
       links.forEach((c) => {
         if (c.targetId) {
-          line += `${'      '} ${c.target_type}.${c.targetId}`;
+          line += `${'\t'} ${c.target_type}.${c.targetId}`;
         }
       });
     }
     Object.keys(node.properties).forEach((key) => {
-      line += ('      ').concat(`${key}`);
+      line += ('\t').concat(`${key}`);
     });
     const text = `${line}\r\n${node.title}`;
     return text;
@@ -65,8 +65,8 @@ const DownloadButton = ({
   };
 
   const downloadTsv = () => {
-    const csv = convertToCSV(documentData);
-    const exportData = new Blob([csv], { type: 'text/plain;csv' });
+    const tsv = convertToTSV(documentData);
+    const exportData = new Blob([tsv], { type: 'data:text/tab-separated-values' });
     saveAs(exportData, `${fileName}.txt`);
   };
 
