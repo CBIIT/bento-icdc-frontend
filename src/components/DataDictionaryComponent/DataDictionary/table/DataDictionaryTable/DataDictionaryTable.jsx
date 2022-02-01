@@ -2,12 +2,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './DataDictionaryTable.css';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+// import { PDFDownloadLink } from '@react-pdf/renderer';
 import styled from 'styled-components';
 import { parseDictionaryNodes } from '../../utils';
 import { createFileName } from '../../../utils';
 import DataDictionaryCategory from '../DataDictionaryCategory';
-import PdfDocument from '../../MultiplePDF';
+// import PdfDocument from '../../MultiplePDF';
+import DownloadButton from '../../NodePDF/DownloadButton';
+
+const pdfDownloadConfig = {
+  class: 'data-dictionary-node__multiple-download-button',
+  loading: 'data-dictionary-node__loading',
+  type: 'document',
+};
 
 const DownloadLinkWrapper = styled.div`
   display: flex;
@@ -81,7 +88,7 @@ const DataDictionaryTable = ({
           <span>{propertiesCount}</span>
           <span> properties </span>
         </p>
-        <PDFDownloadLink
+        {/* <PDFDownloadLink
           document={<PdfDocument data={dictionary} />}
           fileName={createFileName('ICDC_Data_Model', false, '.pdf')}
           className="data-dictionary-node__multiple-download-button"
@@ -89,7 +96,12 @@ const DataDictionaryTable = ({
           {({
             loading,
           }) => (loading ? 'Loading document...' : 'DOWNLOAD DICTIONARY')}
-        </PDFDownloadLink>
+        </PDFDownloadLink> */}
+        <DownloadButton
+          config={pdfDownloadConfig}
+          documentData={dictionary}
+          fileName={createFileName('ICDC_Data_Model', false, 'pdf')}
+        />
       </DownloadLinkWrapper>
       <div className="data-dictionary-node__table_body">
         {Object.keys(c2nl).map((category) => (
