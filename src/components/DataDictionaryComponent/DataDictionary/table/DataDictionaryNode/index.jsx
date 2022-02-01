@@ -21,6 +21,8 @@ const csvBtnDownloadConfig = {
   class: 'data-dictionary-node__download-button_tsv',
   loading: 'data-dictionary-node__loading',
   image: IconDownloadPTSV,
+  fileType: 'txt',
+  prefix: 'ICDC-',
 };
 
 const pdfDownloadConfig = {
@@ -28,6 +30,8 @@ const pdfDownloadConfig = {
   loading: 'data-dictionary-node__loading',
   image: IconDownloadPDF,
   type: 'single',
+  fileType: 'pdf',
+  prefix: 'ICDC_Data_Model_',
 };
 
 class DataDictionaryNode extends React.Component {
@@ -119,7 +123,7 @@ class DataDictionaryNode extends React.Component {
                 <DownloadButton
                   config={pdfDownloadConfig}
                   documentData={this.props.node}
-                  fileName={createFileName(this.props.node.id, true, 'pdf')}
+                  fileName={createFileName(this.props.node.id, pdfDownloadConfig.prefix)}
                 />
               </div>
               <div className="data-dictionary-node__button-wrap">
@@ -130,10 +134,17 @@ class DataDictionaryNode extends React.Component {
                 >
                   <img src={IconDownloadPTSV} alt="download TSV" />
                 </button> */}
-                <DownloadButton
-                  config={csvBtnDownloadConfig}
-                  documentData={this.props.node}
-                />
+                {
+                  (this.props.node.template === 'Yes')
+                  && (
+                  <DownloadButton
+                    config={csvBtnDownloadConfig}
+                    documentData={this.props.node}
+                    template={this.props.node.template}
+                    fileName={createFileName(this.props.node.id, csvBtnDownloadConfig.prefix)}
+                  />
+                  )
+                }
               </div>
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12} className="data-dictionary-node__description">

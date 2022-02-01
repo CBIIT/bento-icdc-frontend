@@ -17,7 +17,6 @@ const DownloadButton = ({
   fileName,
 }) => {
   const [isLoading, setLoading] = React.useState(false);
-
   const theme = createTheme({
     overrides: {
       MuiButton: {
@@ -32,6 +31,23 @@ const DownloadButton = ({
     },
   });
 
+  const convertToTSV = (node) => {
+    let line = 'type';
+    const { links } = node;
+    if (links && links.length) {
+      links.forEach((c) => {
+        if (c.targetId) {
+          line += `${'\t'} ${c.target_type}.${c.targetId}`;
+        }
+      });
+    }
+    Object.keys(node.properties).forEach((key) => {
+      line += ('\t').concat(`${key}`);
+    });
+    const text = `${line}\r\n${node.title}`;
+    return text;
+  };
+
   const generatePdfDocument = async (object) => {
     const document = (config.type === 'document') ? Object.values(object) : [object];
     const blob = await pdf((
@@ -41,11 +57,25 @@ const DownloadButton = ({
     saveAs(blob, `${fileName}.pdf`);
   };
 
-  const download = () => {
+  const downloadPdf = () => {
     setLoading(true);
     setTimeout(() => {
       generatePdfDocument(documentData);
     }, 50);
+  };
+
+  const downloadTsv = () => {
+    const tsv = convertToTSV(documentData);
+    const exportData = new Blob([tsv], { type: 'data:text/tab-separated-values' });
+    saveAs(exportData, `${fileName}.txt`);
+  };
+
+  const download = () => {
+    if (config.fileType === 'txt') {
+      downloadTsv();
+    } else {
+      downloadPdf();
+    }
   };
 
   const btnClass = (config.type === 'document')

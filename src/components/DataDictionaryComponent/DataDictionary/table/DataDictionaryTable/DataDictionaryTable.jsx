@@ -14,6 +14,7 @@ const pdfDownloadConfig = {
   class: 'data-dictionary-node__multiple-download-button',
   loading: 'data-dictionary-node__loading',
   type: 'document',
+  prefix: 'ICDC_Data_Model ',
 };
 
 const DownloadLinkWrapper = styled.div`
@@ -100,7 +101,7 @@ const DataDictionaryTable = ({
         <DownloadButton
           config={pdfDownloadConfig}
           documentData={dictionary}
-          fileName={createFileName('ICDC_Data_Model', false, 'pdf')}
+          fileName={createFileName('', pdfDownloadConfig.prefix)}
         />
       </DownloadLinkWrapper>
       <div className="data-dictionary-node__table_body">
