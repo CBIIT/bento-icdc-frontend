@@ -1,5 +1,5 @@
 .data-dictionary-category {
-  margin: 20px 0px 0px 0px;
+  margin-top: 20px;
   border-top: 1px solid var(--dictionary-border-color);
   border: 1px solid var(--dictionary-border-color);
 }
@@ -20,7 +20,7 @@
 .data-dictionary-category__divider{
   height: 4px;
   display: block;
-  background-color: #E7E5E5;
+  background-color: #e7e5e5;
   border-left: 5px solid var(--dictionary-border-color);
 }
 

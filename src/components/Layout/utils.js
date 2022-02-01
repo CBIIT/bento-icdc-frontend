@@ -93,6 +93,8 @@ async function init() {
             propertiesItem.description = icdcMPData.PropDefinitions[propertyName].Desc;
             propertiesItem.type = icdcMPData.PropDefinitions[propertyName].Type
               || icdcMPData.PropDefinitions[propertyName].Enum;
+            propertiesItem.enum = icdcMPData.PropDefinitions[propertyName].Enum
+              || icdcMPData.PropDefinitions[propertyName].Type.Enum;
             propertiesItem.src = icdcMPData.PropDefinitions[propertyName].Src;
 
             if (icdcMPData.PropDefinitions[propertyName].Req === 'Yes') {

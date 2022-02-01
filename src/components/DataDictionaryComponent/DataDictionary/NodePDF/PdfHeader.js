@@ -8,12 +8,12 @@ import logo from './assets/icdc_nih_logo.png';
 const styles = StyleSheet.create({
   logo: {
     float: 'left',
-    width: '46%',
+    width: '50%',
   },
   hr: {
-    height: '5px',
-    marginTop: '33px',
-    backgroundColor: '#0B3556',
+    height: '2px',
+    marginTop: '5px',
+    backgroundColor: '#0b3556',
   },
 });
 

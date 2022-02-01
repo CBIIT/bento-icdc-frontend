@@ -1,30 +1,47 @@
 import React, { Fragment } from 'react';
-import { Text, View, StyleSheet } from '@react-pdf/renderer';
+import {
+  Text,
+  View,
+  StyleSheet,
+} from '@react-pdf/renderer';
+import { FontRegistry } from './util';
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    paddingLeft: '30px',
+    paddingLeft: '10px',
   },
   evenRow: {
     backgroundColor: '#f4f5f5',
   },
   tableCol: {
-    width: '15%',
+    width: '24%',
+  },
+  tableColType: {
+    width: '18%',
+  },
+  tableColSource: {
+    width: '14%',
   },
   tableColDesc: {
     textAlign: 'left',
-    width: '40%',
+    width: '30%',
+  },
+  tableColRequired: {
+    width: '12%',
   },
   tableCell: {
-    fontSize: 10,
+    fontSize: 8,
+    // lineHeight: '9px',
     overflowWrap: 'break-word',
-    paddingLeft: '10px',
-    paddingTop: '10px',
-    paddingBottom: '10px',
+    paddingLeft: '8px',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    fontFamily: FontRegistry('NunitoNormal'),
   },
   required: {
     color: '#ff5a20',
+    fontFamily: FontRegistry('NunitoExtraBold'),
   },
 });
 
@@ -32,9 +49,15 @@ const PdfTableRow = ({ node }) => {
   const keys = Object.keys(node.properties);
 
   const validateType = (property) => {
+    if (Array.isArray(property)) {
+      if (property.length > 10) {
+        return JSON.stringify(property, undefined, 2);
+      }
+      return property;
+    }
     const type = typeof property;
     if (type === 'object') {
-      return property.pattern;
+      return JSON.stringify(property, undefined, 2);
     }
     return property;
   };
@@ -55,16 +78,16 @@ const PdfTableRow = ({ node }) => {
       <View style={styles.tableCol}>
         <Text style={styles.tableCell}>{key}</Text>
       </View>
-      <View style={styles.tableCol}>
+      <View style={styles.tableColType}>
         <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
       </View>
-      <View style={styles.tableCol}>
+      <View style={styles.tableColRequired}>
         {required(key)}
       </View>
       <View style={styles.tableColDesc}>
         <Text style={styles.tableCell}>{node.properties[key].description}</Text>
       </View>
-      <View style={styles.tableCol}>
+      <View style={styles.tableColSource}>
         <Text style={styles.tableCell}>{node.properties[key].src}</Text>
       </View>
     </View>
