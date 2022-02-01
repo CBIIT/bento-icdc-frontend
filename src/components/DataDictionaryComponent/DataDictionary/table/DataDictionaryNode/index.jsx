@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+// import { PDFDownloadLink } from '@react-pdf/renderer';
 // eslint-disable-next-line no-unused-vars
 import {
   Grid,
@@ -12,9 +12,23 @@ import { capitalizeFirstLetter, createFileName } from '../../../utils';
 import { getCategoryColor } from '../../NodeCategories/helper';
 import DataDictionaryPropertyTable from '../DataDictionaryPropertyTable';
 import './DataDictionaryNode.css';
-import PdfDocument from '../../NodePDF';
+// import PdfDocument from '../../NodePDF';
+import DownloadButton from '../../NodePDF/DownloadButton';
 import IconDownloadPDF from '../icons/icon_download_PDF.svg';
 import IconDownloadPTSV from '../icons/icon_download_TSV.svg';
+
+const csvBtnDownloadConfig = {
+  class: 'data-dictionary-node__download-button_tsv',
+  loading: 'data-dictionary-node__loading',
+  image: IconDownloadPTSV,
+};
+
+const pdfDownloadConfig = {
+  class: 'data-dictionary-node__download-button_pdf',
+  loading: 'data-dictionary-node__loading',
+  image: IconDownloadPDF,
+  type: 'single',
+};
 
 class DataDictionaryNode extends React.Component {
   handleClickNode(nodeID) {
@@ -91,25 +105,35 @@ class DataDictionaryNode extends React.Component {
                   rightIcon="download"
                   buttonType="secondary"
                 /> */}
-                <PDFDownloadLink
+                {/* <PDFDownloadLink
                   document={<PdfDocument node={this.props.node} />}
                   fileName={createFileName(this.props.node.id, true, '.pdf')}
                   className="data-dictionary-node__download-button_pdf"
                 >
                   {({
                     loading,
-                  }) => (loading ? <div className="data-dictionary-node__loading">Loading document... </div>
+                  }) => (loading ? <div className="data-dictionary-node__loading">
+                  Loading document... </div>
                     : <img src={IconDownloadPDF} alt="download pdf" />)}
-                </PDFDownloadLink>
+                </PDFDownloadLink> */}
+                <DownloadButton
+                  config={pdfDownloadConfig}
+                  documentData={this.props.node}
+                  fileName={createFileName(this.props.node.id, true, 'pdf')}
+                />
               </div>
               <div className="data-dictionary-node__button-wrap">
-                <button
+                {/* <button
                   type="button"
                   onClick={() => {}}
                   className="data-dictionary-node__download-button_tsv"
                 >
                   <img src={IconDownloadPTSV} alt="download TSV" />
-                </button>
+                </button> */}
+                <DownloadButton
+                  config={csvBtnDownloadConfig}
+                  documentData={this.props.node}
+                />
               </div>
             </Grid>
             <Grid item lg={12} md={12} sm={12} xs={12} className="data-dictionary-node__description">
@@ -129,14 +153,15 @@ class DataDictionaryNode extends React.Component {
                 role="button"
                 tabIndex={0}
               >
-                Close tab
-                <i className="g3-icon g3-icon--cross data-dictionary-node__property-close-icon" />
+                <i className="g3-icon g3-icon--sm g3-icon--cross data-dictionary-node__property-close-icon" />
               </span>
               <div className="data-dictionary-node__property-summary">
-                <span>{this.props.node.title}</span>
-                <span> has </span>
-                <span>{Object.keys(this.props.node.properties).length}</span>
-                <span> properties. </span>
+                <i>
+                  <span>{this.props.node.title}</span>
+                  <span> has </span>
+                  <span>{Object.keys(this.props.node.properties).length}</span>
+                  <span> properties. </span>
+                </i>
               </div>
               <DataDictionaryPropertyTable
                 properties={this.props.node.properties}

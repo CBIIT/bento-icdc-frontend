@@ -6,15 +6,18 @@
 
 .data-dictionary-property-table__data {
   padding: 10px;
-  border: 1px solid var(--dictionary-border-color);
   text-align: left;
   font-family: raleway;
-  font-weight: 300;
   vertical-align: top;
 }
 
+td.data-dictionary-property-table__data > p {
+  margin: auto;
+}
+
 td.data-dictionary-property-table__data:nth-child(2) > p {
-  width: 300px;
+  max-width: 300px;
+  min-width: 100px;
   word-wrap: break-word;
 }
 
@@ -34,12 +37,26 @@ td.data-dictionary-property-table__data:nth-child(2) > p {
 }
 
 .data-dictionary-property-table__head {
-  background-color: var(--dictionary-header-color);
-  color: var(--g3-color__white);
+  /* background-color: var(--dictionary-header-color); */
+  color: #606060;
+  font-size: 13px;
+  font-weight: 800;
+  border-top: 2px solid #606060;
+  border-bottom: 2px solid #606060;
+}
+
+.data-dictionary-property-table__row:nth-child(odd) {
+  background: #f4f5f5;
+}
+
+.data-dictionary-property-table__row:nth-child(even) {
+  background: #fff;
 }
 
 .data-dictionary-property-table__required {
-  color: var(--g3-color__highlight-orange);
+  color: #ff5a20;
+  font-size: 13px;
+  font-weight: 900;
 }
 
 .data-dictionary-property-table__required-icon {

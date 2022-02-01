@@ -3,34 +3,38 @@ import {
   Page,
   Document,
   StyleSheet,
-  Image,
-  Text,
+  // Text,
 } from '@react-pdf/renderer';
+import PdfHeader from '../NodePDF/PdfHeader';
+import PdfFooter from '../NodePDF/PdfFooter';
 import PdfTable from './PdfTable';
-import logo from './assets/icdc_nih_logo.png';
 
 const styles = StyleSheet.create({
   page: {
-    padding: 10,
+    padding: '130px 150px 100px 150px',
     fontFamily: 'Helvetica',
     lineHeight: 1.5,
   },
   logo: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '80%',
+    float: 'left',
+    width: '46%',
+  },
+  body: {
+    border: '1px solid #C1C1C1',
+    marginTop: '50px',
   },
 });
 
 const PdfDocument = ({ data }) => (
   <Document>
     <Page style={styles.page} size="A2">
-      <Image style={styles.logo} src={logo} />
+      <PdfHeader />
       <PdfTable data={Object.values(data)} />
-      <Text
+      {/* <Text
         render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
         fixed
-      />
+      /> */}
+      <PdfFooter />
     </Page>
   </Document>
 );
