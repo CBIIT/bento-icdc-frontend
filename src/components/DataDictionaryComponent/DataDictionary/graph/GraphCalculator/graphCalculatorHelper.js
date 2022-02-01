@@ -17,6 +17,7 @@ import {
   getAllRoutesBetweenTwoNodes,
 } from './graphStructureHelper';
 import { getCategoryColor } from '../../NodeCategories/helper';
+import { capitalizeFirstLetter } from '../../../utils';
 
 /**
  * Get a set of types from an array of nodes
@@ -84,6 +85,8 @@ export const calculateGraphLayout = (dictionary, countsSearch, linksSearch) => {
           const requiredPropertiesCount = originNode.required ? originNode.required.length : 0;
           const optionalPropertiesCount = originNode.properties
             ? Object.keys(originNode.properties).length - requiredPropertiesCount : 0;
+          const nodeClass = originNode.class ? capitalizeFirstLetter(originNode.class) : '';
+          const nodeAssignment = originNode.assignment ? capitalizeFirstLetter(originNode.assignment) : '';
           let nodeLevel = 0;
           if (originNode && originNode.positionIndex && originNode.positionIndex.length >= 2) {
             nodeLevel = originNode.positionIndex[1];
@@ -109,6 +112,8 @@ export const calculateGraphLayout = (dictionary, countsSearch, linksSearch) => {
             _gvid: n._gvid,
             requiredPropertiesCount,
             optionalPropertiesCount,
+            class: nodeClass,
+            assignment: nodeAssignment,
           };
         });
 
