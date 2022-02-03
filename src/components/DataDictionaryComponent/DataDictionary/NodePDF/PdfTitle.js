@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   nodeAssignmentClass: {
     float: 'right',
-    paddingTop: '2px',
+    paddingTop: '3px',
     paddingRight: '10px',
     paddingLeft: '10px',
     borderRadius: '8px',
