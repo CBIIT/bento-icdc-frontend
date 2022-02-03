@@ -64,6 +64,13 @@ const PdfTableRow = ({ node }) => {
     return property;
   };
 
+  const textContent = (text, symbol) => {
+    if (String(text).length > 20) {
+      return String(text).replace(symbol, `${symbol}\n`);
+    }
+    return text;
+  };
+
   const required = (key) => {
     if (node.required.includes(key) || node.preferred.includes(key)) {
       return (
@@ -78,7 +85,7 @@ const PdfTableRow = ({ node }) => {
   const rows = keys.map((key, index) => (
     <View style={getStyles(styles.row, index)} key={key}>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{key}</Text>
+        <Text style={styles.tableCell}>{textContent(key, '_')}</Text>
       </View>
       <View style={styles.tableColType}>
         <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
@@ -90,7 +97,7 @@ const PdfTableRow = ({ node }) => {
         <Text style={styles.tableCell}>{node.properties[key].description}</Text>
       </View>
       <View style={styles.tableColSource}>
-        <Text style={styles.tableCell}>{node.properties[key].src}</Text>
+        <Text style={styles.tableCell}>{textContent(node.properties[key].src, '/')}</Text>
       </View>
     </View>
   ));
