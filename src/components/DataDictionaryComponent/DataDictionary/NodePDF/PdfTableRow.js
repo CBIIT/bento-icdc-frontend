@@ -9,7 +9,7 @@ import { FontRegistry } from './util';
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    paddingLeft: '10px',
+    paddingLeft: '5px',
   },
   evenRow: {
     backgroundColor: '#f4f5f5',
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   tableColSource: {
     width: '14%',
+    paddingLeft: 5,
   },
   tableColDesc: {
     textAlign: 'left',
@@ -34,9 +35,10 @@ const styles = StyleSheet.create({
     fontSize: 8,
     // lineHeight: '9px',
     overflowWrap: 'break-word',
-    paddingLeft: '8px',
+    paddingLeft: '2px',
     paddingTop: '5px',
     paddingBottom: '5px',
+    lineHeight: 1.2,
     fontFamily: FontRegistry('NunitoNormal'),
   },
   required: {

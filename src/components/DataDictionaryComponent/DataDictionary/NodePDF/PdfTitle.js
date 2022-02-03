@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   categoryStyle: {
     flexDirection: 'row',
-    padding: '7px 0px 7px 12px',
+    padding: '7px 0px 7px 10px',
   },
   hr: {
     height: '4px',
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   nodeInfo: {
     flexDirection: 'row',
-    padding: '6px 0px 2px 20px',
+    padding: '6px 0px 2px 15px',
     backgroundColor: '#f4f5f5',
   },
   nodeTitle: {
@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
   nodeDesc: {
     color: '#000000',
     fontSize: '9px',
-    paddingRight: '20px',
+    paddingRight: '15px',
     paddingTop: '-2px',
+    lineHeight: 1.2,
     fontFamily: FontRegistry('NunitoNormal'),
   },
   categoryHeader: {
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     fontFamily: FontRegistry('NunitoExtraBold'),
   },
   assignment: {
-    fontSize: '7px',
+    fontSize: '8px',
     paddingTop: '2px',
     marginRight: '10px',
     border: '0.5px solid #cdcdcd',
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     marginTop: '-5px',
   },
   class: {
-    fontSize: '7px',
+    fontSize: '8px',
     paddingRight: '4px',
     paddingTop: '2px',
     border: '0.5px solid #cdcdcd',

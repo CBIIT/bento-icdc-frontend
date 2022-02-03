@@ -12,7 +12,7 @@ import PdfFooter from './PdfFooter';
 
 const styles = StyleSheet.create({
   page: {
-    padding: '40px 40px 75px 40px',
+    padding: '40px 40px 60px 40px',
     fontFamily: 'Helvetica',
     lineHeight: 1.5,
   },
