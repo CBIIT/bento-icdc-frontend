@@ -49,7 +49,7 @@ const DownloadButton = ({
   };
 
   const generatePdfDocument = async (object) => {
-    const document = (config.type === 'document') ? Object.values(object) : [object];
+    const document = (config.type === 'document') ? object : [object];
     const blob = await pdf((
       <PdfDocument nodes={document} />
     )).toBlob();

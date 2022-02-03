@@ -50,6 +50,18 @@ export function category2NodeList(dictionary) {
     );
   return res;
 }
+
+/** cluster props according to the category for PDF download */
+export function sortByCategory(c2nl, dictionary) {
+  const sortedList = [];
+  const dictionaryItems = Object.values(dictionary);
+  Object.keys(c2nl).forEach((category) => {
+    const list = dictionaryItems.filter((item) => item.category === category);
+    sortedList.push(...list);
+  });
+  return sortedList;
+}
+
 /* eslint-enable no-param-reassign */
 
 const getNodePropertyCount = (dictionary) => {
@@ -100,7 +112,7 @@ const DataDictionaryTable = ({
         </PDFDownloadLink> */}
         <DownloadButton
           config={pdfDownloadConfig}
-          documentData={dictionary}
+          documentData={sortByCategory(c2nl, dictionary)}
           fileName={createFileName('', pdfDownloadConfig.prefix)}
         />
       </DownloadLinkWrapper>
