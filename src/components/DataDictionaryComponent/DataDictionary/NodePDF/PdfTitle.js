@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
   },
   nodeTitle: {
     color: '#000000',
-    fontSize: '9px',
+    fontSize: '10px',
     fontWeight: 'heavy',
-    width: '25%',
     fontFamily: FontRegistry('NunitoBold'),
+    marginRight: '75px',
   },
   nodeDesc: {
     color: '#000000',
@@ -44,11 +44,15 @@ const styles = StyleSheet.create({
     paddingTop: '8px',
     fontFamily: FontRegistry('NunitoExtraBold'),
   },
-  nodeAssignment: {
-    width: '20%',
+  nodeAssignmentClass: {
     float: 'right',
-    paddingTop: '4px',
-    marginTop: '-5px',
+    paddingTop: '2px',
+    paddingRight: '10px',
+    paddingLeft: '10px',
+    borderRadius: '8px',
+    backgroundColor: '#fff',
+    border: '0.5px solid #cdcdcd',
+    marginRight: '10px',
   },
   label: {
     fontWeight: '900',
@@ -68,11 +72,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#fff',
     color: '#2982af',
-    height: '13px',
     fontFamily: FontRegistry('NunitoNormal'),
   },
   nodeClass: {
-    width: '16%',
+    // width: '16%',
     textAlign: 'center',
     paddingTop: '4px',
     marginTop: '-5px',
@@ -106,27 +109,26 @@ const PdfTitle = (node) => {
       </View>
       <View style={createStyle(styles.hr, categoryColor)} />
       <View style={createStyle(styles.nodeInfo, categoryColor)}>
-        <View style={styles.nodeTitle}>
-          <Text style={styles.nodeName}>
-            {capitalizeFirstLetter(node.title)}
-          </Text>
-        </View>
-        <View style={styles.nodeAssignment}>
-          <Text style={styles.assignment}>
-            <span style={styles.label}>
-              {'Assignment: '}
-            </span>
+        {/* <View style={styles.nodeTitle}> */}
+        <Text style={styles.nodeTitle}>
+          {capitalizeFirstLetter(node.title)}
+        </Text>
+        <Text style={styles.nodeAssignmentClass}>
+          <span style={styles.label}>
+            {'Assignment: '}
+          </span>
+          <span style={styles.assignment}>
             {capitalizeFirstLetter(node.assignment)}
-          </Text>
-        </View>
-        <View style={styles.nodeClass}>
-          <Text style={styles.class}>
-            <span style={styles.label}>
-              {'Class: '}
-            </span>
+          </span>
+        </Text>
+        <Text style={styles.nodeAssignmentClass}>
+          <span style={styles.label}>
+            {'Class: '}
+          </span>
+          <span style={styles.class}>
             {capitalizeFirstLetter(node.nodeClass)}
-          </Text>
-        </View>
+          </span>
+        </Text>
       </View>
       <View style={createStyle(styles.nodeInfo, categoryColor)}>
         <Text style={styles.nodeDesc}>{node.desc}</Text>
