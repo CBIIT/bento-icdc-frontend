@@ -3,6 +3,7 @@ import NunitoExtraBold from './assets/fonts/Nunito-ExtraBold.ttf';
 import NunitoBold from './assets/fonts/Nunito-Bold.ttf';
 import NunitoExtraLightItalic from './assets/fonts/Nunito-ExtraLightItalic.ttf';
 import NunitoNormal from './assets/fonts/Nunito-Medium.ttf';
+import NunitoLight from './assets/fonts/Nunito-Light.ttf';
 
 export const getFont = (path) => {
   switch (path) {
@@ -14,6 +15,8 @@ export const getFont = (path) => {
       return NunitoExtraLightItalic;
     case 'NunitoNormal':
       return NunitoNormal;
+    case 'NunitoLight':
+      return NunitoLight;
     default:
       return NunitoNormal;
   }
