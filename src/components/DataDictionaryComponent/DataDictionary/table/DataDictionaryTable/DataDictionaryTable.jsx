@@ -53,13 +53,8 @@ export function category2NodeList(dictionary) {
 
 /** cluster props according to the category for PDF download */
 export function sortByCategory(c2nl, dictionary) {
-  const sortedList = [];
-  const dictionaryItems = Object.values(dictionary);
-  Object.keys(c2nl).forEach((category) => {
-    const list = dictionaryItems.filter((item) => item.category === category);
-    sortedList.push(...list);
-  });
-  return sortedList;
+  const keys = Object.keys(c2nl);
+  return Object.values(dictionary).sort((a, b) => keys.indexOf(`${a.category}`) - keys.indexOf(`${b.category}`));
 }
 
 /* eslint-enable no-param-reassign */
