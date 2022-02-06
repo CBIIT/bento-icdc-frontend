@@ -50,25 +50,37 @@ const styles = StyleSheet.create({
 const PdfTableRow = ({ node }) => {
   const keys = Object.keys(node.properties);
 
-  const validateType = (property) => {
-    if (Array.isArray(property)) {
-      if (property.length > 10) {
-        return JSON.stringify(property, undefined, 2);
-      }
-      return property;
-    }
-    const type = typeof property;
-    if (type === 'object') {
-      return JSON.stringify(property, undefined, 2);
-    }
-    return property;
-  };
-
   const textContent = (text, symbol) => {
     if (String(text).length > 20) {
       return String(text).replace(symbol, `${symbol}\n`);
     }
     return text;
+  };
+
+  const validateEnums = (enums) => {
+    if (Array.isArray(enums)) {
+      let concatEnums = '';
+      enums.forEach((value) => {
+        concatEnums += textContent(`'${value}'; `, '/');
+      });
+      return concatEnums;
+    }
+    return JSON.stringify(enums);
+  };
+
+  const validateType = (property) => {
+    if (Array.isArray(property)) {
+      if (property.length > 10) {
+        // return JSON.stringify(property, undefined, 2);
+        return textContent(`${property}`, '_');
+      }
+      return property;
+    }
+    const type = typeof property;
+    if (type === 'object') {
+      return textContent(JSON.stringify(property), ']');
+    }
+    return property;
   };
 
   const required = (key) => {
@@ -88,7 +100,14 @@ const PdfTableRow = ({ node }) => {
         <Text style={styles.tableCell}>{textContent(key, '_')}</Text>
       </View>
       <View style={styles.tableColType}>
-        <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
+        {node.properties[key].enum ? (
+          <Text style={styles.tableCell}>
+            {'Acceptable Values: '}
+            {validateEnums(node.properties[key].enum)}
+          </Text>
+        ) : (
+          <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
+        ) }
       </View>
       <View style={styles.tableColRequired}>
         {required(key)}
