@@ -22,6 +22,7 @@ import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/Redux
 import init from './utils';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
+import JBrowseView from '../JBrowse/JBrowseView';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -56,6 +57,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
+            <Route path="/jBrowse" component={JBrowseView} />
             <Route
               path="/icdc-data-model"
               // eslint-disable-next-line arrow-body-style
