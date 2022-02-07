@@ -56,7 +56,7 @@ export default [{
     adapter: {
       type: 'RefNameAliasAdapter',
       location: {
-        uri: 'GRCh38.aliases.txt',
+        uri: 'https://s3.amazonaws.com/jbrowse.org/genomes/GRCh38/hg38_aliases.txt',
         locationType: 'UriLocation',
       },
     },
