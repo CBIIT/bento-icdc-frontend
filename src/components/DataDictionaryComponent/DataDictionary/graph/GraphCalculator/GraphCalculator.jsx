@@ -14,6 +14,7 @@ class GraphCalculator extends React.Component {
     super(props);
     this.oldHighlightingNode = null;
     this.oldSecondHighlightingNodeID = null;
+    this.oldDictionary = this.props.dictionary;
   }
 
   componentDidMount() {
@@ -32,6 +33,20 @@ class GraphCalculator extends React.Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillUpdate(nextProps) {
+    const newDictionary = nextProps.dictionary;
+    if (this.oldDictionary !== newDictionary) {
+      // eslint-disable-next-line no-console
+      console.log('Dictionary changed');
+      calculateGraphLayout(
+        newDictionary,
+        this.props.countsSearch,
+        this.props.linksSearch,
+      ).then((layoutResult) => {
+        this.props.onGraphLayoutCalculated(layoutResult);
+        const legendItems = getAllTypes(layoutResult.nodes);
+        this.props.onGraphLegendCalculated(legendItems);
+      });
+    }
     // if the highlighted node is updated, calculate related highlighted nodes
     const newHighlightingNode = nextProps.highlightingNode;
     const newSecondHighlightingNodeID = nextProps.secondHighlightingNodeID;
@@ -83,6 +98,7 @@ class GraphCalculator extends React.Component {
 
     this.oldHighlightingNode = newHighlightingNode;
     this.oldSecondHighlightingNodeID = newSecondHighlightingNodeID;
+    this.oldDictionary = newDictionary;
   }
 
   getDataModelStructureForHighlightedNodes(newHighlightingNode) {

@@ -40,6 +40,7 @@ const storeKey = 'dashboardTab';
 const initialState = {
   dashboardTab: {
     isDataTableUptoDate: false,
+    test: {},
     isFetched: false,
     isLoading: false,
     isDashboardTableLoading: false,
@@ -232,6 +233,8 @@ function allFilters() {
   const emptyFilters = facetSearchData.reduce((acc, facet) => (
     { ...acc, [facet.datafield]: [] }
   ), {});
+  // eslint-disable-next-line no-console
+  console.log('Empty filters', emptyFilters);
   return emptyFilters;
 }
 
@@ -266,7 +269,14 @@ function hasFilter() {
  */
 
 function createFilterVariables(data) {
+  // eslint-disable-next-line no-console
+  console.log('data', data);
   const currentAllActiveFilters = getState().allActiveFilters;
+  // eslint-disable-next-line no-console
+  console.log('AllActive filters', currentAllActiveFilters);
+  const { test, stats } = getState();
+  // eslint-disable-next-line no-console
+  console.log('test state', test, stats);
   // eslint-disable-next-line  no-unused-vars
   const filter = Object.entries(currentAllActiveFilters).reduce((acc, [key, val]) => {
     if (data[0].datafield === key) {
@@ -277,7 +287,8 @@ function createFilterVariables(data) {
     // return { ...acc , [key]: [...currentAllActiveFilters[key],...[data[0].name]] }
     return { ...acc, [key]: currentAllActiveFilters[key] };
   }, {});
-
+  // eslint-disable-next-line no-console
+  console.log('filter', filter);
   return filter;
 }
 
@@ -729,6 +740,8 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
  */
 
 function setCodeToCheckBoxItem(checkboxData, item) {
+  // eslint-disable-next-line no-console
+  console.log('checkboxData', checkboxData);
   const checkBoxitems = [];
   const updateCheckBoxData = checkboxData;
   item.data.filterCaseCountByStudyCode.forEach((filterItem) => {
@@ -742,6 +755,10 @@ function setCodeToCheckBoxItem(checkboxData, item) {
   });
   updateCheckBoxData[1].checkboxItems = checkBoxitems
     .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
+  // eslint-disable-next-line no-console
+  console.log('checkBoxitems', checkBoxitems);
+  // eslint-disable-next-line no-console
+  console.log('updateCheckBoxData', updateCheckBoxData);
   return updateCheckBoxData;
 }
 /**
@@ -895,18 +912,27 @@ so it contains more information and easy for front-end to show it correctly.
  * @return {json}
  */
 export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromConfig) {
+  // eslint-disable-next-line no-console
   return (
-    facetSearchDataFromConfig.map((mapping) => ({
-      groupName: mapping.label,
-      checkboxItems: transformAPIDataIntoCheckBoxData(
-        convertCasesToCount(data[mapping.filterAPI]),
-        mapping.field,
-      ),
-      datafield: mapping.datafield,
-      show: mapping.show,
-      section: mapping.section,
-      tooltip: mapping.tooltip,
-    }))
+    // eslint-disable-next-line arrow-body-style
+    facetSearchDataFromConfig.map((mapping) => {
+      // eslint-disable-next-line no-console
+      // console.log('data from update', transformAPIDataIntoCheckBoxData(
+      //   convertCasesToCount(data[mapping.filterAPI]),
+      //   mapping.field,
+      // ));
+      return ({
+        groupName: mapping.label,
+        checkboxItems: transformAPIDataIntoCheckBoxData(
+          convertCasesToCount(data[mapping.filterAPI]),
+          mapping.field,
+        ),
+        datafield: mapping.datafield,
+        show: mapping.show,
+        section: mapping.section,
+        tooltip: mapping.tooltip,
+      });
+    })
   );
 }
 
@@ -943,11 +969,19 @@ const reducers = {
     isDashboardTableLoading: false,
   }),
   TOGGGLE_CHECKBOX_WITH_API: (state, item) => {
+    // eslint-disable-next-line no-console
+    console.log('item', item);
     const updatedCheckboxData1 = updateFilteredAPIDataIntoCheckBoxData(
       item.data, facetSearchData,
     );
+    // eslint-disable-next-line no-console
+    console.log('updatedCheckboxData1', updatedCheckboxData1);
     const checkboxData1 = setCodeToCheckBoxItem(setSelectedFilterValues(updatedCheckboxData1,
       item.allFilters), item);
+      // eslint-disable-next-line no-console
+    console.log('Checkbox DataOne: ', checkboxData1);
+    // eslint-disable-next-line no-console
+    console.log('item.allFilters: ', item.allFilters);
     fetchDataForDashboardTab(state.currentActiveTab,
       item.data.searchCases.caseIds, item.data.searchCases.sampleIds,
       item.data.searchCases.fileIds, item.data.searchCases.studyFileIds);
@@ -1027,6 +1061,7 @@ const reducers = {
       ? {
         ...state.dashboard,
         isFetched: true,
+        test: {},
         isLoading: false,
         hasError: false,
         setSideBarLoading: false,

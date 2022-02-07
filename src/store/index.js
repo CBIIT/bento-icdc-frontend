@@ -3,12 +3,12 @@ import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import layout from '../components/Layout/LayoutState';
 import stats from '../components/Stats/StatsState';
-import { submission, ddgraph, versionInfo } from '../components/DataDictionaryComponent/reducers';
+import { ddgraph, versionInfo } from '../components/DataDictionaryComponent/DataDictionary/reducers';
+// import submission from '../components/DataDictionaryComponent/reducers';
 
 const reducers = {
   layout,
   stats,
-  submission,
   ddgraph,
   versionInfo,
 };

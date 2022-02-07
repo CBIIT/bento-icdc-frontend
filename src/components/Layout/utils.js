@@ -140,7 +140,7 @@ async function init() {
       store.dispatch({
         type: 'RECEIVE_DICTIONARY',
         // data: newDict
-        data: newDataList,
+        payload: { data: newDataList },
       }),
       store.dispatch({
         type: 'RECEIVE_VERSION_INFO',
