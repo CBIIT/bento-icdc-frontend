@@ -8,8 +8,8 @@
   vertical-align: middle;
   text-align: center;
   padding: 10px 0;
-  left: -100px; /* tooltipWidth / 2 */
-  width: 196px; /* tooltipWidth = 240 */
+  left: -112px; /* tooltipWidth / 2 */
+  width: 220px; /* tooltipWidth = 240 */
   top: 5px;
   border: 2px solid #c9c9c9;
   border-radius: 8px;
@@ -49,9 +49,10 @@
 .node-popup__list-item {
   text-align: left;
   margin-left: 15px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 18px;
-  color: #2f9acf;
+  color: #0077c1;
+  font-weight: 900;
 }
 
 .node-popup__list-item_label {
@@ -60,13 +61,13 @@
 }
 
 .node-popup__button {
-  width: 136px;
-  font-size: 9px;
-  height: 30px;
+  width: 165px;
+  font-size: 12px;
+  height: 33px;
   background-color: #2f9acf;
   color: var(--g3-color__white);
   margin: 10px auto auto auto;
-  padding: 12px 23px 12px 23px;
+  padding: 12px 23px 12px 15px;
   border: 2px solid #2982af;
   border-radius: 7px;
 }
