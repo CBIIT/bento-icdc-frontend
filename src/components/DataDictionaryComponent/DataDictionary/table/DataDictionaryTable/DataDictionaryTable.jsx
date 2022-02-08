@@ -50,6 +50,13 @@ export function category2NodeList(dictionary) {
     );
   return res;
 }
+
+/** cluster props according to the category for PDF download */
+export function sortByCategory(c2nl, dictionary) {
+  const keys = Object.keys(c2nl);
+  return Object.values(dictionary).sort((a, b) => keys.indexOf(`${a.category}`) - keys.indexOf(`${b.category}`));
+}
+
 /* eslint-enable no-param-reassign */
 
 const getNodePropertyCount = (dictionary) => {
@@ -100,7 +107,7 @@ const DataDictionaryTable = ({
         </PDFDownloadLink> */}
         <DownloadButton
           config={pdfDownloadConfig}
-          documentData={dictionary}
+          documentData={sortByCategory(c2nl, dictionary)}
           fileName={createFileName('', pdfDownloadConfig.prefix)}
         />
       </DownloadLinkWrapper>

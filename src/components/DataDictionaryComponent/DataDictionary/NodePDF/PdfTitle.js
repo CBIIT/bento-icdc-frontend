@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   categoryStyle: {
     flexDirection: 'row',
-    padding: '7px 0px 7px 12px',
+    padding: '7px 0px 7px 10px',
   },
   hr: {
     height: '4px',
@@ -20,21 +20,22 @@ const styles = StyleSheet.create({
   },
   nodeInfo: {
     flexDirection: 'row',
-    padding: '6px 0px 2px 20px',
+    padding: '6px 0px 2px 15px',
     backgroundColor: '#f4f5f5',
   },
   nodeTitle: {
     color: '#000000',
-    fontSize: '9px',
+    fontSize: '10px',
     fontWeight: 'heavy',
-    width: '25%',
     fontFamily: FontRegistry('NunitoBold'),
+    marginRight: '75px',
   },
   nodeDesc: {
     color: '#000000',
     fontSize: '9px',
-    paddingRight: '20px',
+    paddingRight: '15px',
     paddingTop: '-2px',
+    lineHeight: 1.2,
     fontFamily: FontRegistry('NunitoNormal'),
   },
   categoryHeader: {
@@ -44,10 +45,15 @@ const styles = StyleSheet.create({
     paddingTop: '8px',
     fontFamily: FontRegistry('NunitoExtraBold'),
   },
-  nodeAssignment: {
-    width: '20%',
+  nodeAssignmentClass: {
     float: 'right',
-    paddingTop: '4px',
+    paddingTop: '3px',
+    paddingRight: '10px',
+    paddingLeft: '10px',
+    borderRadius: '8px',
+    backgroundColor: '#fff',
+    border: '0.5px solid #cdcdcd',
+    marginRight: '10px',
   },
   label: {
     fontWeight: '900',
@@ -55,31 +61,36 @@ const styles = StyleSheet.create({
     paddingTop: '0px',
     paddingBottom: '2px',
     float: 'left',
-    color: '#8e8e8e',
+    color: '#6c6c6c',
     fontFamily: FontRegistry('NunitoExtraBold'),
   },
   assignment: {
-    fontSize: '7px',
+    fontSize: '8px',
     paddingTop: '2px',
     marginRight: '10px',
-    border: '1px solid #cdcdcd',
-    borderRadius: '2px',
+    border: '0.5px solid #cdcdcd',
+    borderRadius: '8px',
     textAlign: 'center',
     backgroundColor: '#fff',
     color: '#2982af',
+    fontFamily: FontRegistry('NunitoNormal'),
   },
   nodeClass: {
-    width: '16%',
+    // width: '16%',
     textAlign: 'center',
     paddingTop: '4px',
+    marginTop: '-5px',
   },
   class: {
-    fontSize: '7px',
+    fontSize: '8px',
+    paddingRight: '4px',
     paddingTop: '2px',
-    border: '1px solid #cdcdcd',
-    borderRadius: '2px',
+    border: '0.5px solid #cdcdcd',
+    borderRadius: '8px',
     backgroundColor: '#fff',
     color: '#2982af',
+    height: '13px',
+    fontFamily: FontRegistry('NunitoNormal'),
   },
 });
 
@@ -99,27 +110,26 @@ const PdfTitle = (node) => {
       </View>
       <View style={createStyle(styles.hr, categoryColor)} />
       <View style={createStyle(styles.nodeInfo, categoryColor)}>
-        <View style={styles.nodeTitle}>
-          <Text style={styles.nodeName}>
-            {capitalizeFirstLetter(node.title)}
-          </Text>
-        </View>
-        <View style={styles.nodeAssignment}>
-          <Text style={styles.assignment}>
-            <span style={styles.label}>
-              {'Assignment: '}
-            </span>
+        {/* <View style={styles.nodeTitle}> */}
+        <Text style={styles.nodeTitle}>
+          {capitalizeFirstLetter(node.title)}
+        </Text>
+        <Text style={styles.nodeAssignmentClass}>
+          <span style={styles.label}>
+            {'Assignment: '}
+          </span>
+          <span style={styles.assignment}>
             {capitalizeFirstLetter(node.assignment)}
-          </Text>
-        </View>
-        <View style={styles.nodeClass}>
-          <Text style={styles.class}>
-            <span style={styles.label}>
-              {'Class: '}
-            </span>
+          </span>
+        </Text>
+        <Text style={styles.nodeAssignmentClass}>
+          <span style={styles.label}>
+            {'Class: '}
+          </span>
+          <span style={styles.class}>
             {capitalizeFirstLetter(node.nodeClass)}
-          </Text>
-        </View>
+          </span>
+        </Text>
       </View>
       <View style={createStyle(styles.nodeInfo, categoryColor)}>
         <Text style={styles.nodeDesc}>{node.desc}</Text>
