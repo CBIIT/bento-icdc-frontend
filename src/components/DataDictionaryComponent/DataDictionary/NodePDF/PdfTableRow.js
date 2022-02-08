@@ -71,7 +71,6 @@ const PdfTableRow = ({ node }) => {
   const validateType = (property) => {
     if (Array.isArray(property)) {
       if (property.length > 10) {
-        // return JSON.stringify(property, undefined, 2);
         return textContent(`${property}`, '_');
       }
       return property;
