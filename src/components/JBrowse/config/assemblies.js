@@ -24,7 +24,7 @@ export default [{
     adapter: {
       type: 'RefNameAliasAdapter',
       location: {
-        uri: 'https://s3.amazonaws.com/jbrowse.org/genomes/hg19/hg19_aliases.txt',
+        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam6/bigZips/canFam6.chromAlias.txt',
         locationType: 'UriLocation',
       },
     },
@@ -37,14 +37,6 @@ export default [{
     trackId: 'GRCh38-ReferenceSequenceTrack',
     adapter: {
       type: 'BgzipFastaAdapter',
-      fastaLocation: {
-        uri: 'http://ftp.ensembl.org/pub/release-100/fasta/homo_sapiens/dna_index/Homo_sapiens.GRCh38.dna.toplevel.fa.gz',
-        locationType: 'UriLocation',
-      },
-      faiLocation: {
-        uri: 'http://ftp.ensembl.org/pub/release-100/fasta/homo_sapiens/dna_index/Homo_sapiens.GRCh38.dna.toplevel.fa.gz.fai',
-        locationType: 'UriLocation',
-      },
       gziLocation: {
         uri: 'http://ftp.ensembl.org/pub/release-100/fasta/homo_sapiens/dna_index/Homo_sapiens.GRCh38.dna.toplevel.fa.gz.gzi',
         locationType: 'UriLocation',
