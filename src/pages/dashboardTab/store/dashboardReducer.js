@@ -233,8 +233,6 @@ function allFilters() {
   const emptyFilters = facetSearchData.reduce((acc, facet) => (
     { ...acc, [facet.datafield]: [] }
   ), {});
-  // eslint-disable-next-line no-console
-  console.log('Empty filters', emptyFilters);
   return emptyFilters;
 }
 
@@ -729,8 +727,6 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
  */
 
 function setCodeToCheckBoxItem(checkboxData, item) {
-  // eslint-disable-next-line no-console
-  console.log('checkboxData', checkboxData);
   const checkBoxitems = [];
   const updateCheckBoxData = checkboxData;
   item.data.filterCaseCountByStudyCode.forEach((filterItem) => {
@@ -744,10 +740,6 @@ function setCodeToCheckBoxItem(checkboxData, item) {
   });
   updateCheckBoxData[1].checkboxItems = checkBoxitems
     .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
-  // eslint-disable-next-line no-console
-  console.log('checkBoxitems', checkBoxitems);
-  // eslint-disable-next-line no-console
-  console.log('updateCheckBoxData', updateCheckBoxData);
   return updateCheckBoxData;
 }
 /**
@@ -958,19 +950,11 @@ const reducers = {
     isDashboardTableLoading: false,
   }),
   TOGGGLE_CHECKBOX_WITH_API: (state, item) => {
-    // eslint-disable-next-line no-console
-    console.log('item', item);
     const updatedCheckboxData1 = updateFilteredAPIDataIntoCheckBoxData(
       item.data, facetSearchData,
     );
-    // eslint-disable-next-line no-console
-    console.log('updatedCheckboxData1', updatedCheckboxData1);
     const checkboxData1 = setCodeToCheckBoxItem(setSelectedFilterValues(updatedCheckboxData1,
       item.allFilters), item);
-      // eslint-disable-next-line no-console
-    console.log('Checkbox DataOne: ', checkboxData1);
-    // eslint-disable-next-line no-console
-    console.log('item.allFilters: ', item.allFilters);
     fetchDataForDashboardTab(state.currentActiveTab,
       item.data.searchCases.caseIds, item.data.searchCases.sampleIds,
       item.data.searchCases.fileIds, item.data.searchCases.studyFileIds);

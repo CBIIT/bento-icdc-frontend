@@ -35,8 +35,6 @@ class GraphCalculator extends React.Component {
   UNSAFE_componentWillUpdate(nextProps) {
     const newDictionary = nextProps.dictionary;
     if (this.oldDictionary !== newDictionary) {
-      // eslint-disable-next-line no-console
-      console.log('Dictionary changed');
       calculateGraphLayout(
         newDictionary,
         this.props.countsSearch,
