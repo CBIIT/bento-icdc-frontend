@@ -1,86 +1,97 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '@material-ui/core';
 import ReduxDataDictionaryTable from './table/DataDictionaryTable';
 import ReduxDataModelStructure from './DataModelStructure';
 import DataDictionaryGraph from './graph/DataDictionaryGraph';
 import ReduxDictionarySearcher from './search/DictionarySearcher';
 import ReduxDictionarySearchHistory from './search/DictionarySearchHistory';
+import store from '../../../store/index';
+import FacetFilters from './FacetFilters';
+import { facetSearchData } from '../../../bento/dataDictionaryData';
 import './DataDictionary.css';
 
-class DataDictionary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.dictionarySearcherRef = React.createRef();
-  }
-
-  setGraphView = (isGraphView) => {
-    this.props.onSetGraphView(isGraphView);
+const DataDictionary = (props) => {
+  const dictionarySearcherRef = React.useRef();
+  const setGraphView = (isGraphView) => {
+    props.onSetGraphView(isGraphView);
   };
 
-  handleClickSearchHistoryItem = (keyword) => {
-    this.dictionarySearcherRef.current.launchSearchFromOutside(keyword);
+  React.useEffect(() => {
+    setGraphView(true);
+  }, []);
+
+  const handleClickSearchHistoryItem = (keyword) => {
+    dictionarySearcherRef.current.launchSearchFromOutside(keyword);
   };
 
-  handleClearSearchResult = () => {
-    this.dictionarySearcherRef.current.launchClearSearchFromOutside();
+  const handleClearSearchResult = () => {
+    dictionarySearcherRef.current.launchClearSearchFromOutside();
   };
 
-  componentDidMount = () => {
-    this.setGraphView(true);
-  }
+  // eslint-disable-next-line no-unused-vars
+  const filterByNode = (node) => {
+    store.dispatch({ type: 'FILTER_BY_NODE', payload: { data: node } });
+    // eslint-disable-next-line no-console
+    console.log('filtering!!!!');
+  };
 
-  render() {
-    return (
-      <div className="data-dictionary">
-        <div className="data-dictionary__sidebar">
-          <div className="data-dictionary__switch">
-            <span
-              className={`data-dictionary__switch-button ${!this.props.isGraphView ? '' : 'data-dictionary__switch-button--active'}`}
-              onClick={() => { this.setGraphView(true); }}
-              onKeyPress={() => { this.setGraphView(true); }}
-              role="button"
-              tabIndex={0}
-            >
-              Graph View
-            </span>
-            <span
-              className={`data-dictionary__switch-button ${this.props.isGraphView ? '' : 'data-dictionary__switch-button--active'}`}
-              onClick={() => { this.setGraphView(false); }}
-              onKeyPress={() => { this.setGraphView(true); }}
-              role="button"
-              tabIndex={0}
-            >
-              Table View
-            </span>
-          </div>
-          <ReduxDictionarySearcher ref={this.dictionarySearcherRef} />
-          <ReduxDataModelStructure />
-          <ReduxDictionarySearchHistory
-            onClickSearchHistoryItem={this.handleClickSearchHistoryItem}
-          />
-          <div className="data-dictionary__search-history" />
+  const handleToggle = () => {};
+
+  return (
+    <div className="data-dictionary">
+      <div className="data-dictionary__sidebar">
+        <div className="data-dictionary__switch">
+          <span
+            className={`data-dictionary__switch-button ${!props.isGraphView ? '' : 'data-dictionary__switch-button--active'}`}
+            onClick={() => { setGraphView(true); }}
+            onKeyPress={() => { setGraphView(true); }}
+            role="button"
+            tabIndex={0}
+          >
+            Graph View
+          </span>
+          <span
+            className={`data-dictionary__switch-button ${props.isGraphView ? '' : 'data-dictionary__switch-button--active'}`}
+            onClick={() => { setGraphView(false); }}
+            onKeyPress={() => { setGraphView(true); }}
+            role="button"
+            tabIndex={0}
+          >
+            Table View
+          </span>
         </div>
-        <div
-          className="data-dictionary__main"
-        >
-          { this.props.isGraphView
-            ? (
-              <div className={`data-dictionary__graph ${this.props.isGraphView ? '' : 'data-dictionary__graph--hidden'}`}>
-                <DataDictionaryGraph
-                  onClearSearchResult={this.handleClearSearchResult}
-                />
-              </div>
-            )
-            : (
-              <div className={`data-dictionary__table ${!this.props.isGraphView ? '' : 'data-dictionary__table--hidden'}`}>
-                <ReduxDataDictionaryTable />
-              </div>
-            )}
-        </div>
+        <ReduxDictionarySearcher ref={dictionarySearcherRef} />
+        <ReduxDataModelStructure />
+        <FacetFilters />
+        <ReduxDictionarySearchHistory
+          onClickSearchHistoryItem={handleClickSearchHistoryItem}
+        />
+        <div className="data-dictionary__search-history" />
       </div>
-    );
-  }
-}
+      <div
+        className="data-dictionary__main"
+      >
+        { props.isGraphView
+          ? (
+            <div className={`data-dictionary__graph ${props.isGraphView ? '' : 'data-dictionary__graph--hidden'}`}>
+              <DataDictionaryGraph
+                onClearSearchResult={handleClearSearchResult}
+              />
+            </div>
+          )
+          : (
+            <div className={`data-dictionary__table ${!props.isGraphView ? '' : 'data-dictionary__table--hidden'}`}>
+              <ReduxDataDictionaryTable />
+            </div>
+          )}
+      </div>
+    </div>
+  );
+};
 
 DataDictionary.propTypes = {
   onSetGraphView: PropTypes.func,

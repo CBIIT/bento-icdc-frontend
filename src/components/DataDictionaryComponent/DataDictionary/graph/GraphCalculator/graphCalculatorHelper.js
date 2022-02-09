@@ -41,7 +41,6 @@ export const calculateGraphLayout = (dictionary, countsSearch, linksSearch) => {
   const viz = new Viz({ Module, render });
   return viz.renderJSONObject(dotString)
     .then((renderedJSON) => {
-      // console.log(renderedJSON);
       // draw nodes
       const renderedNodes = renderedJSON.objects
         .filter((n) => !n.rank)
@@ -64,13 +63,16 @@ export const calculateGraphLayout = (dictionary, countsSearch, linksSearch) => {
           const width = boundingBox.x2 - boundingBox.x1;
           const height = boundingBox.y2 - boundingBox.y1;
           const originNode = nodes.find((node) => node.id === n.name);
-          const outLinks = edges
-            .filter((edge) => edge.source.id === n.name)
-            .map((edge) => edge.target.id);
-          const inLinks = edges
-            .filter((edge) => edge.target.id === n.name)
-            .map((edge) => edge.source.id);
-
+          let outLinks; let
+            inLinks;
+          if (edges.length > 0) {
+            outLinks = edges
+              .filter((edge) => edge.source.id === n.name)
+              .map((edge) => edge.target.id);
+            inLinks = edges
+              .filter((edge) => edge.target.id === n.name)
+              .map((edge) => edge.source.id);
+          }
           const nodeType = n.type.toLowerCase();
           const nodeColor = getCategoryColor(nodeType);
           const textPadding = graphStyleConfig.nodeContentPadding;
@@ -116,37 +118,39 @@ export const calculateGraphLayout = (dictionary, countsSearch, linksSearch) => {
             assignment: nodeAssignment,
           };
         });
-
       // draw edges
-      const renderedEdges = renderedJSON.edges
-        .map((edge) => {
-          const controlPoints = edge._draw_[1].points;
-          let pathString = `M${controlPoints[0].join(',')}C${controlPoints.slice(1)
-            .map((pair) => `${pair[0]},${pair[1]}`).join(' ')}`;
-          const sourceNode = renderedNodes.find((node) => node._gvid === edge.tail);
-          const targetNode = renderedNodes.find((node) => node._gvid === edge.head);
-          if (sourceNode.level === targetNode.level + 1) {
-            const sourePosition = [
-              (sourceNode.boundingBox.x1 + sourceNode.boundingBox.x2) / 2,
-              sourceNode.boundingBox.y1,
-            ];
-            const targetPosition = [
-              (targetNode.boundingBox.x1 + targetNode.boundingBox.x2) / 2,
-              targetNode.boundingBox.y2,
-            ];
-            pathString = `M${sourePosition[0]} ${sourePosition[1]} 
+      let renderedEdges;
+      if (renderedJSON.edges) {
+        renderedEdges = renderedJSON.edges
+          .map((edge) => {
+            const controlPoints = edge._draw_[1].points;
+            let pathString = `M${controlPoints[0].join(',')}C${controlPoints.slice(1)
+              .map((pair) => `${pair[0]},${pair[1]}`).join(' ')}`;
+            const sourceNode = renderedNodes.find((node) => node._gvid === edge.tail);
+            const targetNode = renderedNodes.find((node) => node._gvid === edge.head);
+            if (sourceNode.level === targetNode.level + 1) {
+              const sourePosition = [
+                (sourceNode.boundingBox.x1 + sourceNode.boundingBox.x2) / 2,
+                sourceNode.boundingBox.y1,
+              ];
+              const targetPosition = [
+                (targetNode.boundingBox.x1 + targetNode.boundingBox.x2) / 2,
+                targetNode.boundingBox.y2,
+              ];
+              pathString = `M${sourePosition[0]} ${sourePosition[1]} 
               L ${targetPosition[0]} ${targetPosition[1]}`;
-          }
-          const { required } = edges
-            .find((e) => (e.source.id === sourceNode.id && e.target.id === targetNode.id));
-          return {
-            source: sourceNode.id,
-            target: targetNode.id,
-            controlPoints,
-            pathString,
-            required,
-          };
-        });
+            }
+            const { required } = edges
+              .find((e) => (e.source.id === sourceNode.id && e.target.id === targetNode.id));
+            return {
+              source: sourceNode.id,
+              target: targetNode.id,
+              controlPoints,
+              pathString,
+              required,
+            };
+          });
+      }
 
       // get bounding box for whole graph
       const graphBoundingBox = renderedJSON._draw_.find((entry) => entry.op === 'P').points;

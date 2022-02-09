@@ -309,7 +309,7 @@ const FacetPanel = ({ classes, disabled }) => {
                             classes={{ root: classes.dropDownIconSubSection }}
                             style={{ fontSize: 26 }}
                           />
-)}
+                        )}
                         aria-controls={sideBarItem.groupName}
                         id={sideBarItem.groupName}
                         className={classes.customExpansionPanelSummaryRoot}

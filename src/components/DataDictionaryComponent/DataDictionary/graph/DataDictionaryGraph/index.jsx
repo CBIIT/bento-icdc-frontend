@@ -10,24 +10,26 @@ import ReduxNodePopup from '../NodePopup';
 import ReduxOverlayPropertyTable from '../OverlayPropertyTable';
 import ReduxActionLayer from '../ActionLayer';
 
-class DataDictionaryGraph extends React.Component {
-  render() {
-    return (
-      <>
-        <ReduxGraphCalculator />
-        <ReduxLegend />
-        <ReduxCanvas>
-          <ReduxGraphDrawer />
-        </ReduxCanvas>
-        {/* <ReduxNodeTooltip /> */}
-        <ReduxNodePopup />
-        <ReduxOverlayPropertyTable />
-        <ReduxActionLayer onClearSearchResult={this.props.onClearSearchResult} />
-      </>
-    );
-  }
-}
+// const currentDict = useSelector((state) => (
+//   state.submission
+//         && state.submission.filteredDictionary
+//     ? state.submission.filteredDictionary : {}));
+const DataDictionaryGraph = (props) => (
+  <>
+    <>
+      <ReduxGraphCalculator />
+      <ReduxLegend />
+      <ReduxCanvas>
+        <ReduxGraphDrawer />
+      </ReduxCanvas>
+      {/* <ReduxNodeTooltip /> */}
+      <ReduxNodePopup />
+      <ReduxOverlayPropertyTable />
+      <ReduxActionLayer onClearSearchResult={props.onClearSearchResult} />
+    </>
 
+  </>
+);
 DataDictionaryGraph.propTypes = {
   onClearSearchResult: PropTypes.func,
 };
