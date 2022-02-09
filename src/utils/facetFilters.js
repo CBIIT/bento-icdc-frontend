@@ -15,8 +15,6 @@ export const allFilters = (data) => {
   const emptyFilters = data.reduce((acc, facet) => (
     { ...acc, [facet.datafield]: [] }
   ), {});
-  // eslint-disable-next-line no-console
-  console.log('Empty filters', emptyFilters);
   return emptyFilters;
 };
 

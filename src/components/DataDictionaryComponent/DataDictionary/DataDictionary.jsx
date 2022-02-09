@@ -32,15 +32,6 @@ const DataDictionary = (props) => {
     dictionarySearcherRef.current.launchClearSearchFromOutside();
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const filterByNode = (node) => {
-    store.dispatch({ type: 'FILTER_BY_NODE', payload: { data: node } });
-    // eslint-disable-next-line no-console
-    console.log('filtering!!!!');
-  };
-
-  const handleToggle = () => {};
-
   return (
     <div className="data-dictionary">
       <div className="data-dictionary__sidebar">
