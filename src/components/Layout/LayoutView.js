@@ -73,7 +73,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/graphql" component={GraphqlClient} />
             <Route component={Error} />
           </Switch>
-          {/* <Footer data={{ isSidebarOpened }} /> */}
+          <Footer data={{ isSidebarOpened }} />
         </div>
       </>
     </HashRouter>
