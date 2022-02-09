@@ -2,12 +2,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './DataDictionaryTable.css';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+// import { PDFDownloadLink } from '@react-pdf/renderer';
 import styled from 'styled-components';
 import { parseDictionaryNodes } from '../../utils';
 import { createFileName } from '../../../utils';
 import DataDictionaryCategory from '../DataDictionaryCategory';
-import PdfDocument from '../../MultiplePDF';
+// import PdfDocument from '../../MultiplePDF';
+import DownloadButton from '../../NodePDF/DownloadButton';
+
+const pdfDownloadConfig = {
+  class: 'data-dictionary-node__multiple-download-button',
+  loading: 'data-dictionary-node__loading',
+  type: 'document',
+  prefix: 'ICDC_Data_Model ',
+};
 
 const DownloadLinkWrapper = styled.div`
   display: flex;
@@ -42,6 +50,13 @@ export function category2NodeList(dictionary) {
     );
   return res;
 }
+
+/** cluster props according to the category for PDF download */
+export function sortByCategory(c2nl, dictionary) {
+  const keys = Object.keys(c2nl);
+  return Object.values(dictionary).sort((a, b) => keys.indexOf(`${a.category}`) - keys.indexOf(`${b.category}`));
+}
+
 /* eslint-enable no-param-reassign */
 
 const getNodePropertyCount = (dictionary) => {
@@ -81,7 +96,7 @@ const DataDictionaryTable = ({
           <span>{propertiesCount}</span>
           <span> properties </span>
         </p>
-        <PDFDownloadLink
+        {/* <PDFDownloadLink
           document={<PdfDocument data={dictionary} />}
           fileName={createFileName('ICDC_Data_Model', false, '.pdf')}
           className="data-dictionary-node__multiple-download-button"
@@ -89,7 +104,12 @@ const DataDictionaryTable = ({
           {({
             loading,
           }) => (loading ? 'Loading document...' : 'DOWNLOAD DICTIONARY')}
-        </PDFDownloadLink>
+        </PDFDownloadLink> */}
+        <DownloadButton
+          config={pdfDownloadConfig}
+          documentData={sortByCategory(c2nl, dictionary)}
+          fileName={createFileName('', pdfDownloadConfig.prefix)}
+        />
       </DownloadLinkWrapper>
       <div className="data-dictionary-node__table_body">
         {Object.keys(c2nl).map((category) => (

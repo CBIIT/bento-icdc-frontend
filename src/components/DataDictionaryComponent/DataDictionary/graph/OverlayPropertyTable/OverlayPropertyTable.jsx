@@ -3,17 +3,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@gen3/ui-component/dist/components/Button';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+// import { PDFDownloadLink } from '@react-pdf/renderer';
 // eslint-disable-next-line no-unused-vars
-import { downloadTemplate, SearchResultItemShape } from '../../utils';
+import { SearchResultItemShape } from '../../utils';
 import { getCategoryIconSVG } from '../../NodeCategories/helper';
+import { createFileName } from '../../../utils';
+import DownloadButton from '../../NodePDF/DownloadButton';
 import {
   getNodeDescriptionFragment,
   getNodeTitleFragment,
 } from '../../highlightHelper';
 import DataDictionaryPropertyTable from '../../table/DataDictionaryPropertyTable';
 import './OverlayPropertyTable.css';
-import PdfDocument from '../../NodePDF';
+// import PdfDocument from '../../NodePDF';
+import IconDownloadPDF from '../../table/icons/icon_download_PDF.svg';
+
+const pdfDownloadConfig = {
+  class: 'data-dictionary-node__download-button_pdf',
+  loading: 'data-dictionary-node__loading',
+  image: IconDownloadPDF,
+  type: 'single',
+  fileType: 'pdf',
+  prefix: 'ICDC_Data_Model_',
+};
 
 class OverlayPropertyTable extends React.Component {
   getTitle = () => {
@@ -67,7 +79,6 @@ class OverlayPropertyTable extends React.Component {
     if (!this.props.node || this.props.hidden) return (<></>);
     const IconSVG = getCategoryIconSVG(this.props.node.category);
     // eslint-disable-next-line no-console
-    console.log('category', this.props.node.category);
     const searchedNodeNotOpened = this.props.isSearchMode && !this.props.isSearchResultNodeOpened;
     const needHighlightSearchResult = this.props.isSearchMode;
     return (
@@ -77,7 +88,7 @@ class OverlayPropertyTable extends React.Component {
           <div className="overlay-property-table__content">
             <div className="overlay-property-table__header">
               <div className="overlay-property-table__category">
-                <IconSVG className="overlay-property-table__category-icon" />
+                <IconSVG className={`overlay-property-table__category-icon ${this.props.node.category}`} />
                 <h4 className="overlay-property-table__category-text">{this.props.node.category}</h4>
                 {
                   this.props.isSearchMode && (
@@ -109,7 +120,7 @@ class OverlayPropertyTable extends React.Component {
                   buttonType="secondary"
                   rightIcon="download"
                 /> */}
-                <PDFDownloadLink
+                {/* <PDFDownloadLink
                   document={<PdfDocument node={this.props.node} />}
                   fileName={`${this.props.node.id}.pdf`}
                   className="overlay-property-table__download-button"
@@ -117,9 +128,15 @@ class OverlayPropertyTable extends React.Component {
                   {({
                     loading,
                   }) => (loading ? 'Loading document...' : <div className="overlay-property-table__download-text">PDF</div>)}
-                </PDFDownloadLink>
+                </PDFDownloadLink> */}
+                <div className="overlay-property-table__download-button">
+                  <DownloadButton
+                    config={pdfDownloadConfig}
+                    documentData={this.props.node}
+                    fileName={createFileName('', pdfDownloadConfig.prefix)}
+                  />
+                </div>
               </div>
-
             </div>
             <div className="overlay-property-table__property">
               <DataDictionaryPropertyTable

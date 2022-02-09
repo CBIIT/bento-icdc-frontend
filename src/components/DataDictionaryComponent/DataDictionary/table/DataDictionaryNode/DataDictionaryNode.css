@@ -13,6 +13,10 @@
   margin-bottom: 5px;
 }
 
+.data-dictionary-node:last-child {
+  margin-bottom: 0;
+}
+
 .data-dictionary-node__title {
   width: 260px;
   flex-grow: 0;
@@ -50,7 +54,7 @@
   max-height: 65px;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-top: 15px;
+  padding-top: 10px;
   padding-left: 0;
 }
 
@@ -73,7 +77,7 @@
 .data-dictionary-node__class,
 .data-dictionary-node__assignment {
   margin-left: 5px;
-  color: #000;
+  color: #2982af;
   font-weight: 500;
 }
 
@@ -84,7 +88,7 @@
 .data-dictionary-node__download-button-group {
   text-align: right;
   margin-top: -5px;
-  padding-right: 10px;
+  padding-right: 15px;
 }
 
 .data-dictionary-node__download-group {
@@ -127,11 +131,13 @@
   display: block;
   color: var(--g3-color__white);
   text-align: right;
+  border: none;
 }
 
 .data-dictionary-node__loading {
   padding: 5px 5px;
-  background-color: #0B3557;
+  background-color: #0b3557;
+  color: #fff;
 }
 
 .data-dictionary-node__download-button_pdf > img {
@@ -158,13 +164,13 @@
   padding: unset; /* override .g3-button's paddings */
   font-weight: normal;
   display: inline;
-  background-color: #0B3557;
+  background-color: #0b3557;
   color: var(--g3-color__white);
   padding: 5px 6px 5px 6px;
-  border-top: 1px solid #CCCCCC;
+  border-top: 1px solid #cccccc;
   border-right: 1px solid #333333;
   border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
+  border-left: 1px solid #cccccc;
 }
 
 .data-dictionary-node__multiple-download-button:hover,
@@ -180,17 +186,19 @@
 }
 
 .data-dictionary-node__property {
-  margin: 10px 0 20px 40px;
+  padding: 10px 18px 18px 23px;
   position: relative;
 }
 
 .data-dictionary-node__property-summary {
-  margin: 5px 0;
+  /* margin: 5px 0; */
+  color: #7a7a7a;
+  padding-left: 17px;
+  margin-bottom: 8px;
 }
 
 .data-dictionary-node__property-close {
-  position: absolute;
-  right: 0;
+  float: right;
   cursor: pointer;
 }
 
@@ -201,7 +209,7 @@
 .data-dictionary-node__property-close-icon {
   position: relative;
   top: 4px;
-  margin-left: 10px;
+  margin-right: 20px;
   background-color: var(--g3-color__gray);
 }
 

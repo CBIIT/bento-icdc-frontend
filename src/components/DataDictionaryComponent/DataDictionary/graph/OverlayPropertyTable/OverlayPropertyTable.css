@@ -95,15 +95,12 @@
   padding: unset; /* override .g3-button's paddings */
   float: right;
   font-weight: normal;
-  background-color: #0B3557;
-  color: var(--g3-color__white);
+  /* background-color: #0B3557; */
+  /* color: var(--g3-color__white); */
   padding: 0px 6px 0px 6px;
-  border-top: 1px solid;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
-  border-left: 1px solid;
-  border-color: #0B3557;
+  /* border-color: #0B3557; */
   text-align: center;
+
 }
 
 .overlay-property-table__download-button:hover,

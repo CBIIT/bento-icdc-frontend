@@ -16,7 +16,8 @@ const required = (requiredFlag, preferredFlag) => {
   if (requiredFlag) {
     return (
       <span className="data-dictionary-property-table__required">
-        <i className="g3-icon g3-icon--star data-dictionary-property-table__required-icon" />
+        {/* <i className="g3-icon g3-icon--star
+        //data-dictionary-property-table__required-icon" /> */}
         Required
       </span>
     );
@@ -29,6 +30,17 @@ const required = (requiredFlag, preferredFlag) => {
   return (
     <span>No</span>
   );
+};
+
+const formatEnumValues = (enums) => {
+  if (Array.isArray(enums)) {
+    let concatEnums = '';
+    enums.forEach((value) => {
+      concatEnums += `'${value}'; `;
+    });
+    return concatEnums;
+  }
+  return JSON.stringify(enums);
 };
 
 class DataDictionaryPropertyTable extends React.Component {
@@ -55,7 +67,7 @@ class DataDictionaryPropertyTable extends React.Component {
       <div className={`data-dictionary-property-table ${borderModifier}`}>
         <table className="data-dictionary-property-table__table">
           <thead className="data-dictionary-property-table__head">
-            <tr className="data-dictionary-property-table__row">
+            <tr>
               <th
                 className="data-dictionary-property-table__data
                 data-dictionary-property-table__data--property"
@@ -113,6 +125,7 @@ class DataDictionaryPropertyTable extends React.Component {
                 let termID = '';
                 let termLink = '';
                 let type = '';
+                let enums = '';
                 if ('src' in property) {
                   try {
                     termID = property.src;
@@ -129,6 +142,9 @@ class DataDictionaryPropertyTable extends React.Component {
                     type = property.type;
                   } catch (err) { }
                 }
+                if ('enum' in property) {
+                  enums = property.enum;
+                }
 
                 const propertyDescriptionFragment = getPropertyDescriptionFragment(
                   property,
@@ -138,12 +154,20 @@ class DataDictionaryPropertyTable extends React.Component {
                 const isRequired = this.props.requiredProperties.includes(propertyKey);
                 const isPreferred = this.props.preferredProperties.includes(propertyKey);
                 return (
-                  <tr key={propertyKey}>
+                  <tr key={propertyKey} className="data-dictionary-property-table__row">
                     <td className="data-dictionary-property-table__data">
                       {propertyNameFragment}
                     </td>
                     <td className="data-dictionary-property-table__data">
-                      <p>{JSON.stringify(type)}</p>
+                      { (enums) ? (
+                        <p>
+                          Acceptable Values:
+                          {' '}
+                          {formatEnumValues(enums)}
+                        </p>
+                      ) : (
+                        <p>{JSON.stringify(type)}</p>
+                      )}
                     </td>
                     {
                       !this.props.hideIsRequired && (

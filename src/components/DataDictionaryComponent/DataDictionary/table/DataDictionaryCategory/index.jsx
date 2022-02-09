@@ -12,7 +12,7 @@ class DataDictionaryCategory extends React.Component {
     return (
       <div className="data-dictionary-category">
         <div className="data-dictionary-category__head" style={{ borderLeftColor: getCategoryColor(this.props.category) }}>
-          <IconSVG className="data-dictionary-category__icon" />
+          <IconSVG className={`data-dictionary-category__icon ${this.props.category}`} />
           <span style={{ color: getCategoryColor(this.props.category) }}>
             {capitalizeFirstLetter(this.props.category)}
           </span>

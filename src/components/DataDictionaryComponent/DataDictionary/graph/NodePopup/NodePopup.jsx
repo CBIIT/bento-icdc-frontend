@@ -39,20 +39,36 @@ class NodePopup extends React.Component {
           this.props.highlightingNode && (
             <div className="node-popup__wrapper">
               <div className="node-popup__content">
-                <li className="node-popup__list-item">
-                  {this.props.highlightingNode.requiredPropertiesCount}
-                  {' '}
-                  required properties
-                </li>
-                <li className="node-popup__list-item">
-                  {this.props.highlightingNode.optionalPropertiesCount}
-                  {' '}
-                  preferred properties
-                </li>
+                <ul className="node-popup__list">
+                  <li className="node-popup__list-item">
+                    <span className="node-popup__list-item_label">
+                      {'Assignment: '}
+                    </span>
+                    {this.props.highlightingNode.assignment}
+                  </li>
+                  <li className="node-popup__list-item">
+                    <span className="node-popup__list-item_label">
+                      {'Class: '}
+                    </span>
+                    {this.props.highlightingNode.class}
+                  </li>
+                  <li className="node-popup__list-item">
+                    <span className="node-popup__list-item_label">
+                      {'Required Properties: '}
+                    </span>
+                    {this.props.highlightingNode.requiredPropertiesCount}
+                  </li>
+                  <li className="node-popup__list-item">
+                    <span className="node-popup__list-item_label">
+                      {'Optional Properties: '}
+                    </span>
+                    {this.props.highlightingNode.optionalPropertiesCount}
+                  </li>
+                </ul>
                 <Button
                   className="node-popup__button"
                   onClick={this.handleClickPropertyButton}
-                  label="Open properties"
+                  label="OPEN PROPERTIES"
                   buttonType="secondary"
                 />
               </div>
