@@ -269,26 +269,15 @@ function hasFilter() {
  */
 
 function createFilterVariables(data) {
-  // eslint-disable-next-line no-console
-  console.log('data', data);
   const currentAllActiveFilters = getState().allActiveFilters;
-  // eslint-disable-next-line no-console
-  console.log('AllActive filters', currentAllActiveFilters);
-  const { test, stats } = getState();
-  // eslint-disable-next-line no-console
-  console.log('test state', test, stats);
-  // eslint-disable-next-line  no-unused-vars
-  const filter = Object.entries(currentAllActiveFilters).reduce((acc, [key, val]) => {
+  const filter = Object.entries(currentAllActiveFilters).reduce((acc, [key]) => {
     if (data[0].datafield === key) {
       return data[0].isChecked
         ? { ...acc, [key]: [...currentAllActiveFilters[key], ...[data[0].name]] }
         : { ...acc, [key]: currentAllActiveFilters[key].filter((item) => item !== data[0].name) };
     }
-    // return { ...acc , [key]: [...currentAllActiveFilters[key],...[data[0].name]] }
     return { ...acc, [key]: currentAllActiveFilters[key] };
   }, {});
-  // eslint-disable-next-line no-console
-  console.log('filter', filter);
   return filter;
 }
 

@@ -70,7 +70,6 @@ export const facetSearchData = [
     checkboxItems: [
       { name: 'Required', isChecked: false },
       { name: 'Preferred', isChecked: false },
-      { name: 'Optional', isChecked: false },
     ],
   },
 ];
@@ -103,4 +102,12 @@ export const resetIcon = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
   alt: 'Reset icon',
   size: '12 px',
+};
+
+export const baseFilters = {
+  category: [],
+  assignment: [],
+  class: [],
+  multiplicity: [],
+  inclusion: [],
 };

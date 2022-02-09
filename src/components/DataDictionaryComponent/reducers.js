@@ -1,16 +1,14 @@
-/* eslint-disable max-len */
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-import { useSelector } from 'react-redux';
 import _ from 'lodash';
 // import ddgraph from './DataDictionary/reducers';
 import {
   setSelectedFilterValues,
 } from 'bento-components';
-import { calculateGraphLayout } from './DataDictionary/graph/GraphCalculator/graphCalculatorHelper';
-// eslint-disable-next-line no-unused-vars
-import { setGraphLayout } from './DataDictionary/action';
-import { facetSearchData } from '../../bento/dataDictionaryData';
+import { facetSearchData, baseFilters } from '../../bento/dataDictionaryData';
+import {
+  getState,
+  allFilters,
+  createFilterVariables,
+} from '../../utils/facetFilters';
 import store from '../../store';
 
 const storeKey = 'submission';
@@ -23,7 +21,6 @@ const initialState = {
 
 export const getFileNodes = (dictionary) => Object.keys(dictionary).filter((node) => dictionary[node].category === 'data_file');
 export const getNodeTypes = (dictionary) => Object.keys(dictionary).filter((node) => node.charAt(0) !== '_');
-const getState = () => store.getState()[storeKey];
 
 const excludeSystemProperties = (node) => {
   const properties = node.properties && Object.keys(node.properties)
@@ -52,35 +49,17 @@ const getDictionaryWithExcludeSystemProperties = (dictionary) => {
   return ret;
 };
 
-function allFilters() {
-  const emptyFilters = facetSearchData.reduce((acc, facet) => (
-    { ...acc, [facet.datafield]: [] }
-  ), {});
-  return emptyFilters;
-}
-
 export const clearAllFilters = () => {
   store.dispatch({ type: 'CLEAR_ALL_FILTERS' });
 };
-
-function createFilterVariables(data) {
-  const currentAllActiveFilters = getState().allActiveFilters;
-  const filter = Object.entries(currentAllActiveFilters).reduce((acc, [key, val]) => {
-    if (data[0].datafield === key) {
-      return data[0].isChecked
-        ? { ...acc, [key]: [...currentAllActiveFilters[key], ...[data[0].name]] }
-        : { ...acc, [key]: currentAllActiveFilters[key].filter((item) => item !== data[0].name) };
-    }
-    return { ...acc, [key]: currentAllActiveFilters[key] };
-  }, {});
-  return filter;
-}
 
 const toggleCheckBoxAction = (payload, currentAllFilterVariables) => {
   store.dispatch({
     type: 'FILTER_DATA_EXPLORER',
     payload: {
-      filter: { groupName: payload[0].groupName, name: [payload[0].name], isChecked: payload[0].isChecked },
+      filter: {
+        groupName: payload[0].groupName, name: [payload[0].name], isChecked: payload[0].isChecked,
+      },
       allFilters: currentAllFilterVariables,
     },
   });
@@ -88,7 +67,8 @@ const toggleCheckBoxAction = (payload, currentAllFilterVariables) => {
 
 export function toggleCheckBox(payload) {
   return () => {
-    const currentAllFilterVariables = payload === {} ? allFilters : createFilterVariables(payload);
+    const currentAllFilterVariables = payload === {} ? allFilters(facetSearchData)
+      : createFilterVariables(payload, getState(storeKey, store).allActiveFilters);
     // For performance issue we are using initial dasboardquery instead of fitered for empty filters
     // if (_.isEqual(currentAllFilterVariables, allFilters())) {
     //   clearAllFilters();
@@ -97,74 +77,53 @@ export function toggleCheckBox(payload) {
   };
 }
 
-const handleExplorerFilter = (chkBoxItems, groupName, dictArray, filteredDictionary) => {
-  let count = 0;
-  chkBoxItems.forEach((el) => {
-    count += el.filters.length;
-  });
-  const flag = !(count > 0);
-  if (flag) { return {}; }
-  switch (groupName) {
-    case 'Category':
-      return Object.fromEntries(dictArray.filter(([key, value]) => chkBoxItems[0].filters.includes(_.startCase(value.category))));
-    case 'Assignment':
-      return Object.fromEntries(dictArray.filter(([key, value]) => chkBoxItems[1].filters.includes(_.startCase(value.assignment))));
-    default:
-      console.log('filtered dict', filteredDictionary);
-      return filteredDictionary;
-  }
+const handleExplorerFilter = (filters, dictArray) => {
+  const asArray = Object.entries(filters);
+  const filtered = asArray.reduce((acc = {}, [key, value]) => {
+    const filteredDict = Object.fromEntries(dictArray.filter(([, dictValue]) => {
+      const flag = !!dictValue[key];
+      if (flag) {
+        if (key === 'inclusion' && Object.keys(dictValue[key]).length > 0) {
+          return value.some((el) => {
+            if (Object.prototype.hasOwnProperty.call(dictValue[key], el.toLowerCase())) {
+              return dictValue[key][el.toLowerCase()].length > 0;
+            }
+            return false;
+          });
+        }
+      }
+      return (value.includes(_.startCase(dictValue[key])));
+    }));
+    return {
+      ...acc,
+      ...filteredDict,
+    };
+  }, {});
+  return filtered;
 };
 
-const setFilteredDictionary = (payload) => (
-  setTimeout(() => {
-    store.dispatch({
-      type: 'FILTER_BY_NODE',
-      payload,
-    });
-  }, 2000)
-);
-// Use global dictionary state to ensure a full copy of the dictionary is being filtered each time the filter is run
 const reducers = {
   FILTER_DATA_EXPLORER: (state, action) => {
-    const oldDictionary = state.dictionary;
-    console.log('old dicty', oldDictionary);
-    setFilteredDictionary(oldDictionary);
     const checkboxData = facetSearchData;
     const updatedCheckboxData = setSelectedFilterValues(checkboxData, action.allFilters);
-    console.log('updatedCheckboxData', updatedCheckboxData);
-    const chkBoxItems = updatedCheckboxData.map(
-      (checkbox) => ({
-        groupName: checkbox.groupName,
-        filters: checkbox.checkboxItems.filter((elem) => elem.isChecked)
-          .map((elem) => elem.name),
-      }),
-    );
-    console.log('chkBoxItems', chkBoxItems);
     const dictArray = Object.entries(state.unfilteredDictionary);
+    const filter = handleExplorerFilter(action.allFilters, dictArray);
     const groupName = action.filter.isChecked ? action.filter.groupName : 'Unchecked';
-    const filter = handleExplorerFilter(chkBoxItems, groupName, dictArray, state.filteredDictionary);
-    // const filter = Object.fromEntries(dictArray.filter(([key, value]) => chkBoxItems[0].filters.includes(_.startCase(value.category))));
-    console.log('filter', filter);
     return {
       ...state,
       dictionary: Object.keys(filter).length > 0 ? filter : state.unfilteredDictionary,
       allActiveFilters: action.allFilters,
+      filteredDictionary: groupName === 'Unchecked' && Object.keys(filter).length > 0 ? filter : state.unfilteredDictionary,
       checkbox: {
         data: updatedCheckboxData,
       },
     };
   },
-  FILTER_BY_NODE: (state, action) => {
-    console.log('action', action);
-    return {
-      ...state,
-      filteredDictionary: action,
-      // dictionary: filter,
-    };
-  },
-  CLEAR_ALL_FILTERS: (state, action) => ({
+  CLEAR_ALL_FILTERS: (state) => ({
     ...state,
     dictionary: state.unfilteredDictionary,
+    filteredDictionary: state.unfilteredDictionary,
+    allActiveFilters: baseFilters,
     checkbox: {
       data: facetSearchData,
     },
@@ -205,8 +164,9 @@ const reducers = {
       dictionary: dict,
       nodeTypes: getNodeTypes(action.data),
       file_nodes: getFileNodes(action.data),
-      allActiveFilters: allFilters(),
+      allActiveFilters: allFilters(facetSearchData),
       unfilteredDictionary: dict,
+      filteredDictionary: dict,
       checkbox: {
         data: facetSearchData,
       },
@@ -216,14 +176,11 @@ const reducers = {
     ...state,
     oauth_url: action.url,
   }),
-  RECEIVE_SUBMISSION_LOGIN: (state, action) => {
-    console.log('state', state);
-    return ({
-      ...state,
-      login: state.result,
-      error: state.error,
-    });
-  },
+  RECEIVE_SUBMISSION_LOGIN: (state) => ({
+    ...state,
+    login: state.result,
+    error: state.error,
+  }),
   RECEIVE_SUBMISSION: (state, action) => {
     const prevCounts = ('submit_entity_counts' in state) ? state.submit_entity_counts : {};
     const newCounts = (action.data.entities || [])
@@ -263,7 +220,7 @@ const reducers = {
     links_search: Object.entries(action.data)
       .reduce((acc, entry) => { acc[entry[0]] = entry[1].length; return acc; }, {}),
   }),
-  CLEAR_COUNTS: (state, action) => ({
+  CLEAR_COUNTS: (state) => ({
     ...state,
     counts_search: null,
     links_search: null,
@@ -281,7 +238,7 @@ const reducers = {
     ...state,
     filesToMap: action.data,
   }),
-  RESET_SUBMISSION_STATUS: (state, action) => ({
+  RESET_SUBMISSION_STATUS: (state) => ({
     ...state,
     submit_entity_counts: [],
     submit_result: null,

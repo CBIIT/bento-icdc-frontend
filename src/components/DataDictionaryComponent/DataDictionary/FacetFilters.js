@@ -386,7 +386,7 @@ const styles = () => ({
     paddingLeft: 0,
   },
   ExpansionPaneldropDownIcon: {
-    left: '-215px',
+    left: '-290px',
     marginRight: '-20px',
   },
   sectionSummaryText: {
@@ -448,6 +448,23 @@ const styles = () => ({
     paddingRight: '5px',
     cursor: 'pointer',
     fontSize: '10px',
+  },
+  clearAllButtonRoot: {
+    margin: 'auto',
+  },
+  customButton: {
+    borderRadius: '100px',
+    marginTop: '4px',
+    minHeight: '20px',
+    fontSize: 9,
+    textTransform: 'none',
+    color: '#3d4241',
+    marginLeft: '100px',
+    marginBottom: '10px',
+    '&:hover': {
+      backgroundColor: '#566672',
+      color: 'white',
+    },
   },
 });
 

@@ -7,6 +7,7 @@
 /* eslint-disable no-restricted-syntax */
 import axios from 'axios';
 import yaml from 'js-yaml';
+import _ from 'lodash';
 import store from '../../store';
 import env from '../../utils/env';
 
@@ -99,7 +100,7 @@ async function init() {
 
             if (icdcMPData.PropDefinitions[propertyName].Req === 'Yes') {
               pRequired.push(nodeP);
-            } else if (icdcMPData.PropDefinitions[propertyName].Req === 'Preferred') {
+            } else if (icdcMPData.PropDefinitions[propertyName].Req === 'No') {
               pPreffered.push(nodeP);
             }
           }
@@ -108,6 +109,19 @@ async function init() {
       }
 
       item.properties = properties;
+      item.inclusion = {};
+      if (pRequired.length > 0) {
+        item.inclusion = {
+          ...item.inclusion,
+          required: pRequired,
+        };
+      }
+      if (pPreffered.length > 0) {
+        item.inclusion = {
+          ...item.inclusion,
+          preferred: pPreffered,
+        };
+      }
       item.required = pRequired;
       item.preferred = pPreffered;
     } else {
@@ -115,6 +129,8 @@ async function init() {
     }
 
     for (const property in icdcMData.Relationships) {
+      // eslint-disable-next-line no-console
+      item.multiplicity = _.startCase(icdcMData.Relationships[property].Mul);
       const label = propertyName;
       // const multiplicity = icdcMData.Relationships[propertyName].Mul;
       const required = false;
