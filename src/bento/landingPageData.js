@@ -73,13 +73,13 @@ export const pageData = {
     },
     {
       index: 1,
-      label: 'Data Dictionary',
+      label: 'Data Model Explorer',
       value: 'dictionary',
       icon: datadictionaryIcon,
       content: {
-        callToActionTitle: 'Delve\ninto the\n Data\n Dictionary',
+        callToActionTitle: 'Delve\ninto the\n Data\n Model',
         callToActionDescription: 'The ICDC data model is a\n representation of how all the\n constituent data are arranged\n relative to each other.',
-        callToActionButtonText: 'DATA DICTIONARY',
+        callToActionButtonText: 'Data Model Explorer',
         callToActionLink: '/icdc-data-model',
         image: datadictionary,
       },
