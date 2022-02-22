@@ -38,6 +38,12 @@ export const multiStudyData = {
   toolTipText: 'Multi-study participant also enrolled as:',
 };
 
+export const fileViewer = {
+  icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadBAM.svg',
+  alt: 'file viewer icon',
+  toolTipText: 'Open and view this file',
+};
+
 // --------------- Tabs Table configuration --------------
 export const tabContainers = [
   {
@@ -356,9 +362,12 @@ export const tabContainers = [
           toolTipTextFileDownload: 'Download a copy of this file',
           toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
           fileSizeColumn: 'file_size',
+          fileFormatColumn: 'file_format',
           fileLocationColumn: 'file_uuid',
+          caseIdColumn: 'sample_id',
           iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
           iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+          iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadBAM.svg',
         },
       },
       {
@@ -494,9 +503,12 @@ export const tabContainers = [
           toolTipTextFileDownload: 'Download a copy of this file',
           toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
           fileSizeColumn: 'file_size',
+          fileFormatColumn: 'file_format',
           fileLocationColumn: 'file_uuid',
+          caseIdColumn: 'sample_id',
           iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
           iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+          iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadBAM.svg',
         },
       },
       {
