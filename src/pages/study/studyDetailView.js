@@ -44,6 +44,7 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfStudyFiles: data.fileCountOfStudyFiles,
     numberOfPrograms: data.programCountOfStudy,
     numberOfAliquots: data.aliquotCountOfStudy ? data.aliquotCountOfStudy : 0,
+    volumeOfData: data.volumeOfDataOfStudy,
   };
 
   React.useEffect(() => {

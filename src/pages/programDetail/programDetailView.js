@@ -56,6 +56,7 @@ const ProgramView = ({ classes, data }) => {
     numberOfStudyFiles: data.studyFileCountOfProgram,
     numberOfPrograms: 1,
     numberOfAliquots: data.aliquotCountOfProgram ? data.aliquotCountOfProgram : 0,
+    volumeOfData: data.volumeOfDataOfProgram,
   };
 
   const breadCrumbJson = [{

@@ -82,6 +82,7 @@ query program($programTitle: String!) {
   aliquotCountOfProgram(program_id: $programTitle)
   studyCountOfProgram(program_id: $programTitle)
   caseCountOfProgram(program_id: $programTitle)
+  volumeOfDataOfProgram(program_id: $programTitle)
   
   
   program(program_acronym: $programTitle)

@@ -906,6 +906,9 @@ type QueryType {
   programCountOfStudy(study_code: String!): Int 
   programsCountOfCase(case_id: String!): Int 
 
+  volumeOfDataOfProgram(program_id: String!): Float 
+  volumeOfDataOfStudy(study_code: String!): Float 
+  volumeOfDataOfCase(case_id: String!): Float 
   
   "Count by group"
   caseCountByStudyCode(case_ids: [String] = []): [GroupCount] 
