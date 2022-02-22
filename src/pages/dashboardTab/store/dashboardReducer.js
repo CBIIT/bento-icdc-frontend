@@ -40,6 +40,7 @@ const storeKey = 'dashboardTab';
 const initialState = {
   dashboardTab: {
     isDataTableUptoDate: false,
+    isOverlayOpen: false,
     test: {},
     isFetched: false,
     isLoading: false,
@@ -921,6 +922,10 @@ export function getUnifiedViewStats(data) {
   store.dispatch({ type: 'SET_UNIFIED_VIEW_STATS', payload: { data } });
 }
 
+export function setOverLayWindow(item) {
+  store.dispatch({ type: 'SET_OVERLAY_WINDOW', payload: item });
+}
+
 export const getDashboard = () => getState();
 
 // reducers
@@ -931,6 +936,10 @@ const reducers = {
     error: item,
     isLoading: false,
     isFetched: false,
+  }),
+  SET_OVERLAY_WINDOW: (state, item) => ({
+    ...state,
+    isOverlayOpen: item,
   }),
   SET_UNIFIED_VIEW_STATS: (state, item) => ({
     ...state,
@@ -1034,7 +1043,7 @@ const reducers = {
       ? {
         ...state.dashboard,
         isFetched: true,
-        test: {},
+        isOverlayOpen: false,
         isLoading: false,
         hasError: false,
         setSideBarLoading: false,
