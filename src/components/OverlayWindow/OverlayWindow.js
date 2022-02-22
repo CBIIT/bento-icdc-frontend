@@ -20,9 +20,6 @@ import { setOverLayWindow } from '../../pages/dashboardTab/store/dashboardReduce
 
 const OverlayWindow = () => {
   const [open, setOpen] = useState(false);
-  // const overlay = useSelector((state) => (
-  //   state.dashboardTab
-  //     ? state.dashboardTab.isOverlayOpen : false));
 
   const handleClose = () => {
     setOpen(false);
