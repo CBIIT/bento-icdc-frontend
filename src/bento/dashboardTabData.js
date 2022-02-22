@@ -39,7 +39,7 @@ export const multiStudyData = {
 };
 
 export const fileViewer = {
-  icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadBAM.svg',
+  icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
   alt: 'file viewer icon',
   toolTipText: 'Open and view this file',
 };
