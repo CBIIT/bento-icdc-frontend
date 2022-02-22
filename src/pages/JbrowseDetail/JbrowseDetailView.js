@@ -114,7 +114,6 @@ const JBrowseViewDetail = ({
   };
 
   useEffect(() => {
-    // const ses = _.cloneDeep(defaultSession);
     setSession(_.cloneDeep(defaultSession));
     if (bamFiles.length > 0) {
       configureAdapters();
