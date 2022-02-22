@@ -884,7 +884,7 @@ type QueryType {
   numberOfStudyFiles: Int 
   numberOfPrograms: Int 
   numberOfAliquots: Int 
-  volumeOfData: Float 
+ volumeOfData: Float 
 
   "Count with parameter"
   sampleCountOfStudy(study_code: String!): Int 
