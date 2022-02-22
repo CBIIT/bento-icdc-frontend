@@ -55,6 +55,7 @@ const CaseDetail = ({ classes, data }) => {
     numberOfFiles: data.fileCountOfCase,
     numberOfStudyFiles: data.studyFileCountOfCase,
     numberOfPrograms: data.programsCountOfCase,
+    volumeOfData: data.volumeOfDataOfCase,
   };
   const caseDetail = data.case[0];
 
