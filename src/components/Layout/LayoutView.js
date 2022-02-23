@@ -3,6 +3,8 @@ import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { LinkBar } from 'bento-components';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
+import resourceDropdownRoutes from '../../bento/resourceDropdownRoutes';
+import dataDropdownRoutes from '../../bento/dataDropdownRoutes';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
@@ -70,6 +72,12 @@ const Layout = ({ classes, isSidebarOpened }) => (
             />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
+            )}
+            {resourceDropdownRoutes.map(
+              (resourceDropdownRoute) => <Route path={resourceDropdownRoute} component={About} />,
+            )}
+            {dataDropdownRoutes.map(
+              (dataDropdownRoute) => <Route path={dataDropdownRoute} component={About} />,
             )}
             <Route path="/graphql" component={GraphqlClient} />
             <Route component={Error} />

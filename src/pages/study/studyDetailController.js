@@ -6,6 +6,8 @@ import { Typography } from '../../components/Wrappers/Wrappers';
 import {
   GET_STUDY_DETAIL_DATA_QUERY,
 } from '../../bento/studyDetailsData';
+import Studies from '../studies/studiesController';
+// eslint-disable-next-line no-unused-vars
 import Error from '../error/Error';
 
 const StudyDetailContainer = ({ match, history }) => {
@@ -22,7 +24,7 @@ const StudyDetailContainer = ({ match, history }) => {
       history.push(redirectUrl);
     }
     if (study.length === 0) {
-      return <Error />;
+      return <Studies invalid />;
     }
   }
 

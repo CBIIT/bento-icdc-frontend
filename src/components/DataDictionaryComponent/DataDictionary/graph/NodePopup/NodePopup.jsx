@@ -54,13 +54,13 @@ class NodePopup extends React.Component {
                   </li>
                   <li className="node-popup__list-item">
                     <span className="node-popup__list-item_label">
-                      {'Required properties: '}
+                      {'Required Properties: '}
                     </span>
                     {this.props.highlightingNode.requiredPropertiesCount}
                   </li>
                   <li className="node-popup__list-item">
                     <span className="node-popup__list-item_label">
-                      {'Optional properties: '}
+                      {'Optional Properties: '}
                     </span>
                     {this.props.highlightingNode.optionalPropertiesCount}
                   </li>

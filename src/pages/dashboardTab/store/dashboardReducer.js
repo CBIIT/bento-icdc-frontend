@@ -40,6 +40,8 @@ const storeKey = 'dashboardTab';
 const initialState = {
   dashboardTab: {
     isDataTableUptoDate: false,
+    isOverlayOpen: false,
+    test: {},
     isFetched: false,
     isLoading: false,
     isDashboardTableLoading: false,
@@ -267,17 +269,14 @@ function hasFilter() {
 
 function createFilterVariables(data) {
   const currentAllActiveFilters = getState().allActiveFilters;
-  // eslint-disable-next-line  no-unused-vars
-  const filter = Object.entries(currentAllActiveFilters).reduce((acc, [key, val]) => {
+  const filter = Object.entries(currentAllActiveFilters).reduce((acc, [key]) => {
     if (data[0].datafield === key) {
       return data[0].isChecked
         ? { ...acc, [key]: [...currentAllActiveFilters[key], ...[data[0].name]] }
         : { ...acc, [key]: currentAllActiveFilters[key].filter((item) => item !== data[0].name) };
     }
-    // return { ...acc , [key]: [...currentAllActiveFilters[key],...[data[0].name]] }
     return { ...acc, [key]: currentAllActiveFilters[key] };
   }, {});
-
   return filter;
 }
 
@@ -895,23 +894,36 @@ so it contains more information and easy for front-end to show it correctly.
  * @return {json}
  */
 export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromConfig) {
+  // eslint-disable-next-line no-console
   return (
-    facetSearchDataFromConfig.map((mapping) => ({
-      groupName: mapping.label,
-      checkboxItems: transformAPIDataIntoCheckBoxData(
-        convertCasesToCount(data[mapping.filterAPI]),
-        mapping.field,
-      ),
-      datafield: mapping.datafield,
-      show: mapping.show,
-      section: mapping.section,
-      tooltip: mapping.tooltip,
-    }))
+    // eslint-disable-next-line arrow-body-style
+    facetSearchDataFromConfig.map((mapping) => {
+      // eslint-disable-next-line no-console
+      // console.log('data from update', transformAPIDataIntoCheckBoxData(
+      //   convertCasesToCount(data[mapping.filterAPI]),
+      //   mapping.field,
+      // ));
+      return ({
+        groupName: mapping.label,
+        checkboxItems: transformAPIDataIntoCheckBoxData(
+          convertCasesToCount(data[mapping.filterAPI]),
+          mapping.field,
+        ),
+        datafield: mapping.datafield,
+        show: mapping.show,
+        section: mapping.section,
+        tooltip: mapping.tooltip,
+      });
+    })
   );
 }
 
 export function getUnifiedViewStats(data) {
   store.dispatch({ type: 'SET_UNIFIED_VIEW_STATS', payload: { data } });
+}
+
+export function setOverLayWindow(item) {
+  store.dispatch({ type: 'SET_OVERLAY_WINDOW', payload: item });
 }
 
 export const getDashboard = () => getState();
@@ -924,6 +936,10 @@ const reducers = {
     error: item,
     isLoading: false,
     isFetched: false,
+  }),
+  SET_OVERLAY_WINDOW: (state, item) => ({
+    ...state,
+    isOverlayOpen: item,
   }),
   SET_UNIFIED_VIEW_STATS: (state, item) => ({
     ...state,
@@ -1027,6 +1043,7 @@ const reducers = {
       ? {
         ...state.dashboard,
         isFetched: true,
+        isOverlayOpen: false,
         isLoading: false,
         hasError: false,
         setSideBarLoading: false,

@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
     display: 'table',
     width: 'auto',
     paddingTop: '10px',
-    paddingLeft: '25px',
-    paddingRight: '20px',
+    paddingLeft: '18px',
+    paddingRight: '15px',
+    paddingBottom: '10px',
   },
   properties: {
     color: '#7a7a7a',
     fontSize: '8px',
-    marginLeft: '15px',
+    marginLeft: '10px',
     fontFamily: FontRegistry('NunitoExtraLightItalic'),
   },
 });

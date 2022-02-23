@@ -241,6 +241,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
     fileCountOfCase(case_id: $case_id)
     studyFileCountOfCase(case_id: $case_id)
     programsCountOfCase(case_id: $case_id)
+    volumeOfDataOfCase(case_id: $case_id)
     multiStudyCases(case_id: $case_id){
       caseIds
       sampleIds

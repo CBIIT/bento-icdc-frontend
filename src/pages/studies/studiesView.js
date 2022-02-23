@@ -10,6 +10,7 @@ import {
   manipulateLinks,
   ToolTip as Tooltip,
 } from 'bento-components';
+import { useSelector } from 'react-redux';
 import {
   pageData, textLabels,
 } from '../../bento/studiesData';
@@ -17,10 +18,14 @@ import Stats from '../../components/Stats/AllStatsController';
 import { navigatedToDashboard } from '../../utils/utils';
 import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
+import InvalidAccesionModal from './InvalidAccesionModal';
 
-const Studies = ({ classes, data }) => {
+const Studies = ({ classes, data, invalid }) => {
+  const overlay = useSelector((state) => (
+    state.dashboardTab
+      ? state.dashboardTab.isOverlayOpen : false));
+
   const tableOptions = getOptions(pageData.table, classes);
-
   const embargoToolTipIcon = () => (
     <Tooltip title="Under Embargo" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
@@ -105,6 +110,11 @@ const Studies = ({ classes, data }) => {
   return (
     <>
       <Stats />
+      {
+        invalid && !overlay ? (
+          <InvalidAccesionModal />
+        ) : null
+    }
       <div className={classes.tableContainer}>
         <div className={classes.container}>
           <div className={classes.header}>
