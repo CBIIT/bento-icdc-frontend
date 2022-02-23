@@ -53,7 +53,6 @@ const getDefaultSession = (alignments, session) => {
         item.trackId,
         [{ ...display }],
       );
-      console.log('test');
       session.view.tracks.push({ ...viewTrack });
     });
   }
