@@ -13,6 +13,7 @@ import {
 import {
   ToolTip as Tooltip,
 } from 'bento-components';
+import _ from 'lodash';
 
 const styles = {
   listItemGutters: {
@@ -76,10 +77,10 @@ function CheckBoxView(props) {
         { dataDictionary ? (
           (checkboxItem.name) ? (
             <>
-              <Tooltip title={checkboxItem.name}>
+              <Tooltip title={_.startCase(checkboxItem.name)}>
                 <div className={classes.panelDetailText}>
                   <span>
-                    {`${checkboxItem.name}`}
+                    {`${_.startCase(checkboxItem.name)}`}
                   </span>
                 </div>
               </Tooltip>

@@ -82,6 +82,7 @@ const handleExplorerFilter = (filters, dictArray) => {
   const filtered = asArray.reduce((acc = {}, [key, value]) => {
     const filteredDict = Object.fromEntries(dictArray.filter(([, dictValue]) => {
       const flag = !!dictValue[key];
+
       if (flag) {
         if (key === 'inclusion' && Object.keys(dictValue[key]).length > 0) {
           return value.some((el) => {
@@ -90,6 +91,11 @@ const handleExplorerFilter = (filters, dictArray) => {
             }
             return false;
           });
+        }
+        if (key === 'multiplicity' && value.length > 0) {
+          const multiplicityArray = dictValue.links
+            .map((dValue) => _.capitalize(dValue.multiplicity));
+          return value.some((el) => multiplicityArray.includes(el));
         }
       }
       return (value.includes(_.startCase(dictValue[key])));

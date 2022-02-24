@@ -129,7 +129,6 @@ async function init() {
     }
 
     for (const property in icdcMData.Relationships) {
-      // eslint-disable-next-line no-console
       item.multiplicity = _.startCase(icdcMData.Relationships[property].Mul);
       const label = propertyName;
       // const multiplicity = icdcMData.Relationships[propertyName].Mul;
@@ -140,12 +139,16 @@ async function init() {
           const backref = icdcMData.Relationships[property].Ends[i].Src;
           const name = icdcMData.Relationships[property].Ends[i].Dst;
           const target = icdcMData.Relationships[property].Ends[i].Dst;
+          const multiplicity = icdcMData.Relationships[property].Ends[i].Mul
+            ? icdcMData.Relationships[property].Ends[i].Mul
+            : icdcMData.Relationships[property].Mul;
 
           linkItem.name = name;
           linkItem.backref = backref;
           linkItem.label = label;
           linkItem.target_type = target;
           linkItem.required = required;
+          linkItem.multiplicity = multiplicity;
 
           link.push(linkItem);
         }
@@ -154,6 +157,18 @@ async function init() {
 
     item.links = link;
     dataList[key] = item;
+  }
+
+  for (const [key, value] of Object.entries(dataList)) {
+    if (value.links.length > 0) {
+      value.links.forEach((el) => {
+        if (el.name) {
+          dataList[el.name].links.push({
+            Dst: el.name, Src: el.backref, multiplicity: el.multiplicity,
+          });
+        }
+      });
+    }
   }
 
   // map parent key for the node

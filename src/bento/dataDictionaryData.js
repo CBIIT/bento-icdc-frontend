@@ -55,10 +55,10 @@ export const facetSearchData = [
     tooltip: 'multiplicity',
     show: true,
     checkboxItems: [
-      { name: 'One to One', isChecked: false },
-      { name: 'One to Many', isChecked: false },
-      { name: 'Many to One', isChecked: false },
-      { name: 'Many to Many', isChecked: false },
+      { name: 'One_to_one', isChecked: false },
+      { name: 'One_to_many', isChecked: false },
+      { name: 'Many_to_one', isChecked: false },
+      { name: 'Many_to_many', isChecked: false },
     ],
   },
   {
