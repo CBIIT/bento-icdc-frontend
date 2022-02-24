@@ -83,21 +83,21 @@ export const facetSectionVariables = {
     checkBoxColorsOne: '#fdf1e8',
     checkBoxColorsTwo: '#fff9f5',
     height: '7px',
-    isExpanded: false,
+    isExpanded: true,
   },
   'Filter By Samples': {
     color: '#9DC1D9',
     checkBoxColorsOne: '#dafafb',
     checkBoxColorsTwo: '#eafafb',
     height: '7px',
-    isExpanded: false,
+    isExpanded: true,
   },
   'Filter By Files': {
     color: '#667A87',
     checkBoxColorsOne: '#d4ddf7',
     checkBoxColorsTwo: '#e9eefb',
     height: '7px',
-    isExpanded: false,
+    isExpanded: true,
   },
 };
 
