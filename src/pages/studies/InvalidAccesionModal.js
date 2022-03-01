@@ -5,10 +5,12 @@ import {
   Modal,
   Fade,
   Typography,
+  IconButton,
 } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 import SadDog from './Sad_dog.png';
 
-const style = {
+const boxStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -41,7 +43,23 @@ const InvalidAccesionModal = () => {
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>
+          <Box sx={boxStyle}>
+            <IconButton
+              onClick={handleClose}
+              style={{
+                position: 'absolute',
+                left: '542px',
+                top: '6px',
+                color: 'black',
+              }}
+            >
+              <Close
+                style={{
+                  width: '15px',
+                  height: '15px',
+                }}
+              />
+            </IconButton>
             <Typography
               id="transition-modal-title"
               variant="h6"
