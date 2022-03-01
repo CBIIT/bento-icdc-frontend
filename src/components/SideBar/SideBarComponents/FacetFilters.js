@@ -271,7 +271,7 @@ const FacetPanel = ({ classes, disabled }) => {
           />
           <ExpansionPanel
             disabled={disabled}
-            expanded={sectionExpanded.includes(currentSection.sectionName)}
+            expanded={!disabled && sectionExpanded.includes(currentSection.sectionName)}
             onChange={handleSectionChange(currentSection.sectionName)}
                 // className={classes.expansion}
             classes={{
