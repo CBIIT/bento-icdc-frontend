@@ -82,6 +82,7 @@ async function init() {
     const properties = {};
     const pRequired = [];
     const pPreffered = [];
+    const pOptional = [];
     if (icdcMData.Nodes[key].Props != null) {
       for (let i = 0; i < icdcMData.Nodes[key].Props.length; i++) {
         const nodeP = icdcMData.Nodes[key].Props[i];
@@ -101,6 +102,8 @@ async function init() {
             if (icdcMPData.PropDefinitions[propertyName].Req === 'Yes') {
               pRequired.push(nodeP);
             } else if (icdcMPData.PropDefinitions[propertyName].Req === 'No') {
+              pOptional.push(nodeP);
+            } else if (icdcMPData.PropDefinitions[propertyName].Req === 'Preferred') {
               pPreffered.push(nodeP);
             }
           }
@@ -116,6 +119,12 @@ async function init() {
           required: pRequired,
         };
       }
+      if (pOptional.length > 0) {
+        item.inclusion = {
+          ...item.inclusion,
+          optional: pOptional,
+        };
+      }
       if (pPreffered.length > 0) {
         item.inclusion = {
           ...item.inclusion,
@@ -124,6 +133,7 @@ async function init() {
       }
       item.required = pRequired;
       item.preferred = pPreffered;
+      item.optional = pOptional;
     } else {
       item.properties = {};
     }

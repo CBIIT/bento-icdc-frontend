@@ -85,8 +85,10 @@ export const calculateGraphLayout = (dictionary, countsSearch, linksSearch) => {
             (textPadding * 2) + (nodeNames.length * (fontSize + textLineGap)),
           );
           const requiredPropertiesCount = originNode.required ? originNode.required.length : 0;
-          const optionalPropertiesCount = originNode.properties
-            ? Object.keys(originNode.properties).length - requiredPropertiesCount : 0;
+          // const optionalPropertiesCount = originNode.properties
+          //   ? Object.keys(originNode.properties).length - requiredPropertiesCount : 0;
+          const optionalPropertiesCount = originNode.optional ? originNode.optional.length : 0;
+          const preferredPropertiesCount = originNode.preferred ? originNode.preferred.length : 0;
           const nodeClass = originNode.class ? capitalizeFirstLetter(originNode.class) : '';
           const nodeAssignment = originNode.assignment ? capitalizeFirstLetter(originNode.assignment) : '';
           let nodeLevel = 0;
@@ -114,6 +116,7 @@ export const calculateGraphLayout = (dictionary, countsSearch, linksSearch) => {
             _gvid: n._gvid,
             requiredPropertiesCount,
             optionalPropertiesCount,
+            preferredPropertiesCount,
             class: nodeClass,
             assignment: nodeAssignment,
           };

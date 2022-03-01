@@ -70,6 +70,7 @@ export const facetSearchData = [
     checkboxItems: [
       { name: 'Required', isChecked: false },
       { name: 'Preferred', isChecked: false },
+      { name: 'Optional', isChecked: false },
     ],
   },
 ];

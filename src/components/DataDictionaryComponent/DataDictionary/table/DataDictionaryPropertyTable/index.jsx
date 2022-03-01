@@ -28,7 +28,7 @@ const required = (requiredFlag, preferredFlag) => {
     );
   }
   return (
-    <span>No</span>
+    <span>Optional</span>
   );
 };
 
