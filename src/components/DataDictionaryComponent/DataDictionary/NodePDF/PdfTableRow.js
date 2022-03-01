@@ -1,10 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
   Text,
   View,
   StyleSheet,
+  Image,
 } from '@react-pdf/renderer';
 import { FontRegistry } from './util';
+import keyIcon from './assets/key_icon.png';
 
 const styles = StyleSheet.create({
   row: {
@@ -16,6 +18,12 @@ const styles = StyleSheet.create({
   },
   tableCol: {
     width: '24%',
+  },
+  tableCol2: {
+    width: '24%',
+  },
+  tableColKey: {
+    width: '4%',
   },
   tableColType: {
     width: '18%',
@@ -33,13 +41,43 @@ const styles = StyleSheet.create({
   },
   tableCell: {
     fontSize: 8,
-    // lineHeight: '9px',
     overflowWrap: 'break-word',
     paddingLeft: '2px',
     paddingTop: '5px',
     paddingBottom: '5px',
     lineHeight: 1.2,
     fontFamily: FontRegistry('NunitoNormal'),
+  },
+  key: {
+    fontSize: 8,
+    color: '#0d71a3',
+    // float: 'left',
+    // overflowWrap: 'break-word',
+    paddingLeft: '2px',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    lineHeight: 1.2,
+    width: '90%',
+    // justifyContent: 'left',
+    fontFamily: FontRegistry('NunitoSemiBold'),
+  },
+  tableColKey1: {
+    width: '90%',
+    justifyContent: 'center',
+  },
+  tableColKey2: {
+    width: '114%',
+  },
+  keyText: {
+    marginRight: '10px',
+  },
+  keyIcon: {
+    width: '12px',
+    marginLeft: '20px',
+  },
+  keyIconView: {
+    position: 'absolute',
+    left: '20px',
   },
   required: {
     color: '#ff5a20',
@@ -49,7 +87,6 @@ const styles = StyleSheet.create({
 
 const PdfTableRow = ({ node }) => {
   const keys = Object.keys(node.properties);
-
   const textContent = (text, symbol) => {
     if (String(text).length > 20) {
       return String(text).replace(symbol, `${symbol}\n`);
@@ -91,12 +128,36 @@ const PdfTableRow = ({ node }) => {
     return <Text style={styles.tableCell}>No</Text>;
   };
 
+  const displayKeyPropertyDisplay = (description) => {
+    const texts = description.split('This property');
+    return texts.map((item) => (
+      <Text style={styles.tableCell}>
+        <br />
+        {`This property ${item}`}
+      </Text>
+    ));
+  };
+
   const getStyles = (classes, index) => ((index % 2 === 0)
     ? { ...classes, ...styles.evenRow } : { ...classes });
   const rows = keys.map((key, index) => (
     <View style={getStyles(styles.row, index)} key={key}>
       <View style={styles.tableCol}>
-        <Text style={styles.tableCell}>{textContent(key, '_')}</Text>
+        {node.properties[key].key ? (
+          <>
+            <View style={(String(key).length > 20) ? styles.tableColKey2 : styles.tableColKey1}>
+              <Text style={styles.key}>
+                {key}
+                {' '}
+                <Image style={styles.keyIcon} src={keyIcon} alt="key icon" />
+              </Text>
+            </View>
+          </>
+        ) : (
+          <Text style={styles.tableCell}>
+            {textContent(key, '_')}
+          </Text>
+        )}
       </View>
       <View style={styles.tableColType}>
         {node.properties[key].enum ? (
@@ -105,14 +166,24 @@ const PdfTableRow = ({ node }) => {
             {validateEnums(node.properties[key].enum)}
           </Text>
         ) : (
-          <Text style={styles.tableCell}>{validateType(node.properties[key].type)}</Text>
+          <Text style={styles.tableCell}>
+            {validateType(node.properties[key].type)}
+          </Text>
         ) }
       </View>
       <View style={styles.tableColRequired}>
         {required(key)}
       </View>
       <View style={styles.tableColDesc}>
-        <Text style={styles.tableCell}>{node.properties[key].description}</Text>
+        {node.properties[key].key ? (
+          <>
+            {displayKeyPropertyDisplay(node.properties[key].description)}
+          </>
+        ) : (
+          <Text style={styles.tableCell}>
+            {node.properties[key].description}
+          </Text>
+        )}
       </View>
       <View style={styles.tableColSource}>
         <Text style={styles.tableCell}>{textContent(node.properties[key].src, '/')}</Text>

@@ -11,6 +11,7 @@ import {
   getPropertyTypeFragment,
 } from '../../highlightHelper';
 import './DataDictionaryPropertyTable.css';
+import { ReactComponent as KeyIconSvg } from '../../../assets/key_icon.svg';
 
 const required = (requiredFlag, preferredFlag) => {
   if (requiredFlag) {
@@ -41,6 +42,34 @@ const formatEnumValues = (enums) => {
     return concatEnums;
   }
   return JSON.stringify(enums);
+};
+
+const displayKeyProperty = (property) => (
+  <>
+    <div className="data-dictionary-property-table__data_KeyProperty">
+      <p>{property}</p>
+      <KeyIconSvg className={`data-dictionary-property-table__data_KeyProperty_icon ${property}`} />
+    </div>
+  </>
+);
+
+const displayKeyPropertyDisplay = (description) => {
+  const texts = description.split('<br>');
+  return texts.map((item, index) => {
+    if (texts.length - 1 === index) {
+      return (
+        <p>
+          <br />
+          {item}
+        </p>
+      );
+    }
+    return (
+      <p>
+        {item}
+      </p>
+    );
+  });
 };
 
 class DataDictionaryPropertyTable extends React.Component {
@@ -126,6 +155,7 @@ class DataDictionaryPropertyTable extends React.Component {
                 let termLink = '';
                 let type = '';
                 let enums = '';
+                let key = false;
                 if ('src' in property) {
                   try {
                     termID = property.src;
@@ -145,6 +175,9 @@ class DataDictionaryPropertyTable extends React.Component {
                 if ('enum' in property) {
                   enums = property.enum;
                 }
+                if ('key' in property) {
+                  key = property.key;
+                }
 
                 const propertyDescriptionFragment = getPropertyDescriptionFragment(
                   property,
@@ -156,7 +189,9 @@ class DataDictionaryPropertyTable extends React.Component {
                 return (
                   <tr key={propertyKey} className="data-dictionary-property-table__row">
                     <td className="data-dictionary-property-table__data">
-                      {propertyNameFragment}
+                      { (key)
+                        ? displayKeyProperty(propertyKey)
+                        : propertyNameFragment }
                     </td>
                     <td className="data-dictionary-property-table__data">
                       { (enums) ? (
@@ -177,7 +212,10 @@ class DataDictionaryPropertyTable extends React.Component {
                       )
                     }
                     <td className="data-dictionary-property-table__data">
-                      <p>{propertyDescriptionFragment}</p>
+                      {/* <p>{propertyDescriptionFragment}</p> */}
+                      { (key)
+                        ? displayKeyPropertyDisplay(property.description)
+                        : propertyDescriptionFragment }
                     </td>
                     <td className="data-dictionary-property-table__data">
                       <p>{JSON.stringify(termID)}</p>

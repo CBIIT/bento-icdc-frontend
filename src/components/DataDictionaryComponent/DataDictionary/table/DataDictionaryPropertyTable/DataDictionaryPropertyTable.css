@@ -5,7 +5,8 @@
 }
 
 .data-dictionary-property-table__data {
-  padding: 10px;
+  padding: 10px 10px 10px 19px;
+  border: 0;
   text-align: left;
   font-family: raleway;
   vertical-align: top;
@@ -31,18 +32,22 @@ td.data-dictionary-property-table__data:nth-child(2) > p {
 .data-dictionary-property-table--without-border tr th.data-dictionary-property-table__data:first-child {
   border-left: 0;
 }
+
 .data-dictionary-property-table--without-border tr td.data-dictionary-property-table__data:last-child,
 .data-dictionary-property-table--without-border tr th.data-dictionary-property-table__data:last-child {
   border-right: 0;
 }
 
 .data-dictionary-property-table__head {
-  /* background-color: var(--dictionary-header-color); */
   color: #606060;
   font-size: 13px;
-  font-weight: 800;
+  background: #fff;
   border-top: 2px solid #606060;
   border-bottom: 2px solid #606060;
+}
+
+.data-dictionary-property-table__head th {
+  font-weight: 900;
 }
 
 .data-dictionary-property-table__row:nth-child(odd) {
@@ -76,4 +81,23 @@ td.data-dictionary-property-table__data:nth-child(2) > p {
 
 .data-dictionary-property-table__span--new-line {
   display: block;
+}
+
+.data-dictionary-property-table__data_KeyProperty {
+  /* float: left; */
+  display: inline-block;
+  min-width: 220px;
+  font-weight: bold;
+  color: #0d71a3;
+}
+
+.data-dictionary-property-table__data_KeyProperty p {
+  float: left;
+  margin: auto;
+}
+
+.data-dictionary-property-table__data_KeyProperty_icon {
+  width: 25px;
+  margin-left: 8px;
+  padding-top: 5px;
 }
