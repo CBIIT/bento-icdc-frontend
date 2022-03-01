@@ -78,7 +78,7 @@ export const pageData = {
       icon: datadictionaryIcon,
       content: {
         callToActionTitle: 'Delve\ninto the\n Data\n Model',
-        callToActionDescription: 'The ICDC data model is a\n representation of how all the\n constituent data are arranged\n relative to each other.',
+        callToActionDescription: 'The ICDC data model provides a\n visual representation of how all the\n constituent nodes and values are arranged relative to each other.',
         callToActionButtonText: 'Data Model Explorer',
         callToActionLink: '/icdc-data-model',
         image: datadictionary,
