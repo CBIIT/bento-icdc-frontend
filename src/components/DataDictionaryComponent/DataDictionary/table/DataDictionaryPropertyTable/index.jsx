@@ -1,8 +1,9 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Link } from '@material-ui/core';
 import { SearchResultItemShape } from '../../utils';
 import {
   getMatchesSummaryForProperties,
@@ -11,6 +12,8 @@ import {
   getPropertyTypeFragment,
 } from '../../highlightHelper';
 import './DataDictionaryPropertyTable.css';
+import DialogBox from './component/DialogComponent';
+import ListComponent from './component/ListComponent';
 
 const required = (requiredFlag, preferredFlag) => {
   if (requiredFlag) {
@@ -32,18 +35,38 @@ const required = (requiredFlag, preferredFlag) => {
   );
 };
 
-const formatEnumValues = (enums) => {
-  if (Array.isArray(enums)) {
-    let concatEnums = '';
-    enums.forEach((value) => {
-      concatEnums += `'${value}'; `;
-    });
-    return concatEnums;
-  }
-  return JSON.stringify(enums);
-};
+// const formatEnumValues = (enums) => {
+//   if (Array.isArray(enums)) {
+//     return enums.slice(0, 14).map((value) => <li>{value}</li>);
+//   }
+//   return enums;
+// };
 
 class DataDictionaryPropertyTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: false,
+      items: [],
+    };
+  }
+
+  openBoxHandler = (values) => {
+    console.log(values);
+    this.setState({
+      display: true,
+      items: values,
+    });
+    console.log(this.state);
+  };
+
+  closeHandler = () => {
+    this.setState({
+      display: false,
+      items: [],
+    });
+  };
+
   render() {
     const borderModifier = this.props.hasBorder ? ''
       : 'data-dictionary-property-table--without-border';
@@ -160,11 +183,19 @@ class DataDictionaryPropertyTable extends React.Component {
                     </td>
                     <td className="data-dictionary-property-table__data">
                       { (enums) ? (
-                        <p>
-                          Acceptable Values:
-                          {' '}
-                          {formatEnumValues(enums)}
-                        </p>
+                        <>
+                          <p>
+                            Acceptable Values:
+                            {' '}
+                            <ListComponent items={enums} />
+                          </p>
+                          {enums.length > 15
+                            && (
+                              <Button onClick={() => this.openBoxHandler(enums)}>
+                                ...show more
+                              </Button>
+                            )}
+                        </>
                       ) : (
                         <p>{JSON.stringify(type)}</p>
                       )}
@@ -188,6 +219,11 @@ class DataDictionaryPropertyTable extends React.Component {
             }
           </tbody>
         </table>
+        <DialogBox
+          display={this.state.display}
+          closeHandler={this.closeHandler}
+          items={this.state.items}
+        />
       </div>
     );
   }
