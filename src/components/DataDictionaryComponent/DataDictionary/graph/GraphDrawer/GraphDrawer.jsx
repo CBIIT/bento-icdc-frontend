@@ -23,15 +23,18 @@ class GraphDrawer extends React.Component {
       this.setNodeSVGElement();
     }
 
+    // Update node's svg elements every time graph is filtered
     if (this.props.activeFilter) {
       this.setNodeSVGElement();
     }
 
+    // Update node's svg elements every time graph filter is cleared
     if (this.props.filtersCleared) {
       this.setNodeSVGElement();
     }
   }
 
+  // updates node's svg element
   setNodeSVGElement() {
     const graphNodesSVGElements = this.props.nodes.map((node) => ({
       nodeID: node.id,
