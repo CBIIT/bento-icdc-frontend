@@ -128,14 +128,20 @@ const PdfTableRow = ({ node }) => {
     return <Text style={styles.tableCell}>No</Text>;
   };
 
-  const displayKeyPropertyDisplay = (description) => {
-    const texts = description.split('This property');
-    return texts.map((item) => (
-      <Text style={styles.tableCell}>
-        <br />
-        {`This property ${item}`}
-      </Text>
-    ));
+  const displayKeyPropsDiscription = (description) => {
+    const texts = description.split('<br>');
+    if (texts.length === 1) return <Text style={styles.tableCell}>{texts}</Text>;
+    return texts.map((item, index) => {
+      if (texts.length - 1 === index) {
+        return (
+          <Text style={styles.tableCell}>
+            <br />
+            {item}
+          </Text>
+        );
+      }
+      return (<Text style={styles.tableCell}>{item}</Text>);
+    });
   };
 
   const getStyles = (classes, index) => ((index % 2 === 0)
@@ -177,7 +183,7 @@ const PdfTableRow = ({ node }) => {
       <View style={styles.tableColDesc}>
         {node.properties[key].key ? (
           <>
-            {displayKeyPropertyDisplay(node.properties[key].description)}
+            {displayKeyPropsDiscription(node.properties[key].description)}
           </>
         ) : (
           <Text style={styles.tableCell}>

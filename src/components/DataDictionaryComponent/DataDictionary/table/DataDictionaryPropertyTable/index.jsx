@@ -53,8 +53,9 @@ const displayKeyProperty = (property) => (
   </>
 );
 
-const displayKeyPropertyDisplay = (description) => {
+const displayKeyPropsDescription = (description) => {
   const texts = description.split('<br>');
+  if (texts.length === 1) return description;
   return texts.map((item, index) => {
     if (texts.length - 1 === index) {
       return (
@@ -64,11 +65,7 @@ const displayKeyPropertyDisplay = (description) => {
         </p>
       );
     }
-    return (
-      <p>
-        {item}
-      </p>
-    );
+    return (<p>{item}</p>);
   });
 };
 
@@ -212,9 +209,8 @@ class DataDictionaryPropertyTable extends React.Component {
                       )
                     }
                     <td className="data-dictionary-property-table__data">
-                      {/* <p>{propertyDescriptionFragment}</p> */}
                       { (key)
-                        ? displayKeyPropertyDisplay(property.description)
+                        ? displayKeyPropsDescription(property.description)
                         : propertyDescriptionFragment }
                     </td>
                     <td className="data-dictionary-property-table__data">
