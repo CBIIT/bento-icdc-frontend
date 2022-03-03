@@ -20,17 +20,29 @@ class GraphDrawer extends React.Component {
     if (this.props.isGraphView
        && this.props.layoutInitialized
        && !this.nodeSVGElementInitialized) {
-      const graphNodesSVGElements = this.props.nodes.map((node) => ({
-        nodeID: node.id,
-        svgElement: this.getNodeRef(node.id).current.getSVGElement(),
-      }))
-        .reduce((acc, cur) => {
-          acc[cur.nodeID] = cur.svgElement;
-          return acc;
-        }, {});
-      this.nodeSVGElementInitialized = true;
-      this.props.onGraphNodesSVGElementsUpdated(graphNodesSVGElements);
+      this.setNodeSVGElement();
     }
+
+    if (this.props.activeFilter) {
+      this.setNodeSVGElement();
+    }
+
+    if (this.props.filtersCleared) {
+      this.setNodeSVGElement();
+    }
+  }
+
+  setNodeSVGElement() {
+    const graphNodesSVGElements = this.props.nodes.map((node) => ({
+      nodeID: node.id,
+      svgElement: this.getNodeRef(node.id).current.getSVGElement(),
+    }))
+      .reduce((acc, cur) => {
+        acc[cur.nodeID] = cur.svgElement;
+        return acc;
+      }, {});
+    this.nodeSVGElementInitialized = true;
+    this.props.onGraphNodesSVGElementsUpdated(graphNodesSVGElements);
   }
 
   onMouseOverNode = (node) => {

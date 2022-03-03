@@ -10,6 +10,8 @@ const ReduxGraphDrawer = (() => {
   const mapStateToProps = (state) => ({
     nodes: state.ddgraph.nodes,
     edges: state.ddgraph.edges,
+    activeFilter: state.submission.activeFilter,
+    filtersCleared: state.submission.filtersCleared,
     graphBoundingBox: state.ddgraph.graphBoundingBox,
     layoutInitialized: state.ddgraph.layoutInitialized,
     highlightingNode: state.ddgraph.highlightingNode,
