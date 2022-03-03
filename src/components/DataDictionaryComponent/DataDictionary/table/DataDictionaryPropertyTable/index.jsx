@@ -187,7 +187,7 @@ class DataDictionaryPropertyTable extends React.Component {
                           <p>
                             Acceptable Values:
                             {' '}
-                            <ListComponent items={enums} />
+                            <ListComponent items={enums.slice(0, 15)} />
                           </p>
                           {enums.length > 15
                             && (
