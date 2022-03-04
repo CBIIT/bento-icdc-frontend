@@ -51,8 +51,6 @@ const styles = StyleSheet.create({
   key: {
     fontSize: 8,
     color: '#0d71a3',
-    // float: 'left',
-    // overflowWrap: 'break-word',
     paddingLeft: '2px',
     paddingTop: '5px',
     paddingBottom: '5px',
@@ -129,19 +127,8 @@ const PdfTableRow = ({ node }) => {
   };
 
   const displayKeyPropsDiscription = (description) => {
-    const texts = description.split('<br>');
-    if (texts.length === 1) return <Text style={styles.tableCell}>{texts}</Text>;
-    return texts.map((item, index) => {
-      if (texts.length - 1 === index) {
-        return (
-          <Text style={styles.tableCell}>
-            <br />
-            {item}
-          </Text>
-        );
-      }
-      return (<Text style={styles.tableCell}>{item}</Text>);
-    });
+    const lines = description.split('<br>');
+    return lines.map((line, index) => <Text key={index} style={styles.tableCell}>{line}</Text>);
   };
 
   const getStyles = (classes, index) => ((index % 2 === 0)

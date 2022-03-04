@@ -54,19 +54,8 @@ const displayKeyProperty = (property) => (
 );
 
 const displayKeyPropsDescription = (description) => {
-  const texts = description.split('<br>');
-  if (texts.length === 1) return description;
-  return texts.map((item, index) => {
-    if (texts.length - 1 === index) {
-      return (
-        <p>
-          <br />
-          {item}
-        </p>
-      );
-    }
-    return (<p>{item}</p>);
-  });
+  const lines = description.split('<br>');
+  return lines.map((line) => <span>{line}</span>);
 };
 
 class DataDictionaryPropertyTable extends React.Component {
@@ -210,7 +199,11 @@ class DataDictionaryPropertyTable extends React.Component {
                     }
                     <td className="data-dictionary-property-table__data">
                       { (key)
-                        ? displayKeyPropsDescription(property.description)
+                        ? (
+                          <div className="data-dictionary-property-table_key_description">
+                            {displayKeyPropsDescription(property.description)}
+                          </div>
+                        )
                         : propertyDescriptionFragment }
                     </td>
                     <td className="data-dictionary-property-table__data">

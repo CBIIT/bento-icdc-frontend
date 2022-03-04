@@ -101,3 +101,8 @@ td.data-dictionary-property-table__data:nth-child(2) > p {
   margin-left: 8px;
   padding-top: 5px;
 }
+
+.data-dictionary-property-table_key_description > span:last-child {
+  display: block;
+  margin-top: 13px;
+}
