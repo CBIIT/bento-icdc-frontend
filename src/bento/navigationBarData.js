@@ -78,6 +78,11 @@ export const navBarData = [
         linkActiveStyle: 'white',
       },
       {
+        labelText: 'Data Use',
+        link: '/guideline',
+        linkActiveStyle: 'white',
+      },
+      {
         labelText: 'Data Submission Guidelines',
         link: '/submit',
         linkActiveStyle: 'white',

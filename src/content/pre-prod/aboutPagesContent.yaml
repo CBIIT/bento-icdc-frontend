@@ -507,7 +507,7 @@
     - 
       paragraph: "$$#Citing ICDC in Publications:#$$"
     - 
-      paragraph: "To cite the ICDC as a resource, reference the data as being available via the NCI’s Integrated Canine Data Commons (ICDC) at https://caninecommons.cancer.gov"
+      paragraph: "To cite the ICDC as a resource, reference the data as being available via the NCI’s Integrated Canine Data Commons (ICDC) at $$[https://caninecommons.cancer.gov ](https://caninecommons.cancer.gov )$$ "
     - 
       paragraph: "$$#Citing Individual Studies:#$$"
     - 
