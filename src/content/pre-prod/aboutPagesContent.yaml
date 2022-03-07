@@ -495,3 +495,33 @@
       paragraph: "In developing the submission plan, a primary consideration is that consumers of the data will not be as familiar with the data as the project owners. For example, submitters may find “lymphoma” implicit as a diagnosis in a given data set and thus not have use for such a field. However, this field would need to be explicit for the research community as a whole."
     - 
       paragraph: "General guidelines have been established to leverage available community standards where possible for both field name and acceptable values. Common data quality issues are: inconsistent spelling (haemotology versus hematology), inconsistent formatting (“Male” versus “male”), concatenated values which should be separate (“neutered male” should be values in two separate fields), gaps in data (Null data versus empty data versus data not collected) and format (Excel or other database compatible formats versus PDF). The ICDC data team will work with the submitter to identify and resolve these issues."
+
+- 
+  page: /guideline
+  title: "ICDC Data Use Guidelines"
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_SubmittingData.jpg'
+  content: 
+    - 
+      paragraph: "Data made available thru the ICDC is for research purposes only. ICDC Data received by the requestor is considered “Licensed Material” as defined below. ICDC data submission and data use is governed by $${title:Creative Commons CC-BY 4.0,link:https://creativecommons.org/licenses/by/4.0/}$$. licensing terms."
+    - 
+      paragraph: "By exercising the Licensed Rights, You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution 4.0 International Public License ("Public License"). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions."
+    - 
+      paragraph: "$$#Citing ICDC in Publications#$$"
+    - 
+      paragraph: "To cite the ICDC as a resource, reference the data as being available via the NCI’s Integrated Canine Data Commons (ICDC) at https://caninecommons.cancer.gov"
+    - 
+      paragraph: "$$#Citing Individual Studies#$$"
+    - 
+      paragraph: "ICDC uses human readable identifiers for representing studies."
+    - 
+      paragraph: "To cite an individual study, either cite the ICDC accession id (e.g., icdc:000003) or the URL to the study (e.g., https://caninecommons.cancer.gov/#/study/GLIOMA01)."
+    - 
+      paragraph: "$$#Intellectual Property policy statement#$$"
+    - 
+      paragraph: "The ICDC discourages use of the data to acquire ownership interest in pre-competitive technologies necessary for the development of the field (“research tools”).  The ICDC places no restrictions on the use of data to develop downstream technologies that may lead to discoveries that address public needs, especially therapeutics.  For further information about the ICDC Intellectual Property policy, please contact us at ICDCHelpDesk@mail.nih.gov"
+     - 
+      paragraph: "$$#Embargo Period for datasets#$$"
+    - 
+      paragraph: "Certain datasets made available in ICDC will have an embargo period as an associated publication is in the process of being accepted and or published.  An embargo is the release of limited metadata on the ICDC portal until an approval is obtained from the respective data submitter. There are several visual icons intended to flag studies that have an active embargo to inform users that the data will be released to ICDC in the near future."
+    
+   
