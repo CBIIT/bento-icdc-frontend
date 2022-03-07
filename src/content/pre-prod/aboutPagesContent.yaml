@@ -517,8 +517,8 @@
     - 
       paragraph: "$$#Intellectual Property policy statement:#$$"
     - 
-      paragraph: "The ICDC discourages use of the data to acquire ownership interest in pre-competitive technologies necessary for the development of the field (“research tools”).  The ICDC places no restrictions on the use of data to develop downstream technologies that may lead to discoveries that address public needs, especially therapeutics.  For further information about the ICDC Intellectual Property policy, please contact us at ICDCHelpDesk@mail.nih.gov"
-     - 
+      paragraph: "The ICDC discourages use of the data to acquire ownership interest in pre-competitive technologies necessary for the development of the field (“research tools”).  The ICDC places no restrictions on the use of data to develop downstream technologies that may lead to discoveries that address public needs, especially therapeutics.  For further information about the ICDC Intellectual Property policy, please contact us at $$@ICDCHelpDesk@mail.nih.gov@$$"
+    - 
       paragraph: "$$#Embargo Period for datasets:#$$"
     - 
       paragraph: "Certain datasets made available in ICDC will have an embargo period as an associated publication is in the process of being accepted and or published.  An embargo is the release of limited metadata on the ICDC portal until an approval is obtained from the respective data submitter. There are several visual icons intended to flag studies that have an active embargo to inform users that the data will be released to ICDC in the near future."
