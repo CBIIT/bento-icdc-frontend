@@ -513,7 +513,7 @@
     - 
       paragraph: "ICDC uses human readable identifiers for representing studies."
     - 
-      paragraph: "To cite an individual study, either cite the ICDC accession id (e.g., icdc:000003) or the URL to the study (e.g., https://caninecommons.cancer.gov/#/study/GLIOMA01)."
+      paragraph: "To cite an individual study, cite the native ICDC accession ID as displayed within the User Interface, prefixed by “icdc:” to create a compact identifier that can be resolved via $$[identifiers.org](https://identifiers.org/)$$ (e.g., icdc:000003), and/or cite the URL to the study (e.g., $$[https://caninecommons.cancer.gov/#/study/000003](https://caninecommons.cancer.gov/#/study/000003)$$), where the URL ends with the native ICDC accession ID."
     - 
       paragraph: "$$#Intellectual Property policy statement:#$$"
     - 
