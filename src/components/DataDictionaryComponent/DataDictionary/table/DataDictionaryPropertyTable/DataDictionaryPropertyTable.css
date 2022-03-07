@@ -102,7 +102,7 @@ td.data-dictionary-property-table__data:nth-child(2) > p {
   padding-top: 5px;
 }
 
-.data-dictionary-property-table_key_description > span:last-child {
+.data-dictionary-property-table_key_description > span:last-child:not(:first-child) {
   display: block;
   margin-top: 13px;
 }

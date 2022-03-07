@@ -37,20 +37,22 @@
 
 .overlay-property-table__close {
   float: right;
-  color: var(--g3-color__bg-coal);
+  color: #fff;
   cursor: pointer;
   margin-left: 15px;
 }
 
 .overlay-property-table__close-icon {
-  background-color: var(--g3-color__bg-coal);
+  background-color: #fff;
+  /* background-color: var(--g3-color__bg-coal); */
   margin-left: 8px;
   position: relative;
   top: 1px;
 }
 
 .overlay-property-table__category {
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: var(--dictionary-header-color);
   height: 60px;
   padding: 10px 15px;
   line-height: 40px;
@@ -101,7 +103,8 @@
   padding: unset; /* override .g3-button's paddings */
   float: right;
   font-weight: normal;
-  background-color: #fff;
+  /* background-color: #fff; */
+  /* background-color: #0B3557; */
   /* color: var(--g3-color__white); */
   border: 0;
   padding: 0px 6px 0px 6px;
@@ -113,7 +116,7 @@
 .overlay-property-table__download-button:hover,
 .overlay-property-table__download-button:active {
   color: white;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .overlay-property-table__download-text {
