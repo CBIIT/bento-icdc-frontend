@@ -36,7 +36,8 @@ const twoColumnsView = {
         fontWeight: '300',
       },
       gutters: {
-        marginBottom: '-5px',
+        paddingLeft: '2px',
+        marginBottom: '-4px',
       },
     },
   },

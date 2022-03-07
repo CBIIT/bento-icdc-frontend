@@ -29,7 +29,7 @@ const theme = {
     },
     MuiDialogContent: {
       root: {
-        padding: '15px 25px 35px 5px',
+        padding: '15px 25px 35px 15px',
       },
     },
     MuiBackdrop: {
