@@ -14,6 +14,8 @@ import {
 import './DataDictionaryPropertyTable.css';
 import DialogBox from './component/DialogComponent';
 import ListComponent from './component/ListComponent';
+import ButtonComponent from './component/ButtonComponent';
+import { controlVocabConfig as config } from '../../../../../bento/dataDictionaryData';
 
 const required = (requiredFlag, preferredFlag) => {
   if (requiredFlag) {
@@ -35,13 +37,6 @@ const required = (requiredFlag, preferredFlag) => {
   );
 };
 
-// const formatEnumValues = (enums) => {
-//   if (Array.isArray(enums)) {
-//     return enums.slice(0, 14).map((value) => <li>{value}</li>);
-//   }
-//   return enums;
-// };
-
 class DataDictionaryPropertyTable extends React.Component {
   constructor(props) {
     super(props);
@@ -52,12 +47,10 @@ class DataDictionaryPropertyTable extends React.Component {
   }
 
   openBoxHandler = (values) => {
-    console.log(values);
     this.setState({
       display: true,
       items: values,
     });
-    console.log(this.state);
   };
 
   closeHandler = () => {
@@ -184,16 +177,19 @@ class DataDictionaryPropertyTable extends React.Component {
                     <td className="data-dictionary-property-table__data">
                       { (enums) ? (
                         <>
-                          <p>
-                            Acceptable Values:
+                          <span>
+                            <p style={{ margin: '0' }}>Acceptable Values:</p>
                             {' '}
-                            <ListComponent items={enums.slice(0, 15)} />
-                          </p>
-                          {enums.length > 15
+                            {enums.length > config.maxNoOfItems
+                              ? (<ListComponent items={enums.slice(0, config.maxNoOfItems)} />)
+                              : (<ListComponent items={enums} />)}
+                          </span>
+                          {enums.length > config.maxNoOfItems
                             && (
-                              <Button onClick={() => this.openBoxHandler(enums)}>
-                                ...show more
-                              </Button>
+                              <ButtonComponent
+                                label="...show more"
+                                openHandler={() => this.openBoxHandler(enums)}
+                              />
                             )}
                         </>
                       ) : (
@@ -219,11 +215,16 @@ class DataDictionaryPropertyTable extends React.Component {
             }
           </tbody>
         </table>
+        {this.state.items.length > 0
+        && (
         <DialogBox
           display={this.state.display}
           closeHandler={this.closeHandler}
           items={this.state.items}
+          maxNoOfItems={config.maxNoOfItems}
+          maxNoOfItemDlgBox={config.maxNoOfItemDlgBox}
         />
+        )}
       </div>
     );
   }

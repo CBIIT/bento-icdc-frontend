@@ -2,27 +2,55 @@ import React, { useEffect, useState } from 'react';
 import {
   Grid,
   DialogContent,
-  Button,
   withStyles,
   IconButton,
   Backdrop,
   Dialog,
+  createTheme,
+  MuiThemeProvider,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ListComponent from './ListComponent';
+import ButtonComponent from './ButtonComponent';
 
-const style = {
-  backdrop: {
-    timeout: 500,
-    style: {
-      backgroundColor: '#4a4a4a52',
+const theme = {
+  overrides: {
+    MuiDialog: {
+      paper: {
+        borderRadius: '5px',
+        padding: '0px 0px 0px 20px',
+        boxShadow: 'none',
+        overflowX: 'hidden',
+        overflowY: 'hidden',
+      },
+      paperScrollPaper: {
+        maxHeight: '620px',
+      },
     },
-  },
-  PaperProps: {
-    style: {
-      borderRadius: '5px',
-      padding: '0px 20px 0px 20px',
-      boxShadow: 'none',
+    MuiDialogContent: {
+      root: {
+        padding: '15px 25px 35px 5px',
+      },
+    },
+    MuiBackdrop: {
+      root: {
+        backgroundColor: '#4a4a4a52',
+      },
+    },
+    MuiIconButton: {
+      root: {
+        textTransform: 'none',
+        padding: 'none',
+        '&:hover': {
+          backgroundColor: 'transparent',
+          cursor: 'pointer',
+        },
+      },
+    },
+    MuiSvgIcon: {
+      root: {
+        color: '#0d71a3',
+      },
     },
   },
 };
@@ -33,6 +61,7 @@ const DialogComponent = ({
   closeHandler,
   items,
   maxNoOfItems,
+  maxNoOfItemDlgBox,
 }) => {
   const [open, setOpen] = useState(display);
   const [expand, setExpand] = useState(false);
@@ -42,46 +71,61 @@ const DialogComponent = ({
     setOpen(display);
     setValues(items);
 
-    if (items && items.length > maxNoOfItems) {
-      console.log('set value');
-      setValues(items.slice(0, maxNoOfItems));
+    if (items && items.length > maxNoOfItemDlgBox) {
+      setValues(items.slice(0, maxNoOfItemDlgBox));
       setExpand(false);
     }
   }, [display, open]);
 
   const expandView = () => {
     setBoxSize('lg');
+    setValues(items);
+    setExpand(true);
   };
 
   return (
-    <Dialog
-      open={open}
-      maxWidth={boxSize}
-      BackdropComponent={Backdrop}
-      BackdropProps={style.backdrop}
-      PaperProps={style.PaperProps}
-    >
-      <Grid container>
-        <Grid item xs={11}>
-          <span className={classes.title}>
-            Acceptable Value
-          </span>
+    <MuiThemeProvider theme={createTheme(theme)}>
+      <Dialog
+        open={open}
+        onClose={closeHandler}
+        maxWidth={boxSize}
+        BackdropProps={{
+          timeout: 500,
+        }}
+        BackdropComponent={Backdrop}
+      >
+        <Grid container>
+          <Grid item xs={11}>
+            <span className={classes.title}>
+              Acceptable Value
+            </span>
+          </Grid>
+          <Grid item xs={1} className={classes.closeBtn}>
+            <IconButton
+              onClick={closeHandler}
+            >
+              <CloseIcon
+                fontSize="small"
+              />
+            </IconButton>
+          </Grid>
         </Grid>
-        <Grid item xs={1}>
-          <IconButton className={classes.closeBtn} onClick={closeHandler}>
-            <CloseIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
-      <DialogContent>
-        <ListComponent items={values} />
-        {expand && (
-          <Button onClick={expandView}>
-            ...show more
-          </Button>
-        )}
-      </DialogContent>
-    </Dialog>
+        <DialogContent>
+          <ListComponent
+            items={values}
+            maxNoOfItems={maxNoOfItems}
+            maxNoOfItemDlgBox={maxNoOfItemDlgBox}
+          />
+          <br />
+          {(items.length > maxNoOfItemDlgBox && !expand) && (
+            <ButtonComponent
+              label="...show more"
+              openHandler={expandView}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+    </MuiThemeProvider>
   );
 };
 
@@ -95,8 +139,8 @@ const styles = () => ({
     color: '#0d71a3',
   },
   closeBtn: {
-    marginTop: '15px',
-    marginLeft: '15px',
+    padding: '15px',
+    textAlign: 'right',
   },
 });
 

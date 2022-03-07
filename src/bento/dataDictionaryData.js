@@ -112,3 +112,8 @@ export const baseFilters = {
   multiplicity: [],
   inclusion: [],
 };
+
+export const controlVocabConfig = {
+  maxNoOfItems: 15,
+  maxNoOfItemDlgBox: 30,
+};
