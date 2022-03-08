@@ -53,10 +53,11 @@ const CaseDetail = ({ classes, data }) => {
     numberOfAliquots: data.aliquotCountOfCase,
     numberOfSamples: data.sampleCountOfCase,
     numberOfFiles: data.fileCountOfCase,
-    numberOfStudyFiles: data.studyFileCountOfCase,
+    numberOfStudyFiles: 0,
     numberOfPrograms: data.programsCountOfCase,
     volumeOfData: data.volumeOfDataOfCase,
   };
+  console.log('stat', stat);
   const caseDetail = data.case[0];
 
   const notProvided = '';
