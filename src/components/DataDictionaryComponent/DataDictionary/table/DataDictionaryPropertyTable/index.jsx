@@ -199,7 +199,7 @@ class DataDictionaryPropertyTable extends React.Component {
                       { (enums) ? (
                         <>
                           <span>
-                            <p style={{ margin: '0' }}>Acceptable Values:</p>
+                            <p style={{ margin: '0', minWidth: '130px' }}>Acceptable Values:</p>
                             {' '}
                             {enums.length > config.maxNoOfItems
                               ? (<ListComponent items={enums.slice(0, config.maxNoOfItems)} />)
