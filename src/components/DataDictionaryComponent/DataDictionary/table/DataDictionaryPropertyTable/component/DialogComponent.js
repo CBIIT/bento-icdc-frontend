@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Grid,
   DialogContent,
   withStyles,
   IconButton,
@@ -94,13 +93,8 @@ const DialogComponent = ({
         }}
         BackdropComponent={Backdrop}
       >
-        <Grid container>
-          <Grid item xs={11}>
-            <span className={classes.title}>
-              Acceptable Value
-            </span>
-          </Grid>
-          <Grid item xs={1} className={classes.closeBtn}>
+        <div className={classes.titleContent}>
+          <div item xs={1} className={classes.closeBtn}>
             <IconButton
               onClick={closeHandler}
             >
@@ -108,8 +102,13 @@ const DialogComponent = ({
                 fontSize="small"
               />
             </IconButton>
-          </Grid>
-        </Grid>
+          </div>
+          <div>
+            <span className={classes.title}>
+              Acceptable Value
+            </span>
+          </div>
+        </div>
         <DialogContent>
           <ListComponent
             items={values}
@@ -130,6 +129,9 @@ const DialogComponent = ({
 };
 
 const styles = () => ({
+  titleContent: {
+    width: '100%',
+  },
   title: {
     paddingLeft: '20px',
     fontSize: '18px',
@@ -139,8 +141,9 @@ const styles = () => ({
     color: '#0d71a3',
   },
   closeBtn: {
-    padding: '15px',
+    padding: '20px',
     textAlign: 'right',
+    float: 'right',
   },
 });
 

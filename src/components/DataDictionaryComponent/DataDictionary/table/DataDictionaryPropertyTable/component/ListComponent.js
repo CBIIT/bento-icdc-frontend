@@ -30,7 +30,7 @@ const twoColumnsView = {
       root: {
         paddingLeft: '0px',
         paddingTop: '2px',
-        marginTop: '-10px',
+        marginTop: '-9px',
         paddingBottom: '0',
         alignItems: 'inherit',
         fontWeight: '300',
@@ -53,6 +53,10 @@ const threeColumnsView = {
         WebkitColumns: 3,
         MozColumns: 3,
         columns: 3,
+      },
+      padding: {
+        paddingTop: '0px',
+        marginTop: '-10px',
       },
     },
     MuiListItemIcon: {
@@ -83,6 +87,7 @@ const threeColumnsView = {
       gutters: {
         margin: 'auto',
         marginBottom: '-10px',
+        paddingLeft: '0px',
       },
     },
   },
