@@ -186,8 +186,10 @@
 }
 
 .data-dictionary-node__property {
+  background-color: #fff;
   padding: 10px 18px 18px 23px;
   position: relative;
+  margin: 0;
 }
 
 .data-dictionary-node__property-summary {

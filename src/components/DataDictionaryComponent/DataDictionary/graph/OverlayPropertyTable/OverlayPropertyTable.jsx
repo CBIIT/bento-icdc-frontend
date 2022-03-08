@@ -3,19 +3,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@gen3/ui-component/dist/components/Button';
-// import { PDFDownloadLink } from '@react-pdf/renderer';
 // eslint-disable-next-line no-unused-vars
 import { SearchResultItemShape } from '../../utils';
-import { getCategoryIconSVG } from '../../NodeCategories/helper';
 import { createFileName } from '../../../utils';
 import DownloadButton from '../../NodePDF/DownloadButton';
+import { getCategoryColor, getCategoryIconSVG } from '../../NodeCategories/helper';
 import {
   getNodeDescriptionFragment,
   getNodeTitleFragment,
 } from '../../highlightHelper';
 import DataDictionaryPropertyTable from '../../table/DataDictionaryPropertyTable';
 import './OverlayPropertyTable.css';
-// import PdfDocument from '../../NodePDF';
 import IconDownloadPDF from '../../table/icons/icon_download_PDF.svg';
 
 const pdfDownloadConfig = {
@@ -81,13 +79,14 @@ class OverlayPropertyTable extends React.Component {
     // eslint-disable-next-line no-console
     const searchedNodeNotOpened = this.props.isSearchMode && !this.props.isSearchResultNodeOpened;
     const needHighlightSearchResult = this.props.isSearchMode;
+    // const expanded = true;
     return (
       <div className="overlay-property-table">
         <div className="overlay-property-table__background" />
         <div className="overlay-property-table__fixed-container">
           <div className="overlay-property-table__content">
             <div className="overlay-property-table__header">
-              <div className="overlay-property-table__category">
+              <div className="overlay-property-table__category" style={{ borderLeftColor: getCategoryColor(this.props.node.category) }}>
                 <IconSVG className={`overlay-property-table__category-icon ${this.props.node.category}`} />
                 <h4 className="overlay-property-table__category-text">{this.props.node.category}</h4>
                 {
@@ -139,6 +138,15 @@ class OverlayPropertyTable extends React.Component {
               </div>
             </div>
             <div className="overlay-property-table__property">
+              {/* <DataDictionaryCategory
+                nodes={[this.props.node]}
+                category={this.props.node.category}
+                expanded={expanded}
+              /> */}
+              {/* <DataDictionaryNode
+                node={this.props.node}
+                expanded={expanded}
+              /> */}
               <DataDictionaryPropertyTable
                 properties={this.props.node.properties}
                 requiredProperties={this.props.node.required}

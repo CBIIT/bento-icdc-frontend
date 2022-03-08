@@ -98,7 +98,7 @@ async function init() {
             propertiesItem.enum = icdcMPData.PropDefinitions[propertyName].Enum
               || icdcMPData.PropDefinitions[propertyName].Type.Enum;
             propertiesItem.src = icdcMPData.PropDefinitions[propertyName].Src;
-
+            propertiesItem.key = icdcMPData.PropDefinitions[propertyName].Key;
             if (icdcMPData.PropDefinitions[propertyName].Req === 'Yes') {
               pRequired.push(nodeP);
             } else if (icdcMPData.PropDefinitions[propertyName].Req === 'No') {

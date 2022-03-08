@@ -272,9 +272,12 @@ export const table2 = {
         toolTipTextFileDownload: 'Download a copy of this file',
         toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
         fileSizeColumn: 'file_size',
+        fileFormatColumn: 'file_format',
         fileLocationColumn: 'uuid',
+        caseIdColumn: 'sample_id',
         iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
         iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
     },
     {

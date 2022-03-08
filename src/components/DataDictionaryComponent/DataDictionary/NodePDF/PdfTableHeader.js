@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
     width: '24%',
     paddingLeft: 2,
   },
+  tableColKey: {
+    width: '4%',
+    paddingLeft: 2,
+  },
   tableColType: {
     width: '18%',
     paddingLeft: 2,
@@ -58,6 +62,7 @@ const PdfTableHeader = () => (
     <View style={styles.tableColHeader}>
       <Text style={styles.tableCellHeader}>Property</Text>
     </View>
+    {/* <View style={styles.tableColKey} /> */}
     <View style={styles.tableColType}>
       <Text style={styles.tableCellHeader}>Type</Text>
     </View>
