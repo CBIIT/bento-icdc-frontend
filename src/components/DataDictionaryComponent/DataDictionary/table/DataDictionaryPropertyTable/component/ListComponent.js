@@ -55,6 +55,15 @@ const threeColumnsView = {
         columns: 3,
       },
     },
+    MuiListItemIcon: {
+      root: {
+        paddingLeft: '0',
+        display: 'initial',
+        paddingTop: '0px',
+        minWidth: '10px',
+        color: '#00002dd9',
+      },
+    },
     MuiListItem: {
       root: {
         paddingLeft: '0px',
@@ -63,6 +72,13 @@ const threeColumnsView = {
         paddingBottom: '0',
         alignItems: 'inherit',
         fontWeight: '300',
+      },
+      MuiListItemText: {
+        root: {
+          padding: '4px',
+          marginTop: '-2px',
+          marginBottom: '3px',
+        },
       },
       gutters: {
         margin: 'auto',
