@@ -59,7 +59,7 @@ const threeColumnsView = {
       root: {
         paddingLeft: '0',
         display: 'initial',
-        paddingTop: '0px',
+        paddingTop: '4px',
         minWidth: '10px',
         color: '#00002dd9',
       },
