@@ -1,8 +1,9 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Link } from '@material-ui/core';
 import { SearchResultItemShape } from '../../utils';
 import {
   getMatchesSummaryForProperties,
@@ -12,6 +13,10 @@ import {
 } from '../../highlightHelper';
 import './DataDictionaryPropertyTable.css';
 import { ReactComponent as KeyIconSvg } from '../../../assets/key_icon.svg';
+import DialogBox from './component/DialogComponent';
+import ListComponent from './component/ListComponent';
+import ButtonComponent from './component/ButtonComponent';
+import { controlVocabConfig as config } from '../../../../../bento/dataDictionaryData';
 
 const required = (requiredFlag, preferredFlag) => {
   if (requiredFlag) {
@@ -33,17 +38,6 @@ const required = (requiredFlag, preferredFlag) => {
   );
 };
 
-const formatEnumValues = (enums) => {
-  if (Array.isArray(enums)) {
-    let concatEnums = '';
-    enums.forEach((value) => {
-      concatEnums += `'${value}'; `;
-    });
-    return concatEnums;
-  }
-  return JSON.stringify(enums);
-};
-
 const displayKeyProperty = (property) => (
   <>
     <div className="data-dictionary-property-table__data_KeyProperty">
@@ -59,6 +53,28 @@ const displayKeyPropsDescription = (description) => {
 };
 
 class DataDictionaryPropertyTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: false,
+      items: [],
+    };
+  }
+
+  openBoxHandler = (values) => {
+    this.setState({
+      display: true,
+      items: values,
+    });
+  };
+
+  closeHandler = () => {
+    this.setState({
+      display: false,
+      items: [],
+    });
+  };
+
   render() {
     const borderModifier = this.props.hasBorder ? ''
       : 'data-dictionary-property-table--without-border';
@@ -181,11 +197,22 @@ class DataDictionaryPropertyTable extends React.Component {
                     </td>
                     <td className="data-dictionary-property-table__data">
                       { (enums) ? (
-                        <p>
-                          Acceptable Values:
-                          {' '}
-                          {formatEnumValues(enums)}
-                        </p>
+                        <>
+                          <span>
+                            <p style={{ margin: '0' }}>Acceptable Values:</p>
+                            {' '}
+                            {enums.length > config.maxNoOfItems
+                              ? (<ListComponent items={enums.slice(0, config.maxNoOfItems)} />)
+                              : (<ListComponent items={enums} />)}
+                          </span>
+                          {enums.length > config.maxNoOfItems
+                            && (
+                              <ButtonComponent
+                                label="...show more"
+                                openHandler={() => this.openBoxHandler(enums)}
+                              />
+                            )}
+                        </>
                       ) : (
                         <p>{JSON.stringify(type)}</p>
                       )}
@@ -215,6 +242,16 @@ class DataDictionaryPropertyTable extends React.Component {
             }
           </tbody>
         </table>
+        {this.state.items.length > 0
+        && (
+        <DialogBox
+          display={this.state.display}
+          closeHandler={this.closeHandler}
+          items={this.state.items}
+          maxNoOfItems={config.maxNoOfItems}
+          maxNoOfItemDlgBox={config.maxNoOfItemDlgBox}
+        />
+        )}
       </div>
     );
   }
