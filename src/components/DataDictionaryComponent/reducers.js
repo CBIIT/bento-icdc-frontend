@@ -17,6 +17,8 @@ const initialState = {
   allActiveFilters: {},
   unfilteredDictionary: {},
   filteredDictionary: {},
+  activeFilter: false,
+  filtersCleared: false,
 };
 
 export const getFileNodes = (dictionary) => Object.keys(dictionary).filter((node) => dictionary[node].category === 'data_file');
@@ -120,6 +122,8 @@ const reducers = {
       dictionary: Object.keys(filter).length > 0 ? filter : state.unfilteredDictionary,
       allActiveFilters: action.allFilters,
       filteredDictionary: groupName === 'Unchecked' && Object.keys(filter).length > 0 ? filter : state.unfilteredDictionary,
+      activeFilter: !state.activeFilter,
+      filtersCleared: state.activeFilter,
       checkbox: {
         data: updatedCheckboxData,
       },
@@ -130,6 +134,8 @@ const reducers = {
     dictionary: state.unfilteredDictionary,
     filteredDictionary: state.unfilteredDictionary,
     allActiveFilters: baseFilters,
+    activeFilter: false,
+    filtersCleared: true,
     checkbox: {
       data: facetSearchData,
     },
