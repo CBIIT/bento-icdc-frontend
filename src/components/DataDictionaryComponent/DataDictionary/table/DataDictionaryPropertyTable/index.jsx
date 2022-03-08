@@ -79,14 +79,14 @@ class DataDictionaryPropertyTable extends React.Component {
     const borderModifier = this.props.hasBorder ? ''
       : 'data-dictionary-property-table--without-border';
     const propertyKeysList = this.props.hideIsRequired ? Object.keys(this.props.properties)
-      : Object.keys(this.props.properties);
-    // .sort((k1, k2) => {
-    //   const required1 = this.props.requiredProperties.includes(k1);
-    //   const required2 = this.props.requiredProperties.includes(k2);
-    //   if (required1) return -1;
-    //   if (required2) return 1;
-    //   return 0;
-    // });
+      : Object.keys(this.props.properties)
+        .sort((k1, k2) => {
+          const required1 = this.props.requiredProperties.includes(k1);
+          const required2 = this.props.requiredProperties.includes(k2);
+          if (required1) return -1;
+          if (required2) return 1;
+          return 0;
+        });
     const needHighlightSearchResult = this.props.onlyShowMatchedProperties
       || this.props.needHighlightSearchResult;
     const matchedPropertiesSummary = needHighlightSearchResult
