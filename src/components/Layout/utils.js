@@ -148,19 +148,20 @@ async function init() {
         if (icdcMData.Relationships[property].Ends[i].Src === key) {
           const backref = icdcMData.Relationships[property].Ends[i].Src;
           const name = icdcMData.Relationships[property].Ends[i].Dst;
-          const target = icdcMData.Relationships[property].Ends[i].Dst;
-          const multiplicity = icdcMData.Relationships[property].Ends[i].Mul
-            ? icdcMData.Relationships[property].Ends[i].Mul
-            : icdcMData.Relationships[property].Mul;
-
-          linkItem.name = name;
-          linkItem.backref = backref;
-          linkItem.label = label;
-          linkItem.target_type = target;
-          linkItem.required = required;
-          linkItem.multiplicity = multiplicity;
-
-          link.push(linkItem);
+          if (name !== backref) {
+            const target = icdcMData.Relationships[property].Ends[i].Dst;
+            const multiplicity = icdcMData.Relationships[property].Ends[i].Mul
+              ? icdcMData.Relationships[property].Ends[i].Mul
+              : icdcMData.Relationships[property].Mul;
+            linkItem.name = name;
+            linkItem.backref = backref;
+            linkItem.label = label;
+            linkItem.target_type = target;
+            linkItem.required = required;
+            linkItem.multiplicity = multiplicity;
+            linkItem.template = icdcMData.Nodes[name].Tags.Template;
+            link.push(linkItem);
+          }
         }
       }
     }
