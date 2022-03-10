@@ -138,8 +138,9 @@ const ListComponent = ({
   items,
   maxNoOfItems,
   maxNoOfItemDlgBox,
+  expand,
 }) => {
-  const customTheme = items.length > maxNoOfItemDlgBox
+  const customTheme = (expand && items.length > maxNoOfItemDlgBox + maxNoOfItems)
     ? { overrides: { ...theme.overrides, ...threeColumnsView.overrides } }
     : (items.length > maxNoOfItems)
       ? { overrides: { ...theme.overrides, ...twoColumnsView.overrides } } : theme;

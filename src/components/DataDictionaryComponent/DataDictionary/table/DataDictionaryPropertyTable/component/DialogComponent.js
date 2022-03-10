@@ -77,7 +77,9 @@ const DialogComponent = ({
   }, [display, open]);
 
   const expandView = () => {
-    setBoxSize('lg');
+    if (items.length > maxNoOfItemDlgBox + maxNoOfItems) {
+      setBoxSize('md');
+    }
     setValues(items);
     setExpand(true);
   };
@@ -114,6 +116,7 @@ const DialogComponent = ({
             items={values}
             maxNoOfItems={maxNoOfItems}
             maxNoOfItemDlgBox={maxNoOfItemDlgBox}
+            expand={expand}
           />
           <br />
           {(items.length > maxNoOfItemDlgBox && !expand) && (
