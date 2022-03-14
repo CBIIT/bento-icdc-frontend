@@ -37,7 +37,6 @@ const twoColumnsView = {
       },
       gutters: {
         paddingLeft: '2px',
-        // marginBottom: '-4px',
         marginBottom: '1px',
         maxWidth: '200px',
       },
