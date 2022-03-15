@@ -118,12 +118,17 @@ const PdfTableRow = ({ node }) => {
   };
 
   const required = (key) => {
-    if (node.required.includes(key) || node.preferred.includes(key)) {
+    if (node.required.includes(key)) {
       return (
         <Text style={{ ...styles.tableCell, ...styles.required }}>Required</Text>
       );
     }
-    return <Text style={styles.tableCell}>No</Text>;
+    if (node.preferred.includes(key)) {
+      return (
+        <Text style={styles.tableCell}>Preferred</Text>
+      );
+    }
+    return <Text style={styles.tableCell}>Optional</Text>;
   };
 
   const displayKeyPropsDiscription = (description) => {
