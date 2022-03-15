@@ -121,7 +121,8 @@ const FacetFilters = ({ classes }) => {
   };
 
   const getCheckBoxView = (sideBarItem, currentSection) => {
-    const showItems = sideBarItem.checkboxItems.filter((item) => item !== undefined).map((item) => (
+    const showItems = sideBarItem.checkboxItems.filter((item) => item !== undefined
+    && item.subjects > 0).map((item) => (
       {
         ...item,
         title: sideBarItem.tooltip ? sideBarItem.tooltip : 'undefined!!!!!!',
