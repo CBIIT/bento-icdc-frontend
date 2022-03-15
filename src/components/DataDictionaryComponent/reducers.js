@@ -19,6 +19,7 @@ const initialState = {
   filteredDictionary: {},
   activeFilter: false,
   filtersCleared: false,
+  filterGroup: '',
 };
 
 export const getFileNodes = (dictionary) => Object.keys(dictionary).filter((node) => dictionary[node].category === 'data_file');
@@ -78,16 +79,71 @@ export function toggleCheckBox(payload) {
     toggleCheckBoxAction(payload, currentAllFilterVariables);
   };
 }
+const generateCount = (filtered, searchGroup, searchTerm) => {
+  let count = 0;
+  if (searchGroup === 'inclusion') {
+    Object.keys(filtered).forEach((elem) => {
+      if (filtered[elem][searchTerm]
+        ? filtered[elem][searchTerm].length > 0
+        : false) {
+        count += filtered[elem][searchTerm].length;
+      }
+    });
+  } else {
+    Object.keys(filtered).forEach((elem) => {
+      if (filtered[elem][searchGroup].toLowerCase() === searchTerm) {
+        count += 1;
+      }
+    });
+  }
+  return count;
+};
+
+const generateSubjectCounts = (filtered) => ({
+  administrative: generateCount(filtered, 'category', 'administrative'),
+  case: generateCount(filtered, 'category', 'case'),
+  study: generateCount(filtered, 'category', 'study'),
+  clinical: generateCount(filtered, 'category', 'clinical'),
+  'clinical trial': generateCount(filtered, 'category', 'clinical_trial'),
+  biospecimen: generateCount(filtered, 'category', 'biospecimen'),
+  analysis: generateCount(filtered, 'category', 'analysis'),
+  'data file': generateCount(filtered, 'category', 'data_file'),
+  core: generateCount(filtered, 'assignment', 'core'),
+  extended: generateCount(filtered, 'assignment', 'extended'),
+  primary: generateCount(filtered, 'class', 'primary'),
+  secondary: generateCount(filtered, 'class', 'secondary'),
+  required: generateCount(filtered, 'inclusion', 'required'),
+  preferred: generateCount(filtered, 'inclusion', 'preferred'),
+  optional: generateCount(filtered, 'inclusion', 'optional'),
+});
+
+const categoryexemptSubjectCount = (unfiltered, filtered) => ({
+  administrative: generateCount(unfiltered, 'category', 'administrative'),
+  case: generateCount(unfiltered, 'category', 'case'),
+  study: generateCount(unfiltered, 'category', 'study'),
+  clinical: generateCount(unfiltered, 'category', 'clinical'),
+  'clinical trial': generateCount(unfiltered, 'category', 'clinical_trial'),
+  biospecimen: generateCount(unfiltered, 'category', 'biospecimen'),
+  analysis: generateCount(unfiltered, 'category', 'analysis'),
+  'data file': generateCount(unfiltered, 'category', 'data_file'),
+  core: generateCount(filtered, 'assignment', 'core'),
+  extended: generateCount(filtered, 'assignment', 'extended'),
+  primary: generateCount(filtered, 'class', 'primary'),
+  secondary: generateCount(filtered, 'class', 'secondary'),
+  required: generateCount(filtered, 'inclusion', 'required'),
+  preferred: generateCount(filtered, 'inclusion', 'preferred'),
+  optional: generateCount(filtered, 'inclusion', 'optional'),
+});
 
 const handleExplorerFilter = (filters, dictArray) => {
   const asArray = Object.entries(filters);
-  const filtered = asArray.reduce((acc = {}, [key, value]) => {
+  const filtered = asArray.reduce((acc, [key, value]) => {
     const filteredDict = Object.fromEntries(dictArray.filter(([, dictValue]) => {
       const flag = !!dictValue[key];
 
       if (flag) {
         if (key === 'inclusion' && Object.keys(dictValue[key]).length > 0) {
-          return value.some((el) => {
+          return value.every((el) => {
             if (Object.prototype.hasOwnProperty.call(dictValue[key], el.toLowerCase())) {
               return dictValue[key][el.toLowerCase()].length > 0;
             }
@@ -102,44 +158,104 @@ const handleExplorerFilter = (filters, dictArray) => {
       }
       return (value.includes(_.startCase(dictValue[key])));
     }));
+    if (asArray.length > 1) {
+      const actual = acc;
+      return {
+        data: { ...filteredDict },
+        actual,
+      };
+    }
     return {
-      ...acc,
-      ...filteredDict,
+      data: {
+        ...acc,
+        ...filteredDict,
+      },
     };
   }, {});
+
   return filtered;
 };
+
+const setCheckboxItems = (checkboxItems, subjectCountObj) => checkboxItems.map((elem) => ({
+  ...elem,
+  subjects: subjectCountObj[elem.name.toLowerCase()],
+}));
+
+const setSubjectCount = (checkboxData, subjectCountObj) => checkboxData.map((elem) => ({
+  ...elem,
+  checkboxItems: setCheckboxItems(elem.checkboxItems, subjectCountObj),
+}));
 
 const reducers = {
   FILTER_DATA_EXPLORER: (state, action) => {
     const checkboxData = facetSearchData;
     const updatedCheckboxData = setSelectedFilterValues(checkboxData, action.allFilters);
-    const dictArray = Object.entries(state.unfilteredDictionary);
-    const filter = handleExplorerFilter(action.allFilters, dictArray);
     const groupName = action.filter.isChecked ? action.filter.groupName : 'Unchecked';
+    const processedFilters = Object.entries(action.allFilters)
+      .filter(([, value]) => value.length > 0);
+    const processedFiltersObj = Object.fromEntries(processedFilters);
+    let dictArray;
+    if (processedFilters.length > 1 && groupName.toLowerCase() !== 'unchecked') {
+      dictArray = Object.entries(state.filteredDictionary);
+    } else if (groupName.toLowerCase() === 'inclusion') {
+      dictArray = Object.entries(state.filteredDictionary);
+    } else {
+      dictArray = Object.entries(state.unfilteredDictionary);
+    }
+    const checkOne = handleExplorerFilter(
+      processedFiltersObj,
+      dictArray,
+    ).data;
+
+    const checkTwo = handleExplorerFilter(
+      processedFiltersObj,
+      dictArray,
+    ).actual
+      ? handleExplorerFilter(
+        processedFiltersObj,
+        dictArray,
+      ).actual.data : {};
+
+    let subjectCountObj;
+    const filter = Object.keys(checkTwo).length > 0
+      && Object.keys(checkTwo).length < Object.keys(checkOne).length
+      ? checkTwo : checkOne;
+    if (processedFilters.length >= 1 && groupName.toLowerCase() !== 'category') {
+      subjectCountObj = generateSubjectCounts(filter);
+    } else if (processedFilters.length === 0) {
+      subjectCountObj = generateSubjectCounts(state.unfilteredDictionary);
+    } else if (groupName.toLowerCase() === 'category' || groupName.toLowerCase() === 'unchecked') {
+      subjectCountObj = categoryexemptSubjectCount(state.unfilteredDictionary, filter);
+    }
+
+    const finalCheckboxData = setSubjectCount(updatedCheckboxData, subjectCountObj);
     return {
       ...state,
-      dictionary: Object.keys(filter).length > 0 ? filter : state.unfilteredDictionary,
+      dictionary: filter && Object.keys(filter).length > 0 ? filter : state.unfilteredDictionary,
       allActiveFilters: action.allFilters,
-      filteredDictionary: groupName === 'Unchecked' && Object.keys(filter).length > 0 ? filter : state.unfilteredDictionary,
+      filteredDictionary: filter,
+      filterGroup: groupName,
       activeFilter: !state.activeFilter,
       filtersCleared: state.activeFilter,
       checkbox: {
-        data: updatedCheckboxData,
+        data: finalCheckboxData,
       },
     };
   },
-  CLEAR_ALL_FILTERS: (state) => ({
-    ...state,
-    dictionary: state.unfilteredDictionary,
-    filteredDictionary: state.unfilteredDictionary,
-    allActiveFilters: baseFilters,
-    activeFilter: false,
-    filtersCleared: true,
-    checkbox: {
-      data: facetSearchData,
-    },
-  }),
+  CLEAR_ALL_FILTERS: (state) => {
+    const subjectCountObj = generateSubjectCounts(state.unfilteredDictionary);
+    return {
+      ...state,
+      dictionary: state.unfilteredDictionary,
+      filteredDictionary: state.unfilteredDictionary,
+      allActiveFilters: baseFilters,
+      activeFilter: false,
+      filtersCleared: true,
+      checkbox: {
+        data: setSubjectCount(facetSearchData, subjectCountObj),
+      },
+    };
+  },
   REQUEST_UPLOAD: (state, action) => ({
     ...state,
     file: action.file,
@@ -171,6 +287,7 @@ const reducers = {
   }),
   RECEIVE_DICTIONARY: (state, action) => {
     const dict = getDictionaryWithExcludeSystemProperties(action.data);
+    const subjectCountObj = generateSubjectCounts(dict);
     return ({
       ...state,
       dictionary: dict,
@@ -180,7 +297,7 @@ const reducers = {
       unfilteredDictionary: dict,
       filteredDictionary: dict,
       checkbox: {
-        data: facetSearchData,
+        data: setSubjectCount(facetSearchData, subjectCountObj),
       },
     });
   },

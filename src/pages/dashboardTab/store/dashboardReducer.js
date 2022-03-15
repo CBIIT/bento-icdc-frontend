@@ -878,11 +878,13 @@ export function sortGroupCheckboxByCount(groupName) {
   });
 }
 
-const convertCasesToCount = (data) => data.map((item) => ({
-  group: item.group,
-  subjects: item.count,
-  tooltip: item.tooltip,
-}));
+const convertCasesToCount = (data) => (
+  data.map((item) => ({
+    group: item.group,
+    subjects: item.count,
+    tooltip: item.tooltip,
+  }))
+);
 
 /**
  *  updateFilteredAPIDataIntoCheckBoxData works for first time init Checkbox,
