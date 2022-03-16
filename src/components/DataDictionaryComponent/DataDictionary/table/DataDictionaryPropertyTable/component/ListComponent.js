@@ -189,7 +189,6 @@ const styles = () => ({
     fontSize: '14px',
   },
   longText: {
-    // width: '220px',
     fontSize: '13px',
     fontWeight: '300',
     marginBottom: '4px',
