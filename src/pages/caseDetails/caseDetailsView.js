@@ -57,7 +57,6 @@ const CaseDetail = ({ classes, data }) => {
     numberOfPrograms: data.programsCountOfCase,
     volumeOfData: data.volumeOfDataOfCase,
   };
-  console.log('stat', stat);
   const caseDetail = data.case[0];
 
   const notProvided = '';

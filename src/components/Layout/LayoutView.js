@@ -59,7 +59,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
-            <Route path="/fileViewer/:id" component={JBrowseDetail} />
+            <Route path="/fileViewer/:type/:id" component={JBrowseDetail} />
             <Route
               path="/icdc-data-model"
               // eslint-disable-next-line arrow-body-style

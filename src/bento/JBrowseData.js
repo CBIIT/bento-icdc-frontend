@@ -3,10 +3,14 @@ import gql from 'graphql-tag';
 export const assemblyNames = ['canFam6', 'canFam5', 'canFam4', 'canFam3', 'canFam2', 'canFam1'];
 
 export const BamAdapter = 'BamAdapter';
+export const VarientAdapter = 'VcfTabixAdapter';
 export const BgzipFastaAdapter = 'BgzipFastaAdapter';
 export const UriLocation = 'UriLocation';
 export const FILE_TYPE_BAM = 'bam';
 export const FILE_TYPE_BAI = 'bai';
+export const FILE_TYPE_VCF = 'gz';
+export const FILE_TYPE_VCF_INDEX = 'tbi';
+export const JbrowserFiles = [FILE_TYPE_BAM, FILE_TYPE_BAI, FILE_TYPE_VCF, FILE_TYPE_VCF_INDEX];
 export const location = 'chr1:60,632,043..60,636,011';
 // size in bytes
 export const chunkSizeLimit = 20000000;
@@ -22,12 +26,118 @@ export const varient = {
   trackId: 'my_varient_track',
   trackName: 'My Varient',
   type: 'VariantTrack',
+  display: 'LinearPileupDisplay',
+  maxDisplayedBpPerPx: 50000,
+  height: 200,
 };
 
 export const jBrowseOptions = {
   jBrowse: true,
   variants: true,
   alignments: true,
+  optionalTracks: [
+    {
+      display: false,
+      trackId: 'ReferenceSequenceTrack',
+      name: 'Reference Sequence',
+      assemblyNames: [...assemblyNames],
+      type: 'FeatureTrack',
+      adapter: {
+        type: 'BgzipFastaAdapter',
+        fastaLocation: {
+          uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz',
+          locationType: 'UriLocation',
+        },
+        faiLocation: {
+          uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz.fai',
+          locationType: 'UriLocation',
+        },
+        gziLocation: {
+          uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz.gzi',
+          locationType: 'UriLocation',
+        },
+      },
+    },
+    {
+      display: false,
+      trackId: 'repeats_hg19',
+      name: 'Repeats',
+      assemblyNames: ['canFam3'],
+      type: 'FeatureTrack',
+      category: ['Annotation'],
+      adapter: {
+        type: 'BigBedAdapter',
+        bigBedLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/gbdb/canFam3/ncbiRefSeq/ncbiRefSeqGenomicDiff.bb',
+          locationType: 'UriLocation',
+        },
+      },
+    },
+    {
+      type: 'FeatureTrack',
+      display: false,
+      trackId: 'gff3tabix_genes',
+      assemblyNames: [...assemblyNames],
+      name: 'GFF3Tabix genes',
+      category: ['Miscellaneous'],
+      adapter: {
+        type: 'Gff3TabixAdapter',
+        gffGzLocation: {
+          uri: 'volvox.sort.gff3.gz',
+          locationType: 'UriLocation',
+        },
+        index: {
+          location: {
+            uri: 'volvox.sort.gff3.gz.tbi',
+            locationType: 'UriLocation',
+          },
+        },
+      },
+    },
+    {
+      type: 'HicTrack',
+      display: false,
+      trackId: 'hic',
+      name: 'Hic Track',
+      assemblyNames: [...assemblyNames],
+      adapter: {
+        type: 'HicAdapter',
+        hicLocation: {
+          uri: 'https://s3.amazonaws.com/igv.broadinstitute.org/data/hic/intra_nofrag_30.hic',
+          locationType: 'UriLocation',
+        },
+      },
+    },
+    {
+      display: false,
+      trackId: 'my_wiggle_track',
+      name: 'My Wiggle Track',
+      assemblyNames: [...assemblyNames],
+      type: 'QuantitativeTrack',
+      adapter: {
+        type: 'BigWig',
+        bigWigLocation: {
+          uri: '',
+          locationType: 'UriLocation',
+        },
+      },
+    },
+    {
+      display: false,
+      type: 'SyntenyTrack',
+      trackId: 'dotplot_track',
+      assemblyNames: [...assemblyNames],
+      name: 'dotplot',
+      adapter: {
+        type: 'PAFAdapter',
+        pafLocation: {
+          uri: '',
+          locationType: 'UriLocation',
+        },
+        assemblyNames: [...assemblyNames],
+      },
+    },
+  ],
   referenceSequenceUris: {
     fastaLocation: {
       uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz',
@@ -314,7 +424,7 @@ export const tracks = [
     trackId:
       'GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.sorted.gff',
     name: 'NCBI RefSeq Genes',
-    assemblyNames: ['GRCh38'],
+    assemblyNames: [...assemblyNames],
     category: ['Genes'],
     adapter: {
       type: 'Gff3TabixAdapter',
@@ -364,3 +474,23 @@ export const GET_JBROWSE_DETAIL_DATA_QUERY = gql`
     }
   }
 `;
+
+export const GET_FILES_ID_BY_NAME = gql`
+query subjectOverViewPaged($file_name: [String]){
+  fileIdsFromFileName(file_name: $file_name) {
+   file_uuid
+   file_name
+  }
+}
+`;
+
+export const theme = {
+  palette: {
+    primary: {
+      main: '#5da8a3',
+    },
+    secondary: {
+      main: '#333',
+    },
+  },
+};

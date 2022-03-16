@@ -15,12 +15,17 @@ import {
   assemblyNames,
   UriLocation,
   BamAdapter,
+  VarientAdapter,
   FILE_TYPE_BAM,
   FILE_TYPE_BAI,
+  FILE_TYPE_VCF,
+  FILE_TYPE_VCF_INDEX,
   alignment,
+  varient,
   chunkSizeLimit,
   location,
   defaultSession,
+  theme,
 } from '../../bento/JBrowseData';
 
 const getAdapter = ({ bamLocationUri, indexUri }) => {
@@ -39,31 +44,51 @@ const getAdapter = ({ bamLocationUri, indexUri }) => {
   );
 };
 
+const getVarient = ({ vcfGzLocationUri, indexUri }) => {
+  const varFileLocation = new FileLocation(
+    vcfGzLocationUri,
+    UriLocation,
+  );
+  const varientIndex = new Index(new FileLocation(
+    indexUri,
+    UriLocation,
+  ));
+  const adapter = {
+    type: VarientAdapter,
+    vcfGzLocation: varFileLocation,
+    index: varientIndex,
+  };
+  console.log(adapter);
+  return adapter;
+};
+
 const getDefaultSession = (alignments, session) => {
   if (alignments && alignments.length > 0) {
     alignments.forEach((item) => {
-      const display = new Display(
-        alignment.display,
-        alignment.height,
-        alignment.maxDisplayedBpPerPx,
-        `${item.trackId}-${alignment.display}`,
-      );
-      const viewTrack = new ViewTrack(
-        item.type,
-        item.trackId,
-        [{ ...display }],
-      );
-      session.view.tracks.push({ ...viewTrack });
+      if (item.type === alignment.type) {
+        const display = new Display(
+          alignment.display,
+          alignment.height,
+          alignment.maxDisplayedBpPerPx,
+          `${item.trackId}-${alignment.display}`,
+        );
+        const viewTrack = new ViewTrack(
+          item.type,
+          item.trackId,
+          [{ ...display }],
+        );
+        session.view.tracks.push({ ...viewTrack });
+      }
     });
   }
   return session;
 };
 
 const getTracks = ({
-  alignments, alignmentUris,
+  alignmentUris, varientUris, optionalTracks,
 }) => {
   const allTracks = [];
-  if (alignments) {
+  if (alignmentUris.file_name) {
     const aligmentAdapter = getAdapter(alignmentUris);
     aligmentAdapter.chunkSizeLimit = chunkSizeLimit;
     const alignmentOpts = new Track(
@@ -75,15 +100,32 @@ const getTracks = ({
     );
     allTracks.push(alignmentOpts);
   }
+
+  if (varientUris.file_name) {
+    const varientAdapter = getVarient(varientUris);
+    const variantOpts = new Track(
+      varient.trackId,
+      varient.trackName,
+      assemblyNames,
+      varient.type,
+      varientAdapter,
+    );
+    allTracks.push(variantOpts);
+  }
+  optionalTracks.forEach((track) => {
+    if (track.display) {
+      allTracks.push(track);
+    }
+  });
   return allTracks;
 };
 
 const JBrowseViewDetail = ({
   bamFiles,
+  vcfFiles,
   options: {
-    variants,
     alignments,
-    variantsUris,
+    optionalTracks,
   },
 }) => {
   const [trackList, setTracks] = useState([]);
@@ -91,7 +133,7 @@ const JBrowseViewDetail = ({
   const configureAdapters = () => {
     const alignmentUris = {};
 
-    if (alignments) {
+    if (bamFiles.length > 0 && alignments) {
       bamFiles.forEach((file) => {
         alignmentUris.file_name = file.file_name;
         if (file.file_type === FILE_TYPE_BAM) {
@@ -103,8 +145,21 @@ const JBrowseViewDetail = ({
       });
     }
 
+    const varientUris = {};
+    if (vcfFiles.length > 0) {
+      vcfFiles.forEach((file) => {
+        varientUris.file_name = file.file_name;
+        if (file.file_type === FILE_TYPE_VCF) {
+          varientUris.vcfGzLocationUri = file.file_location;
+        }
+        if (file.file_type === FILE_TYPE_VCF_INDEX) {
+          varientUris.indexUri = file.file_location;
+        }
+      });
+    }
+
     const currentTracks = getTracks({
-      alignmentUris, variantsUris, alignments, variants,
+      alignmentUris, alignments, varientUris, optionalTracks,
     });
 
     const initSession = getDefaultSession(currentTracks, session);
@@ -114,10 +169,10 @@ const JBrowseViewDetail = ({
 
   useEffect(() => {
     setSession(_.cloneDeep(defaultSession));
-    if (bamFiles.length > 0) {
+    if (bamFiles.length > 0 || vcfFiles.length > 0) {
       configureAdapters();
     }
-  }, [bamFiles]);
+  }, [bamFiles, vcfFiles]);
 
   if (trackList.length === 0 || session.length === 0) {
     return <CircularProgress />;
@@ -126,6 +181,7 @@ const JBrowseViewDetail = ({
   return (
     <>
       <JBrowseComponent
+        theme={theme}
         tracks={trackList}
         assemblies={assemblies}
         location={location}
