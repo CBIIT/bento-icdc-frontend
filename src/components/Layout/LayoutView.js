@@ -9,7 +9,7 @@ import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
-import Home from '../../pages/landing/landingView';
+import Home from '../../pages/landing/landingController';
 import Studies from '../../pages/studies/studiesController';
 import Dashboard from '../../pages/dashboardTab/dashboardController';
 import Cart from '../../pages/fileCentricCart/cartController';

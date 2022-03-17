@@ -3,9 +3,9 @@ import {
   Grid,
   withStyles,
   createTheme,
+  Link,
   MuiThemeProvider,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { cn } from 'bento-components';
 import lbg from '../../assets/landing/Background.png';
@@ -120,11 +120,34 @@ const LineText = (props) => {
   return text.split('\n').map((str) => <div>{str}</div>);
 };
 
-const LandingView = ({ classes }) => {
+const LinkImage = (imagePath, link, classes) => {
+  if (imagePath.length > 0 && link.length > 0) {
+    return (
+      <Link href={link}>
+        <div className={classes.carouselImgContainerSpotlight}>
+          <img src={imagePath} alt="icdc_news" />
+        </div>
+      </Link>
+    );
+  }
+  return (
+    <div className={classes.carouselImgContainerSpotlight}>
+      <img src={imagePath} alt="icdc_news" />
+    </div>
+  );
+};
+
+const LandingView = ({
+  classes,
+  primaryContentImage,
+  link1,
+}) => {
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
   };
+  console.log('test 234');
+  console.log(primaryContentImage);
 
   return (
     <MuiThemeProvider theme={custumTheme}>
@@ -146,8 +169,18 @@ const LandingView = ({ classes }) => {
                 pageData.tabs.map((item, index) => (
                   <TabPanel value={currentTab} index={index}>
                     <Grid container className={classes.tabContainer} spacing={1}>
-                      <Grid item lg={3} md={3} sm={12} xs={12} className={classes.carouselType}>
-                        <div className={classes.carouselTitle}>
+                      <Grid
+                        item
+                        lg={index === 3 ? 5 : 3}
+                        md={index === 3 ? 5 : 3}
+                        sm={12}
+                        xs={12}
+                        className={classes.carouselType}
+                      >
+                        <div
+                          className={index === 3
+                            ? classes.spotLightcarouselTitle : classes.carouselTitle}
+                        >
                           <LineText text={item.content.callToActionTitle} />
                         </div>
                         <div className={classes.divider}>
@@ -164,7 +197,13 @@ const LandingView = ({ classes }) => {
                           </Link>
                         </div>
                       </Grid>
-                      <Grid item lg={9} md={9} sm={12} xs={12}>
+                      <Grid
+                        item
+                        lg={index === 3 ? 7 : 9}
+                        md={index === 3 ? 7 : 9}
+                        sm={12}
+                        xs={12}
+                      >
                         { (index === 0) && (
                         <div>
                           <div className={classes.animationContainer}>
@@ -191,11 +230,7 @@ const LandingView = ({ classes }) => {
                             <img src={item.content.image} alt="icdc_studies" />
                           </div>
                         )}
-                        { (index === 3) && (
-                          <div className={classes.carouselImgContainerSpotlight}>
-                            <img src={item.content.image} alt="icdc_studies" />
-                          </div>
-                        )}
+                        { (index === 3) && LinkImage(primaryContentImage, link1, classes)}
                       </Grid>
                     </Grid>
                   </TabPanel>
@@ -264,6 +299,17 @@ const styles = (theme) => ({
     marginTop: '10px',
     marginBottom: '35px',
   },
+  spotLightcarouselTitle: {
+    paddingTop: '40px',
+    paddingBottom: '12px',
+    width: '400px',
+    color: '#FFFFFF',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '35px',
+    marginTop: '40px',
+    fontWeight: 'bold',
+    lineHeight: '40px',
+  },
   carouselImgContainer: {
     position: 'relative',
     height: '800px',
@@ -275,13 +321,11 @@ const styles = (theme) => ({
   },
   carouselImgContainerSpotlight: {
     position: 'relative',
-    height: '800px',
-    maxHeight: '800px',
+    width: '520px',
     overflow: 'hidden',
     '& img': {
-      width: '860px',
-      marginLeft: '-100px',
-      marginTop: '-120px',
+      width: '520px',
+      marginTop: '20px',
     },
   },
   headerButtonSection: {
@@ -308,7 +352,7 @@ const styles = (theme) => ({
     color: '#ffffff',
     textDecoration: 'none',
     '&:hover': {
-      backgroundColor: '#CB8311',
+      backgroundColor: 'transparent',
       textDecoration: 'none',
     },
   },

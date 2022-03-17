@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CircularProgress } from '@material-ui/core';
 import yaml from 'js-yaml';
 import axios from 'axios';
 import YAMLData from '../../content/prod/aboutPagesContent.yaml';
@@ -15,6 +16,7 @@ const LandingController = ({ match }) => {
       let resultData = [];
       let result = [];
       try {
+        console.log(ABOUT_CONTENT_URL);
         result = await axios.get(ABOUT_CONTENT_URL);
         resultData = yaml.safeLoad(result.data);
       } catch (error) {
@@ -23,17 +25,22 @@ const LandingController = ({ match }) => {
       }
 
       console.log(match.path);
-      const supportObj = resultData.find(({ page }) => page === match.path);
+      const supportObj = resultData.find(({ page }) => page === '/news');
       setData(supportObj);
     };
     fetchData();
     console.log(data);
-  }, [match.path]);
+  }, []);
 
-  const title = '123123 ambac';
+  if (data.length === 0 || data === undefined) {
+    return <CircularProgress />;
+  }
 
   return (
-    <LandingView data={title} />
+    <LandingView
+      link1={data.sourceLink1}
+      primaryContentImage={data.primaryContentImage}
+    />
   );
 };
 
