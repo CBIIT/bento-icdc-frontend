@@ -522,3 +522,8 @@
       paragraph: "$$#Embargo Period for datasets:#$$"
     - 
       paragraph: "Certain datasets made available in ICDC will have an embargo period as an associated publication is in the process of being accepted and or published.  An embargo is the release of limited metadata on the ICDC portal until an approval is obtained from the respective data submitter. There are several visual icons intended to flag studies that have an active embargo to inform users that the data will be released to ICDC in the near future."
+- 
+  page: /news
+  title: "News"
+  sourceLink1: ''
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/icdc_2444/src/assets/landing/EACR_top_ten.png'
