@@ -470,6 +470,10 @@ const styles = () => ({
 
   link: {
     color: '#DC762F',
+    lineSpacing: '19pt',
+    fontWeight: 'bold',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',

@@ -156,8 +156,11 @@ const Studies = ({ classes, data, invalid }) => {
 const styles = (theme) => ({
   link: {
     textDecoration: 'none',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
     fontWeight: 'bold',
     color: '#DC762F',
+    lineSpacing: '19pt',
     float: 'left',
     marginRight: '5px',
     '&:hover': {
