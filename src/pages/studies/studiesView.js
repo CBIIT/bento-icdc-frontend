@@ -60,8 +60,8 @@ const Studies = ({ classes, data, invalid }) => {
         {value}
       </Link>
       {
-      renderSwitch(studyDisposition(tableMeta.rowData[5]))
-    }
+        column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[5]))
+      }
     </>
   );
 
