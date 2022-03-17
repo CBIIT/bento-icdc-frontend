@@ -62,10 +62,8 @@ const JbrowseDetailContainer = ({ match }) => {
   };
   const getFiles = async () => {
     if (data && data.fileIdsFromFileName) {
-      console.log(data.fileIdsFromFileName);
       const promiseArr = data.fileIdsFromFileName.map(getAllFilesUri);
       const responses = await Promise.all(promiseArr);
-      console.log(responses);
       if (type === FILE_TYPE_VCF || type === FILE_TYPE_VCF_INDEX) {
         setVcfFiles(responses);
       }

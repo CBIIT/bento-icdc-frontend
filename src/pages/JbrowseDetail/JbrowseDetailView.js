@@ -58,7 +58,6 @@ const getVarient = ({ vcfGzLocationUri, indexUri }) => {
     vcfGzLocation: varFileLocation,
     index: varientIndex,
   };
-  console.log(adapter);
   return adapter;
 };
 
