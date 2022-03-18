@@ -526,4 +526,4 @@
   page: /news
   title: "News"
   sourceLink1: 'https://caninecommons-qa.cancer.gov/#/submit'
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/icdc_2444/src/assets/landing/EACR_top_ten.png'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/aboutPages/EACR_top_ten.png'
