@@ -36,7 +36,7 @@ const DownloadButton = ({
     const { links } = node;
     if (links && links.length) {
       links.forEach((c) => {
-        if (c.targetId && c.template === 'Yes') {
+        if (c.targetId && String(c.generatedType).toLowerCase() !== 'loader-generated') {
           line += `${'\t'} ${c.target_type}.${c.targetId}`;
         }
       });
