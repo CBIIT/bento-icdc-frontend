@@ -38,7 +38,6 @@ const twoColumnsView = {
       gutters: {
         paddingLeft: '2px',
         marginBottom: '1px',
-        maxWidth: '200px',
       },
     },
   },
@@ -149,18 +148,35 @@ const ListComponent = ({
     <MuiThemeProvider theme={createTheme(customTheme)}>
       <List>
         {items.map((item, index) => (
-          <ListItem key={`${index}`}>
-            <ListItemIcon>
-              <FiberManualRecord style={{ fontSize: 8 }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={(
-                <Typography className={classes.listItemText}>
-                  {item}
-                </Typography>
-              )}
-            />
-          </ListItem>
+          <>
+            {((items.length / 2 === index) && expand) ? (
+              <>
+                <div className={classes.longText}>
+                  <span className={classes.label}>
+                    {item}
+                  </span>
+                  <div className={classes.listIcon}>
+                    <ListItemIcon>
+                      <FiberManualRecord style={{ fontSize: 8, marginTop: '3px' }} />
+                    </ListItemIcon>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <ListItem key={`${index}`}>
+                <ListItemIcon>
+                  <FiberManualRecord style={{ fontSize: 8 }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={(
+                    <Typography className={classes.listItemText}>
+                      {item}
+                    </Typography>
+                  )}
+                />
+              </ListItem>
+            )}
+          </>
         ))}
       </List>
     </MuiThemeProvider>
@@ -171,6 +187,24 @@ const styles = () => ({
   listItemText: {
     fontWeight: '300',
     fontSize: '14px',
+  },
+  longText: {
+    fontSize: '13px',
+    fontWeight: '300',
+    marginBottom: '4px',
+  },
+  listIcon: {
+    float: 'left',
+    paddingTop: '-10px',
+    height: '20px',
+    marginTop: '-45px',
+  },
+  label: {
+    paddingLeft: '15px',
+    display: 'block',
+    fontSize: '14px',
+    fontWeight: 300,
+    marginBottom: '-4px',
   },
 });
 
