@@ -274,7 +274,7 @@ export const table2 = {
         fileSizeColumn: 'file_size',
         fileFormatColumn: 'file_format',
         fileLocationColumn: 'uuid',
-        caseIdColumn: 'sample_id',
+        caseIdColumn: 'file_name',
         iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
         iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
         iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
