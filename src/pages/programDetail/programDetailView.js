@@ -224,7 +224,10 @@ const ProgramView = ({ classes, data }) => {
 const styles = (theme) => ({
   link: {
     fontWeight: 'bold',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
     textDecoration: 'none',
+    lineSpacing: '19pt',
     color: '#DC762F',
     float: 'left',
     marginRight: '5px',

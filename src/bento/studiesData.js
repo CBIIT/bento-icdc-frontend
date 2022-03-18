@@ -40,6 +40,7 @@ export const pageData = {
       {
         dataField: 'program_id',
         header: 'Program',
+        link: '/program/{program_id}',
         display: true,
       },
       {
