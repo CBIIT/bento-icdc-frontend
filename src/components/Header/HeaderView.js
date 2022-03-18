@@ -19,7 +19,7 @@ const ICDCHeader = () => (
   <>
     <Header
       logo={headerData.globalHeaderLogo}
-      easter={headerData.globalHeaderImage}
+      // easter={headerData.globalHeaderImage}
       alt={headerData.globalHeaderLogoAltText}
       homeLink={headerData.globalHeaderLogoLink}
       customStyle={customStyle}
