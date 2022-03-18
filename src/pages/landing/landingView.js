@@ -3,9 +3,9 @@ import {
   Grid,
   withStyles,
   createTheme,
-  Link,
   MuiThemeProvider,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { cn } from 'bento-components';
 import lbg from '../../assets/landing/Background.png';
@@ -123,11 +123,11 @@ const LineText = (props) => {
 const LinkImage = (imagePath, link, classes) => {
   if (imagePath.length > 0 && link && link.length > 0) {
     return (
-      <Link href={link} target="_blank">
+      <a href={link} rel="noreferrer" target="_blank">
         <div className={classes.carouselImgContainerSpotlight}>
           <img src={imagePath} alt="icdc_news" />
         </div>
-      </Link>
+      </a>
     );
   }
   return (
