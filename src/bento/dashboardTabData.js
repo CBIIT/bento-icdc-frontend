@@ -571,7 +571,7 @@ export const tabIndex = [
   },
   {
     title: 'Samples',
-    primaryColor: ' #9DC1D9',
+    primaryColor: '#9DC1D9',
     secondaryColor: '#C9F1F1',
     selectedColor: '#9DC1D9',
   },
