@@ -121,9 +121,9 @@ const LineText = (props) => {
 };
 
 const LinkImage = (imagePath, link, classes) => {
-  if (imagePath.length > 0 && link.length > 0) {
+  if (imagePath.length > 0 && link && link.length > 0) {
     return (
-      <Link href={link}>
+      <Link href={link} target="_blank">
         <div className={classes.carouselImgContainerSpotlight}>
           <img src={imagePath} alt="icdc_news" />
         </div>
@@ -140,14 +140,12 @@ const LinkImage = (imagePath, link, classes) => {
 const LandingView = ({
   classes,
   primaryContentImage,
-  link1,
+  link,
 }) => {
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
   };
-  console.log('test 234');
-  console.log(primaryContentImage);
 
   return (
     <MuiThemeProvider theme={custumTheme}>
@@ -230,7 +228,7 @@ const LandingView = ({
                             <img src={item.content.image} alt="icdc_studies" />
                           </div>
                         )}
-                        { (index === 3) && LinkImage(primaryContentImage, link1, classes)}
+                        { (index === 3) && LinkImage(primaryContentImage, link, classes)}
                       </Grid>
                     </Grid>
                   </TabPanel>

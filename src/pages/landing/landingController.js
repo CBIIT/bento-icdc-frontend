@@ -5,12 +5,14 @@ import axios from 'axios';
 import YAMLData from '../../content/prod/aboutPagesContent.yaml';
 import env from '../../utils/env';
 import LandingView from './landingView';
+import NewsView from './views/newsView';
 
 const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
+const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {
   const [data, setData] = useState([]);
-
+  console.log(match);
   useEffect(() => {
     const fetchData = async () => {
       let resultData = [];
@@ -24,7 +26,6 @@ const LandingController = ({ match }) => {
         resultData = yaml.safeLoad(result.data);
       }
 
-      console.log(match.path);
       const supportObj = resultData.find(({ page }) => page === '/news');
       setData(supportObj);
     };
@@ -36,9 +37,17 @@ const LandingController = ({ match }) => {
     return <CircularProgress />;
   }
 
+  if (match.path === NEWS_PATH) {
+    return (
+      <NewsView
+        availableSoonImage={data.availableSoonImage}
+      />
+    );
+  }
+
   return (
     <LandingView
-      link1={data.sourceLink1}
+      link={data.sourceLink1}
       primaryContentImage={data.primaryContentImage}
     />
   );

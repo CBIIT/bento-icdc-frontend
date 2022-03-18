@@ -51,6 +51,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/ICDC/" component={Home} />
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/news" component={Home} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/studies" component={Studies} />
             <Route path="/explore" component={Dashboard} />
