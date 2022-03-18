@@ -12,13 +12,11 @@ const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {
   const [data, setData] = useState([]);
-  console.log(match);
   useEffect(() => {
     const fetchData = async () => {
       let resultData = [];
       let result = [];
       try {
-        console.log(ABOUT_CONTENT_URL);
         result = await axios.get(ABOUT_CONTENT_URL);
         resultData = yaml.safeLoad(result.data);
       } catch (error) {
@@ -30,7 +28,6 @@ const LandingController = ({ match }) => {
       setData(supportObj);
     };
     fetchData();
-    console.log(data);
   }, []);
 
   if (data.length === 0 || data === undefined) {
