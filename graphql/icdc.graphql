@@ -908,7 +908,7 @@ type QueryType {
 
   volumeOfDataOfProgram(program_id: String!): Float @cypher(statement: "MATCH (f:file)-[*]->(:program {program_acronym: $program_id}) WITH DISTINCT f return sum(f.file_size)")
   volumeOfDataOfStudy(study_code: String!): Float @cypher(statement: "MATCH (f:file)-[*]->(:study {clinical_study_designation: $study_code}) WITH DISTINCT f return sum(f.file_size)")
-  volumeOfDataOfCase(case_id: String!): Float @cypher(statement: "MATCH (c:case{case_id: $case_id})-->(s:study) WITH s MATCH (s)<-[*]-(f:file) WITH SUM(f.file_size) AS study_file_size MATCH (c:case{case_id: $case_id})<-[*]-(f:file) RETURN SUM(f.file_size) + study_file_size)")
+  volumeOfDataOfCase(case_id: String!): Float @cypher(statement: "MATCH (c:case{case_id: $case_id})-->(s:study) WITH s MATCH (s)<--(f:file) WITH SUM(f.file_size) AS study_file_size MATCH (c:case{case_id: $case_id})<-[*]-(f:file) with DISTINCT f, study_file_size RETURN SUM(f.file_size) + study_file_size")
   
   "Count by group"
   caseCountByStudyCode(case_ids: [String] = []): [GroupCount] @cypher(statement: """
