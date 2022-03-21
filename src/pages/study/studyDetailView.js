@@ -517,7 +517,9 @@ const styles = (theme) => ({
     lineHeight: '14px',
     fontSize: '12px',
     fontWeight: 'bold',
-    color: '#FF9742',
+    position: 'relative',
+    top: '2px',
+    color: '#dc762f',
     '&:hover': {
       textDecoration: 'none',
     },

@@ -80,8 +80,9 @@ const styles = (theme) => ({
     verticalAlign: 'middle',
   },
   outLink: {
-    color: '#1db634',
-    textDecoration: 'none',
+    color: '#2fa000',
+    fontWeight: 'bold',
+    textDecoration: 'underline',
     fontSize: '12px',
   },
   paddingLeft8: {
