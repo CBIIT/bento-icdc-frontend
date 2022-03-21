@@ -1,7 +1,6 @@
 import submitData from '../assets/landing/SubmittingData.png';
 import aboutICDC from '../assets/landing/About_ICDC.png';
 import Programs from '../assets/landing/Programs.png';
-import icdcNews from '../assets/landing/ICDC_News.png';
 import studies from '../assets/landing/studies.png';
 import spotlightStudy from '../assets/landing/Spotlight_Studies.png';
 import datadictionary from '../assets/landing/carousel.datadic.v2.png';
@@ -138,7 +137,7 @@ export const pageData = {
     },
     {
       alt: 'ICDC News',
-      img: icdcNews,
+      img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/landingPage/ICDC_News.png',
       titleText: 'ICDC News',
       descriptionText: 'Updates and announcements',
       callToActionText: 'EXPLORE',
