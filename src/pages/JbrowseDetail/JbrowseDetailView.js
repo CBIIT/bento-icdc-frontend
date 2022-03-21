@@ -78,6 +78,21 @@ const getDefaultSession = (alignments, session) => {
         );
         session.view.tracks.push({ ...viewTrack });
       }
+
+      if (item.type === varient.type) {
+        const display = new Display(
+          varient.display,
+          varient.height,
+          varient.maxDisplayedBpPerPx,
+          `${item.trackId}-${varient.display}`,
+        );
+        const viewTrack = new ViewTrack(
+          item.type,
+          item.trackId,
+          [{ ...display }],
+        );
+        session.view.tracks.push({ ...viewTrack });
+      }
     });
   }
   return session;

@@ -23,10 +23,10 @@ export const alignment = {
   height: 200,
 };
 export const varient = {
-  trackId: 'my_varient_track',
-  trackName: 'My Varient',
+  trackId: 'my_variant_track',
+  trackName: 'My Variant',
   type: 'VariantTrack',
-  display: 'LinearPileupDisplay',
+  display: 'LinearVariantDisplay',
   maxDisplayedBpPerPx: 50000,
   height: 200,
 };
