@@ -17,7 +17,8 @@ const ICDCFooter = () => {
         const FSverison = { FileServiceVersion: data.version || '' };
         setFooterUpdatedData({ ...FooterData, ...FSverison });
       } catch (error) {
-        console.error(error);
+        const FSverison = { FileServiceVersion: 'Error in getting File service verison' };
+        setFooterUpdatedData({ ...FooterData, ...FSverison });
       }
     };
     getSystems();
