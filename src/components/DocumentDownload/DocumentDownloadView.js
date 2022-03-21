@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom';
 import { ToolTip } from 'bento-components';
 
 import CustomIcon from '../CustomIcon';
-import { jBrowseOptions } from '../../bento/JBrowseData';
+import {
+  jBrowseOptions,
+  JbrowserFiles,
+} from '../../bento/JBrowseData';
 import env from '../../utils/env';
 
 const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_API;
@@ -49,13 +52,13 @@ const DocumentDownload = ({
   caseId = '',
 }) => (
   <>
-    { (fileFormat === 'bam' || fileFormat === 'bai') && jBrowseOptions.jBrowse ? (
+    { (JbrowserFiles.indexOf(fileFormat) !== -1) && jBrowseOptions.jBrowse ? (
       <ToolTip title={toolTipTextFileViewer}>
         <Link
           rel="noreferrer"
           color="inherit"
           to={{
-            pathname: `/fileViewer/${caseId}`,
+            pathname: `/fileViewer/${fileFormat}/${caseId}`,
           }}
         >
           <CustomIcon imgSrc={iconFileViewer} />

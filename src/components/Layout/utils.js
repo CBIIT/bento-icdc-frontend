@@ -159,7 +159,6 @@ async function init() {
             linkItem.target_type = target;
             linkItem.required = required;
             linkItem.multiplicity = multiplicity;
-            linkItem.template = icdcMData.Nodes[name].Tags.Template;
             link.push(linkItem);
           }
         }
@@ -190,6 +189,7 @@ async function init() {
         const targetId = keyMapList.find((item) => item.node === c.target_type);
         if (targetId) {
           value.links[index].targetId = targetId.props;
+          value.links[index].generatedType = icdcMPData.PropDefinitions[targetId.props].Src;
         }
       });
     }

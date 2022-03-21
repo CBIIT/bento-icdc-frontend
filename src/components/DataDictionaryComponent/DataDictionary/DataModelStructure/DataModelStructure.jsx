@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@gen3/ui-component/dist/components/Button';
 import Dropdown from '@gen3/ui-component/dist/components/Dropdown';
-import { getCategoryIconSVG } from '../NodeCategories/helper';
+import { getGraphCategoryIconSVG } from '../NodeCategories/helper';
 import { downloadMultiTemplate } from '../utils';
 import { intersection } from '../../utils';
 import './DataModelStructure.css';
@@ -60,7 +60,7 @@ class DataModelStructure extends React.Component {
               const {
                 nodeID, nodeIDsBefore, linksBefore, category,
               } = entry;
-              const IconSVG = getCategoryIconSVG(category);
+              const IconSVG = getGraphCategoryIconSVG(category);
               const lastNodeModifier = (i === this.props.dataModelStructure.length - 1) ? 'data-model-structure__node-name--last' : '';
               return (
                 <React.Fragment key={nodeID}>
