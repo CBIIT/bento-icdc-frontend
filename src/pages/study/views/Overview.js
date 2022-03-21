@@ -351,9 +351,11 @@ const styles = (theme) => ({
     paddingLeft: '5px',
   },
   outLink: {
-    color: '#DD752F',
+    color: '#DC762F',
     textDecoration: 'none',
     fontSize: '12px',
+    position: 'relative',
+    bottom: '7px',
   },
   tableContainer2: {
     background: '#fff',
