@@ -909,9 +909,13 @@ type QueryType {
   volumeOfDataOfProgram(program_id: String!): Float 
   volumeOfDataOfStudy(study_code: String!): Float 
   volumeOfDataOfCase(case_id: String!): Float 
-  
-  "Count by group"
-  caseCountByStudyCode(case_ids: [String] = []): [GroupCount] 
+    MATCH (s:study)<-[:member_of]-(c:case)
+      WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
+    RETURN {
+      group: s.clinical_study_designation,
+      count: count(DISTINCT(c))
+    }
+  """, passThrough: true)
 
   caseCountByDiagnosis(case_ids: [String] = []): [GroupCount] 
 
