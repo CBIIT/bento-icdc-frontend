@@ -15,15 +15,16 @@ import {
   assemblyNames,
   UriLocation,
   BamAdapter,
-  VarientAdapter,
+  VariantAdapter,
   FILE_TYPE_BAM,
   FILE_TYPE_BAI,
   FILE_TYPE_VCF,
   FILE_TYPE_VCF_INDEX,
   alignment,
-  varient,
+  variant,
   chunkSizeLimit,
-  location,
+  alignemntLocation,
+  variantLocation,
   defaultSession,
   theme,
 } from '../../bento/JBrowseData';
@@ -44,19 +45,19 @@ const getAdapter = ({ bamLocationUri, indexUri }) => {
   );
 };
 
-const getVarient = ({ vcfGzLocationUri, indexUri }) => {
+const getVariant = ({ vcfGzLocationUri, indexUri }) => {
   const varFileLocation = new FileLocation(
     vcfGzLocationUri,
     UriLocation,
   );
-  const varientIndex = new Index(new FileLocation(
+  const variantIndex = new Index(new FileLocation(
     indexUri,
     UriLocation,
   ));
   const adapter = {
-    type: VarientAdapter,
+    type: VariantAdapter,
     vcfGzLocation: varFileLocation,
-    index: varientIndex,
+    index: variantIndex,
   };
   return adapter;
 };
@@ -78,13 +79,28 @@ const getDefaultSession = (alignments, session) => {
         );
         session.view.tracks.push({ ...viewTrack });
       }
+
+      if (item.type === variant.type) {
+        const display = new Display(
+          variant.display,
+          variant.height,
+          variant.maxDisplayedBpPerPx,
+          `${item.trackId}-${variant.display}`,
+        );
+        const viewTrack = new ViewTrack(
+          item.type,
+          item.trackId,
+          [{ ...display }],
+        );
+        session.view.tracks.push({ ...viewTrack });
+      }
     });
   }
   return session;
 };
 
 const getTracks = ({
-  alignmentUris, varientUris, optionalTracks,
+  alignmentUris, variantUris, optionalTracks,
 }) => {
   const allTracks = [];
   if (alignmentUris.file_name) {
@@ -100,14 +116,14 @@ const getTracks = ({
     allTracks.push(alignmentOpts);
   }
 
-  if (varientUris.file_name) {
-    const varientAdapter = getVarient(varientUris);
+  if (variantUris.file_name) {
+    const variantAdapter = getVariant(variantUris);
     const variantOpts = new Track(
-      varient.trackId,
-      varient.trackName,
+      variant.trackId,
+      variant.trackName,
       assemblyNames,
-      varient.type,
-      varientAdapter,
+      variant.type,
+      variantAdapter,
     );
     allTracks.push(variantOpts);
   }
@@ -129,6 +145,7 @@ const JBrowseViewDetail = ({
 }) => {
   const [trackList, setTracks] = useState([]);
   const [session, setSession] = useState([]);
+  const [location, setLocation] = useState(alignemntLocation);
   const configureAdapters = () => {
     const alignmentUris = {};
 
@@ -144,21 +161,22 @@ const JBrowseViewDetail = ({
       });
     }
 
-    const varientUris = {};
+    const variantUris = {};
     if (vcfFiles.length > 0) {
       vcfFiles.forEach((file) => {
-        varientUris.file_name = file.file_name;
+        variantUris.file_name = file.file_name;
         if (file.file_type === FILE_TYPE_VCF) {
-          varientUris.vcfGzLocationUri = file.file_location;
+          variantUris.vcfGzLocationUri = file.file_location;
         }
         if (file.file_type === FILE_TYPE_VCF_INDEX) {
-          varientUris.indexUri = file.file_location;
+          variantUris.indexUri = file.file_location;
         }
+        setLocation(variantLocation);
       });
     }
 
     const currentTracks = getTracks({
-      alignmentUris, alignments, varientUris, optionalTracks,
+      alignmentUris, alignments, variantUris, optionalTracks,
     });
 
     const initSession = getDefaultSession(currentTracks, session);

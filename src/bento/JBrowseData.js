@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const assemblyNames = ['canFam6', 'canFam5', 'canFam4', 'canFam3', 'canFam2', 'canFam1'];
 
 export const BamAdapter = 'BamAdapter';
-export const VarientAdapter = 'VcfTabixAdapter';
+export const VariantAdapter = 'VcfTabixAdapter';
 export const BgzipFastaAdapter = 'BgzipFastaAdapter';
 export const UriLocation = 'UriLocation';
 export const FILE_TYPE_BAM = 'bam';
@@ -11,7 +11,8 @@ export const FILE_TYPE_BAI = 'bai';
 export const FILE_TYPE_VCF = 'gz';
 export const FILE_TYPE_VCF_INDEX = 'tbi';
 export const JbrowserFiles = [FILE_TYPE_BAM, FILE_TYPE_BAI, FILE_TYPE_VCF, FILE_TYPE_VCF_INDEX];
-export const location = 'chr1:60,632,043..60,636,011';
+export const alignemntLocation = 'chr1:60,632,043..60,636,011';
+export const variantLocation = 'chr1:60,032,043..60,636,011';
 // size in bytes
 export const chunkSizeLimit = 20000000;
 export const alignment = {
@@ -22,11 +23,11 @@ export const alignment = {
   maxDisplayedBpPerPx: 50000,
   height: 200,
 };
-export const varient = {
-  trackId: 'my_varient_track',
-  trackName: 'My Varient',
+export const variant = {
+  trackId: 'my_variant_track',
+  trackName: 'My Variants',
   type: 'VariantTrack',
-  display: 'LinearPileupDisplay',
+  display: 'LinearVariantDisplay',
   maxDisplayedBpPerPx: 50000,
   height: 200,
 };
@@ -38,29 +39,7 @@ export const jBrowseOptions = {
   optionalTracks: [
     {
       display: false,
-      trackId: 'ReferenceSequenceTrack',
-      name: 'Reference Sequence',
-      assemblyNames: [...assemblyNames],
-      type: 'FeatureTrack',
-      adapter: {
-        type: 'BgzipFastaAdapter',
-        fastaLocation: {
-          uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz',
-          locationType: 'UriLocation',
-        },
-        faiLocation: {
-          uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz.fai',
-          locationType: 'UriLocation',
-        },
-        gziLocation: {
-          uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz.gzi',
-          locationType: 'UriLocation',
-        },
-      },
-    },
-    {
-      display: false,
-      trackId: 'repeats_hg19',
+      trackId: 'repeats_canFam',
       name: 'Repeats',
       assemblyNames: ['canFam3'],
       type: 'FeatureTrack',
@@ -68,7 +47,7 @@ export const jBrowseOptions = {
       adapter: {
         type: 'BigBedAdapter',
         bigBedLocation: {
-          uri: 'https://hgdownload.soe.ucsc.edu/gbdb/canFam3/ncbiRefSeq/ncbiRefSeqGenomicDiff.bb',
+          uri: '',
           locationType: 'UriLocation',
         },
       },
@@ -103,7 +82,7 @@ export const jBrowseOptions = {
       adapter: {
         type: 'HicAdapter',
         hicLocation: {
-          uri: 'https://s3.amazonaws.com/igv.broadinstitute.org/data/hic/intra_nofrag_30.hic',
+          uri: '',
           locationType: 'UriLocation',
         },
       },
@@ -138,24 +117,6 @@ export const jBrowseOptions = {
       },
     },
   ],
-  referenceSequenceUris: {
-    fastaLocation: {
-      uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz',
-      locationType: 'UriLocation',
-    },
-    faiLocation: {
-      uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz.fai',
-      locationType: 'UriLocation',
-    },
-    gziLocation: {
-      uri: 'https://jbrowse.org/genomes/hg19/fasta/hg19.fa.gz.gzi',
-      locationType: 'UriLocation',
-    },
-  },
-  variantsUris: {
-    vcfGzLocationUri: 'https://bento-bam-vcf-files.s3.amazonaws.com/NA20811.10.sorted.vcf.gz',
-    indexUri: 'https://bento-bam-vcf-files.s3.amazonaws.com/NA20811.10.sorted.vcf.gz.tbi',
-  },
 };
 
 export const assemblies = [{
