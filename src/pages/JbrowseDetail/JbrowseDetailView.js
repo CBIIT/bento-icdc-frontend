@@ -23,7 +23,8 @@ import {
   alignment,
   variant,
   chunkSizeLimit,
-  location,
+  alignemntLocation,
+  variantLocation,
   defaultSession,
   theme,
 } from '../../bento/JBrowseData';
@@ -144,6 +145,7 @@ const JBrowseViewDetail = ({
 }) => {
   const [trackList, setTracks] = useState([]);
   const [session, setSession] = useState([]);
+  const [location, setLocation] = useState(alignemntLocation);
   const configureAdapters = () => {
     const alignmentUris = {};
 
@@ -169,6 +171,7 @@ const JBrowseViewDetail = ({
         if (file.file_type === FILE_TYPE_VCF_INDEX) {
           variantUris.indexUri = file.file_location;
         }
+        setLocation(variantLocation);
       });
     }
 
