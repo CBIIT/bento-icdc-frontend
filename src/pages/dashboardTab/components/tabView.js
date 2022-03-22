@@ -474,7 +474,7 @@ const styles = () => ({
     fontWeight: 'bold',
     fontFamily: 'Open Sans',
     fontSize: '15px',
-    textDecoration: 'none',
+    textDecoration: 'underline',
     '&:hover': {
       textDecoration: 'underline',
     },

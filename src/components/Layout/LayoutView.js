@@ -9,7 +9,7 @@ import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
-import Home from '../../pages/landing/landingView';
+import Home from '../../pages/landing/landingController';
 import Studies from '../../pages/studies/studiesController';
 import Dashboard from '../../pages/dashboardTab/dashboardController';
 import Cart from '../../pages/fileCentricCart/cartController';
@@ -51,6 +51,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/ICDC/" component={Home} />
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/news" component={Home} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/studies" component={Studies} />
             <Route path="/explore" component={Dashboard} />

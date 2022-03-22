@@ -155,7 +155,7 @@ const Studies = ({ classes, data, invalid }) => {
 
 const styles = (theme) => ({
   link: {
-    textDecoration: 'none',
+    textDecoration: 'underline',
     fontFamily: 'Open Sans',
     fontSize: '15px',
     fontWeight: 'bold',
@@ -190,9 +190,12 @@ const styles = (theme) => ({
   },
   buttonCaseNumb: {
     background: 'none!important',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
     border: 'none',
+    lineSpacing: '19pt',
     padding: '0!important',
-    textDecoration: 'none',
+    textDecoration: 'underline',
     fontWeight: 'bold',
     color: '#DC762F',
     cursor: 'pointer',

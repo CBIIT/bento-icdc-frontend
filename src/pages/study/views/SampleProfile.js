@@ -217,6 +217,7 @@ const styles = (theme) => ({
     paddingBottom: '3px',
     margin: '0 4px',
     fontSize: '14px',
+    color: '#dc762f',
   },
   headerButtonLink: {
     textDecoration: 'none',

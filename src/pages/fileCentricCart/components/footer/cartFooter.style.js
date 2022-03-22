@@ -17,6 +17,7 @@ export default () => ({
   },
   link: {
     color: '#dc762f',
+    textDecoration: 'underline',
     fontWeight: 'bolder',
     '&:hover': {
       color: '#dc762f',
