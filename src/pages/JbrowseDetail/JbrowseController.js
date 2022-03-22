@@ -26,18 +26,12 @@ const JbrowseDetailContainer = ({ match }) => {
   const files = [id];
   switch (type) {
     case FILE_TYPE_BAM:
-      if (id && String(id).includes('sorted')) {
-        files.push(`${id}.${FILE_TYPE_BAI}`);
-      } else {
-        files.push(`${id}`.replace(`${FILE_TYPE_BAM}`, `${FILE_TYPE_BAI}`));
-      }
+      files.push(`${id}.${FILE_TYPE_BAI}`);
+      files.push(`${id}`.replace(`${FILE_TYPE_BAM}`, `${FILE_TYPE_BAI}`));
       break;
     case FILE_TYPE_BAI:
-      if (id && String(id).includes(FILE_TYPE_BAM)) {
-        files.push(`${id}`.replace(`.${FILE_TYPE_BAI}`, ''));
-      } else {
-        files.push(`${id}`.replace(`${FILE_TYPE_BAI}`, `${FILE_TYPE_BAM}`));
-      }
+      files.push(`${id}`.replace(`.${FILE_TYPE_BAI}`, ''));
+      files.push(`${id}`.replace(`${FILE_TYPE_BAI}`, `${FILE_TYPE_BAM}`));
       break;
     case FILE_TYPE_VCF:
       files.push(`${id}.${FILE_TYPE_VCF_INDEX}`);
