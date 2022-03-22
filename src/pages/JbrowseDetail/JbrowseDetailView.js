@@ -15,13 +15,13 @@ import {
   assemblyNames,
   UriLocation,
   BamAdapter,
-  VarientAdapter,
+  VariantAdapter,
   FILE_TYPE_BAM,
   FILE_TYPE_BAI,
   FILE_TYPE_VCF,
   FILE_TYPE_VCF_INDEX,
   alignment,
-  varient,
+  variant,
   chunkSizeLimit,
   location,
   defaultSession,
@@ -44,19 +44,19 @@ const getAdapter = ({ bamLocationUri, indexUri }) => {
   );
 };
 
-const getVarient = ({ vcfGzLocationUri, indexUri }) => {
+const getVariant = ({ vcfGzLocationUri, indexUri }) => {
   const varFileLocation = new FileLocation(
     vcfGzLocationUri,
     UriLocation,
   );
-  const varientIndex = new Index(new FileLocation(
+  const variantIndex = new Index(new FileLocation(
     indexUri,
     UriLocation,
   ));
   const adapter = {
-    type: VarientAdapter,
+    type: VariantAdapter,
     vcfGzLocation: varFileLocation,
-    index: varientIndex,
+    index: variantIndex,
   };
   return adapter;
 };
@@ -79,12 +79,12 @@ const getDefaultSession = (alignments, session) => {
         session.view.tracks.push({ ...viewTrack });
       }
 
-      if (item.type === varient.type) {
+      if (item.type === variant.type) {
         const display = new Display(
-          varient.display,
-          varient.height,
-          varient.maxDisplayedBpPerPx,
-          `${item.trackId}-${varient.display}`,
+          variant.display,
+          variant.height,
+          variant.maxDisplayedBpPerPx,
+          `${item.trackId}-${variant.display}`,
         );
         const viewTrack = new ViewTrack(
           item.type,
@@ -99,7 +99,7 @@ const getDefaultSession = (alignments, session) => {
 };
 
 const getTracks = ({
-  alignmentUris, varientUris, optionalTracks,
+  alignmentUris, variantUris, optionalTracks,
 }) => {
   const allTracks = [];
   if (alignmentUris.file_name) {
@@ -115,14 +115,14 @@ const getTracks = ({
     allTracks.push(alignmentOpts);
   }
 
-  if (varientUris.file_name) {
-    const varientAdapter = getVarient(varientUris);
+  if (variantUris.file_name) {
+    const variantAdapter = getVariant(variantUris);
     const variantOpts = new Track(
-      varient.trackId,
-      varient.trackName,
+      variant.trackId,
+      variant.trackName,
       assemblyNames,
-      varient.type,
-      varientAdapter,
+      variant.type,
+      variantAdapter,
     );
     allTracks.push(variantOpts);
   }
@@ -159,21 +159,21 @@ const JBrowseViewDetail = ({
       });
     }
 
-    const varientUris = {};
+    const variantUris = {};
     if (vcfFiles.length > 0) {
       vcfFiles.forEach((file) => {
-        varientUris.file_name = file.file_name;
+        variantUris.file_name = file.file_name;
         if (file.file_type === FILE_TYPE_VCF) {
-          varientUris.vcfGzLocationUri = file.file_location;
+          variantUris.vcfGzLocationUri = file.file_location;
         }
         if (file.file_type === FILE_TYPE_VCF_INDEX) {
-          varientUris.indexUri = file.file_location;
+          variantUris.indexUri = file.file_location;
         }
       });
     }
 
     const currentTracks = getTracks({
-      alignmentUris, alignments, varientUris, optionalTracks,
+      alignmentUris, alignments, variantUris, optionalTracks,
     });
 
     const initSession = getDefaultSession(currentTracks, session);
