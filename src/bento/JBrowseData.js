@@ -24,7 +24,7 @@ export const alignment = {
 };
 export const variant = {
   trackId: 'my_variant_track',
-  trackName: 'My Variant',
+  trackName: 'My Variants',
   type: 'VariantTrack',
   display: 'LinearVariantDisplay',
   maxDisplayedBpPerPx: 50000,
