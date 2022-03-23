@@ -40,7 +40,7 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfStudies: 1,
     numberOfCases: data.caseCountOfStudy,
     numberOfSamples: data.sampleCountOfStudy,
-    numberOfFiles: (data.fileCountOfStudy - data.fileCountOfStudyFiles),
+    numberOfFiles: data.fileCountOfStudy,
     numberOfStudyFiles: data.fileCountOfStudyFiles,
     numberOfPrograms: data.programCountOfStudy,
     numberOfAliquots: data.aliquotCountOfStudy ? data.aliquotCountOfStudy : 0,

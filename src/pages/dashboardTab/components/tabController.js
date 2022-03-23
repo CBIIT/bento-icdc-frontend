@@ -52,7 +52,7 @@ const tabController = ({ classes, unifiedViewData }) => {
       const obj = {
         numberOfStudies: unifiedViewData.numberOfStudies,
         numberOfCases: unifiedViewData.numberOfCases,
-        numberOfFiles: (unifiedViewData.numberOfFiles - unifiedViewData.numberOfStudyFiles),
+        numberOfFiles: unifiedViewData.numberOfFiles,
         numberOfSamples: unifiedViewData.numberOfSamples,
         numberOfStudyFiles: unifiedViewData.numberOfStudyFiles,
         numberOfPrograms: unifiedViewData.numberOfPrograms,
