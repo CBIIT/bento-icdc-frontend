@@ -52,7 +52,7 @@ const CaseDetail = ({ classes, data }) => {
     numberOfCases: 1,
     numberOfAliquots: data.aliquotCountOfCase,
     numberOfSamples: data.sampleCountOfCase,
-    numberOfFiles: data.fileCountOfCase,
+    numberOfFiles: data.fileCountOfCase + data.studyFileCountOfCase,
     numberOfStudyFiles: data.studyFileCountOfCase,
     numberOfPrograms: data.programsCountOfCase,
     volumeOfData: data.volumeOfDataOfCase,

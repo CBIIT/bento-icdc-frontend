@@ -5,8 +5,8 @@ import humanFileSize from './utils';
 
 /* subtract study file count from total files count */
 const updateStat = (stat) => {
-  const { numberOfFiles, volumeOfData } = stat;
-  const numberOfCaseFiles = numberOfFiles;
+  const { numberOfStudyFiles, numberOfFiles, volumeOfData } = stat;
+  const numberOfCaseFiles = numberOfFiles - numberOfStudyFiles;
   return {
     ...stat,
     numberOfFiles: (numberOfCaseFiles > 0) ? numberOfCaseFiles : 0,
