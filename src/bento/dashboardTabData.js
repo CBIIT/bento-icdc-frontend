@@ -168,6 +168,7 @@ export const tabContainers = [
     paginationAPIField: 'sampleOverview',
     paginationAPIFieldDesc: 'sampleOverviewDesc',
     dataKey: 'sample_id',
+    defaultSortField: 'sample_id',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',
