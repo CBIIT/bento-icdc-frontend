@@ -532,6 +532,11 @@ type StudyOfProgram {
   date_of_iacuc_approval: String
   dates_of_conduct: String
   numberOfCases: Int
+  numberOfStudyFiles: Int,
+  numberOfCaseFiles: Int,
+  numberOfImageCollections: Int,
+  numberOfPublications: Int,
+  numberOfCRDCNodes: Int
 }
 
 type FileOverview2 {

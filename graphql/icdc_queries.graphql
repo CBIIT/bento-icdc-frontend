@@ -48,6 +48,11 @@ type StudyOfProgram {
   date_of_iacuc_approval: String
   dates_of_conduct: String
   numberOfCases: Int
+  numberOfStudyFiles: Int,
+  numberOfCaseFiles: Int,
+  numberOfImageCollections: Int,
+  numberOfPublications: Int,
+  numberOfCRDCNodes: Int
 }
 
 type FileOverview2 {
@@ -2262,7 +2267,16 @@ type QueryType {
   studiesByProgramId(program_id: String!): [StudyOfProgram] @cypher(statement: """
     MATCH (p:program {program_acronym: $program_id})<-[*]-(s:study)
     OPTIONAL MATCH (s)<-[*]-(c:case)
+    OPTIONAL MATCH (s)<--(sf:file)
+    OPTIONAL MATCH (s)<--(ic:image_collection)
+    OPTIONAL MATCH (s)<--(pub:publication)
+    OPTIONAL MATCH (c)<-[*]-(cf:file)
     WITH p, s,
+      COUNT(DISTINCT sf) AS numberOfStudyFiles,
+      COUNT(DISTINCT cf) AS numberOfCaseFiles,
+      COUNT(DISTINCT ic) AS numberOfImageCollections,
+      COUNT(DISTINCT ic.repository_name) AS numberOfCRDCNodes,
+      COUNT(DISTINCT pub) AS numberOfPublications,
       COUNT(DISTINCT(c)) AS numberOfCases
     RETURN{
       program_id: p.program_acronym,
@@ -2275,7 +2289,12 @@ type QueryType {
       study_disposition: s.study_disposition,
       date_of_iacuc_approval: s.date_of_iacuc_approval,
       dates_of_conduct: s.dates_of_conduct,
-      numberOfCases: numberOfCases
+      numberOfCases: numberOfCases,
+      numberOfStudyFiles: numberOfStudyFiles,
+      numberOfCaseFiles: numberOfCaseFiles,
+      numberOfImageCollections: numberOfImageCollections,
+      numberOfPublications: numberOfPublications,
+      numberOfCRDCNodes: numberOfCRDCNodes
     }
     ORDER BY s.clinical_study_designation
   """, passThrough: true)
@@ -2284,7 +2303,16 @@ type QueryType {
     MATCH (s:study)
     OPTIONAL MATCH (p:program)<-[*]-(s)
     OPTIONAL MATCH (s)<-[*]-(c:case)
+    OPTIONAL MATCH (s)<--(sf:file)
+    OPTIONAL MATCH (s)<--(ic:image_collection)
+    OPTIONAL MATCH (s)<--(pub:publication)
+    OPTIONAL MATCH (c)<-[*]-(cf:file)
     WITH p, s,
+      COUNT(DISTINCT sf) AS numberOfStudyFiles,
+      COUNT(DISTINCT cf) AS numberOfCaseFiles,
+      COUNT(DISTINCT ic) AS numberOfImageCollections,
+      COUNT(DISTINCT ic.repository_name) AS numberOfCRDCNodes,
+      COUNT(DISTINCT pub) AS numberOfPublications,
       COUNT(DISTINCT(c)) AS numberOfCases
     RETURN{
       program_id: p.program_acronym,
@@ -2297,7 +2325,12 @@ type QueryType {
       study_disposition: s.study_disposition,
       date_of_iacuc_approval: s.date_of_iacuc_approval,
       dates_of_conduct: s.dates_of_conduct,
-      numberOfCases: numberOfCases
+      numberOfCases: numberOfCases,
+      numberOfStudyFiles: numberOfStudyFiles,
+      numberOfCaseFiles: numberOfCaseFiles,
+      numberOfImageCollections: numberOfImageCollections,
+      numberOfPublications: numberOfPublications,
+      numberOfCRDCNodes: numberOfCRDCNodes
     }
     ORDER BY s.clinical_study_designation
   """, passThrough: true)
