@@ -29,11 +29,13 @@ export default ({
       paddingTop: '20px',
       backgroundColor: '#fffff',
       paddingLeft: '0px',
+      paddingRight: '35px',
     },
     titleRoot: {
       minHeight: '50px',
     },
     actions: {
+      paddingRight: '35px',
       '& span': {
         '& button': {
           right: '10px',

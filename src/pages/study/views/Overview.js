@@ -292,7 +292,7 @@ const styles = (theme) => ({
   },
   detailContainerLeft: {
     display: 'block',
-    padding: '15px 20px 5px 10px !important',
+    padding: '28px 20px 5px 10px !important',
     minHeight: '500px',
     maxHeight: '500px',
     overflowY: 'auto',

@@ -124,11 +124,12 @@ const styles = (theme) => ({
     letterSpacing: '0.025em',
     color: '#000',
     background: '#f3f3f3',
+    paddingLeft: '75px',
   },
   header: {
     background: '#fff',
     lineHeight: '30px',
-    padding: '4px 4px 4px 10px !important',
+    padding: '4px 4px 4px 80px',
     borderBottom: '4px solid #1db634',
     color: '#1db634',
     fontWeight: 'bold',
@@ -159,9 +160,8 @@ const styles = (theme) => ({
     marginTop: '-14px',
     width: '100px',
   },
-
   detailContainerLeft: {
-    padding: '20px 2px 30px 32px !important',
+    padding: '20px 2px 30px 90px',
     minHeight: '230px',
     float: 'left',
   },

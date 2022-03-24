@@ -35,7 +35,7 @@ export const formatEnumValues = (enums) => {
   if (Array.isArray(enums)) {
     let concatEnums = '';
     enums.forEach((value) => {
-      concatEnums += "'{}'; ".replace('{}', value);
+      concatEnums += `'${value}'; `;
     });
     return concatEnums;
   }
