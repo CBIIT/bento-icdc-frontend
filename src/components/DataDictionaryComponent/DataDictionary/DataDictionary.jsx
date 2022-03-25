@@ -57,11 +57,11 @@ const DataDictionary = (props) => {
         </div>
         <ReduxDictionarySearcher ref={dictionarySearcherRef} />
         <ReduxDataModelStructure />
-        <FacetFilters />
         <ReduxDictionarySearchHistory
           onClickSearchHistoryItem={handleClickSearchHistoryItem}
         />
         <div className="data-dictionary__search-history" />
+        <FacetFilters />
       </div>
       <div
         className="data-dictionary__main"
