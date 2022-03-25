@@ -56,7 +56,8 @@ class ServerPaginatedTableView extends React.Component {
     if (this.props.data !== prevProps.data && this.props.data === 'undefined' && prevProps.data !== 'undefined' && this.props.updateSortOrder) {
       this.changeToPrevDataState(prevProps);
     }
-    if (this.state.count < this.state.page * this.state.rowsPerPage) {
+    if (this.state.count > 0 && this.state.page > 0
+        && this.state.count <= this.state.page * this.state.rowsPerPage) {
       this.setPageToInitialState();
     }
 
@@ -118,7 +119,7 @@ class ServerPaginatedTableView extends React.Component {
     }
   }
 
-  getPage = (page) => {
+  getCurrentPage = (page) => {
     if (page !== this.state.page) {
       return this.state.page;
     }
@@ -346,7 +347,7 @@ class ServerPaginatedTableView extends React.Component {
           <TableRow>
             <TablePagination
               count={count}
-              page={this.getPage(page)}
+              page={this.getCurrentPage(page)}
               rowsPerPage={rowsPerPage}
               // eslint-disable-next-line max-len
               onChangeRowsPerPage={(event) => { this.setState({ rowsPerPage: event.target.value }); changePage(page); changeRowsPerPage(event.target.value); }}
