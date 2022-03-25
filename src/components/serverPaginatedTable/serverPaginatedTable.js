@@ -59,7 +59,8 @@ class ServerPaginatedTableView extends React.Component {
     if (this.state.count < this.state.page * this.state.rowsPerPage) {
       this.setPageToInitialState();
     }
-    // update columns state to the current pr ops
+
+    // update columns state to the current props
     if ((this.props.columns !== prevProps.columns
       && (prevProps.data === 'undefined' || this.props.data === prevProps.data))
       || (this.props.data !== prevProps.data
@@ -116,6 +117,13 @@ class ServerPaginatedTableView extends React.Component {
       );
     }
   }
+
+  getPage = (page) => {
+    if (page !== this.state.page) {
+      return this.state.page;
+    }
+    return page;
+  };
 
   sort = (page, sortOrder) => {
     this.setState({ isLoading: true });
@@ -242,25 +250,6 @@ class ServerPaginatedTableView extends React.Component {
     this.rowsSelectedTrigger(displayData);
   };
 
-  customFooter = () => {
-    const { count, page, rowsPerPage } = this.state;
-    return (
-      <TableFooter>
-        <TableRow>
-          <TablePagination
-            count={count}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            // eslint-disable-next-line max-len
-            onChangeRowsPerPage={(event) => { this.setState({ rowsPerPage: event.target.value }); this.changePage(page); this.changeRowsPerPage(event.target.value); }}
-            // eslint-disable-next-line no-shadow
-            onChangePage={(_, page) => this.changePage(page)}
-          />
-        </TableRow>
-      </TableFooter>
-    );
-  };
-
   changeColumnView = (changedColumn, action) => {
     const { columns } = this.state;
     const colIndex = columns.findIndex((col) => col.name === changedColumn);
@@ -352,7 +341,21 @@ class ServerPaginatedTableView extends React.Component {
         data,
       ),
       // eslint-disable-next-line no-shadow
-      customFooter: () => this.customFooter(),
+      customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              count={count}
+              page={this.getPage(page)}
+              rowsPerPage={rowsPerPage}
+              // eslint-disable-next-line max-len
+              onChangeRowsPerPage={(event) => { this.setState({ rowsPerPage: event.target.value }); changePage(page); changeRowsPerPage(event.target.value); }}
+              // eslint-disable-next-line no-shadow
+              onChangePage={(_, page) => changePage(page)}
+            />
+          </TableRow>
+        </TableFooter>
+      ),
       onTableInit: () => this.onTableInit(data),
       onTableChange: (action, tableState) => {
         // a developer could react to change on an action basis or
