@@ -79,9 +79,25 @@ export function toggleCheckBox(payload) {
     toggleCheckBoxAction(payload, currentAllFilterVariables);
   };
 }
-const generateCount = (filtered, searchGroup, searchTerm) => {
+const generateCount = (filtered, searchGroup, searchTerm, flag, filterBy, filterTerms) => {
   let count = 0;
-  if (searchGroup === 'inclusion') {
+  console.log('filterTerms', filterTerms);
+  if (flag) {
+    console.log('In like swimwear');
+    Object.keys(filtered).forEach((elem) => {
+      console.log('elem', elem);
+      console.log('filter', filtered[elem]);
+      console.log('filter.searchGroup', filtered[elem][searchGroup]);
+      console.log('filter.filterBy', filtered[elem][filterBy], filtered[elem][filterBy].length);
+      console.log('searchTerm', searchTerm);
+      if (
+        filtered[elem][searchGroup] === searchTerm
+        && filterTerms.find((term) => term.toLowerCase()
+          === filtered[elem][filterBy].toLowerCase())) {
+        count += 1;
+      }
+    });
+  } else if (searchGroup === 'inclusion') {
     Object.keys(filtered).forEach((elem) => {
       if (filtered[elem][searchTerm]
         ? filtered[elem][searchTerm].length > 0
@@ -116,24 +132,270 @@ const generateSubjectCounts = (filtered) => ({
   preferred: generateCount(filtered, 'inclusion', 'preferred'),
   optional: generateCount(filtered, 'inclusion', 'optional'),
 });
-
-const categoryexemptSubjectCount = (unfiltered, filtered) => ({
-  administrative: generateCount(unfiltered, 'category', 'administrative'),
-  case: generateCount(unfiltered, 'category', 'case'),
-  study: generateCount(unfiltered, 'category', 'study'),
-  clinical: generateCount(unfiltered, 'category', 'clinical'),
-  'clinical trial': generateCount(unfiltered, 'category', 'clinical_trial'),
-  biospecimen: generateCount(unfiltered, 'category', 'biospecimen'),
-  analysis: generateCount(unfiltered, 'category', 'analysis'),
-  'data file': generateCount(unfiltered, 'category', 'data_file'),
-  core: generateCount(filtered, 'assignment', 'core'),
-  extended: generateCount(filtered, 'assignment', 'extended'),
-  primary: generateCount(filtered, 'class', 'primary'),
-  secondary: generateCount(filtered, 'class', 'secondary'),
-  required: generateCount(filtered, 'inclusion', 'required'),
-  preferred: generateCount(filtered, 'inclusion', 'preferred'),
-  optional: generateCount(filtered, 'inclusion', 'optional'),
-});
+const generateFilterBy = (filterObj) => Object.keys(filterObj).pop();
+const categoryexemptSubjectCount = (unfiltered, filtered, groupName, filterObj) => {
+  console.log('group there', groupName);
+  console.log('filterObj', filterObj);
+  switch (groupName) {
+    case 'category':
+      return {
+        administrative: generateCount(unfiltered, 'category', 'administrative'),
+        case: generateCount(unfiltered, 'category', 'case'),
+        study: generateCount(unfiltered, 'category', 'study'),
+        clinical: generateCount(unfiltered, 'category', 'clinical'),
+        'clinical trial': generateCount(unfiltered, 'category', 'clinical_trial'),
+        biospecimen: generateCount(unfiltered, 'category', 'biospecimen'),
+        analysis: generateCount(unfiltered, 'category', 'analysis'),
+        'data file': generateCount(unfiltered, 'category', 'data_file'),
+        core: generateCount(filtered, 'assignment', 'core'),
+        extended: generateCount(filtered, 'assignment', 'extended'),
+        primary: generateCount(filtered, 'class', 'primary'),
+        secondary: generateCount(filtered, 'class', 'secondary'),
+        required: generateCount(filtered, 'inclusion', 'required'),
+        preferred: generateCount(filtered, 'inclusion', 'preferred'),
+        optional: generateCount(filtered, 'inclusion', 'optional'),
+      };
+    case 'assignment':
+      return {
+        administrative: generateCount(filtered, 'category', 'administrative'),
+        case: generateCount(filtered, 'category', 'case'),
+        study: generateCount(filtered, 'category', 'study'),
+        clinical: generateCount(filtered, 'category', 'clinical'),
+        'clinical trial': generateCount(filtered, 'category', 'clinical_trial'),
+        biospecimen: generateCount(filtered, 'category', 'biospecimen'),
+        analysis: generateCount(filtered, 'category', 'analysis'),
+        'data file': generateCount(filtered, 'category', 'data_file'),
+        core: generateCount(unfiltered, 'assignment', 'core'),
+        extended: generateCount(unfiltered, 'assignment', 'extended'),
+        primary: generateCount(filtered, 'class', 'primary'),
+        secondary: generateCount(filtered, 'class', 'secondary'),
+        required: generateCount(filtered, 'inclusion', 'required'),
+        preferred: generateCount(filtered, 'inclusion', 'preferred'),
+        optional: generateCount(filtered, 'inclusion', 'optional'),
+      };
+    case '$assignment':
+      console.log('$assignment', unfiltered);
+      return {
+        administrative: generateCount(
+          unfiltered,
+          'category',
+          'administrative',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        case: generateCount(
+          unfiltered,
+          'category',
+          'case',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        study: generateCount(
+          unfiltered,
+          'category',
+          'study',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        clinical: generateCount(
+          unfiltered,
+          'category',
+          'clinical',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        'clinical trial': generateCount(
+          unfiltered,
+          'category',
+          'clinical_trial',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        biospecimen: generateCount(
+          unfiltered,
+          'category',
+          'biospecimen',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        analysis: generateCount(
+          unfiltered,
+          'category',
+          'analysis',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        'data file': generateCount(
+          unfiltered,
+          'category',
+          'data_file',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        core: generateCount(filtered, 'assignment', 'core'),
+        // extended: generateCount(
+        //   unfiltered,
+        //   'assignment',
+        //   'extended',
+        //   true,
+        //   groupName.slice(1),
+        //   filterObj[groupName.slice(1)],
+        // ),
+        primary: generateCount(filtered, 'class', 'primary'),
+        secondary: generateCount(filtered, 'class', 'secondary'),
+        required: generateCount(filtered, 'inclusion', 'required'),
+        preferred: generateCount(filtered, 'inclusion', 'preferred'),
+        optional: generateCount(filtered, 'inclusion', 'optional'),
+      };
+    case '$category':
+      console.log('$category', unfiltered);
+      return {
+        core: generateCount(
+          unfiltered,
+          'assignment',
+          'core',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        extended: generateCount(
+          unfiltered,
+          'assignment',
+          'extended',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        primary: generateCount(filtered, 'class', 'primary'),
+        secondary: generateCount(filtered, 'class', 'secondary'),
+        required: generateCount(filtered, 'inclusion', 'required'),
+        preferred: generateCount(filtered, 'inclusion', 'preferred'),
+        optional: generateCount(filtered, 'inclusion', 'optional'),
+      };
+    case 'assignmentunchecked': {
+      const processedGroupName = groupName.slice(0, groupName.indexOf('unchecked'));
+      const filterBy = filterObj[processedGroupName]
+        ? filterObj[processedGroupName] : generateFilterBy(filterObj);
+      return categoryexemptSubjectCount(unfiltered, filtered, filterBy, filterObj);
+    }
+    case '$class':
+      console.log('$class', unfiltered);
+      return {
+        administrative: generateCount(
+          unfiltered,
+          'category',
+          'administrative',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        case: generateCount(
+          unfiltered,
+          'category',
+          'case',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        study: generateCount(
+          unfiltered,
+          'category',
+          'study',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        clinical: generateCount(
+          unfiltered,
+          'category',
+          'clinical',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        'clinical trial': generateCount(
+          unfiltered,
+          'category',
+          'clinical_trial',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        biospecimen: generateCount(
+          unfiltered,
+          'category',
+          'biospecimen',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        analysis: generateCount(
+          unfiltered,
+          'category',
+          'analysis',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        'data file': generateCount(
+          unfiltered,
+          'category',
+          'data_file',
+          true,
+          groupName.slice(1),
+          filterObj[groupName.slice(1)],
+        ),
+        // core: generateCount(filtered, 'assignment', 'core'),
+        // extended: generateCount(
+        //   unfiltered,
+        //   'assignment',
+        //   'extended',
+        //   true,
+        //   groupName.slice(1),
+        //   filterObj[groupName.slice(1)],
+        // ),
+        // primary: generateCount(filtered, 'class', 'primary'),
+        // secondary: generateCount(
+        //   unfiltered,
+        //   'class',
+        //   'secondary',
+        //   true,
+        //   groupName.slice(1),
+        //   filterObj[groupName.slice(1)],
+        // ),
+        // required: generateCount(filtered, 'inclusion', 'required'),
+        // preferred: generateCount(filtered, 'inclusion', 'preferred'),
+        // optional: generateCount(filtered, 'inclusion', 'optional'),
+      };
+    default:
+      console.log('default');
+      return {
+        // administrative: generateCount(unfiltered, 'category', 'administrative'),
+        // case: generateCount(unfiltered, 'category', 'case'),
+        // study: generateCount(unfiltered, 'category', 'study'),
+        // clinical: generateCount(unfiltered, 'category', 'clinical'),
+        // 'clinical trial': generateCount(unfiltered, 'category', 'clinical_trial'),
+        // biospecimen: generateCount(unfiltered, 'category', 'biospecimen'),
+        // analysis: generateCount(unfiltered, 'category', 'analysis'),
+        // 'data file': generateCount(unfiltered, 'category', 'data_file'),
+        // core: generateCount(filtered, 'assignment', 'core'),
+        // extended: generateCount(filtered, 'assignment', 'extended'),
+        // primary: generateCount(filtered, 'class', 'primary'),
+        // secondary: generateCount(filtered, 'class', 'secondary'),
+        // required: generateCount(filtered, 'inclusion', 'required'),
+        // preferred: generateCount(filtered, 'inclusion', 'preferred'),
+        // optional: generateCount(filtered, 'inclusion', 'optional'),
+      };
+  }
+};
 
 const handleExplorerFilter = (filters, dictArray) => {
   const asArray = Object.entries(filters);
@@ -190,23 +452,44 @@ const reducers = {
   FILTER_DATA_EXPLORER: (state, action) => {
     const checkboxData = facetSearchData;
     const updatedCheckboxData = setSelectedFilterValues(checkboxData, action.allFilters);
-    const groupName = action.filter.isChecked ? action.filter.groupName : 'Unchecked';
+    // eslint-disable-next-line prefer-const
+    let groupName = action.filter.isChecked ? action.filter.groupName : `${action.filter.groupName}Unchecked`;
+    console.log('group here', groupName);
     const processedFilters = Object.entries(action.allFilters)
       .filter(([, value]) => value.length > 0);
     const processedFiltersObj = Object.fromEntries(processedFilters);
+    console.log('processed', processedFiltersObj);
     let dictArray;
-    if (processedFilters.length > 1 && groupName.toLowerCase() !== 'unchecked') {
-      dictArray = Object.entries(state.filteredDictionary);
-    } else if (groupName.toLowerCase() === 'inclusion') {
-      dictArray = Object.entries(state.filteredDictionary);
-    } else {
+    // if (processedFilters.length > 1 && groupName.toLowerCase() !== 'unchecked') {
+    //   dictArray = Object.entries(state.unfilteredDictionary);
+    // } else if (groupName.toLowerCase() === 'inclusion') {
+    //   console.log('state dict', state.filteredDictionary);
+    //   dictArray = Object.entries(state.unfilteredDictionary);
+    // } else {
+    //   dictArray = Object.entries(state.unfilteredDictionary);
+    // }
+    if (processedFilters.length === 1) {
       dictArray = Object.entries(state.unfilteredDictionary);
+    } else if (processedFilters.length > 1 && groupName.toLowerCase() === 'assignment' && processedFiltersObj[groupName.toLowerCase()] && processedFiltersObj[groupName.toLowerCase()].length > 1) {
+      console.log('this one ???');
+      dictArray = Object.entries(state.unfilteredDictionary);
+    } else if (processedFilters.length > 1 && groupName.toLowerCase() === 'assignment') {
+      dictArray = Object.entries(state.filteredDictionary);
+    } else if (processedFilters.length > 1) {
+      console.log('this');
+      dictArray = Object.entries(state.unfilteredDictionary);
+    } else if (processedFilters.length > 1 && groupName.toLowerCase().includes('unchecked')) {
+      console.log('this running too');
+      dictArray = Object.entries(state.unfilteredDictionary);
+    } else {
+      console.log('this running');
+      dictArray = Object.entries(state.filteredDictionary);
     }
     const checkOne = handleExplorerFilter(
       processedFiltersObj,
       dictArray,
     ).data;
-
+    console.log('chk1', checkOne);
     const checkTwo = handleExplorerFilter(
       processedFiltersObj,
       dictArray,
@@ -215,24 +498,110 @@ const reducers = {
         processedFiltersObj,
         dictArray,
       ).actual.data : {};
-
+        console.log('chk2', checkTwo);
     let subjectCountObj;
     const filter = Object.keys(checkTwo).length > 0
       && Object.keys(checkTwo).length < Object.keys(checkOne).length
       ? checkTwo : checkOne;
-    if (processedFilters.length >= 1 && groupName.toLowerCase() !== 'category') {
-      subjectCountObj = generateSubjectCounts(filter);
-    } else if (processedFilters.length === 0) {
-      subjectCountObj = generateSubjectCounts(state.unfilteredDictionary);
-    } else if (groupName.toLowerCase() === 'category' || groupName.toLowerCase() === 'unchecked') {
-      subjectCountObj = categoryexemptSubjectCount(state.unfilteredDictionary, filter);
+    console.log('filly', filter);
+    if (processedFilters.length === 1) {
+      console.log('filter', filter);
+      subjectCountObj = {
+        ...state.subjectCountObject,
+        ...categoryexemptSubjectCount(
+          state.unfilteredDictionary,
+          filter || state.unfilteredDictionary,
+          groupName.toLowerCase(),
+          processedFiltersObj,
+        ),
+      };
+      console.log('subCntObj', subjectCountObj);
+      // if (groupName.toLowerCase() === 'category') {
+      //   console.log('Category');
+      //   subjectCountObj = categoryexemptSubjectCount(
+      //     state.unfilteredDictionary,
+      //     filter || state.unfilteredDictionary,
+      //     groupName.toLowerCase(),
+      //   );
+      // } else if (groupName.toLowerCase() === 'unchecked') {
+      //   console.log('Unchecked');
+      //   console.log('filter', filter);
+      //   console.log('stateUnfilteredDict', state.unfilteredDictionary);
+      //   subjectCountObj = categoryexemptSubjectCount(
+      //     state.unfilteredDictionary,
+      //     filter || state.unfilteredDictionary,
+      //     groupName.toLowerCase(),
+      //   );
+      // }
+    } else {
+      groupName = `$${groupName}`;
+      subjectCountObj = {
+        ...state.subjectCountObject,
+        ...categoryexemptSubjectCount(
+          state.unfilteredDictionary,
+          filter || state.unfilteredDictionary,
+          groupName.toLowerCase(),
+          processedFiltersObj,
+        ),
+      };
+      console.log('subCntObj', subjectCountObj);
     }
+
+    // if (groupName.toLowerCase() === 'category') {
+    //   console.log('Category');
+    //   subjectCountObj = categoryexemptSubjectCount(
+    //     state.unfilteredDictionary,
+    //     filter || state.unfilteredDictionary,
+    //     groupName.toLowerCase(),
+    //   );
+    // } else if (groupName.toLowerCase() === 'assignment' && processedFilters.length < 1) {
+    //   console.log('Assignment');
+    //   subjectCountObj = categoryexemptSubjectCount(
+    //     state.unfilteredDictionary,
+    //     filter || state.unfilteredDictionary,
+    //     groupName.toLowerCase(),
+    //   );
+    // } else if (groupName.toLowerCase() === 'unchecked') {
+    //   console.log('Unchecked');
+    //   console.log('filter', filter);
+    //   console.log('stateUnfilteredDict', state.unfilteredDictionary);
+    //   subjectCountObj = categoryexemptSubjectCount(
+    //     state.unfilteredDictionary,
+    //     filter || state.unfilteredDictionary,
+    //     groupName.toLowerCase(),
+    //   );
+    // } else if (processedFilters.length > 1) {
+    //   console.log('length > 1');
+    //   groupName = `$${groupName}`;
+    //   console.log('groupy', groupName.toLowerCase());
+    //   subjectCountObj = categoryexemptSubjectCount(
+    //     state.unfilteredDictionary,
+    //     filter || state.unfilteredDictionary,
+    //     groupName.toLowerCase(),
+    //   );
+    // }
+    // ----------------------------------------------------------------------------
+    // if (processedFilters.length >= 1 && groupName.toLowerCase() !== 'category') {
+    //   console.log('running here');
+    //   subjectCountObj = categoryexemptSubjectCount(state.unfilteredDictionary, filter);
+    //   console.log('subCntObj', subjectCountObj);
+    // } else if (processedFilters.length === 0) {
+    //   subjectCountObj = generateSubjectCounts(state.unfilteredDictionary);
+    // } else if (groupName.toLowerCase() === 'category'
+    //   || groupName.toLowerCase() === 'unchecked') {
+    //   console.log('filter in else if', filter);
+    //   subjectCountObj = categoryexemptSubjectCount(state.unfilteredDictionary, filter);
+    //   console.log('subCntObj', subjectCountObj);
+    // }
 
     const finalCheckboxData = setSubjectCount(updatedCheckboxData, subjectCountObj);
     return {
       ...state,
-      dictionary: filter && Object.keys(filter).length > 0 ? filter : state.unfilteredDictionary,
+      dictionary: filter && Object.keys(filter).length > 0
+        && Object.keys(processedFilters).length > 0
+        ? filter : state.unfilteredDictionary,
       allActiveFilters: action.allFilters,
+      subjectCountObject: subjectCountObj,
       filteredDictionary: filter,
       filterGroup: groupName,
       activeFilter: !state.activeFilter,
@@ -296,6 +665,7 @@ const reducers = {
       allActiveFilters: allFilters(facetSearchData),
       unfilteredDictionary: dict,
       filteredDictionary: dict,
+      subjectCountObject: subjectCountObj,
       checkbox: {
         data: setSubjectCount(facetSearchData, subjectCountObj),
       },

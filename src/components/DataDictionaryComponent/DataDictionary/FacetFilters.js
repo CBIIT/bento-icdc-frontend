@@ -162,7 +162,7 @@ const FacetFilters = ({ classes }) => {
 
   const showSelectedChecbox = (sideBarItem, currentSection) => {
     const selectedItems = sideBarItem.checkboxItems.filter((item) => (item.isChecked
-      && item.subjects > 0)).map((item) => (
+      && item.subjects > 0 && item.groupName.toLowerCase() === 'assignment')).map((item) => (
       {
         ...item,
         title: sideBarItem.tooltip ? sideBarItem.tooltip : 'undefined!!!!!!',
