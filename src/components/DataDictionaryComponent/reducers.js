@@ -134,17 +134,11 @@ const initializeFilterHashMap = (dictionary) => {
 
 const generateCount = (filtered, searchGroup, searchTerm, flag, filterBy, filterTerms) => {
   let count = 0;
-  console.log('filterTerms', filterTerms);
   if (flag) {
-    console.log('In like swimwear');
     Object.keys(filtered).forEach((elem) => {
-      console.log('erro3 elem', elem);
-      console.log('erro3 filter', filtered[elem]);
-      console.log('erro3 filter.searchGroup', filtered[elem][searchGroup]);
-      console.log('erro3 searchTerm', searchTerm);
       if (filterBy === 'inclusion') {
         const inclusionObj = filtered[elem][filterBy] ? filtered[elem][filterBy] : {};
-        console.log('error3 here now');
+
         if (
           filtered[elem][searchGroup] === searchTerm
           && filterTerms.find((term) => (
@@ -152,8 +146,10 @@ const generateCount = (filtered, searchGroup, searchTerm, flag, filterBy, filter
         ) {
           count += 1;
         }
+
         return;
       }
+
       if (
         filtered[elem][searchGroup] === searchTerm
         && filterTerms.find((term) => term.toLowerCase()
@@ -204,8 +200,6 @@ const generateFilterBy = (filterObj) => {
 const categoryexemptSubjectCount = (
   unfiltered, filtered, groupName, filterObj, oldSubjectCountObject,
 ) => {
-  console.log('group there', groupName);
-  console.log('filterObj', filterObj);
   switch (groupName) {
     case 'category':
       return {
@@ -280,7 +274,6 @@ const categoryexemptSubjectCount = (
         optional: generateCount(unfiltered, 'inclusion', 'optional'),
       };
     case '$category':
-      console.log('$category', unfiltered);
       return {
         core: generateCount(
           unfiltered,
@@ -319,7 +312,6 @@ const categoryexemptSubjectCount = (
         optional: generateCount(filtered, 'inclusion', 'optional'),
       };
     case '$assignment':
-      console.log('$assignment', unfiltered);
       return {
         administrative: generateCount(
           unfiltered,
@@ -392,7 +384,6 @@ const categoryexemptSubjectCount = (
         optional: generateCount(filtered, 'inclusion', 'optional'),
       };
     case '$class':
-      console.log('$class', unfiltered);
       return {
         administrative: generateCount(
           unfiltered,
@@ -569,67 +560,62 @@ const categoryexemptSubjectCount = (
     }
     case 'categoryunchecked':
     case '$categoryunchecked': {
-      console.log('erro2 doing this');
       const processedGroupName = groupName.slice(0, groupName.indexOf('unchecked'));
-      console.log('erro2 processGrpNm', processedGroupName);
       let filterBy = filterObj[processedGroupName]
         ? filterObj[processedGroupName] : generateFilterBy(filterObj, processedGroupName);
+
       filterBy = processedGroupName.includes('$') ? `$${filterBy}` : filterBy;
-      console.log('erro2 filBy', filterBy);
-      console.log('erro2 filObj', filterObj);
+
       if (Object.prototype.hasOwnProperty.call(filterObj, processedGroupName)) {
-        console.log('erro2 in here');
         return oldSubjectCountObject;
       }
+
       return categoryexemptSubjectCount(unfiltered, filtered, filterBy, filterObj);
     }
     case 'assignmentunchecked':
     case '$assignmentunchecked': {
-      console.log('erro2 doing this');
       const processedGroupName = groupName.slice(0, groupName.indexOf('unchecked'));
-      console.log('erro2 processGrpNm', processedGroupName);
+
       let filterBy = filterObj[processedGroupName]
         ? filterObj[processedGroupName] : generateFilterBy(filterObj, processedGroupName);
+
       filterBy = processedGroupName.includes('$') ? `$${filterBy}` : filterBy;
-      console.log('erro2 filBy', filterBy);
-      console.log('erro2 filObj', filterObj);
+
       if (Object.prototype.hasOwnProperty.call(filterObj, processedGroupName)) {
         return oldSubjectCountObject;
       }
+
       return categoryexemptSubjectCount(unfiltered, filtered, filterBy, filterObj);
     }
     case 'classunchecked':
     case '$classunchecked': {
-      console.log('erro2 doing this instead');
       const processedGroupName = groupName.slice(0, groupName.indexOf('unchecked'));
-      console.log('erro2 processGrpNm', processedGroupName);
+
       let filterBy = filterObj[processedGroupName]
         ? filterObj[processedGroupName] : generateFilterBy(filterObj, processedGroupName);
       filterBy = processedGroupName.includes('$') ? `$${filterBy}` : filterBy;
-      console.log('erro2 filBy', filterBy);
-      console.log('erro2 filObj', filterObj);
+
       if (Object.prototype.hasOwnProperty.call(filterObj, processedGroupName)) {
         return oldSubjectCountObject;
       }
+
       return categoryexemptSubjectCount(unfiltered, filtered, filterBy, filterObj);
     }
     case 'inclusionunchecked':
     case '$inclusionunchecked': {
-      console.log('erro2 doing this instead');
       const processedGroupName = groupName.slice(0, groupName.indexOf('unchecked'));
-      console.log('erro2 processGrpNm', processedGroupName);
+
       let filterBy = filterObj[processedGroupName]
         ? filterObj[processedGroupName] : generateFilterBy(filterObj, processedGroupName);
       filterBy = processedGroupName.includes('$') ? `$${filterBy}` : filterBy;
-      console.log('erro2 filBy', filterBy);
-      console.log('erro2 filObj', filterObj);
+
       if (Object.prototype.hasOwnProperty.call(filterObj, processedGroupName)) {
         return oldSubjectCountObject;
       }
+
       return categoryexemptSubjectCount(unfiltered, filtered, filterBy, filterObj);
     }
     default:
-      console.log('default');
       return generateSubjectCounts(unfiltered);
   }
 };
@@ -640,23 +626,17 @@ const newHandleExplorerFilter = (selectedFilters, filterHashMap) => {
   selectedFilters.forEach(([key, value], index) => {
     switch (index) {
       case 0: {
-        value.forEach((filterValue, filindex) => {
+        value.forEach((filterValue) => {
           filteredDict = [
             ...filteredDict,
             ...filterHashMap.get(filterValue.toLowerCase()),
           ];
-          console.log(`error4 dict ${filindex}`, filteredDict);
-          console.log(`error4 hash ${filindex}`, filterHashMap.get(filterValue.toLowerCase()));
         });
         break;
       }
       case 1: {
         if (key === 'inclusion') {
-          console.log('erro2 doing this!!!');
           value.forEach((filterValue) => {
-            console.log('erro2 alternateFilly', alternateFilteredDict);
-            console.log('erro2 filteredDict', filteredDict);
-            console.log('erro2 compu', filteredDict.filter(([, thisValue]) => (thisValue[key] && thisValue[key][filterValue.toLowerCase()] ? thisValue[key][filterValue.toLowerCase()].length > 0 : false)));
             alternateFilteredDict = [
               ...filteredDict.filter(([, thisValue]) => (thisValue[key]
                 && thisValue[key][filterValue.toLowerCase()]
@@ -668,9 +648,6 @@ const newHandleExplorerFilter = (selectedFilters, filterHashMap) => {
           break;
         }
         value.forEach((filterValue) => {
-          console.log('erro? alternateFilly', alternateFilteredDict);
-          console.log('erro? filteredDict', filteredDict);
-          console.log('error compu', filteredDict.filter(([, thisValue]) => thisValue[key] === filterValue.toLowerCase()));
           alternateFilteredDict = [
             ...alternateFilteredDict,
             ...filteredDict.filter(([, thisValue]) => thisValue[key] === filterValue.toLowerCase()),
@@ -681,13 +658,8 @@ const newHandleExplorerFilter = (selectedFilters, filterHashMap) => {
       }
 
       default: {
-        console.log('erro2 in case 2');
         if (key === 'inclusion') {
-          console.log('erro2 doing this!!!');
           value.forEach((filterValue) => {
-            console.log('erro2 alternateFilly', alternateFilteredDict);
-            console.log('erro2 filteredDict', filteredDict);
-            console.log('erro2 compu', filteredDict.filter(([, thisValue]) => (thisValue[key] && thisValue[key][filterValue.toLowerCase()] ? thisValue[key][filterValue.toLowerCase()].length > 0 : false)));
             alternateFilteredDict = [
               ...filteredDict.filter(([, thisValue]) => (thisValue[key]
                 && thisValue[key][filterValue.toLowerCase()]
@@ -698,14 +670,10 @@ const newHandleExplorerFilter = (selectedFilters, filterHashMap) => {
           break;
         }
         value.forEach((filterValue, filterIndex) => {
-          console.log('erro2 alternateFilly', alternateFilteredDict);
-          console.log('erro2 filteredDict', filteredDict);
-          console.log('erro2 compu', filteredDict.filter(([, thisValue]) => thisValue[key] === filterValue.toLowerCase()));
           alternateFilteredDict = [
             ...filteredDict.filter(([, thisValue]) => thisValue[key] === filterValue.toLowerCase()),
           ];
           if (filterIndex > 0) {
-            console.log('erro2 now!!');
             alternateFilteredDict = [
               ...filteredDict,
             ];
@@ -716,7 +684,7 @@ const newHandleExplorerFilter = (selectedFilters, filterHashMap) => {
       }
     }
   });
-  console.log('error4 final', filteredDict);
+
   return Object.fromEntries(filteredDict);
 };
 
@@ -741,7 +709,6 @@ const reducers = {
 
     const processedFiltersObj = Object.fromEntries(processedFilters);
     const filteredDict = newHandleExplorerFilter(processedFilters, state.filterHashMap);
-    console.log('error4 output', filteredDict, Object.keys(filteredDict).length);
 
     const subjectCountObj = {
       ...state.subjectCountObject,
@@ -753,9 +720,6 @@ const reducers = {
         state.oldSubjectCountObject,
       ),
     };
-    console.log('erro2 sateSub', state.subjectCountObject);
-    console.log('erro2 subCntObj', subjectCountObj);
-    console.log('erro2 old.subCntObj', state.oldSubjectCountObject);
 
     const finalCheckboxData = setSubjectCount(updatedCheckboxData, subjectCountObj || {});
     return {
