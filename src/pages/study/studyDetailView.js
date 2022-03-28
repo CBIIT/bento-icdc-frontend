@@ -22,7 +22,7 @@ import {
   tab,
 } from '../../bento/studyDetailsData';
 import Tab from '../../components/Tab/Tab';
-import Overview from './views/Overview';
+import Overview from './views/overview/Overview';
 import Publication from './views/Publication';
 import ArmsAndCohort from './views/ArmsAndCohort';
 import StudyFiles from './views/StudyFiles';

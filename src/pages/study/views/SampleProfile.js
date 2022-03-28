@@ -169,7 +169,7 @@ const styles = (theme) => ({
     fontSize: '12px',
   },
   tabHighlight: {
-    color: '#0B3556',
+    color: '#0296c9',
     outline: 'none !important',
   },
   tab: {
@@ -184,7 +184,6 @@ const styles = (theme) => ({
   tab2: {
     minWidth: '90px',
     width: '90px',
-    padding: '0',
     fontSize: '11px',
     fontWeight: '700',
     paddingLeft: '5px',
@@ -230,20 +229,6 @@ const styles = (theme) => ({
     },
   },
   tabs: {
-    '& .MuiTab-wrapper': {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-    },
-    '& .studySampleSiteCount': {
-      '& .MuiTab-wrapper': {
-        borderRight: '1px solid #6E6E6E',
-      },
-    },
-    '& .studySampleTypeCount': {
-      '& .MuiTab-wrapper': {
-        borderRight: '1px solid #6E6E6E',
-      },
-    },
     '& .Mui-selected': {
       color: '#0296c9',
       fontWeight: '900',
