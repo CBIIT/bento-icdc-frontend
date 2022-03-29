@@ -3,7 +3,6 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-// import _ from 'lodash';
 import {
   cn,
   ToolTip as Tooltip,
@@ -15,7 +14,6 @@ import {
 import {
   externalIcon,
 } from '../../../../bento/studyDetailsData';
-// import themes from '../../../../themes';
 import SampleProfile from '../SampleProfile';
 import OverviewThemeProvider from './overviewThemeConfig';
 
@@ -30,33 +28,6 @@ const Overview = ({
     const types = JSON.parse(typeString);
     return types.join(', ');
   };
-
-  // const themesLight = _.cloneDeep(themes.light);
-  // themesLight.overrides.MuiTableCell = {
-  //   ...themesLight.overrides.MuiTableCell,
-  //   root: {
-  //     '&:first-child': {
-  //       paddingLeft: '30px',
-  //     },
-  //     '&:lastchild': {
-  //       paddingRight: '30px',
-  //     },
-  //   },
-  // };
-
-  // themesLight.overrides.MUIDataTableToolbar = {
-  //   ...themesLight.overrides.MUIDataTableToolbar,
-  //   root: {
-  //     backgroundColor: '#ffffff',
-  //   },
-  //   actions: {
-  //     '& span': {
-  //       '& button': {
-  //         right: '0px',
-  //       },
-  //     },
-  //   },
-  // };
 
   const getAccessTypeString = (accessType) => (accessType === 'Cloud'
     ? 'Available only via the Cloud' : 'Available for Download');

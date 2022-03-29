@@ -1,5 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import themes, { overrides } from '../../themes';
 
 export default ({
@@ -48,13 +48,16 @@ export default ({
       },
     },
   };
+  overridesObj.MuiGrid.xs = {
+    paddingLeft: '0px',
+  };
   overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
   overridesObj.MuiTablePagination.actions.marginRight = '6px';
   overridesObj.MuiTableCell.head.paddingLeft = '37px';
   overridesObj.MuiTableCell.body.paddingLeft = '37px';
 
   style.push(overridesObj);
-  const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
+  const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });
 
   return (
     <MuiThemeProvider theme={computedTheme}>

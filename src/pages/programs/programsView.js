@@ -63,7 +63,7 @@ const styles = (theme) => ({
     width: 'calc(100% + 6px) !important',
   },
   container: {
-    paddingTop: '70px',
+    paddingTop: '60px',
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '45px',
     paddingRight: '45px',

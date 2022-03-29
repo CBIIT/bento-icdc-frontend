@@ -244,8 +244,8 @@ const styles = (theme) => ({
     paddingLeft: '35px',
     paddingRight: '50px',
     borderBottom: '#004c73 10px solid',
-    height: '155px',
-    paddingTop: '70px',
+    height: '145px',
+    paddingTop: '60px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilyRaleway,

@@ -107,7 +107,7 @@ export default (theme) => ({
     borderTop: '1px solid #81a6b9',
   },
   container: {
-    paddingTop: '70px',
+    paddingTop: '60px',
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '27px',
     paddingRight: '27px',
