@@ -11,7 +11,7 @@ import ReduxDictionarySearcher from './search/DictionarySearcher';
 import ReduxDictionarySearchHistory from './search/DictionarySearchHistory';
 import store from '../../../store/index';
 import FacetFilters from './FacetFilters';
-import { facetSearchData } from '../../../bento/dataDictionaryData';
+// import { facetSearchData } from '../../../bento/dataDictionaryData';
 import './DataDictionary.css';
 
 const DataDictionary = (props) => {
@@ -61,7 +61,7 @@ const DataDictionary = (props) => {
           onClickSearchHistoryItem={handleClickSearchHistoryItem}
         />
         <div className="data-dictionary__search-history" />
-        <FacetFilters />
+        {/* <FacetFilters /> */}
       </div>
       <div
         className="data-dictionary__main"
