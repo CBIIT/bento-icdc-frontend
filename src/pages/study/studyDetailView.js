@@ -24,7 +24,7 @@ import {
 import Tab from '../../components/Tab/Tab';
 import Overview from './views/overview/Overview';
 import Publication from './views/Publication';
-import ArmsAndCohort from './views/ArmsAndCohort';
+import ArmsAndCohort from './views/cohort/ArmsAndCohort';
 import StudyFiles from './views/StudyFiles';
 import TabPanel from '../../components/Tab/TabPanel';
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
@@ -186,14 +186,20 @@ const StudyDetailView = ({ classes, data }) => {
               )
               }
             </div>
-            <div className={cn(classes.headerMSubTitle, classes.headerSubTitleCate)}>
+            <div
+              className={
+                String(studyData.clinical_study_name).length > 85
+                  ? cn(classes.headerMSubTitle, classes.lowLetterSpace)
+                  : cn(classes.headerMSubTitle, classes.headerSubTitleCate)
+              }
+            >
               <span>
                 {' '}
                 {studyData.clinical_study_name}
               </span>
 
             </div>
-            <div>
+            <div className={classes.breadCrumb}>
               <CustomBreadcrumb data={breadCrumbJson} />
             </div>
           </div>

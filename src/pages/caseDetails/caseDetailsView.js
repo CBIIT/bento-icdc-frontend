@@ -456,7 +456,6 @@ const CaseDetail = ({ classes, data }) => {
       </div>
 
       <div id="table_case_detail" className={classes.tableContainer}>
-
         {table1.display
           ? (
             <CaseDetailThemeProvider>
@@ -485,7 +484,6 @@ const CaseDetail = ({ classes, data }) => {
               </Grid>
             </CaseDetailThemeProvider>
           ) : ''}
-
         <div className={classes.tableSpacer} />
 
         {table2.display
@@ -493,7 +491,7 @@ const CaseDetail = ({ classes, data }) => {
             <div id="table_case_detail_samples" className={classes.tableContainer}>
               <CaseDetailThemeProvider>
                 <Grid container spacing={4} className={classes.tableDiv}>
-                  <Grid item>
+                  <Grid item xs={12}>
                     <div className={classes.tableTitle}>
                       <span className={classes.tableHeader}>{table2.tableTitle}</span>
                     </div>
@@ -533,7 +531,7 @@ const styles = (theme) => ({
     paddingBottm: '17px',
   },
   marginTopBottom3: {
-    margin: '3px 0px',
+    margin: '0px',
   },
   spacer: {
     height: '76px',
@@ -571,7 +569,7 @@ const styles = (theme) => ({
     paddingLeft: '35px',
     paddingRight: '35px',
     borderBottom: '#81a6b9 4px solid',
-    height: '80px',
+    height: '90px',
     margin: 'auto',
   },
   tableSpacer: {
@@ -621,13 +619,12 @@ const styles = (theme) => ({
     position: 'absolute',
     float: 'left',
     marginTop: '5px',
-    width: '82px',
+    width: '96px',
     height: '82px',
     marginLeft: '1px',
   },
   detailContainer: {
     margin: 'auto',
-    // paddingTop: '12px',
     paddingLeft: '50px',
     paddingRight: '32px',
     fontFamily: theme.custom.fontFamilySans,
@@ -643,7 +640,6 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#ff8a00',
     position: 'relative',
-    top: '-8px',
   },
   detailContainerBottom: {
     borderTop: '#81a6b9 1px solid',
@@ -651,11 +647,13 @@ const styles = (theme) => ({
     padding: ' 35px 2px 63px 2px !important',
   },
   detailContainerLeft: {
-    padding: '35px 0px 0 2px !important',
+    marginTop: '-3px',
+    padding: '28px 0px 0 2px !important',
     minHeight: '290px',
   },
   detailContainerRight: {
-    padding: '30px 20px 10px 20px !important',
+    marginTop: '-3px',
+    padding: '28px 20px 10px 20px !important',
     minHeight: '290px',
     borderLeft: '#81a6b9 1px solid',
   },
@@ -664,7 +662,7 @@ const styles = (theme) => ({
     marginTop: '-9px',
   },
   tableHeader: {
-    paddingLeft: '32px',
+    paddingLeft: '35px',
     color: '#ff8a00',
   },
   tableDiv: {
@@ -686,7 +684,7 @@ const styles = (theme) => ({
     },
   },
   detailContainerItems: {
-    paddingTop: '21px',
+    paddingTop: '28px',
   },
   title: {
     color: '#9d9d9c',
@@ -702,7 +700,7 @@ const styles = (theme) => ({
     fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#ff17f15',
-    marginLeft: '20px',
+    marginLeft: '11px',
     marginBottom: '24px',
     marginTop: '5px',
     // paddingBottom: '20px',

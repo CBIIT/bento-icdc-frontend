@@ -156,7 +156,7 @@ const Overview = ({
                       )}
                     </Grid>
                   </Grid>
-                  <div><hr className={cn(classes.hrLine, classes.GridhrLineLeftMargin)} /></div>
+                  <div><hr className={cn(classes.hrLine, classes.hrLineRight)} /></div>
                 </Grid>
                 <Grid container spacing={1} direction="row" className={classes.detailContainerRight}>
 
@@ -264,6 +264,9 @@ const styles = (theme) => ({
     border: '#81a6b9 2px solid',
     background: '#81a6b9',
   },
+  hrLineRight: {
+    marginLeft: '4px',
+  },
   hrLineLeftMargin: {
     marginLeft: '4px',
   },
@@ -296,7 +299,6 @@ const styles = (theme) => ({
   },
   detailContainerItems: {
     paddingTop: '7px',
-    paddingLeft: '4px',
   },
   title: {
     color: '#0296c9',
@@ -308,6 +310,7 @@ const styles = (theme) => ({
   },
   detailContainerItem: {
     paddingTop: '15px !important',
+    paddingLeft: '2px',
   },
   detailContainerRight: {
     padding: '32px 20px 5px 10px',
@@ -318,6 +321,7 @@ const styles = (theme) => ({
   },
   detailContainerRightTop: {
     maxHeight: '250px',
+    paddingRight: '0px',
     overflow: 'auto',
   },
   marginTop10: {

@@ -57,6 +57,9 @@ export default ({
   themesLight.overrides.MuiIconButton = {
     ...themesLight.overrides.MuiIconButton,
     root: {
+      '&:first-child': {
+        marginLeft: '-8px',
+      },
       '&:last-child': {
         marginRight: '-16px',
       },

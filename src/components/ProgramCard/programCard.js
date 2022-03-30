@@ -158,7 +158,7 @@ const styles = (theme) => ({
     position: 'absolute',
     float: 'left',
     marginTop: '-14px',
-    width: '100px',
+    width: '96px',
   },
   detailContainerLeft: {
     padding: '20px 2px 30px 90px',

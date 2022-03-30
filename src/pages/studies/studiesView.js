@@ -244,7 +244,7 @@ const styles = (theme) => ({
     paddingLeft: '35px',
     paddingRight: '50px',
     borderBottom: '#004c73 10px solid',
-    height: '145px',
+    height: '154px',
     paddingTop: '60px',
   },
   headerMainTitle: {
@@ -258,7 +258,6 @@ const styles = (theme) => ({
     marginLeft: '10px',
     lineHeight: '25px',
   },
-
   headerTitle: {
     margin: 'auto',
     float: 'left',
@@ -267,7 +266,7 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    width: '83px',
+    width: '94px',
     zIndex: '10',
   },
   tableContainer: {

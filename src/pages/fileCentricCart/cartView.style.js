@@ -5,8 +5,7 @@ export default (theme) => ({
     borderTopLeftRadius: '20px',
     borderTopRightRadius: '20px',
     paddingTop: '30px',
-    margin: 'auto auto 30px auto',
-    maxWidth: '93%',
+    margin: 'auto 27px 30px 27px',
     background: '#f3f3f4',
     paddingBottom: '30px',
   },
@@ -142,8 +141,8 @@ export default (theme) => ({
     position: 'relative',
     paddingBottom: '10px',
   },
-  paddingBottom40: {
-    paddingBottom: '40px',
+  paddingBottom28: {
+    paddingBottom: '28px',
   },
   marginTopNegative20: {
     marginTop: '-38px',

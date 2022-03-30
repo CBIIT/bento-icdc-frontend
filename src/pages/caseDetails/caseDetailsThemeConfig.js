@@ -26,8 +26,20 @@ export default ({
   themesLight.overrides.MuiGrid = {
     ...themesLight.overrides.MuiGrid,
     item: {
-      paddingLeft: '0px',
+      padding: '0px 11px',
       margin: '0px',
+    },
+    container: {
+      display: 'unset',
+    },
+  };
+  themesLight.overrides.MuiTableCell = {
+    root: {
+      borderBottom: '0px',
+      padding: '5px',
+    },
+    paddingCheckbox: {
+      padding: '0px 5px',
     },
   };
   const computedTheme = createTheme({

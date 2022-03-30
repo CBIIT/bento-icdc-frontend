@@ -14,7 +14,16 @@ export default ({
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderTop = tableBorder;
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderBottom = tableBorder;
   overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
-  overridesObj.MuiTableCell.paddingCheckbox.padding = '0px 31px';
+  overridesObj.MuiTableCell.paddingCheckbox = {
+    '&:first-child': {
+      padding: '0px 35px',
+    },
+  };
+  overridesObj.PrivateSwitchBase = {
+    root: {
+      padding: '9px 0px',
+    },
+  };
   overridesObj.MUIDataTableToolbarSelect = {
     root: {
       backgroundColor: '#FFFFFF',
@@ -55,6 +64,17 @@ export default ({
   overridesObj.MuiTablePagination.actions.marginRight = '6px';
   overridesObj.MuiTableCell.head.paddingLeft = '37px';
   overridesObj.MuiTableCell.body.paddingLeft = '37px';
+  overridesObj.MuiIconButton = {
+    ...overridesObj.MuiIconButton,
+    root: {
+      '&:first-child': {
+        marginRight: '-12px',
+      },
+      '&:last-child': {
+        marginRight: '-20px',
+      },
+    },
+  };
 
   style.push(overridesObj);
   const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });

@@ -135,7 +135,7 @@ export default (theme) => ({
     paddingLeft: '35px',
     paddingRight: '21px',
     borderBottom: '#81a6b9 4px solid',
-    height: '94px',
+    height: '88px',
     margin: 'auto',
   },
   headerTitle: {
@@ -165,6 +165,22 @@ export default (theme) => ({
     paddingLeft: '3px',
     textOverflow: 'ellipsis',
     paddingRight: '200px',
+  },
+  lowLetterSpace: {
+    color: '#606061',
+    fontWeight: '400',
+    fontFamily: 'Sans-Serif',
+    textTransform: 'uppercase',
+    fontSize: '14px',
+    paddingLeft: '3px',
+    lineHeight: '17px',
+    textOverflow: 'ellipsis',
+    paddingRight: '200px',
+    letterSpacing: '0.01em',
+    marginBottom: '-9px',
+  },
+  breadCrumb: {
+    marginLeft: '-3px',
   },
   borderRight: {
     borderRight: '#81a6b9 1px solid',
@@ -216,7 +232,7 @@ export default (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    width: '100px',
+    width: '94px',
   },
   detailContainer: {
     margin: 'auto',

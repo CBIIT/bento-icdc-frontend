@@ -2,15 +2,15 @@ export default (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '46px',
-    width: '100px',
+    marginTop: '30px',
+    width: '96px',
   },
   header: {
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingLeft: '27px',
+    paddingRight: '27px',
     borderBottom: '#81a6b9 4px solid',
-    height: '140px',
-    margin: 'auto 33px',
+    height: '124px',
+    margin: 'auto 27px',
   },
   headerTitle: {
     maxWidth: theme.custom.maxContentWidth,

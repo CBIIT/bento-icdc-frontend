@@ -63,12 +63,11 @@ const styles = (theme) => ({
     width: 'calc(100% + 6px) !important',
   },
   container: {
-    paddingTop: '60px',
+    paddingTop: '75px',
     fontFamily: 'Raleway, sans-serif',
-    paddingLeft: '45px',
-    paddingRight: '45px',
+    paddingLeft: '27px',
+    paddingRight: '27px',
     background: '#f3f3f3',
-
   },
   marginTop23: {
     marginTop: '23px',
@@ -91,11 +90,9 @@ const styles = (theme) => ({
     background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '32px',
+    paddingLeft: '35px',
     borderBottom: '#81a6b9 4px solid',
-    height: '80px',
-    maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
+    height: '76px',
   },
   headerTitle: {
     maxWidth: theme.custom.maxContentWidth,
@@ -142,11 +139,9 @@ const styles = (theme) => ({
     position: 'absolute',
     float: 'left',
     marginTop: '-14px',
-    width: '100px',
+    width: '96px',
   },
   detailContainer: {
-    maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
     paddingTop: '18px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
