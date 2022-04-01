@@ -2,7 +2,7 @@
 -  
   page: /purpose
   title: Purpose
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/Photo-About_Purpose.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_Purpose.jpeg'
   content: 
     - 
       paragraph: "NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of spontaneously-arising canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects. The data is harmonized into an integrated data model and then made available to the research community. The ICDC is part of the Cancer Research Data Commons (CRDC), an initiative from NCI’s Center for Biomedical Informatics and Information Technology (CBIIT). Bioinformatic analysis of the ICDC data is accomplished using the CRDC’s $$[Cloud Resources](target:_self url:/#/crdc type:0)$$."
@@ -11,7 +11,7 @@
 - 
   page: /BPSC
   title: Best Practices Sub-Committee 
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/Photo-About_BPSC.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_BPSC.jpeg'
   content: 
     - 
       paragraph: "The Best Practices Sub-Committee (BPSC) has the responsibility for examining past and planned studies to identify and recommend best practices that the Integrated Canine Data Commons (ICDC) will implement to streamline and harmonize data collection, standardize data formats and platforms, and manage and annotate data (especially clinical data). Moreover, we anticipate these recommendations will aid the wider community in study design and data collection and enhance their research to better enable human/canine data comparison. The BPSC is composed of 8 external members, 5 NCI staff, 1 NHGRI staff and is supported by FNLCR staff. The ICDC, which will encompass many data types, is focused into four working groups: Imaging, Clinical/Pathology, Genomics, and Immunology."
@@ -134,7 +134,7 @@
 - 
   page: /DGAB
   title: Data Governance Advisory Board 
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/Photo-About_DGAB.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_DGAB.jpeg'
   content: 
     - 
       paragraph: "The ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. If a researcher has data that will help this mission and they are willing to share that data in the ICDC, they will make a request using the process outlined $$[here](target:_self url:/#/submit type:0)$$. The request will be processed by ICDC’s Data Governance Advisory Board (DGAB) that consists of 4 external members (all from ICDC Steering Committee), 2 NIH members and is supported by FNLCR staff.  The DGAB prioritizes the submission requests and advises the NCI on the suitability of request for inclusion in ICDC. The NCI makes the final decision on the request. The ICDC’s data governance process uses the DGAB, which is chaired by a non-NIH member of ICDC Steering Committee, and meets at least quarterly to review and prioritize all open and complete requests."
@@ -212,7 +212,7 @@
 - 
   page: /steeringCommittee
   title: "Steering Committee"
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/Photo-About_SteeringCommittee.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_SteeringCommittee.jpeg'
   content: 
     - 
       paragraph: "The ICDC (Integrated Canine Data Commons) is community driven and built with input and collaboration from many groups to foster a diversity of ideas and to ensure needs are identified across the broad Research Community . To achieve this collaboration, the ICDC Steering Committee was formed to advise the NCI and FNLCR on the ICDC. The Steering Committee is composed of 11 members from the non-NIH research community, 7 from NCI, 1 from NHGRI and 1 from NCATS. There is also 1 observer from the NCI and 4 ex-officio members who are FNLCR staff. The chairperson is from the non-NIH research community."
@@ -388,7 +388,7 @@
 - 
   page: /crdc
   title: "Cancer Research Data Commons (CRDC) and Analysis"
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/Photo-About_CRDC.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_CRDC.jpeg'
   content: 
     - 
       paragraph: "$$#CRDC:#$$"
@@ -422,7 +422,7 @@
 - 
   page: /icdc-data-model
   title: "ICDC Data and Model"
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/Photo-About_ICDC_model.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_ICDC_model.jpeg'
   secondaryZoomImageTitle: "The ICDC Data Model" 
   secondaryZoomImage: 'https://cbiit.github.io/icdc-model-tool/model-desc/icdc-model.svg'
   content: 
@@ -454,7 +454,7 @@
 - 
   page: /developers
   title: Developers
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/Photo-About_Developer.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_Developer.jpeg'
   content: 
     - 
       paragraph: "The ICDC System features a read-only GRAPHQL API that is available for public consumption:"
@@ -474,14 +474,14 @@
 - 
   page: /support
   title: Support
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/About_Support.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/About_Support.jpeg'
   content: 
     - 
       paragraph: "If you have any questions, please contact us at $$@ICDCHelpDesk@mail.nih.gov@$$."
 - 
   page: /submit
   title: "Submitting Data"
-  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/master/src/assets/about/Photo-About_SubmittingData.jpg'
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_SubmittingData.jpeg'
   content: 
     - 
       paragraph: "The ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. If a researcher has data that will help this mission and they are willing to share that data in the ICDC, they will make a request through our $${title:submission request process [PDF],link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_DGAB_Guidelines_v1.3.pdf}$$. Please email $$@ICDCHelpDesk@mail.nih.gov@$$ for instructions. All data in the ICDC will be made publicly available. This $${title:template,link:https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_Data_Submission_Request_Template.docx}$$ can be used as an aid to the submitter."
@@ -495,3 +495,36 @@
       paragraph: "In developing the submission plan, a primary consideration is that consumers of the data will not be as familiar with the data as the project owners. For example, submitters may find “lymphoma” implicit as a diagnosis in a given data set and thus not have use for such a field. However, this field would need to be explicit for the research community as a whole."
     - 
       paragraph: "General guidelines have been established to leverage available community standards where possible for both field name and acceptable values. Common data quality issues are: inconsistent spelling (haemotology versus hematology), inconsistent formatting (“Male” versus “male”), concatenated values which should be separate (“neutered male” should be values in two separate fields), gaps in data (Null data versus empty data versus data not collected) and format (Excel or other database compatible formats versus PDF). The ICDC data team will work with the submitter to identify and resolve these issues."
+- 
+  page: /guideline
+  title: "Data Use"
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_SubmittingData.jpeg'
+  content: 
+    - 
+      paragraph: "Data made available thru the ICDC is for research purposes only. ICDC Data received by the requestor is considered Licensed Material as defined below. ICDC data submission and data use is governed by $$[Creative Commons CC-BY 4.0.](https://creativecommons.org/licenses/by/4.0/)$$ licensing terms."
+    - 
+      paragraph: "By exercising the Licensed Rights, You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution 4.0 International Public License (“Public License“). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions."
+    - 
+      paragraph: "$$#Citing ICDC in Publications:#$$"
+    - 
+      paragraph: "To cite the ICDC as a resource, reference the data as being available via the NCI’s Integrated Canine Data Commons (ICDC) at $$[https://caninecommons.cancer.gov ](https://caninecommons.cancer.gov )$$ "
+    - 
+      paragraph: "$$#Citing Individual Studies:#$$"
+    - 
+      paragraph: "ICDC uses human readable identifiers for representing studies."
+    - 
+      paragraph: "To cite an individual study, cite the native ICDC accession ID as displayed within the User Interface, prefixed by “icdc:” to create a compact identifier that can be resolved via $$[identifiers.org](https://identifiers.org/)$$ (e.g., icdc:000003), and/or cite the URL to the study (e.g., $$[https://caninecommons.cancer.gov/#/study/000003](https://caninecommons.cancer.gov/#/study/000003)$$), where the URL ends with the native ICDC accession ID."
+    - 
+      paragraph: "$$#Intellectual Property policy statement:#$$"
+    - 
+      paragraph: "The ICDC discourages use of the data to acquire ownership interest in pre-competitive technologies necessary for the development of the field (“research tools”).  The ICDC places no restrictions on the use of data to develop downstream technologies that may lead to discoveries that address public needs, especially therapeutics.  For further information about the ICDC Intellectual Property policy, please contact us at $$@ICDCHelpDesk@mail.nih.gov@$$"
+    - 
+      paragraph: "$$#Embargo Period for datasets:#$$"
+    - 
+      paragraph: "Certain datasets made available in ICDC will have an embargo period as an associated publication is in the process of being accepted and or published.  An embargo is the release of limited metadata on the ICDC portal until an approval is obtained from the respective data submitter. There are several visual icons intended to flag studies that have an active embargo to inform users that the data will be released to ICDC in the near future."
+- 
+  page: /news
+  title: "News"
+  sourceLink1: ''
+  primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/aboutPages/EACR_top_ten.png'
+  availableSoonImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/aboutPages/Smart-Dog.png'
