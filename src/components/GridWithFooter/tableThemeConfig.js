@@ -28,6 +28,10 @@ export default ({
       minHeight: '15px',
       paddingTop: '20px',
       backgroundColor: '#fffff',
+      paddingLeft: '0px',
+    },
+    titleRoot: {
+      minHeight: '50px',
     },
     actions: {
       '& span': {

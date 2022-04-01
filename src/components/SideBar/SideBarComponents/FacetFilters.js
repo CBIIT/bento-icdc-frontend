@@ -67,6 +67,9 @@ const FacetPanel = ({ classes, disabled }) => {
     && state.dashboardTab.isDashboardTableLoading
     ? state.dashboardTab.isDashboardTableLoading
     : false));
+  const tooltipContent = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.tooltip ? state.dashboardTab.tooltip : state));
+
   // redux use actions
   const dispatch = useDispatch();
 
@@ -153,8 +156,7 @@ const FacetPanel = ({ classes, disabled }) => {
     }]));
   };
 
-  const sideBarDisplay = sideBarContent.data.filter((sideBar) => sideBar.show === true)
-    .slice(0, 15);
+  const sideBarDisplay = sideBarContent.data.filter((sideBar) => sideBar.show === true);
 
   const arrangeBySections = (arr) => {
     const sideBar = {};
@@ -173,6 +175,10 @@ const FacetPanel = ({ classes, disabled }) => {
       ? '#B2C6D6' : '#4A4A4A');
   }
 
+  const getTooltipContent = (value, type) => tooltipContent
+    .filter((item) => (item.name === value.name
+      && type === item.type) || (item.acronym === value.name && type === item.type))[0];
+
   function getCheckBoxColor(index, currentSection) {
     return index % 2 ? facetSectionVariables[currentSection.sectionName] ? facetSectionVariables[currentSection.sectionName].checkBoxColorsTwo ? facetSectionVariables[currentSection.sectionName].checkBoxColorsTwo : '' : defaultFacetSectionVariables.checkBoxColorsTwo
       : facetSectionVariables[currentSection.sectionName] ? facetSectionVariables[currentSection.sectionName].checkBoxColorsOne ? facetSectionVariables[currentSection.sectionName].checkBoxColorsOne : '' : defaultFacetSectionVariables.checkBoxColorsOne;
@@ -180,7 +186,12 @@ const FacetPanel = ({ classes, disabled }) => {
 
   const getCheckBoxView = (sideBarItem, currentSection) => {
     const showItems = sideBarItem.checkboxItems.filter((item) => item !== undefined
-      && item.subjects > 0);
+      && item.subjects > 0).map((item) => (
+      {
+        ...item,
+        title: sideBarItem.tooltip ? getTooltipContent(item, sideBarItem.tooltip) : undefined,
+      }
+    ));
     return showItems.map(
       (item, index) => (
         <CheckBoxView
@@ -207,7 +218,12 @@ const FacetPanel = ({ classes, disabled }) => {
 
   const showSelectedChecbox = (sideBarItem, currentSection) => {
     const selectedItems = sideBarItem.checkboxItems.filter((item) => (item.isChecked
-      && item.subjects > 0));
+      && item.subjects > 0)).map((item) => (
+      {
+        ...item,
+        title: sideBarItem.tooltip ? getTooltipContent(item.name, sideBarItem.tooltip) : undefined,
+      }
+    ));
     const selectedCheckbox = selectedItems.slice(0, showCheckboxCount)
       .map((item, index) => (
         <CheckBoxView
@@ -255,7 +271,7 @@ const FacetPanel = ({ classes, disabled }) => {
           />
           <ExpansionPanel
             disabled={disabled}
-            expanded={sectionExpanded.includes(currentSection.sectionName)}
+            expanded={!disabled && sectionExpanded.includes(currentSection.sectionName)}
             onChange={handleSectionChange(currentSection.sectionName)}
                 // className={classes.expansion}
             classes={{
@@ -293,7 +309,7 @@ const FacetPanel = ({ classes, disabled }) => {
                             classes={{ root: classes.dropDownIconSubSection }}
                             style={{ fontSize: 26 }}
                           />
-)}
+                        )}
                         aria-controls={sideBarItem.groupName}
                         id={sideBarItem.groupName}
                         className={classes.customExpansionPanelSummaryRoot}

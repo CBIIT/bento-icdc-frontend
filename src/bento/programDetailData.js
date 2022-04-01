@@ -52,7 +52,7 @@ const table = {
     {
       dataField: 'numberOfCases',
       header: 'Cases',
-      link: '/cases',
+      link: '/explore',
       totalNumberOfCases: true,
       display: true,
     },
@@ -78,10 +78,12 @@ const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
 query program($programTitle: String!) {
   sampleCountOfProgram(program_id: $programTitle)
   fileCountOfProgram(program_id: $programTitle)
+  studyFileCountOfProgram(program_id: $programTitle)
   aliquotCountOfProgram(program_id: $programTitle)
   studyCountOfProgram(program_id: $programTitle)
   caseCountOfProgram(program_id: $programTitle)
- 
+  volumeOfDataOfProgram(program_id: $programTitle)
+  
   
   program(program_acronym: $programTitle)
   { 

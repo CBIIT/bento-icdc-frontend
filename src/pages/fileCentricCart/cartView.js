@@ -1,13 +1,12 @@
 import React from 'react';
 import {
   Grid, withStyles,
-  IconButton, Link,
+  IconButton,
 } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
 import { DeleteOutline as DeleteOutlineIcon, ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
-import { ToolTip as Tooltip } from 'bento-components';
 import CartBody from './components/body/cartBody';
 import CartHeader from './components/header/cartHeader';
+import CartFooter from './components/footer/cartFooter';
 import DialogBox from './components/dialogBox/dialogBox';
 import Styles from './cartView.style';
 import client from '../../utils/graphqlClient';
@@ -22,12 +21,76 @@ import { deleteFromCart } from './store/cart';
 import { downloadJson } from './utils';
 import GA from '../../utils/googleAnalytics';
 
+const CustomHeaderRemove = ({
+  openDialogBox,
+  classes: {
+    removeThCell,
+    removeHeadCell,
+    removeAllMessage,
+    removeHeadCellText,
+    removeHeadCellIcon,
+    removeHeadCellIconButton,
+  },
+}) => {
+  const [popUpStatus, setPopUpStatus] = React.useState(false);
+  const showPopUp = (status) => setPopUpStatus(status === 'open');
+
+  return (
+    <th className={removeThCell}>
+      <span role="button">
+        <div className={removeHeadCell}>
+          <div
+            id="cart_remove_button_text"
+            className={removeHeadCellText}
+          >
+            Remove
+          </div>
+          <div className={removeHeadCellIcon}>
+            <IconButton aria-label="help" className={removeHeadCellIconButton}>
+              <ArrowDropDownIcon
+                onClick={openDialogBox}
+                onMouseEnter={() => showPopUp('open')}
+                onMouseLeave={() => showPopUp('close')}
+              />
+            </IconButton>
+            { popUpStatus ? (
+              <div className={removeAllMessage}>
+                {' '}
+                Remove
+                {' '}
+                <b>All</b>
+                {' '}
+                items in cart.
+                {' '}
+              </div>
+            ) : ''}
+          </div>
+        </div>
+      </span>
+    </th>
+  );
+};
+
 const cartView = ({
-  classes, data, fileIDs = [], defaultSortCoulmn, defaultSortDirection, isLoading, tableDownloadCSV,
+  classes,
+  data,
+  fileIDs = [],
+  defaultSortCoulmn,
+  defaultSortDirection,
+  updateSortOrder,
+  paginationAPIField,
+  paginationAPIFieldDesc,
+  localPage,
+  localRowsPerPage,
+  isLoading,
+  tableDownloadCSV,
 }) => {
   const [modalStatus, setModalStatus] = React.useState(false);
-  const [removeAllMessageStatus, setRemoveAllMessageStatus] = React.useState(false);
-  const [userComments, setUserComments] = React.useState('');
+  const commentRef = React.useRef();
+  // const [userComments, setUserComments] = React.useState('');
+  let dataCartView = data;
+  let localPageCartView = localPage;
+  let localRowsPerPageCartView = localRowsPerPage;
   async function fetchData() {
     const fetchResult = await client
       .query({
@@ -40,9 +103,10 @@ const cartView = ({
     return fetchResult;
   }
 
-  function toggleRemoveAllMessageStatus(status) {
-    return status === 'close' ? setRemoveAllMessageStatus(false) : setRemoveAllMessageStatus(true);
-  }
+  // function toggleRemoveAllMessageStatus(status) {
+  //   return status === 'close'
+  // ? setRemoveAllMessageStatus(false) : setRemoveAllMessageStatus(true);
+  // }
 
   // ================= Dialogbox Functions =================
   const closeDialogBox = () => setModalStatus(false);
@@ -56,6 +120,7 @@ const cartView = ({
 
   // =========== Downlaod Manifest Functions ===========
   async function prepareDownload() {
+    const userComments = commentRef.current.getValue();
     const data1 = await fetchData();
     GA.sendEvent('Manifest', 'Download', 'cart');
     return downloadJson(
@@ -83,6 +148,15 @@ const cartView = ({
 
   const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_uuid');
 
+  if (localStorage.getItem('data')) {
+    if (localStorage.getItem('data') !== 'undefined' && localStorage.getItem('data').length > 0 && (localStorage.getItem('page') !== localPage || localStorage.getItem('rowsPerPage') !== localRowsPerPage || localStorage.getItem('sortColumn') !== defaultSortCoulmn || localStorage.getItem('sortDirection') !== defaultSortDirection)) {
+      const dataLocal = JSON.parse(localStorage.getItem('data'));
+      dataCartView = dataLocal;
+      localPageCartView = localStorage.getItem('page');
+      localRowsPerPageCartView = localStorage.getItem('rowsPerPage');
+    }
+  }
+
   const deleteColumn = [{
     name: 'Remove',
     label: 'Remove',
@@ -100,50 +174,15 @@ const cartView = ({
         </div>
       ),
       customHeadRender: () => (
-        <th className={classes.removeThCell}>
-          <span role="button">
-            <div className={classes.removeHeadCell}>
-              <div
-                className={classes.removeHeadCellText}
-              >
-                Remove
-              </div>
-              <div className={classes.removeHeadCellIcon}>
-                <IconButton aria-label="help" className={classes.removeHeadCellIconButton}>
-                  <ArrowDropDownIcon onClick={() => openDialogBox()} onMouseEnter={() => toggleRemoveAllMessageStatus('open')} onMouseLeave={() => toggleRemoveAllMessageStatus('close')} />
-                </IconButton>
-                {removeAllMessageStatus ? (
-                  <div className={classes.removeAllMessage}>
-                    {' '}
-                    Remove
-                    {' '}
-                    <b>All</b>
-                    {' '}
-                    items in cart.
-                    {' '}
-                  </div>
-                ) : ''}
-              </div>
-            </div>
-          </span>
-        </th>
+        <CustomHeaderRemove
+          classes={classes}
+          openDialogBox={openDialogBox}
+        />
       ),
     },
   }];
 
   const numberOfFilesBeDeleted = myFilesPageData.popUpWindow.showNumberOfFileBeRemoved ? fileIDs.length : '';
-
-  const toolTipIcon = ({ title, placement }) => (
-    <Tooltip arrow title={title} placement={placement}>
-      <IconButton className={classes.helpBtn} aria-label="help">
-        <img
-          src={myFilesPageData.tooltipIcon}
-          alt={myFilesPageData.tooltipAlt}
-          className={classes.helpIcon}
-        />
-      </IconButton>
-    </Tooltip>
-  );
 
   return (
     <Grid className={classes.marginTopNegative20}>
@@ -173,64 +212,27 @@ const cartView = ({
 
             {/* Section: Table */}
             <CartBody
-              data={data}
+              updateSortOrder={updateSortOrder}
+              data={dataCartView}
               deleteColumn={deleteColumn}
               fileIDs={fileIDs}
               defaultSortCoulmn={defaultSortCoulmn}
               defaultSortDirection={defaultSortDirection}
               tableDownloadCSV={tableDownloadCSV}
+              paginationAPIField={paginationAPIField}
+              paginationAPIFieldDesc={paginationAPIFieldDesc}
+              localPage={localPageCartView}
+              localRowsPerPage={localRowsPerPageCartView}
+              isLoading={isLoading}
             />
 
-            {/* Section: Bottom controls */}
-            <div className={classes.paddingLeftRight}>
-              <div className={classes.message}>
-                <span>
-                  To access and analyze files: select and remove unwanted files,
-                  click the “Download Manifest” button, and upload the resulting
-                  Manifest file to your
-                  {' '}
-                  <Link target="_blank" className={classes.link} href="http://www.cancergenomicscloud.org/">
-                    Seven Bridges Genomics
-                  </Link>
-                  <img
-                    src={externalLinkIcon.src}
-                    alt={externalLinkIcon.alt}
-                    className={classes.linkIcon}
-                  />
-                  {' '}
-                  account.
-                </span>
-              </div>
-              {/* Section: User Comments */}
-              <div className={classes.manifestTextarea}>
-                <TextField
-                  id="multiline-user-coments"
-                  label={myFilesPageData.textareaPlaceholder}
-                  multiline
-                  rows={6}
-                  style={{ minWidth: '550px' }}
-                  className={classes.textField}
-                  margin="dense"
-                  variant="filled"
-                  onChange={(e) => setUserComments(e.target.value)}
-                />
-                {toolTipIcon({ title: myFilesPageData.userCommentsTooltipMessage, placement: 'right' })}
-              </div>
-
-              {/* Section: Button Group */}
-              <div className={classes.buttonGroup}>
-                <button
-                  type="button"
-                  className={classes.downloadButton}
-                  onClick={() => prepareDownload()}
-                >
-                  {myFilesPageData.downButtonText}
-                  {' '}
-                </button>
-                {toolTipIcon({ title: myFilesPageData.downloadBtnTooltipMessage, placement: 'right' })}
-              </div>
-            </div>
-
+            {/* Section: Footer */}
+            <CartFooter
+              myFilesPageData={myFilesPageData}
+              externalLinkIcon={externalLinkIcon}
+              ref={commentRef}
+              preparedownload={() => prepareDownload()}
+            />
           </div>
         </div>
       </Grid>

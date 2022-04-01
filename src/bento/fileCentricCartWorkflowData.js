@@ -22,11 +22,11 @@ export const myFilesPageData = {
   downButtonText: 'DOWNLOAD MANIFEST',
   headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
   headerIconAlt: 'Bento MyFiles header logo',
-  manifestFileName: 'BENTO File Manifest',
+  manifestFileName: 'ICDC File Manifest',
   tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
   tooltipAlt: 'tooltip icon',
-  downloadBtnTooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
-  userCommentsTooltipMessage: 'If you wish to annotate the file manifest with comments regarding the files included, enter them here. Comments will be saved as part of the manifest.',
+  downloadBtnTooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download File Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
+  userCommentsTooltipMessage: 'If you wish to annotate the file manifest with comments regarding the files included, enter them here. Comments will be saved as part of the file manifest.',
   textareaPlaceholder: 'User Comments',
   errorMessage: 'An error has occurred in loading CART',
   popUpWindow: {
@@ -53,6 +53,8 @@ export const table = {
   defaultSortField: 'file_name',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
+  paginationAPIField: 'filesInList',
+  paginationAPIFieldDesc: 'filesInListDesc',
   tableDownloadCSV: customMyFilesTabDownloadCSV,
   viewColumns: true,
 
@@ -94,9 +96,12 @@ export const table = {
         toolTipTextFileDownload: 'Download a copy of this file',
         toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
         fileSizeColumn: 'file_size',
+        fileFormatColumn: 'file_format',
         fileLocationColumn: 'file_uuid',
+        caseIdColumn: 'file_name',
         iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
         iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
     },
     {

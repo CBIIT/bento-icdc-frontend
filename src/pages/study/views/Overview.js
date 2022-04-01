@@ -5,30 +5,17 @@ import {
 } from '@material-ui/core';
 import _ from 'lodash';
 import {
-  CustomDataTable,
-  getOptions,
-  getColumns,
+  cn,
   ToolTip as Tooltip,
 } from 'bento-components';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { Typography } from '../../../components/Wrappers/Wrappers';
-import GridWithFooter from '../../../components/GridWithFooter/GridView';
 import {
-  studyDetailSorting,
   customSorting,
-  isStudyUnderEmbargo,
-  fromArmTOCohorDoes,
+  studyDisposition,
 } from '../utils';
 import {
-  table1,
-  table2,
   externalIcon,
-  textLabels,
-  tooltipContent,
 } from '../../../bento/studyDetailsData';
-import themes, { overrides } from '../../../themes';
-import updateColumns from '../../../utils/columnsUtil';
-import DocumentDownload from '../../../components/DocumentDownload';
+import themes from '../../../themes';
 import SampleProfile from './SampleProfile';
 
 const Overview = ({
@@ -37,12 +24,9 @@ const Overview = ({
   diagnoses,
   caseFileTypes,
   data,
-  closeSnack,
-  openSnack,
 }) => {
   const getImageTypes = (typeString) => {
     const types = JSON.parse(typeString);
-
     return types.join(', ');
   };
 
@@ -61,6 +45,9 @@ const Overview = ({
 
   themesLight.overrides.MUIDataTableToolbar = {
     ...themesLight.overrides.MUIDataTableToolbar,
+    root: {
+      backgroundColor: '#ffffff',
+    },
     actions: {
       '& span': {
         '& button': {
@@ -70,74 +57,8 @@ const Overview = ({
     },
   };
 
-  const computedTheme = createMuiTheme({
-    ...themesLight,
-    ...overrides,
-  });
-
   const getAccessTypeString = (accessType) => (accessType === 'Cloud'
     ? 'Available only via the Cloud' : 'Available for Download');
-
-  const cohortAndDosingTableData = [];
-  const { noArmMessage } = table1;
-  const { noCohortMessage } = table1;
-  if (!studyData.cohorts || studyData.cohorts.length === 0) {
-  // no cohort under studyData
-    if (studyData.study_arms && studyData.study_arms.length !== 0) {
-    // no cohort under studyData , has arms
-      studyData.study_arms.forEach((arm) => {
-      // decide arm
-        let cohortAndDosing = {
-          arm: arm.arm || arm.arm === '' ? arm.arm : '',
-          description: arm.description ? arm.description : '',
-          does: '',
-          cohortDescription: '',
-        };
-        cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
-        cohortAndDosingTableData.push(cohortAndDosing);
-      });
-    } else { // no cohort under studyData no arms
-      cohortAndDosingTableData.push({
-        arm: noArmMessage,
-        description: '',
-        does: noCohortMessage,
-        cohortDescription: '',
-      });
-    }
-  } else if (studyData.study_arms && studyData.study_arms.length !== 0) {
-    // has cohort under studyData and arms
-    studyData.study_arms.forEach((arm) => {
-      // decide arm
-      let cohortAndDosing = {
-        arm: arm.arm || arm.arm === '' ? arm.arm : '',
-        description: arm.description ? arm.description : '',
-        does: '',
-        cohortDescription: '',
-      };
-      cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
-      cohortAndDosingTableData.push(cohortAndDosing);
-    });
-  } else { // has cohort under studyData , no arms
-    let cohortAndDosing = {
-      arm: noArmMessage,
-      description: '',
-      does: '',
-      cohortDescription: '',
-    };
-    cohortAndDosing = fromArmTOCohorDoes(studyData.cohorts, cohortAndDosing);
-    cohortAndDosingTableData.push(cohortAndDosing);
-  }
-
-  const fileTableData = data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
-    const cFile = { ...file };
-    cFile.parent = 'Study';
-    cFile.studyDesignation = studyData.clinical_study_designation;
-    return cFile;
-  });
-
-  const tableOneOptions = getOptions(table1, classes);
-  const tableTwoOptions = getOptions(table2, classes);
-  const columns2 = updateColumns(getColumns(table2, classes, fileTableData, externalIcon, '', () => {}, DocumentDownload), table2.columns);
 
   return (
     <>
@@ -145,7 +66,7 @@ const Overview = ({
         <div className={classes.detailContainer}>
           <Grid container>
             <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
-              <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
+              <Grid container spacing={1} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   <span className={classes.detailContainerHeader}>Description</span>
                 </Grid>
@@ -204,12 +125,12 @@ const Overview = ({
               </Grid>
             </Grid>
             {
-              (!isStudyUnderEmbargo(studyData.study_disposition))
+              (!studyDisposition(studyData.study_disposition))
               && (
               <Grid item lg={6} md={6} sm={6} xs={12}>
                 <Grid
                   container
-                  spacing={16}
+                  spacing={1}
                   direction="row"
                   className={classes.detailContainerRight}
                 >
@@ -221,14 +142,14 @@ const Overview = ({
                     xs={12}
                     className={classes.detailContainerRightTop}
                   >
-                    <Grid container spacing={16}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <span className={classes.detailContainerHeader}>DIAGNOSES</span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.paddingTop12}>
-                      {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis) => (
-                        <Grid item xs={12}>
+                      {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis, index) => (
+                        <Grid item xs={12} key={index}>
                           <span className={classes.content}>
                             {' '}
                             {diagnosis}
@@ -245,34 +166,38 @@ const Overview = ({
                     xs={12}
                     className={classes.detailContainerRightTop}
                   >
-                    <Grid container spacing={16}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <span className={classes.detailContainerHeader}>Case File Types</span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.paddingTop12}>
-                      {caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
-                        <Grid item xs={12}>
+                      {(caseFileTypes.length > 0) ? caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType, index) => (
+                        <Grid item xs={12} key={index}>
                           <span className={classes.content}>{fileType}</span>
                         </Grid>
-                      ))}
+                      )) : (
+                        <div className={classes.content}>
+                          This study currently has no Files associated with its cases
+                        </div>
+                      )}
                     </Grid>
                   </Grid>
                   <div><hr className={classes.hrLine} /></div>
                 </Grid>
-                <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
+                <Grid container spacing={1} direction="row" className={classes.detailContainerRight}>
 
                   {/* START: Image Collection */}
                   <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
-                    <Grid container spacing={16}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <span className={classes.detailContainerHeader}> IMAGE COLLECTIONS </span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.detailContainerItems}>
                       {studyData.image_collections.length > 0 ? studyData.image_collections.map(
-                        (imageCollection) => (
-                          <Grid item xs={12} className={classes.detailContainerItem}>
+                        (imageCollection, index) => (
+                          <Grid item xs={12} className={classes.detailContainerItem} key={index}>
                             <Grid item container direction="row">
                               <Grid item xs={12} sm={4} className={classes.title}>
                                 COLLECTION:
@@ -281,7 +206,7 @@ const Overview = ({
                                 item
                                 xs={12}
                                 sm={8}
-                                className={[classes.content, classes.marginTopN5]}
+                                className={cn(classes.content, classes.marginTopN5)}
                               >
                                 <Tooltip title={getAccessTypeString(imageCollection.collection_access)} arrow placement="top">
                                   <a href={`${imageCollection.image_collection_url}`} target="icdc" className={classes.outLink}>
@@ -328,75 +253,6 @@ const Overview = ({
           </Grid>
         </div>
       </div>
-      {
-      (!isStudyUnderEmbargo(studyData.study_disposition))
-      && (
-      <>
-        <div className={classes.tableContainer}>
-          <div className={classes.tableDiv}>
-            <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>ARMS AND COHORTS</span>
-            </div>
-            <Grid item xs={12}>
-              <Grid container>
-                <Grid item xs={12} id="table_cohort_dosing">
-                  <MuiThemeProvider theme={computedTheme}>
-                    <Typography>
-                      <CustomDataTable
-                        data={cohortAndDosingTableData.sort(
-                          (a, b) => studyDetailSorting(a.arm, b.arm),
-                        )}
-                        columns={table1.columns}
-                        options={{ ...tableOneOptions, ...textLabels }}
-                        components={{
-                          Tooltip,
-                        }}
-                      />
-                    </Typography>
-                  </MuiThemeProvider>
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography />
-                </Grid>
-              </Grid>
-            </Grid>
-          </div>
-        </div>
-        <div className={classes.tableContainer2}>
-          <div className={classes.tableDiv}>
-            <Grid item xs={12}>
-              <div className={classes.tableTitle}>
-                <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
-              </div>
-            </Grid>
-            <Grid item xs={12} id="table_associated_files">
-              <MuiThemeProvider theme={computedTheme}>
-                <GridWithFooter
-                  data={fileTableData}
-                  title=""
-                  columns={columns2}
-                  options={{ ...tableTwoOptions, ...textLabels }}
-                  customOnRowsSelect={table2.customOnRowsSelect}
-                  closeSnack={closeSnack}
-                  openSnack={openSnack}
-                  disableRowSelection={table2.disableRowSelection}
-                  buttonText={table2.buttonText}
-                  saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
-                  ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
-                  DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
-                  tooltipMessage={table2.tooltipMessage}
-                  tooltipContent={tooltipContent}
-                  showtooltip
-                  primaryKeyIndex={table2.primaryKeyIndex}
-                />
-              </MuiThemeProvider>
-            </Grid>
-          </div>
-        </div>
-      </>
-      )
-      }
-      <div className={classes.spacer} />
     </>
   );
 };
@@ -491,28 +347,15 @@ const styles = (theme) => ({
   tableContainer: {
     background: '#f3f3f3',
   },
-  tableDiv: {
-    padding: '31px 34px',
-    margin: '40px auto auto auto',
-  },
-  tableTitle: {
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
-    letterSpacing: '0.017em',
-    color: '#ff17f15',
-    paddingBottom: '20px',
-  },
-  tableHeader: {
-    paddingLeft: '32px',
-    color: '#0296c9',
-  },
   paddingLeft5: {
     paddingLeft: '5px',
   },
   outLink: {
-    color: '#DD752F',
+    color: '#DC762F',
     textDecoration: 'none',
     fontSize: '12px',
+    position: 'relative',
+    bottom: '7px',
   },
   tableContainer2: {
     background: '#fff',

@@ -10,21 +10,22 @@ import {
   manipulateLinks,
   ToolTip as Tooltip,
 } from 'bento-components';
+import { useSelector } from 'react-redux';
 import {
   pageData, textLabels,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
-import filterCasePageOnStudyCode from '../../utils/utils';
+import { navigatedToDashboard } from '../../utils/utils';
 import { studyDisposition } from '../study/utils';
-import arrowIcon from '../../assets/icons/arrow-icon.png';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
+import InvalidAccesionModal from './InvalidAccesionModal';
 
-const Studies = ({ classes, data }) => {
-  // TBD
+const Studies = ({ classes, data, invalid }) => {
+  const overlay = useSelector((state) => (
+    state.dashboardTab
+      ? state.dashboardTab.isOverlayOpen : false));
+
   const tableOptions = getOptions(pageData.table, classes);
-  // const columns = updateColumns(getColumns(pageData.table, classes, data,
-  // pageData.externalLinkIcon, '/cases', redirectTo), pageData.table.columns);
-
   const embargoToolTipIcon = () => (
     <Tooltip title="Under Embargo" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
@@ -59,8 +60,8 @@ const Studies = ({ classes, data }) => {
         {value}
       </Link>
       {
-      renderSwitch(studyDisposition(tableMeta.rowData[5]))
-    }
+        column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[5]))
+      }
     </>
   );
 
@@ -70,9 +71,9 @@ const Studies = ({ classes, data }) => {
         renderSwitch(studyDisposition(tableMeta.rowData[5]))
       ) : (
         <Link
-          to={(location) => ({ ...location, pathname: '/cases' })}
           className={classes.buttonCaseNumb}
-          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[0])}
+          to={(location) => ({ ...location, pathname: '/explore' })}
+          onClick={() => navigatedToDashboard(tableMeta.rowData[0], 'Cases')}
         >
           {value}
         </Link>
@@ -109,6 +110,11 @@ const Studies = ({ classes, data }) => {
   return (
     <>
       <Stats />
+      {
+        invalid && !overlay ? (
+          <InvalidAccesionModal />
+        ) : null
+    }
       <div className={classes.tableContainer}>
         <div className={classes.container}>
           <div className={classes.header}>
@@ -149,9 +155,12 @@ const Studies = ({ classes, data }) => {
 
 const styles = (theme) => ({
   link: {
-    textDecoration: 'none',
+    textDecoration: 'underline',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
     fontWeight: 'bold',
     color: '#DC762F',
+    lineSpacing: '19pt',
     float: 'left',
     marginRight: '5px',
     '&:hover': {
@@ -181,55 +190,17 @@ const styles = (theme) => ({
   },
   buttonCaseNumb: {
     background: 'none!important',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
     border: 'none',
+    lineSpacing: '19pt',
     padding: '0!important',
-    textDecoration: 'none',
+    textDecoration: 'underline',
     fontWeight: 'bold',
     color: '#DC762F',
     cursor: 'pointer',
     '&:hover': {
       textDecoration: 'underline',
-    },
-  },
-  embargoIcon: {
-    position: 'relative',
-    textAlign: 'center',
-    '&:before': {
-      content: 'attr(dataText)',
-      position: 'absolute',
-      transform: 'translateY(-50%)',
-      left: '100%',
-      marginLeft: '15px',
-      width: '150px',
-      fontSize: '15px',
-      padding: '0 10px 0 10px',
-      border: '3px solid #3131314a',
-      background: '#fff',
-      color: '##35373b',
-      textAlign: 'center',
-      borderRadius: '5px',
-      display: 'none',
-    },
-    '&:after': {
-      content: 'attr(dataAttr)',
-      position: 'absolute',
-      width: '25px',
-      left: '100%',
-      color: '#fff0',
-      top: '-32%',
-      transform: 'translateY(-50%)',
-      marginLeft: '-7px',
-      backgroundImage: `url(${arrowIcon})`,
-      backgroundSize: '30px 20px',
-      display: 'none',
-    },
-    '&:hover': {
-      '&:before': {
-        display: 'block',
-      },
-      '&:after': {
-        display: 'block',
-      },
     },
   },
   button: {

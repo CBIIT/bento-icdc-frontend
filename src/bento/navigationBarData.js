@@ -1,3 +1,5 @@
+import env from '../utils/env';
+
 export const navBarstyling = {
   global: {
     backgroundColor: '#0B3557',
@@ -7,7 +9,6 @@ export const navBarstyling = {
     fontFamily: 'Raleway, sans-serif',
     activeLabel: '2px solid  #35b9eb',
     paddingRight: '65px',
-    paddingLeft: '55px',
     fontWeight: '600',
     letterSpacing: '1px',
   },
@@ -52,9 +53,9 @@ export const navBarData = [
     link: '/home',
   },
   {
-    labelText: 'cases',
+    labelText: 'explore',
     type: 'link',
-    link: '/cases',
+    link: '/explore',
   },
   {
     labelText: 'programs',
@@ -65,6 +66,45 @@ export const navBarData = [
     labelText: 'Studies',
     type: 'link',
     link: '/studies',
+  },
+  {
+    labelText: 'data',
+    type: 'dropdown',
+
+    dropDownLinks: [
+      {
+        labelText: 'Model Explorer',
+        link: '/icdc-data-model',
+        linkActiveStyle: 'white',
+      },
+      {
+        labelText: 'Data Use',
+        link: '/guideline',
+        linkActiveStyle: 'white',
+      },
+      {
+        labelText: 'Data Submission Guidelines',
+        link: '/submit',
+        linkActiveStyle: 'white',
+      },
+    ],
+  },
+  {
+    labelText: 'resources',
+    type: 'dropdown',
+
+    dropDownLinks: [
+      {
+        labelText: 'GraphQl',
+        link: '/graphql',
+        linkActiveStyle: 'white',
+      },
+      {
+        labelText: 'Developers',
+        link: '/developers',
+        linkActiveStyle: 'white',
+      },
+    ],
   },
   {
     labelText: 'about',
@@ -99,28 +139,40 @@ export const navBarData = [
         linkActiveStyle: 'white',
       },
       {
-        labelText: 'ICDC Data & Model',
-        link: '/icdc-data-model',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Developers',
-        link: '/developers',
-        linkActiveStyle: 'white',
-      },
-      {
         labelText: 'Support',
         link: '/support',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Submitting Data',
-        link: '/submit',
         linkActiveStyle: 'white',
       },
     ],
   },
 ];
+
+export const externalLinks = {
+  resources: [
+    {
+      title: 'Wiki',
+      link: 'https://wiki.nci.nih.gov/spaces/viewspace.action?key=ICDC',
+    },
+    {
+      title: 'Github',
+      link: 'https://github.com/CBIIT/bento-icdc-frontend',
+    },
+    {
+      title: 'Cancer Genomics Cloud',
+      link: 'https://www.cancergenomicscloud.org/',
+    },
+    {
+      title: 'Software Release Notes',
+      link: `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_FE_VERSION}`,
+    },
+  ],
+  data: [
+    {
+      title: 'Data Submission Request Template',
+      link: 'https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_Data_Submission_Request_Template.docx',
+    },
+  ],
+};
 
 export const navBarCartData = {
   cartLabel: 'MY Files',

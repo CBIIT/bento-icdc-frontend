@@ -1,5 +1,10 @@
 import gql from 'graphql-tag';
-import { customCasesTabDownloadCSV, customFilesTabDownloadCSV, customSamplesTabDownloadCSV } from './tableDownloadCSV';
+import {
+  customCasesTabDownloadCSV,
+  customFilesTabDownloadCSV,
+  customSamplesTabDownloadCSV,
+  customStudyFilesTabDownloadCSV,
+} from './tableDownloadCSV';
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
@@ -7,6 +12,7 @@ export const tooltipContent = {
   0: 'Add filtered files associated with selected case(s) to My Files',
   1: 'Add filtered files associated with selected sample(s) to My Files',
   2: 'Add selected files to My Files',
+  3: 'Add selected study files to My Files',
 };
 
 // --------------- Tooltip configuration --------------
@@ -16,6 +22,7 @@ export const selectAllToolTip = {
   0: 'Add filtered files associated with all cases to My Files',
   1: 'Add filtered files associated with all samples to My Files',
   2: 'Add all filtered files to My Files',
+  3: 'Add all filtered study files to My Files',
 };
 
 // --------------- Dahboard Table external link configuration --------------
@@ -29,6 +36,12 @@ export const multiStudyData = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/icon-multiStudy.svg',
   alt: 'Multi-study icon',
   toolTipText: 'Multi-study participant also enrolled as:',
+};
+
+export const fileViewer = {
+  icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+  alt: 'file viewer icon',
+  toolTipText: 'Open and view this file',
 };
 
 // --------------- Tabs Table configuration --------------
@@ -155,6 +168,7 @@ export const tabContainers = [
     paginationAPIField: 'sampleOverview',
     paginationAPIFieldDesc: 'sampleOverviewDesc',
     dataKey: 'sample_id',
+    defaultSortField: 'sample_id',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',
@@ -274,6 +288,7 @@ export const tabContainers = [
     buttonText: 'Add Selected Files',
     addAllButtonText: 'Add All Filtered Files',
     dataKey: 'file_name',
+    associations: 'other',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',
@@ -348,9 +363,12 @@ export const tabContainers = [
           toolTipTextFileDownload: 'Download a copy of this file',
           toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
           fileSizeColumn: 'file_size',
+          fileFormatColumn: 'file_format',
           fileLocationColumn: 'file_uuid',
+          caseIdColumn: 'file_name',
           iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
           iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+          iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
         },
       },
       {
@@ -399,6 +417,121 @@ export const tabContainers = [
     headerPagination: true,
     footerPagination: true,
   },
+  {
+    name: 'StudyFiles',
+    dataField: 'dataStudyFile',
+    api: 'GET_FILES_OVERVIEW_QUERY',
+    paginationAPIField: 'fileOverview',
+    paginationAPIFieldDesc: 'fileOverviewDesc',
+    defaultSortField: 'file_name',
+    defaultSortDirection: 'asc',
+    count: 'numberOfStudyFiles',
+    buttonText: 'Add Selected Files',
+    addAllButtonText: 'Add All Filtered Files',
+    dataKey: 'file_name',
+    associations: 'study',
+    saveButtonDefaultStyle: {
+      borderRadius: '10px',
+      width: '180px',
+      lineHeight: '37px',
+      fontSize: '16px',
+      color: '#fff',
+      backgroundColor: '#ff7f15',
+    },
+    DeactiveSaveButtonDefaultStyle: {
+      opacity: '0.7',
+      cursor: 'auto',
+    },
+    ActiveSaveButtonDefaultStyle: {
+      cursor: 'pointer',
+      opacity: 'unset',
+      border: 'unset',
+    },
+    columns: [
+      {
+        dataField: 'file_name',
+        header: 'File Name',
+        sort: 'asc',
+        primary: true,
+        display: true,
+      },
+      {
+        dataField: 'file_uuid',
+        header: 'File uuid',
+        sort: 'asc',
+        primary: true,
+        display: false,
+      },
+      {
+        dataField: 'file_type',
+        header: 'File Type',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'association',
+        header: 'Association',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'file_description',
+        header: 'Description',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'file_format',
+        header: 'Format',
+        sort: 'asc',
+        display: true,
+      },
+      {
+        dataField: 'file_size',
+        header: 'Size',
+        sort: 'asc',
+        display: true,
+        formatBytes: true,
+      },
+      {
+        dataField: 'access_file',
+        header: 'Access',
+        sort: 'asc',
+        display: true,
+        downloadDocument: true,
+        documentDownloadProps: {
+          maxFileSize: 12000000,
+          toolTipTextFileDownload: 'Download a copy of this file',
+          toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+          fileSizeColumn: 'file_size',
+          fileFormatColumn: 'file_format',
+          fileLocationColumn: 'file_uuid',
+          caseIdColumn: 'file_name',
+          iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+          iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+          iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+        },
+      },
+      {
+        dataField: 'study_code',
+        header: 'Study Code',
+        sort: 'asc',
+        link: '/study/{study_code}',
+        display: true,
+      },
+    ],
+    id: 'file_tab',
+    onRowsSelect: 'type2',
+    disableRowSelection: 'type3',
+    tableID: 'file_tab_table',
+    selectableRows: true,
+    tableDownloadCSV: customStudyFilesTabDownloadCSV,
+    viewColumns: true,
+    tabIndex: '3',
+    downloadFileName: 'Bento_Dashboard_cases_download',
+    headerPagination: true,
+    footerPagination: true,
+  },
 ];
 
 // --------------- Tabs Header Data configuration --------------
@@ -417,9 +550,15 @@ export const tabs = [
   },
   {
     id: 'file_tab',
-    title: 'Files',
+    title: 'Case Files',
     dataField: 'dataFile',
     count: 'numberOfFiles',
+  },
+  {
+    id: 'study_file_tab',
+    title: 'Study Files',
+    dataField: 'dataFile',
+    count: 'numberOfStudyFiles',
   },
 ];
 
@@ -429,19 +568,25 @@ export const tabIndex = [
     title: 'Cases',
     primaryColor: '#FF9742',
     secondaryColor: '#FFDFB8',
-    selectedColor: '#FFF',
+    selectedColor: '#FF9742',
   },
   {
     title: 'Samples',
     primaryColor: '#9DC1D9',
     secondaryColor: '#C9F1F1',
-    selectedColor: '#FFF',
+    selectedColor: '#9DC1D9',
   },
   {
     title: 'Files',
     primaryColor: '#667A87',
     secondaryColor: '#E1E5FF',
-    selectedColor: '#FFF',
+    selectedColor: '#667A87',
+  },
+  {
+    title: 'StudyFiles',
+    primaryColor: '#39C0F0',
+    secondaryColor: '#39C0F0',
+    selectedColor: '#39C0F0',
   },
 ];
 
@@ -450,7 +595,10 @@ export const DASHBOARD_QUERY = gql`{
   numberOfCases
   numberOfSamples
   numberOfFiles
+  numberOfStudyFiles
+  numberOfPrograms
   numberOfAliquots
+  volumeOfData
 caseCountByDiagnosis{
   group,
   count
@@ -468,6 +616,10 @@ caseCountByStageOfDisease{
   count
 }
 caseCountByDiseaseSite{
+  group,
+  count
+}
+filterCaseCountByProgram{
   group,
   count
 }
@@ -528,6 +680,14 @@ filterCaseCountByFileType{
   group,
   count
 }
+filterCaseCountByBiobank{
+  group,
+  count
+}
+filterCaseCountByStudyParticipation{
+  group,
+  count
+}
 filterCaseCountByFileFormat{
   group,
   count
@@ -540,6 +700,11 @@ programsAndStudies{
       caseSize
   }
 }
+biospecimen_source {
+  biospecimen_repository_acronym
+  biospecimen_repository_full_name
+}
+
 caseOverviewPaged(first: 10) {
     case_id
     study_code
@@ -554,6 +719,11 @@ caseOverviewPaged(first: 10) {
     weight
     response_to_treatment
     disease_site
+  }
+
+  program {
+    program_acronym
+    program_name
   }
   }`;
 
@@ -598,6 +768,7 @@ export const FILTER_GROUP_QUERY = gql`
 
 export const FILTER_QUERY = gql`
 query searchCases(
+  $program: [String] = [],
   $study: [String], 
   $study_type: [String], 
   $breed: [String], 
@@ -613,9 +784,12 @@ query searchCases(
   $file_association: [String], 
   $file_type: [String], 
   $file_format: [String],
+  $biobank: [String],
+  $study_participation: [String],
   $first: Int
 ){
 searchCases(
+    program: $program,
     study: $study, 
     study_type: $study_type, 
     breed: $breed, 
@@ -630,17 +804,23 @@ searchCases(
     sample_site: $sample_site, 
     file_association: $file_association, 
     file_type: $file_type,
-    file_format: $file_format
+    file_format: $file_format,
+    biobank: $biobank,
+    study_participation: $study_participation, 
     first: $first
   ) {
       numberOfStudies
       numberOfCases
       numberOfSamples
       numberOfFiles
+      numberOfStudyFiles
+      numberOfPrograms
       numberOfAliquots
+      volumeOfData
       caseIds
       sampleIds
       fileIds
+      studyFileIds
       firstPage {
           case_id
           study_code
@@ -657,7 +837,9 @@ searchCases(
           disease_site
       }
 }
-filterCaseCountByStudyCode (
+
+filterCaseCountByProgram (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -672,6 +854,32 @@ filterCaseCountByStudyCode (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
+  biobank: $biobank,
+  study_participation: $study_participation,
+  file_format: $file_format
+) {
+    group
+    count
+}
+
+filterCaseCountByStudyCode (
+  program: $program,
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  biobank: $biobank,
+  study_participation: $study_participation,
   file_format: $file_format
 ) {
     group
@@ -679,6 +887,7 @@ filterCaseCountByStudyCode (
     code
 }
 filterCaseCountByStudyType (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -693,12 +902,15 @@ filterCaseCountByStudyType (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByBreed (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -713,12 +925,15 @@ filterCaseCountByBreed (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByDiagnosis (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -733,12 +948,15 @@ filterCaseCountByDiagnosis (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByDiseaseSite (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -753,12 +971,15 @@ filterCaseCountByDiseaseSite (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByStageOfDisease (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -773,12 +994,15 @@ filterCaseCountByStageOfDisease (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByResponseToTreatment (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -793,12 +1017,15 @@ filterCaseCountByResponseToTreatment (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountBySex (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -813,12 +1040,15 @@ filterCaseCountBySex (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByNeuteredStatus (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -833,14 +1063,17 @@ filterCaseCountByNeuteredStatus (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountBySampleType (
+  program: $program,
   study: $study, 
-  study_type: $study_type, 
+  study_type: $study_type,
   breed: $breed, 
   diagnosis: $diagnosis, 
   disease_site: $disease_site, 
@@ -853,12 +1086,15 @@ filterCaseCountBySampleType (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountBySamplePathology (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -873,12 +1109,15 @@ filterCaseCountBySamplePathology (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountBySampleSite (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -893,12 +1132,15 @@ filterCaseCountBySampleSite (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type, 
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByFileAssociation (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -913,12 +1155,15 @@ filterCaseCountByFileAssociation (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByFileType (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -933,12 +1178,39 @@ filterCaseCountByFileType (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
 }
 filterCaseCountByFileFormat (
+  program: $program,
+  study: $study, 
+  study_type: $study_type,
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
+) {
+    group
+    count
+}
+
+filterCaseCountByBiobank (
+  program: $program,
   study: $study, 
   study_type: $study_type, 
   breed: $breed, 
@@ -953,7 +1225,32 @@ filterCaseCountByFileFormat (
   sample_site: $sample_site, 
   file_association: $file_association, 
   file_type: $file_type,
-  file_format: $file_format
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
+) {
+    group
+    count
+}
+filterCaseCountByStudyParticipation(
+  program: $program,
+  study: $study, 
+  study_type: $study_type, 
+  breed: $breed, 
+  diagnosis: $diagnosis, 
+  disease_site: $disease_site, 
+  stage_of_disease: $stage_of_disease, 
+  response_to_treatment: $response_to_treatment, 
+  sex: $sex,
+  neutered_status: $neutered_status,
+  sample_type: $sample_type, 
+  sample_pathology: $sample_pathology, 
+  sample_site: $sample_site, 
+  file_association: $file_association, 
+  file_type: $file_type,
+  file_format: $file_format,
+  biobank: $biobank,
+  study_participation: $study_participation
 ) {
     group
     count
@@ -962,8 +1259,8 @@ filterCaseCountByFileFormat (
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
-query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
     file_name
     file_type
     sample_id
@@ -982,16 +1279,16 @@ query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $o
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_NAME_QUERY = gql`
-query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 100000, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 100000, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
     file_name
   }
 }
   `;
 
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-  query fileOverviewDesc($file_uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-    fileOverviewDesc(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {    
+  query fileOverviewDesc($file_uuids: [String],$file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+    fileOverviewDesc(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {    
       file_name
       file_type
       association
@@ -1034,7 +1331,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 
 export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
   query sampleOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  sampleOverviewDesc(case_ids: $case_ids,, offset: $offset,first: $first, order_by: $order_by) {
+  sampleOverviewDesc(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {
     sample_id
     case_id
     breed
@@ -1116,8 +1413,8 @@ query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 1000
   `;
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
-query fileOverview($file_uuids: [String], $offset: Int = 0, $first: Int = 10000000, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, offset: $offset,first: $first, order_by: $order_by) {
+query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10000000, $order_by:String ="file_name"){
+  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
     file_uuid
   }
 }

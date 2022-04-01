@@ -13,7 +13,7 @@ import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboa
 import {
   studyDisposition,
 } from './utils';
-import filterCasePageOnStudyCode from '../../utils/utils';
+import { navigatedToDashboard } from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
   headerIcon,
@@ -21,10 +21,12 @@ import {
   embargoFileIcon,
   tab,
 } from '../../bento/studyDetailsData';
-import Tab from './components/Tab';
+import Tab from '../../components/Tab/Tab';
 import Overview from './views/Overview';
 import Publication from './views/Publication';
-import TabPanel from './components/TabPanel';
+import ArmsAndCohort from './views/ArmsAndCohort';
+import StudyFiles from './views/StudyFiles';
+import TabPanel from '../../components/Tab/TabPanel';
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 
@@ -39,7 +41,10 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfCases: data.caseCountOfStudy,
     numberOfSamples: data.sampleCountOfStudy,
     numberOfFiles: data.fileCountOfStudy,
+    numberOfStudyFiles: data.fileCountOfStudyFiles,
+    numberOfPrograms: data.programCountOfStudy,
     numberOfAliquots: data.aliquotCountOfStudy ? data.aliquotCountOfStudy : 0,
+    volumeOfData: data.volumeOfDataOfStudy,
   };
 
   React.useEffect(() => {
@@ -97,14 +102,14 @@ const StudyDetailView = ({ classes, data }) => {
 
   const renderEmbargoLabel = () => (
     <div className={classes.embargo}>
-      <h4 className={classes.embarLabel}> UNDER EMBARGO </h4>
+      <p className={classes.embarLabel}> UNDER EMBARGO </p>
       <img src={embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </div>
   );
 
   const renderPendingLabel = () => (
     <div className={classes.pending}>
-      <h4 className={classes.pendLabel}>RELEASE PENDING</h4>
+      <p className={classes.pendLabel}>RELEASE PENDING</p>
       <img src={pendingFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
     </div>
   );
@@ -202,22 +207,21 @@ const StudyDetailView = ({ classes, data }) => {
               : (
                 <div className={classes.headerButton}>
                   <span className={classes.headerButtonLinkSpan}>
+                    {/* <span className={classes.headerButtonLinkText}> View </span> */}
                     <Link
                       className={classes.headerButtonLink}
-                      to={(location) => ({ ...location, pathname: '/cases' })}
-                      onClick={() => filterCasePageOnStudyCode(studyData
-                        .clinical_study_designation)}
+                      to={(location) => ({ ...location, pathname: '/explore' })}
+                      onClick={() => navigatedToDashboard(studyData
+                        .clinical_study_designation, 'Cases')}
                     >
-                      {' '}
-                      <span className={classes.headerButtonLinkText}> View </span>
-                      <span className={classes.headerButtonLinkNumber}>
+                      <div className={classes.headerButtonLinkNumber}>
                         {' '}
                         {' '}
                         {data.caseCountOfStudy}
                         {' '}
                         {' '}
-                      </span>
-                      <span className={classes.headerButtonLinkText}>Cases</span>
+                      </div>
+                      <span className={classes.headerButtonLinkText}>Associated Cases</span>
                     </Link>
                   </span>
                 </div>
@@ -249,6 +253,19 @@ const StudyDetailView = ({ classes, data }) => {
         />
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
+        <ArmsAndCohort
+          studyData={studyData}
+        />
+      </TabPanel>
+      <TabPanel value={currentTab} index={2}>
+        <StudyFiles
+          closeSnack={closeSnack}
+          openSnack={openSnack}
+          data={data}
+          studyData={studyData}
+        />
+      </TabPanel>
+      <TabPanel value={currentTab} index={3}>
         <Publication
           publications={studyData.publications}
           display={tab.publication}
@@ -259,13 +276,6 @@ const StudyDetailView = ({ classes, data }) => {
 };
 
 const styles = (theme) => ({
-  hrLine: {
-    width: '50px',
-    float: 'left',
-    marginTop: '30px',
-    border: '#81a6b9 2px solid',
-    background: '#81a6b9',
-  },
   headerItems: {
     width: '250px',
     float: 'right',
@@ -286,38 +296,44 @@ const styles = (theme) => ({
   embargo: {
     color: '#BB2040',
     float: 'right',
-    background: '#fff6f6',
-    width: '180px',
+    background: '#F6F4F4',
+    width: '220px',
     height: '33px',
     marginTop: '25px',
     fontWight: 'bolder',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-    paddingTop: '5px',
+    paddingLeft: '15px',
+    paddingRight: '15px',
+    paddingTop: '4px',
     textAlign: 'center',
     border: '3px solid #BB2040',
-    '& h4': {
+    '& p': {
       display: 'inline ! important',
-      fontWeight: '900',
+      fontWeight: '600',
+      width: '122px',
+      fontSize: '13px',
+      marginTop: '3px',
     },
   },
   pending: {
     color: '#6D6E71',
     float: 'right',
     background: '#fff6f6',
-    width: '180px',
+    width: '220px',
     height: '33px',
     marginTop: '25px',
     fontWight: 'bolder',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-    paddingTop: '5px',
+    paddingLeft: '15px',
+    paddingRight: '14px',
+    paddingTop: '3px',
     textAlign: 'center',
     fontFamily: 'Open Sans',
     border: '3px solid #F3A933',
-    '& h4': {
+    '& p': {
       display: 'inline ! important',
-      fontWeight: '900',
+      fontWeight: '600',
+      width: '122px',
+      fontSize: '13px',
+      marginTop: '3px',
     },
   },
   embargoFileIcon: {
@@ -360,10 +376,12 @@ const styles = (theme) => ({
   tabHighlightColor: {
     color: '#0B3556',
     fontWeight: '700',
-  },
-  tabHighlight: {
-    color: '#0B3556',
     borderBottom: '5px solid rgb(53, 185, 235)',
+  },
+  hrLine: {
+    marginTop: '-2px',
+    marginBottom: '0',
+    borderTop: '1px solid #81a6b9',
   },
   container: {
     paddingTop: '80px',
@@ -442,33 +460,39 @@ const styles = (theme) => ({
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
+    border: '3px solid #81a6b9',
     marginTop: '15px',
     float: 'right',
-    width: '125px',
+    width: '220px',
     height: '33px',
-    background: '#F6F4F4',
-    paddingLeft: '10px',
-    paddingRight: '10px',
+    textAlign: 'center',
+    background: '#f6f4f4',
+    padding: '5px 10px 5px 5px',
 
   },
   headerButtonLinkSpan: {
     fontFamily: theme.custom.fontFamilySans,
-    height: '50px',
-    background: '#F5F3EE',
     width: '200px',
     fontSize: '14px',
+    display: 'inherit',
+    height: '15px',
+    marginTop: '-2px',
   },
   headerButtonLinkText: {
     fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
+    fontSize: '14px',
   },
   headerButtonLinkNumber: {
-    fontFamily: theme.custom.fontFamilySans,
-    borderBottom: 'solid',
-    lineHeight: '30px',
+    fontFamily: 'sans-serif',
+    // borderBottom: 'solid',
+    // lineHeight: '30px',
     paddingBottom: '3px',
-    margin: '0 4px',
-    fontSize: '14px',
+    margin: '0',
+    fontSize: '16px',
+    display: 'inherit',
+    fontWeight: '900',
+    marginRight: '4px',
   },
   logo: {
     position: 'absolute',
@@ -493,9 +517,11 @@ const styles = (theme) => ({
     lineHeight: '14px',
     fontSize: '12px',
     fontWeight: 'bold',
-    color: '#DC762F',
+    position: 'relative',
+    top: '2px',
+    color: '#dc762f',
     '&:hover': {
-      textDecoration: 'underline',
+      textDecoration: 'none',
     },
   },
   button: {

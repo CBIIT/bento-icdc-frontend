@@ -204,9 +204,12 @@ export const table2 = {
         toolTipTextFileDownload: 'Download a copy of this file',
         toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
         fileSizeColumn: 'file_size',
+        fileFormatColumn: 'file_format',
         fileLocationColumn: 'uuid',
+        caseIdColumn: 'file_name',
         iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
         iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
     },
   ],
@@ -236,10 +239,14 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
     fileCountOfCase(case_id: $case_id)
     aliquotCountOfCase(case_id: $case_id)
     fileCountOfCase(case_id: $case_id)
+    studyFileCountOfCase(case_id: $case_id)
+    programsCountOfCase(case_id: $case_id)
+    volumeOfDataOfCase(case_id: $case_id)
     multiStudyCases(case_id: $case_id){
       caseIds
       sampleIds
       fileIds
+      studyFileIds
       individualId
     }
     case(case_id:$case_id){

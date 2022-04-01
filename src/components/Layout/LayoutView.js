@@ -3,11 +3,13 @@ import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { LinkBar } from 'bento-components';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
+import resourceDropdownRoutes from '../../bento/resourceDropdownRoutes';
+import dataDropdownRoutes from '../../bento/dataDropdownRoutes';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
-import Home from '../../pages/landing/landingView';
+import Home from '../../pages/landing/landingController';
 import Studies from '../../pages/studies/studiesController';
 import Dashboard from '../../pages/dashboardTab/dashboardController';
 import Cart from '../../pages/fileCentricCart/cartController';
@@ -18,6 +20,11 @@ import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
 import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
+import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
+import init from './utils';
+import OverlayWindow from '../OverlayWindow/OverlayWindow';
+import GraphqlClient from '../GraphqlClient/GraphqlView';
+import JBrowseDetail from '../../pages/JbrowseDetail/JbrowseController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -31,6 +38,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
       <>
         <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
         <Header />
+        <OverlayWindow />
         <NavBar />
         {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
@@ -43,17 +51,36 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/ICDC/" component={Home} />
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/news" component={Home} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/studies" component={Studies} />
-            <Route path="/cases" component={Dashboard} />
+            <Route path="/explore" component={Dashboard} />
             <Route path="/unifiedView/:id" component={UnifiedView} />
             <Route path="/fileCentricCart" component={Cart} />
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
+            <Route path="/fileViewer/:type/:id" component={JBrowseDetail} />
+            <Route
+              path="/icdc-data-model"
+              // eslint-disable-next-line arrow-body-style
+              render={() => {
+                // get data
+                init();
+                // return component
+                return <ReduxDataDictionary />;
+              }}
+            />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
             )}
+            {resourceDropdownRoutes.map(
+              (resourceDropdownRoute) => <Route path={resourceDropdownRoute} component={About} />,
+            )}
+            {dataDropdownRoutes.map(
+              (dataDropdownRoute) => <Route path={dataDropdownRoute} component={About} />,
+            )}
+            <Route path="/graphql" component={GraphqlClient} />
             <Route component={Error} />
           </Switch>
           <Footer data={{ isSidebarOpened }} />

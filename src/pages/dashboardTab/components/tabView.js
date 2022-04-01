@@ -81,6 +81,7 @@ const TabView = ({
   filteredSubjectIds,
   filteredSampleIds,
   filteredFileIds,
+  filteredStudyFileIds,
   defaultSortCoulmn,
   defaultSortDirection,
   tableDownloadCSV,
@@ -91,6 +92,7 @@ const TabView = ({
   tableHasSelections,
   unifiedViewFlag,
   tabIndex,
+  association,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -147,9 +149,10 @@ const TabView = ({
   async function exportFiles() {
     const selectedIDs = await fetchAllFileIDs(getFilesCount(), selectedRowInfo);
     // Find the newly added files by comparing
-    const selectFileIds = filteredFileIds != null
-      ? selectedIDs.filter((x) => filteredFileIds.includes(x))
-      : selectedIDs;
+    const selectFileIds = ((tabIndex === 3) && filteredStudyFileIds !== null)
+      ? selectedIDs.filter((x) => filteredStudyFileIds.includes(x))
+      : ((tabIndex === 2) && filteredFileIds != null)
+        ? selectedIDs.filter((x) => filteredFileIds.includes(x)) : selectedIDs;
     const newFileIDS = fileIDs !== null ? selectFileIds.filter(
       (e) => !fileIDs.find((a) => e === a),
     ).length : selectedIDs.length;
@@ -256,15 +259,7 @@ const TabView = ({
     serverTableRowCount: selectedRowInfo.length,
   };
 
-  /**
- * Returns a string version of the unified view data to be passed through
- * the url.
- * @return {json}
- */
-  const stringyfyData = (dataObj) => JSON.stringify(dataObj);
-
   const renderMultiStudyTooltipText = (tableMeta, value) => {
-    const cases = [...tableMeta, value];
     const caseID = value;
     return (
       <>
@@ -290,7 +285,7 @@ const TabView = ({
               rel="noreferrer"
               color="inherit"
               to={{
-                pathname: `/unifiedView/${stringyfyData({ ...cases, caseID })}`,
+                pathname: `/unifiedView/${caseID}`,
               }}
               className={classes.link}
             >
@@ -312,15 +307,6 @@ const TabView = ({
       interactive
       classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
     >
-      {/* <StyledBadge
-        badgeContent={tableMeta.length + 1}
-      >
-        <img
-          src={multiStudyData.icon}
-          className={classes.multiStudyIcon}
-          alt={multiStudyData.alt}
-        />
-      </StyledBadge> */}
       <span className={classes.badge}>
         <img
           className={classes.cartIcon}
@@ -421,7 +407,8 @@ const TabView = ({
             queryCustomVaribles={{
               case_ids: filteredSubjectIds,
               sample_ids: filteredSampleIds,
-              file_uuids: filteredFileIds,
+              file_uuids: (tabIndex === '3') ? filteredStudyFileIds : filteredFileIds,
+              file_association: association,
             }}
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
@@ -467,7 +454,7 @@ const TabView = ({
             color="inherit"
             className={classes.cartlink}
           >
-            Go to Cart
+            Go to My Files
             {' '}
             {'>'}
           </Link>
@@ -483,7 +470,11 @@ const styles = () => ({
 
   link: {
     color: '#DC762F',
-    textDecoration: 'none',
+    lineSpacing: '19pt',
+    fontWeight: 'bold',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
+    textDecoration: 'underline',
     '&:hover': {
       textDecoration: 'underline',
     },

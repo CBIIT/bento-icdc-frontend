@@ -22,11 +22,11 @@ import {
 import {
   pageData as ProgramImageConfig,
 } from '../../bento/programData';
-import filterCasePageOnStudyCode from '../../utils/utils';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import themes, { overrides } from '../../themes';
 import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+import { navigatedToDashboard } from '../../utils/utils';
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -53,7 +53,10 @@ const ProgramView = ({ classes, data }) => {
     numberOfCases: data.caseCountOfProgram,
     numberOfSamples: data.sampleCountOfProgram,
     numberOfFiles: data.fileCountOfProgram,
+    numberOfStudyFiles: data.studyFileCountOfProgram,
+    numberOfPrograms: 1,
     numberOfAliquots: data.aliquotCountOfProgram ? data.aliquotCountOfProgram : 0,
+    volumeOfData: data.volumeOfDataOfProgram,
   };
 
   const breadCrumbJson = [{
@@ -62,7 +65,7 @@ const ProgramView = ({ classes, data }) => {
     isALink: true,
   }, {
     name: programDetail.program_acronym,
-    to: '/cases',
+    to: '/explore',
     isALink: true,
   }];
 
@@ -115,9 +118,9 @@ const ProgramView = ({ classes, data }) => {
         renderSwitch(studyDisposition(tableMeta.rowData[5]))
       ) : (
         <Link
-          to={(location) => ({ ...location, pathname: '/cases' })}
+          to={(location) => ({ ...location, pathname: '/explore' })}
           className={classes.buttonCaseNumb}
-          onClick={() => filterCasePageOnStudyCode(tableMeta.rowData[1])}
+          onClick={() => navigatedToDashboard(tableMeta.rowData[1], 'Cases')}
         >
           {value}
         </Link>
@@ -149,8 +152,6 @@ const ProgramView = ({ classes, data }) => {
       ),
     },
   }));
-  // const columns = updateColumns(getColumns(table, classes, data,
-  // '', '/cases', redirectTo), table.columns);
 
   return (
     <>
@@ -223,7 +224,10 @@ const ProgramView = ({ classes, data }) => {
 const styles = (theme) => ({
   link: {
     fontWeight: 'bold',
-    textDecoration: 'none',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
+    textDecoration: 'underline',
+    lineSpacing: '19pt',
     color: '#DC762F',
     float: 'left',
     marginRight: '5px',
@@ -247,54 +251,14 @@ const styles = (theme) => ({
     marginTop: '-30px',
     marginLeft: '-100px',
   },
-  embargoIcon: {
-    position: 'relative',
-    textAlign: 'center',
-    '&:before': {
-      content: 'attr(dataText)',
-      position: 'absolute',
-      transform: 'translateY(-50%)',
-      left: '100%',
-      marginLeft: '15px',
-      width: '150px',
-      fontSize: '15px',
-      padding: '0 10px 0 10px',
-      border: '2px solid #708090d4',
-      background: '#fff',
-      color: '#194563d9',
-      textAlign: 'center',
-      borderRadius: '5px',
-      display: 'none',
-    },
-    '&:after': {
-      content: 'attr(dataAttr)',
-      position: 'absolute',
-      width: '10px',
-      left: '100%',
-      color: '#fff',
-      top: '-32%',
-      transform: 'translateY(-50%)',
-      borderTop: '5px solid transparent',
-      borderRight: '10px solid #708090d4',
-      borderBottom: '5px solid transparent',
-      marginLeft: '6px',
-      display: 'none',
-    },
-    '&:hover': {
-      '&:before': {
-        display: 'block',
-      },
-      '&:after': {
-        display: 'block',
-      },
-    },
-  },
   buttonCaseNumb: {
     background: 'none!important',
     border: 'none',
     padding: '0!important',
-    textDecoration: 'none',
+    textDecoration: 'underline',
     fontWeight: 'bold',
+    fontSize: '15px',
+    lineSpacing: '19pt',
     color: '#DC762F',
     cursor: 'pointer',
     '&:hover': {

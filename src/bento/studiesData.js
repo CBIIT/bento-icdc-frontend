@@ -40,6 +40,7 @@ export const pageData = {
       {
         dataField: 'program_id',
         header: 'Program',
+        link: '/program/{program_id}',
         display: true,
       },
       {
@@ -65,7 +66,7 @@ export const pageData = {
       {
         dataField: 'numberOfCases',
         header: 'Cases',
-        link: '/cases',
+        link: '/explore',
         totalNumberOfCases: true,
         display: true,
       },

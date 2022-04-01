@@ -6,157 +6,39 @@ import {
   Tab,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Chart, {
-  CommonSeriesSettings,
-  SeriesTemplate,
-  Tooltip,
-  Grid as ChartGrid,
-  Label,
-  ValueAxis,
-  ArgumentAxis,
-  Border,
-  Shadow,
-  Size,
-  Font,
-  Title,
-} from 'devextreme-react/chart';
+import { BarChart } from 'bento-components';
 import {
   sampleProfile,
   palette,
+  valueConfiguration,
+  argumentConfiguration,
 } from '../../../bento/studyDetailsData';
-import TabPanel from '../components/TabPanel';
-import filterCasePageOnStudyCode from '../../../utils/utils';
-import {
-  fetchDataForDashboardTab,
-} from '../../dashboardTab/store/dashboardReducer';
+import TabPanel from '../../../components/Tab/TabPanel';
+import { navigatedToDashboard } from '../../../utils/utils';
 
-const enable = true;
-
-const useStyles = makeStyles(() => ({
-  tabs: {
-    '& .MuiTab-wrapper': {
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-    },
-    '& .studySampleSiteCount': {
-      '& .MuiTab-wrapper': {
-        borderRight: '1px solid #6E6E6E',
-      },
-    },
-    '& .studySampleTypeCount': {
-      '& .MuiTab-wrapper': {
-        borderRight: '1px solid #6E6E6E',
-      },
-    },
-    '& .Mui-selected': {
-      color: '#0296c9',
-      fontWeight: '900',
-    },
-  },
-}));
-
-const SampleChart = (data) => {
-  const content = ({ argument, originalValue, point }) => {
-    const color = point.series.getColor();
-    return (
-      <>
-        <div>
-          <span
-            style={{
-              fontWeight: 600,
-              color: '#1C2023',
-            }}
-          >
-            {argument}
-            {', '}
-          </span>
-          <span
-            style={{
-              color: color.toString(),
-              fontWeight: 900,
-            }}
-          >
-            {originalValue}
-          </span>
-        </div>
-      </>
-    );
-  };
-  const { length } = data;
-  const customPallete = [].concat(...new Array(Math
-    .ceil(length / palette.length)).fill(palette));
+const tooltipContent = ({ argument, originalValue, point }) => {
+  const color = point.series.getColor();
   return (
     <>
-      <Chart
-        palette={customPallete}
-        dataSource={data}
-        paletteExtensionMode="extrapolate"
-      >
-        <Size
-          height={300}
-          width={300}
-        />
-        <CommonSeriesSettings
-          argumentField="group"
-          valueField="count"
-          type="bar"
-          ignoreEmptyPoints={enable}
-          showInLegend={!enable}
-          barWidth={80}
-          hoverMode="none"
+      <div>
+        <span
+          style={{
+            fontWeight: 600,
+            color: '#1C2023',
+          }}
         >
-          <Label visible={!enable} />
-        </CommonSeriesSettings>
-        <SeriesTemplate
-          nameField="group"
-          type="bar"
-        />
-        <ValueAxis
-          allowDecimals={!enable}
+          {argument}
+          {', '}
+        </span>
+        <span
+          style={{
+            color: color.toString(),
+            fontWeight: 900,
+          }}
         >
-          <Title
-            text="Sample Count"
-          >
-            <Font
-              size="12"
-            />
-          </Title>
-          <ChartGrid visible={!enable} />
-          <Label
-            position="outside"
-          >
-            <Font
-              size="12"
-            />
-          </Label>
-        </ValueAxis>
-        <ArgumentAxis>
-          <Label
-            visible={!enable}
-            position="inside"
-          />
-        </ArgumentAxis>
-        <Tooltip
-          enabled={enable}
-          contentRender={content}
-          arrowLength="9"
-        >
-          <Font
-            family="Open Sans"
-            size="12"
-          />
-          <Border
-            color="#A7AFB3"
-            width="2"
-          />
-          <Shadow
-            blur="0"
-            offsetY="0"
-            opacity="0"
-          />
-        </Tooltip>
-      </Chart>
+          {originalValue}
+        </span>
+      </div>
     </>
   );
 };
@@ -171,15 +53,14 @@ const SampleProfile = ({ classes, data }) => {
     && data[tab.value].length > 0));
 
   const linkToDashboard = () => {
-    fetchDataForDashboardTab('Samples', null, null, null);
-    filterCasePageOnStudyCode(studyCode);
+    navigatedToDashboard(studyCode, 'Samples');
   };
 
   const tabItem = (items) => (
     <Tabs
       value={currentTab}
       onChange={handleTabChange}
-      className={useStyles().tabs}
+      className={classes.tabs}
       textColor="primary"
       TabIndicatorProps={{
         style: {
@@ -187,7 +68,7 @@ const SampleProfile = ({ classes, data }) => {
         },
       }}
     >
-      { items.map((item) => (
+      { items.map((item, index) => (
         <Tab
           className={item.value}
           classes={{
@@ -195,6 +76,7 @@ const SampleProfile = ({ classes, data }) => {
             labelContainer: classes.labelContainer,
           }}
           label={item.label}
+          key={index}
         />
       )) }
     </Tabs>
@@ -202,19 +84,19 @@ const SampleProfile = ({ classes, data }) => {
 
   return (
     <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
-      <Grid container spacing={16}>
+      <Grid container spacing={1}>
         <Grid item xs={12}>
-          <span className={classes.detailContainerHeader}> SAMPLE PROFILE </span>
+          <span className={classes.detailContainerHeader}> SAMPLE PROFILES </span>
         </Grid>
       </Grid>
       {(tabCount !== undefined && tabCount.length > 0) ? (
         <>
-          <Grid container spacing={16}>
+          <Grid container spacing={1}>
             <div className={classes.headerButton}>
               <span className={classes.headerButtonLinkSpan}>
                 <Link
                   className={classes.headerButtonLink}
-                  to={(location) => ({ ...location, pathname: '/cases' })}
+                  to={(location) => ({ ...location, pathname: '/explore' })}
                   onClick={() => linkToDashboard()}
                 >
                   {' '}
@@ -235,20 +117,26 @@ const SampleProfile = ({ classes, data }) => {
             { tabItem(sampleProfile.tabs) }
           </Grid>
           <Grid container className={classes.detailContainerItems}>
-            { sampleProfile.tabs.map((item) => (
+            { sampleProfile.tabs.map((item, index) => (
               <>
-                <TabPanel index={item.index} value={currentTab}>
-                  {SampleChart(data[item.value])}
+                <TabPanel index={item.index} value={currentTab} key={index}>
+                  <BarChart
+                    data={data[item.value]}
+                    palette={palette}
+                    tooltipContent={tooltipContent}
+                    argument={argumentConfiguration}
+                    value={valueConfiguration}
+                  />
                 </TabPanel>
               </>
             ))}
           </Grid>
         </>
       ) : (
-        <Grid container spacing={16}>
+        <Grid container spacing={1}>
           <Grid item xs={12} sm={10} className={classes.detailContainerItems}>
             <div className={classes.content}>
-              This study currently has no associated samples
+              This study currently has no associated Samples
             </div>
           </Grid>
         </Grid>
@@ -329,6 +217,7 @@ const styles = (theme) => ({
     paddingBottom: '3px',
     margin: '0 4px',
     fontSize: '14px',
+    color: '#dc762f',
   },
   headerButtonLink: {
     textDecoration: 'none',
@@ -338,6 +227,26 @@ const styles = (theme) => ({
     color: '#0296c9',
     '&:hover': {
       textDecoration: 'underline',
+    },
+  },
+  tabs: {
+    '& .MuiTab-wrapper': {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+    },
+    '& .studySampleSiteCount': {
+      '& .MuiTab-wrapper': {
+        borderRight: '1px solid #6E6E6E',
+      },
+    },
+    '& .studySampleTypeCount': {
+      '& .MuiTab-wrapper': {
+        borderRight: '1px solid #6E6E6E',
+      },
+    },
+    '& .Mui-selected': {
+      color: '#0296c9',
+      fontWeight: '900',
     },
   },
 });

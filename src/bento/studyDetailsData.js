@@ -8,6 +8,11 @@ export const tooltipContent = {
   alt: 'tooltipIcon',
 };
 
+export const title = {
+  studyFile: 'This study currently has the following Study Files directly associated with it:',
+  armsAndCohort: 'This study is organized as follows:',
+};
+
 export const embargoFileIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-Embargo-File.svg';
 export const embargoHeaderIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-embargo-study-header.svg';
 export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg';
@@ -34,6 +39,37 @@ export const sampleProfile = {
 
 export const palette = ['#62beeb', '#1651ea', '#a1df71', '#72d1d5', '#d98548'];
 
+export const argumentConfiguration = {
+  field: 'group',
+  visible: false,
+  position: 'inside',
+  size: 12,
+  title: {
+    text: '',
+  },
+  label: {
+    size: 20,
+    position: 'inside',
+    staggeringSpacing: 10,
+  },
+};
+export const valueConfiguration = {
+  field: 'count',
+  size: 12,
+  allowDecimals: false,
+  title: {
+    text: 'Sample count',
+    size: 12,
+  },
+  chartGrid: {
+    visible: false,
+  },
+  label: {
+    size: 12,
+    position: 'outside',
+  },
+};
+
 export const tab = {
   items: [
     {
@@ -43,6 +79,16 @@ export const tab = {
     },
     {
       index: 1,
+      label: 'ARMS & COHORTS',
+      value: 'arms_cohorts',
+    },
+    {
+      index: 2,
+      label: 'STUDY FILES',
+      value: 'study_files',
+    },
+    {
+      index: 3,
       label: 'PUBLICATIONS',
       value: 'publications',
     },
@@ -131,6 +177,8 @@ export const table1 = {
   ],
   noArmMessage: 'This study is not divided into arms',
   noCohortMessage: 'This study is not divided into cohorts',
+  noArmsCohort: 'This study is not divided into Arms or Cohorts',
+  noArmsCohort2: 'This study is not currently divided into Arms or Cohorts',
 };
 
 // --------------- Table 2 configuration --------------//
@@ -224,9 +272,12 @@ export const table2 = {
         toolTipTextFileDownload: 'Download a copy of this file',
         toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
         fileSizeColumn: 'file_size',
+        fileFormatColumn: 'file_format',
         fileLocationColumn: 'uuid',
+        caseIdColumn: 'file_name',
         iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
         iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
     },
     {
@@ -238,6 +289,7 @@ export const table2 = {
   ],
   customOnRowsSelect: FileOnRowsSelect,
   disableRowSelection: FileDisableRowSelection,
+  noAssociatedFiles: 'This study currently has no Files directly associated with it',
 };
 
 export const textLabels = {
@@ -254,11 +306,14 @@ export const textLabels = {
 
 // --------------- GraphQL query configuration --------------
 export const GET_STUDY_DETAIL_DATA_QUERY = gql`
-  query Study($csd: String!) {
+  query Study($csd: String!, $accessionId: String!) {
    sampleCountOfStudy(study_code:$csd)
    fileCountOfStudy(study_code: $csd)
+   fileCountOfStudyFiles(study_code: $csd)
+   programCountOfStudy(study_code: $csd)
    aliquotCountOfStudy(study_code: $csd)
    caseCountOfStudy(study_code: $csd)
+   volumeOfDataOfStudy(study_code: $csd)
    studySampleSiteCount(study_codes: [$csd]){
     group,
     count
@@ -285,7 +340,8 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
           md5sum
           uuid
    }
-  study(clinical_study_designation: $csd){
+
+  study(filter:{OR : [{clinical_study_designation: $csd }, {accession_id: $accessionId}]}){
     program{
       program_acronym
     }

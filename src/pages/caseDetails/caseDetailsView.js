@@ -52,7 +52,10 @@ const CaseDetail = ({ classes, data }) => {
     numberOfCases: 1,
     numberOfAliquots: data.aliquotCountOfCase,
     numberOfSamples: data.sampleCountOfCase,
-    numberOfFiles: data.fileCountOfCase,
+    numberOfFiles: data.fileCountOfCase + data.studyFileCountOfCase,
+    numberOfStudyFiles: data.studyFileCountOfCase,
+    numberOfPrograms: data.programsCountOfCase,
+    volumeOfData: data.volumeOfDataOfCase,
   };
   const caseDetail = data.case[0];
 
@@ -68,7 +71,7 @@ const CaseDetail = ({ classes, data }) => {
     isALink: true,
   }, {
     name: `${caseDetail.study.clinical_study_designation} CASES`,
-    to: '/cases',
+    to: '/explore',
     onClick: () => filterCasePageOnStudyCode(caseDetail.study.clinical_study_designation),
     isALink: true,
   }, {
@@ -196,7 +199,7 @@ const CaseDetail = ({ classes, data }) => {
 
             )}
           {
-            data.multiStudyCases
+            data.multiStudyCases && data.multiStudyCases.caseIds
             && (data.multiStudyCases.caseIds.length > 1)
               && (
                 <div className={classes.multiCaseStudy}>

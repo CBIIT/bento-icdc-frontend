@@ -29,7 +29,7 @@ export function convertToCSV(jsonse, keysToInclude, header) {
   const objArray = jsonse;
   // To Do empty object just print headers
   const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-  let str = '';
+  let str = header.join(',');
   array.map((entry, index) => {
     let line = '';
     keysToInclude.map((keyName) => {
@@ -42,7 +42,7 @@ export function convertToCSV(jsonse, keysToInclude, header) {
       return line;
     });
     if (index === 0) {
-      str = header.join(',');
+      // str = header.join(',');
       str += `\r\n${line}\r\n`;
     } else {
       str += `${line}\r\n`;

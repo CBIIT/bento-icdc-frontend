@@ -2,9 +2,11 @@ import env from '../utils/env';
 
 export default {
   bg: '#325068',
-  footerLogoImage: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/footer/FNL_logo.png',
+  // footerLogoImage: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/footer/FNL_logo.png',
   footerLogoAltText: 'Footer Logo',
-  footerLogoHyperlink: 'https://frederick.cancer.gov/',
+  footerLogoText: 'National Cancer Institute',
+  footerLogoSubText: 'at the National Institutes of Health',
+  footerLogoHyperlink: 'https://www.cancer.gov/',
   footerStaticText: 'NIH … Turning Discovery Into Health®',
   version: env.REACT_APP_FE_VERSION,
   BEversion: env.REACT_APP_BE_VERSION,
@@ -21,12 +23,20 @@ export default {
           link: '/purpose',
         },
         {
+          text: 'News',
+          link: '/news',
+        },
+        {
           text: 'Steering Committee',
           link: '/steeringCommittee',
         },
         {
           text: 'CRDC',
           link: '/crdc',
+        },
+        {
+          text: 'Release Notes',
+          link: `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_FE_VERSION}`,
         },
         {
           text: 'Contact Us',

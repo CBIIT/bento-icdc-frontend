@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -9,6 +10,10 @@ import {
 import {
   CheckBox as CheckBoxIcon, CheckBoxOutlineBlank as CheckBoxBlankIcon,
 } from '@material-ui/icons';
+import {
+  ToolTip as Tooltip,
+} from 'bento-components';
+import _ from 'lodash';
 
 const styles = {
   listItemGutters: {
@@ -36,9 +41,8 @@ const alignment = 'flex-start';
 function CheckBoxView(props) {
   const {
     classes, checkboxItem, handleToggle, sideBarItem, facetSectionVariables,
-    defaultFacetSectionVariables, backgroundColor,
+    defaultFacetSectionVariables, backgroundColor, dataDictionary,
   } = props;
-
   return (
     <>
       <ListItem
@@ -70,13 +74,48 @@ function CheckBoxView(props) {
           color="secondary"
           classes={{ root: classes.checkboxRoot }}
         />
-        <div className={classes.panelDetailText}>
-          <span>
-            {`${checkboxItem.name}`}
-            { checkboxItem.code
-                    && `${checkboxItem.code}`}
-          </span>
-        </div>
+        { dataDictionary ? (
+          (checkboxItem.name) ? (
+            <>
+              <Tooltip title={_.startCase(checkboxItem.name)}>
+                <div className={classes.panelDetailText}>
+                  <span>
+                    {`${_.startCase(checkboxItem.name)}`}
+                  </span>
+                </div>
+              </Tooltip>
+            </>
+          ) : (
+            <div className={classes.panelDetailText}>
+              <span>
+                {`${checkboxItem.name}`}
+                { checkboxItem.code
+                        && `${checkboxItem.code}`}
+              </span>
+            </div>
+          )
+        ) : (
+          (checkboxItem.title) ? (
+            <>
+              <Tooltip title={checkboxItem.title.name}>
+                <div className={classes.panelDetailText}>
+                  <span>
+                    {`${checkboxItem.title.acronym}`}
+                  </span>
+                </div>
+              </Tooltip>
+            </>
+          ) : (
+            <div className={classes.panelDetailText}>
+              <span>
+                {`${checkboxItem.name}`}
+                { checkboxItem.code
+                        && `${checkboxItem.code}`}
+              </span>
+            </div>
+          )
+        )}
+        {/* {label(checkboxItem)} */}
         <ListItemText />
         <div className={classes.panelSubjectText}>
           <span
@@ -92,7 +131,7 @@ function CheckBoxView(props) {
         variant="middle"
         style={{
           backgroundColor: checkboxItem.isChecked ? '#FFFFFF' : '#B1B1B1',
-          margin: checkboxItem.isChecked ? '0px' : '-1px',
+          margin: '0px',
           height: checkboxItem.isChecked ? '2px' : '1px',
         }}
       />

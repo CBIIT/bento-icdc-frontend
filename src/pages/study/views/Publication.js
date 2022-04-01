@@ -37,18 +37,22 @@ const Publication = ({
                         {attr.label}
                         :
                       </Grid>
-                      <Grid item xs={12} sm={6} className={classes.content}>
-                        <a href={getURL(publication[attr.key], attr.url)} target="_blank" rel="noreferrer" className={classes.outLink}>
-                          {publication[attr.key]}
-                          <span className={classes.paddingLeft5}>
-                            <img
-                              src={externalIcon}
-                              alt="imageLink"
-                              className={classes.linkIcon}
-                            />
-                          </span>
-                        </a>
-                      </Grid>
+                      {
+                        (publication[attr.key] !== null && publication[attr.key] !== undefined) ? (
+                          <Grid item xs={12} sm={6} className={classes.content}>
+                            <a href={getURL(publication[attr.key], attr.url)} target="_blank" rel="noreferrer" className={classes.outLink}>
+                              {publication[attr.key]}
+                              <span className={classes.paddingLeft5}>
+                                <img
+                                  src={externalIcon}
+                                  alt="imageLink"
+                                  className={classes.linkIcon}
+                                />
+                              </span>
+                            </a>
+                          </Grid>
+                        ) : null
+                      }
                     </>
                   ) : (
                     <>
@@ -76,7 +80,7 @@ const Publication = ({
         <div className={classes.detailContainer}>
           <Grid container className={classes.gridContainer}>
             <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
-              <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
+              <Grid container spacing={1} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   {
                     (publications && publications.length > 0)
@@ -93,7 +97,7 @@ const Publication = ({
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid
                 container
-                spacing={16}
+                spacing={1}
                 direction="row"
                 className={classes.detailContainerRight}
               >

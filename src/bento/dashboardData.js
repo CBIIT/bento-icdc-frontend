@@ -21,10 +21,19 @@ export const defaultFacetSectionVariables = {
 // A maximum of 12 facetSearchData are allowed
 export const facetSearchData = [
   {
+    label: 'Program', field: 'group', api: 'filterCaseCountByProgram', filterAPI: 'filterCaseCountByProgram', datafield: 'program', section: 'Filter By Cases', tooltip: 'program', show: true,
+  },
+  {
     label: 'Study', field: 'group', api: 'filterCaseCountByStudyCode', filterAPI: 'filterCaseCountByStudyCode', datafield: 'study', section: 'Filter By Cases', show: true,
   },
   {
     label: 'Study Type', field: 'group', api: 'filterCaseCountByStudyType', filterAPI: 'filterCaseCountByStudyType', datafield: 'study_type', section: 'Filter By Cases', show: true,
+  },
+  {
+    label: 'Biobank', field: 'group', api: 'filterCaseCountByBiobank', filterAPI: 'filterCaseCountByBiobank', datafield: 'biobank', section: 'Filter By Cases', tooltip: 'biospecimen_source', show: true,
+  },
+  {
+    label: 'Study Participation', field: 'group', api: 'filterCaseCountByStudyParticipation', filterAPI: 'filterCaseCountByStudyParticipation', datafield: 'study_participation', section: 'Filter By Cases', show: true,
   },
   {
     label: 'Breed', field: 'group', api: 'filterCaseCountByBreed', filterAPI: 'filterCaseCountByBreed', datafield: 'breed', section: 'Filter By Cases', show: true,
@@ -70,25 +79,25 @@ export const facetSearchData = [
 // --------------- Dashboard Sidebar Sections styling --------------
 export const facetSectionVariables = {
   'Filter By Cases': {
-    color: '#f48439',
+    color: '#FF9742',
     checkBoxColorsOne: '#fdf1e8',
     checkBoxColorsTwo: '#fff9f5',
-    height: '4px',
-    isExpanded: false,
+    height: '7px',
+    isExpanded: true,
   },
   'Filter By Samples': {
-    color: '#37d1d6',
+    color: '#9DC1D9',
     checkBoxColorsOne: '#dafafb',
     checkBoxColorsTwo: '#eafafb',
-    height: '4px',
-    isExpanded: false,
+    height: '7px',
+    isExpanded: true,
   },
   'Filter By Files': {
-    color: '#2446c6',
+    color: '#667A87',
     checkBoxColorsOne: '#d4ddf7',
     checkBoxColorsTwo: '#e9eefb',
-    height: '4px',
-    isExpanded: false,
+    height: '7px',
+    isExpanded: true,
   },
 };
 
@@ -139,6 +148,19 @@ export const widgetsData = [
     show: true,
   },
 ];
+
+export const tooltipFields = [
+  {
+    type: 'program',
+    acronym: 'program_acronym',
+    name: 'program_name'
+  },
+  {
+    type: 'biospecimen_source',
+    acronym: 'biospecimen_repository_acronym',
+    name: 'biospecimen_repository_full_name'
+  }
+]
 
 // --------------- Dahboard Table external link configuration --------------
 // Ideal size for externalLinkIcon is 16x16 px
