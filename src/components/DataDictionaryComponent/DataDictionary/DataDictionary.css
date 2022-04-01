@@ -7,6 +7,8 @@
 .data-dictionary {
   display: flex;
   height: calc(100vh);
+  overflow-y: auto;
+  background-image: url('../assets/Model_View.png');
 }
 
 .data-dictionary__sidebar {
