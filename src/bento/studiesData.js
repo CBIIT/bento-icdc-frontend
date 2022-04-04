@@ -60,7 +60,7 @@ export const pageData = {
       },
       {
         dataField: 'study_disposition',
-        header: 'study disposition',
+        header: 'Study Disposition',
         display: false,
       },
       {
