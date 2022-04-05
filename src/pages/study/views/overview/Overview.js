@@ -184,7 +184,7 @@ const Overview = ({
                                 className={cn(classes.content, classes.marginTopN5)}
                               >
                                 <Tooltip title={getAccessTypeString(imageCollection.collection_access)} arrow placement="top">
-                                  <a href={`${imageCollection.image_collection_url}`} target="icdc" className={classes.outLink}>
+                                  <a href={`${imageCollection.image_collection_url}`} target="_blank" rel="noreferrer" className={classes.outLink}>
                                     {imageCollection.image_collection_name}
                                     {' - '}
                                     {imageCollection.repository_name}
