@@ -3,9 +3,10 @@ import { NavBar, ToolTip as Tooltip } from 'bento-components';
 import {
   navBarData, navBarCartData, navBarstyling, externalLinks,
 } from '../../bento/navigationBarData';
+import NavBarThemeProvider from './NavBarThemeConfig';
 
 const BentoNavBar = ({ cartFieldIds }) => (
-  <>
+  <NavBarThemeProvider>
     <NavBar
       navBarData={navBarData}
       navBarCartData={navBarCartData}
@@ -17,6 +18,6 @@ const BentoNavBar = ({ cartFieldIds }) => (
         Tooltip,
       }}
     />
-  </>
+  </NavBarThemeProvider>
 );
 export default BentoNavBar;

@@ -20,9 +20,6 @@ const styles = StyleSheet.create({
     float: 'left',
     width: '46%',
   },
-  body: {
-    // border: '1px solid #C1C1C1',
-  },
   tableContainer: {
     border: '1px solid #C1C1C1',
     marginTop: '60px',

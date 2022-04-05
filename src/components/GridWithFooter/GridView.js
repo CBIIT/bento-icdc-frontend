@@ -282,8 +282,8 @@ const GridView = ({
   return (
     <div>
       <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
-      <Grid container>
-        <Grid item xs={12} id="table_file" className={classes.tableGrid}>
+      <Grid container className={classes.tableGrid}>
+        <Grid item>
           <TableThemeProvider>
             <CustomDataTable
               data={_.cloneDeep(data)}
@@ -395,8 +395,7 @@ const styles = () => ({
     right: '-25px',
   },
   tableGrid: {
-    marginRight: '10.95px',
-    marginLeft: '10.5px',
+    padding: '0px',
   },
 });
 
