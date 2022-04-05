@@ -3,26 +3,24 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import _ from 'lodash';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {
   CustomDataTable,
   getOptions,
   ToolTip as Tooltip,
 } from 'bento-components';
-import { Typography } from '../../../components/Wrappers/Wrappers';
+import { Typography } from '../../../../components/Wrappers/Wrappers';
 import {
   table1,
   textLabels,
   title,
-} from '../../../bento/studyDetailsData';
-import themes, { overrides } from '../../../themes';
+} from '../../../../bento/studyDetailsData';
 import {
   studyDetailSorting,
   fromArmTOCohorDoes,
   studyDisposition,
   isStudyUnderEmbargo,
-} from '../utils';
+} from '../../utils';
+import CohortThemeProvider from './armsAndCohortThemeConfig';
 
 const ArmsAndCohort = ({
   classes,
@@ -83,41 +81,6 @@ const ArmsAndCohort = ({
     cohortAndDosingTableData.push(cohortAndDosing);
   }
 
-  const themesLight = _.cloneDeep(themes.light);
-  themesLight.overrides.MuiTableCell = {
-    ...themesLight.overrides.MuiTableCell,
-    root: {
-      '&:first-child': {
-        paddingLeft: '30px',
-      },
-      '&:lastchild': {
-        paddingRight: '30px',
-      },
-    },
-  };
-
-  themesLight.overrides.MUIDataTableToolbar = {
-    ...themesLight.overrides.MUIDataTableToolbar,
-    root: {
-      backgroundColor: '#ffffff',
-      paddingLeft: '0px',
-    },
-    actions: {
-      '& span': {
-        '& button': {
-          right: '0px',
-        },
-      },
-    },
-    titleText: {
-      fontSize: '1.142rem',
-    },
-  };
-
-  const computedTheme = createMuiTheme({
-    ...themesLight,
-    ...overrides,
-  });
   const tableOneOptions = getOptions(table1, classes);
   // const studyDisposition = studyDisposition(studyData.study_disposition);
   return (
@@ -131,7 +94,7 @@ const ArmsAndCohort = ({
               <Grid item xs={12}>
                 <Grid container>
                   <Grid item xs={12} id="table_cohort_dosing">
-                    <MuiThemeProvider theme={computedTheme}>
+                    <CohortThemeProvider>
                       <Typography>
                         <CustomDataTable
                           title={title.armsAndCohort}
@@ -145,7 +108,7 @@ const ArmsAndCohort = ({
                           }}
                         />
                       </Typography>
-                    </MuiThemeProvider>
+                    </CohortThemeProvider>
                   </Grid>
                   <Grid item xs={8}>
                     <Typography />

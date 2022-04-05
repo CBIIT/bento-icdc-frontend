@@ -19,6 +19,7 @@ import { navigatedToDashboard } from '../../utils/utils';
 import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
 import InvalidAccesionModal from './InvalidAccesionModal';
+import StudiesThemeProvider from './studiesMuiThemConfig';
 
 const Studies = ({ classes, data, invalid }) => {
   const overlay = useSelector((state) => (
@@ -108,7 +109,7 @@ const Studies = ({ classes, data, invalid }) => {
   }));
 
   return (
-    <>
+    <StudiesThemeProvider>
       <Stats />
       {
         invalid && !overlay ? (
@@ -149,7 +150,7 @@ const Studies = ({ classes, data, invalid }) => {
         </div>
 
       </div>
-    </>
+    </StudiesThemeProvider>
   );
 };
 
@@ -222,8 +223,8 @@ const styles = (theme) => ({
   },
   container: {
     margin: 'auto',
-    paddingLeft: '36px',
-    paddingRight: '36px',
+    paddingLeft: '27px',
+    paddingRight: '27px',
   },
   paper: {
     textAlign: 'center',
@@ -240,11 +241,11 @@ const styles = (theme) => ({
   },
   header: {
     background: '#eee',
-    paddingLeft: '20px',
+    paddingLeft: '35px',
     paddingRight: '50px',
     borderBottom: '#004c73 10px solid',
-    height: '120px',
-    paddingTop: '35px',
+    height: '154px',
+    paddingTop: '60px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilyRaleway,
@@ -253,10 +254,10 @@ const styles = (theme) => ({
     color: '#0296c9',
     fontSize: '28px',
     position: 'absolute',
-    marginTop: '14px',
+    marginTop: '12px',
+    marginLeft: '10px',
     lineHeight: '25px',
   },
-
   headerTitle: {
     margin: 'auto',
     float: 'left',
@@ -265,8 +266,7 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginLeft: '-13px',
-    width: '83px',
+    width: '94px',
     zIndex: '10',
   },
   tableContainer: {

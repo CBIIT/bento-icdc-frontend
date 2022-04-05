@@ -196,7 +196,7 @@ const cartView = ({
       />
 
       {/* Section: Header */}
-      <Grid item xs={12} className={[classes.headerGrid, classes.paddingBottom40]}>
+      <Grid item xs={12} className={[classes.headerGrid, classes.paddingBottom28]}>
         <CartHeader
           headerIconSrc={myFilesPageData.headerIconSrc}
           headerIconAlt={myFilesPageData.headerIconAlt}
