@@ -520,6 +520,11 @@ type CaseDetail {
   histology_cytopathology: String
 }
 
+type Link {
+  text: String
+  url: String
+}
+
 type StudyOfProgram {
   program_id: String
   clinical_study_id: String
@@ -537,6 +542,7 @@ type StudyOfProgram {
   numberOfImageCollections: Int,
   numberOfPublications: Int,
   numberOfCRDCNodes: Int
+  CRDCLinks: [Link]
 }
 
 type FileOverview2 {

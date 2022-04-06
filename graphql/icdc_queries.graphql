@@ -36,6 +36,11 @@ type CaseDetail {
   histology_cytopathology: String
 }
 
+type Link {
+  text: String
+  url: String
+}
+
 type StudyOfProgram {
   program_id: String
   clinical_study_id: String
@@ -53,6 +58,7 @@ type StudyOfProgram {
   numberOfImageCollections: Int,
   numberOfPublications: Int,
   numberOfCRDCNodes: Int
+  CRDCLinks: [Link]
 }
 
 type FileOverview2 {
@@ -2277,7 +2283,9 @@ type QueryType {
       COUNT(DISTINCT ic) AS numberOfImageCollections,
       COUNT(DISTINCT ic.repository_name) AS numberOfCRDCNodes,
       COUNT(DISTINCT pub) AS numberOfPublications,
-      COUNT(DISTINCT(c)) AS numberOfCases
+      COUNT(DISTINCT(c)) AS numberOfCases,
+      COLLECT(DISTINCT ic{text: ic.image_collection_name + ' - ' + ic.repository_name,
+                         url: ic.image_collection_url}) AS CRDCLinks
     RETURN{
       program_id: p.program_acronym,
       clinical_study_id: s.clinical_study_id,
@@ -2294,7 +2302,8 @@ type QueryType {
       numberOfCaseFiles: numberOfCaseFiles,
       numberOfImageCollections: numberOfImageCollections,
       numberOfPublications: numberOfPublications,
-      numberOfCRDCNodes: numberOfCRDCNodes
+      numberOfCRDCNodes: numberOfCRDCNodes,
+      CRDCLinks: CRDCLinks
     }
     ORDER BY s.clinical_study_designation
   """, passThrough: true)
@@ -2313,7 +2322,9 @@ type QueryType {
       COUNT(DISTINCT ic) AS numberOfImageCollections,
       COUNT(DISTINCT ic.repository_name) AS numberOfCRDCNodes,
       COUNT(DISTINCT pub) AS numberOfPublications,
-      COUNT(DISTINCT(c)) AS numberOfCases
+      COUNT(DISTINCT(c)) AS numberOfCases,
+      COLLECT(DISTINCT ic{text: ic.image_collection_name + ' - ' + ic.repository_name,
+                         url: ic.image_collection_url}) AS CRDCLinks
     RETURN{
       program_id: p.program_acronym,
       clinical_study_id: s.clinical_study_id,
@@ -2330,7 +2341,8 @@ type QueryType {
       numberOfCaseFiles: numberOfCaseFiles,
       numberOfImageCollections: numberOfImageCollections,
       numberOfPublications: numberOfPublications,
-      numberOfCRDCNodes: numberOfCRDCNodes
+      numberOfCRDCNodes: numberOfCRDCNodes,
+      CRDCLinks: CRDCLinks
     }
     ORDER BY s.clinical_study_designation
   """, passThrough: true)
