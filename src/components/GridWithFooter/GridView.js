@@ -114,6 +114,7 @@ const GridView = ({
     marginBottom: '10px',
     marginRight: '4px',
     border: '3px solid grey',
+    position: 'relative',
   };
 
   useEffect(() => {
@@ -274,8 +275,8 @@ const GridView = ({
         onClick={exportFiles}
       >
         { buttonText }
+        {showtooltip ? tooltipComponent : ''}
       </button>
-      {showtooltip ? tooltipComponent : ''}
     </div>
   );
 
@@ -283,7 +284,7 @@ const GridView = ({
     <div>
       <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
       <Grid container className={classes.tableGrid}>
-        <Grid item>
+        <Grid item className={classes.tableGridItem}>
           <TableThemeProvider>
             <CustomDataTable
               data={_.cloneDeep(data)}
@@ -326,6 +327,9 @@ const styles = () => ({
     marginTop: '36px',
     zIndex: '999',
   },
+  tableGridItem: {
+    width: 'inherit',
+  },
   chipRoot: {
     color: '#ffffff',
     fontFamily: '"Open Sans", sans-serif',
@@ -365,16 +369,16 @@ const styles = () => ({
     zIndex: '600',
     width: '17px',
   },
-  topButtonGroup: {
-    textAlign: 'right',
-    padding: '10px 0px 0px 0px',
-    position: 'absolute',
-    marginTop: '-3px',
-    width: '180px',
-    height: '43px',
-    marginLeft: '37px',
+  // topButtonGroup: {
+  //   textAlign: 'right',
+  //   padding: '10px 0px 0px 0px',
+  //   position: 'absolute',
+  //   marginTop: '-3px',
+  //   width: '180px',
+  //   height: '43px',
+  //   marginLeft: '37px',
 
-  },
+  // },
   messageBottom: {
     position: 'absolute',
     right: '-8px',
@@ -388,11 +392,14 @@ const styles = () => ({
     margin: '0px 0px 0px 2px',
   },
   helpIconButton: {
-    verticalAlign: 'top',
-    marginLeft: '-5px',
+    // verticalAlign: 'top',
+    // marginLeft: '-5px',
+    // position: 'relative',
+    // top: '-60px',
+    // right: '-25px',
     position: 'relative',
-    top: '-60px',
-    right: '-25px',
+    left: '3em',
+    bottom: '1em',
   },
   tableGrid: {
     padding: '0px',
