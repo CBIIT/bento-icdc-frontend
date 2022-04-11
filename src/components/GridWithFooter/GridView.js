@@ -362,23 +362,12 @@ const styles = () => ({
     lineHeight: '18px',
     fontSize: '10pt',
     color: '#fff',
-    // backgroundColor: '#ff7f15',
   },
   helpIcon: {
     verticalAlign: 'top',
     zIndex: '600',
     width: '17px',
   },
-  // topButtonGroup: {
-  //   textAlign: 'right',
-  //   padding: '10px 0px 0px 0px',
-  //   position: 'absolute',
-  //   marginTop: '-3px',
-  //   width: '180px',
-  //   height: '43px',
-  //   marginLeft: '37px',
-
-  // },
   messageBottom: {
     position: 'absolute',
     right: '-8px',
@@ -392,11 +381,6 @@ const styles = () => ({
     margin: '0px 0px 0px 2px',
   },
   helpIconButton: {
-    // verticalAlign: 'top',
-    // marginLeft: '-5px',
-    // position: 'relative',
-    // top: '-60px',
-    // right: '-25px',
     position: 'relative',
     left: '3em',
     bottom: '1em',
