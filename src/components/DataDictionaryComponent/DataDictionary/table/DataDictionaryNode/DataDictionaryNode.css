@@ -72,6 +72,9 @@
 
 .data-dictionary-node__assignment_group {
   text-align: right;
+  position: relative;
+  left: 20rem;
+  top: 1rem;
 }
 
 .data-dictionary-node__class,
@@ -82,13 +85,18 @@
 }
 
 .data-dictionary-node__class_group {
-  padding-left: 18px;
+  position: relative;
+  left: 20rem;
+  top: 1rem;
 }
 
 .data-dictionary-node__download-button-group {
-  text-align: right;
+  /* text-align: right;
   margin-top: -5px;
-  padding-right: 15px;
+  padding-right: 15px; */
+  position: relative;
+  left: 39rem;
+  top: 1rem;
 }
 
 .data-dictionary-node__download-group {
