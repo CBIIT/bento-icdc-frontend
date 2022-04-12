@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import { PDFDownloadLink } from '@react-pdf/renderer';
 // eslint-disable-next-line no-unused-vars
 import {
-  Grid, Typography,
+  Grid,
 } from '@material-ui/core';
 // import Button from '@gen3/ui-component/dist/components/Button';
 import { downloadTemplate } from '../../utils';
@@ -64,19 +64,20 @@ class DataDictionaryNode extends React.Component {
           tabIndex={0}
         >
           <Grid container>
-            <Grid item xs={3}>
+            <Grid item lg={3} md={3} sm={3} xs={12}>
               <span className="data-dictionary-node__title">
                 {/* <i className="g3-icon g3-icon--folder data-dictionary-node__file-icon" /> */}
                 {capitalizeFirstLetter(this.props.node.title)}
                 <i className={`g3-icon g3-icon--chevron-${this.props.expanded ? 'down' : 'right'} data-dictionary-node__toggle-icon`} />
               </span>
             </Grid>
-            <Grid item xs={9} className="data-dictionary-node__description">
-              <Typography>
+            <Grid item lg={9} md={9} sm={9} xs={9} className="data-dictionary-node__description">
+              <span>
                 {(this.props.node.desc) ? this.props.node.desc : this.props.description}
-              </Typography>
+              </span>
             </Grid>
-            <Grid item lg={2} md={2} sm={2} xs={12} className="data-dictionary-node__assignment_group">
+            <Grid item lg={3} md={3} sm={3} xs={12} />
+            <Grid item lg={4} md={4} sm={4} xs={12} className="data-dictionary-node__assignment_group">
               <span className="data-dictionary-node__label">
                 <span>
                   Assignment:
@@ -85,8 +86,6 @@ class DataDictionaryNode extends React.Component {
                   {capitalizeFirstLetter(this.props.node.assignment)}
                 </span>
               </span>
-            </Grid>
-            <Grid item lg={3} md={3} sm={3} xs={12} className="data-dictionary-node__class_group">
               <span className="data-dictionary-node__label">
                 Class:
                 <span className="data-dictionary-node__class">
@@ -94,7 +93,10 @@ class DataDictionaryNode extends React.Component {
                 </span>
               </span>
             </Grid>
-            <Grid item xs={3} className="data-dictionary-node__download-button-group">
+            {/* <Grid item lg={3} md={3} sm={3} xs={12}
+            className="data-dictionary-node__class_group">
+            </Grid> */}
+            <Grid item lg={5} md={5} sm={5} xs={12} className="data-dictionary-node__download-button-group">
               <div className="data-dictionary-node__button-wrap">
                 {
                 // Fix Download buttons
@@ -140,24 +142,24 @@ class DataDictionaryNode extends React.Component {
                   <img src={IconDownloadPTSV} alt="download TSV" />
                 </button> */}
                 {
-                  this.props.node.template === 'Yes' ? (
-                    <DownloadButton
-                      config={csvBtnDownloadConfig}
-                      documentData={this.props.node}
-                      template={this.props.node.template}
-                      fileName={createFileName(this.props.node.id, csvBtnDownloadConfig.prefix)}
-                    />
-                  ) : (
-                    <DownloadButton
-                      config={csvBtnDownloadConfig}
-                      documentData={this.props.node}
-                      template={this.props.node.template}
-                      fileName={createFileName(this.props.node.id, csvBtnDownloadConfig.prefix)}
-                    />
+                  (this.props.node.template === 'Yes')
+                  && (
+                  <DownloadButton
+                    config={csvBtnDownloadConfig}
+                    documentData={this.props.node}
+                    template={this.props.node.template}
+                    fileName={createFileName(this.props.node.id, csvBtnDownloadConfig.prefix)}
+                  />
                   )
                 }
               </div>
             </Grid>
+            {/* <Grid item lg={12} md={12} sm={12} xs={12}
+             className="data-dictionary-node__description">
+              <span>
+                {(this.props.node.desc) ? this.props.node.desc : this.props.description}
+              </span>
+            </Grid> */}
           </Grid>
         </div>
         {
