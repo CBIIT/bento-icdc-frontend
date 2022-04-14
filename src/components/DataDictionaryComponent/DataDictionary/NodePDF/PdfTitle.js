@@ -22,13 +22,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: '6px 0px 2px 15px',
     backgroundColor: '#f4f5f5',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  tagsInfo: {
+    flexDirection: 'row',
+    padding: '6px 0px 2px 15px',
+    backgroundColor: '#f4f5f5',
+    display: 'flex',
   },
   nodeTitle: {
     color: '#000000',
     fontSize: '10px',
     fontWeight: 'heavy',
     fontFamily: FontRegistry('NunitoBold'),
-    marginRight: '75px',
+    // marginRight: '75px',
   },
   nodeDesc: {
     color: '#000000',
@@ -36,6 +44,7 @@ const styles = StyleSheet.create({
     paddingRight: '15px',
     paddingTop: '-2px',
     lineHeight: 1.2,
+    width: '350px',
     fontFamily: FontRegistry('NunitoNormal'),
   },
   categoryHeader: {
@@ -45,15 +54,29 @@ const styles = StyleSheet.create({
     paddingTop: '8px',
     fontFamily: FontRegistry('NunitoExtraBold'),
   },
-  nodeAssignmentClass: {
-    float: 'right',
+  nodeAssignment: {
+    // float: 'right',
     paddingTop: '3px',
     paddingRight: '10px',
     paddingLeft: '10px',
     borderRadius: '8px',
     backgroundColor: '#fff',
     border: '0.5px solid #cdcdcd',
-    marginRight: '10px',
+    marginRight: '11em',
+  },
+  nodeClass: {
+    paddingTop: '3px',
+    paddingRight: '10px',
+    paddingLeft: '10px',
+    borderRadius: '8px',
+    backgroundColor: '#fff',
+    border: '0.5px solid #cdcdcd',
+  },
+  tagContainer: {
+    position: 'relative',
+    left: '142em',
+    display: 'flex',
+    flexDirection: 'row',
   },
   label: {
     fontWeight: '900',
@@ -74,12 +97,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     color: '#2982af',
     fontFamily: FontRegistry('NunitoNormal'),
-  },
-  nodeClass: {
-    // width: '16%',
-    textAlign: 'center',
-    paddingTop: '4px',
-    marginTop: '-5px',
   },
   class: {
     fontSize: '8px',
@@ -114,25 +131,27 @@ const PdfTitle = (node) => {
         <Text style={styles.nodeTitle}>
           {capitalizeFirstLetter(node.title)}
         </Text>
-        <Text style={styles.nodeAssignmentClass}>
-          <span style={styles.label}>
-            {'Assignment: '}
-          </span>
-          <span style={styles.assignment}>
-            {capitalizeFirstLetter(node.assignment)}
-          </span>
-        </Text>
-        <Text style={styles.nodeAssignmentClass}>
-          <span style={styles.label}>
-            {'Class: '}
-          </span>
-          <span style={styles.class}>
-            {capitalizeFirstLetter(node.nodeClass)}
-          </span>
-        </Text>
-      </View>
-      <View style={createStyle(styles.nodeInfo, categoryColor)}>
         <Text style={styles.nodeDesc}>{node.desc}</Text>
+      </View>
+      <View style={createStyle(styles.tagsInfo, categoryColor)}>
+        <span style={styles.tagContainer}>
+          <Text style={styles.nodeAssignment}>
+            <span style={styles.label}>
+              {'Assignment: '}
+            </span>
+            <span style={styles.assignment}>
+              {capitalizeFirstLetter(node.assignment)}
+            </span>
+          </Text>
+          <Text style={styles.nodeClass}>
+            <span style={styles.label}>
+              {'Class: '}
+            </span>
+            <span style={styles.class}>
+              {capitalizeFirstLetter(node.nodeClass)}
+            </span>
+          </Text>
+        </span>
       </View>
     </View>
   );
