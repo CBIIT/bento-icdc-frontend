@@ -93,8 +93,6 @@ function HorizontalPropertyTable({
         <TableBody style={{ padding: '0.5rem 0.5em 0.5em 2em' }}>
           {
           propertyKeysList.map((propertyKey) => {
-            // todo: complete function
-            console.log('working');
             const property = properties[propertyKey];
             let nameMatch = null;
             let descriptionMatch = null;

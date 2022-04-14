@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   tagContainer: {
     position: 'relative',
-    left: '142em',
+    left: '139em',
     display: 'flex',
     flexDirection: 'row',
   },
