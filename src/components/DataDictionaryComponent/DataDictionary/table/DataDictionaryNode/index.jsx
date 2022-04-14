@@ -35,6 +35,8 @@ const pdfDownloadConfig = {
 };
 
 class DataDictionaryNode extends React.Component {
+  notHorizontal = true; // supports landscape orientation
+
   handleClickNode(nodeID) {
     if (!this.props.expanded) {
       this.props.onExpandNode(nodeID);
@@ -174,18 +176,23 @@ class DataDictionaryNode extends React.Component {
               >
                 <i className="g3-icon g3-icon--sm g3-icon--cross data-dictionary-node__property-close-icon" />
               </span>
-              <div className="data-dictionary-node__property-summary">
-                <i>
-                  <span>{this.props.node.title}</span>
-                  <span> has </span>
-                  <span>{Object.keys(this.props.node.properties).length}</span>
-                  <span> properties. </span>
-                </i>
-              </div>
+              {
+                this.notHorizontal && (
+                  <div className="data-dictionary-node__property-summary">
+                    <i>
+                      <span>{this.props.node.title}</span>
+                      <span> has </span>
+                      <span>{Object.keys(this.props.node.properties).length}</span>
+                      <span> properties. </span>
+                    </i>
+                  </div>
+                )
+              }
               <DataDictionaryPropertyTable
                 properties={this.props.node.properties}
                 requiredProperties={this.props.node.required}
                 preferredProperties={this.props.node.preferred}
+                // horizontal // supports horizontal orientation
               />
             </div>
           )
