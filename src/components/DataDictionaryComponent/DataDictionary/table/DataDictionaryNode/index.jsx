@@ -35,6 +35,8 @@ const pdfDownloadConfig = {
 };
 
 class DataDictionaryNode extends React.Component {
+  notHorizontal = true; // supports landscape orientation
+
   handleClickNode(nodeID) {
     if (!this.props.expanded) {
       this.props.onExpandNode(nodeID);
@@ -71,7 +73,13 @@ class DataDictionaryNode extends React.Component {
                 <i className={`g3-icon g3-icon--chevron-${this.props.expanded ? 'down' : 'right'} data-dictionary-node__toggle-icon`} />
               </span>
             </Grid>
-            <Grid item lg={2} md={2} sm={2} xs={12} className="data-dictionary-node__assignment_group">
+            <Grid item lg={9} md={9} sm={9} xs={9} className="data-dictionary-node__description">
+              <span>
+                {(this.props.node.desc) ? this.props.node.desc : this.props.description}
+              </span>
+            </Grid>
+            <Grid item lg={3} md={3} sm={3} xs={12} />
+            <Grid item lg={4} md={4} sm={4} xs={12} className="data-dictionary-node__assignment_group">
               <span className="data-dictionary-node__label">
                 <span>
                   Assignment:
@@ -80,8 +88,6 @@ class DataDictionaryNode extends React.Component {
                   {capitalizeFirstLetter(this.props.node.assignment)}
                 </span>
               </span>
-            </Grid>
-            <Grid item lg={3} md={3} sm={3} xs={12} className="data-dictionary-node__class_group">
               <span className="data-dictionary-node__label">
                 Class:
                 <span className="data-dictionary-node__class">
@@ -89,7 +95,10 @@ class DataDictionaryNode extends React.Component {
                 </span>
               </span>
             </Grid>
-            <Grid item lg={4} md={4} sm={4} xs={12} className="data-dictionary-node__download-button-group">
+            {/* <Grid item lg={3} md={3} sm={3} xs={12}
+            className="data-dictionary-node__class_group">
+            </Grid> */}
+            <Grid item lg={5} md={5} sm={5} xs={12} className="data-dictionary-node__download-button-group">
               <div className="data-dictionary-node__button-wrap">
                 {
                 // Fix Download buttons
@@ -147,11 +156,12 @@ class DataDictionaryNode extends React.Component {
                 }
               </div>
             </Grid>
-            <Grid item lg={12} md={12} sm={12} xs={12} className="data-dictionary-node__description">
+            {/* <Grid item lg={12} md={12} sm={12} xs={12}
+             className="data-dictionary-node__description">
               <span>
                 {(this.props.node.desc) ? this.props.node.desc : this.props.description}
               </span>
-            </Grid>
+            </Grid> */}
           </Grid>
         </div>
         {
@@ -166,18 +176,23 @@ class DataDictionaryNode extends React.Component {
               >
                 <i className="g3-icon g3-icon--sm g3-icon--cross data-dictionary-node__property-close-icon" />
               </span>
-              <div className="data-dictionary-node__property-summary">
-                <i>
-                  <span>{this.props.node.title}</span>
-                  <span> has </span>
-                  <span>{Object.keys(this.props.node.properties).length}</span>
-                  <span> properties. </span>
-                </i>
-              </div>
+              {
+                this.notHorizontal && (
+                  <div className="data-dictionary-node__property-summary">
+                    <i>
+                      <span>{this.props.node.title}</span>
+                      <span> has </span>
+                      <span>{Object.keys(this.props.node.properties).length}</span>
+                      <span> properties. </span>
+                    </i>
+                  </div>
+                )
+              }
               <DataDictionaryPropertyTable
                 properties={this.props.node.properties}
                 requiredProperties={this.props.node.required}
                 preferredProperties={this.props.node.preferred}
+                // horizontal // supports horizontal orientation
               />
             </div>
           )
