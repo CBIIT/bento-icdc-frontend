@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 import {
   Grid,
   withStyles,
@@ -11,8 +14,9 @@ import {
   ToolTip as Tooltip,
 } from 'bento-components';
 import { useSelector } from 'react-redux';
+import { FiberManualRecordRounded } from '@material-ui/icons';
 import {
-  pageData, textLabels,
+  pageData, textLabels, GET_STUDY_DATA_QUERY,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
 import { navigatedToDashboard } from '../../utils/utils';
@@ -61,8 +65,8 @@ const Studies = ({ classes, data, invalid }) => {
         {value}
       </Link>
       {
-        column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[5]))
-      }
+          column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[5]))
+        }
     </>
   );
 
@@ -80,6 +84,22 @@ const Studies = ({ classes, data, invalid }) => {
         </Link>
       )
   );
+  const customIcon = (column, value, tableMeta) => {
+    const flag = value > 0;
+    return (
+      <>
+        {
+        flag && (
+        <div style={{ textAlign: 'center' }}>
+          <Tooltip title={`${data.studiesByProgram[tableMeta.rowIndex][column.dataField]} ${column.header}`}>
+            <FiberManualRecordRounded style={{ color: '#1A89C4' }} />
+          </Tooltip>
+        </div>
+        )
+      }
+      </>
+    );
+  };
 
   const updatedTableWithLinks = manipulateLinks([
     ...pageData.table.columns,
@@ -88,23 +108,27 @@ const Studies = ({ classes, data, invalid }) => {
 
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
-    label: column.header,
+    icon: !!column.icon,
+    label: column.icon ? <img src={column.icon} alt={`${column.label}'s icon`} /> : column.header,
     options: {
       display: column.display,
       viewColumns: column.viewColumns,
-      customBodyRender: (value, tableMeta) => (
-        <>
-          {
-            column.internalLink ? (
-              column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
-                : customStudyCodeLink(column, value, tableMeta)
-            )
-              : (
-                (`${value}` !== 'null') ? `${value}` : ''
-              )
+      customBodyRender: (value, tableMeta) => {
+        if (column.internalLink) {
+          if (column.totalNumberOfCases) {
+            return customCaseNumbLink(column, value, tableMeta);
           }
-        </>
-      ),
+          return customStudyCodeLink(column, value, tableMeta);
+        }
+        if (column.icon) {
+          return customIcon(column, value, tableMeta);
+        }
+        return (
+          <>
+            {(`${value}` !== 'null') ? `${value}` : ''}
+          </>
+        );
+      },
     },
   }));
 
