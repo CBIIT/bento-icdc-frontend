@@ -52,6 +52,8 @@ export const pageData = {
         dataField: 'numberOfCaseFiles',
         header: 'Case File(s)',
         display: true,
+        indicator: '',
+        useImage: false,
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
       },
       {

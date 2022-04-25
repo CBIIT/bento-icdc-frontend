@@ -35,6 +35,38 @@ const table = {
       display: true,
     },
     {
+      dataField: 'numberOfCaseFiles',
+      header: 'Case File(s)',
+      display: true,
+      indicator: '',
+      useImage: false,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
+    },
+    {
+      dataField: 'numberOfStudyFiles',
+      header: 'Study File(s)',
+      display: true,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
+    },
+    {
+      dataField: 'numberOfImageCollections',
+      header: 'Image Collection(s)',
+      display: true,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-ImageCollection.svg',
+    },
+    {
+      dataField: 'numberOfPublications',
+      header: 'Publication(s)',
+      display: true,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
+    },
+    {
+      dataField: 'numberOfCRDCNodes',
+      header: 'icon',
+      display: true,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
+    },
+    {
       dataField: 'clinical_study_type',
       header: 'Study Type',
       display: true,
@@ -102,12 +134,19 @@ query program($programTitle: String!) {
       clinical_study_name
       clinical_study_description
       clinical_study_type
+      numberOfCases
+      numberOfCaseFiles
+      numberOfStudyFiles
+      numberOfImageCollections
+      numberOfPublications
       accession_id
       study_disposition
-      date_of_iacuc_approval
-      dates_of_conduct
-      numberOfCases
+      numberOfCRDCNodes
+      CRDCLinks {
+        text
+        url
       }
+    }
 }`;
 
 export {

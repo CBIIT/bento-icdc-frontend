@@ -13,6 +13,7 @@ import {
 } from 'bento-components';
 import _ from 'lodash';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { FiberManualRecordRounded } from '@material-ui/icons';
 import StatsView from '../../components/Stats/StatsView';
 import {
   table,
@@ -138,29 +139,64 @@ const ProgramView = ({ classes, data }) => {
       )
   );
 
+  const generateCRDCLinks = (linksArray) => (
+    <ul className={classes.crdcLinks}>
+      {linksArray.map((link) => (
+        <li>
+          <a href={link.url}>{`${link.text}`}</a>
+        </li>
+      ))}
+    </ul>
+  );
+  const customIcon = (column, value, tableMeta) => {
+    const flag = value > 0;
+    const title = data.studiesByProgramId[tableMeta.rowIndex].numberOfCRDCNodes > 0 && column.dataField === 'numberOfCRDCNodes'
+      ? generateCRDCLinks(data.studiesByProgramId[tableMeta.rowIndex].CRDCLinks)
+      : `${data.studiesByProgramId[tableMeta.rowIndex][column.dataField]} ${column.header}`;
+    return (
+      <>
+        {
+        flag && (
+        <div className={classes.dataAvailIndicator}>
+          <Tooltip title={title}>
+            {column.indicator && column.useImage
+              ? <img className={classes.dataAvailIndicatorImage} src={column.indicator} alt={`${column.header} icon`} />
+              : <FiberManualRecordRounded className={classes.dataAvailIndicatorIcon} />}
+          </Tooltip>
+        </div>
+        )
+      }
+      </>
+    );
+  };
+
   const updatedTableWithLinks = manipulateLinks([
     ...table.columns,
     ...table.optionalColumns,
   ]);
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
-    label: column.header,
+    icon: !!column.icon,
+    label: column.icon ? <img src={column.icon} alt={`${column.label}'s icon`} /> : column.header,
     options: {
       display: column.display,
       viewColumns: column.viewColumns,
-      customBodyRender: (value, tableMeta) => (
-        <>
-          {
-            column.internalLink ? (
-              column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
-                : customStudyCodeLink(column, value, tableMeta)
-            )
-              : (
-                (`${value}` !== 'null') ? `${value}` : ''
-              )
+      customBodyRender: (value, tableMeta) => {
+        if (column.internalLink) {
+          if (column.totalNumberOfCases) {
+            return customCaseNumbLink(column, value, tableMeta);
           }
-        </>
-      ),
+          return customStudyCodeLink(column, value, tableMeta);
+        }
+        if (column.icon) {
+          return customIcon(column, value, tableMeta);
+        }
+        return (
+          <>
+            {(`${value}` !== 'null') ? `${value}` : ''}
+          </>
+        );
+      },
     },
   }));
 
@@ -233,6 +269,19 @@ const ProgramView = ({ classes, data }) => {
 };
 
 const styles = (theme) => ({
+  crdcLinks: {
+    listStyle: 'none',
+  },
+  dataAvailIndicator: {
+    textAlign: 'center',
+  },
+  dataAvailIndicatorIcon: {
+    color: '#1A89C4',
+  },
+  dataAvailIndicatorImage: {
+    height: '20px',
+    width: '20px',
+  },
   link: {
     fontWeight: 'bold',
     fontFamily: 'Open Sans',
