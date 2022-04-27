@@ -1,5 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import themes, { overrides } from '../../themes';
 
 export default ({
@@ -14,7 +14,16 @@ export default ({
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderTop = tableBorder;
   overridesObj.MUIDataTableHeadCell.fixedHeader.borderBottom = tableBorder;
   overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
-  overridesObj.MuiTableCell.paddingCheckbox.padding = '0px 31px';
+  overridesObj.MuiTableCell.paddingCheckbox = {
+    '&:first-child': {
+      padding: '0px 35px',
+    },
+  };
+  overridesObj.PrivateSwitchBase = {
+    root: {
+      padding: '9px 0px',
+    },
+  };
   overridesObj.MUIDataTableToolbarSelect = {
     root: {
       backgroundColor: '#FFFFFF',
@@ -29,11 +38,13 @@ export default ({
       paddingTop: '20px',
       backgroundColor: '#fffff',
       paddingLeft: '0px',
+      paddingRight: '35px',
     },
     titleRoot: {
       minHeight: '50px',
     },
     actions: {
+      paddingRight: '35px',
       '& span': {
         '& button': {
           right: '10px',
@@ -46,13 +57,27 @@ export default ({
       },
     },
   };
+  overridesObj.MuiGrid.xs = {
+    paddingLeft: '0px',
+  };
   overridesObj.MuiTablePagination.toolbar.paddingTop = '11px';
   overridesObj.MuiTablePagination.actions.marginRight = '6px';
   overridesObj.MuiTableCell.head.paddingLeft = '37px';
   overridesObj.MuiTableCell.body.paddingLeft = '37px';
+  overridesObj.MuiIconButton = {
+    ...overridesObj.MuiIconButton,
+    root: {
+      '&:first-child': {
+        marginRight: '-12px',
+      },
+      '&:last-child': {
+        marginRight: '-20px',
+      },
+    },
+  };
 
   style.push(overridesObj);
-  const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
+  const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });
 
   return (
     <MuiThemeProvider theme={computedTheme}>

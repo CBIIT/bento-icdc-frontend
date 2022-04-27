@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 
 // --------------- Dashboard Data --------------------
 export const themeToggleTooltip = {
-  tooltipIcon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  tooltipIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   tooltipAlt: 'tooltip icon',
   switchThemeButtonMessage: 'Change the background theme',
 }

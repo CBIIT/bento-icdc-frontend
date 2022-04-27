@@ -7,10 +7,13 @@ export const navBarstyling = {
     padding: '9px 20px 0px 20px',
     marginTop: '120px',
     fontFamily: 'Raleway, sans-serif',
-    activeLabel: '2px solid  #35b9eb',
-    paddingRight: '65px',
+    activeLabel: '2px solid #35b9eb',
+    paddingRight: '25px',
     fontWeight: '600',
     letterSpacing: '1px',
+  },
+  myFiles: {
+    right: '8px',
   },
   dropDownIcon: {
     displayIcon: true,

@@ -59,6 +59,8 @@
 }
 
 .data-dictionary-node__label {
+  margin-top: 10px;
+  float: left;
   color: #8e8e8e;
   font-weight: 900;
   margin-right: 5px;

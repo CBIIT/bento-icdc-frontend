@@ -20,10 +20,10 @@ export const facetSearchData = [
       { name: 'Case', isChecked: false },
       { name: 'Study', isChecked: false },
       { name: 'Clinical', isChecked: false },
-      { name: 'Clinical Trial', isChecked: false },
+      { name: 'Clinical_Trial', isChecked: false },
       { name: 'Biospecimen', isChecked: false },
       { name: 'Analysis', isChecked: false },
-      { name: 'Data File', isChecked: false },
+      { name: 'Data_File', isChecked: false },
     ],
   },
   {
@@ -81,21 +81,21 @@ export const facetSectionVariables = {
     checkBoxColorsOne: '#fdf1e8',
     checkBoxColorsTwo: '#fff9f5',
     height: '7px',
-    isExpanded: false,
+    isExpanded: true,
   },
   'Filter By Relationship': {
     color: '#9DC1D9',
     checkBoxColorsOne: '#dafafb',
     checkBoxColorsTwo: '#eafafb',
     height: '7px',
-    isExpanded: false,
+    isExpanded: true,
   },
   'Filter By Property': {
     color: '#667A87',
     checkBoxColorsOne: '#d4ddf7',
     checkBoxColorsTwo: '#e9eefb',
     height: '7px',
-    isExpanded: false,
+    isExpanded: true,
   },
 };
 
@@ -112,6 +112,35 @@ export const baseFilters = {
   multiplicity: [],
   inclusion: [],
 };
+
+export const filterSections = [
+  'category',
+  'assignment',
+  'class',
+  'inclusion',
+];
+
+export const filterOptions = [
+  // category
+  'administrative',
+  'case',
+  'study',
+  'clinical',
+  'clinical_trial',
+  'biospecimen',
+  'analysis',
+  'data_file',
+  // Assignment
+  'core',
+  'extended',
+  // Class
+  'primary',
+  'secondary',
+  // Inclusion
+  'required',
+  'preferred',
+  'optional',
+];
 
 export const controlVocabConfig = {
   maxNoOfItems: 15,

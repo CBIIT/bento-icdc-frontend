@@ -126,6 +126,7 @@ const styles = () => ({
     background: '#0D71A3',
     height: '35px',
     color: '#fff',
+
   },
   image: {
     width: '35px',

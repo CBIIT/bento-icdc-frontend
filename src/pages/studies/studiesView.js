@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 import {
   Grid,
   withStyles,
@@ -11,14 +14,16 @@ import {
   ToolTip as Tooltip,
 } from 'bento-components';
 import { useSelector } from 'react-redux';
+import { FiberManualRecordRounded } from '@material-ui/icons';
 import {
-  pageData, textLabels,
+  pageData, textLabels, GET_STUDY_DATA_QUERY,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
 import { navigatedToDashboard } from '../../utils/utils';
 import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
 import InvalidAccesionModal from './InvalidAccesionModal';
+import StudiesThemeProvider from './studiesMuiThemConfig';
 
 const Studies = ({ classes, data, invalid }) => {
   const overlay = useSelector((state) => (
@@ -60,8 +65,8 @@ const Studies = ({ classes, data, invalid }) => {
         {value}
       </Link>
       {
-        column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[5]))
-      }
+          column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[5]))
+        }
     </>
   );
 
@@ -79,6 +84,22 @@ const Studies = ({ classes, data, invalid }) => {
         </Link>
       )
   );
+  const customIcon = (column, value, tableMeta) => {
+    const flag = value > 0;
+    return (
+      <>
+        {
+        flag && (
+        <div style={{ textAlign: 'center' }}>
+          <Tooltip title={`${data.studiesByProgram[tableMeta.rowIndex][column.dataField]} ${column.header}`}>
+            <FiberManualRecordRounded style={{ color: '#1A89C4' }} />
+          </Tooltip>
+        </div>
+        )
+      }
+      </>
+    );
+  };
 
   const updatedTableWithLinks = manipulateLinks([
     ...pageData.table.columns,
@@ -87,28 +108,32 @@ const Studies = ({ classes, data, invalid }) => {
 
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
-    label: column.header,
+    icon: !!column.icon,
+    label: column.icon ? <img src={column.icon} alt={`${column.label}'s icon`} /> : column.header,
     options: {
       display: column.display,
       viewColumns: column.viewColumns,
-      customBodyRender: (value, tableMeta) => (
-        <>
-          {
-            column.internalLink ? (
-              column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
-                : customStudyCodeLink(column, value, tableMeta)
-            )
-              : (
-                (`${value}` !== 'null') ? `${value}` : ''
-              )
+      customBodyRender: (value, tableMeta) => {
+        if (column.internalLink) {
+          if (column.totalNumberOfCases) {
+            return customCaseNumbLink(column, value, tableMeta);
           }
-        </>
-      ),
+          return customStudyCodeLink(column, value, tableMeta);
+        }
+        if (column.icon) {
+          return customIcon(column, value, tableMeta);
+        }
+        return (
+          <>
+            {(`${value}` !== 'null') ? `${value}` : ''}
+          </>
+        );
+      },
     },
   }));
 
   return (
-    <>
+    <StudiesThemeProvider>
       <Stats />
       {
         invalid && !overlay ? (
@@ -149,7 +174,7 @@ const Studies = ({ classes, data, invalid }) => {
         </div>
 
       </div>
-    </>
+    </StudiesThemeProvider>
   );
 };
 
@@ -222,8 +247,8 @@ const styles = (theme) => ({
   },
   container: {
     margin: 'auto',
-    paddingLeft: '36px',
-    paddingRight: '36px',
+    paddingLeft: '27px',
+    paddingRight: '27px',
   },
   paper: {
     textAlign: 'center',
@@ -240,11 +265,11 @@ const styles = (theme) => ({
   },
   header: {
     background: '#eee',
-    paddingLeft: '20px',
+    paddingLeft: '35px',
     paddingRight: '50px',
     borderBottom: '#004c73 10px solid',
-    height: '120px',
-    paddingTop: '35px',
+    height: '154px',
+    paddingTop: '60px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilyRaleway,
@@ -253,10 +278,10 @@ const styles = (theme) => ({
     color: '#0296c9',
     fontSize: '28px',
     position: 'absolute',
-    marginTop: '14px',
+    marginTop: '12px',
+    marginLeft: '10px',
     lineHeight: '25px',
   },
-
   headerTitle: {
     margin: 'auto',
     float: 'left',
@@ -265,8 +290,7 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginLeft: '-13px',
-    width: '83px',
+    width: '94px',
     zIndex: '10',
   },
   tableContainer: {

@@ -12,7 +12,7 @@ import {
   ToolTip as Tooltip,
 } from 'bento-components';
 import _ from 'lodash';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import StatsView from '../../components/Stats/StatsView';
 import {
   table,
@@ -40,7 +40,18 @@ themesLight.overrides.MuiTableCell = {
     },
   },
 };
-const computedTheme = createMuiTheme({
+themesLight.overrides.MUIDataTableToolbar = {
+  ...themesLight.overrides.MUIDataTableToolbar,
+  actions: {
+    paddingRight: '35px',
+    '& span': {
+      '& button': {
+        right: '0px',
+      },
+    },
+  },
+};
+const computedTheme = createTheme({
   ...themesLight,
   ...overrides,
 });
@@ -311,7 +322,7 @@ const styles = (theme) => ({
     paddingLeft: '32px',
     paddingRight: '32px',
     borderBottom: '#81a6b9 4px solid',
-    height: '80px',
+    height: '76px',
     margin: 'auto 33px',
   },
 
@@ -360,7 +371,7 @@ const styles = (theme) => ({
     position: 'absolute',
     float: 'left',
     marginTop: '-14px',
-    width: '100px',
+    width: '96px',
   },
   detailContainer: {
     margin: 'auto',

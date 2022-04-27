@@ -107,6 +107,20 @@ const FacetFilters = ({ classes }) => {
       : facetSectionVariables[currentSection.sectionName] ? facetSectionVariables[currentSection.sectionName].checkBoxColorsOne ? facetSectionVariables[currentSection.sectionName].checkBoxColorsOne : '' : defaultFacetSectionVariables.checkBoxColorsOne;
   }
 
+  const handleSectionChange = (panel) => (event, isExpanded) => {
+    const sections = _.cloneDeep(sectionExpanded);
+    if (isExpanded) {
+      sections.push(panel);
+    } else {
+      const index = sections.indexOf(panel);
+      if (index > -1) {
+        sections.splice(index, 1);
+      }
+    }
+
+    setSectionExpanded(sections);
+  };
+
   const dispatch = useDispatch();
   const handleToggle = (value) => () => {
     const valueList = value.split('$$');
@@ -227,7 +241,13 @@ const FacetFilters = ({ classes }) => {
               ? facetSectionVariables[currentSection.sectionName].height ? facetSectionVariables[currentSection.sectionName].height : '' : '5px',
           }}
         />
-        <ExpansionPanel>
+        <ExpansionPanel
+          expanded={sectionExpanded.includes(currentSection.sectionName)}
+          onChange={handleSectionChange(currentSection.sectionName)}
+          classes={{
+            root: classes.expansionPanelRoot,
+          }}
+        >
           <CustomExpansionPanelSummary
             expandIcon={<ArrowDropDownIcon classes={{ root: classes.dropDownIconSection }} />}
             aria-controls={currentSection.sectionName}

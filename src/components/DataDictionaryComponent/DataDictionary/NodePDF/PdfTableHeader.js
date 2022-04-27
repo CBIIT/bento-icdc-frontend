@@ -8,7 +8,6 @@ import { FontRegistry } from './util';
 
 const styles = StyleSheet.create({
   container: {
-    // margin: 'auto',
     marginTop: '5px',
     flexDirection: 'row',
     borderTop: '1.5px solid #606060',

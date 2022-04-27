@@ -18,7 +18,7 @@ import _ from 'lodash';
 const styles = {
   listItemGutters: {
     padding: '10px 0px 10px 0px',
-    paddingRight: '5px',
+    marginLeft: '-5px',
   },
   checkboxRoot: {
     marginLeft: '5px',
@@ -130,9 +130,8 @@ function CheckBoxView(props) {
       <Divider
         variant="middle"
         style={{
-          backgroundColor: '#B1B1B1',
+          backgroundColor: checkboxItem.isChecked ? '#FFFFFF' : '#B1B1B1',
           margin: '0px',
-          marginTop: checkboxItem.isChecked ? '-1px' : '0px',
           height: checkboxItem.isChecked ? '2px' : '1px',
         }}
       />

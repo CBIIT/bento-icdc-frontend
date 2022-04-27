@@ -17,6 +17,7 @@ import DialogBox from './component/DialogComponent';
 import ListComponent from './component/ListComponent';
 import ButtonComponent from './component/ButtonComponent';
 import { controlVocabConfig as config } from '../../../../../bento/dataDictionaryData';
+import HorizontalPropertyTable from './HorizontalPropertyTable';
 
 const required = (requiredFlag, preferredFlag) => {
   if (requiredFlag) {
@@ -95,164 +96,182 @@ class DataDictionaryPropertyTable extends React.Component {
         this.props.matchedResult.matches,
       ) : [];
     return (
-      <div className={`data-dictionary-property-table ${borderModifier}`}>
-        <table className="data-dictionary-property-table__table">
-          <thead className="data-dictionary-property-table__head">
-            <tr>
-              <th
-                className="data-dictionary-property-table__data
-                data-dictionary-property-table__data--property"
-              >
-                Property
-              </th>
-              <th
-                className="data-dictionary-property-table__data
-                data-dictionary-property-table__data--type"
-              >
-                Type
-              </th>
-              {
-                !this.props.hideIsRequired && (
+      <>
+        {this.props.horizontal ? (
+          <HorizontalPropertyTable
+            isRequired={this.props.hideIsRequired}
+            propertyKeysList={propertyKeysList}
+            displayKeyProperty={displayKeyProperty}
+            properties={this.props.properties}
+            matchedPropertiesSummary={matchedPropertiesSummary}
+            needHighlightSearchResult={this.props.needHighlightSearchResult}
+            onlyShowMatchedProperties={this.props.onlyShowMatchedProperties}
+            requiredProperties={this.props.requiredProperties}
+            preferredProperties={this.props.preferredProperties}
+            displayKeyPropsDescription={displayKeyPropsDescription}
+            openBoxHandler={this.openBoxHandler}
+          />
+        ) : (
+          <div className={`data-dictionary-property-table ${borderModifier}`}>
+            <table className="data-dictionary-property-table__table">
+              <thead className="data-dictionary-property-table__head">
+                <tr>
                   <th
                     className="data-dictionary-property-table__data
-                    data-dictionary-property-table__data--required"
+                  data-dictionary-property-table__data--property"
                   >
-                    Required
+                    Property
                   </th>
-                )
-              }
-              <th
-                className="data-dictionary-property-table__data
-                data-dictionary-property-table__data--description"
-              >
-                Description
-              </th>
-              <th
-                className="data-dictionary-property-table__data
-                data-dictionary-property-table__data--term"
-              >
-                Source
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              propertyKeysList.map((propertyKey) => {
-                const property = this.props.properties[propertyKey];
-                let nameMatch = null;
-                let descriptionMatch = null;
-                let typeMatchList = null;
-                if (this.props.needHighlightSearchResult) {
-                  const matchedSummaryItem = matchedPropertiesSummary
-                    .find((item) => item.propertyKey === propertyKey);
-                  if (matchedSummaryItem) {
-                    nameMatch = matchedSummaryItem.nameMatch;
-                    descriptionMatch = matchedSummaryItem.descriptionMatch;
-                    typeMatchList = matchedSummaryItem.typeMatchList;
-                  } else if (this.props.onlyShowMatchedProperties) {
-                    return null;
-                  }
+                  <th
+                    className="data-dictionary-property-table__data
+                  data-dictionary-property-table__data--type"
+                  >
+                    Type
+                  </th>
+                  {
+                  !this.props.hideIsRequired && (
+                    <th
+                      className="data-dictionary-property-table__data
+                      data-dictionary-property-table__data--required"
+                    >
+                      Required
+                    </th>
+                  )
                 }
-                let termID = '';
-                let termLink = '';
-                let type = '';
-                let enums = '';
-                let key = false;
-                if ('src' in property) {
-                  try {
-                    termID = property.src;
-                    termLink = property.term.termDef && property.term.termDef.term_url;
-                  } catch (err) { }
-                }
-                const propertyNameFragment = getPropertyNameFragment(
-                  propertyKey,
-                  nameMatch,
-                  'data-dictionary-property-table__span',
-                );
-                if ('type' in property) {
-                  try {
-                    type = property.type;
-                  } catch (err) { }
-                }
-                if ('enum' in property) {
-                  enums = property.enum;
-                }
-                if ('key' in property) {
-                  key = property.key;
-                }
-
-                const propertyDescriptionFragment = getPropertyDescriptionFragment(
-                  property,
-                  descriptionMatch,
-                  'data-dictionary-property-table__span',
-                );
-                const isRequired = this.props.requiredProperties.includes(propertyKey);
-                const isPreferred = this.props.preferredProperties.includes(propertyKey);
-                return (
-                  <tr key={propertyKey} className="data-dictionary-property-table__row">
-                    <td className="data-dictionary-property-table__data">
-                      { (key)
-                        ? displayKeyProperty(propertyKey)
-                        : propertyNameFragment }
-                    </td>
-                    <td className="data-dictionary-property-table__data">
-                      { (enums) ? (
-                        <>
-                          <span>
-                            <p style={{ margin: '0', minWidth: '130px' }}>Acceptable Values:</p>
-                            {' '}
-                            {enums.length > config.maxNoOfItems
-                              ? (<ListComponent items={enums.slice(0, config.maxNoOfItems)} />)
-                              : (<ListComponent items={enums} />)}
-                          </span>
-                          {enums.length > config.maxNoOfItems
-                            && (
-                              <ButtonComponent
-                                label="...show more"
-                                openHandler={() => this.openBoxHandler(enums)}
-                              />
-                            )}
-                        </>
-                      ) : (
-                        <p>{JSON.stringify(type)}</p>
-                      )}
-                    </td>
-                    {
-                      !this.props.hideIsRequired && (
-                        <td className="data-dictionary-property-table__data">
-                          {required(isRequired, isPreferred)}
-                        </td>
-                      )
+                  <th
+                    className="data-dictionary-property-table__data
+                  data-dictionary-property-table__data--description"
+                  >
+                    Description
+                  </th>
+                  <th
+                    className="data-dictionary-property-table__data
+                  data-dictionary-property-table__data--term"
+                  >
+                    Source
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                propertyKeysList.map((propertyKey) => {
+                  const property = this.props.properties[propertyKey];
+                  let nameMatch = null;
+                  let descriptionMatch = null;
+                  let typeMatchList = null;
+                  if (this.props.needHighlightSearchResult) {
+                    const matchedSummaryItem = matchedPropertiesSummary
+                      .find((item) => item.propertyKey === propertyKey);
+                    if (matchedSummaryItem) {
+                      nameMatch = matchedSummaryItem.nameMatch;
+                      descriptionMatch = matchedSummaryItem.descriptionMatch;
+                      typeMatchList = matchedSummaryItem.typeMatchList;
+                    } else if (this.props.onlyShowMatchedProperties) {
+                      return null;
                     }
-                    <td className="data-dictionary-property-table__data">
-                      { (key)
-                        ? (
-                          <div className="data-dictionary-property-table_key_description">
-                            {displayKeyPropsDescription(property.description)}
-                          </div>
+                  }
+                  let termID = '';
+                  let termLink = '';
+                  let type = '';
+                  let enums = '';
+                  let key = false;
+                  if ('src' in property) {
+                    try {
+                      termID = property.src;
+                      termLink = property.term.termDef && property.term.termDef.term_url;
+                    } catch (err) { }
+                  }
+                  const propertyNameFragment = getPropertyNameFragment(
+                    propertyKey,
+                    nameMatch,
+                    'data-dictionary-property-table__span',
+                  );
+                  if ('type' in property) {
+                    try {
+                      type = property.type;
+                    } catch (err) { }
+                  }
+                  if ('enum' in property) {
+                    enums = property.enum;
+                  }
+                  if ('key' in property) {
+                    key = property.key;
+                  }
+
+                  const propertyDescriptionFragment = getPropertyDescriptionFragment(
+                    property,
+                    descriptionMatch,
+                    'data-dictionary-property-table__span',
+                  );
+                  const isRequired = this.props.requiredProperties.includes(propertyKey);
+                  const isPreferred = this.props.preferredProperties.includes(propertyKey);
+                  return (
+                    <tr key={propertyKey} className="data-dictionary-property-table__row">
+                      <td className="data-dictionary-property-table__data">
+                        { (key)
+                          ? displayKeyProperty(propertyKey)
+                          : propertyNameFragment }
+                      </td>
+                      <td className="data-dictionary-property-table__data">
+                        { (enums) ? (
+                          <>
+                            <span>
+                              <p style={{ margin: '0', minWidth: '130px' }}>Acceptable Values:</p>
+                              {' '}
+                              {enums.length > config.maxNoOfItems
+                                ? (<ListComponent items={enums.slice(0, config.maxNoOfItems)} />)
+                                : (<ListComponent items={enums} />)}
+                            </span>
+                            {enums.length > config.maxNoOfItems
+                              && (
+                                <ButtonComponent
+                                  label="...show more"
+                                  openHandler={() => this.openBoxHandler(enums)}
+                                />
+                              )}
+                          </>
+                        ) : (
+                          <p>{JSON.stringify(type)}</p>
+                        )}
+                      </td>
+                      {
+                        !this.props.hideIsRequired && (
+                          <td className="data-dictionary-property-table__data">
+                            {required(isRequired, isPreferred)}
+                          </td>
                         )
-                        : propertyDescriptionFragment }
-                    </td>
-                    <td className="data-dictionary-property-table__data">
-                      <p>{JSON.stringify(termID)}</p>
-                    </td>
-                  </tr>
-                );
-              })
-            }
-          </tbody>
-        </table>
-        {this.state.items.length > 0
-        && (
-        <DialogBox
-          display={this.state.display}
-          closeHandler={this.closeHandler}
-          items={this.state.items}
-          maxNoOfItems={config.maxNoOfItems}
-          maxNoOfItemDlgBox={config.maxNoOfItemDlgBox}
-        />
+                      }
+                      <td className="data-dictionary-property-table__data">
+                        { (key)
+                          ? (
+                            <div className="data-dictionary-property-table_key_description">
+                              {displayKeyPropsDescription(property.description)}
+                            </div>
+                          )
+                          : propertyDescriptionFragment }
+                      </td>
+                      <td className="data-dictionary-property-table__data">
+                        <p>{JSON.stringify(termID)}</p>
+                      </td>
+                    </tr>
+                  );
+                })
+              }
+              </tbody>
+            </table>
+          </div>
         )}
-      </div>
+        {this.state.items.length > 0
+          && (
+          <DialogBox
+            display={this.state.display}
+            closeHandler={this.closeHandler}
+            items={this.state.items}
+            maxNoOfItems={config.maxNoOfItems}
+            maxNoOfItemDlgBox={config.maxNoOfItemDlgBox}
+          />
+          )}
+      </>
     );
   }
 }

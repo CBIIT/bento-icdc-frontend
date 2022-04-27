@@ -111,8 +111,6 @@ const theme = {
       },
       gutters: {
         paddingLeft: '0',
-        // margin: 'auto',
-        // marginBottom: '-8px',
       },
     },
     MuiListItemIcon: {

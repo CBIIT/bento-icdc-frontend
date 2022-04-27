@@ -3,7 +3,6 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import _ from 'lodash';
 import {
   cn,
   ToolTip as Tooltip,
@@ -11,12 +10,12 @@ import {
 import {
   customSorting,
   studyDisposition,
-} from '../utils';
+} from '../../utils';
 import {
   externalIcon,
-} from '../../../bento/studyDetailsData';
-import themes from '../../../themes';
-import SampleProfile from './SampleProfile';
+} from '../../../../bento/studyDetailsData';
+import SampleProfile from '../SampleProfile';
+import OverviewThemeProvider from './overviewThemeConfig';
 
 const Overview = ({
   classes,
@@ -30,47 +29,20 @@ const Overview = ({
     return types.join(', ');
   };
 
-  const themesLight = _.cloneDeep(themes.light);
-  themesLight.overrides.MuiTableCell = {
-    ...themesLight.overrides.MuiTableCell,
-    root: {
-      '&:first-child': {
-        paddingLeft: '30px',
-      },
-      '&:lastchild': {
-        paddingRight: '30px',
-      },
-    },
-  };
-
-  themesLight.overrides.MUIDataTableToolbar = {
-    ...themesLight.overrides.MUIDataTableToolbar,
-    root: {
-      backgroundColor: '#ffffff',
-    },
-    actions: {
-      '& span': {
-        '& button': {
-          right: '0px',
-        },
-      },
-    },
-  };
-
   const getAccessTypeString = (accessType) => (accessType === 'Cloud'
     ? 'Available only via the Cloud' : 'Available for Download');
 
   return (
-    <>
+    <OverviewThemeProvider>
       <div className={classes.container}>
         <div className={classes.detailContainer}>
           <Grid container>
             <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
               <Grid container spacing={1} direction="row" className={classes.detailContainerLeft}>
-                <Grid item xs={12}>
-                  <span className={classes.detailContainerHeader}>Description</span>
+                <Grid item xs={12} className={classes.containerHeader}>
+                  <span className={classes.detailContainerHeaderText}>Description</span>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} className={classes.studyDescription}>
                   <div>
                     <span className={classes.content}>
                       {' '}
@@ -97,7 +69,8 @@ const Overview = ({
                         Principal Investigators:
                       </Grid>
                       <Grid item xs={12} sm={6} className={classes.content}>
-                        {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => (`${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `)) : ''}
+                        {studyData.principal_investigators ? studyData.principal_investigators
+                          .map((principalInvestigator) => (`${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `)) : ''}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -143,8 +116,8 @@ const Overview = ({
                     className={classes.detailContainerRightTop}
                   >
                     <Grid container spacing={1}>
-                      <Grid item xs={12}>
-                        <span className={classes.detailContainerHeader}>DIAGNOSES</span>
+                      <Grid item xs={12} className={classes.containerHeader}>
+                        <span className={classes.detailContainerHeaderText}>DIAGNOSES</span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.paddingTop12}>
@@ -167,8 +140,8 @@ const Overview = ({
                     className={classes.detailContainerRightTop}
                   >
                     <Grid container spacing={1}>
-                      <Grid item xs={12}>
-                        <span className={classes.detailContainerHeader}>Case File Types</span>
+                      <Grid item xs={12} className={classes.containerHeader}>
+                        <span className={classes.detailContainerHeaderText}>Case File Types</span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.paddingTop12}>
@@ -183,7 +156,7 @@ const Overview = ({
                       )}
                     </Grid>
                   </Grid>
-                  <div><hr className={classes.hrLine} /></div>
+                  <div><hr className={cn(classes.hrLine, classes.hrLineRight)} /></div>
                 </Grid>
                 <Grid container spacing={1} direction="row" className={classes.detailContainerRight}>
 
@@ -191,7 +164,9 @@ const Overview = ({
                   <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
                     <Grid container spacing={1}>
                       <Grid item xs={12}>
-                        <span className={classes.detailContainerHeader}> IMAGE COLLECTIONS </span>
+                        <span className={classes.detailContainerHeaderText}>
+                          IMAGE COLLECTIONS
+                        </span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.detailContainerItems}>
@@ -209,7 +184,7 @@ const Overview = ({
                                 className={cn(classes.content, classes.marginTopN5)}
                               >
                                 <Tooltip title={getAccessTypeString(imageCollection.collection_access)} arrow placement="top">
-                                  <a href={`${imageCollection.image_collection_url}`} target="icdc" className={classes.outLink}>
+                                  <a href={`${imageCollection.image_collection_url}`} target="_blank" rel="noreferrer" className={classes.outLink}>
                                     {imageCollection.image_collection_name}
                                     {' - '}
                                     {imageCollection.repository_name}
@@ -253,7 +228,7 @@ const Overview = ({
           </Grid>
         </div>
       </div>
-    </>
+    </OverviewThemeProvider>
   );
 };
 
@@ -269,6 +244,9 @@ const styles = (theme) => ({
     height: '80px',
     width: '100%',
   },
+  studyDescription: {
+    paddingTop: '0px !important',
+  },
   detailContainer: {
     margin: 'auto',
     paddingLeft: '36px',
@@ -278,7 +256,6 @@ const styles = (theme) => ({
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
-
   },
   hrLine: {
     width: '50px',
@@ -287,12 +264,18 @@ const styles = (theme) => ({
     border: '#81a6b9 2px solid',
     background: '#81a6b9',
   },
+  hrLineRight: {
+    marginLeft: '4px',
+  },
+  hrLineLeftMargin: {
+    marginLeft: '4px',
+  },
   borderRight: {
     borderRight: '#81a6b9 1px solid',
   },
   detailContainerLeft: {
     display: 'block',
-    padding: '15px 20px 5px 10px !important',
+    padding: '28px 20px 5px 10px',
     minHeight: '500px',
     maxHeight: '500px',
     overflowY: 'auto',
@@ -300,7 +283,11 @@ const styles = (theme) => ({
     width: 'calc(100% + 8px) !important',
     margin: '0px -8px',
   },
-  detailContainerHeader: {
+  containerHeader: {
+    marginBottom: '24px',
+    lineHeight: '9px',
+  },
+  detailContainerHeaderText: {
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '17px',
@@ -323,9 +310,10 @@ const styles = (theme) => ({
   },
   detailContainerItem: {
     paddingTop: '15px !important',
+    paddingLeft: '2px',
   },
   detailContainerRight: {
-    padding: '20px 0 5px 20px !important',
+    padding: '32px 20px 5px 10px',
     maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
@@ -333,13 +321,14 @@ const styles = (theme) => ({
   },
   detailContainerRightTop: {
     maxHeight: '250px',
+    paddingRight: '0px',
     overflow: 'auto',
   },
   marginTop10: {
     marginTop: '10px',
   },
   paddingTop12: {
-    paddingTop: '12px',
+    paddingTop: '4px',
   },
   linkIcon: {
     width: '20px',

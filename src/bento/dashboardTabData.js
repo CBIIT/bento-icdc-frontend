@@ -7,7 +7,7 @@ import {
 } from './tableDownloadCSV';
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
-  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
   0: 'Add filtered files associated with selected case(s) to My Files',
   1: 'Add filtered files associated with selected sample(s) to My Files',
@@ -17,7 +17,7 @@ export const tooltipContent = {
 
 // --------------- Tooltip configuration --------------
 export const selectAllToolTip = {
-  icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
   0: 'Add filtered files associated with all cases to My Files',
   1: 'Add filtered files associated with all samples to My Files',
@@ -168,6 +168,7 @@ export const tabContainers = [
     paginationAPIField: 'sampleOverview',
     paginationAPIFieldDesc: 'sampleOverviewDesc',
     dataKey: 'sample_id',
+    defaultSortField: 'sample_id',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',

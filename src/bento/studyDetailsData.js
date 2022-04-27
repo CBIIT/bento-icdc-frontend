@@ -4,7 +4,7 @@ import { FileDisableRowSelection, FileOnRowsSelect } from '../pages/study/utils'
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
-  src: 'https://raw.githubusercontent.com/google/material-design-icons/master/src/action/help/materialicons/24px.svg',
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
 };
 

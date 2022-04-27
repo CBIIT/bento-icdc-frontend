@@ -49,6 +49,36 @@ export const pageData = {
         display: true,
       },
       {
+        dataField: 'numberOfCaseFiles',
+        header: 'Case File(s)',
+        display: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
+      },
+      {
+        dataField: 'numberOfStudyFiles',
+        header: 'Study File(s)',
+        display: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
+      },
+      {
+        dataField: 'numberOfImageCollections',
+        header: 'Image Collection(s)',
+        display: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-ImageCollection.svg',
+      },
+      {
+        dataField: 'numberOfPublications',
+        header: 'Publication(s)',
+        display: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
+      },
+      {
+        dataField: 'numberOfCRDCNodes',
+        header: 'icon',
+        display: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
+      },
+      {
         dataField: 'clinical_study_type',
         header: 'Study Type',
         display: true,
@@ -60,7 +90,7 @@ export const pageData = {
       },
       {
         dataField: 'study_disposition',
-        header: 'study disposition',
+        header: 'Study Disposition',
         display: false,
       },
       {
@@ -96,8 +126,17 @@ export const GET_STUDY_DATA_QUERY = gql`{
         clinical_study_name
         clinical_study_type
         numberOfCases
+        numberOfCaseFiles
+        numberOfStudyFiles
+        numberOfImageCollections
+        numberOfPublications
         accession_id
         study_disposition
+        numberOfCRDCNodes
+        CRDCLinks {
+          text
+          url
+        }
     }
   }
   `;

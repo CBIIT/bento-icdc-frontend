@@ -22,13 +22,15 @@ import {
   tab,
 } from '../../bento/studyDetailsData';
 import Tab from '../../components/Tab/Tab';
-import Overview from './views/Overview';
+import Overview from './views/overview/Overview';
 import Publication from './views/Publication';
-import ArmsAndCohort from './views/ArmsAndCohort';
+import ArmsAndCohort from './views/cohort/ArmsAndCohort';
 import StudyFiles from './views/StudyFiles';
 import TabPanel from '../../components/Tab/TabPanel';
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+import Styles from './studyDetailsStyle';
+import StudyThemeProvider from './studyDetailsThemeConfig';
 
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
@@ -144,7 +146,7 @@ const StudyDetailView = ({ classes, data }) => {
   );
 
   return (
-    <>
+    <StudyThemeProvider>
       <Snackbar
         snackbarState={snackbarState}
         closeSnack={closeSnack}
@@ -184,14 +186,20 @@ const StudyDetailView = ({ classes, data }) => {
               )
               }
             </div>
-            <div className={cn(classes.headerMSubTitle, classes.headerSubTitleCate)}>
+            <div
+              className={
+                String(studyData.clinical_study_name).length > 85
+                  ? cn(classes.headerMSubTitle, classes.lowLetterSpace)
+                  : cn(classes.headerMSubTitle, classes.headerSubTitleCate)
+              }
+            >
               <span>
                 {' '}
                 {studyData.clinical_study_name}
               </span>
 
             </div>
-            <div>
+            <div className={classes.breadCrumb}>
               <CustomBreadcrumb data={breadCrumbJson} />
             </div>
           </div>
@@ -271,283 +279,8 @@ const StudyDetailView = ({ classes, data }) => {
           display={tab.publication}
         />
       </TabPanel>
-    </>
+    </StudyThemeProvider>
   );
 };
 
-const styles = (theme) => ({
-  headerItems: {
-    width: '250px',
-    float: 'right',
-  },
-  headerItemAccessionId: {
-    paddingTop: '10px',
-    '& span': {
-      margin: '40px 20px',
-      color: '#5e8ca5',
-    },
-  },
-  embargoIcon: {
-    position: 'absolute',
-    color: 'white',
-    top: '-12px',
-    backgroundColor: '#de7328',
-  },
-  embargo: {
-    color: '#BB2040',
-    float: 'right',
-    background: '#F6F4F4',
-    width: '220px',
-    height: '33px',
-    marginTop: '25px',
-    fontWight: 'bolder',
-    paddingLeft: '15px',
-    paddingRight: '15px',
-    paddingTop: '4px',
-    textAlign: 'center',
-    border: '3px solid #BB2040',
-    '& p': {
-      display: 'inline ! important',
-      fontWeight: '600',
-      width: '122px',
-      fontSize: '13px',
-      marginTop: '3px',
-    },
-  },
-  pending: {
-    color: '#6D6E71',
-    float: 'right',
-    background: '#fff6f6',
-    width: '220px',
-    height: '33px',
-    marginTop: '25px',
-    fontWight: 'bolder',
-    paddingLeft: '15px',
-    paddingRight: '14px',
-    paddingTop: '3px',
-    textAlign: 'center',
-    fontFamily: 'Open Sans',
-    border: '3px solid #F3A933',
-    '& p': {
-      display: 'inline ! important',
-      fontWeight: '600',
-      width: '122px',
-      fontSize: '13px',
-      marginTop: '3px',
-    },
-  },
-  embargoFileIcon: {
-    width: '20px',
-    float: 'right',
-    marginLeft: '5px',
-  },
-  headerBar: {
-    fontWeight: '10',
-    color: '#5e8ca5',
-    margin: '0px 15px 0 15px',
-  },
-  headerAccessionItem: {
-    borderRadius: '100px',
-    border: '2px solid',
-    textAlign: 'center',
-    padding: '0 16px',
-    background: 'rgb(203 226 238 / 11%)',
-    fontSize: '15px',
-  },
-  accessionLabel: {
-    fontSize: '14px',
-    fontWeight: '900',
-    color: '#5e8ca5',
-  },
-  accessionValue: {
-    fontSize: '13px',
-    fontWeight: '800',
-  },
-  paddingLeft8: {
-    paddingLeft: '8px',
-  },
-  paddingBottm17: {
-    paddingBottm: '17px',
-  },
-  tabPrimaryColor: {
-    color: '#81a6b9',
-    fontWeight: '700',
-  },
-  tabHighlightColor: {
-    color: '#0B3556',
-    fontWeight: '700',
-    borderBottom: '5px solid rgb(53, 185, 235)',
-  },
-  hrLine: {
-    marginTop: '-2px',
-    marginBottom: '0',
-    borderTop: '1px solid #81a6b9',
-  },
-  container: {
-    paddingTop: '80px',
-    fontFamily: 'Raleway, sans-serif',
-    paddingLeft: '33px',
-    paddingRight: '33px',
-  },
-  content: {
-    fontSize: '12px',
-  },
-  warning: {
-    color: theme.palette.warning.main,
-  },
-  paper: {
-    textAlign: 'center',
-  },
-  fakeToolbar: {
-    ...theme.mixins.toolbar,
-  },
-  root: {
-    fontFamily: '"Open Sans", sans-serif',
-    fontSize: '9px',
-    letterSpacing: '0.025em',
-    color: '#000',
-    background: '#f3f3f3',
-  },
-  header: {
-    paddingLeft: '21px',
-    paddingRight: '21px',
-    borderBottom: '#81a6b9 4px solid',
-    height: '94px',
-    margin: 'auto',
-  },
-  headerTitle: {
-    margin: 'auto',
-    float: 'left',
-    marginLeft: '110px',
-    width: 'calc(100% - 465px)',
-  },
-  headerMainTitle: {
-    fontFamily: theme.custom.fontFamilySans,
-    fontWeight: 'bold',
-    letterSpacing: '0.017em',
-    color: '#0296c9',
-    fontSize: '19px',
-    height: '12px',
-    lineHeight: '17px',
-    paddingLeft: '3px',
-  },
-  headerSubTitleCate: {
-    color: '#606061',
-    fontWeight: '400',
-    fontFamily: 'Sans-Serif',
-    textTransform: 'uppercase',
-    letterSpacing: '0.025em',
-    fontSize: '14px',
-    maxHeight: '45px',
-    paddingLeft: '3px',
-    textOverflow: 'ellipsis',
-    paddingRight: '200px',
-  },
-  borderRight: {
-    borderRight: '#81a6b9 1px solid',
-  },
-  headerSubTitleContent: {
-    color: '#000000',
-    fontWeight: 'bold',
-    fontFamily: theme.custom.fontFamilyRaleway,
-    textTransform: 'uppercase',
-    letterSpacing: '0.023em',
-    fontSize: '14pt',
-
-  },
-  headerMSubTitle: {
-    paddingTop: '15px',
-  },
-  headerButton: {
-    fontFamily: theme.custom.fontFamilySans,
-    border: '3px solid #81a6b9',
-    marginTop: '15px',
-    float: 'right',
-    width: '220px',
-    height: '33px',
-    textAlign: 'center',
-    background: '#f6f4f4',
-    padding: '5px 10px 5px 5px',
-
-  },
-  headerButtonLinkSpan: {
-    fontFamily: theme.custom.fontFamilySans,
-    width: '200px',
-    fontSize: '14px',
-    display: 'inherit',
-    height: '15px',
-    marginTop: '-2px',
-  },
-  headerButtonLinkText: {
-    fontFamily: theme.custom.fontFamilySans,
-    color: '#0B3556',
-    fontSize: '14px',
-  },
-  headerButtonLinkNumber: {
-    fontFamily: 'sans-serif',
-    // borderBottom: 'solid',
-    // lineHeight: '30px',
-    paddingBottom: '3px',
-    margin: '0',
-    fontSize: '16px',
-    display: 'inherit',
-    fontWeight: '900',
-    marginRight: '4px',
-  },
-  logo: {
-    position: 'absolute',
-    float: 'left',
-    // marginTop: '-4px',
-    width: '100px',
-  },
-  detailContainer: {
-    margin: 'auto',
-    paddingTop: '30px',
-    paddingLeft: '36px',
-    paddingRight: '36px',
-    fontFamily: theme.custom.fontFamilySans,
-    letterSpacing: '0.014em',
-    color: '#000000',
-    size: '12px',
-    lineHeight: '23px',
-
-  },
-  headerButtonLink: {
-    textDecoration: 'none',
-    lineHeight: '14px',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    position: 'relative',
-    top: '2px',
-    color: '#dc762f',
-    '&:hover': {
-      textDecoration: 'none',
-    },
-  },
-  button: {
-    borderRadius: '22px',
-    padding: '0 22px',
-    width: '150px',
-    height: '35px',
-    lineHeight: '14px',
-    fontSize: '10px',
-    color: '#ffffff',
-    textTransform: 'uppercase',
-    backgroundColor: '#ff8a00',
-    fontFamily: theme.custom.fontFamilySans,
-    '&:hover': {
-      backgroundColor: '#ff8a00',
-    },
-  },
-  title: {
-    color: '#0296c9',
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '12px',
-    letterSpacing: '0.017em',
-    fontWeight: '600',
-    textTransform: 'uppercase',
-  },
-
-});
-
-export default withStyles(styles, { withTheme: true })(StudyDetailView);
+export default withStyles(Styles, { withTheme: true })(StudyDetailView);
