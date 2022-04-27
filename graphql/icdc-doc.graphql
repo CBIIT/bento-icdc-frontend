@@ -1009,24 +1009,29 @@ type Link {
     url: String
 }
 
+type Link {
+  text: String
+  url: String
+}
+
 type StudyOfProgram {
-    program_id: String
-    clinical_study_id: String
-    clinical_study_designation: String
-    clinical_study_name: String
-    clinical_study_description: String
-    clinical_study_type: String
-    accession_id: String
-    study_disposition: String
-    date_of_iacuc_approval: String
-    dates_of_conduct: String
-    numberOfCases: Int
-    numberOfStudyFiles: Int,
-    numberOfCaseFiles: Int,
-    numberOfImageCollections: Int,
-    numberOfPublications: Int,
-    numberOfCRDCNodes: Int
-    CRDCLinks: [Link]
+  program_id: String
+  clinical_study_id: String
+  clinical_study_designation: String
+  clinical_study_name: String
+  clinical_study_description: String
+  clinical_study_type: String
+  accession_id: String
+  study_disposition: String
+  date_of_iacuc_approval: String
+  dates_of_conduct: String
+  numberOfCases: Int
+  numberOfStudyFiles: Int,
+  numberOfCaseFiles: Int,
+  numberOfImageCollections: Int,
+  numberOfPublications: Int,
+  numberOfCRDCNodes: Int
+  CRDCLinks: [Link]
 }
 
 type FileOverview2 {

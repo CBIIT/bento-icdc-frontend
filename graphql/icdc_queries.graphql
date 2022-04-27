@@ -525,24 +525,29 @@ type Link {
     url: String
 }
 
+type Link {
+  text: String
+  url: String
+}
+
 type StudyOfProgram {
-    program_id: String
-    clinical_study_id: String
-    clinical_study_designation: String
-    clinical_study_name: String
-    clinical_study_description: String
-    clinical_study_type: String
-    accession_id: String
-    study_disposition: String
-    date_of_iacuc_approval: String
-    dates_of_conduct: String
-    numberOfCases: Int
-    numberOfStudyFiles: Int,
-    numberOfCaseFiles: Int,
-    numberOfImageCollections: Int,
-    numberOfPublications: Int,
-    numberOfCRDCNodes: Int
-    CRDCLinks: [Link]
+  program_id: String
+  clinical_study_id: String
+  clinical_study_designation: String
+  clinical_study_name: String
+  clinical_study_description: String
+  clinical_study_type: String
+  accession_id: String
+  study_disposition: String
+  date_of_iacuc_approval: String
+  dates_of_conduct: String
+  numberOfCases: Int
+  numberOfStudyFiles: Int,
+  numberOfCaseFiles: Int,
+  numberOfImageCollections: Int,
+  numberOfPublications: Int,
+  numberOfCRDCNodes: Int
+  CRDCLinks: [Link]
 }
 
 type FileOverview2 {
@@ -2762,32 +2767,32 @@ type QueryType {
     OPTIONAL MATCH (s)<--(pub:publication)
     OPTIONAL MATCH (c)<-[*]-(cf:file)
     WITH p, s,
-    COUNT(DISTINCT sf) AS numberOfStudyFiles,
-    COUNT(DISTINCT cf) AS numberOfCaseFiles,
-    COUNT(DISTINCT ic) AS numberOfImageCollections,
-    COUNT(DISTINCT ic.repository_name) AS numberOfCRDCNodes,
-    COUNT(DISTINCT pub) AS numberOfPublications,
-    COUNT(DISTINCT(c)) AS numberOfCases,
-    COLLECT(DISTINCT ic{text: ic.image_collection_name + ' - ' + ic.repository_name,
-    url: ic.image_collection_url}) AS CRDCLinks
+      COUNT(DISTINCT sf) AS numberOfStudyFiles,
+      COUNT(DISTINCT cf) AS numberOfCaseFiles,
+      COUNT(DISTINCT ic) AS numberOfImageCollections,
+      COUNT(DISTINCT ic.repository_name) AS numberOfCRDCNodes,
+      COUNT(DISTINCT pub) AS numberOfPublications,
+      COUNT(DISTINCT(c)) AS numberOfCases,
+      COLLECT(DISTINCT ic{text: ic.image_collection_name + ' - ' + ic.repository_name,
+                         url: ic.image_collection_url}) AS CRDCLinks
     RETURN{
-    program_id: p.program_acronym,
-    clinical_study_id: s.clinical_study_id,
-    clinical_study_designation: s.clinical_study_designation,
-    clinical_study_name: s.clinical_study_name,
-    clinical_study_description: s.clinical_study_description,
-    clinical_study_type: s.clinical_study_type,
-    accession_id: s.accession_id,
-    study_disposition: s.study_disposition,
-    date_of_iacuc_approval: s.date_of_iacuc_approval,
-    dates_of_conduct: s.dates_of_conduct,
-    numberOfCases: numberOfCases,
-    numberOfStudyFiles: numberOfStudyFiles,
-    numberOfCaseFiles: numberOfCaseFiles,
-    numberOfImageCollections: numberOfImageCollections,
-    numberOfPublications: numberOfPublications,
-    numberOfCRDCNodes: numberOfCRDCNodes,
-    CRDCLinks: CRDCLinks
+      program_id: p.program_acronym,
+      clinical_study_id: s.clinical_study_id,
+      clinical_study_designation: s.clinical_study_designation,
+      clinical_study_name: s.clinical_study_name,
+      clinical_study_description: s.clinical_study_description,
+      clinical_study_type: s.clinical_study_type,
+      accession_id: s.accession_id,
+      study_disposition: s.study_disposition,
+      date_of_iacuc_approval: s.date_of_iacuc_approval,
+      dates_of_conduct: s.dates_of_conduct,
+      numberOfCases: numberOfCases,
+      numberOfStudyFiles: numberOfStudyFiles,
+      numberOfCaseFiles: numberOfCaseFiles,
+      numberOfImageCollections: numberOfImageCollections,
+      numberOfPublications: numberOfPublications,
+      numberOfCRDCNodes: numberOfCRDCNodes,
+      CRDCLinks: CRDCLinks
     }
     ORDER BY s.clinical_study_designation
     """, passThrough: true)
@@ -2801,32 +2806,32 @@ type QueryType {
     OPTIONAL MATCH (s)<--(pub:publication)
     OPTIONAL MATCH (c)<-[*]-(cf:file)
     WITH p, s,
-    COUNT(DISTINCT sf) AS numberOfStudyFiles,
-    COUNT(DISTINCT cf) AS numberOfCaseFiles,
-    COUNT(DISTINCT ic) AS numberOfImageCollections,
-    COUNT(DISTINCT ic.repository_name) AS numberOfCRDCNodes,
-    COUNT(DISTINCT pub) AS numberOfPublications,
-    COUNT(DISTINCT(c)) AS numberOfCases,
-    COLLECT(DISTINCT ic{text: ic.image_collection_name + ' - ' + ic.repository_name,
-    url: ic.image_collection_url}) AS CRDCLinks
+      COUNT(DISTINCT sf) AS numberOfStudyFiles,
+      COUNT(DISTINCT cf) AS numberOfCaseFiles,
+      COUNT(DISTINCT ic) AS numberOfImageCollections,
+      COUNT(DISTINCT ic.repository_name) AS numberOfCRDCNodes,
+      COUNT(DISTINCT pub) AS numberOfPublications,
+      COUNT(DISTINCT(c)) AS numberOfCases,
+      COLLECT(DISTINCT ic{text: ic.image_collection_name + ' - ' + ic.repository_name,
+                         url: ic.image_collection_url}) AS CRDCLinks
     RETURN{
-    program_id: p.program_acronym,
-    clinical_study_id: s.clinical_study_id,
-    clinical_study_designation: s.clinical_study_designation,
-    clinical_study_name: s.clinical_study_name,
-    clinical_study_description: s.clinical_study_description,
-    clinical_study_type: s.clinical_study_type,
-    accession_id: s.accession_id,
-    study_disposition: s.study_disposition,
-    date_of_iacuc_approval: s.date_of_iacuc_approval,
-    dates_of_conduct: s.dates_of_conduct,
-    numberOfCases: numberOfCases,
-    numberOfStudyFiles: numberOfStudyFiles,
-    numberOfCaseFiles: numberOfCaseFiles,
-    numberOfImageCollections: numberOfImageCollections,
-    numberOfPublications: numberOfPublications,
-    numberOfCRDCNodes: numberOfCRDCNodes,
-    CRDCLinks: CRDCLinks
+      program_id: p.program_acronym,
+      clinical_study_id: s.clinical_study_id,
+      clinical_study_designation: s.clinical_study_designation,
+      clinical_study_name: s.clinical_study_name,
+      clinical_study_description: s.clinical_study_description,
+      clinical_study_type: s.clinical_study_type,
+      accession_id: s.accession_id,
+      study_disposition: s.study_disposition,
+      date_of_iacuc_approval: s.date_of_iacuc_approval,
+      dates_of_conduct: s.dates_of_conduct,
+      numberOfCases: numberOfCases,
+      numberOfStudyFiles: numberOfStudyFiles,
+      numberOfCaseFiles: numberOfCaseFiles,
+      numberOfImageCollections: numberOfImageCollections,
+      numberOfPublications: numberOfPublications,
+      numberOfCRDCNodes: numberOfCRDCNodes,
+      CRDCLinks: CRDCLinks
     }
     ORDER BY s.clinical_study_designation
     """, passThrough: true)
