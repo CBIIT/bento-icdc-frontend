@@ -87,6 +87,10 @@ export default {
           text: 'FOIA',
           link: 'https://www.cancer.gov/policies/foia',
         },
+        {
+          text: 'HHS Vulnerability Disclosure',
+          link: 'https://www.hhs.gov/vulnerability-disclosure-policy/index.html',
+        },
       ],
     },
   ],
