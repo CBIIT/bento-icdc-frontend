@@ -84,15 +84,30 @@ const Studies = ({ classes, data, invalid }) => {
         </Link>
       )
   );
+
+  const generateCRDCLinks = (linksArray) => (
+    <ul className={classes.crdcLinks}>
+      {linksArray.map((link) => (
+        <li>
+          <a href={link.url}>{`${link.text}`}</a>
+        </li>
+      ))}
+    </ul>
+  );
   const customIcon = (column, value, tableMeta) => {
     const flag = value > 0;
+    const title = data.studiesByProgram[tableMeta.rowIndex].numberOfCRDCNodes > 0 && column.dataField === 'numberOfCRDCNodes'
+      ? generateCRDCLinks(data.studiesByProgram[tableMeta.rowIndex].CRDCLinks)
+      : `${data.studiesByProgram[tableMeta.rowIndex][column.dataField]} ${column.header}`;
     return (
       <>
         {
         flag && (
-        <div style={{ textAlign: 'center' }}>
-          <Tooltip title={`${data.studiesByProgram[tableMeta.rowIndex][column.dataField]} ${column.header}`}>
-            <FiberManualRecordRounded style={{ color: '#1A89C4' }} />
+        <div className={classes.dataAvailIndicator}>
+          <Tooltip title={title}>
+            {column.indicator && column.useImage
+              ? <img className={classes.dataAvailIndicatorImage} src={column.indicator} alt={`${column.header} icon`} />
+              : <FiberManualRecordRounded className={classes.dataAvailIndicatorIcon} />}
           </Tooltip>
         </div>
         )
@@ -179,6 +194,19 @@ const Studies = ({ classes, data, invalid }) => {
 };
 
 const styles = (theme) => ({
+  crdcLinks: {
+    listStyle: 'none',
+  },
+  dataAvailIndicator: {
+    textAlign: 'center',
+  },
+  dataAvailIndicatorIcon: {
+    color: '#1A89C4',
+  },
+  dataAvailIndicatorImage: {
+    height: '20px',
+    width: '20px',
+  },
   link: {
     textDecoration: 'underline',
     fontFamily: 'Open Sans',
