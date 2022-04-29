@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -238,23 +239,23 @@ const GridView = ({
   const tooltipComponent = (
     <>
       <Tooltip title={tooltipMessage} arrow placement="bottom" interactive>
-        <IconButton aria-label="help" className={classes.helpIconButton}>
-          {tooltipContent.src ? (
-            <img
-              src={tooltipContent.src}
-              alt={tooltipContent.alt}
-              className={classes.helpIcon}
-            />
-          ) : (
-            <HelpIcon
-              className={classes.helpIcon}
-              fontSize="small"
-              onMouseOver={() => toggleMessageStatus('top', 'open')}
-              onMouseEnter={() => toggleMessageStatus('top', 'open')}
-              onFocus={() => toggleMessageStatus('top', 'open')}
-            />
-          )}
-        </IconButton>
+
+        {tooltipContent.src ? (
+          <img
+            src={tooltipContent.src}
+            alt={tooltipContent.alt}
+            className={classes.helpIconButton}
+          />
+        ) : (
+          <HelpIcon
+            fontSize="small"
+            onMouseOver={() => toggleMessageStatus('top', 'open')}
+            onMouseEnter={() => toggleMessageStatus('top', 'open')}
+            onFocus={() => toggleMessageStatus('top', 'open')}
+            className={classes.helpIconButton}
+          />
+        )}
+
       </Tooltip>
       { messageStatus ? (
         <div className={classes.messageBottom} style={tooltipStyle(tooltipMessage)}>
@@ -275,8 +276,8 @@ const GridView = ({
         onClick={exportFiles}
       >
         { buttonText }
-        {showtooltip ? tooltipComponent : ''}
       </button>
+      {showtooltip ? tooltipComponent : ''}
     </div>
   );
 
@@ -363,11 +364,6 @@ const styles = () => ({
     fontSize: '10pt',
     color: '#fff',
   },
-  helpIcon: {
-    verticalAlign: 'top',
-    zIndex: '600',
-    width: '17px',
-  },
   messageBottom: {
     position: 'absolute',
     right: '-8px',
@@ -381,9 +377,8 @@ const styles = () => ({
     margin: '0px 0px 0px 2px',
   },
   helpIconButton: {
-    position: 'relative',
-    left: '3em',
-    bottom: '1em',
+    width: '1.5em',
+    position: 'absolute',
   },
   tableGrid: {
     padding: '0px',
