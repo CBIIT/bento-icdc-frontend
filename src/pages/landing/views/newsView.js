@@ -174,7 +174,7 @@ const NewsView = ({ classes, availableSoonImage }) => (
             <h4 style={{ color: '#fff' }}>Twitter</h4>
             <TwitterTimelineEmbed
               sourceType="profile"
-              screenName="EACRnews"
+              screenName="ncidatasci"
               options={{ height: 600 }}
             />
           </div>
@@ -204,7 +204,7 @@ const NewsView = ({ classes, availableSoonImage }) => (
       <div style={{ width: '93em' }}>
         {' '}
         <h4 style={{ color: '#fff' }}>Videos</h4>
-        <YouTube id="A71aqufiNtQ" />
+        <YouTube id="bIWaMKZ9pl4" />
       </div>
     </div>
   </>
