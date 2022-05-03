@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
@@ -7,7 +8,7 @@ import resourceDropdownRoutes from '../../bento/resourceDropdownRoutes';
 import dataDropdownRoutes from '../../bento/dataDropdownRoutes';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
-import Footer from '../Footer/FooterView';
+// import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
 import Home from '../../pages/landing/landingController';
 import Studies from '../../pages/studies/studiesController';
@@ -83,7 +84,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/graphql" component={GraphqlClient} />
             <Route component={Error} />
           </Switch>
-          <Footer data={{ isSidebarOpened }} />
+          {/* <Footer data={{ isSidebarOpened }} /> */}
         </div>
       </>
     </HashRouter>
