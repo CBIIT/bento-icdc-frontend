@@ -34,18 +34,19 @@ const LandingController = ({ match }) => {
     return <CircularProgress />;
   }
 
-  if (match.path === NEWS_PATH) {
+  if (data && match.path === NEWS_PATH) {
+    console.log('news deets', data);
     return (
       <NewsView
-        availableSoonImage={data.availableSoonImage}
+        availableSoonImage={data && data.availableSoonImage}
       />
     );
   }
 
   return (
     <LandingView
-      link={data.sourceLink1}
-      primaryContentImage={data.primaryContentImage}
+      link={data.sourceLink1 || 'testlink'}
+      primaryContentImage={data && data.primaryContentImage}
     />
   );
 };

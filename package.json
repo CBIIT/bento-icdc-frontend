@@ -77,6 +77,8 @@
     "react-svg-loader": "^3.0.3",
     "react-swipeable-views": "^0.13.9",
     "react-syntax-highlighter": "^10.2.0",
+    "react-twitter-embed": "^4.0.4",
+    "react-youtube-embed": "^1.0.3",
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
