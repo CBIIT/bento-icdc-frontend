@@ -525,7 +525,30 @@
 - 
   page: /news
   title: "News"
-  sourceLink1: ''
-  paragraph: 'Announcemnt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi ipsum faucibus vitae aliquet nec. Aliquam sem et tortor consequat id. Pellentesque habitant morbi tristique senectus et netus et. Sed cras ornare arcu dui vivamus arcu felis. Ac feugiat sed lectus vestibulum. Nullam eget felis eget nunc. Aenean pharetra magna ac placerat vestibulum. Dolor sit amet consectetur adipiscing elit. Magna etiam tempor orci eu. Congue mauris rhoncus aenean vel elit scelerisque. Semper viverra nam libero justo. Sodales neque sodales ut etiam sit. Auctor neque vitae tempus quam pellentesque nec nam aliquam sem. Augue lacus viverra vitae congue eu consequat ac felis. Non diam phasellus vestibulum lorem sed risus ultricies. Volutpat lacus laoreet non curabitur gravida arcu ac. Commodo viverra maecenas accumsan lacus vel facilisis volutpat est velit. At quis risus sed vulputate odio ut. Magna eget est lorem ipsum dolor sit amet.'
   primaryContentImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/aboutPages/EACR_top_ten.png'
   availableSoonImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/aboutPages/Smart-Dog.png'
+  sourceLink1: ''
+  content: 
+    - 
+      paragraph: "Data made available thru the ICDC is for research purposes only. ICDC Data received by the requestor is considered Licensed Material as defined below. ICDC data submission and data use is governed by $$[Creative Commons CC-BY 4.0.](https://creativecommons.org/licenses/by/4.0/)$$ licensing terms."
+    - 
+      paragraph: "By exercising the Licensed Rights, You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution 4.0 International Public License (“Public License“). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions."
+    - 
+      paragraph: "$$#Citing ICDC in Publications:#$$"
+    - 
+      paragraph: "To cite the ICDC as a resource, reference the data as being available via the NCI’s Integrated Canine Data Commons (ICDC) at $$[https://caninecommons.cancer.gov ](https://caninecommons.cancer.gov )$$ "
+    - 
+      paragraph: "$$#Citing Individual Studies:#$$"
+    - 
+      paragraph: "ICDC uses human readable identifiers for representing studies."
+    - 
+      paragraph: "To cite an individual study, cite the native ICDC accession ID as displayed within the User Interface, prefixed by “icdc:” to create a compact identifier that can be resolved via $$[identifiers.org](https://identifiers.org/)$$ (e.g., icdc:000003), and/or cite the URL to the study (e.g., $$[https://caninecommons.cancer.gov/#/study/000003](https://caninecommons.cancer.gov/#/study/000003)$$), where the URL ends with the native ICDC accession ID."
+    - 
+      paragraph: "$$#Intellectual Property policy statement:#$$"
+    - 
+      paragraph: "The ICDC discourages use of the data to acquire ownership interest in pre-competitive technologies necessary for the development of the field (“research tools”).  The ICDC places no restrictions on the use of data to develop downstream technologies that may lead to discoveries that address public needs, especially therapeutics.  For further information about the ICDC Intellectual Property policy, please contact us at $$@ICDCHelpDesk@mail.nih.gov@$$"
+    - 
+      paragraph: "$$#Embargo Period for datasets:#$$"
+    - 
+      paragraph: "Certain datasets made available in ICDC will have an embargo period as an associated publication is in the process of being accepted and or published.  An embargo is the release of limited metadata on the ICDC portal until an approval is obtained from the respective data submitter. There are several visual icons intended to flag studies that have an active embargo to inform users that the data will be released to ICDC in the near future."
+-
