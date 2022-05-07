@@ -39,6 +39,7 @@ const LandingController = ({ match }) => {
     return (
       <NewsView
         availableSoonImage={data && data.availableSoonImage}
+        news={data && data.content}
       />
     );
   }

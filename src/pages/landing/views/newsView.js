@@ -2,230 +2,80 @@ import React from 'react';
 import {
   withStyles,
   List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  Typography,
-  Divider,
   ImageList,
   ImageListItem,
   ImageListItemBar,
 } from '@material-ui/core';
 import { TwitterTimelineEmbed, TwitterTweetEmbed } from 'react-twitter-embed';
 import ReactPlayer from 'react-player';
-import StatView from '../../../components/Stats/AllStatsController';
 import lbg from '../../../assets/landing/Background.png';
-import Bosco from '../../../content/pre-prod/ICDC-Images/Bosco.jpg';
-import DogAtVet from '../../../content/pre-prod/ICDC-Images/dogAtVet.jpg';
-import Emmie from '../../../content/pre-prod/ICDC-Images/Emmie.JPG';
+import { newsViewImageData } from '../../../bento/landingPageData';
+import NewsItem from './NewsListItem';
 
-// function srcset(image, size, rows = 1, cols = 1) {
-//   return {
-//     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-//     srcSet: `${image}?w=${size * cols}&h=${
-//       size * rows
-//     }&fit=crop&auto=format&dpr=2 2x`,
-//   };
-// }
-
-const itemData = [
-  {
-    img: Bosco,
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: DogAtVet,
-  },
-  {
-    img: Emmie,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-    title: 'Coffee',
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-    title: 'Hats',
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-    title: 'Honey',
-    author: '@arwinneil',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-    title: 'Basketball',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-    title: 'Fern',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-    title: 'Mushrooms',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-    title: 'Tomato basil',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-    title: 'Sea star',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-    title: 'Bike',
-    cols: 2,
-  },
-];
-
-const NewsView = ({ classes }) => (
-  <>
-    <StatView />
+const NewsView = ({ classes, news }) => (
+  <div className={classes.page}>
+    <div className={classes.pageBanner}>
+      <h1 className={classes.pageBannerText}>
+        ICDC News
+      </h1>
+    </div>
 
     <div className={classes.outterContainer}>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '3em' }}>
-        <div style={{
-        }}
-        >
-          <h4 style={{
-            color: '#fff', fontSize: '2em', fontFamily: 'Raleway', margin: '0',
-          }}
-          >
+      <div className={classes.listSection}>
+        <div>
+          <h4 className={classes.newsListHeading}>
             Updates
           </h4>
-          <List style={{
-            width: '30em', height: '100%', backgroundColor: '#fff', borderRadius: '0.5em',
-          }}
-          >
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Brunch this weekend?"
-                secondary={(
-                  <>
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      Ali Connors
-                    </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                  </>
-          )}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Summer BBQ"
-                secondary={(
-                  <>
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      to Scott, Alex, Jennifer
-                    </Typography>
-                    {" — Wish I could come, but I'm out of town this…"}
-                  </>
-          )}
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Oui Oui"
-                secondary={(
-                  <>
-                    <Typography
-                      sx={{ display: 'inline' }}
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
-                    >
-                      Sandra Adams
-                    </Typography>
-                    {' — Do you have Paris recommendations? Have you ever…'}
-                  </>
-          )}
-              />
-            </ListItem>
+
+          <List className={classes.newsList}>
+            {
+                // eslint-disable-next-line max-len
+                news.map((newsItem, index) => <NewsItem newsItem={newsItem} index={index + 1} total={news.length} />)
+              }
           </List>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '3em' }}>
-          <div style={{ width: '60em' }}>
-            <h4 style={{
-              color: '#fff', fontSize: '2em', fontFamily: 'Raleway', margin: '0',
-            }}
-            >
+        <div className={classes.twitterAndImageSection}>
+          <div>
+            <h4 className={classes.twitterSectionHeading}>
               Twitter
             </h4>
-            <div style={{
-              display: 'flex', justifyContent: 'center', background: '#fff', flexDirection: 'column', borderRadius: '0.5em', width: 'fit-content',
-            }}
-            >
-              <div style={{
-                display: 'flex', background: '#1977CC', justifyContent: 'space-between', padding: '0.5em 15em 0.5em 1em', color: '#fff', borderTopLeftRadius: '0.5em', borderTopRightRadius: '0.5em', WebkitBorderTopLeftRadius: '0.5em', WebkitBorderTopRightRadius: '0.5em',
-              }}
-              >
-                <div><h6 style={{ fontSize: '1.2em', margin: '0' }}>Featured tweet</h6></div>
-                <div><h6 style={{ fontSize: '1.2em', margin: '0' }}>Follow us on Twitter</h6></div>
+
+            <div className={classes.twitterSectionContainer}>
+              <div className={classes.twitterSectionSubHeadingContainer}>
+                <div>
+                  <h6 className={classes.twitterSectionSubHeading}>Featured tweet</h6>
+                </div>
+
+                <div>
+                  <h6 className={classes.twitterSectionSubHeading}>Follow us on Twitter</h6>
+                </div>
               </div>
-              <div style={{
-                display: 'flex', justifyContent: 'center', padding: '1em', gap: '2em',
-              }}
-              >
+
+              <div className={classes.twitterSection}>
                 <TwitterTweetEmbed
-                  tweetId="933354946111705097"
+                  tweetId="1493638757001711620"
                   className={classes.test}
                 />
 
-                <div style={{
-                  marginTop: '1em', height: '26.5em',
-                }}
-                >
+                <div className={classes.twitterTimelineSection}>
                   <TwitterTimelineEmbed
                     sourceType="profile"
                     screenName="ncidatasci"
-                    options={{ height: 300 }}
+                    options={{ height: 524 }}
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div style={{ position: 'relative', top: '4.1em' }}>
-            <h4 style={{
-              color: '#fff', fontSize: '2em', fontFamily: 'Raleway', margin: '0',
-            }}
-            >
+          <div className={classes.imageSectionContainer}>
+            <h4 className={classes.imageSectionHeading}>
               Images
             </h4>
             <div className={classes.root}>
               <ImageList className={classes.imageList} cols={2.5}>
-                {itemData.map((item) => (
+                {newsViewImageData.map((item) => (
                   <ImageListItem key={item.img}>
                     <img src={item.img} alt={item.titlee} className={classes.img} />
                     <ImageListItemBar
@@ -243,41 +93,21 @@ const NewsView = ({ classes }) => (
         </div>
       </div>
 
-      <div style={{ width: '81em', position: 'relative', right: '6em' }}>
-        <h4 style={{
-          color: '#fff', fontSize: '2em', fontFamily: 'Raleway', margin: '0',
-        }}
-        >
+      <div className={classes.videoSectionContainer}>
+        <h4 className={classes.videoSectionHeading}>
           Videos
         </h4>
-        <div style={{
-          display: 'flex', backgroundColor: '#fff', borderRadius: '0.5em', justifyContent: 'center', marginBottom: '5em', flexDirection: 'column',
-        }}
-        >
-          <div style={{
-            display: 'flex',
-            background: '#1977CC',
-            justifyContent: 'space-between',
-            padding: '0.5em 19.5em 0.5em 1em',
-            color: '#fff',
-            borderTopLeftRadius: '0.5em',
-            borderTopRightRadius: '0.5em',
-            WebkitBorderTopLeftRadius: '0.5em',
-            WebkitBorderTopRightRadius: '0.5em',
-          }}
-          >
-            <div><h6 style={{ fontSize: '1.2em', margin: '0' }}>Featured video</h6></div>
-            <div><h6 style={{ fontSize: '1.2em', margin: '0' }}>Other videos</h6></div>
+        <div className={classes.videoSection}>
+          <div className={classes.videoSectionSubHeadingContainer}>
+            <div><h6 className={classes.videoSectionSubHeading}>Featured video</h6></div>
+            <div><h6 className={classes.videoSectionSubHeading}>Other videos</h6></div>
           </div>
 
-          <div style={{
-            display: 'grid', justifyContent: 'center', gridTemplateColumns: '2fr 1fr', gap: '1em', padding: '1em',
-          }}
-          >
+          <div className={classes.featuredVideo}>
             <div>
               <ReactPlayer url="https://www.youtube.com/watch?v=bIWaMKZ9pl4" height="100%" width="100%" />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+            <div className={classes.otherVideos}>
               <ReactPlayer url="https://www.youtube.com/watch?v=bIWaMKZ9pl4" height="15em" width="100%" />
               <ReactPlayer url="https://www.youtube.com/watch?v=bIWaMKZ9pl4" height="15em" width="100%" />
             </div>
@@ -286,24 +116,159 @@ const NewsView = ({ classes }) => (
         </div>
       </div>
     </div>
-  </>
+  </div>
 );
 
 const styles = (theme) => ({
-  outterContainer: {
+  page: {
     background: '#5E8CA5',
     backgroundImage: `url(${lbg})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundAttachment: 'fixed',
+  },
+  pageBanner: {
+    backgroundColor: 'rgba(25, 119, 204, 0.61)',
+    height: '12.8em',
+    marginTop: '-3.3em',
+    display: 'flex',
+    alignItems: 'center',
+    border: '1px solid #000',
+    paddingLeft: '35em',
+    position: 'relative',
+    fontFamily: 'Raleway',
+  },
+  pageBannerText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontFamily: 'Raleway',
+    fontSize: '3.7em',
+  },
+  listSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '3em',
+  },
+  newsListHeading: {
+    color: '#fff',
+    fontSize: '2em',
+    fontFamily: 'Raleway',
+    margin: '0',
+  },
+  newsList: {
+    width: '30em',
+    height: '76.5em',
+    backgroundColor: '#fff',
+    borderRadius: '0.5em',
+    overflow: 'auto',
+  },
+  twitterAndImageSection: {
     display: 'flex',
     flexDirection: 'column',
-    // justifyContent: 'center',
+    gap: '3em',
+  },
+  twitterSectionHeading: {
+    color: '#fff',
+    fontSize: '2em',
+    fontFamily: 'Raleway',
+    margin: '0',
+  },
+  twitterSectionContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    background: '#fff',
+    flexDirection: 'column',
+    borderRadius: '0.5em',
+    width: 'fit-content',
+  },
+  twitterSectionSubHeadingContainer: {
+    display: 'flex',
+    background: '#1977CC',
+    justifyContent: 'space-between',
+    padding: '0.5em 12.2em 0.5em 1em',
+    color: '#fff',
+    borderTopLeftRadius: '0.5em',
+    borderTopRightRadius: '0.5em',
+    WebkitBorderTopLeftRadius: '0.5em',
+    WebkitBorderTopRightRadius: '0.5em',
+  },
+  twitterSectionSubHeading: {
+    fontSize: '1.2em',
+    margin: '0',
+  },
+  twitterSection: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '1em',
+    gap: '2em',
+  },
+  twitterTimelineSection: {
+    marginTop: '1em',
+    height: '26.5em',
+  },
+  imageSectionContainer: {
+    position: 'relative',
+    top: '4.1em',
+  },
+  imageSectionHeading: {
+    color: '#fff',
+    fontSize: '2em',
+    fontFamily: 'Raleway',
+    margin: '0',
+  },
+  videoSectionContainer: {
+    width: '81em',
+  },
+  videoSectionHeading: {
+    color: '#fff',
+    fontSize: '2em',
+    fontFamily: 'Raleway',
+    margin: '0',
+  },
+  vidoeSection: {
+    display: 'flex',
+    backgroundColor: '#fff',
+    borderRadius: '0.5em',
+    justifyContent: 'center',
+    marginBottom: '5em',
+    flexDirection: 'column',
+  },
+  videoSectionSubHeadingContainer: {
+    display: 'flex',
+    background: '#1977CC',
+    justifyContent: 'space-between',
+    padding: '0.5em 19.5em 0.5em 1em',
+    color: '#fff',
+    borderTopLeftRadius: '0.5em',
+    borderTopRightRadius: '0.5em',
+    WebkitBorderTopLeftRadius: '0.5em',
+    WebkitBorderTopRightRadius: '0.5em',
+  },
+  videoSectionSubHeading: {
+    fontSize: '1.2em',
+    margin: '0',
+  },
+  featuredVideo: {
+    display: 'grid',
+    justifyContent: 'center',
+    gridTemplateColumns: '2fr 1fr',
+    gap: '1em',
+    padding: '1em',
+    backgroundColor: '#fff',
+  },
+  otherVideos: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1em',
+  },
+  outterContainer: {
+    display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     paddingTop: '5em',
+    paddingBottom: '5em',
     gap: '6em',
     height: '100%',
-    width: '100%',
   },
   root: {
     display: 'flex',

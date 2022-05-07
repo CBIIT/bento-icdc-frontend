@@ -8,6 +8,16 @@ import dogIcon from '../assets/landing/Button.Explore.Active.png';
 import studyActive from '../assets/landing/Button.Studies.Active.png';
 import spotLight from '../assets/landing/Button.Spotlight.Active.png';
 import datadictionaryIcon from '../assets/landing/Button.DataDictionary.Open.png';
+import DogAtVet from '../assets/landing/DogAtVet.jpg';
+import Emmie from '../assets/landing/Emmie.JPG';
+import Freddie from '../assets/landing/Freddie.jpg';
+import Gertie from '../assets/landing/Gertie.jpeg';
+import JellyBean from '../assets/landing/Jelly-Bean.jpg';
+import Krish from '../assets/landing/Krish.jpg';
+import LouiAndTeddy from '../assets/landing/Louie-Teddy.JPG';
+import Samantha from '../assets/landing/Samantha.jpg';
+import Bosco from '../assets/landing/Bosco.jpg';
+
 // import dogImage from '../assets/landing/dog-bubble.png';
 
 export const pageData = {
@@ -145,6 +155,36 @@ export const pageData = {
     },
   ],
 };
+
+export const newsViewImageData = [
+  {
+    img: Bosco,
+  },
+  {
+    img: DogAtVet,
+  },
+  {
+    img: Emmie,
+  },
+  {
+    img: Freddie,
+  },
+  {
+    img: Gertie,
+  },
+  {
+    img: JellyBean,
+  },
+  {
+    img: Krish,
+  },
+  {
+    img: LouiAndTeddy,
+  },
+  {
+    img: Samantha,
+  },
+];
 
 // --------------- GraphQL query - Retrieve Landing page data --------------
 export const GET_LANDING_PAGE_DATA_QUERY = false;
