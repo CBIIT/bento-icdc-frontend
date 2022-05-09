@@ -721,28 +721,7 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
 }
-/**
- * function to set code to checkbox Item (accession id) for filterCountByStudyCode likewise
- *
- * @return checkboxItem
- */
 
-function setCodeToCheckBoxItem(checkboxData, item) {
-  const checkBoxitems = [];
-  const updateCheckBoxData = checkboxData;
-  item.data.filterCaseCountByStudyCode.forEach((filterItem) => {
-    checkboxData[1].checkboxItems.forEach((checkboxItem) => {
-      if (filterItem.group === checkboxItem.name) {
-        const updatecheckBoxItem = checkboxItem;
-        updatecheckBoxItem.code = (filterItem.code !== null) ? ` (${filterItem.code})` : filterItem.code;
-        checkBoxitems.push(updatecheckBoxItem);
-      }
-    });
-  });
-  updateCheckBoxData[1].checkboxItems = checkBoxitems
-    .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
-  return updateCheckBoxData;
-}
 /**
  * Reducer for clear all filters
  *
@@ -964,8 +943,8 @@ const reducers = {
     const updatedCheckboxData1 = updateFilteredAPIDataIntoCheckBoxData(
       item.data, facetSearchData,
     );
-    const checkboxData1 = setCodeToCheckBoxItem(setSelectedFilterValues(updatedCheckboxData1,
-      item.allFilters), item);
+    const checkboxData1 = setSelectedFilterValues(updatedCheckboxData1,
+      item.allFilters);
     fetchDataForDashboardTab(state.currentActiveTab,
       item.data.searchCases.caseIds, item.data.searchCases.sampleIds,
       item.data.searchCases.fileIds, item.data.searchCases.studyFileIds);
@@ -1038,8 +1017,8 @@ const reducers = {
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
-    const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data,
-      facetSearchData, 'count'), item);
+    const checkboxData = customCheckBox(item.data,
+      facetSearchData, 'count');
     fetchDataForDashboardTab(tabIndex[0].title, null, null, null, null);
     return item.data
       ? {
@@ -1191,7 +1170,7 @@ const reducers = {
     },
   }),
   CLEAR_ALL_FILTER_AND_TABLE_SELECTION: (state, item) => {
-    const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data, facetSearchData, 'count'), item);
+    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
     fetchDataForDashboardTab(state.currentActiveTab, null, null, null, null);
     return item.data
       ? {

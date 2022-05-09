@@ -850,7 +850,6 @@ type SearchResult {
 type GroupCount {
     group: String
     count: Int
-    code: String
 }
 
 type StudyInfo {

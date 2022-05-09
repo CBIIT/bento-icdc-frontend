@@ -626,7 +626,6 @@ filterCaseCountByProgram{
 filterCaseCountByStudyCode{
   group,
   count,
-  code
 }
 filterCaseCountByStudyType{
   group,
@@ -884,7 +883,6 @@ filterCaseCountByStudyCode (
 ) {
     group
     count
-    code
 }
 filterCaseCountByStudyType (
   program: $program,

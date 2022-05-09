@@ -366,7 +366,6 @@ type SearchResult {
 type GroupCount {
     group: String
     count: Int
-    code: String
 }
 
 type StudyInfo {
@@ -442,7 +441,7 @@ type QueryType {
     MATCH (s:study)<-[:member_of]-(c:case)
     WHERE (size($case_ids) = 0 OR c.case_id IN $case_ids)
     RETURN {
-    group: s.clinical_study_designation,
+    group: s.clinical_study_designation + ' ('+ s.accession_id+')',
     count: count(DISTINCT(c))
     }
     """, passThrough: true)
@@ -874,11 +873,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s ,c , demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     //AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -999,8 +999,7 @@ type QueryType {
     groups
     UNWIND groups AS group
     RETURN{
-    group: group.clinical_study_designation,
-    code: group.accession_id,
+    group: group.clinical_study_designation + '( '+ group.accession_id +' )',
     count: SUM(CASE count_group WHEN group THEN count ELSE 0 END)
     }
     """, passThrough: true)
@@ -1034,11 +1033,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     //AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1114,11 +1114,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     //AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1193,11 +1194,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1272,11 +1274,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1351,11 +1354,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1430,11 +1434,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1509,11 +1514,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1588,11 +1594,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1667,11 +1674,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1746,11 +1754,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1825,11 +1834,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1904,11 +1914,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -1983,11 +1994,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -2062,11 +2074,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -2144,11 +2157,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p, s, c, demo, diag, r, groups, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -2215,8 +2229,9 @@ type QueryType {
     MATCH (p:program)<--(s:study)<--(c:case)<--(demo:demographic), (c)<--(diag:diagnosis)
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
-    WITH p, s, c, demo, diag, r, biobank_cases, ci
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WITH p, s, c, demo, diag, r, biobank_cases, ci,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)
     AND (size($breed) = 0 OR demo.breed IN $breed)
@@ -2693,11 +2708,12 @@ type QueryType {
     OPTIONAL MATCH (c)<--(r:registration)
     OPTIONAL MATCH (c)-->(ci:canine_individual)
     WITH p,s,c,demo,diag,r,biobank_cases,
+    s.clinical_study_designation + ' ('+ s.accession_id+')' as filter_study,
     CASE ci IS NULL
     WHEN True THEN 'Single Study'
     ELSE 'Multiple Study'
     END AS participation
-    WHERE (size($study) = 0 OR s.clinical_study_designation IN $study)
+    WHERE (size($study) = 0 OR filter_study IN $study)
     AND (size($program) = 0 OR p.program_acronym in $program)
     AND (s.study_disposition = 'Unrestricted')
     AND (size($study_type) = 0 OR s.clinical_study_type IN $study_type)

@@ -88,9 +88,7 @@ function CheckBoxView(props) {
           ) : (
             <div className={classes.panelDetailText}>
               <span>
-                {`${checkboxItem.name}`}
-                { checkboxItem.code
-                        && `${checkboxItem.code}`}
+                {checkboxItem.name}
               </span>
             </div>
           )
@@ -108,9 +106,7 @@ function CheckBoxView(props) {
           ) : (
             <div className={classes.panelDetailText}>
               <span>
-                {`${checkboxItem.name}`}
-                { checkboxItem.code
-                        && `${checkboxItem.code}`}
+                {checkboxItem.name}
               </span>
             </div>
           )
