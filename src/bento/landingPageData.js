@@ -8,6 +8,16 @@ import dogIcon from '../assets/landing/Button.Explore.Active.png';
 import studyActive from '../assets/landing/Button.Studies.Active.png';
 import spotLight from '../assets/landing/Button.Spotlight.Active.png';
 import datadictionaryIcon from '../assets/landing/Button.DataDictionary.Open.png';
+import DogAtVet from '../assets/landing/DogAtVet.jpg';
+import Emmie from '../assets/landing/Emmie.JPG';
+import Freddie from '../assets/landing/Freddie.jpg';
+import Gertie from '../assets/landing/Gertie.jpeg';
+import JellyBean from '../assets/landing/Jelly-Bean.jpg';
+import Krish from '../assets/landing/Krish.jpg';
+import LouiAndTeddy from '../assets/landing/Louie-Teddy.JPG';
+import Samantha from '../assets/landing/Samantha.jpg';
+import Bosco from '../assets/landing/Bosco.jpg';
+
 // import dogImage from '../assets/landing/dog-bubble.png';
 
 export const pageData = {
@@ -145,6 +155,60 @@ export const pageData = {
     },
   ],
 };
+
+export const newsViewImageData = [
+  {
+    img: Bosco,
+    label: 'Bosco',
+  },
+  {
+    img: DogAtVet,
+    label: 'Dog at vet',
+  },
+  {
+    img: Emmie,
+    label: 'Emmie',
+  },
+  {
+    img: Freddie,
+    label: 'Freddie',
+  },
+  {
+    img: Gertie,
+    label: 'Gertie',
+  },
+  {
+    img: JellyBean,
+    label: 'JellyBean',
+  },
+  {
+    img: Krish,
+    label: 'Krish',
+  },
+  {
+    img: LouiAndTeddy,
+    label: 'Louie and Teddy',
+  },
+  {
+    img: Samantha,
+    label: 'Samantha',
+  },
+];
+
+export const newsViewVideoData = [
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
+  },
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
+  },
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
+  },
+];
 
 // --------------- GraphQL query - Retrieve Landing page data --------------
 export const GET_LANDING_PAGE_DATA_QUERY = false;
