@@ -20,11 +20,10 @@ import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
 import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
-import ReduxDataDictionary from '../DataDictionaryComponent/DataDictionary/ReduxDataDictionary';
-import init from './utils';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import JBrowseDetail from '../../pages/JbrowseDetail/JbrowseController';
+import ModelExplorer from './utils';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -61,16 +60,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
             <Route path="/fileViewer/:type/:id" component={JBrowseDetail} />
-            <Route
-              path="/icdc-data-model"
-              // eslint-disable-next-line arrow-body-style
-              render={() => {
-                // get data
-                init();
-                // return component
-                return <ReduxDataDictionary />;
-              }}
-            />
+            <Route path="/icdc-data-model" component={ModelExplorer} />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
             )}
