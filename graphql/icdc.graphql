@@ -156,6 +156,7 @@ type diagnosis {
   follow_up_data: String
   concurrent_disease: String
   concurrent_disease_type: String
+  diagnosis_id: String
   case: case @relation(name:"of_case", direction:OUT)
   files: [file] @relation(name:"from_diagnosis", direction:IN)
 }
@@ -170,7 +171,10 @@ type disease_extent {
   target_lesion: String
   date_of_evaluation: String
   measured_how: String
-  longest_measurement: String
+  longest_measurement: Float
+  longest_measurement_unit: String
+  longest_measurement_original: Float
+  longest_measurement_original_unit: String
   evaluation_number: String
   evaluation_code: String
   visit: visit @relation(name:"on_visit", direction:OUT)
@@ -183,8 +187,8 @@ type enrollment {
   date_of_informed_consent: String
   site_short_name: String
   veterinary_medical_center: String
-  cohort_description: String
   patient_subgroup: String
+  enrollment_id: String
   case: case @relation(name:"of_case", direction:OUT)
   prior_therapies: [prior_therapy] @relation(name:"at_enrollment", direction:IN)
   prior_surgeries: [prior_surgery] @relation(name:"at_enrollment", direction:IN)
@@ -303,7 +307,7 @@ type prior_therapy {
   total_dose_original: Float
   total_dose_original_unit: String
   agent_units_of_measure: String
-  best_response: String
+  best_response_to_prior_therapy: String
   nonresponse_therapy_type: String
   prior_therapy_type: String
   prior_steroid_exposure: Boolean
@@ -432,6 +436,7 @@ type study_site {
 type visit {
   visit_date: String
   visit_number: String
+  visit_id: String
   case: case @relation(name:"of_case", direction:OUT)
   cycle: cycle @relation(name:"of_cycle", direction:OUT)
   agent_administrations: [agent_administration] @relation(name:"on_visit", direction:IN)
@@ -476,7 +481,7 @@ type vital_signs {
   body_surface_area_original: Float
   body_surface_area_original_unit: String
   modified_ecog: String
-  ecg: Boolean
+  ecg: String
   assessment_timepoint: Int
   phase: String
   visit: visit @relation(name:"on_visit", direction:OUT)
@@ -847,7 +852,7 @@ type UnifiedCounts{
 
 type QueryType {
   "Version"
-  schemaVersion: String @cypher(statement: "RETURN '1.2.0'")
+  schemaVersion: String @cypher(statement: "RETURN '2.0.0'")
 
   "Simple count"
   numberOfStudies: Int @cypher(statement: "MATCH (n:study) WHERE n.study_disposition = 'Unrestricted' RETURN  count (n)")
