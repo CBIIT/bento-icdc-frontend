@@ -2,15 +2,13 @@ import React from 'react';
 import {
   withStyles,
   List,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
 } from '@material-ui/core';
 import { TwitterTimelineEmbed, TwitterTweetEmbed } from 'react-twitter-embed';
-import ReactPlayer from 'react-player';
 import lbg from '../../../assets/landing/Background.png';
-import { newsViewImageData } from '../../../bento/landingPageData';
+import { newsViewImageData, newsViewVideoData } from '../../../bento/landingPageData';
 import NewsItem from './NewsListItem';
+import NewsViewImage from './NewsViewImage';
+import NewsViewVideo from './NewsViewVideo';
 
 const NewsView = ({ classes, news }) => (
   <div className={classes.page}>
@@ -30,7 +28,7 @@ const NewsView = ({ classes, news }) => (
           <List className={classes.newsList}>
             {
                 // eslint-disable-next-line max-len
-                news.map((newsItem, index) => <NewsItem newsItem={newsItem} index={index + 1} total={news.length} />)
+                news.map(({ paragraph, label }, index) => <NewsItem paragraph={paragraph} index={index + 1} total={news.length} label={label} />)
               }
           </List>
         </div>
@@ -73,21 +71,28 @@ const NewsView = ({ classes, news }) => (
             <h4 className={classes.imageSectionHeading}>
               Images
             </h4>
-            <div className={classes.root}>
-              <ImageList className={classes.imageList} cols={2.5}>
-                {newsViewImageData.map((item) => (
-                  <ImageListItem key={item.img}>
-                    <img src={item.img} alt={item.titlee} className={classes.img} />
-                    <ImageListItemBar
-                      title={item.title}
-                      classes={{
-                        root: classes.titleBar,
-                        title: classes.title,
-                      }}
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
+
+            <div
+              className={classes.root}
+            >
+              <div className={classes.imageSectionOne}>
+                {
+                newsViewImageData.slice(0, 4)
+                  .map((image) => <NewsViewImage img={image.img} label={image.label} />)
+              }
+              </div>
+              <div className={classes.imageSectionTwo}>
+                <NewsViewImage img={newsViewImageData[5].img} label={newsViewImageData[5].label} />
+              </div>
+              <div className={classes.imageSectionThree}>
+                {
+                  newsViewImageData.slice(6, -1)
+                    .map((image) => <NewsViewImage img={image.img} label={image.label} />)
+                }
+              </div>
+              <div className={classes.imageSectionFour}>
+                <NewsViewImage img={newsViewImageData[8].img} label={newsViewImageData[8].label} />
+              </div>
             </div>
           </div>
         </div>
@@ -105,11 +110,13 @@ const NewsView = ({ classes, news }) => (
 
           <div className={classes.featuredVideo}>
             <div>
-              <ReactPlayer url="https://www.youtube.com/watch?v=bIWaMKZ9pl4" height="100%" width="100%" />
+              <NewsViewVideo url={newsViewVideoData[0].vid} label={newsViewVideoData[0].label} />
             </div>
             <div className={classes.otherVideos}>
-              <ReactPlayer url="https://www.youtube.com/watch?v=bIWaMKZ9pl4" height="15em" width="100%" />
-              <ReactPlayer url="https://www.youtube.com/watch?v=bIWaMKZ9pl4" height="15em" width="100%" />
+              {
+                newsViewVideoData.slice(1)
+                  .map((vid) => <NewsViewVideo url={vid.vid} label={vid.label} />)
+              }
             </div>
           </div>
 
@@ -157,7 +164,7 @@ const styles = (theme) => ({
   },
   newsList: {
     width: '30em',
-    height: '76.5em',
+    height: '69.9em',
     backgroundColor: '#fff',
     borderRadius: '0.5em',
     overflow: 'auto',
@@ -165,7 +172,6 @@ const styles = (theme) => ({
   twitterAndImageSection: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '3em',
   },
   twitterSectionHeading: {
     color: '#fff',
@@ -201,6 +207,7 @@ const styles = (theme) => ({
     justifyContent: 'center',
     padding: '1em',
     gap: '2em',
+    height: '44em',
   },
   twitterTimelineSection: {
     marginTop: '1em',
@@ -209,6 +216,10 @@ const styles = (theme) => ({
   imageSectionContainer: {
     position: 'relative',
     top: '4.1em',
+  },
+  dialogTitle: {
+    display: 'flex',
+    justifyContent: 'end',
   },
   imageSectionHeading: {
     color: '#fff',
@@ -267,26 +278,37 @@ const styles = (theme) => ({
     alignItems: 'center',
     paddingTop: '5em',
     paddingBottom: '5em',
-    gap: '6em',
+    gap: '2em',
     height: '100%',
   },
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    width: '48em',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#fff',
+    width: '47.9em',
+    display: 'grid',
+    gridTemplateColumns: '2fr 2fr 1fr 2fr',
+    padding: '0.5em',
+    gap: '0.5em',
     borderRadius: '0.5em',
-    padding: '1em',
   },
   img: {
     height: '100%',
   },
-  imageList: {
-    flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
+  imageSectionOne: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    height: '13.8em',
+    gap: '0.5em',
+  },
+  imageSectiontwo: {
+    height: '13.8em',
+  },
+  imageSectionThree: {
+    display: 'grid',
+    gap: '0.5em',
+    height: '13.8em',
+  },
+  imageSectionFour: {
+    height: '13.8em',
   },
   titlee: {
     color: theme.palette.primary.light,

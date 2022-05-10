@@ -11,10 +11,12 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  IconButton,
 } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 
 const NewsItem = ({
-  newsItem, index, total, classes,
+  paragraph, index, total, classes, label,
 }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -34,7 +36,6 @@ const NewsItem = ({
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ListItemText
-            // primary="Brunch this weekend?"
               secondary={(
                 <>
                   <Typography
@@ -44,7 +45,7 @@ const NewsItem = ({
                     color="text.primary"
                     className={classes.listItemBody}
                   >
-                    {newsItem.paragraph}
+                    {paragraph}
                   </Typography>
                 </>
             )}
@@ -60,26 +61,28 @@ const NewsItem = ({
         READ MORE
       </Button>
 
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitle}>
-          <Button onClick={handleClose}>X</Button>
-        </DialogTitle>
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} classes={{ paperWidthSm: classes.paper }}>
+        <div className={classes.dialogTitle}>
+          <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitle}>
+            <h3 className={classes.title}>{`Update: ${label}`}</h3>
+          </DialogTitle>
+          <IconButton
+            onClick={handleClose}
+            className={classes.closeIconButton}
+          >
+            <Close
+              className={classes.closeIcon}
+            />
+          </IconButton>
+        </div>
         <DialogContent
           dividers
+          className={classes.dialogContent}
         >
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
+          <p className={classes.dialogParagraph}>
             Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
             lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-            auctor fringilla.
-          </Typography>
+          </p>
         </DialogContent>
         {/* <DialogActions>
             <Button autoFocus onClick={handleClose} color="primary">
@@ -133,7 +136,35 @@ const styles = () => ({
   },
   dialogTitle: {
     display: 'flex',
-    justifyContent: 'end',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: '1.3em',
+  },
+  dialogParagraph: {
+    fontFamily: 'Inter',
+    fontWeight: '300',
+    fontSize: '1.21em',
+  },
+  dialogContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1em',
+  },
+  paper: {
+    maxWidth: '800px',
+  },
+  title: {
+    fontWeight: '600',
+    fontFamily: 'Raleway',
+    fontSize: '1.3em',
+  },
+  closeIconButton: {
+    color: 'black',
+    height: 'fit-content',
+  },
+  closeIcon: {
+    width: '15px',
+    height: '15px',
   },
 });
 

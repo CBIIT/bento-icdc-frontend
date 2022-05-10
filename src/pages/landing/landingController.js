@@ -3,11 +3,11 @@ import { CircularProgress } from '@material-ui/core';
 import yaml from 'js-yaml';
 import axios from 'axios';
 import YAMLData from '../../content/prod/aboutPagesContent.yaml';
-import env from '../../utils/env';
+// import env from '../../utils/env';
 import LandingView from './landingView';
 import NewsView from './views/newsView';
 
-const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
+const ABOUT_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/Dev/yaml/newsView.yaml';
 const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {

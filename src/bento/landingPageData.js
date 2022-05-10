@@ -159,30 +159,54 @@ export const pageData = {
 export const newsViewImageData = [
   {
     img: Bosco,
+    label: 'Bosco',
   },
   {
     img: DogAtVet,
+    label: 'Dog at vet',
   },
   {
     img: Emmie,
+    label: 'Emmie',
   },
   {
     img: Freddie,
+    label: 'Freddie',
   },
   {
     img: Gertie,
+    label: 'Gertie',
   },
   {
     img: JellyBean,
+    label: 'JellyBean',
   },
   {
     img: Krish,
+    label: 'Krish',
   },
   {
     img: LouiAndTeddy,
+    label: 'Louie and Teddy',
   },
   {
     img: Samantha,
+    label: 'Samantha',
+  },
+];
+
+export const newsViewVideoData = [
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
+  },
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
+  },
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
   },
 ];
 
