@@ -88,7 +88,7 @@ const styles = (theme) => ({
   },
   LinkBar: {
     position: 'relative',
-    zIndex: '1222',
+    zIndex: '1000',
   },
   Header: {
     position: 'relative',
@@ -102,10 +102,10 @@ const styles = (theme) => ({
   },
   '@global': {
     '*::-webkit-scrollbar': {
-      width: '0.6em',
+      width: 'none',
     },
     '*::-webkit-scrollbar-track': {
-      '-webkit-box-shadow': 'inset 0 0 6px #ccc',
+      '-webkit-box-shadow': 'inset 0 0 2px #ccc',
       borderRadius: '0px',
       backgroundColor: '#FFFFFF',
     },

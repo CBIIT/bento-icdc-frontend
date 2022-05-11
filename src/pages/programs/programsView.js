@@ -68,6 +68,7 @@ const styles = (theme) => ({
     paddingLeft: '27px',
     paddingRight: '27px',
     background: '#f3f3f3',
+    minWidth: '960px',
   },
   marginTop23: {
     marginTop: '23px',
@@ -148,6 +149,9 @@ const styles = (theme) => ({
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
+    maxWidth: '1345px',
+    minWidth: '960px',
+    margin: 'auto',
   },
   detailContainerHeader: {
     textTransform: 'uppercase',

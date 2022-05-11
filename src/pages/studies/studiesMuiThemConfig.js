@@ -43,6 +43,10 @@ export default ({
         },
       },
     },
+    root: {
+      maxHeight: '50px',
+      minHeight: '50px',
+    },
   };
 
   themesLight.overrides.MuiTablePagination = {
