@@ -11,12 +11,14 @@ import { Close } from '@material-ui/icons';
 
 const NewsViewVideo = ({ url, label, classes }) => {
   const [open, setOpen] = React.useState(false);
+  const [secondsElapsed, setSecondsElapsed] = React.useState(0);
   const [playing, setPlaying] = React.useState(false);
 
   const handleClickOpen = () => {
     setPlaying(true);
     setOpen(true);
   };
+
   const handleClose = () => {
     setPlaying(false);
     setOpen(false);
@@ -43,20 +45,21 @@ const NewsViewVideo = ({ url, label, classes }) => {
           className={classes.dialogContent}
         >
           <div className={classes.videoContainer}>
-            <ReactPlayer playing muted onStart={handleClickOpen} url={url} height="30em" width="100%" />
+            <ReactPlayer
+              playing
+              onProgress={({ playedSeconds }) => open || setSecondsElapsed(playedSeconds)}
+              url={`${url}&start=${secondsElapsed}`}
+              height="30em"
+              width="100%"
+            />
           </div>
           <p className={classes.dialogParagraph}>
             Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
             lacus vel augue laoreet rutrum faucibus dolor auctor.
           </p>
         </DialogContent>
-        {/* <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              Save changes
-            </Button>
-          </DialogActions> */}
       </Dialog>
-      <ReactPlayer playing={playing} muted onStart={handleClickOpen} url={url} height="100%" width="100%" />
+      <ReactPlayer playing={playing} muted onPlay={handleClickOpen} url={url} height="100%" width="100%" />
     </>
   );
 };
@@ -67,6 +70,7 @@ const styles = () => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingRight: '1.3em',
+    height: '4.5em',
   },
   title: {
     fontWeight: '600',
@@ -78,8 +82,8 @@ const styles = () => ({
     height: 'fit-content',
   },
   closeIcon: {
-    width: '15px',
-    height: '15px',
+    width: '1.4em',
+    height: '1.4em',
   },
   dialogContent: {
     display: 'flex',

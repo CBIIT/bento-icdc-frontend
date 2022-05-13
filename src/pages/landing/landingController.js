@@ -35,7 +35,6 @@ const LandingController = ({ match }) => {
   }
 
   if (data && match.path === NEWS_PATH) {
-    console.log('news deets', data);
     return (
       <NewsView
         availableSoonImage={data && data.availableSoonImage}

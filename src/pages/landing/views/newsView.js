@@ -2,6 +2,7 @@ import React from 'react';
 import {
   withStyles,
   List,
+  ImageList,
 } from '@material-ui/core';
 import { TwitterTimelineEmbed, TwitterTweetEmbed } from 'react-twitter-embed';
 import lbg from '../../../assets/landing/Background.png';
@@ -25,12 +26,19 @@ const NewsView = ({ classes, news }) => (
             Updates
           </h4>
 
-          <List className={classes.newsList}>
-            {
+          <div className={classes.newsListTitleBar}>
+            <div className={classes.newsListTitle}>
+              <h6 style={{ color: 'white', fontSize: '1em' }}>
+                Announcments
+              </h6>
+            </div>
+            <List className={classes.newsList}>
+              {
                 // eslint-disable-next-line max-len
                 news.map(({ paragraph, label }, index) => <NewsItem paragraph={paragraph} index={index + 1} total={news.length} label={label} />)
               }
-          </List>
+            </List>
+          </div>
         </div>
 
         <div className={classes.twitterAndImageSection}>
@@ -72,27 +80,12 @@ const NewsView = ({ classes, news }) => (
               Images
             </h4>
 
-            <div
-              className={classes.root}
-            >
-              <div className={classes.imageSectionOne}>
-                {
-                newsViewImageData.slice(0, 4)
-                  .map((image) => <NewsViewImage img={image.img} label={image.label} />)
-              }
-              </div>
-              <div className={classes.imageSectionTwo}>
-                <NewsViewImage img={newsViewImageData[5].img} label={newsViewImageData[5].label} />
-              </div>
-              <div className={classes.imageSectionThree}>
-                {
-                  newsViewImageData.slice(6, -1)
-                    .map((image) => <NewsViewImage img={image.img} label={image.label} />)
-                }
-              </div>
-              <div className={classes.imageSectionFour}>
-                <NewsViewImage img={newsViewImageData[8].img} label={newsViewImageData[8].label} />
-              </div>
+            <div className={classes.root}>
+              <ImageList classes={{ root: classes.imageList }} cols={2.5}>
+                {newsViewImageData.map((item) => (
+                  <NewsViewImage img={item.img} label={item.label} />
+                ))}
+              </ImageList>
             </div>
           </div>
         </div>
@@ -134,16 +127,36 @@ const styles = (theme) => ({
     backgroundSize: 'cover',
     backgroundAttachment: 'fixed',
   },
+  imageListItem: {
+    height: '100%',
+    width: '13.6em',
+  },
   pageBanner: {
     backgroundColor: 'rgba(25, 119, 204, 0.61)',
     height: '12.8em',
     marginTop: '-3.3em',
     display: 'flex',
     alignItems: 'center',
-    border: '1px solid #000',
     paddingLeft: '35em',
     position: 'relative',
     fontFamily: 'Raleway',
+  },
+  newsListTitleBar: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  newsListTitle: {
+    borderTopRightRadius: '0.5em',
+    borderTopLeftRadius: '0.5em',
+    WebkitBorderTopLeftRadius: '0.5em',
+    WebkitBorderTopRightRadius: '0.5em',
+    backgroundColor: '#1977CC',
+    fontSize: '1.2em',
+    margin: '0',
+    height: '2.28em',
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: '0.5em',
   },
   pageBannerText: {
     color: 'white',
@@ -164,10 +177,14 @@ const styles = (theme) => ({
   },
   newsList: {
     width: '30em',
-    height: '69.9em',
+    height: '65.8em',
     backgroundColor: '#fff',
-    borderRadius: '0.5em',
     overflow: 'auto',
+    overflowX: 'hidden',
+    borderBottomRightRadius: '0.5em',
+    borderBottomLeftRadius: '0.5em',
+    WebkitBorderBottoLeftRadius: '0.5em',
+    WebkitBorderBottomRightRadius: '0.5em',
   },
   twitterAndImageSection: {
     display: 'flex',
@@ -215,7 +232,7 @@ const styles = (theme) => ({
   },
   imageSectionContainer: {
     position: 'relative',
-    top: '4.1em',
+    top: '1.1em',
   },
   dialogTitle: {
     display: 'flex',
@@ -282,33 +299,24 @@ const styles = (theme) => ({
     height: '100%',
   },
   root: {
-    backgroundColor: '#fff',
-    width: '47.9em',
-    display: 'grid',
-    gridTemplateColumns: '2fr 2fr 1fr 2fr',
-    padding: '0.5em',
-    gap: '0.5em',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    width: '48em',
+    backgroundColor: theme.palette.background.paper,
     borderRadius: '0.5em',
+    padding: '1em',
   },
-  img: {
-    height: '100%',
-  },
-  imageSectionOne: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    height: '13.8em',
+  imageList: {
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+    height: '15em',
+    '& li': {
+      width: '13.1em',
+    },
     gap: '0.5em',
-  },
-  imageSectiontwo: {
-    height: '13.8em',
-  },
-  imageSectionThree: {
-    display: 'grid',
-    gap: '0.5em',
-    height: '13.8em',
-  },
-  imageSectionFour: {
-    height: '13.8em',
   },
   titlee: {
     color: theme.palette.primary.light,

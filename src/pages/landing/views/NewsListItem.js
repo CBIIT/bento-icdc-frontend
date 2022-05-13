@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   withStyles,
@@ -10,7 +9,6 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,
   IconButton,
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
@@ -29,7 +27,7 @@ const NewsItem = ({
 
   return (
     <div className={classes.container}>
-      <ListItem alignItems="flex-start" className={classes.listItem}>
+      <ListItem classes={{ root: classes.listItem }} alignItems="flex-start">
         <div className={classes.listItemContent}>
           <div className={classes.listItemCount}>
             {`${index}/${total}`}
@@ -84,11 +82,6 @@ const NewsItem = ({
             lacus vel augue laoreet rutrum faucibus dolor auctor.
           </p>
         </DialogContent>
-        {/* <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              Save changes
-            </Button>
-          </DialogActions> */}
       </Dialog>
       <Divider />
     </div>
@@ -133,12 +126,16 @@ const styles = () => ({
     fontWeight: '600',
     fontFamily: 'Raleway',
     borderRadius: '3em',
+    '&:hover': {
+      backgroundColor: '#CB8311',
+    },
   },
   dialogTitle: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingRight: '1.3em',
+    height: '4.5em',
   },
   dialogParagraph: {
     fontFamily: 'Inter',
@@ -163,8 +160,8 @@ const styles = () => ({
     height: 'fit-content',
   },
   closeIcon: {
-    width: '15px',
-    height: '15px',
+    width: '1.4em',
+    height: '1.4em',
   },
 });
 

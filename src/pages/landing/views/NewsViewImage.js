@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import {
   IconButton,
@@ -6,6 +5,7 @@ import {
   DialogTitle,
   DialogContent,
   withStyles,
+  ImageListItem,
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 
@@ -47,23 +47,25 @@ const NewsViewImage = ({ img, classes, label }) => {
             lacus vel augue laoreet rutrum faucibus dolor auctor.
           </p>
         </DialogContent>
-        {/* <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              Save changes
-            </Button>
-          </DialogActions> */}
       </Dialog>
-      <img aria-label="button" onClick={handleClickOpen} className={classes.img} src={img} alt="icdc news" />
+      <ImageListItem onClick={handleClickOpen} classes={{ root: classes.imageListItem }} key={img}>
+        <img src={img} alt={label} className={classes.img} />
+      </ImageListItem>
     </>
   );
 };
 
 const styles = () => ({
+  imageListItem: {
+    height: '100%',
+    width: '13.6em',
+  },
   dialogTitle: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingRight: '1.3em',
+    height: '4.5em',
   },
   img: {
     height: '100%',
@@ -79,8 +81,8 @@ const styles = () => ({
     height: 'fit-content',
   },
   closeIcon: {
-    width: '15px',
-    height: '15px',
+    width: '1.4em',
+    height: '1.4em',
   },
   dialogContent: {
     display: 'flex',
