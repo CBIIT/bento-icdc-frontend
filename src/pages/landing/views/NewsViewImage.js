@@ -92,6 +92,7 @@ const styles = () => ({
   imgContainer: {
     display: 'flex',
     justifyContent: 'center',
+    height: '58em',
   },
   dialogParagraph: {
     fontFamily: 'Inter',
