@@ -17,7 +17,8 @@ export default ({
   overridesObj.MUIDataTableToolbar = {
     root: {
       minHeight: '15px',
-      paddingTop: '20px',
+      paddingTop: '8px',
+      paddingBottom: '8px',
     },
     actions: {
       '& span': {

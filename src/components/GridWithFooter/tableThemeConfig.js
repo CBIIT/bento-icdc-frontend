@@ -35,7 +35,7 @@ export default ({
   overridesObj.MUIDataTableToolbar = {
     root: {
       minHeight: '15px',
-      paddingTop: '20px',
+      paddingTop: '0px',
       backgroundColor: '#fffff',
       paddingLeft: '0px',
       paddingRight: '35px',
