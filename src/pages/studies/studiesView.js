@@ -89,7 +89,7 @@ const Studies = ({ classes, data, invalid }) => {
     <ul className={classes.crdcLinks}>
       {linksArray.map((link) => (
         <li>
-          <a href={link.url}>{`${link.text}`}</a>
+          <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>{`${link.text}`}</a>
         </li>
       ))}
     </ul>
@@ -104,7 +104,7 @@ const Studies = ({ classes, data, invalid }) => {
         {
         flag && (
         <div className={classes.dataAvailIndicator}>
-          <Tooltip title={title}>
+          <Tooltip title={title} interactive={column.dataField === 'numberOfCRDCNodes'}>
             {column.indicator && column.useImage
               ? <img className={classes.dataAvailIndicatorImage} src={column.indicator} alt={`${column.header} icon`} />
               : <FiberManualRecordRounded className={classes.dataAvailIndicatorIcon} />}
@@ -194,9 +194,6 @@ const Studies = ({ classes, data, invalid }) => {
 };
 
 const styles = (theme) => ({
-  crdcLinks: {
-    listStyle: 'none',
-  },
   dataAvailIndicator: {
     textAlign: 'center',
   },
@@ -206,6 +203,9 @@ const styles = (theme) => ({
   dataAvailIndicatorImage: {
     height: '20px',
     width: '20px',
+  },
+  crdcLinkStyle: {
+    color: '#000',
   },
   link: {
     textDecoration: 'underline',
