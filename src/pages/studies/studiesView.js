@@ -65,15 +65,15 @@ const Studies = ({ classes, data, invalid }) => {
         {value}
       </Link>
       {
-          column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[5]))
+          column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[10]))
         }
     </>
   );
 
   const customCaseNumbLink = (column, value, tableMeta) => (
-    renderSwitch(studyDisposition(tableMeta.rowData[5]))
+    renderSwitch(studyDisposition(tableMeta.rowData[10]))
       ? (
-        renderSwitch(studyDisposition(tableMeta.rowData[5]))
+        renderSwitch(studyDisposition(tableMeta.rowData[10]))
       ) : (
         <Link
           className={classes.buttonCaseNumb}
