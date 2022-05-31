@@ -27,6 +27,7 @@ import {
   variantLocation,
   defaultSession,
   theme,
+  annotation,
 } from '../../bento/JBrowseData';
 
 const getAdapter = ({ bamLocationUri, indexUri }) => {
@@ -62,38 +63,41 @@ const getVariant = ({ vcfGzLocationUri, indexUri }) => {
   return adapter;
 };
 
-const getDefaultSession = (alignments, session) => {
-  if (alignments && alignments.length > 0) {
-    alignments.forEach((item) => {
+const getDefaultSession = (tracks, session) => {
+  if (tracks && tracks.length > 0) {
+    tracks.forEach((item) => {
+      let display;
       if (item.type === alignment.type) {
-        const display = new Display(
+        display = new Display(
           alignment.display,
           alignment.height,
           alignment.maxDisplayedBpPerPx,
           `${item.trackId}-${alignment.display}`,
         );
-        const viewTrack = new ViewTrack(
-          item.type,
-          item.trackId,
-          [{ ...display }],
-        );
-        session.view.tracks.push({ ...viewTrack });
       }
 
       if (item.type === variant.type) {
-        const display = new Display(
+        display = new Display(
           variant.display,
           variant.height,
           variant.maxDisplayedBpPerPx,
           `${item.trackId}-${variant.display}`,
         );
-        const viewTrack = new ViewTrack(
-          item.type,
-          item.trackId,
-          [{ ...display }],
-        );
-        session.view.tracks.push({ ...viewTrack });
       }
+      if (item.type === annotation.type) {
+        display = new Display(
+          annotation.display,
+          annotation.height,
+          annotation.maxDisplayedBpPerPx,
+          `${item.trackId}-${item.display}`,
+        );
+      }
+      const viewTrack = new ViewTrack(
+        item.type,
+        item.trackId,
+        [{ ...display }],
+      );
+      session.view.tracks.push({ ...viewTrack });
     });
   }
   return session;
@@ -132,6 +136,8 @@ const getTracks = ({
       allTracks.push(track);
     }
   });
+  allTracks.push(annotation);
+  console.log(allTracks);
   return allTracks;
 };
 

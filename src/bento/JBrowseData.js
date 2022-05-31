@@ -32,6 +32,33 @@ export const variant = {
   height: 200,
 };
 
+export const annotation = {
+  name: 'GCF_000002285.3_CanFam3.1_genomic.sorted.gff',
+  trackId: 'NCBI_Ref_Seq_(GFF3Tabix)',
+  type: 'FeatureTrack',
+  display: 'LinearBasicDisplay',
+  maxDisplayedBpPerPx: 50000,
+  height: 200,
+  metadata: {
+    source: 'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/002/285/GCF_000002285.3_CanFam3.1/',
+    dateaccessed: '4/5/2022',
+  },
+  adapter: {
+    type: 'Gff3TabixAdapter',
+    gffGzLocation: {
+      uri: 'https://github.com/rana22/Jbrowse_test/blob/master/assets/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz?raw=true',
+      locationType: 'UriLocation',
+    },
+    index: {
+      location: {
+        uri: 'https://github.com/rana22/Jbrowse_test/blob/master/assets/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz.tbi?raw=true',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  assemblyNames: ['canFam3'],
+};
+
 export const jBrowseOptions = {
   jBrowse: true,
   variants: true,
