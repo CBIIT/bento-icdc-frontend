@@ -120,6 +120,34 @@ export const jBrowseOptions = {
 };
 
 export const assemblies = [{
+  name: 'canFam3',
+  aliases: ['Broad CanFam3.1'],
+  sequence: {
+    type: 'ReferenceSequenceTrack',
+    trackId: 'reference_id_canFam3',
+    adapter: {
+      type: 'TwoBitAdapter',
+      twoBitLocation: {
+        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.2bit',
+        locationType: 'UriLocation',
+      },
+      chromSizesLocation: {
+        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chrom.sizes',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  refNameAliases: {
+    adapter: {
+      type: 'RefNameAliasAdapter',
+      location: {
+        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chromAlias.txt',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+},
+{
   name: 'canFam6',
   aliases: ['Dog10K_Boxer_Tasha'],
   sequence: {
@@ -198,34 +226,6 @@ export const assemblies = [{
       type: 'RefNameAliasAdapter',
       location: {
         uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam4/bigZips/canFam4.chromAlias.txt',
-        locationType: 'UriLocation',
-      },
-    },
-  },
-},
-{
-  name: 'canFam3',
-  aliases: ['Broad CanFam3.1'],
-  sequence: {
-    type: 'ReferenceSequenceTrack',
-    trackId: 'reference_id_canFam3',
-    adapter: {
-      type: 'TwoBitAdapter',
-      twoBitLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.2bit',
-        locationType: 'UriLocation',
-      },
-      chromSizesLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chrom.sizes',
-        locationType: 'UriLocation',
-      },
-    },
-  },
-  refNameAliases: {
-    adapter: {
-      type: 'RefNameAliasAdapter',
-      location: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chromAlias.txt',
         locationType: 'UriLocation',
       },
     },
@@ -409,14 +409,14 @@ export const defaultSession = {
     tracks: [
       {
         type: 'ReferenceSequenceTrack',
-        configuration: 'reference_id_canFam6',
+        configuration: 'reference_id_canFam3',
         displays: [
           {
             type: 'LinearReferenceSequenceDisplay',
             maxDisplayedBpPerPx: 22345,
             height: 200,
             configuration:
-              'reference_id_canFam6-LinearReferenceSequenceDisplay',
+              'reference_id_canFam3-LinearReferenceSequenceDisplay',
           },
         ],
       },
