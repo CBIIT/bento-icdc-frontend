@@ -9,9 +9,10 @@ import React from 'react';
 import _ from 'lodash';
 import { ReduxDataDictionary, getModelExploreData } from 'model-explorer';
 import store from '../../store';
+import { DATA_MODEL_URL, DATA_MODEL_PROPS_URL, filterConfig } from '../../bento/dataDictionaryData';
 
 async function getData() {
-  const response = await getModelExploreData();
+  const response = await getModelExploreData(DATA_MODEL_URL, DATA_MODEL_PROPS_URL);
   Promise.all(
     [
       store.dispatch({
