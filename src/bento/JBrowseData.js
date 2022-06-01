@@ -61,10 +61,41 @@ export const annotation = {
   assemblyNames: ['canFam3'],
 };
 
+export const ensembl = {
+  name: 'canFam3.ens.gff',
+  trackId: 'Ensemble_Ref_Seq_(GFF3Tabix)',
+  type: 'FeatureTrack',
+  display: 'LinearBasicDisplay',
+  maxDisplayedBpPerPx: 50000,
+  height: 200,
+  metadata: {
+    source: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/genes/',
+    dateaccessed: '4/5/2022',
+  },
+  adapter: {
+    type: 'Gff3TabixAdapter',
+    gffGzLocation: {
+      uri: 'https://github.com/rana22/Jbrowse_test/blob/master/assets/canFam3.ensGene.sorted.gff.gz?raw=true',
+      locationType: 'UriLocation',
+    },
+    index: {
+      location: {
+        uri: 'https://github.com/rana22/Jbrowse_test/blob/master/assets/canFam3.ensGene.sorted.gff.gz.tbi?raw=true',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  assemblyNames: ['canFam3'],
+};
+
 export const jBrowseOptions = {
   jBrowse: true,
   variants: true,
   alignments: true,
+  additionalTracks: [
+    annotation,
+    ensembl,
+  ],
   optionalTracks: [
     {
       display: false,

@@ -27,7 +27,6 @@ import {
   variantLocation,
   defaultSession,
   theme,
-  annotation,
   height,
   maxDisplayedBpPerPx,
 } from '../../bento/JBrowseData';
@@ -65,7 +64,7 @@ const getVariant = ({ vcfGzLocationUri, indexUri }) => {
   return adapter;
 };
 
-const getDisplayValue = (display, trackId) => new Display(
+const getSessionDisplayValue = (display, trackId) => new Display(
   display,
   height,
   maxDisplayedBpPerPx,
@@ -78,15 +77,13 @@ const getDefaultSession = (tracks, session) => {
       let display;
       switch (item.type) {
         case alignment.type:
-          display = getDisplayValue(alignment.display, alignment.trackId);
+          display = getSessionDisplayValue(alignment.display, alignment.trackId);
           break;
         case variant.type:
-          display = getDisplayValue(variant.display, variant.trackId);
-          break;
-        case annotation.type:
-          display = getDisplayValue(annotation.display, annotation.trackId);
+          display = getSessionDisplayValue(variant.display, variant.trackId);
           break;
         default:
+          display = getSessionDisplayValue(item.display, item.trackId);
           break;
       }
       const viewTrack = new ViewTrack(
@@ -101,7 +98,7 @@ const getDefaultSession = (tracks, session) => {
 };
 
 const getTracks = ({
-  alignmentUris, variantUris, optionalTracks,
+  alignmentUris, variantUris, additionalTracks,
 }) => {
   const allTracks = [];
   if (alignmentUris.file_name) {
@@ -128,13 +125,7 @@ const getTracks = ({
     );
     allTracks.push(variantOpts);
   }
-  optionalTracks.forEach((track) => {
-    if (track.display) {
-      allTracks.push(track);
-    }
-  });
-  allTracks.push(annotation);
-  console.log(allTracks);
+  allTracks.push(...additionalTracks);
   return allTracks;
 };
 
@@ -143,7 +134,7 @@ const JBrowseViewDetail = ({
   vcfFiles,
   options: {
     alignments,
-    optionalTracks,
+    additionalTracks,
   },
 }) => {
   const [trackList, setTracks] = useState([]);
@@ -179,7 +170,7 @@ const JBrowseViewDetail = ({
     }
 
     const currentTracks = getTracks({
-      alignmentUris, alignments, variantUris, optionalTracks,
+      alignmentUris, alignments, variantUris, additionalTracks,
     });
 
     const initSession = getDefaultSession(currentTracks, session);
