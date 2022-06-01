@@ -17,7 +17,7 @@ async function getData() {
     [
       store.dispatch({
         type: 'RECEIVE_DICTIONARY',
-        payload: { data: response.data },
+        payload: { data: response.data, facetfilterConfig: filterConfig },
       }),
       store.dispatch({
         type: 'RECEIVE_VERSION_INFO',
