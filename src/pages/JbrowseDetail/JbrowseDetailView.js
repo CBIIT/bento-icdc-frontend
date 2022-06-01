@@ -28,6 +28,8 @@ import {
   defaultSession,
   theme,
   annotation,
+  height,
+  maxDisplayedBpPerPx,
 } from '../../bento/JBrowseData';
 
 const getAdapter = ({ bamLocationUri, indexUri }) => {
@@ -63,34 +65,29 @@ const getVariant = ({ vcfGzLocationUri, indexUri }) => {
   return adapter;
 };
 
+const getDisplayValue = (display, trackId) => new Display(
+  display,
+  height,
+  maxDisplayedBpPerPx,
+  `${trackId}-${display}`,
+);
+
 const getDefaultSession = (tracks, session) => {
   if (tracks && tracks.length > 0) {
     tracks.forEach((item) => {
       let display;
-      if (item.type === alignment.type) {
-        display = new Display(
-          alignment.display,
-          alignment.height,
-          alignment.maxDisplayedBpPerPx,
-          `${item.trackId}-${alignment.display}`,
-        );
-      }
-
-      if (item.type === variant.type) {
-        display = new Display(
-          variant.display,
-          variant.height,
-          variant.maxDisplayedBpPerPx,
-          `${item.trackId}-${variant.display}`,
-        );
-      }
-      if (item.type === annotation.type) {
-        display = new Display(
-          annotation.display,
-          annotation.height,
-          annotation.maxDisplayedBpPerPx,
-          `${item.trackId}-${item.display}`,
-        );
+      switch (item.type) {
+        case alignment.type:
+          display = getDisplayValue(alignment.display, alignment.trackId);
+          break;
+        case variant.type:
+          display = getDisplayValue(variant.display, variant.trackId);
+          break;
+        case annotation.type:
+          display = getDisplayValue(annotation.display, annotation.trackId);
+          break;
+        default:
+          break;
       }
       const viewTrack = new ViewTrack(
         item.type,

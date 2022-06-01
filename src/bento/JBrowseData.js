@@ -13,6 +13,8 @@ export const FILE_TYPE_VCF_INDEX = 'tbi';
 export const JbrowserFiles = [FILE_TYPE_BAM, FILE_TYPE_BAI, FILE_TYPE_VCF, FILE_TYPE_VCF_INDEX];
 export const alignemntLocation = 'chr1:60,632,043..60,636,011';
 export const variantLocation = 'chr1:60,032,043..60,636,011';
+export const maxDisplayedBpPerPx = 50000;
+export const height = 200;
 // size in bytes
 export const chunkSizeLimit = 20000000;
 export const alignment = {
