@@ -173,7 +173,7 @@ const generateSpotlightContent = (template, classes, item) => {
             height: '448px',
           }}
           >
-            <img src={item.img} alt="landing" className={classes.imageWithCaption} />
+            <img src={item.img} alt={item.alt} className={classes.imageWithCaption} />
 
           </div>
           <div style={{
@@ -189,19 +189,19 @@ const generateSpotlightContent = (template, classes, item) => {
     case 'noCaptionImage':
       return (
         <div className={classes.noCaptionImageContainer}>
-          <img src={item.img} alt="landing" className={classes.imageWithCaption} />
+          <img src={item.img} alt={item.alt} className={classes.imageWithCaption} />
         </div>
       );
     case 'smallIcon':
       return (
         <div className={classes.smallIconContainer}>
-          <img src={item.img} alt="landing" />
+          <img src={item.img} alt={item.alt} />
         </div>
       );
     case 'largeIcon':
       return (
         <div className={classes.largeIconContainer}>
-          <img src={item.img} alt="landing" />
+          <img src={item.img} alt={item.alt} />
         </div>
       );
     default:
