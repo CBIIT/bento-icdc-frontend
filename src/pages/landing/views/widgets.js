@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Widgets = ({ classes }) => (
-  <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
+  <Grid className={classes.root} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
     {
       pageData.widgets.map((widget) => (
         <Grid item xs={3} className={classes.widget}>
@@ -43,6 +43,9 @@ const Widgets = ({ classes }) => (
 );
 
 const styles = (theme) => ({
+  root: {
+    marginTop: '2em',
+  },
   widget: {
     paddingLeft: theme.spacing(2),
   },

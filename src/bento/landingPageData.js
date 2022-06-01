@@ -4,7 +4,6 @@ import Programs from '../assets/landing/Programs.png';
 import studies from '../assets/landing/studies.png';
 import spotlightStudy from '../assets/landing/Spotlight_Studies.png';
 import datadictionary from '../assets/landing/carousel.datadic.v2.png';
-import dogIcon from '../assets/landing/Button.Explore.Active.png';
 import studyActive from '../assets/landing/Button.Studies.Active.png';
 import spotLight from '../assets/landing/Button.Spotlight.Active.png';
 import datadictionaryIcon from '../assets/landing/Button.DataDictionary.Open.png';
@@ -71,7 +70,7 @@ export const pageData = {
       index: 0,
       label: 'Explore ICDC',
       value: 'explore',
-      icon: dogIcon,
+      icon: 'https://github.com/CBIIT/datacommons-assets/blob/main/icdc/images/png/Button.Explore.Active.png?raw=true',
       content: {
         callToActionTitle: 'Integrated\n Canine\n Data\n Commons',
         callToActionDescription: 'Exploring, analyzing, and\n understanding the biological\n relationships between human\n and canine cancers.',
@@ -117,6 +116,26 @@ export const pageData = {
         callToActionButtonText: 'VIEW THE STUDY',
         callToActionLink: '/study/UBC01',
         image: spotlightStudy,
+        template: 'twitter',
+        twitter: {
+          tweetId: '1493638757001711620',
+        },
+        youtube: {
+          url: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+        },
+        imageWithCaption: {
+          img: DogAtVet,
+          caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        },
+        noCaptionImage: {
+          img: DogAtVet,
+        },
+        smallIcon: {
+          img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+        },
+        largeIcon: {
+          img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+        },
       },
     },
   ],
