@@ -122,7 +122,7 @@ const Studies = ({ classes, data, invalid }) => {
   // eslint-disable-next-line arrow-body-style
   const generateDataAvailabilityTooltipText = () => {
     return (
-      <div style={{ display: 'grid', zIndex: '200' }}>
+      <div style={{ display: 'grid' }}>
         <h3 style={{ textAlign: 'center' }}>Data Avalaibility:</h3>
         {
           pageData.table.columns.map((item) => (
@@ -145,7 +145,12 @@ const Studies = ({ classes, data, invalid }) => {
     label: column.icon ? column.legendTooltip
       ? (
         <div style={{ display: 'flex' }}>
-          <Tooltip title={generateDataAvailabilityTooltipText()} interactive>
+          <Tooltip
+            title={generateDataAvailabilityTooltipText()}
+            interactive
+            className={classes.legend}
+            placement="top"
+          >
             <IconButton aria-label="help" className={classes.legendTooltip}>
               <img style={{ width: '0.8em' }} src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg" alt="tooltip" />
             </IconButton>
@@ -236,6 +241,9 @@ const styles = (theme) => ({
   },
   crdcLinkStyle: {
     color: '#000',
+  },
+  legend: {
+    zIndex: '1000',
   },
   legendTooltip: {
     position: 'relative',
