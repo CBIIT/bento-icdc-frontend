@@ -48,12 +48,12 @@ export const annotation = {
   adapter: {
     type: 'Gff3TabixAdapter',
     gffGzLocation: {
-      uri: 'https://github.com/rana22/Jbrowse_test/blob/master/assets/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz?raw=true',
+      uri: 'https://github.com/CBIIT/icdc-genomics/blob/main/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz?raw=true',
       locationType: 'UriLocation',
     },
     index: {
       location: {
-        uri: 'https://github.com/rana22/Jbrowse_test/blob/master/assets/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz.tbi?raw=true',
+        uri: 'https://github.com/CBIIT/icdc-genomics/blob/main/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz.tbi?raw=true',
         locationType: 'UriLocation',
       },
     },
@@ -75,12 +75,12 @@ export const ensembl = {
   adapter: {
     type: 'Gff3TabixAdapter',
     gffGzLocation: {
-      uri: 'https://github.com/rana22/Jbrowse_test/blob/master/assets/canFam3.ensGene.sorted.gff.gz?raw=true',
+      uri: 'https://github.com/CBIIT/icdc-genomics/blob/main/canFam3.ensGene.sorted.gff.gz?raw=true',
       locationType: 'UriLocation',
     },
     index: {
       location: {
-        uri: 'https://github.com/rana22/Jbrowse_test/blob/master/assets/canFam3.ensGene.sorted.gff.gz.tbi?raw=true',
+        uri: 'https://github.com/CBIIT/icdc-genomics/blob/main/canFam3.ensGene.sorted.gff.gz.tbi?raw=true',
         locationType: 'UriLocation',
       },
     },
