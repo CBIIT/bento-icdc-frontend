@@ -88,9 +88,21 @@ const Studies = ({ classes, data, invalid }) => {
   const generateCRDCLinks = (linksArray) => (
     <ul className={classes.crdcLinks}>
       {linksArray.map((link) => (
-        <li>
-          <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>{`${link.text}`}</a>
-        </li>
+        <div style={{ display: 'flex' }}>
+          <li>
+            <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
+              {`${link.text}`}
+              <img
+                style={{
+                  width: '1.5em',
+                }}
+                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
+                alt="external link icon"
+              />
+            </a>
+          </li>
+
+        </div>
       ))}
     </ul>
   );
@@ -205,7 +217,9 @@ const styles = (theme) => ({
     width: '20px',
   },
   crdcLinkStyle: {
-    color: '#000',
+    color: '#DC762F',
+    display: 'flex',
+    gap: '0.5em',
   },
   link: {
     textDecoration: 'underline',
