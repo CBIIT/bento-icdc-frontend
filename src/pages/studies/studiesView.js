@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
 import {
   Grid,
+  IconButton,
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -16,7 +14,7 @@ import {
 import { useSelector } from 'react-redux';
 import { FiberManualRecordRounded } from '@material-ui/icons';
 import {
-  pageData, textLabels, GET_STUDY_DATA_QUERY,
+  pageData, textLabels,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
 import { navigatedToDashboard } from '../../utils/utils';
@@ -121,10 +119,42 @@ const Studies = ({ classes, data, invalid }) => {
     ...pageData.table.optionalColumns,
   ]);
 
+  // eslint-disable-next-line arrow-body-style
+  const generateDataAvailabilityTooltipText = () => {
+    return (
+      <div style={{ display: 'grid', zIndex: '200' }}>
+        <h3 style={{ textAlign: 'center' }}>Data Avalaibility:</h3>
+        {
+          pageData.table.columns.map((item) => (
+            item.icon && (
+            <div style={{ display: 'flex', gap: '2em', marginBottom: '0.5em' }}>
+              <img src={item.icon} alt={`${item.label} icon`} style={{ width: '3em' }} />
+              {' '}
+              {item.label}
+            </div>
+            )
+          ))
+        }
+      </div>
+    );
+  };
+
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     icon: !!column.icon,
-    label: column.icon ? <img src={column.icon} alt={`${column.label}'s icon`} /> : column.header,
+    label: column.icon ? column.legendTooltip
+      ? (
+        <div style={{ display: 'flex' }}>
+          <Tooltip title={generateDataAvailabilityTooltipText()} interactive>
+            <IconButton aria-label="help" className={classes.legendTooltip}>
+              <img style={{ width: '0.8em' }} src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg" alt="tooltip" />
+            </IconButton>
+          </Tooltip>
+          <img src={column.icon} alt={`${column.label}'s icon`} />
+        </div>
+      )
+      : <img src={column.icon} alt={`${column.label}'s icon`} />
+      : column.header,
     options: {
       display: column.display,
       viewColumns: column.viewColumns,
@@ -206,6 +236,10 @@ const styles = (theme) => ({
   },
   crdcLinkStyle: {
     color: '#000',
+  },
+  legendTooltip: {
+    position: 'relative',
+    bottom: '0.5em',
   },
   link: {
     textDecoration: 'underline',
