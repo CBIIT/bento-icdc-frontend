@@ -58,7 +58,7 @@ export const annotation = {
       },
     },
   },
-  assemblyNames: ['canFam3'],
+  assemblyNames: [...assemblyNames],
 };
 
 export const ensembl = {
@@ -85,7 +85,7 @@ export const ensembl = {
       },
     },
   },
-  assemblyNames: ['canFam3'],
+  assemblyNames: [...assemblyNames],
 };
 
 export const jBrowseOptions = {
