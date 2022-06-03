@@ -123,7 +123,7 @@ const Studies = ({ classes, data, invalid }) => {
   const generateDataAvailabilityTooltipText = () => {
     return (
       <div style={{ display: 'grid' }}>
-        <h3 style={{ textAlign: 'center' }}>Data Avalaibility:</h3>
+        <h3 style={{ textAlign: 'center' }}>Data Availability:</h3>
         {
           pageData.table.columns.map((item) => (
             item.icon && (
@@ -149,7 +149,7 @@ const Studies = ({ classes, data, invalid }) => {
             title={generateDataAvailabilityTooltipText()}
             interactive
             className={classes.legend}
-            placement="top"
+            placement="left"
           >
             <IconButton aria-label="help" className={classes.legendTooltip}>
               <img style={{ width: '0.8em' }} src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg" alt="tooltip" />
