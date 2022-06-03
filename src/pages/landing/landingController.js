@@ -9,51 +9,53 @@ import YAMLData from '../../content/prod/aboutPagesContent.yaml';
 import LandingView from './landingView';
 import NewsView from './views/newsView';
 
-const ABOUT_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/main/yaml/newsView.yaml';
+const LANDING_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/landingView.yaml';
+const NEWS_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/newsView.yaml';
 const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {
-  const [data, setData] = useState([]);
+  const [newsData, setNewsData] = useState([]);
   const [landingPageData, setLandingPageData] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchStaticContent = async (url, setter) => {
       let resultData = [];
       let result = [];
       try {
-        result = await axios.get(ABOUT_CONTENT_URL);
+        result = await axios.get(url);
 
         resultData = parse(result.data);
+        if (setter === 'landing') {
+          setLandingPageData(resultData[0]);
+        } else {
+          setNewsData(resultData[0]);
+        }
       } catch (error) {
         result = await axios.get(YAMLData);
         resultData = parse(result.data);
       }
-
-      const supportObj = resultData.find(({ page }) => page === '/news');
-      const landingPageObj = resultData.find(({ page }) => page === 'landing');
-      setLandingPageData(landingPageObj);
-      setData(supportObj);
     };
-    fetchData();
+    fetchStaticContent(LANDING_CONTENT_URL, 'landing');
+    fetchStaticContent(NEWS_CONTENT_URL, 'news');
   }, []);
 
-  if (data.length === 0 || data === undefined) {
+  if (newsData.length === 0 || newsData === undefined || landingPageData === undefined) {
     return <CircularProgress />;
   }
 
-  if (data && match.path === NEWS_PATH) {
+  if (newsData && match.path === NEWS_PATH) {
     return (
       <NewsView
-        availableSoonImage={data && data.availableSoonImage}
-        news={data && data.content}
+        availableSoonImage={newsData && newsData.availableSoonImage}
+        news={newsData && newsData.content}
       />
     );
   }
 
   return (
     <LandingView
-      link={data.sourceLink1 || 'testlink'}
+      link={newsData.sourceLink1 || 'testlink'}
       pageData={landingPageData && landingPageData}
-      primaryContentImage={data && data.primaryContentImage}
+      primaryContentImage={newsData && newsData.primaryContentImage}
     />
   );
 };
