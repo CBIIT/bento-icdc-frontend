@@ -94,11 +94,25 @@ const Studies = ({ classes, data, invalid }) => {
       ))}
     </ul>
   );
+  const generateIndicatorTooltipTitle = (dataField, value) => {
+    switch (dataField) {
+      case 'numberOfCaseFiles':
+        return `${value} Case File(s)`;
+      default:
+        return '';
+    }
+  };
+
   const customIcon = (column, value, tableMeta) => {
+    console.log('col', column);
+    console.log('val', value);
+    console.log('tabMeeta', tableMeta);
     const flag = value > 0;
-    const title = data.studiesByProgram[tableMeta.rowIndex].numberOfCRDCNodes > 0 && column.dataField === 'numberOfCRDCNodes'
-      ? generateCRDCLinks(data.studiesByProgram[tableMeta.rowIndex].CRDCLinks)
-      : `${data.studiesByProgram[tableMeta.rowIndex][column.dataField]} ${column.header}`;
+    const title = generateIndicatorTooltipTitle(column.dataField, value);
+    // eslint-disable-next-line max-len
+    // const title = data.studiesByProgram[tableMeta.rowIndex].numberOfCRDCNodes > 0 && column.dataField === 'numberOfCRDCNodes'
+    //   ? generateCRDCLinks(data.studiesByProgram[tableMeta.rowIndex].CRDCLinks)
+    //   : `${data.studiesByProgram[tableMeta.rowIndex][column.dataField]} ${column.header}`;
     return (
       <>
         {

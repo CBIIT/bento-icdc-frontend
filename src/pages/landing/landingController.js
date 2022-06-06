@@ -50,7 +50,8 @@ const LandingController = ({ match }) => {
       />
     );
   }
-
+  console.log('lamding', landingPageData);
+  console.log('nes', newsData);
   return (
     <LandingView
       link={newsData.sourceLink1 || 'testlink'}
