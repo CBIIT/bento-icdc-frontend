@@ -27,6 +27,8 @@ import {
   variantLocation,
   defaultSession,
   theme,
+  height,
+  maxDisplayedBpPerPx,
 } from '../../bento/JBrowseData';
 
 const getAdapter = ({ bamLocationUri, indexUri }) => {
@@ -62,45 +64,41 @@ const getVariant = ({ vcfGzLocationUri, indexUri }) => {
   return adapter;
 };
 
-const getDefaultSession = (alignments, session) => {
-  if (alignments && alignments.length > 0) {
-    alignments.forEach((item) => {
-      if (item.type === alignment.type) {
-        const display = new Display(
-          alignment.display,
-          alignment.height,
-          alignment.maxDisplayedBpPerPx,
-          `${item.trackId}-${alignment.display}`,
-        );
-        const viewTrack = new ViewTrack(
-          item.type,
-          item.trackId,
-          [{ ...display }],
-        );
-        session.view.tracks.push({ ...viewTrack });
-      }
+const getSessionDisplayValue = (display, trackId) => new Display(
+  display,
+  height,
+  maxDisplayedBpPerPx,
+  `${trackId}-${display}`,
+);
 
-      if (item.type === variant.type) {
-        const display = new Display(
-          variant.display,
-          variant.height,
-          variant.maxDisplayedBpPerPx,
-          `${item.trackId}-${variant.display}`,
-        );
-        const viewTrack = new ViewTrack(
-          item.type,
-          item.trackId,
-          [{ ...display }],
-        );
-        session.view.tracks.push({ ...viewTrack });
+const getDefaultSession = (tracks, session) => {
+  if (tracks && tracks.length > 0) {
+    tracks.forEach((item) => {
+      let display;
+      switch (item.type) {
+        case alignment.type:
+          display = getSessionDisplayValue(alignment.display, alignment.trackId);
+          break;
+        case variant.type:
+          display = getSessionDisplayValue(variant.display, variant.trackId);
+          break;
+        default:
+          display = getSessionDisplayValue(item.display, item.trackId);
+          break;
       }
+      const viewTrack = new ViewTrack(
+        item.type,
+        item.trackId,
+        [{ ...display }],
+      );
+      session.view.tracks.push({ ...viewTrack });
     });
   }
   return session;
 };
 
 const getTracks = ({
-  alignmentUris, variantUris, optionalTracks,
+  alignmentUris, variantUris, additionalTracks,
 }) => {
   const allTracks = [];
   if (alignmentUris.file_name) {
@@ -127,11 +125,7 @@ const getTracks = ({
     );
     allTracks.push(variantOpts);
   }
-  optionalTracks.forEach((track) => {
-    if (track.display) {
-      allTracks.push(track);
-    }
-  });
+  allTracks.push(...additionalTracks);
   return allTracks;
 };
 
@@ -140,7 +134,7 @@ const JBrowseViewDetail = ({
   vcfFiles,
   options: {
     alignments,
-    optionalTracks,
+    additionalTracks,
   },
 }) => {
   const [trackList, setTracks] = useState([]);
@@ -176,7 +170,7 @@ const JBrowseViewDetail = ({
     }
 
     const currentTracks = getTracks({
-      alignmentUris, alignments, variantUris, optionalTracks,
+      alignmentUris, alignments, variantUris, additionalTracks,
     });
 
     const initSession = getDefaultSession(currentTracks, session);

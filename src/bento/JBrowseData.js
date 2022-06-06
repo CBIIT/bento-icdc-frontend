@@ -13,6 +13,8 @@ export const FILE_TYPE_VCF_INDEX = 'tbi';
 export const JbrowserFiles = [FILE_TYPE_BAM, FILE_TYPE_BAI, FILE_TYPE_VCF, FILE_TYPE_VCF_INDEX];
 export const alignemntLocation = 'chr1:60,632,043..60,636,011';
 export const variantLocation = 'chr1:60,032,043..60,636,011';
+export const maxDisplayedBpPerPx = 50000;
+export const height = 200;
 // size in bytes
 export const chunkSizeLimit = 20000000;
 export const alignment = {
@@ -32,10 +34,68 @@ export const variant = {
   height: 200,
 };
 
+export const annotation = {
+  name: 'GCF_000002285.3_CanFam3.1_genomic.sorted.gff',
+  trackId: 'NCBI_Ref_Seq_(GFF3Tabix)',
+  type: 'FeatureTrack',
+  display: 'LinearBasicDisplay',
+  maxDisplayedBpPerPx: 50000,
+  height: 200,
+  metadata: {
+    source: 'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/002/285/GCF_000002285.3_CanFam3.1/',
+    dateaccessed: '4/5/2022',
+  },
+  adapter: {
+    type: 'Gff3TabixAdapter',
+    gffGzLocation: {
+      uri: 'https://github.com/CBIIT/icdc-genomics/blob/main/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz?raw=true',
+      locationType: 'UriLocation',
+    },
+    index: {
+      location: {
+        uri: 'https://github.com/CBIIT/icdc-genomics/blob/main/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz.tbi?raw=true',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  assemblyNames: [...assemblyNames],
+};
+
+export const ensembl = {
+  name: 'canFam3.ens.gff',
+  trackId: 'Ensemble_Ref_Seq_(GFF3Tabix)',
+  type: 'FeatureTrack',
+  display: 'LinearBasicDisplay',
+  maxDisplayedBpPerPx: 50000,
+  height: 200,
+  metadata: {
+    source: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/genes/',
+    dateaccessed: '4/5/2022',
+  },
+  adapter: {
+    type: 'Gff3TabixAdapter',
+    gffGzLocation: {
+      uri: 'https://github.com/CBIIT/icdc-genomics/blob/main/canFam3.ensGene.sorted.gff.gz?raw=true',
+      locationType: 'UriLocation',
+    },
+    index: {
+      location: {
+        uri: 'https://github.com/CBIIT/icdc-genomics/blob/main/canFam3.ensGene.sorted.gff.gz.tbi?raw=true',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  assemblyNames: [...assemblyNames],
+};
+
 export const jBrowseOptions = {
   jBrowse: true,
   variants: true,
   alignments: true,
+  additionalTracks: [
+    annotation,
+    ensembl,
+  ],
   optionalTracks: [
     {
       display: false,
