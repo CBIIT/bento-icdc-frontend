@@ -144,7 +144,7 @@ const ProgramView = ({ classes, data }) => {
     <div style={{ display: 'grid' }}>
       <h3 style={{ textAlign: 'center' }}>Data Availability:</h3>
       {
-          pageData.table.columns.map((item) => (
+          table.columns.map((item) => (
             item.icon && (
             <div style={{ display: 'flex', gap: '2em', marginBottom: '0.5em' }}>
               <img src={item.icon} alt={`${item.label} icon`} style={{ width: '3em' }} />

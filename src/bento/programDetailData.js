@@ -36,6 +36,8 @@ const table = {
     },
     {
       dataField: 'numberOfCaseFiles',
+      label: 'Case Files',
+      legendTooltip: true,
       header: 'Case File(s)',
       display: true,
       indicator: '',
@@ -44,24 +46,28 @@ const table = {
     },
     {
       dataField: 'numberOfStudyFiles',
+      label: 'Study Files',
       header: 'Study File(s)',
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
     },
     {
       dataField: 'numberOfImageCollections',
+      label: 'Image Collections',
       header: 'Image Collection(s)',
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-ImageCollection.svg',
     },
     {
       dataField: 'numberOfPublications',
+      label: 'Publications',
       header: 'Publication(s)',
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
     },
     {
       dataField: 'numberOfCRDCNodes',
+      label: 'Additional CRDC Nodes',
       header: 'icon',
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
