@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Grid,
   withStyles,
+  IconButton,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {
@@ -177,7 +178,24 @@ const ProgramView = ({ classes, data }) => {
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     icon: !!column.icon,
-    label: column.icon ? <img src={column.icon} alt={`${column.label}'s icon`} /> : column.header,
+    label: column.icon ? column.legendTooltip
+      ? (
+        <div style={{ display: 'flex' }}>
+          <Tooltip
+            title={generateDataAvailabilityTooltipText()}
+            interactive
+            className={classes.legend}
+            placement="left"
+          >
+            <IconButton aria-label="help" className={classes.legendTooltip}>
+              <img style={{ width: '0.8em' }} src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg" alt="tooltip" />
+            </IconButton>
+          </Tooltip>
+          <img src={column.icon} alt={`${column.label}'s icon`} />
+        </div>
+      )
+      : <img src={column.icon} alt={`${column.label}'s icon`} />
+      : column.header,
     options: {
       display: column.display,
       viewColumns: column.viewColumns,
