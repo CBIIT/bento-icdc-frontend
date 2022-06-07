@@ -307,6 +307,13 @@ const styles = (theme) => ({
   crdcLinks: {
     listStyle: 'none',
   },
+  legend: {
+    zIndex: '1000',
+  },
+  legendTooltip: {
+    position: 'relative',
+    bottom: '0.5em',
+  },
   dataAvailIndicator: {
     textAlign: 'center',
   },
