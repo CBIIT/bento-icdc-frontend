@@ -106,11 +106,26 @@ const Studies = ({ classes, data, invalid }) => {
       ))}
     </ul>
   );
+  const generateIndicatorTooltipTitle = (dataField, value, accessionId) => {
+    switch (dataField) {
+      case 'numberOfCaseFiles':
+        return `${value} Case File(s)`;
+      case 'numberOfStudyFiles':
+        return `${value} Study File(s)`;
+      case 'numberOfImageCollections':
+        return `${value} Image Collection(s)`;
+      case 'numberOfPublications':
+        return `${value} Publication(s)`;
+      default:
+        return generateCRDCLinks(
+          data.studiesByProgram.filter((study) => study.accession_id === accessionId)[0].CRDCLinks,
+        );
+    }
+  };
+
   const customIcon = (column, value, tableMeta) => {
     const flag = value > 0;
-    const title = data.studiesByProgram[tableMeta.rowIndex].numberOfCRDCNodes > 0 && column.dataField === 'numberOfCRDCNodes'
-      ? generateCRDCLinks(data.studiesByProgram[tableMeta.rowIndex].CRDCLinks)
-      : `${data.studiesByProgram[tableMeta.rowIndex][column.dataField]} ${column.header}`;
+    const title = generateIndicatorTooltipTitle(column.dataField, value, tableMeta.rowData[9]);
     return (
       <>
         {
