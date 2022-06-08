@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Grid,
   withStyles,
+  IconButton,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {
@@ -139,6 +140,23 @@ const ProgramView = ({ classes, data }) => {
       )
   );
 
+  const generateDataAvailabilityTooltipText = () => (
+    <div style={{ display: 'grid' }}>
+      <h3 style={{ textAlign: 'center' }}>Data Availability:</h3>
+      {
+          table.columns.map((item) => (
+            item.icon && (
+            <div style={{ display: 'flex', gap: '2em', marginBottom: '0.5em' }}>
+              <img src={item.icon} alt={`${item.label} icon`} style={{ width: '3em' }} />
+              {' '}
+              {item.label}
+            </div>
+            )
+          ))
+        }
+    </div>
+  );
+
   const generateCRDCLinks = (linksArray) => (
     <ul className={classes.crdcLinks}>
       {linksArray.map((link) => (
@@ -177,7 +195,24 @@ const ProgramView = ({ classes, data }) => {
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     icon: !!column.icon,
-    label: column.icon ? <img src={column.icon} alt={`${column.label}'s icon`} /> : column.header,
+    label: column.icon ? column.legendTooltip
+      ? (
+        <div style={{ display: 'flex' }}>
+          <Tooltip
+            title={generateDataAvailabilityTooltipText()}
+            interactive
+            className={classes.legend}
+            placement="left"
+          >
+            <IconButton aria-label="help" className={classes.legendTooltip}>
+              <img style={{ width: '0.8em' }} src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg" alt="tooltip" />
+            </IconButton>
+          </Tooltip>
+          <img src={column.icon} alt={`${column.label}'s icon`} />
+        </div>
+      )
+      : <img src={column.icon} alt={`${column.label}'s icon`} />
+      : column.header,
     options: {
       display: column.display,
       viewColumns: column.viewColumns,
@@ -272,8 +307,14 @@ const styles = (theme) => ({
   crdcLinks: {
     listStyle: 'none',
   },
+  legend: {
+    zIndex: '1000',
+  },
+  legendTooltip: {
+    position: 'relative',
+    bottom: '0.5em',
+  },
   dataAvailIndicator: {
-    textAlign: 'center',
   },
   dataAvailIndicatorIcon: {
     color: '#1A89C4',
