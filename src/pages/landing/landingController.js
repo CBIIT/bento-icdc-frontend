@@ -38,7 +38,8 @@ const LandingController = ({ match }) => {
     fetchStaticContent(NEWS_CONTENT_URL, 'news');
   }, []);
 
-  if (newsData.length === 0 || newsData === undefined || landingPageData === undefined) {
+  if (newsData.length === 0 || newsData === undefined || landingPageData === undefined
+    || landingPageData.tabs === undefined) {
     return <CircularProgress />;
   }
 
