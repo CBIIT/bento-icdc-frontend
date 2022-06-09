@@ -155,7 +155,7 @@ const generateSpotlightContent = (template, classes, item) => {
         <div className={classes.youtubeEmbedContainer}>
           <ReactPlayer
             url="https://www.youtube.com/watch?v=bIWaMKZ9pl4"
-            height="27em"
+            height="100%"
             width="100%"
           />
         </div>
@@ -168,9 +168,11 @@ const generateSpotlightContent = (template, classes, item) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '0.3em',
-            width: '436px',
-            height: '448px',
+            padding: '0.4em',
+            boxSizing: 'border-box',
+            border: '1px solid #000',
+            width: '38em',
+            height: '27.5em',
           }}
           >
             <img src={item.img} alt={item.alt} className={classes.imageWithCaption} />
@@ -178,7 +180,7 @@ const generateSpotlightContent = (template, classes, item) => {
           </div>
           <div style={{
             color: 'white',
-            width: '436px',
+            width: '36em',
           }}
           >
             <p className={classes.imageCaption}>{item.caption}</p>
@@ -313,7 +315,7 @@ const LandingView = ({
                 ))
               }
             </Grid>
-            <Widgets />
+            <Widgets activeTemplate={pageData.tabs[3].content.template} />
           </Grid>
 
         </div>
@@ -337,10 +339,14 @@ const styles = (theme) => ({
     fontSize: '1em',
     fontWeight: '300',
     letterSpacing: '0',
+    lineHeight: '13px',
+    position: 'relative',
+    bottom: '0.6em',
   },
   twitterEmbedContainer: {
     marginTop: '6.5em',
-    width: '32em',
+    width: '31.8em',
+    boxShadow: '0 25px 51px 10px #000',
   },
   smallIconContainer: {
     width: '300px',
@@ -348,16 +354,18 @@ const styles = (theme) => ({
     marginTop: '6.5em',
   },
   largeIconContainer: {
-    width: '390px',
+    width: '31.5em',
     marginLeft: '5em',
     marginTop: '6.5em',
   },
   youtubeEmbedContainer: {
     background: '#fff',
     marginTop: '6.5em',
-    padding: '0.5em',
     borderRadius: '0.5em',
-    width: '48.5em',
+    width: '49em',
+    height: '27.8em',
+    boxSizing: 'border-box',
+    border: '5px solid #fff',
   },
   imageWithCaptionContainer: {
     padding: '0.4em',
@@ -376,15 +384,15 @@ const styles = (theme) => ({
   noCaptionImageContainer: {
     transform: 'rotate(10deg)',
     marginTop: '6.5em',
-    padding: '1em',
     backgroundColor: '#fff',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '0.4em',
-    width: '34.5em',
-    height: '35.5em',
+    width: '30.5em',
+    height: '38em',
     marginLeft: '3em',
+    border: '0.8em solid #fff',
 
   },
   container: {
