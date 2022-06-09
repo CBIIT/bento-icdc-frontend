@@ -120,15 +120,15 @@ const ProgramView = ({ classes, data }) => {
         {value}
       </Link>
       {
-        renderSwitch(studyDisposition(tableMeta.rowData[5]))
+        renderSwitch(studyDisposition(tableMeta.rowData[10]))
       }
     </>
   );
 
   const customCaseNumbLink = (column, value, tableMeta) => (
-    renderSwitch(studyDisposition(tableMeta.rowData[5]))
+    renderSwitch(studyDisposition(tableMeta.rowData[10]))
       ? (
-        renderSwitch(studyDisposition(tableMeta.rowData[5]))
+        renderSwitch(studyDisposition(tableMeta.rowData[10]))
       ) : (
         <Link
           to={(location) => ({ ...location, pathname: '/explore' })}
