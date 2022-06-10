@@ -344,6 +344,7 @@ const styles = (theme) => ({
     bottom: '0.5em',
   },
   dataAvailIndicator: {
+    textAlign: 'center',
   },
   dataAvailIndicatorIcon: {
     color: '#1A89C4',
