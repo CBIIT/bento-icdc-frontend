@@ -205,7 +205,7 @@ const ProgramView = ({ classes, data }) => {
         {
         flag && (
         <div className={classes.dataAvailIndicator}>
-          <Tooltip title={title}>
+          <Tooltip title={title} interactive={column.dataField === 'numberOfCRDCNodes'}>
             {column.indicator && column.useImage
               ? <img className={classes.dataAvailIndicatorImage} src={column.indicator} alt={`${column.header} icon`} />
               : <FiberManualRecordRounded className={classes.dataAvailIndicatorIcon} />}
