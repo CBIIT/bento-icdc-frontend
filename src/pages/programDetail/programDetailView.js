@@ -160,17 +160,46 @@ const ProgramView = ({ classes, data }) => {
   const generateCRDCLinks = (linksArray) => (
     <ul className={classes.crdcLinks}>
       {linksArray.map((link) => (
-        <li>
-          <a href={link.url}>{`${link.text}`}</a>
-        </li>
+        <div style={{ display: 'flex' }}>
+          <li>
+            <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
+              {`${link.text}`}
+              <img
+                style={{
+                  width: '1.5em',
+                }}
+                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
+                alt="external link icon"
+              />
+            </a>
+          </li>
+
+        </div>
       ))}
     </ul>
   );
+
+  const generateIndicatorTooltipTitle = (dataField, value, accessionId) => {
+    switch (dataField) {
+      case 'numberOfCaseFiles':
+        return `${value} Case File(s)`;
+      case 'numberOfStudyFiles':
+        return `${value} Study File(s)`;
+      case 'numberOfImageCollections':
+        return `${value} Image Collection(s)`;
+      case 'numberOfPublications':
+        return `${value} Publication(s)`;
+      default:
+        return generateCRDCLinks(
+          data.studiesByProgramId
+            .filter((study) => study.accession_id === accessionId)[0].CRDCLinks,
+        );
+    }
+  };
+
   const customIcon = (column, value, tableMeta) => {
     const flag = value > 0;
-    const title = data.studiesByProgramId[tableMeta.rowIndex].numberOfCRDCNodes > 0 && column.dataField === 'numberOfCRDCNodes'
-      ? generateCRDCLinks(data.studiesByProgramId[tableMeta.rowIndex].CRDCLinks)
-      : `${data.studiesByProgramId[tableMeta.rowIndex][column.dataField]} ${column.header}`;
+    const title = generateIndicatorTooltipTitle(column.dataField, value, tableMeta.rowData[9]);
     return (
       <>
         {
@@ -318,6 +347,11 @@ const styles = (theme) => ({
   },
   dataAvailIndicatorIcon: {
     color: '#1A89C4',
+  },
+  crdcLinkStyle: {
+    color: '#DC762F',
+    display: 'flex',
+    gap: '0.5em',
   },
   dataAvailIndicatorImage: {
     height: '20px',
