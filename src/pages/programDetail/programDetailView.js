@@ -59,7 +59,6 @@ const computedTheme = createTheme({
 });
 
 const ProgramView = ({ classes, data }) => {
-  console.log('data', data);
   const programDetail = data.program[0];
 
   const stat = {
