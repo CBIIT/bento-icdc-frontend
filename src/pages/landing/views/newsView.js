@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core';
 import { TwitterTimelineEmbed, TwitterTweetEmbed } from 'react-twitter-embed';
 import lbg from '../../../assets/landing/Background.png';
-import { newsViewImageData, newsViewVideoData } from '../../../bento/landingPageData';
 import NewsItem from './NewsListItem';
 import NewsViewImage from './NewsViewImage';
 import NewsViewVideo from './NewsViewVideo';
@@ -23,20 +22,20 @@ const NewsView = ({ classes, news }) => (
       <div className={classes.listSection}>
         <div>
           <h4 className={classes.newsListHeading}>
-            Updates
+            {news.tile1.heading}
           </h4>
 
           <div className={classes.newsListTitleBar}>
             <div className={classes.newsListTitle}>
               <h6 style={{ color: 'white', fontSize: '1em' }}>
-                Announcments
+                {news.tile1.subHeading}
               </h6>
             </div>
             <List className={classes.newsList}>
               {
                 // eslint-disable-next-line max-len
-                news.map(({ paragraph, label }, index) => <NewsItem paragraph={paragraph} index={index + 1} total={news.length} label={label} />)
-              }
+                news.content.map(({ paragraph, label, blurb }, index) => <NewsItem paragraph={paragraph} index={index + 1} total={news.content.length} label={label} blurb={blurb} />)
+}
             </List>
           </div>
         </div>
@@ -44,30 +43,30 @@ const NewsView = ({ classes, news }) => (
         <div className={classes.twitterAndImageSection}>
           <div>
             <h4 className={classes.twitterSectionHeading}>
-              Twitter
+              {news.tile2.heading}
             </h4>
 
             <div className={classes.twitterSectionContainer}>
               <div className={classes.twitterSectionSubHeadingContainer}>
                 <div>
-                  <h6 className={classes.twitterSectionSubHeading}>Featured tweet</h6>
+                  <h6 className={classes.twitterSectionSubHeading}>{news.tile2.subHeading1}</h6>
                 </div>
 
                 <div>
-                  <h6 className={classes.twitterSectionSubHeading}>Follow us on Twitter</h6>
+                  <h6 className={classes.twitterSectionSubHeading}>{news.tile2.subHeading2}</h6>
                 </div>
               </div>
 
               <div className={classes.twitterSection}>
                 <TwitterTweetEmbed
-                  tweetId="1493638757001711620"
+                  tweetId={news.twitter.tweet.tweetId}
                   className={classes.test}
                 />
 
                 <div className={classes.twitterTimelineSection}>
                   <TwitterTimelineEmbed
-                    sourceType="profile"
-                    screenName="ncidatasci"
+                    sourceType={news.twitter.timeline.sourceType}
+                    screenName={news.twitter.timeline.screenName}
                     options={{ height: 524 }}
                   />
                 </div>
@@ -77,12 +76,12 @@ const NewsView = ({ classes, news }) => (
 
           <div className={classes.imageSectionContainer}>
             <h4 className={classes.imageSectionHeading}>
-              Images
+              {news.tile3.heading}
             </h4>
 
             <div className={classes.root}>
               <ImageList classes={{ root: classes.imageList }} cols={2.5}>
-                {newsViewImageData.map((item) => (
+                {news.images.map((item) => (
                   <NewsViewImage img={item.img} label={item.label} />
                 ))}
               </ImageList>
@@ -93,23 +92,31 @@ const NewsView = ({ classes, news }) => (
 
       <div className={classes.videoSectionContainer}>
         <h4 className={classes.videoSectionHeading}>
-          Videos
+          {news.tile4.heading}
         </h4>
         <div className={classes.videoSection}>
           <div className={classes.videoSectionSubHeadingContainer}>
-            <div><h6 className={classes.videoSectionSubHeading}>Featured video</h6></div>
-            <div><h6 className={classes.videoSectionSubHeading}>Other videos</h6></div>
+            <div>
+              <h6 className={classes.videoSectionSubHeading}>
+                {news.tile4.subHeading1}
+              </h6>
+
+            </div>
+            <div>
+              <h6 className={classes.videoSectionSubHeading}>
+                {news.tile4.subHeading2}
+              </h6>
+
+            </div>
           </div>
 
           <div className={classes.featuredVideo}>
             <div>
-              <NewsViewVideo url={newsViewVideoData[0].vid} label={newsViewVideoData[0].label} />
+              <NewsViewVideo url={news.youtube.main.vid} label={news.youtube.main.label} />
             </div>
             <div className={classes.otherVideos}>
-              {
-                newsViewVideoData.slice(1)
-                  .map((vid) => <NewsViewVideo url={vid.vid} label={vid.label} />)
-              }
+              {news.youtube.others
+                .map((vid) => <NewsViewVideo url={vid.vid} label={vid.label} />)}
             </div>
           </div>
 

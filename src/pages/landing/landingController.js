@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
-import yaml from 'js-yaml';
-import { parse, stringify } from 'yaml';
+import { parse } from 'yaml';
 import axios from 'axios';
 import YAMLData from '../../content/prod/aboutPagesContent.yaml';
-// import env from '../../utils/env';
 import LandingView from './landingView';
 import NewsView from './views/newsView';
 
@@ -14,7 +11,7 @@ const NEWS_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-sta
 const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {
-  const [newsData, setNewsData] = useState([]);
+  const [newsData, setNewsData] = useState(undefined);
   const [landingPageData, setLandingPageData] = useState([]);
   useEffect(() => {
     const fetchStaticContent = async (url, setter) => {
@@ -27,7 +24,7 @@ const LandingController = ({ match }) => {
         if (setter === 'landing') {
           setLandingPageData(resultData[0]);
         } else {
-          setNewsData(resultData[0]);
+          setNewsData(resultData);
         }
       } catch (error) {
         result = await axios.get(YAMLData);
@@ -38,7 +35,7 @@ const LandingController = ({ match }) => {
     fetchStaticContent(NEWS_CONTENT_URL, 'news');
   }, []);
 
-  if (newsData.length === 0 || newsData === undefined || landingPageData === undefined
+  if (newsData === undefined || landingPageData === undefined
     || landingPageData.tabs === undefined) {
     return <CircularProgress />;
   }
@@ -47,7 +44,7 @@ const LandingController = ({ match }) => {
     return (
       <NewsView
         availableSoonImage={newsData && newsData.availableSoonImage}
-        news={newsData && newsData.content}
+        news={newsData && newsData}
       />
     );
   }

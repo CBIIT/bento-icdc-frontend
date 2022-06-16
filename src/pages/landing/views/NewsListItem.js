@@ -14,7 +14,7 @@ import {
 import { Close } from '@material-ui/icons';
 
 const NewsItem = ({
-  paragraph, index, total, classes, label,
+  paragraph, index, total, classes, label, blurb,
 }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -43,7 +43,7 @@ const NewsItem = ({
                     color="text.primary"
                     className={classes.listItemBody}
                   >
-                    {paragraph}
+                    {`${blurb}...`}
                   </Typography>
                 </>
             )}
@@ -78,8 +78,7 @@ const NewsItem = ({
           className={classes.dialogContent}
         >
           <p className={classes.dialogParagraph}>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
+            {paragraph}
           </p>
         </DialogContent>
       </Dialog>
