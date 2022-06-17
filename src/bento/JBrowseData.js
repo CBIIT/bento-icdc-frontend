@@ -48,12 +48,12 @@ export const annotation = {
   adapter: {
     type: 'Gff3TabixAdapter',
     gffGzLocation: {
-      uri: 'https://raw.githubusercontent.com/CBIIT/icdc-genomics/main/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz?raw=true',
+      uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz',
       locationType: 'UriLocation',
     },
     index: {
       location: {
-        uri: 'https://raw.githubusercontent.com/CBIIT/icdc-genomics/main/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz.tbi?raw=true',
+        uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz.tbi',
         locationType: 'UriLocation',
       },
     },
@@ -75,12 +75,12 @@ export const ensembl = {
   adapter: {
     type: 'Gff3TabixAdapter',
     gffGzLocation: {
-      uri: 'https://raw.githubusercontent.com/CBIIT/icdc-genomics/main/canFam3.ensGene.sorted.gff.gz?raw=true',
+      uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/canFam3.ensGene.sorted.gff.gz',
       locationType: 'UriLocation',
     },
     index: {
       location: {
-        uri: 'https://raw.githubusercontent.com/CBIIT/icdc-genomics/main/canFam3.ensGene.sorted.gff.gz.tbi?raw=true',
+        uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/canFam3.ensGene.sorted.gff.gz.tbi',
         locationType: 'UriLocation',
       },
     },
