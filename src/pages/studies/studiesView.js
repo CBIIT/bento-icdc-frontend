@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import {
   Grid,
@@ -122,7 +123,7 @@ const Studies = ({ classes, data, invalid }) => {
   };
 
   const customIcon = (column, value, tableMeta) => {
-    const flag = value > 0;
+    const flag = Array.isArray(value) ? value.length > 0 : value > 0;
     const title = generateIndicatorTooltipTitle(column.dataField, value, tableMeta.rowData[9]);
     return (
       <>
@@ -169,6 +170,8 @@ const Studies = ({ classes, data, invalid }) => {
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     icon: !!column.icon,
+    csvNullValue: column.csvNullValue,
+    iconLabel: column.iconLabel,
     label: column.icon ? column.legendTooltip
       ? (
         <div style={{ display: 'flex' }}>
