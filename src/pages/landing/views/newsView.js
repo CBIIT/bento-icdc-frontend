@@ -112,11 +112,21 @@ const NewsView = ({ classes, news }) => (
 
           <div className={classes.featuredVideo}>
             <div>
-              <NewsViewVideo url={news.youtube.main.vid} label={news.youtube.main.label} />
+              <NewsViewVideo
+                url={news.youtube.main.vid}
+                label={news.youtube.main.label}
+                description={news.youtube.main.description}
+              />
             </div>
             <div className={classes.otherVideos}>
               {news.youtube.others
-                .map((vid) => <NewsViewVideo url={vid.vid} label={vid.label} />)}
+                .map((vid) => (
+                  <NewsViewVideo
+                    url={vid.vid}
+                    label={vid.label}
+                    description={news.youtube.main.description}
+                  />
+                ))}
             </div>
           </div>
 

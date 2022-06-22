@@ -85,6 +85,7 @@ const ProgramView = ({ classes, data }) => {
   const programConfig = ProgramImageConfig[programDetail.program_acronym];
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const tableOptions = getOptions(table, classes);
+  tableOptions.downloadOptions.filename = tableOptions.downloadOptions.filename.replace('Program', `${programDetail.program_name}: ${programDetail.program_acronym}`);
 
   const embargoToolTipIcon = () => (
     <Tooltip title="Under Embargo" arrow placement="bottom">
@@ -198,7 +199,7 @@ const ProgramView = ({ classes, data }) => {
   };
 
   const customIcon = (column, value, tableMeta) => {
-    const flag = value > 0;
+    const flag = Array.isArray(value) ? value.length > 0 : value > 0;
     const title = generateIndicatorTooltipTitle(column.dataField, value, tableMeta.rowData[9]);
     return (
       <>
@@ -224,6 +225,8 @@ const ProgramView = ({ classes, data }) => {
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     icon: !!column.icon,
+    csvNullValue: column.csvNullValue,
+    iconLabel: column.iconLabel,
     label: column.icon ? column.legendTooltip
       ? (
         <div style={{ display: 'flex' }}>

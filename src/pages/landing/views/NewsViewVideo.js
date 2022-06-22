@@ -9,7 +9,9 @@ import {
 import ReactPlayer from 'react-player/youtube';
 import { Close } from '@material-ui/icons';
 
-const NewsViewVideo = ({ url, label, classes }) => {
+const NewsViewVideo = ({
+  url, label, classes, description,
+}) => {
   const [open, setOpen] = React.useState(false);
   const [secondsElapsed, setSecondsElapsed] = React.useState(0);
   const [playing, setPlaying] = React.useState(false);
@@ -54,8 +56,7 @@ const NewsViewVideo = ({ url, label, classes }) => {
             />
           </div>
           <p className={classes.dialogParagraph}>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
+            {description}
           </p>
         </DialogContent>
       </Dialog>

@@ -37,6 +37,8 @@ const table = {
     {
       dataField: 'numberOfCaseFiles',
       label: 'Case Files',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'Number of Case Files',
       legendTooltip: true,
       header: 'Case File(s)',
       display: true,
@@ -47,12 +49,16 @@ const table = {
     {
       dataField: 'numberOfStudyFiles',
       label: 'Study Files',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'Number of Study Files',
       header: 'Study File(s)',
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
     },
     {
       dataField: 'numberOfImageCollections',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'Number of Image Collections',
       label: 'Image Collections',
       header: 'Image Collection(s)',
       display: true,
@@ -61,12 +67,16 @@ const table = {
     {
       dataField: 'numberOfPublications',
       label: 'Publications',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'Number of Publications',
       header: 'Publication(s)',
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
     },
     {
-      dataField: 'numberOfCRDCNodes',
+      dataField: 'CRDCLinks',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'External Data Sets',
       label: 'Additional CRDC Nodes',
       header: 'icon',
       display: true,
