@@ -29,6 +29,8 @@ export const pageData = {
     downloadFileName: 'ICDC_Studies_download',
     // Set 'selectableRows' to true to show the row selection
     selectableRows: false,
+    // toggle D.A.L unified tooltip above D.A.L icons on table toolbar
+    legendTooltip: true,
     columns: [
       {
         dataField: 'clinical_study_designation',
@@ -58,6 +60,7 @@ export const pageData = {
         display: true,
         indicator: '',
         useImage: false,
+        firstIcon: true,
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
       },
       {
@@ -94,6 +97,7 @@ export const pageData = {
         label: 'Additional CRDC Nodes',
         header: 'icon',
         display: true,
+        lastIcon: true,
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
       },
       {
