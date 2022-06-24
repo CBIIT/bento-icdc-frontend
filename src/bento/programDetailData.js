@@ -15,6 +15,7 @@ const table = {
   viewColumns: true,
   title: 'STUDIES IN THIS PROGRAM',
   selectableRows: false,
+  legendTooltip: true,
   downloadFileName: 'ICDC_Program_Studies_download',
   columns: [
     {
@@ -42,6 +43,7 @@ const table = {
       legendTooltip: true,
       header: 'Case File(s)',
       display: true,
+      firstIcon: true,
       indicator: '',
       useImage: false,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
@@ -79,6 +81,7 @@ const table = {
       iconLabel: 'External Data Sets',
       label: 'Additional CRDC Nodes',
       header: 'icon',
+      lastIcon: true,
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
     },

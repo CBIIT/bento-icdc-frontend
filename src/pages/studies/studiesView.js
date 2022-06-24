@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Grid,
-  IconButton,
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -86,21 +85,18 @@ const Studies = ({ classes, data, invalid }) => {
   const generateCRDCLinks = (linksArray) => (
     <ul className={classes.crdcLinks}>
       {linksArray.map((link) => (
-        <div style={{ display: 'flex' }}>
-          <li>
-            <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
-              {`${link.text}`}
-              <img
-                style={{
-                  width: '1.5em',
-                }}
-                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
-                alt="external link icon"
-              />
-            </a>
-          </li>
-
-        </div>
+        <li>
+          <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
+            {`${link.text}`}
+            <img
+              style={{
+                width: '1.5em',
+              }}
+              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
+              alt="external link icon"
+            />
+          </a>
+        </li>
       ))}
     </ul>
   );
@@ -129,7 +125,7 @@ const Studies = ({ classes, data, invalid }) => {
         {
         flag && (
         <div className={classes.dataAvailIndicator}>
-          <Tooltip title={title} interactive={column.dataField === 'numberOfCRDCNodes'}>
+          <Tooltip classes={{ tooltip: column.dataField === 'CRDCLinks' ? classes.externalLinkDalTooltip : classes.defaultDalTooltip }} title={title} interactive={column.dataField === 'CRDCLinks'}>
             {column.indicator && column.useImage
               ? <img className={classes.dataAvailIndicatorImage} src={column.indicator} alt={`${column.header} icon`} />
               : <FiberManualRecordRounded className={classes.dataAvailIndicatorIcon} />}
@@ -146,48 +142,15 @@ const Studies = ({ classes, data, invalid }) => {
     ...pageData.table.optionalColumns,
   ]);
 
-  // eslint-disable-next-line arrow-body-style
-  const generateDataAvailabilityTooltipText = () => {
-    return (
-      <div style={{ display: 'grid' }}>
-        <h3 style={{ textAlign: 'center' }}>Data Availability:</h3>
-        {
-          pageData.table.columns.map((item) => (
-            item.icon && (
-            <div style={{ display: 'flex', gap: '2em', marginBottom: '0.5em' }}>
-              <img src={item.icon} alt={`${item.label} icon`} style={{ width: '3em' }} />
-              {' '}
-              {item.label}
-            </div>
-            )
-          ))
-        }
-      </div>
-    );
-  };
-
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
     icon: !!column.icon,
     csvNullValue: column.csvNullValue,
+    iconViewColumnsLabel: column.label,
     iconLabel: column.iconLabel,
-    label: column.icon ? column.legendTooltip
-      ? (
-        <div style={{ display: 'flex' }}>
-          <Tooltip
-            title={generateDataAvailabilityTooltipText()}
-            interactive
-            className={classes.legend}
-            placement="left"
-          >
-            <IconButton aria-label="help" className={classes.legendTooltip}>
-              <img style={{ width: '0.8em' }} src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg" alt="tooltip" />
-            </IconButton>
-          </Tooltip>
-          <img src={column.icon} alt={`${column.label}'s icon`} />
-        </div>
-      )
-      : <img src={column.icon} alt={`${column.label}'s icon`} />
+    firstIcon: column.firstIcon,
+    lastIcon: column.lastIcon,
+    label: column.icon ? <img className={classes.dalIcon} src={column.icon} alt={`${column.label}'s icon`} />
       : column.header,
     options: {
       display: column.display,
@@ -263,6 +226,11 @@ const styles = (theme) => ({
   },
   dataAvailIndicatorIcon: {
     color: '#1A89C4',
+    height: '13px',
+    width: '13px',
+  },
+  dalIcon: {
+    width: '25px',
   },
   dataAvailIndicatorImage: {
     height: '20px',
@@ -270,11 +238,20 @@ const styles = (theme) => ({
   },
   crdcLinkStyle: {
     color: '#DC762F',
-    display: 'flex',
-    gap: '0.5em',
+  },
+  defaultDalTooltip: {
+    maxWidth: 'none',
+  },
+  externalLinkDalTooltip: {
+    maxWidth: 'none',
+    padding: '0px 12px',
   },
   legend: {
     zIndex: '1000',
+  },
+  crdcLinks: {
+    paddingLeft: '1em',
+    textAlign: 'left',
   },
   legendTooltip: {
     position: 'relative',
