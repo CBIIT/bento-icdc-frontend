@@ -8,8 +8,8 @@ export const defaultFacetSectionVariables = {
   isExpanded: false,
 };
 
-export const DATA_MODEL_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/develop/model-desc/icdc-model.yml';
-export const DATA_MODEL_PROPS_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/develop/model-desc/icdc-model-props.yml';
+export const DATA_MODEL_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model.yml';
+export const DATA_MODEL_PROPS_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model-props.yml';
 
 export const facetFilterSearchData = [
   {
