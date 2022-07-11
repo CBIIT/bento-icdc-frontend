@@ -11,9 +11,11 @@ export default () => ({
     width: '35%',
     marginBottom: '5px',
     paddingLeft: '7px',
+    marginTop: '20px',
   },
   helpBtn: {
     padding: '0px',
+    marginLeft: '2px',
   },
   link: {
     color: '#dc762f',

@@ -3,8 +3,6 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import _ from 'lodash';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { getOptions, getColumns, cn } from 'bento-components';
 import StatsView from '../../components/Stats/StatsView';
 import GridWithFooter from '../../components/GridWithFooter/GridView';
@@ -20,27 +18,10 @@ import {
 import Snackbar from '../../components/Snackbar';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import filterCasePageOnStudyCode from '../../utils/utils';
-import themes, { overrides } from '../../themes';
 import updateColumns from '../../utils/columnsUtil';
 import DocumentDownload from '../../components/DocumentDownload';
 import MultiStudyCases from './components/multiStudyCasesController';
-
-const themesLight = _.cloneDeep(themes.light);
-themesLight.overrides.MuiTableCell = {
-  ...themesLight.overrides.MuiTableCell,
-  root: {
-    '&:first-child': {
-      paddingLeft: '38px',
-    },
-    '&:last-child': {
-      paddingRight: '38px',
-    },
-  },
-};
-const computedTheme = createMuiTheme({
-  ...themesLight,
-  ...overrides,
-});
+import CaseDetailThemeProvider from './caseDetailsThemeConfig';
 
 const CaseDetail = ({ classes, data }) => {
   React.useEffect(() => {
@@ -212,7 +193,7 @@ const CaseDetail = ({ classes, data }) => {
           }
         </div>
 
-        <div id="case_detail_container" className={classes.detailContainer}>
+        <div className={classes.detailContainer}>
 
           <Grid container spacing={4} className={classes.marginTopBottom3}>
 
@@ -475,12 +456,11 @@ const CaseDetail = ({ classes, data }) => {
       </div>
 
       <div id="table_case_detail" className={classes.tableContainer}>
-
         {table1.display
           ? (
-            <Grid container spacing={4} className={classes.tableDiv}>
-              <Grid item xs={12}>
-                <MuiThemeProvider theme={computedTheme}>
+            <CaseDetailThemeProvider>
+              <Grid container spacing={4} className={classes.tableDiv}>
+                <Grid item>
                   <div className={classes.tableTitle}>
                     <span className={classes.tableHeader}>{table1.tableTitle}</span>
                   </div>
@@ -500,19 +480,18 @@ const CaseDetail = ({ classes, data }) => {
                     tooltipContent={tooltipContent}
                     showtooltip
                   />
-                </MuiThemeProvider>
+                </Grid>
               </Grid>
-            </Grid>
+            </CaseDetailThemeProvider>
           ) : ''}
-
         <div className={classes.tableSpacer} />
 
         {table2.display
           ? (
             <div id="table_case_detail_samples" className={classes.tableContainer}>
-              <Grid container spacing={4} className={classes.tableDiv}>
-                <Grid item xs={12}>
-                  <MuiThemeProvider theme={computedTheme}>
+              <CaseDetailThemeProvider>
+                <Grid container spacing={4} className={classes.tableDiv}>
+                  <Grid item xs={12}>
                     <div className={classes.tableTitle}>
                       <span className={classes.tableHeader}>{table2.tableTitle}</span>
                     </div>
@@ -533,9 +512,9 @@ const CaseDetail = ({ classes, data }) => {
                       showtooltip
                       primaryKeyIndex={table2.primaryKeyIndex}
                     />
-                  </MuiThemeProvider>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </CaseDetailThemeProvider>
             </div>
           ) : ''}
         <div className={classes.spacer} />
@@ -552,17 +531,17 @@ const styles = (theme) => ({
     paddingBottm: '17px',
   },
   marginTopBottom3: {
-    margin: '3px 0px',
+    margin: '0px',
   },
   spacer: {
     height: '76px',
     width: '100%',
   },
   container: {
-    paddingTop: '74px',
+    paddingTop: '60px',
     fontFamily: 'Raleway, sans-serif',
-    paddingLeft: '33px',
-    paddingRight: '35px',
+    paddingLeft: '27px',
+    paddingRight: '27px',
     paddingBottom: '40px',
   },
   content: {
@@ -587,10 +566,10 @@ const styles = (theme) => ({
     color: '#000',
   },
   header: {
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingLeft: '35px',
+    paddingRight: '35px',
     borderBottom: '#81a6b9 4px solid',
-    height: '80px',
+    height: '90px',
     margin: 'auto',
   },
   tableSpacer: {
@@ -640,14 +619,13 @@ const styles = (theme) => ({
     position: 'absolute',
     float: 'left',
     marginTop: '5px',
-    width: '82px',
+    width: '96px',
     height: '82px',
-    marginLeft: '8px',
+    marginLeft: '1px',
   },
   detailContainer: {
     margin: 'auto',
-    paddingTop: '12px',
-    paddingLeft: '60px',
+    paddingLeft: '50px',
     paddingRight: '32px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
@@ -662,7 +640,6 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#ff8a00',
     position: 'relative',
-    top: '-8px',
   },
   detailContainerBottom: {
     borderTop: '#81a6b9 1px solid',
@@ -670,11 +647,13 @@ const styles = (theme) => ({
     padding: ' 35px 2px 63px 2px !important',
   },
   detailContainerLeft: {
-    padding: '35px 0px 0 2px !important',
+    marginTop: '-3px',
+    padding: '28px 0px 0 2px !important',
     minHeight: '290px',
   },
   detailContainerRight: {
-    padding: '30px 20px 10px 20px !important',
+    marginTop: '-3px',
+    padding: '28px 20px 10px 20px !important',
     minHeight: '290px',
     borderLeft: '#81a6b9 1px solid',
   },
@@ -683,11 +662,11 @@ const styles = (theme) => ({
     marginTop: '-9px',
   },
   tableHeader: {
-    paddingLeft: '32px',
+    paddingLeft: '35px',
     color: '#ff8a00',
   },
   tableDiv: {
-    padding: '31px 20px',
+    padding: '31px 27px',
     margin: '10px auto 0px auto',
   },
   button: {
@@ -705,7 +684,7 @@ const styles = (theme) => ({
     },
   },
   detailContainerItems: {
-    paddingTop: '21px',
+    paddingTop: '28px',
   },
   title: {
     color: '#9d9d9c',
@@ -721,7 +700,7 @@ const styles = (theme) => ({
     fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#ff17f15',
-    marginLeft: '20px',
+    marginLeft: '11px',
     marginBottom: '24px',
     marginTop: '5px',
     // paddingBottom: '20px',

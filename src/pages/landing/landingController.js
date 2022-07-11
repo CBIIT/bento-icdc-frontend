@@ -1,51 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
-import yaml from 'js-yaml';
+import { parse } from 'yaml';
 import axios from 'axios';
 import YAMLData from '../../content/prod/aboutPagesContent.yaml';
-import env from '../../utils/env';
 import LandingView from './landingView';
 import NewsView from './views/newsView';
 
-const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
+const LANDING_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/landingView.yaml';
+const NEWS_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/newsView.yaml';
 const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {
-  const [data, setData] = useState([]);
+  const [newsData, setNewsData] = useState(undefined);
+  const [landingPageData, setLandingPageData] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchStaticContent = async (url, setter) => {
       let resultData = [];
       let result = [];
       try {
-        result = await axios.get(ABOUT_CONTENT_URL);
-        resultData = yaml.safeLoad(result.data);
+        result = await axios.get(url);
+
+        resultData = parse(result.data);
+        if (setter === 'landing') {
+          setLandingPageData(resultData[0]);
+        } else {
+          setNewsData(resultData);
+        }
       } catch (error) {
         result = await axios.get(YAMLData);
-        resultData = yaml.safeLoad(result.data);
+        resultData = parse(result.data);
       }
-
-      const supportObj = resultData.find(({ page }) => page === '/news');
-      setData(supportObj);
     };
-    fetchData();
+    fetchStaticContent(LANDING_CONTENT_URL, 'landing');
+    fetchStaticContent(NEWS_CONTENT_URL, 'news');
   }, []);
 
-  if (data.length === 0 || data === undefined) {
+  if (newsData === undefined || landingPageData === undefined
+    || landingPageData.tabs === undefined) {
     return <CircularProgress />;
   }
 
-  if (match.path === NEWS_PATH) {
+  if (newsData && match.path === NEWS_PATH) {
     return (
       <NewsView
-        availableSoonImage={data.availableSoonImage}
+        availableSoonImage={newsData && newsData.availableSoonImage}
+        news={newsData && newsData}
       />
     );
   }
 
   return (
     <LandingView
-      link={data.sourceLink1}
-      primaryContentImage={data.primaryContentImage}
+      link={newsData.sourceLink1 || 'testlink'}
+      pageData={landingPageData && landingPageData}
+      primaryContentImage={newsData && newsData.primaryContentImage}
     />
   );
 };

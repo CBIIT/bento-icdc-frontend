@@ -13,6 +13,8 @@ export const FILE_TYPE_VCF_INDEX = 'tbi';
 export const JbrowserFiles = [FILE_TYPE_BAM, FILE_TYPE_BAI, FILE_TYPE_VCF, FILE_TYPE_VCF_INDEX];
 export const alignemntLocation = 'chr1:60,632,043..60,636,011';
 export const variantLocation = 'chr1:60,032,043..60,636,011';
+export const maxDisplayedBpPerPx = 50000;
+export const height = 200;
 // size in bytes
 export const chunkSizeLimit = 20000000;
 export const alignment = {
@@ -32,10 +34,68 @@ export const variant = {
   height: 200,
 };
 
+export const annotation = {
+  name: 'GCF_000002285.3_CanFam3.1_genomic.sorted.gff',
+  trackId: 'NCBI_Ref_Seq_(GFF3Tabix)',
+  type: 'FeatureTrack',
+  display: 'LinearBasicDisplay',
+  maxDisplayedBpPerPx: 50000,
+  height: 200,
+  metadata: {
+    source: 'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/002/285/GCF_000002285.3_CanFam3.1/',
+    dateaccessed: '4/5/2022',
+  },
+  adapter: {
+    type: 'Gff3TabixAdapter',
+    gffGzLocation: {
+      uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz',
+      locationType: 'UriLocation',
+    },
+    index: {
+      location: {
+        uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/GCF_000002285.3_CanFam3.1_genomic.sorted.gff.gz.tbi',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  assemblyNames: [...assemblyNames],
+};
+
+export const ensembl = {
+  name: 'canFam3.ens.gff',
+  trackId: 'Ensemble_Ref_Seq_(GFF3Tabix)',
+  type: 'FeatureTrack',
+  display: 'LinearBasicDisplay',
+  maxDisplayedBpPerPx: 50000,
+  height: 200,
+  metadata: {
+    source: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/genes/',
+    dateaccessed: '4/5/2022',
+  },
+  adapter: {
+    type: 'Gff3TabixAdapter',
+    gffGzLocation: {
+      uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/canFam3.ensGene.sorted.gff.gz',
+      locationType: 'UriLocation',
+    },
+    index: {
+      location: {
+        uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/canFam3.ensGene.sorted.gff.gz.tbi',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  assemblyNames: [...assemblyNames],
+};
+
 export const jBrowseOptions = {
   jBrowse: true,
   variants: true,
   alignments: true,
+  additionalTracks: [
+    annotation,
+    ensembl,
+  ],
   optionalTracks: [
     {
       display: false,
@@ -120,6 +180,34 @@ export const jBrowseOptions = {
 };
 
 export const assemblies = [{
+  name: 'canFam3',
+  aliases: ['Broad CanFam3.1'],
+  sequence: {
+    type: 'ReferenceSequenceTrack',
+    trackId: 'reference_id_canFam3',
+    adapter: {
+      type: 'TwoBitAdapter',
+      twoBitLocation: {
+        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.2bit',
+        locationType: 'UriLocation',
+      },
+      chromSizesLocation: {
+        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chrom.sizes',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  refNameAliases: {
+    adapter: {
+      type: 'RefNameAliasAdapter',
+      location: {
+        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chromAlias.txt',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+},
+{
   name: 'canFam6',
   aliases: ['Dog10K_Boxer_Tasha'],
   sequence: {
@@ -198,34 +286,6 @@ export const assemblies = [{
       type: 'RefNameAliasAdapter',
       location: {
         uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam4/bigZips/canFam4.chromAlias.txt',
-        locationType: 'UriLocation',
-      },
-    },
-  },
-},
-{
-  name: 'canFam3',
-  aliases: ['Broad CanFam3.1'],
-  sequence: {
-    type: 'ReferenceSequenceTrack',
-    trackId: 'reference_id_canFam3',
-    adapter: {
-      type: 'TwoBitAdapter',
-      twoBitLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.2bit',
-        locationType: 'UriLocation',
-      },
-      chromSizesLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chrom.sizes',
-        locationType: 'UriLocation',
-      },
-    },
-  },
-  refNameAliases: {
-    adapter: {
-      type: 'RefNameAliasAdapter',
-      location: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chromAlias.txt',
         locationType: 'UriLocation',
       },
     },
@@ -409,14 +469,14 @@ export const defaultSession = {
     tracks: [
       {
         type: 'ReferenceSequenceTrack',
-        configuration: 'reference_id_canFam6',
+        configuration: 'reference_id_canFam3',
         displays: [
           {
             type: 'LinearReferenceSequenceDisplay',
             maxDisplayedBpPerPx: 22345,
             height: 200,
             configuration:
-              'reference_id_canFam6-LinearReferenceSequenceDisplay',
+              'reference_id_canFam3-LinearReferenceSequenceDisplay',
           },
         ],
       },

@@ -4,9 +4,16 @@ import {
   withStyles,
   styled,
   Paper,
+  makeStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { pageData } from '../../../bento/landingPageData';
+
+const useStyles = makeStyles({
+  root: {
+    marginTop: (props) => (props.activeTemplate === 'twitter' ? '3em' : '1em'),
+  },
+});
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -16,31 +23,35 @@ const Item = styled(Paper)(({ theme }) => ({
   marginTop: '50px',
 }));
 
-const Widgets = ({ classes }) => (
-  <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
-    {
-      pageData.widgets.map((widget) => (
-        <Grid item xs={3} className={classes.widget}>
-          <Item>
-            <Link to={widget.callToActionLink}>
-              <div className={classes.container}>
-                <div className={classes.title}>
-                  {widget.titleText}
+const Widgets = ({ classes, ...props }) => {
+  const { root } = useStyles(props);
+
+  return (
+    <Grid className={root} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
+      {
+        pageData.widgets.map((widget) => (
+          <Grid item xs={3} className={classes.widget}>
+            <Item>
+              <Link to={widget.callToActionLink}>
+                <div className={classes.container}>
+                  <div className={classes.title}>
+                    {widget.titleText}
+                  </div>
+                  <div className={classes.image}>
+                    <img src={widget.img} alt={widget.alt} />
+                  </div>
+                  <div className={classes.description}>
+                    {widget.descriptionText}
+                  </div>
                 </div>
-                <div className={classes.image}>
-                  <img src={widget.img} alt={widget.alt} />
-                </div>
-                <div className={classes.description}>
-                  {widget.descriptionText}
-                </div>
-              </div>
-            </Link>
-          </Item>
-        </Grid>
-      ))
-    }
-  </Grid>
-);
+              </Link>
+            </Item>
+          </Grid>
+        ))
+      }
+    </Grid>
+  );
+};
 
 const styles = (theme) => ({
   widget: {

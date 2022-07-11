@@ -15,6 +15,7 @@ const table = {
   viewColumns: true,
   title: 'STUDIES IN THIS PROGRAM',
   selectableRows: false,
+  legendTooltip: true,
   downloadFileName: 'ICDC_Program_Studies_download',
   columns: [
     {
@@ -33,6 +34,56 @@ const table = {
       dataField: 'clinical_study_name',
       header: 'Study Name',
       display: true,
+    },
+    {
+      dataField: 'numberOfCaseFiles',
+      label: 'Case Files',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'Number of Case Files',
+      legendTooltip: true,
+      header: 'Case File(s)',
+      display: true,
+      firstIcon: true,
+      indicator: '',
+      useImage: false,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
+    },
+    {
+      dataField: 'numberOfStudyFiles',
+      label: 'Study Files',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'Number of Study Files',
+      header: 'Study File(s)',
+      display: true,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
+    },
+    {
+      dataField: 'numberOfImageCollections',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'Number of Image Collections',
+      label: 'Image Collections',
+      header: 'Image Collection(s)',
+      display: true,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-ImageCollection.svg',
+    },
+    {
+      dataField: 'numberOfPublications',
+      label: 'Publications',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'Number of Publications',
+      header: 'Publication(s)',
+      display: true,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
+    },
+    {
+      dataField: 'CRDCLinks',
+      csvNullValue: 'Not Applicable',
+      iconLabel: 'External Data Sets',
+      label: 'Additional CRDC Nodes',
+      header: 'icon',
+      lastIcon: true,
+      display: true,
+      icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
     },
     {
       dataField: 'clinical_study_type',
@@ -102,12 +153,19 @@ query program($programTitle: String!) {
       clinical_study_name
       clinical_study_description
       clinical_study_type
+      numberOfCases
+      numberOfCaseFiles
+      numberOfStudyFiles
+      numberOfImageCollections
+      numberOfPublications
       accession_id
       study_disposition
-      date_of_iacuc_approval
-      dates_of_conduct
-      numberOfCases
+      numberOfCRDCNodes
+      CRDCLinks {
+        text
+        url
       }
+    }
 }`;
 
 export {

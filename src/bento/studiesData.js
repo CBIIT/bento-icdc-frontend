@@ -29,6 +29,8 @@ export const pageData = {
     downloadFileName: 'ICDC_Studies_download',
     // Set 'selectableRows' to true to show the row selection
     selectableRows: false,
+    // toggle D.A.L unified tooltip above D.A.L icons on table toolbar
+    legendTooltip: true,
     columns: [
       {
         dataField: 'clinical_study_designation',
@@ -49,6 +51,56 @@ export const pageData = {
         display: true,
       },
       {
+        dataField: 'numberOfCaseFiles',
+        csvNullValue: 'Not Applicable',
+        iconLabel: 'Number of Case Files',
+        label: 'Case Files',
+        legendTooltip: true,
+        header: 'Case File(s)',
+        display: true,
+        indicator: '',
+        useImage: false,
+        firstIcon: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
+      },
+      {
+        dataField: 'numberOfStudyFiles',
+        csvNullValue: 'Not Applicable',
+        label: 'Study Files',
+        iconLabel: 'Number of Study Files',
+        header: 'Study File(s)',
+        display: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
+      },
+      {
+        dataField: 'numberOfImageCollections',
+        label: 'Image Collections',
+        csvNullValue: 'Not Applicable',
+        iconLabel: 'Number of Image Collections',
+        header: 'Image Collection(s)',
+        display: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-ImageCollection.svg',
+      },
+      {
+        dataField: 'numberOfPublications',
+        csvNullValue: 'Not Applicable',
+        iconLabel: 'Number of Publications',
+        label: 'Publications',
+        header: 'Publication(s)',
+        display: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
+      },
+      {
+        dataField: 'CRDCLinks',
+        csvNullValue: 'Not Applicable',
+        iconLabel: 'External Data Sets',
+        label: 'Additional CRDC Nodes',
+        header: 'icon',
+        display: true,
+        lastIcon: true,
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
+      },
+      {
         dataField: 'clinical_study_type',
         header: 'Study Type',
         display: true,
@@ -60,7 +112,7 @@ export const pageData = {
       },
       {
         dataField: 'study_disposition',
-        header: 'study disposition',
+        header: 'Study Disposition',
         display: false,
       },
       {
@@ -96,8 +148,17 @@ export const GET_STUDY_DATA_QUERY = gql`{
         clinical_study_name
         clinical_study_type
         numberOfCases
+        numberOfCaseFiles
+        numberOfStudyFiles
+        numberOfImageCollections
+        numberOfPublications
         accession_id
         study_disposition
+        numberOfCRDCNodes
+        CRDCLinks {
+          text
+          url
+        }
     }
   }
   `;

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   Grid,
@@ -8,13 +9,14 @@ import {
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { cn } from 'bento-components';
+import { TwitterTweetEmbed } from 'react-twitter-embed';
+import ReactPlayer from 'react-player/youtube';
 import lbg from '../../assets/landing/Background.png';
 import { Button } from '../../components/Wrappers/Wrappers';
 import starImg from '../../assets/landing/Spark.png';
 import flare from '../../assets/landing/flare_bkgd.png';
 import dogImg from '../../assets/landing/canine_bubble.png';
 import humanImg from '../../assets/landing/human_bubble.png';
-import { pageData } from '../../bento/landingPageData';
 import Widgets from './views/widgets';
 import Tab from '../../components/Tab/Tab';
 import TabPanel from '../../components/Tab/TabPanel';
@@ -137,10 +139,83 @@ const LinkImage = (imagePath, link, classes) => {
   );
 };
 
+const generateSpotlightContent = (template, classes, item) => {
+  switch (template) {
+    case 'twitter':
+      return (
+        <div className={classes.twitterEmbedContainer}>
+          <TwitterTweetEmbed
+            tweetId="1493638757001711620"
+            className={classes.test}
+          />
+        </div>
+      );
+    case 'youtube':
+      return (
+        <div className={classes.youtubeEmbedContainer}>
+          <ReactPlayer
+            url="https://www.youtube.com/watch?v=bIWaMKZ9pl4"
+            height="100%"
+            width="100%"
+          />
+        </div>
+      );
+    case 'imageWithCaption':
+      return (
+        <div className={classes.imageWithCaptionContainer}>
+          <div style={{
+            backgroundColor: '#fff',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '0.4em',
+            boxSizing: 'border-box',
+            border: '1px solid #000',
+            width: '38em',
+            height: '27.5em',
+          }}
+          >
+            <img src={item.img} alt={item.alt} className={classes.imageWithCaption} />
+
+          </div>
+          <div style={{
+            color: 'white',
+            width: '36em',
+          }}
+          >
+            <p className={classes.imageCaption}>{item.caption}</p>
+
+          </div>
+        </div>
+      );
+    case 'noCaptionImage':
+      return (
+        <div className={classes.noCaptionImageContainer}>
+          <img src={item.img} alt={item.alt} className={classes.imageWithCaption} />
+        </div>
+      );
+    case 'smallIcon':
+      return (
+        <div className={classes.smallIconContainer}>
+          <img src={item.img} alt={item.alt} />
+        </div>
+      );
+    case 'largeIcon':
+      return (
+        <div className={classes.largeIconContainer}>
+          <img src={item.img} alt={item.alt} />
+        </div>
+      );
+    default:
+      return '';
+  }
+};
+
 const LandingView = ({
   classes,
   primaryContentImage,
   link,
+  pageData,
 }) => {
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
@@ -203,40 +278,46 @@ const LandingView = ({
                         xs={12}
                       >
                         { (index === 0) && (
-                        <div>
-                          <div className={classes.animationContainer}>
-                            <SlideDown className={classes.dog}>
-                              <img className={classes.dogImg} src={dogImg} width="320px" alt="Dog" />
-                            </SlideDown>
-                            <SlideUp className={classes.human}>
-                              <img className={classes.humanImg} src={humanImg} width="320px" alt="human" />
-                            </SlideUp>
-                            <Star className={classes.star}>
-                              <img className={classes.starImg} src={starImg} alt="star" />
-                              <img className={classes.starImg} src={flare} alt="flare" />
-                            </Star>
+                          <div>
+                            <div className={classes.animationContainer}>
+                              <SlideDown className={classes.dog}>
+                                <img className={classes.dogImg} src={dogImg} width="320px" alt="Dog" />
+                              </SlideDown>
+                              <SlideUp className={classes.human}>
+                                <img className={classes.humanImg} src={humanImg} width="320px" alt="human" />
+                              </SlideUp>
+                              <Star className={classes.star}>
+                                <img className={classes.starImg} src={starImg} alt="star" />
+                                <img className={classes.starImg} src={flare} alt="flare" />
+                              </Star>
+                            </div>
                           </div>
-                        </div>
                         )}
                         { (index === 1) && (
-                          <div className={classes.datadictionaryContainer}>
-                            <img src={item.content.image} alt="icdc_studies" />
-                          </div>
+                        <div className={classes.datadictionaryContainer}>
+                          <img src={item.content.image} alt="icdc_studies" />
+                        </div>
                         )}
                         { (index === 2) && (
-                          <div className={classes.carouselImgContainer}>
-                            <img src={item.content.image} alt="icdc_studies" />
-                          </div>
+                        <div className={classes.carouselImgContainer}>
+                          <img src={item.content.image} alt="icdc_studies" />
+                        </div>
                         )}
-                        { (index === 3) && LinkImage(primaryContentImage, link, classes)}
+                        { (index === 3)
+                            && generateSpotlightContent(
+                              item.content.template,
+                              classes,
+                              item.content[item.content.template],
+                            )}
                       </Grid>
                     </Grid>
                   </TabPanel>
                 ))
               }
             </Grid>
+            <Widgets activeTemplate={pageData.tabs[3].content.template} />
           </Grid>
-          <Widgets />
+
         </div>
       </div>
     </MuiThemeProvider>
@@ -251,6 +332,68 @@ const styles = (theme) => ({
     backgroundSize: 'cover',
     backgroundAttachment: 'fixed',
     marginTop: '-47px',
+  },
+  imageCaption: {
+    textAlign: 'justify',
+    fontFamily: 'Inter',
+    fontSize: '1em',
+    fontWeight: '300',
+    letterSpacing: '0',
+    lineHeight: '13px',
+    position: 'relative',
+    bottom: '0.6em',
+  },
+  twitterEmbedContainer: {
+    marginTop: '6.5em',
+    width: '31.8em',
+    boxShadow: '0 25px 51px 10px #000',
+  },
+  smallIconContainer: {
+    width: '300px',
+    marginLeft: '9em',
+    marginTop: '6.5em',
+  },
+  largeIconContainer: {
+    width: '31.5em',
+    marginLeft: '5em',
+    marginTop: '6.5em',
+  },
+  youtubeEmbedContainer: {
+    background: '#fff',
+    marginTop: '6.5em',
+    borderRadius: '0.5em',
+    width: '49em',
+    height: '27.8em',
+    boxSizing: 'border-box',
+    border: '5px solid #fff',
+  },
+  imageWithCaptionContainer: {
+    padding: '0.4em',
+    width: 'fit-content',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '6em',
+    marginLeft: '3em',
+  },
+  imageWithCaption: {
+    height: '100%',
+    width: '100%',
+  },
+  noCaptionImageContainer: {
+    transform: 'rotate(10deg)',
+    marginTop: '6.5em',
+    backgroundColor: '#fff',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '0.4em',
+    width: '30.5em',
+    height: '38em',
+    marginLeft: '3em',
+    border: '0.8em solid #fff',
+
   },
   container: {
     paddingTop: '10px',

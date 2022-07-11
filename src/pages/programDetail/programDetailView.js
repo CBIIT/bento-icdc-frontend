@@ -12,7 +12,8 @@ import {
   ToolTip as Tooltip,
 } from 'bento-components';
 import _ from 'lodash';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { FiberManualRecordRounded } from '@material-ui/icons';
 import StatsView from '../../components/Stats/StatsView';
 import {
   table,
@@ -40,7 +41,18 @@ themesLight.overrides.MuiTableCell = {
     },
   },
 };
-const computedTheme = createMuiTheme({
+themesLight.overrides.MUIDataTableToolbar = {
+  ...themesLight.overrides.MUIDataTableToolbar,
+  actions: {
+    paddingRight: '35px',
+    '& span': {
+      '& button': {
+        right: '0px',
+      },
+    },
+  },
+};
+const computedTheme = createTheme({
   ...themesLight,
   ...overrides,
 });
@@ -72,6 +84,7 @@ const ProgramView = ({ classes, data }) => {
   const programConfig = ProgramImageConfig[programDetail.program_acronym];
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const tableOptions = getOptions(table, classes);
+  tableOptions.downloadOptions.filename = tableOptions.downloadOptions.filename.replace('Program', `${programDetail.program_acronym}`);
 
   const embargoToolTipIcon = () => (
     <Tooltip title="Under Embargo" arrow placement="bottom">
@@ -107,15 +120,15 @@ const ProgramView = ({ classes, data }) => {
         {value}
       </Link>
       {
-        renderSwitch(studyDisposition(tableMeta.rowData[5]))
+        renderSwitch(studyDisposition(tableMeta.rowData[10]))
       }
     </>
   );
 
   const customCaseNumbLink = (column, value, tableMeta) => (
-    renderSwitch(studyDisposition(tableMeta.rowData[5]))
+    renderSwitch(studyDisposition(tableMeta.rowData[10]))
       ? (
-        renderSwitch(studyDisposition(tableMeta.rowData[5]))
+        renderSwitch(studyDisposition(tableMeta.rowData[10]))
       ) : (
         <Link
           to={(location) => ({ ...location, pathname: '/explore' })}
@@ -127,29 +140,96 @@ const ProgramView = ({ classes, data }) => {
       )
   );
 
+  const generateCRDCLinks = (linksArray) => (
+    <ul className={classes.crdcLinks}>
+      {linksArray.map((link) => (
+        <li>
+          <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
+            {`${link.text}`}
+            <img
+              style={{
+                width: '1.5em',
+              }}
+              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
+              alt="external link icon"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+
+  const generateIndicatorTooltipTitle = (dataField, value, accessionId) => {
+    switch (dataField) {
+      case 'numberOfCaseFiles':
+        return `${value} Case File(s)`;
+      case 'numberOfStudyFiles':
+        return `${value} Study File(s)`;
+      case 'numberOfImageCollections':
+        return `${value} Image Collection(s)`;
+      case 'numberOfPublications':
+        return `${value} Publication(s)`;
+      default:
+        return generateCRDCLinks(
+          data.studiesByProgramId
+            .filter((study) => study.accession_id === accessionId)[0].CRDCLinks,
+        );
+    }
+  };
+
+  const customIcon = (column, value, tableMeta) => {
+    const flag = Array.isArray(value) ? value.length > 0 : value > 0;
+    const title = generateIndicatorTooltipTitle(column.dataField, value, tableMeta.rowData[9]);
+    return (
+      <>
+        {
+        flag && (
+        <div className={classes.dataAvailIndicator}>
+          <Tooltip classes={{ tooltip: column.dataField === 'CRDCLinks' ? classes.externalLinkDalTooltip : classes.defaultDalTooltip }} title={title} interactive={column.dataField === 'CRDCLinks'}>
+            {column.indicator && column.useImage
+              ? <img className={classes.dataAvailIndicatorImage} src={column.indicator} alt={`${column.header} icon`} />
+              : <FiberManualRecordRounded className={classes.dataAvailIndicatorIcon} />}
+          </Tooltip>
+        </div>
+        )
+      }
+      </>
+    );
+  };
+
   const updatedTableWithLinks = manipulateLinks([
     ...table.columns,
     ...table.optionalColumns,
   ]);
   const columns = updatedTableWithLinks.map((column) => ({
     name: column.dataField,
-    label: column.header,
+    icon: !!column.icon,
+    csvNullValue: column.csvNullValue,
+    iconLabel: column.iconLabel,
+    firstIcon: column.firstIcon,
+    iconViewColumnsLabel: column.label,
+    lastIcon: column.lastIcon,
+    label: column.icon ? <img className={classes.dalIcon} src={column.icon} alt={`${column.label}'s icon`} />
+      : column.header,
     options: {
       display: column.display,
       viewColumns: column.viewColumns,
-      customBodyRender: (value, tableMeta) => (
-        <>
-          {
-            column.internalLink ? (
-              column.totalNumberOfCases ? customCaseNumbLink(column, value, tableMeta)
-                : customStudyCodeLink(column, value, tableMeta)
-            )
-              : (
-                (`${value}` !== 'null') ? `${value}` : ''
-              )
+      customBodyRender: (value, tableMeta) => {
+        if (column.internalLink) {
+          if (column.totalNumberOfCases) {
+            return customCaseNumbLink(column, value, tableMeta);
           }
-        </>
-      ),
+          return customStudyCodeLink(column, value, tableMeta);
+        }
+        if (column.icon) {
+          return customIcon(column, value, tableMeta);
+        }
+        return (
+          <>
+            {(`${value}` !== 'null') ? `${value}` : ''}
+          </>
+        );
+      },
     },
   }));
 
@@ -222,6 +302,42 @@ const ProgramView = ({ classes, data }) => {
 };
 
 const styles = (theme) => ({
+  crdcLinks: {
+    paddingLeft: '1em',
+    textAlign: 'left',
+  },
+  legend: {
+    zIndex: '1000',
+  },
+  legendTooltip: {
+    position: 'relative',
+    bottom: '0.5em',
+  },
+  dalIcon: {
+    width: '25px',
+  },
+  dataAvailIndicator: {
+    textAlign: 'center',
+  },
+  dataAvailIndicatorIcon: {
+    color: '#1A89C4',
+    height: '13px',
+    width: '13px',
+  },
+  crdcLinkStyle: {
+    color: '#DC762F',
+  },
+  dataAvailIndicatorImage: {
+    height: '20px',
+    width: '20px',
+  },
+  defaultDalTooltip: {
+    maxWidth: 'none',
+  },
+  externalLinkDalTooltip: {
+    maxWidth: 'none',
+    padding: '0px 12px',
+  },
   link: {
     fontWeight: 'bold',
     fontFamily: 'Open Sans',
@@ -311,7 +427,7 @@ const styles = (theme) => ({
     paddingLeft: '32px',
     paddingRight: '32px',
     borderBottom: '#81a6b9 4px solid',
-    height: '80px',
+    height: '76px',
     margin: 'auto 33px',
   },
 
@@ -360,7 +476,7 @@ const styles = (theme) => ({
     position: 'absolute',
     float: 'left',
     marginTop: '-14px',
-    width: '100px',
+    width: '96px',
   },
   detailContainer: {
     margin: 'auto',

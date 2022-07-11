@@ -60,15 +60,15 @@ const styles = (theme) => ({
     paddingBottm: '17px',
   },
   gridContainer: {
-    width: 'calc(100% + 8px) !important',
+    width: 'calc(100% + 6px) !important',
   },
   container: {
-    paddingTop: '80px',
+    paddingTop: '75px',
     fontFamily: 'Raleway, sans-serif',
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingLeft: '27px',
+    paddingRight: '27px',
     background: '#f3f3f3',
-
+    minWidth: '960px',
   },
   marginTop23: {
     marginTop: '23px',
@@ -91,13 +91,10 @@ const styles = (theme) => ({
     background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '32px',
+    paddingLeft: '35px',
     borderBottom: '#81a6b9 4px solid',
-    height: '80px',
-    maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
+    height: '76px',
   },
-
   headerTitle: {
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
@@ -143,17 +140,18 @@ const styles = (theme) => ({
     position: 'absolute',
     float: 'left',
     marginTop: '-14px',
-    width: '100px',
+    width: '96px',
   },
   detailContainer: {
-    maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
-    paddingTop: '12px',
+    paddingTop: '18px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
+    maxWidth: '1345px',
+    minWidth: '960px',
+    margin: 'auto',
   },
   detailContainerHeader: {
     textTransform: 'uppercase',

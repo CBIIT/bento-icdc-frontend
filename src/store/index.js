@@ -1,16 +1,16 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import { ddgraph, moduleReducers as submission, versionInfo } from 'model-explorer';
 import layout from '../components/Layout/LayoutState';
 import stats from '../components/Stats/StatsState';
-import { ddgraph, versionInfo } from '../components/DataDictionaryComponent/DataDictionary/reducers';
-// import submission from '../components/DataDictionaryComponent/reducers';
 
 const reducers = {
-  layout,
-  stats,
   ddgraph,
   versionInfo,
+  submission,
+  layout,
+  stats,
 };
 
 const loggerMiddleware = createLogger();

@@ -8,7 +8,10 @@ export const defaultFacetSectionVariables = {
   isExpanded: false,
 };
 
-export const facetSearchData = [
+export const DATA_MODEL_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model.yml';
+export const DATA_MODEL_PROPS_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model-props.yml';
+
+export const facetFilterSearchData = [
   {
     groupName: 'Category',
     datafield: 'category',
@@ -16,14 +19,14 @@ export const facetSearchData = [
     tooltip: 'category',
     show: true,
     checkboxItems: [
-      { name: 'Administrative', isChecked: false },
-      { name: 'Case', isChecked: false },
-      { name: 'Study', isChecked: false },
-      { name: 'Clinical', isChecked: false },
-      { name: 'Clinical_Trial', isChecked: false },
-      { name: 'Biospecimen', isChecked: false },
-      { name: 'Analysis', isChecked: false },
-      { name: 'Data_File', isChecked: false },
+      { name: 'Administrative', isChecked: false, group: 'category' },
+      { name: 'Case', isChecked: false, group: 'category' },
+      { name: 'Study', isChecked: false, group: 'category' },
+      { name: 'Clinical', isChecked: false, group: 'category' },
+      { name: 'Clinical_Trial', isChecked: false, group: 'category' },
+      { name: 'Biospecimen', isChecked: false, group: 'category' },
+      { name: 'Analysis', isChecked: false, group: 'category' },
+      { name: 'Data_File', isChecked: false, group: 'category' },
     ],
   },
   {
@@ -33,8 +36,8 @@ export const facetSearchData = [
     tooltip: 'assignment',
     show: true,
     checkboxItems: [
-      { name: 'Core', isChecked: false },
-      { name: 'Extended', isChecked: false },
+      { name: 'Core', isChecked: false, group: 'assignment' },
+      { name: 'Extended', isChecked: false, group: 'assignment' },
     ],
   },
   {
@@ -44,8 +47,8 @@ export const facetSearchData = [
     tooltip: 'class',
     show: true,
     checkboxItems: [
-      { name: 'Primary', isChecked: false },
-      { name: 'Secondary', isChecked: false },
+      { name: 'Primary', isChecked: false, group: 'class' },
+      { name: 'Secondary', isChecked: false, group: 'class' },
     ],
   },
   // {
@@ -55,10 +58,10 @@ export const facetSearchData = [
   //   tooltip: 'multiplicity',
   //   show: true,
   //   checkboxItems: [
-  //     { name: 'One_to_one', isChecked: false },
-  //     { name: 'One_to_many', isChecked: false },
-  //     { name: 'Many_to_one', isChecked: false },
-  //     { name: 'Many_to_many', isChecked: false },
+  //     { name: 'One_to_one', isChecked: false, group: 'multiplicity' },
+  //     { name: 'One_to_many', isChecked: false, group: 'multiplicity' },
+  //     { name: 'Many_to_one', isChecked: false, group: 'multiplicity' },
+  //     { name: 'Many_to_many', isChecked: false, group: 'multiplicity' },
   //   ],
   // },
   {
@@ -68,14 +71,14 @@ export const facetSearchData = [
     tooltip: 'inclusion',
     show: true,
     checkboxItems: [
-      { name: 'Required', isChecked: false },
-      { name: 'Preferred', isChecked: false },
-      { name: 'Optional', isChecked: false },
+      { name: 'Required', isChecked: false, group: 'required' },
+      { name: 'Preferred', isChecked: false, group: 'preferred' },
+      { name: 'Optional', isChecked: false, group: 'optional' },
     ],
   },
 ];
 
-export const facetSectionVariables = {
+export const facetFilterSectionVariables = {
   'Filter By Nodes': {
     color: '#FF9742',
     checkBoxColorsOne: '#fdf1e8',
@@ -99,13 +102,13 @@ export const facetSectionVariables = {
   },
 };
 
-export const resetIcon = {
+export const filterResetIcon = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/Clear-icon.svg',
   alt: 'Reset icon',
   size: '12 px',
 };
 
-export const baseFilters = {
+export const baseFacetFilters = {
   category: [],
   assignment: [],
   class: [],
@@ -113,14 +116,14 @@ export const baseFilters = {
   inclusion: [],
 };
 
-export const filterSections = [
+export const facetFilterSections = [
   'category',
   'assignment',
   'class',
   'inclusion',
 ];
 
-export const filterOptions = [
+export const facetFilterOptions = [
   // category
   'administrative',
   'case',
@@ -145,4 +148,13 @@ export const filterOptions = [
 export const controlVocabConfig = {
   maxNoOfItems: 15,
   maxNoOfItemDlgBox: 30,
+};
+
+export const filterConfig = {
+  facetSearchData: facetFilterSearchData,
+  facetSectionVariables: facetFilterSectionVariables,
+  resetIcon: filterResetIcon,
+  baseFilters: baseFacetFilters,
+  filterSections: facetFilterSections,
+  filterOptions: facetFilterOptions,
 };

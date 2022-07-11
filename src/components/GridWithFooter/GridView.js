@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -114,6 +115,7 @@ const GridView = ({
     marginBottom: '10px',
     marginRight: '4px',
     border: '3px solid grey',
+    position: 'relative',
   };
 
   useEffect(() => {
@@ -237,23 +239,23 @@ const GridView = ({
   const tooltipComponent = (
     <>
       <Tooltip title={tooltipMessage} arrow placement="bottom" interactive>
-        <IconButton aria-label="help" className={classes.helpIconButton}>
-          {tooltipContent.src ? (
-            <img
-              src={tooltipContent.src}
-              alt={tooltipContent.alt}
-              className={classes.helpIcon}
-            />
-          ) : (
-            <HelpIcon
-              className={classes.helpIcon}
-              fontSize="small"
-              onMouseOver={() => toggleMessageStatus('top', 'open')}
-              onMouseEnter={() => toggleMessageStatus('top', 'open')}
-              onFocus={() => toggleMessageStatus('top', 'open')}
-            />
-          )}
-        </IconButton>
+
+        {tooltipContent.src ? (
+          <img
+            src={tooltipContent.src}
+            alt={tooltipContent.alt}
+            className={classes.helpIconButton}
+          />
+        ) : (
+          <HelpIcon
+            fontSize="small"
+            onMouseOver={() => toggleMessageStatus('top', 'open')}
+            onMouseEnter={() => toggleMessageStatus('top', 'open')}
+            onFocus={() => toggleMessageStatus('top', 'open')}
+            className={classes.helpIconButton}
+          />
+        )}
+
       </Tooltip>
       { messageStatus ? (
         <div className={classes.messageBottom} style={tooltipStyle(tooltipMessage)}>
@@ -282,8 +284,8 @@ const GridView = ({
   return (
     <div>
       <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
-      <Grid container>
-        <Grid item xs={12} id="table_file" className={classes.tableGrid}>
+      <Grid container className={classes.tableGrid}>
+        <Grid item className={classes.tableGridItem}>
           <TableThemeProvider>
             <CustomDataTable
               data={_.cloneDeep(data)}
@@ -326,6 +328,9 @@ const styles = () => ({
     marginTop: '36px',
     zIndex: '999',
   },
+  tableGridItem: {
+    width: 'inherit',
+  },
   chipRoot: {
     color: '#ffffff',
     fontFamily: '"Open Sans", sans-serif',
@@ -358,22 +363,6 @@ const styles = () => ({
     lineHeight: '18px',
     fontSize: '10pt',
     color: '#fff',
-    // backgroundColor: '#ff7f15',
-  },
-  helpIcon: {
-    verticalAlign: 'top',
-    zIndex: '600',
-    width: '17px',
-  },
-  topButtonGroup: {
-    textAlign: 'right',
-    padding: '10px 0px 0px 0px',
-    position: 'absolute',
-    marginTop: '-3px',
-    width: '180px',
-    height: '43px',
-    marginLeft: '37px',
-
   },
   messageBottom: {
     position: 'absolute',
@@ -388,15 +377,11 @@ const styles = () => ({
     margin: '0px 0px 0px 2px',
   },
   helpIconButton: {
-    verticalAlign: 'top',
-    marginLeft: '-5px',
-    position: 'relative',
-    top: '-60px',
-    right: '-25px',
+    width: '1.5em',
+    position: 'absolute',
   },
   tableGrid: {
-    marginRight: '10.95px',
-    marginLeft: '10.5px',
+    padding: '0px',
   },
 });
 

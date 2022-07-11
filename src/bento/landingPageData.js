@@ -4,10 +4,19 @@ import Programs from '../assets/landing/Programs.png';
 import studies from '../assets/landing/studies.png';
 import spotlightStudy from '../assets/landing/Spotlight_Studies.png';
 import datadictionary from '../assets/landing/carousel.datadic.v2.png';
-import dogIcon from '../assets/landing/Button.Explore.Active.png';
 import studyActive from '../assets/landing/Button.Studies.Active.png';
 import spotLight from '../assets/landing/Button.Spotlight.Active.png';
 import datadictionaryIcon from '../assets/landing/Button.DataDictionary.Open.png';
+import DogAtVet from '../assets/landing/DogAtVet.jpg';
+import Emmie from '../assets/landing/Emmie.JPG';
+import Freddie from '../assets/landing/Freddie.jpg';
+import Gertie from '../assets/landing/Gertie.jpeg';
+import JellyBean from '../assets/landing/Jelly-Bean.jpg';
+import Krish from '../assets/landing/Krish.jpg';
+import LouiAndTeddy from '../assets/landing/Louie-Teddy.JPG';
+import Samantha from '../assets/landing/Samantha.jpg';
+import Bosco from '../assets/landing/Bosco.jpg';
+
 // import dogImage from '../assets/landing/dog-bubble.png';
 
 export const pageData = {
@@ -61,7 +70,7 @@ export const pageData = {
       index: 0,
       label: 'Explore ICDC',
       value: 'explore',
-      icon: dogIcon,
+      icon: 'https://github.com/CBIIT/datacommons-assets/blob/main/icdc/images/png/Button.Explore.Active.png?raw=true',
       content: {
         callToActionTitle: 'Integrated\n Canine\n Data\n Commons',
         callToActionDescription: 'Exploring, analyzing, and\n understanding the biological\n relationships between human\n and canine cancers.',
@@ -107,6 +116,26 @@ export const pageData = {
         callToActionButtonText: 'VIEW THE STUDY',
         callToActionLink: '/study/UBC01',
         image: spotlightStudy,
+        template: 'twitter',
+        twitter: {
+          tweetId: '1493638757001711620',
+        },
+        youtube: {
+          url: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+        },
+        imageWithCaption: {
+          img: DogAtVet,
+          caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        },
+        noCaptionImage: {
+          img: DogAtVet,
+        },
+        smallIcon: {
+          img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+        },
+        largeIcon: {
+          img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+        },
       },
     },
   ],
@@ -145,6 +174,60 @@ export const pageData = {
     },
   ],
 };
+
+export const newsViewImageData = [
+  {
+    img: Bosco,
+    label: 'Bosco',
+  },
+  {
+    img: DogAtVet,
+    label: 'Dog at vet',
+  },
+  {
+    img: Emmie,
+    label: 'Emmie',
+  },
+  {
+    img: Freddie,
+    label: 'Freddie',
+  },
+  {
+    img: Gertie,
+    label: 'Gertie',
+  },
+  {
+    img: JellyBean,
+    label: 'JellyBean',
+  },
+  {
+    img: Krish,
+    label: 'Krish',
+  },
+  {
+    img: LouiAndTeddy,
+    label: 'Louie and Teddy',
+  },
+  {
+    img: Samantha,
+    label: 'Samantha',
+  },
+];
+
+export const newsViewVideoData = [
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
+  },
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
+  },
+  {
+    vid: 'https://www.youtube.com/watch?v=bIWaMKZ9pl4',
+    label: 'Unleashing Comparative Oncology',
+  },
+];
 
 // --------------- GraphQL query - Retrieve Landing page data --------------
 export const GET_LANDING_PAGE_DATA_QUERY = false;
