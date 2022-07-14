@@ -9,10 +9,14 @@ import React from 'react';
 import _ from 'lodash';
 import { ReduxDataDictionary, getModelExploreData } from 'model-explorer';
 import store from '../../store';
-import { DATA_MODEL_URL, DATA_MODEL_PROPS_URL, filterConfig } from '../../bento/dataDictionaryData';
+import { filterConfig } from '../../bento/dataDictionaryData';
+import env from '../../utils/env';
+
+const DATA_MODEL = env.REACT_APP_DATA_MODEL;
+const DATA_MODEL_PROPS = env.REACT_APP_DATA_MODEL_PROPS;
 
 async function getData() {
-  const response = await getModelExploreData(DATA_MODEL_URL, DATA_MODEL_PROPS_URL);
+  const response = await getModelExploreData(DATA_MODEL, DATA_MODEL_PROPS);
   Promise.all(
     [
       store.dispatch({
