@@ -9,7 +9,7 @@ import React from 'react';
 import _ from 'lodash';
 import { ReduxDataDictionary, getModelExploreData } from 'model-explorer';
 import store from '../../store';
-import { filterConfig } from '../../bento/dataDictionaryData';
+import { filterConfig, pdfDownloadConfig } from '../../bento/dataDictionaryData';
 import env from '../../utils/env';
 
 const DATA_MODEL = env.REACT_APP_DATA_MODEL;
@@ -34,7 +34,7 @@ async function getData() {
 const ModelExplorer = () => {
   getData();
   return (
-    <ReduxDataDictionary />
+    <ReduxDataDictionary pdfDownloadConfig={pdfDownloadConfig} />
   );
 };
 

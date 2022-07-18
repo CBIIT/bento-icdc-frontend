@@ -173,3 +173,9 @@ export const filterConfig = {
   filterSections: facetFilterSections,
   filterOptions: facetFilterOptions,
 };
+
+export const pdfDownloadConfig = {
+  fileType: 'pdf',
+  prefix: 'ICDC_Data_Model_',
+  landscape: 'true',
+};
