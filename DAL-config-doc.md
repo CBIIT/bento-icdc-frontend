@@ -78,7 +78,7 @@ from line 53-102
     }
 ```
 
-### Config optiona
+### Config options
 - display: Toggles on and off display of indicator.
 - icon: accepts a path to an image for the indicator icon.
 - header: text displayed in tooltip on hover.
