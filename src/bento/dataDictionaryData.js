@@ -1,5 +1,13 @@
 export const categories = ['Admistrative', 'Study', 'Clinical Trial', 'Case', 'Biospecimen', 'Clinical', 'Analysis', 'Data File'];
 
+export const types = {
+  CATEGORY: 'category',
+  ASSIGNMENT: 'assignment',
+  INCLUSION: 'inclusion',
+  CLASS: 'class',
+  MULTIPLICITY: 'multiplicity',
+};
+
 export const defaultFacetSectionVariables = {
   color: '#000000',
   checkBoxColorsOne: '#E8F7DC',
@@ -7,9 +15,6 @@ export const defaultFacetSectionVariables = {
   height: '5px',
   isExpanded: false,
 };
-
-export const DATA_MODEL_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model.yml';
-export const DATA_MODEL_PROPS_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model-props.yml';
 
 export const facetFilterSearchData = [
   {
@@ -83,8 +88,8 @@ export const facetFilterSearchData = [
     tooltip: 'inclusion',
     show: true,
     checkboxItems: [
-      { name: 'no', isChecked: false, group: 'uiDisplay' },
-      { name: 'yes', isChecked: false, group: 'uiDisplay' },
+      { name: 'no', isChecked: false, group: 'no' },
+      { name: 'yes', isChecked: false, group: 'yes' },
     ],
   },
 ];
@@ -165,6 +170,8 @@ export const controlVocabConfig = {
   maxNoOfItemDlgBox: 30,
 };
 
+export const showNoOfCheckbox = 6;
+
 export const filterConfig = {
   facetSearchData: facetFilterSearchData,
   facetSectionVariables: facetFilterSectionVariables,
@@ -172,6 +179,7 @@ export const filterConfig = {
   baseFilters: baseFacetFilters,
   filterSections: facetFilterSections,
   filterOptions: facetFilterOptions,
+  showCheckboxCount: showNoOfCheckbox,
 };
 
 export const pdfDownloadConfig = {
