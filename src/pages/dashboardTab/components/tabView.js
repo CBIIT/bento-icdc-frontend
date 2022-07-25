@@ -62,6 +62,7 @@ const TabView = ({
   openSnack,
   disableRowSelection,
   buttonText,
+  jbrowseButtonText,
   addAllButtonText,
   tableID,
   saveButtonDefaultStyle,
@@ -96,7 +97,6 @@ const TabView = ({
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
-
   const fileIDs = cart.fileIds ? cart.fileIds : [];
   const saveButton = useRef(null);
   const saveButton2 = useRef(null);
@@ -170,6 +170,10 @@ const TabView = ({
       // tell the reducer to clear the selection on the table.
       clearTableSelections();
     }
+  }
+
+  function viewFilesOnJBrowse() {
+    console.log('View files on J browse');
   }
 
   function rowSelectionEvent(displayData, rowsSelected) {
@@ -392,6 +396,32 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
+        <button
+          type="button"
+          onClick={viewFilesOnJBrowse}
+          className={classes.button}
+        >
+          {jbrowseButtonText}
+        </button>
+        <Tooltip title={tooltipContent[tabIndex]} arrow placement="bottom">
+          <IconButton
+            aria-label="help"
+            className={classes.helpIconButton}
+          >
+            {TopMessageStatus.src ? (
+              <img
+                src={TopMessageStatus.src}
+                alt={TopMessageStatus.alt}
+                className={classes.helpIcon}
+              />
+            ) : (
+              <HelpIcon
+                className={classes.helpIcon}
+                fontSize="small"
+              />
+            )}
+          </IconButton>
+        </Tooltip>
       </Grid>
       <Grid container>
         <Grid item xs={12} id={tableID}>
@@ -580,7 +610,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '156px',
+    width: '176px',
     lineHeight: '37px',
     fontSize: '16px',
     fontFamily: 'Lato',

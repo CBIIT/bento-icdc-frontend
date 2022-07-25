@@ -122,6 +122,13 @@ const tabController = ({ classes, unifiedViewData }) => {
     && state.dashboardTab.filteredFileIds ? state.dashboardTab.filteredFileIds : null));
   const filteredStudyFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredStudyFileIds ? state.dashboardTab.filteredStudyFileIds : null));
+
+  const selectedFiles = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.dataFileSelected && state.dashboardTab.dataFileSelected.selectedRowInfo
+    ? state.dashboardTab.dataFileSelected.selectedRowInfo : null));
+  console.log('test file ids');
+  console.log(selectedFiles);
+
   const [TopMessageStatus, setTopMessageStatus] = React.useState({
     text: tooltipContent[currentTab],
     src: tooltipContent.icon,
@@ -313,6 +320,7 @@ const tabController = ({ classes, unifiedViewData }) => {
         closeSnack={closeSnack}
         disableRowSelection={disableRowSelectionFunction[container.disableRowSelection]}
         buttonText={container.buttonText}
+        jbrowseButtonText={container.jbrowseButtonText}
         addAllButtonText={container.addAllButtonText}
         tableID={container.tableID}
         saveButtonDefaultStyle={container.saveButtonDefaultStyle}
