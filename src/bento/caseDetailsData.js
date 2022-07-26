@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { FileOnRowsSelect } from '../pages/caseDetails/fileTable';
+import { FileOnRowsSelect, getSelectedFileNames } from '../pages/caseDetails/fileTable';
 import { SampleOnRowsSelect } from '../pages/caseDetails/sampleFileTable';
 
 // --------------- Tooltip configuration --------------
@@ -125,6 +125,7 @@ export const table2 = {
   defaultSortDirection: 'asc',
   // Text to appear on Add to cart button
   buttonText: 'Add Selected Files',
+  displayViewJBowseBtn: true,
   saveButtonDefaultStyle: {
     color: '#fff',
     opacity: '1',
@@ -217,6 +218,7 @@ export const table2 = {
   // Util Functions
   // Custom function on selct checkbox is selected.
   customOnRowsSelect: FileOnRowsSelect,
+  selectedFileNames: getSelectedFileNames,
 };
 
 export const textLabels = {

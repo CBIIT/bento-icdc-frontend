@@ -13,6 +13,7 @@ import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart'
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';
 import TableThemeProvider from './tableThemeConfig';
+import ViewJBrowseButton from '../../pages/JbrowseDetail/components/JBrowseViewBtn';
 
 const GridView = ({
   classes,
@@ -20,6 +21,7 @@ const GridView = ({
   title,
   columns,
   customOnRowsSelect,
+  selectedFileNames,
   openSnack,
   disableRowSelection,
   buttonText,
@@ -30,6 +32,7 @@ const GridView = ({
   saveButtonDefaultStyle,
   DeactiveSaveButtonDefaultStyle,
   ActiveSaveButtonDefaultStyle,
+  displayViewJBowseBtn,
   primaryKeyIndex = 0,
 }) => {
   // Get the existing files ids from  cart state
@@ -50,6 +53,9 @@ const GridView = ({
   const AddToCartAlertDialogRef = useRef();
   const [cartIsFull, setCartIsFull] = React.useState(false);
   const saveButton = useRef(null);
+
+  // Store Jbrowse related file selection
+  const [selectedRowFileNames, setSelectedRowFileNames] = React.useState([]);
 
   function openMessage() {
     return setMessageStatus(true);
@@ -185,7 +191,6 @@ const GridView = ({
         return accumulator;
       }, [],
     );
-
     setRowSelection({
       selectedRowInfo: newSelectedRowInfo,
       selectedRowIndex: newSelectedRowIndex,
@@ -200,11 +205,15 @@ const GridView = ({
     setSelectedIDs([...new Set(
       customOnRowsSelect(data, allRowsSelected),
     )]);
-
     if (allRowsSelected.length === 0) {
       updateActiveSaveButtonStyle(true, saveButton);
     } else {
       updateActiveSaveButtonStyle(false, saveButton);
+    }
+    if (selectedFileNames) {
+      setSelectedRowFileNames([...new Set(
+        selectedFileNames(data, allRowsSelected),
+      )]);
     }
   }
 
@@ -268,17 +277,20 @@ const GridView = ({
   );
 
   const downloadButton = (
-    <div className={classes.topButtonGroup} style={divStyle()}>
-      <button
-        type="button"
-        style={btnStyle}
-        ref={saveButton}
-        onClick={exportFiles}
-      >
-        { buttonText }
-      </button>
-      {showtooltip ? tooltipComponent : ''}
-    </div>
+    <>
+      <div className={classes.topButtonGroup} style={divStyle()}>
+        <button
+          type="button"
+          style={btnStyle}
+          ref={saveButton}
+          onClick={exportFiles}
+        >
+          { buttonText }
+        </button>
+        {showtooltip ? tooltipComponent : ''}
+        { displayViewJBowseBtn && <ViewJBrowseButton selectedFileNames={selectedRowFileNames} /> }
+      </div>
+    </>
   );
 
   return (

@@ -27,6 +27,7 @@ import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/ca
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 import updateColumns, { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
 import DocumentDownload from '../../../components/DocumentDownload';
+import ViewJBrowseButton from '../../JbrowseDetail/components/JBrowseViewBtn';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
 
@@ -62,7 +63,6 @@ const TabView = ({
   openSnack,
   disableRowSelection,
   buttonText,
-  jbrowseButtonText,
   addAllButtonText,
   tableID,
   saveButtonDefaultStyle,
@@ -76,6 +76,7 @@ const TabView = ({
   TopMessageStatus,
   count,
   api,
+  displayViewJBowseBtn,
   paginationAPIField,
   paginationAPIFieldDesc,
   dataKey,
@@ -170,10 +171,6 @@ const TabView = ({
       // tell the reducer to clear the selection on the table.
       clearTableSelections();
     }
-  }
-
-  function viewFilesOnJBrowse() {
-    console.log('View files on J browse');
   }
 
   function rowSelectionEvent(displayData, rowsSelected) {
@@ -396,32 +393,7 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
-        <button
-          type="button"
-          onClick={viewFilesOnJBrowse}
-          className={classes.button}
-        >
-          {jbrowseButtonText}
-        </button>
-        <Tooltip title={tooltipContent[tabIndex]} arrow placement="bottom">
-          <IconButton
-            aria-label="help"
-            className={classes.helpIconButton}
-          >
-            {TopMessageStatus.src ? (
-              <img
-                src={TopMessageStatus.src}
-                alt={TopMessageStatus.alt}
-                className={classes.helpIcon}
-              />
-            ) : (
-              <HelpIcon
-                className={classes.helpIcon}
-                fontSize="small"
-              />
-            )}
-          </IconButton>
-        </Tooltip>
+        { displayViewJBowseBtn && <ViewJBrowseButton /> }
       </Grid>
       <Grid container>
         <Grid item xs={12} id={tableID}>
@@ -477,6 +449,7 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
+        { displayViewJBowseBtn && <ViewJBrowseButton /> }
         <div style={{ position: 'relative' }}>
           <Link
             rel="noreferrer"
