@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -12,12 +11,12 @@ import {
   FILE_TYPE_BAI,
   FILE_TYPE_VCF,
   FILE_TYPE_VCF_INDEX,
-} from '../../bento/JBrowseData';
-import env from '../../utils/env';
-import { Typography } from '../../components/Wrappers/Wrappers';
-import Error from '../error/Error';
-
-const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_API;
+} from '../../../bento/JBrowseData';
+import { Typography } from '../../../components/Wrappers/Wrappers';
+import Error from '../../error/Error';
+import {
+  getAllFilesUri,
+} from '../util';
 
 const JbrowseDetailContainer = ({ match }) => {
   const [bamFiles, setBamFiles] = useState([]);
@@ -47,21 +46,6 @@ const JbrowseDetailContainer = ({ match }) => {
     variables: { file_name: files },
   });
 
-  const getAllFilesUri = async (file) => {
-    const resp = await axios.get(
-      `${FILE_SERVICE_API}${file.file_uuid}`,
-      {
-        headers: {
-          'Content-Type': 'application/pdf',
-        },
-      },
-    );
-    return {
-      file_location: resp.data,
-      file_type: `${file.file_name}`.split('.').pop(),
-      file_name: file.file_name,
-    };
-  };
   const getFiles = async () => {
     if (data && data.fileIdsFromFileName) {
       const promiseArr = data.fileIdsFromFileName.map(getAllFilesUri);

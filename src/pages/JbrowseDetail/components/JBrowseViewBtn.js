@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   IconButton,
@@ -8,7 +9,9 @@ import HelpIcon from '@material-ui/icons/Help';
 import { ToolTip as Tooltip } from 'bento-components';
 import {
   FILE_TYPE_BAI,
+  FILE_TYPE_VCF_INDEX,
 } from '../../../bento/JBrowseData';
+import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 
 const ViewJBrowseButton = ({
   classes,
@@ -26,7 +29,8 @@ const ViewJBrowseButton = ({
   const setSelectedFiles = (selectedFiles) => {
     const files = new Set();
     if (selectedFiles && selectedFiles.length > 0) {
-      const convertFilesName = selectedFiles.map((file) => file.replace(`.${FILE_TYPE_BAI}`, ''));
+      const convertFilesName = selectedFiles.map((file) => file.replace(`.${FILE_TYPE_BAI}`, '')
+        .replace(`.${FILE_TYPE_VCF_INDEX}`, ''));
       convertFilesName.forEach((name) => files.add(name));
     }
     return [...files];
@@ -39,10 +43,27 @@ const ViewJBrowseButton = ({
   const viewFilesOnJBrowse = () => {
     console.log('view file on jbrowse');
     console.log(distinctFiles);
+    localStorage.setItem('jbroseFiles', distinctFiles);
+    setJborwseSelectedFiles(distinctFiles);
   };
 
   return (
     <>
+      <Link
+        to={{
+          pathname: '/multiFileViewer',
+          state: { fileNames: distinctFiles },
+        }}
+      >
+        <button
+          className={classes.button}
+          type="button"
+          onClick={viewFilesOnJBrowse}
+          disabled={distinctFiles.length === 0 || distinctFiles.length > 5}
+        >
+          View in JBrowse
+        </button>
+      </Link>
       <button
         className={classes.button}
         type="button"
