@@ -9,12 +9,14 @@ import {
   FILE_TYPE_BAM,
   FILE_TYPE_VCF,
   FILE_TYPE_VCF_INDEX,
+  jBrowseOptions,
 } from '../../../bento/JBrowseData';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 import Error from '../../error/Error';
 import {
   getAllFilesUri,
 } from '../util';
+import MultiFilesView from './MultiFilesView';
 
 const JbrowseMultiViewController = (props) => {
   const [jbrowseFiles, setJbrowseFiles] = useState([]);
@@ -25,13 +27,13 @@ const JbrowseMultiViewController = (props) => {
 
   const generateIndexFile = (selectedFiles) => {
     const files = [];
-    const vcfFiles = selectedFiles.filter((item) => item.includes(FILE_TYPE_VCF));
-    const bamFiles = selectedFiles.filter((item) => item.includes(FILE_TYPE_BAM));
-    vcfFiles.forEach((fileName) => {
+    const vcfFiles1 = selectedFiles.filter((item) => item.includes(FILE_TYPE_VCF));
+    const bamFiles1 = selectedFiles.filter((item) => item.includes(FILE_TYPE_BAM));
+    vcfFiles1.forEach((fileName) => {
       files.push(fileName);
       files.push(`${fileName}.${FILE_TYPE_VCF_INDEX}`);
     });
-    bamFiles.forEach((fileName) => {
+    bamFiles1.forEach((fileName) => {
       files.push(fileName);
       files.push(`${fileName}.${FILE_TYPE_BAI}`);
     });
@@ -43,17 +45,26 @@ const JbrowseMultiViewController = (props) => {
   const { loading, error, data } = useQuery(GET_FILES_ID_BY_NAME, {
     variables: { file_name: generateFiles },
   });
-  console.log('get fileid');
-  console.log(data);
+
+  const formatFiles = (files, selectedFiles) => {
+    const formatedFiles = [];
+    selectedFiles.forEach((item) => {
+      const fileName = `${item}`.replace(`.${FILE_TYPE_VCF}`, '').replace(`.${FILE_TYPE_BAM}`, '');
+      const file = files.filter((c) => c.file_name.includes(fileName));
+      formatedFiles.push(file);
+    });
+    return formatedFiles;
+  };
 
   const getFiles = async () => {
     if (data && data.fileIdsFromFileName) {
       const promiseArr = data.fileIdsFromFileName.map(getAllFilesUri);
       const responses = await Promise.all(promiseArr);
-      console.log(responses);
-      setJbrowseFiles(responses);
+      const formatedFiles = formatFiles(responses, allFiles);
+      setJbrowseFiles(formatedFiles);
     }
   };
+
   useEffect(() => {
     if (data && data.fileIdsFromFileName && !loading) {
       getFiles();
@@ -75,7 +86,10 @@ const JbrowseMultiViewController = (props) => {
 
   return (
     <>
-      <h2>Multi view page</h2>
+      <MultiFilesView
+        jbrowseFiles={jbrowseFiles}
+        options={jBrowseOptions}
+      />
     </>
   );
 };

@@ -6,10 +6,6 @@ import {
 } from 'bento-components';
 import {
   assemblies,
-  FILE_TYPE_BAM,
-  FILE_TYPE_BAI,
-  FILE_TYPE_VCF,
-  FILE_TYPE_VCF_INDEX,
   alignemntLocation,
   variantLocation,
   defaultSession,
@@ -18,6 +14,8 @@ import {
 import {
   getDefaultSession,
   getTracks,
+  setVarientUrl,
+  setAlignmentUrl,
 } from '../util';
 
 const JBrowseViewDetail = ({
@@ -32,38 +30,15 @@ const JBrowseViewDetail = ({
   const [session, setSession] = useState([]);
   const [location, setLocation] = useState(alignemntLocation);
   const configureAdapters = () => {
-    const alignmentUris = {};
-
-    if (bamFiles.length > 0 && alignments) {
-      bamFiles.forEach((file) => {
-        alignmentUris.file_name = file.file_name;
-        if (file.file_type === FILE_TYPE_BAM) {
-          alignmentUris.bamLocationUri = file.file_location;
-        }
-        if (file.file_type === FILE_TYPE_BAI) {
-          alignmentUris.indexUri = file.file_location;
-        }
-      });
-    }
-
-    const variantUris = {};
-    if (vcfFiles.length > 0) {
-      vcfFiles.forEach((file) => {
-        variantUris.file_name = file.file_name;
-        if (file.file_type === FILE_TYPE_VCF) {
-          variantUris.vcfGzLocationUri = file.file_location;
-        }
-        if (file.file_type === FILE_TYPE_VCF_INDEX) {
-          variantUris.indexUri = file.file_location;
-        }
-        setLocation(variantLocation);
-      });
-    }
+    const alignmentUris = setAlignmentUrl(bamFiles);
+    const variantUris = setVarientUrl(vcfFiles);
+    setLocation(variantLocation);
 
     const currentTracks = getTracks({
       alignmentUris, alignments, variantUris, additionalTracks,
     });
 
+    console.log(currentTracks);
     const initSession = getDefaultSession(currentTracks, session);
     setSession(initSession);
     setTracks(currentTracks);
@@ -74,11 +49,17 @@ const JBrowseViewDetail = ({
     if (bamFiles.length > 0 || vcfFiles.length > 0) {
       configureAdapters();
     }
+    if (bamFiles.length > 0) {
+      setLocation(alignemntLocation);
+    } else {
+      setLocation(variantLocation);
+    }
   }, [bamFiles, vcfFiles]);
 
   if (trackList.length === 0 || session.length === 0) {
     return <CircularProgress />;
   }
+  console.log(location);
 
   return (
     <>

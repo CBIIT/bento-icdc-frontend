@@ -17,6 +17,10 @@ import {
   chunkSizeLimit,
   height,
   maxDisplayedBpPerPx,
+  FILE_TYPE_BAM,
+  FILE_TYPE_BAI,
+  FILE_TYPE_VCF,
+  FILE_TYPE_VCF_INDEX,
 } from '../../bento/JBrowseData';
 import env from '../../utils/env';
 
@@ -88,32 +92,42 @@ export const getDefaultSession = (tracks, session) => {
   return session;
 };
 
+export const createAlignmentTrack = (alignmentUris) => {
+  const aligmentAdapter = getAdapter(alignmentUris);
+  aligmentAdapter.chunkSizeLimit = chunkSizeLimit;
+  const alignmentOpts = new Track(
+    alignment.trackId,
+    alignment.trackName,
+    assemblyNames,
+    alignment.type,
+    aligmentAdapter,
+  );
+  return alignmentOpts;
+};
+
+export const createVarientTrack = (variantUris) => {
+  const variantAdapter = getVariant(variantUris);
+  const variantOpts = new Track(
+    variant.trackId,
+    variant.trackName,
+    assemblyNames,
+    variant.type,
+    variantAdapter,
+  );
+  return variantOpts;
+};
+
 export const getTracks = ({
   alignmentUris, variantUris, additionalTracks,
 }) => {
   const allTracks = [];
-  if (alignmentUris.file_name) {
-    const aligmentAdapter = getAdapter(alignmentUris);
-    aligmentAdapter.chunkSizeLimit = chunkSizeLimit;
-    const alignmentOpts = new Track(
-      alignment.trackId,
-      alignment.trackName,
-      assemblyNames,
-      alignment.type,
-      aligmentAdapter,
-    );
+  if (alignmentUris && alignmentUris.file_name) {
+    const alignmentOpts = createAlignmentTrack(alignmentUris);
     allTracks.push(alignmentOpts);
   }
 
-  if (variantUris.file_name) {
-    const variantAdapter = getVariant(variantUris);
-    const variantOpts = new Track(
-      variant.trackId,
-      variant.trackName,
-      assemblyNames,
-      variant.type,
-      variantAdapter,
-    );
+  if (variantUris && variantUris.file_name) {
+    const variantOpts = createVarientTrack(variantUris);
     allTracks.push(variantOpts);
   }
   allTracks.push(...additionalTracks);
@@ -134,4 +148,38 @@ export const getAllFilesUri = async (file) => {
     file_type: `${file.file_name}`.split('.').pop(),
     file_name: file.file_name,
   };
+};
+
+export const setAlignmentUrl = (bamFiles) => {
+  const alignmentUris = {};
+  bamFiles.forEach((file) => {
+    alignmentUris.file_name = file.file_name;
+    if (file.file_type === FILE_TYPE_BAM) {
+      alignmentUris.bamLocationUri = file.file_location;
+    }
+    if (file.file_type === FILE_TYPE_BAI) {
+      alignmentUris.indexUri = file.file_location;
+    }
+  });
+  if (Object.keys(alignmentUris).length !== 3) {
+    return null;
+  }
+  return alignmentUris;
+};
+
+export const setVarientUrl = (vcfFiles) => {
+  const variantUris = {};
+  vcfFiles.forEach((file) => {
+    variantUris.file_name = file.file_name;
+    if (file.file_type === FILE_TYPE_VCF) {
+      variantUris.vcfGzLocationUri = file.file_location;
+    }
+    if (file.file_type === FILE_TYPE_VCF_INDEX) {
+      variantUris.indexUri = file.file_location;
+    }
+  });
+  if (Object.keys(variantUris).length !== 3) {
+    return null;
+  }
+  return variantUris;
 };
