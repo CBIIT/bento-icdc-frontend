@@ -10,29 +10,33 @@ import {
   defaultSession,
 } from '../../../bento/JBrowseData';
 import {
-  setVarientUrl,
+  // setVarientUrl,
   setAlignmentUrl,
+  createAlignmentTrack,
 } from '../util';
 
 const MultiFilesView = ({
   jbrowseFiles,
+  options: {
+    additionalTracks,
+  },
 }) => {
   console.log(jbrowseFiles);
+  const [trackList, setTracks] = useState([]);
   const [session, setSession] = useState([]);
   console.log(session);
   const configureAdapters = () => {
     console.log('configure adapters');
     console.log(jbrowseFiles);
-    // const tracks = [];
-    jbrowseFiles.forEach((tracks) => {
-      tracks.forEach((track) => {
-        console.log(track);
-        const alignmentUris = setAlignmentUrl(tracks);
-        const variantUris = setVarientUrl(tracks);
-        console.log(alignmentUris);
-        console.log(variantUris);
-      });
+    const tracks = [];
+    jbrowseFiles.forEach((files) => {
+      const alignmentUris = setAlignmentUrl(files);
+      const alignmentTrack = createAlignmentTrack(alignmentUris);
+      tracks.push(alignmentTrack);
+      console.log(alignmentTrack);
     });
+    tracks.push(...additionalTracks);
+    setTracks(tracks);
   };
 
   useEffect(() => {
@@ -42,14 +46,16 @@ const MultiFilesView = ({
     }
   }, [jbrowseFiles]);
 
-  if (session && session.length === 0) {
+  if (trackList && trackList.length === 0) {
     return <CircularProgress />;
   }
+  console.log(trackList);
 
   return (
     <>
       <JBrowseComponent
         theme={theme}
+        tracks={trackList}
         assemblies={assemblies}
       />
     </>
