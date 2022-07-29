@@ -20,7 +20,7 @@ export function initMultiview() {
 const reducers = {
   JBROWSE_SELECTED_FILES: (state, item) => {
     console.log(JSON.stringify(item));
-    localStorage.setItem('jbrowseFiles', JSON.stringify(item) || []);
+    localStorage.setItem('jbrowseFiles', JSON.stringify(item.filesName) || []);
     return {
       ...state,
       jbrowseFiles: item,

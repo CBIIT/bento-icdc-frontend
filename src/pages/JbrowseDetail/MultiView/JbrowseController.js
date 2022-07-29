@@ -23,11 +23,8 @@ const JbrowseMultiViewController = () => {
   const [jbrowseFiles, setJbrowseFiles] = useState([]);
   const allFiles = useSelector((state) => (state.jbrowseView
     && state.jbrowseView.jbrowseFiles && state.jbrowseView.jbrowseFiles.filesName
-    ? state.jbrowseView.jbrowseFiles.filesName : null));
+    ? state.jbrowseView.jbrowseFiles.filesName : JSON.parse(localStorage.getItem('jbrowseFiles'))));
   if (!allFiles) {
-    console.log('test data');
-    const datae = localStorage.getItem('jbrowseFiles');
-    console.log(datae);
     return <CircularProgress />;
   }
   const generateIndexFile = (selectedFiles) => {
