@@ -6,6 +6,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { ToolTip as Tooltip } from 'bento-components';
 import {
   FILE_TYPE_BAI,
@@ -22,7 +23,7 @@ const ViewJBrowseButton = ({
     ? state.dashboardTab.dataFileSelected.selectedRowInfo : null));
   if (!selectedDashFiles) {
     return (
-      <>circle</>
+      <CircularProgress />
     );
   }
 
@@ -41,7 +42,6 @@ const ViewJBrowseButton = ({
   const distinctFiles = setSelectedFiles(filesName);
 
   const viewFilesOnJBrowse = () => {
-    localStorage.setItem('jbroseFiles', distinctFiles);
     setJborwseSelectedFiles(distinctFiles);
   };
 

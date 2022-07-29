@@ -11,18 +11,24 @@ export function setJborwseSelectedFiles(filesName) {
   });
 }
 
-export function getFiles() {
-
+export function initMultiview() {
+  store.dispatch({
+    type: 'RECEIVE_FILES',
+  });
 }
 
 const reducers = {
-  JBROWSE_SELECTED_FILES: (state, item) => ({
+  JBROWSE_SELECTED_FILES: (state, item) => {
+    console.log(JSON.stringify(item));
+    localStorage.setItem('jbrowseFiles', JSON.stringify(item) || []);
+    return {
+      ...state,
+      jbrowseFiles: item,
+    };
+  },
+  RECEIVE_FILES: (state) => ({
     ...state,
-    jbrowseFiles: item,
-  }),
-  initMultiview: (state) => ({
-    ...state,
-    jbrowseFiles: localStorage.getItem('jbroseFiles'),
+    jbrowseFiles: JSON.parse(localStorage.getItem('jbrowseFiles') || []),
   }),
 };
 

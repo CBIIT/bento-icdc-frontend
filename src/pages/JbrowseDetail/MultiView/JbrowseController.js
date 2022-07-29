@@ -17,14 +17,19 @@ import {
   getAllFilesUri,
 } from '../util';
 import MultiFilesView from './MultiFilesView';
+import { initMultiview } from '../store/jborwse.reducer';
 
 const JbrowseMultiViewController = () => {
   const [jbrowseFiles, setJbrowseFiles] = useState([]);
   const allFiles = useSelector((state) => (state.jbrowseView
     && state.jbrowseView.jbrowseFiles && state.jbrowseView.jbrowseFiles.filesName
     ? state.jbrowseView.jbrowseFiles.filesName : null));
-  if (!allFiles) return <CircularProgress />;
-
+  if (!allFiles) {
+    console.log('test data');
+    const datae = localStorage.getItem('jbrowseFiles');
+    console.log(datae);
+    return <CircularProgress />;
+  }
   const generateIndexFile = (selectedFiles) => {
     const files = [];
     const vcfFiles1 = selectedFiles.filter((item) => item.includes(FILE_TYPE_VCF));

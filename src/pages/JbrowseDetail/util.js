@@ -94,7 +94,6 @@ export const getDefaultSession = (tracks, session) => {
 
 export const createAlignmentTrack = (alignmentUris, alignmentView = alignment) => {
   const aligmentAdapter = getAdapter(alignmentUris);
-  console.log(alignmentView);
   const { trackId, trackName, type } = alignmentView;
   aligmentAdapter.chunkSizeLimit = chunkSizeLimit;
   const alignmentOpts = new Track(
@@ -109,7 +108,6 @@ export const createAlignmentTrack = (alignmentUris, alignmentView = alignment) =
 
 export const createVarientTrack = (variantUris, variantView = variant) => {
   const variantAdapter = getVariant(variantUris);
-  console.log(variantView);
   const { trackId, trackName, type } = variantView;
   const variantOpts = new Track(
     trackId,
