@@ -18,7 +18,7 @@ import {
 } from '../util';
 import MultiFilesView from './MultiFilesView';
 
-const JbrowseMultiViewController = (props) => {
+const JbrowseMultiViewController = () => {
   const [jbrowseFiles, setJbrowseFiles] = useState([]);
   const allFiles = useSelector((state) => (state.jbrowseView
     && state.jbrowseView.jbrowseFiles && state.jbrowseView.jbrowseFiles.filesName
@@ -68,11 +68,10 @@ const JbrowseMultiViewController = (props) => {
   useEffect(() => {
     if (data && data.fileIdsFromFileName && !loading) {
       getFiles();
-      console.log(jbrowseFiles);
     }
   }, [data]);
 
-  if (loading) return <CircularProgress />;
+  if (loading || jbrowseFiles.length === 0) return <CircularProgress />;
   if (data.fileIdsFromFileName && data.fileIdsFromFileName.length === 0) {
     return <Error />;
   }

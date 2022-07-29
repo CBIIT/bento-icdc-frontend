@@ -41,8 +41,6 @@ const ViewJBrowseButton = ({
   const distinctFiles = setSelectedFiles(filesName);
 
   const viewFilesOnJBrowse = () => {
-    console.log('view file on jbrowse');
-    console.log(distinctFiles);
     localStorage.setItem('jbroseFiles', distinctFiles);
     setJborwseSelectedFiles(distinctFiles);
   };
@@ -64,14 +62,6 @@ const ViewJBrowseButton = ({
           View in JBrowse
         </button>
       </Link>
-      <button
-        className={classes.button}
-        type="button"
-        onClick={viewFilesOnJBrowse}
-        disabled={distinctFiles.length === 0 || distinctFiles.length > 5}
-      >
-        View in JBrowse
-      </button>
       <Tooltip title="view file in jbrowse" arrow placement="bottom">
         <IconButton
           aria-label="help"

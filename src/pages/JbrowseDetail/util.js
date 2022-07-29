@@ -92,26 +92,30 @@ export const getDefaultSession = (tracks, session) => {
   return session;
 };
 
-export const createAlignmentTrack = (alignmentUris, trackId = alignment.trackId) => {
+export const createAlignmentTrack = (alignmentUris, alignmentView = alignment) => {
   const aligmentAdapter = getAdapter(alignmentUris);
+  console.log(alignmentView);
+  const { trackId, trackName, type } = alignmentView;
   aligmentAdapter.chunkSizeLimit = chunkSizeLimit;
   const alignmentOpts = new Track(
     trackId,
-    alignment.trackName,
+    trackName,
     assemblyNames,
-    alignment.type,
+    type,
     aligmentAdapter,
   );
   return alignmentOpts;
 };
 
-export const createVarientTrack = (variantUris, trackId = variant.trackId) => {
+export const createVarientTrack = (variantUris, variantView = variant) => {
   const variantAdapter = getVariant(variantUris);
+  console.log(variantView);
+  const { trackId, trackName, type } = variantView;
   const variantOpts = new Track(
     trackId,
-    variant.trackName,
+    trackName,
     assemblyNames,
-    variant.type,
+    type,
     variantAdapter,
   );
   return variantOpts;
