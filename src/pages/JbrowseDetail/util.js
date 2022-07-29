@@ -92,11 +92,11 @@ export const getDefaultSession = (tracks, session) => {
   return session;
 };
 
-export const createAlignmentTrack = (alignmentUris) => {
+export const createAlignmentTrack = (alignmentUris, trackId = alignment.trackId) => {
   const aligmentAdapter = getAdapter(alignmentUris);
   aligmentAdapter.chunkSizeLimit = chunkSizeLimit;
   const alignmentOpts = new Track(
-    alignment.trackId,
+    trackId,
     alignment.trackName,
     assemblyNames,
     alignment.type,
@@ -105,10 +105,10 @@ export const createAlignmentTrack = (alignmentUris) => {
   return alignmentOpts;
 };
 
-export const createVarientTrack = (variantUris) => {
+export const createVarientTrack = (variantUris, trackId = variant.trackId) => {
   const variantAdapter = getVariant(variantUris);
   const variantOpts = new Track(
-    variant.trackId,
+    trackId,
     variant.trackName,
     assemblyNames,
     variant.type,
