@@ -34,17 +34,16 @@ const JbrowseController = ({ match }) => {
     vcfFiles1.forEach((fileName) => {
       files.push(fileName);
       files.push(`${fileName}.${FILE_TYPE_VCF_INDEX}`);
-      files.push(`${fileName}`.replace(`${FILE_TYPE_BAM}`, `${FILE_TYPE_BAI}`));
     });
     bamFiles1.forEach((fileName) => {
       files.push(fileName);
       files.push(`${fileName}.${FILE_TYPE_BAI}`);
+      files.push(`${fileName}`.replace(`${FILE_TYPE_BAM}`, `${FILE_TYPE_BAI}`));
     });
     return files;
   };
 
   const generateFiles = generateIndexFile(allFiles);
-
   const { loading, error, data } = useQuery(GET_FILES_ID_BY_NAME, {
     variables: { file_name: generateFiles },
   });

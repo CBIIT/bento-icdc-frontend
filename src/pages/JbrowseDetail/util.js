@@ -194,8 +194,17 @@ export const setVarientUrl = (vcfFiles) => {
 export const setSelectedFiles = (selectedFiles) => {
   const files = new Set();
   if (selectedFiles && selectedFiles.length > 0) {
-    const convertFilesName = selectedFiles.map((file) => file.replace(`.${FILE_TYPE_BAI}`, '')
-      .replace(`.${FILE_TYPE_VCF_INDEX}`, ''));
+    const convertFilesName = [];
+    selectedFiles.forEach((file) => {
+      const fileType = file.replace(`.${FILE_TYPE_BAI}`, '').replace(`.${FILE_TYPE_VCF_INDEX}`, '');
+      if (fileType.includes(FILE_TYPE_BAM) || fileType.includes(FILE_TYPE_VCF)) {
+        convertFilesName.push(fileType);
+      } else if (file.includes(FILE_TYPE_VCF_INDEX)) {
+        convertFilesName.push(file.replace(FILE_TYPE_VCF_INDEX, FILE_TYPE_VCF));
+      } else {
+        convertFilesName.push(file.replace(FILE_TYPE_BAI, FILE_TYPE_BAM));
+      }
+    });
     convertFilesName.forEach((name) => files.add(name));
   }
   return [...files];
