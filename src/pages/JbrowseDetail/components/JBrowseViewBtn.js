@@ -9,10 +9,12 @@ import HelpIcon from '@material-ui/icons/Help';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { ToolTip as Tooltip } from 'bento-components';
 import {
-  FILE_TYPE_BAI,
-  FILE_TYPE_VCF_INDEX,
+  MAX_NUMBER_OF_FILES,
+  MULTI_FILES_VIEW,
+  ButtonText,
 } from '../../../bento/JBrowseData';
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
+import { setSelectedFiles } from '../util';
 
 const ViewJBrowseButton = ({
   classes,
@@ -27,16 +29,6 @@ const ViewJBrowseButton = ({
     );
   }
 
-  const setSelectedFiles = (selectedFiles) => {
-    const files = new Set();
-    if (selectedFiles && selectedFiles.length > 0) {
-      const convertFilesName = selectedFiles.map((file) => file.replace(`.${FILE_TYPE_BAI}`, '')
-        .replace(`.${FILE_TYPE_VCF_INDEX}`, ''));
-      convertFilesName.forEach((name) => files.add(name));
-    }
-    return [...files];
-  };
-
   const filesName = (selectedFileNames && selectedFileNames.length >= 0)
     ? selectedFileNames : selectedDashFiles;
   const distinctFiles = setSelectedFiles(filesName);
@@ -49,7 +41,7 @@ const ViewJBrowseButton = ({
     <>
       <Link
         to={{
-          pathname: '/multiFileViewer',
+          pathname: `/jbroswse/${MULTI_FILES_VIEW}`,
           state: { fileNames: distinctFiles },
         }}
       >
@@ -57,9 +49,9 @@ const ViewJBrowseButton = ({
           className={classes.button}
           type="button"
           onClick={viewFilesOnJBrowse}
-          disabled={distinctFiles.length === 0 || distinctFiles.length > 5}
+          disabled={distinctFiles.length === 0 || distinctFiles.length > MAX_NUMBER_OF_FILES}
         >
-          View in JBrowse
+          {ButtonText}
         </button>
       </Link>
       <Tooltip title="view file in jbrowse" arrow placement="bottom">

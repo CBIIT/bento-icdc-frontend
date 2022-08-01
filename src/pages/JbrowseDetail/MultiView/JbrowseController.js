@@ -17,9 +17,10 @@ import {
   getAllFilesUri,
 } from '../util';
 import MultiFilesView from './MultiFilesView';
-import { initMultiview } from '../store/jborwse.reducer';
 
-const JbrowseMultiViewController = () => {
+const JbrowseMultiViewController = ({ match }) => {
+  const { params } = match;
+  console.log(params.displayMode);
   const [jbrowseFiles, setJbrowseFiles] = useState([]);
   const allFiles = useSelector((state) => (state.jbrowseView
     && state.jbrowseView.jbrowseFiles && state.jbrowseView.jbrowseFiles.filesName
@@ -34,6 +35,7 @@ const JbrowseMultiViewController = () => {
     vcfFiles1.forEach((fileName) => {
       files.push(fileName);
       files.push(`${fileName}.${FILE_TYPE_VCF_INDEX}`);
+      files.push(`${fileName}`.replace(`${FILE_TYPE_BAM}`, `${FILE_TYPE_BAI}`));
     });
     bamFiles1.forEach((fileName) => {
       files.push(fileName);
@@ -88,6 +90,7 @@ const JbrowseMultiViewController = () => {
   return (
     <>
       <MultiFilesView
+        displayMode={params.displayMode}
         jbrowseFiles={jbrowseFiles}
         options={jBrowseOptions}
       />

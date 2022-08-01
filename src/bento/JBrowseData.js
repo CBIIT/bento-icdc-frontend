@@ -17,6 +17,15 @@ export const maxDisplayedBpPerPx = 50000;
 export const height = 200;
 // size in bytes
 export const chunkSizeLimit = 20000000;
+export const chunkSizeLimit2 = 10000000;
+
+export const ButtonText = 'View in JBrowse';
+
+export const MULTI_FILES_VIEW = 'multiFilesView';
+export const SINGLE_FILE_VIEW = 'singleFileView';
+
+export const MAX_NUMBER_OF_FILES = 3;
+
 export const alignment = {
   trackId: 'my_alignments_track',
   trackName: 'My Alignment',

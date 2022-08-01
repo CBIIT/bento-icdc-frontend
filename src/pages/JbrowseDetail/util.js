@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 import {
   FileLocation,
   Index,
@@ -15,12 +16,14 @@ import {
   alignment,
   variant,
   chunkSizeLimit,
+  chunkSizeLimit2,
   height,
   maxDisplayedBpPerPx,
   FILE_TYPE_BAM,
   FILE_TYPE_BAI,
   FILE_TYPE_VCF,
   FILE_TYPE_VCF_INDEX,
+  MULTI_FILES_VIEW,
 } from '../../bento/JBrowseData';
 import env from '../../utils/env';
 
@@ -67,15 +70,16 @@ export const getSessionDisplayValue = (display, trackId) => new Display(
 );
 
 export const getDefaultSession = (tracks, session) => {
+  const defaultSession = _.cloneDeep(session);
   if (tracks && tracks.length > 0) {
     tracks.forEach((item) => {
       let display;
       switch (item.type) {
         case alignment.type:
-          display = getSessionDisplayValue(alignment.display, alignment.trackId);
+          display = getSessionDisplayValue(alignment.display, item.trackId);
           break;
         case variant.type:
-          display = getSessionDisplayValue(variant.display, variant.trackId);
+          display = getSessionDisplayValue(variant.display, item.trackId);
           break;
         default:
           display = getSessionDisplayValue(item.display, item.trackId);
@@ -86,16 +90,17 @@ export const getDefaultSession = (tracks, session) => {
         item.trackId,
         [{ ...display }],
       );
-      session.view.tracks.push({ ...viewTrack });
+      defaultSession.view.tracks.push({ ...viewTrack });
     });
   }
-  return session;
+  return defaultSession;
 };
 
-export const createAlignmentTrack = (alignmentUris, alignmentView = alignment) => {
+export const createAlignmentTrack = (alignmentUris, alignmentView = alignment, displayMode) => {
   const aligmentAdapter = getAdapter(alignmentUris);
   const { trackId, trackName, type } = alignmentView;
-  aligmentAdapter.chunkSizeLimit = chunkSizeLimit;
+  aligmentAdapter.chunkSizeLimit = (displayMode === MULTI_FILES_VIEW)
+    ? chunkSizeLimit : chunkSizeLimit2;
   const alignmentOpts = new Track(
     trackId,
     trackName,
@@ -184,4 +189,14 @@ export const setVarientUrl = (vcfFiles) => {
     return null;
   }
   return variantUris;
+};
+
+export const setSelectedFiles = (selectedFiles) => {
+  const files = new Set();
+  if (selectedFiles && selectedFiles.length > 0) {
+    const convertFilesName = selectedFiles.map((file) => file.replace(`.${FILE_TYPE_BAI}`, '')
+      .replace(`.${FILE_TYPE_VCF_INDEX}`, ''));
+    convertFilesName.forEach((name) => files.add(name));
+  }
+  return [...files];
 };

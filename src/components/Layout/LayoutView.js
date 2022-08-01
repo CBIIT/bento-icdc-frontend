@@ -61,7 +61,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
             <Route path="/fileViewer/:type/:id" component={JBrowseDetail} />
-            <Route path="/multiFileViewer" component={JbrowseMultiViewController} />
+            <Route path="/jbroswse/:diplayMode" component={JbrowseMultiViewController} />
             <Route path="/icdc-data-model" component={ModelExplorer} />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,

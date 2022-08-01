@@ -11,15 +11,18 @@ import {
   variant,
   alignemntLocation,
   variantLocation,
+  defaultSession,
 } from '../../../bento/JBrowseData';
 import {
   setVarientUrl,
   setAlignmentUrl,
   createAlignmentTrack,
   createVarientTrack,
+  getDefaultSession,
 } from '../util';
 
 const MultiFilesView = ({
+  displayMode,
   jbrowseFiles,
   options: {
     additionalTracks,
@@ -27,6 +30,7 @@ const MultiFilesView = ({
 }) => {
   const [trackList, setTracks] = useState([]);
   const [location, setLocation] = useState(variantLocation);
+  const [session, setSession] = useState();
   const configureAdapters = () => {
     const tracks = [];
     jbrowseFiles.forEach((files, index) => {
@@ -37,7 +41,7 @@ const MultiFilesView = ({
         const alignment1 = _.cloneDeep(alignment);
         alignment1.trackId = `${alignment.trackId}_${trackNumber}`;
         alignment1.trackName = `${alignment.trackName}_${trackNumber}`;
-        const alignmentTrack = createAlignmentTrack(alignmentUris, alignment1);
+        const alignmentTrack = createAlignmentTrack(alignmentUris, alignment1, displayMode);
         tracks.push(alignmentTrack);
       }
       const variantUris = setVarientUrl(files);
@@ -51,9 +55,12 @@ const MultiFilesView = ({
     });
     tracks.push(...additionalTracks);
     setTracks(tracks);
+    const initSession = getDefaultSession(tracks, defaultSession);
+    setSession(initSession);
   };
 
   useEffect(() => {
+    setSession(_.cloneDeep(defaultSession));
     if (jbrowseFiles && jbrowseFiles.length > 0) {
       configureAdapters();
     }
@@ -70,6 +77,7 @@ const MultiFilesView = ({
         tracks={trackList}
         assemblies={assemblies}
         location={location}
+        defaultSession={session}
       />
     </>
   );
