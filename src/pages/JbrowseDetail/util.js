@@ -100,7 +100,7 @@ export const createAlignmentTrack = (alignmentUris, alignmentView = alignment, d
   const aligmentAdapter = getAdapter(alignmentUris);
   const { trackId, trackName, type } = alignmentView;
   aligmentAdapter.chunkSizeLimit = (displayMode === MULTI_FILES_VIEW)
-    ? chunkSizeLimit : chunkSizeLimit2;
+    ? chunkSizeLimit2 : chunkSizeLimit;
   const alignmentOpts = new Track(
     trackId,
     trackName,

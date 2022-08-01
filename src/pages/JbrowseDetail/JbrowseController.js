@@ -10,17 +10,16 @@ import {
   FILE_TYPE_VCF,
   FILE_TYPE_VCF_INDEX,
   jBrowseOptions,
-} from '../../../bento/JBrowseData';
-import { Typography } from '../../../components/Wrappers/Wrappers';
-import Error from '../../error/Error';
+} from '../../bento/JBrowseData';
+import { Typography } from '../../components/Wrappers/Wrappers';
+import Error from '../error/Error';
 import {
   getAllFilesUri,
-} from '../util';
-import MultiFilesView from './MultiFilesView';
+} from './util';
+import JbrowseDetailView from './JbrowseDetailView';
 
-const JbrowseMultiViewController = ({ match }) => {
+const JbrowseController = ({ match }) => {
   const { params } = match;
-  console.log(params.displayMode);
   const [jbrowseFiles, setJbrowseFiles] = useState([]);
   const allFiles = useSelector((state) => (state.jbrowseView
     && state.jbrowseView.jbrowseFiles && state.jbrowseView.jbrowseFiles.filesName
@@ -89,8 +88,8 @@ const JbrowseMultiViewController = ({ match }) => {
 
   return (
     <>
-      <MultiFilesView
-        displayMode={params.displayMode}
+      <JbrowseDetailView
+        displayMode={params.diplayMode}
         jbrowseFiles={jbrowseFiles}
         options={jBrowseOptions}
       />
@@ -98,4 +97,4 @@ const JbrowseMultiViewController = ({ match }) => {
   );
 };
 
-export default JbrowseMultiViewController;
+export default JbrowseController;

@@ -22,9 +22,8 @@ import StudyDetail from '../../pages/study/studyDetailController';
 import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
-import JBrowseDetail from '../../pages/JbrowseDetail/SingleView/JbrowseController';
 import ModelExplorer from './utils';
-import JbrowseMultiViewController from '../../pages/JbrowseDetail/MultiView/JbrowseController';
+import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -60,8 +59,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
-            <Route path="/fileViewer/:type/:id" component={JBrowseDetail} />
-            <Route path="/jbroswse/:diplayMode" component={JbrowseMultiViewController} />
+            <Route path="/jbroswse/:diplayMode" component={JbrowseController} />
             <Route path="/icdc-data-model" component={ModelExplorer} />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,

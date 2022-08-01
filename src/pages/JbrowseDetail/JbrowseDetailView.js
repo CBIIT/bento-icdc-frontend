@@ -12,16 +12,16 @@ import {
   alignemntLocation,
   variantLocation,
   defaultSession,
-} from '../../../bento/JBrowseData';
+} from '../../bento/JBrowseData';
 import {
   setVarientUrl,
   setAlignmentUrl,
   createAlignmentTrack,
   createVarientTrack,
   getDefaultSession,
-} from '../util';
+} from './util';
 
-const MultiFilesView = ({
+const JbrowseDetailView = ({
   displayMode,
   jbrowseFiles,
   options: {
@@ -83,7 +83,7 @@ const MultiFilesView = ({
   );
 };
 
-MultiFilesView.defaultProps = {
+JbrowseDetailView.defaultProps = {
   options: {
     variants: false,
     alignments: false,
@@ -91,4 +91,4 @@ MultiFilesView.defaultProps = {
   bamFiles: [],
 };
 
-export default MultiFilesView;
+export default JbrowseDetailView;
