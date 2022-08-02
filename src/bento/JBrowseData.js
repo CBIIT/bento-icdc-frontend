@@ -27,7 +27,9 @@ export const SINGLE_FILE_VIEW = 'singleFileView';
 
 export const MAX_NUMBER_OF_FILES = 3;
 
+// button style
 export const JBROWSE_BTN_ID = 'jbrowse_multi_view_button';
+export const DISABLE_RIPPLE = true;
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',

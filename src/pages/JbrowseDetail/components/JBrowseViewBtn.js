@@ -6,7 +6,7 @@ import {
   Button,
 } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { ToolTip as Tooltip } from 'bento-components';
+import { ToolTip as Tooltip, cn } from 'bento-components';
 import {
   MAX_NUMBER_OF_FILES,
   MULTI_FILES_VIEW,
@@ -14,6 +14,7 @@ import {
   ButtonText2,
   JBROWSE_BTN_ID,
   tooltipContent,
+  DISABLE_RIPPLE,
 } from '../../../bento/JBrowseData';
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
@@ -40,7 +41,6 @@ const ViewJBrowseButton = ({
   };
 
   const isInvlaid = distinctFiles.length === 0 || distinctFiles.length > MAX_NUMBER_OF_FILES;
-  console.log(isInvlaid);
   return (
     <>
       <Link
@@ -50,11 +50,12 @@ const ViewJBrowseButton = ({
         }}
       >
         <Button
-          className={classes.button}
+          className={isInvlaid ? cn(classes.button, classes.disbaleButton) : classes.button}
           type="button"
           onClick={viewFilesOnJBrowse}
           disabled={isInvlaid}
           id={JBROWSE_BTN_ID}
+          disableRipple={DISABLE_RIPPLE}
         >
           {ButtonText1}
           <img
@@ -88,6 +89,12 @@ const styles = () => ({
     marginTop: '6px',
     marginBottom: '10px',
     marginRight: '5px',
+    '&:hover': {
+      backgroundColor: '#3e5c79',
+    },
+  },
+  disbaleButton: {
+    opacity: '0.7',
   },
   helpIconButton: {
     verticalAlign: 'top',
@@ -106,6 +113,7 @@ const styles = () => ({
     pointerEvents: 'none',
   },
   activeLink: {
+    cursor: 'pointer',
   },
 });
 
