@@ -42,6 +42,9 @@ export default ({
       padding: '0px 5px',
     },
   };
+  themesLight.overrides.MuiButton = {
+
+  };
   const computedTheme = createTheme({
     ...themesLight,
     ...overrides,

@@ -24,6 +24,7 @@ import {
   FILE_TYPE_VCF,
   FILE_TYPE_VCF_INDEX,
   MULTI_FILES_VIEW,
+  JbrowserFiles,
 } from '../../bento/JBrowseData';
 import env from '../../utils/env';
 
@@ -191,11 +192,24 @@ export const setVarientUrl = (vcfFiles) => {
   return variantUris;
 };
 
+const filterJbrowseFile = (selectedFiles) => {
+  const files = [];
+  selectedFiles.forEach((item) => {
+    JbrowserFiles.forEach((type) => {
+      if (item.includes(type)) {
+        files.push(item);
+      }
+    });
+  });
+  return files;
+};
+
 export const setSelectedFiles = (selectedFiles) => {
   const files = new Set();
   if (selectedFiles && selectedFiles.length > 0) {
     const convertFilesName = [];
-    selectedFiles.forEach((file) => {
+    const validJbrowseFiles = filterJbrowseFile(selectedFiles);
+    validJbrowseFiles.forEach((file) => {
       const fileType = file.replace(`.${FILE_TYPE_BAI}`, '').replace(`.${FILE_TYPE_VCF_INDEX}`, '');
       if (fileType.includes(FILE_TYPE_BAM) || fileType.includes(FILE_TYPE_VCF)) {
         convertFilesName.push(fileType);
