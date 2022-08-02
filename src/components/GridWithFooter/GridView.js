@@ -8,7 +8,6 @@ import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import { CustomDataTable, ToolTip as Tooltip } from 'bento-components';
 import HelpIcon from '@material-ui/icons/Help';
-import IconButton from '@material-ui/core/IconButton';
 import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart';
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';
@@ -288,7 +287,13 @@ const GridView = ({
           { buttonText }
         </button>
         {showtooltip ? tooltipComponent : ''}
-        { displayViewJBowseBtn && <ViewJBrowseButton selectedFileNames={selectedRowFileNames} /> }
+        { displayViewJBowseBtn
+          && (
+          <ViewJBrowseButton
+            selectedFileNames={selectedRowFileNames}
+            tooltipContent={tooltipContent}
+          />
+          )}
       </div>
     </>
   );

@@ -2,16 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
-  IconButton,
   withStyles,
+  Button,
 } from '@material-ui/core';
-import HelpIcon from '@material-ui/icons/Help';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { ToolTip as Tooltip } from 'bento-components';
 import {
   MAX_NUMBER_OF_FILES,
   MULTI_FILES_VIEW,
-  ButtonText,
+  ButtonText1,
+  ButtonText2,
+  JBROWSE_BTN_ID,
+  tooltipContent,
 } from '../../../bento/JBrowseData';
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
@@ -37,33 +39,38 @@ const ViewJBrowseButton = ({
     setJborwseSelectedFiles(distinctFiles);
   };
 
+  const isInvlaid = distinctFiles.length === 0 || distinctFiles.length > MAX_NUMBER_OF_FILES;
+  console.log(isInvlaid);
   return (
     <>
       <Link
+        className={isInvlaid ? classes.diableLink : classes.activeLink}
         to={{
           pathname: `/jbroswse/${MULTI_FILES_VIEW}`,
-          state: { fileNames: distinctFiles },
         }}
       >
-        <button
+        <Button
           className={classes.button}
           type="button"
           onClick={viewFilesOnJBrowse}
-          disabled={distinctFiles.length === 0 || distinctFiles.length > MAX_NUMBER_OF_FILES}
+          disabled={isInvlaid}
+          id={JBROWSE_BTN_ID}
         >
-          {ButtonText}
-        </button>
-      </Link>
-      <Tooltip title="view file in jbrowse" arrow placement="bottom">
-        <IconButton
-          aria-label="help"
-          className={classes.helpIconButton}
-        >
-          <HelpIcon
-            className={classes.helpIcon}
-            fontSize="small"
+          {ButtonText1}
+          <img
+            src="https://jbrowse.org/jb2/img/logo.svg"
+            alt=""
+            className={classes.jbrowseIcon}
           />
-        </IconButton>
+          {ButtonText2}
+        </Button>
+      </Link>
+      <Tooltip title="View file in jbrowse" arrow placement="bottom">
+        <img
+          src={tooltipContent.src}
+          alt={tooltipContent.alt}
+          className={classes.helpIconButton}
+        />
       </Tooltip>
     </>
   );
@@ -72,23 +79,33 @@ const ViewJBrowseButton = ({
 const styles = () => ({
   button: {
     borderRadius: '10px',
-    width: '176px',
+    width: '210px',
     lineHeight: '37px',
     fontSize: '16px',
     fontFamily: 'Lato',
-    color: '#fff',
-    backgroundColor: '#ff7f15',
+    color: '#fffffff',
+    backgroundColor: '#3e5c79',
     marginTop: '6px',
     marginBottom: '10px',
     marginRight: '5px',
   },
   helpIconButton: {
     verticalAlign: 'top',
-    marginLeft: '-5px',
+    marginLeft: '-2px',
+    width: '1.5em',
+    position: 'absolute',
   },
   helpIcon: {
     zIndex: '600',
     width: '17px',
+  },
+  jbrowseIcon: {
+    width: '2.25em',
+  },
+  diableLink: {
+    pointerEvents: 'none',
+  },
+  activeLink: {
   },
 });
 

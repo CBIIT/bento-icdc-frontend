@@ -86,6 +86,15 @@ export default ({
   overridesObj.MuiTabs = MuiTabs;
   overridesObj.MuiTab = MuiTab;
   overridesObj.PrivateTabIndicator = PrivateTabIndicator;
+  overridesObj.MuiButton = {
+    root: {
+      '&#jbrowse_multi_view_button': {
+        marginLeft: '28px',
+        height: '43px',
+        color: '#ffffff',
+      },
+    },
+  };
 
   style.push(overridesObj);
 
