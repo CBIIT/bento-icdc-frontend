@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
@@ -73,7 +74,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/graphql" component={GraphqlClient} />
             <Route component={Error} />
           </Switch>
-          <Footer data={{ isSidebarOpened }} />
+          {/* <Footer data={{ isSidebarOpened }} /> */}
         </div>
       </>
     </HashRouter>

@@ -15,9 +15,6 @@ import {
   GET_FILES_OVERVIEW_QUERY,
   GET_SAMPLES_OVERVIEW_QUERY,
   GET_CASES_OVERVIEW_QUERY,
-  GET_FILES_OVERVIEW_DESC_QUERY,
-  GET_SAMPLES_OVERVIEW_DESC_QUERY,
-  GET_CASES_OVERVIEW_DESC_QUERY,
   tooltipContent,
   multiStudyData,
 } from '../../../bento/dashboardTabData';
@@ -29,9 +26,6 @@ import updateColumns, { hasMultiStudyParticipants } from '../../../utils/columns
 import DocumentDownload from '../../../components/DocumentDownload';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
-
-// Due to cypher limitation we have to send seperate query get descending list
-const getOverviewDescQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_DESC_QUERY);
 
 // const StyledBadge = withStyles(() => ({
 //   badge: {
@@ -78,8 +72,7 @@ const TabView = ({
   paginationAPIField,
   paginationAPIFieldDesc,
   dataKey,
-  filteredSubjectIds,
-  filteredSampleIds,
+  allFilters,
   filteredFileIds,
   filteredStudyFileIds,
   defaultSortCoulmn,
@@ -92,6 +85,7 @@ const TabView = ({
   tableHasSelections,
   unifiedViewFlag,
   tabIndex,
+  // eslint-disable-next-line no-unused-vars
   association,
 }) => {
   // Get the existing files ids from  cart state
@@ -401,15 +395,9 @@ const TabView = ({
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}
-            overviewDesc={getOverviewDescQuery(api)}
             paginationAPIField={paginationAPIField}
             paginationAPIFieldDesc={paginationAPIFieldDesc}
-            queryCustomVaribles={{
-              case_ids: filteredSubjectIds,
-              sample_ids: filteredSampleIds,
-              file_uuids: (tabIndex === '3') ? filteredStudyFileIds : filteredFileIds,
-              file_association: association,
-            }}
+            queryCustomVaribles={allFilters}
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
             tableDownloadCSV={tableDownloadCSV}

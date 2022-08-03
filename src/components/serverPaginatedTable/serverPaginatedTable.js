@@ -259,7 +259,6 @@ class ServerPaginatedTableView extends React.Component {
   };
 
   async fetchData(offset, rowsRequired, sortOrder = {}) {
-    let sortDirection = 'asc';
     let sortColumn = 'arm';
     let offsetReal = offset;
     let page = offset / rowsRequired;
@@ -274,7 +273,6 @@ class ServerPaginatedTableView extends React.Component {
       });
     }
 
-    sortDirection = Object.keys(sortOrder).length === 0 ? this.props.defaultSortDirection || 'asc' : sortOrder.direction;
     sortColumn = Object.keys(sortOrder).length === 0 ? this.props.defaultSortCoulmn || '' : sortOrder.name;
     if (this.props.updateSortOrder) {
       localStorage.setItem('page', String(page));
@@ -285,7 +283,7 @@ class ServerPaginatedTableView extends React.Component {
     }
     const fetchResult = await client
       .query({
-        query: sortDirection !== 'asc' ? this.props.overviewDesc : this.props.overview,
+        query: this.props.overview,
         variables: {
           offset: offsetReal,
           first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
@@ -293,11 +291,12 @@ class ServerPaginatedTableView extends React.Component {
           ...this.props.queryCustomVaribles,
         },
       })
-      .then((result) => (sortDirection !== 'asc' ? result.data[this.props.paginationAPIFieldDesc] : result.data[this.props.paginationAPIField]));
+      .then((result) => (result.data[this.props.paginationAPIField]));
     if (this.props.updateSortOrder) {
       localStorage.setItem('dataLength', String(fetchResult.length));
       localStorage.setItem('data', JSON.stringify(fetchResult));
     }
+
     return fetchResult;
   }
 
