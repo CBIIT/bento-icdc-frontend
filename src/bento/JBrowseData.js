@@ -29,11 +29,20 @@ export const MAX_NUMBER_OF_FILES = 3;
 
 // button style
 export const JBROWSE_BTN_ID = 'jbrowse_multi_view_button';
+export const JBROWSE_TOOLTIP_ICON_ID = 'jbrowse_tooltip_icon';
 export const DISABLE_RIPPLE = true;
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
 };
+
+export const jbrowseIconSrc = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/jbrowseIcons/jbrowseLogo.svg';
+
+export const tooltipMsg1 = 'Select Compatible Files';
+
+export const tooltipMsg2 = 'View selected files in Jbrowse, up to 3 files max';
+
+export const tooltipErrMsg = 'Max of 5 files can be loaded into JBrowse at a time';
 
 export const alignment = {
   trackId: 'my_alignments_track',

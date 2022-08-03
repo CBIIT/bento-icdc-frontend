@@ -89,7 +89,7 @@ export default ({
   overridesObj.MuiButton = {
     root: {
       '&#jbrowse_multi_view_button': {
-        marginLeft: '28px',
+        marginLeft: '22px',
         height: '43px',
         color: '#ffffff',
       },

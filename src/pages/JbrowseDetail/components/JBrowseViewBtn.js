@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   withStyles,
   Button,
+  Typography,
 } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { ToolTip as Tooltip, cn } from 'bento-components';
@@ -13,8 +14,13 @@ import {
   ButtonText1,
   ButtonText2,
   JBROWSE_BTN_ID,
+  JBROWSE_TOOLTIP_ICON_ID,
   tooltipContent,
   DISABLE_RIPPLE,
+  jbrowseIconSrc,
+  tooltipMsg1,
+  tooltipMsg2,
+  tooltipErrMsg,
 } from '../../../bento/JBrowseData';
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
@@ -39,8 +45,21 @@ const ViewJBrowseButton = ({
   const viewFilesOnJBrowse = () => {
     setJborwseSelectedFiles(distinctFiles);
   };
-
   const isInvlaid = distinctFiles.length === 0 || distinctFiles.length > MAX_NUMBER_OF_FILES;
+
+  const renderTooltipContent = () => (
+    <>
+      {((distinctFiles.length > 0) && isInvlaid) && (
+        <Typography className={classes.warning}>
+          Warning:
+        </Typography>
+      )}
+      <Typography align="center" color="inherit" className={classes.descripText}>
+        {((distinctFiles.length > 0) && isInvlaid)
+          ? tooltipErrMsg : (distinctFiles.length === 0) ? tooltipMsg1 : tooltipMsg2}
+      </Typography>
+    </>
+  );
   return (
     <>
       <Link
@@ -59,17 +78,22 @@ const ViewJBrowseButton = ({
         >
           {ButtonText1}
           <img
-            src="https://jbrowse.org/jb2/img/logo.svg"
-            alt=""
-            className={classes.jbrowseIcon}
+            src={jbrowseIconSrc}
+            alt="jbrowse_icon"
+            className={cn(classes.jbrowseIcon)}
           />
           {ButtonText2}
         </Button>
       </Link>
-      <Tooltip title="View file in jbrowse" arrow placement="bottom">
+      <Tooltip
+        title={renderTooltipContent()}
+        placement="right"
+        maxWidth={250}
+      >
         <img
           src={tooltipContent.src}
           alt={tooltipContent.alt}
+          id={JBROWSE_TOOLTIP_ICON_ID}
           className={classes.helpIconButton}
         />
       </Tooltip>
@@ -98,8 +122,9 @@ const styles = () => ({
   },
   helpIconButton: {
     verticalAlign: 'top',
-    marginLeft: '-2px',
-    width: '1.5em',
+    marginLeft: '-1px',
+    width: '17px',
+    marginTop: '5px',
     position: 'absolute',
   },
   helpIcon: {
@@ -114,6 +139,11 @@ const styles = () => ({
   },
   activeLink: {
     cursor: 'pointer',
+  },
+  warning: {
+    color: '#a32d05',
+    float: 'left',
+    fontWeight: '900',
   },
 });
 
