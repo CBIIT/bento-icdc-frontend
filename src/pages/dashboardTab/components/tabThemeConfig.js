@@ -95,6 +95,12 @@ export default ({
       },
     },
   };
+  overridesObj.MuiIconButton = {
+    ...overridesObj.MuiIconButton,
+    root: {
+      padding: '5px',
+    },
+  };
 
   style.push(overridesObj);
 
