@@ -290,6 +290,7 @@ const GridView = ({
         { displayViewJBowseBtn
           && (
           <ViewJBrowseButton
+            customClass={classes.helpIconButton}
             selectedFileNames={selectedRowFileNames}
             tooltipContent={tooltipContent}
           />
@@ -394,7 +395,7 @@ const styles = () => ({
     margin: '0px 0px 0px 2px',
   },
   helpIconButton: {
-    width: '1.5em',
+    width: '17px',
     position: 'absolute',
   },
   tableGrid: {

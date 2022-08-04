@@ -393,7 +393,7 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
-        { displayViewJBowseBtn && <ViewJBrowseButton /> }
+        { displayViewJBowseBtn && <ViewJBrowseButton customClass={classes.helpIcon} /> }
       </Grid>
       <Grid container>
         <Grid item xs={12} id={tableID}>
@@ -449,7 +449,7 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
-        { displayViewJBowseBtn && <ViewJBrowseButton /> }
+        { displayViewJBowseBtn && <ViewJBrowseButton customClass={classes.helpIcon} /> }
         <div style={{ position: 'relative' }}>
           <Link
             rel="noreferrer"
@@ -610,6 +610,10 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     marginLeft: '-5px',
+  },
+  jbrowseelpIconButton: {
+    width: '1.5em',
+    position: 'absolute',
   },
   multiStudyIcon: {
     width: '34px',

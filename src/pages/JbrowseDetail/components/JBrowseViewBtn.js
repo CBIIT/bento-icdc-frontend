@@ -5,6 +5,7 @@ import {
   withStyles,
   Button,
   Typography,
+  IconButton,
 } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { ToolTip as Tooltip, cn } from 'bento-components';
@@ -26,6 +27,7 @@ import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
 
 const ViewJBrowseButton = ({
+  customClass,
   classes,
   selectedFileNames,
 }) => {
@@ -90,12 +92,14 @@ const ViewJBrowseButton = ({
         placement="right"
         maxWidth={250}
       >
-        <img
-          src={tooltipContent.src}
-          alt={tooltipContent.alt}
-          id={JBROWSE_TOOLTIP_ICON_ID}
-          className={classes.helpIconButton}
-        />
+        <IconButton className={classes.helpIconButton}>
+          <img
+            src={tooltipContent.src}
+            alt={tooltipContent.alt}
+            id={JBROWSE_TOOLTIP_ICON_ID}
+            className={customClass}
+          />
+        </IconButton>
       </Tooltip>
     </>
   );
@@ -122,9 +126,6 @@ const styles = () => ({
   },
   helpIconButton: {
     verticalAlign: 'top',
-    marginLeft: '-1px',
-    width: '17px',
-    marginTop: '5px',
     position: 'absolute',
   },
   helpIcon: {
