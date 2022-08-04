@@ -42,7 +42,7 @@ export const tooltipMsg1 = 'Select Compatible Files';
 
 export const tooltipMsg2 = 'View selected files in Jbrowse, up to 3 files max';
 
-export const tooltipErrMsg = 'Max of 5 files can be loaded into JBrowse at a time';
+export const tooltipErrMsg = 'Max of 3 files can be loaded into JBrowse at a time';
 
 export const alignment = {
   trackId: 'my_alignments_track',

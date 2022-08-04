@@ -47,18 +47,25 @@ const ViewJBrowseButton = ({
   const viewFilesOnJBrowse = () => {
     setJborwseSelectedFiles(distinctFiles);
   };
-  const isInvlaid = distinctFiles.length === 0 || distinctFiles.length > MAX_NUMBER_OF_FILES;
+  const isInactive = distinctFiles.length === 0;
+  const isInvlaid = isInactive || distinctFiles.length > MAX_NUMBER_OF_FILES;
+
+  const InValidToottipMsg = () => (
+    <>
+      <span className={classes.warning}>
+        {'Warning: '}
+      </span>
+      <span>
+        {tooltipErrMsg}
+      </span>
+    </>
+  );
 
   const renderTooltipContent = () => (
     <>
-      {((distinctFiles.length > 0) && isInvlaid) && (
-        <Typography className={classes.warning}>
-          Warning:
-        </Typography>
-      )}
       <Typography align="center" color="inherit" className={classes.descripText}>
-        {((distinctFiles.length > 0) && isInvlaid)
-          ? tooltipErrMsg : (distinctFiles.length === 0) ? tooltipMsg1 : tooltipMsg2}
+        {(!isInactive && isInvlaid)
+          ? <InValidToottipMsg /> : isInactive ? tooltipMsg1 : tooltipMsg2}
       </Typography>
     </>
   );
@@ -113,16 +120,17 @@ const styles = () => ({
     fontSize: '16px',
     fontFamily: 'Lato',
     color: '#fffffff',
-    backgroundColor: '#3e5c79',
+    backgroundColor: '#566672',
     marginTop: '6px',
     marginBottom: '10px',
     marginRight: '5px',
     '&:hover': {
-      backgroundColor: '#3e5c79',
+      backgroundColor: '#566672',
     },
   },
   disbaleButton: {
-    opacity: '0.7',
+    // opacity: '0.7',
+    backgroundColor: '#CCD1D4',
   },
   helpIconButton: {
     verticalAlign: 'top',
@@ -142,8 +150,7 @@ const styles = () => ({
     cursor: 'pointer',
   },
   warning: {
-    color: '#a32d05',
-    float: 'left',
+    color: '#971818',
     fontWeight: '900',
   },
 });
