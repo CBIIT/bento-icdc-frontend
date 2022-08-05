@@ -875,6 +875,9 @@ type QueryType {
     numberOfAliquots: Int 
     volumeOfData: Float 
     volumeOfDataOfCase(case_id: String!): Float 
+    volumeOfDataOfProgram(program_id: String!): Float 
+    volumeOfDataOfStudy(study_code: String!): Float 
+
 
     "Count with parameter"
     sampleCountOfStudy(study_code: String!): Int 
