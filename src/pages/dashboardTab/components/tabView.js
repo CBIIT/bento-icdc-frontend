@@ -77,6 +77,7 @@ const TabView = ({
   count,
   api,
   displayViewJBowseBtn,
+  disableViewJBowseBtn,
   paginationAPIField,
   paginationAPIFieldDesc,
   dataKey,
@@ -393,7 +394,13 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
-        { displayViewJBowseBtn && <ViewJBrowseButton customClass={classes.helpIcon} /> }
+        { displayViewJBowseBtn
+          && (
+          <ViewJBrowseButton
+            customClass={classes.helpIcon}
+            disable={disableViewJBowseBtn}
+          />
+          )}
       </Grid>
       <Grid container>
         <Grid item xs={12} id={tableID}>
@@ -449,7 +456,13 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
-        { displayViewJBowseBtn && <ViewJBrowseButton customClass={classes.helpIcon} /> }
+        { displayViewJBowseBtn
+          && (
+          <ViewJBrowseButton
+            customClass={classes.helpIcon}
+            disable={disableViewJBowseBtn}
+          />
+          )}
         <div style={{ position: 'relative' }}>
           <Link
             rel="noreferrer"

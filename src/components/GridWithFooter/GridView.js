@@ -32,6 +32,7 @@ const GridView = ({
   DeactiveSaveButtonDefaultStyle,
   ActiveSaveButtonDefaultStyle,
   displayViewJBowseBtn,
+  disableViewJBowseBtn,
   primaryKeyIndex = 0,
 }) => {
   // Get the existing files ids from  cart state
@@ -293,6 +294,7 @@ const GridView = ({
             customClass={classes.helpIconButton}
             selectedFileNames={selectedRowFileNames}
             tooltipContent={tooltipContent}
+            disable={disableViewJBowseBtn}
           />
           )}
       </div>

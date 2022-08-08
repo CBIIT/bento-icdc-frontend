@@ -59,6 +59,7 @@ export const tabContainers = [
     defaultSortDirection: 'asc',
     buttonText: 'Add Associated Files',
     displayViewJBowseBtn: true,
+    disableViewJBowseBtn: true,
     addAllButtonText: 'Add Associated Files for All',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
@@ -167,6 +168,7 @@ export const tabContainers = [
     api: 'GET_SAMPLES_OVERVIEW_QUERY',
     count: 'numberOfSamples',
     displayViewJBowseBtn: true,
+    disableViewJBowseBtn: true,
     paginationAPIField: 'sampleOverview',
     paginationAPIFieldDesc: 'sampleOverviewDesc',
     dataKey: 'sample_id',
@@ -289,6 +291,7 @@ export const tabContainers = [
     count: 'numberOfFiles',
     buttonText: 'Add Selected Files',
     displayViewJBowseBtn: true,
+    disableViewJBowseBtn: false,
     addAllButtonText: 'Add All Filtered Files',
     dataKey: 'file_name',
     associations: 'other',
@@ -434,6 +437,7 @@ export const tabContainers = [
     dataKey: 'file_name',
     associations: 'study',
     displayViewJBowseBtn: true,
+    disableViewJBowseBtn: true,
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',

@@ -29,6 +29,7 @@ import { setSelectedFiles } from '../util';
 const ViewJBrowseButton = ({
   customClass,
   classes,
+  disable,
   selectedFileNames,
 }) => {
   const selectedDashFiles = useSelector((state) => (state.dashboardTab
@@ -64,21 +65,22 @@ const ViewJBrowseButton = ({
   const renderTooltipContent = () => (
     <>
       <Typography align="center" color="inherit" className={classes.descripText}>
-        {(!isInactive && isInvlaid)
-          ? <InValidToottipMsg /> : isInactive ? tooltipMsg1 : tooltipMsg2}
+        {(!isInactive && isInvlaid && !disable)
+          ? <InValidToottipMsg /> : (isInactive || disable) ? tooltipMsg1 : tooltipMsg2}
       </Typography>
     </>
   );
   return (
     <>
       <Link
-        className={isInvlaid ? classes.diableLink : classes.activeLink}
+        className={(isInvlaid || disable) ? classes.diableLink : classes.activeLink}
         to={{
           pathname: `/jbroswse/${MULTI_FILES_VIEW}`,
         }}
       >
         <Button
-          className={isInvlaid ? cn(classes.button, classes.disbaleButton) : classes.button}
+          className={(isInvlaid || disable)
+            ? cn(classes.button, classes.disbaleButton) : classes.button}
           type="button"
           onClick={viewFilesOnJBrowse}
           disabled={isInvlaid}
@@ -145,9 +147,11 @@ const styles = () => ({
   },
   diableLink: {
     pointerEvents: 'none',
+    marginRight: '-5px',
   },
   activeLink: {
     cursor: 'pointer',
+    marginRight: '-5px',
   },
   warning: {
     color: '#971818',
