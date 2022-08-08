@@ -881,6 +881,11 @@ filterCaseCountByFileFormat{
       biospecimen_repository_acronym
       biospecimen_repository_full_name
     }
+
+    program {
+    program_acronym
+    program_name
+  }
   }
 `;
 
