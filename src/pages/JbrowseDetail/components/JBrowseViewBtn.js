@@ -65,8 +65,8 @@ const ViewJBrowseButton = ({
   const renderTooltipContent = () => (
     <>
       <Typography align="center" color="inherit" className={classes.descripText}>
-        {(!isInactive && isInvlaid && !disable)
-          ? <InValidToottipMsg /> : (isInactive || disable) ? tooltipMsg1 : tooltipMsg2}
+        {(isInactive || disable) ? tooltipMsg1
+          : (isInvlaid) ? <InValidToottipMsg /> : tooltipMsg2}
       </Typography>
     </>
   );
