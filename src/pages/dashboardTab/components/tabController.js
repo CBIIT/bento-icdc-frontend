@@ -122,6 +122,7 @@ const tabController = ({ classes, unifiedViewData }) => {
     && state.dashboardTab.filteredFileIds ? state.dashboardTab.filteredFileIds : null));
   const filteredStudyFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredStudyFileIds ? state.dashboardTab.filteredStudyFileIds : null));
+
   const [TopMessageStatus, setTopMessageStatus] = React.useState({
     text: tooltipContent[currentTab],
     src: tooltipContent.icon,
@@ -313,6 +314,8 @@ const tabController = ({ classes, unifiedViewData }) => {
         closeSnack={closeSnack}
         disableRowSelection={disableRowSelectionFunction[container.disableRowSelection]}
         buttonText={container.buttonText}
+        displayViewJBowseBtn={container.displayViewJBowseBtn}
+        disableViewJBowseBtn={container.disableViewJBowseBtn}
         addAllButtonText={container.addAllButtonText}
         tableID={container.tableID}
         saveButtonDefaultStyle={container.saveButtonDefaultStyle}

@@ -76,6 +76,16 @@ export default ({
     },
   };
 
+  overridesObj.MuiButton = {
+    root: {
+      '&#jbrowse_multi_view_button': {
+        marginLeft: '28px',
+        height: '43px',
+        color: '#ffffff',
+      },
+    },
+  };
+
   style.push(overridesObj);
   const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });
 

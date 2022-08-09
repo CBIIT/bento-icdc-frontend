@@ -42,6 +42,15 @@ export default ({
       padding: '0px 5px',
     },
   };
+  themesLight.overrides.MuiButton = {
+    root: {
+      '&#jbrowse_multi_view_button': {
+        marginLeft: '28px',
+        height: '43px',
+        color: '#ffffff',
+      },
+    },
+  };
   const computedTheme = createTheme({
     ...themesLight,
     ...overrides,

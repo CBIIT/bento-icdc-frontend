@@ -27,6 +27,7 @@ import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/ca
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 import updateColumns, { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
 import DocumentDownload from '../../../components/DocumentDownload';
+import ViewJBrowseButton from '../../JbrowseDetail/components/JBrowseViewBtn';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
 
@@ -75,6 +76,8 @@ const TabView = ({
   TopMessageStatus,
   count,
   api,
+  displayViewJBowseBtn,
+  disableViewJBowseBtn,
   paginationAPIField,
   paginationAPIFieldDesc,
   dataKey,
@@ -96,7 +99,6 @@ const TabView = ({
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
-
   const fileIDs = cart.fileIds ? cart.fileIds : [];
   const saveButton = useRef(null);
   const saveButton2 = useRef(null);
@@ -392,6 +394,13 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
+        { displayViewJBowseBtn
+          && (
+          <ViewJBrowseButton
+            customClass={classes.helpIcon}
+            disable={disableViewJBowseBtn}
+          />
+          )}
       </Grid>
       <Grid container>
         <Grid item xs={12} id={tableID}>
@@ -447,6 +456,13 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
+        { displayViewJBowseBtn
+          && (
+          <ViewJBrowseButton
+            customClass={classes.helpIcon}
+            disable={disableViewJBowseBtn}
+          />
+          )}
         <div style={{ position: 'relative' }}>
           <Link
             rel="noreferrer"
@@ -580,7 +596,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '156px',
+    width: '176px',
     lineHeight: '37px',
     fontSize: '16px',
     fontFamily: 'Lato',
@@ -607,6 +623,10 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     marginLeft: '-5px',
+  },
+  jbrowseelpIconButton: {
+    width: '1.5em',
+    position: 'absolute',
   },
   multiStudyIcon: {
     width: '34px',
