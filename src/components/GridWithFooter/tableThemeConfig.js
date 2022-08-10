@@ -82,6 +82,7 @@ export default ({
         marginLeft: '28px',
         height: '43px',
         color: '#ffffff',
+        textTransform: 'inherit',
       },
     },
   };

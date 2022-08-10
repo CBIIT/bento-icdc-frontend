@@ -40,7 +40,7 @@ const JbrowseDetailView = ({
         setLocation(alignemntLocation);
         const alignment1 = _.cloneDeep(alignment);
         alignment1.trackId = `${alignment.trackId}_${trackNumber}`;
-        alignment1.trackName = `${alignment.trackName}_${trackNumber}`;
+        alignment1.trackName = files[0].file_name;
         const alignmentTrack = createAlignmentTrack(alignmentUris, alignment1, displayMode);
         tracks.push(alignmentTrack);
       }
@@ -48,7 +48,7 @@ const JbrowseDetailView = ({
       if (variantUris) {
         const variant1 = _.cloneDeep(variant);
         variant1.trackId = `${variant.trackId}_${trackNumber}`;
-        variant1.trackName = `${variant.trackName}_${trackNumber}`;
+        variant1.trackName = files[0].file_name;
         const variantTrack = createVarientTrack(variantUris, variant1);
         tracks.push(variantTrack);
       }

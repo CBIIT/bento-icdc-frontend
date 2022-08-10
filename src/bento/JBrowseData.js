@@ -19,8 +19,8 @@ export const height = 200;
 export const chunkSizeLimit = 20000000;
 export const chunkSizeLimit2 = 10000000;
 
-export const ButtonText1 = 'VIEW IN';
-export const ButtonText2 = 'JBROWSE';
+export const ButtonText1 = 'View in';
+export const ButtonText2 = 'Jbrowse';
 
 export const MULTI_FILES_VIEW = 'multiFilesView';
 export const SINGLE_FILE_VIEW = 'singleFileView';
