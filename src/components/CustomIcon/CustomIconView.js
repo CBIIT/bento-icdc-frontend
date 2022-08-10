@@ -17,7 +17,7 @@ const styles = () => ({
     width: '1em',
     height: '1em',
     position: 'relative',
-    left: '25%',
+    left: '15%',
     display: 'inline-block',
     flexShrink: 0,
   },
