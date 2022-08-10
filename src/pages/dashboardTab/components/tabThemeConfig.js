@@ -92,6 +92,7 @@ export default ({
         marginLeft: '22px',
         height: '43px',
         color: '#ffffff',
+        textTransform: 'inherit',
       },
     },
   };

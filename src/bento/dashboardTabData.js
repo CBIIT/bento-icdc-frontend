@@ -41,7 +41,7 @@ export const multiStudyData = {
 export const fileViewer = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
   alt: 'file viewer icon',
-  toolTipText: 'Open and view this file',
+  toolTipText: 'View in JBrowse',
 };
 
 // --------------- Tabs Table configuration --------------
@@ -322,7 +322,7 @@ export const tabContainers = [
       },
       {
         dataField: 'access_file',
-        header: 'View in JBrowse',
+        header: 'Access',
         sort: 'asc',
         display: true,
         downloadDocument: true,
