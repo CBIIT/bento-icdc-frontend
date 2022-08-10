@@ -14,7 +14,7 @@ import {
 import { setSelectedFiles } from '../../pages/JbrowseDetail/util';
 import { setJborwseSelectedFiles } from '../../pages/JbrowseDetail/store/jborwse.reducer';
 import env from '../../utils/env';
-import jbrowseLogo from '../../assets/icons/jbrowseLogo.svg';
+import jbrowseLogo from '../../assets/icons/JbrowseViewIcon.svg';
 
 const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_API;
 
