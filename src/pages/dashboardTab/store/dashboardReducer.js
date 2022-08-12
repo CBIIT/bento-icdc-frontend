@@ -690,8 +690,6 @@ function createSingleFilterVariables(payload) {
  * @return tooltip content
  */
 function getTooltipContent(data, items) {
-  console.log('loggy data', data);
-  console.log('loggy items', items);
   const content = [];
   items.forEach((item) => {
     const objects = data[item.type];
@@ -1057,7 +1055,6 @@ const reducers = {
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
-    console.log('loggy I', item.data.searchCases.programsAndStudies);
     const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data.searchCases,
       facetSearchData, 'count'), item);
     fetchDataForDashboardTab(tabIndex[0].title, allFilters());
