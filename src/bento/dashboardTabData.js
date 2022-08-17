@@ -41,7 +41,7 @@ export const multiStudyData = {
 export const fileViewer = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
   alt: 'file viewer icon',
-  toolTipText: 'Open and view this file',
+  toolTipText: 'View in JBrowse',
 };
 
 // --------------- Tabs Table configuration --------------
@@ -57,6 +57,8 @@ export const tabContainers = [
     defaultSortField: 'case_id',
     defaultSortDirection: 'asc',
     buttonText: 'Add Associated Files',
+    displayViewJBowseBtn: true,
+    disableViewJBowseBtn: true,
     addAllButtonText: 'Add Associated Files for All',
     saveButtonDefaultStyle: {
       borderRadius: '10px',
@@ -164,6 +166,8 @@ export const tabContainers = [
     dataField: 'dataSample',
     api: 'GET_SAMPLES_OVERVIEW_QUERY',
     count: 'numberOfSamples',
+    displayViewJBowseBtn: true,
+    disableViewJBowseBtn: true,
     paginationAPIField: 'sampleOverview',
     dataKey: 'sample_id',
     defaultSortField: 'sample_id',
@@ -283,6 +287,8 @@ export const tabContainers = [
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
     buttonText: 'Add Selected Files',
+    displayViewJBowseBtn: true,
+    disableViewJBowseBtn: false,
     addAllButtonText: 'Add All Filtered Files',
     dataKey: 'file_name',
     associations: 'other',
@@ -310,6 +316,25 @@ export const tabContainers = [
         sort: 'asc',
         primary: true,
         display: true,
+      },
+      {
+        dataField: 'access_file',
+        header: 'Access',
+        sort: 'asc',
+        display: true,
+        downloadDocument: true,
+        documentDownloadProps: {
+          maxFileSize: 12000000,
+          toolTipTextFileDownload: 'Download a copy of this file',
+          toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+          fileSizeColumn: 'file_size',
+          fileFormatColumn: 'file_format',
+          fileLocationColumn: 'file_uuid',
+          caseIdColumn: 'file_name',
+          iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+          iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+          iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+        },
       },
       {
         dataField: 'file_uuid',
@@ -348,25 +373,6 @@ export const tabContainers = [
         sort: 'asc',
         display: true,
         formatBytes: true,
-      },
-      {
-        dataField: 'access_file',
-        header: 'Access',
-        sort: 'asc',
-        display: true,
-        downloadDocument: true,
-        documentDownloadProps: {
-          maxFileSize: 12000000,
-          toolTipTextFileDownload: 'Download a copy of this file',
-          toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
-          fileSizeColumn: 'file_size',
-          fileFormatColumn: 'file_format',
-          fileLocationColumn: 'file_uuid',
-          caseIdColumn: 'file_name',
-          iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-          iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-          iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
-        },
       },
       {
         dataField: 'sample_id',
@@ -426,6 +432,8 @@ export const tabContainers = [
     addAllButtonText: 'Add All Filtered Files',
     dataKey: 'file_name',
     associations: 'study',
+    displayViewJBowseBtn: true,
+    disableViewJBowseBtn: true,
     saveButtonDefaultStyle: {
       borderRadius: '10px',
       width: '180px',

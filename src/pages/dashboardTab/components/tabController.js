@@ -312,6 +312,8 @@ const tabController = ({ classes, unifiedViewData }) => {
         closeSnack={closeSnack}
         disableRowSelection={disableRowSelectionFunction[container.disableRowSelection]}
         buttonText={container.buttonText}
+        displayViewJBowseBtn={container.displayViewJBowseBtn}
+        disableViewJBowseBtn={container.disableViewJBowseBtn}
         addAllButtonText={container.addAllButtonText}
         tableID={container.tableID}
         saveButtonDefaultStyle={container.saveButtonDefaultStyle}

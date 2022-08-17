@@ -17,6 +17,33 @@ export const maxDisplayedBpPerPx = 50000;
 export const height = 200;
 // size in bytes
 export const chunkSizeLimit = 20000000;
+export const chunkSizeLimit2 = 10000000;
+
+export const ButtonText1 = 'View in';
+export const ButtonText2 = 'Jbrowse';
+
+export const MULTI_FILES_VIEW = 'multiFilesView';
+export const SINGLE_FILE_VIEW = 'singleFileView';
+
+export const MAX_NUMBER_OF_FILES = 3;
+
+// button style
+export const JBROWSE_BTN_ID = 'jbrowse_multi_view_button';
+export const JBROWSE_TOOLTIP_ICON_ID = 'jbrowse_tooltip_icon';
+export const DISABLE_RIPPLE = true;
+// --------------- Tooltip configuration --------------
+export const tooltipContent = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
+};
+
+export const jbrowseIconSrc = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/jbrowseIcons/jbrowseLogo.svg';
+
+export const tooltipMsg1 = 'Select Compatible Files';
+
+export const tooltipMsg2 = 'View selected files in Jbrowse, up to 3 files max';
+
+export const tooltipErrMsg = 'Max of 3 files can be loaded into JBrowse at a time';
+
 export const alignment = {
   trackId: 'my_alignments_track',
   trackName: 'My Alignment',

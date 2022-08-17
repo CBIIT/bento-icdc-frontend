@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { FileOnRowsSelect } from '../pages/caseDetails/fileTable';
+import { FileOnRowsSelect, getSelectedFileNames } from '../pages/caseDetails/fileTable';
 import { SampleOnRowsSelect } from '../pages/caseDetails/sampleFileTable';
 
 // --------------- Tooltip configuration --------------
@@ -125,6 +125,7 @@ export const table2 = {
   defaultSortDirection: 'asc',
   // Text to appear on Add to cart button
   buttonText: 'Add Selected Files',
+  displayViewJBowseBtn: true,
   saveButtonDefaultStyle: {
     color: '#fff',
     opacity: '1',
@@ -157,6 +158,25 @@ export const table2 = {
     {
       dataField: 'sample_id',
       header: 'Sample ID',
+    },
+    {
+      dataField: '',
+      header: 'Access',
+      sort: 'asc',
+      display: true,
+      downloadDocument: true,
+      documentDownloadProps: {
+        maxFileSize: 12000000,
+        toolTipTextFileDownload: 'Download a copy of this file',
+        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+        fileSizeColumn: 'file_size',
+        fileFormatColumn: 'file_format',
+        fileLocationColumn: 'uuid',
+        caseIdColumn: 'file_name',
+        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+      },
     },
     {
       dataField: 'file_name',
@@ -192,31 +212,13 @@ export const table2 = {
       primary: true,
       // set formatBytes to true to display file size (in bytes) in a more human readable format
     },
-    {
-      dataField: '',
-      header: 'Access',
-      sort: 'asc',
-      display: true,
-      downloadDocument: true,
-      documentDownloadProps: {
-        maxFileSize: 12000000,
-        toolTipTextFileDownload: 'Download a copy of this file',
-        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
-        fileSizeColumn: 'file_size',
-        fileFormatColumn: 'file_format',
-        fileLocationColumn: 'uuid',
-        caseIdColumn: 'file_name',
-        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
-      },
-    },
   ],
   optionalColumns: [
   ],
   // Util Functions
   // Custom function on selct checkbox is selected.
   customOnRowsSelect: FileOnRowsSelect,
+  selectedFileNames: getSelectedFileNames,
 };
 
 export const textLabels = {

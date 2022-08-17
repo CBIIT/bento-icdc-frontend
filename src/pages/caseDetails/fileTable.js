@@ -24,3 +24,11 @@ export function FileDisableRowSelection(data, cartData) {
 export function FileOnRowsSelect(data, allRowsSelected) {
   return allRowsSelected.map((row) => data[row.dataIndex].uuid);
 }
+
+/**
+ * return fileNames of selected row
+ */
+
+export function getSelectedFileNames(data, allRowsSelected) {
+  return allRowsSelected.map((row) => data[row.dataIndex].file_name);
+}
