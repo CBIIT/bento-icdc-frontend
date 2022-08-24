@@ -4,19 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Studies from './studiesView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_STUDY_DATA_QUERY } from '../../bento/studiesData';
-
-const convertCRDCLinksToValue = (data) => {
-  const objString = Object.entries(data)[0][0];
-  const dataArr = Object.entries(data)[0][1];
-  const processedArr = dataArr
-    .map((element) => ({
-      ...element, CRDCLinks: element.CRDCLinks.length, links: element.CRDCLinks,
-    }));
-  const tempArr = [
-    [objString, processedArr],
-  ];
-  return Object.fromEntries(tempArr);
-};
+import { convertCRDCLinksToValue } from '../../utils/utils';
 
 const studiesContainer = ({ invalid }) => {
   const { loading, error, data } = useQuery(GET_STUDY_DATA_QUERY);

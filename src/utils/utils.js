@@ -23,3 +23,25 @@ export function navigatedToDashboard(studyCode, tab) {
   fetchDataForDashboardTab(tab, null, null, null);
   filterCasePageOnStudyCode(studyCode);
 }
+
+export const convertCRDCLinksToValue = (data, key) => {
+  if (!key) {
+    const objString = Object.entries(data)[0][0];
+    const dataArr = Object.entries(data)[0][1];
+    const processedArr = dataArr
+      .map((element) => ({
+        ...element, CRDCLinks: element.CRDCLinks.length, links: element.CRDCLinks,
+      }));
+    const tempArr = [
+      [objString, processedArr],
+    ];
+    return Object.fromEntries(tempArr);
+  }
+
+  const processedArr = data[key]
+    .map((element) => ({
+      ...element, CRDCLinks: element.CRDCLinks.length, links: element.CRDCLinks,
+    }));
+
+  return { ...data, [key]: processedArr };
+};
