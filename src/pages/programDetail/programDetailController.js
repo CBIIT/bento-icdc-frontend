@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import ProgramView from './programDetailView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_PROGRAM_DETAIL_DATA_QUERY } from '../../bento/programDetailData';
+import { convertCRDCLinksToValue } from '../../utils/utils';
 
 const ProgramDetailContainer = ({ match }) => {
   const { loading, error, data } = useQuery(GET_PROGRAM_DETAIL_DATA_QUERY, {
@@ -18,7 +19,8 @@ const ProgramDetailContainer = ({ match }) => {
       </Typography>
     );
   }
-  return <ProgramView data={data} />;
+
+  return <ProgramView data={convertCRDCLinksToValue(data, 'studiesByProgramId')} />;
 };
 
 export default ProgramDetailContainer;
