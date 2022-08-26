@@ -751,6 +751,7 @@ export const DASHBOARD_QUERY = gql`
     $file_format: [String],
     $biobank: [String],
     $study_participation: [String],
+    $case_ids: [String] = [],
   ) 
   {
     searchCases
@@ -773,6 +774,7 @@ export const DASHBOARD_QUERY = gql`
       file_format: $file_format,
       biobank: $biobank,
       study_participation: $study_participation, 
+      case_ids: $case_ids,
     ) 
     {
         numberOfStudies
@@ -1190,6 +1192,7 @@ caseCountByDiseaseSite{
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
   query fileOverview(
+    $case_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1215,6 +1218,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
   ){
     fileOverview
     (
+      case_ids: $case_ids,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -1389,6 +1393,7 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
 // --------------- GraphQL query - Retrieve sample tab details --------------
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
   query sampleOverview(
+    $case_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1414,6 +1419,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
   ){
     sampleOverview
     (
+      case_ids: $case_ids,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -1575,6 +1581,7 @@ export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
 
 export const GET_CASES_OVERVIEW_QUERY = gql`
   query caseOverview(
+    $case_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1622,6 +1629,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
       sort_direction: $sort_direction,
       first: $first,
       offset: $offset,
+      case_ids: $case_ids
     )
     {
       case_id
@@ -1738,6 +1746,7 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
 
 export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
   query caseOverview(
+    $case_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1763,6 +1772,7 @@ export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
   ){
     caseOverview
     (
+      case_ids: $case_ids,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -1794,6 +1804,7 @@ export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
 query sampleOverview(
+    $case_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1819,6 +1830,7 @@ query sampleOverview(
   ){
     sampleOverview
     (
+      case_ids: $case_ids,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -1850,6 +1862,7 @@ query sampleOverview(
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
  query fileOverview(
+    $case_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1875,6 +1888,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   ){
     fileOverview
     (
+      case_ids: $case_ids,
       program: $program,
       study: $study, 
       study_type: $study_type, 

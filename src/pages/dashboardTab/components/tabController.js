@@ -48,7 +48,7 @@ const tabController = ({ classes, unifiedViewData }) => {
   React.useEffect(() => {
     if (unifiedViewData) {
       prevMultistudyProp = unifiedViewData;
-      fetchDataForDashboardTab('Cases', unifiedViewData.caseIds, unifiedViewData.sampleIds, unifiedViewData.fileIds, unifiedViewData.studyFileIds);
+      fetchDataForDashboardTab('Cases', { case_ids: unifiedViewData.caseIds });
       const obj = {
         numberOfStudies: unifiedViewData.numberOfStudies,
         numberOfCases: unifiedViewData.numberOfCases,
@@ -204,11 +204,13 @@ const tabController = ({ classes, unifiedViewData }) => {
     }
     setCurrentTab(value);
     if (unifiedViewData) {
-      fetchDataForDashboardTab(tabIndex[value].title,
-        unifiedViewData.caseIds,
-        unifiedViewData.sampleIds,
-        unifiedViewData.fileIds,
-        unifiedViewData.studyFileIds);
+      if (tabIndex[value].title === 'StudyFiles') {
+        fetchDataForDashboardTab(tabIndex[value].title,
+          { case_ids: unifiedViewData.caseIds, file_association: ['study'] });
+      } else {
+        fetchDataForDashboardTab(tabIndex[value].title,
+          { case_ids: unifiedViewData.caseIds });
+      }
     } else {
       fetchDataForDashboardTab(tabIndex[value].title);
     }
