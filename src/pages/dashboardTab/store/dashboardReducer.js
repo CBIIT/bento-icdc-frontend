@@ -350,6 +350,7 @@ export function fetchDataForDashboardTab(
         ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
       }
       : allFilters()) : filters;
+
   return client
     .query({
       query: QUERY,
