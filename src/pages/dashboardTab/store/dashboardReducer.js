@@ -27,6 +27,7 @@ import {
   GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   tabIndex,
+  GET_STUDY_CODE,
   GET_FILES_NAME_QUERY,
 } from '../../../bento/dashboardTabData';
 
@@ -792,13 +793,32 @@ export async function setSingleFilter(payload) {
 }
 
 /**
+ * Returns stuy_code name and accession id to be passed on
+ * for a singleFilter payload
+ */
+export async function getAccessionId(payload) {
+  // eslint-disable-next-line no-unused-vars
+  const response = await client
+    .query({
+      query: GET_STUDY_CODE,
+      variables: {
+        clinical_study_designation: payload[0].name,
+      },
+    })
+    .then((result) => result.data || {});
+  return response;
+}
+
+/**
  * Reducer for setting single checkbox filter
  * @param {object} payload
  * @return distpatcher
  */
 
 export async function singleCheckBox(payload) {
-  await setSingleFilter(payload);
+  const studyCode = await getAccessionId(payload);
+  const studyFilterVariable = `${studyCode.study[0].clinical_study_designation} (${studyCode.study[0].accession_id})`;
+  await setSingleFilter([{ ...payload[0], name: studyFilterVariable }]);
   const currentAllFilterVariables = payload === {} ? allFilters : createFilterVariables(payload);
   toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
 }

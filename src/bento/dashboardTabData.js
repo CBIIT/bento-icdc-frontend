@@ -1936,3 +1936,12 @@ query (
         file_uuid
     }
 }`;
+
+export const GET_STUDY_CODE = gql`
+  query study($clinical_study_designation: String) {
+    study(clinical_study_designation: $clinical_study_designation) {
+      clinical_study_designation
+      accession_id
+    }
+  }
+`;
