@@ -305,9 +305,9 @@ const TabView = ({
     >
       <span className={classes.badge}>
         <img
-          className={classes.cartIcon}
           src={multiStudyData.icon}
           alt={multiStudyData.alt}
+          style={{ height: '2em' }}
         />
         <span className={classes.cartCounter}>
           {tableMeta.length + 1}
@@ -482,11 +482,6 @@ const styles = () => ({
     '&:hover': {
       textDecoration: 'underline',
     },
-  },
-  cartIcon: {
-    height: '24px',
-    width: '24px',
-    margin: '0px 0px 0px 6px',
   },
   cartCounter: {
     position: 'relative',
