@@ -6,7 +6,7 @@ window.injectedEnv = {
   REACT_APP_APPLICATION_VERSION: 'YYYY_MM_DD/HH:MM',
   REACT_APP_FE_VERSION: 'v3.8.7-588',
   REACT_APP_FILE_SERVICE_API: 'https://caninecommons.cancer.gov/api/files/version',
-  REACT_APP_ABOUT_CONTENT_URL: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/Develop/src/content/pre-prod/aboutPagesContent.yaml',
+  REACT_APP_ABOUT_CONTENT_URL: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/aboutPagesContent.yaml',
   REACT_APP_GA_TRACKING_ID: 'UA-154442677-1',
   REACT_APP_FILE_SERVICE_API: 'https://caninecommons-dev.cancer.gov/api/files/',
   REACT_APP_DATA_MODEL: 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/develop/model-desc/icdc-model.yml',
