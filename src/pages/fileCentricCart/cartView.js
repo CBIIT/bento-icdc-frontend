@@ -88,9 +88,10 @@ const cartView = ({
   const [modalStatus, setModalStatus] = React.useState(false);
   const commentRef = React.useRef();
   // const [userComments, setUserComments] = React.useState('');
-  let dataCartView = data;
+  const dataCartView = data;
   let localPageCartView = localPage;
   let localRowsPerPageCartView = localRowsPerPage;
+  console.log(data);
   async function fetchData() {
     const fetchResult = await client
       .query({
@@ -150,8 +151,8 @@ const cartView = ({
 
   if (localStorage.getItem('data')) {
     if (localStorage.getItem('data') !== 'undefined' && localStorage.getItem('data').length > 0 && (localStorage.getItem('page') !== localPage || localStorage.getItem('rowsPerPage') !== localRowsPerPage || localStorage.getItem('sortColumn') !== defaultSortCoulmn || localStorage.getItem('sortDirection') !== defaultSortDirection)) {
-      const dataLocal = JSON.parse(localStorage.getItem('data'));
-      dataCartView = dataLocal;
+      // const dataLocal = JSON.parse(localStorage.getItem('data'));
+      // dataCartView = dataLocal;
       localPageCartView = localStorage.getItem('page');
       localRowsPerPageCartView = localStorage.getItem('rowsPerPage');
     }
