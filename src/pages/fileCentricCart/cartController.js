@@ -13,6 +13,7 @@ const cartController = () => {
     ? GET_MY_CART_DATA_QUERY_DESC : GET_MY_CART_DATA_QUERY;
   const defaultSortColumnValue = cart.sortColumn === '' || !cart.sortColumn ? table.defaultSortField || '' : cart.sortColumn;
   // if the user open the webpage for the first time.
+  console.log('cartController call');
   if (!localStorage.getItem('sortColumn') || !localStorage.getItem('page') || !localStorage.getItem('rowsPerPage')) {
     localStorage.setItem('sortColumn', defaultSortColumnValue);
     localStorage.setItem('page', '0');
