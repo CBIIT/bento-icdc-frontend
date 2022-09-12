@@ -7,14 +7,11 @@ import CartView from './cartView';
 
 const cartController = () => {
   const cart = getCart();
-  console.log('cart controller');
-  console.log(cart);
   const ids = cart.fileIds ? cart.fileIds : [];
   const defaultSortDirection = table.defaultSortDirection || 'asc';
   const CART_QUERY = (defaultSortDirection === 'desc' || cart.sortDirection === 'desc')
     ? GET_MY_CART_DATA_QUERY_DESC : GET_MY_CART_DATA_QUERY;
   const defaultSortColumnValue = cart.sortColumn === '' || !cart.sortColumn ? table.defaultSortField || '' : cart.sortColumn;
-
   // if the user open the webpage for the first time.
   if (!localStorage.getItem('sortColumn') || !localStorage.getItem('page') || !localStorage.getItem('rowsPerPage')) {
     localStorage.setItem('sortColumn', defaultSortColumnValue);
@@ -37,17 +34,15 @@ const cartController = () => {
     },
   });
 
-  console.log(data);
-
   if (loading) {
-    return (
-      <CartView
-        isLoading
-        data="undefined"
-        defaultSortCoulmn={defaultSortColumnValue}
-        defaultSortDirection={defaultSortDirection}
-      />
-    );
+    // return (
+    //   <CartView
+    //     isLoading
+    //     data="undefined"
+    //     defaultSortCoulmn={defaultSortColumnValue}
+    //     defaultSortDirection={defaultSortDirection}
+    //   />
+    // );
   }
   if (error || !data) {
     return (

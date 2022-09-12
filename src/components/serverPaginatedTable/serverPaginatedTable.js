@@ -117,6 +117,9 @@ class ServerPaginatedTableView extends React.Component {
         displayedData.map((d) => d[this.props.options.dataKey]),
       );
     }
+    if (this.props.options.onSortingTrigger) {
+      this.props.options.onSortingTrigger(displayedData);
+    }
   }
 
   getCurrentPage = (page) => {
@@ -126,7 +129,7 @@ class ServerPaginatedTableView extends React.Component {
     return page;
   };
 
-  sort = (page, sortOrder) => {
+  sort = ({ page, sortOrder }) => {
     this.setState({ isLoading: true });
     const rowsPerPageSort = this.state.rowsPerPage;
     if (this.props.updateSortOrder) {
@@ -361,13 +364,12 @@ class ServerPaginatedTableView extends React.Component {
       onTableChange: (action, tableState) => {
         // a developer could react to change on an action basis or
         // examine the state as a whole and do whatever they want
-
         switch (action) {
           case 'changePage':
             this.changePage(tableState.page, tableState.sortOrder);
             break;
           case 'sort':
-            this.sort(tableState.page, tableState.sortOrder);
+            this.sort(tableState);
             break;
           default:
             break;

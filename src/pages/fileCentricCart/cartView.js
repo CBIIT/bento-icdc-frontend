@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Grid, withStyles,
   IconButton,
@@ -17,7 +18,7 @@ import {
   externalLinkIcon,
   GET_MY_CART_DATA_QUERY,
 } from '../../bento/fileCentricCartWorkflowData';
-import { deleteFromCart } from './store/cart';
+import { deleteFromCart, selectFiles } from './store/cart';
 import { downloadJson } from './utils';
 import GA from '../../utils/googleAnalytics';
 
@@ -91,7 +92,6 @@ const cartView = ({
   const dataCartView = data;
   let localPageCartView = localPage;
   let localRowsPerPageCartView = localRowsPerPage;
-  console.log(data);
   async function fetchData() {
     const fetchResult = await client
       .query({
@@ -150,7 +150,12 @@ const cartView = ({
   const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_uuid');
 
   if (localStorage.getItem('data')) {
-    if (localStorage.getItem('data') !== 'undefined' && localStorage.getItem('data').length > 0 && (localStorage.getItem('page') !== localPage || localStorage.getItem('rowsPerPage') !== localRowsPerPage || localStorage.getItem('sortColumn') !== defaultSortCoulmn || localStorage.getItem('sortDirection') !== defaultSortDirection)) {
+    if (localStorage.getItem('data') !== 'undefined'
+        && localStorage.getItem('data').length > 0
+        && (localStorage.getItem('page') !== localPage
+        || localStorage.getItem('rowsPerPage') !== localRowsPerPage
+        || localStorage.getItem('sortColumn') !== defaultSortCoulmn
+        || localStorage.getItem('sortDirection') !== defaultSortDirection)) {
       // const dataLocal = JSON.parse(localStorage.getItem('data'));
       // dataCartView = dataLocal;
       localPageCartView = localStorage.getItem('page');
@@ -182,6 +187,8 @@ const cartView = ({
       ),
     },
   }];
+
+  const selectedRowData = useSelector((state) => (state.cart.selectedFiles));
 
   const numberOfFilesBeDeleted = myFilesPageData.popUpWindow.showNumberOfFileBeRemoved ? fileIDs.length : '';
 
@@ -225,6 +232,8 @@ const cartView = ({
               localPage={localPageCartView}
               localRowsPerPage={localRowsPerPageCartView}
               isLoading={isLoading}
+              setRowSelection={selectFiles}
+              selectedRowInfo={selectedRowData.selectedRowInfo}
             />
 
             {/* Section: Footer */}

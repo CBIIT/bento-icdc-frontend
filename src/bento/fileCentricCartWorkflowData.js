@@ -51,6 +51,7 @@ export const table = {
   dataField: 'filesInList',
   // Value must be one of the 'dataField's in "columns"
   defaultSortField: 'file_name',
+  selectableRows: true,
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
   paginationAPIField: 'filesInList',

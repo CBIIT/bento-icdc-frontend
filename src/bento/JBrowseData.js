@@ -30,6 +30,7 @@ export const MAX_NUMBER_OF_FILES = 3;
 // button style
 export const JBROWSE_BTN_ID = 'jbrowse_multi_view_button';
 export const JBROWSE_TOOLTIP_ICON_ID = 'jbrowse_tooltip_icon';
+export const JBROWSE_TOOLTIP_BTN = 'jbrowse_help_icon_btn';
 export const DISABLE_RIPPLE = true;
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
