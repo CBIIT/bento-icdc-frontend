@@ -18,8 +18,6 @@ const CartFooter = React.forwardRef(({
   externalLinkIcon,
 }, ref) => {
   const selectedRowData = useSelector((state) => (state.cart.selectedFiles));
-  console.log('get data');
-  console.log(selectedRowData);
   const [commentText, setcommentText] = React.useState('');
   const onChange = ({ target: { value } }) => setcommentText(value);
   React.useImperativeHandle(ref, () => ({

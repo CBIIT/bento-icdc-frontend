@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   withStyles,
@@ -19,7 +19,7 @@ import {
 import TableThemeProvider from './cartTableThemeConfig';
 import updateColumns from '../../../../utils/columnsUtil';
 import DocumentDownload from '../../../../components/DocumentDownload';
-import { deleteFromCart, selectFiles } from '../../store/cart';
+import { selectFiles } from '../../store/cart';
 // import { getCart } from '../../store/cart';
 
 // const ACTION_TYPE_SELECT = 'select';
@@ -52,14 +52,11 @@ const CartHeader = ({
   const [selectedFileName, setSelectedFileName] = useState([]);
   const [cartData, setCartData] = useState(_.cloneDeep(data));
 
-  const deleteRowEvent = (tableMeta, fileIdIndex) => {
-    console.log('deleteRowEvent');
-    console.log(fileIdIndex);
-    console.log(tableMeta);
-    deleteFromCart({ fileIds: tableMeta.rowData[fileIdIndex] });
-  };
-  const delCols = deleteColumn(deleteRowEvent);
-  const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(delCols), table.columns);
+  useEffect(() => {
+    setCartData(_.cloneDeep(data));
+  }, [data]);
+
+  const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(deleteColumn), table.columns);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
   /*

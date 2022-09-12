@@ -163,36 +163,32 @@ const cartView = ({
     }
   }
 
-  const deleteColumn = (deleteRowFunc) => {
-    console.log('delete column');
-    return [{
-      name: 'Remove',
-      label: 'Remove',
-      options: {
-        sort: false,
-        customBodyRender: (value, tableMeta) => (
-          <div className={classes.tableDeleteButtonDiv}>
-            <button
-              type="button"
-              className={classes.tableDeleteButton}
-              onClick={() => deleteRowFunc(tableMeta, fileIdIndex)}
-            >
-              <DeleteOutlineIcon fontSize="small" />
-            </button>
-          </div>
-        ),
-        customHeadRender: () => (
-          <CustomHeaderRemove
-            classes={classes}
-            openDialogBox={openDialogBox}
-          />
-        ),
-      },
-    }];
-  };
+  const deleteColumn = [{
+    name: 'Remove',
+    label: 'Remove',
+    options: {
+      sort: false,
+      customBodyRender: (value, tableMeta) => (
+        <div className={classes.tableDeleteButtonDiv}>
+          <button
+            type="button"
+            className={classes.tableDeleteButton}
+            onClick={() => deleteFromCart({ fileIds: tableMeta.rowData[fileIdIndex] })}
+          >
+            <DeleteOutlineIcon fontSize="small" />
+          </button>
+        </div>
+      ),
+      customHeadRender: () => (
+        <CustomHeaderRemove
+          classes={classes}
+          openDialogBox={openDialogBox}
+        />
+      ),
+    },
+  }];
 
   const selectedRowData = useSelector((state) => (state.cart.selectedFiles));
-  console.log('carview upate component');
   const numberOfFilesBeDeleted = myFilesPageData.popUpWindow.showNumberOfFileBeRemoved ? fileIDs.length : '';
 
   return (
