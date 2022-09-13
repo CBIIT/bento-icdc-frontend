@@ -17,9 +17,16 @@ export default ({
       },
     },
   };
-
+  const MuiIconButton = {
+    root: {
+      '&#jbrowse_help_icon_btn': {
+        marginTop: '-10px',
+        marginLeft: '-10px',
+      },
+    },
+  };
   overridesObj.MuiButton = MuiButton;
-
+  overridesObj.MuiIconButton = MuiIconButton;
   style.push(overridesObj);
   const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });
 
