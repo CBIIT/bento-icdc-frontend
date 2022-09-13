@@ -59,6 +59,8 @@ const CartHeader = ({
   const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(deleteColumn), table.columns);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
+  const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
   /*
     Presist user selection
   */
@@ -67,7 +69,7 @@ const CartHeader = ({
     const selectedFilesIndex = dispData.reduce((acc, v, i) => acc
       .concat(selectedFileName.includes(v) ? i : []), []);
     if (selectedFileName.length > 0
-      && JSON.stringify(selectedRows) !== JSON.stringify(selectedFilesIndex)) {
+      && !isEqual(selectedRows, selectedFilesIndex)) {
       setSelectedRows(selectedFilesIndex);
       setCartData(displayedData);
       selectFiles({
@@ -76,7 +78,7 @@ const CartHeader = ({
       });
     }
     if (selectedFileName.length === 0
-      && JSON.stringify(selectedRowData.selectedRowInfo) !== JSON.stringify(selectedFileName)) {
+      && !isEqual(selectedRowData.selectedRowInfo, selectedFileName)) {
       selectFiles({
         selectedRowInfo: selectedFileName,
         selectedRowIndex: selectedFilesIndex,
@@ -85,7 +87,6 @@ const CartHeader = ({
   }
 
   function rowSelectionFunc(curr, allRowsSelected, rowsSelected, displayData) {
-    console.log('select');
     const selectedFiles = displayData.reduce((acc, d, i) => acc
       .concat(rowsSelected.includes(i) ? d.data[primaryKeyIndex] : []), []);
     const files = displayData.map((d) => d.data[primaryKeyIndex]);
@@ -100,7 +101,6 @@ const CartHeader = ({
       } else {
         setSelectedFileName(selectedFiles);
       }
-      console.log(selectedFileName);
     }
   }
 
