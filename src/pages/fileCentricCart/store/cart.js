@@ -8,6 +8,10 @@ const initialState = {
   fileIds: [],
   error: '',
   isError: false,
+  selectedFiles: {
+    selectedRowInfo: [],
+    selectedRowIndex: [],
+  },
 };
 
 // utils
@@ -38,6 +42,9 @@ const subscribe = (f) => {
 
 // actions
 export const addToCart = (item) => store.dispatch({ type: 'addFiles', payload: item });
+
+// Jbrowse select files
+export const selectFiles = (item) => store.dispatch({ type: 'selectedFiles', payload: item });
 
 export const deleteFromCart = (item) => store.dispatch({ type: 'deleteFiles', payload: item });
 
@@ -97,6 +104,13 @@ const reducers = {
       sortDirection: localStorage.getItem('sortDirection'),
     };
   },
+  selectedFiles: (state, item) => ({
+    ...state,
+    selectedFiles: {
+      selectedRowInfo: item.selectedRowInfo,
+      selectedRowIndex: item.selectedRowIndex,
+    },
+  }),
   deleteFiles: (state, item) => {
     const fileIdsAfterDeletion = filterOutIDs(item.fileIds, state.fileIds);
     localStorage.setItem('CartFileIds', JSON.stringify(fileIdsAfterDeletion));

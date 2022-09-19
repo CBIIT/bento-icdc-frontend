@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Grid, withStyles,
   IconButton,
@@ -17,7 +18,7 @@ import {
   externalLinkIcon,
   GET_MY_CART_DATA_QUERY,
 } from '../../bento/fileCentricCartWorkflowData';
-import { deleteFromCart } from './store/cart';
+import { deleteFromCart, selectFiles } from './store/cart';
 import { downloadJson } from './utils';
 import GA from '../../utils/googleAnalytics';
 
@@ -164,6 +165,8 @@ const cartView = ({
     }
   }
 
+  const selectedRowData = useSelector((state) => (state.cart.selectedFiles));
+
   const deleteColumn = [{
     name: 'Remove',
     label: 'Remove',
@@ -231,6 +234,8 @@ const cartView = ({
               localPage={localPageCartView}
               localRowsPerPage={localRowsPerPageCartView}
               isLoading={isLoading}
+              setRowSelection={selectFiles}
+              selectedRowInfo={selectedRowData.selectedRowInfo}
             />
 
             {/* Section: Footer */}
