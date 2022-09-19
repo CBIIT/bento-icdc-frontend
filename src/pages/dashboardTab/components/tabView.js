@@ -17,9 +17,6 @@ import {
   GET_FILES_OVERVIEW_QUERY,
   GET_SAMPLES_OVERVIEW_QUERY,
   GET_CASES_OVERVIEW_QUERY,
-  GET_FILES_OVERVIEW_DESC_QUERY,
-  GET_SAMPLES_OVERVIEW_DESC_QUERY,
-  GET_CASES_OVERVIEW_DESC_QUERY,
   tooltipContent,
   multiStudyData,
 } from '../../../bento/dashboardTabData';
@@ -98,8 +95,7 @@ const TabView = ({
   paginationAPIField,
   paginationAPIFieldDesc,
   dataKey,
-  filteredSubjectIds,
-  filteredSampleIds,
+  allFilters,
   filteredFileIds,
   filteredStudyFileIds,
   defaultSortCoulmn,
@@ -112,6 +108,7 @@ const TabView = ({
   tableHasSelections,
   unifiedViewFlag,
   tabIndex,
+  // eslint-disable-next-line no-unused-vars
   association,
 }) => {
   // Get the existing files ids from  cart state
@@ -328,9 +325,9 @@ const TabView = ({
     >
       <span className={classes.badge}>
         <img
-          className={classes.cartIcon}
           src={multiStudyData.icon}
           alt={multiStudyData.alt}
+          style={{ height: '2em' }}
         />
         <span className={classes.cartCounter}>
           {tableMeta.length + 1}
@@ -429,15 +426,9 @@ const TabView = ({
             options={finalOptions}
             count={count}
             overview={getOverviewQuery(api)}
-            overviewDesc={getOverviewDescQuery(api)}
             paginationAPIField={paginationAPIField}
             paginationAPIFieldDesc={paginationAPIFieldDesc}
-            queryCustomVaribles={{
-              case_ids: filteredSubjectIds,
-              sample_ids: filteredSampleIds,
-              file_uuids: (tabIndex === '3') ? filteredStudyFileIds : filteredFileIds,
-              file_association: association,
-            }}
+            queryCustomVaribles={allFilters}
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
             tableDownloadCSV={tableDownloadCSV}
@@ -513,11 +504,6 @@ const styles = () => ({
     '&:hover': {
       textDecoration: 'underline',
     },
-  },
-  cartIcon: {
-    height: '24px',
-    width: '24px',
-    margin: '0px 0px 0px 6px',
   },
   cartCounter: {
     position: 'relative',

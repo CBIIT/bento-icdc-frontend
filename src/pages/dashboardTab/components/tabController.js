@@ -48,7 +48,7 @@ const tabController = ({ classes, unifiedViewData }) => {
   React.useEffect(() => {
     if (unifiedViewData) {
       prevMultistudyProp = unifiedViewData;
-      fetchDataForDashboardTab('Cases', unifiedViewData.caseIds, unifiedViewData.sampleIds, unifiedViewData.fileIds, unifiedViewData.studyFileIds);
+      fetchDataForDashboardTab('Cases', { case_ids: unifiedViewData.caseIds });
       const obj = {
         numberOfStudies: unifiedViewData.numberOfStudies,
         numberOfCases: unifiedViewData.numberOfCases,
@@ -114,15 +114,16 @@ const tabController = ({ classes, unifiedViewData }) => {
   // get stats data from store
   const dashboardStats = getDashboardStats();
 
-  const filteredSubjectIds = useSelector((state) => (state.dashboardTab
-    && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : null));
-  const filteredSampleIds = useSelector((state) => (state.dashboardTab
-    && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : null));
+  // const filteredSubjectIds = useSelector((state) => (state.dashboardTab
+  //   && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : null));
+  // const filteredSampleIds = useSelector((state) => (state.dashboardTab
+  //   && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : null));
   const filteredFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredFileIds ? state.dashboardTab.filteredFileIds : null));
   const filteredStudyFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredStudyFileIds ? state.dashboardTab.filteredStudyFileIds : null));
-
+  const allFilters = useSelector((state) => (state.dashboardTab
+      && state.dashboardTab.allActiveFilters ? state.dashboardTab.allActiveFilters : {}));
   const [TopMessageStatus, setTopMessageStatus] = React.useState({
     text: tooltipContent[currentTab],
     src: tooltipContent.icon,
@@ -203,16 +204,15 @@ const tabController = ({ classes, unifiedViewData }) => {
     }
     setCurrentTab(value);
     if (unifiedViewData) {
-      fetchDataForDashboardTab(tabIndex[value].title,
-        unifiedViewData.caseIds,
-        unifiedViewData.sampleIds,
-        unifiedViewData.fileIds,
-        unifiedViewData.studyFileIds);
+      if (tabIndex[value].title === 'StudyFiles') {
+        fetchDataForDashboardTab(tabIndex[value].title,
+          { case_ids: unifiedViewData.caseIds, file_association: ['study'] });
+      } else {
+        fetchDataForDashboardTab(tabIndex[value].title,
+          { case_ids: unifiedViewData.caseIds });
+      }
     } else {
-      fetchDataForDashboardTab(tabIndex[value].title,
-        filteredSubjectIds,
-        filteredSampleIds,
-        filteredFileIds, filteredStudyFileIds);
+      fetchDataForDashboardTab(tabIndex[value].title);
     }
   };
 
@@ -336,9 +336,8 @@ const tabController = ({ classes, unifiedViewData }) => {
         defaultSortDirection={container.defaultSortDirection || 'asc'}
         dataKey={container.dataKey}
         tableHasSelections={tableHasSelections}
-        filteredSubjectIds={filteredSubjectIds}
-        filteredSampleIds={filteredSampleIds}
         filteredFileIds={filteredFileIds}
+        allFilters={allFilters}
         filteredStudyFileIds={filteredStudyFileIds}
         tableDownloadCSV={container.tableDownloadCSV || false}
         setRowSelection={getTableRowSelectionEvent()}

@@ -51,8 +51,7 @@ export const tabContainers = [
     name: 'Cases',
     dataField: 'dataCase',
     api: 'GET_CASES_OVERVIEW_QUERY',
-    paginationAPIField: 'caseOverviewPaged',
-    paginationAPIFieldDesc: 'caseOverviewPagedDesc',
+    paginationAPIField: 'caseOverview',
     count: 'numberOfCases',
     dataKey: 'case_id',
     defaultSortField: 'case_id',
@@ -170,7 +169,6 @@ export const tabContainers = [
     displayViewJBowseBtn: true,
     disableViewJBowseBtn: true,
     paginationAPIField: 'sampleOverview',
-    paginationAPIFieldDesc: 'sampleOverviewDesc',
     dataKey: 'sample_id',
     defaultSortField: 'sample_id',
     saveButtonDefaultStyle: {
@@ -285,7 +283,6 @@ export const tabContainers = [
     dataField: 'dataFile',
     api: 'GET_FILES_OVERVIEW_QUERY',
     paginationAPIField: 'fileOverview',
-    paginationAPIFieldDesc: 'fileOverviewDesc',
     defaultSortField: 'file_name',
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
@@ -428,7 +425,6 @@ export const tabContainers = [
     dataField: 'dataStudyFile',
     api: 'GET_FILES_OVERVIEW_QUERY',
     paginationAPIField: 'fileOverview',
-    paginationAPIFieldDesc: 'fileOverviewDesc',
     defaultSortField: 'file_name',
     defaultSortDirection: 'asc',
     count: 'numberOfStudyFiles',
@@ -598,16 +594,199 @@ export const tabIndex = [
   },
 ];
 
-export const DASHBOARD_QUERY = gql`{
-  numberOfStudies
-  numberOfCases
-  numberOfSamples
-  numberOfFiles
-  numberOfStudyFiles
-  numberOfPrograms
-  numberOfAliquots
-  volumeOfData
-caseCountByDiagnosis{
+// export const DASHBOARD_QUERY = gql`{
+//   numberOfStudies
+//   numberOfCases
+//   numberOfSamples
+//   numberOfFiles
+//   numberOfStudyFiles
+//   numberOfPrograms
+//   numberOfAliquots
+//   volumeOfData
+// caseCountByDiagnosis{
+//   group,
+//   count
+// }
+// caseCountByGender{
+//   group,
+//   count
+// }
+// caseCountByBreed{
+//   group,
+//   count
+// }
+// caseCountByStageOfDisease{
+//   group,
+//   count
+// }
+// caseCountByDiseaseSite{
+//   group,
+//   count
+// }
+// filterCaseCountByProgram{
+//   group,
+//   count
+// }
+// filterCaseCountByStudyCode{
+//   group,
+//   count,
+//   code
+// }
+// filterCaseCountByStudyType{
+//   group,
+//   count
+// }
+// filterCaseCountByBreed{
+//   group,
+//   count
+// }
+// filterCaseCountByDiagnosis{
+//   group,
+//   count
+// }
+// filterCaseCountByDiseaseSite{
+//   group,
+//   count
+// }
+// filterCaseCountByStageOfDisease{
+//   group,
+//   count
+// }
+// filterCaseCountByResponseToTreatment{
+//   group,
+//   count
+// }
+// filterCaseCountBySex{
+//   group,
+//   count
+// }
+// filterCaseCountByNeuteredStatus{
+//   group,
+//   count
+// }
+// filterCaseCountBySampleType{
+//   group,
+//   count
+// }
+// filterCaseCountBySamplePathology{
+//   group,
+//   count
+// }
+// filterCaseCountBySampleSite{
+//   group,
+//   count
+// }
+// filterCaseCountByFileAssociation{
+//   group,
+//   count
+// }
+// filterCaseCountByFileType{
+//   group,
+//   count
+// }
+// filterCaseCountByBiobank{
+//   group,
+//   count
+// }
+// filterCaseCountByStudyParticipation{
+//   group,
+//   count
+// }
+// filterCaseCountByFileFormat{
+//   group,
+//   count
+// }
+// programsAndStudies{
+//   program
+//   caseSize
+//   studies{
+//       study
+//       caseSize
+//   }
+// }
+// biospecimen_source {
+//   biospecimen_repository_acronym
+//   biospecimen_repository_full_name
+// }
+
+// caseOverviewPaged(first: 10) {
+//     case_id
+//     study_code
+//     study_type
+//     cohort
+//     breed
+//     diagnosis
+//     stage_of_disease
+//     age
+//     sex
+//     neutered_status
+//     weight
+//     response_to_treatment
+//     disease_site
+//   }
+
+//   program {
+//     program_acronym
+//     program_name
+//   }
+//   }`;
+
+export const DASHBOARD_QUERY = gql`
+  query searchCases(
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $case_ids: [String] = [],
+  ) 
+  {
+    searchCases
+    (
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation, 
+      case_ids: $case_ids,
+    ) 
+    {
+        numberOfStudies
+        numberOfCases
+        numberOfSamples
+        numberOfFiles
+        numberOfStudyFiles
+        numberOfPrograms
+        numberOfAliquots
+        volumeOfData
+
+        caseCountByDiagnosis{
   group,
   count
 }
@@ -634,7 +813,6 @@ filterCaseCountByProgram{
 filterCaseCountByStudyCode{
   group,
   count,
-  code
 }
 filterCaseCountByStudyType{
   group,
@@ -700,607 +878,374 @@ filterCaseCountByFileFormat{
   group,
   count
 }
-programsAndStudies{
-  program
-  caseSize
-  studies{
-      study
-      caseSize
-  }
-}
-biospecimen_source {
-  biospecimen_repository_acronym
-  biospecimen_repository_full_name
-}
+        programsAndStudies {
+          program
+          caseSize
+          studies {
+            study
+            caseSize
+          }
+        }
+    }
+    biospecimen_source {
+      biospecimen_repository_acronym
+      biospecimen_repository_full_name
+    }
 
-caseOverviewPaged(first: 10) {
-    case_id
-    study_code
-    study_type
-    cohort
-    breed
-    diagnosis
-    stage_of_disease
-    age
-    sex
-    neutered_status
-    weight
-    response_to_treatment
-    disease_site
-  }
-
-  program {
+    program {
     program_acronym
     program_name
   }
-  }`;
-
-export const FILTER_GROUP_QUERY = gql`
-  query groupCounts($case_ids: [String]){
-    caseCountByStudyCode(case_ids: $case_ids){
-      group
-      count
-      code
   }
-  caseCountByDiagnosis(case_ids: $case_ids){
-    group,
-    count
-  }
-  caseCountByGender(case_ids: $case_ids){
-    group,
-    count
-  }
-  caseCountByBreed(case_ids: $case_ids){
-    group,
-    count
-  }
-  caseCountByStageOfDisease(case_ids: $case_ids){
-    group,
-    count
-  }
-  caseCountByDiseaseSite(case_ids: $case_ids){
-    group,
-    count
-  }
-  programsAndStudies(case_ids: $case_ids){
-    program
-    caseSize
-    studies{
-        study
-        caseSize
-    }
-  }
-   
-}
- `;
-
-export const FILTER_QUERY = gql`
-query searchCases(
-  $program: [String] = [],
-  $study: [String], 
-  $study_type: [String], 
-  $breed: [String], 
-  $diagnosis: [String], 
-  $disease_site: [String], 
-  $stage_of_disease: [String], 
-  $response_to_treatment: [String], 
-  $sex: [String], 
-  $neutered_status: [String], 
-  $sample_type: [String], 
-  $sample_pathology: [String], 
-  $sample_site:[String],
-  $file_association: [String], 
-  $file_type: [String], 
-  $file_format: [String],
-  $biobank: [String],
-  $study_participation: [String],
-  $first: Int
-){
-searchCases(
-    program: $program,
-    study: $study, 
-    study_type: $study_type, 
-    breed: $breed, 
-    diagnosis: $diagnosis, 
-    disease_site: $disease_site, 
-    stage_of_disease: $stage_of_disease, 
-    response_to_treatment: $response_to_treatment, 
-    sex: $sex,
-    neutered_status: $neutered_status,
-    sample_type: $sample_type, 
-    sample_pathology: $sample_pathology, 
-    sample_site: $sample_site, 
-    file_association: $file_association, 
-    file_type: $file_type,
-    file_format: $file_format,
-    biobank: $biobank,
-    study_participation: $study_participation, 
-    first: $first
-  ) {
-      numberOfStudies
-      numberOfCases
-      numberOfSamples
-      numberOfFiles
-      numberOfStudyFiles
-      numberOfPrograms
-      numberOfAliquots
-      volumeOfData
-      caseIds
-      sampleIds
-      fileIds
-      studyFileIds
-      firstPage {
-          case_id
-          study_code
-          study_type
-          cohort
-          breed
-          diagnosis
-          stage_of_disease
-          age
-          sex
-          neutered_status
-          weight
-          response_to_treatment
-          disease_site
-      }
-}
-
-filterCaseCountByProgram (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  biobank: $biobank,
-  study_participation: $study_participation,
-  file_format: $file_format
-) {
-    group
-    count
-}
-
-filterCaseCountByStudyCode (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  biobank: $biobank,
-  study_participation: $study_participation,
-  file_format: $file_format
-) {
-    group
-    count
-    code
-}
-filterCaseCountByStudyType (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByBreed (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByDiagnosis (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByDiseaseSite (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByStageOfDisease (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByResponseToTreatment (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountBySex (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByNeuteredStatus (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountBySampleType (
-  program: $program,
-  study: $study, 
-  study_type: $study_type,
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountBySamplePathology (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology,
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountBySampleSite (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology,
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type, 
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByFileAssociation (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex, 
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByFileType (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByFileFormat (
-  program: $program,
-  study: $study, 
-  study_type: $study_type,
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-
-filterCaseCountByBiobank (
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-filterCaseCountByStudyParticipation(
-  program: $program,
-  study: $study, 
-  study_type: $study_type, 
-  breed: $breed, 
-  diagnosis: $diagnosis, 
-  disease_site: $disease_site, 
-  stage_of_disease: $stage_of_disease, 
-  response_to_treatment: $response_to_treatment, 
-  sex: $sex,
-  neutered_status: $neutered_status,
-  sample_type: $sample_type, 
-  sample_pathology: $sample_pathology, 
-  sample_site: $sample_site, 
-  file_association: $file_association, 
-  file_type: $file_type,
-  file_format: $file_format,
-  biobank: $biobank,
-  study_participation: $study_participation
-) {
-    group
-    count
-}
-}`;
-
-// --------------- GraphQL query - Retrieve files tab details --------------
-export const GET_FILES_OVERVIEW_QUERY = gql`
-query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
-    file_name
-    file_type
-    sample_id
-    association
-    file_description
-    file_format
-    file_size
-    case_id
-    breed
-    diagnosis
-    study_code
-    file_uuid
-  }
-}
-  `;
+`;
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_NAME_QUERY = gql`
-query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 100000, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
-    file_name
+query fileOverview(
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "file_name",
+    $sort_direction: String = "ASC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    fileOverview
+    (
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
+      file_name
+    }
   }
-}
   `;
 
-export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-  query fileOverviewDesc($file_uuids: [String],$file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-    fileOverviewDesc(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {    
+// export const FILTER_GROUP_QUERY = gql`
+//   query searchCases(
+//     $program: [String] = [],
+//     $study: [String],
+//     $study_type: [String],
+//     $breed: [String],
+//     $diagnosis: [String],
+//     $disease_site: [String],
+//     $stage_of_disease: [String],
+//     $response_to_treatment: [String],
+//     $sex: [String],
+//     $neutered_status: [String],
+//     $sample_type: [String],
+//     $sample_pathology: [String],
+//     $sample_site:[String],
+//     $file_association: [String],
+//     $file_type: [String],
+//     $file_format: [String],
+//     $biobank: [String],
+//     $study_participation: [String],
+//   )
+//   {
+//     searchCases
+//     (
+//       program: $program,
+//       study: $study,
+//       study_type: $study_type,
+//       breed: $breed,
+//       diagnosis: $diagnosis,
+//       disease_site: $disease_site,
+//       stage_of_disease: $stage_of_disease,
+//       response_to_treatment: $response_to_treatment,
+//       sex: $sex,
+//       neutered_status: $neutered_status,
+//       sample_type: $sample_type,
+//       sample_pathology: $sample_pathology,
+//       sample_site: $sample_site,
+//       file_association: $file_association,
+//       file_type: $file_type,
+//       file_format: $file_format,
+//       biobank: $biobank,
+//       study_participation: $study_participation,
+//     )
+//     {
+//       caseCountByDiagnosis {
+//         group
+//         count
+//       }
+//       caseCountByGender {
+//         group
+//         count
+//       }
+//       caseCountByBreed {
+//         group
+//         count
+//       }
+//       caseCountByStageOfDisease {
+//         group
+//         count
+//       }
+//       caseCountByDiseaseSite {
+//         group
+//         count
+//       }
+//       programsAndStudies {
+//           program
+//           caseSize
+//           studies {
+//             study
+//             caseSize
+//           }
+//       }
+//     }
+//   }
+// `;
+
+export const FILTER_QUERY = gql`
+query searchCases(
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+  ) 
+  {
+    searchCases
+    (
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation, 
+    ) 
+    {
+        numberOfStudies
+        numberOfCases
+        numberOfSamples
+        numberOfFiles
+        numberOfStudyFiles
+        numberOfPrograms
+        numberOfAliquots
+        volumeOfData
+        caseCountByDiagnosis{
+  group,
+  count
+}
+caseCountByGender{
+  group,
+  count
+}
+caseCountByBreed{
+  group,
+  count
+}
+caseCountByStageOfDisease{
+  group,
+  count
+}
+caseCountByDiseaseSite{
+  group,
+  count
+}
+
+        filterCaseCountByProgram {
+          group
+          count
+        }
+        filterCaseCountByStudyCode {
+          group
+          count
+        }
+        filterCaseCountByStudyType {
+          group
+          count
+        }
+        filterCaseCountByBreed {
+          group
+          count
+        }
+        filterCaseCountByDiagnosis {
+          group
+          count
+        }
+        filterCaseCountByDiseaseSite {
+          group
+          count
+        }
+        filterCaseCountByStageOfDisease {
+          group
+          count
+        }
+        filterCaseCountByResponseToTreatment {
+          group
+          count
+        }
+        filterCaseCountBySex {
+          group
+          count
+        }
+        filterCaseCountByNeuteredStatus {
+          group
+          count
+        }
+        filterCaseCountBySampleType {
+          group
+          count
+        }
+        filterCaseCountBySamplePathology {
+          group
+          count
+        }
+        filterCaseCountBySampleSite {
+          group
+          count
+        }
+        filterCaseCountByFileAssociation {
+          group
+          count
+        }
+        filterCaseCountByFileType {
+          group
+          count
+        }
+        filterCaseCountByFileFormat {
+          group
+          count
+        }
+        filterCaseCountByBiobank {
+          group
+          count
+        }
+        filterCaseCountByStudyParticipation {
+          group
+          count
+        }
+        programsAndStudies {
+          program
+          caseSize
+          studies {
+            study
+            caseSize
+          }
+        }
+    }
+  }
+`;
+
+// --------------- GraphQL query - Retrieve files tab details --------------
+export const GET_FILES_OVERVIEW_QUERY = gql`
+  query fileOverview(
+    $case_ids: [String] = [],
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "file_name",
+    $sort_direction: String = "ASC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    fileOverview
+    (
+      case_ids: $case_ids,
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
       file_name
       file_type
       association
-      sample_id
       file_description
       file_format
       file_size
@@ -1309,59 +1254,384 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
       diagnosis
       study_code
       file_uuid
+      sample_id
+      sample_site
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      summarized_sample_type
+      specific_sample_pathology
+      date_of_sample_collection
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      comment
+      individual_id
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      arm
+      other_cases
     }
   }
-    `;
+`;
+
+export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
+  query fileOverview(
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "file_name",
+    $sort_direction: String = "DESC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    fileOverview
+    (
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
+      file_name
+      file_type
+      association
+      file_description
+      file_format
+      file_size
+      case_id
+      breed
+      diagnosis
+      study_code
+      file_uuid
+      sample_id
+      sample_site
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      summarized_sample_type
+      specific_sample_pathology
+      date_of_sample_collection
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      comment
+      individual_id
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      arm
+      other_cases
+    }
+  }
+`;
 
 // --------------- GraphQL query - Retrieve sample tab details --------------
-
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
-  query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  sampleOverview(sample_ids: $sample_ids, offset: $offset,first: $first, order_by: $order_by) {
-    sample_id
-    case_id
-    breed
-    diagnosis
-    sample_site
-    sample_type
-    sample_pathology
-    tumor_grade
-    sample_chronology
-    percentage_tumor
-    necropsy_sample
-    sample_preservation
-    files
+  query sampleOverview(
+    $case_ids: [String] = [],
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "sample_ids",
+    $sort_direction: String = "ASC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    sampleOverview
+    (
+      case_ids: $case_ids,
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
+      sample_id
+      case_id
+      breed
+      diagnosis
+      sample_site
+      sample_type
+      sample_pathology
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      files
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      comment
+      individual_id
+      other_cases
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      arm
+    }  
 }
-}
-  `;
+`;
 
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
-  query sampleOverview($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  sampleOverviewDesc(case_ids: $case_ids, offset: $offset,first: $first, order_by: $order_by) {
-    sample_id
-    case_id
-    breed
-    diagnosis
-    sample_site
-    sample_type
-    sample_pathology
-    tumor_grade
-    sample_chronology
-    percentage_tumor
-    necropsy_sample
-    sample_preservation
-    files
-}
+  query sampleOverview(
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "sample_ids",
+    $sort_direction: String = "DESC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    sampleOverview
+    (
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
+      sample_id
+      case_id
+      breed
+      diagnosis
+      sample_site
+      sample_type
+      sample_pathology
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      files
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      comment
+      individual_id
+      other_cases
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      arm
+    }  
 }
   `;
 
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_CASES_OVERVIEW_QUERY = gql`
-  query subjectOverViewPaged($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-    caseOverviewPaged (case_ids: $case_ids, order_by: $order_by, first: $first, offset: $offset) {
+  query caseOverview(
+    $case_ids: [String] = [],
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "case_ids",
+    $sort_direction: String = "ASC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    caseOverview
+    (
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+      case_ids: $case_ids
+    )
+    {
       case_id
       study_code
       study_type
@@ -1377,14 +1647,73 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
       disease_site
       files
       other_cases
-    }
+      individual_id
+      primary_disease_site
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      arm
+    }  
 }
   `;
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
-  query subjectOverViewPaged($case_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-    caseOverviewPagedDesc (case_ids: $case_ids, order_by: $order_by, first: $first, offset: $offset) {
+  query caseOverview(
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "case_ids",
+    $sort_direction: String = "DESC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    caseOverview
+    (
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
       case_id
       study_code
       study_type
@@ -1400,32 +1729,193 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
       disease_site
       files
       other_cases
-    }
+      individual_id
+      primary_disease_site
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      arm
+    }  
 }
   `;
 
 export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
-  query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
-    caseOverviewPaged(case_ids: $case_ids, first: $first) {
-        files 
-    }
+  query caseOverview(
+    $case_ids: [String] = [],
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "case_ids",
+    $sort_direction: String = "ASC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    caseOverview
+    (
+      case_ids: $case_ids,
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
+      files
+    }  
 }
   `;
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
-query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 10000000, $order_by:String =""){
-  sampleOverview(sample_ids: $sample_ids, offset: $offset,first: $first, order_by: $order_by) {
-    files
-}
+query sampleOverview(
+    $case_ids: [String] = [],
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "sample_ids",
+    $sort_direction: String = "ASC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    sampleOverview
+    (
+      case_ids: $case_ids,
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
+      files
+    }  
 }
   `;
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
-query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10000000, $order_by:String ="file_name"){
-  fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
-    file_uuid
+ query fileOverview(
+    $case_ids: [String] = [],
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "file_name",
+    $sort_direction: String = "ASC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    fileOverview
+    (
+      case_ids: $case_ids,
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
+      file_uuid
+    }
   }
-}
   `;
 
 export const GET_FILE_IDS_FROM_FILE_NAME = gql`
@@ -1446,3 +1936,12 @@ query (
         file_uuid
     }
 }`;
+
+export const GET_STUDY_CODE = gql`
+  query study($clinical_study_designation: String) {
+    study(clinical_study_designation: $clinical_study_designation) {
+      clinical_study_designation
+      accession_id
+    }
+  }
+`;
