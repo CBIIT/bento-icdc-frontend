@@ -29,7 +29,7 @@ const UnifiedViewController = ({ match }) => {
 
   const unifiedViewData = {
     ...multiStudyData.multiStudyCases,
-    ...unifiedViewStats.unifiedViewData,
+    ...unifiedViewStats.searchCases,
   };
 
   return (
