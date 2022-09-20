@@ -3,7 +3,7 @@ import _ from 'lodash';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {
   JBrowseComponent,
-} from 'bento-components';
+} from 'bento-jbrowse';
 import {
   assemblies,
   theme,
