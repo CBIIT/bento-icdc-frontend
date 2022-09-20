@@ -1,12 +1,14 @@
 import React, { useRef, useEffect } from 'react';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import {
   // Badge,
   Grid,
   IconButton,
   Typography,
   withStyles,
+  Link,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
 import { getColumns, ToolTip as Tooltip, cn } from 'bento-components';
 import _ from 'lodash';
@@ -88,7 +90,6 @@ const TabView = ({
   tableHasSelections,
   unifiedViewFlag,
   tabIndex,
-  // eslint-disable-next-line no-unused-vars
   association,
 }) => {
   // Get the existing files ids from  cart state
@@ -318,9 +319,11 @@ const TabView = ({
 
   const customLink = (path, column, value, tableMeta) => (
     <div className={classes.caseIdContainer}>
-      <Link className={classes.link} to={`${path}/${value}`}>
-        {value}
-      </Link>
+      <MuiThemeProvider theme={createTheme(theme)}>
+        <Link className={classes.link} href={`/#${path}/${value}`}>
+          {value}
+        </Link>
+      </MuiThemeProvider>
       {
         (column.dataField === 'case_id' && !unifiedViewFlag)
         && hasMultiStudyParticipants(tableMeta.rowData[1])
