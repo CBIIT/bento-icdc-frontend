@@ -148,6 +148,7 @@ const cartView = ({
   }
 
   const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_uuid');
+  const fileNameIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_name');
 
   if (localStorage.getItem('data')) {
     if (localStorage.getItem('data') !== 'undefined'
@@ -165,7 +166,7 @@ const cartView = ({
     }
   }
 
-  const selectedRowData = useSelector((state) => (state.cart.selectedFiles));
+  const { selectedFiles, displayData } = useSelector((state) => (state.cart));
 
   const deleteColumn = [{
     name: 'Remove',
@@ -177,7 +178,10 @@ const cartView = ({
           <button
             type="button"
             className={classes.tableDeleteButton}
-            onClick={() => deleteFromCart({ fileIds: tableMeta.rowData[fileIdIndex] })}
+            onClick={() => deleteFromCart({
+              fileIds: tableMeta.rowData[fileIdIndex],
+              fileNames: tableMeta.rowData[fileNameIndex],
+            })}
           >
             <DeleteOutlineIcon fontSize="small" />
           </button>
@@ -223,8 +227,7 @@ const cartView = ({
             {/* Section: Table */}
             <CartBody
               updateSortOrder={updateSortOrder}
-              data={selectedRowData.currentDisplayedData
-                ? selectedRowData.currentDisplayedData : dataCartView}
+              data={displayData || dataCartView}
               deleteColumn={deleteColumn}
               fileIDs={fileIDs}
               defaultSortCoulmn={defaultSortCoulmn}
@@ -236,7 +239,7 @@ const cartView = ({
               localRowsPerPage={localRowsPerPageCartView}
               isLoading={isLoading}
               setRowSelection={selectFiles}
-              selectedRowInfo={selectedRowData.selectedRowInfo}
+              selectedRowsFileName={selectedFiles.selectedRowInfo}
             />
 
             {/* Section: Footer */}

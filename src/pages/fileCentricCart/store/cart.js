@@ -106,6 +106,7 @@ const reducers = {
   },
   selectedFiles: (state, item) => ({
     ...state,
+    displayData: item.currentDisplayedData,
     selectedFiles: {
       selectedRowInfo: item.selectedRowInfo,
       selectedRowIndex: item.selectedRowIndex,
@@ -136,11 +137,24 @@ const reducers = {
       const newPage = page - 1;
       localStorage.setItem('page', newPage);
     }
+
+    // remove matching selected files on row delete
+    console.log(item.fileNames);
+    const rows = state.selectedFiles.selectedRowInfo;
+    const filesName = rows.reduce((acc, d) => acc
+      .concat(!item.fileNames.includes(d) ? d : []), []);
+    console.log(filesName);
+
     return {
       ...state,
       fileIds: fileIdsAfterDeletion,
       sortColumn: sortColumnValue,
       sortDirection: sortDirectionValue,
+      displayData: undefined,
+      selectedFiles: {
+        ...state.selectFiles,
+        selectedRowInfo: filesName,
+      },
     };
   },
   initCart: (state) => ({

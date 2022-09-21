@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   withStyles,
@@ -9,7 +9,6 @@ import {
   getDefaultCustomFooter,
   ToolTip as Tooltip,
 } from 'bento-components';
-// import _ from 'lodash';
 import CustomDataTable from '../../../../components/serverPaginatedTable/serverPaginatedTable';
 import Styles from './cartBody.style';
 import {
@@ -37,6 +36,7 @@ const CartHeader = ({
   isLoading,
   dataKey = 'file_name',
   primaryKeyIndex = 0,
+  selectedRowInfo,
 }) => {
   function onRowSelectionChange(curr, allRowsSelected) {
     return (curr, allRowsSelected);
@@ -46,19 +46,17 @@ const CartHeader = ({
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedFileName, setSelectedFileName] = useState([]);
 
-  useEffect(() => {
-    // setCartData(_.cloneDeep(data));
-  }, [data]);
-
   const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(deleteColumn), table.columns);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
+  // check if displayed data is equal
   const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
   /*
     Presist user selection
   */
-  function onSortingTriggerFunc(displayedData) {
+  function onSortingTriggerHandler(displayedData) {
+    console.log(selectedRowInfo);
     const dispData = displayedData.map((d) => d.file_name);
     const selectedFilesIndex = dispData.reduce((acc, v, i) => acc
       .concat(selectedFileName.includes(v) ? i : []), []);
@@ -83,7 +81,7 @@ const CartHeader = ({
     }
   }
 
-  function rowSelectionFunc(curr, allRowsSelected, rowsSelected, displayData) {
+  function rowSelectionHandler(curr, allRowsSelected, rowsSelected, displayData) {
     const selectedFiles = displayData.reduce((acc, d, i) => acc
       .concat(rowsSelected.includes(i) ? d.data[primaryKeyIndex] : []), []);
     const files = displayData.map((d) => d.data[primaryKeyIndex]);
@@ -104,8 +102,8 @@ const CartHeader = ({
   const defaultOptions = () => ({
     dataKey,
     rowsSelected: selectedRows,
-    onRowSelectionChange: rowSelectionFunc,
-    onSortingTrigger: onSortingTriggerFunc,
+    onRowSelectionChange: rowSelectionHandler,
+    onSortingTrigger: onSortingTriggerHandler,
   });
   const finalOptions = {
     ...options,
