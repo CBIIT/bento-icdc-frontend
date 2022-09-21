@@ -305,6 +305,8 @@ const querySwitch = (payload, tabContainer) => {
         sortfield: tabContainer.defaultSortField || '',
         sortDirection: tabContainer.defaultSortDirection || '',
         association: tabContainer.associations,
+        ...(tabContainer.paginationAPIField === 'fileOverview'
+        && tabContainer.name === 'StudyFiles' ? { file_level: ['study'] } : { file_level: ['case'] }),
       };
   }
 };
@@ -339,8 +341,8 @@ export function fetchDataForDashboardTab(
     QUERY,
     sortfield,
     sortDirection,
-    // eslint-disable-next-line no-unused-vars
-    association,
+    // eslint-disable-next-line camelcase
+    file_level,
   } = getQueryAndDefaultSort(payload);
   // const fileIds = (payload === tabIndex[3].title) ? studyFileIDsAfterFilter
   //   : fileIDsAfterFilter;
@@ -356,13 +358,11 @@ export function fetchDataForDashboardTab(
     .query({
       query: QUERY,
       variables: {
-        // case_ids: subjectIDsAfterFilter,
-        // sample_ids: sampleIDsAfterFilter,
-        // file_uuids: fileIds,
         ...activeFilters,
         order_by: sortfield || '',
         sort_direction: sortDirection || 'ASC',
-        // file_association: association,
+        // eslint-disable-next-line camelcase
+        ...(file_level && { file_level }),
       },
     })
     .then((result) => store.dispatch({ type: 'UPDATE_CURRRENT_TAB_DATA', payload: { currentTab: payload, sortDirection, ..._.cloneDeep(result) } }))
@@ -431,6 +431,7 @@ export async function tableHasSelections() {
  * @param obj fileCoubt
  * @return {json}
  */
+// eslint-disable-next-line no-unused-vars
 export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   // const association = getState().currentActiveTab === tabIndex[2].title
   //   ? tabContainers[2].associations : tabContainers[3].associations;
@@ -453,7 +454,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
       query: SELECT_ALL_QUERY,
       variables: {
         ...activeFilters,
-        first: fileCount,
+        first: 1000,
         ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
       },
     })

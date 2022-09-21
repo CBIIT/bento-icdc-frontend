@@ -902,6 +902,7 @@ filterCaseCountByFileFormat{
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_NAME_QUERY = gql`
 query fileOverview(
+    $file_level: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -927,6 +928,7 @@ query fileOverview(
   ){
     fileOverview
     (
+      file_level: $file_level,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -1192,6 +1194,7 @@ caseCountByDiseaseSite{
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
   query fileOverview(
+    $file_level: [String] = [],
     $case_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
@@ -1218,6 +1221,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
   ){
     fileOverview
     (
+      file_level: $file_level,
       case_ids: $case_ids,
       program: $program,
       study: $study, 
@@ -1293,6 +1297,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
 
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
   query fileOverview(
+    $file_level: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1318,6 +1323,7 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
   ){
     fileOverview
     (
+      file_level: $file_level,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -1862,6 +1868,7 @@ query sampleOverview(
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
  query fileOverview(
+    $file_level: [String] = [],
     $case_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
@@ -1888,6 +1895,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   ){
     fileOverview
     (
+      file_level: $file_level,
       case_ids: $case_ids,
       program: $program,
       study: $study, 
