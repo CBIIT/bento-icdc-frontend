@@ -109,6 +109,7 @@ const reducers = {
     selectedFiles: {
       selectedRowInfo: item.selectedRowInfo,
       selectedRowIndex: item.selectedRowIndex,
+      currentDisplayedData: item.currentDisplayedData,
     },
   }),
   deleteFiles: (state, item) => {

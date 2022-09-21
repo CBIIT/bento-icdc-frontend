@@ -9,7 +9,7 @@ import {
   getDefaultCustomFooter,
   ToolTip as Tooltip,
 } from 'bento-components';
-import _ from 'lodash';
+// import _ from 'lodash';
 import CustomDataTable from '../../../../components/serverPaginatedTable/serverPaginatedTable';
 import Styles from './cartBody.style';
 import {
@@ -45,10 +45,9 @@ const CartHeader = ({
 
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedFileName, setSelectedFileName] = useState([]);
-  const [cartData, setCartData] = useState(_.cloneDeep(data));
 
   useEffect(() => {
-    setCartData(_.cloneDeep(data));
+    // setCartData(_.cloneDeep(data));
   }, [data]);
 
   const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(deleteColumn), table.columns);
@@ -65,11 +64,13 @@ const CartHeader = ({
       .concat(selectedFileName.includes(v) ? i : []), []);
     if (selectedFileName.length > 0
       && !isEqual(selectedRows, selectedFilesIndex)) {
-      setSelectedRows(selectedFilesIndex);
-      setCartData(displayedData);
+      if (isEqual(data, displayedData)) {
+        setSelectedRows(selectedFilesIndex);
+      }
       selectFiles({
         selectedRowInfo: selectedFileName,
         selectedRowIndex: selectedFilesIndex,
+        currentDisplayedData: displayedData,
       });
     }
     if (selectedFileName.length === 0
@@ -77,6 +78,7 @@ const CartHeader = ({
       selectFiles({
         selectedRowInfo: selectedFileName,
         selectedRowIndex: selectedFilesIndex,
+        currentDisplayedData: displayedData,
       });
     }
   }
@@ -113,7 +115,7 @@ const CartHeader = ({
   return (
     <TableThemeProvider>
       <CustomDataTable
-        data={cartData}
+        data={data}
         columns={columns}
         options={finalOptions}
         className={classes.tableStyle}

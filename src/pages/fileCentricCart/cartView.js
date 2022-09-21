@@ -223,7 +223,8 @@ const cartView = ({
             {/* Section: Table */}
             <CartBody
               updateSortOrder={updateSortOrder}
-              data={dataCartView}
+              data={selectedRowData.currentDisplayedData
+                ? selectedRowData.currentDisplayedData : dataCartView}
               deleteColumn={deleteColumn}
               fileIDs={fileIDs}
               defaultSortCoulmn={defaultSortCoulmn}
