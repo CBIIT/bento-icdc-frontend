@@ -30,6 +30,20 @@ import ViewJBrowseButton from '../../JbrowseDetail/components/JBrowseViewBtn';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
 
+const theme = {
+  overrides: {
+    MuiLink: {
+      root: {
+        color: '#DC762F',
+        fontSize: '15px',
+        fontFmily: 'Open Sans',
+        fontWeight: 'bold',
+        lineSpacing: '19pt',
+        textDecoration: 'underline',
+      },
+    },
+  },
+};
 // const StyledBadge = withStyles(() => ({
 //   badge: {
 //     border: '2px solid #A7AFB3',
@@ -90,7 +104,7 @@ const TabView = ({
   tableHasSelections,
   unifiedViewFlag,
   tabIndex,
-  association,
+  // association,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
