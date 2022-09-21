@@ -1,12 +1,14 @@
 import React, { useRef, useEffect } from 'react';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import {
   // Badge,
   Grid,
   IconButton,
   Typography,
   withStyles,
+  Link,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
 import { getColumns, ToolTip as Tooltip, cn } from 'bento-components';
 import _ from 'lodash';
@@ -33,6 +35,21 @@ const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SA
 
 // Due to cypher limitation we have to send seperate query get descending list
 const getOverviewDescQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_DESC_QUERY);
+
+const theme = {
+  overrides: {
+    MuiLink: {
+      root: {
+        color: '#DC762F',
+        fontSize: '15px',
+        fontFmily: 'Open Sans',
+        fontWeight: 'bold',
+        lineSpacing: '19pt',
+        textDecoration: 'underline',
+      },
+    },
+  },
+};
 
 // const StyledBadge = withStyles(() => ({
 //   badge: {
@@ -324,9 +341,11 @@ const TabView = ({
 
   const customLink = (path, column, value, tableMeta) => (
     <div className={classes.caseIdContainer}>
-      <Link className={classes.link} to={`${path}/${value}`}>
-        {value}
-      </Link>
+      <MuiThemeProvider theme={createTheme(theme)}>
+        <Link className={classes.link} href={`/#${path}/${value}`}>
+          {value}
+        </Link>
+      </MuiThemeProvider>
       {
         (column.dataField === 'case_id' && !unifiedViewFlag)
         && hasMultiStudyParticipants(tableMeta.rowData[1])
