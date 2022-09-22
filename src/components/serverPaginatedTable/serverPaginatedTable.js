@@ -117,6 +117,9 @@ class ServerPaginatedTableView extends React.Component {
         displayedData.map((d) => d[this.props.options.dataKey]),
       );
     }
+    if (this.props.options.onSortingTrigger) {
+      this.props.options.onSortingTrigger(displayedData);
+    }
   }
 
   getCurrentPage = (page) => {

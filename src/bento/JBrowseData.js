@@ -30,6 +30,7 @@ export const MAX_NUMBER_OF_FILES = 3;
 // button style
 export const JBROWSE_BTN_ID = 'jbrowse_multi_view_button';
 export const JBROWSE_TOOLTIP_ICON_ID = 'jbrowse_tooltip_icon';
+export const JBROWSE_HELP_ICON_BTN = 'jbrowse_help_icon_btn';
 export const DISABLE_RIPPLE = true;
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
@@ -42,7 +43,7 @@ export const tooltipMsg1 = 'Select Compatible Files';
 
 export const tooltipMsg2 = 'View selected files in Jbrowse, up to 3 files max';
 
-export const tooltipErrMsg = 'Max of 3 files can be loaded into JBrowse at a time';
+export const tooltipErrMsg = 'Compatible files selected exceed the limit that can be loaded into a single session of JBrowse';
 
 export const alignment = {
   trackId: 'my_alignments_track',
