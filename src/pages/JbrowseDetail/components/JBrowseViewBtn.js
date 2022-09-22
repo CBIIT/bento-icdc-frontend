@@ -25,6 +25,7 @@ import {
 } from '../../../bento/JBrowseData';
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
+import jbrowseLogo from '../../../assets/icons/JbrowseViewIcon2.svg';
 
 const ViewJBrowseButton = ({
   customClass,
@@ -84,7 +85,7 @@ const ViewJBrowseButton = ({
         >
           {ButtonText1}
           <img
-            src={jbrowseIconSrc}
+            src={(isInvlaid || disable) ? jbrowseIconSrc : jbrowseLogo}
             alt="jbrowse_icon"
             className={cn(classes.jbrowseIcon)}
           />
