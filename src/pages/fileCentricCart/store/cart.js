@@ -139,11 +139,9 @@ const reducers = {
     }
 
     // remove matching selected files on row delete
-    console.log(item.fileNames);
     const rows = state.selectedFiles.selectedRowInfo;
     const filesName = rows.reduce((acc, d) => acc
       .concat(!item.fileNames.includes(d) ? d : []), []);
-    console.log(filesName);
 
     return {
       ...state,
