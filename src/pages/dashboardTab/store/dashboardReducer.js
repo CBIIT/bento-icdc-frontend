@@ -461,7 +461,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
     .then((result) => {
       const RESULT_DATA = (getState().currentActiveTab === tabIndex[2].title
         || getState().currentActiveTab === tabIndex[3].title) ? 'fileOverview'
-        : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverviewPaged';
+        : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverview';
       const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? result.data[RESULT_DATA].map((item) => ({
         files: [item.file_uuid],
       })) : result.data[RESULT_DATA] || [];
@@ -603,7 +603,7 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
       filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
       break;
     default:
-      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverviewPaged');
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverview');
   }
   return filterOutFileIds(filesIds);
 }
