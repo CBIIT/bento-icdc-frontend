@@ -24,6 +24,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
+// import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);

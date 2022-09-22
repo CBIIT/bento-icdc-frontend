@@ -7,7 +7,6 @@ import {
   Typography,
   IconButton,
 } from '@material-ui/core';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { ToolTip as Tooltip, cn } from 'bento-components';
 import {
   MAX_NUMBER_OF_FILES,
@@ -16,6 +15,7 @@ import {
   ButtonText2,
   JBROWSE_BTN_ID,
   JBROWSE_TOOLTIP_ICON_ID,
+  JBROWSE_HELP_ICON_BTN,
   tooltipContent,
   DISABLE_RIPPLE,
   jbrowseIconSrc,
@@ -35,11 +35,6 @@ const ViewJBrowseButton = ({
   const selectedDashFiles = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.dataFileSelected && state.dashboardTab.dataFileSelected.selectedRowInfo
     ? state.dashboardTab.dataFileSelected.selectedRowInfo : null));
-  if (!selectedDashFiles) {
-    return (
-      <CircularProgress />
-    );
-  }
 
   const filesName = (selectedFileNames && selectedFileNames.length >= 0)
     ? selectedFileNames : selectedDashFiles;
@@ -101,7 +96,7 @@ const ViewJBrowseButton = ({
         placement="right"
         maxWidth={250}
       >
-        <IconButton className={classes.helpIconButton}>
+        <IconButton className={classes.helpIconButton} id={JBROWSE_HELP_ICON_BTN}>
           <img
             src={tooltipContent.src}
             alt={tooltipContent.alt}
