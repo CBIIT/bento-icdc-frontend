@@ -13,7 +13,7 @@ import Styles from './cartView.style';
 import client from '../../utils/graphqlClient';
 import {
   myFilesPageData,
-  table,
+  // table,
   manifestData,
   externalLinkIcon,
   GET_MY_CART_DATA_QUERY,
@@ -147,9 +147,6 @@ const cartView = ({
     return css;
   }
 
-  const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_uuid');
-  const fileNameIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_name');
-
   if (localStorage.getItem('data')) {
     if (localStorage.getItem('data') !== 'undefined'
       && localStorage.getItem('data').length > 0
@@ -168,7 +165,7 @@ const cartView = ({
 
   const { selectedFiles, displayData } = useSelector((state) => (state.cart));
 
-  const deleteColumn = [{
+  const deleteColumn = (deleteHandler) => [{
     name: 'Remove',
     label: 'Remove',
     options: {
@@ -178,10 +175,7 @@ const cartView = ({
           <button
             type="button"
             className={classes.tableDeleteButton}
-            onClick={() => deleteFromCart({
-              fileIds: tableMeta.rowData[fileIdIndex],
-              fileNames: tableMeta.rowData[fileNameIndex],
-            })}
+            onClick={() => deleteHandler(tableMeta)}
           >
             <DeleteOutlineIcon fontSize="small" />
           </button>

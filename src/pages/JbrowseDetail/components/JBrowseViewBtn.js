@@ -15,6 +15,7 @@ import {
   ButtonText2,
   JBROWSE_BTN_ID,
   JBROWSE_TOOLTIP_ICON_ID,
+  JBROWSE_HELP_ICON_BTN,
   tooltipContent,
   DISABLE_RIPPLE,
   jbrowseIconSrc,
@@ -95,7 +96,7 @@ const ViewJBrowseButton = ({
         placement="right"
         maxWidth={250}
       >
-        <IconButton className={classes.helpIconButton}>
+        <IconButton className={classes.helpIconButton} id={JBROWSE_HELP_ICON_BTN}>
           <img
             src={tooltipContent.src}
             alt={tooltipContent.alt}

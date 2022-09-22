@@ -17,7 +17,7 @@ import {
 import TableThemeProvider from './cartTableThemeConfig';
 import updateColumns from '../../../../utils/columnsUtil';
 import DocumentDownload from '../../../../components/DocumentDownload';
-import { selectFiles } from '../../store/cart';
+import { selectFiles, deleteFromCart } from '../../store/cart';
 
 const CartHeader = ({
   classes,
@@ -36,7 +36,6 @@ const CartHeader = ({
   isLoading,
   dataKey = 'file_name',
   primaryKeyIndex = 0,
-  selectedRowInfo,
 }) => {
   function onRowSelectionChange(curr, allRowsSelected) {
     return (curr, allRowsSelected);
@@ -46,7 +45,23 @@ const CartHeader = ({
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedFileName, setSelectedFileName] = useState([]);
 
-  const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(deleteColumn), table.columns);
+  const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_uuid');
+  const fileNameIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_name');
+
+  const deleteRowHandler = (tableMeta) => {
+    const delFileName = tableMeta.rowData[fileNameIndex];
+    const selFileNames = selectedFileName.filter((file) => file !== delFileName);
+    deleteFromCart({
+      fileIds: tableMeta.rowData[fileIdIndex],
+      fileNames: delFileName,
+    });
+    if (selFileNames.length === 0) {
+      setSelectedFileName(selFileNames);
+      setSelectedRows([]);
+    }
+  };
+
+  const columns = updateColumns(getColumns(table, classes, data, externalLinkIcon, '', () => {}, DocumentDownload).concat(deleteColumn(deleteRowHandler)), table.columns);
   const options = getOptions(table, classes, getDefaultCustomFooter, onRowSelectionChange);
 
   // check if displayed data is equal
@@ -56,7 +71,6 @@ const CartHeader = ({
     Presist user selection
   */
   function onSortingTriggerHandler(displayedData) {
-    console.log(selectedRowInfo);
     const dispData = displayedData.map((d) => d.file_name);
     const selectedFilesIndex = dispData.reduce((acc, v, i) => acc
       .concat(selectedFileName.includes(v) ? i : []), []);
