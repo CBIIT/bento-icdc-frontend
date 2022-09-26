@@ -7,6 +7,9 @@ import {
   Typography,
   withStyles,
   Link,
+  Box,
+  List,
+  ListItem,
 } from '@material-ui/core';
 // import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
@@ -42,8 +45,83 @@ const theme = {
         textDecoration: 'underline',
       },
     },
+    MuiBox: {
+      root: {
+        color: 'red',
+        bottom: '3px',
+        display: 'inline-flex',
+        position: 'relative',
+        verticalAlign: 'middle',
+        '&#cartCounter': {
+          marginTop: '-10px',
+          display: 'block',
+          float: 'right',
+        },
+      },
+    },
+    MuiTooltip: {
+      toottip: {
+        borderRadius: '8%',
+        padding: 'auto',
+        maxWidth: '250px',
+        '&#customTooltip': {
+          borderRadius: '8%',
+        },
+      },
+    },
+    MuiTypography: {
+      root: {
+        '&#descripText': {
+          fontWeight: '600',
+          fontSize: '14px',
+          letterSpacing: '0.05px',
+          lineHeight: '18px',
+          paddingBottom: '5px',
+        },
+      },
+    },
+    MuiList: {
+      root: {
+        listStyleType: 'none',
+        padding: '0px',
+      },
+    },
+    MuiListItem: {
+      root: {
+        padding: '0px',
+      },
+      gutters: {
+        fontSize: '14px',
+        lineHeight: '18px',
+        paddingTop: '1px',
+        paddingBottom: '1px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        justifyContent: 'center',
+      },
+    },
   },
 };
+
+const customStyle = {
+  customTooltip: {
+    borderRadius: '8%',
+    padding: 'auto',
+    maxWidth: '250px',
+  },
+  cartCounter: {
+    marginTop: '-10px',
+    display: 'block',
+    float: 'right',
+  },
+};
+
+const StudyCount = ({ length }) => (
+  <Box component="span" id="cartCounter" style={customStyle.cartCounter}>
+    {length + 1}
+  </Box>
+);
+
 // const StyledBadge = withStyles(() => ({
 //   badge: {
 //     border: '2px solid #A7AFB3',
@@ -277,78 +355,78 @@ const TabView = ({
     const caseID = value;
     return (
       <>
-        <Typography align="center" color="inherit" className={classes.descripText}>
+        <Typography align="center" color="inherit" id="descripText" className={classes.descripText}>
           {multiStudyData.toolTipText}
         </Typography>
-
-        <div className={classes.casesText}>
-          {tableMeta.map((elem, elemIdx) => (
-            <ul className={classes.ul} key={elemIdx}>
-              <li>
-                <MuiThemeProvider theme={theme}>
+        <div className={classes.casesText} style={{ marginTop: '-10px' }}>
+          <List>
+            {tableMeta.map((elem, elemIdx) => (
+              <ListItem className={classes.ul} key={elemIdx}>
+                <li>
                   <Link className={classes.link} href={`/#/case/${elem}`}>
                     <Typography align="center" className={classes.multiStudyTooltip}>
                       {`Case: ${elem}`}
                     </Typography>
                   </Link>
-                </MuiThemeProvider>
-              </li>
-            </ul>
-          ))}
-
+                </li>
+              </ListItem>
+            ))}
+          </List>
           <div className={classes.dashboardLink}>
-            <MuiThemeProvider theme={theme}>
-              <Link
-                rel="noreferrer"
-                color="inherit"
-                href={`/#/unifiedView/${caseID}`}
-                className={classes.link}
-              >
-                <Typography align="center" className={classes.multiStudyTooltip}>
-                  View All Related Cases
-                </Typography>
-              </Link>
-            </MuiThemeProvider>
+            <Link
+              rel="noreferrer"
+              color="inherit"
+              href={`/#/unifiedView/${caseID}`}
+              className={classes.link}
+            >
+              <Typography align="center" className={classes.multiStudyTooltip}>
+                View All Related Cases
+              </Typography>
+            </Link>
           </div>
-
         </div>
       </>
     );
   };
 
   const toolTipIcon = (tableMeta, value) => (
-    <Tooltip
-      title={renderMultiStudyTooltipText(tableMeta, value)}
-      placement="bottom"
-      interactive
-      classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
-    >
-      <span className={classes.badge}>
-        <img
-          src={multiStudyData.icon}
-          alt={multiStudyData.alt}
-          style={{ height: '2em' }}
-        />
-        <span className={classes.cartCounter}>
-          {tableMeta.length + 1}
-        </span>
-      </span>
-    </Tooltip>
+    <MuiThemeProvider theme={theme}>
+      <Box style={{ borderRadius: '8%' }}>
+        <Tooltip
+          title={renderMultiStudyTooltipText(tableMeta, value)}
+          renderComponent={renderMultiStudyTooltipText(tableMeta, value)}
+          placement="bottom"
+          interactive
+          classes={{ tooltip: customStyle, arrow: classes.customArrow }}
+          id="customTooltip"
+          style={{ borderRadius: '8%' }}
+        >
+          <Box component="span" id="badge" className={classes.badge}>
+            <img
+              src={multiStudyData.icon}
+              alt={multiStudyData.alt}
+              style={{ height: '2em' }}
+            />
+            <StudyCount length={tableMeta.length} />
+          </Box>
+        </Tooltip>
+      </Box>
+    </MuiThemeProvider>
   );
 
   const customLink = (path, column, value, tableMeta) => (
-    <div className={classes.caseIdContainer}>
-      <MuiThemeProvider theme={createTheme(theme)}>
+    <MuiThemeProvider theme={createTheme(theme)}>
+      <div className={classes.caseIdContainer} style={{ display: 'flex' }}>
         <Link className={classes.link} href={`/#${path}/${value}`}>
           {value}
         </Link>
-      </MuiThemeProvider>
-      {
-        (column.dataField === 'case_id' && !unifiedViewFlag)
-        && hasMultiStudyParticipants(tableMeta.rowData[1])
-        && toolTipIcon(tableMeta.rowData[1], value)
-      }
-    </div>
+        {
+          (column.dataField === 'case_id' && !unifiedViewFlag)
+          && hasMultiStudyParticipants(tableMeta.rowData[1])
+          && toolTipIcon(tableMeta.rowData[1], value)
+        }
+      </div>
+    </MuiThemeProvider>
   );
 
   const getPath = (dataField) => (dataField === 'case_id' ? '/case' : '/study');
