@@ -426,6 +426,17 @@ export async function tableHasSelections() {
   ).length > 0;
 }
 
+const getFileLevel = (activeTab) => {
+  switch (activeTab) {
+    case 'Files':
+      return ['case'];
+    case 'StudyFiles':
+      return ['study'];
+    default:
+      return [];
+  }
+};
+
 /**
  * Gets all file ids for active subjectIds.
  * TODO this  functtion can use filtered file IDs except for initial load
@@ -455,7 +466,8 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
       query: SELECT_ALL_QUERY,
       variables: {
         ...activeFilters,
-        first: 1000,
+        file_level: getFileLevel(getState().currentActiveTab),
+        first: fileCount,
         ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
       },
     })
