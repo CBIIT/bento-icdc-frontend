@@ -285,28 +285,30 @@ const TabView = ({
           {tableMeta.map((elem, elemIdx) => (
             <ul className={classes.ul} key={elemIdx}>
               <li>
-                <Link className={classes.link} to={`case/${elem}`}>
-                  <Typography align="center" className={classes.multiStudyTooltip}>
-                    {`Case: ${elem}`}
-                  </Typography>
-                </Link>
+                <MuiThemeProvider theme={theme}>
+                  <Link className={classes.link} href={`/#/case/${elem}`}>
+                    <Typography align="center" className={classes.multiStudyTooltip}>
+                      {`Case: ${elem}`}
+                    </Typography>
+                  </Link>
+                </MuiThemeProvider>
               </li>
             </ul>
           ))}
 
           <div className={classes.dashboardLink}>
-            <Link
-              rel="noreferrer"
-              color="inherit"
-              to={{
-                pathname: `/unifiedView/${caseID}`,
-              }}
-              className={classes.link}
-            >
-              <Typography align="center" className={classes.multiStudyTooltip}>
-                View All Related Cases
-              </Typography>
-            </Link>
+            <MuiThemeProvider theme={theme}>
+              <Link
+                rel="noreferrer"
+                color="inherit"
+                href={`/#/unifiedView/${caseID}`}
+                className={classes.link}
+              >
+                <Typography align="center" className={classes.multiStudyTooltip}>
+                  View All Related Cases
+                </Typography>
+              </Link>
+            </MuiThemeProvider>
           </div>
 
         </div>
