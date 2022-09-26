@@ -262,7 +262,8 @@ class ServerPaginatedTableView extends React.Component {
   };
 
   async fetchData(offset, rowsRequired, sortOrder = {}) {
-    let sortColumn = 'arm';
+    const sortColumn = Object.keys(sortOrder).length === 0 ? this.props.defaultSortCoulmn || '' : sortOrder.name;
+    const sortDirection = Object.keys(sortOrder).length === 0 ? this.props.defaultSortDirection || 'asc' : sortOrder.direction;
     let offsetReal = offset;
     let page = offset / rowsRequired;
     // if the offset value is bigger that the count, then change offset value
@@ -276,25 +277,26 @@ class ServerPaginatedTableView extends React.Component {
       });
     }
 
-    sortColumn = Object.keys(sortOrder).length === 0 ? this.props.defaultSortCoulmn || '' : sortOrder.name;
-    if (this.props.updateSortOrder) {
-      localStorage.setItem('page', String(page));
-      localStorage.setItem('rowsPerPage', String(rowsRequired));
-      this.setState({
-        page,
-      });
+    let fetchResult = [];
+    if (this.props.data && this.props.data.length > this.state.rowsPerPage) {
+      const newData = [...this.props.data];
+      const sortedData = this.getSortData(newData, sortColumn, sortDirection);
+      fetchResult = sortedData.splice(offsetReal, this.state.rowsPerPage);
+    } else {
+      fetchResult = await client
+        .query({
+          query: this.props.overview,
+          variables: {
+            offset: offsetReal,
+            first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
+            order_by: sortColumn,
+            file_level: this.props.fileLevel,
+            sort_direction: sortDirection,
+            ...this.props.queryCustomVaribles,
+          },
+        })
+        .then((result) => (result.data[this.props.paginationAPIField]));
     }
-    const fetchResult = await client
-      .query({
-        query: this.props.overview,
-        variables: {
-          offset: offsetReal,
-          first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
-          order_by: sortColumn,
-          ...this.props.queryCustomVaribles,
-        },
-      })
-      .then((result) => (result.data[this.props.paginationAPIField]));
     if (this.props.updateSortOrder) {
       localStorage.setItem('dataLength', String(fetchResult.length));
       localStorage.setItem('data', JSON.stringify(fetchResult));

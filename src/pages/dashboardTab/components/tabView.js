@@ -86,6 +86,7 @@ const TabView = ({
   TopMessageStatus,
   count,
   api,
+  fileLevel,
   displayViewJBowseBtn,
   disableViewJBowseBtn,
   paginationAPIField,
@@ -101,6 +102,7 @@ const TabView = ({
   setRowSelection,
   selectedRowInfo = [],
   selectedRowIndex = [],
+  // eslint-disable-next-line no-unused-vars
   tableHasSelections,
   unifiedViewFlag,
   tabIndex,
@@ -140,8 +142,8 @@ const TabView = ({
       buildButtonStyle(button, ActiveSaveButtonDefaultStyle);
     }
   };
-  async function updateButtonStatus() {
-    const status = await tableHasSelections();
+
+  async function updateButtonStatus(status) {
     if (!status) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);
@@ -154,7 +156,7 @@ const TabView = ({
   useEffect(() => {
     initSaveButtonDefaultStyle(saveButton);
     initSaveButtonDefaultStyle(saveButton2);
-    updateButtonStatus();
+    updateButtonStatus(selectedRowInfo.length > 0);
   });
 
   async function exportFiles() {
@@ -167,6 +169,7 @@ const TabView = ({
     const newFileIDS = fileIDs !== null ? selectFileIds.filter(
       (e) => !fileIDs.find((a) => e === a),
     ).length : selectedIDs.length;
+
     if (cartWillFull(newFileIDS)) {
       // throw an alert
       setCartIsFull(true);
@@ -420,6 +423,7 @@ const TabView = ({
             columns={columns}
             options={finalOptions}
             count={count}
+            fileLevel={fileLevel}
             overview={getOverviewQuery(api)}
             paginationAPIField={paginationAPIField}
             paginationAPIFieldDesc={paginationAPIFieldDesc}

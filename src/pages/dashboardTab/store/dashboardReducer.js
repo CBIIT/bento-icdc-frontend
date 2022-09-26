@@ -26,6 +26,7 @@ import {
   GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
   GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+  GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
   tabIndex,
   GET_STUDY_CODE,
   GET_FILES_NAME_QUERY,
@@ -425,6 +426,17 @@ export async function tableHasSelections() {
   ).length > 0;
 }
 
+const getFileLevel = (activeTab) => {
+  switch (activeTab) {
+    case 'Files':
+      return ['case'];
+    case 'StudyFiles':
+      return ['study'];
+    default:
+      return [];
+  }
+};
+
 /**
  * Gets all file ids for active subjectIds.
  * TODO this  functtion can use filtered file IDs except for initial load
@@ -454,7 +466,8 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
       query: SELECT_ALL_QUERY,
       variables: {
         ...activeFilters,
-        first: 1000,
+        file_level: getFileLevel(getState().currentActiveTab),
+        first: fileCount,
         ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
       },
     })
@@ -546,19 +559,42 @@ async function getFileIDs(
   SELECT_ALL_QUERY,
   caseIds = [],
   sampleIds = [],
+  fileName = [],
   cate,
 ) {
-  const fetchResult = await client
-    .query({
-      query: SELECT_ALL_QUERY,
-      variables: {
-        case_ids: caseIds,
-        sample_ids: sampleIds,
-        file_uuids: [],
-        first: fileCount,
-      },
-    })
-    .then((result) => result.data[cate] || []);
+  let fetchResult;
+  if (cate !== 'fileIdsFromFileName') {
+    fetchResult = await client
+      .query({
+        query: SELECT_ALL_QUERY,
+        variables: {
+          case_ids: caseIds,
+          sample_ids: sampleIds,
+          file_uuids: [],
+          first: fileCount,
+        },
+      })
+      .then((result) => result.data[cate] || []);
+  } else {
+    fetchResult = await client
+      .query({
+        query: SELECT_ALL_QUERY,
+        variables: {
+          file_name: fileName,
+          first: fileCount,
+        },
+      })
+      .then((result) => result.data[cate] || []);
+  }
+
+  if (cate === 'fileIdsFromFileName') {
+    return fetchResult.reduce((accumulator, currentValue) => {
+      // eslint-disable-next-line camelcase
+      const { file_uuid } = currentValue;
+      accumulator.push(file_uuid);
+      return accumulator;
+    }, []);
+  }
 
   return fetchResult.reduce((accumulator, currentValue) => {
     const { files } = currentValue;
@@ -594,16 +630,16 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
   let filesIds = [];
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:
-      filesIds = '';
-      return filesIds;
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL, [], [], selectedIds, 'fileIdsFromFileName');
+      break;
     case tabIndex[2].title:
-      filesIds = '';
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL, [], [], selectedIds, 'fileIdsFromFileName');
       break;
     case tabIndex[1].title:
-      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, [], 'sampleOverview');
       break;
     default:
-      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverview');
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], [], 'caseOverview');
   }
   return filterOutFileIds(filesIds);
 }

@@ -1811,6 +1811,7 @@ export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
 query sampleOverview(
     $case_ids: [String] = [],
+    $sample_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1837,6 +1838,7 @@ query sampleOverview(
     sampleOverview
     (
       case_ids: $case_ids,
+      sample_ids: $sample_ids,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -1944,6 +1946,18 @@ query (
         file_uuid
     }
 }`;
+
+export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
+ query fileOverview (
+  $file_name: [String]
+ ) {
+  fileIdsFromFileName(
+    file_name: $file_name
+  ) {
+    file_uuid
+  }
+ }
+  `;
 
 export const GET_STUDY_CODE = gql`
   query study($clinical_study_designation: String) {

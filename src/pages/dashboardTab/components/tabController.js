@@ -302,6 +302,16 @@ const tabController = ({ classes, unifiedViewData }) => {
     return { marginTop: marginTopValue };
   }
 
+  function getFileLevel(container) {
+    switch (container.name) {
+      case 'Files':
+        return ['case'];
+      case 'StudyFiles':
+        return ['study'];
+      default:
+        return [''];
+    }
+  }
   // Tab table Generator
   const TABContainers = tabContainers.map((container) => (
     <TabContainer id={container.id}>
@@ -325,11 +335,12 @@ const tabController = ({ classes, unifiedViewData }) => {
         BottomMessageStatus={BottomMessageStatus}
         TopMessageStatus={TopMessageStatus}
         selectAllToolTipStatus={selectAllToolTipStatus}
-        // eslint-disable-next-line jsx-a11y/tabindex-no-positive
+          // eslint-disable-next-line jsx-a11y/tabindex-no-positive
         tabIndex={container.tabIndex}
         externalLinkIcon={externalLinkIcon}
         count={dashboardStats[container.count] ? getCount(container) : 0}
         api={container.api}
+        fileLevel={getFileLevel(container)}
         paginationAPIField={container.paginationAPIField}
         paginationAPIFieldDesc={container.paginationAPIFieldDesc}
         defaultSortCoulmn={container.defaultSortField || ''}
