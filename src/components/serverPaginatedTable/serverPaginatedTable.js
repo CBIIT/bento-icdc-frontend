@@ -291,6 +291,7 @@ class ServerPaginatedTableView extends React.Component {
             first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
             order_by: sortColumn,
             file_level: this.props.fileLevel,
+            ...(this.props.unifiedViewFlag && { case_ids: this.props.unifiedViewCaseIds }),
             sort_direction: sortDirection,
             ...this.props.queryCustomVaribles,
           },

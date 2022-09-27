@@ -319,6 +319,7 @@ const tabController = ({ classes, unifiedViewData }) => {
         options={getOptions(container, classes)}
         data={dashboard[container.dataField] ? dashboard[container.dataField] : 'undefined'}
         unifiedViewFlag={!!unifiedViewData}
+        unifiedViewCaseIds={unifiedViewData ? unifiedViewData.caseIds : []}
         customColumn={container}
         openSnack={openSnack}
         closeSnack={closeSnack}

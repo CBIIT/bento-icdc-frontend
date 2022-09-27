@@ -183,6 +183,7 @@ const TabView = ({
   // eslint-disable-next-line no-unused-vars
   tableHasSelections,
   unifiedViewFlag,
+  unifiedViewCaseIds,
   tabIndex,
   // association,
 }) => {
@@ -511,6 +512,8 @@ const TabView = ({
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
             tableDownloadCSV={tableDownloadCSV}
+            unifiedViewFlag={unifiedViewFlag}
+            unifiedViewCaseIds={unifiedViewCaseIds}
             components={{
               Tooltip,
             }}
