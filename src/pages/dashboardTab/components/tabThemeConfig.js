@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import themes, { overrides } from '../../../themes';
 
 export default ({
@@ -42,7 +42,19 @@ export default ({
     overridesObj.MuiTablePagination.actions.marginRight = '32px';
     overridesObj.MUIDataTableFooter.root.borderBottom = tableBorder;
   }
-
+  overridesObj.MUIDataTableBodyCell = {
+    ...overridesObj.MUIDataTableBodyCell,
+    root: {
+      '& a': {
+        color: '#DC762F',
+        fontSize: '15px',
+        fontFmily: 'Open Sans',
+        fontWeight: 'bold',
+        lineSpacing: '19pt',
+        textDecoration: 'underline',
+      },
+    },
+  };
   const PrivateTabIndicator = {
     root: {
       transitionProperty: 'none',
@@ -105,7 +117,7 @@ export default ({
 
   style.push(overridesObj);
 
-  const computedTheme = createMuiTheme({ ...themesLight, ...overrides, ...style });
+  const computedTheme = createTheme({ ...themesLight, ...overrides, ...style });
 
   return (
     <MuiThemeProvider theme={computedTheme}>
