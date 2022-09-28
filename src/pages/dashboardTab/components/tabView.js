@@ -110,7 +110,7 @@ const customStyle = {
     maxWidth: '250px',
   },
   cartCounter: {
-    marginTop: '-10px',
+    marginTop: '-5px',
     display: 'block',
     float: 'right',
   },
@@ -392,7 +392,7 @@ const TabView = ({
 
   const toolTipIcon = (tableMeta, value) => (
     <MuiThemeProvider theme={theme}>
-      <Box style={{ borderRadius: '8%' }}>
+      <Box style={{ marginLeft: '5px' }}>
         <Tooltip
           title={renderMultiStudyTooltipText(tableMeta, value)}
           renderComponent={renderMultiStudyTooltipText(tableMeta, value)}
@@ -403,12 +403,12 @@ const TabView = ({
           style={{ borderRadius: '8%' }}
         >
           <Box component="span" id="badge" className={classes.badge}>
+            <StudyCount length={tableMeta.length} />
             <img
               src={multiStudyData.icon}
               alt={multiStudyData.alt}
               style={{ height: '2em' }}
             />
-            <StudyCount length={tableMeta.length} />
           </Box>
         </Tooltip>
       </Box>
@@ -558,7 +558,7 @@ const TabView = ({
         <div style={{ position: 'relative' }}>
           <Link
             rel="noreferrer"
-            to={(location) => ({ ...location, pathname: '/fileCentricCart' })}
+            href="/#/fileCentricCart"
             color="inherit"
             className={classes.cartlink}
           >
