@@ -402,7 +402,7 @@ const TabView = ({
           id="customTooltip"
           style={{ borderRadius: '8%' }}
         >
-          <Box component="span" id="badge" className={classes.badge}>
+          <Box component="span" id="badge">
             <StudyCount length={tableMeta.length} />
             <img
               src={multiStudyData.icon}
