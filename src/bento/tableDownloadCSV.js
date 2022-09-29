@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_CASES_TAB = gql`
 query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
-  caseOverviewPaged(case_ids: $case_ids, first: $first) {
+  caseOverview(case_ids: $case_ids, first: $first) {
     case_id
     study_code
     study_type
@@ -77,7 +77,7 @@ export const customCasesTabDownloadCSV = {
     ...customCasesOptionalDataFields.header,
   ],
   query: GET_CASES_TAB,
-  apiVariable: 'caseOverviewPaged',
+  apiVariable: 'caseOverview',
   fileName: 'ICDC_Cases_download',
 };
 
@@ -197,8 +197,59 @@ export const customSamplesTabDownloadCSV = {
 };
 
 export const GET_FILES_TAB = gql`
-query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
-    fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
+query fileOverview($file_level: [String] = ["case"], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+    fileOverview(file_level: $file_level, offset: $offset,first: $first, order_by: $order_by) {
+      file_name
+      file_type
+      sample_id
+      association
+      file_description
+      file_format
+      file_size
+      case_id
+      breed
+      diagnosis
+      study_code
+      file_uuid
+      sample_site
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      summarized_sample_type
+      specific_sample_pathology
+      date_of_sample_collection
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      comment
+      individual_id
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      cohort_description
+      arm
+      other_cases
+    }
+  }
+`;
+
+export const GET_FILES_TAB_STUDY_FILES = gql`
+query fileOverview($file_level: [String] = ["study"], $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+    fileOverview(file_level: $file_level, offset: $offset,first: $first, order_by: $order_by) {
       file_name
       file_type
       sample_id
@@ -350,7 +401,7 @@ export const customStudyFilesTabDownloadCSV = {
   header: [
     ...customStudyFilesTabCoreDataFields.header,
   ],
-  query: GET_FILES_TAB,
+  query: GET_FILES_TAB_STUDY_FILES,
   apiVariable: 'fileOverview',
   fileName: 'ICDC_Study_Files_download',
 };
