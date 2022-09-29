@@ -261,6 +261,20 @@ class ServerPaginatedTableView extends React.Component {
     this.setState({ columns });
   };
 
+  // sort data
+  getSortData = (arr, sortColumn, sortDirection) => arr.sort((a, b) => {
+    const keyA = parseInt(a[sortColumn].replace(/^\D+/g, ''), 10);
+    const keyB = parseInt(b[sortColumn].replace(/^\D+/g, ''), 10);
+    if (sortDirection === 'asc') {
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+    } else {
+      if (keyA < keyB) return 1;
+      if (keyA > keyB) return -1;
+    }
+    return 0;
+  });
+
   async fetchData(offset, rowsRequired, sortOrder = {}) {
     const sortColumn = Object.keys(sortOrder).length === 0 ? this.props.defaultSortCoulmn || '' : sortOrder.name;
     const sortDirection = Object.keys(sortOrder).length === 0 ? this.props.defaultSortDirection || 'asc' : sortOrder.direction;
@@ -275,6 +289,29 @@ class ServerPaginatedTableView extends React.Component {
       this.setState({
         page,
       });
+    }
+
+    // fetch data for mycart file table
+    if (this.props.options.onSortingTrigger) {
+      if (this.props.updateSortOrder) {
+        localStorage.setItem('page', String(page));
+        localStorage.setItem('rowsPerPage', String(rowsRequired));
+        this.setState({
+          page,
+        });
+      }
+      const fetchResult = await client
+        .query({
+          query: sortDirection !== 'asc' ? this.props.overviewDesc : this.props.overview,
+          variables: {
+            offset: offsetReal,
+            first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
+            order_by: sortColumn,
+            ...this.props.queryCustomVaribles,
+          },
+        })
+        .then((result) => (sortDirection !== 'asc' ? result.data[this.props.paginationAPIFieldDesc] : result.data[this.props.paginationAPIField]));
+      return fetchResult;
     }
 
     let fetchResult = [];
