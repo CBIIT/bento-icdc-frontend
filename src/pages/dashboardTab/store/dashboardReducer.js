@@ -90,7 +90,7 @@ const initialState = {
 };
 
 // HELPERS
-const getState = () => store.getState()[storeKey];
+export const getState = () => store.getState()[storeKey];
 
 const SUNBURST_COLORS = [
   '#1F4B87',
