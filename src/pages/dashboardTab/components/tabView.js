@@ -330,13 +330,24 @@ const TabView = ({
         newSelectedRowIndex,
         _.isEqual,
       ).length !== 0) {
-      if (currentActiveTab !== tabContainers[3].name
+      if ((currentActiveTab === tabContainers[0].name
+        || currentActiveTab === tabContainers[1].name)
+        && !isEqual(newSelectedRowInfo, dataFileSelected.selectedRowInfo)
         && !isEqual(newSelectedRowInfo, dataStudyFileSelected.selectedRowInfo)) {
         setRowSelection({
           selectedRowInfo: newSelectedRowInfo,
           selectedRowIndex: newSelectedRowIndex,
         });
       }
+
+      if (currentActiveTab === tabContainers[2].name
+        && !isEqual(newSelectedRowInfo, dataStudyFileSelected.selectedRowInfo)) {
+        setRowSelection({
+          selectedRowInfo: newSelectedRowInfo,
+          selectedRowIndex: newSelectedRowIndex,
+        });
+      }
+
       if (currentActiveTab === tabContainers[3].name
         && !isEqual(newSelectedRowInfo, dataFileSelected.selectedRowInfo)) {
         setRowSelection({
