@@ -51,11 +51,9 @@ class ServerPaginatedTableView extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.data !== prevProps.data && this.props.data !== 'undefined') {
-      console.log('test');
       this.getData('', 0);
     }
     if (this.props.data !== prevProps.data && this.props.data === 'undefined' && prevProps.data !== 'undefined' && this.props.updateSortOrder) {
-      console.log('test2');
       this.changeToPrevDataState(prevProps);
     }
     if (this.state.count > 0 && this.state.page > 0
