@@ -45,6 +45,7 @@ export const manifestData = {
   header: ['Study Code', 'Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'],
 };
 
+export const myFileViewFlag = true;
 // --------------- File table configuration --------------
 
 export const table = {

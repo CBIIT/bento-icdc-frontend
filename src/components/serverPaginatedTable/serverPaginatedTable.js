@@ -51,9 +51,11 @@ class ServerPaginatedTableView extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.data !== prevProps.data && this.props.data !== 'undefined') {
+      console.log('test');
       this.getData('', 0);
     }
     if (this.props.data !== prevProps.data && this.props.data === 'undefined' && prevProps.data !== 'undefined' && this.props.updateSortOrder) {
+      console.log('test2');
       this.changeToPrevDataState(prevProps);
     }
     if (this.state.count > 0 && this.state.page > 0
@@ -62,12 +64,12 @@ class ServerPaginatedTableView extends React.Component {
     }
 
     // update columns state to the current props
-    if ((this.props.columns !== prevProps.columns
-      && (prevProps.data === 'undefined' || this.props.data === prevProps.data))
-      || (this.props.data !== prevProps.data
-        && this.props.queryCustomVaribles.case_ids !== undefined)) {
-      this.setColumnState(this.props.columns);
-    }
+    // if ((this.props.columns !== prevProps.columns
+    //   && (prevProps.data === 'undefined' || this.props.data === prevProps.data))
+    //   || (this.props.data !== prevProps.data
+    //     && this.props.queryCustomVaribles.case_ids !== undefined)) {
+    //   this.setColumnState(this.props.columns);
+    // }
   }
 
   setColumnState = (columns) => {
@@ -291,8 +293,9 @@ class ServerPaginatedTableView extends React.Component {
       });
     }
 
-    // fetch data for mycart file table
-    if (this.props.options.onSortingTrigger) {
+    // store table props for mycart file table
+    const { myFileView } = this.props;
+    if (myFileView) {
       if (this.props.updateSortOrder) {
         localStorage.setItem('page', String(page));
         localStorage.setItem('rowsPerPage', String(rowsRequired));
@@ -300,18 +303,6 @@ class ServerPaginatedTableView extends React.Component {
           page,
         });
       }
-      const fetchResult = await client
-        .query({
-          query: sortDirection !== 'asc' ? this.props.overviewDesc : this.props.overview,
-          variables: {
-            offset: offsetReal,
-            first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
-            order_by: sortColumn,
-            ...this.props.queryCustomVaribles,
-          },
-        })
-        .then((result) => (sortDirection !== 'asc' ? result.data[this.props.paginationAPIFieldDesc] : result.data[this.props.paginationAPIField]));
-      return fetchResult;
     }
 
     let fetchResult = [];
@@ -320,20 +311,27 @@ class ServerPaginatedTableView extends React.Component {
       const sortedData = this.getSortData(newData, sortColumn, sortDirection);
       fetchResult = sortedData.splice(offsetReal, this.state.rowsPerPage);
     } else {
+      const queryArg = sortDirection !== 'asc' ? this.props.overviewDesc : this.props.overview;
       fetchResult = await client
         .query({
-          query: this.props.overview,
+          query: myFileView ? queryArg : this.props.overview,
           variables: {
             offset: offsetReal,
             first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
             order_by: sortColumn,
-            file_level: this.props.fileLevel,
+            ...(!myFileView && { file_level: this.props.fileLevel }),
             ...(this.props.unifiedViewFlag && { case_ids: this.props.unifiedViewCaseIds }),
             sort_direction: sortDirection,
-            ...this.props.queryCustomVaribles,
+            ...(!this.props.unifiedViewFlag && this.props.queryCustomVaribles),
           },
         })
-        .then((result) => (result.data[this.props.paginationAPIField]));
+        .then((result) => {
+          if (myFileView) {
+            return (sortDirection !== 'asc' ? result.data[this.props.paginationAPIFieldDesc]
+              : result.data[this.props.paginationAPIField]);
+          }
+          return result.data[this.props.paginationAPIField];
+        });
     }
     if (this.props.updateSortOrder) {
       localStorage.setItem('dataLength', String(fetchResult.length));
