@@ -261,6 +261,20 @@ class ServerPaginatedTableView extends React.Component {
     this.setState({ columns });
   };
 
+  // sort data
+  getSortData = (arr, sortColumn, sortDirection) => arr.sort((a, b) => {
+    const keyA = parseInt(a[sortColumn].replace(/^\D+/g, ''), 10);
+    const keyB = parseInt(b[sortColumn].replace(/^\D+/g, ''), 10);
+    if (sortDirection === 'asc') {
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+    } else {
+      if (keyA < keyB) return 1;
+      if (keyA > keyB) return -1;
+    }
+    return 0;
+  });
+
   async fetchData(offset, rowsRequired, sortOrder = {}) {
     const sortColumn = Object.keys(sortOrder).length === 0 ? this.props.defaultSortCoulmn || '' : sortOrder.name;
     const sortDirection = Object.keys(sortOrder).length === 0 ? this.props.defaultSortDirection || 'asc' : sortOrder.direction;
@@ -277,26 +291,45 @@ class ServerPaginatedTableView extends React.Component {
       });
     }
 
+    // store table props for mycart file table
+    const { myFileView } = this.props;
+    if (myFileView) {
+      if (this.props.updateSortOrder) {
+        localStorage.setItem('page', String(page));
+        localStorage.setItem('rowsPerPage', String(rowsRequired));
+        this.setState({
+          page,
+        });
+      }
+    }
+
     let fetchResult = [];
     if (this.props.data && this.props.data.length > this.state.rowsPerPage) {
       const newData = [...this.props.data];
       const sortedData = this.getSortData(newData, sortColumn, sortDirection);
       fetchResult = sortedData.splice(offsetReal, this.state.rowsPerPage);
     } else {
+      const queryArg = sortDirection !== 'asc' ? this.props.overviewDesc : this.props.overview;
       fetchResult = await client
         .query({
-          query: this.props.overview,
+          query: myFileView ? queryArg : this.props.overview,
           variables: {
             offset: offsetReal,
             first: this.props.count < rowsRequired ? this.props.count : rowsRequired,
             order_by: sortColumn,
-            file_level: this.props.fileLevel,
+            ...(!myFileView && { file_level: this.props.fileLevel }),
             ...(this.props.unifiedViewFlag && { case_ids: this.props.unifiedViewCaseIds }),
             sort_direction: sortDirection,
-            ...this.props.queryCustomVaribles,
+            ...(!this.props.unifiedViewFlag && this.props.queryCustomVaribles),
           },
         })
-        .then((result) => (result.data[this.props.paginationAPIField]));
+        .then((result) => {
+          if (myFileView) {
+            return (sortDirection !== 'asc' ? result.data[this.props.paginationAPIFieldDesc]
+              : result.data[this.props.paginationAPIField]);
+          }
+          return result.data[this.props.paginationAPIField];
+        });
     }
     if (this.props.updateSortOrder) {
       localStorage.setItem('dataLength', String(fetchResult.length));

@@ -38,7 +38,6 @@ const subscribe = (f) => {
     () => lastState !== getState() && f((lastState = getState())),
   );
 };
-/* eslint-disable no-return-assign */
 
 // actions
 export const addToCart = (item) => store.dispatch({ type: 'addFiles', payload: item });

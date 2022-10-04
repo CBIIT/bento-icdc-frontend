@@ -22,8 +22,14 @@ import {
   GET_CASES_OVERVIEW_QUERY,
   tooltipContent,
   multiStudyData,
+  tabContainers,
 } from '../../../bento/dashboardTabData';
-import { clearTableSelections, fetchAllFileIDs, getFilesCount } from '../store/dashboardReducer';
+import {
+  clearTableSelections,
+  fetchAllFileIDs,
+  getFilesCount,
+  getState,
+} from '../store/dashboardReducer';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
@@ -240,11 +246,13 @@ const TabView = ({
 
   async function exportFiles() {
     const selectedIDs = await fetchAllFileIDs(getFilesCount(), selectedRowInfo);
+
     // Find the newly added files by comparing
     const selectFileIds = ((tabIndex === 3) && filteredStudyFileIds !== null)
       ? selectedIDs.filter((x) => filteredStudyFileIds.includes(x))
       : ((tabIndex === 2) && filteredFileIds != null)
         ? selectedIDs.filter((x) => filteredFileIds.includes(x)) : selectedIDs;
+
     const newFileIDS = fileIDs !== null ? selectFileIds.filter(
       (e) => !fileIDs.find((a) => e === a),
     ).length : selectedIDs.length;
@@ -299,6 +307,10 @@ const TabView = ({
       }, [],
     );
 
+    // check if displayed data is equal
+    const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+    const { currentActiveTab, dataStudyFileSelected, dataFileSelected } = getState();
     // reduce the state chagne, when newSelectedRowIndex and newSelectedRowInfo is same as previous.
     if (_.differenceWith(
       newSelectedRowIndex,
@@ -320,10 +332,31 @@ const TabView = ({
         newSelectedRowIndex,
         _.isEqual,
       ).length !== 0) {
-      setRowSelection({
-        selectedRowInfo: newSelectedRowInfo,
-        selectedRowIndex: newSelectedRowIndex,
-      });
+      if ((currentActiveTab === tabContainers[0].name
+        || currentActiveTab === tabContainers[1].name)
+        && !isEqual(newSelectedRowInfo, dataFileSelected.selectedRowInfo)
+        && !isEqual(newSelectedRowInfo, dataStudyFileSelected.selectedRowInfo)) {
+        setRowSelection({
+          selectedRowInfo: newSelectedRowInfo,
+          selectedRowIndex: newSelectedRowIndex,
+        });
+      }
+
+      if (currentActiveTab === tabContainers[2].name
+        && !isEqual(newSelectedRowInfo, dataStudyFileSelected.selectedRowInfo)) {
+        setRowSelection({
+          selectedRowInfo: newSelectedRowInfo,
+          selectedRowIndex: newSelectedRowIndex,
+        });
+      }
+
+      if (currentActiveTab === tabContainers[3].name
+        && !isEqual(newSelectedRowInfo, dataFileSelected.selectedRowInfo)) {
+        setRowSelection({
+          selectedRowInfo: newSelectedRowInfo,
+          selectedRowIndex: newSelectedRowIndex,
+        });
+      }
     }
   }
 
@@ -460,6 +493,8 @@ const TabView = ({
           toggleMessageStatus={toggleMessageStatus}
           selectAllToolTipStatus={selectAllToolTipStatus}
           tabIndex={tabIndex}
+          unifiedViewFlag={unifiedViewFlag}
+          unifiedViewCaseIds={unifiedViewCaseIds}
         />
         <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
         <button

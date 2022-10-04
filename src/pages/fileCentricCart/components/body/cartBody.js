@@ -12,7 +12,7 @@ import {
 import CustomDataTable from '../../../../components/serverPaginatedTable/serverPaginatedTable';
 import Styles from './cartBody.style';
 import {
-  table, GET_MY_CART_DATA_QUERY, GET_MY_CART_DATA_QUERY_DESC,
+  table, GET_MY_CART_DATA_QUERY, GET_MY_CART_DATA_QUERY_DESC, myFileViewFlag,
 } from '../../../../bento/fileCentricCartWorkflowData';
 import TableThemeProvider from './cartTableThemeConfig';
 import updateColumns from '../../../../utils/columnsUtil';
@@ -140,6 +140,7 @@ const CartHeader = ({
         defaultSortCoulmn={defaultSortCoulmn}
         defaultSortDirection={defaultSortDirection}
         tableDownloadCSV={tableDownloadCSV}
+        myFileView={myFileViewFlag}
         components={{
           Tooltip,
         }}
