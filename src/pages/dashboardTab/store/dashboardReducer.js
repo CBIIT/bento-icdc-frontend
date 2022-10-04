@@ -443,7 +443,6 @@ const getFileLevel = (activeTab) => {
  * @param obj fileCoubt
  * @return {json}
  */
-// eslint-disable-next-line no-unused-vars
 export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   // const association = getState().currentActiveTab === tabIndex[2].title
   //   ? tabContainers[2].associations : tabContainers[3].associations;
@@ -533,27 +532,6 @@ function sortByCheckboxItemsByCount(checkboxData) {
   return sortByCheckboxByIsChecked(checkboxData);
 }
 
-// eslint-disable-next-line max-len
-// async function getFileIDsByFileName(file_name = [], offset = 0.0, first = 100000, order_by = 'file_name') {
-//   const data = await client
-//     .query({
-//       query: GET_FILE_IDS_FROM_FILE_NAME,
-//       variables: {
-//         file_name,
-//         offset,
-//         first,
-//         order_by,
-//       },
-//     })
-//     .then((result) => {
-//       if (result && result.data && result.data.fileIdsFromFileNameDesc.length > 0) {
-//         return result.data.fileIdsFromFileNameDesc.map((d) => d.file_uuid);
-//       }
-//       return [];
-//     });
-//   return data;
-// }
-
 async function getFileIDs(
   fileCount = 100000,
   SELECT_ALL_QUERY,
@@ -606,16 +584,24 @@ async function getFileIDs(
   }, []);
 }
 
-function filterOutFileIds(fileIds) {
+function filterOutFileIds(fileIds, fileType) {
   // Removing fileIds that are not in our current list of filtered fileIds
-  const { filteredFileIds } = getState();
+  const { filteredFileIds, filteredStudyFileIds } = getState();
 
-  if (fileIds
+  if (fileType !== 'studyFiles' && fileIds
       && fileIds.length > 0
        && filteredFileIds
         && filteredFileIds != null
         && filteredFileIds.length > 0) {
     return fileIds.filter((x) => filteredFileIds.includes(x));
+  }
+
+  if (fileType === 'studyFiles' && fileIds
+  && fileIds.length > 0
+   && filteredFileIds
+    && filteredFileIds != null
+    && filteredFileIds.length > 0) {
+    return fileIds.filter((x) => filteredStudyFileIds.includes(x));
   }
   return fileIds;
 }
@@ -631,7 +617,8 @@ export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offs
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:
       filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL, [], [], selectedIds, 'fileIdsFromFileName');
-      break;
+
+      return filterOutFileIds(filesIds, 'studyFiles');
     case tabIndex[2].title:
       filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL, [], [], selectedIds, 'fileIdsFromFileName');
       break;
@@ -834,7 +821,6 @@ export async function setSingleFilter(payload) {
  * for a singleFilter payload
  */
 export async function getAccessionId(payload) {
-  // eslint-disable-next-line no-unused-vars
   const response = await client
     .query({
       query: GET_STUDY_CODE,
@@ -977,11 +963,9 @@ so it contains more information and easy for front-end to show it correctly.
  * @return {json}
  */
 export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromConfig) {
-  // eslint-disable-next-line no-console
   return (
     // eslint-disable-next-line arrow-body-style
     facetSearchDataFromConfig.map((mapping) => {
-      // eslint-disable-next-line no-console
       // console.log('data from update', transformAPIDataIntoCheckBoxData(
       //   convertCasesToCount(data[mapping.filterAPI]),
       //   mapping.field,

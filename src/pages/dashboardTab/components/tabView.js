@@ -240,11 +240,12 @@ const TabView = ({
 
   async function exportFiles() {
     const selectedIDs = await fetchAllFileIDs(getFilesCount(), selectedRowInfo);
+
     // Find the newly added files by comparing
     const selectFileIds = ((tabIndex === 3) && filteredStudyFileIds !== null)
       ? selectedIDs.filter((x) => filteredStudyFileIds.includes(x))
-      : ((tabIndex === 2) && filteredFileIds != null)
-        ? selectedIDs.filter((x) => filteredFileIds.includes(x)) : selectedIDs;
+      : ((tabIndex === 2) && filteredFileIds != null);
+
     const newFileIDS = fileIDs !== null ? selectFileIds.filter(
       (e) => !fileIDs.find((a) => e === a),
     ).length : selectedIDs.length;
