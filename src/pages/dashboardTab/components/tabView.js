@@ -493,6 +493,8 @@ const TabView = ({
           toggleMessageStatus={toggleMessageStatus}
           selectAllToolTipStatus={selectAllToolTipStatus}
           tabIndex={tabIndex}
+          unifiedViewFlag={unifiedViewFlag}
+          unifiedViewCaseIds={unifiedViewCaseIds}
         />
         <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
         <button

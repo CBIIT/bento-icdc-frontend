@@ -443,7 +443,11 @@ const getFileLevel = (activeTab) => {
  * @param obj fileCoubt
  * @return {json}
  */
-export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
+export async function fetchAllFileIDsForSelectAll(
+  fileCount = 100000,
+  isUnifiedView,
+  unifiedViewCaseIds,
+) {
   // const association = getState().currentActiveTab === tabIndex[2].title
   //   ? tabContainers[2].associations : tabContainers[3].associations;
   // const caseIds = getState().filteredSubjectIds;
@@ -467,6 +471,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
         ...activeFilters,
         file_level: getFileLevel(getState().currentActiveTab),
         first: fileCount,
+        ...(isUnifiedView && { case_ids: unifiedViewCaseIds }),
         ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
       },
     })
@@ -474,11 +479,14 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
       const RESULT_DATA = (getState().currentActiveTab === tabIndex[2].title
         || getState().currentActiveTab === tabIndex[3].title) ? 'fileOverview'
         : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverview';
+
       const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? result.data[RESULT_DATA].map((item) => ({
         files: [item.file_uuid],
       })) : result.data[RESULT_DATA] || [];
+
       return fileIdsFromQuery;
     });
+
   // Restaruting the result Bringing {files} to files
   const filesArray = fetchResult.reduce((accumulator, currentValue) => {
     const { files } = currentValue;
@@ -494,6 +502,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   const filteredFilesArray = fileIds != null
     ? filesArray.filter((x) => fileIds.includes(x))
     : filesArray;
+
   return filteredFilesArray;
 }
 
