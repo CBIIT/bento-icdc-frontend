@@ -363,6 +363,8 @@ class ServerPaginatedTableView extends React.Component {
         this.props.tableDownloadCSV && (
         <CSVDownloadToolbar
           tableDownloadCSV={this.props.tableDownloadCSV}
+          unifiedViewCaseIds={this.props.unifiedViewCaseIds}
+          unifiedViewFlag={this.props.unifiedViewFlag}
           queryCustomVaribles={this.props.queryCustomVaribles}
         />
         )
