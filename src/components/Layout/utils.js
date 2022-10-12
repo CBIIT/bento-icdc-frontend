@@ -9,7 +9,12 @@ import React from 'react';
 import _ from 'lodash';
 import { ReduxDataDictionary, getModelExploreData } from 'model-explorer';
 import store from '../../store';
-import { filterConfig, pdfDownloadConfig, readMeConfig } from '../../bento/dataDictionaryData';
+import {
+  filterConfig,
+  pdfDownloadConfig,
+  readMeConfig,
+  controlVocabConfig,
+} from '../../bento/dataDictionaryData';
 import env from '../../utils/env';
 
 const DATA_MODEL = env.REACT_APP_DATA_MODEL;
@@ -29,6 +34,7 @@ async function getData() {
             readMeUrl: DATA_MODEL_README,
             readMeTitle: readMeConfig.title,
           },
+          ctrlVocabConfig: controlVocabConfig,
         },
       }),
       store.dispatch({

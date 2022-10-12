@@ -7,7 +7,7 @@ import {
   Track,
   Display,
   ViewTrack,
-} from 'bento-components';
+} from 'bento-jbrowse';
 import {
   assemblyNames,
   UriLocation,

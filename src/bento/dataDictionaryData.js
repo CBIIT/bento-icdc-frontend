@@ -166,7 +166,7 @@ export const facetFilterOptions = [
 ];
 
 export const controlVocabConfig = {
-  maxNoOfItems: 15,
+  maxNoOfItems: 10,
   maxNoOfItemDlgBox: 30,
 };
 
