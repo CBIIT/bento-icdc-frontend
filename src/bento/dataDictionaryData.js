@@ -187,3 +187,7 @@ export const pdfDownloadConfig = {
   prefix: 'ICDC_Data_Model_',
   landscape: 'true',
 };
+
+export const readMeConfig = {
+  title: 'Understanding the ICDC Data Model',
+};
