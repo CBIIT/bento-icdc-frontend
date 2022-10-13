@@ -16,6 +16,7 @@ import {
   controlVocabConfig,
 } from '../../bento/dataDictionaryData';
 import env from '../../utils/env';
+import { Typography } from '../Wrappers/Wrappers';
 
 const DATA_MODEL = env.REACT_APP_DATA_MODEL;
 const DATA_MODEL_PROPS = env.REACT_APP_DATA_MODEL_PROPS;
@@ -46,6 +47,17 @@ async function getData() {
 }
 
 const ModelExplorer = () => {
+  if (!DATA_MODEL || !DATA_MODEL_PROPS || !DATA_MODEL_README) {
+    return (
+      <Typography variant="h4" color="error" size="sm">
+        <ul>
+          {(!DATA_MODEL) && (<li>Provided URL for Data model </li>)}
+          {(!DATA_MODEL_PROPS) && (<li>Provided URL for Data model Properties</li>)}
+          {(!DATA_MODEL_README) && (<li>Provided URL for Data model ReadMe</li>)}
+        </ul>
+      </Typography>
+    );
+  }
   getData();
   return (
     <ReduxDataDictionary pdfDownloadConfig={pdfDownloadConfig} />
