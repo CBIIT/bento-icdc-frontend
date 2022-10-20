@@ -51,20 +51,6 @@ const theme = {
         textDecoration: 'underline',
       },
     },
-    MuiBox: {
-      root: {
-        color: 'red',
-        bottom: '3px',
-        display: 'inline-flex',
-        position: 'relative',
-        verticalAlign: 'middle',
-        '&#cartCounter': {
-          marginTop: '-10px',
-          display: 'block',
-          float: 'right',
-        },
-      },
-    },
     MuiTooltip: {
       toottip: {
         borderRadius: '8%',
@@ -84,6 +70,14 @@ const theme = {
           lineHeight: '18px',
           paddingBottom: '5px',
         },
+        '&#viewAllCases': {
+          color: '#DC762F',
+          fontAize: '15px',
+          textDecoration: 'underline',
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        },
       },
     },
     MuiList: {
@@ -91,19 +85,31 @@ const theme = {
         listStyleType: 'none',
         padding: '0px',
       },
+      padding: {
+        paddingBottom: '0px',
+      },
     },
     MuiListItem: {
       root: {
         padding: '0px',
       },
       gutters: {
-        fontSize: '14px',
+        fontSize: '15px',
         lineHeight: '18px',
         paddingTop: '1px',
         paddingBottom: '1px',
+        lineSpacing: '19pt',
         paddingLeft: '0px',
         paddingRight: '0px',
         justifyContent: 'center',
+        textDecoration: 'underline',
+        '&:hover': {
+          textDecoration: 'underline',
+        },
+        '& .caseLink': {
+          fontAize: '15px',
+          color: '#DC762F',
+        },
       },
     },
   },
@@ -389,36 +395,32 @@ const TabView = ({
     const caseID = value;
     return (
       <>
-        <Typography align="center" color="inherit" id="descripText" className={classes.descripText}>
+        <Typography align="center" color="inherit" id="descripText">
           {multiStudyData.toolTipText}
         </Typography>
-        <div className={classes.casesText} style={{ marginTop: '-10px' }}>
+        <Box component="div" style={{ marginTop: '-10px' }}>
           <List>
             {tableMeta.map((elem, elemIdx) => (
               <ListItem className={classes.ul} key={elemIdx}>
-                <li>
-                  <Link className={classes.link} href={`/#/case/${elem}`}>
-                    <Typography align="center" className={classes.multiStudyTooltip}>
-                      {`Case: ${elem}`}
-                    </Typography>
-                  </Link>
-                </li>
+                <Link class="caseLink" className={classes.link} href={`/#/case/${elem}`}>
+                  <Typography align="center">
+                    {`Case: ${elem}`}
+                  </Typography>
+                </Link>
               </ListItem>
             ))}
           </List>
-          <div className={classes.dashboardLink}>
-            <Link
-              rel="noreferrer"
-              color="inherit"
-              href={`/#/unifiedView/${caseID}`}
-              className={classes.link}
-            >
-              <Typography align="center" className={classes.multiStudyTooltip}>
-                View All Related Cases
-              </Typography>
-            </Link>
-          </div>
-        </div>
+          <Link
+            rel="noreferrer"
+            class="caseLink"
+            href={`/#/unifiedView/${caseID}`}
+            className={classes.link}
+          >
+            <Typography align="center" id="viewAllCases">
+              View All Related Cases
+            </Typography>
+          </Link>
+        </Box>
       </>
     );
   };
@@ -432,8 +434,9 @@ const TabView = ({
           placement="bottom"
           interactive
           classes={{ tooltip: customStyle, arrow: classes.customArrow }}
-          id="customTooltip"
-          style={{ borderRadius: '8%' }}
+          borderRadius="8%"
+          padding="auto"
+          maxWidth="250px"
         >
           <Box component="span" id="badge">
             <StudyCount length={tableMeta.length} />
