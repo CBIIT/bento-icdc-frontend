@@ -1,15 +1,12 @@
 import React, { useRef, useEffect } from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+// import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import {
   // Badge,
   Grid,
   IconButton,
-  Typography,
+  // Typography,
   withStyles,
   Link,
-  Box,
-  List,
-  ListItem,
 } from '@material-ui/core';
 // import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
@@ -21,7 +18,7 @@ import {
   GET_SAMPLES_OVERVIEW_QUERY,
   GET_CASES_OVERVIEW_QUERY,
   tooltipContent,
-  multiStudyData,
+  // multiStudyData,
   tabContainers,
 } from '../../../bento/dashboardTabData';
 import {
@@ -36,103 +33,9 @@ import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 import updateColumns, { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
 import DocumentDownload from '../../../components/DocumentDownload';
 import ViewJBrowseButton from '../../JbrowseDetail/components/JBrowseViewBtn';
+import MultiStudyToolTip from './multiStudyTooltip';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
-
-const theme = {
-  overrides: {
-    MuiLink: {
-      root: {
-        color: '#DC762F',
-        fontSize: '15px',
-        fontFmily: 'Open Sans',
-        fontWeight: 'bold',
-        lineSpacing: '19pt',
-        textDecoration: 'underline',
-      },
-    },
-    MuiTooltip: {
-      toottip: {
-        borderRadius: '8%',
-        padding: 'auto',
-        maxWidth: '250px',
-        '&#customTooltip': {
-          borderRadius: '8%',
-        },
-      },
-    },
-    MuiTypography: {
-      root: {
-        '&#descripText': {
-          fontWeight: '600',
-          fontSize: '14px',
-          letterSpacing: '0.05px',
-          lineHeight: '18px',
-          paddingBottom: '5px',
-        },
-        '&#viewAllCases': {
-          color: '#DC762F',
-          fontAize: '15px',
-          textDecoration: 'underline',
-          '&:hover': {
-            textDecoration: 'underline',
-          },
-        },
-      },
-    },
-    MuiList: {
-      root: {
-        listStyleType: 'none',
-        padding: '0px',
-      },
-      padding: {
-        paddingBottom: '0px',
-      },
-    },
-    MuiListItem: {
-      root: {
-        padding: '0px',
-      },
-      gutters: {
-        fontSize: '15px',
-        lineHeight: '18px',
-        paddingTop: '1px',
-        paddingBottom: '1px',
-        lineSpacing: '19pt',
-        paddingLeft: '0px',
-        paddingRight: '0px',
-        justifyContent: 'center',
-        textDecoration: 'underline',
-        '&:hover': {
-          textDecoration: 'underline',
-        },
-        '& .caseLink': {
-          fontAize: '15px',
-          color: '#DC762F',
-        },
-      },
-    },
-  },
-};
-
-const customStyle = {
-  customTooltip: {
-    borderRadius: '8%',
-    padding: 'auto',
-    maxWidth: '250px',
-  },
-  cartCounter: {
-    marginTop: '-5px',
-    display: 'block',
-    float: 'right',
-  },
-};
-
-const StudyCount = ({ length }) => (
-  <Box component="span" id="cartCounter" style={customStyle.cartCounter}>
-    {length + 1}
-  </Box>
-);
 
 // const StyledBadge = withStyles(() => ({
 //   badge: {
@@ -391,79 +294,24 @@ const TabView = ({
     serverTableRowCount: selectedRowInfo.length,
   };
 
-  const renderMultiStudyTooltipText = (tableMeta, value) => {
-    const caseID = value;
-    return (
-      <>
-        <Typography align="center" color="inherit" id="descripText">
-          {multiStudyData.toolTipText}
-        </Typography>
-        <Box component="div" style={{ marginTop: '-10px' }}>
-          <List>
-            {tableMeta.map((elem, elemIdx) => (
-              <ListItem className={classes.ul} key={elemIdx}>
-                <Link class="caseLink" className={classes.link} href={`/#/case/${elem}`}>
-                  <Typography align="center">
-                    {`Case: ${elem}`}
-                  </Typography>
-                </Link>
-              </ListItem>
-            ))}
-          </List>
-          <Link
-            rel="noreferrer"
-            class="caseLink"
-            href={`/#/unifiedView/${caseID}`}
-            className={classes.link}
-          >
-            <Typography align="center" id="viewAllCases">
-              View All Related Cases
-            </Typography>
-          </Link>
-        </Box>
-      </>
-    );
-  };
-
-  const toolTipIcon = (tableMeta, value) => (
-    <MuiThemeProvider theme={theme}>
-      <Box style={{ marginLeft: '5px' }}>
-        <Tooltip
-          title={renderMultiStudyTooltipText(tableMeta, value)}
-          renderComponent={renderMultiStudyTooltipText(tableMeta, value)}
-          placement="bottom"
-          interactive
-          classes={{ tooltip: customStyle, arrow: classes.customArrow }}
-          borderRadius="8%"
-          padding="auto"
-          maxWidth="250px"
-        >
-          <Box component="span" id="badge">
-            <StudyCount length={tableMeta.length} />
-            <img
-              src={multiStudyData.icon}
-              alt={multiStudyData.alt}
-              style={{ height: '2em' }}
-            />
-          </Box>
-        </Tooltip>
-      </Box>
-    </MuiThemeProvider>
-  );
-
   const customLink = (path, column, value, tableMeta) => (
-    <MuiThemeProvider theme={createTheme(theme)}>
-      <div className={classes.caseIdContainer} style={{ display: 'flex' }}>
-        <Link className={classes.link} href={`/#${path}/${value}`}>
-          {value}
-        </Link>
-        {
-          (column.dataField === 'case_id' && !unifiedViewFlag)
-          && hasMultiStudyParticipants(tableMeta.rowData[1])
-          && toolTipIcon(tableMeta.rowData[1], value)
-        }
-      </div>
-    </MuiThemeProvider>
+    <div className={classes.caseIdContainer} style={{ display: 'flex' }}>
+      <Link href={`/#${path}/${value}`}>
+        {value}
+      </Link>
+      {
+        (column.dataField === 'case_id' && !unifiedViewFlag)
+        && hasMultiStudyParticipants(tableMeta.rowData[1])
+        && (
+          <>
+            <MultiStudyToolTip
+              tableMeta={tableMeta.rowData[1]}
+              value={value}
+            />
+          </>
+        )
+      }
+    </div>
   );
 
   const getPath = (dataField) => (dataField === 'case_id' ? '/case' : '/study');
@@ -613,18 +461,6 @@ const TabView = ({
 };
 
 const styles = () => ({
-
-  link: {
-    color: '#DC762F',
-    lineSpacing: '19pt',
-    fontWeight: 'bold',
-    fontFamily: 'Open Sans',
-    fontSize: '15px',
-    textDecoration: 'underline',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
   cartCounter: {
     position: 'relative',
     top: '-4px',

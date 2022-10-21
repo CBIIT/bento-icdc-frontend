@@ -95,8 +95,23 @@ export default ({
     },
   };
 
+  const MuiLink = {
+    root: {
+      fontSize: '15px',
+    },
+  };
+
+  overridesObj.MuiTypography = {
+    root: {
+      color: '#000000',
+      margin: '0',
+      fontSize: '14px',
+    },
+  };
+
   overridesObj.MuiTabs = MuiTabs;
   overridesObj.MuiTab = MuiTab;
+  overridesObj.MuiLink = MuiLink;
   overridesObj.PrivateTabIndicator = PrivateTabIndicator;
   overridesObj.MuiButton = {
     root: {
