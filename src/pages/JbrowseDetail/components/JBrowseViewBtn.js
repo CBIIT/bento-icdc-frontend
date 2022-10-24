@@ -1,4 +1,5 @@
 import React from 'react';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
@@ -26,6 +27,11 @@ import {
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
 import jbrowseLogo from '../../../assets/icons/JbrowseViewIcon2.svg';
+
+const customTheme = {
+  override: {
+  },
+};
 
 const ViewJBrowseButton = ({
   customClass,
@@ -59,12 +65,12 @@ const ViewJBrowseButton = ({
   );
 
   const renderTooltipContent = () => (
-    <>
+    <MuiThemeProvider theme={createTheme(customTheme)}>
       <Typography align="center" color="inherit" className={classes.descripText}>
         {(isInactive || disable) ? tooltipMsg1
           : (isInvlaid) ? <InValidToottipMsg /> : tooltipMsg2}
       </Typography>
-    </>
+    </MuiThemeProvider>
   );
   return (
     <>
@@ -152,6 +158,12 @@ const styles = () => ({
   warning: {
     color: '#971818',
     fontWeight: '900',
+  },
+  descripText: {
+    fontSize: '0.75rem',
+    fontWeight: '600',
+    lineHeight: '1.6',
+    fontFamily: 'Open Sans',
   },
 });
 
