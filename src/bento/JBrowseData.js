@@ -39,7 +39,7 @@ export const tooltipContent = {
 
 export const jbrowseIconSrc = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/jbrowseIcons/jbrowseLogo.svg';
 
-export const tooltipMsg1 = 'Select Compatible Files';
+export const tooltipMsg1 = 'Select compatible files';
 
 export const tooltipMsg2 = 'View selected files in Jbrowse, up to 3 files max';
 
