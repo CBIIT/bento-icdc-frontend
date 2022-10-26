@@ -7,7 +7,7 @@
 /* eslint-disable no-restricted-syntax */
 import React from 'react';
 import _ from 'lodash';
-import { ReduxDataDictionary, getModelExploreData } from 'model-explorer';
+import { ReduxDataDictionary, getModelExploreData } from 'data-model-navigator';
 import store from '../../store';
 import {
   filterConfig,
