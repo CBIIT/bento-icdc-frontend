@@ -8,8 +8,8 @@ export default {
   footerLogoSubText: 'at the National Institutes of Health',
   footerLogoHyperlink: 'https://www.cancer.gov/',
   // footerStaticText: 'NIH … Turning Discovery Into Health®',
-  // version: env.REACT_APP_FE_VERSION,
-  // BEversion: env.REACT_APP_BE_VERSION || '14.5.1',
+  version: env.REACT_APP_FE_VERSION,
+  BEversion: env.REACT_APP_BE_VERSION || '14.5.1',
   // A maximum of 3 Subsections (link_sections) are allowed
   // A maximum of 4 Subsection Links ('items' under link_sections) are allowed
   // A maximum of 4 Anchor Links (global_footer_links) are allowed
@@ -43,6 +43,7 @@ export default {
     },
     {
       title: 'System Info',
+      systemInfoInLinkSection: true,
       items: [
         {
           text: 'Resource',
