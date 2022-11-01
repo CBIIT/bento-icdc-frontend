@@ -20,18 +20,15 @@ import {
   tabContainers,
   DASHBOARD_QUERY,
   FILTER_QUERY,
-  FILTER_GROUP_QUERY,
   GET_FILES_OVERVIEW_QUERY,
   GET_SAMPLES_OVERVIEW_QUERY,
   GET_CASES_OVERVIEW_QUERY,
   GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
   GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
-  GET_FILES_OVERVIEW_DESC_QUERY,
-  GET_SAMPLES_OVERVIEW_DESC_QUERY,
-  GET_CASES_OVERVIEW_DESC_QUERY,
-  GET_FILE_IDS_FROM_FILE_NAME,
+  GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
   tabIndex,
+  GET_STUDY_CODE,
   GET_FILES_NAME_QUERY,
 } from '../../../bento/dashboardTabData';
 
@@ -93,7 +90,7 @@ const initialState = {
 };
 
 // HELPERS
-const getState = () => store.getState()[storeKey];
+export const getState = () => store.getState()[storeKey];
 
 const SUNBURST_COLORS = [
   '#1F4B87',
@@ -103,6 +100,14 @@ const SUNBURST_COLORS = [
 
 function shouldFetchDataForDashboardTabDataTable(state) {
   return !(state.isFetched);
+}
+
+// Custom function for mergeWith
+// eslint-disable-next-line consistent-return
+function customizer(objValue, srcValue) {
+  if (_.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
 }
 
 function setDataCaseSelected(result) {
@@ -195,12 +200,20 @@ function getWidgetsInitData(data, widgetsInfoFromCustConfig) {
   return donut;
 }
 
+function allFilters() {
+  const emptyFilters = facetSearchData.reduce((acc, facet) => (
+    { ...acc, [facet.datafield]: [] }
+  ), {});
+  return emptyFilters;
+}
+
 function fetchDashboardTab() {
   return () => {
     store.dispatch({ type: 'REQUEST_DASHBOARDTAB' });
     return client
       .query({
         query: DASHBOARD_QUERY,
+        variables: allFilters(),
       })
       .then((result) => store.dispatch({ type: 'RECEIVE_DASHBOARDTAB', payload: _.cloneDeep(result) }))
       .catch((error) => store.dispatch(
@@ -228,13 +241,6 @@ export function clearSectionSort(groupName) {
       groupName,
     },
   });
-}
-
-function allFilters() {
-  const emptyFilters = facetSearchData.reduce((acc, facet) => (
-    { ...acc, [facet.datafield]: [] }
-  ), {});
-  return emptyFilters;
 }
 
 /**
@@ -291,15 +297,17 @@ function createFilterVariables(data) {
 const querySwitch = (payload, tabContainer) => {
   switch (payload) {
     case ('Cases'):
-      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_CASES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
+      return { QUERY: GET_CASES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
     case ('Samples'):
-      return { QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : GET_SAMPLES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
+      return { QUERY: GET_SAMPLES_OVERVIEW_QUERY, sortfield: tabContainer.defaultSortField || '', sortDirection: tabContainer.defaultSortDirection || '' };
     default:
       return {
-        QUERY: tabContainer.defaultSortDirection === 'desc' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_FILES_OVERVIEW_QUERY,
+        QUERY: GET_FILES_OVERVIEW_QUERY,
         sortfield: tabContainer.defaultSortField || '',
         sortDirection: tabContainer.defaultSortDirection || '',
         association: tabContainer.associations,
+        ...(tabContainer.paginationAPIField === 'fileOverview'
+        && tabContainer.name === 'StudyFiles' ? { file_level: ['study'] } : { file_level: ['case'] }),
       };
   }
 };
@@ -328,28 +336,34 @@ const getQueryAndDefaultSort = (payload = tabIndex[0].title) => {
 
 export function fetchDataForDashboardTab(
   payload,
-  subjectIDsAfterFilter = null,
-  sampleIDsAfterFilter = null,
-  fileIDsAfterFilter = null,
-  studyFileIDsAfterFilter = null,
+  filters = null,
 ) {
   const {
     QUERY,
     sortfield,
     sortDirection,
-    association,
+    // eslint-disable-next-line camelcase
+    file_level,
   } = getQueryAndDefaultSort(payload);
-  const fileIds = (payload === tabIndex[3].title) ? studyFileIDsAfterFilter
-    : fileIDsAfterFilter;
+  // const fileIds = (payload === tabIndex[3].title) ? studyFileIDsAfterFilter
+  //   : fileIDsAfterFilter;
+  const activeFilters = filters === null
+    ? (getState().allActiveFilters !== {}
+      ? {
+        ...getState().allActiveFilters,
+        ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
+      }
+      : allFilters()) : filters;
+
   return client
     .query({
       query: QUERY,
       variables: {
-        case_ids: subjectIDsAfterFilter,
-        sample_ids: sampleIDsAfterFilter,
-        file_uuids: fileIds,
+        ...activeFilters,
         order_by: sortfield || '',
-        file_association: association,
+        sort_direction: sortDirection || 'ASC',
+        // eslint-disable-next-line camelcase
+        ...(file_level && { file_level }),
       },
     })
     .then((result) => store.dispatch({ type: 'UPDATE_CURRRENT_TAB_DATA', payload: { currentTab: payload, sortDirection, ..._.cloneDeep(result) } }))
@@ -374,11 +388,14 @@ export async function getFileNamesByFileIds(fileIds, association) {
 export async function tableHasSelections() {
   let selectedRowInfo = [];
   let filteredIds = [];
+
   const association = (getState().currentActiveTab === tabIndex[2].title)
     ? tabContainers[2].associations : tabContainers[3].associations;
   const fileIds = (getState().currentActiveTab === tabIndex[3].title)
     ? getState().filteredStudyFileIds : getState().filteredFileIds;
+
   const filteredNames = await getFileNamesByFileIds(fileIds, association);
+
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:
       filteredIds = filteredNames;
@@ -409,19 +426,38 @@ export async function tableHasSelections() {
   ).length > 0;
 }
 
+const getFileLevel = (activeTab) => {
+  switch (activeTab) {
+    case 'Files':
+      return ['case'];
+    case 'StudyFiles':
+      return ['study'];
+    default:
+      return [];
+  }
+};
+
 /**
  * Gets all file ids for active subjectIds.
  * TODO this  functtion can use filtered file IDs except for initial load
  * @param obj fileCoubt
  * @return {json}
  */
-export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
-  const association = getState().currentActiveTab === tabIndex[2].title
-    ? tabContainers[2].associations : tabContainers[3].associations;
-  const caseIds = getState().filteredSubjectIds;
-  const sampleIds = getState().filteredSampleIds;
+export async function fetchAllFileIDsForSelectAll(
+  fileCount = 100000,
+  isUnifiedView,
+  unifiedViewCaseIds,
+) {
+  // const association = getState().currentActiveTab === tabIndex[2].title
+  //   ? tabContainers[2].associations : tabContainers[3].associations;
+  // const caseIds = getState().filteredSubjectIds;
+  // const sampleIds = getState().filteredSampleIds;
   const fileIds = (getState().currentActiveTab === tabIndex[3].title)
     ? getState().filteredStudyFileIds : getState().filteredFileIds;
+
+  const activeFilters = getState().allActiveFilters !== {}
+    ? getState().allActiveFilters : allFilters();
+
   const SELECT_ALL_QUERY = getState().currentActiveTab === tabIndex[0].title
     ? GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL
     : getState().currentActiveTab === tabIndex[1].title
@@ -432,22 +468,25 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
     .query({
       query: SELECT_ALL_QUERY,
       variables: {
-        case_ids: caseIds,
-        sample_ids: sampleIds,
-        file_uuids: fileIds,
+        ...activeFilters,
+        file_level: getFileLevel(getState().currentActiveTab),
         first: fileCount,
-        file_association: association,
+        ...(isUnifiedView && { case_ids: unifiedViewCaseIds }),
+        ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
       },
     })
     .then((result) => {
       const RESULT_DATA = (getState().currentActiveTab === tabIndex[2].title
         || getState().currentActiveTab === tabIndex[3].title) ? 'fileOverview'
-        : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverviewPaged';
+        : getState().currentActiveTab === tabIndex[1].title ? 'sampleOverview' : 'caseOverview';
+
       const fileIdsFromQuery = RESULT_DATA === 'fileOverview' ? result.data[RESULT_DATA].map((item) => ({
         files: [item.file_uuid],
       })) : result.data[RESULT_DATA] || [];
+
       return fileIdsFromQuery;
     });
+
   // Restaruting the result Bringing {files} to files
   const filesArray = fetchResult.reduce((accumulator, currentValue) => {
     const { files } = currentValue;
@@ -463,6 +502,7 @@ export async function fetchAllFileIDsForSelectAll(fileCount = 100000) {
   const filteredFilesArray = fileIds != null
     ? filesArray.filter((x) => fileIds.includes(x))
     : filesArray;
+
   return filteredFilesArray;
 }
 
@@ -501,44 +541,47 @@ function sortByCheckboxItemsByCount(checkboxData) {
   return sortByCheckboxByIsChecked(checkboxData);
 }
 
-async function getFileIDsByFileName(file_name = [], offset = 0.0, first = 100000, order_by = 'file_name') {
-  const data = await client
-    .query({
-      query: GET_FILE_IDS_FROM_FILE_NAME,
-      variables: {
-        file_name,
-        offset,
-        first,
-        order_by,
-      },
-    })
-    .then((result) => {
-      if (result && result.data && result.data.fileIdsFromFileNameDesc.length > 0) {
-        return result.data.fileIdsFromFileNameDesc.map((d) => d.file_uuid);
-      }
-      return [];
-    });
-  return data;
-}
-
 async function getFileIDs(
   fileCount = 100000,
   SELECT_ALL_QUERY,
   caseIds = [],
   sampleIds = [],
+  fileName = [],
   cate,
 ) {
-  const fetchResult = await client
-    .query({
-      query: SELECT_ALL_QUERY,
-      variables: {
-        case_ids: caseIds,
-        sample_ids: sampleIds,
-        file_uuids: [],
-        first: fileCount,
-      },
-    })
-    .then((result) => result.data[cate] || []);
+  let fetchResult;
+  if (cate !== 'fileIdsFromFileName') {
+    fetchResult = await client
+      .query({
+        query: SELECT_ALL_QUERY,
+        variables: {
+          case_ids: caseIds,
+          sample_ids: sampleIds,
+          file_uuids: [],
+          first: fileCount,
+        },
+      })
+      .then((result) => result.data[cate] || []);
+  } else {
+    fetchResult = await client
+      .query({
+        query: SELECT_ALL_QUERY,
+        variables: {
+          file_name: fileName,
+          first: fileCount,
+        },
+      })
+      .then((result) => result.data[cate] || []);
+  }
+
+  if (cate === 'fileIdsFromFileName') {
+    return fetchResult.reduce((accumulator, currentValue) => {
+      // eslint-disable-next-line camelcase
+      const { file_uuid } = currentValue;
+      accumulator.push(file_uuid);
+      return accumulator;
+    }, []);
+  }
 
   return fetchResult.reduce((accumulator, currentValue) => {
     const { files } = currentValue;
@@ -550,16 +593,24 @@ async function getFileIDs(
   }, []);
 }
 
-function filterOutFileIds(fileIds) {
+function filterOutFileIds(fileIds, fileType) {
   // Removing fileIds that are not in our current list of filtered fileIds
-  const { filteredFileIds } = getState();
+  const { filteredFileIds, filteredStudyFileIds } = getState();
 
-  if (fileIds
+  if (fileType !== 'studyFiles' && fileIds
       && fileIds.length > 0
        && filteredFileIds
         && filteredFileIds != null
         && filteredFileIds.length > 0) {
     return fileIds.filter((x) => filteredFileIds.includes(x));
+  }
+
+  if (fileType === 'studyFiles' && fileIds
+  && fileIds.length > 0
+   && filteredFileIds
+    && filteredFileIds != null
+    && filteredFileIds.length > 0) {
+    return fileIds.filter((x) => filteredStudyFileIds.includes(x));
   }
   return fileIds;
 }
@@ -569,20 +620,22 @@ function filterOutFileIds(fileIds) {
  * @param obj fileCoubt
  * @return {json}
  */
+// eslint-disable-next-line no-unused-vars
 export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
   let filesIds = [];
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:
-      filesIds = await getFileIDsByFileName(selectedIds, offset, first, order_by);
-      return filesIds;
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL, [], [], selectedIds, 'fileIdsFromFileName');
+
+      return filterOutFileIds(filesIds, 'studyFiles');
     case tabIndex[2].title:
-      filesIds = await getFileIDsByFileName(selectedIds, offset, first, order_by);
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL, [], [], selectedIds, 'fileIdsFromFileName');
       break;
     case tabIndex[1].title:
-      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, 'sampleOverview');
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, [], 'sampleOverview');
       break;
     default:
-      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], 'caseOverviewPaged');
+      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], [], 'caseOverview');
   }
   return filterOutFileIds(filesIds);
 }
@@ -698,29 +751,33 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
       query: FILTER_QUERY,
       variables: { ...currentAllFilterVariables, first: 100 },
     })
-    .then((result) => client.query({ // request to get the filtered group counts
-      query: FILTER_GROUP_QUERY,
-      variables: { case_ids: result.data.searchCases.caseIds },
-    })
-      .then((result2) => store.dispatch({
-        type: 'TOGGGLE_CHECKBOX_WITH_API',
-        payload: {
-          filter: payload,
-          allFilters: currentAllFilterVariables,
-          groups: _.cloneDeep(result2),
-          ..._.cloneDeep(result),
-        },
-      }))
-      .then(() => store.dispatch({
-        type: 'SORT_ALL_GROUP_CHECKBOX',
-      }))
-      .catch((error) => store.dispatch(
-        { type: 'DASHBOARDTAB_QUERY_ERR', error },
-      )))
+    .then((result) => store.dispatch({
+      type: 'TOGGGLE_CHECKBOX_WITH_API',
+      payload: {
+        filter: payload,
+        allFilters: currentAllFilterVariables,
+        groups: _.cloneDeep(result),
+        ..._.cloneDeep(result),
+      },
+    }))
+    .then(() => store.dispatch({
+      type: 'SORT_ALL_GROUP_CHECKBOX',
+    }))
     .catch((error) => store.dispatch(
       { type: 'DASHBOARDTAB_QUERY_ERR', error },
     ));
 }
+
+function extractCode(groupString) {
+  const bracketIndex = groupString.indexOf('(');
+  const accessionId = groupString.slice(bracketIndex).slice(5);
+  const name = groupString.split(' ')[0];
+  const code = accessionId[0] === '-'
+    ? accessionId.substring(1, accessionId.length - 1)
+    : accessionId.substring(0, accessionId.length - 1);
+  return `${name} (${code})`;
+}
+
 /**
  * function to set code to checkbox Item (accession id) for filterCountByStudyCode likewise
  *
@@ -730,17 +787,18 @@ function toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables) {
 function setCodeToCheckBoxItem(checkboxData, item) {
   const checkBoxitems = [];
   const updateCheckBoxData = checkboxData;
-  item.data.filterCaseCountByStudyCode.forEach((filterItem) => {
+  item.data.searchCases.filterCaseCountByStudyCode.forEach((filterItem) => {
     checkboxData[1].checkboxItems.forEach((checkboxItem) => {
       if (filterItem.group === checkboxItem.name) {
         const updatecheckBoxItem = checkboxItem;
-        updatecheckBoxItem.code = (filterItem.code !== null) ? ` (${filterItem.code})` : filterItem.code;
+        updatecheckBoxItem.uiName = extractCode(filterItem.group);
         checkBoxitems.push(updatecheckBoxItem);
       }
     });
   });
   updateCheckBoxData[1].checkboxItems = checkBoxitems
     .sort((currentItem, previousItem) => currentItem.name.localeCompare(previousItem.name));
+
   return updateCheckBoxData;
 }
 /**
@@ -768,13 +826,31 @@ export async function setSingleFilter(payload) {
 }
 
 /**
+ * Returns stuy_code name and accession id to be passed on
+ * for a singleFilter payload
+ */
+export async function getAccessionId(payload) {
+  const response = await client
+    .query({
+      query: GET_STUDY_CODE,
+      variables: {
+        clinical_study_designation: payload[0].name,
+      },
+    })
+    .then((result) => result.data || {});
+  return response;
+}
+
+/**
  * Reducer for setting single checkbox filter
  * @param {object} payload
  * @return distpatcher
  */
 
 export async function singleCheckBox(payload) {
-  await setSingleFilter(payload);
+  const studyCode = await getAccessionId(payload);
+  const studyFilterVariable = `${studyCode.study[0].clinical_study_designation} (${studyCode.study[0].accession_id})`;
+  await setSingleFilter([{ ...payload[0], name: studyFilterVariable }]);
   const currentAllFilterVariables = payload === {} ? allFilters : createFilterVariables(payload);
   toggleCheckBoxWithAPIAction(payload, currentAllFilterVariables);
 }
@@ -896,11 +972,9 @@ so it contains more information and easy for front-end to show it correctly.
  * @return {json}
  */
 export function updateFilteredAPIDataIntoCheckBoxData(data, facetSearchDataFromConfig) {
-  // eslint-disable-next-line no-console
   return (
     // eslint-disable-next-line arrow-body-style
     facetSearchDataFromConfig.map((mapping) => {
-      // eslint-disable-next-line no-console
       // console.log('data from update', transformAPIDataIntoCheckBoxData(
       //   convertCasesToCount(data[mapping.filterAPI]),
       //   mapping.field,
@@ -962,26 +1036,22 @@ const reducers = {
   }),
   TOGGGLE_CHECKBOX_WITH_API: (state, item) => {
     const updatedCheckboxData1 = updateFilteredAPIDataIntoCheckBoxData(
-      item.data, facetSearchData,
+      item.data.searchCases, facetSearchData,
     );
     const checkboxData1 = setCodeToCheckBoxItem(setSelectedFilterValues(updatedCheckboxData1,
       item.allFilters), item);
     fetchDataForDashboardTab(state.currentActiveTab,
-      item.data.searchCases.caseIds, item.data.searchCases.sampleIds,
-      item.data.searchCases.fileIds, item.data.searchCases.studyFileIds);
+      item.allFilters);
     return {
       ...state,
       setSideBarLoading: false,
       allActiveFilters: item.allFilters,
-      filteredSubjectIds: item.data.searchCases.caseIds,
-      filteredSampleIds: item.data.searchCases.sampleIds,
-      filteredFileIds: item.data.searchCases.fileIds,
       filteredStudyFileIds: item.data.searchCases.studyFileIds,
       checkbox: {
         data: checkboxData1,
       },
       stats: getFilteredStat(item.data.searchCases, statsCount),
-      widgets: getWidgetsInitData(item.groups.data, widgetsData),
+      widgets: getWidgetsInitData(item.data.searchCases, widgetsData),
     };
   },
   UPDATE_CURRRENT_TAB_DATA: (state, item) => (
@@ -991,12 +1061,10 @@ const reducers = {
       currentActiveTab: item.currentTab,
       datatable: {
         ...state.datatable,
-        dataCase: item.sortDirection === 'desc' ? item.data.caseOverviewPagedDesc : item.data.caseOverviewPaged,
-        dataSample: item.sortDirection === 'desc' ? item.data.sampleOverviewDesc : item.data.sampleOverview,
-        dataFile: (item.currentTab === tabContainers[3].name) ? undefined : item.sortDirection === 'desc'
-          ? item.data.fileOverviewDesc : item.data.fileOverview,
-        dataStudyFile: (item.currentTab === tabContainers[2].name) ? undefined : item.sortDirection === 'desc'
-          ? item.data.fileOverviewDesc : item.data.fileOverview,
+        dataCase: item.data.caseOverview,
+        dataSample: item.data.sampleOverview,
+        dataFile: item.data.fileOverview,
+        dataStudyFile: item.data.fileOverview,
       },
     }
   ),
@@ -1038,9 +1106,9 @@ const reducers = {
     };
   },
   RECEIVE_DASHBOARDTAB: (state, item) => {
-    const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data,
+    const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data.searchCases,
       facetSearchData, 'count'), item);
-    fetchDataForDashboardTab(tabIndex[0].title, null, null, null, null);
+    fetchDataForDashboardTab(tabIndex[0].title, allFilters());
     return item.data
       ? {
         ...state.dashboard,
@@ -1050,7 +1118,7 @@ const reducers = {
         hasError: false,
         setSideBarLoading: false,
         error: '',
-        stats: getStatInit(item.data, statsCount),
+        stats: getStatInit(item.data.searchCases, statsCount),
         allActiveFilters: allFilters(),
         filteredSubjectIds: null,
         filteredSampleIds: null,
@@ -1065,7 +1133,7 @@ const reducers = {
         datatable: {
           filters: [],
         },
-        widgets: getWidgetsInitData(item.data, widgetsData),
+        widgets: getWidgetsInitData(item.data.searchCases, widgetsData),
         dataCaseSelected: {
           selectedRowInfo: [],
           selectedRowIndex: [],
@@ -1082,12 +1150,13 @@ const reducers = {
           selectedRowInfo: [],
           selectedRowIndex: [],
         },
+
         tooltip: getTooltipContent(item.data, tooltipFields),
       } : { ...state };
   },
   CLEAR_ALL_FILTER: (state, item) => {
-    const checkboxData = customCheckBox(item.data, facetSearchData, 'count');
-    fetchDataForDashboardTab(state.currentActiveTab, null, null, null, null);
+    const checkboxData = customCheckBox(item.data.searchCases, facetSearchData, 'count');
+    fetchDataForDashboardTab(tabIndex[0].title, allFilters());
     return item.data
       ? {
         ...state.dashboard,
@@ -1095,15 +1164,12 @@ const reducers = {
         isLoading: false,
         hasError: false,
         error: '',
-        stats: getStatInit(item.data, statsCount),
+        stats: getStatInit(item.data.searchCases, statsCount),
         allActiveFilters: allFilters(),
         filteredSubjectIds: null,
         filteredSampleIds: null,
         filteredFileIds: null,
         filteredStudyFileIds: null,
-        subjectOverView: {
-          data: item.data.subjectOverViewPaged,
-        },
         checkboxForAll: {
           data: checkboxData,
         },
@@ -1111,9 +1177,6 @@ const reducers = {
           data: checkboxData,
         },
         datatable: {
-          dataCase: item.data.subjectOverViewPaged,
-          dataSample: item.data.sampleOverview,
-          dataFile: item.data.fileOverview,
           filters: [],
         },
         dataCaseSelected: {
@@ -1131,7 +1194,7 @@ const reducers = {
         sortByList: {
           ...state.sortByList,
         },
-        widgets: getWidgetsInitData(item.data, widgetsData),
+        widgets: getWidgetsInitData(item.data.searchCases, widgetsData),
         tooltip: getTooltipContent(item.data, tooltipFields),
       } : { ...state };
   },
@@ -1191,8 +1254,8 @@ const reducers = {
     },
   }),
   CLEAR_ALL_FILTER_AND_TABLE_SELECTION: (state, item) => {
-    const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data, facetSearchData, 'count'), item);
-    fetchDataForDashboardTab(state.currentActiveTab, null, null, null, null);
+    const checkboxData = setCodeToCheckBoxItem(customCheckBox(item.data.searchCases, facetSearchData, 'count'), item);
+    fetchDataForDashboardTab(tabIndex[0].title, allFilters());
     return item.data
       ? {
         ...state.dashboard,
@@ -1200,15 +1263,12 @@ const reducers = {
         isLoading: false,
         hasError: false,
         error: '',
-        stats: getStatInit(item.data, statsCount),
+        stats: getStatInit(item.data.searchCases, statsCount),
         allActiveFilters: allFilters(),
         filteredSubjectIds: null,
         filteredSampleIds: null,
         filteredFileIds: null,
         filteredStudyFileIds: null,
-        subjectOverView: {
-          data: item.data.subjectOverViewPaged,
-        },
         checkboxForAll: {
           data: checkboxData,
         },
@@ -1216,9 +1276,6 @@ const reducers = {
           data: checkboxData,
         },
         datatable: {
-          dataCase: item.data.subjectOverViewPaged,
-          dataSample: item.data.sampleOverview,
-          dataFile: item.data.fileOverview,
           filters: [],
         },
         dataCaseSelected: {
@@ -1240,7 +1297,7 @@ const reducers = {
         sortByList: {
           ...state.sortByList,
         },
-        widgets: getWidgetsInitData(item.data, widgetsData),
+        widgets: getWidgetsInitData(item.data.searchCases, widgetsData),
         tooltip: getTooltipContent(item.data, tooltipFields),
       } : { ...state };
   },

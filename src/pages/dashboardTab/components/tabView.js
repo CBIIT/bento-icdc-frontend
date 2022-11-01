@@ -7,6 +7,9 @@ import {
   Typography,
   withStyles,
   Link,
+  Box,
+  List,
+  ListItem,
 } from '@material-ui/core';
 // import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
@@ -17,13 +20,16 @@ import {
   GET_FILES_OVERVIEW_QUERY,
   GET_SAMPLES_OVERVIEW_QUERY,
   GET_CASES_OVERVIEW_QUERY,
-  GET_FILES_OVERVIEW_DESC_QUERY,
-  GET_SAMPLES_OVERVIEW_DESC_QUERY,
-  GET_CASES_OVERVIEW_DESC_QUERY,
   tooltipContent,
   multiStudyData,
+  tabContainers,
 } from '../../../bento/dashboardTabData';
-import { clearTableSelections, fetchAllFileIDs, getFilesCount } from '../store/dashboardReducer';
+import {
+  clearTableSelections,
+  fetchAllFileIDs,
+  getFilesCount,
+  getState,
+} from '../store/dashboardReducer';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
@@ -32,9 +38,6 @@ import DocumentDownload from '../../../components/DocumentDownload';
 import ViewJBrowseButton from '../../JbrowseDetail/components/JBrowseViewBtn';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
-
-// Due to cypher limitation we have to send seperate query get descending list
-const getOverviewDescQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_DESC_QUERY);
 
 const theme = {
   overrides: {
@@ -48,8 +51,82 @@ const theme = {
         textDecoration: 'underline',
       },
     },
+    MuiBox: {
+      root: {
+        color: 'red',
+        bottom: '3px',
+        display: 'inline-flex',
+        position: 'relative',
+        verticalAlign: 'middle',
+        '&#cartCounter': {
+          marginTop: '-10px',
+          display: 'block',
+          float: 'right',
+        },
+      },
+    },
+    MuiTooltip: {
+      toottip: {
+        borderRadius: '8%',
+        padding: 'auto',
+        maxWidth: '250px',
+        '&#customTooltip': {
+          borderRadius: '8%',
+        },
+      },
+    },
+    MuiTypography: {
+      root: {
+        '&#descripText': {
+          fontWeight: '600',
+          fontSize: '14px',
+          letterSpacing: '0.05px',
+          lineHeight: '18px',
+          paddingBottom: '5px',
+        },
+      },
+    },
+    MuiList: {
+      root: {
+        listStyleType: 'none',
+        padding: '0px',
+      },
+    },
+    MuiListItem: {
+      root: {
+        padding: '0px',
+      },
+      gutters: {
+        fontSize: '14px',
+        lineHeight: '18px',
+        paddingTop: '1px',
+        paddingBottom: '1px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        justifyContent: 'center',
+      },
+    },
   },
 };
+
+const customStyle = {
+  customTooltip: {
+    borderRadius: '8%',
+    padding: 'auto',
+    maxWidth: '250px',
+  },
+  cartCounter: {
+    marginTop: '-5px',
+    display: 'block',
+    float: 'right',
+  },
+};
+
+const StudyCount = ({ length }) => (
+  <Box component="span" id="cartCounter" style={customStyle.cartCounter}>
+    {length + 1}
+  </Box>
+);
 
 // const StyledBadge = withStyles(() => ({
 //   badge: {
@@ -93,13 +170,13 @@ const TabView = ({
   TopMessageStatus,
   count,
   api,
+  fileLevel,
   displayViewJBowseBtn,
   disableViewJBowseBtn,
   paginationAPIField,
   paginationAPIFieldDesc,
   dataKey,
-  filteredSubjectIds,
-  filteredSampleIds,
+  allFilters,
   filteredFileIds,
   filteredStudyFileIds,
   defaultSortCoulmn,
@@ -109,10 +186,12 @@ const TabView = ({
   setRowSelection,
   selectedRowInfo = [],
   selectedRowIndex = [],
+  // eslint-disable-next-line no-unused-vars
   tableHasSelections,
   unifiedViewFlag,
+  unifiedViewCaseIds,
   tabIndex,
-  association,
+  // association,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
@@ -148,8 +227,8 @@ const TabView = ({
       buildButtonStyle(button, ActiveSaveButtonDefaultStyle);
     }
   };
-  async function updateButtonStatus() {
-    const status = await tableHasSelections();
+
+  async function updateButtonStatus(status) {
     if (!status) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);
@@ -162,19 +241,22 @@ const TabView = ({
   useEffect(() => {
     initSaveButtonDefaultStyle(saveButton);
     initSaveButtonDefaultStyle(saveButton2);
-    updateButtonStatus();
+    updateButtonStatus(selectedRowInfo.length > 0);
   });
 
   async function exportFiles() {
     const selectedIDs = await fetchAllFileIDs(getFilesCount(), selectedRowInfo);
+
     // Find the newly added files by comparing
     const selectFileIds = ((tabIndex === 3) && filteredStudyFileIds !== null)
       ? selectedIDs.filter((x) => filteredStudyFileIds.includes(x))
       : ((tabIndex === 2) && filteredFileIds != null)
         ? selectedIDs.filter((x) => filteredFileIds.includes(x)) : selectedIDs;
+
     const newFileIDS = fileIDs !== null ? selectFileIds.filter(
       (e) => !fileIDs.find((a) => e === a),
     ).length : selectedIDs.length;
+
     if (cartWillFull(newFileIDS)) {
       // throw an alert
       setCartIsFull(true);
@@ -225,6 +307,10 @@ const TabView = ({
       }, [],
     );
 
+    // check if displayed data is equal
+    const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+    const { currentActiveTab, dataStudyFileSelected, dataFileSelected } = getState();
     // reduce the state chagne, when newSelectedRowIndex and newSelectedRowInfo is same as previous.
     if (_.differenceWith(
       newSelectedRowIndex,
@@ -246,10 +332,31 @@ const TabView = ({
         newSelectedRowIndex,
         _.isEqual,
       ).length !== 0) {
-      setRowSelection({
-        selectedRowInfo: newSelectedRowInfo,
-        selectedRowIndex: newSelectedRowIndex,
-      });
+      if ((currentActiveTab === tabContainers[0].name
+        || currentActiveTab === tabContainers[1].name)
+        && !isEqual(newSelectedRowInfo, dataFileSelected.selectedRowInfo)
+        && !isEqual(newSelectedRowInfo, dataStudyFileSelected.selectedRowInfo)) {
+        setRowSelection({
+          selectedRowInfo: newSelectedRowInfo,
+          selectedRowIndex: newSelectedRowIndex,
+        });
+      }
+
+      if (currentActiveTab === tabContainers[2].name
+        && !isEqual(newSelectedRowInfo, dataStudyFileSelected.selectedRowInfo)) {
+        setRowSelection({
+          selectedRowInfo: newSelectedRowInfo,
+          selectedRowIndex: newSelectedRowIndex,
+        });
+      }
+
+      if (currentActiveTab === tabContainers[3].name
+        && !isEqual(newSelectedRowInfo, dataFileSelected.selectedRowInfo)) {
+        setRowSelection({
+          selectedRowInfo: newSelectedRowInfo,
+          selectedRowIndex: newSelectedRowIndex,
+        });
+      }
     }
   }
 
@@ -282,30 +389,28 @@ const TabView = ({
     const caseID = value;
     return (
       <>
-        <Typography align="center" color="inherit" className={classes.descripText}>
+        <Typography align="center" color="inherit" id="descripText" className={classes.descripText}>
           {multiStudyData.toolTipText}
         </Typography>
-
-        <div className={classes.casesText}>
-          {tableMeta.map((elem, elemIdx) => (
-            <ul className={classes.ul} key={elemIdx}>
-              <li>
-                <Link className={classes.link} to={`case/${elem}`}>
-                  <Typography align="center" className={classes.multiStudyTooltip}>
-                    {`Case: ${elem}`}
-                  </Typography>
-                </Link>
-              </li>
-            </ul>
-          ))}
-
+        <div className={classes.casesText} style={{ marginTop: '-10px' }}>
+          <List>
+            {tableMeta.map((elem, elemIdx) => (
+              <ListItem className={classes.ul} key={elemIdx}>
+                <li>
+                  <Link className={classes.link} href={`/#/case/${elem}`}>
+                    <Typography align="center" className={classes.multiStudyTooltip}>
+                      {`Case: ${elem}`}
+                    </Typography>
+                  </Link>
+                </li>
+              </ListItem>
+            ))}
+          </List>
           <div className={classes.dashboardLink}>
             <Link
               rel="noreferrer"
               color="inherit"
-              to={{
-                pathname: `/unifiedView/${caseID}`,
-              }}
+              href={`/#/unifiedView/${caseID}`}
               className={classes.link}
             >
               <Typography align="center" className={classes.multiStudyTooltip}>
@@ -313,45 +418,49 @@ const TabView = ({
               </Typography>
             </Link>
           </div>
-
         </div>
       </>
     );
   };
 
   const toolTipIcon = (tableMeta, value) => (
-    <Tooltip
-      title={renderMultiStudyTooltipText(tableMeta, value)}
-      placement="bottom"
-      interactive
-      classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
-    >
-      <span className={classes.badge}>
-        <img
-          className={classes.cartIcon}
-          src={multiStudyData.icon}
-          alt={multiStudyData.alt}
-        />
-        <span className={classes.cartCounter}>
-          {tableMeta.length + 1}
-        </span>
-      </span>
-    </Tooltip>
+    <MuiThemeProvider theme={theme}>
+      <Box style={{ marginLeft: '5px' }}>
+        <Tooltip
+          title={renderMultiStudyTooltipText(tableMeta, value)}
+          renderComponent={renderMultiStudyTooltipText(tableMeta, value)}
+          placement="bottom"
+          interactive
+          classes={{ tooltip: customStyle, arrow: classes.customArrow }}
+          id="customTooltip"
+          style={{ borderRadius: '8%' }}
+        >
+          <Box component="span" id="badge">
+            <StudyCount length={tableMeta.length} />
+            <img
+              src={multiStudyData.icon}
+              alt={multiStudyData.alt}
+              style={{ height: '2em' }}
+            />
+          </Box>
+        </Tooltip>
+      </Box>
+    </MuiThemeProvider>
   );
 
   const customLink = (path, column, value, tableMeta) => (
-    <div className={classes.caseIdContainer}>
-      <MuiThemeProvider theme={createTheme(theme)}>
+    <MuiThemeProvider theme={createTheme(theme)}>
+      <div className={classes.caseIdContainer} style={{ display: 'flex' }}>
         <Link className={classes.link} href={`/#${path}/${value}`}>
           {value}
         </Link>
-      </MuiThemeProvider>
-      {
-        (column.dataField === 'case_id' && !unifiedViewFlag)
-        && hasMultiStudyParticipants(tableMeta.rowData[1])
-        && toolTipIcon(tableMeta.rowData[1], value)
-      }
-    </div>
+        {
+          (column.dataField === 'case_id' && !unifiedViewFlag)
+          && hasMultiStudyParticipants(tableMeta.rowData[1])
+          && toolTipIcon(tableMeta.rowData[1], value)
+        }
+      </div>
+    </MuiThemeProvider>
   );
 
   const getPath = (dataField) => (dataField === 'case_id' ? '/case' : '/study');
@@ -384,6 +493,8 @@ const TabView = ({
           toggleMessageStatus={toggleMessageStatus}
           selectAllToolTipStatus={selectAllToolTipStatus}
           tabIndex={tabIndex}
+          unifiedViewFlag={unifiedViewFlag}
+          unifiedViewCaseIds={unifiedViewCaseIds}
         />
         <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
         <button
@@ -428,19 +539,16 @@ const TabView = ({
             columns={columns}
             options={finalOptions}
             count={count}
+            fileLevel={fileLevel}
             overview={getOverviewQuery(api)}
-            overviewDesc={getOverviewDescQuery(api)}
             paginationAPIField={paginationAPIField}
             paginationAPIFieldDesc={paginationAPIFieldDesc}
-            queryCustomVaribles={{
-              case_ids: filteredSubjectIds,
-              sample_ids: filteredSampleIds,
-              file_uuids: (tabIndex === '3') ? filteredStudyFileIds : filteredFileIds,
-              file_association: association,
-            }}
+            queryCustomVaribles={allFilters}
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
             tableDownloadCSV={tableDownloadCSV}
+            unifiedViewFlag={unifiedViewFlag}
+            unifiedViewCaseIds={unifiedViewCaseIds}
             components={{
               Tooltip,
             }}
@@ -485,7 +593,7 @@ const TabView = ({
         <div style={{ position: 'relative' }}>
           <Link
             rel="noreferrer"
-            to={(location) => ({ ...location, pathname: '/fileCentricCart' })}
+            href="/#/fileCentricCart"
             color="inherit"
             className={classes.cartlink}
           >
@@ -513,11 +621,6 @@ const styles = () => ({
     '&:hover': {
       textDecoration: 'underline',
     },
-  },
-  cartIcon: {
-    height: '24px',
-    width: '24px',
-    margin: '0px 0px 0px 6px',
   },
   cartCounter: {
     position: 'relative',

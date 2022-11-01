@@ -14,16 +14,19 @@ const defaultToolbarStyles = {
 };
 
 const CustomToolbar = ({
-  classes, tableDownloadCSV, queryCustomVaribles,
+  classes, tableDownloadCSV, queryCustomVaribles, unifiedViewCaseIds, unifiedViewFlag,
 }) => {
   async function fetchData() {
+    const variables = unifiedViewFlag
+      ? { first: 1000, ...{ case_ids: unifiedViewCaseIds } }
+      : {
+        first: 10000,
+        ...queryCustomVaribles,
+      };
     const fetchResult = await client
       .query({
         query: tableDownloadCSV.query,
-        variables: {
-          first: 10000,
-          ...queryCustomVaribles,
-        },
+        variables,
       })
       .then((result) => result.data[tableDownloadCSV.apiVariable]);
     return fetchResult;

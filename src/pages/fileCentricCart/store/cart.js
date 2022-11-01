@@ -38,7 +38,6 @@ const subscribe = (f) => {
     () => lastState !== getState() && f((lastState = getState())),
   );
 };
-/* eslint-disable no-return-assign */
 
 // actions
 export const addToCart = (item) => store.dispatch({ type: 'addFiles', payload: item });
@@ -95,6 +94,7 @@ const reducers = {
       ) : previousFileIds;
 
     // store ids in the localstorage.
+    localStorage.setItem('data', []);
     localStorage.setItem('CartFileIds', JSON.stringify(uniqueFileIds) || []);
 
     return {
@@ -102,6 +102,7 @@ const reducers = {
       fileIds: uniqueFileIds,
       sortColumn: localStorage.getItem('sortColumn'),
       sortDirection: localStorage.getItem('sortDirection'),
+      displayData: undefined,
     };
   },
   selectedFiles: (state, item) => ({
@@ -131,6 +132,7 @@ const reducers = {
         fileIds: fileIdsAfterDeletion,
         sortColumn: sortColumnValue,
         sortDirection: sortDirectionValue,
+        displayData: undefined,
       };
     }
     if (dataLength === 1 && page !== 0) {
@@ -160,6 +162,7 @@ const reducers = {
     fileIds: JSON.parse(localStorage.getItem('CartFileIds')) || [],
     sortColumn: localStorage.getItem('sortColumn'),
     sortDirection: localStorage.getItem('sortDirection'),
+    displayData: undefined,
   }),
   readyCart: (state) => state,
 };

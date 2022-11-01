@@ -45,6 +45,7 @@ export const manifestData = {
   header: ['Study Code', 'Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'],
 };
 
+export const myFileViewFlag = true;
 // --------------- File table configuration --------------
 
 export const table = {
@@ -63,6 +64,25 @@ export const table = {
     {
       dataField: 'file_name',
       header: 'File Name',
+    },
+    {
+      dataField: 'access_file',
+      header: 'Access',
+      sort: 'asc',
+      display: true,
+      downloadDocument: true,
+      documentDownloadProps: {
+        maxFileSize: 12000000,
+        toolTipTextFileDownload: 'Download a copy of this file',
+        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+        fileSizeColumn: 'file_size',
+        fileFormatColumn: 'file_format',
+        fileLocationColumn: 'file_uuid',
+        caseIdColumn: 'file_name',
+        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+      },
     },
     {
       dataField: 'file_type',
@@ -85,25 +105,6 @@ export const table = {
       header: 'Size',
       // set formatBytes to true to display file size (in bytes) in a more human readable format
       formatBytes: true,
-    },
-    {
-      dataField: 'access_file',
-      header: 'Access',
-      sort: 'asc',
-      display: true,
-      downloadDocument: true,
-      documentDownloadProps: {
-        maxFileSize: 12000000,
-        toolTipTextFileDownload: 'Download a copy of this file',
-        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
-        fileSizeColumn: 'file_size',
-        fileFormatColumn: 'file_format',
-        fileLocationColumn: 'file_uuid',
-        caseIdColumn: 'file_name',
-        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
-      },
     },
     {
       dataField: 'sample_id',
