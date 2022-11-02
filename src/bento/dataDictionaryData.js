@@ -166,7 +166,7 @@ export const facetFilterOptions = [
 ];
 
 export const controlVocabConfig = {
-  maxNoOfItems: 15,
+  maxNoOfItems: 10,
   maxNoOfItemDlgBox: 30,
 };
 
@@ -186,4 +186,8 @@ export const pdfDownloadConfig = {
   fileType: 'pdf',
   prefix: 'ICDC_Data_Model_',
   landscape: 'true',
+};
+
+export const readMeConfig = {
+  title: 'Understanding the ICDC Data Model',
 };
