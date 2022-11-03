@@ -1,6 +1,7 @@
 import env from '../utils/env';
 
 export const navBarstyling = {
+  cart: {},
   global: {
     backgroundColor: '#0B3557',
     height: '39px',

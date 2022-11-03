@@ -226,6 +226,8 @@ const styles = (theme) => ({
     maxWidth: 'calc(100% - 250px)',
     position: 'relative',
     marginLeft: '20px',
+    height: '1100px',
+    overflowY: 'scroll',
   },
   content: {
     // padding: theme.spacing.unit * 3,
