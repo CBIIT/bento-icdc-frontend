@@ -101,7 +101,8 @@ const ViewJBrowseButton = ({
       <Tooltip
         title={renderTooltipContent()}
         placement="right"
-        maxWidth={250}
+        maxWidth={230}
+        arrow
       >
         <IconButton className={classes.helpIconButton} id={JBROWSE_HELP_ICON_BTN}>
           <img
@@ -163,6 +164,7 @@ const styles = () => ({
     fontSize: '0.75rem',
     fontWeight: '600',
     lineHeight: '1.6',
+    textAlign: 'left',
     fontFamily: 'Open Sans',
   },
 });
