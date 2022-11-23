@@ -20,7 +20,7 @@ import { Typography } from '../Wrappers/Wrappers';
 
 const DATA_MODEL = env.REACT_APP_DATA_MODEL;
 const DATA_MODEL_PROPS = env.REACT_APP_DATA_MODEL_PROPS;
-const DATA_MODEL_README = env.REACT_APP_DMN_README;
+let DATA_MODEL_README = env.REACT_APP_DMN_README;
 
 async function getData() {
   const response = await getModelExploreData(DATA_MODEL, DATA_MODEL_PROPS);
@@ -47,6 +47,9 @@ async function getData() {
 }
 
 // added for demo - will be replaced with ReadMe file url for DMN
+if (!DATA_MODEL_README) {
+  DATA_MODEL_README = 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/data-model-navigator/header.md';
+}
 
 const ModelExplorer = () => {
   if (!DATA_MODEL || !DATA_MODEL_PROPS || !DATA_MODEL_README) {
