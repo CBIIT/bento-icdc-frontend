@@ -186,6 +186,10 @@ export const pdfDownloadConfig = {
   fileType: 'pdf',
   prefix: 'ICDC_Data_Model_',
   landscape: 'true',
+  catagoryIcon: {
+    url: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/DMN/Pdf/',
+    type: '.png',
+  },
 };
 
 export const readMeConfig = {
