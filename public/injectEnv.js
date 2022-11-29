@@ -13,5 +13,5 @@ window.injectedEnv = {
   REACT_APP_DATA_MODEL_PROPS: 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/develop/model-desc/icdc-model-props.yml',
   REACT_APP_LANDING_DATA: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/landingView.yaml',
   REACT_APP_NEWS_DATA: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/newsView.yaml',
-  REACT_APP_DMN_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/data-model-navigator/header.md',
+  REACT_APP_DMN_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/Data_Model_Navigator_README.md',
 };
