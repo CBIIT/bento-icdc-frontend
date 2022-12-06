@@ -263,11 +263,25 @@ const LandingView = ({
                           <LineText text={item.content.callToActionDescription} />
                         </div>
                         <div className={classes.headerButtonSection}>
-                          <Link to={item.content.callToActionLink} className={classes.headerLink}>
-                            <Button className={classes.headerButton}>
-                              {item.content.callToActionButtonText}
-                            </Button>
-                          </Link>
+                          {
+                              item.content.externalLink ? (
+                                <a href={item.content.callToActionLink} target="_blank" rel="noreferrer" className={classes.headerLink}>
+                                  <Button className={classes.headerButton}>
+                                    {item.content.callToActionButtonText}
+                                  </Button>
+                                </a>
+                              ) : (
+                                <Link
+                                  to={item.content.callToActionLink}
+                                  className={classes.headerLink}
+                                >
+                                  <Button className={classes.headerButton}>
+                                    {item.content.callToActionButtonText}
+                                  </Button>
+                                </Link>
+                              )
+                            }
+
                         </div>
                       </Grid>
                       <Grid
@@ -278,37 +292,37 @@ const LandingView = ({
                         xs={12}
                       >
                         { (index === 0) && (
-                          <div>
-                            <div className={classes.animationContainer}>
-                              <SlideDown className={classes.dog}>
-                                <img className={classes.dogImg} src={dogImg} width="320px" alt="Dog" />
-                              </SlideDown>
-                              <SlideUp className={classes.human}>
-                                <img className={classes.humanImg} src={humanImg} width="320px" alt="human" />
-                              </SlideUp>
-                              <Star className={classes.star}>
-                                <img className={classes.starImg} src={starImg} alt="star" />
-                                <img className={classes.starImg} src={flare} alt="flare" />
-                              </Star>
-                            </div>
+                        <div>
+                          <div className={classes.animationContainer}>
+                            <SlideDown className={classes.dog}>
+                              <img className={classes.dogImg} src={dogImg} width="320px" alt="Dog" />
+                            </SlideDown>
+                            <SlideUp className={classes.human}>
+                              <img className={classes.humanImg} src={humanImg} width="320px" alt="human" />
+                            </SlideUp>
+                            <Star className={classes.star}>
+                              <img className={classes.starImg} src={starImg} alt="star" />
+                              <img className={classes.starImg} src={flare} alt="flare" />
+                            </Star>
                           </div>
+                        </div>
                         )}
                         { (index === 1) && (
-                        <div className={classes.datadictionaryContainer}>
-                          <img src={item.content.image} alt="icdc_studies" />
-                        </div>
+                          <div className={classes.datadictionaryContainer}>
+                            <img src={item.content.image} alt="icdc_studies" />
+                          </div>
                         )}
                         { (index === 2) && (
-                        <div className={classes.carouselImgContainer}>
-                          <img src={item.content.image} alt="icdc_studies" />
-                        </div>
+                          <div className={classes.carouselImgContainer}>
+                            <img src={item.content.image} alt="icdc_studies" />
+                          </div>
                         )}
                         { (index === 3)
-                            && generateSpotlightContent(
-                              item.content.template,
-                              classes,
-                              item.content[item.content.template],
-                            )}
+                              && generateSpotlightContent(
+                                item.content.template,
+                                classes,
+                                item.content[item.content.template],
+                              )}
                       </Grid>
                     </Grid>
                   </TabPanel>
