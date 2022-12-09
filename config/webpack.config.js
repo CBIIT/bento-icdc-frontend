@@ -291,7 +291,32 @@ module.exports = function(webpackEnv) {
       rules: [
         // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
-
+        // parsing fails for on optional operator without this cofiguration.
+        // reactflow uses optionsl chaning and nullish coalescing operator 
+        // that webpack 4 is unable to prase by default
+        {
+          test: /node_modules\/@reactflow\/controls|minimap|node-toolbar|core\/dist\/esm\/index.js/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    modules: false,
+                    corejs: 3,
+                    useBuiltIns: "usage",
+                    include: [
+                      "@babel/plugin-proposal-optional-chaining", 
+                      "@babel/plugin-proposal-nullish-coalescing-operator"
+                    ],
+                    targets: "last 5 Chrome versions, last 5 Firefox versions",
+                  },
+                ]
+              ],
+            },
+          },
+        },
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
         {
@@ -335,7 +360,7 @@ module.exports = function(webpackEnv) {
                 customize: require.resolve(
                   'babel-preset-react-app/webpack-overrides'
                 ),
-                
+                presets: ["@babel/preset-env", "@babel/preset-react"],
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
@@ -360,7 +385,7 @@ module.exports = function(webpackEnv) {
             // Unlike the application JS, we only compile the standard ES features.
             {
               test: /\.(js|mjs)$/,
-              exclude: /@babel(?:\/|\\{1,2})runtime/,
+              exclude: /@babel(?:\/|\\{1,2})runtime|@reactflow\/controls|minimap|node-toolbar|core\/dist\/esm\/index.js/,
               loader: require.resolve('babel-loader'),
               options: {
                 babelrc: false,
