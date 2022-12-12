@@ -79,6 +79,7 @@ const ViewJBrowseButton = ({
         to={{
           pathname: `/jbroswse/${MULTI_FILES_VIEW}`,
         }}
+        target="_blank"
       >
         <Button
           className={(isInvlaid || disable)
