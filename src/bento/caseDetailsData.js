@@ -160,6 +160,11 @@ export const table2 = {
       header: 'Sample ID',
     },
     {
+      dataField: 'file_name',
+      header: 'File Name',
+      viewColumns: false,
+    },
+    {
       dataField: '',
       header: 'Access',
       sort: 'asc',
@@ -179,21 +184,8 @@ export const table2 = {
       },
     },
     {
-      dataField: 'file_name',
-      header: 'File Name',
-      viewColumns: false,
-    },
-    {
       dataField: 'file_type',
       header: 'File Type',
-    },
-    {
-      dataField: 'parent',
-      header: 'Association',
-    },
-    {
-      dataField: 'file_description',
-      header: 'Description',
     },
     {
       dataField: 'file_format',
@@ -204,6 +196,14 @@ export const table2 = {
       header: 'Size',
       // set formatBytes to true to display file size (in bytes) in a more human readable format
       formatBytes: true,
+    },
+    {
+      dataField: 'parent',
+      header: 'Association',
+    },
+    {
+      dataField: 'file_description',
+      header: 'Description',
     },
     {
       dataField: 'uuid',
