@@ -337,17 +337,23 @@ export const tabContainers = [
         },
       },
       {
-        dataField: 'file_uuid',
-        header: 'File uuid',
+        dataField: 'file_format',
+        header: 'Format',
         sort: 'asc',
-        primary: true,
-        display: false,
+        display: true,
       },
       {
         dataField: 'file_type',
         header: 'File Type',
         sort: 'asc',
         display: true,
+      },
+      {
+        dataField: 'file_size',
+        header: 'Size',
+        sort: 'asc',
+        display: true,
+        formatBytes: true,
       },
       {
         dataField: 'association',
@@ -360,19 +366,6 @@ export const tabContainers = [
         header: 'Description',
         sort: 'asc',
         display: true,
-      },
-      {
-        dataField: 'file_format',
-        header: 'Format',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'file_size',
-        header: 'Size',
-        sort: 'asc',
-        display: true,
-        formatBytes: true,
       },
       {
         dataField: 'sample_id',
@@ -399,6 +392,13 @@ export const tabContainers = [
         header: 'Diagnosis',
         sort: 'asc',
         display: true,
+      },
+      {
+        dataField: 'file_uuid',
+        header: 'File uuid',
+        sort: 'asc',
+        primary: true,
+        display: false,
       },
       {
         dataField: 'study_code',
