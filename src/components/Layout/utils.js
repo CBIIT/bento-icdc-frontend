@@ -36,7 +36,13 @@ async function getData() {
             readMeTitle: readMeConfig.title,
           },
           ctrlVocabConfig: controlVocabConfig,
+          pdfDownloadConfig,
         },
+      }),
+      store.dispatch({
+        type: 'REACT_FLOW_GRAPH_DICTIONARY',
+        dictionary: response.data,
+        pdfDownloadConfig,
       }),
       store.dispatch({
         type: 'RECEIVE_VERSION_INFO',
