@@ -79,7 +79,7 @@ export const navBarData = [
 
     dropDownLinks: [
       {
-        labelText: 'Model Explorer',
+        labelText: 'Model Navigator',
         link: '/icdc-data-model',
         linkActiveStyle: 'white',
       },
