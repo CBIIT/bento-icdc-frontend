@@ -101,7 +101,7 @@ export const navBarData = [
 
     dropDownLinks: [
       {
-        labelText: 'GraphQl',
+        labelText: 'GraphQL',
         link: '/graphql',
         linkActiveStyle: 'white',
       },
