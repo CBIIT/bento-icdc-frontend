@@ -46,8 +46,8 @@ export default {
       systemInfoInLinkSection: true,
       items: [
         {
-          text: 'Resource',
-          link: 'https://github.com/CBIIT/bento-icdc-frontend',
+          text: 'Release Notes',
+          link: 'https://github.com/CBIIT/bento-icdc-frontend/releases',
         },
         {
           text: `FE Version: ${env.REACT_APP_FE_VERSION}`,
@@ -62,7 +62,7 @@ export default {
       items: [
         {
           text: 'Disclaimer',
-          link: '/home',
+          link: 'https://www.cancer.gov/policies/disclaimer',
         },
         {
           text: 'Accessibility',
