@@ -7,6 +7,10 @@ import CustomThemeProvider from './FooterThemConfig';
 
 const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_API;
 
+const ICDC_FOOTER_STYLE = {
+  padding: '24px 294px 45px',
+};
+
 const ICDCFooter = () => {
   const [footerUpdatedData, setFooterUpdatedData] = useState(FooterData);
 
@@ -28,7 +32,7 @@ const ICDCFooter = () => {
   }, [FooterData]);
   return (
     <CustomThemeProvider>
-      <Footer data={footerUpdatedData} />
+      <Footer data={footerUpdatedData} styles={ICDC_FOOTER_STYLE} />
     </CustomThemeProvider>
   );
 };
