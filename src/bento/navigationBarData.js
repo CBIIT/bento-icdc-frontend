@@ -79,7 +79,7 @@ export const navBarData = [
 
     dropDownLinks: [
       {
-        labelText: 'Model Explorer',
+        labelText: 'Model Navigator',
         link: '/icdc-data-model',
         linkActiveStyle: 'white',
       },
@@ -101,7 +101,7 @@ export const navBarData = [
 
     dropDownLinks: [
       {
-        labelText: 'GraphQl',
+        labelText: 'GraphQL',
         link: '/graphql',
         linkActiveStyle: 'white',
       },
