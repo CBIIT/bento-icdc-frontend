@@ -14,6 +14,7 @@ import {
   pdfDownloadConfig,
   readMeConfig,
   controlVocabConfig,
+  graphViewConfig,
 } from '../../bento/dataDictionaryData';
 import env from '../../utils/env';
 import { Typography } from '../Wrappers/Wrappers';
@@ -37,6 +38,7 @@ async function getData() {
           },
           ctrlVocabConfig: controlVocabConfig,
           pdfDownloadConfig,
+          graphViewConfig,
         },
       }),
       store.dispatch({

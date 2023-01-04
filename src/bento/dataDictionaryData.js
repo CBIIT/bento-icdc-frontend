@@ -195,3 +195,17 @@ export const pdfDownloadConfig = {
 export const readMeConfig = {
   title: 'Understanding the ICDC Data Model',
 };
+
+export const graphViewConfig = {
+  legend: {
+  },
+  canvas: {
+    fit: {
+      x: 0,
+      y: 0,
+      zoom: 0.7,
+      minZoom: 0.7,
+      maxZoom: 2,
+    },
+  },
+};
