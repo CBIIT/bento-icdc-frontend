@@ -28,6 +28,12 @@ async function getData() {
   Promise.all(
     [
       store.dispatch({
+        type: 'REACT_FLOW_GRAPH_DICTIONARY',
+        dictionary: response.data,
+        pdfDownloadConfig,
+        graphViewConfig,
+      }),
+      store.dispatch({
         type: 'RECEIVE_DICTIONARY',
         payload: {
           data: response.data,
@@ -40,11 +46,6 @@ async function getData() {
           pdfDownloadConfig,
           graphViewConfig,
         },
-      }),
-      store.dispatch({
-        type: 'REACT_FLOW_GRAPH_DICTIONARY',
-        dictionary: response.data,
-        pdfDownloadConfig,
       }),
       store.dispatch({
         type: 'RECEIVE_VERSION_INFO',
