@@ -70,7 +70,6 @@ const DocumentDownload = ({
           to={{
             pathname: `/jbroswse/${SINGLE_FILE_VIEW}`,
           }}
-          target="_blank"
           className={classes.JBrowseLink}
         >
           <img alt="jbrowse" src={jbrowseLogo} className={classes.jbrowseIcon} />
