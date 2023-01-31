@@ -204,7 +204,7 @@ export const graphViewConfig = {
   canvas: {
     fit: {
       x: 0,
-      y: 0,
+      y: 20,
       zoom: 0.7,
       minZoom: 0.7,
       maxZoom: 2,
