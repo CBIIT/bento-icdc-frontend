@@ -27,6 +27,7 @@ import {
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
 import jbrowseLogo from '../../../assets/icons/JbrowseViewIcon2.svg';
+import './index.css';
 
 const customTheme = {
   override: {
@@ -75,9 +76,6 @@ const ViewJBrowseButton = ({
   return (
     <>
       <Link
-        style={{
-          textDecoration: 'none !important',
-        }}
         className={(isInvlaid || disable) ? classes.diableLink : classes.activeLink}
         to={{
           pathname: `/jbroswse/${MULTI_FILES_VIEW}`,
