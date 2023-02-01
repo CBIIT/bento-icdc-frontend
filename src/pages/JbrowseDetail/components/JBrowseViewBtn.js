@@ -75,6 +75,9 @@ const ViewJBrowseButton = ({
   return (
     <>
       <Link
+        style={{
+          textDecoration: 'none !important',
+        }}
         className={(isInvlaid || disable) ? classes.diableLink : classes.activeLink}
         to={{
           pathname: `/jbroswse/${MULTI_FILES_VIEW}`,
