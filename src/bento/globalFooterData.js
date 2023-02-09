@@ -1,4 +1,10 @@
+import axios from 'axios';
 import env from '../utils/env';
+
+const getPrivacy = async () => {
+  const data = await (await axios.get('https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/privacy-policy/Privacy_Policy.md')).data;
+  return data;
+};
 
 export default {
   bg: '#325068',
@@ -75,6 +81,11 @@ export default {
         {
           text: 'HHS Vulnerability Disclosure',
           link: 'https://www.hhs.gov/vulnerability-disclosure-policy/index.html',
+        },
+        {
+          text: 'Privacy',
+          type: 'modal',
+          content: getPrivacy(),
         },
       ],
     },
