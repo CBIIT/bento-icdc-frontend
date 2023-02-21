@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { FileOnRowsSelect, getSelectedFileNames } from '../pages/caseDetails/fileTable';
+import { FileOnRowsSelect } from '../pages/caseDetails/fileTable';
 import { SampleOnRowsSelect } from '../pages/caseDetails/sampleFileTable';
 
 // --------------- Tooltip configuration --------------
@@ -125,7 +125,6 @@ export const table2 = {
   defaultSortDirection: 'asc',
   // Text to appear on Add to cart button
   buttonText: 'Add Selected Files',
-  displayViewJBowseBtn: true,
   saveButtonDefaultStyle: {
     color: '#fff',
     opacity: '1',
@@ -165,6 +164,35 @@ export const table2 = {
       viewColumns: false,
     },
     {
+      dataField: 'file_type',
+      header: 'File Type',
+    },
+    {
+      dataField: 'parent',
+      header: 'Association',
+    },
+    {
+      dataField: 'file_description',
+      header: 'Description',
+    },
+    {
+      dataField: 'file_format',
+      header: 'Format',
+    },
+    {
+      dataField: 'file_size',
+      header: 'Size',
+      // set formatBytes to true to display file size (in bytes) in a more human readable format
+      formatBytes: true,
+    },
+    {
+      dataField: 'uuid',
+      header: 'UUID',
+      display: false,
+      primary: true,
+      // set formatBytes to true to display file size (in bytes) in a more human readable format
+    },
+    {
       dataField: '',
       header: 'Access',
       sort: 'asc',
@@ -183,42 +211,12 @@ export const table2 = {
         iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
     },
-    {
-      dataField: 'file_type',
-      header: 'File Type',
-    },
-    {
-      dataField: 'file_format',
-      header: 'Format',
-    },
-    {
-      dataField: 'file_size',
-      header: 'Size',
-      // set formatBytes to true to display file size (in bytes) in a more human readable format
-      formatBytes: true,
-    },
-    {
-      dataField: 'parent',
-      header: 'Association',
-    },
-    {
-      dataField: 'file_description',
-      header: 'Description',
-    },
-    {
-      dataField: 'uuid',
-      header: 'UUID',
-      display: false,
-      primary: true,
-      // set formatBytes to true to display file size (in bytes) in a more human readable format
-    },
   ],
   optionalColumns: [
   ],
   // Util Functions
   // Custom function on selct checkbox is selected.
   customOnRowsSelect: FileOnRowsSelect,
-  selectedFileNames: getSelectedFileNames,
 };
 
 export const textLabels = {

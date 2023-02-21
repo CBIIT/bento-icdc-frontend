@@ -500,7 +500,6 @@ const CaseDetail = ({ classes, data }) => {
                       columns={tableTwoColumns}
                       options={{ ...tableTwoOptions, ...textLabels }}
                       customOnRowsSelect={table2.customOnRowsSelect}
-                      selectedFileNames={table2.selectedFileNames}
                       openSnack={openSnack}
                       closeSnack={closeSnack}
                       disableRowSelection={table2.disableRowSelection}
@@ -509,7 +508,6 @@ const CaseDetail = ({ classes, data }) => {
                       ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
                       DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
                       tooltipMessage={table2.tooltipMessage}
-                      displayViewJBowseBtn={table2.displayViewJBowseBtn}
                       tooltipContent={tooltipContent}
                       showtooltip
                       primaryKeyIndex={table2.primaryKeyIndex}

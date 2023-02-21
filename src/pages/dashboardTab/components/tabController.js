@@ -48,7 +48,7 @@ const tabController = ({ classes, unifiedViewData }) => {
   React.useEffect(() => {
     if (unifiedViewData) {
       prevMultistudyProp = unifiedViewData;
-      fetchDataForDashboardTab('Cases', { case_ids: unifiedViewData.caseIds });
+      fetchDataForDashboardTab('Cases', unifiedViewData.caseIds, unifiedViewData.sampleIds, unifiedViewData.fileIds, unifiedViewData.studyFileIds);
       const obj = {
         numberOfStudies: unifiedViewData.numberOfStudies,
         numberOfCases: unifiedViewData.numberOfCases,
@@ -114,16 +114,14 @@ const tabController = ({ classes, unifiedViewData }) => {
   // get stats data from store
   const dashboardStats = getDashboardStats();
 
-  // const filteredSubjectIds = useSelector((state) => (state.dashboardTab
-  //   && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : null));
-  // const filteredSampleIds = useSelector((state) => (state.dashboardTab
-  //   && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : null));
+  const filteredSubjectIds = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.filteredSubjectIds ? state.dashboardTab.filteredSubjectIds : null));
+  const filteredSampleIds = useSelector((state) => (state.dashboardTab
+    && state.dashboardTab.filteredSampleIds ? state.dashboardTab.filteredSampleIds : null));
   const filteredFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredFileIds ? state.dashboardTab.filteredFileIds : null));
   const filteredStudyFileIds = useSelector((state) => (state.dashboardTab
     && state.dashboardTab.filteredStudyFileIds ? state.dashboardTab.filteredStudyFileIds : null));
-  const allFilters = useSelector((state) => (state.dashboardTab
-      && state.dashboardTab.allActiveFilters ? state.dashboardTab.allActiveFilters : {}));
   const [TopMessageStatus, setTopMessageStatus] = React.useState({
     text: tooltipContent[currentTab],
     src: tooltipContent.icon,
@@ -204,15 +202,16 @@ const tabController = ({ classes, unifiedViewData }) => {
     }
     setCurrentTab(value);
     if (unifiedViewData) {
-      if (tabIndex[value].title === 'StudyFiles') {
-        fetchDataForDashboardTab(tabIndex[value].title,
-          { case_ids: unifiedViewData.caseIds, file_association: ['study'] });
-      } else {
-        fetchDataForDashboardTab(tabIndex[value].title,
-          { case_ids: unifiedViewData.caseIds });
-      }
+      fetchDataForDashboardTab(tabIndex[value].title,
+        unifiedViewData.caseIds,
+        unifiedViewData.sampleIds,
+        unifiedViewData.fileIds,
+        unifiedViewData.studyFileIds);
     } else {
-      fetchDataForDashboardTab(tabIndex[value].title);
+      fetchDataForDashboardTab(tabIndex[value].title,
+        filteredSubjectIds,
+        filteredSampleIds,
+        filteredFileIds, filteredStudyFileIds);
     }
   };
 
@@ -302,16 +301,6 @@ const tabController = ({ classes, unifiedViewData }) => {
     return { marginTop: marginTopValue };
   }
 
-  function getFileLevel(container) {
-    switch (container.name) {
-      case 'Files':
-        return ['case'];
-      case 'StudyFiles':
-        return ['study'];
-      default:
-        return [''];
-    }
-  }
   // Tab table Generator
   const TABContainers = tabContainers.map((container) => (
     <TabContainer id={container.id}>
@@ -319,14 +308,11 @@ const tabController = ({ classes, unifiedViewData }) => {
         options={getOptions(container, classes)}
         data={dashboard[container.dataField] ? dashboard[container.dataField] : 'undefined'}
         unifiedViewFlag={!!unifiedViewData}
-        unifiedViewCaseIds={unifiedViewData ? unifiedViewData.caseIds : []}
         customColumn={container}
         openSnack={openSnack}
         closeSnack={closeSnack}
         disableRowSelection={disableRowSelectionFunction[container.disableRowSelection]}
         buttonText={container.buttonText}
-        displayViewJBowseBtn={container.displayViewJBowseBtn}
-        disableViewJBowseBtn={container.disableViewJBowseBtn}
         addAllButtonText={container.addAllButtonText}
         tableID={container.tableID}
         saveButtonDefaultStyle={container.saveButtonDefaultStyle}
@@ -336,20 +322,20 @@ const tabController = ({ classes, unifiedViewData }) => {
         BottomMessageStatus={BottomMessageStatus}
         TopMessageStatus={TopMessageStatus}
         selectAllToolTipStatus={selectAllToolTipStatus}
-          // eslint-disable-next-line jsx-a11y/tabindex-no-positive
+        // eslint-disable-next-line jsx-a11y/tabindex-no-positive
         tabIndex={container.tabIndex}
         externalLinkIcon={externalLinkIcon}
         count={dashboardStats[container.count] ? getCount(container) : 0}
         api={container.api}
-        fileLevel={getFileLevel(container)}
         paginationAPIField={container.paginationAPIField}
         paginationAPIFieldDesc={container.paginationAPIFieldDesc}
         defaultSortCoulmn={container.defaultSortField || ''}
         defaultSortDirection={container.defaultSortDirection || 'asc'}
         dataKey={container.dataKey}
         tableHasSelections={tableHasSelections}
+        filteredSubjectIds={filteredSubjectIds}
+        filteredSampleIds={filteredSampleIds}
         filteredFileIds={filteredFileIds}
-        allFilters={allFilters}
         filteredStudyFileIds={filteredStudyFileIds}
         tableDownloadCSV={container.tableDownloadCSV || false}
         setRowSelection={getTableRowSelectionEvent()}

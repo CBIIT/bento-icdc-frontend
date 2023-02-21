@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import themes, { overrides } from '../../../themes';
 
 export default ({
@@ -42,19 +42,7 @@ export default ({
     overridesObj.MuiTablePagination.actions.marginRight = '32px';
     overridesObj.MUIDataTableFooter.root.borderBottom = tableBorder;
   }
-  overridesObj.MUIDataTableBodyCell = {
-    ...overridesObj.MUIDataTableBodyCell,
-    root: {
-      '& a': {
-        color: '#DC762F',
-        fontSize: '15px',
-        fontFmily: 'Open Sans',
-        fontWeight: 'bold',
-        lineSpacing: '19pt',
-        textDecoration: 'underline',
-      },
-    },
-  };
+
   const PrivateTabIndicator = {
     root: {
       transitionProperty: 'none',
@@ -95,44 +83,13 @@ export default ({
     },
   };
 
-  const MuiLink = {
-    root: {
-      fontSize: '15px',
-    },
-  };
-
-  overridesObj.MuiTypography = {
-    root: {
-      color: '#000000',
-      margin: '0',
-      fontSize: '14px',
-    },
-  };
-
   overridesObj.MuiTabs = MuiTabs;
   overridesObj.MuiTab = MuiTab;
-  overridesObj.MuiLink = MuiLink;
   overridesObj.PrivateTabIndicator = PrivateTabIndicator;
-  overridesObj.MuiButton = {
-    root: {
-      '&#jbrowse_multi_view_button': {
-        marginLeft: '22px',
-        height: '43px',
-        color: '#ffffff',
-        textTransform: 'inherit',
-      },
-    },
-  };
-  overridesObj.MuiIconButton = {
-    ...overridesObj.MuiIconButton,
-    root: {
-      padding: '5px',
-    },
-  };
 
   style.push(overridesObj);
 
-  const computedTheme = createTheme({ ...themesLight, ...overrides, ...style });
+  const computedTheme = createMuiTheme({ ...themesLight, ...overrides, ...style });
 
   return (
     <MuiThemeProvider theme={computedTheme}>

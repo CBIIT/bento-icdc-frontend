@@ -1,48 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_CASES_TAB = gql`
-query subjectOverViewPaged(
-  $case_ids: [String],
-  $biobank: [String],
-  $breed: [String],
-  $diagnosis: [String],
-  $disease_site: [String],
-  $file_association: [String],
-  $file_format: [String],
-  $file_type: [String],
-  $neutered_status: [String],
-  $program: [String],
-  $response_to_treatment: [String],
-  $sample_pathology: [String],
-  $sample_site: [String],
-  $sample_type: [String],
-  $sex: [String],
-  $stage_of_disease: [String],
-  $study: [String],
-  $study_participation: [String],
-  $study_type: [String],
-  $first: Int = 10000000){
-  caseOverview(
-    case_ids: $case_ids,
-    biobank: $biobank,
-    breed: $breed,
-    diagnosis: $diagnosis,
-    disease_site: $disease_site,
-    file_association: $file_association,
-    file_format: $file_format,
-    file_type: $file_type,
-    neutered_status: $neutered_status,
-    program: $program,
-    response_to_treatment: $response_to_treatment,
-    sample_pathology: $sample_pathology,
-    sample_site: $sample_site,
-    sample_type: $sample_type,
-    sex: $sex,
-    stage_of_disease: $stage_of_disease,
-    study: $study,
-    study_participation: $study_participation,
-    study_type: $study_type,
-    first: $first) {
+query subjectOverViewPaged($case_ids: [String], $first: Int = 10000000){
+  caseOverviewPaged(case_ids: $case_ids, first: $first) {
     case_id
     study_code
     study_type
@@ -117,59 +77,13 @@ export const customCasesTabDownloadCSV = {
     ...customCasesOptionalDataFields.header,
   ],
   query: GET_CASES_TAB,
-  apiVariable: 'caseOverview',
+  apiVariable: 'caseOverviewPaged',
   fileName: 'ICDC_Cases_download',
 };
 
 export const GET_SAMPLES_TAB = gql`
-query sampleOverview(
-  $case_ids: [String],
-  $sample_ids: [String],
-  $biobank: [String],
-  $breed: [String],
-  $diagnosis: [String],
-  $disease_site: [String],
-  $file_association: [String],
-  $file_format: [String],
-  $file_type: [String],
-  $neutered_status: [String],
-  $program: [String],
-  $response_to_treatment: [String],
-  $sample_pathology: [String],
-  $sample_site: [String],
-  $sample_type: [String],
-  $sex: [String],
-  $stage_of_disease: [String],
-  $study: [String],
-  $study_participation: [String],
-  $study_type: [String],
-  $offset: Int = 0,
-  $first: Int = 10,
-  $order_by:String =""){
-    sampleOverview(
-      case_ids: $case_ids,
-      sample_ids: $sample_ids,
-      biobank: $biobank,
-      breed: $breed,
-      diagnosis: $diagnosis,
-      disease_site: $disease_site,
-      file_association: $file_association,
-      file_format: $file_format,
-      file_type: $file_type,
-      neutered_status: $neutered_status,
-      program: $program,
-      response_to_treatment: $response_to_treatment,
-      sample_pathology: $sample_pathology,
-      sample_site: $sample_site,
-      sample_type: $sample_type,
-      sex: $sex,
-      stage_of_disease: $stage_of_disease,
-      study: $study,
-      study_participation: $study_participation,
-      study_type: $study_type,
-      offset: $offset,
-      first: $first,
-      order_by: $order_by) {
+query sampleOverview($sample_ids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
+    sampleOverview(sample_ids: $sample_ids, offset: $offset,first: $first, order_by: $order_by) {
       sample_id
       case_id
       breed
@@ -283,151 +197,8 @@ export const customSamplesTabDownloadCSV = {
 };
 
 export const GET_FILES_TAB = gql`
-query fileOverview(
-  $case_ids: [String],
-  $file_level: [String] = ["case"],
-  $biobank: [String],
-  $breed: [String],
-  $diagnosis: [String],
-  $disease_site: [String],
-  $file_association: [String],
-  $file_format: [String],
-  $file_type: [String],
-  $neutered_status: [String],
-  $program: [String],
-  $response_to_treatment: [String],
-  $sample_pathology: [String],
-  $sample_site: [String],
-  $sample_type: [String],
-  $sex: [String],
-  $stage_of_disease: [String],
-  $study: [String],
-  $study_participation: [String],
-  $study_type: [String],
-  $offset: Int = 0,
-  $first: Int = 10,
-  $order_by:String ="file_name"){
-    fileOverview(
-      case_ids: $case_ids,
-      biobank: $biobank,
-      breed: $breed,
-      diagnosis: $diagnosis,
-      disease_site: $disease_site,
-      file_association: $file_association,
-      file_format: $file_format,
-      file_type: $file_type,
-      neutered_status: $neutered_status,
-      program: $program,
-      response_to_treatment: $response_to_treatment,
-      sample_pathology: $sample_pathology,
-      sample_site: $sample_site,
-      sample_type: $sample_type,
-      sex: $sex,
-      stage_of_disease: $stage_of_disease,
-      study: $study,
-      study_participation: $study_participation,
-      study_type: $study_type,
-      file_level: $file_level,
-      offset: $offset,
-      first: $first,
-      order_by: $order_by) {
-      file_name
-      file_type
-      sample_id
-      association
-      file_description
-      file_format
-      file_size
-      case_id
-      breed
-      diagnosis
-      study_code
-      file_uuid
-      sample_site
-      physical_sample_type
-      general_sample_pathology
-      tumor_sample_origin
-      summarized_sample_type
-      specific_sample_pathology
-      date_of_sample_collection
-      tumor_grade
-      sample_chronology
-      percentage_tumor
-      necropsy_sample
-      sample_preservation
-      comment
-      individual_id
-      patient_age_at_enrollment
-      sex
-      neutered_indicator
-      weight
-      primary_disease_site
-      stage_of_disease
-      date_of_diagnosis
-      histology_cytopathology
-      histological_grade
-      best_response
-      pathology_report
-      treatment_data
-      follow_up_data
-      concurrent_disease
-      concurrent_disease_type
-      cohort_description
-      arm
-      other_cases
-    }
-  }
-`;
-
-export const GET_FILES_TAB_STUDY_FILES = gql`
-query fileOverview(
-  $case_ids: [String],
-  $file_level: [String] = ["study"],
-  $biobank: [String],
-  $breed: [String],
-  $diagnosis: [String],
-  $disease_site: [String],
-  $file_association: [String],
-  $file_format: [String],
-  $file_type: [String],
-  $neutered_status: [String],
-  $program: [String],
-  $response_to_treatment: [String],
-  $sample_pathology: [String],
-  $sample_site: [String],
-  $sample_type: [String],
-  $sex: [String],
-  $stage_of_disease: [String],
-  $study: [String],
-  $study_participation: [String],
-  $study_type: [String],
-  $offset: Int = 0,
-  $first: Int = 10,
-  $order_by:String ="file_name"){
-    fileOverview(
-      case_ids: $case_ids,
-      biobank: $biobank,
-      breed: $breed,
-      diagnosis: $diagnosis,
-      disease_site: $disease_site,
-      file_association: $file_association,
-      file_format: $file_format,
-      file_type: $file_type,
-      neutered_status: $neutered_status,
-      program: $program,
-      response_to_treatment: $response_to_treatment,
-      sample_pathology: $sample_pathology,
-      sample_site: $sample_site,
-      sample_type: $sample_type,
-      sex: $sex,
-      stage_of_disease: $stage_of_disease,
-      study: $study,
-      study_participation: $study_participation,
-      study_type: $study_type,
-      file_level: $file_level,
-      offset: $offset,
-      first: $first,
-      order_by: $order_by) {
+query fileOverview($file_uuids: [String], $file_association: String, $offset: Int = 0, $first: Int = 10, $order_by:String ="file_name"){
+    fileOverview(file_uuids: $file_uuids, file_association: $file_association, offset: $offset,first: $first, order_by: $order_by) {
       file_name
       file_type
       sample_id
@@ -579,7 +350,7 @@ export const customStudyFilesTabDownloadCSV = {
   header: [
     ...customStudyFilesTabCoreDataFields.header,
   ],
-  query: GET_FILES_TAB_STUDY_FILES,
+  query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
   fileName: 'ICDC_Study_Files_download',
 };

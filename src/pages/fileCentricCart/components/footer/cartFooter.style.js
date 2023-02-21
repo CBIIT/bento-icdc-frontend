@@ -61,8 +61,4 @@ export default () => ({
     width: '17px',
     zIndex: '600',
   },
-  buttonGroup: {
-    float: 'left',
-    marginRight: '10px',
-  },
 });

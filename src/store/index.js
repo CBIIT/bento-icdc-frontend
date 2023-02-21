@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { ddgraph, moduleReducers as submission, versionInfo } from 'data-model-navigator';
+import { ddgraph, moduleReducers as submission, versionInfo } from 'model-explorer';
 import layout from '../components/Layout/LayoutState';
 import stats from '../components/Stats/StatsState';
 

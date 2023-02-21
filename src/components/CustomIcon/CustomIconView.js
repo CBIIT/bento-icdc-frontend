@@ -1,14 +1,9 @@
 import React from 'react';
 import { withStyles, Icon } from '@material-ui/core';
 
-const Logo = ({
-  imgSrc,
-  imgAlt = 'Logo alt text',
-  classes,
-  styles,
-}) => (
+const Logo = ({ imgSrc, imgAlt = 'Logo alt text', classes }) => (
   <Icon>
-    <img src={imgSrc} className={classes.root} styles={styles} alt={imgAlt} />
+    <img src={imgSrc} className={classes.root} alt={imgAlt} />
   </Icon>
 );
 
@@ -17,7 +12,7 @@ const styles = () => ({
     width: '1em',
     height: '1em',
     position: 'relative',
-    left: '15%',
+    left: '25%',
     display: 'inline-block',
     flexShrink: 0,
   },

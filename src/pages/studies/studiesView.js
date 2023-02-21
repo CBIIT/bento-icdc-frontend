@@ -28,7 +28,6 @@ const Studies = ({ classes, data, invalid }) => {
       ? state.dashboardTab.isOverlayOpen : false));
 
   const tableOptions = getOptions(pageData.table, classes);
-
   const embargoToolTipIcon = () => (
     <Tooltip title="Under Embargo" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
@@ -113,7 +112,7 @@ const Studies = ({ classes, data, invalid }) => {
         return `${value} Publication(s)`;
       default:
         return generateCRDCLinks(
-          data.studiesByProgram.filter((study) => study.accession_id === accessionId)[0].links,
+          data.studiesByProgram.filter((study) => study.accession_id === accessionId)[0].CRDCLinks,
         );
     }
   };

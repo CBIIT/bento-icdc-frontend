@@ -1,5 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import themes, { overrides } from '../../../../themes';
 
 export default ({
@@ -37,7 +37,7 @@ export default ({
   overridesObj.MuiTableCell.body.paddingLeft = '37px';
 
   style.push(overridesObj);
-  const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });
+  const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
 
   return (
     <MuiThemeProvider theme={computedTheme}>

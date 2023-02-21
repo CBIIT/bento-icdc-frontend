@@ -1,14 +1,12 @@
 import React, { useRef, useEffect } from 'react';
-// import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import {
   // Badge,
   Grid,
   IconButton,
-  // Typography,
+  Typography,
   withStyles,
-  Link,
 } from '@material-ui/core';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
 import { getColumns, ToolTip as Tooltip, cn } from 'bento-components';
 import _ from 'lodash';
@@ -17,26 +15,23 @@ import {
   GET_FILES_OVERVIEW_QUERY,
   GET_SAMPLES_OVERVIEW_QUERY,
   GET_CASES_OVERVIEW_QUERY,
+  GET_FILES_OVERVIEW_DESC_QUERY,
+  GET_SAMPLES_OVERVIEW_DESC_QUERY,
+  GET_CASES_OVERVIEW_DESC_QUERY,
   tooltipContent,
-  // multiStudyData,
-  tabContainers,
+  multiStudyData,
 } from '../../../bento/dashboardTabData';
-import {
-  clearTableSelections,
-  fetchAllFileIDs,
-  getFilesCount,
-  getState,
-} from '../store/dashboardReducer';
+import { clearTableSelections, fetchAllFileIDs, getFilesCount } from '../store/dashboardReducer';
 import CustomDataTable from '../../../components/serverPaginatedTable/serverPaginatedTable';
 import { addToCart, getCart, cartWillFull } from '../../fileCentricCart/store/cart';
 import AddToCartAlertDialog from '../../../components/AddToCartDialog';
 import updateColumns, { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
 import DocumentDownload from '../../../components/DocumentDownload';
-import ViewJBrowseButton from '../../JbrowseDetail/components/JBrowseViewBtn';
-import MultiStudyToolTip from './multiStudyTooltip';
-import styles from './tabStyle';
 
 const getOverviewQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_QUERY : GET_CASES_OVERVIEW_QUERY);
+
+// Due to cypher limitation we have to send seperate query get descending list
+const getOverviewDescQuery = (api) => (api === 'GET_SAMPLES_OVERVIEW_QUERY' ? GET_SAMPLES_OVERVIEW_DESC_QUERY : api === 'GET_FILES_OVERVIEW_QUERY' ? GET_FILES_OVERVIEW_DESC_QUERY : GET_CASES_OVERVIEW_DESC_QUERY);
 
 // const StyledBadge = withStyles(() => ({
 //   badge: {
@@ -80,13 +75,11 @@ const TabView = ({
   TopMessageStatus,
   count,
   api,
-  fileLevel,
-  displayViewJBowseBtn,
-  disableViewJBowseBtn,
   paginationAPIField,
   paginationAPIFieldDesc,
   dataKey,
-  allFilters,
+  filteredSubjectIds,
+  filteredSampleIds,
   filteredFileIds,
   filteredStudyFileIds,
   defaultSortCoulmn,
@@ -96,15 +89,14 @@ const TabView = ({
   setRowSelection,
   selectedRowInfo = [],
   selectedRowIndex = [],
-  // eslint-disable-next-line no-unused-vars
   tableHasSelections,
   unifiedViewFlag,
-  unifiedViewCaseIds,
   tabIndex,
-  // association,
+  association,
 }) => {
   // Get the existing files ids from  cart state
   const cart = getCart();
+
   const fileIDs = cart.fileIds ? cart.fileIds : [];
   const saveButton = useRef(null);
   const saveButton2 = useRef(null);
@@ -137,8 +129,8 @@ const TabView = ({
       buildButtonStyle(button, ActiveSaveButtonDefaultStyle);
     }
   };
-
-  async function updateButtonStatus(status) {
+  async function updateButtonStatus() {
+    const status = await tableHasSelections();
     if (!status) {
       updateActiveSaveButtonStyle(true, saveButton);
       updateActiveSaveButtonStyle(true, saveButton2);
@@ -151,22 +143,19 @@ const TabView = ({
   useEffect(() => {
     initSaveButtonDefaultStyle(saveButton);
     initSaveButtonDefaultStyle(saveButton2);
-    updateButtonStatus(selectedRowInfo.length > 0);
+    updateButtonStatus();
   });
 
   async function exportFiles() {
     const selectedIDs = await fetchAllFileIDs(getFilesCount(), selectedRowInfo);
-
     // Find the newly added files by comparing
     const selectFileIds = ((tabIndex === 3) && filteredStudyFileIds !== null)
       ? selectedIDs.filter((x) => filteredStudyFileIds.includes(x))
       : ((tabIndex === 2) && filteredFileIds != null)
         ? selectedIDs.filter((x) => filteredFileIds.includes(x)) : selectedIDs;
-
     const newFileIDS = fileIDs !== null ? selectFileIds.filter(
       (e) => !fileIDs.find((a) => e === a),
     ).length : selectedIDs.length;
-
     if (cartWillFull(newFileIDS)) {
       // throw an alert
       setCartIsFull(true);
@@ -217,10 +206,6 @@ const TabView = ({
       }, [],
     );
 
-    // check if displayed data is equal
-    const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
-
-    const { currentActiveTab, dataStudyFileSelected, dataFileSelected } = getState();
     // reduce the state chagne, when newSelectedRowIndex and newSelectedRowInfo is same as previous.
     if (_.differenceWith(
       newSelectedRowIndex,
@@ -242,40 +227,10 @@ const TabView = ({
         newSelectedRowIndex,
         _.isEqual,
       ).length !== 0) {
-      if (newSelectedRowInfo.length === 0
-        && dataFileSelected.selectedRowInfo.length === 0) {
-        setRowSelection({
-          selectedRowInfo: newSelectedRowInfo,
-          selectedRowIndex: newSelectedRowIndex,
-        });
-      }
-
-      if ((currentActiveTab === tabContainers[0].name
-        || currentActiveTab === tabContainers[1].name)
-        && !isEqual(newSelectedRowInfo, dataFileSelected.selectedRowInfo)
-        && !isEqual(newSelectedRowInfo, dataStudyFileSelected.selectedRowInfo)) {
-        setRowSelection({
-          selectedRowInfo: newSelectedRowInfo,
-          selectedRowIndex: newSelectedRowIndex,
-        });
-      }
-
-      if (currentActiveTab === tabContainers[2].name
-        && (!isEqual(newSelectedRowInfo, dataStudyFileSelected.selectedRowInfo)
-        || newSelectedRowInfo.length === 0)) {
-        setRowSelection({
-          selectedRowInfo: newSelectedRowInfo,
-          selectedRowIndex: newSelectedRowIndex,
-        });
-      }
-
-      if (currentActiveTab === tabContainers[3].name
-        && !isEqual(newSelectedRowInfo, dataFileSelected.selectedRowInfo)) {
-        setRowSelection({
-          selectedRowInfo: newSelectedRowInfo,
-          selectedRowIndex: newSelectedRowIndex,
-        });
-      }
+      setRowSelection({
+        selectedRowInfo: newSelectedRowInfo,
+        selectedRowIndex: newSelectedRowIndex,
+      });
     }
   }
 
@@ -304,22 +259,76 @@ const TabView = ({
     serverTableRowCount: selectedRowInfo.length,
   };
 
+  const renderMultiStudyTooltipText = (tableMeta, value) => {
+    const caseID = value;
+    return (
+      <>
+        <Typography align="center" color="inherit" className={classes.descripText}>
+          {multiStudyData.toolTipText}
+        </Typography>
+
+        <div className={classes.casesText}>
+          {tableMeta.map((elem, elemIdx) => (
+            <ul className={classes.ul} key={elemIdx}>
+              <li>
+                <Link className={classes.link} to={`case/${elem}`}>
+                  <Typography align="center" className={classes.multiStudyTooltip}>
+                    {`Case: ${elem}`}
+                  </Typography>
+                </Link>
+              </li>
+            </ul>
+          ))}
+
+          <div className={classes.dashboardLink}>
+            <Link
+              rel="noreferrer"
+              color="inherit"
+              to={{
+                pathname: `/unifiedView/${caseID}`,
+              }}
+              className={classes.link}
+            >
+              <Typography align="center" className={classes.multiStudyTooltip}>
+                View All Related Cases
+              </Typography>
+            </Link>
+          </div>
+
+        </div>
+      </>
+    );
+  };
+
+  const toolTipIcon = (tableMeta, value) => (
+    <Tooltip
+      title={renderMultiStudyTooltipText(tableMeta, value)}
+      placement="bottom"
+      interactive
+      classes={{ tooltip: classes.customTooltip, arrow: classes.customArrow }}
+    >
+      <span className={classes.badge}>
+        <img
+          className={classes.cartIcon}
+          src={multiStudyData.icon}
+          alt={multiStudyData.alt}
+        />
+        <span className={classes.cartCounter}>
+          {tableMeta.length + 1}
+        </span>
+      </span>
+    </Tooltip>
+  );
+
   const customLink = (path, column, value, tableMeta) => (
-    <div className={classes.caseIdContainer} style={{ display: 'flex' }}>
-      <Link href={`/#${path}/${value}`}>
+    <div className={classes.caseIdContainer}>
+      <Link className={classes.link} to={`${path}/${value}`}>
         {value}
       </Link>
       {
         (column.dataField === 'case_id' && !unifiedViewFlag)
         && hasMultiStudyParticipants(tableMeta.rowData[1])
-        && (
-          <>
-            <MultiStudyToolTip
-              tableMeta={tableMeta.rowData[1]}
-              value={value}
-            />
-          </>
-        )
+        && toolTipIcon(tableMeta.rowData[1], value)
       }
     </div>
   );
@@ -354,8 +363,6 @@ const TabView = ({
           toggleMessageStatus={toggleMessageStatus}
           selectAllToolTipStatus={selectAllToolTipStatus}
           tabIndex={tabIndex}
-          unifiedViewFlag={unifiedViewFlag}
-          unifiedViewCaseIds={unifiedViewCaseIds}
         />
         <AddToCartAlertDialog cartWillFull={cartIsFull} ref={AddToCartAlertDialogRef} />
         <button
@@ -385,13 +392,6 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
-        { displayViewJBowseBtn
-          && (
-          <ViewJBrowseButton
-            customClass={classes.helpIcon}
-            disable={disableViewJBowseBtn}
-          />
-          )}
       </Grid>
       <Grid container>
         <Grid item xs={12} id={tableID}>
@@ -400,16 +400,19 @@ const TabView = ({
             columns={columns}
             options={finalOptions}
             count={count}
-            fileLevel={fileLevel}
             overview={getOverviewQuery(api)}
+            overviewDesc={getOverviewDescQuery(api)}
             paginationAPIField={paginationAPIField}
             paginationAPIFieldDesc={paginationAPIFieldDesc}
-            queryCustomVaribles={allFilters}
+            queryCustomVaribles={{
+              case_ids: filteredSubjectIds,
+              sample_ids: filteredSampleIds,
+              file_uuids: (tabIndex === '3') ? filteredStudyFileIds : filteredFileIds,
+              file_association: association,
+            }}
             defaultSortCoulmn={defaultSortCoulmn}
             defaultSortDirection={defaultSortDirection}
             tableDownloadCSV={tableDownloadCSV}
-            unifiedViewFlag={unifiedViewFlag}
-            unifiedViewCaseIds={unifiedViewCaseIds}
             components={{
               Tooltip,
             }}
@@ -444,17 +447,10 @@ const TabView = ({
             )}
           </IconButton>
         </Tooltip>
-        { displayViewJBowseBtn
-          && (
-          <ViewJBrowseButton
-            customClass={classes.helpIcon}
-            disable={disableViewJBowseBtn}
-          />
-          )}
         <div style={{ position: 'relative' }}>
           <Link
             rel="noreferrer"
-            href="/#/fileCentricCart"
+            to={(location) => ({ ...location, pathname: '/fileCentricCart' })}
             color="inherit"
             className={classes.cartlink}
           >
@@ -469,5 +465,160 @@ const TabView = ({
     </div>
   );
 };
+
+const styles = () => ({
+
+  link: {
+    color: '#DC762F',
+    lineSpacing: '19pt',
+    fontWeight: 'bold',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
+    textDecoration: 'underline',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  cartIcon: {
+    height: '24px',
+    width: '24px',
+    margin: '0px 0px 0px 6px',
+  },
+  cartCounter: {
+    position: 'relative',
+    top: '-4px',
+    right: '0px',
+  },
+  badge: {
+    display: 'inline-flex',
+    position: 'relative',
+    verticalAlign: 'middle',
+    bottom: '3px',
+  },
+  spacer: {
+    height: '52px',
+    width: '100%',
+  },
+  descripText: {
+    fontWeight: '600',
+    fontSize: '16px',
+    letterSpacing: '0.05px',
+    lineHeight: '18px',
+    paddingBottom: '5px',
+  },
+  multiStudyTooltip: {
+    fontSize: '15px',
+    lineHeight: '18px',
+  },
+  customTooltip: {
+    borderRadius: '8%',
+    padding: 'auto',
+    maxWidth: '250px',
+  },
+  dashboardLink: {
+    padding: 'auto',
+    marginTop: '-5px',
+  },
+  casesText: {
+    marginTop: '-10px',
+  },
+  cartlink: {
+    fontFamily: 'Lato',
+    color: '#3E6886',
+    fontSize: '12px',
+    marginLeft: '55px',
+    textDecoration: 'none',
+    borderBottom: '1px solid #3E6886',
+    // paddingBottom: '3px',
+  },
+  caseTitle: {
+    color: '#194563',
+    fontSize: '25.2pt',
+    fontStyle: 'normal',
+    fontFamily: 'Raleway',
+    letterSpacing: '0.025em',
+    backgroundColor: '#f5f5f5',
+    padding: '10px 32px 8px 28px',
+  },
+  chips: {
+    position: 'absolute',
+    marginLeft: '250px',
+    marginTop: '36px',
+    zIndex: '999',
+  },
+  chipRoot: {
+    color: '#ffffff',
+    fontFamily: '"Open Sans", sans-serif',
+    letterSpacing: '0.075em',
+    marginLeft: '10px',
+    backgroundColor: '#9b9b9b',
+    fontSize: '9pt',
+  },
+  chipDeleteIcon: {
+    color: '#ffffff',
+    '&:hover': {
+      color: '#ffffff',
+    },
+  },
+  root: {
+    fontFamily: '"Open Sans", sans-serif',
+    fontSize: '9pt',
+    letterSpacing: '0.025em',
+    color: '#000',
+  },
+  saveButtonDiv: {
+    paddingTop: '5px',
+    paddingLeft: '18px',
+    textAlign: 'left',
+  },
+  saveButtonDivBottom: {
+    marginTop: '-2px',
+    paddingLeft: '18px',
+    textAlign: 'left',
+    marginBottom: '30px',
+    position: 'relative',
+  },
+  button: {
+    borderRadius: '10px',
+    width: '156px',
+    lineHeight: '37px',
+    fontSize: '16px',
+    fontFamily: 'Lato',
+    color: '#fff',
+    backgroundColor: '#ff7f15',
+    marginTop: '6px',
+    marginBottom: '10px',
+    marginRight: '5px',
+  },
+  bottomBtn: {
+    marginTop: '13px',
+    marginBottom: '8px',
+  },
+  messageBottom: {
+    zIndex: '500',
+    position: 'absolute',
+    marginTop: '-148px',
+    marginLeft: '-5px',
+  },
+  helpIcon: {
+    zIndex: '600',
+    width: '17px',
+  },
+  helpIconButton: {
+    verticalAlign: 'top',
+    marginLeft: '-5px',
+  },
+  multiStudyIcon: {
+    width: '34px',
+    height: '24px',
+  },
+  caseIdContainer: {
+    display: 'flex',
+  },
+  ul: {
+    listStyleType: 'none',
+    padding: '0px',
+  },
+});
 
 export default withStyles(styles, { withTheme: true })(TabView);

@@ -82,7 +82,7 @@ const NewsView = ({ classes, news }) => (
             <div className={classes.root}>
               <ImageList classes={{ root: classes.imageList }} cols={2.5}>
                 {news.images.map((item) => (
-                  <NewsViewImage img={item.img} label={item.label} caption={item.caption} />
+                  <NewsViewImage img={item.img} label={item.label} />
                 ))}
               </ImageList>
             </div>

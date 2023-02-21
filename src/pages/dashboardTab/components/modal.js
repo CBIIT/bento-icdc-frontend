@@ -38,8 +38,7 @@ const styles = () => ({
 });
 
 const SelectAllModalDialog = ({
-  classes, openSnack, addAllButtonText, selectAllToolTipStatus, tabIndex, unifiedViewFlag,
-  unifiedViewCaseIds,
+  classes, openSnack, addAllButtonText, selectAllToolTipStatus, tabIndex,
 }) => {
   const childRef = useRef();
 
@@ -56,10 +55,7 @@ const SelectAllModalDialog = ({
 
   async function getAllFilesData() {
     // Find the newly added files by comparing
-    const allFilesData = await fetchAllFileIDsForSelectAll(
-      getFilesCount(), unifiedViewFlag, unifiedViewCaseIds,
-    );
-
+    const allFilesData = await fetchAllFileIDsForSelectAll(getFilesCount());
     const currentFileIdsInCart = getFilesIdsInCart();
     const newFileIDSLength = (currentFileIdsInCart !== null || currentFileIdsInCart !== [])
       ? allFilesData.filter(
@@ -72,8 +68,7 @@ const SelectAllModalDialog = ({
   }
 
   async function exportFiles() {
-    const { allFilesData, newFileIDSLength } = await getAllFilesData(unifiedViewFlag);
-
+    const { allFilesData, newFileIDSLength } = await getAllFilesData();
     openSnack(newFileIDSLength || 0);
     addToCart({ fileIds: allFilesData });
     // tell the reducer to clear the selection on the table.

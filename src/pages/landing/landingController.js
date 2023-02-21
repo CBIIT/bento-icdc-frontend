@@ -5,10 +5,9 @@ import axios from 'axios';
 import YAMLData from '../../content/prod/aboutPagesContent.yaml';
 import LandingView from './landingView';
 import NewsView from './views/newsView';
-import env from '../../utils/env';
 
-const LANDING_CONTENT_URL = env.REACT_APP_LANDING_DATA;
-const NEWS_CONTENT_URL = env.REACT_APP_NEWS_DATA;
+const LANDING_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/landingView.yaml';
+const NEWS_CONTENT_URL = 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/newsView.yaml';
 const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {

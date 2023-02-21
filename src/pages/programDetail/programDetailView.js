@@ -172,7 +172,7 @@ const ProgramView = ({ classes, data }) => {
       default:
         return generateCRDCLinks(
           data.studiesByProgramId
-            .filter((study) => study.accession_id === accessionId)[0].links,
+            .filter((study) => study.accession_id === accessionId)[0].CRDCLinks,
         );
     }
   };

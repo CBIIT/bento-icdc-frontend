@@ -80,7 +80,7 @@ function CheckBoxView(props) {
               <Tooltip title={_.startCase(checkboxItem.name)}>
                 <div className={classes.panelDetailText}>
                   <span>
-                    {`${_.startCase(checkboxItem.uiName)}`}
+                    {`${_.startCase(checkboxItem.name)}`}
                   </span>
                 </div>
               </Tooltip>
