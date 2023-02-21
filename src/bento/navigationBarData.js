@@ -1,6 +1,9 @@
 import env from '../utils/env';
 
 export const navBarstyling = {
+  cart: {
+
+  },
   global: {
     backgroundColor: '#0B3557',
     height: '39px',
@@ -76,7 +79,7 @@ export const navBarData = [
 
     dropDownLinks: [
       {
-        labelText: 'Model Explorer',
+        labelText: 'Model Navigator',
         link: '/icdc-data-model',
         linkActiveStyle: 'white',
       },
@@ -98,7 +101,7 @@ export const navBarData = [
 
     dropDownLinks: [
       {
-        labelText: 'GraphQl',
+        labelText: 'GraphQL',
         link: '/graphql',
         linkActiveStyle: 'white',
       },

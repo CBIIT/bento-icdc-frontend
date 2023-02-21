@@ -9,7 +9,9 @@ import {
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 
-const NewsViewImage = ({ img, classes, label }) => {
+const NewsViewImage = ({
+  img, classes, label, caption,
+}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -43,8 +45,7 @@ const NewsViewImage = ({ img, classes, label }) => {
             <img src={img} alt="icdc news" className={classes.img} />
           </div>
           <p className={classes.dialogParagraph}>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
+            {caption}
           </p>
         </DialogContent>
       </Dialog>

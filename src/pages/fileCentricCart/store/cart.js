@@ -8,6 +8,10 @@ const initialState = {
   fileIds: [],
   error: '',
   isError: false,
+  selectedFiles: {
+    selectedRowInfo: [],
+    selectedRowIndex: [],
+  },
 };
 
 // utils
@@ -34,10 +38,12 @@ const subscribe = (f) => {
     () => lastState !== getState() && f((lastState = getState())),
   );
 };
-/* eslint-disable no-return-assign */
 
 // actions
 export const addToCart = (item) => store.dispatch({ type: 'addFiles', payload: item });
+
+// Jbrowse select files
+export const selectFiles = (item) => store.dispatch({ type: 'selectedFiles', payload: item });
 
 export const deleteFromCart = (item) => store.dispatch({ type: 'deleteFiles', payload: item });
 
@@ -88,6 +94,7 @@ const reducers = {
       ) : previousFileIds;
 
     // store ids in the localstorage.
+    localStorage.setItem('data', []);
     localStorage.setItem('CartFileIds', JSON.stringify(uniqueFileIds) || []);
 
     return {
@@ -95,8 +102,18 @@ const reducers = {
       fileIds: uniqueFileIds,
       sortColumn: localStorage.getItem('sortColumn'),
       sortDirection: localStorage.getItem('sortDirection'),
+      displayData: undefined,
     };
   },
+  selectedFiles: (state, item) => ({
+    ...state,
+    displayData: item.currentDisplayedData,
+    selectedFiles: {
+      selectedRowInfo: item.selectedRowInfo,
+      selectedRowIndex: item.selectedRowIndex,
+      currentDisplayedData: item.currentDisplayedData,
+    },
+  }),
   deleteFiles: (state, item) => {
     const fileIdsAfterDeletion = filterOutIDs(item.fileIds, state.fileIds);
     localStorage.setItem('CartFileIds', JSON.stringify(fileIdsAfterDeletion));
@@ -115,17 +132,29 @@ const reducers = {
         fileIds: fileIdsAfterDeletion,
         sortColumn: sortColumnValue,
         sortDirection: sortDirectionValue,
+        displayData: undefined,
       };
     }
     if (dataLength === 1 && page !== 0) {
       const newPage = page - 1;
       localStorage.setItem('page', newPage);
     }
+
+    // remove matching selected files on row delete
+    const rows = state.selectedFiles.selectedRowInfo;
+    const filesName = rows.reduce((acc, d) => acc
+      .concat(!item.fileNames.includes(d) ? d : []), []);
+
     return {
       ...state,
       fileIds: fileIdsAfterDeletion,
       sortColumn: sortColumnValue,
       sortDirection: sortDirectionValue,
+      displayData: undefined,
+      selectedFiles: {
+        ...state.selectFiles,
+        selectedRowInfo: filesName,
+      },
     };
   },
   initCart: (state) => ({
@@ -133,6 +162,7 @@ const reducers = {
     fileIds: JSON.parse(localStorage.getItem('CartFileIds')) || [],
     sortColumn: localStorage.getItem('sortColumn'),
     sortDirection: localStorage.getItem('sortDirection'),
+    displayData: undefined,
   }),
   readyCart: (state) => state,
 };

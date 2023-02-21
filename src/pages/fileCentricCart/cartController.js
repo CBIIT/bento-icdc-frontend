@@ -9,7 +9,8 @@ const cartController = () => {
   const cart = getCart();
   const ids = cart.fileIds ? cart.fileIds : [];
   const defaultSortDirection = table.defaultSortDirection || 'asc';
-  const CART_QUERY = defaultSortDirection === 'desc' ? GET_MY_CART_DATA_QUERY_DESC : GET_MY_CART_DATA_QUERY;
+  const CART_QUERY = (defaultSortDirection === 'desc' || cart.sortDirection === 'desc')
+    ? GET_MY_CART_DATA_QUERY_DESC : GET_MY_CART_DATA_QUERY;
   const defaultSortColumnValue = cart.sortColumn === '' || !cart.sortColumn ? table.defaultSortField || '' : cart.sortColumn;
 
   // if the user open the webpage for the first time.
@@ -63,7 +64,7 @@ const cartController = () => {
       localPage={localPage}
       localRowsPerPage={localRowsPerPage}
       data={
-        defaultSortDirection === 'desc'
+        (defaultSortDirection === 'desc' || cart.sortDirection === 'desc')
           ? data.filesInListDesc === null || data.filesInListDesc === '' ? [] : data.filesInListDesc
           : data.filesInList === null || data.filesInList === '' ? [] : data.filesInList
         }

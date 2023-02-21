@@ -70,7 +70,12 @@ const Overview = ({
                       </Grid>
                       <Grid item xs={12} sm={6} className={classes.content}>
                         {studyData.principal_investigators ? studyData.principal_investigators
-                          .map((principalInvestigator) => (`${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `)) : ''}
+                          .map((principalInvestigator, index) => {
+                            if (index + 1 === studyData.principal_investigators.length) {
+                              return (`${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name}`);
+                            }
+                            return (`${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `);
+                          }) : ''}
                       </Grid>
                     </Grid>
                   </Grid>

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -8,11 +7,11 @@ import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import { CustomDataTable, ToolTip as Tooltip } from 'bento-components';
 import HelpIcon from '@material-ui/icons/Help';
-import IconButton from '@material-ui/core/IconButton';
 import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart';
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';
 import TableThemeProvider from './tableThemeConfig';
+import ViewJBrowseButton from '../../pages/JbrowseDetail/components/JBrowseViewBtn';
 
 const GridView = ({
   classes,
@@ -20,6 +19,7 @@ const GridView = ({
   title,
   columns,
   customOnRowsSelect,
+  selectedFileNames,
   openSnack,
   disableRowSelection,
   buttonText,
@@ -30,6 +30,8 @@ const GridView = ({
   saveButtonDefaultStyle,
   DeactiveSaveButtonDefaultStyle,
   ActiveSaveButtonDefaultStyle,
+  displayViewJBowseBtn,
+  disableViewJBowseBtn,
   primaryKeyIndex = 0,
 }) => {
   // Get the existing files ids from  cart state
@@ -50,6 +52,9 @@ const GridView = ({
   const AddToCartAlertDialogRef = useRef();
   const [cartIsFull, setCartIsFull] = React.useState(false);
   const saveButton = useRef(null);
+
+  // Store Jbrowse related file selection
+  const [selectedRowFileNames, setSelectedRowFileNames] = React.useState([]);
 
   function openMessage() {
     return setMessageStatus(true);
@@ -185,7 +190,6 @@ const GridView = ({
         return accumulator;
       }, [],
     );
-
     setRowSelection({
       selectedRowInfo: newSelectedRowInfo,
       selectedRowIndex: newSelectedRowIndex,
@@ -200,11 +204,15 @@ const GridView = ({
     setSelectedIDs([...new Set(
       customOnRowsSelect(data, allRowsSelected),
     )]);
-
     if (allRowsSelected.length === 0) {
       updateActiveSaveButtonStyle(true, saveButton);
     } else {
       updateActiveSaveButtonStyle(false, saveButton);
+    }
+    if (selectedFileNames) {
+      setSelectedRowFileNames([...new Set(
+        selectedFileNames(data, allRowsSelected),
+      )]);
     }
   }
 
@@ -268,17 +276,28 @@ const GridView = ({
   );
 
   const downloadButton = (
-    <div className={classes.topButtonGroup} style={divStyle()}>
-      <button
-        type="button"
-        style={btnStyle}
-        ref={saveButton}
-        onClick={exportFiles}
-      >
-        { buttonText }
-      </button>
-      {showtooltip ? tooltipComponent : ''}
-    </div>
+    <>
+      <div className={classes.topButtonGroup} style={divStyle()}>
+        <button
+          type="button"
+          style={btnStyle}
+          ref={saveButton}
+          onClick={exportFiles}
+        >
+          { buttonText }
+        </button>
+        {showtooltip ? tooltipComponent : ''}
+        { displayViewJBowseBtn
+          && (
+          <ViewJBrowseButton
+            customClass={classes.helpIconButton}
+            selectedFileNames={selectedRowFileNames}
+            tooltipContent={tooltipContent}
+            disable={disableViewJBowseBtn}
+          />
+          )}
+      </div>
+    </>
   );
 
   return (
@@ -377,7 +396,7 @@ const styles = () => ({
     margin: '0px 0px 0px 2px',
   },
   helpIconButton: {
-    width: '1.5em',
+    width: '17px',
     position: 'absolute',
   },
   tableGrid: {

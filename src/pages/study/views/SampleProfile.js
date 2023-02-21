@@ -16,32 +16,29 @@ import {
 import TabPanel from '../../../components/Tab/TabPanel';
 import { navigatedToDashboard } from '../../../utils/utils';
 
-const tooltipContent = ({ argument, originalValue, point }) => {
-  const color = point.series.getColor();
-  return (
-    <>
-      <div>
-        <span
-          style={{
-            fontWeight: 600,
-            color: '#1C2023',
-          }}
-        >
-          {argument}
-          {', '}
-        </span>
-        <span
-          style={{
-            color: color.toString(),
-            fontWeight: 900,
-          }}
-        >
-          {originalValue}
-        </span>
-      </div>
-    </>
-  );
-};
+const tooltipContent = ({ argument, originalValue }) => (
+  <>
+    <div>
+      <span
+        style={{
+          fontWeight: 600,
+          color: '#1C2023',
+        }}
+      >
+        {argument}
+        {', '}
+      </span>
+      <span
+        style={{
+          color: '#000000',
+          fontWeight: 900,
+        }}
+      >
+        {originalValue}
+      </span>
+    </div>
+  </>
+);
 
 const SampleProfile = ({ classes, data }) => {
   const studyCode = data.study[0].clinical_study_designation;

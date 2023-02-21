@@ -1,5 +1,13 @@
 export const categories = ['Admistrative', 'Study', 'Clinical Trial', 'Case', 'Biospecimen', 'Clinical', 'Analysis', 'Data File'];
 
+export const types = {
+  CATEGORY: 'category',
+  ASSIGNMENT: 'assignment',
+  INCLUSION: 'inclusion',
+  CLASS: 'class',
+  MULTIPLICITY: 'multiplicity',
+};
+
 export const defaultFacetSectionVariables = {
   color: '#000000',
   checkBoxColorsOne: '#E8F7DC',
@@ -7,9 +15,6 @@ export const defaultFacetSectionVariables = {
   height: '5px',
   isExpanded: false,
 };
-
-export const DATA_MODEL_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model.yml';
-export const DATA_MODEL_PROPS_URL = 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/master/model-desc/icdc-model-props.yml';
 
 export const facetFilterSearchData = [
   {
@@ -20,13 +25,13 @@ export const facetFilterSearchData = [
     show: true,
     checkboxItems: [
       { name: 'Administrative', isChecked: false, group: 'category' },
+      { name: 'Analysis', isChecked: false, group: 'category' },
+      { name: 'Biospecimen', isChecked: false, group: 'category' },
       { name: 'Case', isChecked: false, group: 'category' },
-      { name: 'Study', isChecked: false, group: 'category' },
       { name: 'Clinical', isChecked: false, group: 'category' },
       { name: 'Clinical_Trial', isChecked: false, group: 'category' },
-      { name: 'Biospecimen', isChecked: false, group: 'category' },
-      { name: 'Analysis', isChecked: false, group: 'category' },
       { name: 'Data_File', isChecked: false, group: 'category' },
+      { name: 'Study', isChecked: false, group: 'category' },
     ],
   },
   {
@@ -71,32 +76,45 @@ export const facetFilterSearchData = [
     tooltip: 'inclusion',
     show: true,
     checkboxItems: [
-      { name: 'Required', isChecked: false, group: 'required' },
-      { name: 'Preferred', isChecked: false, group: 'preferred' },
       { name: 'Optional', isChecked: false, group: 'optional' },
+      { name: 'Preferred', isChecked: false, group: 'preferred' },
+      { name: 'Required', isChecked: false, group: 'required' },
+    ],
+  },
+  {
+    groupName: 'UI Display',
+    datafield: 'uiDisplay',
+    section: 'Filter By Property',
+    tooltip: 'inclusion',
+    show: true,
+    checkboxItems: [
+      { name: 'no', isChecked: false, group: 'no' },
+      { name: 'yes', isChecked: false, group: 'yes' },
     ],
   },
 ];
 
 export const facetFilterSectionVariables = {
   'Filter By Nodes': {
-    color: '#FF9742',
-    checkBoxColorsOne: '#fdf1e8',
-    checkBoxColorsTwo: '#fff9f5',
+    color: '#0D71A3',
+    checkBoxColorsOne: '#E3F4FD',
+    checkBoxColorsTwo: '#f0f8ff',
+    checkBoxBorderColor: '#0D71A3',
     height: '7px',
     isExpanded: true,
   },
   'Filter By Relationship': {
-    color: '#9DC1D9',
-    checkBoxColorsOne: '#dafafb',
-    checkBoxColorsTwo: '#eafafb',
+    color: '#FF9742',
+    checkBoxColorsOne: '#FF9742',
+    checkBoxColorsTwo: '#FF9742',
     height: '7px',
     isExpanded: true,
   },
   'Filter By Property': {
-    color: '#667A87',
-    checkBoxColorsOne: '#d4ddf7',
-    checkBoxColorsTwo: '#e9eefb',
+    color: '#94C0EC',
+    checkBoxColorsOne: '#E3F4FD',
+    checkBoxColorsTwo: '#f0f8ff',
+    checkBoxBorderColor: '#0D71A3',
     height: '7px',
     isExpanded: true,
   },
@@ -114,6 +132,7 @@ export const baseFacetFilters = {
   class: [],
   multiplicity: [],
   inclusion: [],
+  uiDisplay: [],
 };
 
 export const facetFilterSections = [
@@ -121,6 +140,7 @@ export const facetFilterSections = [
   'assignment',
   'class',
   'inclusion',
+  'uiDisplay',
 ];
 
 export const facetFilterOptions = [
@@ -143,12 +163,16 @@ export const facetFilterOptions = [
   'required',
   'preferred',
   'optional',
+  'yes',
+  'no',
 ];
 
 export const controlVocabConfig = {
-  maxNoOfItems: 15,
+  maxNoOfItems: 10,
   maxNoOfItemDlgBox: 30,
 };
+
+export const showNoOfCheckbox = 6;
 
 export const filterConfig = {
   facetSearchData: facetFilterSearchData,
@@ -157,4 +181,33 @@ export const filterConfig = {
   baseFilters: baseFacetFilters,
   filterSections: facetFilterSections,
   filterOptions: facetFilterOptions,
+  showCheckboxCount: showNoOfCheckbox,
+};
+
+export const pdfDownloadConfig = {
+  fileType: 'pdf',
+  prefix: 'ICDC_Data_Model_',
+  landscape: 'true',
+  catagoryIcon: {
+    url: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/DMN/Pdf/',
+    type: '.png',
+  },
+};
+
+export const readMeConfig = {
+  title: 'Understanding the ICDC Data Model',
+};
+
+export const graphViewConfig = {
+  legend: {
+  },
+  canvas: {
+    fit: {
+      x: 0,
+      y: 20,
+      zoom: 0.7,
+      minZoom: 0.7,
+      maxZoom: 2,
+    },
+  },
 };

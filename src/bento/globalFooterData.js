@@ -7,24 +7,29 @@ export default {
   footerLogoText: 'National Cancer Institute',
   footerLogoSubText: 'at the National Institutes of Health',
   footerLogoHyperlink: 'https://www.cancer.gov/',
-  footerStaticText: 'NIH … Turning Discovery Into Health®',
+  // footerStaticText: 'NIH … Turning Discovery Into Health®',
   version: env.REACT_APP_FE_VERSION,
-  BEversion: env.REACT_APP_BE_VERSION,
+  BEversion: env.REACT_APP_BE_VERSION || '14.5.1',
   // A maximum of 3 Subsections (link_sections) are allowed
   // A maximum of 4 Subsection Links ('items' under link_sections) are allowed
   // A maximum of 4 Anchor Links (global_footer_links) are allowed
   // Ideal size for icon is 20x20 px
   link_sections: [
     {
-      title: 'About ICDC',
+      title: 'Contact Information',
       items: [
         {
-          text: 'Purpose',
-          link: '/purpose',
+          text: 'ICDC Help Desk',
+          link: '/support',
         },
+      ],
+    },
+    {
+      title: 'More Information',
+      items: [
         {
-          text: 'News',
-          link: '/news',
+          text: 'ICDC Home',
+          link: '/home',
         },
         {
           text: 'Steering Committee',
@@ -34,47 +39,27 @@ export default {
           text: 'CRDC',
           link: '/crdc',
         },
+      ],
+    },
+    {
+      title: 'System Info',
+      systemInfoInLinkSection: true,
+      items: [
         {
           text: 'Release Notes',
-          link: `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_FE_VERSION}`,
+          link: 'https://github.com/CBIIT/bento-icdc-frontend/releases',
         },
         {
-          text: 'Contact Us',
-          link: 'icdchelpdesk@nih.gov',
+          text: `FE Version: ${env.REACT_APP_FE_VERSION}`,
+        },
+        {
+          text: `BE Version: ${env.REACT_APP_BE_VERSION}`,
         },
       ],
     },
-
     {
-      title: 'About the Data',
+      title: 'Policies',
       items: [
-        {
-          text: 'ICDC Data & Model',
-          link: '/icdc-data-model',
-        },
-        {
-          text: 'Analyzing Data',
-          link: '/crdc',
-        },
-        {
-          text: 'Developers (APIs)',
-          link: '/developers',
-        },
-        {
-          text: 'Submission Guide',
-          link: '/submit',
-        },
-      ],
-    },
-
-    {
-      title: 'More Information',
-      items: [
-        {
-          text: 'Policies',
-          link: 'https://www.cancer.gov/global/web/policies',
-          title: 'link to NCI policies',
-        },
         {
           text: 'Disclaimer',
           link: 'https://www.cancer.gov/policies/disclaimer',

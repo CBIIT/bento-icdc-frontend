@@ -45,6 +45,7 @@ export const manifestData = {
   header: ['Study Code', 'Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'],
 };
 
+export const myFileViewFlag = true;
 // --------------- File table configuration --------------
 
 export const table = {
@@ -52,6 +53,7 @@ export const table = {
   // Value must be one of the 'dataField's in "columns"
   defaultSortField: 'file_name',
   // 'asc' or 'desc'
+  selectableRows: true,
   defaultSortDirection: 'asc',
   paginationAPIField: 'filesInList',
   paginationAPIFieldDesc: 'filesInListDesc',
@@ -62,28 +64,6 @@ export const table = {
     {
       dataField: 'file_name',
       header: 'File Name',
-    },
-    {
-      dataField: 'file_type',
-      header: 'File Type',
-    },
-    {
-      dataField: 'association',
-      header: 'Association',
-    },
-    {
-      dataField: 'file_description',
-      header: 'Description',
-    },
-    {
-      dataField: 'file_format',
-      header: 'Format',
-    },
-    {
-      dataField: 'file_size',
-      header: 'Size',
-      // set formatBytes to true to display file size (in bytes) in a more human readable format
-      formatBytes: true,
     },
     {
       dataField: 'access_file',
@@ -103,6 +83,28 @@ export const table = {
         iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
         iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
+    },
+    {
+      dataField: 'file_format',
+      header: 'Format',
+    },
+    {
+      dataField: 'file_type',
+      header: 'File Type',
+    },
+    {
+      dataField: 'file_size',
+      header: 'Size',
+      // set formatBytes to true to display file size (in bytes) in a more human readable format
+      formatBytes: true,
+    },
+    {
+      dataField: 'association',
+      header: 'Association',
+    },
+    {
+      dataField: 'file_description',
+      header: 'Description',
     },
     {
       dataField: 'sample_id',

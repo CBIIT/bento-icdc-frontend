@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Grid, withStyles,
   IconButton,
@@ -12,12 +13,12 @@ import Styles from './cartView.style';
 import client from '../../utils/graphqlClient';
 import {
   myFilesPageData,
-  table,
+  // table,
   manifestData,
   externalLinkIcon,
   GET_MY_CART_DATA_QUERY,
 } from '../../bento/fileCentricCartWorkflowData';
-import { deleteFromCart } from './store/cart';
+import { deleteFromCart, selectFiles } from './store/cart';
 import { downloadJson } from './utils';
 import GA from '../../utils/googleAnalytics';
 
@@ -146,18 +147,25 @@ const cartView = ({
     return css;
   }
 
-  const fileIdIndex = table.columns.map((d) => d.dataField).findIndex((e) => e === 'file_uuid');
-
   if (localStorage.getItem('data')) {
-    if (localStorage.getItem('data') !== 'undefined' && localStorage.getItem('data').length > 0 && (localStorage.getItem('page') !== localPage || localStorage.getItem('rowsPerPage') !== localRowsPerPage || localStorage.getItem('sortColumn') !== defaultSortCoulmn || localStorage.getItem('sortDirection') !== defaultSortDirection)) {
-      const dataLocal = JSON.parse(localStorage.getItem('data'));
-      dataCartView = dataLocal;
+    if (localStorage.getItem('data') !== 'undefined'
+      && localStorage.getItem('data').length > 0
+      && (localStorage.getItem('page') !== localPage
+      || localStorage.getItem('rowsPerPage') !== localRowsPerPage
+      || localStorage.getItem('sortColumn') !== defaultSortCoulmn
+      || localStorage.getItem('sortDirection') !== defaultSortDirection)) {
+      if (data === 'undefined') {
+        const dataLocal = JSON.parse(localStorage.getItem('data'));
+        dataCartView = dataLocal;
+      }
       localPageCartView = localStorage.getItem('page');
       localRowsPerPageCartView = localStorage.getItem('rowsPerPage');
     }
   }
 
-  const deleteColumn = [{
+  const { selectedFiles, displayData } = useSelector((state) => (state.cart));
+
+  const deleteColumn = (deleteHandler) => [{
     name: 'Remove',
     label: 'Remove',
     options: {
@@ -167,7 +175,7 @@ const cartView = ({
           <button
             type="button"
             className={classes.tableDeleteButton}
-            onClick={() => deleteFromCart({ fileIds: tableMeta.rowData[fileIdIndex] })}
+            onClick={() => deleteHandler(tableMeta)}
           >
             <DeleteOutlineIcon fontSize="small" />
           </button>
@@ -213,7 +221,7 @@ const cartView = ({
             {/* Section: Table */}
             <CartBody
               updateSortOrder={updateSortOrder}
-              data={dataCartView}
+              data={displayData || dataCartView}
               deleteColumn={deleteColumn}
               fileIDs={fileIDs}
               defaultSortCoulmn={defaultSortCoulmn}
@@ -224,6 +232,8 @@ const cartView = ({
               localPage={localPageCartView}
               localRowsPerPage={localRowsPerPageCartView}
               isLoading={isLoading}
+              setRowSelection={selectFiles}
+              selectedRowsFileName={selectedFiles.selectedRowInfo}
             />
 
             {/* Section: Footer */}
