@@ -2,7 +2,7 @@ import axios from 'axios';
 import env from '../utils/env';
 
 const getPrivacy = async () => {
-  const data = await (await axios.get('https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/privacy-policy/Privacy_Policy.md')).data;
+  const data = await (await axios.get(env.REACT_APP_FOOTER_PRIVACY_POLICY)).data;
   return data;
 };
 
