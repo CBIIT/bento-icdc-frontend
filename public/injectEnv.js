@@ -14,4 +14,5 @@ window.injectedEnv = {
   REACT_APP_LANDING_DATA: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/landingView.yaml',
   REACT_APP_NEWS_DATA: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/newsView.yaml',
   REACT_APP_DMN_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/Data_Model_Navigator_README.md',
+  REACT_APP_INTEROP_SERVICE_URL: 'https://caninecommons-dev.cancer.gov/api/interoperation/graphql',
 };
