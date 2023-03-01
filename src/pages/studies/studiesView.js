@@ -1,6 +1,8 @@
 import React from 'react';
 import {
+  CircularProgress,
   Grid,
+  Typography,
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -12,6 +14,8 @@ import {
 } from 'bento-components';
 import { useSelector } from 'react-redux';
 import { FiberManualRecordRounded } from '@material-ui/icons';
+import { request, gql } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
 import {
   pageData, textLabels,
 } from '../../bento/studiesData';
@@ -21,8 +25,31 @@ import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
 import InvalidAccesionModal from './InvalidAccesionModal';
 import StudiesThemeProvider from './studiesMuiThemConfig';
+import env from '../../utils/env';
+
+const studiesByProgram = gql`
+  query studiesByProgram {
+    studiesByProgram {
+      clinical_study_designation
+      CRDCLinks {
+        url
+        repository
+      }
+      numberOfCRDCNodes
+      numberOfImageCollections
+    }
+  }
+`;
 
 const Studies = ({ classes, data, invalid }) => {
+  const { data: interOpData, isLoading, isError } = useQuery({
+    queryKey: ['studiesByProgram'],
+    queryFn: async () => request(
+      env.REACT_APP_INTEROP_SERVICE_URL,
+      studiesByProgram,
+    ),
+  });
+
   const overlay = useSelector((state) => (
     state.dashboardTab
       ? state.dashboardTab.isOverlayOpen : false));
@@ -83,12 +110,12 @@ const Studies = ({ classes, data, invalid }) => {
       )
   );
 
-  const generateCRDCLinks = (linksArray) => (
+  const generateCRDCLinks = (linksArray, clinicalStudyDesignation) => (
     <ul className={classes.crdcLinks}>
       {linksArray.map((link) => (
         <li>
           <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
-            {`${link.text}`}
+            {`${link.repository} | ICDC-${clinicalStudyDesignation}`}
             <img
               style={{
                 width: '1.5em',
@@ -101,26 +128,42 @@ const Studies = ({ classes, data, invalid }) => {
       ))}
     </ul>
   );
-  const generateIndicatorTooltipTitle = (dataField, value, accessionId) => {
-    switch (dataField) {
+  const generateIndicatorTooltipTitle = (column, value, accessionId, studyData) => {
+    switch (column.dataField) {
       case 'numberOfCaseFiles':
         return `${value} Case File(s)`;
       case 'numberOfStudyFiles':
         return `${value} Study File(s)`;
-      case 'numberOfImageCollections':
-        return `${value} Image Collection(s)`;
+      case 'numberOfImageCollections': {
+        return `${studyData.length && studyData[0].numberOfImageCollections} Image Collection(s)`;
+      }
       case 'numberOfPublications':
         return `${value} Publication(s)`;
-      default:
-        return generateCRDCLinks(
-          data.studiesByProgram.filter((study) => study.accession_id === accessionId)[0].links,
+      default: {
+        return studyData.length
+        && generateCRDCLinks(
+          studyData[0].CRDCLinks, studyData[0].clinical_study_designation,
         );
+      }
     }
   };
 
   const customIcon = (column, value, tableMeta) => {
-    const flag = Array.isArray(value) ? value.length > 0 : value > 0;
-    const title = generateIndicatorTooltipTitle(column.dataField, value, tableMeta.rowData[9]);
+    const currentStudyData = interOpData.studiesByProgram
+      .filter((study) => study.clinical_study_designation === tableMeta.rowData[0]);
+    let flag;
+    if (currentStudyData.length) {
+      flag = true;
+    } else {
+      flag = Array.isArray(value) ? value.length > 0 : value > 0;
+    }
+    const title = generateIndicatorTooltipTitle(
+      column,
+      value,
+      tableMeta.rowData[9],
+      currentStudyData,
+    );
+
     return (
       <>
         {
@@ -174,6 +217,20 @@ const Studies = ({ classes, data, invalid }) => {
       },
     },
   }));
+
+  if (isLoading) {
+    return (
+      <CircularProgress />
+    );
+  }
+
+  if (isError) {
+    return (
+      <Typography variant="h5" color="error" size="sm">
+        An error has occurred in interoperability api
+      </Typography>
+    );
+  }
 
   return (
     <StudiesThemeProvider>
