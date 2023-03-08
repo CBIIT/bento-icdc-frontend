@@ -20,7 +20,6 @@ import {
   createVarientTrack,
   getDefaultSession,
 } from './util';
-import './index.css';
 
 const JbrowseDetailView = ({
   displayMode,
