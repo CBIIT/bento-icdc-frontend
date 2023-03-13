@@ -66,6 +66,7 @@ const DocumentDownload = ({
         <Link
           rel="noreferrer"
           color="inherit"
+          target="_blank"
           onClick={() => viewFileOnJbrowse(caseId)}
           to={{
             pathname: `/jbroswse/${SINGLE_FILE_VIEW}`,
