@@ -118,7 +118,7 @@ export const ensembl = {
 
 export const liftover = {
   name: 'hg38tocanFam3.sorted.gff',
-  trackId: 'NCBI_Ref_Seq_(GFF3Tabix)',
+  trackId: 'LiftOff(GFF3Tabix)',
   type: 'FeatureTrack',
   display: 'LinearBasicDisplay',
   maxDisplayedBpPerPx: 50000,
