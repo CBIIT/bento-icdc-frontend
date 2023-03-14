@@ -116,6 +116,33 @@ export const ensembl = {
   assemblyNames: [...assemblyNames],
 };
 
+export const liftover = {
+  name: 'hg38tocanFam3.sorted.gff',
+  trackId: 'NCBI_Ref_Seq_(GFF3Tabix)',
+  type: 'FeatureTrack',
+  display: 'LinearBasicDisplay',
+  maxDisplayedBpPerPx: 50000,
+  height: 200,
+  metadata: {
+    source: 'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.26_GRCh38/',
+    dateaccessed: '1/30/2023',
+  },
+  adapter: {
+    type: 'Gff3TabixAdapter',
+    gffGzLocation: {
+      uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/hg38tocanFam3.sorted.gff.gz',
+      locationType: 'UriLocation',
+    },
+    index: {
+      location: {
+        uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/hg38tocanFam3.sorted.gff.gz.tbi',
+        locationType: 'UriLocation',
+      },
+    },
+  },
+  assemblyNames: [...assemblyNames],
+};
+
 export const jBrowseOptions = {
   jBrowse: true,
   variants: true,
@@ -123,6 +150,7 @@ export const jBrowseOptions = {
   additionalTracks: [
     annotation,
     ensembl,
+    liftover,
   ],
   optionalTracks: [
     {
