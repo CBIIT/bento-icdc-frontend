@@ -63,8 +63,8 @@ export const variant = {
 };
 
 export const annotation = {
-  name: 'GCF_000002285.3_CanFam3.1_genomic.sorted.gff',
-  trackId: 'NCBI_Ref_Seq_(GFF3Tabix)',
+  name: 'NCBI RefSeq (GFF3)',
+  trackId: 'GCF_000002285.3_CanFam3.1_genomic.sorted.gff',
   type: 'FeatureTrack',
   display: 'LinearBasicDisplay',
   maxDisplayedBpPerPx: 50000,
@@ -90,8 +90,8 @@ export const annotation = {
 };
 
 export const ensembl = {
-  name: 'canFam3.ens.gff',
-  trackId: 'Ensemble_Ref_Seq_(GFF3Tabix)',
+  name: 'Ensembl (GFF3)',
+  trackId: 'canFam3.ensGene.sorted.gff',
   type: 'FeatureTrack',
   display: 'LinearBasicDisplay',
   maxDisplayedBpPerPx: 50000,
@@ -117,8 +117,8 @@ export const ensembl = {
 };
 
 export const liftover = {
-  name: 'hg38tocanFam3.sorted.gff',
-  trackId: 'LiftOff(GFF3Tabix)',
+  name: 'Liftover- hg38 genes mapped to canFam3 (GFF3)',
+  trackId: 'hg38tocanFam3.sorted.gff',
   type: 'FeatureTrack',
   display: 'LinearBasicDisplay',
   maxDisplayedBpPerPx: 50000,
@@ -138,6 +138,25 @@ export const liftover = {
         uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/hg38tocanFam3.sorted.gff.gz.tbi',
         locationType: 'UriLocation',
       },
+    },
+  },
+  textSearching: {
+    textSearchAdapter: {
+      type: 'TrixTextSearchAdapter',
+      textSearchAdapterId: 'sorted_hg38tocanfam3-index',
+      ixFilePath: {
+        uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/hg38tocanFam3.sorted.gff.gz.ix',
+        locationType: 'UriLocation',
+      },
+      ixxFilePath: {
+        uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/hg38tocanFam3.sorted.gff.gz.ixx',
+        locationType: 'UriLocation',
+      },
+      metaFilePath: {
+        uri: 'https://d3qlumquwycjrs.cloudfront.net/annotations/hg38tocanFam3.sorted.gff.gz_meta.json',
+        locationType: 'UriLocation',
+      },
+      assemblyNames: [...assemblyNames],
     },
   },
   assemblyNames: [...assemblyNames],
