@@ -92,6 +92,11 @@ export const tab = {
       label: 'PUBLICATIONS',
       value: 'publications',
     },
+    {
+      index: 4,
+      label: 'SUPPORTING DATA',
+      value: 'supporting_data',
+    },
   ],
   publication: {
     numbOfPublishPerView: 2,

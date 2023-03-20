@@ -1,12 +1,17 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import {
   Grid,
   withStyles,
+  Typography,
+  CircularProgress,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   cn,
 } from 'bento-components';
+import { request, gql } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
 import Snackbar from '../../components/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
@@ -31,8 +36,56 @@ import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDe
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 import Styles from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
+import SupportingData from './views/supporting-data/supportingData';
+import env from '../../utils/env';
+
+const studiesByProgram = gql`
+  query studiesByProgram {
+    studiesByProgram {
+      clinical_study_designation
+      CRDCLinks {
+        url
+        repository
+        metadata {
+                ... on IDCMetadata {
+                    collection_id,
+                    cancer_type,
+                    date_updated,
+                    description,
+                    doi,
+                    image_types,
+                    location,
+                    species,
+                    subject_count,
+                    supporting_data
+                }
+                ... on TCIAMetadata {
+                    Collection,
+                    total_patientIDs,
+                    unique_modalities,
+                    unique_bodypartsExamined,
+                    total_imageCounts
+                }
+            }
+      }
+      numberOfCRDCNodes
+      numberOfImageCollections
+    }
+  }
+`;
 
 const StudyDetailView = ({ classes, data }) => {
+  const { pathname } = useLocation();
+  const clinicalStudyDesignation = pathname.split('/')[2];
+
+  const { data: interOpData, isLoading, isError } = useQuery({
+    queryKey: ['studiesByProgram'],
+    queryFn: async () => request(
+      env.REACT_APP_INTEROP_SERVICE_URL,
+      studiesByProgram,
+    ),
+  });
+
   const studyData = data.study[0];
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
@@ -145,6 +198,24 @@ const StudyDetailView = ({ classes, data }) => {
     ), renderEmbargoLabel, renderPendingLabel,
   );
 
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return (
+      <Typography variant="h5" color="error" size="sm">
+        An error has occurred in interoperability api
+      </Typography>
+    );
+  }
+
+  let processedTabs;
+  if (!interOpData.studiesByProgram.length) {
+    processedTabs = tab.items.filter((item) => item.label !== 'SUPPORTING DATA');
+  } else {
+    processedTabs = tab.items;
+  }
   return (
     <StudyThemeProvider>
       <Snackbar
@@ -174,16 +245,16 @@ const StudyDetailView = ({ classes, data }) => {
                 </span>
               </span>
               {
-              (studyData.accession_id !== null && studyData.accession_id !== undefined && studyData.accession_id !== '')
-              && (
-                <>
-                  <span className={classes.headerBar}> | </span>
-                  <span className={classes.headerAccessionItem}>
-                    <span className={classes.accessionLabel}>{'Accession ID : '}</span>
-                    <span className={classes.accessionValue}>{studyData.accession_id}</span>
-                  </span>
-                </>
-              )
+                (studyData.accession_id !== null && studyData.accession_id !== undefined && studyData.accession_id !== '')
+                && (
+                  <>
+                    <span className={classes.headerBar}> | </span>
+                    <span className={classes.headerAccessionItem}>
+                      <span className={classes.accessionLabel}>{'Accession ID : '}</span>
+                      <span className={classes.accessionValue}>{studyData.accession_id}</span>
+                    </span>
+                  </>
+                )
               }
             </div>
             <div
@@ -234,7 +305,7 @@ const StudyDetailView = ({ classes, data }) => {
                   </span>
                 </div>
               )
-            }
+          }
         </div>
 
         <div className={classes.detailContainer}>
@@ -242,7 +313,7 @@ const StudyDetailView = ({ classes, data }) => {
             <Grid item xs={12}>
               <Tab
                 styleClasses={classes}
-                tabItems={tab.items}
+                tabItems={processedTabs}
                 currentTab={currentTab}
                 handleTabChange={handleTabChange}
               />
@@ -277,6 +348,13 @@ const StudyDetailView = ({ classes, data }) => {
         <Publication
           publications={studyData.publications}
           display={tab.publication}
+        />
+      </TabPanel>
+
+      <TabPanel value={currentTab} index={4}>
+        <SupportingData
+          clinicalStudyDesignation={clinicalStudyDesignation}
+          interOpData={interOpData}
         />
       </TabPanel>
     </StudyThemeProvider>
