@@ -61,10 +61,10 @@ const studiesByProgram = gql`
                 }
                 ... on TCIAMetadata {
                     Collection,
-                    total_patientIDs,
+                    total_patient_IDs,
                     unique_modalities,
-                    unique_bodypartsExamined,
-                    total_imageCounts
+                    unique_bodyparts_examined,
+                    total_image_counts
                 }
             }
       }
