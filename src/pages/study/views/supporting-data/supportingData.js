@@ -45,8 +45,8 @@ const SupportingData = ({
 }) => {
   const IDCData = data.CRDCLinks.filter((item) => item.repository === 'IDC');
   const TCIAData = data.CRDCLinks.filter((item) => item.repository === 'TCIA');
-  const IDCMetaData = IDCData[0].metadata;
-  const TCIAMetaData = TCIAData[0].metadata;
+  const IDCMetaData = IDCData[0].metadata || {};
+  const TCIAMetaData = TCIAData[0].metadata || {};
 
   return (
     <div className={classes.supportDataContainer}>
