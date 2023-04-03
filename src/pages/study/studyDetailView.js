@@ -6,7 +6,7 @@ import {
   Typography,
   CircularProgress,
 } from '@material-ui/core';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   cn,
 } from 'bento-components';
@@ -61,10 +61,10 @@ const studiesByProgram = gql`
                 }
                 ... on TCIAMetadata {
                     Collection,
-                    total_patientIDs,
+                    total_patient_IDs,
                     unique_modalities,
-                    unique_bodypartsExamined,
-                    total_imageCounts
+                    unique_bodyparts_examined,
+                    total_image_counts
                 }
             }
       }
@@ -75,9 +75,6 @@ const studiesByProgram = gql`
 `;
 
 const StudyDetailView = ({ classes, data }) => {
-  const { pathname } = useLocation();
-  const clinicalStudyDesignation = pathname.split('/')[2];
-
   const { data: interOpData, isLoading, isError } = useQuery({
     queryKey: ['studiesByProgram'],
     queryFn: async () => request(
@@ -210,8 +207,10 @@ const StudyDetailView = ({ classes, data }) => {
     );
   }
 
+  const currentStudy = interOpData.studiesByProgram
+    .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
   let processedTabs;
-  if (!interOpData.studiesByProgram.length) {
+  if (!currentStudy) {
     processedTabs = tab.items.filter((item) => item.label !== 'SUPPORTING DATA');
   } else {
     processedTabs = tab.items;
@@ -351,12 +350,15 @@ const StudyDetailView = ({ classes, data }) => {
         />
       </TabPanel>
 
-      <TabPanel value={currentTab} index={4}>
-        <SupportingData
-          clinicalStudyDesignation={clinicalStudyDesignation}
-          interOpData={interOpData}
-        />
-      </TabPanel>
+      {
+            currentStudy && (
+            <TabPanel value={currentTab} index={4}>
+              <SupportingData
+                data={currentStudy}
+              />
+            </TabPanel>
+            )
+        }
     </StudyThemeProvider>
   );
 };

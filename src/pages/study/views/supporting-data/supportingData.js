@@ -41,14 +41,10 @@ const ScrollContainer = styled.div`
 
 const SupportingData = ({
   classes,
-  isLoading,
-  isError,
-  clinicalStudyDesignation,
-  interOpData,
+  data,
 }) => {
-  const data = interOpData.studiesByProgram.filter(((item) => item.clinical_study_designation === clinicalStudyDesignation));
-  const IDCData = data[0].CRDCLinks.filter((item) => item.repository === 'IDC');
-  const TCIAData = data[0].CRDCLinks.filter((item) => item.repository === 'TCIA');
+  const IDCData = data.CRDCLinks.filter((item) => item.repository === 'IDC');
+  const TCIAData = data.CRDCLinks.filter((item) => item.repository === 'TCIA');
   const IDCMetaData = IDCData[0].metadata;
   const TCIAMetaData = TCIAData[0].metadata;
 
@@ -230,7 +226,7 @@ const styles = {
     width: '50%',
   },
   idcTableItem: {
-    height: '55px',
+    height: '63px',
     paddingLeft: '20px',
   },
   headerText: {
