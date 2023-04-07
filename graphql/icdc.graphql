@@ -962,7 +962,8 @@ type QueryType {
     diag.concurrent_disease_type as concurrent_disease_type,
     co.cohort_description as cohort_description,
     a.arm as arm,
-    collect(DISTINCT o.case_id) AS other_cases
+    collect(DISTINCT o.case_id) AS other_cases,
+    'https://nci-crdc.datacommons.io/ga4gh/drs/v1/objects/dg.4DFC/' AS drs_prefix
     RETURN{
     file_name: file_name,
     file_type: file_type,
@@ -1010,7 +1011,9 @@ type QueryType {
     concurrent_disease_type: concurrent_disease_type,
     cohort_description: cohort_description,
     arm: arm,
-    other_cases: other_cases
+    other_cases: other_cases,
+    name: file_name,
+    drs_uri: drs_prefix + file_uuid
     }
     ORDER BY CASE $order_by
     WHEN 'file_name' THEN file_name
@@ -1094,7 +1097,8 @@ type QueryType {
     diag.concurrent_disease_type as concurrent_disease_type,
     co.cohort_description as cohort_description,
     a.arm as arm,
-    collect(DISTINCT o.case_id) AS other_cases
+    collect(DISTINCT o.case_id) AS other_cases,
+    'https://nci-crdc.datacommons.io/ga4gh/drs/v1/objects/dg.4DFC/' AS drs_prefix
     RETURN{
     file_name: file_name,
     file_type: file_type,
@@ -1142,7 +1146,9 @@ type QueryType {
     concurrent_disease_type: concurrent_disease_type,
     cohort_description: cohort_description,
     arm: arm,
-    other_cases: other_cases
+    other_cases: other_cases,
+    name: file_name,
+    drs_uri: drs_prefix + file_uuid
     }
     ORDER BY CASE $order_by
     WHEN 'file_name' THEN file_name
