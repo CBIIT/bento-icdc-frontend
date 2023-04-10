@@ -42,9 +42,13 @@ const ScrollContainer = styled.div`
 const SupportingData = ({
   classes,
   data,
+  isLoading,
 }) => {
-  const IDCData = data.CRDCLinks.filter((item) => item.repository === 'IDC');
-  const TCIAData = data.CRDCLinks.filter((item) => item.repository === 'TCIA');
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+  const IDCData = data[0].CRDCLinks.filter((item) => item.repository === 'IDC');
+  const TCIAData = data[0].CRDCLinks.filter((item) => item.repository === 'TCIA');
   const IDCMetaData = IDCData[0].metadata;
   const TCIAMetaData = TCIAData[0].metadata;
 
