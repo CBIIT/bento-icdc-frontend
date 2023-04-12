@@ -94,6 +94,11 @@ export const tab = {
     },
     {
       index: 4,
+      label: 'CLINICAL DATA',
+      value: 'clinical_data',
+    },
+    {
+      index: 5,
       label: 'SUPPORTING DATA',
       value: 'supporting_data',
     },

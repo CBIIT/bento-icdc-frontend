@@ -38,6 +38,7 @@ import Styles from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
 import SupportingData from './views/supporting-data/supportingData';
 import env from '../../utils/env';
+import ClinicalData from './views/clinical-data/clinicalData';
 
 const studiesByProgram = gql`
   query studiesByProgram {
@@ -209,6 +210,8 @@ const StudyDetailView = ({ classes, data }) => {
 
   const currentStudy = interOpData ? interOpData.studiesByProgram : []
     .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
+  const interOpClinicalStudyData = true;
+
   console.log('log-curr', currentStudy);
   let processedTabs;
   if (!currentStudy) {
@@ -352,8 +355,16 @@ const StudyDetailView = ({ classes, data }) => {
       </TabPanel>
 
       {
+          interOpClinicalStudyData && (
+          <TabPanel value={currentTab} index={4}>
+            <ClinicalData />
+          </TabPanel>
+          )
+      }
+
+      {
             currentStudy && (
-            <TabPanel value={currentTab} index={4}>
+            <TabPanel value={currentTab} index={5}>
               <SupportingData
                 data={currentStudy}
                 isLoading={isLoading}
