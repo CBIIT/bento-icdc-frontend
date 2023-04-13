@@ -209,7 +209,6 @@ const StudyDetailView = ({ classes, data }) => {
 
   const currentStudy = interOpData ? interOpData.studiesByProgram : []
     .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
-  console.log('log-curr', currentStudy);
   let processedTabs;
   if (!currentStudy) {
     processedTabs = tab.items.filter((item) => item.label !== 'SUPPORTING DATA');
