@@ -42,9 +42,13 @@ const ScrollContainer = styled.div`
 const SupportingData = ({
   classes,
   data,
+  isLoading,
 }) => {
-  const IDCData = data.CRDCLinks.filter((item) => item.repository === 'IDC');
-  const TCIAData = data.CRDCLinks.filter((item) => item.repository === 'TCIA');
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+  const IDCData = data[0].CRDCLinks.filter((item) => item.repository === 'IDC');
+  const TCIAData = data[0].CRDCLinks.filter((item) => item.repository === 'TCIA');
   const IDCMetaData = IDCData[0].metadata;
   const TCIAMetaData = TCIAData[0].metadata;
 
@@ -52,7 +56,7 @@ const SupportingData = ({
     <div className={classes.supportDataContainer}>
       <Grid container justifyContent="center">
         <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
-          <Paper>
+          <Paper className={classes.paper}>
             <Grid container direction="row" className={classes.containerLeft}>
               <Grid item xs={12}>
                 <div className={classes.headerText}>
@@ -123,17 +127,17 @@ const SupportingData = ({
           </Paper>
         </Grid>
         <Grid item lg={6} md={6} sm={6} xs={12}>
-          <Paper>
+          <Paper className={classes.paper}>
             <Grid container direction="row" className={classes.containerLeft}>
               <Grid item xs={12}>
-                <div className={classes.headerText}>
+                <div className={classes.tciaHeaderText}>
                   Repository:
                   {' '}
-                  <span className={classes.headerSpan}>Imaging Data Commons (IDC)</span>
+                  <span className={classes.headerSpan}>The Cancer Imaging Archive (TCIA)</span>
                 </div>
               </Grid>
               <Grid item xs={12}>
-                <div className={classes.externalLinkWrapper}>
+                <div className={classes.tciaExternalLinkWrapper}>
                   Go to site:
                   {' '}
                   <ToolTip title="Click to view external link in new tab">
@@ -150,7 +154,7 @@ const SupportingData = ({
                 </div>
               </Grid>
 
-              <ScrollContainer>
+              <ScrollContainer className={classes.tciaScrollConatiner}>
                 <div>
                   <Grid container className={classes.idcTableContainer} xs={12}>
                     {
@@ -199,6 +203,9 @@ const SupportingData = ({
 };
 
 const styles = {
+  paper: {
+    boxShadow: 'none',
+  },
   supportDataContainer: {
     margin: 'auto',
     paddingLeft: '77px',
@@ -229,11 +236,21 @@ const styles = {
     height: '63px',
     paddingLeft: '20px',
   },
+  tciaScrollConatiner: {
+    marginLeft: '30px',
+  },
   headerText: {
     color: '#0296C9',
     fontFamily: 'Open Sans',
     fontWeight: '400',
     fontSize: '17px',
+  },
+  tciaHeaderText: {
+    color: '#0296C9',
+    fontFamily: 'Open Sans',
+    fontWeight: '400',
+    fontSize: '17px',
+    marginLeft: '30px',
   },
   headerSpan: {
     color: '#007299',
@@ -248,6 +265,14 @@ const styles = {
     fontSize: '12px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
+  },
+  tciaExternalLinkWrapper: {
+    color: '#000',
+    fontWeight: '400',
+    fontSize: '12px',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    marginLeft: '30px',
   },
   title: {
     color: '#0296C9',
