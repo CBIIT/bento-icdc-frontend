@@ -306,9 +306,11 @@ const TabView = ({
 
   const customLink = (path, column, value, tableMeta) => (
     <div className={classes.caseIdContainer} style={{ display: 'flex' }}>
-      <Link href={`/#${path}/${value}`}>
-        {value}
-      </Link>
+      <div>
+        <Link href={`/#${path}/${value}`}>
+          {value}
+        </Link>
+      </div>
       {
         (column.dataField === 'case_id' && !unifiedViewFlag)
         && hasMultiStudyParticipants(tableMeta.rowData[1])
