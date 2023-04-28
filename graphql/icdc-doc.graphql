@@ -1,21 +1,21 @@
 type adverse_event {
-  ae_dose: Float
-  ae_dose_unit: String
-  ae_dose_original: Float
-  ae_dose_original_unit: String
-  ae_agent_name: String
   day_in_cycle: Int
-  date_resolved: String
+  date_of_onset: String
+  existing_adverse_event: String
+  date_of_resolution: String
+  ongoing_adverse_event: String
   adverse_event_term: String
   adverse_event_description: String
   adverse_event_grade: String
   adverse_event_grade_description: String
+  adverse_event_agent_name: String
+  adverse_event_agent_dose: String
   attribution_to_research: String
   attribution_to_ind: String
   attribution_to_disease: String
   attribution_to_commercial: String
   attribution_to_other: String
-  ae_other: String
+  other_attribution_description: String
   dose_limiting_toxicity: String
   unexpected_adverse_event: String
   case: case 
@@ -127,7 +127,9 @@ type cycle {
 }
 
 type demographic {
+  demographic_id: String
   breed: String
+  additional_breed_detail: String
   patient_age_at_enrollment: Float
   patient_age_at_enrollment_unit: String
   patient_age_at_enrollment_original: Float
@@ -143,6 +145,7 @@ type demographic {
 }
 
 type diagnosis {
+  diagnosis_id: String
   disease_term: String
   primary_disease_site: String
   stage_of_disease: String
@@ -156,7 +159,6 @@ type diagnosis {
   follow_up_data: String
   concurrent_disease: String
   concurrent_disease_type: String
-  diagnosis_id: String
   case: case 
   files: [file] 
 }
@@ -181,6 +183,7 @@ type disease_extent {
 }
 
 type enrollment {
+  enrollment_id: String
   date_of_registration: String
   registering_institution: String
   initials: String
@@ -188,7 +191,6 @@ type enrollment {
   site_short_name: String
   veterinary_medical_center: String
   patient_subgroup: String
-  enrollment_id: String
   case: case 
   prior_therapies: [prior_therapy] 
   prior_surgeries: [prior_surgery] 
@@ -861,6 +863,23 @@ type UnifiedCounts{
     volumeOfData: Float
 }
 
+type ClinicalDataNodeCounts {
+    agent: Int,
+    cycle: Int,
+    visit: Int,
+    follow_up: Int,
+    adverse_event: Int,
+    off_treatment: Int,
+    off_study: Int,
+    prior_therapy: Int,
+    prior_surgery: Int,
+    agent_administration: Int,
+    physical_exam: Int,
+    vital_signs: Int,
+    disease_extent: Int,
+    lab_exam: Int
+}
+
 type QueryType {
     "Version"
     schemaVersion: String 
@@ -952,5 +971,11 @@ type QueryType {
     studySampleTypeCount(study_codes: [String]): [GroupCount] 
 
     studySamplePathologyCount(study_codes: [String]): [GroupCount] 
+
+    clinicalDataNodeCounts(study_code: String!): ClinicalDataNodeCounts 
+
+    clinicalDataNodeCaseCounts(study_code: String!): ClinicalDataNodeCounts 
+
+    clinicalDataNodeNames: [String] 
 }
 
