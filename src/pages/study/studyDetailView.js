@@ -207,7 +207,7 @@ const StudyDetailView = ({ classes, data }) => {
     );
   }
 
-  const currentStudy = interOpData.studiesByProgram
+  const currentStudy = interOpData ? interOpData.studiesByProgram : []
     .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
   let processedTabs;
   if (!currentStudy) {
@@ -355,6 +355,7 @@ const StudyDetailView = ({ classes, data }) => {
             <TabPanel value={currentTab} index={4}>
               <SupportingData
                 data={currentStudy}
+                isLoading={isLoading}
               />
             </TabPanel>
             )

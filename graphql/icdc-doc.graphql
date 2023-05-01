@@ -865,6 +865,23 @@ type UnifiedCounts{
     volumeOfData: Float
 }
 
+type ClinicalDataNodeCounts {
+    agent: Int,
+    cycle: Int,
+    visit: Int,
+    follow_up: Int,
+    adverse_event: Int,
+    off_treatment: Int,
+    off_study: Int,
+    prior_therapy: Int,
+    prior_surgery: Int,
+    agent_administration: Int,
+    physical_exam: Int,
+    vital_signs: Int,
+    disease_extent: Int,
+    lab_exam: Int
+}
+
 type QueryType {
     "Version"
     schemaVersion: String 
@@ -956,5 +973,11 @@ type QueryType {
     studySampleTypeCount(study_codes: [String]): [GroupCount] 
 
     studySamplePathologyCount(study_codes: [String]): [GroupCount] 
+
+    clinicalDataNodeCounts(study_code: String!): ClinicalDataNodeCounts 
+
+    clinicalDataNodeCaseCounts(study_code: String!): ClinicalDataNodeCounts 
+
+    clinicalDataNodeNames: [String] 
 }
 
