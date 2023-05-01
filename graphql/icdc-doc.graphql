@@ -721,6 +721,8 @@ type FileInList {
     cohort_description: String
     arm: String
     other_cases: [String]
+    name: String
+    drs_uri: String
 }
 
 type FileOverview {
