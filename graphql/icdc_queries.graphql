@@ -1215,20 +1215,20 @@ type QueryType {
     OPTIONAL MATCH (v)<-[:on_visit]-(de:disease_extent)
     OPTIONAL MATCH (v)<-[:on_visit]-(le:lab_exam)
     RETURN {
-        agent: COUNT(DISTINCT a),
-        cycle: COUNT(DISTINCT cy),
-        visit: COUNT(DISTINCT v),
-        follow_up: COUNT(DISTINCT fu),
-        adverse_event: COUNT(DISTINCT ae),
-        off_treatment: COUNT(DISTINCT ot),
-        off_study: COUNT(DISTINCT os),
-        prior_therapy: COUNT(DISTINCT pt),
-        prior_surgery: COUNT(DISTINCT ps),
-        agent_administration: COUNT(DISTINCT aa),
-        physical_exam: COUNT(DISTINCT pe),
-        vital_signs: COUNT(DISTINCT vs),
-        disease_extent: COUNT(DISTINCT de),
-        lab_exam: COUNT(DISTINCT le)
+    agent: COUNT(DISTINCT a),
+    cycle: COUNT(DISTINCT cy),
+    visit: COUNT(DISTINCT v),
+    follow_up: COUNT(DISTINCT fu),
+    adverse_event: COUNT(DISTINCT ae),
+    off_treatment: COUNT(DISTINCT ot),
+    off_study: COUNT(DISTINCT os),
+    prior_therapy: COUNT(DISTINCT pt),
+    prior_surgery: COUNT(DISTINCT ps),
+    agent_administration: COUNT(DISTINCT aa),
+    physical_exam: COUNT(DISTINCT pe),
+    vital_signs: COUNT(DISTINCT vs),
+    disease_extent: COUNT(DISTINCT de),
+    lab_exam: COUNT(DISTINCT le)
     }
     """)
 
@@ -1252,39 +1252,39 @@ type QueryType {
     OPTIONAL MATCH (v)<-[:on_visit]-(de:disease_extent)
     OPTIONAL MATCH (v)<-[:on_visit]-(le:lab_exam)
     RETURN {
-        agent: COUNT(DISTINCT a),
-        cycle: COUNT(DISTINCT cy.case_id),
-        visit: COUNT(DISTINCT left(v.visit_id, 13)),
-        follow_up: COUNT(DISTINCT fu),
-        adverse_event: COUNT(DISTINCT ae),
-        off_treatment: COUNT(DISTINCT ot),
-        off_study: COUNT(DISTINCT os),
-        prior_therapy: COUNT(DISTINCT pt),
-        prior_surgery: COUNT(DISTINCT ps),
-        agent_administration: COUNT(DISTINCT aa),
-        physical_exam: COUNT(DISTINCT pe.case_id),
-        vital_signs: COUNT(DISTINCT vs.case_id),
-        disease_extent: COUNT(DISTINCT de.case_id),
-        lab_exam: COUNT(DISTINCT le)
+    agent: COUNT(DISTINCT a),
+    cycle: COUNT(DISTINCT cy.case_id),
+    visit: COUNT(DISTINCT left(v.visit_id, 13)),
+    follow_up: COUNT(DISTINCT fu),
+    adverse_event: COUNT(DISTINCT ae),
+    off_treatment: COUNT(DISTINCT ot),
+    off_study: COUNT(DISTINCT os),
+    prior_therapy: COUNT(DISTINCT pt),
+    prior_surgery: COUNT(DISTINCT ps),
+    agent_administration: COUNT(DISTINCT aa),
+    physical_exam: COUNT(DISTINCT pe.case_id),
+    vital_signs: COUNT(DISTINCT vs.case_id),
+    disease_extent: COUNT(DISTINCT de.case_id),
+    lab_exam: COUNT(DISTINCT le)
     }
     """)
 
     clinicalDataNodeNames: [String] @cypher(statement: """
     UNWIND [
-        'AGENT',
-        'CYCLE',
-        'VISIT',
-        'PRIOR THERAPY',
-        'PRIOR SURGERY',
-        'AGENT ADMINISTRATION',
-        'PHYSICAL EXAM',
-        'VITAL SIGNS',
-        'LAB EXAM',
-        'ADVERSE EVENT',
-        'DISEASE EXTENT',
-        'FOLLOW UP',
-        'OFF STUDY',
-        'OFF TREATMENT'
+    'AGENT',
+    'CYCLE',
+    'VISIT',
+    'PRIOR THERAPY',
+    'PRIOR SURGERY',
+    'AGENT ADMINISTRATION',
+    'PHYSICAL EXAM',
+    'VITAL SIGNS',
+    'LAB EXAM',
+    'ADVERSE EVENT',
+    'DISEASE EXTENT',
+    'FOLLOW UP',
+    'OFF STUDY',
+    'OFF TREATMENT'
     ] AS clinical_data_node_names
     RETURN clinical_data_node_names
     """)
