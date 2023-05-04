@@ -1230,7 +1230,7 @@ type QueryType {
     disease_extent: COUNT(DISTINCT de),
     lab_exam: COUNT(DISTINCT le)
     }
-    """)
+    """, passThrough: true)
 
     clinicalDataNodeCaseCounts(study_code: String!): ClinicalDataNodeCounts @cypher(statement: """
     MATCH (s:study)
@@ -1267,7 +1267,7 @@ type QueryType {
     disease_extent: COUNT(DISTINCT de.case_id),
     lab_exam: COUNT(DISTINCT le)
     }
-    """)
+    """, passThrough: true)
 
     clinicalDataNodeNames: [String] @cypher(statement: """
     UNWIND [
