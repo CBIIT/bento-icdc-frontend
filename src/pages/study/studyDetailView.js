@@ -207,7 +207,7 @@ const StudyDetailView = ({ classes, data }) => {
     );
   }
 
-  const currentStudy = interOpData ? interOpData.studiesByProgram : []
+  const currentStudy = interOpData?.studiesByProgram
     .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
   let processedTabs;
   if (!currentStudy) {
