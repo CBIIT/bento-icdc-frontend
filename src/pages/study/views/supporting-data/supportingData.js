@@ -44,13 +44,14 @@ const SupportingData = ({
   data,
   isLoading,
 }) => {
-  if (isLoading) {
+  const IDCData = data?.CRDCLinks.filter((item) => item.repository === 'IDC');
+  const TCIAData = data?.CRDCLinks.filter((item) => item.repository === 'TCIA');
+  const IDCMetaData = IDCData?.[0]?.metadata;
+  const TCIAMetaData = TCIAData?.[0]?.metadata;
+
+  if (isLoading || !IDCMetaData || !TCIAMetaData) {
     return <CircularProgress />;
   }
-  const IDCData = data[0].CRDCLinks.filter((item) => item.repository === 'IDC');
-  const TCIAData = data[0].CRDCLinks.filter((item) => item.repository === 'TCIA');
-  const IDCMetaData = IDCData[0].metadata;
-  const TCIAMetaData = TCIAData[0].metadata;
 
   return (
     <div className={classes.supportDataContainer}>
