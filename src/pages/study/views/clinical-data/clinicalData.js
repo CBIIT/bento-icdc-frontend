@@ -5,31 +5,81 @@ import {
   Table, TableBody, TableCell,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow, useMediaQuery,
   withStyles,
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { ToolTip as Tooltip } from 'bento-components';
+import _ from 'lodash';
+import DownloadBtn from './components/downloadBtn';
+
+function splitArray(originalArray) {
+  const mid = Math.ceil(originalArray.length / 2);
+
+  const firstHalf = originalArray.slice(0, mid);
+  const secondHalf = originalArray.slice(mid);
+
+  return [firstHalf, secondHalf];
+}
 
 const StyledTableCell = withStyles(() => ({
   head: {
-    backgroundColor: 'lightblue',
-    color: 'white',
+    backgroundColor: '#F5F5F5',
+    color: '#194563',
+    fontSize: '15px',
+    textDecorationLine: 'underline',
+    fontWeight: '600',
+    fontFamily: 'Raleway',
+    fontStyle: 'normal',
   },
   body: {
-    fontSize: 14,
+    fontSize: '13px',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: '600',
     border: '1px solid black',
   },
 }))(TableCell);
 
+const StyledStarterTableCell = withStyles(() => ({
+  head: {
+    paddingLeft: '15px',
+  },
+  body: {
+    paddingLeft: '15px',
+    borderLeft: '0',
+    fontSize: '12px',
+  },
+}))(StyledTableCell);
+
+const StyledEndTableCell = withStyles(() => ({
+  body: {
+    borderWidth: '1px 0 1px 1px',
+    borderColor: 'black',
+    borderStyle: 'solid',
+  },
+}))(StyledTableCell);
+
+const StyledStarterEmptyTableCell = withStyles(() => ({
+  body: {
+    color: '#A1A1A1',
+  },
+}))(StyledStarterTableCell);
+
+const StyledStarterFilledTableCell = withStyles(() => ({
+  body: {
+    color: '#0296C9',
+  },
+}))(StyledStarterTableCell);
+
 const ScrollContainer = styled.div`
   overflow: auto;
-  max-height: 400px;
+  max-height: 450px;
   min-height: fit-content;
   margin-top: 37px;
   border-top: 3px solid #004C73;
   border-bottom: 3px solid #004C73;
-  width: 80%;
+  width: 618px;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -77,58 +127,122 @@ const tableHeaders = [
   },
 ];
 
-const ClinicalData = ({ classes }) => (
-  <div className={classes.clinicalDataContainer}>
-    <Grid container justifyContent="center">
-      <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
-        <Paper className={classes.paper}>
-          <Grid container direction="row" className={classes.containerLeft} spacing={2}>
-            <Grid
-              item
-              xs={12}
-              classes={{
-                'spacing-xs-2': classes.leftItem,
-              }}
-            >
-              <div>
-                Detailed clinical trial observations from this study can be downloaded from
-                any node for which a CSV download option is displayed.
-              </div>
-            </Grid>
-            <Grid item xs={12}>
-              The node-specific counts indicate the number of cases represented
-              within a node into which data has been propagated versus the number
-              of records within such nodes.
-            </Grid>
+const processData = (names, nodeCountArg, nodeCaseCountArg) => names.map((name) => {
+  const objMatcher = _.toLower(_.replace(name, ' ', '_'));
+  const nodeCount = nodeCountArg[objMatcher];
+  const nodeCaseCount = nodeCaseCountArg[objMatcher];
 
-            <ScrollContainer>
-              <div>
-                <Grid container className={classes.tableContainer}>
-                  <TableContainer component={Paper}>
-                    <Table aria-label="table">
-                      <TableHead>
-                        <TableRow>
-                          {
+  if (nodeCaseCount === 0 && nodeCount === 0) {
+    return {
+      name,
+      iEmpty: true,
+    };
+  }
+  return {
+    name,
+    nodeCount,
+    nodeCaseCount,
+    isEmpty: false,
+  };
+});
+
+const ClinicalData = ({ classes, data }) => {
+  const useColumn = useMediaQuery('(max-width:1460px)');
+  const processedData = processData(data.names, data.nodeCount, data.nodeCaseCount);
+  const [tableA, tableB] = splitArray(processedData);
+
+  return (
+    <div className={classes.clinicalDataContainer}>
+      <Grid container justifyContent="flex-start">
+        <Grid
+          container
+          justifyContent="center"
+          spacing={1}
+        >
+          <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
+            <Paper className={classes.paper}>
+              <Grid container className={classes.containerLeft} spacing={2}>
+                <Grid
+                  item
+                  xs={12}
+                  classes={{
+                    'spacing-xs-2': classes.leftItem,
+                  }}
+                >
+                  <div className={classes.leftContainerText}>
+                    Detailed clinical trial observations from this study can be downloaded from
+                    any node for which a CSV download option is displayed.
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <div className={classes.leftContainerText}>
+                    The node-specific counts indicate the number of cases represented
+                    within a node into which data has been propagated versus the number
+                    of records within such nodes.
+                  </div>
+                </Grid>
+
+                <ScrollContainer>
+                  <div>
+                    <Grid container className={classes.tableContainer}>
+                      <TableContainer component={Paper}>
+                        <Table aria-label="table">
+                          <TableHead>
+                            <TableRow>
+                              {
                                 tableHeaders.map((header, index) => {
-                                  // logic
-                                  console.log('--');
                                   if (header.tooltip.display) {
+                                    if (index === 0) {
+                                      return (
+                                        <StyledStarterTableCell
+                                          key={index}
+                                        >
+                                          <div className={classes.headerCellText}>
+                                            <div>
+                                              {header.title}
+                                              {' '}
+                                              <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                                <img
+                                                  src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                                  alt="tooltip"
+                                                  className={classes.headerCellTooltip}
+                                                />
+                                              </Tooltip>
+                                            </div>
+                                          </div>
+                                        </StyledStarterTableCell>
+                                      );
+                                    }
                                     return (
                                       <StyledTableCell
                                         key={index}
-                                        align={index === 0 ? 'left' : 'center'}
+                                        align="center"
                                       >
                                         <div className={classes.headerCellText}>
-                                          <div>{header.title}</div>
-                                          <Tooltip title={header.tooltip.content} arrow placement="top">
-                                            <img
-                                              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
-                                              alt="tooltip"
-                                              className={classes.headerCellTooltip}
-                                            />
-                                          </Tooltip>
+                                          <div>
+                                            {header.title}
+                                            {' '}
+                                            <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                              <img
+                                                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                                alt="tooltip"
+                                                className={classes.headerCellTooltip}
+                                              />
+                                            </Tooltip>
+                                          </div>
                                         </div>
                                       </StyledTableCell>
+                                    );
+                                  }
+
+                                  if (index === 0) {
+                                    return (
+                                      <StyledStarterTableCell
+                                        key={index}
+                                        align={index === 0 ? 'left' : 'center'}
+                                      >
+                                        {header.title}
+                                      </StyledStarterTableCell>
                                     );
                                   }
                                   return (
@@ -140,106 +254,229 @@ const ClinicalData = ({ classes }) => (
                                     </StyledTableCell>
                                   );
                                 })
-                          }
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        <StyledTableCell>Test 1</StyledTableCell>
-                        <StyledTableCell>Test 1</StyledTableCell>
-                        <StyledTableCell>Test 1</StyledTableCell>
-                        <StyledTableCell>Test 1</StyledTableCell>
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
-              </div>
-            </ScrollContainer>
-          </Grid>
-        </Paper>
-      </Grid>
-      <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
-        <Paper className={classes.paper}>
-          <Grid container direction="row" className={classes.containerRight}>
-            <ScrollContainer className={classes.rightContainerTable}>
-              <div>
-                <Grid container className={classes.tableContainer}>
-                  <TableContainer component={Paper}>
-                    <Table aria-label="table">
-                      <TableHead>
-                        <TableRow>
-                          {
-                            tableHeaders.map((header, index) => {
-                              // logic
-                              console.log('--');
-                              if (header.tooltip.display) {
-                                return (
-
-                                  <StyledTableCell
-                                    key={index}
-                                    align={index === 0 ? 'left' : 'center'}
-                                  >
-                                    {header.title}
-                                  </StyledTableCell>
-                                );
                               }
-                              return (
-                                <StyledTableCell
-                                  key={index}
-                                  align={index === 0 ? 'left' : 'center'}
-                                >
-                                  {header.title}
-                                </StyledTableCell>
-                              );
-                            })
-                          }
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        <StyledTableCell>Test 1</StyledTableCell>
-                        <StyledTableCell>Test 1</StyledTableCell>
-                        <StyledTableCell>Test 1</StyledTableCell>
-                        <StyledTableCell>Test 1</StyledTableCell>
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
-              </div>
-            </ScrollContainer>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {
+                              tableA.map((element, index) => {
+                                if (element.isEmpty === false) {
+                                  return (
+                                    <TableRow key={index}>
+                                      <StyledStarterFilledTableCell>
+                                        {element.name}
+                                      </StyledStarterFilledTableCell>
+                                      <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
+                                      <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
+                                      <StyledEndTableCell align="center">
+                                        <img
+                                          src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                          alt="csv download icon"
+                                          style={{ marginLeft: '20px' }}
+                                        />
+                                      </StyledEndTableCell>
+                                    </TableRow>
+                                  );
+                                }
+                                return (
+                                  <TableRow key={index}>
+                                    <StyledStarterEmptyTableCell>
+                                      {element.name}
+                                    </StyledStarterEmptyTableCell>
+                                    <StyledTableCell align="center">{' '}</StyledTableCell>
+                                    <StyledTableCell align="center">{' '}</StyledTableCell>
+                                    <StyledEndTableCell align="center">{' '}</StyledEndTableCell>
+                                  </TableRow>
+                                );
+                              })
+                            }
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </Grid>
+                  </div>
+                </ScrollContainer>
+                {
+                    !useColumn && <DownloadBtn />
+                 }
+              </Grid>
+            </Paper>
           </Grid>
-        </Paper>
+          <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
+            <Paper className={classes.paper}>
+              <Grid container direction="row" className={classes.containerRight}>
+                <ScrollContainer style={{ marginTop: useColumn ? '15px' : '210px' }}>
+                  <div>
+                    <Grid container className={classes.tableContainer}>
+                      <TableContainer component={Paper}>
+                        <Table aria-label="table">
+                          <TableHead>
+                            <TableRow>
+                              {
+                                tableHeaders.map((header, index) => {
+                                  if (header.tooltip.display) {
+                                    if (index === 0) {
+                                      return (
+                                        <StyledStarterTableCell
+                                          key={index}
+                                        >
+                                          <div className={classes.headerCellText}>
+                                            <div>
+                                              {header.title}
+                                              {' '}
+                                              <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                                <img
+                                                  src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                                  alt="tooltip"
+                                                  className={classes.headerCellTooltip}
+                                                />
+                                              </Tooltip>
+                                            </div>
+                                          </div>
+                                        </StyledStarterTableCell>
+                                      );
+                                    }
+                                    return (
+                                      <StyledTableCell
+                                        key={index}
+                                        align="center"
+                                      >
+                                        <div className={classes.headerCellText}>
+                                          <div>
+                                            {header.title}
+                                            {' '}
+                                            <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                              <img
+                                                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                                alt="tooltip"
+                                                className={classes.headerCellTooltip}
+                                              />
+                                            </Tooltip>
+                                          </div>
+                                        </div>
+                                      </StyledTableCell>
+                                    );
+                                  }
+
+                                  if (index === 0) {
+                                    return (
+                                      <StyledStarterTableCell
+                                        key={index}
+                                        align={index === 0 ? 'left' : 'center'}
+                                      >
+                                        {header.title}
+                                      </StyledStarterTableCell>
+                                    );
+                                  }
+                                  return (
+                                    <StyledTableCell
+                                      key={index}
+                                      align={index === 0 ? 'left' : 'center'}
+                                    >
+                                      {header.title}
+                                    </StyledTableCell>
+                                  );
+                                })
+                              }
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {
+                              tableB.map((element, index) => {
+                                if (element.isEmpty === false) {
+                                  return (
+                                    <TableRow key={index}>
+                                      <StyledStarterFilledTableCell>
+                                        {element.name}
+                                      </StyledStarterFilledTableCell>
+                                      <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
+                                      <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
+                                      <StyledEndTableCell align="center">
+                                        <img
+                                          src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                          alt="csv download icon"
+                                          style={{ marginLeft: '20px' }}
+                                        />
+                                      </StyledEndTableCell>
+                                    </TableRow>
+                                  );
+                                }
+                                return (
+                                  <TableRow key={index}>
+                                    <StyledStarterEmptyTableCell>
+                                      {element.name}
+                                    </StyledStarterEmptyTableCell>
+                                    <StyledTableCell align="center">{' '}</StyledTableCell>
+                                    <StyledTableCell align="center">{' '}</StyledTableCell>
+                                    <StyledEndTableCell align="center">{' '}</StyledEndTableCell>
+                                  </TableRow>
+                                );
+                              })
+                            }
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </Grid>
+                  </div>
+                </ScrollContainer>
+                {
+                    useColumn && <DownloadBtn />
+                 }
+              </Grid>
+            </Paper>
+          </Grid>
+        </Grid>
+        {/* <Grid item lg={6} md={6} sm={6} xs={12}> */}
+        {/*  <DownloadBtn /> */}
+        {/* </Grid> */}
       </Grid>
-    </Grid>
-  </div>
-);
+    </div>
+  );
+};
 
 const styles = {
   clinicalDataContainer: {
     margin: 'auto',
     paddingLeft: '77px',
     paddingRight: '77px',
-    // fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
-    minHeight: '800px',
   },
-  headerCellText: {
-    display: 'flex',
-    gap: '5px',
+  tooltipText: {
+    fontFamily: 'Munito',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '12px',
   },
   paper: {
     boxShadow: 'none',
   },
-  leftItem: {
-    padding: '8px 0',
-  },
   rightContainerTable: {
-    marginTop: '150px',
+    marginTop: '210px',
+  },
+  leftContainerText: {
+    textAlign: 'justify',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '16px',
+    width: '610px',
+  },
+  borderRight: {
+    maxWidth: '100%',
+  },
+  containerLeft: {
+    display: 'block',
+    padding: '28px 20px 5px 10px',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    width: 'calc(100% + 8px) !important',
+    margin: '0px -8px',
   },
   headerCellTooltip: {
     width: '12px',
-    alignSelf: 'flex-start',
+    marginBottom: '5px',
   },
 };
 
