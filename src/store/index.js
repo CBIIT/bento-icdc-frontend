@@ -6,7 +6,7 @@ import { ddgraph, moduleReducers as submission, versionInfo } from 'data-model-n
 import layout from '../components/Layout/LayoutState';
 import stats from '../components/Stats/StatsState';
 
-const { statusReducer: dashboard } = sideBarReducerGenerator();
+const { statusReducer } = sideBarReducerGenerator();
 
 const reducers = {
   ddgraph,
@@ -14,7 +14,7 @@ const reducers = {
   submission,
   layout,
   stats,
-  dashboard,
+  statusReducer,
 };
 
 const loggerMiddleware = createLogger();

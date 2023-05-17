@@ -31,7 +31,6 @@ const getDashData = (states) => {
   useEffect(() => {
     const controller = new AbortController();
     getData(activeFilters).then((result) => {
-      console.log(result);
       if (result) {
         setDashData(result);
       }
@@ -57,7 +56,7 @@ const DashTemplateController = ((props) => {
 });
 
 const mapStateToProps = (state) => ({
-  filterState: state.dashboard.filterState,
+  filterState: state.statusReducer.filterState,
 });
 
 export default connect(mapStateToProps, null)(DashTemplateController);

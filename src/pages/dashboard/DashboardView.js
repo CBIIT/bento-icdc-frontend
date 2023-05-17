@@ -1,6 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 import styles from './DashboardStyle';
+import StatsView from '../../components/Stats/StatsView';
+import BentoFacetFilter from './sideBar/BentoFacetFilter';
 
 const Dashboard = ({
   classes,
@@ -12,8 +14,16 @@ const Dashboard = ({
   console.log(searchCases);
   return (
     <div className={classes.dashboardContainer}>
+      <StatsView data={searchCases} />
       <div>
-        new dash
+        <div className={classes.content}>
+          <div className={classes.sideBar}>
+            Filter Component
+            <BentoFacetFilter
+              searchData={searchCases}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
