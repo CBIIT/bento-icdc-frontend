@@ -94,6 +94,11 @@ export const tab = {
     },
     {
       index: 4,
+      label: 'CLINICAL DATA',
+      value: 'clinical_data',
+    },
+    {
+      index: 5,
       label: 'SUPPORTING DATA',
       value: 'supporting_data',
     },
@@ -316,6 +321,39 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
    fileCountOfStudy(study_code: $csd)
    fileCountOfStudyFiles(study_code: $csd)
    programCountOfStudy(study_code: $csd)
+    clinicalDataNodeNames
+    clinicalDataNodeCounts(study_code: $csd) {
+      agent
+      cycle
+      visit
+      follow_up
+      adverse_event
+      off_treatment
+      off_study
+      prior_therapy
+      prior_surgery
+      agent_administration
+      physical_exam
+      vital_signs
+      disease_extent
+      lab_exam
+    }
+    clinicalDataNodeCaseCounts(study_code: $csd) {
+      agent
+      cycle
+      visit
+      follow_up
+      adverse_event
+      off_treatment
+      off_study
+      prior_therapy
+      prior_surgery
+      agent_administration
+      physical_exam
+      vital_signs
+      disease_extent
+      lab_exam
+    }
    aliquotCountOfStudy(study_code: $csd)
    caseCountOfStudy(study_code: $csd)
    volumeOfDataOfStudy(study_code: $csd)
