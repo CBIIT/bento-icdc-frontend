@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import {
   cn,
+  // eslint-disable-next-line no-unused-vars
   ToolTip as Tooltip,
 } from 'bento-components';
 import {
@@ -12,6 +13,7 @@ import {
   studyDisposition,
 } from '../../utils';
 import {
+  // eslint-disable-next-line no-unused-vars
   externalIcon,
 } from '../../../../bento/studyDetailsData';
 import SampleProfile from '../SampleProfile';
@@ -23,12 +25,19 @@ const Overview = ({
   diagnoses,
   caseFileTypes,
   data,
+  nodeCount,
+  supportingDataCount,
+  clinicalDataTabIndex,
+  supportingDataTabIndex,
+  setCurrentTab,
 }) => {
+  // eslint-disable-next-line no-unused-vars
   const getImageTypes = (typeString) => {
     const types = JSON.parse(typeString);
     return types.join(', ');
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getAccessTypeString = (accessType) => (accessType === 'Cloud'
     ? 'Available only via the Cloud' : 'Available for Download');
 
@@ -164,68 +173,71 @@ const Overview = ({
                   <div><hr className={cn(classes.hrLine, classes.hrLineRight)} /></div>
                 </Grid>
                 <Grid container spacing={1} direction="row" className={classes.detailContainerRight}>
+                  <SampleProfile data={data} />
 
                   {/* START: Image Collection */}
                   <Grid item lg={6} md={6} sm={6} xs={12} className={classes.marginTop10}>
                     <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <span className={classes.detailContainerHeaderText}>
-                          IMAGE COLLECTIONS
+                          ADDITIONAL DATA
                         </span>
                       </Grid>
                     </Grid>
                     <Grid container className={classes.detailContainerItems}>
-                      {studyData.image_collections.length > 0 ? studyData.image_collections.map(
-                        (imageCollection, index) => (
-                          <Grid item xs={12} className={classes.detailContainerItem} key={index}>
+                      {/* eslint-disable-next-line no-constant-condition */}
+                      {supportingDataCount > 0 || nodeCount > 0 ? (
+                        <Grid item xs={12} className={classes.detailContainerItem}>
+                          {
+                            nodeCount > 0 && (
                             <Grid item container direction="row">
-                              <Grid item xs={12} sm={4} className={classes.title}>
-                                COLLECTION:
+                              <Grid className={classes.titleCD}>
+                                Clinical Data in:
                               </Grid>
                               <Grid
                                 item
-                                xs={12}
-                                sm={8}
                                 className={cn(classes.content, classes.marginTopN5)}
                               >
-                                <Tooltip title={getAccessTypeString(imageCollection.collection_access)} arrow placement="top">
-                                  <a href={`${imageCollection.image_collection_url}`} target="_blank" rel="noreferrer" className={classes.outLink}>
-                                    {imageCollection.image_collection_name}
-                                    {' - '}
-                                    {imageCollection.repository_name}
-                                    <span className={classes.paddingLeft5}>
-                                      <img
-                                        src={externalIcon}
-                                        alt="imageLink"
-                                        className={classes.linkIcon}
-                                      />
-                                    </span>
-                                  </a>
-                                </Tooltip>
+                                <button
+                                  type="button"
+                                  onClick={() => setCurrentTab(clinicalDataTabIndex)}
+                                  className={classes.additionalDataLink}
+                                >
+                                  {nodeCount > 1 ? `${nodeCount} Nodes` : `${nodeCount} Node`}
+                                </button>
                               </Grid>
                             </Grid>
+                            )
+                          }
+                          {
+                            supportingDataCount > 0 && (
                             <Grid item container direction="row">
-                              <Grid item xs={12} sm={4} className={classes.title}>
-                                IMAGE TYPES:
+                              <Grid item className={classes.titleCD}>
+                                Supporting Data in:
                               </Grid>
-                              <Grid item xs={12} sm={8} className={classes.content}>
-                                {imageCollection.image_type_included
-                                && getImageTypes(imageCollection.image_type_included)}
+                              <Grid className={classes.content}>
+                                <button
+                                  type="button"
+                                  onClick={() => setCurrentTab(supportingDataTabIndex)}
+                                  className={classes.additionalDataLink}
+                                >
+                                  {supportingDataCount > 1 ? `${supportingDataCount} Repositories` : `${supportingDataCount} Repository`}
+                                </button>
                               </Grid>
                             </Grid>
-                          </Grid>
-                        ),
+                            )
+                          }
+                        </Grid>
                       ) : (
                         <Grid item xs={12} sm={10} className={classes.content}>
                           <div className={classes.content}>
-                            This study currently has no associated Image Collections
+                            This study currently has no Additional Data associated with it
                           </div>
                         </Grid>
                       )}
                     </Grid>
                   </Grid>
                   {/* END: Image Collection */}
-                  <SampleProfile data={data} />
                 </Grid>
               </Grid>
               )
@@ -243,6 +255,18 @@ const styles = (theme) => ({
     paddingLeft: '33px',
     paddingRight: '33px',
     paddingBottom: '25px',
+  },
+  additionalDataLink: {
+    color: '#DC762F',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontFamily: 'Open Sans',
+    fontSize: '13px',
+    background: 'none !important',
+    border: 'none',
+    padding: '0 !important',
+    textDecoration: 'underline',
+    cursor: 'pointer',
   },
   spacer: {
     marginTop: '50px',
@@ -312,6 +336,15 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     fontWeight: '600',
     textTransform: 'uppercase',
+  },
+  titleCD: {
+    color: '#0296c9',
+    fontFamily: theme.custom.fontFamilySans,
+    fontSize: '12px',
+    letterSpacing: '0.017em',
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    marginRight: '4px',
   },
   detailContainerItem: {
     paddingTop: '15px !important',

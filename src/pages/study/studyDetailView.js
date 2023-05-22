@@ -12,6 +12,7 @@ import {
 } from 'bento-components';
 import { request, gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
+import _ from 'lodash';
 import Snackbar from '../../components/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
@@ -78,6 +79,25 @@ const studiesByProgram = gql`
 function hasPositiveValue(arr) {
   return arr.some((obj) => Object.values(obj).some((value) => value > 0));
 }
+
+const processData = (names, nodeCountArg, nodeCaseCountArg) => names.map((name) => {
+  const objMatcher = _.toLower(_.replace(name, ' ', '_'));
+  const nodeCount = nodeCountArg[objMatcher];
+  const nodeCaseCount = nodeCaseCountArg[objMatcher];
+
+  if (nodeCaseCount === 0 && nodeCount === 0) {
+    return {
+      name,
+      iEmpty: true,
+    };
+  }
+  return {
+    name,
+    nodeCount,
+    nodeCaseCount,
+    isEmpty: false,
+  };
+});
 
 const StudyDetailView = ({ classes, data }) => {
   const { data: interOpData, isLoading, isError } = useQuery({
@@ -231,13 +251,24 @@ const StudyDetailView = ({ classes, data }) => {
   }
 
   if (!hasClinicalData) {
-    processedTabs = [
-      ...processedTabs,
-      ...processedTabs.items.filter((item) => item.label !== 'CLINICAL DATA'),
-    ];
-  } else {
-    processedTabs = [...processedTabs];
+    processedTabs = processedTabs.filter((item) => item.label !== 'CLINICAL DATA');
   }
+
+  const processedClinicalDataTabData = processData(
+    clinicalDataTabData.names,
+    clinicalDataTabData.nodeCount,
+    clinicalDataTabData.nodeCaseCount,
+  );
+
+  let clinicalDataNodeCount = 0;
+  const supportingDataCount = currentStudy?.CRDCLinks.length;
+
+  processedClinicalDataTabData.forEach((el) => {
+    if (el?.isEmpty === false) { clinicalDataNodeCount += 1; }
+  });
+
+  const supportingDataTabIndex = processedTabs.findIndex((tab) => tab.label === 'SUPPORTING DATA');
+  const clinicalDataTabIndex = processedTabs.findIndex((tab) => tab.label === 'CLINICAL DATA');
 
   return (
     <StudyThemeProvider>
@@ -344,53 +375,77 @@ const StudyDetailView = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
-      <TabPanel value={currentTab} index={0}>
-        <Overview
-          studyData={studyData}
-          diagnoses={diagnoses}
-          caseFileTypes={caseFileTypes}
-          closeSnack={closeSnack}
-          openSnack={openSnack}
-          data={data}
-        />
-      </TabPanel>
-      <TabPanel value={currentTab} index={1}>
-        <ArmsAndCohort
-          studyData={studyData}
-        />
-      </TabPanel>
-      <TabPanel value={currentTab} index={2}>
-        <StudyFiles
-          closeSnack={closeSnack}
-          openSnack={openSnack}
-          data={data}
-          studyData={studyData}
-        />
-      </TabPanel>
-      <TabPanel value={currentTab} index={3}>
-        <Publication
-          publications={studyData.publications}
-          display={tab.publication}
-        />
-      </TabPanel>
-
       {
-          hasClinicalData && (
-          <TabPanel value={currentTab} index={4}>
-            <ClinicalData data={clinicalDataTabData} />
-          </TabPanel>
-          )
-      }
+            processedTabs.map((processedTab, index) => {
+              switch (processedTab.label) {
+                case 'OVERVIEW': return (
+                  <TabPanel value={currentTab} index={index}>
+                    <Overview
+                      studyData={studyData}
+                      diagnoses={diagnoses}
+                      caseFileTypes={caseFileTypes}
+                      closeSnack={closeSnack}
+                      openSnack={openSnack}
+                      data={data}
+                      nodeCount={clinicalDataNodeCount}
+                      supportingDataCount={supportingDataCount}
+                      setCurrentTab={setCurrentTab}
+                      supportingDataTabIndex={supportingDataTabIndex}
+                      clinicalDataTabIndex={clinicalDataTabIndex}
+                    />
+                  </TabPanel>
+                );
 
-      {
-            currentStudy && (
-            <TabPanel value={currentTab} index={5}>
-              <SupportingData
-                data={currentStudy}
-                isLoading={isLoading}
-              />
-            </TabPanel>
-            )
+                case 'ARMS & COHORTS': return (
+                  <TabPanel value={currentTab} index={index}>
+                    <ArmsAndCohort
+                      studyData={studyData}
+                    />
+                  </TabPanel>
+                );
+                case 'STUDY FILES': return (
+                  <TabPanel value={currentTab} index={index}>
+                    <StudyFiles
+                      closeSnack={closeSnack}
+                      openSnack={openSnack}
+                      data={data}
+                      studyData={studyData}
+                    />
+                  </TabPanel>
+                );
+                case 'PUBLICATIONS': return (
+                  <TabPanel value={currentTab} index={index}>
+                    <Publication
+                      publications={studyData.publications}
+                      display={tab.publication}
+                    />
+                  </TabPanel>
+                );
+                case 'CLINICAL DATA': return (
+                  <TabPanel value={currentTab} index={index}>
+                    {
+                              hasClinicalData
+                        && <ClinicalData data={processedClinicalDataTabData} />
+                          }
+                  </TabPanel>
+
+                );
+                case 'SUPPORTING DATA': return (
+                  <TabPanel value={currentTab} index={index}>
+                    {
+                              currentStudy && (
+                              <SupportingData
+                                data={currentStudy}
+                                isLoading={isLoading}
+                              />
+                              )
+                          }
+                  </TabPanel>
+                );
+                default:
+                  return null;
+              }
+            })
         }
     </StudyThemeProvider>
   );
