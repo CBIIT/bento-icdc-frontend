@@ -3,17 +3,12 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 const theme = {
   overrides: {
-    // Mui: {
-    //   '&$expanded': {
-    //     margin: '0px 0px',
-    //   },
-    //   checked: {
-    //     color: 'red',
-    //   },
-    // },
     MuiAccordionDetails: {
       root: {
         padding: '0px 1px 0px',
+        '.CheckBoxView-listItemGutters': {
+          padding: '10px 2px 10px 0px',
+        },
       },
     },
     MuiAccordion: {
@@ -24,13 +19,16 @@ const theme = {
       },
     },
     MuiAccordionSummary: {
+      expandIcon: {
+        '&.Mui-expanded': {
+          paddingLeft: '18px',
+          marginLeft: '-7px',
+        },
+      },
       content: {
         margin: '0',
         display: 'inherit',
       },
-    //   root: {
-    //     display: '',
-    //   },
     },
     MuiList: {
       padding: {
@@ -40,24 +38,32 @@ const theme = {
     },
     MuiCheckbox: {
       colorSecondary: {
+        marginLeft: '0',
         '&:first-child': {
           color: '#000000',
         },
       },
+      root: {
+        marginLeft: '0 !important',
+      },
     },
     MuiListItem: {
       root: {
-        '&.casesCheckedEven': {
-          backgroundColor: '#e8f7dc',
+        '& CheckBoxView-checkboxRoot': {
+          marginLeft: '0',
         },
-        '&.casesCheckedOdd': {
-          backgroundColor: '#f5FDEE',
+        padding: '10px 2px 10px 0px !important',
+        '&.filter_by_casesCheckedEven': {
+          backgroundColor: '#fdf1e8',
         },
-        '&.samplesCheckedEven': {
-          backgroundColor: '#C9EBF7',
+        '&.filter_by_casesCheckedOdd': {
+          backgroundColor: '#fff9f5',
         },
-        '&.samplesCheckedOdd': {
-          backgroundColor: '#E8F8FE',
+        '&.filter_by_samplesCheckedEven': {
+          backgroundColor: '#dafafb',
+        },
+        '&.filter_by_samplesCheckedOdd': {
+          backgroundColor: '#eafafb',
         },
         '&.filesCheckedEven': {
           backgroundColor: '#FBE3FB',
@@ -69,36 +75,39 @@ const theme = {
     },
     MuiSvgIcon: {
       root: {
-        '&.casesCheckedIcon': {
-          color: '#10a075',
+        '&.filter_by_casesCheckedIcon': {
+          color: '#ff7f15',
         },
-        '&.samplesCheckedIcon': {
-          color: '#10beff',
+        '&.filter_by_cases': {
+          color: '#ff7f15',
         },
-        '&.filesCheckedIcon': {
-          color: '#e636e4',
+        '&.filter_by_samplesCheckedIcon': {
+          color: '#9dc1d9',
+        },
+        '&.filter_by_samples': {
+          color: '#9dc1d9',
         },
       },
     },
     MuiTypography: {
       root: {
-        '&.casesSubjects': {
-          color: '#10a075',
+        '&.filter_by_casesSubjects': {
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
+          color: '#ff7f15',
         },
-        '&.samplesSubjects': {
-          color: '#10beff',
+        '&.filter_by_samplesSubjects': {
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
+          color: '#9dc1d9',
         },
-        '&.filesSubjects': {
-          color: '#e636e4',
+        '&.filter_by_filesSubjects': {
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
+          color: '#667ab7',
         },
       },
     },
@@ -108,22 +117,22 @@ const theme = {
         marginRight: '0px',
       },
       root: {
-        height: '5px',
+        height: '7px',
         '&.divider0': {
-          backgroundColor: '#0d8461',
+          backgroundColor: '#ff7f15',
         },
         '&.divider1': {
-          backgroundColor: '#10beff',
+          backgroundColor: '#9dc1d9',
         },
         '&.divider2': {
-          backgroundColor: '#e636e4',
+          backgroundColor: '#667a87',
         },
       },
     },
     checkboxRoot: {
       color: 'inherit',
       '&$checked': {
-        color: '#8DCAFF',
+        color: '#8dcaff',
       },
     },
   },

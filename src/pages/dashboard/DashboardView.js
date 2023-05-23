@@ -7,6 +7,7 @@ import BentoFacetFilter from './sideBar/BentoFacetFilter';
 const Dashboard = ({
   classes,
   dashData,
+  activeFilters,
 }) => {
   const { biospecimen_source: biospecimenSource, program, searchCases } = dashData;
   console.log(biospecimenSource);
@@ -18,9 +19,9 @@ const Dashboard = ({
       <div>
         <div className={classes.content}>
           <div className={classes.sideBar}>
-            Filter Component
             <BentoFacetFilter
               searchData={searchCases}
+              activeFilters={activeFilters}
             />
           </div>
         </div>

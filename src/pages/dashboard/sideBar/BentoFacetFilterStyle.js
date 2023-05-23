@@ -3,23 +3,20 @@ export default () => ({
     margin: 'auto',
   },
   customButton: {
-    borderRadius: '9px',
-    maxWidth: '30px',
-    maxHeight: '30px',
-    minWidth: '30px',
-    minHeight: '30px',
-    marginTop: '0px',
-    fontSize: 9,
+    fontSize: '9px',
+    marginTop: '4px',
+    minHeight: '20px',
+    fontFamily: 'Lato, Open Sans, sans-serif',
+    marginLeft: '16px',
+    borderRadius: '100px',
     textTransform: 'none',
-    color: '#3d4241',
-    marginLeft: '0px',
     '&:hover': {
       backgroundColor: '#566672',
-      color: 'white',
     },
   },
   floatRight: {
     margin: '7px 0px 7px 6px',
+    paddingTop: '10px',
   },
   resetText: {
     marginTop: '0px',
@@ -59,10 +56,10 @@ export default () => ({
     lineHeight: '0',
     marginLeft: '5px',
     letterSpacing: '0',
-    textTransform: 'uppercase',
   },
   dropDownIconSubSection: {
-    marginLeft: '0px',
+    marginLeft: '-5px',
+    paddingLeft: '0px',
     fill: '#000000',
   },
   customExpansionPanelSummaryRoot: {
@@ -86,6 +83,12 @@ export default () => ({
   CasesCheckedIcon: {
     color: '#10A075',
   },
+  SamplesCheckbox: {
+    color: '#9dc1d9',
+  },
+  SamplesCheckedIcon: {
+    color: '#9dc1d9',
+  },
   checkboxRoot: {
     marginLeft: '5px',
     height: 12,
@@ -102,14 +105,14 @@ export default () => ({
     fontSize: '14px',
     marginRight: '0px',
   },
-  activeFacetCases: {
-    color: '#10a075',
+  activeFacetFilterByCases: {
+    color: '#ff7f15',
   },
-  activeFacetSamples: {
-    color: '#10beff',
+  activeFacetFilterBySamples: {
+    color: '#9dc1d9',
   },
-  activeFacetFiles: {
-    color: '#e636e4',
+  activeFacetFilterByFiles: {
+    color: '#667a87',
   },
   searchContainer: {
     paddingTop: '15px',

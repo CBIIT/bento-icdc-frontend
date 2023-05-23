@@ -3,9 +3,9 @@ export default () => ({
     backgroundColor: '#FFFFFF',
   },
   content: {
-    display: 'flex',
-    maxWidth: '1800px',
     margin: 'auto',
+    display: 'flex',
+    paddingTop: '20px',
   },
   sideBar: {
     width: '250px',

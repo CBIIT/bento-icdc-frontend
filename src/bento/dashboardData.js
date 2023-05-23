@@ -500,7 +500,7 @@ export const facetsConfig = [
     datafield: 'stage_of_disease',
     field: GROUP,
     type: InputTypes.CHECKBOX,
-    sort_type: sortType.ALPHABET,
+    sort_type: sortType.ALPHA_NUMERIC,
     show: true,
   },
   {
