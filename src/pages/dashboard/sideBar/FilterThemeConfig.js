@@ -3,12 +3,17 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 const theme = {
   overrides: {
+    MuiTouchRipple: {
+      child: {
+        backgroundColor: 'white',
+      },
+    },
     MuiAccordionDetails: {
       root: {
         padding: '0px 1px 0px',
-        '.CheckBoxView-listItemGutters': {
-          padding: '10px 2px 10px 0px',
-        },
+        // '.CheckBoxView-listItemGutters': {
+        //   padding: '10px 2px 10px 0px',
+        // },
       },
     },
     MuiAccordion: {
@@ -21,13 +26,16 @@ const theme = {
     MuiAccordionSummary: {
       expandIcon: {
         '&.Mui-expanded': {
-          paddingLeft: '18px',
-          marginLeft: '-7px',
         },
       },
       content: {
         margin: '0',
         display: 'inherit',
+      },
+    },
+    MuiIconButton: {
+      root: {
+        padding: '5px',
       },
     },
     MuiList: {
@@ -65,11 +73,11 @@ const theme = {
         '&.filter_by_samplesCheckedOdd': {
           backgroundColor: '#eafafb',
         },
-        '&.filesCheckedEven': {
-          backgroundColor: '#FBE3FB',
+        '&.filter_by_filesCheckedEven': {
+          backgroundColor: '#d4ddf7',
         },
-        '&.filesCheckedOdd': {
-          backgroundColor: '#FFF2FF',
+        '&.filter_by_filesCheckedOdd': {
+          backgroundColor: '#e9eefb',
         },
       },
     },
@@ -86,6 +94,12 @@ const theme = {
         },
         '&.filter_by_samples': {
           color: '#9dc1d9',
+        },
+        '&.filter_by_filesCheckedIcon': {
+          color: '#667a87',
+        },
+        '&.filter_by_files': {
+          color: '#667a87',
         },
       },
     },
@@ -107,7 +121,7 @@ const theme = {
           fontSize: '12px',
           fontFamily: 'Nunito',
           marginRight: '0px',
-          color: '#667ab7',
+          color: '#667a87',
         },
       },
     },

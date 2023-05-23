@@ -18,9 +18,6 @@ import { facetSectionVariables, facetsConfig } from '../../../bento/dashboardDat
 const CustomExpansionPanelSummary = withStyles({
   root: {
     marginBottom: -1,
-    paddingTop: 6,
-    paddingLeft: 14,
-    paddingRight: 14,
     minHeight: 48,
     '&$expanded': {
       minHeight: 48,
@@ -28,7 +25,7 @@ const CustomExpansionPanelSummary = withStyles({
   },
   content: {
     '&$expanded': {
-      margin: '4px 0px 15px 0px',
+      margin: '16px 0',
     },
   },
   expanded: {},
@@ -92,6 +89,7 @@ const BentoFacetFilter = ({
           }
           onClick={collapseHandler}
           id={section}
+          className={classes.customExpansionPanelSummaryRoot}
         >
           <div className={classes.sectionSummaryTextContainer}>
             {name}

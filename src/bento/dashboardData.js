@@ -537,7 +537,7 @@ export const facetsConfig = [
     show: true,
   },
   {
-    section: CASES,
+    section: SAMPLES,
     label: 'Sample Site',
     apiPath: 'filterCaseCountBySampleSite',
     apiForFiltering: 'filterCaseCountBySampleSite',
