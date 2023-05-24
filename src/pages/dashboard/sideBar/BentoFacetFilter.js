@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   AccordionSummary,
   Button,
-  //   ExpansionPanelSummary,
   withStyles,
 } from '@material-ui/core';
 import {
@@ -13,7 +12,7 @@ import clsx from 'clsx';
 import { ClearAllFiltersBtn, FacetFilter } from '@bento-core/facet-filter';
 import FacetFilterThemeProvider from './FilterThemeConfig';
 import styles from './BentoFacetFilterStyle';
-import { facetSectionVariables, facetsConfig } from '../../../bento/dashboardData';
+import { facetSectionVariables, facetsConfig, tooltipConfig } from '../../../bento/dashboardData';
 
 const CustomExpansionPanelSummary = withStyles({
   root: {
@@ -35,16 +34,35 @@ const BentoFacetFilter = ({
   classes,
   searchData,
   activeFilters,
+  tooltipItems,
 }) => {
+  // set tooltip text progams / biobank
+  // useMemo to prevent execution of func everytime component re renders
+  const tooltipText = useMemo(() => tooltipItems.reduce((acc, item) => {
+    const { __typename: datafield } = item;
+    const { acronym, name } = tooltipConfig[datafield];
+    return { ...acc, [datafield]: { ...acc[datafield], [item[acronym]]: item[name] } };
+  }, {}), []);
+
   /**
    * Add Bento frontend filter count/subjects
+   * Add tootip text
    */
-  const filterData = { ...searchData };
-  facetsConfig.forEach((item) => {
-    const subjectCounts = [...searchData[item.apiPath]];
-    filterData[item.apiPath] = subjectCounts
-      .map((checkbox) => ({ ...checkbox, customSubjects: checkbox.count }));
-  });
+  const filterData = facetsConfig.reduce((acc, item) => {
+    const facetValues = searchData[item.apiPath];
+    if (!facetValues) {
+      return acc;
+    }
+    const subjectCounts = [...facetValues].map((checkbox) => {
+      const text = tooltipText[item.tooltipKey];
+      return {
+        ...checkbox,
+        customSubjects: checkbox.count,
+        tooltip: text ? text[checkbox.group] : undefined,
+      };
+    });
+    return { ...acc, [item.apiPath]: [...subjectCounts] };
+  }, {});
 
   /**
   * Clear All Filter Button
@@ -56,11 +74,9 @@ const BentoFacetFilter = ({
   const CustomClearAllFiltersBtn = ({ onClearAllFilters, disable }) => (
     <div className={classes.floatRight}>
       <Button
-        id="button_sidebar_clear_all_filters"
         variant="outlined"
         disabled={disable}
-        className={classes.customButton}
-        classes={{ root: classes.clearAllButtonRoot }}
+        className={classes.resetButton}
         onClick={() => {
           onClearAllFilters();
         }}

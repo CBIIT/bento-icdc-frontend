@@ -9,7 +9,6 @@ import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';
 const getDashData = (states) => {
   const {
     filterState,
-    localFindUpload, localFindAutocomplete,
   } = states;
 
   const client = useApolloClient();
@@ -36,20 +35,30 @@ const getDashData = (states) => {
       }
     });
     return () => controller.abort();
-  }, [filterState, localFindUpload, localFindAutocomplete]);
+  }, [filterState]);
+
   return { dashData, activeFilters };
 };
 
 const DashTemplateController = ((props) => {
-  const { dashData, activeFilters } = getDashData(props);
+  const {
+    dashData,
+    activeFilters,
+  } = getDashData(props);
+
   if (!dashData) {
     return (<CircularProgress />);
   }
 
+  // set dashfilter tooltip text
+  const { biospecimen_source: biospecimenSource, program, searchCases } = dashData;
+
   return (
     <DashboardView
       {...props}
-      dashData={dashData}
+      searchCases={searchCases}
+      biospecimenSource={biospecimenSource}
+      program={program}
       activeFilters={activeFilters}
     />
   );

@@ -403,17 +403,29 @@ const SAMPLES = 'Filter By Samples';
 const FILES = 'Filter By Files';
 const GROUP = 'group';
 
+export const tooltipConfig = {
+  program: {
+    acronym: 'program_acronym',
+    name: 'program_name',
+  },
+  biospecimen_source: {
+    acronym: 'biospecimen_repository_acronym',
+    name: 'biospecimen_repository_full_name',
+  },
+};
+
 export const facetsConfig = [
   {
     section: CASES,
     label: 'Program',
     apiPath: 'filterCaseCountByProgram',
     apiForFiltering: 'filterCaseCountByProgram',
-    datafield: 'programs',
+    datafield: 'program',
     field: GROUP,
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
     show: true,
+    tooltipKey: 'program',
   },
   {
     section: CASES,
@@ -447,6 +459,7 @@ export const facetsConfig = [
     type: InputTypes.CHECKBOX,
     sort_type: sortType.ALPHABET,
     show: true,
+    tooltipKey: 'biospecimen_source',
   },
   {
     section: CASES,

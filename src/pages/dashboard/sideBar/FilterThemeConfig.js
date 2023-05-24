@@ -5,15 +5,12 @@ const theme = {
   overrides: {
     MuiTouchRipple: {
       child: {
-        backgroundColor: 'white',
+        backgroundColor: '#ffffff',
       },
     },
     MuiAccordionDetails: {
       root: {
         padding: '0px 1px 0px',
-        // '.CheckBoxView-listItemGutters': {
-        //   padding: '10px 2px 10px 0px',
-        // },
       },
     },
     MuiAccordion: {
@@ -24,10 +21,6 @@ const theme = {
       },
     },
     MuiAccordionSummary: {
-      expandIcon: {
-        '&.Mui-expanded': {
-        },
-      },
       content: {
         margin: '0',
         display: 'inherit',
@@ -63,21 +56,39 @@ const theme = {
         padding: '10px 2px 10px 0px !important',
         '&.filter_by_casesCheckedEven': {
           backgroundColor: '#fdf1e8',
+          '&:hover': {
+            backgroundColor: '#fdf1e8',
+          },
         },
         '&.filter_by_casesCheckedOdd': {
           backgroundColor: '#fff9f5',
+          '&:hover': {
+            backgroundColor: '#fff9f5',
+          },
         },
         '&.filter_by_samplesCheckedEven': {
           backgroundColor: '#dafafb',
+          '&:hover': {
+            backgroundColor: '#dafafb',
+          },
         },
         '&.filter_by_samplesCheckedOdd': {
           backgroundColor: '#eafafb',
+          '&:hover': {
+            backgroundColor: '#eafafb',
+          },
         },
         '&.filter_by_filesCheckedEven': {
           backgroundColor: '#d4ddf7',
+          '&:hover': {
+            backgroundColor: '#d4ddf7',
+          },
         },
         '&.filter_by_filesCheckedOdd': {
           backgroundColor: '#e9eefb',
+          '&:hover': {
+            backgroundColor: '#e9eefb',
+          },
         },
       },
     },
@@ -147,6 +158,21 @@ const theme = {
       color: 'inherit',
       '&$checked': {
         color: '#8dcaff',
+      },
+    },
+    MuiTooltip: {
+      tooltip: {
+        backgroundColor: '#ffffff',
+        color: '#1c2023',
+        maxWidth: '220px',
+        fontSize: '0.75rem',
+        border: '2px solid #a7afb3',
+        fontFamily: 'Open Sans',
+        fontWeight: '600',
+        textAlign: 'left',
+        lineHeight: '1.6',
+        padding: '10px 12px',
+        borderRadius: '0px',
       },
     },
   },
