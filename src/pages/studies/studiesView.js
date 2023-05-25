@@ -103,7 +103,7 @@ const Studies = ({ classes, data, invalid }) => {
         <Link
           className={classes.buttonCaseNumb}
           to={(location) => ({ ...location, pathname: '/explore' })}
-          onClick={() => navigatedToDashboard(tableMeta.rowData[0], 'Cases')}
+          onClick={() => navigatedToDashboard(`${tableMeta.rowData[0]} (${tableMeta.rowData[9]})`, 'Cases')}
         >
           {value}
         </Link>
