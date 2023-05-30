@@ -117,19 +117,19 @@ const theme = {
     MuiTypography: {
       root: {
         '&.filter_by_casesSubjects': {
-          fontSize: '12px',
+          fontSize: '14px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           color: '#ff7f15',
         },
         '&.filter_by_samplesSubjects': {
-          fontSize: '12px',
+          fontSize: '14px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           color: '#9dc1d9',
         },
         '&.filter_by_filesSubjects': {
-          fontSize: '12px',
+          fontSize: '14px',
           fontFamily: 'Nunito',
           marginRight: '0px',
           color: '#667a87',
