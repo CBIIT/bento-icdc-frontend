@@ -51,6 +51,7 @@
     "graphql-request": "^5.1.0",
     "graphql-tag": "^2.11.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
+    "html2pdf": "^0.0.11",
     "html2pdf.js": "^0.10.1",
     "identity-obj-proxy": "3.0.0",
     "isomorphic-fetch": "^2.2.1",

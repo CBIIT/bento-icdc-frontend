@@ -320,6 +320,12 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
    sampleCountOfStudy(study_code:$csd)
    fileCountOfStudy(study_code: $csd)
    fileCountOfStudyFiles(study_code: $csd)
+    clinicalDataNodeNames
+    clinicalDataNodeCounts(study_code: $csd) {
+      agent
+      cycle
+      physical_exam
+    }
    programCountOfStudy(study_code: $csd)
     clinicalDataNodeNames
     clinicalDataNodeCounts(study_code: $csd) {

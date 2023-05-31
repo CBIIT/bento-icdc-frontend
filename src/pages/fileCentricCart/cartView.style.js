@@ -19,6 +19,15 @@ export default (theme) => ({
   headerMainSubTitle: {
 
   },
+  jBrowseBtnContainer: {
+    marginLeft: '29px',
+    marginRight: '29px',
+    marginBottom: '8px',
+    boxShadow: 'none',
+  },
+  jBrowseBtn: {
+    marginLeft: '27px',
+  },
   tableTitleWizard: {
     width: '400px',
     float: 'right',
@@ -110,6 +119,12 @@ export default (theme) => ({
     marginTop: '5px',
     height: '25px',
   },
+  helpIcon: {
+    position: 'relative',
+    bottom: '8px',
+    left: '4px',
+    width: '17px',
+  },
   removeAllMessage: {
     fontWeight: '500',
     position: 'absolute',
@@ -123,6 +138,12 @@ export default (theme) => ({
     width: '110px',
     height: '48px',
     padding: '5px 0px',
+  },
+  bottomDivider: {
+    marginTop: '22px',
+    marginBottom: '40px',
+    height: '3px',
+    background: '#CFCFCF',
   },
   message: {
     color: '#000000',
@@ -149,5 +170,17 @@ export default (theme) => ({
   },
   helpBtn: {
     padding: '0px',
+  },
+  removeBtn: {
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: '12px',
+    background: '#FFF',
+    border: '1px solid #003559',
+    borderRadius: '8px',
+    color: '#1D79A8',
+    height: '38px',
+    width: '95px',
   },
 });

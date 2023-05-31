@@ -10,6 +10,7 @@ export const navBarData = {
 export const pageData = {
   mainTitle: 'My Files :',
   subTitle: 'Files',
+  readMeUrl: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/prod/Data_Model_Navigator_README.md',
   buttonText: 'DOWNLOAD MANIFEST',
   headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/icons/Icon-Cart-Workflow.svg',
   headerIconAlt: 'Bento MyFiles header logo',
