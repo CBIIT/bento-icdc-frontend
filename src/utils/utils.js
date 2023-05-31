@@ -1,4 +1,4 @@
-import { onClearAllAndSelectFacetValue } from '../pages/dashboard/sideBar/BentoFilterUtils';
+import { onClearAllAndSelectFacetValue } from '../components/sideBarFilter/BentoFilterUtils';
 import {
   singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
 } from '../pages/dashboardTab/store/dashboardReducer';

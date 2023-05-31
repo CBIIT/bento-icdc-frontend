@@ -402,6 +402,7 @@ const CASES = 'Filter By Cases';
 const SAMPLES = 'Filter By Samples';
 const FILES = 'Filter By Files';
 const GROUP = 'group';
+export const CLEAR_ALL_BTN_TEXT = 'CLEAR ALL';
 
 export const tooltipConfig = {
   program: {
@@ -549,6 +550,22 @@ export const facetsConfig = [
     sort_type: sortType.ALPHABET,
     show: true,
   },
+  // {
+  //   section: CASES,
+  //   label: 'Age',
+  //   apiPath: 'filterSubjectCountByAge',
+  //   apiForFiltering: 'filterSubjectCountByAge',
+  //   datafield: 'age_at_index',
+  //   ApiLowerBoundName: 'lowerBound',
+  //   ApiUpperBoundName: 'upperBound',
+  //   show: true,
+  //   slider: true,
+  //   type: InputTypes.SLIDER,
+  //   sort_type: 'none',
+  //   minLowerBound: 0,
+  //   maxUpperBound: 30,
+  //   quantifier: 'Years',
+  // },
   {
     section: SAMPLES,
     label: 'Sample Site',

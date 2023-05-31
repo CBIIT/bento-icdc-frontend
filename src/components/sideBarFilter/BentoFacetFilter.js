@@ -12,7 +12,6 @@ import clsx from 'clsx';
 import { ClearAllFiltersBtn, FacetFilter } from '@bento-core/facet-filter';
 import FacetFilterThemeProvider from './FilterThemeConfig';
 import styles from './BentoFacetFilterStyle';
-import { facetSectionVariables, facetsConfig, tooltipConfig } from '../../../bento/dashboardData';
 
 const CustomExpansionPanelSummary = withStyles({
   root: {
@@ -35,6 +34,9 @@ const BentoFacetFilter = ({
   searchData,
   activeFilters,
   tooltipItems,
+  facetSectionVariables,
+  facetsConfig,
+  tooltipConfig,
 }) => {
   // set tooltip text progams / biobank
   // useMemo to prevent execution of func everytime component re renders
