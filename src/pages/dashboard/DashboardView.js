@@ -3,7 +3,11 @@ import { withStyles } from '@material-ui/core';
 import styles from './DashboardStyle';
 import StatsView from '../../components/Stats/StatsView';
 import BentoFacetFilter from '../../components/sideBarFilter/BentoFacetFilter';
-import { facetSectionVariables, facetsConfig, tooltipConfig } from '../../bento/dashboardData';
+import {
+  facetSectionVariables,
+  facetsConfig,
+  tooltipConfig,
+} from '../../bento/dashboardData';
 
 const Dashboard = ({
   classes,
