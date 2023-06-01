@@ -151,12 +151,8 @@ const Studies = ({ classes, data, invalid }) => {
   const customIcon = (column, value, tableMeta) => {
     const currentStudyData = interOpData.studiesByProgram
       .filter((study) => study.clinical_study_designation === tableMeta.rowData[0]);
-    let flag;
-    if (currentStudyData.length) {
-      flag = true;
-    } else {
-      flag = Array.isArray(value) ? value.length > 0 : value > 0;
-    }
+    const flag = Array.isArray(value) ? value.length > 0 : value > 0;
+
     const title = generateIndicatorTooltipTitle(
       column,
       value,
