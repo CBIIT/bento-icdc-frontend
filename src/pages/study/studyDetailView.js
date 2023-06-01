@@ -220,6 +220,9 @@ const StudyDetailView = ({ classes, data }) => {
     );
   }
 
+  const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
+  const filterStudy = `${studyCode} (${accessionId})`;
+
   const currentStudy = interOpData?.studiesByProgram
     .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
 
@@ -313,8 +316,7 @@ const StudyDetailView = ({ classes, data }) => {
                     <Link
                       className={classes.headerButtonLink}
                       to={(location) => ({ ...location, pathname: '/explore' })}
-                      onClick={() => navigatedToDashboard(studyData
-                        .clinical_study_designation, 'Cases')}
+                      onClick={() => navigatedToDashboard(filterStudy)}
                     >
                       <div className={classes.headerButtonLinkNumber}>
                         {' '}

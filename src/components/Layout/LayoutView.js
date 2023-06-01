@@ -12,6 +12,7 @@ import Error from '../../pages/error/Error';
 import Home from '../../pages/landing/landingController';
 import Studies from '../../pages/studies/studiesController';
 import Dashboard from '../../pages/dashboardTab/dashboardController';
+import DashboardView from '../../pages/dashboard/DashboardController';
 import Cart from '../../pages/fileCentricCart/cartController';
 import About from '../../pages/about/aboutController';
 import Programs from '../../pages/programs/programsController';
@@ -54,7 +55,8 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/news" component={Home} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/studies" component={Studies} />
-            <Route path="/explore" component={Dashboard} />
+            <Route path="/exploreOld" component={Dashboard} />
+            <Route path="/explore" component={DashboardView} />
             <Route path="/unifiedView/:id" component={UnifiedView} />
             <Route path="/fileCentricCart" component={Cart} />
             <Route path="/programs" component={Programs} />

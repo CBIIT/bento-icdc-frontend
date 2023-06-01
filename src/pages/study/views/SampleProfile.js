@@ -41,7 +41,8 @@ const tooltipContent = ({ argument, originalValue }) => (
 );
 
 const SampleProfile = ({ classes, data }) => {
-  const studyCode = data.study[0].clinical_study_designation;
+  const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
+  const filterStudy = `${studyCode} (${accessionId})`;
   const [currentTab, setCurrentTab] = useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
@@ -50,7 +51,7 @@ const SampleProfile = ({ classes, data }) => {
     && data[tab.value].length > 0));
 
   const linkToDashboard = () => {
-    navigatedToDashboard(studyCode, 'Samples');
+    navigatedToDashboard(filterStudy, 'Samples');
   };
 
   const tabItem = (items) => (

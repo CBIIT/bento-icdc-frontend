@@ -1,5 +1,6 @@
+import { onClearAllAndSelectFacetValue } from '../components/sideBarFilter/BentoFilterUtils';
 import {
-  singleCheckBox, setSideBarToLoading, setDashboardTableLoading, fetchDataForDashboardTab,
+  singleCheckBox, setSideBarToLoading, setDashboardTableLoading,
 } from '../pages/dashboardTab/store/dashboardReducer';
 
 /*
@@ -19,9 +20,8 @@ function filterCasePageOnStudyCode(study) {
 
 export default filterCasePageOnStudyCode;
 
-export function navigatedToDashboard(studyCode, tab) {
-  fetchDataForDashboardTab(tab, null, null, null);
-  filterCasePageOnStudyCode(studyCode);
+export function navigatedToDashboard(studyCode) {
+  onClearAllAndSelectFacetValue('study', studyCode);
 }
 
 export const convertCRDCLinksToValue = (data, key) => {
