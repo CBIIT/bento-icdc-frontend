@@ -12,21 +12,18 @@ import { ToolTip as Tooltip, cn } from 'bento-components';
 import {
   MAX_NUMBER_OF_FILES,
   MULTI_FILES_VIEW,
-  ButtonText1,
-  ButtonText2,
   JBROWSE_BTN_ID,
   JBROWSE_TOOLTIP_ICON_ID,
   JBROWSE_HELP_ICON_BTN,
   tooltipContent,
   DISABLE_RIPPLE,
-  jbrowseIconSrc,
   tooltipMsg1,
   tooltipMsg2,
   tooltipErrMsg,
 } from '../../../bento/JBrowseData';
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
-import jbrowseLogo from '../../../assets/icons/JbrowseViewIcon2.svg';
+import jBrowseLogo from '../../fileCentricCart/Group.svg';
 import './index.css';
 
 const customTheme = {
@@ -90,13 +87,16 @@ const ViewJBrowseButton = ({
           id={JBROWSE_BTN_ID}
           disableRipple={DISABLE_RIPPLE}
         >
-          {ButtonText1}
+          View in JBrowse
           <img
-            src={(isInvlaid || disable) ? jbrowseIconSrc : jbrowseLogo}
-            alt="jbrowse_icon"
-            className={cn(classes.jbrowseIcon)}
+            src={jBrowseLogo}
+            alt="jbrowse logo"
+            style={{
+              width: '24px',
+              height: '21px',
+              marginLeft: '8px',
+            }}
           />
-          {ButtonText2}
         </Button>
       </Link>
       <Tooltip
@@ -120,22 +120,16 @@ const ViewJBrowseButton = ({
 
 const styles = () => ({
   button: {
-    borderRadius: '10px',
-    width: '210px',
-    lineHeight: '37px',
-    fontSize: '16px',
+    backgroundColor: '#FFF',
+    border: '2px solid #2F567D',
+    borderRadius: '8px',
     fontFamily: 'Lato',
-    color: '#fffffff',
-    backgroundColor: '#566672',
-    marginTop: '6px',
-    marginBottom: '10px',
-    marginRight: '5px',
-    '&:hover': {
-      backgroundColor: '#566672',
-    },
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: '16px',
+    color: '#2F567D',
   },
   disbaleButton: {
-    // opacity: '0.7',
     backgroundColor: '#CCD1D4',
   },
   helpIconButton: {
