@@ -8,6 +8,7 @@ import {
   facetsConfig,
   tooltipConfig,
 } from '../../bento/dashboardData';
+import DashboardTabs from './components/DashboardTabs';
 
 const Dashboard = ({
   classes,
@@ -28,6 +29,14 @@ const Dashboard = ({
             facetSectionVariables={facetSectionVariables}
             facetsConfig={facetsConfig}
             tooltipConfig={tooltipConfig}
+          />
+        </div>
+        <div className={classes.rightContent}>
+          <br />
+          <br />
+          <DashboardTabs
+            dashboardStats={searchCases}
+            activeFilters={activeFilters}
           />
         </div>
       </div>

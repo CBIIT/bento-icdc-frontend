@@ -33,7 +33,7 @@ const BentoFacetFilter = ({
   classes,
   searchData,
   activeFilters,
-  tooltipItems,
+  tooltipItems = [],
   facetSectionVariables,
   facetsConfig,
   tooltipConfig,
