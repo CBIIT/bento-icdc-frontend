@@ -106,20 +106,15 @@ export const facetSectionVariables = {
 
 // Sunburst chart color scheme
 export const SUNBURST_COLORS_LEVEL_1 = [
-  '#7dc242',
-  '#274fa5',
-  '#79287c',
-  '#f78f48',
-  '#057ebd',
+  '#1F4B87',
+  '#AD1919',
+  '#DA6B2E',
 ];
 
 export const SUNBURST_COLORS_LEVEL_2 = [
-  '#057ebd',
-  '#f78f48',
-  '#79287c',
-  '#0e3151',
-  '#057ebd',
-  '#7dc242',
+  '#1F4B87',
+  '#AD1919',
+  '#DA6B2E',
 ];
 
 // A maximum of 6 widgets are allowed

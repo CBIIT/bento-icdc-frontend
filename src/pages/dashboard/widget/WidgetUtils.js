@@ -11,8 +11,18 @@ import {
  * @param {object} data
  * @returns {object} filtered data
  */
-const removeEmptyCountFromDonutData = (data) => data.filter((item) => item.count !== 0);
-
+const removeEmptyCountFromDonutData = (data) => {
+  const convertCasesToSubjects = data.map((item) => ({
+    subjects: item.count,
+    group: item.group,
+  }));
+  convertCasesToSubjects.sort((a, b) => {
+    if (a.group < b.group) return 1;
+    if (a.group > b.group) return -1;
+    return 0;
+  });
+  return convertCasesToSubjects.filter((item) => item.subjects !== 0);
+};
 /**
  * Returns the widgets data formatted as key:dataset pairs
  *

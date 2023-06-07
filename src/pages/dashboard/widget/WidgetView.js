@@ -21,6 +21,7 @@ const WidgetView = ({
   theme,
 }) => {
   const displayWidgets = formatWidgetData(data, widgetsData);
+  console.log(displayWidgets);
   const [collapse, setCollapse] = React.useState(true);
   const themeChanger = useTheme();
   const handleChange = () => setCollapse((prev) => !prev);
@@ -95,8 +96,8 @@ const WidgetView = ({
                   data={dataset}
                   chartType={widget.type}
                   sliceTitle={widget.sliceTitle}
-                  chartTitleLocation="bottom"
-                  chartTitleAlignment="center"
+                  chartTitleLocation="top"
+                  chartTitleAlignment="left"
                 />
               </Grid>
             );
