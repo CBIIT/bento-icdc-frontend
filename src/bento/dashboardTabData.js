@@ -2,6 +2,10 @@
 import gql from 'graphql-tag';
 import { cellTypes, dataFormatTypes } from '@bento-core/table';
 import {
+  btnTypes,
+  types,
+} from '@bento-core/paginated-table';
+import {
   customCasesTabDownloadCSV,
   customFilesTabDownloadCSV,
   customSamplesTabDownloadCSV,
@@ -15,6 +19,14 @@ export const tooltipContent = {
   1: 'Add filtered files associated with selected sample(s) to My Files',
   2: 'Add selected files to My Files',
   3: 'Add selected study files to My Files',
+  Cases: 'Add filtered files associated with selected case(s) to My Files',
+  Samples: 'Add filtered files associated with selected sample(s) to My Files',
+  'Case Files': 'Add selected files to My Files',
+  'Study Files': 'Add selected study files to My Files',
+  arrow: true,
+  styles: {
+    border: '#a7afb3 1px solid',
+  },
 };
 
 // --------------- Tooltip configuration --------------
@@ -589,149 +601,12 @@ export const tabIndex = [
     selectedColor: '#667A87',
   },
   {
-    title: 'StudyFiles',
+    title: 'Study Files',
     primaryColor: '#39C0F0',
     secondaryColor: '#39C0F0',
     selectedColor: '#39C0F0',
   },
 ];
-
-// export const DASHBOARD_QUERY = gql`{
-//   numberOfStudies
-//   numberOfCases
-//   numberOfSamples
-//   numberOfFiles
-//   numberOfStudyFiles
-//   numberOfPrograms
-//   numberOfAliquots
-//   volumeOfData
-// caseCountByDiagnosis{
-//   group,
-//   count
-// }
-// caseCountByGender{
-//   group,
-//   count
-// }
-// caseCountByBreed{
-//   group,
-//   count
-// }
-// caseCountByStageOfDisease{
-//   group,
-//   count
-// }
-// caseCountByDiseaseSite{
-//   group,
-//   count
-// }
-// filterCaseCountByProgram{
-//   group,
-//   count
-// }
-// filterCaseCountByStudyCode{
-//   group,
-//   count,
-//   code
-// }
-// filterCaseCountByStudyType{
-//   group,
-//   count
-// }
-// filterCaseCountByBreed{
-//   group,
-//   count
-// }
-// filterCaseCountByDiagnosis{
-//   group,
-//   count
-// }
-// filterCaseCountByDiseaseSite{
-//   group,
-//   count
-// }
-// filterCaseCountByStageOfDisease{
-//   group,
-//   count
-// }
-// filterCaseCountByResponseToTreatment{
-//   group,
-//   count
-// }
-// filterCaseCountBySex{
-//   group,
-//   count
-// }
-// filterCaseCountByNeuteredStatus{
-//   group,
-//   count
-// }
-// filterCaseCountBySampleType{
-//   group,
-//   count
-// }
-// filterCaseCountBySamplePathology{
-//   group,
-//   count
-// }
-// filterCaseCountBySampleSite{
-//   group,
-//   count
-// }
-// filterCaseCountByFileAssociation{
-//   group,
-//   count
-// }
-// filterCaseCountByFileType{
-//   group,
-//   count
-// }
-// filterCaseCountByBiobank{
-//   group,
-//   count
-// }
-// filterCaseCountByStudyParticipation{
-//   group,
-//   count
-// }
-// filterCaseCountByFileFormat{
-//   group,
-//   count
-// }
-// programsAndStudies{
-//   program
-//   caseSize
-//   studies{
-//       study
-//       caseSize
-//   }
-// }
-// biospecimen_source {
-//   biospecimen_repository_acronym
-//   biospecimen_repository_full_name
-// }
-
-// caseOverviewPaged(first: 10) {
-//     case_id
-//     study_code
-//     study_type
-//     cohort
-//     breed
-//     diagnosis
-//     stage_of_disease
-//     age
-//     sex
-//     neutered_status
-//     weight
-//     response_to_treatment
-//     disease_site
-//   }
-
-//   program {
-//     program_acronym
-//     program_name
-//   }
-//   }`;
 
 export const DASHBOARD_QUERY = gql`
   query searchCases(
@@ -959,82 +834,6 @@ query fileOverview(
     }
   }
   `;
-
-// export const FILTER_GROUP_QUERY = gql`
-//   query searchCases(
-//     $program: [String] = [],
-//     $study: [String],
-//     $study_type: [String],
-//     $breed: [String],
-//     $diagnosis: [String],
-//     $disease_site: [String],
-//     $stage_of_disease: [String],
-//     $response_to_treatment: [String],
-//     $sex: [String],
-//     $neutered_status: [String],
-//     $sample_type: [String],
-//     $sample_pathology: [String],
-//     $sample_site:[String],
-//     $file_association: [String],
-//     $file_type: [String],
-//     $file_format: [String],
-//     $biobank: [String],
-//     $study_participation: [String],
-//   )
-//   {
-//     searchCases
-//     (
-//       program: $program,
-//       study: $study,
-//       study_type: $study_type,
-//       breed: $breed,
-//       diagnosis: $diagnosis,
-//       disease_site: $disease_site,
-//       stage_of_disease: $stage_of_disease,
-//       response_to_treatment: $response_to_treatment,
-//       sex: $sex,
-//       neutered_status: $neutered_status,
-//       sample_type: $sample_type,
-//       sample_pathology: $sample_pathology,
-//       sample_site: $sample_site,
-//       file_association: $file_association,
-//       file_type: $file_type,
-//       file_format: $file_format,
-//       biobank: $biobank,
-//       study_participation: $study_participation,
-//     )
-//     {
-//       caseCountByDiagnosis {
-//         group
-//         count
-//       }
-//       caseCountByGender {
-//         group
-//         count
-//       }
-//       caseCountByBreed {
-//         group
-//         count
-//       }
-//       caseCountByStageOfDisease {
-//         group
-//         count
-//       }
-//       caseCountByDiseaseSite {
-//         group
-//         count
-//       }
-//       programsAndStudies {
-//           program
-//           caseSize
-//           studies {
-//             study
-//             caseSize
-//           }
-//       }
-//     }
-//   }
-// `;
 
 export const FILTER_QUERY = gql`
 query searchCases(
@@ -1983,6 +1782,7 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     extendedViewConfig: {
       pagination: true,
+      download: true,
       manageViewColumns: {
         title: 'View Columns',
       },
@@ -1998,7 +1798,7 @@ export const tableContainers = [
         header: 'Case ID',
         sort: 'asc',
         display: true,
-        cellType: cellTypes.LINK,
+        cellType: cellTypes.CUSTOM_ELEM,
         linkAttr: {
           rootPath: '/case',
           pathParams: ['case_id'],
@@ -2120,6 +1920,7 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     extendedViewConfig: {
       pagination: true,
+      download: true,
       manageViewColumns: {
         title: 'View Columns',
       },
@@ -2147,6 +1948,7 @@ export const tableContainers = [
         },
         display: true,
         viewColumns: false,
+        tooltipText: 'sort',
       },
       {
         dataField: 'breed',
@@ -2234,7 +2036,7 @@ export const tableContainers = [
     // addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   },
   {
-    name: 'Files',
+    name: 'Case Files',
     dataField: 'dataFile',
     api: GET_FILES_OVERVIEW_QUERY,
     paginationAPIField: 'fileOverview',
@@ -2242,8 +2044,13 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
     dataKey: 'file_name',
+    jbrowse: true,
+    queryParam: {
+      file_level: ['case'],
+    },
     extendedViewConfig: {
       pagination: true,
+      download: true,
       manageViewColumns: {
         title: 'View Columns',
       },
@@ -2265,7 +2072,7 @@ export const tableContainers = [
         dataField: 'access_file',
         header: 'Access',
         display: true,
-        downloadDocument: true,
+        cellType: cellTypes.CUSTOM_ELEM,
         documentDownloadProps: {
           maxFileSize: 12000000,
           toolTipTextFileDownload: 'Download a copy of this file',
@@ -2365,7 +2172,7 @@ export const tableContainers = [
           rootPath: '/study',
           pathParams: ['study_code'],
         },
-        display: true,
+        display: false,
         role: cellTypes.DISPLAY,
         tooltipText: 'sort',
       },
@@ -2385,7 +2192,7 @@ export const tableContainers = [
     // addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   },
   {
-    name: 'StudyFiles',
+    name: 'Study Files',
     dataField: 'dataStudyFile',
     api: GET_FILES_OVERVIEW_QUERY,
     paginationAPIField: 'fileOverview',
@@ -2398,6 +2205,7 @@ export const tableContainers = [
     },
     extendedViewConfig: {
       pagination: true,
+      download: true,
       manageViewColumns: {
         title: 'View Columns',
       },
@@ -2456,6 +2264,8 @@ export const tableContainers = [
         display: true,
         role: cellTypes.DISPLAY,
         tooltipText: 'sort',
+        dataFormatType: dataFormatTypes.FORMAT_BYTES,
+        cellType: cellTypes.FORMAT_DATA,
       },
       {
         dataField: 'access_file',
@@ -2490,12 +2300,72 @@ export const tableContainers = [
         tooltipText: 'sort',
       },
     ],
+    tableMsg: {
+      noMatch: 'No Matching Records Found',
+    },
   },
 ];
 
+export const alertMessage = 'The cart is limited to 1000 files. Please narrow the search criteria or remove some files from the cart to add more.';
+
+const addSelectedFiles = {
+  title: 'Add Selected Files',
+  clsName: 'add_selected_button',
+  type: types.BUTTON,
+  role: btnTypes.ADD_SELECTED_FILES,
+  btnType: btnTypes.ADD_SELECTED_FILES,
+  tooltipCofig: tooltipContent,
+  conditional: true,
+};
+
+const jBrowseBtn = {
+  type: types.CUSTOM_ELEM,
+  Jbrowse: true,
+};
+
 export const tableLayOut = [
+  {
+    container: 'buttons',
+    size: 'xl',
+    clsName: 'container_header',
+    items: [
+      {
+        title: 'Add Associated Files For All',
+        clsName: 'add_all_button',
+        type: types.BUTTON,
+        role: btnTypes.ADD_ALL_FILES,
+        btnType: btnTypes.ADD_ALL_FILES,
+        conditional: false,
+        tooltipCofig: tooltipContent,
+        alertMessage,
+      },
+      addSelectedFiles,
+      jBrowseBtn,
+    ],
+  },
   {
     container: 'paginatedTable',
     paginatedTable: true,
+  },
+  {
+    container: 'buttons',
+    size: 'xl',
+    clsName: 'container_footer',
+    items: [
+      addSelectedFiles,
+      jBrowseBtn,
+    ],
+  },
+  {
+    container: 'buttons',
+    size: 'xl',
+    clsName: 'container_footer_link',
+    items: [
+      {
+        title: 'Go to My Cart >',
+        clsName: 'go_to_cart',
+        url: '#/fileCentricCart',
+        type: types.LINK,
+      }],
   },
 ];

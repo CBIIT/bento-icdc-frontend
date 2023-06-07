@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs as BentoTabs } from '@bento-core/tab';
-import { tabContainers } from '../../bento/dashboardTabData';
+import { tableContainers } from '../../bento/dashboardTabData';
 import customTheme from './DefaultTabTheme';
 
 const Tabs = ({
@@ -21,7 +21,7 @@ const Tabs = ({
   return (
     <>
       <BentoTabs
-        tabItems={getTabs(tabContainers)}
+        tabItems={getTabs(tableContainers)}
         currentTab={currentTab}
         handleTabChange={setCurrentTab}
         customTheme={customTheme}

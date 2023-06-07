@@ -1,7 +1,7 @@
 const customTheme = {
   MuiTabs: {
     root: {
-      borderBottom: '10px solid #40789c',
+      borderBottom: '1px solid #6B6B6B',
     },
   },
   MuiTab: {
@@ -11,30 +11,31 @@ const customTheme = {
       height: '45px',
       overflow: 'hidden',
       background: '#EAEAEA',
-      borderTop: '1px solid black',
-      borderLeft: '1px solid black',
-      borderRight: '1px solid black',
-      fontWeight: '400',
-      lineHeight: '18px',
+      fontWeight: '500',
+      lineHeight: '1.75',
       letterSpacing: '0.25px',
       marginRight: '10px',
-      fontSize: '21px',
+      fontSize: '17px',
       width: '250px',
       textTransform: 'none',
       fontFamily: 'Lato',
+      borderTop: '7px solid #c6c9cd',
       '&.Mui-selected': {
-        fontWeight: 'bolder',
         '&.cases': {
-          background: '#d6f2ea',
-          color: '#10a075',
+          color: '#FF9742',
+          borderTop: '7px solid #FF9742',
         },
         '&.samples': {
-          background: '#cfedf9',
-          color: '#0dafec',
+          color: '#9DC1D9',
+          borderTop: '7px solid #9DC1D9',
         },
-        '&.files': {
-          background: '#f7d7f7',
-          color: '#c92ec7',
+        '&.case_files': {
+          color: '#667A87',
+          borderTop: '7px solid #667A87',
+        },
+        '&.study_files': {
+          color: '#39C0F0',
+          borderTop: '7px solid #39C0F0',
         },
         '&.MuiTypography-body1': {
           color: 'red',
@@ -48,7 +49,11 @@ const customTheme = {
         marginLeft: '5px',
         fontSize: '17px',
       },
-      '& span.files_count': {
+      '& span.case_files_count': {
+        marginLeft: '5px',
+        fontSize: '17px',
+      },
+      '& span.study_files_count': {
         marginLeft: '5px',
         fontSize: '17px',
       },

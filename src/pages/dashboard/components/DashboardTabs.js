@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import {
+  TableContextProvider,
+} from '@bento-core/paginated-table';
 import TabsView from '../../../components/Tabs/TabsView';
-import { tableContainers, tableLayOut } from '../../../bento/dashboardTabData';
+import { tableContainers, tableLayOut, tabIndex } from '../../../bento/dashboardTabData';
 import PaginatedTableView from '../../../components/PaginatedTable/TableView';
 
 const DashboardTabsView = ({
@@ -21,20 +24,21 @@ const DashboardTabsView = ({
       />
       {
         tableContainers.map((tab, index) => (
-          <>
+          <TableContextProvider>
             <div hidden={currentTab !== index}>
               <PaginatedTableView
                 config={tab}
                 tableLayOut={tableLayOut}
                 totalRowCount={dashboardStats[tab.count]}
                 activeTab={index === currentTab}
+                tabStyles={tabIndex[index]}
                 activeFilters={{
                   ...activeFilters,
                   ...tab?.queryParam,
                 }}
               />
             </div>
-          </>
+          </TableContextProvider>
         ))
       }
     </>

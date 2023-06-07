@@ -97,11 +97,11 @@ export default () => ({
     marginLeft: '-5px',
   },
   customTooltip: {
-    border: '#03A383 1px solid',
+    border: '#a7afb3 2px solid',
   },
   customArrow: {
     '&::before': {
-      border: '#03A383 1px solid',
+      border: '#a7afb3 2px solid',
     },
   },
 });
