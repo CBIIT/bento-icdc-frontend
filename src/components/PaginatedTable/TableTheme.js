@@ -104,7 +104,10 @@ const tblBody = {
   },
 };
 
-export const extendedView = ({ primaryColor = '#FF9742' }) => ({
+export const extendedView = ({
+  primaryColor = '#FF9742',
+  selectedRows = [],
+}) => ({
   extendedView: {
     tblTopPgn: {
       MuiTablePagination: {
@@ -141,11 +144,18 @@ export const extendedView = ({ primaryColor = '#FF9742' }) => ({
         display: 'block',
         position: 'relative',
         textAlign: 'right',
-        '&.downloadColumnView': {
+        '&.downloadAndColumnView': {
           maxHeight: '2px',
           minHeight: '0px',
           '& button': {
             marginTop: '-50px',
+            '&.download-icon': {
+              marginRight: '-10px',
+              display: (selectedRows.length > 0) ? 'none' : '',
+            },
+            '&.manageViewColumnBtn': {
+              display: (selectedRows.length > 0) ? 'none' : '',
+            },
           },
         },
       },
@@ -219,7 +229,15 @@ export const customTheme = {
         textDecoration: 'none',
       },
       '& img': {
-        width: '15px',
+        width: '17px',
+        '&.addAllTooltip': {
+          verticalAlign: 'top',
+          marginTop: '8px',
+        },
+        '&.add_selected_file_tooltip_icon': {
+          verticalAlign: 'top',
+          marginTop: '8px',
+        },
       },
     },
   },
@@ -257,11 +275,15 @@ export const customTheme = {
       },
       '&.add_selected_button': {
         marginRight: '10px',
+        marginLeft: '25px',
         color: '#fff',
         borderRadius: '10px',
         fontSize: '16px',
         backgroundColor: '#ff7f15',
         textTransform: 'none',
+        '& img': {
+          width: '2.25em',
+        },
         '&.Mui-disabled': {
           opacity: '0.7',
           textTransform: 'none',
@@ -325,10 +347,10 @@ export const customTheme = {
   },
 };
 
-export const themeConfig = (styles = {}) => ({
+export const themeConfig = (styles = {}, table) => ({
   ...headerTheme(styles),
   tblBody,
   ...tblContainer(styles),
   tblPgn,
-  ...extendedView(styles),
+  ...extendedView({ ...styles, ...table }),
 });

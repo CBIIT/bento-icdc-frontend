@@ -9,6 +9,7 @@ import {
   tooltipConfig,
 } from '../../bento/dashboardData';
 import DashboardTabs from './components/DashboardTabs';
+import { updateStat } from '../../components/Stats/utils';
 
 const Dashboard = ({
   classes,
@@ -35,7 +36,7 @@ const Dashboard = ({
           <br />
           <br />
           <DashboardTabs
-            dashboardStats={searchCases}
+            dashboardStats={updateStat(searchCases)}
             activeFilters={activeFilters}
           />
         </div>

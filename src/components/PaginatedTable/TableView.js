@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import {
   TableView,
   Wrapper,
+  TableContext,
 } from '@bento-core/paginated-table';
 import styles from './TableStyle';
 import { themeConfig, customTheme } from './TableTheme';
 import { CustomizeCellView } from './Customize/CellView';
 import { updateWrapperConfig } from './Customize/TableView';
+import { ExtendedViewConfig } from './Customize/ExtendedView';
 
 const PaginatedTableView = (props) => {
   /**
@@ -23,7 +25,10 @@ const PaginatedTableView = (props) => {
     activeTab,
     tableLayOut = [],
     tabStyles,
+    rowsPerPage = 10,
   } = props;
+
+  const { context } = useContext(TableContext);
   /*
   * useReducer table state
   * paginated table update data when state change
@@ -61,15 +66,16 @@ const PaginatedTableView = (props) => {
     tableMsg: config.tableMsg,
     sortBy: config.defaultSortField,
     sortOrder: config.defaultSortDirection,
-    extendedViewConfig: config.extendedViewConfig,
-    rowsPerPage: 10,
+    activeFilters,
+    extendedViewConfig: ExtendedViewConfig(config),
+    rowsPerPage,
     page: 0,
   });
 
   return (
     <>
       <Wrapper
-        wrapConfig={updateWrapperConfig(config, tableLayOut)}
+        wrapConfig={updateWrapperConfig(config, tableLayOut, context)}
         customTheme={customTheme}
         classes={classes}
         section={config.name}
@@ -79,7 +85,7 @@ const PaginatedTableView = (props) => {
           <Grid item xs={12} id={config.tableID}>
             <TableView
               initState={initTblState}
-              themeConfig={themeConfig(tabStyles)}
+              themeConfig={themeConfig(tabStyles, context)}
               queryVariables={activeFilters}
               totalRowCount={totalRowCount}
               activeTab={activeTab}

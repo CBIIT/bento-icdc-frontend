@@ -2,11 +2,13 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { sideBarReducerGenerator } from '@bento-core/facet-filter';
+import { cartReducerGenerator } from '@bento-core/cart';
 import { ddgraph, moduleReducers as submission, versionInfo } from 'data-model-navigator';
 import layout from '../components/Layout/LayoutState';
 import stats from '../components/Stats/StatsState';
 
 const { statusReducer } = sideBarReducerGenerator();
+const { cartReducer } = cartReducerGenerator();
 
 const reducers = {
   ddgraph,
@@ -15,6 +17,7 @@ const reducers = {
   layout,
   stats,
   statusReducer,
+  cartReducer,
 };
 
 const loggerMiddleware = createLogger();

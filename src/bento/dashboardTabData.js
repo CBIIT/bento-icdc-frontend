@@ -11,6 +11,7 @@ import {
   customSamplesTabDownloadCSV,
   customStudyFilesTabDownloadCSV,
 } from './tableDownloadCSV';
+
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
@@ -24,9 +25,7 @@ export const tooltipContent = {
   'Case Files': 'Add selected files to My Files',
   'Study Files': 'Add selected study files to My Files',
   arrow: true,
-  styles: {
-    border: '#a7afb3 1px solid',
-  },
+  clsName: 'addSelectedTooltip',
 };
 
 // --------------- Tooltip configuration --------------
@@ -37,8 +36,13 @@ export const selectAllToolTip = {
   1: 'Add filtered files associated with all samples to My Files',
   2: 'Add all filtered files to My Files',
   3: 'Add all filtered study files to My Files',
+  Cases: 'Add filtered files associated with all cases to My Files',
+  Samples: 'Add filtered files associated with all samples to My Files',
+  'Case Files': 'Add all filtered files to My Files',
+  'Study Files': 'Add all filtered study files to My Files',
+  arrow: true,
+  clsName: 'addAllTooltip',
 };
-
 // --------------- Dahboard Table external link configuration --------------
 // Ideal size for externalLinkIcon is 16x16 px
 export const externalLinkIcon = {
@@ -1782,7 +1786,10 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     extendedViewConfig: {
       pagination: true,
-      download: true,
+      download: {
+        downloadCsv: 'Download Table Contents As CSV',
+        ...customCasesTabDownloadCSV,
+      },
       manageViewColumns: {
         title: 'View Columns',
       },
@@ -1897,17 +1904,15 @@ export const tableContainers = [
     ],
     id: 'case_tab',
     tableID: 'case_tab_table',
-    tableDownloadCSV: customCasesTabDownloadCSV,
     tabIndex: '0',
-    downloadFileName: 'Bento_Dashboard_cases_download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    // addFilesRequestVariableKey: 'subject_ids',
-    // addFilesResponseKeys: ['fileIDsFromList'],
-    // addAllFilesResponseKeys: ['subjectOverview', 'files'],
-    // addAllFileQuery: GET_ALL_FILEIDS_FROM_CASESTAB_FOR_ADD_ALL_CART,
-    // addSelectedFilesQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
+    addFilesRequestVariableKey: 'case_ids',
+    addFilesResponseKeys: ['caseOverview', 'files'],
+    addAllFilesResponseKeys: ['caseOverview', 'files'],
+    addAllFileQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Samples',
@@ -1920,7 +1925,10 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     extendedViewConfig: {
       pagination: true,
-      download: true,
+      download: {
+        downloadCsv: 'Download Table Contents As CSV',
+        ...customSamplesTabDownloadCSV,
+      },
       manageViewColumns: {
         title: 'View Columns',
       },
@@ -2024,8 +2032,6 @@ export const tableContainers = [
     id: 'sample_tab',
     tableID: 'sample_tab_table',
     tabIndex: '1',
-    tableDownloadCSV: customSamplesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_cases_download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -2050,7 +2056,10 @@ export const tableContainers = [
     },
     extendedViewConfig: {
       pagination: true,
-      download: true,
+      download: {
+        downloadCsv: 'Download Table Contents As CSV',
+        ...customFilesTabDownloadCSV,
+      },
       manageViewColumns: {
         title: 'View Columns',
       },
@@ -2180,8 +2189,6 @@ export const tableContainers = [
     id: 'file_tab',
     tableID: 'file_tab_table',
     selectableRows: true,
-    tableDownloadCSV: customFilesTabDownloadCSV,
-    downloadFileName: 'Bento_Dashboard_cases_download',
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
@@ -2205,7 +2212,10 @@ export const tableContainers = [
     },
     extendedViewConfig: {
       pagination: true,
-      download: true,
+      download: {
+        downloadCsv: 'Download Table Contents As CSV',
+        ...customStudyFilesTabDownloadCSV,
+      },
       manageViewColumns: {
         title: 'View Columns',
       },
@@ -2336,7 +2346,7 @@ export const tableLayOut = [
         role: btnTypes.ADD_ALL_FILES,
         btnType: btnTypes.ADD_ALL_FILES,
         conditional: false,
-        tooltipCofig: tooltipContent,
+        tooltipCofig: selectAllToolTip,
         alertMessage,
       },
       addSelectedFiles,

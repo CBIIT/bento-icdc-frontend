@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TableContextProvider,
 } from '@bento-core/paginated-table';
@@ -15,6 +15,16 @@ const DashboardTabsView = ({
     setCurrentTab(value);
   };
 
+  /**
+  * 1. update active Filter query for table only after
+  * dashboard state change
+  * To prevent table from making additional call
+  */
+  const [queryVeriables, setQueryVariables] = useState({});
+  useEffect(() => {
+    setQueryVariables(activeFilters);
+  }, [dashboardStats]);
+  console.log(dashboardStats);
   return (
     <>
       <TabsView
@@ -33,7 +43,7 @@ const DashboardTabsView = ({
                 activeTab={index === currentTab}
                 tabStyles={tabIndex[index]}
                 activeFilters={{
-                  ...activeFilters,
+                  ...queryVeriables,
                   ...tab?.queryParam,
                 }}
               />
