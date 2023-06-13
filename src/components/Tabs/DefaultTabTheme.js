@@ -1,6 +1,7 @@
 const customTheme = {
   MuiTabs: {
     root: {
+      width: '100%',
       borderBottom: '1px solid #6B6B6B',
     },
   },

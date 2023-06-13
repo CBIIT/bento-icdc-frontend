@@ -15,6 +15,7 @@
     "@bento-core/stats-bar": "^0.2.0",
     "@bento-core/tab": "^0.2.0",
     "@bento-core/table": "^0.3.0",
+    "@bento-core/tool-tip": "^0.3.0",
     "@bento-core/util": "^0.3.0",
     "@bento-core/widgets": "^0.3.0",
     "@gen3/ui-component": "^0.5.1",
