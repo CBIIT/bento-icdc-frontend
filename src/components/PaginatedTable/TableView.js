@@ -27,7 +27,7 @@ const PaginatedTableView = (props) => {
     tabStyles,
     rowsPerPage = 10,
   } = props;
-
+  // access table state
   const { context } = useContext(TableContext);
   /*
   * useReducer table state

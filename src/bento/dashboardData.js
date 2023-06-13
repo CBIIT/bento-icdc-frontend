@@ -103,47 +103,63 @@ export const facetSectionVariables = {
 };
 
 // --------------- Dashboard Widgets configuration --------------
+
+// Sunburst chart color scheme
+export const SUNBURST_COLORS_LEVEL_1 = [
+  '#1F4B87',
+  '#AD1919',
+  '#DA6B2E',
+];
+
+export const SUNBURST_COLORS_LEVEL_2 = [
+  '#1F4B87',
+  '#AD1919',
+  '#DA6B2E',
+];
+
 // A maximum of 6 widgets are allowed
 export const widgetsData = [
   {
     type: 'sunburst',
-    label: 'Programs and Studies',
+    title: 'Programs and Studies',
     dataName: 'programsAndStudies',
     datatable_level1_field: 'program',
     datatable_level2_field: 'study',
     show: true,
+    datatable_level1_colors: SUNBURST_COLORS_LEVEL_1,
+    datatable_level2_colors: SUNBURST_COLORS_LEVEL_2,
   },
   {
     type: 'donut',
-    label: 'Breed',
+    title: 'Breed',
     dataName: 'caseCountByBreed',
     datatable_field: 'breed',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Diagnosis',
+    title: 'Diagnosis',
     dataName: 'caseCountByDiagnosis',
     datatable_field: 'diagnosis',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Disease Site',
+    title: 'Disease Site',
     dataName: 'caseCountByDiseaseSite',
     datatable_field: 'disease_site',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Sex',
+    title: 'Sex',
     dataName: 'caseCountByGender',
     datatable_field: 'gender',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Stage of Disease',
+    title: 'Stage of Disease',
     dataName: 'caseCountByStageOfDisease',
     datatable_field: 'stage_of_disease',
     show: true,

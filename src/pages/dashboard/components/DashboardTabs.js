@@ -24,7 +24,7 @@ const DashboardTabsView = ({
   useEffect(() => {
     setQueryVariables(activeFilters);
   }, [dashboardStats]);
-  console.log(dashboardStats);
+
   return (
     <>
       <TabsView
