@@ -9,6 +9,7 @@ import {
   facetsConfig,
   tooltipConfig,
 } from '../../bento/dashboardData';
+import QueryBarView from './filterQueryBar/QueryBarView';
 
 const Dashboard = ({
   classes,
@@ -36,6 +37,7 @@ const Dashboard = ({
             <WidgetView
               data={searchCases}
             />
+            <QueryBarView data={searchCases} />
           </div>
         </div>
       </div>
