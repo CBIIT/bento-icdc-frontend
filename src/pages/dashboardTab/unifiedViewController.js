@@ -31,7 +31,6 @@ const UnifiedViewController = ({ match }) => {
     ...multiStudyData.multiStudyCases,
     ...unifiedViewStats.searchCases,
   };
-  console.log(unifiedViewData);
   return (
     <Dashboard
       unifiedViewData={unifiedViewData}
