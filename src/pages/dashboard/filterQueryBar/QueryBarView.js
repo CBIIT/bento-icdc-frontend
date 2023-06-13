@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
+import { Container, ThemeProvider, createTheme } from '@material-ui/core';
 import {
   clearAllFilters, clearFacetSection, clearSliderSection, toggleCheckBox,
 } from '@bento-core/facet-filter';
 import { resetAllData, resetUploadData, updateAutocompleteData } from '@bento-core/local-find';
 import { QueryBarGenerator } from '@bento-core/query-bar';
 import { facetsConfig } from '../../../bento/dashboardData';
+import theme from './QueryBarTheme';
 
 /**
  * Generate the Explore Tab Query Bar
@@ -71,10 +73,17 @@ const QueryBarView = ({ data, statusReducer, localFind }) => {
   });
 
   return (
-    <QueryBar
-      statusReducer={mappedFilterState}
-      localFind={localFind}
-    />
+    <ThemeProvider theme={createTheme(theme)}>
+      <Container
+        maxWidth="xl"
+        className="icdc_query_bar"
+      >
+        <QueryBar
+          statusReducer={mappedFilterState}
+          localFind={localFind}
+        />
+      </Container>
+    </ThemeProvider>
   );
 };
 

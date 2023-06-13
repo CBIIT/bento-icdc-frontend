@@ -98,6 +98,7 @@ const WidgetView = ({
                   sliceTitle={widget.sliceTitle}
                   chartTitleLocation="top"
                   chartTitleAlignment="left"
+                  padAngle={0.02}
                 />
               </Grid>
             );
