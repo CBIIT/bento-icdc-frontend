@@ -22,6 +22,7 @@ const Dashboard = ({
   const [collapse, setCollapse] = React.useState(true);
   const [unifiedViewFlag, setUnifiedViewFlag] = React.useState(false);
   const themeChanger = useTheme();
+
   const handleChange = () => {
     setCollapse((prev) => !prev);
   };
