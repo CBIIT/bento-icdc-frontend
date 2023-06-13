@@ -9,11 +9,19 @@
     "@bento-core/all": "^0.2.0",
     "@bento-core/facet-filter": "^0.2.0",
     "@bento-core/stats-bar": "^0.2.0",
+<<<<<<< HEAD
+    "@bento-core/widgets": "^0.2.0",
+    "@bento-core/util": "^0.2.0",
+=======
+    "@bento-core/local-find": "^0.2.0",
+    "@bento-core/query-bar": "^0.2.0",
+>>>>>>> 100cabb8f1e6b03f35030f63331a0d9873c076cc
     "@gen3/ui-component": "^0.5.1",
     "@librpc/web": "^1.1.1",
     "@material-ui/core": "^4.10.0",
     "@material-ui/data-grid": "*",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.11.5",
     "@react-pdf/renderer": "^2.0.21",
     "@svgr/webpack": "4.1.0",
     "@tanstack/react-query": "^4.24.10",

@@ -38,6 +38,7 @@ import Styles from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
 import SupportingData from './views/supporting-data/supportingData';
 import env from '../../utils/env';
+import ClinicalData from './views/clinical-data/clinicalData';
 
 const studiesByProgram = gql`
   query studiesByProgram {
@@ -74,6 +75,10 @@ const studiesByProgram = gql`
   }
 `;
 
+function hasPositiveValue(arr) {
+  return arr.some((obj) => Object.values(obj).some((value) => value > 0));
+}
+
 const StudyDetailView = ({ classes, data }) => {
   const { data: interOpData, isLoading, isError } = useQuery({
     queryKey: ['studiesByProgram'],
@@ -88,6 +93,14 @@ const StudyDetailView = ({ classes, data }) => {
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
   const caseFileTypes = [...new Set(data.filesOfStudy.map((f) => (f.file_type))
     .filter((f) => !studyFileTypes.includes(f)))];
+  const { clinicalDataNodeNames, clinicalDataNodeCounts, clinicalDataNodeCaseCounts } = data;
+  const clinicalDataTabData = {
+    names: clinicalDataNodeNames,
+    nodeCount: clinicalDataNodeCounts,
+    nodeCaseCount: clinicalDataNodeCaseCounts,
+  };
+  const hasClinicalData = hasPositiveValue([clinicalDataNodeCounts, clinicalDataNodeCaseCounts]);
+
   const stat = {
     numberOfStudies: 1,
     numberOfCases: data.caseCountOfStudy,
@@ -212,12 +225,23 @@ const StudyDetailView = ({ classes, data }) => {
 
   const currentStudy = interOpData?.studiesByProgram
     .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
+
   let processedTabs;
   if (!currentStudy) {
     processedTabs = tab.items.filter((item) => item.label !== 'SUPPORTING DATA');
   } else {
     processedTabs = tab.items;
   }
+
+  if (!hasClinicalData) {
+    processedTabs = [
+      ...processedTabs,
+      ...processedTabs.items.filter((item) => item.label !== 'CLINICAL DATA'),
+    ];
+  } else {
+    processedTabs = [...processedTabs];
+  }
+
   return (
     <StudyThemeProvider>
       <Snackbar
@@ -353,8 +377,16 @@ const StudyDetailView = ({ classes, data }) => {
       </TabPanel>
 
       {
+          hasClinicalData && (
+          <TabPanel value={currentTab} index={4}>
+            <ClinicalData data={clinicalDataTabData} />
+          </TabPanel>
+          )
+      }
+
+      {
             currentStudy && (
-            <TabPanel value={currentTab} index={4}>
+            <TabPanel value={currentTab} index={5}>
               <SupportingData
                 data={currentStudy}
                 isLoading={isLoading}
