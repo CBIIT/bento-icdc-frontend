@@ -12,12 +12,12 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { noop } from 'lodash';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
+import env from '../../../../utils/env';
 import Styles from './cartHeader.style';
 import ReadMoreSVG from './readMore';
 // import ReadMeDialog from './readMeDialog';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
-import { pageData } from '../../../../bento/cartData';
 import cgcIcon from './assets/cgc.svg';
 
 const StyledMenu = withStyles({
@@ -73,8 +73,8 @@ const OPTIONS = [
   EXPORT_TO_SEVEN_BRIDGES,
 ];
 
-const getReadMe = async (setContent) => {
-  const { data } = await axios.get(pageData.readMeUrl);
+const getReadMe = async (setContent, url) => {
+  const { data } = await axios.get(url);
   setContent(data);
 };
 
@@ -97,7 +97,7 @@ const CartHeader = React.forwardRef(({
   const [isLoading, setLoading] = React.useState(false);
 
   useEffect(() => {
-    getReadMe(setContent);
+    getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
   }, []);
   const exportOptionsClickHandler = (event) => {
     // setLabel('Available Downloads');
