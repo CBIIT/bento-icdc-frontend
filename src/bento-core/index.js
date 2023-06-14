@@ -38,6 +38,7 @@ import { QueryBarGenerator } from '@bento-core/query-bar';
 import {
   transformInitialDataForSunburst,
 } from '@bento-core/util';
+import ToolTip from '@bento-core/tool-tip';
 
 export {
   WidgetGenerator, // widgets
@@ -70,4 +71,5 @@ export {
   BentoTabs, // bento tabs
   QueryBarGenerator, // query bar component
   transformInitialDataForSunburst, // bento-core util
+  ToolTip, // tooltip
 };

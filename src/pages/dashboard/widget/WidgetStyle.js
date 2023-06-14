@@ -103,6 +103,14 @@ const styles = (theme) => ({
   },
   checked: {},
   track: {},
+  iconButton: {
+    marginRight: '10px',
+  },
+  helpIcon: {
+    verticalAlign: 'top',
+    width: '17px',
+    zIndex: '600',
+  },
 });
 
 export default styles;
