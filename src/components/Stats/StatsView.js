@@ -1,5 +1,5 @@
 import React from 'react';
-import StatsBar from '@bento-core/stats-bar';
+import { StatsBar } from '../../bento-core';
 import { statsStyling, globalStatsData } from '../../bento/globalStatsData';
 import { updateStat } from './utils';
 /**

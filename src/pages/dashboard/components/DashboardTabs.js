@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   TableContextProvider,
-} from '@bento-core/paginated-table';
+} from '../../../bento-core';
 import TabsView from '../../../components/Tabs/TabsView';
 import { tableContainers, tableLayOut, tabIndex } from '../../../bento/dashboardTabData';
 import PaginatedTableView from '../../../components/PaginatedTable/TableView';

@@ -9,7 +9,7 @@ import {
   ExpandMore as ExpandMoreIcon,
 } from '@material-ui/icons';
 import clsx from 'clsx';
-import { ClearAllFiltersBtn, FacetFilter } from '@bento-core/facet-filter';
+import { ClearAllFiltersBtn, FacetFilter } from '../../bento-core';
 import FacetFilterThemeProvider from './FilterThemeConfig';
 import styles from './BentoFacetFilterStyle';
 

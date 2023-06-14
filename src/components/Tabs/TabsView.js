@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs as BentoTabs } from '@bento-core/tab';
+import { BentoTabs } from '../../bento-core';
 import { tableContainers } from '../../bento/dashboardTabData';
 import customTheme from './DefaultTabTheme';
 

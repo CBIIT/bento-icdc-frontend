@@ -1,10 +1,11 @@
 /* eslint-disable no-multiple-empty-lines */
 import gql from 'graphql-tag';
-import { cellTypes, dataFormatTypes } from '@bento-core/table';
 import {
+  cellTypes,
+  dataFormatTypes,
   btnTypes,
   types,
-} from '@bento-core/paginated-table';
+} from '../bento-core';
 import {
   customCasesTabDownloadCSV,
   customFilesTabDownloadCSV,

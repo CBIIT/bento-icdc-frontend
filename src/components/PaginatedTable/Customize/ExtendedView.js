@@ -1,5 +1,5 @@
 import { useApolloClient } from '@apollo/client';
-import { getFilters } from '@bento-core/facet-filter';
+import { getFilters } from '../../../bento-core';
 import store from '../../../store/index';
 import { downloadJson } from '../utils';
 

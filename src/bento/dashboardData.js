@@ -1,6 +1,6 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
-import { sortType, InputTypes } from '@bento-core/facet-filter';
+import { sortType, InputTypes } from '../bento-core';
 
 // --------------- Dashboard Data --------------------
 export const themeToggleTooltip = {

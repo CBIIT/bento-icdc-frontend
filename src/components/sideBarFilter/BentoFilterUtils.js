@@ -1,4 +1,4 @@
-import { clearAllAndSelectFacet } from '@bento-core/facet-filter';
+import { clearAllAndSelectFacet } from '../../bento-core';
 import store from '../../store';
 
 export const getFacetValues = (facet, facetValue) => ({ [facet]: { [facetValue]: true } });

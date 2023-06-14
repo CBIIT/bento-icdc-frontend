@@ -4,7 +4,7 @@ import {
   TableView,
   Wrapper,
   TableContext,
-} from '@bento-core/paginated-table';
+} from '../../bento-core';
 import styles from './TableStyle';
 import { themeConfig, customTheme } from './TableTheme';
 import { CustomizeCellView } from './Customize/CellView';

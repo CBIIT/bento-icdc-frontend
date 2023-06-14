@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   btnTypes,
-} from '@bento-core/paginated-table';
+} from '../../../bento-core';
 import ViewJBrowseButton from '../../../pages/JbrowseDetail/components/JBrowseViewBtn';
 
 export const CostomizeTableView = () => null;

@@ -1,10 +1,15 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
-  clearAllFilters, clearFacetSection, clearSliderSection, toggleCheckBox,
-} from '@bento-core/facet-filter';
-import { resetAllData, resetUploadData, updateAutocompleteData } from '@bento-core/local-find';
-import { QueryBarGenerator } from '@bento-core/query-bar';
+  clearAllFilters,
+  clearFacetSection,
+  clearSliderSection,
+  toggleCheckBox,
+  resetAllData,
+  resetUploadData,
+  updateAutocompleteData,
+  QueryBarGenerator,
+} from '../../../bento-core';
 import { facetsConfig } from '../../../bento/dashboardData';
 
 /**

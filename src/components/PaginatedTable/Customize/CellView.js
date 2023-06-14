@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Typography } from '@material-ui/core';
-import { cellTypes, headerTypes } from '@bento-core/table';
+import { cellTypes, headerTypes } from '../../../bento-core';
 import DocumentDownload from '../../DocumentDownload/DocumentDownloadView';
 import { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
 import MultiStudyTooltip from '../../../pages/dashboardTab/components/multiStudyTooltip';
