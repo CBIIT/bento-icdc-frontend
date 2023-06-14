@@ -13,6 +13,8 @@
     "@bento-core/paginated-table": "^0.3.0",
     "@bento-core/query-bar": "^0.3.0",
     "@bento-core/stats-bar": "^0.2.0",
+    "@bento-core/local-find": "^0.2.0",
+    "@bento-core/query-bar": "^0.2.0",
     "@bento-core/tab": "^0.2.0",
     "@bento-core/table": "^0.3.0",
     "@bento-core/tool-tip": "^0.3.0",
