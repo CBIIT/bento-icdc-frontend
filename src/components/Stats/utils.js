@@ -1,4 +1,4 @@
-const humanFileSize = (size) => {
+export const humanFileSize = (size) => {
   if (typeof size !== 'number') {
     return '';
   }
@@ -8,4 +8,13 @@ const humanFileSize = (size) => {
   return `${sizeStr} ${suffix}`;
 };
 
-export default humanFileSize;
+/* subtract study file count from total files count */
+export const updateStat = (stat) => {
+  const { numberOfStudyFiles, numberOfFiles, volumeOfData } = stat;
+  const numberOfCaseFiles = numberOfFiles - numberOfStudyFiles;
+  return {
+    ...stat,
+    numberOfFiles: (numberOfCaseFiles > 0) ? numberOfCaseFiles : 0,
+    volumeOfData: humanFileSize(volumeOfData),
+  };
+};

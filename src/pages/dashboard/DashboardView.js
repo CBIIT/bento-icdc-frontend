@@ -10,6 +10,8 @@ import {
   tooltipConfig,
 } from '../../bento/dashboardData';
 import QueryBarView from './filterQueryBar/QueryBarView';
+import DashboardTabs from './components/DashboardTabs';
+import { updateStat } from '../../components/Stats/utils';
 
 const Dashboard = ({
   classes,
@@ -39,6 +41,10 @@ const Dashboard = ({
               data={searchCases}
             />
           </div>
+          <DashboardTabs
+            dashboardStats={updateStat(searchCases)}
+            activeFilters={activeFilters}
+          />
         </div>
       </div>
     </div>
