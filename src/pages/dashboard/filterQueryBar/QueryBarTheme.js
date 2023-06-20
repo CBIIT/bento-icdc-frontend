@@ -1,9 +1,11 @@
 const theme = {
   overrides: {
-    '&.filterCheckboxes': {
-      color: 'red',
-    },
     MuiContainer: {
+      maxWidthXl: {
+        '@media (min-width: 1920px)': {
+          maxWidth: '100%',
+        },
+      },
       root: {
         '&.icdc_query_bar': {
           padding: '0',

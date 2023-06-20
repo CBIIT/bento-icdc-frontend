@@ -15,15 +15,35 @@ const DashboardTabsView = ({
     setCurrentTab(value);
   };
 
-  /**
-  * 1. update active Filter query for table only after
-  * dashboard state change
-  * To prevent table from making additional call
-  */
-  const [queryVeriables, setQueryVariables] = useState({});
-  useEffect(() => {
-    setQueryVariables(activeFilters);
-  }, [dashboardStats]);
+  const TableView = ({
+    tab,
+    index,
+  }) => {
+    /**
+    * 1. update active Filter query for table only after
+    * dashboard state change
+    * prevents table from making additional call
+    */
+    const [queryVeriables, setQueryVariables] = useState({});
+    useEffect(() => {
+      setQueryVariables({ ...activeFilters, ...tab?.queryParam });
+    }, [dashboardStats[tab.count]]);
+
+    return (
+      <TableContextProvider>
+        <div hidden={currentTab !== index}>
+          <PaginatedTableView
+            config={tab}
+            tableLayOut={tableLayOut}
+            totalRowCount={dashboardStats[tab.count]}
+            activeTab={index === currentTab}
+            tabStyles={tabIndex[index]}
+            activeFilters={queryVeriables}
+          />
+        </div>
+      </TableContextProvider>
+    );
+  };
 
   return (
     <>
@@ -34,21 +54,7 @@ const DashboardTabsView = ({
       />
       {
         tableContainers.map((tab, index) => (
-          <TableContextProvider>
-            <div hidden={currentTab !== index}>
-              <PaginatedTableView
-                config={tab}
-                tableLayOut={tableLayOut}
-                totalRowCount={dashboardStats[tab.count]}
-                activeTab={index === currentTab}
-                tabStyles={tabIndex[index]}
-                activeFilters={{
-                  ...queryVeriables,
-                  ...tab?.queryParam,
-                }}
-              />
-            </div>
-          </TableContextProvider>
+          <TableView tab={tab} index={index} />
         ))
       }
     </>

@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { Container, ThemeProvider, createTheme } from '@material-ui/core';
+import {
+  Container,
+  ThemeProvider,
+  createTheme,
+  withStyles,
+} from '@material-ui/core';
 import {
   clearAllFilters,
   clearFacetSection,
@@ -13,6 +18,7 @@ import {
 } from '../../../bento-core';
 import { facetsConfig } from '../../../bento/dashboardData';
 import theme from './QueryBarTheme';
+import styles from './QueryBarStyles';
 
 /**
  * Generate the Explore Tab Query Bar
@@ -23,7 +29,12 @@ import theme from './QueryBarTheme';
  * @param {object} props.localFind Local Find State
  * @returns {JSX.Element}
  */
-const QueryBarView = ({ data, statusReducer, localFind }) => {
+const QueryBarView = ({
+  data,
+  statusReducer,
+  localFind,
+  classes,
+}) => {
   const dispatch = useDispatch();
 
   const sectionOrder = facetsConfig.map((v) => v.datafield);
@@ -86,6 +97,8 @@ const QueryBarView = ({ data, statusReducer, localFind }) => {
         <QueryBar
           statusReducer={mappedFilterState}
           localFind={localFind}
+          classes={classes}
+          styles={classes}
         />
       </Container>
     </ThemeProvider>
@@ -97,4 +110,4 @@ const mapStateToProps = (state) => ({
   localFind: state.localFind,
 });
 
-export default connect(mapStateToProps, null)(QueryBarView);
+export default connect(mapStateToProps, null)(withStyles(styles)(QueryBarView));

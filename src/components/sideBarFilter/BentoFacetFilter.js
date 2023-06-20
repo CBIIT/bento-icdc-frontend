@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   AccordionSummary,
   Button,
@@ -50,20 +50,30 @@ const BentoFacetFilter = ({
    * Add Bento frontend filter count/subjects
    * Add tootip text
    */
+  const updateFacetConfig = useMemo(() => facetsConfig.map((item) => ({
+    ...item,
+    customCount: (text) => `(${text || 0})`,
+  })), []);
+
   const filterData = facetsConfig.reduce((acc, item) => {
     const facetValues = searchData[item.apiPath];
     if (!facetValues) {
       return acc;
     }
-    const subjectCounts = [...facetValues].map((checkbox) => {
-      const text = tooltipText[item.tooltipKey];
+    if (item.tooltipKey) {
+      const subjectCounts = [...facetValues].map((checkbox) => {
+        const text = tooltipText[item.tooltipKey];
+        return {
+          ...checkbox,
+          tooltip: text ? text[checkbox.group] : undefined,
+        };
+      });
       return {
-        ...checkbox,
-        customSubjects: checkbox.count,
-        tooltip: text ? text[checkbox.group] : undefined,
+        ...acc,
+        [item.apiPath]: [...subjectCounts],
       };
-    });
-    return { ...acc, [item.apiPath]: [...subjectCounts] };
+    }
+    return { ...acc, [item.apiPath]: facetValues };
   }, {});
 
   /**
@@ -73,7 +83,7 @@ const BentoFacetFilter = ({
   * 1. onClearAllFilters - dispatch clear all filters
   * 2. disable - true/ false
   */
-  const CustomClearAllFiltersBtn = ({ onClearAllFilters, disable }) => (
+  const CustomClearAllFiltersBtn = useCallback(({ onClearAllFilters, disable }) => (
     <div className={classes.floatRight}>
       <Button
         variant="outlined"
@@ -87,14 +97,14 @@ const BentoFacetFilter = ({
         CLEAR ALL
       </Button>
     </div>
-  );
+  ), []);
 
   /** Note:
   * Generate Custom facet Section Component
   * 1. Config local search input for Case
   * 2. Facet Section Name
   */
-  const CustomFacetSection = ({ section }) => {
+  const CustomFacetSection = useCallback(({ section }) => {
     const { name, expandSection } = section;
     const [expanded, setExpanded] = useState(expandSection);
     const collapseHandler = () => setExpanded(!expanded);
@@ -115,14 +125,14 @@ const BentoFacetFilter = ({
         </CustomExpansionPanelSummary>
       </>
     );
-  };
+  }, []);
 
   /**
   * Generate Custom facet View Component
   * 1. Config local search input for Case
   * 2. Facet Section Name
   */
-  const CustomFacetView = ({ facet, facetClasses }) => {
+  const CustomFacetView = useCallback(({ facet, facetClasses }) => {
     const clsName = `${facetClasses}`.replace(/\s+/g, '');
     return (
       <>
@@ -147,7 +157,7 @@ const BentoFacetFilter = ({
         </CustomExpansionPanelSummary>
       </>
     );
-  };
+  }, []);
 
   return (
     <FacetFilterThemeProvider>
@@ -157,8 +167,9 @@ const BentoFacetFilter = ({
       />
       <FacetFilter
         data={filterData}
+        tooltipText={tooltipText}
         facetSectionConfig={facetSectionVariables}
-        facetsConfig={facetsConfig}
+        facetsConfig={updateFacetConfig}
         CustomFacetSection={CustomFacetSection}
         CustomFacetView={CustomFacetView}
       />
