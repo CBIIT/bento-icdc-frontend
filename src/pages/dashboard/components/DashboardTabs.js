@@ -20,12 +20,7 @@ const DashboardTabsView = ({
   * dashboard state change
   * prevents table from making additional call
   */
-  // const [queryVeriables, setQueryVariables] = useState({});
-  // useEffect(() => {
-  //   setQueryVariables({ ...activeFilters });
-  // }, [dashboardStats]);
-
-  const getQuery = (tab) => {
+  const getQueryVariables = (tab) => {
     const [queryVeriables, setQueryVariables] = useState({});
     useEffect(() => {
       setQueryVariables({ ...activeFilters, ...tab?.queryParam });
@@ -52,7 +47,7 @@ const DashboardTabsView = ({
                 totalRowCount={dashboardStats[tab.count]}
                 activeTab={index === currentTab}
                 tabStyles={tabIndex[index]}
-                activeFilters={getQuery(tab)}
+                activeFilters={getQueryVariables(tab)}
               />
             </div>
           </TableContextProvider>
