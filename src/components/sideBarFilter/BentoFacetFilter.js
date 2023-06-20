@@ -52,7 +52,7 @@ const BentoFacetFilter = ({
    */
   const updateFacetConfig = useMemo(() => facetsConfig.map((item) => ({
     ...item,
-    customCount: (text) => `(${text || 0})`,
+    customCount: (text) => `${text || 0}`,
   })), []);
 
   const filterData = facetsConfig.reduce((acc, item) => {
