@@ -5,7 +5,7 @@ export default () => ({
   content: {
     margin: 'auto',
     display: 'flex',
-    paddingTop: '20px',
+    paddingTop: '30px',
   },
   sideBar: {
     width: '250px',
@@ -19,6 +19,7 @@ export default () => ({
     boxShadow: 'inset 0 0 87px 7px #E2E7EC',
   },
   rightContent: {
+    marginLeft: '20px',
     width: 'calc(100% - 250px)',
     position: 'relative',
     borderRight: 'thin solid #B1B1B1',

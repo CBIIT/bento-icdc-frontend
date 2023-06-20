@@ -444,7 +444,7 @@ const getFileLevel = (activeTab) => {
  * @return {json}
  */
 export async function fetchAllFileIDsForSelectAll(
-  fileCount = 100000,
+  fileCount = 10000,
   isUnifiedView,
   unifiedViewCaseIds,
 ) {
@@ -542,7 +542,7 @@ function sortByCheckboxItemsByCount(checkboxData) {
 }
 
 async function getFileIDs(
-  fileCount = 100000,
+  fileCount = 10000,
   SELECT_ALL_QUERY,
   caseIds = [],
   sampleIds = [],
@@ -621,7 +621,7 @@ function filterOutFileIds(fileIds, fileType) {
  * @return {json}
  */
 // eslint-disable-next-line no-unused-vars
-export async function fetchAllFileIDs(fileCount = 100000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
+export async function fetchAllFileIDs(fileCount = 10000, selectedIds = [], offset = 0.0, first = 1000, order_by = 'file_name') {
   let filesIds = [];
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:

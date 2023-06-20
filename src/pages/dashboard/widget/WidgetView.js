@@ -6,11 +6,15 @@ import {
   Grid,
   Switch,
   withStyles,
+  IconButton,
 } from '@material-ui/core';
-import { WidgetGenerator } from '@bento-core/widgets';
+import {
+  WidgetGenerator,
+  ToolTip,
+} from '../../../bento-core';
 import { useTheme } from '../../../components/ThemeContext';
 import styles from './WidgetStyle';
-import { widgetsData } from '../../../bento/dashboardData';
+import { themeToggleTooltip, widgetsData } from '../../../bento/dashboardData';
 import colors from '../../../utils/colors';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 import { formatWidgetData } from './WidgetUtils';
@@ -21,7 +25,6 @@ const WidgetView = ({
   theme,
 }) => {
   const displayWidgets = formatWidgetData(data, widgetsData);
-  console.log(displayWidgets);
   const [collapse, setCollapse] = React.useState(true);
   const themeChanger = useTheme();
   const handleChange = () => setCollapse((prev) => !prev);
@@ -42,7 +45,7 @@ const WidgetView = ({
       },
     },
   };
-  const { Widget } = useCallback(WidgetGenerator(widgetGeneratorConfig), []);
+  const { Widget } = useCallback(WidgetGenerator(widgetGeneratorConfig), [theme]);
 
   return (
     <>
@@ -69,6 +72,15 @@ const WidgetView = ({
             checked={themeChanger.dark}
             onChange={themeChanger.toggleTheme}
           />
+          <ToolTip title={themeToggleTooltip.switchThemeButtonMessage} arrow placement="bottom">
+            <IconButton className={classes.iconButton} aria-label="help">
+              <img
+                src={themeToggleTooltip.tooltipIcon}
+                alt={themeToggleTooltip.tooltipAlt}
+                className={classes.helpIcon}
+              />
+            </IconButton>
+          </ToolTip>
         </div>
       </div>
       <Collapse in={collapse} className={classes.backgroundWidgets}>
@@ -85,7 +97,7 @@ const WidgetView = ({
               <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
                 <Widget
                   header={(
-                    <Typography size="md" weight="normal" family="Nunito" color="lochmara">
+                    <Typography size="md" weight="bold" family="Raleway" color="lochmara">
                       {widget.title}
                     </Typography>
                   )}
@@ -98,14 +110,13 @@ const WidgetView = ({
                   sliceTitle={widget.sliceTitle}
                   chartTitleLocation="top"
                   chartTitleAlignment="left"
+                  padAngle={0.02}
                 />
               </Grid>
             );
           })}
         </Grid>
       </Collapse>
-      {collapse && <div className={classes.dashboardDividerTop} />}
-      {collapse && <div className={classes.dashboardDivider} />}
     </>
   );
 };

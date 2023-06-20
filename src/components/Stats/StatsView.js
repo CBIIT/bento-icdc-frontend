@@ -1,19 +1,7 @@
 import React from 'react';
-import StatsBar from '@bento-core/stats-bar';
+import { StatsBar } from '../../bento-core';
 import { statsStyling, globalStatsData } from '../../bento/globalStatsData';
-import humanFileSize from './utils';
-
-/* subtract study file count from total files count */
-const updateStat = (stat) => {
-  const { numberOfStudyFiles, numberOfFiles, volumeOfData } = stat;
-  const numberOfCaseFiles = numberOfFiles - numberOfStudyFiles;
-  return {
-    ...stat,
-    numberOfFiles: (numberOfCaseFiles > 0) ? numberOfCaseFiles : 0,
-    volumeOfData: humanFileSize(volumeOfData),
-  };
-};
-
+import { updateStat } from './utils';
 /**
 * Bento-core 4.0 update 5/17/2023
 */

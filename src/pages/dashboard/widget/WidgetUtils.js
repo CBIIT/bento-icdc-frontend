@@ -3,7 +3,7 @@
 
 import {
   transformInitialDataForSunburst,
-} from '@bento-core/util';
+} from '../../../bento-core';
 
 /**
  * Removes empty subjects from donut data.

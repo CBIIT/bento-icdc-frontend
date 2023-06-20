@@ -3,13 +3,15 @@ import { withStyles } from '@material-ui/core';
 import styles from './DashboardStyle';
 import StatsView from '../../components/Stats/StatsView';
 import BentoFacetFilter from '../../components/sideBarFilter/BentoFacetFilter';
-import WidgetView from './widget/WidgetView';
 import {
   facetSectionVariables,
   facetsConfig,
   tooltipConfig,
 } from '../../bento/dashboardData';
+import WidgetView from './widget/WidgetView';
 import QueryBarView from './filterQueryBar/QueryBarView';
+import DashboardTabs from './components/DashboardTabs';
+import { updateStat } from '../../components/Stats/utils';
 
 const Dashboard = ({
   classes,
@@ -34,11 +36,15 @@ const Dashboard = ({
         </div>
         <div className={classes.rightContent}>
           <div className={classes.widgetsContainer}>
+            <QueryBarView data={searchCases} />
             <WidgetView
               data={searchCases}
             />
-            <QueryBarView data={searchCases} />
           </div>
+          <DashboardTabs
+            dashboardStats={updateStat(searchCases)}
+            activeFilters={activeFilters}
+          />
         </div>
       </div>
     </div>

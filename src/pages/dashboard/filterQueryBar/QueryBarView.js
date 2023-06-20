@@ -1,11 +1,24 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
-  clearAllFilters, clearFacetSection, clearSliderSection, toggleCheckBox,
-} from '@bento-core/facet-filter';
-import { resetAllData, resetUploadData, updateAutocompleteData } from '@bento-core/local-find';
-import { QueryBarGenerator } from '@bento-core/query-bar';
+  Container,
+  ThemeProvider,
+  createTheme,
+  withStyles,
+} from '@material-ui/core';
+import {
+  clearAllFilters,
+  clearFacetSection,
+  clearSliderSection,
+  toggleCheckBox,
+  resetAllData,
+  resetUploadData,
+  updateAutocompleteData,
+  QueryBarGenerator,
+} from '../../../bento-core';
 import { facetsConfig } from '../../../bento/dashboardData';
+import theme from './QueryBarTheme';
+import styles from './QueryBarStyles';
 
 /**
  * Generate the Explore Tab Query Bar
@@ -16,7 +29,12 @@ import { facetsConfig } from '../../../bento/dashboardData';
  * @param {object} props.localFind Local Find State
  * @returns {JSX.Element}
  */
-const QueryBarView = ({ data, statusReducer, localFind }) => {
+const QueryBarView = ({
+  data,
+  statusReducer,
+  localFind,
+  classes,
+}) => {
   const dispatch = useDispatch();
 
   const sectionOrder = facetsConfig.map((v) => v.datafield);
@@ -71,10 +89,19 @@ const QueryBarView = ({ data, statusReducer, localFind }) => {
   });
 
   return (
-    <QueryBar
-      statusReducer={mappedFilterState}
-      localFind={localFind}
-    />
+    <ThemeProvider theme={createTheme(theme)}>
+      <Container
+        maxWidth="xl"
+        className="icdc_query_bar"
+      >
+        <QueryBar
+          statusReducer={mappedFilterState}
+          localFind={localFind}
+          classes={classes}
+          styles={classes}
+        />
+      </Container>
+    </ThemeProvider>
   );
 };
 
@@ -83,4 +110,4 @@ const mapStateToProps = (state) => ({
   localFind: state.localFind,
 });
 
-export default connect(mapStateToProps, null)(QueryBarView);
+export default connect(mapStateToProps, null)(withStyles(styles)(QueryBarView));
