@@ -11,6 +11,7 @@ const CaseIdLink = (props) => {
     other_cases: otherCases,
     linkAttr = {},
     case_id: caseId,
+    unifiedView,
   } = props;
   const { rootPath, pathParams } = linkAttr;
   const url = pathParams.map((attr) => `#${rootPath}/`.concat(props[attr]));
@@ -22,7 +23,7 @@ const CaseIdLink = (props) => {
         </Typography>
       </Link>
       {
-        (hasMultiStudyParticipants(otherCases))
+        ((!unifiedView) && hasMultiStudyParticipants(otherCases))
         && (
           <>
             <MultiStudyTooltip
@@ -75,7 +76,10 @@ export const CustomHeaderCellView = () => (<></>);
 * @param {*} columns
 * @returns config columns
 */
-export const CustomizeCellView = (columns) => {
+export const CustomizeCellView = ({
+  columns,
+  unifiedView = false,
+}) => {
   /**
   * display columns as configuration
   * set custom cell render for column
@@ -85,7 +89,7 @@ export const CustomizeCellView = (columns) => {
     if (column.cellType === cellTypes.CUSTOM_ELEM) {
       return {
         ...column,
-        customCellRender: (props) => <CustomCellView {...props} />,
+        customCellRender: (props) => <CustomCellView {...props} unifiedView={unifiedView} />,
       };
     }
     return column;
