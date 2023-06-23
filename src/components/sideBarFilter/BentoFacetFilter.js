@@ -37,6 +37,7 @@ const BentoFacetFilter = ({
   facetSectionVariables,
   facetsConfig,
   tooltipConfig,
+  isUnifiedView = false,
 }) => {
   // set tooltip text progams / biobank
   // useMemo to prevent execution of func everytime component re renders
@@ -117,7 +118,13 @@ const BentoFacetFilter = ({
           }
           onClick={collapseHandler}
           id={section}
-          className={classes.customExpansionPanelSummaryRoot}
+          className={clsx(
+            classes.customExpansionPanelSummaryRoot,
+            {
+              [classes.disableExpansion]: isUnifiedView,
+            },
+          )}
+          disabled={isUnifiedView}
         >
           <div className={classes.sectionSummaryTextContainer}>
             {name}
@@ -126,6 +133,27 @@ const BentoFacetFilter = ({
       </>
     );
   }, []);
+
+  /** Note:
+  * Generate Custom facet Section Component
+  * 1. Config local search input for Case
+  * 2. Facet Section Name
+  */
+  const RedirectButton = useCallback(({ onClearAllFilters }) => (
+    <div className={classes.floatRight}>
+      <Button
+        variant="outlined"
+        className={classes.resetButton}
+        href="#/explore"
+        onClick={() => {
+          onClearAllFilters();
+        }}
+        disableRipple
+      >
+        RESET QUERY
+      </Button>
+    </div>
+  ), []);
 
   /**
   * Generate Custom facet View Component
@@ -162,7 +190,7 @@ const BentoFacetFilter = ({
   return (
     <FacetFilterThemeProvider>
       <ClearAllFiltersBtn
-        Component={CustomClearAllFiltersBtn}
+        Component={isUnifiedView ? RedirectButton : CustomClearAllFiltersBtn}
         activeFilters={activeFilters}
       />
       <FacetFilter

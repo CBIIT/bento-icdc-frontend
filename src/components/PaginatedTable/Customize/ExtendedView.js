@@ -1,9 +1,11 @@
 import { useApolloClient } from '@apollo/client';
+import { getFilters } from '../../../bento-core';
+import store from '../../../store/index';
 import { downloadJson } from '../utils';
 
 export const extendedViewConfigtest = '';
 
-export const ExtendedViewConfig = (config, activeFilters) => {
+export const ExtendedViewConfig = (config) => {
   const { extendedViewConfig } = config;
   const { download } = extendedViewConfig;
   /**
@@ -19,7 +21,8 @@ export const ExtendedViewConfig = (config, activeFilters) => {
 
     const client = useApolloClient();
     download.downloadTable = () => {
-      console.log(activeFilters);
+      const { filterState = {} } = store.getState()?.statusReducer;
+      const activeFilters = getFilters(filterState);
       client
         .query({
           query: download.query,

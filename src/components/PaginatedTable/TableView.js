@@ -67,7 +67,7 @@ const PaginatedTableView = (props) => {
     sortBy: config.defaultSortField,
     sortOrder: config.defaultSortDirection,
     activeFilters,
-    extendedViewConfig: ExtendedViewConfig(config, activeFilters),
+    extendedViewConfig: ExtendedViewConfig(config),
     rowsPerPage,
     page: 0,
   });

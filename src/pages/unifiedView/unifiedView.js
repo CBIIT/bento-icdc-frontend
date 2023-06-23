@@ -20,6 +20,7 @@ import DashboardTabsView from '../dashboard/components/DashboardTabs';
 const Dashboard = ({
   classes,
   unifiedViewData,
+  isUnifiedView = true,
 }) => (
   <div className={classes.dashboardContainer}>
     <StatsView data={unifiedViewData} />
@@ -30,6 +31,7 @@ const Dashboard = ({
             facetSectionVariables={facetSectionVariables}
             facetsConfig={facetsConfig}
             searchData={{}}
+            isUnifiedView={isUnifiedView}
           />
         </div>
         <div className={classes.rightContent}>
