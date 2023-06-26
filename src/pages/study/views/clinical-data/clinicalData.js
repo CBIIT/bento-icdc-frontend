@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { ToolTip as Tooltip } from 'bento-components';
-import _ from 'lodash';
 import DownloadBtn from './components/downloadBtn';
 
 function splitArray(originalArray) {
@@ -127,29 +126,9 @@ const tableHeaders = [
   },
 ];
 
-const processData = (names, nodeCountArg, nodeCaseCountArg) => names.map((name) => {
-  const objMatcher = _.toLower(_.replace(name, ' ', '_'));
-  const nodeCount = nodeCountArg[objMatcher];
-  const nodeCaseCount = nodeCaseCountArg[objMatcher];
-
-  if (nodeCaseCount === 0 && nodeCount === 0) {
-    return {
-      name,
-      iEmpty: true,
-    };
-  }
-  return {
-    name,
-    nodeCount,
-    nodeCaseCount,
-    isEmpty: false,
-  };
-});
-
 const ClinicalData = ({ classes, data }) => {
   const useColumn = useMediaQuery('(max-width:1460px)');
-  const processedData = processData(data.names, data.nodeCount, data.nodeCaseCount);
-  const [tableA, tableB] = splitArray(processedData);
+  const [tableA, tableB] = splitArray(data);
 
   return (
     <div className={classes.clinicalDataContainer}>
