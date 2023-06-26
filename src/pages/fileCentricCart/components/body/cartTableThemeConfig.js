@@ -35,6 +35,11 @@ export default ({
   overridesObj.MuiTablePagination.actions.marginRight = '14px';
   overridesObj.MuiTableCell.head.paddingLeft = '37px';
   overridesObj.MuiTableCell.body.paddingLeft = '37px';
+  overridesObj.MuiTable = {
+    root: {
+      borderCollapse: 'none',
+    },
+  };
 
   style.push(overridesObj);
   const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });

@@ -16,4 +16,5 @@ window.injectedEnv = {
   REACT_APP_DMN_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/Data_Model_Navigator_README.md',
   REACT_APP_FOOTER_PRIVACY_POLICY: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/Privacy_Policy.md',
   REACT_APP_INTEROP_SERVICE_URL: 'https://caninecommons-dev.cancer.gov/api/interoperation/graphql',
+  REACT_APP_FILE_CENTRIC_CART_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/My_Files_Cart_Page_README.md',
 };

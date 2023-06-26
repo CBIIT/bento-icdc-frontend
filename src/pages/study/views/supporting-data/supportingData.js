@@ -1,12 +1,10 @@
-/* eslint-disable no-lone-blocks */
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
 import React from 'react';
 import {
   Grid,
   withStyles,
   Paper,
   CircularProgress,
+  // eslint-disable-next-line no-unused-vars
   Typography,
 } from '@material-ui/core';
 import { ToolTip } from 'bento-components';
@@ -115,6 +113,7 @@ const SupportingData = ({
                                 )
                                }
                              </Grid>
+                             {/* eslint-disable-next-line max-len */}
                              {(index + 1) !== Object.keys(IDCMetaData).length && <div><hr className={classes.hrLine} /></div>}
                            </Grid>
                          );
@@ -186,6 +185,7 @@ const SupportingData = ({
                                 )
                                }
                              </Grid>
+                             {/* eslint-disable-next-line max-len */}
                              {(index + 1) !== Object.keys(TCIAMetaData).length && <div><hr className={classes.hrLine} /></div>}
                            </Grid>
                          );
