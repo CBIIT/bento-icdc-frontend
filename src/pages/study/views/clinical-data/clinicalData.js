@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button, CircularProgress,
   Grid,
   Paper,
   Table, TableBody, TableCell,
@@ -10,7 +11,24 @@ import {
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { ToolTip as Tooltip } from 'bento-components';
+import { noop, filter } from 'lodash';
 import DownloadBtn from './components/downloadBtn';
+import { downloadJson } from '../../../fileCentricCart/utils';
+import useFetchCSVDownload from './hooks/useFetchCSVDownload';
+import
+{
+  adverseEventNodeMetadata,
+  agentAdministrationNodeMetadata,
+  agentNodeMetadata,
+  cycleNodeMetadata,
+  diseaseExtentNodeMetadata, followUpNodeMetadata,
+  labExamNodeMetadata,
+  offStudyNodeMetadata, offTreatmentNodeMetadata,
+  physicalExamNodeMetadata,
+  priorSurgeryNodeMetadata,
+  priorTherapyNodeMetadata,
+  visitNodeMetadata, vitalSignsNodeMetadata,
+} from '../../../../bento/studyDetailsData';
 
 function splitArray(originalArray) {
   const mid = Math.ceil(originalArray.length / 2);
@@ -126,10 +144,102 @@ const tableHeaders = [
   },
 ];
 
-const ClinicalData = ({ classes, data }) => {
+const ClinicalData = ({
+  classes,
+  data,
+  csvDownloadFlags,
+  studyCode,
+}) => {
+  const [
+    agentNodeCSV,
+    cycleNodeCSV,
+    visitNodeCSV,
+    priorTherapyNodeCSV,
+    priorSurgeryNodeCSV,
+    agentAdministrationNodeCSV,
+    physicalExamNodeCSV,
+    vitalSignsNodeCSV,
+    labExamNodeCSV,
+    adverseEventNodeCSV,
+    diseaseExtentNodeCSV,
+    followUpNodeCSV,
+    offStudyNodeCSV,
+    offTreatmentNodeCSV,
+    isLoading,
+  ] = useFetchCSVDownload(csvDownloadFlags, studyCode);
+
   const useColumn = useMediaQuery('(max-width:1460px)');
   const [tableA, tableB] = splitArray(data);
 
+  const handleCSVDownload = (element) => {
+    const fileName = `ICDC_Clinical_Data-${studyCode}-${element.name}`;
+    switch (element.name) {
+      case 'AGENT': {
+        const processedAgentNodeCSV = filter(agentNodeCSV, (el) => el !== null);
+        return downloadJson(processedAgentNodeCSV, '', fileName, agentNodeMetadata);
+      }
+      case 'CYCLE': {
+        const processedCycleNodeCSV = filter(cycleNodeCSV, (el) => el !== null);
+        return downloadJson(processedCycleNodeCSV, '', fileName, cycleNodeMetadata);
+      }
+      case 'VISIT': {
+        const processedVisitNodeCSV = filter(visitNodeCSV, (el) => el !== null);
+        return downloadJson(processedVisitNodeCSV, '', fileName, visitNodeMetadata);
+      }
+      case 'PRIOR THERAPY': {
+        const processedPriorTherapyNodeCSV = filter(priorTherapyNodeCSV, (el) => el !== null);
+        return downloadJson(processedPriorTherapyNodeCSV, '', fileName, priorTherapyNodeMetadata);
+      }
+      case 'PRIOR SURGERY': {
+        const processedPriorSurgeryNodeCSV = filter(priorSurgeryNodeCSV, (el) => el !== null);
+        return downloadJson(processedPriorSurgeryNodeCSV, '', fileName, priorSurgeryNodeMetadata);
+      }
+      case 'AGENT ADMINISTRATION': {
+        const processedAgentAdministrationNodeCSV = filter(
+          agentAdministrationNodeCSV,
+          (el) => el !== null,
+        );
+        return downloadJson(processedAgentAdministrationNodeCSV, '', fileName, agentAdministrationNodeMetadata);
+      }
+      case 'PHYSICAL EXAM': {
+        const processedPhysicalExamNodeCSV = filter(physicalExamNodeCSV, (el) => el !== null);
+        return downloadJson(processedPhysicalExamNodeCSV, '', fileName, physicalExamNodeMetadata);
+      }
+      case 'VITAL SIGNS': {
+        const processedVitalSignsNodeCSV = filter(vitalSignsNodeCSV, (el) => el !== null);
+        return downloadJson(processedVitalSignsNodeCSV, '', fileName, vitalSignsNodeMetadata);
+      }
+      case 'LAB EXAM': {
+        const processedLabExamNodeCSV = filter(labExamNodeCSV, (el) => el !== null);
+        return downloadJson(processedLabExamNodeCSV, '', fileName, labExamNodeMetadata);
+      }
+      case 'ADVERSE EVENT': {
+        const processedAdverseEventNodeCSV = filter(adverseEventNodeCSV, (el) => el !== null);
+        return downloadJson(processedAdverseEventNodeCSV, '', fileName, adverseEventNodeMetadata);
+      }
+      case 'DISEASE EXTENT': {
+        const processedDiseaseExtentNodeCSV = filter(diseaseExtentNodeCSV, (el) => el !== null);
+        return downloadJson(processedDiseaseExtentNodeCSV, '', fileName, diseaseExtentNodeMetadata);
+      }
+      case 'FOLLOW UP': {
+        const processedFollowUpNodeCSV = filter(followUpNodeCSV, (el) => el !== null);
+        return downloadJson(processedFollowUpNodeCSV, '', fileName, followUpNodeMetadata);
+      }
+      case 'OFF STUDY': {
+        const processedOffStudyNodeCSV = filter(offStudyNodeCSV, (el) => el !== null);
+        return downloadJson(processedOffStudyNodeCSV, '', fileName, offStudyNodeMetadata);
+      }
+      case 'OFF TREATMENT': {
+        const processedOffTreatmentNodeCSV = filter(offTreatmentNodeCSV, (el) => el !== null);
+        return downloadJson(processedOffTreatmentNodeCSV, '', fileName, offTreatmentNodeMetadata);
+      }
+      default: return noop();
+    }
+  };
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
   return (
     <div className={classes.clinicalDataContainer}>
       <Grid container justifyContent="flex-start">
@@ -248,11 +358,15 @@ const ClinicalData = ({ classes, data }) => {
                                       <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
                                       <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
                                       <StyledEndTableCell align="center">
-                                        <img
-                                          src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
-                                          alt="csv download icon"
-                                          style={{ marginLeft: '20px' }}
-                                        />
+                                        <Button
+                                          onClick={() => handleCSVDownload(element)}
+                                        >
+                                          <img
+                                            src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                            alt="csv download icon"
+                                            style={{ marginLeft: '20px' }}
+                                          />
+                                        </Button>
                                       </StyledEndTableCell>
                                     </TableRow>
                                   );
