@@ -29,11 +29,6 @@ const UnifiedController = ({ match }) => {
     ...multiStudyData.multiStudyCases,
     ...unifiedViewStats.searchCases,
   };
-  console.log(unifiedViewData);
-  if (!unifiedViewData) {
-    console.log('return null');
-    return null;
-  }
 
   return (
     <Dashboard

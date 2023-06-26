@@ -31,6 +31,7 @@ export const headerTheme = ({ primaryColor = '#FF9742' }) => ({
       head: {
         height: '40px',
         borderBottom: `3px solid ${primaryColor}`,
+        background: '#f5f5f5',
       },
     },
     MuiTooltip: {

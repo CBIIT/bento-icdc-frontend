@@ -140,7 +140,7 @@ const BentoFacetFilter = ({
   * 2. Facet Section Name
   */
   const RedirectButton = useCallback(({ onClearAllFilters }) => (
-    <div className={classes.floatRight}>
+    <div className={classes.restBtn}>
       <Button
         variant="outlined"
         className={classes.resetButton}
@@ -186,7 +186,6 @@ const BentoFacetFilter = ({
       </>
     );
   }, []);
-
   return (
     <FacetFilterThemeProvider>
       <ClearAllFiltersBtn

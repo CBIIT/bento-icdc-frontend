@@ -29,6 +29,7 @@ const PaginatedTableView = (props) => {
   } = props;
   // access table state
   const { context } = useContext(TableContext);
+
   /*
   * useReducer table state
   * paginated table update data when state change
@@ -66,8 +67,7 @@ const PaginatedTableView = (props) => {
     tableMsg: config.tableMsg,
     sortBy: config.defaultSortField,
     sortOrder: config.defaultSortDirection,
-    activeFilters,
-    extendedViewConfig: ExtendedViewConfig(config),
+    extendedViewConfig: ExtendedViewConfig(config, activeFilters),
     rowsPerPage,
     page: 0,
   });
