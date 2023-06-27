@@ -4,8 +4,9 @@ import {
   Divider, ListItemText, Menu,
   withStyles,
 } from '@material-ui/core';
-import { request, gql } from 'graphql-request';
-import { useQuery } from '@tanstack/react-query';
+// import { request, gql } from 'graphql-request';
+// import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@apollo/client';
 import {
   cn,
   ToolTip as Tooltip,
@@ -14,6 +15,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { noop } from 'lodash';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
+import gql from 'graphql-tag';
 import env from '../../../../utils/env';
 import Styles from './cartHeader.style';
 import ReadMoreSVG from './readMore';
@@ -80,11 +82,11 @@ const getReadMe = async (setContent, url) => {
   setContent(data);
 };
 
-// const STORE_MANIFEST_QUERY = gql`
-//     query storeManifest($manifest: [FileInList!]!) {
-//         storeManifest(manifest: $manifest)
-//     }
-// `;
+const STORE_MANIFEST_QUERY = gql`
+    query storeManifest($manifest: [FileInList!]!) {
+        storeManifest(manifest: $manifest)
+    }
+`;
 
 const CartHeader = React.forwardRef(({
   classes,
@@ -104,51 +106,58 @@ const CartHeader = React.forwardRef(({
   // }).join(',') : [{}]}])
   // }
   // `;
-  const STORE_MANIFEST_QUERY = gql`{
-    storeManifest(manifest: [{
-      file_name: "010015_0103_sorted.bam",
-      file_type: "RNA Sequence File",
-      association: "sample",
-      file_description: "tumor sample binary alignment file: seq reads to canfam3.1",
-      file_format: "bam",
-      file_size: 17545870661,
-      case_id: "NCATS-COP01-CCB010015",
-      breed: "Mixed Breed",
-      diagnosis: "B Cell Lymphoma",
-      study_code: "NCATS-COP01",
-      file_uuid: "bf7ae08f-0afe-5aa5-969a-de9a17ac0f2f",
-      md5sum: "70ec6bee3d4e5bb9da4641c3fa7f8609",
-      sample_id: "NCATS-COP01-CCB010015 0103",
-      individual_id: null,
-      name: "010015_0103_sorted.bam",
-      drs_uri: "https://nci-crdc.datacommons.io/ga4gh/drs/v1/objects/dg.4DFC/bf7ae08f-0afe-5aa5-969a-de9a17ac0f2f",
-    }, {
-      file_name: "010015_0103_sorted.bam",
-      file_type: "RNA Sequence File",
-      association: "sample",
-      file_description: "tumor sample binary alignment file: seq reads to canfam3.1",
-      file_format: "bam",
-      file_size: 17545870661,
-      case_id: "NCATS-COP01-CCB010015",
-      breed: "Mixed Breed",
-      diagnosis: "B Cell Lymphoma",
-      study_code: "NCATS-COP01",
-      file_uuid: "bf7ae08f-0afe-5aa5-969a-de9a17ac0f2f",
-      md5sum: "70ec6bee3d4e5bb9da4641c3fa7f8609",
-      sample_id: "NCATS-COP01-CCB010015 0103",
-      individual_id: null,
-      name: "010015_0103_sorted.bam",
-      drs_uri: "https://nci-crdc.datacommons.io/ga4gh/drs/v1/objects/dg.4DFC/bf7ae08f-0afe-5aa5-969a-de9a17ac0f2f",
-    }])
-  }
-  `;
-  const { data } = useQuery({
-    queryKey: ['storeManifest'],
-    queryFn: async () => request(
-      env.REACT_APP_INTEROP_SERVICE_URL,
-      STORE_MANIFEST_QUERY,
-    ),
-    enabled: !!manifestPayload,
+
+  // const STORE_MANIFEST_QUERY = gql`{
+  //   storeManifest(manifest: [{
+  //     file_name: "010015_0103_sorted.bam",
+  //     file_type: "RNA Sequence File",
+  //     association: "sample",
+  //     file_description: "tumor sample binary alignment file: seq reads to canfam3.1",
+  //     file_format: "bam",
+  //     file_size: 17545870661,
+  //     case_id: "NCATS-COP01-CCB010015",
+  //     breed: "Mixed Breed",
+  //     diagnosis: "B Cell Lymphoma",
+  //     study_code: "NCATS-COP01",
+  //     file_uuid: "bf7ae08f-0afe-5aa5-969a-de9a17ac0f2f",
+  //     md5sum: "70ec6bee3d4e5bb9da4641c3fa7f8609",
+  //     sample_id: "NCATS-COP01-CCB010015 0103",
+  //     individual_id: null,
+  //     name: "010015_0103_sorted.bam",
+  //     drs_uri: "https://nci-crdc.datacommons.io/ga4gh/drs/v1/objects/dg.4DFC/bf7ae08f-0afe-5aa5-969a-de9a17ac0f2f",
+  //   }, {
+  //     file_name: "010015_0103_sorted.bam",
+  //     file_type: "RNA Sequence File",
+  //     association: "sample",
+  //     file_description: "tumor sample binary alignment file: seq reads to canfam3.1",
+  //     file_format: "bam",
+  //     file_size: 17545870661,
+  //     case_id: "NCATS-COP01-CCB010015",
+  //     breed: "Mixed Breed",
+  //     diagnosis: "B Cell Lymphoma",
+  //     study_code: "NCATS-COP01",
+  //     file_uuid: "bf7ae08f-0afe-5aa5-969a-de9a17ac0f2f",
+  //     md5sum: "70ec6bee3d4e5bb9da4641c3fa7f8609",
+  //     sample_id: "NCATS-COP01-CCB010015 0103",
+  //     individual_id: null,
+  //     name: "010015_0103_sorted.bam",
+  //     drs_uri: "https://nci-crdc.datacommons.io/ga4gh/drs/v1/objects/dg.4DFC/bf7ae08f-0afe-5aa5-969a-de9a17ac0f2f",
+  //   }])
+  // }
+  // `;
+  // const { data } = useQuery({
+  //   queryKey: ['storeManifest'],
+  //   queryFn: async () => request(
+  //     env.REACT_APP_INTEROP_SERVICE_URL,
+  //     STORE_MANIFEST_QUERY,
+  //   ),
+  //   enabled: !!manifestPayload,
+  // });
+
+  const { data } = useQuery(STORE_MANIFEST_QUERY, {
+    variables: { manifest: manifestPayload },
+    context: { clientName: 'interopService' },
+    fetchPolicy: 'no-cache',
   });
 
   console.log('log deets', data);
