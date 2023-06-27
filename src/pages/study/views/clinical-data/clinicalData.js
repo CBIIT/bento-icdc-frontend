@@ -110,7 +110,7 @@ const ScrollContainer = styled.div`
     background-color: #fff;
   }
 
-  scrollbar-color: #81ACDF #fff
+  scrollbar-color: #81ACDF #fff;
   scrollbar-width: thin;
 
 `;
@@ -485,11 +485,15 @@ const ClinicalData = ({
                                       <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
                                       <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
                                       <StyledEndTableCell align="center">
-                                        <img
-                                          src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
-                                          alt="csv download icon"
-                                          style={{ marginLeft: '20px' }}
-                                        />
+                                        <Button
+                                          onClick={() => handleCSVDownload(element)}
+                                        >
+                                          <img
+                                            src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                            alt="csv download icon"
+                                            style={{ marginLeft: '20px' }}
+                                          />
+                                        </Button>
                                       </StyledEndTableCell>
                                     </TableRow>
                                   );
