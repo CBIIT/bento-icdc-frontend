@@ -61,6 +61,7 @@ const cartView = ({
   localRowsPerPage,
   isLoading,
   tableDownloadCSV,
+  storeManifestPayload,
 }) => {
   const selectedRowData = useSelector((state) => (state.cart.selectedFiles));
   const [modalStatus, setModalStatus] = React.useState(false);
@@ -101,6 +102,7 @@ const cartView = ({
   async function prepareDownload() {
     const userComments = commentRef.current.getValue();
     const data1 = await fetchData();
+    console.log('log data1', data1);
     GA.sendEvent('Manifest', 'Download', 'cart');
     return downloadJson(
       data1,
@@ -189,6 +191,7 @@ const cartView = ({
           mainTitle={myFilesPageData.mainTitle}
           subTitle={myFilesPageData.subTitle}
           prepareDownload={prepareDownload}
+          manifestPayload={storeManifestPayload}
           ref={commentRef}
         />
       </Grid>
