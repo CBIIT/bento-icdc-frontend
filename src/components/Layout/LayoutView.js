@@ -20,7 +20,8 @@ import ProgramDetail from '../../pages/programDetail/programDetailController';
 import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 import GA from '../../utils/googleAnalytics';
 import StudyDetail from '../../pages/study/studyDetailController';
-import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
+// import UnifiedView from '../../pages/dashboardTab/unifiedViewController';
+import UnifiedDash from '../../pages/unifiedView/unifiedController';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
@@ -57,7 +58,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/studies" component={Studies} />
             <Route path="/exploreOld" component={Dashboard} />
             <Route path="/explore" component={DashboardView} />
-            <Route path="/unifiedView/:id" component={UnifiedView} />
+            <Route path="/unifiedView/:id" component={UnifiedDash} />
             <Route path="/fileCentricCart" component={Cart} />
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />

@@ -2193,11 +2193,11 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    // addFilesRequestVariableKey: 'file_names',
-    // addFilesResponseKeys: ['fileIDsFromList'],
-    // addAllFilesResponseKeys: ['fileOverview', 'file_id'],
-    // addAllFileQuery: GET_ALL_FILEIDS_FROM_FILESTAB_FOR_ADD_ALL_CART,
-    // addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+    addFilesRequestVariableKey: 'file_name',
+    addFilesResponseKeys: ['fileIdsFromFileName'],
+    addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Study Files',
@@ -2314,6 +2314,11 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
+    addFilesRequestVariableKey: 'file_name',
+    addFilesResponseKeys: ['fileIdsFromFileName'],
+    addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
   },
 ];
 

@@ -60,7 +60,7 @@ const PaginatedTableView = (props) => {
     query: config.api,
     paginationAPIField: config.paginationAPIField,
     dataKey: config.dataKey,
-    columns: CustomizeCellView(config.columns),
+    columns: CustomizeCellView(config),
     count: totalRowCount,
     selectedRows: [],
     tableMsg: config.tableMsg,

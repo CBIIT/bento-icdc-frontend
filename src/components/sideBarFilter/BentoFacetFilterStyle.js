@@ -9,6 +9,7 @@ export default () => ({
     textTransform: 'none',
     '&:hover': {
       backgroundColor: '#566672',
+      color: '#fff',
     },
   },
   floatRight: {
@@ -34,6 +35,9 @@ export default () => ({
   customExpansionPanelSummaryRoot: {
     flexDirection: 'row-reverse',
     paddingLeft: 0,
+  },
+  disableExpansion: {
+    backgroundColor: 'rgba(0, 0, 0 , 0.17)',
   },
   sectionSummaryTextContainer: {
     marginLeft: '10px',
