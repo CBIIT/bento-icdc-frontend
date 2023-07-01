@@ -21,7 +21,12 @@ const CaseDetailContainer = ({ match }) => {
     );
   }
 
-  return <CaseDetailView data={data} />;
+  return (
+    <CaseDetailView
+      data={data}
+      subjectId={match.params.id}
+    />
+  );
 };
 
 export default CaseDetailContainer;
