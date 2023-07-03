@@ -10,7 +10,7 @@ const arrayOfObjects = [
     return "{" + formattedEntries.join(", ") + "}";
   }).join(",");
   
-  console.log(stringRepresentation);
+  // console.log(stringRepresentation);
   
   {
     file_name: "010015_0103_sorted.bam",

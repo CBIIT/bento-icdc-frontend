@@ -97,7 +97,8 @@ const CartHeader = React.forwardRef(({
   prepareDownload,
   manifestPayload,
 }, ref) => {
-  console.log('log maniPay', { manifestPayload, type: typeof manifestPayload, string: JSON.stringify(manifestPayload) });
+  // eslint-disable-next-line max-len
+  // console.log('log maniPay', { manifestPayload, type: typeof manifestPayload, string: JSON.stringify(manifestPayload) });
 
   const { data } = useQuery(STORE_MANIFEST_QUERY, {
     variables: { manifest: JSON.stringify(manifestPayload) },
@@ -106,7 +107,7 @@ const CartHeader = React.forwardRef(({
     fetchPolicy: 'no-cache',
   });
 
-  console.log('log deets', data);
+  // console.log('log deets', data);
 
   const [anchorElement, setAnchorElement] = React.useState(null);
   const [label, setLabel] = useState(LABEL);
@@ -131,11 +132,11 @@ const CartHeader = React.forwardRef(({
   };
 
   const initiateDownload = (currLabel) => {
-    console.log('log label', currLabel);
+    // console.log('log label', currLabel);
     switch (currLabel) {
       case 'Export to Seven Bridges': prepareDownload();
         break;
-      default: noop();
+      default: noop(data);
         break;
     }
     noop();

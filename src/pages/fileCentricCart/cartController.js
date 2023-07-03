@@ -85,7 +85,7 @@ const cartController = () => {
     drs_uri: el.drs_uri,
   }));
 
-  console.log('log check', processedStoreManifestPayload);
+  // console.log('log check', processedStoreManifestPayload);
   return (
     <CartView
       isLoading={false}

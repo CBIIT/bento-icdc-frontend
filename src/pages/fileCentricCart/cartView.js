@@ -102,7 +102,7 @@ const cartView = ({
   async function prepareDownload() {
     const userComments = commentRef.current.getValue();
     const data1 = await fetchData();
-    console.log('log data1', data1);
+    // console.log('log data1', data1);
     GA.sendEvent('Manifest', 'Download', 'cart');
     return downloadJson(
       data1,
