@@ -38,6 +38,15 @@ const CaseDetail = ({
   };
 
   const caseDetail = data.case[0];
+  const files = [...data.filesOfCase].map((f) => {
+    const customF = { ...f };
+    const parentSample = data.samplesByCaseId
+      .filter((s) => s.files.map((sf) => sf.uuid).includes(f.uuid));
+    if (parentSample && parentSample.length > 0) {
+      customF.sample_id = parentSample[0].sample_id;
+    }
+    return customF;
+  });
 
   const notProvided = '';
 
@@ -438,7 +447,7 @@ const CaseDetail = ({
       <div id="case_detail_table_associated_samples" className={classes.tableContainer}>
         <div className={classes.tableDiv}>
           <TableContextProvider>
-            <SampleTableView data={[]} />
+            <SampleTableView data={data.samplesByCaseId} />
           </TableContextProvider>
         </div>
       </div>
@@ -446,7 +455,7 @@ const CaseDetail = ({
       <div id="case_detail_table_associated_files" className={classes.tableContainer}>
         <div className={classes.tableDiv}>
           <TableContextProvider>
-            <FileTableView data={[]} />
+            <FileTableView data={files} />
           </TableContextProvider>
         </div>
       </div>

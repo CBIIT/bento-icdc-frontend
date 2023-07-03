@@ -24,7 +24,6 @@ const CaseDetailContainer = ({ match }) => {
   return (
     <CaseDetailView
       data={data}
-      subjectId={match.params.id}
     />
   );
 };
