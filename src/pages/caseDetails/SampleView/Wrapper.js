@@ -4,7 +4,6 @@ import {
 } from '@bento-core/paginated-table';
 import {
   tooltipContent,
-  alertMessage,
 } from '../../../bento/caseDetailsData';
 
 export const layoutConfig = [{
@@ -19,61 +18,26 @@ export const layoutConfig = [{
 * Configuration display component based on index
 * CAUTION: provide position of table component
 */
-export const wrapperConfig = [{
-  container: 'buttons',
-  size: 'xl',
-  clsName: 'container_header',
-  items: [
-    {
-      title: 'ADD ALL FILES',
-      clsName: 'add_all_button',
-      type: types.BUTTON,
-      role: btnTypes.ADD_ALL_FILES,
-      btnType: btnTypes.ADD_ALL_FILES,
-      conditional: false,
-      alertMessage,
-    },
-    {
-      title: 'ADD SELECTED FILES',
-      clsName: 'add_selected_button',
-      type: types.BUTTON,
-      role: btnTypes.ADD_SELECTED_FILES,
-      btnType: btnTypes.ADD_SELECTED_FILES,
-      tooltipCofig: tooltipContent,
-      conditional: true,
-    }],
-},
-{
-  container: 'paginatedTable',
-  paginatedTable: true,
-},
-{
-  container: 'buttons',
-  size: 'xl',
-  clsName: 'container_footer',
-  items: [
-    {
-      title: 'ADD SELECTED FILES',
-      clsName: 'add_selected_button',
-      type: types.BUTTON,
-      role: btnTypes.ADD_SELECTED_FILES,
-      btnType: btnTypes.ADD_SELECTED_FILES,
-      tooltipCofig: tooltipContent,
-      conditional: true,
-    }],
-},
-{
-  container: 'buttons',
-  size: 'xl',
-  clsName: 'container_footer_link',
-  items: [
-    {
-      title: 'Go to Cart >',
-      clsName: 'go_to_cart',
-      url: '#/fileCentricCart',
-      type: types.LINK,
-    }],
-},
+export const wrapperConfig = [
+  {
+    container: 'paginatedTable',
+    paginatedTable: true,
+  },
+  {
+    container: 'buttons',
+    size: 'xl',
+    clsName: 'container_footer',
+    items: [
+      {
+        title: 'ADD ASSOCIATED FILES',
+        clsName: 'add_selected_button',
+        type: types.BUTTON,
+        role: btnTypes.ADD_SELECTED_FILES,
+        btnType: btnTypes.ADD_SELECTED_FILES,
+        tooltipCofig: tooltipContent,
+        conditional: true,
+      }],
+  },
 ];
 
 /**

@@ -126,7 +126,7 @@ export const sampleTable = {
   // showHideColumns 'true' or 'false'
   showHideColumns: true,
   // download csv
-  download: false,
+  download: true,
   tableDownloadCSV: customSamplesTabDownloadCSV,
   // downloaded File Name
   downloadFileName: 'ICDC_Case_Samples_download',

@@ -12,6 +12,7 @@ export const ExtendedViewConfig = (config) => {
   * configure table download
   */
   if (download) {
+    console.log('I ama downloading');
     const getQueryVeriables = (filters) => {
       const variables = { ...filters };
       variables.offset = 0;
