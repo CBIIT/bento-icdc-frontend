@@ -4,8 +4,6 @@ import {
   Divider, ListItemText, Menu,
   withStyles,
 } from '@material-ui/core';
-// import { request, gql } from 'graphql-request';
-// import { useQuery } from '@tanstack/react-query';
 import { useQuery } from '@apollo/client';
 import {
   cn,
@@ -19,7 +17,6 @@ import gql from 'graphql-tag';
 import env from '../../../../utils/env';
 import Styles from './cartHeader.style';
 import ReadMoreSVG from './readMore';
-// import ReadMeDialog from './readMeDialog';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
 import cgcIcon from './assets/cgc.svg';
@@ -97,9 +94,6 @@ const CartHeader = React.forwardRef(({
   prepareDownload,
   manifestPayload,
 }, ref) => {
-  // eslint-disable-next-line max-len
-  // console.log('log maniPay', { manifestPayload, type: typeof manifestPayload, string: JSON.stringify(manifestPayload) });
-
   const [sbgUrl, setSBGUrl] = useState('');
   const { data } = useQuery(STORE_MANIFEST_QUERY, {
     variables: { manifest: JSON.stringify(manifestPayload) },
@@ -109,12 +103,10 @@ const CartHeader = React.forwardRef(({
   });
 
   useEffect(() => {
-    if (data.storeManifest) {
+    if (data?.storeManifest) {
       setSBGUrl(data.storeManifest);
     }
   }, [data]);
-
-  // console.log('log deets', data);
 
   const [anchorElement, setAnchorElement] = React.useState(null);
   const [label, setLabel] = useState(LABEL);
@@ -139,7 +131,6 @@ const CartHeader = React.forwardRef(({
   };
 
   const initiateDownload = (currLabel) => {
-    // console.log('log label', currLabel);
     switch (currLabel) {
       case 'Export to Seven Bridges': window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${sbgUrl}`, '_blank');
         break;
