@@ -100,12 +100,19 @@ const CartHeader = React.forwardRef(({
   // eslint-disable-next-line max-len
   // console.log('log maniPay', { manifestPayload, type: typeof manifestPayload, string: JSON.stringify(manifestPayload) });
 
+  const [sbgUrl, setSBGUrl] = useState('');
   const { data } = useQuery(STORE_MANIFEST_QUERY, {
     variables: { manifest: JSON.stringify(manifestPayload) },
     context: { clientName: 'interopService' },
     skip: !manifestPayload,
     fetchPolicy: 'no-cache',
   });
+
+  useEffect(() => {
+    if (data.storeManifest) {
+      setSBGUrl(data.storeManifest);
+    }
+  }, [data]);
 
   // console.log('log deets', data);
 
@@ -134,7 +141,7 @@ const CartHeader = React.forwardRef(({
   const initiateDownload = (currLabel) => {
     // console.log('log label', currLabel);
     switch (currLabel) {
-      case 'Export to Seven Bridges': window.open('https://google.com', '_blank');
+      case 'Export to Seven Bridges': window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${sbgUrl}`, '_blank');
         break;
       default: noop(data);
         break;
