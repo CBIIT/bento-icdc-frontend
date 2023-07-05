@@ -134,7 +134,7 @@ const CartHeader = React.forwardRef(({
   const initiateDownload = (currLabel) => {
     // console.log('log label', currLabel);
     switch (currLabel) {
-      case 'Export to Seven Bridges': prepareDownload();
+      case 'Export to Seven Bridges': window.open('https://google.com', '_blank');
         break;
       default: noop(data);
         break;
