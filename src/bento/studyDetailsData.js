@@ -317,16 +317,16 @@ export const textLabels = {
 // --------------- GraphQL query configuration --------------
 export const GET_STUDY_DETAIL_DATA_QUERY = gql`
   query Study($csd: String!, $accessionId: String!) {
-   sampleCountOfStudy(study_code:$csd)
-   fileCountOfStudy(study_code: $csd)
-   fileCountOfStudyFiles(study_code: $csd)
+    sampleCountOfStudy(study_code:$csd)
+    fileCountOfStudy(study_code: $csd)
+    fileCountOfStudyFiles(study_code: $csd)
     clinicalDataNodeNames
     clinicalDataNodeCounts(study_code: $csd) {
       agent
       cycle
       physical_exam
     }
-   programCountOfStudy(study_code: $csd)
+    programCountOfStudy(study_code: $csd)
     clinicalDataNodeNames
     clinicalDataNodeCounts(study_code: $csd) {
       agent
@@ -360,90 +360,90 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
       disease_extent
       lab_exam
     }
-   aliquotCountOfStudy(study_code: $csd)
-   caseCountOfStudy(study_code: $csd)
-   volumeOfDataOfStudy(study_code: $csd)
-   studySampleSiteCount(study_codes: [$csd]){
-    group,
-    count
-   }
-   studySampleTypeCount(study_codes: [$csd]){
-    group,
-    count
-  }
-  studySamplePathologyCount(study_codes: [$csd]){
-    group,
-    count
-  }
-   filesOfStudy(study_code: $csd){
-    file_type
-   }
-   studyFiles(study_codes: [$csd]){
-         file_description
-          file_format
-          file_location
-          file_name
-          file_size
-          file_status
-          file_type
-          md5sum
-          uuid
-   }
+    aliquotCountOfStudy(study_code: $csd)
+    caseCountOfStudy(study_code: $csd)
+    volumeOfDataOfStudy(study_code: $csd)
+    studySampleSiteCount(study_codes: [$csd]){
+      group,
+      count
+    }
+    studySampleTypeCount(study_codes: [$csd]){
+      group,
+      count
+    }
+    studySamplePathologyCount(study_codes: [$csd]){
+      group,
+      count
+    }
+    filesOfStudy(study_code: $csd){
+      file_type
+    }
+    studyFiles(study_codes: [$csd]){
+      file_description
+      file_format
+      file_location
+      file_name
+      file_size
+      file_status
+      file_type
+      md5sum
+      uuid
+    }
 
-  study(filter:{OR : [{clinical_study_designation: $csd }, {accession_id: $accessionId}]}){
-    program{
-      program_acronym
-    }
-    clinical_study_id
-    clinical_study_name
-    clinical_study_designation
-    clinical_study_description
-    clinical_study_type
-    date_of_iacuc_approval
-    accession_id
-    study_disposition
-    dates_of_conduct
-    cohorts{
-        cohort_dose
-        cohort_description
-    }
-    study_arms{
-      arm
-      ctep_treatment_assignment_code
+    study(filter:{OR : [{clinical_study_designation: $csd }, {accession_id: $accessionId}]}){
+      program{
+        program_acronym
+      }
+      clinical_study_id
+      clinical_study_name
+      clinical_study_designation
+      clinical_study_description
+      clinical_study_type
+      date_of_iacuc_approval
+      accession_id
+      study_disposition
+      dates_of_conduct
       cohorts{
         cohort_dose
         cohort_description
       }
-    }
-    principal_investigators{
-      pi_first_name
-      pi_last_name
-      pi_middle_initial
-    }
-    publications{
-      publication_title
-      authorship
-      year_of_publication
-      journal_citation
-      digital_object_id
-      pubmed_id
-    }
-    image_collections {
-      image_collection_name
-      image_collection_url
-      repository_name
-      image_type_included
-      collection_access
-    }
-    cases{
-      case_id
-      diagnoses{
-        disease_term
+      study_arms{
+        arm
+        ctep_treatment_assignment_code
+        cohorts{
+          cohort_dose
+          cohort_description
+        }
+      }
+      principal_investigators{
+        pi_first_name
+        pi_last_name
+        pi_middle_initial
+      }
+      publications{
+        publication_title
+        authorship
+        year_of_publication
+        journal_citation
+        digital_object_id
+        pubmed_id
+      }
+      image_collections {
+        image_collection_name
+        image_collection_url
+        repository_name
+        image_type_included
+        collection_access
+      }
+      cases{
+        case_id
+        diagnoses{
+          disease_term
+        }
       }
     }
-  }
-  
- }`;
+
+  }`;
 
 export const agentNodeMetadata = {
   keysToInclude: [
@@ -462,34 +462,26 @@ export const cycleNodeMetadata = {
     'date_of_cycle_start',
     'date_of_cycle_end',
     'crf_id',
-    'created',
     'case_id',
-    'uuid',
   ],
   header: [
     'cycle_number',
     'date_of_cycle_start',
     'date_of_cycle_end',
     'crf_id',
-    'created',
     'case_id',
-    'uuid',
   ],
 };
 
 export const visitNodeMetadata = {
   keysToInclude: [
-    'created',
     'inferred',
     'visit_id',
-    'uuid',
     'visit_date',
   ],
   header: [
-    'created',
     'inferred',
     'visit_id',
-    'uuid',
     'visit_date',
   ],
 };
@@ -626,7 +618,6 @@ export const vitalSignsNodeMetadata = {
     'respiration_pattern',
     'pulse_ox_original_unit',
     'body_surface_area',
-    'uuid',
     'patient_weight_original_unit',
     'body_surface_area_unit',
     'systolic_bp_original_unit',
@@ -643,7 +634,6 @@ export const vitalSignsNodeMetadata = {
     'date_of_vital_signs',
     'pulse_ox_unit',
     'modified_ecog',
-    'created',
     'respiration_rate_unit',
     'patient_weight_original',
     'pulse_unit',
@@ -657,7 +647,6 @@ export const vitalSignsNodeMetadata = {
     'respiration_pattern',
     'pulse_ox_original_unit',
     'body_surface_area',
-    'uuid',
     'patient_weight_original_unit',
     'body_surface_area_unit',
     'systolic_bp_original_unit',
@@ -674,7 +663,6 @@ export const vitalSignsNodeMetadata = {
     'date_of_vital_signs',
     'pulse_ox_unit',
     'modified_ecog',
-    'created',
     'respiration_rate_unit',
     'patient_weight_original',
     'pulse_unit',
@@ -688,20 +676,16 @@ export const physicalExamNodeMetadata = {
   keysToInclude: [
     'date_of_examination',
     'pe_comment',
-    'created',
     'body_system',
     'case_id',
     'pe_finding',
-    'uuid',
   ],
   header: [
     'date_of_examination',
     'pe_comment',
-    'created',
     'body_system',
     'case_id',
     'pe_finding',
-    'uuid',
   ],
 };
 
@@ -715,13 +699,11 @@ export const adverseEventNodeMetadata = {
     'dose_limiting_toxicity',
     'unexpected_adverse_event',
     'date_of_onset',
-    'created',
     'adverse_event_grade_description',
     'existing_adverse_event',
     'ongoing_adverse_event',
     'date_of_resolution',
     'attribution_to_ind',
-    'uuid',
     'attribution_to_research',
     'adverse_event_term',
     'attribution_to_commercial',
@@ -738,13 +720,11 @@ export const adverseEventNodeMetadata = {
     'dose_limiting_toxicity',
     'unexpected_adverse_event',
     'date_of_onset',
-    'created',
     'adverse_event_grade_description',
     'existing_adverse_event',
     'ongoing_adverse_event',
     'date_of_resolution',
     'attribution_to_ind',
-    'uuid',
     'attribution_to_research',
     'adverse_event_term',
     'attribution_to_commercial',
@@ -868,9 +848,7 @@ export const GET_CYCLE_CLINICAL_DATA = gql`
       date_of_cycle_start
       date_of_cycle_end
       crf_id
-      created
       case_id
-      uuid
     }
   }
 `;
@@ -887,10 +865,8 @@ export const GET_AGENT_CLINICAL_DATA = gql`
 export const GET_VISIT_CLINICAL_DATA = gql`
   query visitNodeData($study_code: String!){
     visitNodeData(study_code: $study_code) {
-      created
       inferred
       visit_id
-      uuid
       visit_date
     }
   }
@@ -974,11 +950,9 @@ export const GET_PHYSICAL_EXAM_CLINICAL_DATA = gql`
     physicalExamNodeData(study_code: $study_code) {
       date_of_examination
       pe_comment
-      created
       body_system
       case_id
       pe_finding
-      uuid
     }
   }
 `;
@@ -991,7 +965,6 @@ export const GET_VITAL_SIGNS_CLINICAL_DATA = gql`
       respiration_pattern
       pulse_ox_original_unit
       body_surface_area
-      uuid
       patient_weight_original_unit
       body_surface_area_unit
       systolic_bp_original_unit
@@ -1008,7 +981,6 @@ export const GET_VITAL_SIGNS_CLINICAL_DATA = gql`
       date_of_vital_signs
       pulse_ox_unit
       modified_ecog
-      created
       respiration_rate_unit
       patient_weight_original
       pulse_unit
@@ -1031,13 +1003,11 @@ export const GET_ADVERSE_EVENT_CLINICAL_DATA = gql`
       dose_limiting_toxicity
       unexpected_adverse_event
       date_of_onset
-      created
       adverse_event_grade_description
       existing_adverse_event
       ongoing_adverse_event
       date_of_resolution
       attribution_to_ind
-      uuid
       attribution_to_research
       adverse_event_term
       attribution_to_commercial
