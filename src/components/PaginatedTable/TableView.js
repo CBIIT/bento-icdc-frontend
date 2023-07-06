@@ -10,6 +10,7 @@ import { themeConfig, customTheme } from './TableTheme';
 import { CustomizeCellView } from './Customize/CellView';
 import { updateWrapperConfig } from './Customize/TableView';
 import { ExtendedViewConfig } from './Customize/ExtendedView';
+import { ColumnGrouping } from './Customize/ColumnGrouping';
 
 const PaginatedTableView = (props) => {
   /**
@@ -26,9 +27,13 @@ const PaginatedTableView = (props) => {
     tableLayOut = [],
     tabStyles,
     rowsPerPage = 10,
+    tblRows = [],
+    isServer = true,
+    customhemeConfig,
   } = props;
   // access table state
   const { context } = useContext(TableContext);
+
   /*
   * useReducer table state
   * paginated table update data when state change
@@ -66,8 +71,8 @@ const PaginatedTableView = (props) => {
     tableMsg: config.tableMsg,
     sortBy: config.defaultSortField,
     sortOrder: config.defaultSortDirection,
-    activeFilters,
-    extendedViewConfig: ExtendedViewConfig(config),
+    extendedViewConfig: ExtendedViewConfig(config, activeFilters),
+    columnGroups: ColumnGrouping(config.columnGroups),
     rowsPerPage,
     page: 0,
   });
@@ -85,10 +90,15 @@ const PaginatedTableView = (props) => {
           <Grid item xs={12} id={config.tableID}>
             <TableView
               initState={initTblState}
-              themeConfig={themeConfig(tabStyles, context)}
+              themeConfig={{
+                ...themeConfig(tabStyles, context),
+                ...customhemeConfig,
+              }}
               queryVariables={activeFilters}
               totalRowCount={totalRowCount}
               activeTab={activeTab}
+              tblRows={tblRows}
+              server={isServer}
             />
           </Grid>
         </Grid>

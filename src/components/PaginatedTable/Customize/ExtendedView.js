@@ -5,9 +5,16 @@ import { downloadJson } from '../utils';
 
 export const extendedViewConfigtest = '';
 
-export const ExtendedViewConfig = (config) => {
+export const ExtendedViewConfig = (config, propsFilters) => {
   const { extendedViewConfig } = config;
-  const { download } = extendedViewConfig;
+  if (!extendedViewConfig) {
+    return null;
+  }
+  const { download, customDownload } = extendedViewConfig;
+
+  if (!customDownload) {
+    return extendedViewConfig;
+  }
   /**
   * configure table download
   */
@@ -22,7 +29,15 @@ export const ExtendedViewConfig = (config) => {
     const client = useApolloClient();
     download.downloadTable = () => {
       const { filterState = {} } = store.getState()?.statusReducer;
-      const activeFilters = getFilters(filterState);
+      /**
+      * combine both props and store filter.
+      * 1. dashboard uses store filter (filterState)
+      * 2. unifived view requires props filter
+      */
+      const activeFilters = getFilters({
+        ...propsFilters,
+        ...filterState,
+      });
       client
         .query({
           query: download.query,

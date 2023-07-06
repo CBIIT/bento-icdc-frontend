@@ -33,6 +33,10 @@ import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 import { navigatedToDashboard } from '../../utils/utils';
 import env from '../../utils/env';
+import StudiesTable from './studiesTable';
+import {
+  TableContextProvider,
+} from '../../bento-core';
 
 const studiesByProgram = gql`
   query studiesByProgram {
@@ -84,6 +88,7 @@ const ProgramView = ({ classes, data }) => {
       studiesByProgram,
     ),
   });
+  console.log(interOpData);
 
   const programDetail = data.program[0];
 
@@ -343,6 +348,19 @@ const ProgramView = ({ classes, data }) => {
                 }}
               />
             </MuiThemeProvider>
+          </Grid>
+        </Grid>
+        <Grid container spacing={8} className={classes.tableDiv}>
+          <div className={classes.tableTitle}>
+            <span className={classes.tableHeader}>STUDIES IN THIS PROGRAM</span>
+          </div>
+          <Grid item xs={12} lg={12} md={12} sm={12} id="table_studies" className={classes.table}>
+            <TableContextProvider>
+              <StudiesTable
+                data={data.studiesByProgramId}
+                interOpData={interOpData}
+              />
+            </TableContextProvider>
           </Grid>
         </Grid>
       </div>

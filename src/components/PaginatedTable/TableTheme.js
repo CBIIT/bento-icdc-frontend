@@ -1,4 +1,4 @@
-export const headerTheme = ({ primaryColor = '#FF9742' }) => ({
+export const headerTheme = ({ primaryColor = '#004c73' }) => ({
   tblHeader: {
     MuiTableSortLabel: {
       root: {
@@ -20,6 +20,15 @@ export const headerTheme = ({ primaryColor = '#FF9742' }) => ({
       root: {
         paddingLeft: '5px',
         paddingRight: '5px',
+        '&.data_availability': {
+          textAlign: 'center',
+          fontSize: '16px',
+          fontWeight: '600',
+          padding: '0',
+        },
+        '&.group_1': {
+          padding: '0',
+        },
       },
       paddingCheckbox: {
         '& label': {
@@ -31,6 +40,11 @@ export const headerTheme = ({ primaryColor = '#FF9742' }) => ({
       head: {
         height: '40px',
         borderBottom: `3px solid ${primaryColor}`,
+        background: '#f5f5f5',
+        '&.column_grouping': {
+          background: '#fff',
+          padding: '0',
+        },
       },
     },
     MuiTooltip: {
@@ -52,10 +66,26 @@ export const headerTheme = ({ primaryColor = '#FF9742' }) => ({
 });
 
 const tblBody = {
+  MuiTooltip: {
+    tooltip: {
+      backgroundColor: '#ffffff',
+      color: '#1c2023',
+      maxWidth: '220px',
+      fontSize: '0.75rem',
+      border: '2px solid #a7afb3',
+      fontFamily: 'Open Sans',
+      fontWeight: '600',
+      textAlign: 'left',
+      lineHeight: '1.6',
+      padding: '10px 12px',
+      borderRadius: '0px',
+    },
+  },
   MuiTableCell: {
     root: {
       minHeight: '45px',
       padding: '0px 5px 0px 5px',
+      // padding: '16px',
       color: '#004C73',
       borderBottom: 'none',
       '& a': {
@@ -138,6 +168,10 @@ export const extendedView = ({
         root: {
           '&.viewColumnList': {
             padding: '8px 42px 8px 10px',
+            '& img': {
+              width: '25px',
+              marginRight: '10px',
+            },
           },
         },
       },
@@ -157,6 +191,8 @@ export const extendedView = ({
               },
               '&.manageViewColumnBtn': {
                 display: hidden ? 'none' : '',
+                marginBottom: '0px',
+                zIndex: '10',
               },
             },
           },
@@ -182,7 +218,7 @@ export const tblPgn = {
   },
 };
 
-export const tblContainer = ({ primaryColor = '#FF9742' }) => ({
+export const tblContainer = ({ primaryColor = '#004c73' }) => ({
   tblContainer: {
     MuiTableContainer: {
       root: {

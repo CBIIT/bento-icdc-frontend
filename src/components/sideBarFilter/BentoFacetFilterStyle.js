@@ -16,6 +16,11 @@ export default () => ({
     margin: '7px 0px 15px 6px',
     paddingTop: '10px',
   },
+  restBtn: {
+    margin: '7px 0px 15px 6px',
+    paddingTop: '10px',
+    textAlign: 'center',
+  },
   dropDownIconSection: {
     color: '#000000',
   },

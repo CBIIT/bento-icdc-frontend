@@ -1,4 +1,8 @@
 import gql from 'graphql-tag';
+import {
+  cellTypes,
+  headerTypes,
+} from '../bento-core';
 
 // --------------- Left Pannel configuration --------------
 // A maximum of 6 leftPanelattributes are allowed
@@ -11,17 +15,29 @@ const pageData = {
 // --------------- Table configuration --------------
 const table = {
   display: true,
+  name: 'ICDC_Program_Studies',
   download: true,
   viewColumns: true,
   title: 'STUDIES IN THIS PROGRAM',
   selectableRows: false,
   legendTooltip: true,
-  downloadFileName: 'ICDC_Program_Studies_download',
+  extendedViewConfig: {
+    download: {
+      customDownload: false,
+      downloadFileName: 'ICDC_Program_Studies_download',
+      downloadCsv: 'Download Table Contents As CSV',
+    },
+    manageViewColumns: {
+      title: 'View Columns',
+    },
+  },
   columns: [
     {
       dataField: 'program_id',
       header: 'Program',
       display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
     },
     {
       dataField: 'clinical_study_designation',
@@ -29,11 +45,19 @@ const table = {
       link: '/study/{clinical_study_designation}',
       viewColumns: false,
       display: true,
+      cellType: cellTypes.LINK,
+      linkAttr: {
+        rootPath: '/study',
+        pathParams: ['clinical_study_designation'],
+      },
+      tooltipText: 'sort',
     },
     {
       dataField: 'clinical_study_name',
       header: 'Study Name',
       display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
     },
     {
       dataField: 'numberOfCaseFiles',
@@ -46,7 +70,11 @@ const table = {
       firstIcon: true,
       indicator: '',
       useImage: false,
+      role: cellTypes.DISPLAY,
+      cellType: cellTypes.CUSTOM_ELEM,
+      headerType: headerTypes.CUSTOM_ELEM,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
+      tooltipText: 'sort',
     },
     {
       dataField: 'numberOfStudyFiles',
@@ -55,6 +83,11 @@ const table = {
       iconLabel: 'Number of Study Files',
       header: 'Study File(s)',
       display: true,
+      role: cellTypes.DISPLAY,
+      cellType: cellTypes.CUSTOM_ELEM,
+      headerType: headerTypes.CUSTOM_ELEM,
+      tooltipText: 'sort',
+      columnGroup: 'dataAvailability',
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
     },
     {
@@ -64,6 +97,10 @@ const table = {
       label: 'Image Collections',
       header: 'Image Collection(s)',
       display: true,
+      role: cellTypes.DISPLAY,
+      cellType: cellTypes.CUSTOM_ELEM,
+      headerType: headerTypes.CUSTOM_ELEM,
+      tooltipText: 'sort',
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-ImageCollection.svg',
     },
     {
@@ -73,6 +110,10 @@ const table = {
       iconLabel: 'Number of Publications',
       header: 'Publication(s)',
       display: true,
+      role: cellTypes.DISPLAY,
+      cellType: cellTypes.CUSTOM_ELEM,
+      headerType: headerTypes.CUSTOM_ELEM,
+      tooltipText: 'sort',
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
     },
     {
@@ -80,25 +121,36 @@ const table = {
       csvNullValue: 'Not Applicable',
       iconLabel: 'External Data Sets',
       label: 'Additional CRDC Nodes',
-      header: 'icon',
+      header: 'Additional CRDC Nodes',
       lastIcon: true,
       display: true,
+      role: cellTypes.DISPLAY,
+      cellType: cellTypes.CUSTOM_ELEM,
+      headerType: headerTypes.CUSTOM_ELEM,
+      tooltipText: 'sort',
+      columnGroup: 'dataAvailability',
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
     },
     {
       dataField: 'clinical_study_type',
       header: 'Study Type',
+      role: cellTypes.DISPLAY,
       display: true,
+      tooltipText: 'sort',
     },
     {
       dataField: 'accession_id',
       header: 'Accession ID',
       display: true,
+      role: cellTypes.DISPLAY,
+      tooltipText: 'sort',
     },
     {
       dataField: 'study_disposition',
       header: 'Study Disposition',
       display: false,
+      role: cellTypes.DISPLAY,
+      tooltipText: 'sort',
     },
     {
       dataField: 'numberOfCases',
@@ -106,11 +158,40 @@ const table = {
       link: '/explore',
       totalNumberOfCases: true,
       display: true,
+      cellType: cellTypes.CUSTOM_ELEM,
+      role: cellTypes.DISPLAY,
+      tooltipText: 'sort',
     },
   ],
   optionalColumns: [
   ],
+  columnGroups: [
+    {
+      clsName: 'other_columns',
+      columnIndexes: [0, 2],
+    },
+    {
+      clsName: 'data_availability',
+      custom: true,
+      columnIndexes: [3, 7],
+    },
+    {
+      clsName: 'other_columns',
+      groupIndex: 2,
+      columnIndexes: [8, 10],
+    },
+  ],
+  tableMsg: {
+    noMatch: 'Sorry, no matching records found',
+  },
 };
+
+export const tableLayOut = [
+  {
+    container: 'paginatedTable',
+    paginatedTable: true,
+  },
+];
 
 const textLabels = {
   textLabels: {
