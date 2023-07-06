@@ -10,7 +10,6 @@ export const customTheme = {
       },
       '&.container_footer': {
         paddingTop: '10px',
-        textAlign: 'right',
       },
       '&.container_footer_link': {
         textAlign: 'right',
@@ -21,6 +20,17 @@ export const customTheme = {
         fontFamily: 'Lato',
         borderBottom: '1px solid #3E6886',
         textDecoration: 'none',
+      },
+      '& img': {
+        width: '17px',
+        '&.addAllTooltip': {
+          verticalAlign: 'top',
+          marginTop: '8px',
+        },
+        '&.add_selected_file_tooltip_icon': {
+          verticalAlign: 'top',
+          marginTop: '8px',
+        },
       },
     },
   },
@@ -45,24 +55,23 @@ export const customTheme = {
         marginRight: '10px',
       },
       '&.add_selected_button_file': {
-        backgroundColor: '#10A075',
+        backgroundColor: '#ff7e15',
       },
-      '&.add_selected_button_Samples': {
-        backgroundColor: '#0DAFEC',
-      },
-      '&.add_selected_button_Files': {
-        backgroundColor: '#C92EC7',
+      '&#jbrowse_multi_view_button': {
+        padding: '0px',
+        color: '#00000',
+        height: '43px',
+        marginLeft: '22px',
+        textTransform: 'inherit',
+        '& img': {
+          width: '2.25em',
+        },
       },
       '&.Mui-disabled': {
         color: '#fff',
         '&.add_selected_button_file': {
-          backgroundColor: '#D6F2EA',
-        },
-        '&.add_selected_button_Samples': {
-          backgroundColor: '#CFEDF9',
-        },
-        '&.add_selected_button_Files': {
-          backgroundColor: '#F7D7F7',
+          backgroundColor: '#ff7e15',
+          opacity: 0.3,
         },
       },
       '&.yesBtn': {
@@ -139,7 +148,18 @@ export const tblHeader = {
   },
 };
 
+const tblBody = {
+  MuiCheckbox: {
+    colorSecondary: {
+      '&.Mui-checked': {
+        color: '#13344A',
+      },
+    },
+  },
+};
+
 export const themeConfig = {
   customTheme,
   tblHeader,
+  tblBody,
 };

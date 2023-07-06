@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import { Container, withStyles } from '@material-ui/core';
 import { TableContext, TableView, Wrapper } from '../../../bento-core';
 import {
-  fileTable,
+  fileTable, fileWrapperConfig,
 } from '../../../bento/caseDetailsData';
 import { customTheme, themeConfig } from './Theme';
-import { ExtendedViewConfig } from '../Customize/ExtendedView';
-import { configWrapper, wrapperConfig } from './Wrapper';
+import { CustomizeCellView } from '../../../components/PaginatedTable/Customize/CellView';
+import { ExtendedViewConfig } from '../../../components/PaginatedTable/Customize/ExtendedView';
+import { updateWrapperConfig } from '../../../components/PaginatedTable/Customize/TableView';
 
 const FileTableView = ({
   classes,
@@ -15,7 +16,7 @@ const FileTableView = ({
   const initTblState = (initailState) => ({
     ...initailState,
     title: fileTable.name,
-    columns: fileTable.columns,
+    columns: CustomizeCellView(fileTable),
     selectedRows: [],
     tableMsg: fileTable.tableMsg,
     sortBy: fileTable.defaultSortField,
@@ -27,20 +28,19 @@ const FileTableView = ({
   });
 
   const { context } = useContext(TableContext);
-  const { selectedRows = [] } = context;
 
   return (
     <>
-      {selectedRows.length === 0 && (
-        <Container className={classes.container}>
-          <span className={classes.tableName}>
-            {fileTable.tableTitle}
-          </span>
-        </Container>
-      )}
+
+      <Container className={classes.container}>
+        <span className={classes.tableName}>
+          {fileTable.tableTitle}
+        </span>
+      </Container>
+
       <div className={classes.tableContainer}>
         <Wrapper
-          wrapConfig={configWrapper(fileTable, wrapperConfig)}
+          wrapConfig={updateWrapperConfig(fileTable, fileWrapperConfig, context)}
           customTheme={customTheme}
           classes={classes}
           section={fileTable.name}

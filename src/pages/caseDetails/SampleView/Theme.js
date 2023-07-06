@@ -45,12 +45,12 @@ export const customTheme = {
       },
       '&.add_selected_button_sample': {
         backgroundColor: '#ff7e15',
-        opacity: 0.3,
       },
       '&.Mui-disabled': {
         color: '#fff',
         '&.add_selected_button_sample': {
           backgroundColor: '#ff7e15',
+          opacity: 0.3,
         },
       },
       '&.yesBtn': {
@@ -127,7 +127,18 @@ export const tblHeader = {
   },
 };
 
+const tblBody = {
+  MuiCheckbox: {
+    colorSecondary: {
+      '&.Mui-checked': {
+        color: '#13344A',
+      },
+    },
+  },
+};
+
 export const themeConfig = {
   customTheme,
   tblHeader,
+  tblBody,
 };

@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { Container, withStyles } from '@material-ui/core';
 import { TableContext, TableView, Wrapper } from '../../../bento-core';
 import {
-  sampleTable,
+  sampleTable, sampleWrapperConfig,
 } from '../../../bento/caseDetailsData';
 import { customTheme, themeConfig } from './Theme';
-import { ExtendedViewConfig } from '../Customize/ExtendedView';
-import { configWrapper, wrapperConfig } from './Wrapper';
+import { ExtendedViewConfig } from '../../../components/PaginatedTable/Customize/ExtendedView';
+import { updateWrapperConfig } from '../../../components/PaginatedTable/Customize/TableView';
 
 const SampleTableView = ({
   classes,
@@ -27,20 +27,19 @@ const SampleTableView = ({
   });
 
   const { context } = useContext(TableContext);
-  const { selectedRows = [] } = context;
 
   return (
     <>
-      {selectedRows.length === 0 && (
-        <Container className={classes.container}>
-          <span className={classes.tableName}>
-            {sampleTable.tableTitle}
-          </span>
-        </Container>
-      )}
+
+      <Container className={classes.container}>
+        <span className={classes.tableName}>
+          {sampleTable.tableTitle}
+        </span>
+      </Container>
+
       <div className={classes.tableContainer}>
         <Wrapper
-          wrapConfig={configWrapper(sampleTable, wrapperConfig)}
+          wrapConfig={updateWrapperConfig(sampleTable, sampleWrapperConfig, context)}
           customTheme={customTheme}
           classes={classes}
           section={sampleTable.name}
