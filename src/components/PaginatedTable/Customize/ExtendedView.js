@@ -7,7 +7,14 @@ export const extendedViewConfigtest = '';
 
 export const ExtendedViewConfig = (config, propsFilters) => {
   const { extendedViewConfig } = config;
-  const { download } = extendedViewConfig;
+  if (!extendedViewConfig) {
+    return null;
+  }
+  const { download, customDownload } = extendedViewConfig;
+
+  if (!customDownload) {
+    return extendedViewConfig;
+  }
   /**
   * configure table download
   */

@@ -66,7 +66,6 @@ export const fileViewer = {
 // --------------- Tabs Table configuration --------------
 export const tabContainers = [
   {
-
     name: 'Cases',
     dataField: 'dataCase',
     api: 'GET_CASES_OVERVIEW_QUERY',
