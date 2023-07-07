@@ -22,7 +22,7 @@ export const tooltipContent = {
 
 // --------------- table wrapper configuration --------------
 export const addAssociatedFilesBtn = {
-  title: 'ADD ASSOCIATED FILES',
+  title: 'Add SELECTED FILES',
   clsName: 'add_selected_button',
   type: types.BUTTON,
   role: btnTypes.ADD_SELECTED_FILES,
