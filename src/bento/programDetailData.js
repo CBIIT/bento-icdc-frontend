@@ -42,9 +42,8 @@ const table = {
     {
       dataField: 'clinical_study_designation',
       header: 'Study Code',
-      viewColumns: false,
       display: true,
-      cellType: cellTypes.LINK,
+      cellType: cellTypes.CUSTOM_ELEM,
       linkAttr: {
         rootPath: '/study',
         pathParams: ['clinical_study_designation'],

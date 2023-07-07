@@ -9,13 +9,7 @@ import { navigatedToDashboard } from '../../../utils/utils';
 import { pageData } from '../../../bento/programDetailData';
 import pendingFileIcon from '../../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 
-const NumberOfCasesView = ({
-  classes,
-  clinical_study_designation: studyDesignation,
-  numberOfCases,
-  study_disposition: studyDispositionValue,
-  accession_id: accessionId,
-}) => {
+export const getStudyIcon = (classes, param) => {
   const embargoToolTipIcon = () => (
     <Tooltip title="Under Embargo" arrow placement="bottom">
       <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
@@ -33,35 +27,42 @@ const NumberOfCasesView = ({
   * @param {String} param
   * @return {function}
   */
-  const renderSwitch = (param) => {
-    switch (param) {
-      case 'embargo':
-        return embargoToolTipIcon();
-      case 'pending':
-        return pendingToolTipIcon();
-      default:
-        return false;
-    }
-  };
+  switch (param) {
+    case 'embargo':
+      return embargoToolTipIcon();
+    case 'pending':
+      return pendingToolTipIcon();
+    default:
+      return false;
+  }
+};
 
-  const CustomCaseNumbLink = () => (
-    renderSwitch(studyDisposition(studyDispositionValue))
-      ? (
-        renderSwitch(studyDisposition(studyDispositionValue))
-      ) : (
-        <Link
-          to={(location) => ({ ...location, pathname: '/explore' })}
-          className={classes.buttonCaseNumb}
-          onClick={() => navigatedToDashboard(`${studyDesignation} (${accessionId})`, 'Cases')}
-        >
-          {numberOfCases}
-        </Link>
-      )
-  );
-
+const NumberOfCasesView = ({
+  classes,
+  clinical_study_designation: studyDesignation,
+  numberOfCases,
+  study_disposition: studyDispositionValue,
+  accession_id: accessionId,
+}) => {
+  const StudyIcon = getStudyIcon(classes, studyDisposition(studyDispositionValue));
   return (
     <>
-      <CustomCaseNumbLink />
+      {
+        (StudyIcon) ? (
+          <>
+            { StudyIcon }
+          </>
+        )
+          : (
+            <Link
+              to={(location) => ({ ...location, pathname: '/explore' })}
+              className={classes.buttonCaseNumb}
+              onClick={() => navigatedToDashboard(`${studyDesignation} (${accessionId})`, 'Cases')}
+            >
+              {numberOfCases}
+            </Link>
+          )
+      }
     </>
   );
 };

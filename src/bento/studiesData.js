@@ -22,30 +22,17 @@ export const pageData = {
     alt: 'External link icon',
   },
   table: {
-    // Set 'display' to false to hide the table entirely
-    display: true,
     // Table title
     title: 'Studies',
     // Field name for table data, need to be updated only when using a different GraphQL query
     dataField: 'studiesByProgram',
-    // Value must be one of the 'field' in columns
-    // defaultSortField: 'clinical_study_designation',
-    // 'asc' or 'desc'
-    // defaultSortDirection: 'asc',
-    // viewColumns 'true' or 'false'
-    viewColumns: true,
-    // download csv 'true' or 'false'
-    download: true,
-    // downloaded File Name
-    downloadFileName: 'ICDC_Studies_download',
-    // Set 'selectableRows' to true to show the row selection
-    selectableRows: false,
     // toggle D.A.L unified tooltip above D.A.L icons on table toolbar
     legendTooltip: true,
     extendedViewConfig: {
       download: {
         customDownload: false,
-        downloadFileName: 'ICDC_Program_Studies_download',
+        // downloaded File Name
+        downloadFileName: 'ICDC_Studies_download',
         downloadCsv: 'Download Table Contents As CSV',
       },
       manageViewColumns: {
@@ -58,7 +45,7 @@ export const pageData = {
         header: 'Study Code',
         viewColumns: false,
         display: true,
-        cellType: cellTypes.LINK,
+        cellType: cellTypes.CUSTOM_ELEM,
         linkAttr: {
           rootPath: '/study',
           pathParams: ['clinical_study_designation'],

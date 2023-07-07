@@ -8,6 +8,7 @@ import { customizeColumn, customizeHeader, customizeLandScapeView } from './Type
 import DataAvailabilityCellView from './DataAvailability/TableCell';
 import DataAvailabilityHeader from './DataAvailability/HeaderCell';
 import NumberOfCasesView from './NumberOfCases';
+import StudyLink from './StudyLink';
 
 const CaseIdLink = (props) => {
   const {
@@ -70,6 +71,10 @@ export const CustomCellView = (props) => {
     case customizeColumn.numberOfCases:
       return (
         <NumberOfCasesView {...props} />
+      );
+    case customizeColumn.studyDesignation:
+      return (
+        <StudyLink {...props} />
       );
     case customizeLandScapeView.CASE_FILES:
     case customizeLandScapeView.STUDY_FILES:
