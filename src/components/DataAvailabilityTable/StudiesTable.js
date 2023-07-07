@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
-import PaginatedTableView from '../../components/PaginatedTable/TableView';
+import PaginatedTableView from '../PaginatedTable/TableView';
 import {
   TableContext,
 } from '../../bento-core';
-import {
-  table,
-  tableLayOut,
-} from '../../bento/programDetailData';
 import { themeConfig } from './tableThemeConfig';
 
 const StudiesTable = ({
+  table,
+  tableLayOut,
   data,
   interOpData,
 }) => {
@@ -25,7 +23,7 @@ const StudiesTable = ({
       }}
       tableLayOut={tableLayOut}
       totalRowCount={data.length || 0}
-      customhemeConfig={{ ...themeConfig(context) }}
+      customthemeConfig={{ ...themeConfig(context) }}
     />
   );
 };

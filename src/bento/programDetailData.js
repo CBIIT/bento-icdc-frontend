@@ -42,7 +42,6 @@ const table = {
     {
       dataField: 'clinical_study_designation',
       header: 'Study Code',
-      link: '/study/{clinical_study_designation}',
       viewColumns: false,
       display: true,
       cellType: cellTypes.LINK,
@@ -61,15 +60,11 @@ const table = {
     },
     {
       dataField: 'numberOfCaseFiles',
-      label: 'Case Files',
-      csvNullValue: 'Not Applicable',
-      iconLabel: 'Number of Case Files',
-      legendTooltip: true,
       header: 'Case File(s)',
       display: true,
-      firstIcon: true,
-      indicator: '',
-      useImage: false,
+      columnDefaultValues: {
+        0: 'Not Applicable',
+      },
       role: cellTypes.DISPLAY,
       cellType: cellTypes.CUSTOM_ELEM,
       headerType: headerTypes.CUSTOM_ELEM,
@@ -78,25 +73,24 @@ const table = {
     },
     {
       dataField: 'numberOfStudyFiles',
-      label: 'Study Files',
-      csvNullValue: 'Not Applicable',
-      iconLabel: 'Number of Study Files',
       header: 'Study File(s)',
       display: true,
+      columnDefaultValues: {
+        0: 'Not Applicable',
+      },
       role: cellTypes.DISPLAY,
       cellType: cellTypes.CUSTOM_ELEM,
       headerType: headerTypes.CUSTOM_ELEM,
       tooltipText: 'sort',
-      columnGroup: 'dataAvailability',
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
     },
     {
       dataField: 'numberOfImageCollections',
-      csvNullValue: 'Not Applicable',
-      iconLabel: 'Number of Image Collections',
-      label: 'Image Collections',
       header: 'Image Collection(s)',
       display: true,
+      columnDefaultValues: {
+        0: 'Not Applicable',
+      },
       role: cellTypes.DISPLAY,
       cellType: cellTypes.CUSTOM_ELEM,
       headerType: headerTypes.CUSTOM_ELEM,
@@ -105,11 +99,11 @@ const table = {
     },
     {
       dataField: 'numberOfPublications',
-      label: 'Publications',
-      csvNullValue: 'Not Applicable',
-      iconLabel: 'Number of Publications',
       header: 'Publication(s)',
       display: true,
+      columnDefaultValues: {
+        0: 'Not Applicable',
+      },
       role: cellTypes.DISPLAY,
       cellType: cellTypes.CUSTOM_ELEM,
       headerType: headerTypes.CUSTOM_ELEM,
@@ -118,17 +112,15 @@ const table = {
     },
     {
       dataField: 'CRDCLinks',
-      csvNullValue: 'Not Applicable',
-      iconLabel: 'External Data Sets',
-      label: 'Additional CRDC Nodes',
       header: 'Additional CRDC Nodes',
-      lastIcon: true,
       display: true,
+      columnDefaultValues: {
+        0: 'Not Applicable',
+      },
       role: cellTypes.DISPLAY,
       cellType: cellTypes.CUSTOM_ELEM,
       headerType: headerTypes.CUSTOM_ELEM,
       tooltipText: 'sort',
-      columnGroup: 'dataAvailability',
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
     },
     {
@@ -156,14 +148,11 @@ const table = {
       dataField: 'numberOfCases',
       header: 'Cases',
       link: '/explore',
-      totalNumberOfCases: true,
       display: true,
       cellType: cellTypes.CUSTOM_ELEM,
       role: cellTypes.DISPLAY,
       tooltipText: 'sort',
     },
-  ],
-  optionalColumns: [
   ],
   columnGroups: [
     {
@@ -177,7 +166,6 @@ const table = {
     },
     {
       clsName: 'other_columns',
-      groupIndex: 2,
       columnIndexes: [8, 10],
     },
   ],

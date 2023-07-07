@@ -5,38 +5,27 @@ import {
   Typography,
   CircularProgress,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import {
-  CustomDataTable,
   cn,
   getOptions,
-  manipulateLinks,
-  ToolTip as Tooltip,
 } from 'bento-components';
-import _ from 'lodash';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-import { FiberManualRecordRounded } from '@material-ui/icons';
 import { request, gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import StatsView from '../../components/Stats/StatsView';
 import {
   table,
   pageData,
-  textLabels,
+  tableLayOut,
 } from '../../bento/programDetailData';
 import {
   pageData as ProgramImageConfig,
 } from '../../bento/programData';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
-import themes, { overrides } from '../../themes';
-import { studyDisposition } from '../study/utils';
-import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
-import { navigatedToDashboard } from '../../utils/utils';
 import env from '../../utils/env';
-import StudiesTable from './studiesTable';
 import {
   TableContextProvider,
 } from '../../bento-core';
+import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
 
 const studiesByProgram = gql`
   query studiesByProgram {
@@ -52,34 +41,6 @@ const studiesByProgram = gql`
   }
 `;
 
-const themesLight = _.cloneDeep(themes.light);
-themesLight.overrides.MuiTableCell = {
-  ...themesLight.overrides.MuiTableCell,
-  root: {
-    '&:first-child': {
-      paddingLeft: '42px',
-    },
-    '&:last-child': {
-      paddingRight: '41px',
-    },
-  },
-};
-themesLight.overrides.MUIDataTableToolbar = {
-  ...themesLight.overrides.MUIDataTableToolbar,
-  actions: {
-    paddingRight: '35px',
-    '& span': {
-      '& button': {
-        right: '0px',
-      },
-    },
-  },
-};
-const computedTheme = createTheme({
-  ...themesLight,
-  ...overrides,
-});
-
 const ProgramView = ({ classes, data }) => {
   const { data: interOpData, isLoading, isError } = useQuery({
     queryKey: ['studiesByProgram'],
@@ -88,7 +49,6 @@ const ProgramView = ({ classes, data }) => {
       studiesByProgram,
     ),
   });
-  console.log(interOpData);
 
   const programDetail = data.program[0];
 
@@ -117,161 +77,6 @@ const ProgramView = ({ classes, data }) => {
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const tableOptions = getOptions(table, classes);
   tableOptions.downloadOptions.filename = tableOptions.downloadOptions.filename.replace('Program', `${programDetail.program_acronym}`);
-
-  const embargoToolTipIcon = () => (
-    <Tooltip title="Under Embargo" arrow placement="bottom">
-      <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
-    </Tooltip>
-  );
-
-  const pendingToolTipIcon = () => (
-    <Tooltip title="Release Pending" arrow placement="bottom">
-      <img src={pendingFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
-    </Tooltip>
-  );
-
-  /**
- * Conditionally returns a tooltip based on study disposition.
- * @param {String} param
- * @return {function}
- */
-  const renderSwitch = (param) => {
-    switch (param) {
-      case 'embargo':
-        return embargoToolTipIcon();
-      case 'pending':
-        return pendingToolTipIcon();
-      default:
-        return false;
-    }
-  };
-
-  const customStudyCodeLink = (column, value, tableMeta) => (
-    <>
-      <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
-        {value}
-      </Link>
-      {
-        renderSwitch(studyDisposition(tableMeta.rowData[10]))
-      }
-    </>
-  );
-
-  const customCaseNumbLink = (column, value, tableMeta) => (
-    renderSwitch(studyDisposition(tableMeta.rowData[10]))
-      ? (
-        renderSwitch(studyDisposition(tableMeta.rowData[10]))
-      ) : (
-        <Link
-          to={(location) => ({ ...location, pathname: '/explore' })}
-          className={classes.buttonCaseNumb}
-          onClick={() => navigatedToDashboard(tableMeta.rowData[1], 'Cases')}
-        >
-          {value}
-        </Link>
-      )
-  );
-
-  const generateCRDCLinks = (linksArray, clinicalStudyDesignation) => (
-    <ul className={classes.crdcLinks}>
-      {linksArray.map((link) => (
-        <li>
-          <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
-            {`${link.repository} | ICDC-${clinicalStudyDesignation}`}
-            <img
-              style={{
-                width: '1.5em',
-              }}
-              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
-              alt="external link icon"
-            />
-          </a>
-        </li>
-      ))}
-    </ul>
-  );
-
-  const generateIndicatorTooltipTitle = (column, value, studyData) => {
-    switch (column.dataField) {
-      case 'numberOfCaseFiles':
-        return `${value} Case File(s)`;
-      case 'numberOfStudyFiles':
-        return `${value} Study File(s)`;
-      case 'numberOfImageCollections':
-        return `${studyData.length && studyData[0].numberOfImageCollections} Image Collection(s)`;
-      case 'numberOfPublications':
-        return `${value} Publication(s)`;
-      default: {
-        return studyData.length
-        && generateCRDCLinks(
-          studyData[0].CRDCLinks, studyData[0].clinical_study_designation,
-        );
-      }
-    }
-  };
-
-  const customIcon = (column, value, tableMeta) => {
-    const currentStudyData = interOpData.studiesByProgram
-      .filter((study) => study.clinical_study_designation === tableMeta.rowData[1]);
-    let flag;
-    if (currentStudyData.length) {
-      flag = true;
-    } else {
-      flag = Array.isArray(value) ? value.length > 0 : value > 0;
-    }
-    const title = generateIndicatorTooltipTitle(column, value, currentStudyData);
-    return (
-      <>
-        {
-        flag && (
-        <div className={classes.dataAvailIndicator}>
-          <Tooltip classes={{ tooltip: column.dataField === 'CRDCLinks' ? classes.externalLinkDalTooltip : classes.defaultDalTooltip }} title={title} interactive={column.dataField === 'CRDCLinks'}>
-            {column.indicator && column.useImage
-              ? <img className={classes.dataAvailIndicatorImage} src={column.indicator} alt={`${column.header} icon`} />
-              : <FiberManualRecordRounded className={classes.dataAvailIndicatorIcon} />}
-          </Tooltip>
-        </div>
-        )
-      }
-      </>
-    );
-  };
-
-  const updatedTableWithLinks = manipulateLinks([
-    ...table.columns,
-    ...table.optionalColumns,
-  ]);
-  const columns = updatedTableWithLinks.map((column) => ({
-    name: column.dataField,
-    icon: !!column.icon,
-    csvNullValue: column.csvNullValue,
-    iconLabel: column.iconLabel,
-    firstIcon: column.firstIcon,
-    iconViewColumnsLabel: column.label,
-    lastIcon: column.lastIcon,
-    label: column.icon ? <img className={classes.dalIcon} src={column.icon} alt={`${column.label}'s icon`} />
-      : column.header,
-    options: {
-      display: column.display,
-      viewColumns: column.viewColumns,
-      customBodyRender: (value, tableMeta) => {
-        if (column.internalLink) {
-          if (column.totalNumberOfCases) {
-            return customCaseNumbLink(column, value, tableMeta);
-          }
-          return customStudyCodeLink(column, value, tableMeta);
-        }
-        if (column.icon) {
-          return customIcon(column, value, tableMeta);
-        }
-        return (
-          <>
-            {(`${value}` !== 'null') ? `${value}` : ''}
-          </>
-        );
-      },
-    },
-  }));
 
   if (isLoading) {
     return (
@@ -338,27 +143,12 @@ const ProgramView = ({ classes, data }) => {
             <span className={classes.tableHeader}>STUDIES IN THIS PROGRAM</span>
           </div>
           <Grid item xs={12} lg={12} md={12} sm={12} id="table_studies" className={classes.table}>
-            <MuiThemeProvider theme={computedTheme}>
-              <CustomDataTable
-                data={data.studiesByProgramId}
-                columns={columns}
-                options={{ ...tableOptions, ...textLabels }}
-                components={{
-                  Tooltip,
-                }}
-              />
-            </MuiThemeProvider>
-          </Grid>
-        </Grid>
-        <Grid container spacing={8} className={classes.tableDiv}>
-          <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>STUDIES IN THIS PROGRAM</span>
-          </div>
-          <Grid item xs={12} lg={12} md={12} sm={12} id="table_studies" className={classes.table}>
             <TableContextProvider>
               <StudiesTable
                 data={data.studiesByProgramId}
                 interOpData={interOpData}
+                table={table}
+                tableLayOut={tableLayOut}
               />
             </TableContextProvider>
           </Grid>

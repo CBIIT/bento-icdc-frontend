@@ -1,4 +1,15 @@
 import gql from 'graphql-tag';
+import {
+  cellTypes,
+  headerTypes,
+} from '../bento-core';
+
+export const tableLayOut = [
+  {
+    container: 'paginatedTable',
+    paginatedTable: true,
+  },
+];
 
 export const pageData = {
   embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-Embargo-File.svg',
@@ -31,99 +42,158 @@ export const pageData = {
     selectableRows: false,
     // toggle D.A.L unified tooltip above D.A.L icons on table toolbar
     legendTooltip: true,
+    extendedViewConfig: {
+      download: {
+        customDownload: false,
+        downloadFileName: 'ICDC_Program_Studies_download',
+        downloadCsv: 'Download Table Contents As CSV',
+      },
+      manageViewColumns: {
+        title: 'View Columns',
+      },
+    },
     columns: [
       {
         dataField: 'clinical_study_designation',
         header: 'Study Code',
-        link: '/study/{clinical_study_designation}',
-        display: true,
         viewColumns: false,
+        display: true,
+        cellType: cellTypes.LINK,
+        linkAttr: {
+          rootPath: '/study',
+          pathParams: ['clinical_study_designation'],
+        },
+        tooltipText: 'sort',
       },
       {
         dataField: 'program_id',
         header: 'Program',
-        link: '/program/{program_id}',
+        cellType: cellTypes.LINK,
+        linkAttr: {
+          rootPath: '/program',
+          pathParams: ['program_id'],
+        },
+        role: cellTypes.DISPLAY,
         display: true,
       },
       {
         dataField: 'clinical_study_name',
         header: 'Study Name',
         display: true,
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
       },
       {
         dataField: 'numberOfCaseFiles',
-        csvNullValue: 'Not Applicable',
         iconLabel: 'Number of Case Files',
-        label: 'Case Files',
-        legendTooltip: true,
         header: 'Case File(s)',
         display: true,
-        indicator: '',
-        useImage: false,
-        firstIcon: true,
+        columnDefaultValues: {
+          0: 'Not Applicable',
+        },
+        tooltipText: 'sort',
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        headerType: headerTypes.CUSTOM_ELEM,
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
       },
       {
         dataField: 'numberOfStudyFiles',
-        csvNullValue: 'Not Applicable',
-        label: 'Study Files',
-        iconLabel: 'Number of Study Files',
         header: 'Study File(s)',
         display: true,
+        columnDefaultValues: {
+          0: 'Not Applicable',
+        },
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        headerType: headerTypes.CUSTOM_ELEM,
+        tooltipText: 'sort',
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
       },
       {
         dataField: 'numberOfImageCollections',
-        label: 'Image Collections',
-        csvNullValue: 'Not Applicable',
-        iconLabel: 'Number of Image Collections',
         header: 'Image Collection(s)',
         display: true,
+        columnDefaultValues: {
+          0: 'Not Applicable',
+        },
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        headerType: headerTypes.CUSTOM_ELEM,
+        tooltipText: 'sort',
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-ImageCollection.svg',
       },
       {
         dataField: 'numberOfPublications',
-        csvNullValue: 'Not Applicable',
-        iconLabel: 'Number of Publications',
-        label: 'Publications',
         header: 'Publication(s)',
         display: true,
+        columnDefaultValues: {
+          0: 'Not Applicable',
+        },
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        headerType: headerTypes.CUSTOM_ELEM,
+        tooltipText: 'sort',
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
       },
       {
         dataField: 'CRDCLinks',
-        csvNullValue: 'Not Applicable',
-        iconLabel: 'External Data Sets',
-        label: 'Additional CRDC Nodes',
         header: 'icon',
         display: true,
-        lastIcon: true,
+        columnDefaultValues: {
+          0: 'Not Applicable',
+        },
+        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
+        headerType: headerTypes.CUSTOM_ELEM,
+        tooltipText: 'sort',
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-CRDCnodes.svg',
       },
       {
         dataField: 'clinical_study_type',
         header: 'Study Type',
+        role: cellTypes.DISPLAY,
         display: true,
+        tooltipText: 'sort',
       },
       {
         dataField: 'accession_id',
         header: 'Accession ID',
         display: true,
+        role: cellTypes.DISPLAY,
+        tooltipText: 'sort',
       },
       {
         dataField: 'study_disposition',
         header: 'Study Disposition',
         display: false,
+        role: cellTypes.DISPLAY,
+        tooltipText: 'sort',
       },
       {
         dataField: 'numberOfCases',
         header: 'Cases',
         link: '/explore',
-        totalNumberOfCases: true,
         display: true,
+        cellType: cellTypes.CUSTOM_ELEM,
+        role: cellTypes.DISPLAY,
+        tooltipText: 'sort',
       },
     ],
-    optionalColumns: [
+    columnGroups: [
+      {
+        clsName: 'other_columns',
+        columnIndexes: [0, 2],
+      },
+      {
+        clsName: 'data_availability',
+        custom: true,
+        columnIndexes: [3, 7],
+      },
+      {
+        clsName: 'other_columns',
+        columnIndexes: [8, 10],
+      },
     ],
   },
 };

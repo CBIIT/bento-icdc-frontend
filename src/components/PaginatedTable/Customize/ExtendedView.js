@@ -10,8 +10,9 @@ export const ExtendedViewConfig = (config, propsFilters) => {
   if (!extendedViewConfig) {
     return null;
   }
-  const { download, customDownload } = extendedViewConfig;
 
+  const { download } = extendedViewConfig;
+  const { customDownload } = download;
   if (!customDownload) {
     return extendedViewConfig;
   }

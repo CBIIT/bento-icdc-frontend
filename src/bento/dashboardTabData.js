@@ -1787,6 +1787,7 @@ export const tableContainers = [
     extendedViewConfig: {
       pagination: true,
       download: {
+        customDownload: true,
         downloadCsv: 'Download Table Contents As CSV',
         ...customCasesTabDownloadCSV,
       },
@@ -1926,6 +1927,7 @@ export const tableContainers = [
     extendedViewConfig: {
       pagination: true,
       download: {
+        customDownload: true,
         downloadCsv: 'Download Table Contents As CSV',
         ...customSamplesTabDownloadCSV,
       },
@@ -2035,11 +2037,11 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
-    // addFilesRequestVariableKey: 'sample_ids',
-    // addFilesResponseKeys: ['fileIDsFromList'],
-    // addAllFilesResponseKeys: ['sampleOverview', 'files'],
-    // addAllFileQuery: GET_ALL_FILEIDS_FROM_SAMPLETAB_FOR_ADD_ALL_CART,
-    // addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
+    addFilesRequestVariableKey: 'sample_ids',
+    addFilesResponseKeys: ['fileIDsFromList'],
+    addAllFilesResponseKeys: ['sampleOverview', 'files'],
+    addAllFileQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Case Files',
@@ -2057,6 +2059,7 @@ export const tableContainers = [
     extendedViewConfig: {
       pagination: true,
       download: {
+        customDownload: true,
         downloadCsv: 'Download Table Contents As CSV',
         ...customFilesTabDownloadCSV,
       },

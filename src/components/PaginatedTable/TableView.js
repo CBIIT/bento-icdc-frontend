@@ -29,7 +29,7 @@ const PaginatedTableView = (props) => {
     rowsPerPage = 10,
     tblRows = [],
     isServer = true,
-    customhemeConfig,
+    customthemeConfig,
   } = props;
   // access table state
   const { context } = useContext(TableContext);
@@ -92,7 +92,7 @@ const PaginatedTableView = (props) => {
               initState={initTblState}
               themeConfig={{
                 ...themeConfig(tabStyles, context),
-                ...customhemeConfig,
+                ...customthemeConfig,
               }}
               queryVariables={activeFilters}
               totalRowCount={totalRowCount}
