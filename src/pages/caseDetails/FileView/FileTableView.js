@@ -4,10 +4,11 @@ import { TableContext, TableView, Wrapper } from '../../../bento-core';
 import {
   fileTable, fileWrapperConfig,
 } from '../../../bento/caseDetailsData';
-import { customTheme, themeConfig } from './Theme';
+// import { customTheme, themeConfig } from './Theme';
 import { CustomizeCellView } from '../../../components/PaginatedTable/Customize/CellView';
 import { ExtendedViewConfig } from '../../../components/PaginatedTable/Customize/ExtendedView';
 import { updateWrapperConfig } from '../../../components/PaginatedTable/Customize/TableView';
+import { themeConfig, customTheme } from '../SampleView/Theme';
 
 const FileTableView = ({
   classes,
@@ -47,7 +48,9 @@ const FileTableView = ({
         >
           <TableView
             initState={initTblState}
-            themeConfig={themeConfig}
+            themeConfig={{
+              ...themeConfig(context),
+            }}
             tblRows={data}
             totalRowCount={data.length}
             server={false}

@@ -46,7 +46,9 @@ const SampleTableView = ({
         >
           <TableView
             initState={initTblState}
-            themeConfig={themeConfig}
+            themeConfig={{
+              ...themeConfig(context),
+            }}
             tblRows={data}
             totalRowCount={data.length}
             server={false}

@@ -1,6 +1,22 @@
 export const customTheme = {
+  MuiTooltip: {
+    tooltip: {
+      backgroundColor: '#ffffff',
+      color: '#1c2023',
+      maxWidth: '220px',
+      fontSize: '0.75rem',
+      border: '2px solid #a7afb3',
+      fontFamily: 'Open Sans',
+      fontWeight: '600',
+      textAlign: 'left',
+      lineHeight: '1.6',
+      padding: '10px 12px',
+      borderRadius: '0px',
+    },
+  },
   MuiContainer: {
     root: {
+      background: '#f3f3f3',
       paddingTop: '5px',
       '& .add_selected_file_tooltip_icon': {
         width: '17px !important',
@@ -23,12 +39,16 @@ export const customTheme = {
       },
     },
   },
+  MuiButtonBase: {
+    root: {
+      color: 'red',
+    },
+  },
   MuiButton: {
     text: {
       padding: '10px 16px',
     },
     root: {
-      color: '#fff',
       fontSize: '12px',
       marginTop: '6px',
       fontFamily: 'Lato',
@@ -44,26 +64,18 @@ export const customTheme = {
         marginRight: '10px',
       },
       '&.add_selected_button_sample': {
-        backgroundColor: '#ff7e15',
-      },
-      '&.Mui-disabled': {
         color: '#fff',
-        '&.add_selected_button_sample': {
-          backgroundColor: '#ff7e15',
+        backgroundColor: '#ff7e15',
+        '&.Mui-disabled': {
           opacity: 0.3,
         },
       },
-      '&.yesBtn': {
-        width: '133px',
-        height: '45px',
-        cursor: 'pointer',
-        background: '#98a19e',
-      },
-      '&.noBtn': {
-        width: '133px',
-        height: '45px',
-        cursor: 'pointer',
-        background: '#42779a',
+      '&.add_selected_button_file': {
+        color: '#fff',
+        backgroundColor: '#ff7e15',
+        '&.Mui-disabled': {
+          opacity: 0.3,
+        },
       },
     },
   },
@@ -125,6 +137,21 @@ export const tblHeader = {
       color: '#194563',
     },
   },
+  MuiTooltip: {
+    tooltip: {
+      backgroundColor: '#ffffff',
+      color: '#1c2023',
+      maxWidth: '220px',
+      fontSize: '0.75rem',
+      border: '2px solid #a7afb3',
+      fontFamily: 'Open Sans',
+      fontWeight: '600',
+      textAlign: 'left',
+      lineHeight: '1.6',
+      padding: '10px 12px',
+      borderRadius: '0px',
+    },
+  },
 };
 
 const tblBody = {
@@ -135,10 +162,99 @@ const tblBody = {
       },
     },
   },
+  MuiTableCell: {
+    root: {
+      padding: '0px 5px 0px 15px',
+    },
+  },
 };
 
-export const themeConfig = {
-  customTheme,
-  tblHeader,
-  tblBody,
+export const extendedView = ({
+  primaryColor = '#FF9742',
+  selectedRows = [],
+}) => {
+  const hidden = selectedRows.length > 0;
+  return {
+    extendedView: {
+      MuiContainer: {
+        background: '#fff',
+      },
+      tblTopPgn: {
+        MuiTablePagination: {
+          root: {
+            paddingRight: '50px',
+            borderTop: `3px solid ${primaryColor}`,
+          },
+        },
+      },
+      MuiTooltip: {
+        tooltip: {
+          backgroundColor: '#ffffff',
+          color: '#1c2023',
+          maxWidth: '220px',
+          fontSize: '0.75rem',
+          border: '2px solid #a7afb3',
+          fontFamily: 'Open Sans',
+          fontWeight: '600',
+          textAlign: 'left',
+          lineHeight: '1.6',
+          padding: '10px 12px',
+          borderRadius: '0px',
+        },
+      },
+      MuiList: {
+        root: {
+          '&.viewColumnList': {
+            padding: '8px 42px 8px 10px',
+            '& img': {
+              width: '25px',
+              marginRight: '10px',
+            },
+          },
+        },
+      },
+      MuiToolbar: {
+        root: {
+          display: 'block',
+          position: 'relative',
+          textAlign: 'right',
+          '&.downloadAndColumnView': {
+            '& button': {
+              '&.download-icon': {
+                marginRight: '-10px',
+                display: hidden ? 'none' : '',
+              },
+              '&.manageViewColumnBtn': {
+                display: hidden ? 'none' : '',
+                marginBottom: '0px',
+                zIndex: '10',
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 };
+
+const tblPgn = {
+  MuiTablePagination: {
+    root: {
+      backgroundColor: '#ffffff',
+    },
+  },
+};
+
+// export const themeConfig = {
+//   customTheme,
+//   tblHeader,
+//   tblBody,
+// };
+
+export const themeConfig = (table) => ({
+  customTheme,
+  tblBody,
+  tblHeader,
+  tblPgn,
+  ...extendedView(table),
+});

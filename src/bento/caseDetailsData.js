@@ -245,8 +245,8 @@ export const sampleTable = {
   // A maximum of 10 columns are allowed
   extendedViewConfig: {
     download: {
+      customDownload: false,
       downloadCsv: 'Download Table Contents As CSV',
-      ...customSamplesTabDownloadCSV,
     },
     manageViewColumns: {
       title: 'View Columns',
@@ -264,7 +264,6 @@ export const sampleTable = {
       primary: true,
       display: true,
       tooltipText: 'sort',
-      role: cellTypes.DISPLAY,
     },
     {
       dataField: 'sample_site',
@@ -387,8 +386,8 @@ export const fileTable = {
   // A maximum of 10 columns are allowed
   extendedViewConfig: {
     download: {
+      customDownload: false,
       downloadCsv: 'Download Table Contents As CSV',
-      ...customFilesTabDownloadCSV,
     },
     manageViewColumns: {
       title: 'View Columns',
