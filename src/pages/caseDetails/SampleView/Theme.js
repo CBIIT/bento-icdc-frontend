@@ -37,11 +37,17 @@ export const customTheme = {
         borderBottom: '1px solid #3E6886',
         textDecoration: 'none',
       },
-    },
-  },
-  MuiButtonBase: {
-    root: {
-      color: 'red',
+      '& img': {
+        width: '17px',
+        '&.addAllTooltip': {
+          verticalAlign: 'top',
+          marginTop: '8px',
+        },
+        '&.add_selected_file_tooltip_icon': {
+          verticalAlign: 'top',
+          marginTop: '8px',
+        },
+      },
     },
   },
   MuiButton: {
@@ -49,6 +55,7 @@ export const customTheme = {
       padding: '10px 16px',
     },
     root: {
+      color: '#fff',
       fontSize: '12px',
       marginTop: '6px',
       fontFamily: 'Lato',
@@ -64,19 +71,35 @@ export const customTheme = {
         marginRight: '10px',
       },
       '&.add_selected_button_sample': {
-        color: '#fff',
         backgroundColor: '#ff7e15',
-        '&.Mui-disabled': {
-          opacity: 0.3,
-        },
       },
       '&.add_selected_button_file': {
-        color: '#fff',
         backgroundColor: '#ff7e15',
-        '&.Mui-disabled': {
+      },
+      '&#jbrowse_multi_view_button': {
+        padding: '0px 6px',
+        color: '#00000',
+        height: '43px',
+        marginLeft: '22px',
+        textTransform: 'inherit',
+        '& img': {
+          width: '2.25em',
+        },
+      },
+      '&.Mui-disabled': {
+        color: '#fff',
+        '&.add_selected_button_sample': {
+          opacity: 0.3,
+        },
+        '&.add_selected_button_file': {
           opacity: 0.3,
         },
       },
+    },
+  },
+  MuiIconButton: {
+    root: {
+      padding: '4px 12px 12px 15px',
     },
   },
   MuiLink: {
