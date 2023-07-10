@@ -84,7 +84,7 @@ const PdfTemplate = ({
   const renderSubHeader = (text, count) => {
     const titleStyle = styles[`h${count}`];
     return <Text style={titleStyle}>{text}</Text>;
-  }
+  };
 
   const renderContent = (text) => {
     // split text with newline and generate pdf elements
@@ -94,25 +94,31 @@ const PdfTemplate = ({
       if (count > 0) {
         return renderSubHeader(item.replaceAll('#', ''), count);
       }
-      return <Text style={styles.content}> {item} </Text>
+      return (
+        <Text style={styles.content}>
+          {' '}
+          {item}
+          {' '}
+        </Text>
+      );
     });
     return pdfContent;
-  }
+  };
   return (
-  <Document>
-    <Page style={styles.page} size="A4">
-      <PdfHeader />
-      <View>
-        <Text style={styles.title}>
-          {title}
-        </Text>
-        <Text style={styles.space}>
-        </Text>
-        {renderContent(content)}
-      </View>
-      <PdfFooter />
-    </Page>
-  </Document>
-)};
+    <Document>
+      <Page style={styles.page} size="A4">
+        <PdfHeader />
+        <View>
+          <Text style={styles.title}>
+            {title}
+          </Text>
+          <Text style={styles.space} />
+          {renderContent(content)}
+        </View>
+        <PdfFooter />
+      </Page>
+    </Document>
+  );
+};
 
 export default PdfTemplate;
