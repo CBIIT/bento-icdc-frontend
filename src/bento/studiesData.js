@@ -41,9 +41,7 @@ export const pageData = {
     },
     columns: [
       {
-        dataField: 'clinical_study_designation',
         header: 'Study Code',
-        viewColumns: false,
         display: true,
         cellType: cellTypes.CUSTOM_ELEM,
         linkAttr: {

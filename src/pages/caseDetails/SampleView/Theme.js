@@ -15,6 +15,11 @@ export const customTheme = {
     },
   },
   MuiContainer: {
+    maxWidthXl: {
+      '@media (min-width: 1920px)': {
+        maxWidth: '100%',
+      },
+    },
     root: {
       background: '#f3f3f3',
       paddingTop: '5px',
