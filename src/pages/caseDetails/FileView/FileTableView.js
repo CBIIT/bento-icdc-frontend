@@ -29,6 +29,9 @@ const FileTableView = ({
   });
 
   const { context } = useContext(TableContext);
+  if (data.length === 0) {
+    fileWrapperConfig[1].items = [];
+  }
 
   return (
     <>

@@ -27,7 +27,9 @@ const SampleTableView = ({
   });
 
   const { context } = useContext(TableContext);
-
+  if (data.length === 0) {
+    sampleWrapperConfig[1].items = [];
+  }
   return (
     <>
 

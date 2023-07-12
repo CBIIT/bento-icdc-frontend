@@ -599,7 +599,7 @@ const styles = (theme) => ({
   },
   tableContainer: {
     background: '#f3f3f3',
-    marginTop: '-9px',
+    marginTop: '-12px',
   },
   tableHeader: {
     paddingLeft: '35px',
