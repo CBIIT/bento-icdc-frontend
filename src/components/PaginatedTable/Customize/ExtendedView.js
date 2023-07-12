@@ -20,7 +20,7 @@ export const ExtendedViewConfig = (config, propsFilters) => {
   * configure table download
   */
   if (download) {
-    const getQueryVeriables = (filters) => {
+    const getQueryVeriables = (filters = {}) => {
       const variables = { ...filters };
       variables.offset = 0;
       variables.first = 10000;

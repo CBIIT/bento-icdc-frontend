@@ -5,10 +5,6 @@ import {
   types,
   dataFormatTypes,
 } from '../bento-core';
-import {
-  customFilesTabDownloadCSV,
-  customSamplesTabDownloadCSV,
-} from './tableDownloadCSV';
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
@@ -228,25 +224,12 @@ export const sampleTable = {
   defaultSortField: 'sample_id',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
-  // Text to appear on Add to cart button
-  buttonText: 'Add Associated Files',
-  // Help Icon Message
-  tooltipMessage: 'Add files associated with selected sample(s) to My Files',
-  helpMessage: 'Here help message',
-  // showHideColumns 'true' or 'false'
-  showHideColumns: true,
-  // download csv
-  download: true,
-  tableDownloadCSV: customSamplesTabDownloadCSV,
-  // downloaded File Name
-  downloadFileName: 'ICDC_Case_Samples_download',
   // Set 'selectableRows' to true to show the row selection
-  selectableRows: true,
-  // A maximum of 10 columns are allowed
   extendedViewConfig: {
     download: {
       customDownload: false,
       downloadCsv: 'Download Table Contents As CSV',
+      downloadFileName: 'ICDC_Samples_download',
     },
     manageViewColumns: {
       title: 'View Columns',
@@ -344,49 +327,16 @@ export const fileTable = {
   defaultSortField: 'sample_id',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
-  // Text to appear on Add to cart button
-  buttonText: 'Add Selected Files',
-  displayViewJBowseBtn: true,
-  saveButtonDefaultStyle: {
-    color: '#fff',
-    opacity: '1',
-    cursor: 'pointer',
-  },
-  ActiveSaveButtonDefaultStyle: {
-    disabled: true,
-    opacity: '0.3',
-    cursor: 'auto',
-  },
-  DeactiveSaveButtonDefaultStyle: {
-    cursor: 'pointer',
-    opacity: 'unset',
-    border: 'unset',
-  },
-  // Help Icon Message
-  tooltipMessage: 'Add selected files to My Files',
-  // viewColumns 'true' or 'false'
-  viewColumns: true,
-  // download csv 'true' or 'false'
-  download: true,
-  // downloaded File Name
-  downloadFileName: 'ICDC_Case_Files_download',
-  // Set 'selectableRows' to true to show the row selection
-  selectableRows: true,
-
-  primaryKeyIndex: 7,
-
   // Set 'display' to false to hide the table entirely
   name: 'file',
   dataKey: 'file_name',
   helpMessage: 'Here help message',
   jbrowse: true,
-  // showHideColumns 'true' or 'false'
-  showHideColumns: true,
-  tableDownloadCSV: customFilesTabDownloadCSV,
   // A maximum of 10 columns are allowed
   extendedViewConfig: {
     download: {
       customDownload: false,
+      downloadFileName: 'ICDC_Case_Files_download',
       downloadCsv: 'Download Table Contents As CSV',
     },
     manageViewColumns: {
