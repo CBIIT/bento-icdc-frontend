@@ -109,6 +109,7 @@ const StudyDetailView = ({ classes, data }) => {
   });
 
   const studyData = data.study[0];
+  const studyCode = studyData.clinical_study_designation;
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
   const caseFileTypes = [...new Set(data.filesOfStudy.map((f) => (f.file_type))
@@ -266,8 +267,15 @@ const StudyDetailView = ({ classes, data }) => {
   let clinicalDataNodeCount = 0;
   const supportingDataCount = currentStudy?.CRDCLinks.length;
 
+  const clinicalDataDownloadFlags = {};
+
   processedClinicalDataTabData.forEach((el) => {
-    if (el?.isEmpty === false) { clinicalDataNodeCount += 1; }
+    if (el?.isEmpty === false) {
+      clinicalDataNodeCount += 1;
+      clinicalDataDownloadFlags[el.name] = true;
+    } else {
+      clinicalDataDownloadFlags[el.name] = false;
+    }
   });
 
   const supportingDataTabIndex = processedTabs.findIndex((tab) => tab.label === 'SUPPORTING DATA');
@@ -427,7 +435,13 @@ const StudyDetailView = ({ classes, data }) => {
                   <TabPanel value={currentTab} index={index}>
                     {
                               hasClinicalData
-                        && <ClinicalData data={processedClinicalDataTabData} />
+                        && (
+                        <ClinicalData
+                          data={processedClinicalDataTabData}
+                          csvDownloadFlags={clinicalDataDownloadFlags}
+                          studyCode={studyCode}
+                        />
+                        )
                           }
                   </TabPanel>
 

@@ -134,7 +134,8 @@ const styles = () => ({
   },
   helpIconButton: {
     verticalAlign: 'top',
-    position: 'absolute',
+    position: 'relative',
+    left: '5px',
   },
   helpIcon: {
     zIndex: '600',

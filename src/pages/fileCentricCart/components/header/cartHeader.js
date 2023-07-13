@@ -4,6 +4,7 @@ import {
   Divider, ListItemText, Menu,
   withStyles,
 } from '@material-ui/core';
+import { useQuery } from '@apollo/client';
 import {
   cn,
   ToolTip as Tooltip,
@@ -12,10 +13,10 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { noop } from 'lodash';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
+import gql from 'graphql-tag';
 import env from '../../../../utils/env';
 import Styles from './cartHeader.style';
 import ReadMoreSVG from './readMore';
-// import ReadMeDialog from './readMeDialog';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
 import cgcIcon from './assets/cgc.svg';
@@ -78,6 +79,12 @@ const getReadMe = async (setContent, url) => {
   setContent(data);
 };
 
+const STORE_MANIFEST_QUERY = gql`
+    query storeManifest($manifest: String!) {
+        storeManifest(manifest: $manifest)
+    }
+`;
+
 const CartHeader = React.forwardRef(({
   classes,
   headerIconSrc,
@@ -85,7 +92,22 @@ const CartHeader = React.forwardRef(({
   mainTitle,
   subTitle,
   prepareDownload,
+  manifestPayload,
 }, ref) => {
+  const [sbgUrl, setSBGUrl] = useState('');
+  const { data } = useQuery(STORE_MANIFEST_QUERY, {
+    variables: { manifest: JSON.stringify(manifestPayload) },
+    context: { clientName: 'interopService' },
+    skip: !manifestPayload,
+    fetchPolicy: 'no-cache',
+  });
+
+  useEffect(() => {
+    if (data?.storeManifest) {
+      setSBGUrl(data.storeManifest);
+    }
+  }, [data]);
+
   const [anchorElement, setAnchorElement] = React.useState(null);
   const [label, setLabel] = useState(LABEL);
   const [displayReadMe, setDisplayReadMe] = useState(false);
@@ -108,7 +130,13 @@ const CartHeader = React.forwardRef(({
     setAnchorElement(null);
   };
 
-  const initiateDownload = () => {
+  const initiateDownload = (currLabel) => {
+    switch (currLabel) {
+      case 'Export to Seven Bridges': window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${sbgUrl}`, '_blank');
+        break;
+      default: noop(data);
+        break;
+    }
     noop();
   };
 
@@ -220,7 +248,7 @@ const CartHeader = React.forwardRef(({
               </Button>
               <Button
                 disabled={LABEL === label}
-                onClick={initiateDownload}
+                onClick={() => initiateDownload(label)}
                 classes={{
                   root: classes.availableDownloadBtn,
                 }}

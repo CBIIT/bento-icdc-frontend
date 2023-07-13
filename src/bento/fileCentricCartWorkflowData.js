@@ -245,3 +245,25 @@ query filesInListDesc($uuids: [String], $offset: Int = 0, $first: Int = 10, $ord
     cohort_description
  }
 }`;
+
+export const GET_STORE_MANIFEST_DATA_QUERY = gql`
+  query filesInList($uuids: [String]){
+    filesInList(uuids: $uuids){
+      file_name
+      file_type
+      association
+      file_description
+      file_format
+      file_size
+      case_id
+      breed
+      diagnosis
+      study_code
+      file_uuid
+      md5sum
+      sample_id
+      individual_id
+      name
+      drs_uri
+    }
+  }`;

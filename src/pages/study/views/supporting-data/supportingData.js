@@ -173,14 +173,14 @@ const SupportingData = ({
                                </Grid>
                                {
                                 TCIAMetaData[item].length > 90 ? (
-                                  <ToolTip title={TCIAMetaData[item]} placement="bottom">
+                                  <ToolTip title={Array.isArray(content) ? content.join(', ') : content} placement="bottom">
                                     <Grid item xs={12} sm={6} className={classes.content}>
-                                      {content}
+                                      {Array.isArray(content) ? content.join(', ') : content}
                                     </Grid>
                                   </ToolTip>
                                 ) : (
                                   <Grid item xs={12} sm={6} className={classes.content}>
-                                    {content}
+                                    {Array.isArray(content) ? content.join(', ') : content}
                                   </Grid>
                                 )
                                }

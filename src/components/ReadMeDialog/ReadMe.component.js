@@ -7,7 +7,6 @@ import {
   Button,
 } from '@material-ui/core';
 // import { saveAs } from 'file-saver';
-import { ArrowDownward } from '@material-ui/icons';
 // import MarkdownPDF from "markdown-pdf";
 import CloseIcon from '@material-ui/icons/Close';
 // import { pdf } from '@react-pdf/renderer';
@@ -20,6 +19,7 @@ import CustomTheme from './ReadMe.theme.config';
 import footerLine from './assets/footer_line.png';
 import nihLogo from './assets/icdc_nih_logo.png';
 import { createFileName } from '../../pages/fileCentricCart/utils';
+import PdfDownloadIcon from './assets/Download_PDF.svg';
 
 const date = new Date().toLocaleString('en-us', { month: 'long', year: 'numeric', day: 'numeric' });
 
@@ -126,10 +126,16 @@ const ReadMeDialogComponent = ({
           <div item xs={1} className={classes.closeBtn}>
             <Button
               className={classes.downloadBtn}
-              startIcon={<ArrowDownward className={classes.downloadIcon} id="download_arrow_all" />}
               onClick={() => downloadMarkdownPdf(title, content)}
-            />
+            >
+              <img
+                src={PdfDownloadIcon}
+                alt="pdf download icon"
+                className={classes.downloadIcon}
+              />
+            </Button>
             <IconButton
+              className={classes.closBtnContainer}
               onClick={displayReadMeDialog}
             >
               <CloseIcon

@@ -632,7 +632,7 @@ export async function fetchAllFileIDs(fileCount = 10000, selectedIds = [], offse
       filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL, [], [], selectedIds, 'fileIdsFromFileName');
       break;
     case tabIndex[1].title:
-      filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, [], 'sampleOverview');
+      filesIds = await getFileIDs(1000, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, [], 'sampleOverview');
       break;
     default:
       filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], [], 'caseOverview');

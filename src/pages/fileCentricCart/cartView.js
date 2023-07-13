@@ -61,6 +61,7 @@ const cartView = ({
   localRowsPerPage,
   isLoading,
   tableDownloadCSV,
+  storeManifestPayload,
 }) => {
   const selectedRowData = useSelector((state) => (state.cart.selectedFiles));
   const [modalStatus, setModalStatus] = React.useState(false);
@@ -189,6 +190,7 @@ const cartView = ({
           mainTitle={myFilesPageData.mainTitle}
           subTitle={myFilesPageData.subTitle}
           prepareDownload={prepareDownload}
+          manifestPayload={storeManifestPayload}
           ref={commentRef}
         />
       </Grid>

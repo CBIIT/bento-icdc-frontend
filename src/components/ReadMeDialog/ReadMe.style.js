@@ -24,18 +24,21 @@ export default () => ({
     fontSize: '30px',
   },
   downloadBtn: {
-    height: '27px',
-    backgroundColor: '#0D71A3',
-    borderRadius: '5px',
+    height: '30px',
+    width: '30px',
     marginBottom: '-10px',
     marginRight: '7px',
-    '&:hover': {
-      backgroundColor: '#0D71A3',
-    },
+    // '&:hover': {
+    //   backgroundColor: '#0D71A3',
+    // },
+  },
+  closBtnContainer: {
+    paddingTop: '8px',
   },
   downloadIcon: {
     color: '#fff',
-    fontSize: '18px',
+    height: '30px',
+    width: '30px',
   },
   content: {
     height: '700px',

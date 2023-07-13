@@ -6,7 +6,7 @@ import {
 import HelpIcon from '@material-ui/icons/Help';
 import { ToolTip as Tooltip } from 'bento-components';
 import {
-  clearTableSelections, fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal, getFilesCount,
+  clearTableSelections, fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal,
 } from '../store/dashboardReducer';
 import Dialog from '../../../components/AddToCartDialog';
 import { addToCart, cartWillFull, getFilesIdsInCart } from '../../fileCentricCart/store/cart';
@@ -57,7 +57,7 @@ const SelectAllModalDialog = ({
   async function getAllFilesData() {
     // Find the newly added files by comparing
     const allFilesData = await fetchAllFileIDsForSelectAll(
-      getFilesCount(), unifiedViewFlag, unifiedViewCaseIds,
+      1000, unifiedViewFlag, unifiedViewCaseIds,
     );
 
     const currentFileIdsInCart = getFilesIdsInCart();
