@@ -1,33 +1,17 @@
 import React from 'react';
-import { NavBar, ToolTip as Tooltip } from 'bento-components';
-import { useLocation } from 'react-router';
+import { NavBar } from '@bento-core/nav-bar';
 import {
-  navBarData, navBarCartData, navBarstyling, externalLinks,
+  navBarData, navBarCartData, navBarstyling,
 } from '../../bento/navigationBarData';
-import NavBarThemeProvider from './NavBarThemeConfig';
 
-const BentoNavBar = ({ cartFieldIds }) => {
-  const location = useLocation();
-  const { pathname } = location;
-
-  return (
-    <NavBarThemeProvider>
-      <NavBar
-        navBarData={pathname.includes('/jbroswse/')
-          ? []
-          : navBarData}
-        navBarCartData={pathname.includes('/jbroswse/')
-          ? undefined
-          : navBarCartData}
-        navBarstyling={navBarstyling}
-        numberOfCases={cartFieldIds.length || 0}
-        externalLinksFlag
-        externalLinks={externalLinks}
-        components={{
-          Tooltip,
-        }}
-      />
-    </NavBarThemeProvider>
-  );
-};
+const BentoNavBar = ({ cartFieldIds = [] }) => (
+  <>
+    <NavBar
+      navBarData={navBarData}
+      navBarCartData={navBarCartData}
+      navBarstyling={navBarstyling}
+      numberOfCases={cartFieldIds.length}
+    />
+  </>
+);
 export default BentoNavBar;
