@@ -135,6 +135,7 @@ export const widgetsData = [
     dataName: 'caseCountByBreed',
     datatable_field: 'breed',
     show: true,
+    titleText: 'Breed',
   },
   {
     type: 'donut',

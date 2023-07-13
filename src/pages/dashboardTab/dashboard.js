@@ -137,6 +137,7 @@ const Dashboard = ({
                                     titleLocation="top"
                                     titleAlignment="left"
                                     paddingSpace={2}
+                                    titleText={widget.titleText}
                                   />
                                 </Widget>
                               </Grid>

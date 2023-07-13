@@ -3,27 +3,25 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { getOptions, getColumns, cn } from 'bento-components';
+import { cn } from 'bento-components';
+import {
+  TableContextProvider,
+} from '../../bento-core';
+import SampleTableView from './SampleView/SampleTableView';
+import FileTableView from './FileView/FileTableView';
 import StatsView from '../../components/Stats/StatsView';
-import GridWithFooter from '../../components/GridWithFooter/GridView';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
   headerIcon,
-  table1,
-  table2,
-  externalLinkIcon,
-  tooltipContent,
-  textLabels,
 } from '../../bento/caseDetailsData';
 import Snackbar from '../../components/Snackbar';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import filterCasePageOnStudyCode from '../../utils/utils';
-import updateColumns from '../../utils/columnsUtil';
-import DocumentDownload from '../../components/DocumentDownload';
 import MultiStudyCases from './components/multiStudyCasesController';
-import CaseDetailThemeProvider from './caseDetailsThemeConfig';
 
-const CaseDetail = ({ classes, data }) => {
+const CaseDetail = ({
+  classes, data,
+}) => {
   React.useEffect(() => {
     fetchDataForDashboardTabDataTable();
   }, []);
@@ -38,7 +36,17 @@ const CaseDetail = ({ classes, data }) => {
     numberOfPrograms: data.programsCountOfCase,
     volumeOfData: data.volumeOfDataOfCase,
   };
+
   const caseDetail = data.case[0];
+  const files = [...data.filesOfCase].map((f) => {
+    const customF = { ...f };
+    const parentSample = data.samplesByCaseId
+      .filter((s) => s.files.map((sf) => sf.uuid).includes(f.uuid));
+    if (parentSample && parentSample.length > 0) {
+      customF.sample_id = parentSample[0].sample_id;
+    }
+    return customF;
+  });
 
   const notProvided = '';
 
@@ -64,28 +72,9 @@ const CaseDetail = ({ classes, data }) => {
     value: 0,
   });
 
-  function openSnack(value) {
-    setsnackbarState({ open: true, value, action: 'added' });
-  }
   function closeSnack() {
     setsnackbarState({ open: false });
   }
-
-  const files = [...data.filesOfCase].map((f) => {
-    const customF = { ...f };
-    const parentSample = data.samplesByCaseId
-      .filter((s) => s.files.map((sf) => sf.uuid).includes(f.uuid));
-    if (parentSample && parentSample.length > 0) {
-      customF.sample_id = parentSample[0].sample_id;
-    }
-    return customF;
-  });
-
-  const tableOneOptions = getOptions(table1, classes);
-  const tableTwoOptions = getOptions(table2, classes);
-  const tableOneColumns = updateColumns(getColumns(table1, classes,
-    data, externalLinkIcon), table1.columns);
-  const tableTwoColumns = updateColumns(getColumns(table2, classes, data, externalLinkIcon, '', () => {}, DocumentDownload), table2.columns);
 
   return (
     <>
@@ -455,71 +444,20 @@ const CaseDetail = ({ classes, data }) => {
         </div>
       </div>
 
-      <div id="table_case_detail" className={classes.tableContainer}>
-        {table1.display
-          ? (
-            <CaseDetailThemeProvider>
-              <Grid container spacing={4} className={classes.tableDiv}>
-                <Grid item>
-                  <div className={classes.tableTitle}>
-                    <span className={classes.tableHeader}>{table1.tableTitle}</span>
-                  </div>
-                  <GridWithFooter
-                    data={data.samplesByCaseId}
-                    columns={tableOneColumns}
-                    options={{ ...tableOneOptions, ...textLabels }}
-                    customOnRowsSelect={table1.customOnRowsSelect}
-                    openSnack={openSnack}
-                    closeSnack={closeSnack}
-                    disableRowSelection={table1.disableRowSelection}
-                    buttonText={table1.buttonText}
-                    saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
-                    ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
-                    DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
-                    tooltipMessage={table1.tooltipMessage}
-                    tooltipContent={tooltipContent}
-                    showtooltip
-                  />
-                </Grid>
-              </Grid>
-            </CaseDetailThemeProvider>
-          ) : ''}
-        <div className={classes.tableSpacer} />
+      <div id="case_detail_table_associated_samples" className={classes.tableContainer}>
+        <div className={classes.tableDiv}>
+          <TableContextProvider>
+            <SampleTableView data={data.samplesByCaseId} />
+          </TableContextProvider>
+        </div>
+      </div>
 
-        {table2.display
-          ? (
-            <div id="table_case_detail_samples" className={classes.tableContainer}>
-              <CaseDetailThemeProvider>
-                <Grid container spacing={4} className={classes.tableDiv}>
-                  <Grid item xs={12}>
-                    <div className={classes.tableTitle}>
-                      <span className={classes.tableHeader}>{table2.tableTitle}</span>
-                    </div>
-                    <GridWithFooter
-                      data={files}
-                      columns={tableTwoColumns}
-                      options={{ ...tableTwoOptions, ...textLabels }}
-                      customOnRowsSelect={table2.customOnRowsSelect}
-                      selectedFileNames={table2.selectedFileNames}
-                      openSnack={openSnack}
-                      closeSnack={closeSnack}
-                      disableRowSelection={table2.disableRowSelection}
-                      buttonText={table2.buttonText}
-                      saveButtonDefaultStyle={table1.saveButtonDefaultStyle}
-                      ActiveSaveButtonDefaultStyle={table1.ActiveSaveButtonDefaultStyle}
-                      DeactiveSaveButtonDefaultStyle={table1.DeactiveSaveButtonDefaultStyle}
-                      tooltipMessage={table2.tooltipMessage}
-                      displayViewJBowseBtn={table2.displayViewJBowseBtn}
-                      tooltipContent={tooltipContent}
-                      showtooltip
-                      primaryKeyIndex={table2.primaryKeyIndex}
-                    />
-                  </Grid>
-                </Grid>
-              </CaseDetailThemeProvider>
-            </div>
-          ) : ''}
-        <div className={classes.spacer} />
+      <div id="case_detail_table_associated_files" className={classes.tableContainer}>
+        <div className={classes.tableDiv}>
+          <TableContextProvider>
+            <FileTableView data={files} />
+          </TableContextProvider>
+        </div>
       </div>
     </>
   );
@@ -661,7 +599,7 @@ const styles = (theme) => ({
   },
   tableContainer: {
     background: '#f3f3f3',
-    marginTop: '-9px',
+    marginTop: '-12px',
   },
   tableHeader: {
     paddingLeft: '35px',
