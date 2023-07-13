@@ -4,7 +4,11 @@ import { cellTypes, headerTypes } from '../../../bento-core';
 import DocumentDownload from '../../DocumentDownload/DocumentDownloadView';
 import { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
 import MultiStudyTooltip from '../../../pages/dashboardTab/components/multiStudyTooltip';
-import { customizeColumn } from './Types';
+import { customizeColumn, customizeHeader, customizeLandScapeView } from './Types';
+import DataAvailabilityCellView from './DataAvailability/TableCell';
+import DataAvailabilityHeader from './DataAvailability/HeaderCell';
+import NumberOfCasesView from './NumberOfCases';
+import StudyLink from './StudyLink';
 
 const CaseIdLink = (props) => {
   const {
@@ -64,12 +68,42 @@ export const CustomCellView = (props) => {
       return (
         <CaseIdLink {...props} />
       );
+    case customizeColumn.numberOfCases:
+      return (
+        <NumberOfCasesView {...props} />
+      );
+    case customizeColumn.studyDesignation:
+      return (
+        <StudyLink {...props} />
+      );
+    case customizeLandScapeView.CASE_FILES:
+    case customizeLandScapeView.STUDY_FILES:
+    case customizeLandScapeView.IMAGE:
+    case customizeLandScapeView.CRDCLinks:
+    case customizeLandScapeView.PUBLICATTION:
+      return (
+        <DataAvailabilityCellView {...props} />
+      );
     default:
       return (<></>);
   }
 };
 
-export const CustomHeaderCellView = () => (<></>);
+export const CustomHeaderCellView = (props) => {
+  const { dataField, icon } = props;
+  switch (dataField) {
+    case customizeHeader.CASE_FILES:
+    case customizeHeader.STUDY_FILES:
+    case customizeHeader.IMAGE:
+    case customizeHeader.CRDCLinks:
+    case customizeHeader.PUBLICATTION:
+      return (
+        <DataAvailabilityHeader icon={icon} dataField={dataField} />
+      );
+    default:
+      return (<></>);
+  }
+};
 
 /**
 * set column configuration
@@ -79,6 +113,7 @@ export const CustomHeaderCellView = () => (<></>);
 export const CustomizeCellView = ({
   columns,
   unifiedView = false,
+  interOpData,
 }) => {
   /**
   * display columns as configuration
@@ -89,7 +124,13 @@ export const CustomizeCellView = ({
     if (column.cellType === cellTypes.CUSTOM_ELEM) {
       return {
         ...column,
-        customCellRender: (props) => <CustomCellView {...props} unifiedView={unifiedView} />,
+        customCellRender: (props) => (
+          <CustomCellView
+            {...props}
+            unifiedView={unifiedView}
+            interOpData={interOpData}
+          />
+        ),
       };
     }
     return column;
