@@ -59,6 +59,7 @@ const DocumentDownloadView = ({
 
 export const CustomCellView = (props) => {
   const { dataField } = props;
+
   switch (dataField) {
     case customizeColumn.DOCUMENT_DOWNLOAD:
       return (
@@ -114,6 +115,7 @@ export const CustomizeCellView = ({
   columns,
   unifiedView = false,
   interOpData,
+  deleteCartFile,
 }) => {
   /**
   * display columns as configuration
@@ -131,6 +133,12 @@ export const CustomizeCellView = ({
             interOpData={interOpData}
           />
         ),
+      };
+    }
+    if (column.cellType === cellTypes.DELETE) {
+      return {
+        ...column,
+        cellEventHandler: deleteCartFile,
       };
     }
     return column;

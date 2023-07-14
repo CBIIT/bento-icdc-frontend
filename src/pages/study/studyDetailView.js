@@ -109,7 +109,7 @@ const StudyDetailView = ({ classes, data }) => {
   });
 
   const studyData = data.study[0];
-  const studyCode = studyData.clinical_study_designation;
+  const { clinical_study_designation: studyCode } = studyData;
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
   const caseFileTypes = [...new Set(data.filesOfStudy.map((f) => (f.file_type))
@@ -241,7 +241,7 @@ const StudyDetailView = ({ classes, data }) => {
     );
   }
 
-  const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
+  const { accession_id: accessionId } = data.study[0];
   const filterStudy = `${studyCode} (${accessionId})`;
 
   const currentStudy = interOpData?.studiesByProgram
@@ -289,7 +289,6 @@ const StudyDetailView = ({ classes, data }) => {
         autoHideDuration={3000}
         classes={classes}
       />
-
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>

@@ -26,6 +26,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
+import CartView from '../../pages/cart/CartController';
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
 const ScrollToTop = () => {
@@ -60,6 +61,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/explore" component={DashboardView} />
             <Route path="/unifiedView/:id" component={UnifiedDash} />
             <Route path="/fileCentricCart" component={Cart} />
+            <Route path="/myFiles" component={CartView} />
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
