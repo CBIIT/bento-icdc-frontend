@@ -229,7 +229,7 @@ const CartHeader = React.forwardRef(({
           </Button>
 
           {/* Dropdown btns */}
-          <div>
+          <div style={{ display: 'none' }}>
             <ButtonGroup variant="contained" classes={{ root: classes.btnGrpRoot, contained: classes.btnGrpContained }}>
               <Button
                 classes={{
