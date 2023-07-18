@@ -75,8 +75,10 @@ const ViewJBrowseButton = ({
       <Link
         className={(isInvlaid || disable) ? classes.diableLink : classes.activeLink}
         to={{
-          pathname: `/jbroswse/${MULTI_FILES_VIEW}`,
+          pathname: `/jBrowse/${MULTI_FILES_VIEW}`,
         }}
+        target="_blank"
+        rel="noreferrer noopener"
       >
         <Button
           className={(isInvlaid || disable)
@@ -120,7 +122,7 @@ const ViewJBrowseButton = ({
 
 const styles = () => ({
   button: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#5b6571',
     border: '2px solid #2F567D',
     borderRadius: '8px',
     fontFamily: 'Lato',
@@ -128,6 +130,9 @@ const styles = () => ({
     fontWeight: 400,
     fontSize: '16px',
     color: '#2F567D',
+    '&:hover': {
+      backgroundColor: '#5b6571',
+    },
   },
   disbaleButton: {
     backgroundColor: '#CCD1D4',
