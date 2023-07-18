@@ -11,7 +11,7 @@ export const CostomizeTableView = () => null;
 * 2. responseKeys - provided respose key for addFileQuery
 * 3. Configure Jbrowse
 */
-export const updateWrapperConfig = (tab, configs, table) => {
+export const updateWrapperConfig = (tab, configs, context) => {
   // set reponse key to access file ids to add to my cart for add selected and add all files button
   const wrpConfig = configs.map((container) => ({
     ...container,
@@ -30,12 +30,13 @@ export const updateWrapperConfig = (tab, configs, table) => {
       // configure jbrowse button from Case Files tab
       // set selected files using table context
       if (item.Jbrowse) {
-        const selectedRows = tab.jbrowse ? table.selectedRows : [];
+        // const { table } = context;
+        // console.log(context);
+        const selectedRows = context.selectedRows || [];
         return {
           ...item,
           customViewElem: () => (
             <ViewJBrowseButton
-              disable={!tab.jbrowse}
               selectedFileNames={selectedRows}
             />
           ),

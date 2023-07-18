@@ -272,6 +272,7 @@ export const table = {
 
 export const cartTable = {
   dataField: 'filesInList',
+  title: 'myFiles',
   // Value must be one of the 'dataField's in "columns"
   defaultSortField: 'file_name',
   // 'asc' or 'desc'
@@ -284,6 +285,7 @@ export const cartTable = {
   api: GET_MY_CART_DATA_QUERY,
   extendedViewConfig: {
     download: {
+      customDownload: true,
       downloadCsv: 'Download Table Contents As CSV',
       ...customMyFilesTabDownloadCSV,
     },
@@ -295,12 +297,15 @@ export const cartTable = {
     {
       cellType: cellTypes.CHECKBOX,
       display: true,
-      role: cellTypes.CHECKBOX,
+      header: 'Checkbox',
+      dataField: 'checkbox',
     },
     {
       dataField: 'file_name',
       header: 'File Name',
       tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+      display: true,
     },
     {
       dataField: 'access_file',
@@ -398,12 +403,14 @@ export const cartTable = {
       header: 'Md5Sum',
       display: false,
       tooltipText: 'sort',
-      role: cellTypes.DISPLAY,
     },
     {
       cellType: cellTypes.DELETE,
+      dataField: 'Remove',
+      header: 'Remove',
       headerType: cellTypes.DELETE,
       display: true,
+      role: cellTypes.DISPLAY,
     },
   ],
   tableMsg: {
@@ -417,6 +424,24 @@ const jBrowseBtn = {
 };
 
 export const tableLayOut = [
+  {
+    container: 'outer_layout',
+    size: 'xl',
+    clsName: 'container_outer_layout',
+    items: [
+      {
+        clsName: 'cart_icon',
+        type: types.ICON,
+        src: myFilesPageData.headerIconSrc,
+        alt: myFilesPageData.headerIconAlt,
+      },
+      {
+        clsName: 'cart_header_text',
+        text: 'My Files',
+        type: types.TEXT,
+      },
+    ],
+  },
   {
     container: 'paginatedTable',
     paginatedTable: true,

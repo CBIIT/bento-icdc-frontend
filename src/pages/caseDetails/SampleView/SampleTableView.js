@@ -1,6 +1,11 @@
 import React, { useContext } from 'react';
 import { Container, withStyles } from '@material-ui/core';
-import { TableContext, TableView, Wrapper } from '../../../bento-core';
+import {
+  TableContext,
+  TableView,
+  Wrapper,
+  onRowSeclect,
+} from '../../../bento-core';
 import {
   sampleTable, sampleWrapperConfig,
 } from '../../../bento/caseDetailsData';
@@ -30,6 +35,23 @@ const SampleTableView = ({
   if (data.length === 0) {
     sampleWrapperConfig[1].items = [];
   }
+
+  const paginationOptions = {
+    customizeToggleSelectAll: (event) => {
+      const { table, dispatch } = context;
+      if (event.target.checked) {
+        const ids = data.reduce((acc, item) => {
+          acc.push(item[table.dataKey]);
+          return acc;
+        }, []);
+        dispatch(onRowSeclect(ids));
+      } else {
+        // remove all the selection
+        dispatch(onRowSeclect([]));
+      }
+    },
+  };
+
   return (
     <>
 
@@ -54,6 +76,7 @@ const SampleTableView = ({
             tblRows={data}
             totalRowCount={data.length}
             server={false}
+            paginationOptions={paginationOptions}
           />
         </Wrapper>
       </div>

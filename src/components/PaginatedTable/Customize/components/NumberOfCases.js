@@ -4,10 +4,10 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { studyDisposition } from './DataAvailability/TableCell';
-import { navigatedToDashboard } from '../../../utils/utils';
-import { pageData } from '../../../bento/programDetailData';
-import pendingFileIcon from '../../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+import { studyDisposition } from '../DataAvailability/TableCell';
+import { navigatedToDashboard } from '../../../../utils/utils';
+import { pageData } from '../../../../bento/programDetailData';
+import pendingFileIcon from '../../../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 
 export const getStudyIcon = (classes, param) => {
   const embargoToolTipIcon = () => (
