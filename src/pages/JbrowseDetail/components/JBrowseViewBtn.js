@@ -130,6 +130,9 @@ const styles = () => ({
     fontWeight: 400,
     fontSize: '16px',
     color: '#2F567D',
+    '&:hover': {
+      backgroundColor: '#5b6571',
+    },
   },
   disbaleButton: {
     backgroundColor: '#CCD1D4',
