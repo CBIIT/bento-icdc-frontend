@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import {
   cn,
 } from 'bento-components';
-import { request, gql } from 'graphql-request';
+import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';
 import Snackbar from '../../components/Snackbar';
@@ -26,6 +26,7 @@ import {
   embargoHeaderIcon,
   embargoFileIcon,
   tab,
+  studiesByProgram,
 } from '../../bento/studyDetailsData';
 import Tab from '../../components/Tab/Tab';
 import Overview from './views/overview/Overview';
@@ -40,41 +41,6 @@ import StudyThemeProvider from './studyDetailsThemeConfig';
 import SupportingData from './views/supporting-data/supportingData';
 import env from '../../utils/env';
 import ClinicalData from './views/clinical-data/clinicalData';
-
-const studiesByProgram = gql`
-  query studiesByProgram {
-    studiesByProgram {
-      clinical_study_designation
-      CRDCLinks {
-        url
-        repository
-        metadata {
-                ... on IDCMetadata {
-                    collection_id,
-                    cancer_type,
-                    date_updated,
-                    description,
-                    doi,
-                    image_types,
-                    location,
-                    species,
-                    subject_count,
-                    supporting_data
-                }
-                ... on TCIAMetadata {
-                    Collection,
-                    total_patient_IDs,
-                    unique_modalities,
-                    unique_bodyparts_examined,
-                    total_image_counts
-                }
-            }
-      }
-      numberOfCRDCNodes
-      numberOfImageCollections
-    }
-  }
-`;
 
 function hasPositiveValue(arr) {
   return arr.some((obj) => Object.values(obj).some((value) => value > 0));
@@ -241,7 +207,7 @@ const StudyDetailView = ({ classes, data }) => {
     );
   }
 
-  const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
+  const { accession_id: accessionId } = data.study[0];
   const filterStudy = `${studyCode} (${accessionId})`;
 
   const currentStudy = interOpData?.studiesByProgram
