@@ -12,7 +12,7 @@ import {
 import styled from 'styled-components';
 import { ToolTip as Tooltip } from 'bento-components';
 import { noop, filter } from 'lodash';
-import DownloadBtn from './components/downloadBtn';
+// import DownloadBtn from './components/downloadBtn';
 import { downloadJson } from '../../../fileCentricCart/utils';
 import useFetchCSVDownload from './hooks/useFetchCSVDownload';
 import
@@ -389,9 +389,9 @@ const ClinicalData = ({
                     </Grid>
                   </div>
                 </ScrollContainer>
-                {
-                    !useColumn && <DownloadBtn />
-                 }
+                {/* { */}
+                {/*    !useColumn && <DownloadBtn /> */}
+                {/* } */}
               </Grid>
             </Paper>
           </Grid>
@@ -516,9 +516,9 @@ const ClinicalData = ({
                     </Grid>
                   </div>
                 </ScrollContainer>
-                {
-                    useColumn && <DownloadBtn />
-                 }
+                {/* { */}
+                {/*    useColumn && <DownloadBtn /> */}
+                {/* } */}
               </Grid>
             </Paper>
           </Grid>
@@ -562,6 +562,7 @@ const styles = {
   },
   borderRight: {
     maxWidth: '100%',
+    marginBottom: '14px',
   },
   containerLeft: {
     display: 'block',
