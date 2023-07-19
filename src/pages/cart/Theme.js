@@ -297,7 +297,7 @@ export const tblPgn = {
     root: {
       background: '#fff',
       paddingRight: '50px',
-      borderTop: '5px solid #e7e5e5',
+      borderTop: '3px solid #004c73',
       borderBottom: '3px solid #e7e5e5',
       '&:last-child': {
         paddingRight: '50px',
@@ -309,9 +309,23 @@ export const tblPgn = {
   },
 };
 
+const displayErr = {
+  MuiContainer: {
+    root: {
+      background: '#fff',
+    },
+    maxWidthLg: {
+      '@media (min-width: 1920px)': {
+        maxWidth: '100%',
+      },
+    },
+  },
+};
+
 export const themeConfig = (table) => ({
   ...headerTheme(table),
   ...extendedView(table),
   customTheme,
   tblPgn,
+  displayErr,
 });

@@ -414,7 +414,7 @@ export const cartTable = {
     },
   ],
   tableMsg: {
-    noMatch: 'No Matching Records Found',
+    noMatch: 'Sorry, no matching records found',
   },
 };
 
