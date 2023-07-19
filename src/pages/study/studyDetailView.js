@@ -13,7 +13,6 @@ import {
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';
-import Snackbar from '../../components/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import {
@@ -112,19 +111,6 @@ const StudyDetailView = ({ classes, data }) => {
     to: '',
     isALink: false,
   }];
-
-  const [snackbarState, setsnackbarState] = React.useState({
-    open: false,
-    value: 0,
-  });
-
-  function openSnack(value) {
-    setsnackbarState({ open: true, value, action: 'added' });
-  }
-
-  function closeSnack() {
-    setsnackbarState({ open: false });
-  }
 
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
@@ -249,12 +235,6 @@ const StudyDetailView = ({ classes, data }) => {
 
   return (
     <StudyThemeProvider>
-      <Snackbar
-        snackbarState={snackbarState}
-        closeSnack={closeSnack}
-        autoHideDuration={3000}
-        classes={classes}
-      />
 
       <StatsView data={stat} />
       <div className={classes.container}>
@@ -360,8 +340,6 @@ const StudyDetailView = ({ classes, data }) => {
                       studyData={studyData}
                       diagnoses={diagnoses}
                       caseFileTypes={caseFileTypes}
-                      closeSnack={closeSnack}
-                      openSnack={openSnack}
                       data={data}
                       nodeCount={clinicalDataNodeCount}
                       supportingDataCount={supportingDataCount}
@@ -382,8 +360,6 @@ const StudyDetailView = ({ classes, data }) => {
                 case 'STUDY FILES': return (
                   <TabPanel value={currentTab} index={index}>
                     <StudyFiles
-                      closeSnack={closeSnack}
-                      openSnack={openSnack}
                       data={data}
                       studyData={studyData}
                     />

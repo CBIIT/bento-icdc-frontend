@@ -344,7 +344,7 @@ export const fileTable = {
         toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
         fileSizeColumn: 'file_size',
         fileFormatColumn: 'file_format',
-        fileLocationColumn: 'uuid',
+        fileLocation: 'uuid',
         caseIdColumn: 'file_name',
         iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
         iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
