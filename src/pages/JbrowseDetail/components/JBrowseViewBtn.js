@@ -12,18 +12,21 @@ import { ToolTip as Tooltip, cn } from 'bento-components';
 import {
   MAX_NUMBER_OF_FILES,
   MULTI_FILES_VIEW,
+  ButtonText1,
+  ButtonText2,
   JBROWSE_BTN_ID,
   JBROWSE_TOOLTIP_ICON_ID,
   JBROWSE_HELP_ICON_BTN,
   tooltipContent,
   DISABLE_RIPPLE,
+  jbrowseIconSrc,
   tooltipMsg1,
   tooltipMsg2,
   tooltipErrMsg,
 } from '../../../bento/JBrowseData';
 import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
-import jBrowseLogo from '../../fileCentricCart/Group.svg';
+import jbrowseLogo from '../../../assets/icons/JbrowseViewIcon2.svg';
 import './index.css';
 
 const customTheme = {
@@ -89,16 +92,13 @@ const ViewJBrowseButton = ({
           id={JBROWSE_BTN_ID}
           disableRipple={DISABLE_RIPPLE}
         >
-          View in JBrowse
+          {ButtonText1}
           <img
-            src={jBrowseLogo}
-            alt="jbrowse logo"
-            style={{
-              width: '24px',
-              height: '21px',
-              marginLeft: '8px',
-            }}
+            src={(isInvlaid || disable) ? jbrowseIconSrc : jbrowseLogo}
+            alt="jbrowse_icon"
+            className={cn(classes.jbrowseIcon)}
           />
+          {ButtonText2}
         </Button>
       </Link>
       <Tooltip
@@ -122,25 +122,29 @@ const ViewJBrowseButton = ({
 
 const styles = () => ({
   button: {
-    backgroundColor: '#5b6571',
-    border: '2px solid #2F567D',
-    borderRadius: '8px',
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    fontWeight: 400,
+    borderRadius: '10px',
+    width: '210px',
+    lineHeight: '37px',
     fontSize: '16px',
-    color: '#2F567D',
+    fontFamily: 'Lato',
+    color: '#ffffff',
+    backgroundColor: '#566672',
+    marginTop: '6px',
+    marginBottom: '10px',
+    textTransform: 'none',
+    marginRight: '5px',
     '&:hover': {
-      backgroundColor: '#5b6571',
+      backgroundColor: '#566672',
     },
   },
   disbaleButton: {
+    // opacity: '0.7',
+    color: '#ffffff !important',
     backgroundColor: '#CCD1D4',
   },
   helpIconButton: {
     verticalAlign: 'top',
-    position: 'relative',
-    left: '5px',
+    position: 'absolute',
   },
   helpIcon: {
     zIndex: '600',
