@@ -409,6 +409,7 @@ export const cartTable = {
       header: 'Remove',
       headerType: cellTypes.DELETE,
       display: true,
+      role: cellTypes.DISPLAY,
     },
   ],
   tableMsg: {

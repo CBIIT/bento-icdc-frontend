@@ -29,6 +29,7 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
           padding: '0',
         },
         '&.del_all_row': {
+          textAlign: 'center',
           padding: '0px 20px, 0px, 0px',
         },
         '&.group_1': {
