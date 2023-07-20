@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header } from 'bento-components';
+import { useLocation } from 'react-router';
 import headerData from '../../bento/globalHeaderData';
 
 const customStyle = {
@@ -15,14 +16,29 @@ const customStyle = {
   },
 };
 
-const ICDCHeader = () => (
-  <>
-    <Header
-      logo={headerData.globalHeaderLogo}
-      alt={headerData.globalHeaderLogoAltText}
-      homeLink={headerData.globalHeaderLogoLink}
-      customStyle={customStyle}
-    />
-  </>
-);
+const ICDCHeader = () => {
+  const location = useLocation();
+
+  return (
+    <>
+      {
+        location.pathname.includes('/jBrowse') ? (
+          <Header
+            logo={headerData.globalHeaderLogo}
+            alt={headerData.globalHeaderLogoAltText}
+            noLink
+            customStyle={customStyle}
+          />
+        ) : (
+          <Header
+            logo={headerData.globalHeaderLogo}
+            alt={headerData.globalHeaderLogoAltText}
+            homeLink={headerData.globalHeaderLogoLink}
+            customStyle={customStyle}
+          />
+        )
+      }
+    </>
+  );
+};
 export default ICDCHeader;

@@ -13,10 +13,10 @@ const BentoNavBar = ({ cartFieldIds }) => {
   return (
     <NavBarThemeProvider>
       <NavBar
-        navBarData={pathname.includes('/jbroswse/')
+        navBarData={pathname.includes('/jBrowse/')
           ? []
           : navBarData}
-        navBarCartData={pathname.includes('/jbroswse/')
+        navBarCartData={pathname.includes('/jBrowse/')
           ? undefined
           : navBarCartData}
         navBarstyling={navBarstyling}
