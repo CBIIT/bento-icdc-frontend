@@ -241,7 +241,7 @@ const StudyDetailView = ({ classes, data }) => {
     );
   }
 
-  const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
+  const { accession_id: accessionId } = data.study[0];
   const filterStudy = `${studyCode} (${accessionId})`;
 
   const currentStudy = interOpData?.studiesByProgram
