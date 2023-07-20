@@ -15,7 +15,6 @@ import {
 
 export const myFileTablePaginationOptions = (context) => ({
   customizeSortByColumn: (column, order) => {
-    console.log(context);
     const { dispatch, sortBy } = context;
     const sort = (order === 'asc' && sortBy === column) ? 'desc' : 'asc';
     const value = {

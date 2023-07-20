@@ -179,4 +179,8 @@ export default () => ({
     height: '38px',
     width: '95px',
   },
+  headerGrid: {
+    paddingLeft: '40px',
+    paddingRight: '40px',
+  },
 });

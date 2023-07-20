@@ -171,6 +171,11 @@ export const extendedView = ({
 };
 
 export const customTheme = {
+  MuiIconButton: {
+    label: {
+      width: '17px',
+    },
+  },
   MuiContainer: {
     root: {
       paddingTop: '5px',
@@ -200,58 +205,20 @@ export const customTheme = {
           },
         },
       },
-      '&.container_header': {
-        maxWidth: '100%',
-        height: '75px',
-        padding: '10px 0px 15px 0px',
-        marginRight: '-5px',
-        position: 'relative',
-        textAlign: 'right',
-        '& img.tooltip_icon': {
-          width: '20px',
-          marginLeft: '5px',
-          verticalAlign: 'top',
-        },
-      },
-      '&.tooltip_icon': {
-        width: '25px',
-      },
       '&.container_footer': {
         maxWidth: '100%',
         textAlign: 'left',
         paddingLeft: '0px',
-        '& textarea.manifest_comments': {
-          color: '#000',
-          border: '1.5px solid #707070',
-          height: '170px',
-          resize: 'none',
-          padding: '15px',
-          fontSize: '10px',
-          minWidth: '412px',
-          background: '#ebebeb',
-          fontFamily: 'Open Sans',
-          marginRight: '10px',
-          borderRadius: '10px',
-        },
       },
     },
   },
   MuiButton: {
-    text: {
-      padding: '10px 16px',
-    },
     root: {
-      color: '#fff',
-      backgroundColor: '#03a383',
-      fontSize: '0.875rem',
-      fontFamily: 'Lato',
-      fontWeight: '500',
-      lineHeight: '1.75',
-      borderRadius: '10px',
-      marginBottom: '10px',
-      textTransform: 'uppercase',
-      '&:hover': {
-        backgroundColor: '#03a383',
+      '&#jbrowse_multi_view_button': {
+        marginLeft: '22px',
+        height: '43px',
+        color: '#ffffff',
+        textTransform: 'inherit',
       },
     },
   },

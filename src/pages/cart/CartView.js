@@ -6,8 +6,11 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { TableContext, TableContextProvider } from '../../bento-core';
-import { cartTable, tableLayOut } from '../../bento/fileCentricCartWorkflowData';
+import {
+  cartTable, tableLayOut,
+} from '../../bento/fileCentricCartWorkflowData';
 import PaginatedTableView from '../../components/PaginatedTable/TableView';
+import CartHeader from './header/CartHeaderController';
 import Styles from './CartStyle';
 import { tblContainer, themeConfig } from './Theme';
 
@@ -33,9 +36,13 @@ const CartView = (props) => {
 
   return (
     <Grid className={classes.marginTopNegative20}>
+      <Grid item xs={12} className={classes.headerGrid}>
+        <CartHeader filesId={filesId} />
+      </Grid>
       <Grid item xs={12}>
         <div id="table_selected_files" className={classes.bodyWrapper}>
           <div className={classes.tableWrapper}>
+            {/* Section: Header */}
             <TableContextProvider>
               <ThemeProvider theme={createTheme(tblContainer)}>
                 <PaginatedTableView

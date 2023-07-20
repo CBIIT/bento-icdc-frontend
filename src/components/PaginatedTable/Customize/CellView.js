@@ -99,9 +99,9 @@ export const CustomHeaderCellView = (props) => {
     dataField,
     icon,
     openDialogBox,
+    cellType,
   } = props;
-  console.log(openDialogBox);
-  switch (dataField) {
+  switch (dataField || cellType) {
     case customizeHeader.CASE_FILES:
     case customizeHeader.STUDY_FILES:
     case customizeHeader.IMAGE:
@@ -110,7 +110,7 @@ export const CustomHeaderCellView = (props) => {
       return (
         <DataAvailabilityHeader icon={icon} dataField={dataField} />
       );
-    case customizeHeader.REMOVE:
+    case customizeHeader.DELETE:
       return (
         <CustomHeaderRemover openDialogBox={openDialogBox} />
       );

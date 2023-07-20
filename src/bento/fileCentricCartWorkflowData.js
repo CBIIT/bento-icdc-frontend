@@ -286,6 +286,7 @@ export const cartTable = {
   extendedViewConfig: {
     download: {
       customDownload: true,
+      fileName: 'ICDC_My_Files_download',
       downloadCsv: 'Download Table Contents As CSV',
       ...customMyFilesTabDownloadCSV,
     },
@@ -298,7 +299,6 @@ export const cartTable = {
       cellType: cellTypes.CHECKBOX,
       display: true,
       header: 'Checkbox',
-      dataField: 'checkbox',
     },
     {
       dataField: 'file_name',
@@ -406,11 +406,9 @@ export const cartTable = {
     },
     {
       cellType: cellTypes.DELETE,
-      dataField: 'Remove',
       header: 'Remove',
       headerType: cellTypes.DELETE,
       display: true,
-      role: cellTypes.DISPLAY,
     },
   ],
   tableMsg: {
@@ -424,24 +422,24 @@ const jBrowseBtn = {
 };
 
 export const tableLayOut = [
-  {
-    container: 'outer_layout',
-    size: 'xl',
-    clsName: 'container_outer_layout',
-    items: [
-      {
-        clsName: 'cart_icon',
-        type: types.ICON,
-        src: myFilesPageData.headerIconSrc,
-        alt: myFilesPageData.headerIconAlt,
-      },
-      {
-        clsName: 'cart_header_text',
-        text: 'My Files',
-        type: types.TEXT,
-      },
-    ],
-  },
+  // {
+  //   container: 'outer_layout',
+  //   size: 'xl',
+  //   clsName: 'container_outer_layout',
+  //   items: [
+  //     {
+  //       clsName: 'cart_icon',
+  //       type: types.ICON,
+  //       src: myFilesPageData.headerIconSrc,
+  //       alt: myFilesPageData.headerIconAlt,
+  //     },
+  //     {
+  //       clsName: 'cart_header_text',
+  //       text: 'My Files',
+  //       type: types.TEXT,
+  //     },
+  //   ],
+  // },
   {
     container: 'paginatedTable',
     paginatedTable: true,
