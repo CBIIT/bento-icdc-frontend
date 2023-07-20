@@ -35,7 +35,7 @@ const ICDCFooter = () => {
     getSystems();
   }, [FooterData]);
 
-  if (pathname.includes('/jbroswse/')) {
+  if (pathname.includes('/jBrowse/')) {
     return null;
   }
 
