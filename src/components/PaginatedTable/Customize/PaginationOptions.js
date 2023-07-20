@@ -25,7 +25,7 @@ export const myFileTablePaginationOptions = (context) => ({
       paginationAPIField: sort === 'asc' ? cartTable.paginationAPIField
         : cartTable.paginationAPIFieldDesc,
     };
-    dispatch(customPaginationAction({ ...value }));
+    dispatch(customPaginationAction(value));
   },
 });
 

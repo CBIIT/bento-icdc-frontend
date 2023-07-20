@@ -40,10 +40,10 @@ const FileTableView = ({
 
   const paginationOptions = {
     customizeToggleSelectAll: (event) => {
-      const { table, dispatch } = context;
+      const { dataKey, dispatch } = context;
       if (event.target.checked) {
         const ids = data.reduce((acc, item) => {
-          acc.push(item[table.dataKey]);
+          acc.push(item[dataKey]);
           return acc;
         }, []);
         dispatch(onRowSeclect(ids));

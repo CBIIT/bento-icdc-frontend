@@ -13,7 +13,7 @@ import Home from '../../pages/landing/landingController';
 import Studies from '../../pages/studies/studiesController';
 import Dashboard from '../../pages/dashboardTab/dashboardController';
 import DashboardView from '../../pages/dashboard/DashboardController';
-import Cart from '../../pages/fileCentricCart/cartController';
+// import Cart from '../../pages/fileCentricCart/cartController';
 import About from '../../pages/about/aboutController';
 import Programs from '../../pages/programs/programsController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
@@ -60,7 +60,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/exploreOld" component={Dashboard} />
             <Route path="/explore" component={DashboardView} />
             <Route path="/unifiedView/:id" component={UnifiedDash} />
-            <Route path="/fileCentricCart" component={Cart} />
+            <Route path="/fileCentricCart" component={CartView} />
             <Route path="/myFiles" component={CartView} />
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
