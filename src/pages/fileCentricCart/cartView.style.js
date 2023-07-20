@@ -120,7 +120,7 @@ export default (theme) => ({
     height: '25px',
   },
   helpIcon: {
-    position: 'relative',
+    // position: 'relative',
     bottom: '8px',
     left: '4px',
     width: '17px',
