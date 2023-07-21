@@ -57,7 +57,7 @@ const SelectAllModalDialog = ({
   async function getAllFilesData() {
     // Find the newly added files by comparing
     const allFilesData = await fetchAllFileIDsForSelectAll(
-      1000, unifiedViewFlag, unifiedViewCaseIds,
+      undefined, unifiedViewFlag, unifiedViewCaseIds,
     );
 
     const currentFileIdsInCart = getFilesIdsInCart();
