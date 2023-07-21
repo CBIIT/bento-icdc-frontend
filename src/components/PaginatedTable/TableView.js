@@ -82,7 +82,7 @@ const PaginatedTableView = (props) => {
   return (
     <>
       <Wrapper
-        wrapConfig={updateWrapperConfig(config, tableLayOut, context)}
+        wrapConfig={updateWrapperConfig(config, tableLayOut, context, totalRowCount)}
         customTheme={{
           ...customTheme,
           ...customthemeConfig?.customTheme,

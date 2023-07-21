@@ -20,6 +20,8 @@ import ReadMoreSVG from './readMore';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import ReadMeDialogComponent from '../../../components/ReadMeDialog/ReadMe.controller';
 import cgcIcon from './assets/cgc.svg';
+import { getManifestData } from '../util/TableService';
+import { GET_STORE_MANIFEST_DATA_QUERY } from '../../../bento/fileCentricCartWorkflowData';
 
 const StyledMenu = withStyles({
   paper: {
@@ -92,14 +94,42 @@ const CartHeader = React.forwardRef(({
   mainTitle,
   subTitle,
   prepareDownload,
-  manifestPayload,
+  // manifestPayload,
   filesId,
 }, ref) => {
   const [sbgUrl, setSBGUrl] = useState('');
+
+  const getManifestPayload = () => {
+    const { data: manifestData } = getManifestData(GET_STORE_MANIFEST_DATA_QUERY, filesId);
+    if (!manifestData) {
+      return null;
+    }
+    console.log(manifestData);
+    const processedStoreManifestPayload = manifestData.filesInList.map((el) => ({
+      file_name: el.file_name,
+      file_type: el.file_type,
+      association: el.association,
+      file_description: el.file_description,
+      file_format: el.file_format,
+      file_size: el.file_size,
+      case_id: el.case_id,
+      breed: el.breed,
+      diagnosis: el.diagnosis,
+      study_code: el.study_code,
+      file_uuid: el.file_uuid,
+      md5sum: el.md5sum,
+      sample_id: el.sample_id,
+      individual_id: el.individual_id,
+      name: el.name,
+      drs_uri: el.drs_uri,
+    }));
+    return processedStoreManifestPayload;
+  };
+
   const { data } = useQuery(STORE_MANIFEST_QUERY, {
-    variables: { manifest: JSON.stringify(manifestPayload) },
+    variables: { manifest: JSON.stringify(getManifestPayload()) },
     context: { clientName: 'interopService' },
-    skip: !manifestPayload,
+    skip: !getManifestPayload(),
     fetchPolicy: 'no-cache',
   });
 

@@ -4,9 +4,7 @@ export default () => ({
     borderBottomRightRadius: '20px',
     borderTopLeftRadius: '20px',
     borderTopRightRadius: '20px',
-    paddingTop: '30px',
-    margin: 'auto 27px 30px 27px',
-    // background: '#f3f3f4',
+    margin: '-35px 27px 30px 27px',
     paddingBottom: '30px',
   },
   tableWrapper: {

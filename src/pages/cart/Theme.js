@@ -286,6 +286,9 @@ const displayErr = {
       '@media (min-width: 1920px)': {
         maxWidth: '100%',
       },
+      '@media (min-width: 1280px)': {
+        maxWidth: '100%',
+      },
     },
   },
 };
