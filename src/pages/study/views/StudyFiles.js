@@ -4,9 +4,6 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import {
-  table2,
-} from '../../../bento/studyDetailsData';
 import FileTableView from './FileView/FileTableView';
 import {
   TableContextProvider,
@@ -15,6 +12,7 @@ import themes from '../../../themes';
 import {
   studyDisposition,
 } from '../utils';
+import { fileTable } from '../../../bento/studyDetailsData';
 
 const StudyFiles = ({
   data,
@@ -68,7 +66,7 @@ const StudyFiles = ({
             <div>
               <Grid item xs={12}>
                 <div className={classes.noAssociatedFiles}>
-                  {table2.noAssociatedFiles}
+                  {fileTable.noAssociatedFiles}
                 </div>
               </Grid>
             </div>

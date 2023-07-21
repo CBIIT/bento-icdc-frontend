@@ -1,6 +1,5 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { FileDisableRowSelection, FileOnRowsSelect } from '../pages/study/utils';
 import {
   cellTypes,
   dataFormatTypes,
@@ -370,6 +369,7 @@ export const fileTable = {
   addAllFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
   addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
+  noAssociatedFiles: 'This study currently has no Files directly associated with it',
 };
 // --------------- Table 1 configuration --------------
 export const table1 = {
