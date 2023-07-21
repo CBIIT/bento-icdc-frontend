@@ -12,6 +12,7 @@ import {
 export const tooltipContent = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
+  file: 'Add selected files to My Files',
 };
 
 export const title = {
