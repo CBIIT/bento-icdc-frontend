@@ -71,7 +71,7 @@ const JbrowseDetailView = ({
   }
 
   return (
-    <div className="test">
+    <>
       <JBrowseComponent
         theme={theme}
         tracks={trackList}
@@ -79,7 +79,7 @@ const JbrowseDetailView = ({
         location={location}
         defaultSession={session}
       />
-    </div>
+    </>
   );
 };
 
