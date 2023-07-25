@@ -444,6 +444,7 @@ const getFileLevel = (activeTab) => {
  * @return {json}
  */
 export async function fetchAllFileIDsForSelectAll(
+  // eslint-disable-next-line no-unused-vars
   fileCount = 10000,
   isUnifiedView,
   unifiedViewCaseIds,
@@ -464,16 +465,18 @@ export async function fetchAllFileIDsForSelectAll(
       ? GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL
       : GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL;
 
+  const variables = {
+    ...activeFilters,
+    first: fileCount,
+    file_level: getFileLevel(getState().currentActiveTab),
+    ...(isUnifiedView && { case_ids: unifiedViewCaseIds }),
+    ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
+  };
+
   const fetchResult = await client
     .query({
       query: SELECT_ALL_QUERY,
-      variables: {
-        ...activeFilters,
-        file_level: getFileLevel(getState().currentActiveTab),
-        first: fileCount,
-        ...(isUnifiedView && { case_ids: unifiedViewCaseIds }),
-        ..._.mergeWith({}, getState().bulkUpload, getState().autoCompleteSelection, customizer),
-      },
+      variables,
     })
     .then((result) => {
       const RESULT_DATA = (getState().currentActiveTab === tabIndex[2].title
@@ -621,7 +624,8 @@ function filterOutFileIds(fileIds, fileType) {
  * @return {json}
  */
 // eslint-disable-next-line no-unused-vars
-export async function fetchAllFileIDs(fileCount = 10000, selectedIds = [], offset = 0.0, first = 1000, order_by = 'file_name') {
+export async function fetchAllFileIDs(fileCount = 10000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
+
   let filesIds = [];
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:
@@ -632,7 +636,7 @@ export async function fetchAllFileIDs(fileCount = 10000, selectedIds = [], offse
       filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL, [], [], selectedIds, 'fileIdsFromFileName');
       break;
     case tabIndex[1].title:
-      filesIds = await getFileIDs(1000, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, [], 'sampleOverview');
+      filesIds = await getFileIDs(undefined, GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL, [], selectedIds, [], 'sampleOverview');
       break;
     default:
       filesIds = await getFileIDs(fileCount, GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL, selectedIds, [], [], 'caseOverview');
