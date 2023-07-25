@@ -1,11 +1,17 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { FileDisableRowSelection, FileOnRowsSelect } from '../pages/study/utils';
+import {
+  cellTypes,
+  dataFormatTypes,
+  types,
+  btnTypes,
+} from '../bento-core';
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
+  file: 'Add selected files to My Files',
 };
 
 export const title = {
@@ -136,6 +142,235 @@ export const tab = {
     ],
   },
 };
+
+export const addAssociatedFilesBtn = {
+  title: 'Add SELECTED FILES',
+  clsName: 'add_selected_button',
+  type: types.BUTTON,
+  role: btnTypes.ADD_SELECTED_FILES,
+  btnType: btnTypes.ADD_SELECTED_FILES,
+  tooltipCofig: tooltipContent,
+  conditional: true,
+};
+
+export const fileWrapperConfig = [
+  {
+    container: 'paginatedTable',
+    paginatedTable: true,
+  },
+  {
+    container: 'buttons',
+    size: 'xl',
+    clsName: 'container_footer',
+    items: [
+      addAssociatedFilesBtn,
+    ],
+  },
+];
+
+export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
+ query fileOverview(
+    $file_level: [String] = [],
+    $case_ids: [String] = [],
+    $program: [String] = [],
+    $study: [String], 
+    $study_type: [String], 
+    $breed: [String], 
+    $diagnosis: [String], 
+    $disease_site: [String], 
+    $stage_of_disease: [String], 
+    $response_to_treatment: [String], 
+    $sex: [String], 
+    $neutered_status: [String], 
+    $sample_type: [String], 
+    $sample_pathology: [String], 
+    $sample_site:[String],
+    $file_association: [String], 
+    $file_type: [String], 
+    $file_format: [String],
+    $biobank: [String],
+    $study_participation: [String],
+    $order_by: String = "file_name",
+    $sort_direction: String = "ASC",
+    $first: Int = 10,
+    $offset: Int = 0,
+  ){
+    fileOverview
+    (
+      file_level: $file_level,
+      case_ids: $case_ids,
+      program: $program,
+      study: $study, 
+      study_type: $study_type, 
+      breed: $breed, 
+      diagnosis: $diagnosis, 
+      disease_site: $disease_site, 
+      stage_of_disease: $stage_of_disease, 
+      response_to_treatment: $response_to_treatment, 
+      sex: $sex,
+      neutered_status: $neutered_status,
+      sample_type: $sample_type, 
+      sample_pathology: $sample_pathology, 
+      sample_site: $sample_site, 
+      file_association: $file_association, 
+      file_type: $file_type,
+      file_format: $file_format,
+      biobank: $biobank,
+      study_participation: $study_participation,
+      order_by: $order_by,
+      sort_direction: $sort_direction,
+      first: $first,
+      offset: $offset,
+    )
+    {
+      file_uuid
+    }
+  }
+  `;
+
+export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
+ query fileOverview (
+  $file_name: [String]
+ ) {
+  fileIdsFromFileName(
+    file_name: $file_name
+  ) {
+    file_uuid
+  }
+ }
+  `;
+
+// ---------------- File table configuration -----------
+export const fileTable = {
+  // Set 'display' to false to hide the table entirely
+  display: true,
+  // Table title
+  tableTitle: 'This study currently has the following Study Files directly associated with it:',
+  // Field name for files data, need to be updated only when using a different GraphQL query
+  subjectDetailField: 'files',
+  // Value must be one of the 'dataField's in fileTableColumns
+  defaultSortField: 'file_name',
+  // 'asc' or 'desc'
+  defaultSortDirection: 'asc',
+  // Set 'display' to false to hide the table entirely
+  name: 'file',
+  dataKey: 'file_name',
+  helpMessage: 'Here help message',
+  // A maximum of 10 columns are allowed
+  extendedViewConfig: {
+    download: {
+      customDownload: false,
+      downloadFileName: 'ICDC_Study_Files_download',
+      downloadCsv: 'Download Table Contents As CSV',
+    },
+    manageViewColumns: {
+      title: 'View Columns',
+    },
+  },
+  columns: [
+    {
+      cellType: cellTypes.CHECKBOX,
+      display: true,
+    },
+    {
+      dataField: 'studyDesignation',
+      header: 'Study Designation',
+      display: false,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'file_name',
+      header: 'File Name',
+      sort: 'asc',
+      primary: true,
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'file_type',
+      header: 'File Type',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'parent',
+      header: 'Association',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'file_description',
+      header: 'Description',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'file_format',
+      header: 'Format',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'file_size',
+      header: 'Size',
+      dataFormatType: dataFormatTypes.FORMAT_BYTES,
+      cellType: cellTypes.FORMAT_DATA,
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'uuid',
+      header: 'UUID',
+      display: false,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'access_file',
+      header: 'Access',
+      sort: 'asc',
+      display: true,
+      downloadDocument: true,
+      documentDownloadProps: {
+        maxFileSize: 12000000,
+        toolTipTextFileDownload: 'Download a copy of this file',
+        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+        fileSizeColumn: 'file_size',
+        fileFormatColumn: 'file_format',
+        fileLocation: 'uuid',
+        caseIdColumn: 'file_name',
+        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+      },
+      cellType: cellTypes.CUSTOM_ELEM,
+      tooltipText: 'sort',
+    },
+    {
+      dataField: 'md5sum',
+      header: 'Md5Sum',
+      display: false,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+  ],
+  tableMsg: {
+    noMatch: 'No Matching Records Found',
+  },
+  addFilesRequestVariableKey: 'file_name',
+  addFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
+  addAllFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
+  addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+  addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
+  noAssociatedFiles: 'This study currently has no Files directly associated with it',
+};
 // --------------- Table 1 configuration --------------
 export const table1 = {
   // Set 'display' to false to hide the table entirely
@@ -189,117 +424,6 @@ export const table1 = {
   noCohortMessage: 'This study is not divided into cohorts',
   noArmsCohort: 'This study is not divided into Arms or Cohorts',
   noArmsCohort2: 'This study is not currently divided into Arms or Cohorts',
-};
-
-// --------------- Table 2 configuration --------------//
-export const table2 = {
-  // Set 'display' to false to hide the table entirely
-  display: true,
-  // Table title
-  tableTitle: 'ASSOCIATED STUDY FILES',
-  // Value must be one of the 'dataField's in fileTableColumns
-  defaultSortField: 'file_name',
-  // 'asc' or 'desc'
-  defaultSortDirection: 'asc',
-  // Text to appear on Add to cart button
-  buttonText: 'Add Selected Files',
-  saveButtonDefaultStyle: {
-    color: '#fff',
-    opacity: '1',
-    cursor: 'pointer',
-  },
-  ActiveSaveButtonDefaultStyle: {
-    disabled: true,
-    opacity: '0.3',
-    cursor: 'auto',
-  },
-  DeactiveSaveButtonDefaultStyle: {
-    cursor: 'pointer',
-    opacity: 'unset',
-    border: 'unset',
-  },
-  // Help Icon Message
-  tooltipMessage: 'Add selected files to My Files',
-  // viewColumns 'true' or 'false'
-  viewColumns: true,
-  // download csv 'true' or 'false'
-  download: true,
-  // downloaded File Name
-  downloadFileName: 'ICDC_Study_Files_download',
-  // Set 'selectableRows' to true to show the row selection
-  selectableRows: true,
-  // A maximum of 10 columns are allowed
-  primaryKeyIndex: 7,
-
-  columns: [
-    {
-      dataField: 'studyDesignation',
-      header: 'Study Designation',
-      display: false,
-    },
-    {
-      dataField: 'file_name',
-      header: 'File Name',
-      sort: 'asc',
-      primary: true,
-      display: true,
-      viewColumns: false,
-    },
-    {
-      dataField: 'file_type',
-      header: 'File Type',
-    },
-    {
-      dataField: 'parent',
-      header: 'Association',
-    },
-    {
-      dataField: 'file_description',
-      header: 'Description',
-    },
-    {
-      dataField: 'file_format',
-      header: 'Format',
-    },
-    {
-      dataField: 'file_size',
-      header: 'Size',
-      formatBytes: true,
-    },
-    {
-      dataField: 'uuid',
-      header: 'UUID',
-      display: false,
-    },
-    {
-      dataField: '',
-      header: 'Access',
-      sort: 'asc',
-      display: true,
-      downloadDocument: true,
-      documentDownloadProps: {
-        maxFileSize: 12000000,
-        toolTipTextFileDownload: 'Download a copy of this file',
-        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
-        fileSizeColumn: 'file_size',
-        fileFormatColumn: 'file_format',
-        fileLocationColumn: 'uuid',
-        caseIdColumn: 'file_name',
-        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
-      },
-    },
-    {
-      dataField: 'md5sum',
-      header: 'Md5Sum',
-      display: false,
-      // set formatBytes to true to display file size (in bytes) in a more human readable format
-    },
-  ],
-  customOnRowsSelect: FileOnRowsSelect,
-  disableRowSelection: FileDisableRowSelection,
-  noAssociatedFiles: 'This study currently has no Files directly associated with it',
 };
 
 export const textLabels = {
@@ -868,6 +992,41 @@ export const GET_VISIT_CLINICAL_DATA = gql`
       inferred
       visit_id
       visit_date
+    }
+  }
+`;
+
+export const studiesByProgram = gql`
+  query studiesByProgram {
+    studiesByProgram {
+      clinical_study_designation
+      CRDCLinks {
+        url
+        repository
+        metadata {
+                ... on IDCMetadata {
+                    collection_id,
+                    cancer_type,
+                    date_updated,
+                    description,
+                    doi,
+                    image_types,
+                    location,
+                    species,
+                    subject_count,
+                    supporting_data
+                }
+                ... on TCIAMetadata {
+                    Collection,
+                    total_patient_IDs,
+                    unique_modalities,
+                    unique_bodyparts_examined,
+                    total_image_counts
+                }
+            }
+      }
+      numberOfCRDCNodes
+      numberOfImageCollections
     }
   }
 `;
