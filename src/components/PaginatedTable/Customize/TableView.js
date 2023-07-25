@@ -49,6 +49,7 @@ export const updateWrapperConfig = (tab, configs, context, totalRowCount) => {
         || item.role === btnTypes.ADD_SELECTED_FILES) {
         return {
           ...item,
+          title: (item.role === btnTypes.ADD_ALL_FILES) ? tab.selectAllButtonText : item.title,
           addFileQuery: (item.role === btnTypes.ADD_ALL_FILES)
             ? tab.addAllFileQuery : tab.addSelectedFilesQuery,
           dataKey: tab.addFilesRequestVariableKey,
