@@ -17,10 +17,6 @@ import {
 export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
-  0: 'Add filtered files associated with selected case(s) to My Files',
-  1: 'Add filtered files associated with selected sample(s) to My Files',
-  2: 'Add selected files to My Files',
-  3: 'Add selected study files to My Files',
   Cases: 'Add filtered files associated with selected case(s) to My Files',
   Samples: 'Add filtered files associated with selected sample(s) to My Files',
   'Case Files': 'Add selected files to My Files',
@@ -33,17 +29,15 @@ export const tooltipContent = {
 export const selectAllToolTip = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
-  0: 'Add filtered files associated with all cases in the current results set to My Files',
-  1: 'Add filtered files associated with all samples in the current results set to My Files',
-  2: 'Add all filtered files to My Files',
-  3: 'Add all filtered files to My Files',
+  arrow: true,
+  clsName: 'addAllTooltip',
+  Cases: 'Add filtered files associated with all cases to My Files set',
+  Samples: 'Add filtered files associated with all samples to My Files',
+  'Case Files': 'Add all filtered files to My Files',
+  'Study Files': 'Add all filtered study files to My Files',
 };
 
 export const selectAllButtonText = {
-  0: 'Add filtered files associated with all cases to My Files',
-  1: 'Add filtered files associated with all samples to My Files',
-  2: 'Add all filtered files to My Files',
-  3: 'Add all filtered study files to My Files',
   Cases: 'Add filtered files associated with all cases to My Files',
   Samples: 'Add filtered files associated with all samples to My Files',
   'Case Files': 'Add all filtered files to My Files',
