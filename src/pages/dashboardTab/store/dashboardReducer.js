@@ -625,6 +625,7 @@ function filterOutFileIds(fileIds, fileType) {
  */
 // eslint-disable-next-line no-unused-vars
 export async function fetchAllFileIDs(fileCount = 10000, selectedIds = [], offset = 0.0, first = 100000, order_by = 'file_name') {
+
   let filesIds = [];
   switch (getState().currentActiveTab) {
     case tabIndex[3].title:

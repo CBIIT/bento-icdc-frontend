@@ -1,5 +1,6 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
+import { sortType, InputTypes } from '../bento-core';
 
 // --------------- Dashboard Data --------------------
 export const themeToggleTooltip = {
@@ -102,47 +103,64 @@ export const facetSectionVariables = {
 };
 
 // --------------- Dashboard Widgets configuration --------------
+
+// Sunburst chart color scheme
+export const SUNBURST_COLORS_LEVEL_1 = [
+  '#1F4B87',
+  '#AD1919',
+  '#DA6B2E',
+];
+
+export const SUNBURST_COLORS_LEVEL_2 = [
+  '#1F4B87',
+  '#AD1919',
+  '#DA6B2E',
+];
+
 // A maximum of 6 widgets are allowed
 export const widgetsData = [
   {
     type: 'sunburst',
-    label: 'Programs and Studies',
+    title: 'Programs and Studies',
     dataName: 'programsAndStudies',
     datatable_level1_field: 'program',
     datatable_level2_field: 'study',
     show: true,
+    datatable_level1_colors: SUNBURST_COLORS_LEVEL_1,
+    datatable_level2_colors: SUNBURST_COLORS_LEVEL_2,
   },
   {
     type: 'donut',
-    label: 'Breed',
+    title: 'Breed',
     dataName: 'caseCountByBreed',
     datatable_field: 'breed',
     show: true,
+    titleText: 'Breed',
   },
   {
     type: 'donut',
-    label: 'Diagnosis',
+    title: 'Diagnosis',
     dataName: 'caseCountByDiagnosis',
     datatable_field: 'diagnosis',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Disease Site',
+    title: 'Disease Site',
     dataName: 'caseCountByDiseaseSite',
     datatable_field: 'disease_site',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Sex',
+    title: 'Sex',
     dataName: 'caseCountByGender',
     datatable_field: 'gender',
     show: true,
   },
   {
     type: 'donut',
-    label: 'Stage of Disease',
+    title: 'Stage of Disease',
     dataName: 'caseCountByStageOfDisease',
     datatable_field: 'stage_of_disease',
     show: true,
@@ -264,7 +282,7 @@ export const dashboardTable = {
 // --------------- Sorting related labels configuration --------------
 export const sortLabels = {
   sortAlphabetically: 'Sort alphabetically',
-  sortByCount: 'Sort by counts',
+  sortByCount: 'Sort by count',
   showMore: '...expand to see all selections',
 };
 
@@ -396,3 +414,258 @@ export const GET_DASHBOARD_TABLE_DATA_QUERY = gql`{
     disease_site
   }
   }`;
+
+const CASES = 'Filter By Cases';
+const SAMPLES = 'Filter By Samples';
+const FILES = 'Filter By Files';
+const GROUP = 'group';
+const COUNT = 'count';
+export const CLEAR_ALL_BTN_TEXT = 'CLEAR ALL';
+
+export const tooltipConfig = {
+  program: {
+    acronym: 'program_acronym',
+    name: 'program_name',
+  },
+  biospecimen_source: {
+    acronym: 'biospecimen_repository_acronym',
+    name: 'biospecimen_repository_full_name',
+  },
+};
+
+export const facetsConfig = [
+  {
+    section: CASES,
+    label: 'Program',
+    apiPath: 'filterCaseCountByProgram',
+    apiForFiltering: 'filterCaseCountByProgram',
+    datafield: 'program',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+    tooltipKey: 'program',
+  },
+  {
+    section: CASES,
+    label: 'Study',
+    apiPath: 'filterCaseCountByStudyCode',
+    apiForFiltering: 'filterCaseCountByStudyCode',
+    datafield: 'study',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Study Type',
+    apiPath: 'filterCaseCountByStudyType',
+    apiForFiltering: 'filterCaseCountByStudyType',
+    datafield: 'study_type',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Biobank',
+    apiPath: 'filterCaseCountByBiobank',
+    apiForFiltering: 'filterCaseCountByBiobank',
+    datafield: 'biobank',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+    tooltipKey: 'biospecimen_source',
+  },
+  {
+    section: CASES,
+    label: 'Study Participation',
+    apiPath: 'filterCaseCountByStudyParticipation',
+    apiForFiltering: 'filterCaseCountByStudyParticipation',
+    datafield: 'study_participation',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Breed',
+    apiPath: 'filterCaseCountByBreed',
+    apiForFiltering: 'filterCaseCountByBreed',
+    datafield: 'breed',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Diagnosis',
+    apiPath: 'filterCaseCountByDiagnosis',
+    apiForFiltering: 'filterCaseCountByDiagnosis',
+    datafield: 'diagnosis',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Primary Disease Site',
+    apiPath: 'filterCaseCountByDiseaseSite',
+    apiForFiltering: 'filterCaseCountByDiseaseSite',
+    datafield: 'disease_site',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Stage of Disease',
+    apiPath: 'filterCaseCountByStageOfDisease',
+    apiForFiltering: 'filterCaseCountByStageOfDisease',
+    datafield: 'stage_of_disease',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHA_NUMERIC,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Response to Treatment',
+    apiPath: 'filterCaseCountByResponseToTreatment',
+    apiForFiltering: 'filterCaseCountByResponseToTreatment',
+    datafield: 'response_to_treatment',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Sex',
+    apiPath: 'filterCaseCountBySex',
+    apiForFiltering: 'filterCaseCountBySex',
+    datafield: 'sex',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: CASES,
+    label: 'Neutered Status',
+    apiPath: 'filterCaseCountByNeuteredStatus',
+    apiForFiltering: 'filterCaseCountByNeuteredStatus',
+    datafield: 'neutered_status',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  // {
+  //   section: CASES,
+  //   label: 'Age',
+  //   apiPath: 'filterSubjectCountByAge',
+  //   apiForFiltering: 'filterSubjectCountByAge',
+  //   datafield: 'age_at_index',
+  //   ApiLowerBoundName: 'lowerBound',
+  //   ApiUpperBoundName: 'upperBound',
+  //   show: true,
+  //   slider: true,
+  //   type: InputTypes.SLIDER,
+  //   sort_type: 'none',
+  //   minLowerBound: 0,
+  //   maxUpperBound: 30,
+  //   quantifier: 'Years',
+  // },
+  {
+    section: SAMPLES,
+    label: 'Sample Site',
+    apiPath: 'filterCaseCountBySampleSite',
+    apiForFiltering: 'filterCaseCountBySampleSite',
+    datafield: 'sample_site',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: SAMPLES,
+    label: 'Sample Type',
+    apiPath: 'filterCaseCountBySampleType',
+    apiForFiltering: 'filterCaseCountBySampleType',
+    datafield: 'tissue_type',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: SAMPLES,
+    label: 'Sample Pathology',
+    apiPath: 'filterCaseCountBySamplePathology',
+    apiForFiltering: 'filterCaseCountBySamplePathology',
+    datafield: 'sample_pathology',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: FILES,
+    label: 'File Association',
+    apiPath: 'filterCaseCountByFileAssociation',
+    apiForFiltering: 'filterCaseCountByFileAssociation',
+    datafield: 'association',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: FILES,
+    label: 'File Type',
+    apiPath: 'filterCaseCountByFileType',
+    apiForFiltering: 'filterCaseCountByFileType',
+    datafield: 'file_type',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+  {
+    section: FILES,
+    label: 'File Format',
+    apiPath: 'filterCaseCountByFileFormat',
+    apiForFiltering: 'filterCaseCountByFileFormat',
+    datafield: 'file_format',
+    field: GROUP,
+    count: COUNT,
+    type: InputTypes.CHECKBOX,
+    sort_type: sortType.ALPHABET,
+    show: true,
+  },
+];

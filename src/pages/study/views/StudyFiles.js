@@ -4,29 +4,17 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import FileTableView from './FileView/FileTableView';
 import {
-  getOptions,
-  getColumns,
-} from 'bento-components';
-import {
-  table2,
-  externalIcon,
-  textLabels,
-  tooltipContent,
-  title,
-} from '../../../bento/studyDetailsData';
-import DocumentDownload from '../../../components/DocumentDownload';
-import GridWithFooter from '../../../components/GridWithFooter/GridView';
-import updateColumns from '../../../utils/columnsUtil';
-import themes, { overrides } from '../../../themes';
+  TableContextProvider,
+} from '../../../bento-core';
+import themes from '../../../themes';
 import {
   studyDisposition,
 } from '../utils';
+import { fileTable } from '../../../bento/studyDetailsData';
 
 const StudyFiles = ({
-  closeSnack,
-  openSnack,
   data,
   studyData,
   classes,
@@ -37,8 +25,6 @@ const StudyFiles = ({
     cFile.studyDesignation = studyData.clinical_study_designation;
     return cFile;
   });
-  const tableTwoOptions = getOptions(table2, classes);
-  const columns2 = updateColumns(getColumns(table2, classes, fileTableData, externalIcon, '', () => {}, DocumentDownload), table2.columns);
   const themesLight = _.cloneDeep(themes.light);
   themesLight.overrides.MuiTableCell = {
     ...themesLight.overrides.MuiTableCell,
@@ -63,11 +49,6 @@ const StudyFiles = ({
     },
   };
 
-  const computedTheme = createMuiTheme({
-    ...themesLight,
-    ...overrides,
-  });
-
   return (
     <>
       {
@@ -75,28 +56,9 @@ const StudyFiles = ({
         ? (
           <div className={classes.tableContainer}>
             <div className={classes.tableDiv}>
-              <Grid item xs={12} id="table_associated_files">
-                <MuiThemeProvider theme={computedTheme}>
-                  <GridWithFooter
-                    data={fileTableData}
-                    title={title.studyFile}
-                    columns={columns2}
-                    options={{ ...tableTwoOptions, ...textLabels }}
-                    customOnRowsSelect={table2.customOnRowsSelect}
-                    closeSnack={closeSnack}
-                    openSnack={openSnack}
-                    disableRowSelection={table2.disableRowSelection}
-                    buttonText={table2.buttonText}
-                    saveButtonDefaultStyle={table2.saveButtonDefaultStyle}
-                    ActiveSaveButtonDefaultStyle={table2.ActiveSaveButtonDefaultStyle}
-                    DeactiveSaveButtonDefaultStyle={table2.DeactiveSaveButtonDefaultStyle}
-                    tooltipMessage={table2.tooltipMessage}
-                    tooltipContent={tooltipContent}
-                    showtooltip
-                    primaryKeyIndex={table2.primaryKeyIndex}
-                  />
-                </MuiThemeProvider>
-              </Grid>
+              <TableContextProvider>
+                <FileTableView data={fileTableData} />
+              </TableContextProvider>
             </div>
           </div>
         ) : (
@@ -104,7 +66,7 @@ const StudyFiles = ({
             <div>
               <Grid item xs={12}>
                 <div className={classes.noAssociatedFiles}>
-                  {table2.noAssociatedFiles}
+                  {fileTable.noAssociatedFiles}
                 </div>
               </Grid>
             </div>

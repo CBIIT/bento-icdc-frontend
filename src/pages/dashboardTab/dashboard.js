@@ -22,6 +22,7 @@ const Dashboard = ({
   const [collapse, setCollapse] = React.useState(true);
   const [unifiedViewFlag, setUnifiedViewFlag] = React.useState(false);
   const themeChanger = useTheme();
+
   const handleChange = () => {
     setCollapse((prev) => !prev);
   };
@@ -136,6 +137,7 @@ const Dashboard = ({
                                     titleLocation="top"
                                     titleAlignment="left"
                                     paddingSpace={2}
+                                    titleText={widget.titleText}
                                   />
                                 </Widget>
                               </Grid>
