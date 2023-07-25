@@ -1,5 +1,8 @@
 import React from 'react';
-import { Link, Typography } from '@material-ui/core';
+import {
+  Link,
+  Typography,
+} from '@material-ui/core';
 import { cellTypes, headerTypes } from '../../../bento-core';
 import DocumentDownload from '../../DocumentDownload/DocumentDownloadView';
 import { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
@@ -7,8 +10,9 @@ import MultiStudyTooltip from '../../../pages/dashboardTab/components/multiStudy
 import { customizeColumn, customizeHeader, customizeLandScapeView } from './Types';
 import DataAvailabilityCellView from './DataAvailability/TableCell';
 import DataAvailabilityHeader from './DataAvailability/HeaderCell';
-import NumberOfCasesView from './NumberOfCases';
-import StudyLink from './StudyLink';
+import NumberOfCasesView from './components/NumberOfCases';
+import StudyLink from './components/StudyLink';
+import CustomHeaderRemover from './components/CustomHeaderRemover';
 
 const CaseIdLink = (props) => {
   const {
@@ -62,6 +66,7 @@ const DocumentDownloadView = ({
 
 export const CustomCellView = (props) => {
   const { dataField } = props;
+
   switch (dataField) {
     case customizeColumn.DOCUMENT_DOWNLOAD:
       return (
@@ -93,8 +98,13 @@ export const CustomCellView = (props) => {
 };
 
 export const CustomHeaderCellView = (props) => {
-  const { dataField, icon } = props;
-  switch (dataField) {
+  const {
+    dataField,
+    icon,
+    openDialogBox,
+    cellType,
+  } = props;
+  switch (dataField || cellType) {
     case customizeHeader.CASE_FILES:
     case customizeHeader.STUDY_FILES:
     case customizeHeader.IMAGE:
@@ -102,6 +112,10 @@ export const CustomHeaderCellView = (props) => {
     case customizeHeader.PUBLICATTION:
       return (
         <DataAvailabilityHeader icon={icon} dataField={dataField} />
+      );
+    case customizeHeader.DELETE:
+      return (
+        <CustomHeaderRemover openDialogBox={openDialogBox} />
       );
     default:
       return (<></>);
@@ -117,6 +131,8 @@ export const CustomizeCellView = ({
   columns,
   unifiedView = false,
   interOpData,
+  deleteCartFile,
+  deleteAllFiles,
 }) => {
   /**
   * display columns as configuration
@@ -136,6 +152,12 @@ export const CustomizeCellView = ({
         ),
       };
     }
+    if (column.cellType === cellTypes.DELETE) {
+      return {
+        ...column,
+        cellEventHandler: deleteCartFile,
+      };
+    }
     return column;
   });
 
@@ -147,6 +169,27 @@ export const CustomizeCellView = ({
       return {
         ...column,
         customColHeaderRender: (props) => <CustomHeaderCellView {...props} />,
+      };
+    }
+    if (column.headerType === headerTypes.DELETE) {
+      return {
+        ...column,
+        headerEventHandler: deleteAllFiles,
+        customColHeaderRender: (toggleDisplay) => {
+          console.log(toggleDisplay);
+          return (
+            <CustomHeaderCellView openDialogBox={toggleDisplay} {...column} />
+          );
+        },
+      };
+    }
+    /*
+    * props deleteAllFiles
+    */
+    if (column.headerType === headerTypes.DELETE) {
+      return {
+        ...column,
+        headerEventHandler: deleteAllFiles,
       };
     }
     return column;

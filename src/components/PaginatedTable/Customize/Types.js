@@ -19,4 +19,5 @@ export const customizeHeader = {
   IMAGE: 'numberOfImageCollections',
   PUBLICATTION: 'numberOfPublications',
   CRDCLinks: 'CRDCLinks',
+  DELETE: 'DELETE',
 };

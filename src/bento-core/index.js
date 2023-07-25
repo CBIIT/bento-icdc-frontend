@@ -19,6 +19,15 @@ import {
   btnTypes,
   types,
   TableContextProvider,
+  onColumnViewChange,
+  onColumnSort,
+  onChangeSortDirection,
+  onRowsPerPageChange,
+  onPageAndTotalCountChange,
+  onPageChange,
+  onRowSeclect,
+  setTotalRowCount,
+  customPaginationAction,
 } from 'icdc-paginated-table';
 import {
   cellTypes,
@@ -60,6 +69,15 @@ export {
   headerTypes,
   btnTypes,
   types,
+  onColumnViewChange,
+  onColumnSort,
+  onChangeSortDirection,
+  onRowsPerPageChange,
+  onPageAndTotalCountChange,
+  onPageChange,
+  onRowSeclect,
+  setTotalRowCount,
+  customPaginationAction,
   dataFormatTypes, // table (views)
   cellTypes,
   cartReducerGenerator, // cart

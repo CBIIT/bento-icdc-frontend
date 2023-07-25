@@ -26,6 +26,9 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
           fontWeight: '600',
           padding: '0',
         },
+        '&.del_all_row': {
+          padding: '0',
+        },
         '&.group_1': {
           padding: '0',
         },
@@ -60,6 +63,16 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
         lineHeight: '1.6',
         padding: '10px 12px',
         borderRadius: '0px',
+      },
+      arrow: {
+        color: '#ffffff',
+        marginTop: '-0.71em',
+        marginLeft: '0px',
+        marginRight: '4px',
+        fontSize: '1.25rem',
+        '&:before': {
+          border: '2px solid #a7afb3',
+        },
       },
     },
   },
@@ -116,6 +129,9 @@ const tblBody = {
         },
       },
       '&.acl': {
+        textAlign: 'center',
+      },
+      '&.delete_row': {
         textAlign: 'center',
       },
     },

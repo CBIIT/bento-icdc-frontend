@@ -2196,7 +2196,7 @@ export const tableContainers = [
       noMatch: 'No Matching Records Found',
     },
     addFilesRequestVariableKey: 'file_name',
-    addFilesResponseKeys: ['fileIdsFromFileName'],
+    addFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
     addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
@@ -2316,6 +2316,7 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
+    id: 'study_file_tab',
     addFilesRequestVariableKey: 'file_name',
     addFilesResponseKeys: ['fileIdsFromFileName'],
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
@@ -2334,6 +2335,7 @@ const addSelectedFiles = {
   btnType: btnTypes.ADD_SELECTED_FILES,
   tooltipCofig: tooltipContent,
   conditional: true,
+  maxFileLimit: 10000,
 };
 
 const jBrowseBtn = {
@@ -2355,6 +2357,7 @@ export const tableLayOut = [
         btnType: btnTypes.ADD_ALL_FILES,
         conditional: false,
         tooltipCofig: selectAllToolTip,
+        maxFileLimit: 10000,
         alertMessage,
       },
       addSelectedFiles,

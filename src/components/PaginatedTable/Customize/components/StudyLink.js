@@ -4,9 +4,9 @@ import {
   Link,
   Typography,
 } from '@material-ui/core';
-import { studyDisposition } from './DataAvailability/TableCell';
+import { studyDisposition } from '../DataAvailability/TableCell';
 import { getStudyIcon } from './NumberOfCases';
-import { cellTypes } from '../../../bento-core';
+import { cellTypes } from '../../../../bento-core';
 
 const StudyLink = (props) => {
   const {

@@ -11,6 +11,7 @@ import { CustomizeCellView } from './Customize/CellView';
 import { updateWrapperConfig } from './Customize/TableView';
 import { ExtendedViewConfig } from './Customize/ExtendedView';
 import { ColumnGrouping } from './Customize/ColumnGrouping';
+import { paginationOptions } from './Customize/PaginationOptions';
 
 const PaginatedTableView = (props) => {
   /**
@@ -30,10 +31,11 @@ const PaginatedTableView = (props) => {
     tblRows = [],
     isServer = true,
     customthemeConfig,
+    tableReduxActions,
   } = props;
   // access table state
-  const { context } = useContext(TableContext);
-
+  const tableContext = useContext(TableContext);
+  const { context } = tableContext;
   /*
   * useReducer table state
   * paginated table update data when state change
@@ -65,7 +67,7 @@ const PaginatedTableView = (props) => {
     query: config.api,
     paginationAPIField: config.paginationAPIField,
     dataKey: config.dataKey,
-    columns: CustomizeCellView(config),
+    columns: CustomizeCellView({ ...config, ...tableReduxActions }),
     count: totalRowCount,
     selectedRows: [],
     tableMsg: config.tableMsg,
@@ -80,8 +82,11 @@ const PaginatedTableView = (props) => {
   return (
     <>
       <Wrapper
-        wrapConfig={updateWrapperConfig(config, tableLayOut, context)}
-        customTheme={customTheme}
+        wrapConfig={updateWrapperConfig(config, tableLayOut, context, totalRowCount)}
+        customTheme={{
+          ...customTheme,
+          ...customthemeConfig?.customTheme,
+        }}
         classes={classes}
         section={config.name}
         activeFilters={activeFilters}
@@ -99,6 +104,7 @@ const PaginatedTableView = (props) => {
               activeTab={activeTab}
               tblRows={tblRows}
               server={isServer}
+              paginationOptions={paginationOptions(context, config)}
             />
           </Grid>
         </Grid>
