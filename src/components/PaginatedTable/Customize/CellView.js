@@ -47,13 +47,16 @@ const DocumentDownloadView = ({
   file_name: caseId,
   file_uuid: fileLocation,
   documentDownloadProps,
+  ...props
 }) => (
   <DocumentDownload
     fileSize={fileSize}
     fileFormat={fileFormat}
     caseId={caseId}
-    fileLocation={fileLocation}
     {...documentDownloadProps}
+    fileLocation={props[documentDownloadProps.fileLocation]
+      ? props[documentDownloadProps.fileLocation]
+      : fileLocation}
   />
 );
 
