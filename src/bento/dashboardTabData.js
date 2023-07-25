@@ -19,10 +19,17 @@ export const tooltipContent = {
 export const selectAllToolTip = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
-  0: 'Add filtered files associated with all cases to My Files',
-  1: 'Add filtered files associated with all samples to My Files',
+  0: 'Add filtered files associated with all cases in the current results set to My Files',
+  1: 'Add filtered files associated with all samples in the current results set to My Files',
   2: 'Add all filtered files to My Files',
-  3: 'Add all filtered study files to My Files',
+  3: 'Add all filtered files to My Files',
+};
+
+export const selectAllButtonText = {
+  0: 'Add Files For All Cases',
+  1: 'Add Files For All Samples',
+  2: 'Add All Files',
+  3: 'Add All Files',
 };
 
 // --------------- Dahboard Table external link configuration --------------

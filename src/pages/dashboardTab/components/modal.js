@@ -10,7 +10,7 @@ import {
 } from '../store/dashboardReducer';
 import Dialog from '../../../components/AddToCartDialog';
 import { addToCart, cartWillFull, getFilesIdsInCart } from '../../fileCentricCart/store/cart';
-import { selectAllToolTip } from '../../../bento/dashboardTabData';
+import { selectAllButtonText, selectAllToolTip } from '../../../bento/dashboardTabData';
 
 const styles = () => ({
   button: {
@@ -38,7 +38,7 @@ const styles = () => ({
 });
 
 const SelectAllModalDialog = ({
-  classes, openSnack, addAllButtonText, selectAllToolTipStatus, tabIndex, unifiedViewFlag,
+  classes, openSnack, selectAllToolTipStatus, tabIndex, unifiedViewFlag,
   unifiedViewCaseIds,
 }) => {
   const childRef = useRef();
@@ -60,7 +60,7 @@ const SelectAllModalDialog = ({
       undefined, unifiedViewFlag, unifiedViewCaseIds,
     );
 
-    const currentFileIdsInCart = getFilesIdsInCart();
+    const currentFileIdsInCart = getFilesIdsInCart(); console.log('log-d currFileIdsInCart', currentFileIdsInCart);
     const newFileIDSLength = (currentFileIdsInCart !== null || currentFileIdsInCart !== [])
       ? allFilesData.filter(
         (e) => !currentFileIdsInCart.find((a) => e === a),
@@ -91,7 +91,7 @@ const SelectAllModalDialog = ({
   return (
     <>
       <button type="button" onClick={handleClickOpen} className={classes.button}>
-        {addAllButtonText}
+        {selectAllButtonText[tabIndex]}
       </button>
       <Tooltip title={selectAllToolTip[tabIndex]} arrow placement="bottom">
         <IconButton aria-label="help" className={classes.helpIconButton}>
