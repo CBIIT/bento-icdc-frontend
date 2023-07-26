@@ -23,7 +23,7 @@ export const DisplayCustomText = ({
       text = `Add all ${totalRowCount} files to My Files?`;
       break;
     case 'study_file_tab':
-      text = `Add all files for the ${totalRowCount} selected StudyFiles to My Files?`;
+      text = `Add all ${totalRowCount} files to My Files?`;
       break;
     default:
       break;
