@@ -20,7 +20,7 @@ import {
 import TextField from '@material-ui/core/TextField';
 import DownloadFileManifestIcon from './assets/dwnldFileManifest.svg';
 import { GET_MY_CART_DATA_QUERY, manifestData, myFilesPageData } from '../../../bento/fileCentricCartWorkflowData';
-import { downloadJson } from '../../fileCentricCart/utils';
+import { downloadJson } from '../utils';
 // import { noop } from 'lodash';
 // import PDFIcon from './assets/Download_PDF.svg';
 

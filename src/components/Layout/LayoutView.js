@@ -11,7 +11,6 @@ import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
 import Home from '../../pages/landing/landingController';
 import Studies from '../../pages/studies/studiesController';
-import Dashboard from '../../pages/dashboardTab/dashboardController';
 import DashboardView from '../../pages/dashboard/DashboardController';
 // import Cart from '../../pages/fileCentricCart/cartController';
 import About from '../../pages/about/aboutController';
@@ -57,7 +56,6 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route exact path="/news" component={Home} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/studies" component={Studies} />
-            <Route path="/exploreOld" component={Dashboard} />
             <Route path="/explore" component={DashboardView} />
             <Route path="/unifiedView/:id" component={UnifiedDash} />
             <Route path="/fileCentricCart" component={CartView} />

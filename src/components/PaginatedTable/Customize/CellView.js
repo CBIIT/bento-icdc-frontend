@@ -6,7 +6,7 @@ import {
 import { cellTypes, headerTypes } from '../../../bento-core';
 import DocumentDownload from '../../DocumentDownload/DocumentDownloadView';
 import { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
-import MultiStudyTooltip from '../../../pages/dashboardTab/components/multiStudyTooltip';
+import MultiStudyTooltip from './components/multiStudyTooltip';
 import { customizeColumn, customizeHeader, customizeLandScapeView } from './Types';
 import DataAvailabilityCellView from './DataAvailability/TableCell';
 import DataAvailabilityHeader from './DataAvailability/HeaderCell';
