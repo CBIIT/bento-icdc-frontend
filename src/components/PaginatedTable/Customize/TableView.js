@@ -13,7 +13,6 @@ export const DisplayCustomText = ({
     id,
   } = tab;
   let text = '';
-  console.log(activeFilters);
   switch (id) {
     case 'case_tab':
       text = Object.keys(activeFilters).length > 0 ? `Add all filtered Files for the ${totalRowCount} selected Cases to My Files?` : `Add all files for the ${totalRowCount} selected Cases to My Files?`;
