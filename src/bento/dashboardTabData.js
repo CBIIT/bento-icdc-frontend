@@ -17,7 +17,7 @@ import {
 export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
-  Cases: 'Add selected files to My Files',
+  Cases: 'Add filtered files associated with selected case(s) to My Files',
   Samples: 'Add selected files to My Files',
   'Case Files': 'Add selected files to My Files',
   'Study Files': 'Add selected files to My Files',
@@ -1781,6 +1781,7 @@ export const tableContainers = [
     dataField: 'dataCase',
     api: GET_CASES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add Files for All Cases',
+    selectedButtonText: 'Add Files for Selected Cases',
     paginationAPIField: 'caseOverview',
     count: 'numberOfCases',
     dataKey: 'case_id',
@@ -2332,6 +2333,18 @@ export const tableContainers = [
 
 export const alertMessage = 'The cart is limited to 1000 files. Please narrow the search criteria or remove some files from the cart to add more.';
 
+const addAllFiles = {
+  title: 'Add Associated Files For All',
+  clsName: 'add_all_button',
+  type: types.BUTTON,
+  role: btnTypes.ADD_ALL_FILES,
+  btnType: btnTypes.ADD_ALL_FILES,
+  conditional: false,
+  tooltipCofig: selectAllToolTip,
+  maxFileLimit: 10000,
+  alertMessage,
+};
+
 const addSelectedFiles = {
   title: 'Add Selected Files',
   clsName: 'add_selected_button',
@@ -2354,17 +2367,7 @@ export const tableLayOut = [
     size: 'xl',
     clsName: 'container_header',
     items: [
-      {
-        title: 'Add Associated Files For All',
-        clsName: 'add_all_button',
-        type: types.BUTTON,
-        role: btnTypes.ADD_ALL_FILES,
-        btnType: btnTypes.ADD_ALL_FILES,
-        conditional: false,
-        tooltipCofig: selectAllToolTip,
-        maxFileLimit: 10000,
-        alertMessage,
-      },
+      addAllFiles,
       addSelectedFiles,
       jBrowseBtn,
     ],
