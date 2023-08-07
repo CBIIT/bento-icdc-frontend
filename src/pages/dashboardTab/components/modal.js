@@ -60,7 +60,7 @@ const SelectAllModalDialog = ({
       undefined, unifiedViewFlag, unifiedViewCaseIds,
     );
 
-    const currentFileIdsInCart = getFilesIdsInCart(); console.log('log-d currFileIdsInCart', currentFileIdsInCart);
+    const currentFileIdsInCart = getFilesIdsInCart();
     const newFileIDSLength = (currentFileIdsInCart !== null || currentFileIdsInCart !== [])
       ? allFilesData.filter(
         (e) => !currentFileIdsInCart.find((a) => e === a),
