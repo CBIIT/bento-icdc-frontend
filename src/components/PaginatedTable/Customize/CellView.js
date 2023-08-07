@@ -175,12 +175,9 @@ export const CustomizeCellView = ({
       return {
         ...column,
         headerEventHandler: deleteAllFiles,
-        customColHeaderRender: (toggleDisplay) => {
-          console.log(toggleDisplay);
-          return (
-            <CustomHeaderCellView openDialogBox={toggleDisplay} {...column} />
-          );
-        },
+        customColHeaderRender: (toggleDisplay) => (
+          <CustomHeaderCellView openDialogBox={toggleDisplay} {...column} />
+        ),
       };
     }
     /*
