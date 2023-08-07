@@ -5,8 +5,8 @@ import {
 } from '@material-ui/core';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
-import { CustomDataTable, ToolTip as Tooltip } from 'bento-components';
 import HelpIcon from '@material-ui/icons/Help';
+import { CustomDataTable, ToolTip as Tooltip } from '../../bento-core';
 import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart';
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';

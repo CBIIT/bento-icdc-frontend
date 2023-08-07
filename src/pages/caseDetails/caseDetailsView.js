@@ -3,7 +3,7 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { cn } from 'bento-components';
+import { cn } from '@bento-core/util';
 import {
   TableContextProvider,
 } from '../../bento-core';

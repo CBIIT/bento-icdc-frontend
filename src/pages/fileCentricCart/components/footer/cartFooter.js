@@ -6,7 +6,7 @@ import {
   Link,
 } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import { ToolTip as Tooltip } from 'bento-components';
+import { ToolTip as Tooltip } from '../../../../bento-core';
 import Styles from './cartFooter.style';
 import ViewJBrowseButton from '../../../JbrowseDetail/components/JBrowseViewBtn';
 import FooterThemeProvider from './cartFooterThemeConfig';

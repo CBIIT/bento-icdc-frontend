@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 import {
   cn,
-} from 'bento-components';
+} from '@bento-core/util';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';

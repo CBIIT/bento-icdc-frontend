@@ -10,8 +10,9 @@ import {
 } from '@material-ui/core';
 // import { Link } from 'react-router-dom';
 import HelpIcon from '@material-ui/icons/Help';
-import { getColumns, ToolTip as Tooltip, cn } from 'bento-components';
+import { getColumns, cn } from '@bento-core/util';
 import _ from 'lodash';
+import { ToolTip as Tooltip } from '../../../bento-core';
 import SelectAllModal from './modal';
 import {
   GET_FILES_OVERVIEW_QUERY,

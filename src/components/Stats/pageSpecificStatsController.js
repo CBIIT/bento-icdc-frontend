@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { filterData } from 'bento-components';
+import { filterData } from '../../bento-core';
 import { getFilteredStat, fetchDataForDashboardTabDataTable } from '../../pages/dashboardTab/store/dashboardReducer';
 
 import StatsView from './StatsView';

@@ -8,7 +8,7 @@ import {
   getOptions,
   getDefaultCustomFooter,
   ToolTip as Tooltip,
-} from 'bento-components';
+} from '../../../../bento-core';
 import CustomDataTable from '../../../../components/serverPaginatedTable/serverPaginatedTable';
 import Styles from './cartBody.style';
 import {

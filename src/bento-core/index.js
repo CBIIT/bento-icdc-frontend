@@ -1,4 +1,6 @@
 import { WidgetGenerator } from '@bento-core/widgets';
+import { CustomDataTable } from '@bento-core/data-table';
+import { Header } from '@bento-core/header';
 import {
   clearAllAndSelectFacet,
   ClearAllFiltersBtn,
@@ -29,10 +31,12 @@ import {
   setTotalRowCount,
   customPaginationAction,
 } from 'icdc-paginated-table';
+import { Footer } from '@bento-core/footer';
 import {
   cellTypes,
   dataFormatTypes,
   headerTypes,
+  formatBytes,
 } from '@bento-core/table';
 import { cartReducerGenerator } from '@bento-core/cart';
 import {
@@ -46,11 +50,25 @@ import { Tabs as BentoTabs } from '@bento-core/tab';
 import { QueryBarGenerator } from 'icdc-query-bar';
 import {
   transformInitialDataForSunburst,
+  filterData,
+  getOptions,
+  customCheckBox,
+  getCheckBoxData,
+  getStatDataFromDashboardData,
+  getSunburstDataFromDashboardData,
+  getDonutDataFromDashboardData,
+  setSelectedFilterValues,
+  transformAPIDataIntoCheckBoxData,
+  getColumns,
+  getDefaultCustomFooter,
 } from '@bento-core/util';
+import { AboutBody } from '@bento-core/about';
 import ToolTip from '@bento-core/tool-tip';
 
 export {
   WidgetGenerator, // widgets
+  Footer, // footer
+  Header, // header
   clearAllAndSelectFacet, // filters
   ClearAllFiltersBtn,
   FacetFilter,
@@ -80,6 +98,7 @@ export {
   customPaginationAction,
   dataFormatTypes, // table (views)
   cellTypes,
+  formatBytes,
   cartReducerGenerator, // cart
   LocalFindReducerGenerator, // local search
   resetAllData,
@@ -89,5 +108,18 @@ export {
   BentoTabs, // bento tabs
   QueryBarGenerator, // query bar component
   transformInitialDataForSunburst, // bento-core util
+  filterData,
+  getOptions,
+  customCheckBox,
+  getCheckBoxData,
+  getStatDataFromDashboardData,
+  getSunburstDataFromDashboardData,
+  getDonutDataFromDashboardData,
+  setSelectedFilterValues,
+  transformAPIDataIntoCheckBoxData,
+  getColumns,
+  getDefaultCustomFooter,
   ToolTip, // tooltip
+  CustomDataTable, // data-table
+  AboutBody, // about
 };

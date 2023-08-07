@@ -1,6 +1,6 @@
 import { Button, withStyles } from '@material-ui/core';
-import { ToolTip as Tooltip } from 'bento-components';
 import React from 'react';
+import { ToolTip as Tooltip } from '../../../../../bento-core';
 
 const DownloadBtn = ({ classes }) => (
   <div className={classes.downloadAllBtnContainer}>

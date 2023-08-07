@@ -8,7 +8,7 @@ import {
 import {
   cn,
   getOptions,
-} from 'bento-components';
+} from '@bento-core/util';
 import { request, gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import StatsView from '../../components/Stats/StatsView';

@@ -5,9 +5,7 @@ import {
 } from '@material-ui/core';
 import {
   cn,
-  // eslint-disable-next-line no-unused-vars
-  ToolTip as Tooltip,
-} from 'bento-components';
+} from '@bento-core/util';
 import {
   customSorting,
   studyDisposition,
@@ -18,6 +16,8 @@ import {
 } from '../../../../bento/studyDetailsData';
 import SampleProfile from '../SampleProfile';
 import OverviewThemeProvider from './overviewThemeConfig';
+// eslint-disable-next-line no-unused-vars
+import { ToolTip as Tooltip } from '../../../../bento-core';
 
 const Overview = ({
   classes,

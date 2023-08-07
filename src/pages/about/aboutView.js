@@ -1,8 +1,8 @@
 import React from 'react';
-import { AboutBody } from 'bento-components';
 import { withStyles } from '@material-ui/core';
 import AboutHeader from './aboutHeader';
 import Stats from '../../components/Stats/AllStatsController';
+import { AboutBody } from '../../bento-core';
 
 const AboutView = ({ classes, data }) => {
   const getImage = (imgPath, alt) => <img className={classes.img} src={imgPath != null ? imgPath : ''} alt={alt} />;

@@ -8,7 +8,8 @@ import {
   Typography,
   IconButton,
 } from '@material-ui/core';
-import { ToolTip as Tooltip, cn } from 'bento-components';
+import { cn } from '@bento-core/util';
+import { ToolTip as Tooltip } from '../../../bento-core';
 import {
   MAX_NUMBER_OF_FILES,
   MULTI_FILES_VIEW,

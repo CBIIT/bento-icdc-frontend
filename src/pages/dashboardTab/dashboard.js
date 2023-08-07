@@ -2,8 +2,9 @@ import React from 'react';
 import {
   Grid, withStyles, Button, Switch, Collapse, FormControlLabel, IconButton,
 } from '@material-ui/core';
-import { ProgramSunburst, CustomActiveDonut, ToolTip as Tooltip } from 'bento-components';
+// import { ProgramSunburst, CustomActiveDonut } from 'bento-components';
 import Chip from '@material-ui/core/Chip';
+import { ToolTip as Tooltip } from '../../bento-core';
 import { useTheme } from '../../components/ThemeContext';
 import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/DashboardStatsController';
@@ -11,13 +12,13 @@ import SideBar from '../../components/SideBar/SideBarView';
 import { widgetsData, themeToggleTooltip } from '../../bento/dashboardData';
 import { multiStudyData as custodianMultiStudyData } from '../../bento/dashboardTabData';
 import Tab from './components/tabController';
-import colors from '../../utils/colors';
+// import colors from '../../utils/colors';
 import unifiedViewIcon from '../../assets/unifiedViewIcon.svg';
 
 const displaywidgets = widgetsData.filter((widget) => widget.show === true).slice(0, 6);
 
 const Dashboard = ({
-  classes, data, theme, unifiedViewData,
+  classes, /* data, theme, */ unifiedViewData,
 }) => {
   const [collapse, setCollapse] = React.useState(true);
   const [unifiedViewFlag, setUnifiedViewFlag] = React.useState(false);
@@ -95,7 +96,7 @@ const Dashboard = ({
                                   widgetBorderDivider
                                   customBackGround
                                 >
-                                  <ProgramSunburst
+                                  {/* <ProgramSunburst
                                     data={data[widget.dataName]}
                                     width={250}
                                     height={173}
@@ -108,7 +109,7 @@ const Dashboard = ({
                                     titleLocation="top"
                                     titleAlignment="left"
                                     padAngle={0.02}
-                                  />
+                                  /> */}
                                 </Widget>
                               </Grid>
                             );
@@ -124,7 +125,7 @@ const Dashboard = ({
                                   widgetBorderDivider
                                   customBackGround
                                 >
-                                  <CustomActiveDonut
+                                  {/* <CustomActiveDonut
                                     data={data[widget.dataName]}
                                     width={400}
                                     height={225}
@@ -138,7 +139,7 @@ const Dashboard = ({
                                     titleAlignment="left"
                                     paddingSpace={2}
                                     titleText={widget.titleText}
-                                  />
+                                  /> */}
                                 </Widget>
                               </Grid>
                             );

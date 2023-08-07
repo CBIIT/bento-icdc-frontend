@@ -9,7 +9,7 @@ import {
   DeleteOutline as DeleteOutlineIcon,
   // ArrowDropDown as ArrowDropDownIcon,
 } from '@material-ui/icons';
-import { ToolTip } from 'bento-components';
+import { ToolTip } from '../../bento-core';
 import CartBody from './components/body/cartBody';
 import CartHeader from './components/header/cartHeader';
 // import CartFooter from './components/footer/cartFooter';

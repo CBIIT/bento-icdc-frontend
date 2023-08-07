@@ -10,11 +10,11 @@ import {
   withStyles,
 } from '@material-ui/core';
 import styled from 'styled-components';
-import { ToolTip as Tooltip } from 'bento-components';
 import { noop, filter } from 'lodash';
 // import DownloadBtn from './components/downloadBtn';
 import { downloadJson } from '../../../fileCentricCart/utils';
 import useFetchCSVDownload from './hooks/useFetchCSVDownload';
+import { ToolTip as Tooltip } from '../../../../bento-core';
 import
 {
   adverseEventNodeMetadata,

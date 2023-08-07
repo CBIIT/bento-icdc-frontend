@@ -1,7 +1,7 @@
 import React from 'react';
-import { Header } from 'bento-components';
 import { useLocation } from 'react-router';
 import headerData from '../../bento/globalHeaderData';
+import { Header } from '../../bento-core';
 
 const customStyle = {
   nihLogoImg: {

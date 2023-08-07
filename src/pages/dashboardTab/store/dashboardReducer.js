@@ -10,7 +10,7 @@ import {
   setSelectedFilterValues,
   transformInitialDataForSunburst,
   transformAPIDataIntoCheckBoxData,
-} from 'bento-components';
+} from '../../../bento-core';
 import { globalStatsData as statsCount } from '../../../bento/globalStatsData';
 import { widgetsData, facetSearchData, tooltipFields } from '../../../bento/dashboardData';
 

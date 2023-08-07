@@ -4,10 +4,10 @@ import {
   withStyles,
 } from '@material-ui/core';
 import {
+  ToolTip as Tooltip,
   CustomDataTable,
   getOptions,
-  ToolTip as Tooltip,
-} from 'bento-components';
+} from '../../../../bento-core';
 import { Typography } from '../../../../components/Wrappers/Wrappers';
 import {
   table1,
