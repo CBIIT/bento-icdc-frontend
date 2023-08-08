@@ -7,6 +7,7 @@ import ViewJBrowseButton from '../../../pages/JbrowseDetail/components/JBrowseVi
 export const DisplayCustomText = ({
   tab,
   totalRowCount,
+  activeFilters,
 }) => {
   const {
     id,
@@ -14,7 +15,7 @@ export const DisplayCustomText = ({
   let text = '';
   switch (id) {
     case 'case_tab':
-      text = `Add all files for the ${totalRowCount} selected Cases to My Files?`;
+      text = Object.keys(activeFilters).length > 0 ? `Add all filtered Files for the ${totalRowCount} selected Cases to My Files?` : `Add all files for the ${totalRowCount} selected Cases to My Files?`;
       break;
     case 'sample_tab':
       text = `Add all files for the ${totalRowCount} selected Samples to My Files?`;
