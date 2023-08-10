@@ -37,6 +37,19 @@ export const DisplayCustomText = ({
 };
 
 /**
+* Return title that will be displayed in wrapper buttons
+*/
+const getButtonTitle = (tab, item) => {
+  if (item.role === btnTypes.ADD_ALL_FILES) {
+    return tab.selectAllButtonText;
+  } if (item.role === btnTypes.ADD_SELECTED_FILES && tab.selectedButtonText) {
+    return tab.selectedButtonText;
+  }
+
+  return item.title;
+};
+
+/**
 * 1. addFileQuery - query to addAll files or add selected files on cart
 * 2. responseKeys - provided respose key for addFileQuery
 * 3. Configure Jbrowse
@@ -50,7 +63,7 @@ export const updateWrapperConfig = (tab, configs, context, totalRowCount) => {
         || item.role === btnTypes.ADD_SELECTED_FILES) {
         return {
           ...item,
-          title: (item.role === btnTypes.ADD_ALL_FILES) ? tab.selectAllButtonText : item.title,
+          title: getButtonTitle(tab, item),
           addFileQuery: (item.role === btnTypes.ADD_ALL_FILES)
             ? tab.addAllFileQuery : tab.addSelectedFilesQuery,
           dataKey: tab.addFilesRequestVariableKey,
