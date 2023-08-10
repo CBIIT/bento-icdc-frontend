@@ -11,7 +11,7 @@ import {
 import { ToolTip as Tooltip } from 'bento-components';
 import {
   multiStudyData,
-} from '../../../bento/dashboardTabData';
+} from '../../../../bento/dashboardTabData';
 
 const theme = {
   overrides: {
