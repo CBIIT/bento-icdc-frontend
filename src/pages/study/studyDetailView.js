@@ -14,7 +14,6 @@ import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';
 import StatsView from '../../components/Stats/StatsView';
-import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import {
   studyDisposition,
 } from './utils';
@@ -97,10 +96,6 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfAliquots: data.aliquotCountOfStudy ? data.aliquotCountOfStudy : 0,
     volumeOfData: data.volumeOfDataOfStudy,
   };
-
-  React.useEffect(() => {
-    fetchDataForDashboardTabDataTable();
-  }, []);
 
   const breadCrumbJson = [{
     name: 'ALL PROGRAMS',
