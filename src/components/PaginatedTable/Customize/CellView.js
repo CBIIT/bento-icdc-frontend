@@ -6,7 +6,7 @@ import {
 import { cellTypes, headerTypes } from '../../../bento-core';
 import DocumentDownload from '../../DocumentDownload/DocumentDownloadView';
 import { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
-import MultiStudyTooltip from '../../../pages/dashboardTab/components/multiStudyTooltip';
+import MultiStudyTooltip from './components/multiStudyTooltip';
 import { customizeColumn, customizeHeader, customizeLandScapeView } from './Types';
 import DataAvailabilityCellView from './DataAvailability/TableCell';
 import DataAvailabilityHeader from './DataAvailability/HeaderCell';
@@ -175,12 +175,9 @@ export const CustomizeCellView = ({
       return {
         ...column,
         headerEventHandler: deleteAllFiles,
-        customColHeaderRender: (toggleDisplay) => {
-          console.log(toggleDisplay);
-          return (
-            <CustomHeaderCellView openDialogBox={toggleDisplay} {...column} />
-          );
-        },
+        customColHeaderRender: (toggleDisplay) => (
+          <CustomHeaderCellView openDialogBox={toggleDisplay} {...column} />
+        ),
       };
     }
     /*

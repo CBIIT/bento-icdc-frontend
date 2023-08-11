@@ -15,17 +15,11 @@ import {
   headerIcon,
 } from '../../bento/caseDetailsData';
 import Snackbar from '../../components/Snackbar';
-import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
-import filterCasePageOnStudyCode from '../../utils/utils';
 import MultiStudyCases from './components/multiStudyCasesController';
 
 const CaseDetail = ({
   classes, data,
 }) => {
-  React.useEffect(() => {
-    fetchDataForDashboardTabDataTable();
-  }, []);
-
   const stat = {
     numberOfStudies: 1,
     numberOfCases: 1,
@@ -61,7 +55,6 @@ const CaseDetail = ({
   }, {
     name: `${caseDetail.study.clinical_study_designation} CASES`,
     to: '/explore',
-    onClick: () => filterCasePageOnStudyCode(caseDetail.study.clinical_study_designation),
     isALink: true,
   }, {
     name: caseDetail.case_id,

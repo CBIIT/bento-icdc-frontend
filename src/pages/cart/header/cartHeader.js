@@ -104,7 +104,6 @@ const CartHeader = React.forwardRef(({
     if (!manifestData) {
       return null;
     }
-    console.log(manifestData);
     const processedStoreManifestPayload = manifestData.filesInList.map((el) => ({
       file_name: el.file_name,
       file_type: el.file_type,

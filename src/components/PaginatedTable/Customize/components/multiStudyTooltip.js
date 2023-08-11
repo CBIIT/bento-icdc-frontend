@@ -8,10 +8,10 @@ import {
   List,
   ListItem,
 } from '@material-ui/core';
-import { ToolTip as Tooltip } from '../../../bento-core';
+import { ToolTip as Tooltip } from '../../../../bento-core';
 import {
   multiStudyData,
-} from '../../../bento/dashboardTabData';
+} from '../../../../bento/dashboardTabData';
 
 const theme = {
   overrides: {

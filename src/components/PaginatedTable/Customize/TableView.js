@@ -7,6 +7,7 @@ import ViewJBrowseButton from '../../../pages/JbrowseDetail/components/JBrowseVi
 export const DisplayCustomText = ({
   tab,
   totalRowCount,
+  activeFilters,
 }) => {
   const {
     id,
@@ -14,7 +15,7 @@ export const DisplayCustomText = ({
   let text = '';
   switch (id) {
     case 'case_tab':
-      text = `Add all files for the ${totalRowCount} selected Cases to My Files?`;
+      text = Object.keys(activeFilters).length > 0 ? `Add all filtered Files for the ${totalRowCount} selected Cases to My Files?` : `Add all files for the ${totalRowCount} selected Cases to My Files?`;
       break;
     case 'sample_tab':
       text = `Add all files for the ${totalRowCount} selected Samples to My Files?`;
@@ -23,7 +24,7 @@ export const DisplayCustomText = ({
       text = `Add all ${totalRowCount} files to My Files?`;
       break;
     case 'study_file_tab':
-      text = `Add all files for the ${totalRowCount} selected StudyFiles to My Files?`;
+      text = `Add all ${totalRowCount} files to My Files?`;
       break;
     default:
       break;
@@ -33,6 +34,19 @@ export const DisplayCustomText = ({
       {text}
     </>
   );
+};
+
+/**
+* Return title that will be displayed in wrapper buttons
+*/
+const getButtonTitle = (tab, item) => {
+  if (item.role === btnTypes.ADD_ALL_FILES) {
+    return tab.selectAllButtonText;
+  } if (item.role === btnTypes.ADD_SELECTED_FILES && tab.selectedButtonText) {
+    return tab.selectedButtonText;
+  }
+
+  return item.title;
 };
 
 /**
@@ -49,7 +63,7 @@ export const updateWrapperConfig = (tab, configs, context, totalRowCount) => {
         || item.role === btnTypes.ADD_SELECTED_FILES) {
         return {
           ...item,
-          title: (item.role === btnTypes.ADD_ALL_FILES) ? tab.selectAllButtonText : item.title,
+          title: getButtonTitle(tab, item),
           addFileQuery: (item.role === btnTypes.ADD_ALL_FILES)
             ? tab.addAllFileQuery : tab.addSelectedFilesQuery,
           dataKey: tab.addFilesRequestVariableKey,

@@ -12,7 +12,7 @@ import {
 import styled from 'styled-components';
 import { noop, filter } from 'lodash';
 // import DownloadBtn from './components/downloadBtn';
-import { downloadJson } from '../../../fileCentricCart/utils';
+import { downloadJson } from '../../../cart/utils';
 import useFetchCSVDownload from './hooks/useFetchCSVDownload';
 import { ToolTip as Tooltip } from '../../../../bento-core';
 import

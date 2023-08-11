@@ -8,9 +8,6 @@ import StatsView from './StatsView';
 
 const Stats = ({ filter }) => {
   const dispatch = useDispatch();
-  const initDashboardStatus = () => () => Promise.resolve(
-    dispatch(fetchDataForDashboardTabDataTable()),
-  );
 
   const data = useSelector((state) => {
     if (!state.dashboard.isFetched) {

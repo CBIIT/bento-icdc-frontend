@@ -10,6 +10,7 @@ import {
 import _ from 'lodash';
 import styled from 'styled-components';
 import { ToolTip } from '../../../../bento-core';
+import { useOrderSupportingData } from './useOrderSupportingData';
 
 const ScrollContainer = styled.div`
   overflow: auto;
@@ -42,14 +43,11 @@ const SupportingData = ({
   data,
   isLoading,
 }) => {
-  const IDCData = data?.CRDCLinks.filter((item) => item.repository === 'IDC');
-  const TCIAData = data?.CRDCLinks.filter((item) => item.repository === 'TCIA');
-  const IDCMetaData = IDCData?.[0]?.metadata;
-  const TCIAMetaData = TCIAData?.[0]?.metadata;
-
-  if (isLoading || !IDCMetaData || !TCIAMetaData) {
+  if (isLoading) {
     return <CircularProgress />;
   }
+
+  const [IDCMetaData, TCIAMetaData] = useOrderSupportingData(data);
 
   return (
     <div className={classes.supportDataContainer}>
