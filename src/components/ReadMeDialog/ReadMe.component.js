@@ -18,7 +18,7 @@ import styles from './ReadMe.style';
 import CustomTheme from './ReadMe.theme.config';
 import footerLine from './assets/footer_line.png';
 import nihLogo from './assets/icdc_nih_logo.png';
-import { createFileName } from '../../pages/cart/utils';
+import { createFileName } from '../../pages/fileCentricCart/utils';
 import PdfDownloadIcon from './assets/Download_PDF.svg';
 
 const date = new Date().toLocaleString('en-us', { month: 'long', year: 'numeric', day: 'numeric' });

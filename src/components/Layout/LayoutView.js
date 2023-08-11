@@ -25,7 +25,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
-import CartView from '../../pages/cart/CartController';
+import CartView from '../../pages/fileCentricCart/CartController';
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
 const ScrollToTop = () => {
