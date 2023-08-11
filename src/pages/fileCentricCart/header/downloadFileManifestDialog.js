@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useApolloClient } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 // import Button from '@material-ui/core/Button';
 // import Avatar from '@material-ui/core/Avatar';
@@ -18,6 +19,8 @@ import {
 } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import DownloadFileManifestIcon from './assets/dwnldFileManifest.svg';
+import { GET_MY_CART_DATA_QUERY, manifestData, myFilesPageData } from '../../../bento/fileCentricCartWorkflowData';
+import { downloadJson } from '../utils';
 // import { noop } from 'lodash';
 // import PDFIcon from './assets/Download_PDF.svg';
 
@@ -93,7 +96,7 @@ const CustomDialogContent = withStyles(() => ({
 // ));
 
 const DownloadFileManifestDialog = React.forwardRef(({
-  onClose, selectedValue, open, prepareDownload,
+  onClose, selectedValue, open, filesId,
 }, ref) => {
   const [comment, setComment] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -111,6 +114,23 @@ const DownloadFileManifestDialog = React.forwardRef(({
   const handleTextFieldChange = (event) => {
     setComment(event.target.value);
   };
+
+  const client = useApolloClient();
+  async function downloadSCSVFile() {
+    const result = await client.query({
+      query: GET_MY_CART_DATA_QUERY,
+      variables: {
+        uuids: filesId,
+        first: 10000,
+      },
+    }).then((response) => response.data.filesInList);
+    downloadJson(
+      result,
+      comment,
+      myFilesPageData.manifestFileName,
+      manifestData,
+    );
+  }
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} classes={{ paper: classes.dialogContainer }}>
@@ -132,7 +152,7 @@ const DownloadFileManifestDialog = React.forwardRef(({
           classes={{ root: classes.textArea, input: classes.input }}
         />
         <Button
-          onClick={prepareDownload}
+          onClick={downloadSCSVFile}
           classes={{
             root: classes.downloadFileManifestBtn,
           }}

@@ -1,7 +1,9 @@
+
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
 export function createFileName(fileName, format = '.csv') {
+
   const date = new Date();
   const yyyy = date.getFullYear();
   let dd = date.getDate();
@@ -24,6 +26,7 @@ export function createFileName(fileName, format = '.csv') {
   if (seconds < 10) { seconds = `0${seconds}`; }
 
   return `${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}${format}`;
+
 }
 
 export function convertToCSV(jsonse, comments, keysToInclude, header) {

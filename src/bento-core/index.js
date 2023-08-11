@@ -11,7 +11,7 @@ import {
   clearFacetSection,
   clearSliderSection,
   toggleCheckBox,
-} from 'icdc-facet-filter';
+} from '@bento-core/facet-filter';
 import {
   TableView,
   Wrapper,
@@ -28,7 +28,7 @@ import {
   onRowSeclect,
   setTotalRowCount,
   customPaginationAction,
-} from 'icdc-paginated-table';
+} from '@bento-core/paginated-table';
 import {
   cellTypes,
   dataFormatTypes,
@@ -43,7 +43,7 @@ import {
 } from '@bento-core/local-find';
 import StatsBar from '@bento-core/stats-bar';
 import { Tabs as BentoTabs } from '@bento-core/tab';
-import { QueryBarGenerator } from 'icdc-query-bar';
+import { QueryBarGenerator } from '@bento-core/query-bar';
 import {
   transformInitialDataForSunburst,
 } from '@bento-core/util';
