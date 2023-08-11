@@ -9,11 +9,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { noop } from 'lodash';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
+import { cn } from '@bento-core/util';
 import gql from 'graphql-tag';
-import {
-  cn,
-  ToolTip as Tooltip,
-} from '@bento-core/util';
 import env from '../../../utils/env';
 import Styles from './cartHeader.style';
 import ReadMoreSVG from './readMore';
@@ -22,6 +19,9 @@ import ReadMeDialogComponent from '../../../components/ReadMeDialog/ReadMe.contr
 import cgcIcon from './assets/cgc.svg';
 import { getManifestData } from '../util/TableService';
 import { GET_STORE_MANIFEST_DATA_QUERY } from '../../../bento/fileCentricCartWorkflowData';
+import {
+  ToolTip as Tooltip,
+} from '../../../bento-core';
 
 const StyledMenu = withStyles({
   paper: {
