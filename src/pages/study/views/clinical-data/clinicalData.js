@@ -5,7 +5,7 @@ import {
   Table, TableBody, TableCell,
   TableContainer,
   TableHead,
-  TableRow, useMediaQuery,
+  TableRow,
   withStyles,
 } from '@material-ui/core';
 import styled from 'styled-components';
@@ -169,7 +169,7 @@ const ClinicalData = ({
     isLoading,
   ] = useFetchCSVDownload(csvDownloadFlags, studyCode);
 
-  const useColumn = useMediaQuery('(max-width:1460px)');
+  // const useColumn = useMediaQuery('(max-width:1460px)');
   const [tableA, tableB] = splitArray(data);
 
   const handleCSVDownload = (element) => {
@@ -420,7 +420,9 @@ const ClinicalData = ({
                 </Table>
               </TableContainer>
             </ScrollContainer>
-            <div className={classes.topDownloadBtn}><DownloadBtn loading={loading} handleCSVDownload={handleCSVDownload} /></div>
+            <div className={classes.topDownloadBtn}>
+              <DownloadBtn loading={loading} handleCSVDownload={handleCSVDownload} />
+            </div>
           </div>
         </div>
 
