@@ -170,6 +170,7 @@ const ClinicalData = ({
     isLoading,
   ] = useFetchCSVDownload(csvDownloadFlags, studyCode);
 
+  // const useColumn = useMediaQuery('(max-width:1460px)');
   const [tableA, tableB] = splitArray(data);
 
   const handleCSVDownload = (element) => {
