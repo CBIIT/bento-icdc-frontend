@@ -7,10 +7,10 @@ import {
   // eslint-disable-next-line no-unused-vars
   Typography,
 } from '@material-ui/core';
-import { ToolTip } from 'bento-components';
 import _ from 'lodash';
 import styled from 'styled-components';
 import { useOrderSupportingData } from './useOrderSupportingData';
+import { ToolTip } from '../../../../bento-core';
 
 const ScrollContainer = styled.div`
   overflow: auto;

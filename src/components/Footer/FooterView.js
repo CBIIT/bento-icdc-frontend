@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Footer } from 'bento-components';
 import { useLocation } from 'react-router';
 import FooterData from '../../bento/globalFooterData';
 import env from '../../utils/env';
 import CustomThemeProvider from './FooterThemConfig';
+import { Footer } from '../../bento-core';
 
 const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_API;
 

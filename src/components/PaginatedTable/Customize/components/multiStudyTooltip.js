@@ -8,7 +8,7 @@ import {
   List,
   ListItem,
 } from '@material-ui/core';
-import { ToolTip as Tooltip } from 'bento-components';
+import { ToolTip as Tooltip } from '../../../../bento-core';
 import {
   multiStudyData,
 } from '../../../../bento/dashboardTabData';

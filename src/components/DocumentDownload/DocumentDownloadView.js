@@ -3,7 +3,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { ToolTip } from 'bento-components';
+import { ToolTip } from '../../bento-core';
 
 import CustomIcon from '../CustomIcon';
 import {

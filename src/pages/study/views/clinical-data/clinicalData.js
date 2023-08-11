@@ -9,7 +9,6 @@ import {
   withStyles,
 } from '@material-ui/core';
 import styled from 'styled-components';
-import { ToolTip as Tooltip } from 'bento-components';
 import { filter } from 'lodash';
 import DownloadBtn from './components/downloadBtn';
 import { downloadAndZipJson, downloadJson } from '../../../fileCentricCart/utils';
@@ -28,6 +27,7 @@ import
   priorTherapyNodeMetadata,
   visitNodeMetadata, vitalSignsNodeMetadata,
 } from '../../../../bento/studyDetailsData';
+import { ToolTip as Tooltip } from '../../../../bento-core';
 
 function splitArray(originalArray) {
   const mid = Math.ceil(originalArray.length / 2);

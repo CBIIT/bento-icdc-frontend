@@ -10,10 +10,8 @@ import {
 import {
   CheckBox as CheckBoxIcon, CheckBoxOutlineBlank as CheckBoxBlankIcon,
 } from '@material-ui/icons';
-import {
-  ToolTip as Tooltip,
-} from 'bento-components';
 import _ from 'lodash';
+import { ToolTip as Tooltip } from '../../../bento-core';
 
 const styles = {
   listItemGutters: {

@@ -7,12 +7,12 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import {
-  cn,
-} from 'bento-components';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';
+import {
+  cn,
+} from '@bento-core/util';
 import StatsView from '../../components/Stats/StatsView';
 import {
   studyDisposition,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import { cn } from 'bento-components';
+import { cn } from '@bento-core/util';
 
 const tabLabel = ({
   classes, title, primaryColorClass, icon,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import { LinkBar } from 'bento-components';
+import LinkBar from '../LinkBar';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import resourceDropdownRoutes from '../../bento/resourceDropdownRoutes';
 import dataDropdownRoutes from '../../bento/dataDropdownRoutes';

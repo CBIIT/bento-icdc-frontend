@@ -3,7 +3,7 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { cn } from 'bento-components';
+import { cn } from '@bento-core/util';
 import Stats from '../../components/Stats/AllStatsController';
 import { pageData } from '../../bento/programData';
 import ProgramCard from '../../components/ProgramCard/programCard';
