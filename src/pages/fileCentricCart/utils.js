@@ -1,4 +1,7 @@
-export function createFileName(fileName) {
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
+
+export function createFileName(fileName, format = '.csv') {
   const date = new Date();
   const yyyy = date.getFullYear();
   let dd = date.getDate();
@@ -20,7 +23,7 @@ export function createFileName(fileName) {
 
   if (seconds < 10) { seconds = `0${seconds}`; }
 
-  return `${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
+  return `${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}${format}`;
 }
 
 export function convertToCSV(jsonse, comments, keysToInclude, header) {
@@ -63,3 +66,29 @@ export function downloadJson(tableData, comments, fileName, manifestData) {
   tempLink.click();
   document.body.removeChild(tempLink);
 }
+
+export const downloadAndZipJson = (dataArray, setLoading, studyCode) => {
+  const filteredArr = dataArray.filter((el) => el.node.length !== 0);
+  const processedFiles = [];
+  const zip = new JSZip();
+
+  filteredArr.forEach((dataObj) => {
+    const jsonse = JSON.stringify(dataObj.node);
+    const csv = convertToCSV(jsonse,
+      dataObj.comments,
+      dataObj.metadata.keysToInclude, dataObj.metadata.header);
+    processedFiles.push({
+      name: createFileName(`${dataObj.fileName}`),
+      content: csv,
+    });
+  });
+
+  processedFiles.forEach((file) => {
+    zip.file(file.name, file.content);
+  });
+
+  zip.generateAsync({ type: 'blob' }).then((content) => {
+    saveAs(content, createFileName(`ICDC_Clinical_Data-${studyCode}`, '.zip'));
+  });
+  setLoading(false);
+};

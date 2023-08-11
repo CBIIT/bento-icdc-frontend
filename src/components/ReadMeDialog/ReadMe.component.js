@@ -18,7 +18,7 @@ import styles from './ReadMe.style';
 import CustomTheme from './ReadMe.theme.config';
 import footerLine from './assets/footer_line.png';
 import nihLogo from './assets/icdc_nih_logo.png';
-import { createFileName } from '../../pages/cart/utils';
+import { createFileName } from '../../pages/fileCentricCart/utils';
 import PdfDownloadIcon from './assets/Download_PDF.svg';
 
 const date = new Date().toLocaleString('en-us', { month: 'long', year: 'numeric', day: 'numeric' });
@@ -39,8 +39,8 @@ export const downloadMarkdownPdf = async (title, content) => {
   readMeContent.innerHTML += titleEl;
   readMeContent.innerHTML += marked(content);
 
-  /** set pdf fileneam */
-  const fileName = createFileName('read_me', 'ICDC_Data_Model-');
+  /** set pdf fileneame */
+  const fileName = createFileName('ICDC-MY-FILES-CART-README', 'pdf');
   /** configure pdf increase pixel of the PDF */
   const options = {
     margin: [0.85, 0.75, 1, 0.75],
@@ -80,7 +80,7 @@ export const downloadMarkdownPdf = async (title, content) => {
         pdf.setFontSize(8);
         pdf.setTextColor(0);
         pdf.text(pgWidth - 1.75, pgHeight - 0.5, `${date} | ${i}`);
-        pdf.text(pgWidth - 7.75, pgHeight - 0.5, 'CANINECOMMONS.CANCER.GOV/#/ICDC-DATA-MODEL');
+        pdf.text(pgWidth - 7.75, pgHeight - 0.5, 'CANINECOMMONS.CANCER.GOV/#/FileCentricCart');
         pdf.addImage(footerLine, 'JPEG', pgWidth - 7.75, pgHeight - 0.75, 7, 0.05);
         // if (i === 1) {
         // pdf.addImage(nihLogo, 'JPEG', pgWidth - 7.75, pgHeight - 10.75, 4, 0.5);
