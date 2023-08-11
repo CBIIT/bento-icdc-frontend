@@ -1,4 +1,4 @@
-export function createFileName(fileName) {
+export function createFileName(fileName, format = 'csv') {
   const date = new Date();
   const yyyy = date.getFullYear();
   let dd = date.getDate();
@@ -20,7 +20,7 @@ export function createFileName(fileName) {
 
   if (seconds < 10) { seconds = `0${seconds}`; }
 
-  return `${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
+  return `${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}.${format}`;
 }
 
 export function convertToCSV(jsonse, comments, keysToInclude, header) {
