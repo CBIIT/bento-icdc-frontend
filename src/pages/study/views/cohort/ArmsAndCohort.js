@@ -7,7 +7,7 @@ import {
   CustomDataTable,
   getOptions,
   ToolTip as Tooltip,
-} from 'bento-components';
+} from '../../../../bento-core';
 import { Typography } from '../../../../components/Wrappers/Wrappers';
 import {
   table1,

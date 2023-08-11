@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import DownloadIcon from '@material-ui/icons/CloudDownload';
 import { withStyles } from '@material-ui/core/styles';
-import { ToolTip as Tooltip } from 'bento-components';
+import { ToolTip as Tooltip } from '../../../bento-core';
 import client from '../../../utils/graphqlClient';
 import { downloadJson } from './utils';
 

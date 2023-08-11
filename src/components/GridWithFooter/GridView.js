@@ -5,13 +5,13 @@ import {
 } from '@material-ui/core';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
-import { CustomDataTable, ToolTip as Tooltip } from 'bento-components';
 import HelpIcon from '@material-ui/icons/Help';
 import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart';
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';
 import TableThemeProvider from './tableThemeConfig';
 import ViewJBrowseButton from '../../pages/JbrowseDetail/components/JBrowseViewBtn';
+import { CustomDataTable, ToolTip as Tooltip } from '../../bento-core';
 
 const GridView = ({
   classes,

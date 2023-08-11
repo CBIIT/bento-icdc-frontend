@@ -6,7 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import cloneDeep from 'lodash/cloneDeep';
 import { CircularProgress, Backdrop, withStyles } from '@material-ui/core';
-import { CustomDataTable, ToolTip as Tooltip } from 'bento-components';
+import { ToolTip as Tooltip, CustomDataTable } from '../../bento-core';
 import client from '../../utils/graphqlClient';
 import CSVDownloadToolbar from './components/CSVDownloadCustomToolbar';
 

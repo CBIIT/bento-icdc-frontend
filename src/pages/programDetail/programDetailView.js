@@ -5,12 +5,12 @@ import {
   Typography,
   CircularProgress,
 } from '@material-ui/core';
+import { request, gql } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
 import {
   cn,
   getOptions,
-} from 'bento-components';
-import { request, gql } from 'graphql-request';
-import { useQuery } from '@tanstack/react-query';
+} from '@bento-core/util';
 import StatsView from '../../components/Stats/StatsView';
 import {
   table,

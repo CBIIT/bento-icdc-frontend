@@ -5,15 +5,15 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
-import {
-  cn,
-  ToolTip as Tooltip,
-} from 'bento-components';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { noop } from 'lodash';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
 import gql from 'graphql-tag';
+import {
+  cn,
+  ToolTip as Tooltip,
+} from '@bento-core/util';
 import env from '../../../utils/env';
 import Styles from './cartHeader.style';
 import ReadMoreSVG from './readMore';

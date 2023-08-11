@@ -4,7 +4,7 @@ import {
   IconButton,
 } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
-import { ToolTip as Tooltip } from 'bento-components';
+import { ToolTip as Tooltip } from '../../../bento-core';
 import {
   clearTableSelections, fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal,
 } from '../store/dashboardReducer';
