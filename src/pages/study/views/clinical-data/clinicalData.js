@@ -554,7 +554,9 @@ const ClinicalData = ({
                 </Table>
               </TableContainer>
             </ScrollContainer>
-            <div className={classes.bottomDownloadBtn}><DownloadBtn loading={loading} handleCSVDownload={handleCSVDownload} /></div>
+            <div className={classes.bottomDownloadBtn}>
+              <DownloadBtn loading={loading} handleCSVDownload={handleCSVDownload} />
+            </div>
           </div>
         </div>
       </div>
@@ -563,9 +565,14 @@ const ClinicalData = ({
 };
 
 const styles = {
-  leftArea: { gridArea: 'a' },
-  rightArea: { gridArea: 'b' },
-  container: { display: 'grid', placeItems: 'center' },
+  leftArea: { gridArea: 'a', paddingLeft: '77px' },
+  rightArea: { gridArea: 'b', paddingLeft: '77px' },
+  container: {
+    display: 'grid',
+    '@media (max-width: 1500px)': {
+      placeItems: 'center',
+    },
+  },
   paragraphOne: { width: '617px' },
   paragraphTwo: { width: '623px' },
   csvBtn: { minWidth: '35px', maxWidth: '35px' },
