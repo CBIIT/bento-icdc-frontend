@@ -1,4 +1,3 @@
-import React from 'react';
 import gql from 'graphql-tag';
 import {
   cellTypes,
@@ -286,7 +285,6 @@ export const fileTable = {
       primary: true,
       display: true,
       tooltipText: 'sort',
-      role: cellTypes.DISPLAY,
     },
     {
       dataField: 'file_type',
@@ -376,48 +374,46 @@ export const table1 = {
   // Set 'display' to false to hide the table entirely
   display: true,
   // Table title
-  tableTitle: 'ASSOCIATED SAMPLES',
+  tableTitle: 'This study is organized as follows:',
   // Field name for files data, need to be updated only when using a different GraphQL query
   subjectDetailField: 'samples',
   // Value must be one of the 'dataField's in fileTableColumns
   defaultSortField: 'sample_id',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
-  // Text to appear on Add to cart button
-  // viewColumns 'true' or 'false'
-  viewColumns: true,
-  // download csv
-  download: true,
-  // downloaded File Name
-  downloadFileName: 'ICDC_ARMS_AND_COHORTS_download',
   // Set 'selectableRows' to true to show the row selection
-  selectableRows: false,
-  // A maximum of 10 columns are allowed
+  extendedViewConfig: {
+    download: {
+      customDownload: false,
+      downloadFileName: 'ICDC_ARMS_AND_COHORTS_download',
+      downloadCsv: 'Download Table Contents As CSV',
+    },
+    manageViewColumns: {
+      title: 'View Columns',
+    },
+  },
   columns: [
     {
-      name: 'arm',
-      label: 'Arms',
-      options: {
-        viewColumns: false,
-      },
+      dataField: 'arm',
+      header: 'Arms',
+      display: true,
+      tooltipText: 'sort',
     },
     {
-      name: 'description',
-      label: 'Description',
-      options: {
-        customBodyRender: (value) => (
-          value.split('#').map((desc) => (desc === '' ? '' : <li style={{ listStyleType: 'none' }}>{desc}</li>))
-        ),
-      },
+      dataField: 'description',
+      header: 'Description',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+      cellType: cellTypes.CUSTOM_ELEM,
     },
     {
-      name: 'does',
-      label: 'Cohorts',
-      options: {
-        customBodyRender: (value) => (
-          value.split('#').map((desc) => (desc === '' ? '' : <li style={{ listStyleType: 'none' }}>{desc}</li>))
-        ),
-      },
+      dataField: 'does',
+      header: 'Cohorts',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+      cellType: cellTypes.CUSTOM_ELEM,
     },
   ],
   noArmMessage: 'This study is not divided into arms',

@@ -3,6 +3,8 @@ export const customizeColumn = {
   DOCUMENT_DOWNLOAD: 'access_file',
   numberOfCases: 'numberOfCases',
   studyDesignation: 'clinical_study_designation',
+  Description: 'description',
+  Cohort: 'does',
 };
 
 export const customizeLandScapeView = {

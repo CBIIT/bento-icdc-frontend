@@ -69,6 +69,7 @@ const styles = () => ({
     maxWidth: '100%',
     lineHeight: '40px',
     marginBottom: '-32px',
+    paddingLeft: '0px',
   },
   tableContainer: {
     background: 'white',
