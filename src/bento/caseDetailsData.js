@@ -362,7 +362,6 @@ export const fileTable = {
       header: 'File Name',
       display: true,
       tooltipText: 'sort',
-      role: cellTypes.DISPLAY,
     },
     {
       dataField: 'access_file',
@@ -383,6 +382,7 @@ export const fileTable = {
         iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
       cellType: cellTypes.CUSTOM_ELEM,
+      role: cellTypes.DISPLAY,
       tooltipText: 'sort',
     },
     {

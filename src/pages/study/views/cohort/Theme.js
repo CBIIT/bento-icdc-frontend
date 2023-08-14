@@ -23,7 +23,6 @@ export const customTheme = {
     root: {
       background: '#f3f3f3',
       paddingTop: '5px',
-      paddingLeft: '0px',
       '& .add_selected_file_tooltip_icon': {
         width: '17px !important',
       },
@@ -71,6 +70,7 @@ export const customTheme = {
       textTransform: 'uppercase',
       '&.add_all_button': {
         marginRight: '24px',
+        // width: '120px',
         backgroundColor: '#142D64',
       },
       '&.add_selected_button': {
@@ -163,7 +163,9 @@ export const tblHeader = {
   MuiTableCell: {
     root: {
       backgroundColor: '#f5f5f5',
-      color: '#194563',
+      '& li': {
+        color: '#194563',
+      },
     },
   },
   MuiTooltip: {
@@ -191,14 +193,24 @@ const tblBody = {
       },
     },
   },
-  MuiSvgIcon: {
-    root: {
-      color: '#0B3556',
-    },
-  },
   MuiTableCell: {
     root: {
-      padding: '0px 5px 0px 15px',
+      padding: '20px 5px 20px 15px',
+      color: '#223d4c',
+      fontSize: '10pt',
+      fontFamily: 'Open Sans, sans-serif',
+      fontWeight: 'bold',
+      letterSpacing: '0.025em',
+      '& li': {
+        color: '#223d4c',
+      },
+      '& p': {
+        color: '#223d4c',
+        fontSize: '10pt',
+        fontFamily: 'Open Sans, sans-serif',
+        fontWeight: 'bold',
+        letterSpacing: '0.025em',
+      },
     },
   },
 };

@@ -45,6 +45,14 @@ const CaseIdLink = (props) => {
   );
 };
 
+const ArmsCohortList = (props) => {
+  const { dataField } = props;
+  const value = props[dataField];
+  return value
+    .split('#').map((desc) => (desc === '' ? ''
+      : <li style={{ listStyleType: 'none' }}>{desc}</li>));
+};
+
 const DocumentDownloadView = ({
   file_size: fileSize,
   file_format: fileFormat,
@@ -83,6 +91,11 @@ export const CustomCellView = (props) => {
     case customizeColumn.studyDesignation:
       return (
         <StudyLink {...props} />
+      );
+    case customizeColumn.Description:
+    case customizeColumn.Cohort:
+      return (
+        <ArmsCohortList {...props} />
       );
     case customizeLandScapeView.CASE_FILES:
     case customizeLandScapeView.STUDY_FILES:
