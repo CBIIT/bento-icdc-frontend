@@ -1,12 +1,18 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import {
   Grid,
   withStyles,
+  Typography,
+  CircularProgress,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {
   cn,
 } from 'bento-components';
+import { request, gql } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
+import _ from 'lodash';
 import Snackbar from '../../components/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
@@ -31,13 +37,91 @@ import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDe
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 import Styles from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
+import SupportingData from './views/supporting-data/supportingData';
+import env from '../../utils/env';
+import ClinicalData from './views/clinical-data/clinicalData';
+
+const studiesByProgram = gql`
+  query studiesByProgram {
+    studiesByProgram {
+      clinical_study_designation
+      CRDCLinks {
+        url
+        repository
+        metadata {
+                ... on IDCMetadata {
+                    collection_id,
+                    cancer_type,
+                    date_updated,
+                    description,
+                    doi,
+                    image_types,
+                    location,
+                    species,
+                    subject_count,
+                    supporting_data
+                }
+                ... on TCIAMetadata {
+                    Collection,
+                    total_patient_IDs,
+                    unique_modalities,
+                    unique_bodyparts_examined,
+                    total_image_counts
+                }
+            }
+      }
+      numberOfCRDCNodes
+      numberOfImageCollections
+    }
+  }
+`;
+
+function hasPositiveValue(arr) {
+  return arr.some((obj) => Object.values(obj).some((value) => value > 0));
+}
+
+const processData = (names, nodeCountArg, nodeCaseCountArg) => names.map((name) => {
+  const objMatcher = _.toLower(_.replace(name, ' ', '_'));
+  const nodeCount = nodeCountArg[objMatcher];
+  const nodeCaseCount = nodeCaseCountArg[objMatcher];
+
+  if (nodeCaseCount === 0 && nodeCount === 0) {
+    return {
+      name,
+      iEmpty: true,
+    };
+  }
+  return {
+    name,
+    nodeCount,
+    nodeCaseCount,
+    isEmpty: false,
+  };
+});
 
 const StudyDetailView = ({ classes, data }) => {
+  const { data: interOpData, isLoading, isError } = useQuery({
+    queryKey: ['studiesByProgram'],
+    queryFn: async () => request(
+      env.REACT_APP_INTEROP_SERVICE_URL,
+      studiesByProgram,
+    ),
+  });
+
   const studyData = data.study[0];
+  const studyCode = studyData.clinical_study_designation;
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
   const caseFileTypes = [...new Set(data.filesOfStudy.map((f) => (f.file_type))
     .filter((f) => !studyFileTypes.includes(f)))];
+  const { clinicalDataNodeNames, clinicalDataNodeCounts, clinicalDataNodeCaseCounts } = data;
+  const clinicalDataTabData = {
+    names: clinicalDataNodeNames,
+    nodeCount: clinicalDataNodeCounts,
+    nodeCaseCount: clinicalDataNodeCaseCounts,
+  };
+  const hasClinicalData = hasPositiveValue([clinicalDataNodeCounts, clinicalDataNodeCaseCounts]);
+
   const stat = {
     numberOfStudies: 1,
     numberOfCases: data.caseCountOfStudy,
@@ -145,6 +229,55 @@ const StudyDetailView = ({ classes, data }) => {
     ), renderEmbargoLabel, renderPendingLabel,
   );
 
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (isError) {
+    return (
+      <Typography variant="h5" color="error" size="sm">
+        An error has occurred in interoperability api
+      </Typography>
+    );
+  }
+
+  const currentStudy = interOpData?.studiesByProgram
+    .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
+
+  let processedTabs;
+  if (!currentStudy) {
+    processedTabs = tab.items.filter((item) => item.label !== 'SUPPORTING DATA');
+  } else {
+    processedTabs = tab.items;
+  }
+
+  if (!hasClinicalData) {
+    processedTabs = processedTabs.filter((item) => item.label !== 'CLINICAL DATA');
+  }
+
+  const processedClinicalDataTabData = processData(
+    clinicalDataTabData.names,
+    clinicalDataTabData.nodeCount,
+    clinicalDataTabData.nodeCaseCount,
+  );
+
+  let clinicalDataNodeCount = 0;
+  const supportingDataCount = currentStudy?.CRDCLinks.length;
+
+  const clinicalDataDownloadFlags = {};
+
+  processedClinicalDataTabData.forEach((el) => {
+    if (el?.isEmpty === false) {
+      clinicalDataNodeCount += 1;
+      clinicalDataDownloadFlags[el.name] = true;
+    } else {
+      clinicalDataDownloadFlags[el.name] = false;
+    }
+  });
+
+  const supportingDataTabIndex = processedTabs.findIndex((tab) => tab.label === 'SUPPORTING DATA');
+  const clinicalDataTabIndex = processedTabs.findIndex((tab) => tab.label === 'CLINICAL DATA');
+
   return (
     <StudyThemeProvider>
       <Snackbar
@@ -174,16 +307,16 @@ const StudyDetailView = ({ classes, data }) => {
                 </span>
               </span>
               {
-              (studyData.accession_id !== null && studyData.accession_id !== undefined && studyData.accession_id !== '')
-              && (
-                <>
-                  <span className={classes.headerBar}> | </span>
-                  <span className={classes.headerAccessionItem}>
-                    <span className={classes.accessionLabel}>{'Accession ID : '}</span>
-                    <span className={classes.accessionValue}>{studyData.accession_id}</span>
-                  </span>
-                </>
-              )
+                (studyData.accession_id !== null && studyData.accession_id !== undefined && studyData.accession_id !== '')
+                && (
+                  <>
+                    <span className={classes.headerBar}> | </span>
+                    <span className={classes.headerAccessionItem}>
+                      <span className={classes.accessionLabel}>{'Accession ID : '}</span>
+                      <span className={classes.accessionValue}>{studyData.accession_id}</span>
+                    </span>
+                  </>
+                )
               }
             </div>
             <div
@@ -234,7 +367,7 @@ const StudyDetailView = ({ classes, data }) => {
                   </span>
                 </div>
               )
-            }
+          }
         </div>
 
         <div className={classes.detailContainer}>
@@ -242,7 +375,7 @@ const StudyDetailView = ({ classes, data }) => {
             <Grid item xs={12}>
               <Tab
                 styleClasses={classes}
-                tabItems={tab.items}
+                tabItems={processedTabs}
                 currentTab={currentTab}
                 handleTabChange={handleTabChange}
               />
@@ -250,35 +383,84 @@ const StudyDetailView = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
-      <TabPanel value={currentTab} index={0}>
-        <Overview
-          studyData={studyData}
-          diagnoses={diagnoses}
-          caseFileTypes={caseFileTypes}
-          closeSnack={closeSnack}
-          openSnack={openSnack}
-          data={data}
-        />
-      </TabPanel>
-      <TabPanel value={currentTab} index={1}>
-        <ArmsAndCohort
-          studyData={studyData}
-        />
-      </TabPanel>
-      <TabPanel value={currentTab} index={2}>
-        <StudyFiles
-          closeSnack={closeSnack}
-          openSnack={openSnack}
-          data={data}
-          studyData={studyData}
-        />
-      </TabPanel>
-      <TabPanel value={currentTab} index={3}>
-        <Publication
-          publications={studyData.publications}
-          display={tab.publication}
-        />
-      </TabPanel>
+      {
+            processedTabs.map((processedTab, index) => {
+              switch (processedTab.label) {
+                case 'OVERVIEW': return (
+                  <TabPanel value={currentTab} index={index}>
+                    <Overview
+                      studyData={studyData}
+                      diagnoses={diagnoses}
+                      caseFileTypes={caseFileTypes}
+                      closeSnack={closeSnack}
+                      openSnack={openSnack}
+                      data={data}
+                      nodeCount={clinicalDataNodeCount}
+                      supportingDataCount={supportingDataCount}
+                      setCurrentTab={setCurrentTab}
+                      supportingDataTabIndex={supportingDataTabIndex}
+                      clinicalDataTabIndex={clinicalDataTabIndex}
+                    />
+                  </TabPanel>
+                );
+
+                case 'ARMS & COHORTS': return (
+                  <TabPanel value={currentTab} index={index}>
+                    <ArmsAndCohort
+                      studyData={studyData}
+                    />
+                  </TabPanel>
+                );
+                case 'STUDY FILES': return (
+                  <TabPanel value={currentTab} index={index}>
+                    <StudyFiles
+                      closeSnack={closeSnack}
+                      openSnack={openSnack}
+                      data={data}
+                      studyData={studyData}
+                    />
+                  </TabPanel>
+                );
+                case 'PUBLICATIONS': return (
+                  <TabPanel value={currentTab} index={index}>
+                    <Publication
+                      publications={studyData.publications}
+                      display={tab.publication}
+                    />
+                  </TabPanel>
+                );
+                case 'CLINICAL DATA': return (
+                  <TabPanel value={currentTab} index={index}>
+                    {
+                              hasClinicalData
+                        && (
+                        <ClinicalData
+                          data={processedClinicalDataTabData}
+                          csvDownloadFlags={clinicalDataDownloadFlags}
+                          studyCode={studyCode}
+                        />
+                        )
+                          }
+                  </TabPanel>
+
+                );
+                case 'SUPPORTING DATA': return (
+                  <TabPanel value={currentTab} index={index}>
+                    {
+                              currentStudy && (
+                              <SupportingData
+                                data={currentStudy}
+                                isLoading={isLoading}
+                              />
+                              )
+                          }
+                  </TabPanel>
+                );
+                default:
+                  return null;
+              }
+            })
+        }
     </StudyThemeProvider>
   );
 };

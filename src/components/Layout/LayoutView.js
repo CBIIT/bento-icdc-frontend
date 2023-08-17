@@ -60,7 +60,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/programs" component={Programs} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/case/:id" component={CaseDetails} />
-            <Route path="/jbroswse/:diplayMode" component={JbrowseController} />
+            <Route path="/jBrowse/:diplayMode" component={JbrowseController} />
             <Route path="/icdc-data-model" component={ModelExplorer} />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,

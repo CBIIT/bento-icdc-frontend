@@ -1,4 +1,10 @@
+import axios from 'axios';
 import env from '../utils/env';
+
+const getPrivacy = async () => {
+  const data = await (await axios.get(env.REACT_APP_FOOTER_PRIVACY_POLICY)).data;
+  return data;
+};
 
 export default {
   bg: '#325068',
@@ -75,6 +81,11 @@ export default {
         {
           text: 'HHS Vulnerability Disclosure',
           link: 'https://www.hhs.gov/vulnerability-disclosure-policy/index.html',
+        },
+        {
+          text: 'Privacy',
+          type: 'modal',
+          content: getPrivacy(),
         },
       ],
     },

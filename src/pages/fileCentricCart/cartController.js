@@ -2,7 +2,12 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { getCart, updateSortOrder } from './store/cart';
 import { Typography } from '../../components/Wrappers/Wrappers';
-import { GET_MY_CART_DATA_QUERY, GET_MY_CART_DATA_QUERY_DESC, table } from '../../bento/fileCentricCartWorkflowData';
+import {
+  GET_MY_CART_DATA_QUERY,
+  GET_MY_CART_DATA_QUERY_DESC,
+  GET_STORE_MANIFEST_DATA_QUERY,
+  table,
+} from '../../bento/fileCentricCartWorkflowData';
 import CartView from './cartView';
 
 const cartController = () => {
@@ -35,7 +40,17 @@ const cartController = () => {
     },
   });
 
-  if (loading) {
+  const {
+    loading: storeManifestLoading,
+    error: storeManifestError,
+    data: storeManifestPayload,
+  } = useQuery(GET_STORE_MANIFEST_DATA_QUERY, {
+    variables: {
+      uuids: ids,
+    },
+  });
+
+  if (loading || storeManifestLoading) {
     return (
       <CartView
         isLoading
@@ -45,11 +60,30 @@ const cartController = () => {
       />
     );
   }
-  if (error || !data) {
+  if (error || !data || storeManifestError || !storeManifestPayload) {
     return (
       <Typography variant="headline" color="error" size="sm">{error && `An error has occurred in loading CART : ${error}`}</Typography>
     );
   }
+
+  const processedStoreManifestPayload = storeManifestPayload.filesInList.map((el) => ({
+    file_name: el.file_name,
+    file_type: el.file_type,
+    association: el.association,
+    file_description: el.file_description,
+    file_format: el.file_format,
+    file_size: el.file_size,
+    case_id: el.case_id,
+    breed: el.breed,
+    diagnosis: el.diagnosis,
+    study_code: el.study_code,
+    file_uuid: el.file_uuid,
+    md5sum: el.md5sum,
+    sample_id: el.sample_id,
+    individual_id: el.individual_id,
+    name: el.name,
+    drs_uri: el.drs_uri,
+  }));
 
   return (
     <CartView
@@ -63,6 +97,7 @@ const cartController = () => {
       tableDownloadCSV={table.tableDownloadCSV || false}
       localPage={localPage}
       localRowsPerPage={localRowsPerPage}
+      storeManifestPayload={processedStoreManifestPayload}
       data={
         (defaultSortDirection === 'desc' || cart.sortDirection === 'desc')
           ? data.filesInListDesc === null || data.filesInListDesc === '' ? [] : data.filesInListDesc

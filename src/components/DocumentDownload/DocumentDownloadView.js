@@ -66,13 +66,14 @@ const DocumentDownload = ({
         <Link
           rel="noreferrer"
           color="inherit"
+          target="_blank"
           onClick={() => viewFileOnJbrowse(caseId)}
           to={{
-            pathname: `/jbroswse/${SINGLE_FILE_VIEW}`,
+            pathname: `/jBrowse/${SINGLE_FILE_VIEW}`,
           }}
           className={classes.JBrowseLink}
         >
-          <img alt="jbrowse" src={jbrowseLogo} className={classes.jbrowseIcon} />
+          <img alt="jBrowse" src={jbrowseLogo} className={classes.jbrowseIcon} />
         </Link>
       </ToolTip>
     ) : fileSize < maxFileSize ? (

@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Grid,
   withStyles,
+  Typography,
+  CircularProgress,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {
@@ -14,6 +16,8 @@ import {
 import _ from 'lodash';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { FiberManualRecordRounded } from '@material-ui/icons';
+import { request, gql } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
 import StatsView from '../../components/Stats/StatsView';
 import {
   table,
@@ -28,6 +32,21 @@ import themes, { overrides } from '../../themes';
 import { studyDisposition } from '../study/utils';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 import { navigatedToDashboard } from '../../utils/utils';
+import env from '../../utils/env';
+
+const studiesByProgram = gql`
+  query studiesByProgram {
+    studiesByProgram {
+      clinical_study_designation
+      CRDCLinks {
+        url
+        repository
+      }
+      numberOfCRDCNodes
+      numberOfImageCollections
+    }
+  }
+`;
 
 const themesLight = _.cloneDeep(themes.light);
 themesLight.overrides.MuiTableCell = {
@@ -58,6 +77,14 @@ const computedTheme = createTheme({
 });
 
 const ProgramView = ({ classes, data }) => {
+  const { data: interOpData, isLoading, isError } = useQuery({
+    queryKey: ['studiesByProgram'],
+    queryFn: async () => request(
+      env.REACT_APP_INTEROP_SERVICE_URL,
+      studiesByProgram,
+    ),
+  });
+
   const programDetail = data.program[0];
 
   const stat = {
@@ -140,12 +167,12 @@ const ProgramView = ({ classes, data }) => {
       )
   );
 
-  const generateCRDCLinks = (linksArray) => (
+  const generateCRDCLinks = (linksArray, clinicalStudyDesignation) => (
     <ul className={classes.crdcLinks}>
       {linksArray.map((link) => (
         <li>
           <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
-            {`${link.text}`}
+            {`${link.repository} | ICDC-${clinicalStudyDesignation}`}
             <img
               style={{
                 width: '1.5em',
@@ -159,27 +186,30 @@ const ProgramView = ({ classes, data }) => {
     </ul>
   );
 
-  const generateIndicatorTooltipTitle = (dataField, value, accessionId) => {
-    switch (dataField) {
+  const generateIndicatorTooltipTitle = (column, value, studyData) => {
+    switch (column.dataField) {
       case 'numberOfCaseFiles':
         return `${value} Case File(s)`;
       case 'numberOfStudyFiles':
         return `${value} Study File(s)`;
       case 'numberOfImageCollections':
-        return `${value} Image Collection(s)`;
+        return `${studyData.length && studyData[0].numberOfImageCollections} Image Collection(s)`;
       case 'numberOfPublications':
         return `${value} Publication(s)`;
-      default:
-        return generateCRDCLinks(
-          data.studiesByProgramId
-            .filter((study) => study.accession_id === accessionId)[0].links,
+      default: {
+        return studyData.length
+        && generateCRDCLinks(
+          studyData[0].CRDCLinks, studyData[0].clinical_study_designation,
         );
+      }
     }
   };
 
   const customIcon = (column, value, tableMeta) => {
+    const currentStudyData = interOpData.studiesByProgram
+      .filter((study) => study.clinical_study_designation === tableMeta.rowData[1]);
+    const title = generateIndicatorTooltipTitle(column, value, currentStudyData);
     const flag = Array.isArray(value) ? value.length > 0 : value > 0;
-    const title = generateIndicatorTooltipTitle(column.dataField, value, tableMeta.rowData[9]);
     return (
       <>
         {
@@ -232,6 +262,20 @@ const ProgramView = ({ classes, data }) => {
       },
     },
   }));
+
+  if (isLoading) {
+    return (
+      <CircularProgress />
+    );
+  }
+
+  if (isError) {
+    return (
+      <Typography variant="h5" color="error" size="sm">
+        An error has occurred in interoperability api
+      </Typography>
+    );
+  }
 
   return (
     <>

@@ -2,12 +2,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import {
   Grid, withStyles,
-  IconButton,
+  // eslint-disable-next-line no-unused-vars
+  IconButton, Divider, Button,
 } from '@material-ui/core';
-import { DeleteOutline as DeleteOutlineIcon, ArrowDropDown as ArrowDropDownIcon } from '@material-ui/icons';
+import {
+  DeleteOutline as DeleteOutlineIcon,
+  // ArrowDropDown as ArrowDropDownIcon,
+} from '@material-ui/icons';
+import { ToolTip } from 'bento-components';
 import CartBody from './components/body/cartBody';
 import CartHeader from './components/header/cartHeader';
-import CartFooter from './components/footer/cartFooter';
+// import CartFooter from './components/footer/cartFooter';
 import DialogBox from './components/dialogBox/dialogBox';
 import Styles from './cartView.style';
 import client from '../../utils/graphqlClient';
@@ -15,63 +20,34 @@ import {
   myFilesPageData,
   // table,
   manifestData,
-  externalLinkIcon,
+  // externalLinkIcon,
   GET_MY_CART_DATA_QUERY,
 } from '../../bento/fileCentricCartWorkflowData';
 import { deleteFromCart, selectFiles } from './store/cart';
 import { downloadJson } from './utils';
 import GA from '../../utils/googleAnalytics';
+import ViewJBrowseButton from '../JbrowseDetail/components/JBrowseViewBtn';
 
 const CustomHeaderRemove = ({
   openDialogBox,
   classes: {
     removeThCell,
-    removeHeadCell,
-    removeAllMessage,
-    removeHeadCellText,
-    removeHeadCellIcon,
-    removeHeadCellIconButton,
+    removeBtn,
   },
-}) => {
-  const [popUpStatus, setPopUpStatus] = React.useState(false);
-  const showPopUp = (status) => setPopUpStatus(status === 'open');
-
-  return (
-    <th className={removeThCell}>
-      <span role="button">
-        <div className={removeHeadCell}>
-          <div
-            id="cart_remove_button_text"
-            className={removeHeadCellText}
-          >
-            Remove
-          </div>
-          <div className={removeHeadCellIcon}>
-            <IconButton aria-label="help" className={removeHeadCellIconButton}>
-              <ArrowDropDownIcon
-                onClick={openDialogBox}
-                onMouseEnter={() => showPopUp('open')}
-                onMouseLeave={() => showPopUp('close')}
-              />
-            </IconButton>
-            { popUpStatus ? (
-              <div className={removeAllMessage}>
-                {' '}
-                Remove
-                {' '}
-                <b>All</b>
-                {' '}
-                items in cart.
-                {' '}
-              </div>
-            ) : ''}
-          </div>
-        </div>
-      </span>
-    </th>
-  );
-};
-
+}) => (
+  <th className={removeThCell}>
+    <div>
+      <ToolTip title="Remove all items in cart" arrow>
+        <Button
+          classes={{ root: removeBtn }}
+          onClick={openDialogBox}
+        >
+          Clear Cart
+        </Button>
+      </ToolTip>
+    </div>
+  </th>
+);
 const cartView = ({
   classes,
   data,
@@ -85,7 +61,9 @@ const cartView = ({
   localRowsPerPage,
   isLoading,
   tableDownloadCSV,
+  storeManifestPayload,
 }) => {
+  const selectedRowData = useSelector((state) => (state.cart.selectedFiles));
   const [modalStatus, setModalStatus] = React.useState(false);
   const commentRef = React.useRef();
   // const [userComments, setUserComments] = React.useState('');
@@ -120,6 +98,7 @@ const cartView = ({
   }
 
   // =========== Downlaod Manifest Functions ===========
+  // eslint-disable-next-line no-unused-vars
   async function prepareDownload() {
     const userComments = commentRef.current.getValue();
     const data1 = await fetchData();
@@ -210,6 +189,9 @@ const cartView = ({
           headerIconAlt={myFilesPageData.headerIconAlt}
           mainTitle={myFilesPageData.mainTitle}
           subTitle={myFilesPageData.subTitle}
+          prepareDownload={prepareDownload}
+          manifestPayload={storeManifestPayload}
+          ref={commentRef}
         />
       </Grid>
 
@@ -237,16 +219,24 @@ const cartView = ({
             />
 
             {/* Section: Footer */}
-            <CartFooter
-              myFilesPageData={myFilesPageData}
-              externalLinkIcon={externalLinkIcon}
-              ref={commentRef}
-              preparedownload={() => prepareDownload()}
-            />
+            {/* <CartFooter */}
+            {/*  myFilesPageData={myFilesPageData} */}
+            {/*  externalLinkIcon={externalLinkIcon} */}
+            {/*  ref={commentRef} */}
+            {/*  preparedownload={() => prepareDownload()} */}
+            {/* /> */}
           </div>
         </div>
       </Grid>
-
+      <div className={classes.jBrowseBtnContainer}>
+        <span className={classes.jBrowseBtn}>
+          <ViewJBrowseButton
+            selectedFileNames={selectedRowData.selectedRowInfo}
+            customClass={classes.helpIcon}
+          />
+        </span>
+        <Divider className={classes.bottomDivider} />
+      </div>
     </Grid>
 
   );
