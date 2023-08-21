@@ -18,7 +18,7 @@ export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
   Cases: 'Add filtered files associated with selected case(s) to My Files',
-  Samples: 'Add selected files to My Files',
+  Samples: 'Add filtered files associated with selected sample(s) to My Files',
   'Case Files': 'Add selected files to My Files',
   'Study Files': 'Add selected files to My Files',
   arrow: true,
@@ -1923,6 +1923,7 @@ export const tableContainers = [
     dataField: 'dataSample',
     api: GET_SAMPLES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add Files for All Samples',
+    selectedButtonText: 'Add Files for Selected Sample',
     count: 'numberOfSamples',
     paginationAPIField: 'sampleOverview',
     dataKey: 'sample_id',
@@ -2042,7 +2043,7 @@ export const tableContainers = [
       noMatch: 'No Matching Records Found',
     },
     addFilesRequestVariableKey: 'sample_ids',
-    addFilesResponseKeys: ['fileIDsFromList'],
+    addFilesResponseKeys: ['sampleOverview', 'files'],
     addAllFilesResponseKeys: ['sampleOverview', 'files'],
     addAllFileQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
     addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
@@ -2347,7 +2348,7 @@ const addAllFiles = {
 };
 
 const addSelectedFiles = {
-  title: 'Add Selected Files',
+  title: 'Add Selected Files ',
   clsName: 'add_selected_button',
   type: types.BUTTON,
   role: btnTypes.ADD_SELECTED_FILES,

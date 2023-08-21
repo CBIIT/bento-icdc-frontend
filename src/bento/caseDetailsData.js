@@ -335,7 +335,6 @@ export const fileTable = {
   // A maximum of 10 columns are allowed
   extendedViewConfig: {
     download: {
-      customDownload: false,
       downloadFileName: 'ICDC_Case_Files_download',
       downloadCsv: 'Download Table Contents As CSV',
     },
