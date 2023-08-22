@@ -1691,7 +1691,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
     $sample_type: [String], 
     $sample_pathology: [String], 
     $sample_site:[String],
-    $file_association: [String], 
+    $file_association: [String],
     $file_type: [String], 
     $file_format: [String],
     $biobank: [String],
@@ -1912,11 +1912,14 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
+    queryParam: {
+      file_level: ['case'],
+    },
     addFilesRequestVariableKey: 'case_ids',
-    addFilesResponseKeys: ['caseOverview', 'files'],
-    addAllFilesResponseKeys: ['caseOverview', 'files'],
-    addAllFileQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
+    addFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Samples',
@@ -2042,10 +2045,14 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
+    queryParam: {
+      file_level: ['case'],
+      file_association: ['sample'],
+    },
     addFilesRequestVariableKey: 'sample_ids',
     addFilesResponseKeys: ['sampleOverview', 'files'],
-    addAllFilesResponseKeys: ['sampleOverview', 'files'],
-    addAllFileQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
+    addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
     addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   },
   {
@@ -2355,6 +2362,7 @@ const addSelectedFiles = {
   btnType: btnTypes.ADD_SELECTED_FILES,
   tooltipCofig: tooltipContent,
   conditional: true,
+  applyActiveFilter: true,
   maxFileLimit: 10000,
 };
 

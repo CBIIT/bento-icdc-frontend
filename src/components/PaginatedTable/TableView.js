@@ -89,7 +89,10 @@ const PaginatedTableView = (props) => {
         }}
         classes={classes}
         section={config.name}
-        activeFilters={activeFilters}
+        activeFilters={{
+          ...activeFilters,
+          [config.addFilesRequestVariableKey]: context.selectedRows || [],
+        }}
       >
         <Grid container>
           <Grid item xs={12} id={config.tableID}>
