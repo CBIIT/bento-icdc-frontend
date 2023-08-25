@@ -11,14 +11,24 @@ export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
   sample: 'Add files associated with selected sample(s) to My Files',
-  file: 'Add selected files to My Files',
+  file: 'Add selected file(s) to My Files',
   arrow: true,
   clsName: 'addSelectedTooltip',
 };
 
 // --------------- table wrapper configuration --------------
-export const addAssociatedFilesBtn = {
-  title: 'Add SELECTED FILES',
+export const addSampleFilesBtn = {
+  title: 'Add Files for Selected Samples',
+  clsName: 'add_selected_button',
+  type: types.BUTTON,
+  role: btnTypes.ADD_SELECTED_FILES,
+  btnType: btnTypes.ADD_SELECTED_FILES,
+  tooltipCofig: tooltipContent,
+  conditional: true,
+};
+
+export const addSelectedFilesBtn = {
+  title: 'Add Selected Files',
   clsName: 'add_selected_button',
   type: types.BUTTON,
   role: btnTypes.ADD_SELECTED_FILES,
@@ -42,7 +52,7 @@ export const sampleWrapperConfig = [
     size: 'xl',
     clsName: 'container_footer',
     items: [
-      addAssociatedFilesBtn,
+      addSampleFilesBtn,
     ],
   },
 ];
@@ -57,7 +67,7 @@ export const fileWrapperConfig = [
     size: 'xl',
     clsName: 'container_footer',
     items: [
-      addAssociatedFilesBtn,
+      addSelectedFilesBtn,
       jBrowseBtn,
     ],
   },

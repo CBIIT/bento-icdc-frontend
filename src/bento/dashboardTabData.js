@@ -1912,6 +1912,8 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
+    // Add selected files (orange button)
+    // additional query variable specific to tab case
     queryParam: {
       file_level: ['case'],
     },
@@ -2045,6 +2047,8 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
+    // Add selected files (orange button)
+    // additional query variable specific to sample tab
     queryParam: {
       file_level: ['case'],
       file_association: ['sample'],

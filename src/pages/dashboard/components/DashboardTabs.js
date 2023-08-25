@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 import {
   TableContextProvider,
@@ -15,23 +15,6 @@ const DashboardTabsView = ({
   const [currentTab, setCurrentTab] = useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
-  };
-  /**
-  * 1. update active Filter query for table only after
-  * dashboard state change
-  * prevents table from making additional call
-  */
-  const getQueryVariables = (tab) => {
-    const [queryVeriables, setQueryVariables] = useState({});
-    useEffect(() => {
-      setQueryVariables({
-        ...activeFilters,
-        ...tab?.queryParam,
-      });
-    }, [dashboardStats[tab.count]]);
-    return {
-      ...queryVeriables,
-    };
   };
 
   return (
@@ -55,7 +38,8 @@ const DashboardTabsView = ({
                 activeTab={index === currentTab}
                 tabStyles={tabIndex[index]}
                 activeFilters={{
-                  ...getQueryVariables(tab),
+                  ...activeFilters,
+                  ...tab?.queryParam,
                   ...unifiedQueryParam,
                 }}
               />
