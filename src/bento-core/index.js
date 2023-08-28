@@ -44,6 +44,10 @@ import {
   resetAllData,
   resetUploadData,
   updateAutocompleteData,
+  chunkSplit,
+  SearchView,
+  SearchBoxGenerator,
+  UploadModalGenerator,
 } from '@bento-core/local-find';
 import StatsBar from '@bento-core/stats-bar';
 import { Tabs as BentoTabs } from '@bento-core/tab';
@@ -100,10 +104,6 @@ export {
   cellTypes,
   formatBytes,
   cartReducerGenerator, // cart
-  LocalFindReducerGenerator, // local search
-  resetAllData,
-  resetUploadData,
-  updateAutocompleteData,
   StatsBar, // stats bar
   BentoTabs, // bento tabs
   QueryBarGenerator, // query bar component
@@ -122,4 +122,12 @@ export {
   ToolTip, // tooltip
   CustomDataTable, // data-table
   AboutBody, // about
+  resetAllData, // Local-Find
+  chunkSplit,
+  SearchView,
+  SearchBoxGenerator,
+  UploadModalGenerator,
+  LocalFindReducerGenerator,
+  resetUploadData,
+  updateAutocompleteData,
 };
