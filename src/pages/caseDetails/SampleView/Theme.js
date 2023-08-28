@@ -195,6 +195,20 @@ const tblBody = {
       padding: '0px 5px 0px 15px',
     },
   },
+  MuiTypography: {
+    body1: {
+      fontSize: '10pt',
+      fontFamily: 'Open Sans, sans-serif',
+      fontWeight: '600',
+      color: '#13344A',
+      letterSpacing: '0.025em',
+    },
+  },
+  MuiSvgIcon: {
+    root: {
+      color: '#0B3556',
+    },
+  },
 };
 
 export const extendedView = ({

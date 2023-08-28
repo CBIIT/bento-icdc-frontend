@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import {
   TableView,
@@ -79,6 +79,23 @@ const PaginatedTableView = (props) => {
     page: 0,
   });
 
+  /**
+  * 1. update active Filter query for table only after
+  * dashboard state change
+  * prevents table from making additional call
+  */
+  const getQueryVariables = () => {
+    const [queryVeriables, setQueryVariables] = useState({});
+    useEffect(() => {
+      setQueryVariables({
+        ...activeFilters,
+      });
+    }, [totalRowCount]);
+    return {
+      ...queryVeriables,
+    };
+  };
+
   return (
     <>
       <Wrapper
@@ -99,7 +116,7 @@ const PaginatedTableView = (props) => {
                 ...themeConfig(tabStyles, context),
                 ...customthemeConfig,
               }}
-              queryVariables={activeFilters}
+              queryVariables={getQueryVariables()}
               totalRowCount={totalRowCount}
               activeTab={activeTab}
               tblRows={tblRows}
