@@ -1678,6 +1678,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
  query fileOverview(
     $file_level: [String] = [],
     $case_ids: [String] = [],
+    $sample_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1705,6 +1706,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
     (
       file_level: $file_level,
       case_ids: $case_ids,
+      sample_ids: $sample_ids,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -2054,10 +2056,10 @@ export const tableContainers = [
       file_association: ['sample'],
     },
     addFilesRequestVariableKey: 'sample_ids',
-    addFilesResponseKeys: ['sampleOverview', 'files'],
+    addFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Case Files',
