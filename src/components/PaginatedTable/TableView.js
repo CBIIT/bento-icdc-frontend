@@ -70,6 +70,7 @@ const PaginatedTableView = (props) => {
     columns: CustomizeCellView({ ...config, ...tableReduxActions }),
     count: totalRowCount,
     selectedRows: [],
+    selectedFileIds: [],
     tableMsg: config.tableMsg,
     sortBy: config.defaultSortField,
     sortOrder: config.defaultSortDirection,

@@ -26,6 +26,29 @@ export const myFileTablePaginationOptions = (context) => ({
     };
     dispatch(customPaginationAction(value));
   },
+  customizeOnRowSelect: (event, row) => {
+    const { dispatch } = context;
+    // default behavior
+    event.stopPropagation();
+    let selectedIds = [...context.selectedRows];
+    const selectedId = row[context.dataKey];
+    if (!row.isChecked) {
+      selectedIds.push(selectedId);
+    } else {
+      selectedIds = selectedIds.reduce((acc, id) => {
+        if (selectedId !== id) {
+          acc.push(id);
+        }
+        return acc;
+      }, []);
+    }
+    // end of default behavior
+
+    dispatch(customPaginationAction({
+      selectedFileIds: [...context.selectedFileIds, row.file_uuid],
+      selectedRows: selectedIds, // default behavior
+    }));
+  },
 });
 
 export const paginationOptions = (context, config) => {
