@@ -96,7 +96,7 @@ const CartHeader = React.forwardRef(({
   prepareDownload,
   // manifestPayload,
   filesId,
-}, ref) => {
+}) => {
   const [sbgUrl, setSBGUrl] = useState('');
 
   const getManifestPayload = () => {
@@ -306,6 +306,7 @@ const CartHeader = React.forwardRef(({
             <Button
               variant="contained"
               onClick={handleDownloadFileManifestDialogOpen}
+              disabled={filesId.length === 0}
               classes={{
                 root: classes.downloadFileManifestBtn,
               }}
@@ -365,7 +366,6 @@ const CartHeader = React.forwardRef(({
         onClose={handleDownloadFileManifestDialogClose}
         open={downloadFileManifestDialogOpen}
         prepareDownload={prepareDownload}
-        ref={ref}
         filesId={filesId}
       />
     </div>
