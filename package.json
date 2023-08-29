@@ -43,7 +43,7 @@
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "clsx": "^1.2.1",
-    "data-model-navigator": "^1.0.91",
+    "data-model-navigator": "^1.0.92",
     "dotenv": "^6.0.0",
     "dotenv-expand": "4.2.0",
     "file-loader": "2.0.0",
