@@ -10,7 +10,8 @@ import {
 export const tooltipContent = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
-  file: 'Add selected files to My Files',
+  file: 'Add selected file(s) to My Files',
+  arrow: true,
 };
 
 export const title = {
@@ -143,7 +144,7 @@ export const tab = {
 };
 
 export const addAssociatedFilesBtn = {
-  title: 'Add SELECTED FILES',
+  title: 'Add Selected Files',
   clsName: 'add_selected_button',
   type: types.BUTTON,
   role: btnTypes.ADD_SELECTED_FILES,

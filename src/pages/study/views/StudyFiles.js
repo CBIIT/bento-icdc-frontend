@@ -57,7 +57,10 @@ const StudyFiles = ({
           <div className={classes.tableContainer}>
             <div className={classes.tableDiv}>
               <TableContextProvider>
-                <FileTableView data={fileTableData} />
+                <FileTableView
+                  data={fileTableData}
+                  classes={classes}
+                />
               </TableContextProvider>
             </div>
           </div>
@@ -116,6 +119,14 @@ const styles = (theme) => ({
     marginTop: '20px',
     fontSize: '12px',
     minHeight: '500px',
+  },
+  customTooltip: {
+    border: '#a7afb3 2px solid',
+  },
+  customArrow: {
+    '&::before': {
+      border: '#a7afb3 2px solid',
+    },
   },
 });
 
