@@ -82,6 +82,14 @@ const { UploadModal } = UploadModalGenerator({
       }
     },
   },
+  config: {
+    title: 'Upload Case Set',
+    inputPlaceholder: 'eg. ICDC-CASE-06, ICDC-CASE-22',
+    inputTooltip: 'Add the case indentifier.',
+    uploadTooltip: 'Add the case indentifier.',
+    accept: '.csv,.txt',
+    maxSearchTerms: 1000,
+  },
 });
 const BentoFacetFilter = ({
   classes,
