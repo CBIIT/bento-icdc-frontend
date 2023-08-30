@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 // --------------- GraphQL query - Retrieve stats details --------------
 export const GET_ALL_IDS = gql`{
   idsLists{
-    subjectIds
+    caseIds
     sampleIds
     fileIds
     fileNames

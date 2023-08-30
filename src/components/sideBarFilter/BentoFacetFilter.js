@@ -53,6 +53,11 @@ const { SearchBox } = SearchBoxGenerator({
       }
     },
   },
+  config: {
+    inputPlaceholder: 'e.g. ICDC-CASE-06, ICDC-CASE-22',
+    noOptionsText: 'No matching items found',
+    searchType: 'caseIds',
+  },
 });
 
 // Generate UploadModal Component
