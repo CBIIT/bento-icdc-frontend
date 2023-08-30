@@ -18,7 +18,7 @@ export const tooltipContent = {
   icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   alt: 'tooltipIcon',
   Cases: 'Add filtered files associated with selected case(s) to My Files',
-  Samples: 'Add selected files to My Files',
+  Samples: 'Add filtered files associated with selected sample(s) to My Files',
   'Case Files': 'Add selected files to My Files',
   'Study Files': 'Add selected files to My Files',
   arrow: true,
@@ -1678,6 +1678,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
  query fileOverview(
     $file_level: [String] = [],
     $case_ids: [String] = [],
+    $sample_ids: [String] = [],
     $program: [String] = [],
     $study: [String], 
     $study_type: [String], 
@@ -1691,7 +1692,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
     $sample_type: [String], 
     $sample_pathology: [String], 
     $sample_site:[String],
-    $file_association: [String], 
+    $file_association: [String],
     $file_type: [String], 
     $file_format: [String],
     $biobank: [String],
@@ -1705,6 +1706,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
     (
       file_level: $file_level,
       case_ids: $case_ids,
+      sample_ids: $sample_ids,
       program: $program,
       study: $study, 
       study_type: $study_type, 
@@ -1912,17 +1914,23 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
+    // Add selected files (orange button)
+    // additional query variable specific to tab case
+    queryParam: {
+      file_level: ['case'],
+    },
     addFilesRequestVariableKey: 'case_ids',
-    addFilesResponseKeys: ['caseOverview', 'files'],
-    addAllFilesResponseKeys: ['caseOverview', 'files'],
-    addAllFileQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL,
+    addFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Samples',
     dataField: 'dataSample',
     api: GET_SAMPLES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add Files for All Samples',
+    selectedButtonText: 'Add Files for Selected Sample',
     count: 'numberOfSamples',
     paginationAPIField: 'sampleOverview',
     dataKey: 'sample_id',
@@ -2041,11 +2049,17 @@ export const tableContainers = [
     tableMsg: {
       noMatch: 'No Matching Records Found',
     },
+    // Add selected files (orange button)
+    // additional query variable specific to sample tab
+    queryParam: {
+      file_level: ['case'],
+      file_association: ['sample'],
+    },
     addFilesRequestVariableKey: 'sample_ids',
-    addFilesResponseKeys: ['fileIDsFromList'],
-    addAllFilesResponseKeys: ['sampleOverview', 'files'],
-    addAllFileQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
+    addFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
+    addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   },
   {
     name: 'Case Files',
@@ -2347,13 +2361,14 @@ const addAllFiles = {
 };
 
 const addSelectedFiles = {
-  title: 'Add Selected Files',
+  title: 'Add Selected Files ',
   clsName: 'add_selected_button',
   type: types.BUTTON,
   role: btnTypes.ADD_SELECTED_FILES,
   btnType: btnTypes.ADD_SELECTED_FILES,
   tooltipCofig: tooltipContent,
   conditional: true,
+  applyActiveFilter: true,
   maxFileLimit: 10000,
 };
 

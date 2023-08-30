@@ -22,6 +22,7 @@ const CartView = (props) => {
     deleteCartFile,
   } = props;
   const variables = {};
+
   variables.uuids = filesId.reduce((acc, item) => {
     if (item.file_uuid) {
       acc.push(item.file_uuid);
@@ -35,15 +36,16 @@ const CartView = (props) => {
   const { context } = tableContext;
 
   return (
-    <Grid className={classes.marginTopNegative20}>
-      <Grid item xs={12} className={classes.headerGrid}>
-        <CartHeader filesId={filesId} />
-      </Grid>
-      <Grid item xs={12}>
-        <div id="table_selected_files" className={classes.bodyWrapper}>
-          <div className={classes.tableWrapper}>
-            {/* Section: Header */}
-            <TableContextProvider>
+    <TableContextProvider>
+      <Grid className={classes.marginTopNegative20}>
+        <Grid item xs={12} className={classes.headerGrid}>
+          <CartHeader filesId={filesId} context={context} />
+        </Grid>
+        <Grid item xs={12}>
+          <div id="table_selected_files" className={classes.bodyWrapper}>
+            <div className={classes.tableWrapper}>
+              {/* Section: Header */}
+
               <ThemeProvider theme={createTheme(tblContainer)}>
                 <PaginatedTableView
                   tableReduxActions={{
@@ -57,11 +59,12 @@ const CartView = (props) => {
                   customthemeConfig={themeConfig(context)}
                 />
               </ThemeProvider>
-            </TableContextProvider>
+
+            </div>
           </div>
-        </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </TableContextProvider>
   );
 };
 

@@ -14,8 +14,8 @@ import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
   headerIcon,
 } from '../../bento/caseDetailsData';
-import Snackbar from '../../components/Snackbar';
 import MultiStudyCases from './components/multiStudyCasesController';
+import styles from './caseDetailsStyles';
 
 const CaseDetail = ({
   classes, data,
@@ -60,24 +60,8 @@ const CaseDetail = ({
     name: caseDetail.case_id,
   }];
 
-  const [snackbarState, setsnackbarState] = React.useState({
-    open: false,
-    value: 0,
-  });
-
-  function closeSnack() {
-    setsnackbarState({ open: false });
-  }
-
   return (
     <>
-      <Snackbar
-        snackbarState={snackbarState}
-        closeSnack={closeSnack}
-        autoHideDuration={3000}
-        classes={classes}
-      />
-
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
@@ -86,7 +70,6 @@ const CaseDetail = ({
               src={headerIcon}
               alt="ICDC case detail header logo"
             />
-
           </div>
 
           {(caseDetail.patient_first_name === '' || caseDetail.patient_first_name === null)
@@ -455,222 +438,5 @@ const CaseDetail = ({
     </>
   );
 };
-
-const styles = (theme) => ({
-  paddingLeft8: {
-    paddingLeft: '12px',
-  },
-  paddingBottm17: {
-    paddingBottm: '17px',
-  },
-  marginTopBottom3: {
-    margin: '0px',
-  },
-  spacer: {
-    height: '76px',
-    width: '100%',
-  },
-  container: {
-    paddingTop: '60px',
-    fontFamily: 'Raleway, sans-serif',
-    paddingLeft: '27px',
-    paddingRight: '27px',
-    paddingBottom: '40px',
-  },
-  content: {
-    fontSize: '12px',
-  },
-  marginTop23: {
-    marginTop: '24px',
-  },
-  warning: {
-    color: theme.palette.warning.main,
-  },
-  paper: {
-    textAlign: 'center',
-  },
-  fakeToolbar: {
-    ...theme.mixins.toolbar,
-  },
-  root: {
-    fontFamily: '"Open Sans", sans-serif',
-    fontSize: '9px',
-    letterSpacing: '0.025em',
-    color: '#000',
-  },
-  header: {
-    paddingLeft: '35px',
-    paddingRight: '35px',
-    borderBottom: '#81a6b9 4px solid',
-    height: '90px',
-    margin: 'auto',
-  },
-  tableSpacer: {
-    height: '25px',
-    width: '100%',
-  },
-  headerTitle: {
-    margin: 'auto',
-    float: 'left',
-    marginLeft: '96px',
-    paddingLeft: '3px',
-  },
-  headerMainTitle: {
-    fontFamily: theme.custom.fontFamilySans,
-    fontWeight: 'bold',
-    letterSpacing: '0.017em',
-    color: '#ff8a00',
-    fontSize: '21px',
-    lineHeight: '18px',
-    paddingLeft: '5px',
-  },
-  headerMSubTitle: {
-    paddingTop: '8px',
-  },
-  headerSubTitleCate: {
-    color: '#606061',
-    fontWeight: 'bold',
-    fontFamily: theme.custom.fontFamilyRaleway,
-    textTransform: 'uppercase',
-    letterSpacing: '0.023em',
-    fontSize: '12px',
-    maxHeight: '30px',
-    overflow: 'hidden',
-    paddingLeft: '3px',
-  },
-  headerSubTitleContent: {
-    color: '#000000',
-    fontWeight: 'bold',
-    fontFamily: theme.custom.fontFamilyRaleway,
-    textTransform: 'uppercase',
-    letterSpacing: '0.023em',
-    fontSize: '12px',
-    paddingLeft: '3px',
-  },
-
-  logo: {
-    position: 'absolute',
-    float: 'left',
-    marginTop: '5px',
-    width: '96px',
-    height: '82px',
-    marginLeft: '1px',
-  },
-  detailContainer: {
-    margin: 'auto',
-    paddingLeft: '50px',
-    paddingRight: '32px',
-    fontFamily: theme.custom.fontFamilySans,
-    letterSpacing: '0.014em',
-    color: '#000000',
-    size: '12px',
-    lineHeight: '23px',
-  },
-  detailContainerHeader: {
-    textTransform: 'uppercase',
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
-    letterSpacing: '0.017em',
-    color: '#ff8a00',
-    position: 'relative',
-  },
-  detailContainerBottom: {
-    borderTop: '#81a6b9 1px solid',
-    marginTop: '8px',
-    padding: ' 35px 2px 63px 2px !important',
-  },
-  detailContainerLeft: {
-    marginTop: '-3px',
-    padding: '28px 0px 0 2px !important',
-    minHeight: '290px',
-  },
-  detailContainerRight: {
-    marginTop: '-3px',
-    padding: '28px 20px 10px 20px !important',
-    minHeight: '290px',
-    borderLeft: '#81a6b9 1px solid',
-  },
-  tableContainer: {
-    background: '#f3f3f3',
-    marginTop: '-12px',
-  },
-  tableHeader: {
-    paddingLeft: '35px',
-    color: '#ff8a00',
-  },
-  tableDiv: {
-    padding: '31px 27px',
-    margin: '10px auto 0px auto',
-  },
-  button: {
-    borderRadius: '10px',
-    width: '178px',
-    height: '27px',
-    lineHeight: '18px',
-    fontSize: '10px',
-    color: '#ffffff',
-    textTransform: 'uppercase',
-    backgroundColor: '#ff8a00',
-    fontFamily: theme.custom.fontFamilySans,
-    '&:hover': {
-      backgroundColor: '#ff8a00',
-    },
-  },
-  detailContainerItems: {
-    paddingTop: '28px',
-  },
-  title: {
-    color: '#9d9d9c',
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '12px',
-    lineHeight: '12px',
-    letterSpacing: '0.017em',
-    fontWeight: '600',
-    textTransform: 'uppercase',
-  },
-  tableTitle: {
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
-    letterSpacing: '0.017em',
-    color: '#ff17f15',
-    marginLeft: '11px',
-    marginBottom: '24px',
-    marginTop: '5px',
-    // paddingBottom: '20px',
-  },
-  headerButton: {
-    fontFamily: theme.custom.fontFamilySans,
-    float: 'right',
-    marginTop: '15px',
-    width: '125px',
-    height: '33px',
-    marginRight: '20px',
-  },
-  headerButtonLink: {
-    fontFamily: theme.custom.fontFamilySans,
-    color: 'rgb(255, 255, 255)',
-    backgroundColor: '#DC762F',
-    opacity: 'unset',
-    border: 'unset',
-    fontWeight: '600',
-    cursor: 'pointer',
-    height: '27px',
-    fontSize: '10pt',
-    lineHeight: '18px',
-    borderRadius: '10px',
-    width: '178px',
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-  snackBarMessageIcon: {
-    verticalAlign: 'middle',
-  },
-  multiCaseStudy: {
-    float: 'right',
-    marginTop: '30px',
-  },
-});
 
 export default withStyles(styles, { withTheme: true })(CaseDetail);

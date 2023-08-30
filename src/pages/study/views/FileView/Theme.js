@@ -68,13 +68,21 @@ export const customTheme = {
       fontFamily: 'Lato',
       borderRadius: '10px',
       marginBottom: '10px',
-      textTransform: 'uppercase',
-      '&.add_all_button': {
-        marginRight: '24px',
-        backgroundColor: '#142D64',
-      },
       '&.add_selected_button': {
         marginRight: '10px',
+        marginLeft: '25px',
+        color: '#fff',
+        borderRadius: '10px',
+        fontSize: '16px',
+        backgroundColor: '#ff7f15',
+        textTransform: 'none',
+        '& img': {
+          width: '2.25em',
+        },
+        '&.Mui-disabled': {
+          opacity: '0.7',
+          textTransform: 'none',
+        },
       },
       '&.add_selected_button_sample': {
         backgroundColor: '#ff7e15',
@@ -189,6 +197,15 @@ const tblBody = {
       '&.Mui-checked': {
         color: '#13344A',
       },
+    },
+  },
+  MuiTypography: {
+    body1: {
+      fontSize: '10pt',
+      fontFamily: 'Open Sans, sans-serif',
+      fontWeight: '600',
+      color: '#13344A',
+      letterSpacing: '0.025em',
     },
   },
   MuiSvgIcon: {

@@ -413,7 +413,7 @@ export const cartTable = {
     },
   ],
   tableMsg: {
-    noMatch: 'Sorry, no matching records found',
+    noMatch: 'No files have been added to the cart',
   },
 };
 
