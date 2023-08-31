@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
-// import Button from '@material-ui/core/Button';
-// import Avatar from '@material-ui/core/Avatar';
-// import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-// import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-// import PersonIcon from '@material-ui/icons/Person';
-// import AddIcon from '@material-ui/icons/Add';
-// import Typography from '@material-ui/core/Typography';
-// import { blue } from '@material-ui/core/colors';
 import {
   Button,
   DialogContent, DialogContentText, withStyles,
@@ -21,8 +11,6 @@ import TextField from '@material-ui/core/TextField';
 import DownloadFileManifestIcon from './assets/dwnldFileManifest.svg';
 import { GET_MY_CART_DATA_QUERY, manifestData, myFilesPageData } from '../../../bento/fileCentricCartWorkflowData';
 import { downloadJson } from '../utils';
-// import { noop } from 'lodash';
-// import PDFIcon from './assets/Download_PDF.svg';
 
 const useStyles = makeStyles({
   dialogContainer: {
@@ -54,12 +42,18 @@ const useStyles = makeStyles({
     width: 'fit-content',
     marginTop: '23px',
   },
+  dialogHeaderSection: {
+    display: 'grid', gridTemplateColumns: '14fr 1fr',
+  },
   dialogTitle: {
     fontFamily: 'Lato',
     fontStyle: 'normal',
     fontWeight: 700,
+    width: '100%',
     fontSize: '18px',
     color: '#7896A9',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 });
 
@@ -76,25 +70,6 @@ const CustomDialogContent = withStyles(() => ({
   <DialogContent {...props} />
 ));
 
-// const CartDialogContentTwo = withStyles(() => ({
-//   root: {
-//     backgroundColor: '#E3F4FD',
-//     margin: '24px 46px 8px 46px',
-//     padding: '18px 24px',
-//     overflowY: 'initial',
-//   },
-// }))((props) => (
-//   <DialogContent {...props} />
-// ));
-//
-// const CartDialogContentThree = withStyles(() => ({
-//   root: {
-//     backgroundColor: '#F2F2F2',
-//   },
-// }))((props) => (
-//   <CartDialogContentTwo {...props} />
-// ));
-
 const DownloadFileManifestDialog = React.forwardRef(({
   onClose, selectedValue, open, filesId,
 }, ref) => {
@@ -107,6 +82,7 @@ const DownloadFileManifestDialog = React.forwardRef(({
       return comment;
     },
   }));
+
   const handleClose = () => {
     onClose(selectedValue);
   };
@@ -134,9 +110,12 @@ const DownloadFileManifestDialog = React.forwardRef(({
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} classes={{ paper: classes.dialogContainer }}>
-      <DialogTitle id="simple-dialog-title" classes={{ root: classes.dialogTitle }}>
-        Optional User Comments
-      </DialogTitle>
+      <div className={classes.dialogHeaderSection}>
+        <DialogTitle id="simple-dialog-title" classes={{ root: classes.dialogTitle }}>
+          Optional User Comments
+        </DialogTitle>
+        <Button onClick={handleClose}>x</Button>
+      </div>
 
       <CustomDialogContent>
         <DialogContentText classes={{ root: classes.contentText }}>
@@ -166,10 +145,5 @@ const DownloadFileManifestDialog = React.forwardRef(({
     </Dialog>
   );
 });
-
-// DownloadFileManifestDialog.propTypes = {
-//   onClose: PropTypes.func.isRequired,
-//   open: PropTypes.bool.isRequired,
-// };
 
 export default DownloadFileManifestDialog;
