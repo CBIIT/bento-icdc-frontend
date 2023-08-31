@@ -162,7 +162,7 @@ const CartHeader = React.forwardRef(({
 
   const initiateDownload = (currLabel) => {
     switch (currLabel) {
-      case 'Export to Seven Bridges': window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${sbgUrl}`, '_blank');
+      case 'Export to Seven Bridges': window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`, '_blank');
         break;
       default: noop(data);
         break;
