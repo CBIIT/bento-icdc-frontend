@@ -45,8 +45,8 @@ const { SearchBox } = SearchBoxGenerator({
     getSuggestions: async (searchType) => {
       try {
         const response = await getAllIds(searchType).catch(() => []);
-        return response && response[searchType] instanceof Array
-          ? response[searchType].map((id) => ({ type: searchType, title: id }))
+        return response && response instanceof Array
+          ? response.map((id) => ({ type: searchType, title: id }))
           : [];
       } catch (e) {
         return [];
@@ -56,7 +56,7 @@ const { SearchBox } = SearchBoxGenerator({
   config: {
     inputPlaceholder: 'e.g. ICDC-CASE-06, ICDC-CASE-22',
     noOptionsText: 'No matching items found',
-    searchType: 'caseIds',
+    searchType: 'case_id',
   },
 });
 
@@ -75,7 +75,7 @@ const { UploadModal } = UploadModalGenerator({
 
         // Combine the results and remove duplicates
         const unmatched = new Set(inputArray);
-        matched.forEach((obj) => unmatched.delete(obj.subject_id));
+        matched.forEach((obj) => unmatched.delete(obj.case_id));
         return { matched, unmatched: [...unmatched] };
       } catch (e) {
         return { matched: [], unmatched: [] };

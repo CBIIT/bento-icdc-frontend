@@ -28,8 +28,9 @@ export async function getAllIds(type) {
       query: GET_IDS_BY_TYPE(type),
       variables: {},
     })
-    .then((result) => result.data.idsLists)
+    .then((result) => result.data.caseOverview.map((item) => item[type]))
     .catch(() => []);
+
   return allids;
 }
 
@@ -44,7 +45,7 @@ export async function getAllSubjectIds(subjectIdsArray) {
     .query({
       query: GET_SUBJECT_IDS,
       variables: {
-        subject_ids: subjectIdsArray,
+        case_ids: subjectIdsArray,
       },
     })
     .then((result) => result.data.findSubjectIdsInList)
