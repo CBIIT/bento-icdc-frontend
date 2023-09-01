@@ -48,7 +48,7 @@ export async function getAllSubjectIds(subjectIdsArray) {
         case_ids: subjectIdsArray,
       },
     })
-    .then((result) => result.data.findSubjectIdsInList)
+    .then((result) => result.data.caseOverview)
     .catch(() => []);
   return allids;
 }

@@ -25,6 +25,7 @@ query caseOverview(
   )
   {
     case_id
+    study_code
   }  
 }
 `;
