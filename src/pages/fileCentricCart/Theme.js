@@ -209,7 +209,7 @@ export const customTheme = {
       '&.container_footer': {
         maxWidth: '100%',
         textAlign: 'left',
-        paddingLeft: '0px',
+        paddingLeft: '24px',
       },
     },
   },

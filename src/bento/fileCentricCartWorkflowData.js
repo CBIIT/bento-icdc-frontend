@@ -287,11 +287,11 @@ export const cartTable = {
     download: {
       customDownload: true,
       fileName: 'ICDC_My_Files_download',
-      downloadCsv: 'Download Table Contents As CSV',
+      downloadCsv: 'Download table contents as CSV',
       ...customMyFilesTabDownloadCSV,
     },
     manageViewColumns: {
-      title: 'View Columns',
+      title: 'View columns',
     },
   },
   columns: [
