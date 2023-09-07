@@ -86,7 +86,13 @@ const PaginatedTableView = (props) => {
   * prevents table from making additional call
   */
   const getQueryVariables = () => {
-    const [queryVeriables, setQueryVariables] = useState({});
+    const [queryVeriables, setQueryVariables] = useState(activeFilters);
+    // searchCases query should be resolve first before updating the table row/data
+    // only when total count of cases/samples/files (totalRowCount) changed
+    // update the queryVeriables state to reload the table
+    // (state update will rerender the component),
+    // this will prevent backend call when table state is invalid
+    // invalid table state will display empty table
     useEffect(() => {
       setQueryVariables({
         ...activeFilters,

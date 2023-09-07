@@ -51,6 +51,9 @@ const QueryBarView = ({
     sectionOrder.indexOf(a.datafield) - sectionOrder.indexOf(b.datafield)));
 
   const { QueryBar } = QueryBarGenerator({
+    config: {
+      maxItems: 4,
+    },
     functions: {
       clearAll: () => {
         dispatch(resetAllData());
