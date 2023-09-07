@@ -15,7 +15,7 @@ import {
 } from '../../bento-core';
 
 import FacetFilterThemeProvider from './FilterThemeConfig';
-import styles from './BentoFacetFilterStyle';
+import styles, { customStyles } from './BentoFacetFilterStyle';
 import { getAllIds, getAllSubjectIds } from './BentoFilterUtils';
 import store from '../../store';
 
@@ -58,6 +58,7 @@ const { SearchBox } = SearchBoxGenerator({
     noOptionsText: 'No matching items found',
     searchType: 'case_id',
   },
+  customStyles,
 });
 
 // Generate UploadModal Component
@@ -89,6 +90,11 @@ const { UploadModal } = UploadModalGenerator({
     uploadTooltip: 'Add the case indentifier.',
     accept: '.csv,.txt',
     maxSearchTerms: 1000,
+    matchedId: 'case_id',
+    matchedLabel: 'SUBMITTED CASE ID',
+    associateId: 'study_code',
+    associataLabel: 'ASSOCIATED STUDY',
+    projectName: 'ICDC',
   },
 });
 const BentoFacetFilter = ({
@@ -182,24 +188,6 @@ const BentoFacetFilter = ({
 
     return (
       <>
-        {/* <CustomExpansionPanelSummary
-          expandIcon={
-            <ArrowDropDownIcon classes={{ root: classes.dropDownIconSection }} />
-          }
-          onClick={collapseHandler}
-          id={section}
-          className={clsx(
-            classes.customExpansionPanelSummaryRoot,
-            {
-              [classes.disableExpansion]: isUnifiedView,
-            },
-          )}
-          disabled={isUnifiedView}
-        >
-          <div className={classes.sectionSummaryTextContainer}>
-            {name}
-          </div>
-        </CustomExpansionPanelSummary> */}
         <CustomExpansionPanelSummary
           onClick={collapseHandler}
           id={section}
