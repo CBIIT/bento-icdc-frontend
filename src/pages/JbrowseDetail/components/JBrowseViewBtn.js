@@ -146,6 +146,9 @@ const styles = () => ({
   helpIconButton: {
     verticalAlign: 'top',
     position: 'absolute',
+    '&:hover': {
+      backgroundColor: '#fff',
+    },
   },
   helpIcon: {
     zIndex: '600',

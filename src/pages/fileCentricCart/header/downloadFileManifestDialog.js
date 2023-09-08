@@ -14,8 +14,7 @@ import { downloadJson } from '../utils';
 
 const useStyles = makeStyles({
   dialogContainer: {
-    width: '844px',
-    maxWidth: '844px',
+    maxWidth: '700px',
   },
   contentText: {
     display: 'flex',
@@ -60,7 +59,7 @@ const useStyles = makeStyles({
 const CustomDialogContent = withStyles(() => ({
   root: {
     backgroundColor: '#fff',
-    margin: '15px 61px 65px 61px',
+    margin: '15px 61px 30px 61px',
     overflowY: 'initial',
     display: 'flex',
     flexDirection: 'column',

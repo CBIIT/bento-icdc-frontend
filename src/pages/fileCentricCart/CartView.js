@@ -7,7 +7,8 @@ import {
 } from '@material-ui/core';
 import { TableContext, TableContextProvider } from '../../bento-core';
 import {
-  cartTable, tableLayOut,
+  cartTable,
+  tableLayOut,
 } from '../../bento/fileCentricCartWorkflowData';
 import PaginatedTableView from '../../components/PaginatedTable/TableView';
 import CartHeader from './header/CartHeaderController';
@@ -16,10 +17,7 @@ import { tblContainer, themeConfig } from './Theme';
 
 const CartView = (props) => {
   const {
-    classes,
-    filesId = [],
-    deleteAllFiles,
-    deleteCartFile,
+    classes, filesId = [], deleteAllFiles, deleteCartFile,
   } = props;
   const variables = {};
 
@@ -59,7 +57,6 @@ const CartView = (props) => {
                   customthemeConfig={themeConfig(context)}
                 />
               </ThemeProvider>
-
             </div>
           </div>
         </Grid>

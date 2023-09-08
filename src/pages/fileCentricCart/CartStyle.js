@@ -13,6 +13,9 @@ export default () => ({
   customFooterStyle: {
     background: '#f3f3f4',
   },
+  container_footer: {
+    background: 'red',
+  },
   jBrowseBtnContainer: {
     marginLeft: '29px',
     marginRight: '29px',
@@ -180,5 +183,6 @@ export default () => ({
   headerGrid: {
     paddingLeft: '40px',
     paddingRight: '40px',
+    paddingTop: '35px',
   },
 });
