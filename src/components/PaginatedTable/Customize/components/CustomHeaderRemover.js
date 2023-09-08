@@ -45,14 +45,15 @@ const styles = () => ({
     fontFamily: 'Lato',
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: '15px',
     background: '#FFF',
     border: '1px solid #003559',
     borderRadius: '8px',
-    color: '#1D79A8',
+    color: '#DA6300',
     height: '38px',
     width: '95px',
     padding: '5px',
+    textTransform: 'none',
   },
 });
 

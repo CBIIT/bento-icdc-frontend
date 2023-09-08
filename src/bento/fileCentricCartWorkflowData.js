@@ -284,14 +284,15 @@ export const cartTable = {
   Jbrowse: true,
   api: GET_MY_CART_DATA_QUERY,
   extendedViewConfig: {
+    pagination: true,
     download: {
       customDownload: true,
       fileName: 'ICDC_My_Files_download',
-      downloadCsv: 'Download Table Contents As CSV',
+      downloadCsv: 'Download table contents as CSV',
       ...customMyFilesTabDownloadCSV,
     },
     manageViewColumns: {
-      title: 'View Columns',
+      title: 'View columns',
     },
   },
   columns: [
@@ -327,16 +328,17 @@ export const cartTable = {
       role: cellTypes.DISPLAY,
       tooltipText: 'sort',
     },
+
     {
-      dataField: 'file_format',
-      header: 'Format',
+      dataField: 'file_type',
+      header: 'File Type',
       display: true,
       role: cellTypes.DISPLAY,
       tooltipText: 'sort',
     },
     {
-      dataField: 'file_type',
-      header: 'File Type',
+      dataField: 'file_format',
+      header: 'Format',
       display: true,
       role: cellTypes.DISPLAY,
       tooltipText: 'sort',
