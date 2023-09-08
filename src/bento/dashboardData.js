@@ -85,6 +85,7 @@ export const facetSectionVariables = {
     checkBoxColorsTwo: '#fff9f5',
     height: '7px',
     isExpanded: true,
+    hasSearch: true,
   },
   'Filter By Samples': {
     color: '#9DC1D9',

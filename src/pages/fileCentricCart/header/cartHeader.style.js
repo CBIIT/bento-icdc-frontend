@@ -37,23 +37,24 @@ export default (theme) => ({
   buttonContainer: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px',
+    gap: '18px',
   },
   readMeBtnRoot: {
     height: '38px',
     width: '137px',
+    boxShadow: 'none',
     background: '#fff',
     borderRadius: '5px',
     border: '1px solid #003559',
     '&:hover': {
       backgroundColor: '#fff',
+      boxShadow: 'none',
     },
   },
   readMeBtnLabel: {
     color: '#1D79A8',
     fontFamily: 'Lato',
     fontSize: '16px',
-    lineHeight: '22px',
     fontWeight: 400,
     fontStyle: 'normal',
   },
@@ -88,23 +89,28 @@ export default (theme) => ({
   },
   downloadFileManifestBtn: {
     backgroundColor: '#1A8CCB',
-    borderRadius: '8px',
+    borderRadius: '5px',
     border: '1px solid #1A8CCB',
+    boxShadow: 'none',
     fontFamily: 'Lato',
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: '16px',
+    fontSize: '18px',
+    textTransform: 'none',
     color: '#fff',
     '&:hover': {
       backgroundColor: '#1A8CCB',
+      boxShadow: 'none',
     },
   },
   availableDownloadDropdownBtn: {
     backgroundColor: '#F2F2F2',
     borderRadius: '8px',
+    boxShadow: 'none',
     maxWidth: '287px',
     '&:hover': {
       backgroundColor: '#F2F2F2',
+      boxShadow: 'none',
     },
   },
   availableDownloadDropdownBtnLabel: {
@@ -116,13 +122,18 @@ export default (theme) => ({
   },
   availableDownloadBtn: {
     backgroundColor: '#155F97 !important',
+    boxShadow: 'none',
+    '&:hover': {
+      boxShadow: 'none',
+    },
   },
   btnGrpRoot: {
     border: '1px solid #155F97',
     borderRadius: '8px',
+    boxShadow: 'none',
   },
   readMoreIconContainer: {
-    marginLeft: '10px',
+    // marginLeft: '10px',
   },
   downloadFileManifestTooltip: {
     fontFamily: 'Nunito',
@@ -130,6 +141,7 @@ export default (theme) => ({
     fontWeight: 500,
     fontSize: '12px',
     color: '#000',
+    lineHeight: '15px',
   },
   downloadFileManifestInfoIcon: {
     width: '15px',
