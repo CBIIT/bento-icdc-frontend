@@ -106,6 +106,7 @@ const BentoFacetFilter = ({
   facetsConfig,
   tooltipConfig,
   isUnifiedView = false,
+  localFindAutocomplete,
 }) => {
   // set tooltip text progams / biobank
   // useMemo to prevent execution of func everytime component re renders
@@ -212,7 +213,7 @@ const BentoFacetFilter = ({
       </>
 
     );
-  }, []);
+  }, [localFindAutocomplete]);
 
   /** Note:
   * Generate Custom facet Section Component
