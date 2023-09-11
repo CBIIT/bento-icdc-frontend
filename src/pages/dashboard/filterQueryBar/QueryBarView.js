@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
   Container,
@@ -50,9 +50,10 @@ const QueryBarView = ({
   mappedFilterState.sort((a, b) => (
     sectionOrder.indexOf(a.datafield) - sectionOrder.indexOf(b.datafield)));
 
-  const { QueryBar } = QueryBarGenerator({
+  const { QueryBar } = useCallback(QueryBarGenerator({
     config: {
-      maxItems: 4,
+      maxItems: 2,
+      displayAllActiveFilters: true,
     },
     functions: {
       clearAll: () => {
@@ -90,7 +91,7 @@ const QueryBarView = ({
       },
     },
     customStyles,
-  });
+  }), []);
 
   return (
     <ThemeProvider theme={createTheme(theme)}>
