@@ -178,4 +178,11 @@ export const customStyles = {
       borderColor: '#FCA359 !important',
     },
   },
+  searchResultDetailText: {
+    color: '#FCA359',
+    lineHeight: '20px',
+    fontFamily: 'Lato',
+    fontSize: '11px',
+    fontStyle: 'italic',
+  },
 };

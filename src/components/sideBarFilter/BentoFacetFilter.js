@@ -40,6 +40,7 @@ const CustomExpansionPanelSummary = withStyles({
 })(AccordionSummary);
 
 // Generate SearchBox Component
+
 const { SearchBox } = SearchBoxGenerator({
   functions: {
     getSuggestions: async (searchType) => {
