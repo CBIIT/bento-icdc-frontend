@@ -31,7 +31,7 @@ query caseOverview(
 `;
 
 export const GET_IDS_BY_TYPE = (type) => gql`{
-    caseOverview(case_ids: [], first: 10) {
+    caseOverview(case_ids: [], first: 100) {
     ${type}
   }
 }
