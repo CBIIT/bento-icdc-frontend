@@ -614,7 +614,7 @@ export const facetsConfig = [
     label: 'Sample Type',
     apiPath: 'filterCaseCountBySampleType',
     apiForFiltering: 'filterCaseCountBySampleType',
-    datafield: 'tissue_type',
+    datafield: 'sample_type',
     field: GROUP,
     count: COUNT,
     type: InputTypes.CHECKBOX,

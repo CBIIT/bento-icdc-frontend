@@ -94,7 +94,7 @@ const { UploadModal } = UploadModalGenerator({
     matchedId: 'case_id',
     matchedLabel: 'SUBMITTED CASE ID',
     associateId: 'study_code',
-    associataLabel: 'ASSOCIATED STUDY',
+    associateLabel: 'ASSOCIATED STUDY',
     projectName: 'ICDC',
   },
 });
