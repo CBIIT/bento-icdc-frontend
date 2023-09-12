@@ -19,6 +19,7 @@ const Dashboard = ({
   program,
   biospecimenSource,
   activeFilters,
+  localFindAutocomplete,
 }) => (
   <div className={classes.dashboardContainer}>
     <StatsView data={searchCases} />
@@ -32,6 +33,7 @@ const Dashboard = ({
             facetSectionVariables={facetSectionVariables}
             facetsConfig={facetsConfig}
             tooltipConfig={tooltipConfig}
+            localFindAutocomplete={localFindAutocomplete}
           />
         </div>
         <div className={classes.rightContent}>

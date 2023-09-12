@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
   Container,
@@ -18,7 +18,7 @@ import {
 } from '../../../bento-core';
 import { facetsConfig } from '../../../bento/dashboardData';
 import theme from './QueryBarTheme';
-import styles from './QueryBarStyles';
+import styles, { customStyles } from './QueryBarStyles';
 
 /**
  * Generate the Explore Tab Query Bar
@@ -50,7 +50,12 @@ const QueryBarView = ({
   mappedFilterState.sort((a, b) => (
     sectionOrder.indexOf(a.datafield) - sectionOrder.indexOf(b.datafield)));
 
-  const { QueryBar } = QueryBarGenerator({
+  const { QueryBar } = useCallback(QueryBarGenerator({
+    config: {
+      maxItems: 2,
+      displayAllActiveFilters: true,
+      count: 'count',
+    },
     functions: {
       clearAll: () => {
         dispatch(resetAllData());
@@ -86,7 +91,8 @@ const QueryBarView = ({
         }));
       },
     },
-  });
+    customStyles,
+  }), [localFind]);
 
   return (
     <ThemeProvider theme={createTheme(theme)}>

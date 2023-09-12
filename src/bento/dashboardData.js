@@ -85,6 +85,7 @@ export const facetSectionVariables = {
     checkBoxColorsTwo: '#fff9f5',
     height: '7px',
     isExpanded: true,
+    hasSearch: true,
   },
   'Filter By Samples': {
     color: '#9DC1D9',
@@ -613,7 +614,7 @@ export const facetsConfig = [
     label: 'Sample Type',
     apiPath: 'filterCaseCountBySampleType',
     apiForFiltering: 'filterCaseCountBySampleType',
-    datafield: 'tissue_type',
+    datafield: 'sample_type',
     field: GROUP,
     count: COUNT,
     type: InputTypes.CHECKBOX,

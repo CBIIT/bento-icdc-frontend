@@ -79,19 +79,16 @@ const styles = () => ({
   },
   /* Custom Styling by Project */
   localFind: {
-    color: '#10A075',
+    color: '#ff7f15',
   },
   localFindBackground: {
-    backgroundColor: '#C0E9D7',
+    color: '#ff7f15',
   },
   facetSectionCases: {
-    color: '#10A075',
+    color: '#ff7f15',
   },
   facetSectionCasesBackground: {
-    backgroundColor: '#C0E9D7',
-  },
-  facetSectionFiles: {
-    color: '#E636E4',
+    backgroundColor: '#FFB170',
   },
   facetSectionFilesBackground: {
     backgroundColor: '#F5C3F1',
@@ -103,5 +100,35 @@ const styles = () => ({
     backgroundColor: '#C3EAF5',
   },
 });
+
+export const customStyles = {
+  localFind: {
+    color: '#ff7f15',
+  },
+  localFindBackground: {
+    // backgroundColor: '#FFB170',
+  },
+  facetSectionCases: {
+    color: '#ff7f15',
+  },
+  facetSectionFilterByCases: {
+    color: '#ff7f15',
+  },
+  facetSectionFilterByCasesBackground: {
+    color: '#ff7f15',
+  },
+  facetSectionFilterBySample: {
+    color: '#9dc1d9',
+  },
+  facetSectionFilterBySampleBackground: {
+    color: '#9dc1d9',
+  },
+  facetSectionFilterByFile: {
+    color: '#667a87',
+  },
+  facetSectionFilterByFileBackground: {
+    color: '#667a87',
+  },
+};
 
 export default styles;
