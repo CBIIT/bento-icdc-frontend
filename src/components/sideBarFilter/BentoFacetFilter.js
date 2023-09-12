@@ -5,30 +5,99 @@ import {
   withStyles,
 } from '@material-ui/core';
 import {
-  ArrowDropDown as ArrowDropDownIcon,
+  // ArrowDropDown as ArrowDropDownIcon,
   ExpandMore as ExpandMoreIcon,
 } from '@material-ui/icons';
 import clsx from 'clsx';
-import { ClearAllFiltersBtn, FacetFilter } from '../../bento-core';
+import {
+  ClearAllFiltersBtn, FacetFilter, resetAllData, chunkSplit,
+  SearchView, SearchBoxGenerator, UploadModalGenerator,
+} from '../../bento-core';
+
 import FacetFilterThemeProvider from './FilterThemeConfig';
-import styles from './BentoFacetFilterStyle';
+import styles, { customStyles } from './BentoFacetFilterStyle';
+import { getAllIds, getAllSubjectIds } from './BentoFilterUtils';
+import store from '../../store';
 
 const CustomExpansionPanelSummary = withStyles({
   root: {
     marginBottom: -1,
+    paddingTop: 6,
+    paddingLeft: 14,
+    paddingRight: 14,
     minHeight: 48,
     '&$expanded': {
       minHeight: 48,
     },
   },
   content: {
+    display: 'block',
     '&$expanded': {
-      margin: '16px 0',
+      margin: '4px 0px 15px 0px',
     },
   },
   expanded: {},
 })(AccordionSummary);
 
+// Generate SearchBox Component
+
+const { SearchBox } = SearchBoxGenerator({
+  functions: {
+    getSuggestions: async (searchType) => {
+      try {
+        const response = await getAllIds(searchType).catch(() => []);
+        return response && response instanceof Array
+          ? response.map((id) => ({ type: searchType, title: id }))
+          : [];
+      } catch (e) {
+        return [];
+      }
+    },
+  },
+  config: {
+    inputPlaceholder: 'e.g. ICDC-CASE-06, ICDC-CASE-22',
+    noOptionsText: 'No matching items found',
+    searchType: 'case_id',
+  },
+  customStyles,
+});
+
+// Generate UploadModal Component
+const { UploadModal } = UploadModalGenerator({
+  functions: {
+    searchMatches: async (inputArray) => {
+      try {
+        // Split the search terms into chunks of 500
+        const caseChunks = chunkSplit(inputArray, 500);
+        const matched = (await Promise.allSettled(caseChunks.map((chunk) => (
+          getAllSubjectIds(chunk)))))
+          .filter((result) => result.status === 'fulfilled')
+          .map((result) => result.value || [])
+          .flat(1);
+
+        // Combine the results and remove duplicates
+        const unmatched = new Set(inputArray);
+        matched.forEach((obj) => unmatched.delete(obj.case_id));
+        return { matched, unmatched: [...unmatched] };
+      } catch (e) {
+        return { matched: [], unmatched: [] };
+      }
+    },
+  },
+  config: {
+    title: 'Upload Case Set',
+    inputPlaceholder: 'eg. ICDC-CASE-06, ICDC-CASE-22',
+    inputTooltip: 'Add the case indentifier.',
+    uploadTooltip: 'Add the case indentifier.',
+    accept: '.csv,.txt',
+    maxSearchTerms: 1000,
+    matchedId: 'case_id',
+    matchedLabel: 'SUBMITTED CASE ID',
+    associateId: 'study_code',
+    associateLabel: 'ASSOCIATED STUDY',
+    projectName: 'ICDC',
+  },
+});
 const BentoFacetFilter = ({
   classes,
   searchData,
@@ -38,6 +107,7 @@ const BentoFacetFilter = ({
   facetsConfig,
   tooltipConfig,
   isUnifiedView = false,
+  localFindAutocomplete,
 }) => {
   // set tooltip text progams / biobank
   // useMemo to prevent execution of func everytime component re renders
@@ -92,6 +162,7 @@ const BentoFacetFilter = ({
         className={classes.resetButton}
         onClick={() => {
           onClearAllFilters();
+          store.dispatch(resetAllData());
         }}
         disableRipple
       >
@@ -107,32 +178,43 @@ const BentoFacetFilter = ({
   */
   const CustomFacetSection = useCallback(({ section }) => {
     const { name, expandSection } = section;
+    const { hasSearch = false } = facetSectionVariables[name];
     const [expanded, setExpanded] = useState(expandSection);
+    const [showSearch, setShowSearch] = useState(true);
+
+    const toggleSearch = (e) => {
+      e.stopPropagation();
+      setShowSearch(!showSearch);
+    };
     const collapseHandler = () => setExpanded(!expanded);
 
     return (
       <>
         <CustomExpansionPanelSummary
-          expandIcon={
-            <ArrowDropDownIcon classes={{ root: classes.dropDownIconSection }} />
-          }
           onClick={collapseHandler}
           id={section}
-          className={clsx(
-            classes.customExpansionPanelSummaryRoot,
-            {
-              [classes.disableExpansion]: isUnifiedView,
-            },
-          )}
-          disabled={isUnifiedView}
         >
           <div className={classes.sectionSummaryTextContainer}>
             {name}
+            {hasSearch && (
+              <div className={classes.findCaseButton} onClick={toggleSearch}>
+                <img src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/FacetLocalFindSearchIcon.svg" className={classes.findCaseIcon} alt="search" />
+              </div>
+            )}
           </div>
+          {hasSearch && (
+            <SearchView
+              classes={classes}
+              SearchBox={SearchBox}
+              UploadModal={UploadModal}
+              hidden={!expanded || !showSearch}
+            />
+          )}
         </CustomExpansionPanelSummary>
       </>
+
     );
-  }, []);
+  }, [localFindAutocomplete]);
 
   /** Note:
   * Generate Custom facet Section Component

@@ -29,9 +29,9 @@ export const useOrderSupportingData = (data) => {
   React.useEffect(() => {
     const IDCData = data?.CRDCLinks.filter((item) => item.repository === 'IDC');
     const TCIAData = data?.CRDCLinks.filter((item) => item.repository === 'TCIA');
+
     const IDCObj = reorderObjectKeys(IDCData?.[0]?.metadata, IDCOrder);
     const TCIAObj = reorderObjectKeys(TCIAData?.[0]?.metadata, TCIAOrder);
-
     setIDC(IDCObj);
     setTCIA(TCIAObj);
   }, [data]);

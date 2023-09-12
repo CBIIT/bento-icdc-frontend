@@ -129,7 +129,7 @@ export const reorderObjectKeys = (dataObject, orderObject) => {
 
   Object.keys(orderObject).forEach((key) => {
     // eslint-disable-next-line no-prototype-builtins
-    if (dataObject.hasOwnProperty(key)) {
+    if (dataObject && dataObject.hasOwnProperty(key)) {
       orderedData[key] = dataObject[key];
       // eslint-disable-next-line no-param-reassign
       delete dataObject[key];

@@ -9,6 +9,7 @@ import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';
 const getDashData = (states) => {
   const {
     filterState,
+    localFindUpload, localFindAutocomplete,
   } = states;
 
   const client = useApolloClient();
@@ -25,6 +26,10 @@ const getDashData = (states) => {
 
   const activeFilters = {
     ...getFilters(filterState),
+    case_ids: [
+      ...(localFindUpload || []).map((obj) => obj.case_id),
+      ...(localFindAutocomplete || []).map((obj) => obj.title),
+    ],
   };
 
   useEffect(() => {
@@ -35,7 +40,7 @@ const getDashData = (states) => {
       }
     });
     return () => controller.abort();
-  }, [filterState]);
+  }, [filterState, localFindUpload, localFindAutocomplete]);
 
   return { dashData, activeFilters };
 };
@@ -66,6 +71,8 @@ const DashTemplateController = ((props) => {
 
 const mapStateToProps = (state) => ({
   filterState: state.statusReducer.filterState,
+  localFindUpload: state.localFind.upload,
+  localFindAutocomplete: state.localFind.autocomplete,
 });
 
 export default connect(mapStateToProps, null)(DashTemplateController);
