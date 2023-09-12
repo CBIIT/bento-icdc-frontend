@@ -117,16 +117,16 @@ export const customStyles = {
   facetSectionFilterByCasesBackground: {
     color: '#ff7f15',
   },
-  facetSectionFilterBySample: {
+  facetSectionFilterBySamples: {
     color: '#9dc1d9',
   },
-  facetSectionFilterBySampleBackground: {
+  facetSectionFilterBySamplesBackground: {
     color: '#9dc1d9',
   },
-  facetSectionFilterByFile: {
+  facetSectionFilterByFiles: {
     color: '#667a87',
   },
-  facetSectionFilterByFileBackground: {
+  facetSectionFilterByFilesBackground: {
     color: '#667a87',
   },
 };
