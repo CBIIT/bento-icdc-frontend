@@ -82,7 +82,7 @@ const styles = () => ({
     color: '#ff7f15',
   },
   localFindBackground: {
-    backgroundColor: '#FFB170',
+    color: '#ff7f15',
   },
   facetSectionCases: {
     color: '#ff7f15',
@@ -106,7 +106,7 @@ export const customStyles = {
     color: '#ff7f15',
   },
   localFindBackground: {
-    backgroundColor: '#FFB170',
+    // backgroundColor: '#FFB170',
   },
   facetSectionCases: {
     color: '#ff7f15',

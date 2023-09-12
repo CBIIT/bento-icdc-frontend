@@ -54,6 +54,7 @@ const QueryBarView = ({
     config: {
       maxItems: 2,
       displayAllActiveFilters: true,
+      count: 'count',
     },
     functions: {
       clearAll: () => {
