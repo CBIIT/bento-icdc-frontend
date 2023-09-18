@@ -12,10 +12,15 @@ import {
   cases,
   programs,
   studies,
+  samples,
+  files,
+  allResult,
 } from '../../bento/search';
 import ProgramCard from './results/program/ProgramCardView';
 import StudyCardView from './results/study/StudyCardView';
 import CaseCardView from './results/case/CaseCardView';
+import SampleCardView from './results/sample/SampleCardView';
+import fileCardView from './results/file/FileCardView';
 
 /**
  * Handle the tab selection change event, and redirect the user
@@ -102,13 +107,19 @@ const GlobalSearchView = ({
     console.log(pageSize);
     console.log(currentPage);
     if (field === 'all') {
-      return programs;
+      return allResult;
     }
     if (field === 'clinical_study_designation') {
       return studies;
     }
     if (field === 'case_id') {
       return cases;
+    }
+    if (field === 'sample_id') {
+      return samples;
+    }
+    if (field === 'file_name') {
+      return files;
     }
     return programs;
   };
@@ -200,6 +211,8 @@ const GlobalSearchView = ({
         program: ProgramCard,
         study: StudyCardView,
         case: CaseCardView,
+        sample: SampleCardView,
+        file: fileCardView,
       },
     },
   });

@@ -103,8 +103,9 @@ export const cases = [
   },
 ];
 
-const samples = [
+export const samples = [
   {
+    type: 'sample',
     sample_id: '',
     program_name: '',
     clinical_study_designation: '',
@@ -115,8 +116,9 @@ const samples = [
   },
 ];
 
-const files = [
+export const files = [
   {
+    type: 'file',
     file_name: '',
     file_type: '',
     program_name: '',
@@ -135,6 +137,14 @@ const counts = {
   sample_count: 3,
   file_count: 6,
 };
+
+export const allResult = [
+  ...studies,
+  ...programs,
+  ...cases,
+  ...samples,
+  ...files,
+];
 
 export const mockSearchData = {
   globalSearch: {
