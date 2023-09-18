@@ -17,6 +17,9 @@ export default () => ({
   crdcLinkStyle: {
     color: '#DC762F',
   },
+  crdcApiFailed: {
+    color: '#DC762F',
+  },
   defaultDalTooltip: {
     maxWidth: 'none',
   },
