@@ -43,6 +43,7 @@ const Studies = ({ classes, data, invalid }) => {
       studiesByProgram,
     ),
   });
+  console.log('inter', interOpData);
 
   const overlay = useSelector((state) => (
     state.dashboardTab
