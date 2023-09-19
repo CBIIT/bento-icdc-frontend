@@ -1,11 +1,13 @@
 import React from 'react';
 import GlobalSearchView from './GlobalSerachView';
 
-const GlobalSearchController = () => {
+const GlobalSearchController = ({ match }) => {
   console.log('global search controller');
   return (
     <>
-      <GlobalSearchView />
+      <GlobalSearchView
+        searchparam={match.params.id}
+      />
     </>
   );
 };

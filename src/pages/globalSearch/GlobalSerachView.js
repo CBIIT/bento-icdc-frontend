@@ -3,6 +3,7 @@ import {
   Box,
   withStyles,
 } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import {
   SearchBarGenerator,
   SearchResultsGenerator,
@@ -40,8 +41,9 @@ const GlobalSearchView = ({
   searchparam = '',
 }) => {
   console.log('global search view');
-
+  const history = useHistory();
   const [searchText, setSearchText] = useState(searchparam);
+  const [searchCounts, setSearchCounts] = useState([]);
 
   /**
    * Handle the search box input change event
@@ -67,6 +69,16 @@ const GlobalSearchView = ({
     console.log(value);
     console.log(reason);
     console.log(_config);
+
+    if (!value || typeof value !== 'string') {
+      setSearchText('');
+      setSearchCounts([]);
+      if (reason === 'clear') {
+        history.push('/search');
+      }
+      return [];
+    }
+    if (value.trim() === '') { return []; }
 
     // mock result sets
     // update suggested result set from query
@@ -152,7 +164,7 @@ const GlobalSearchView = ({
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: 2,
+        count: searchCounts.all || 2,
         value: '1',
       },
       {
