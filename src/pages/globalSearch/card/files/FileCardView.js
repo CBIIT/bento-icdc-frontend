@@ -8,7 +8,7 @@ const FileCardView = (props) => {
   console.log(props);
   return (
     <>
-      <h3>File Card View</h3>
+      <h3>Case Card</h3>
     </>
   );
 };
