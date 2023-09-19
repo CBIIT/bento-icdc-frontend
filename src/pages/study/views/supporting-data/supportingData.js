@@ -17,7 +17,6 @@ const ScrollContainer = styled.div`
   max-height: 400px;
   min-height: fit-content;
   margin-top: 37px;
-  border-top: 3px solid #004C73;
   border-bottom: 3px solid #004C73;
   width: 80%;
 
@@ -27,10 +26,12 @@ const ScrollContainer = styled.div`
 
   &::-webkit-scrollbar-thumb {
     background-color: #81ACDF;
+   
   }
 
   &::-webkit-scrollbar-track {
     background-color: #fff;
+    padding-top: 12px;
   }
 
   scrollbar-color: #81ACDF #fff
@@ -64,13 +65,14 @@ const SupportingData = ({
               </Grid>
               <Grid item xs={12}>
                 <div className={classes.externalLinkWrapper}>
-                  Go to site:
+                  <span>Go to site:</span>
                   {' '}
                   <ToolTip title="Click to view external link in new tab">
                     <a href="https://portal.imaging.datacommons.cancer.gov/explore/" target="_blank" rel="noreferrer">
                       <img
                         style={{
                           width: '1.5em',
+                          marginTop: '2.5px',
                         }}
                         src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
                         alt="external link icon"
@@ -230,6 +232,7 @@ const styles = {
   },
   idcTableContainer: {
     width: '50%',
+    borderTop: '3px solid #004C73',
   },
   idcTableItem: {
     height: '63px',
@@ -243,6 +246,7 @@ const styles = {
     fontFamily: 'Open Sans',
     fontWeight: '400',
     fontSize: '17px',
+    textTransform: 'uppercase',
   },
   tciaHeaderText: {
     color: '#0296C9',
@@ -253,10 +257,12 @@ const styles = {
   },
   headerSpan: {
     color: '#007299',
-    fontWeight: '700',
+    fontWeight: '900',
     fontSize: '18px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
+    paddingLeft: '5px',
+    textTransform: 'Capitalize',
   },
   externalLinkWrapper: {
     color: '#000',
@@ -264,6 +270,9 @@ const styles = {
     fontSize: '12px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
+    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
   },
   tciaExternalLinkWrapper: {
     color: '#000',
@@ -272,6 +281,9 @@ const styles = {
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     marginLeft: '30px',
+    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
   },
   title: {
     color: '#0296C9',
