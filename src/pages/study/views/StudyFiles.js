@@ -21,7 +21,7 @@ const StudyFiles = ({
 }) => {
   const fileTableData = data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
     const cFile = { ...file };
-    cFile.parent = 'Study';
+    cFile.parent = 'study';
     cFile.studyDesignation = studyData.clinical_study_designation;
     return cFile;
   });
