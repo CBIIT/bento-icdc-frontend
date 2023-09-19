@@ -138,6 +138,14 @@ const counts = {
   file_count: 6,
 };
 
+export const mockHeaderSuggestion = {
+  programs,
+  studies,
+  cases: [],
+  samples: [],
+  files: [],
+};
+
 export const allResult = [
   ...studies,
   ...programs,
