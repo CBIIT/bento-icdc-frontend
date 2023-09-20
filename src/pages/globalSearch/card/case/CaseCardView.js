@@ -27,39 +27,39 @@ const CaseCardView = ({
       <Grid item xs={11} className={classes.propertyContainer}>
         <div>
           <span className={classes.detailContainerHeader}>Case</span>
-          <Link to={`/program/${caseId}`} className={classes.cardTitle}>
+          <Link to={`/case/${caseId}`} className={classes.cardTitle}>
             {caseId}
           </Link>
         </div>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
-            Program Name:
+          <span className={classes.title}>
+            Program:
           </span>
-          <span className={classes.content} id={`section_fullName_${index + 1}`}>
+          <Link to={`/program/${programName}`} className={classes.content}>
             {programName}
-          </span>
+          </Link>
         </Grid>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
-            Clinical Study Designation:
+          <span className={classes.title}>
+            Study:
           </span>
-          <span className={classes.content} id={`section_description_${index + 1}`}>
+          <Link to={`/study/${studyDesignation}`} className={classes.content}>
             {studyDesignation}
-          </span>
+          </Link>
         </Grid>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
-            Disease Term:
+          <span className={classes.title}>
+            Diagnosis:
           </span>
-          <span className={classes.content} id={`section_term_${index + 1}`}>
+          <span className={classes.content}>
             {term}
           </span>
         </Grid>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
+          <span className={classes.title}>
             Breed:
           </span>
-          <span className={classes.content} id={`section_term_${index + 1}`}>
+          <span className={classes.content}>
             {breed}
           </span>
         </Grid>

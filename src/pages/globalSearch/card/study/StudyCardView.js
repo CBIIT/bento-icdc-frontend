@@ -16,6 +16,7 @@ const StudyCardView = ({
     clinical_study_name: studyName,
     accession_id: accessionID,
     clinical_study_type: studyType,
+    program_id: programID,
   } = data;
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
@@ -30,26 +31,34 @@ const StudyCardView = ({
           </Link>
         </div>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
-            Study Name:
+          <span className={classes.title}>
+            Program:
           </span>
-          <span className={classes.content} id={`section_fullName_${index + 1}`}>
-            {studyName}
-          </span>
+          <Link to={`/program/${programID}`} className={classes.content}>
+            {programID}
+          </Link>
         </Grid>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
+          <span className={classes.title}>
             Accession ID:
           </span>
-          <span className={classes.content} id={`section_accesionID_${index + 1}`}>
+          <span className={classes.content}>
             {accessionID}
           </span>
         </Grid>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
+          <span className={classes.title}>
+            Study Name:
+          </span>
+          <span className={classes.content}>
+            {studyName}
+          </span>
+        </Grid>
+        <Grid item xs={12}>
+          <span className={classes.title}>
             Study Type:
           </span>
-          <span className={classes.content} id={`section_studyType_${index + 1}`}>
+          <span className={classes.content}>
             {studyType}
           </span>
         </Grid>

@@ -31,26 +31,26 @@ const ProgramCard = ({
           </Link>
         </div>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
+          <span className={classes.title}>
             Program Name:
           </span>
-          <span className={classes.content} id={`section_fullName_${index + 1}`}>
+          <span className={classes.content}>
             {fullName}
           </span>
         </Grid>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
+          <span className={classes.title}>
             Description:
           </span>
-          <span className={classes.content} id={`section_description_${index + 1}`}>
+          <span className={classes.content}>
             {description}
           </span>
         </Grid>
         <Grid item xs={12}>
-          <span className={classes.title} id={`section_title_${index + 1}`}>
+          <span className={classes.title}>
             External Url:
           </span>
-          <span className={classes.content} id={`section_external_link_${index + 1}`}>
+          <span className={classes.content}>
             <a target="_blank" rel="noreferrer" href={externalURL}>
               {externalURL}
             </a>

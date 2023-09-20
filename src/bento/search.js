@@ -106,25 +106,35 @@ export const cases = [
 export const samples = [
   {
     type: 'sample',
-    sample_id: '',
-    program_name: '',
-    clinical_study_designation: '',
-    case_id: '',
-    sample_site: '',
-    physical_sample_type: '',
-    general_sample_pathology: '',
+    sample_id: 'GLIOMA01-i_03A6-T1-A1-J02',
+    program_name: 'Comparative Oncology Program',
+    clinical_study_designation: 'GLIOMA01',
+    case_id: 'GLIOMA01-i_03A6',
+    sample_site: 'Hemispheric',
+    physical_sample_type: 'Primary Malignant Tumor Tissue',
+    general_sample_pathology: 'Oligodendroglioma',
+  },
+  {
+    type: 'sample',
+    sample_id: 'UC01-UD-113',
+    program_name: 'CMCP',
+    clinical_study_designation: 'UC01',
+    case_id: 'UC01-UD-113',
+    sample_site: 'Hemispheric',
+    physical_sample_type: 'Primary Malignant Tumor Tissue',
+    general_sample_pathology: 'Oligodendroglioma',
   },
 ];
 
 export const files = [
   {
     type: 'file',
-    file_name: '',
-    file_type: '',
-    program_name: '',
-    clinical_study_designation: '',
-    case_id: '',
-    sample_id: '',
+    file_name: '010015_0103_sorted.bam',
+    file_type: 'RNA Sequence File',
+    program_name: 'COP',
+    clinical_study_designation: 'NCATS-COP01',
+    case_id: 'NCATS-COP01-CCB010015',
+    sample_id: 'NCATS-COP01-CCB010015 0103',
   },
 ];
 
