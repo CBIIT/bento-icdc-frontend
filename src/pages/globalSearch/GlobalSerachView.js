@@ -40,7 +40,6 @@ const GlobalSearchView = ({
   classes,
   searchparam = '',
 }) => {
-  console.log('global search view');
   const history = useHistory();
   const [searchText, setSearchText] = useState(searchparam);
   const [searchCounts, setSearchCounts] = useState([]);

@@ -4,7 +4,7 @@ const styles = () => ({
   },
   indexContainer: {
     padding: '18px 0px 18px 18px',
-    color: '#747474',
+    color: '#667A87',
     fontFamily: 'Inter',
     fontSize: '13px',
   },
@@ -43,6 +43,7 @@ const styles = () => ({
   },
   cardTitle: {
     textDecoration: 'none',
+    color: '#667A87',
     fontSize: '16px',
     fontFamily: 'Nunito',
     paddingLeft: '9px',
