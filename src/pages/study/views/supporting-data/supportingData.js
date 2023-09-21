@@ -94,38 +94,43 @@ const SupportingData = ({
                 <div>
                   <Grid container className={classes.idcTableContainer} xs={12}>
                     {
-                       Object.keys(IDCMetaData).map((item, index) => {
-                         const title = _.replace(item, '_', ' ');
-                         let content = IDCMetaData[item];
-                         if (content.length > 92) {
-                           content = _.truncate(content, { length: 92, separator: ' ' });
-                         }
+                      Object.keys(IDCMetaData).length > 0
+                        ? (Object.keys(IDCMetaData).map((item, index) => {
+                          const title = _.replace(item, '_', ' ');
+                          let content = IDCMetaData[item];
+                          if (content.length > 92) {
+                            content = _.truncate(content, { length: 92, separator: ' ' });
+                          }
 
-                         return (
-                           <Grid item xs={12}>
-                             <Grid item container direction="row" alignItems="center" className={classes.idcTableItem}>
-                               <Grid item xs={12} sm={4} className={classes.title}>
-                                 <div className={classes.keyTitle}>{_.toUpper(title)}</div>
-                               </Grid>
-                               {
-                                IDCMetaData[item].length > 90 ? (
-                                  <ToolTip title={IDCMetaData[item]} placement="bottom">
+                          return (
+                            <Grid item xs={12}>
+                              <Grid item container direction="row" alignItems="center" className={classes.idcTableItem}>
+                                <Grid item xs={12} sm={4} className={classes.title}>
+                                  <div className={classes.keyTitle}>{_.toUpper(title)}</div>
+                                </Grid>
+                                {
+                                  IDCMetaData[item].length > 90 ? (
+                                    <ToolTip title={Array.isArray(content) ? content.join(', ') : content} placement="bottom">
+                                      <Grid item xs={12} sm={6} className={classes.content}>
+                                        {Array.isArray(content) ? content.join(', ') : content}
+                                      </Grid>
+                                    </ToolTip>
+                                  ) : (
                                     <Grid item xs={12} sm={6} className={classes.content}>
-                                      {content}
+                                      {Array.isArray(content) ? content.join(', ') : content}
                                     </Grid>
-                                  </ToolTip>
-                                ) : (
-                                  <Grid item xs={12} sm={6} className={classes.content}>
-                                    {content}
-                                  </Grid>
-                                )
-                               }
-                             </Grid>
-                             {/* eslint-disable-next-line max-len */}
-                             {((((index + 1) !== Object.keys(IDCMetaData).length) && index !== 4) || (index === 4 && displayLine)) && <div><hr className={classes.hrLine} /></div>}
-                           </Grid>
-                         );
-                       })
+                                  )
+                                }
+                              </Grid>
+                              {/* eslint-disable-next-line max-len */}
+                              {((((index + 1) !== Object.keys(IDCMetaData).length) && index !== 4) || (index === 4 && displayLine)) && <div><hr className={classes.hrLine} /></div>}
+                            </Grid>
+                          );
+                        })) : (
+                          <div className={classes.apiFailed}>
+                            Data unavailable at this time
+                          </div>
+                        )
                     }
                   </Grid>
 
@@ -166,38 +171,43 @@ const SupportingData = ({
                 <div>
                   <Grid container className={classes.idcTableContainer} xs={12}>
                     {
-                       Object.keys(TCIAMetaData).map((item, index) => {
-                         const title = _.replace(item, '_', ' ');
-                         let content = TCIAMetaData[item];
-                         if (content.length > 92) {
-                           content = _.truncate(content, { length: 92, separator: ' ' });
-                         }
+                      Object.keys(TCIAMetaData).length > 0
+                        ? (Object.keys(TCIAMetaData).map((item, index) => {
+                          const title = _.replace(item, '_', ' ');
+                          let content = TCIAMetaData[item];
+                          if (content.length > 92) {
+                            content = _.truncate(content, { length: 92, separator: ' ' });
+                          }
 
-                         return (
-                           <Grid item xs={12}>
-                             <Grid item container direction="row" alignItems="center" className={classes.idcTableItem}>
-                               <Grid item xs={12} sm={4} className={classes.title}>
-                                 <div className={classes.keyTitle}>{_.toUpper(title)}</div>
-                               </Grid>
-                               {
-                                TCIAMetaData[item].length > 90 ? (
-                                  <ToolTip title={Array.isArray(content) ? content.join(', ') : content} placement="bottom">
+                          return (
+                            <Grid item xs={12}>
+                              <Grid item container direction="row" alignItems="center" className={classes.idcTableItem}>
+                                <Grid item xs={12} sm={4} className={classes.title}>
+                                  <div className={classes.keyTitle}>{_.toUpper(title)}</div>
+                                </Grid>
+                                {
+                                  TCIAMetaData[item].length > 90 ? (
+                                    <ToolTip title={Array.isArray(content) ? content.join(', ') : content} placement="bottom">
+                                      <Grid item xs={12} sm={6} className={classes.content}>
+                                        {Array.isArray(content) ? content.join(', ') : content}
+                                      </Grid>
+                                    </ToolTip>
+                                  ) : (
                                     <Grid item xs={12} sm={6} className={classes.content}>
                                       {Array.isArray(content) ? content.join(', ') : content}
                                     </Grid>
-                                  </ToolTip>
-                                ) : (
-                                  <Grid item xs={12} sm={6} className={classes.content}>
-                                    {Array.isArray(content) ? content.join(', ') : content}
-                                  </Grid>
-                                )
-                               }
-                             </Grid>
-                             {/* eslint-disable-next-line max-len */}
-                             {(index + 1) !== Object.keys(TCIAMetaData).length && <div><hr className={classes.hrLine} /></div>}
-                           </Grid>
-                         );
-                       })
+                                  )
+                                }
+                              </Grid>
+                              {/* eslint-disable-next-line max-len */}
+                              {(index + 1) !== Object.keys(TCIAMetaData).length && <div><hr className={classes.hrLine} /></div>}
+                            </Grid>
+                          );
+                        })) : (
+                          <div className={classes.apiFailed}>
+                            Data unavailable at this time
+                          </div>
+                        )
                     }
                   </Grid>
 
@@ -214,6 +224,11 @@ const SupportingData = ({
 const styles = {
   paper: {
     boxShadow: 'none',
+  },
+  apiFailed: {
+    width: '100%',
+    textAlign: 'center',
+    fontFamily: 'Open Sans',
   },
   supportDataContainer: {
     margin: 'auto',
