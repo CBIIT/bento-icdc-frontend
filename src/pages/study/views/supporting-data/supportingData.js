@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   withStyles,
@@ -16,7 +16,6 @@ const ScrollContainer = styled.div`
   overflow: auto;
   max-height: 400px;
   min-height: fit-content;
-  margin-top: 37px;
   border-bottom: 3px solid #004C73;
   width: 80%;
 
@@ -26,16 +25,19 @@ const ScrollContainer = styled.div`
 
   &::-webkit-scrollbar-thumb {
     background-color: #81ACDF;
+    border-top: 4px #fff solid;
+    background-clip: padding-box;
+    outline: 1px solid #fff;
    
   }
 
   &::-webkit-scrollbar-track {
     background-color: #fff;
-    padding-top: 12px;
   }
 
-  scrollbar-color: #81ACDF #fff
+  scrollbar-color: #81ACDF #fff;
   scrollbar-width: thin;
+
 
 `;
 
@@ -49,6 +51,11 @@ const SupportingData = ({
   }
 
   const [IDCMetaData, TCIAMetaData] = useOrderSupportingData(data);
+  const [displayLine, setDisplayLine] = useState(false);
+
+  const showLine = () => {
+    setDisplayLine(true);
+  };
 
   return (
     <div className={classes.supportDataContainer}>
@@ -72,7 +79,7 @@ const SupportingData = ({
                       <img
                         style={{
                           width: '1.5em',
-                          marginTop: '2.5px',
+                          marginTop: '3px',
                         }}
                         src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
                         alt="external link icon"
@@ -81,8 +88,8 @@ const SupportingData = ({
                   </ToolTip>
                 </div>
               </Grid>
-
-              <ScrollContainer>
+              <hr className={classes.topBorder} />
+              <ScrollContainer onScroll={showLine} className={classes.idcScrollContainer}>
                 <div>
                   <Grid container className={classes.idcTableContainer} xs={12}>
                     {
@@ -114,7 +121,7 @@ const SupportingData = ({
                                }
                              </Grid>
                              {/* eslint-disable-next-line max-len */}
-                             {(index + 1) !== Object.keys(IDCMetaData).length && <div><hr className={classes.hrLine} /></div>}
+                             {((((index + 1) !== Object.keys(IDCMetaData).length) && index !== 4) || (index === 4 && displayLine)) && <div><hr className={classes.hrLine} /></div>}
                            </Grid>
                          );
                        })
@@ -145,6 +152,7 @@ const SupportingData = ({
                       <img
                         style={{
                           width: '1.5em',
+                          marginTop: '3px',
                         }}
                         src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
                         alt="external link icon"
@@ -153,7 +161,7 @@ const SupportingData = ({
                   </ToolTip>
                 </div>
               </Grid>
-
+              <hr className={classes.topBorder} />
               <ScrollContainer className={classes.tciaScrollConatiner}>
                 <div>
                   <Grid container className={classes.idcTableContainer} xs={12}>
@@ -230,9 +238,16 @@ const styles = {
     width: 'calc(100% + 8px) !important',
     margin: '0px -8px',
   },
+  topBorder: {
+    top: '0',
+    left: '0',
+    marginTop: '37px',
+    height: '5px',
+    width: '80%',
+    backgroundColor: '#004C73',
+  },
   idcTableContainer: {
     width: '50%',
-    borderTop: '3px solid #004C73',
   },
   idcTableItem: {
     height: '63px',
@@ -254,6 +269,7 @@ const styles = {
     fontWeight: '400',
     fontSize: '17px',
     marginLeft: '30px',
+    textTransform: 'uppercase',
   },
   headerSpan: {
     color: '#007299',

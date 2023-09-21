@@ -26,7 +26,7 @@ const TabItems = ({
     <Tab
       index={tab.index}
       label={
-        getTabLalbel(tab.label, tab.icon, tab.index)
+        getTabLalbel(tab.label, tab.icon, index)
       }
       key={index}
       disableRipple
