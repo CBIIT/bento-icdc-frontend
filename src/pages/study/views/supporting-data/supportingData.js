@@ -17,6 +17,8 @@ const ScrollContainer = styled.div`
   max-height: 400px;
   min-height: fit-content;
   border-bottom: 3px solid #004C73;
+  border-top: 3px solid #004C73;
+  margin-top: 37px;
   width: 80%;
 
   &::-webkit-scrollbar {
@@ -88,7 +90,6 @@ const SupportingData = ({
                   </ToolTip>
                 </div>
               </Grid>
-              <hr className={classes.topBorder} />
               <ScrollContainer onScroll={showLine} className={classes.idcScrollContainer}>
                 <div>
                   <Grid container className={classes.idcTableContainer} xs={12}>
@@ -161,7 +162,6 @@ const SupportingData = ({
                   </ToolTip>
                 </div>
               </Grid>
-              <hr className={classes.topBorder} />
               <ScrollContainer className={classes.tciaScrollConatiner}>
                 <div>
                   <Grid container className={classes.idcTableContainer} xs={12}>
@@ -237,14 +237,6 @@ const styles = {
     overflowX: 'hidden',
     width: 'calc(100% + 8px) !important',
     margin: '0px -8px',
-  },
-  topBorder: {
-    top: '0',
-    left: '0',
-    marginTop: '37px',
-    height: '5px',
-    width: '80%',
-    backgroundColor: '#004C73',
   },
   idcTableContainer: {
     width: '50%',
