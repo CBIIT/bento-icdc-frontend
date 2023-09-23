@@ -5,15 +5,18 @@ import {
   onDeleteCartFile,
   CartContextProvider,
 } from '@bento-core/cart';
+import { TableContextProvider } from '../../bento-core';
 import { table } from '../../bento/fileCentricCartWorkflowData';
 import CartView from './CartView';
 
 const CartController = (props) => (
   <CartContextProvider>
-    <CartView
-      {...props}
-      config={table}
-    />
+    <TableContextProvider>
+      <CartView
+        {...props}
+        config={table}
+      />
+    </TableContextProvider>
   </CartContextProvider>
 );
 

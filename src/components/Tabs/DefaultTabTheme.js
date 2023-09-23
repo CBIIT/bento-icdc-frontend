@@ -38,9 +38,6 @@ const customTheme = {
           color: '#39C0F0',
           borderTop: '7px solid #39C0F0',
         },
-        '&.MuiTypography-body1': {
-          color: 'red',
-        },
       },
       '& span.cases_count': {
         marginLeft: '5px',
