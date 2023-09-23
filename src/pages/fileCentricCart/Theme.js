@@ -87,89 +87,87 @@ export const tblContainer = {
       container: {
         margin: '50px 0px 30px 0px',
         background: '#f3f3f4',
-        padding: '30px 0px',
+        padding: '30px 30px',
         borderTopLeftRadius: '20px',
         borderTopRightRadius: '20px',
         borderBottomLeftRadius: '20px',
         borderBottomRightRadius: '20px',
       },
       root: {
-        padding: '0px 30px',
+        // padding: '0px 30px',
+        borderRadius: '15px',
+        paddingTop: '10px',
+        backgroundColor: '#fff',
       },
     },
   },
 };
 
-export const extendedView = ({
-  primaryColor = '#FF9742',
-  selectedRows = [],
-}) => {
-  const hidden = selectedRows.length > 0;
-  return {
-    extendedView: {
-      tblTopPgn: {
-        MuiTablePagination: {
-          root: {
-            paddingRight: '20px',
-            borderTop: `3px solid ${primaryColor}`,
+export const extendedView = () => ({
+  extendedView: {
+    tblTopPgn: {
+      MuiTablePagination: {
+        root: {
+          width: '30%',
+          float: 'right',
+          minWidth: '500px',
+        },
+      },
+    },
+    MuiTooltip: {
+      root: {
+        background: '#fff',
+      },
+      tooltip: {
+        backgroundColor: '#ffffff',
+        color: '#1c2023',
+        maxWidth: '220px',
+        fontSize: '0.75rem',
+        fontFamily: 'Open Sans',
+        fontWeight: '600',
+        textAlign: 'left',
+        lineHeight: '1.6',
+        padding: '10px 12px',
+        borderRadius: '0px',
+      },
+    },
+    MuiList: {
+      root: {
+        '&.viewColumnList': {
+          padding: '8px 42px 8px 10px',
+          '& img': {
+            width: '25px',
+            marginRight: '10px',
           },
         },
       },
-      MuiTooltip: {
-        root: {
-          background: '#fff',
-        },
-        tooltip: {
+    },
+    MuiToolbar: {
+      root: {
+        width: '40%',
+        display: 'block',
+        position: 'relative',
+        textAlign: 'right',
+        '&.downloadAndColumnView': {
+          width: '100px',
+          float: 'right',
+          padding: '0px',
           backgroundColor: '#ffffff',
-          color: '#1c2023',
-          maxWidth: '220px',
-          fontSize: '0.75rem',
-          border: '2px solid #a7afb3',
-          fontFamily: 'Open Sans',
-          fontWeight: '600',
-          textAlign: 'left',
-          lineHeight: '1.6',
-          padding: '10px 12px',
-          borderRadius: '0px',
-        },
-      },
-      MuiList: {
-        root: {
-          '&.viewColumnList': {
-            padding: '8px 42px 8px 10px',
-            '& img': {
-              width: '25px',
-              marginRight: '10px',
+          minHeight: '44px',
+          '& button': {
+            '&.download-icon': {
+              marginRight: '-10px',
             },
-          },
-        },
-      },
-      MuiToolbar: {
-        regular: {
-          background: '#fff',
-        },
-        root: {
-          display: 'block',
-          position: 'relative',
-          textAlign: 'right',
-          '&.downloadAndColumnView': {
-            '& button': {
-              '&.download-icon': {
-                marginRight: '-10px',
-                display: hidden ? 'none' : '',
-              },
-              '&.manageViewColumnBtn': {
-                display: hidden ? 'none' : '',
-                marginBottom: '0px',
-                zIndex: '10',
-              },
+            '&.manageViewColumnBtn': {
+              marginBottom: '0px',
+              zIndex: '10',
             },
           },
         },
       },
     },
-  };
-};
+  },
+});
 
 export const customTheme = {
   MuiIconButton: {

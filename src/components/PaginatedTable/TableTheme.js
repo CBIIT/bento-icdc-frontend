@@ -396,9 +396,18 @@ export const customTheme = {
   },
 };
 
+const toolbar = {
+  MuiToolbar: {
+    root: {
+      minHeight: '44px !important',
+    },
+  },
+};
+
 export const themeConfig = (styles = {}, table) => ({
   ...headerTheme(styles),
   tblBody,
+  toolbar,
   ...tblContainer(styles),
   tblPgn,
   ...extendedView({ ...styles, ...table }),
