@@ -5,7 +5,7 @@ import {
   createTheme,
   withStyles,
 } from '@material-ui/core';
-import { TableContext, TableContextProvider } from '../../bento-core';
+import { TableContext } from '../../bento-core';
 import {
   cartTable,
   tableLayOut,
@@ -34,34 +34,31 @@ const CartView = (props) => {
   const { context } = tableContext;
 
   return (
-    <TableContextProvider>
-      <Grid className={classes.marginTopNegative20}>
-        <Grid item xs={12} className={classes.headerGrid}>
-          <CartHeader filesId={filesId} context={context} />
-        </Grid>
-        <Grid item xs={12}>
-          <div id="table_selected_files" className={classes.bodyWrapper}>
-            <div className={classes.tableWrapper}>
-              {/* Section: Header */}
-
-              <ThemeProvider theme={createTheme(tblContainer)}>
-                <PaginatedTableView
-                  tableReduxActions={{
-                    deleteAllFiles,
-                    deleteCartFile,
-                  }}
-                  config={cartTable}
-                  tableLayOut={tableLayOut}
-                  activeFilters={variables}
-                  totalRowCount={filesId.length}
-                  customthemeConfig={themeConfig(context)}
-                />
-              </ThemeProvider>
-            </div>
-          </div>
-        </Grid>
+    <Grid className={classes.marginTopNegative20}>
+      <Grid item xs={12} className={classes.headerGrid}>
+        <CartHeader filesId={filesId} context={context} />
       </Grid>
-    </TableContextProvider>
+      <Grid item xs={12}>
+        <div id="table_selected_files" className={classes.bodyWrapper}>
+          <div className={classes.tableWrapper}>
+            {/* Section: Header */}
+            <ThemeProvider theme={createTheme(tblContainer)}>
+              <PaginatedTableView
+                tableReduxActions={{
+                  deleteAllFiles,
+                  deleteCartFile,
+                }}
+                config={cartTable}
+                tableLayOut={tableLayOut}
+                activeFilters={variables}
+                totalRowCount={filesId.length}
+                customthemeConfig={themeConfig(context)}
+              />
+            </ThemeProvider>
+          </div>
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 
