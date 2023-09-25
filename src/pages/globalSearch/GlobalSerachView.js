@@ -16,12 +16,16 @@ import {
   samples,
   files,
   allResult,
+  aboutMock,
+  modelModel,
 } from '../../bento/search';
 import ProgramCard from './card/program/ProgramCardView';
 import StudyCardView from './card/study/StudyCardView';
 import CaseCardView from './card/case/CaseCardView';
 import SampleCardView from './card/sample/SampleCardView';
 import FileCardView from './card/files/FileCardView';
+import AboutCardView from './card/about/AboutCardView';
+import ModelCardView from './card/model/ModelCardView';
 
 /**
  * Handle the tab selection change event, and redirect the user
@@ -115,10 +119,9 @@ const GlobalSearchView = ({
   */
   const getTabData = async (field, pageSize, currentPage) => {
     console.log(field);
-    console.log(pageSize);
     console.log(currentPage);
     if (field === 'all') {
-      return allResult;
+      return (allResult || []).slice(0, pageSize);
     }
     if (field === 'clinical_study_designation') {
       return studies;
@@ -131,6 +134,12 @@ const GlobalSearchView = ({
     }
     if (field === 'file_name') {
       return files;
+    }
+    if (field === 'about_page') {
+      return aboutMock;
+    }
+    if (field === 'model') {
+      return modelModel;
     }
     return programs;
   };
@@ -163,7 +172,7 @@ const GlobalSearchView = ({
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: searchCounts.all || 2,
+        count: searchCounts.all || 12,
         value: '1',
       },
       {
@@ -216,6 +225,26 @@ const GlobalSearchView = ({
         count: 6,
         value: '6',
       },
+      {
+        name: 'Data Model',
+        field: 'model',
+        classes: {
+          root: classes.buttonRoot,
+          wrapper: classes.tabColor,
+        },
+        count: 5,
+        value: '7',
+      },
+      {
+        name: 'About',
+        field: 'about_page',
+        classes: {
+          root: classes.buttonRoot,
+          wrapper: classes.tabColor,
+        },
+        count: 1,
+        value: '8',
+      },
     ],
     config: {
       resultCardMap: {
@@ -224,6 +253,8 @@ const GlobalSearchView = ({
         case: CaseCardView,
         sample: SampleCardView,
         file: FileCardView,
+        about: AboutCardView,
+        model: ModelCardView,
       },
     },
   });

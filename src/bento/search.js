@@ -156,6 +156,26 @@ export const mockHeaderSuggestion = {
   files: [],
 };
 
+export const aboutMock = [{
+  type: 'about',
+  title: 'Purpose',
+  page: '/bento',
+  text: [
+    'Bento\'s reference implementation contains a data $model$ that is compatible with the Cancer Research Data',
+    'Commons Harmonized $model$ (CRDC-H) such that Bento instances can be connected into and inter-operate',
+  ],
+}];
+
+export const modelModel = [{
+  type: 'model',
+  highlight: 'Number of passages (splits) between the original tissue and this model.',
+  node_name: 'Program',
+  property_name: 'passage_count',
+  property_description: 'Number of passages (splits) between the original tissue and this model.',
+  property_required: 'false',
+  property_type: 'Int',
+}];
+
 export const allResult = [
   ...studies,
   ...programs,
