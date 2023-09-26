@@ -14,6 +14,7 @@ import Chart, {
   Size,
   Font,
   Title,
+  Legend,
   Tick,
   HoverStyle
 } from 'devextreme-react/chart';
@@ -64,11 +65,12 @@ class BarChart extends PureComponent {
         <Size height={size.height} width={size.width} />
 
         //** indiviual series setting */
-        <Series type={type}></Series>
+        <Series type={type} name="test-i"></Series>
 
         //** common series setting */
         <CommonSeriesSettings
           argumentField={argument.field}
+            name="test"
           valueField={value.field}
           type={type}
           ignoreEmptyPoints={seriesSetting.ignoreEmptyPoints}
@@ -101,7 +103,7 @@ class BarChart extends PureComponent {
           />
         </CommonSeriesSettings>
 
-        <SeriesTemplate nameField={argument.field} />
+        <SeriesTemplate nameField={argument.field} name="test-ii"/>
         
         /** value or y axis */
         <ValueAxis allowDecimals={value.allowDecimals}>
@@ -125,6 +127,9 @@ class BarChart extends PureComponent {
           </Label>
         </ArgumentAxis>
 
+                   
+
+
         /** tooltip */
         {tooltipContent && (
           <CartToolTip enabled={tooltipConfig.enable} contentRender={tooltipContent} >
@@ -134,6 +139,8 @@ class BarChart extends PureComponent {
           </CartToolTip>
           )
         }
+
+           <Legend />
         </Chart>
       </>
     );

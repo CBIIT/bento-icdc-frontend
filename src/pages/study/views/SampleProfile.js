@@ -16,6 +16,7 @@ import {
 import TabPanel from '../../../components/Tab/TabPanel';
 import { navigatedToDashboard } from '../../../utils/utils';
 import useDashboardTabs from '../../dashboard/components/dashboard-tabs-store';
+import SampleProfileModal from './sample-profile-madal';
 
 const tooltipContent = ({ argument, originalValue }) => (
   <>
@@ -121,13 +122,26 @@ const SampleProfile = ({ classes, data }) => {
             { sampleProfile.tabs.map((item, index) => (
               <>
                 <TabPanel index={item.index} value={currentTab} key={index}>
-                  <BarChart
-                    data={data[item.value]}
-                    palette={palette}
-                    tooltipContent={tooltipContent}
-                    argument={argumentConfiguration}
-                    value={valueConfiguration}
-                  />
+                  <div className={classes.barChartWrapper}>
+                    <BarChart
+                      data={data[item.value]}
+                      palette={palette}
+                      tooltipContent={tooltipContent}
+                      argument={argumentConfiguration}
+                      value={valueConfiguration}
+                    />
+                    <SampleProfileModal
+                      sampleProfiles={sampleProfile}
+                      data={data}
+                      barChartObject={{
+                        data: data[item.value],
+                        palette,
+                        tooltipContent,
+                        argument: argumentConfiguration,
+                        value: valueConfiguration,
+                      }}
+                    />
+                  </div>
                 </TabPanel>
               </>
             ))}
@@ -159,6 +173,12 @@ const styles = (theme) => ({
   },
   detailContainerItems: {
     paddingTop: '7px',
+  },
+  barChartWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '8px',
   },
   container: {
     fontFamily: 'Raleway, sans-serif',
