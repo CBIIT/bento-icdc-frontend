@@ -8,10 +8,10 @@ const DashboardTabsStore = createStore({
   // actions that trigger store mutation
   actions: {
     changeCurrentTab:
-      (value) => ({ setState, getState }) => {
+      (value) => ({ setState }) => {
         // mutate state synchronously
         setState({
-          currentTab: value || getState().currentTab + 1,
+          currentTab: value,
         });
       },
   },

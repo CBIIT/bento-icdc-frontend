@@ -14,7 +14,6 @@ const DashboardTabsView = ({
   unifiedQueryParam = {},
 }) => {
   const [state, actions] = useDashboardTabs();
-  console.log('state-->', state);
   const handleTabChange = (_event, value) => {
     actions.changeCurrentTab(value);
   };
