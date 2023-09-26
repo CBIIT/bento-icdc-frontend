@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import {
   TableContextProvider,
@@ -6,28 +6,30 @@ import {
 import TabsView from '../../../components/Tabs/TabsView';
 import { tableContainers, tableLayOut, tabIndex } from '../../../bento/dashboardTabData';
 import PaginatedTableView from '../../../components/PaginatedTable/TableView';
+import useDashboardTabs from './dashboard-tabs-store';
 
 const DashboardTabsView = ({
   dashboardStats,
   activeFilters,
   unifiedQueryParam = {},
 }) => {
-  const [currentTab, setCurrentTab] = useState(0);
-  const handleTabChange = (event, value) => {
-    setCurrentTab(value);
+  const [state, actions] = useDashboardTabs();
+  console.log('state-->', state);
+  const handleTabChange = (_event, value) => {
+    actions.changeCurrentTab(value);
   };
 
   return (
     <>
       <TabsView
         dashboardStats={dashboardStats}
-        currentTab={currentTab}
+        currentTab={state.currentTab}
         setCurrentTab={handleTabChange}
       />
       {
         tableContainers.map((tab, index) => (
           <TableContextProvider>
-            <div hidden={currentTab !== index}>
+            <div hidden={state.currentTab !== index}>
               <PaginatedTableView
                 config={{
                   ...tab,
@@ -35,7 +37,7 @@ const DashboardTabsView = ({
                 }}
                 tableLayOut={tableLayOut}
                 totalRowCount={dashboardStats[tab.count]}
-                activeTab={index === currentTab}
+                activeTab={index === state.currentTab}
                 tabStyles={tabIndex[index]}
                 activeFilters={{
                   ...activeFilters,
