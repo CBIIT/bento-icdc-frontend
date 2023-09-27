@@ -19,7 +19,7 @@ const theme = {
           display: 'contents',
         },
         '& img': {
-          width: '40px',
+          width: '32px',
           height: '45px',
         },
       },
