@@ -47,6 +47,7 @@ const StyledTableCell = withStyles(() => ({
     fontWeight: '600',
     fontFamily: 'Raleway',
     fontStyle: 'normal',
+    paaddingLeft: 'center',
   },
   body: {
     fontSize: '13px',
@@ -96,6 +97,7 @@ const ScrollContainer = styled.div`
   border-top: 3px solid #004C73;
   border-bottom: 3px solid #004C73;
   width: 618px;
+  margin-bottom: 90px;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -306,7 +308,7 @@ const ClinicalData = ({
             <ScrollContainer>
               <TableContainer component={Paper}>
                 <Table aria-label="table">
-                  <TableHead>
+                  <TableHead className={classes.bottomHeader}>
                     <TableRow>
                       {
                         tableHeaders.map((header, index) => {
@@ -442,7 +444,7 @@ const ClinicalData = ({
             <ScrollContainer>
               <TableContainer component={Paper}>
                 <Table aria-label="table">
-                  <TableHead>
+                  <TableHead className={classes.bottomHeader}>
                     <TableRow>
                       {
                         tableHeaders.map((header, index) => {
@@ -567,8 +569,9 @@ const ClinicalData = ({
 };
 
 const styles = {
+  bottomHeader: { borderBottom: '3px solid #004C73' },
   leftArea: { gridArea: 'a', paddingLeft: '77px' },
-  rightArea: { gridArea: 'b', paddingLeft: '77px' },
+  rightArea: { gridArea: 'b', paddingLeft: '83px' },
   container: {
     display: 'grid',
     '@media (max-width: 1500px)': {
@@ -577,7 +580,7 @@ const styles = {
   },
   paragraphOne: { width: '617px' },
   paragraphTwo: { width: '623px' },
-  csvBtn: { minWidth: '35px', maxWidth: '35px' },
+  csvBtn: { minWidth: '35px', maxWidth: '35px', marginLeft: '15px' },
   tooltipText: {
     fontFamily: 'Munito',
     fontStyle: 'normal',
@@ -586,7 +589,7 @@ const styles = {
   },
   headerCellTooltip: {
     width: '12px',
-    marginBottom: '5px',
+    marginBottom: '15px',
   },
   paper: {
     display: 'grid',
