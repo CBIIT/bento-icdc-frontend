@@ -24,9 +24,15 @@ const mapStateToProps = (state) => ({
   filesId: state.cartReducer.filesId,
 });
 
+const getFileId = (row) => row.file_uuid;
+
 const mapDispatchToProps = (dispatch) => ({
   deleteAllFiles: () => dispatch(onDeleteAllCartFile()),
-  deleteCartFile: ({ file_uuid: fileId }) => dispatch(onDeleteCartFile(fileId)),
+  deleteCartFile: (row, onDeleteRow) => {
+    dispatch(onDeleteCartFile(getFileId(row)));
+    onDeleteRow(row);
+  },
+  // deleteCartFile: ({ file_uuid: fileId }) => dispatch(onDeleteCartFile(fileId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartController);
