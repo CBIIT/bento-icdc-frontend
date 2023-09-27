@@ -242,8 +242,8 @@ const StudyDetailView = ({ classes, data }) => {
             <div className={classes.headerMainTitle}>
               <span>
                 {' '}
+                <span className={classes.headerPropertyName}> Study :</span>
                 <span>
-                  Study :
                   {' '}
                   {' '}
                   {studyData.clinical_study_designation}

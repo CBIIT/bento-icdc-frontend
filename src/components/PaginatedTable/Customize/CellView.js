@@ -13,6 +13,7 @@ import DataAvailabilityHeader from './DataAvailability/HeaderCell';
 import NumberOfCasesView from './components/NumberOfCases';
 import StudyLink from './components/StudyLink';
 import CustomHeaderRemover from './components/CustomHeaderRemover';
+import DeleteButton from './components/DeleteButton';
 
 const CaseIdLink = (props) => {
   const {
@@ -168,7 +169,15 @@ export const CustomizeCellView = ({
     if (column.cellType === cellTypes.DELETE) {
       return {
         ...column,
-        cellEventHandler: deleteCartFile,
+        customCellRender: (row, onDeleteRow) => (
+          <>
+            <DeleteButton
+              row={row}
+              onDeleteRow={onDeleteRow}
+              deleteCartFile={deleteCartFile}
+            />
+          </>
+        ),
       };
     }
     return column;
