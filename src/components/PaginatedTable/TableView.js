@@ -74,7 +74,7 @@ const PaginatedTableView = (props) => {
     tableMsg: config.tableMsg,
     sortBy: config.defaultSortField,
     sortOrder: config.defaultSortDirection,
-    extendedViewConfig: ExtendedViewConfig(config, activeFilters),
+    extendedViewConfig: ExtendedViewConfig(config),
     columnGroups: ColumnGrouping(config.columnGroups),
     rowsPerPage,
     page: 0,
