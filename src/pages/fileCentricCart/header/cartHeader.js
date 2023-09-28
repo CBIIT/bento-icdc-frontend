@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button, ButtonGroup,
-  Divider, ListItemText, Menu,
+  Button, Divider, ListItemText, Menu,
   withStyles,
 } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
@@ -26,9 +25,11 @@ import {
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
-    width: '287px',
-    borderTopRightRadius: '0px',
-    borderTopLeftRadius: '0px',
+    width: '272px',
+    borderTopRightRadius: '6px',
+    borderTopLeftRadius: '6px',
+    borderBottomLeftRadius: '8px',
+    borderBottomRightRadius: '8px',
   },
   list: {
     paddingTop: '0px',
@@ -52,7 +53,8 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
-    padding: '10px',
+    // padding: '10px',
+    padding: '2px 26px',
     color: '#095c85',
     '&:focus': {
       backgroundColor: '#0d71a3',
@@ -67,13 +69,13 @@ const StyledMenuItem = withStyles((theme) => ({
 const LABEL = 'Available Export Options';
 
 const {
-  EXPORT_TO_SEVEN_BRIDGES,
+  EXPORT_TO_CANCER_GENOMICS_CLOUD,
 } = {
-  EXPORT_TO_SEVEN_BRIDGES: 'Export to Seven Bridges',
+  EXPORT_TO_CANCER_GENOMICS_CLOUD: 'Export to Cancer Genomics Cloud',
 };
 
 const OPTIONS = [
-  EXPORT_TO_SEVEN_BRIDGES,
+  EXPORT_TO_CANCER_GENOMICS_CLOUD,
 ];
 
 const getReadMe = async (setContent, url) => {
@@ -139,7 +141,7 @@ const CartHeader = React.forwardRef(({
   }, [data]);
 
   const [anchorElement, setAnchorElement] = React.useState(null);
-  const [label, setLabel] = useState(LABEL);
+  const [label] = useState(LABEL);
   const [displayReadMe, setDisplayReadMe] = useState(false);
   const [content, setContent] = useState(undefined);
   // eslint-disable-next-line no-unused-vars
@@ -162,7 +164,7 @@ const CartHeader = React.forwardRef(({
 
   const initiateDownload = (currLabel) => {
     switch (currLabel) {
-      case 'Export to Seven Bridges': window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`, '_blank');
+      case 'Export to Cancer Genomics Cloud': window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`, '_blank');
         break;
       default: noop(data);
         break;
@@ -183,14 +185,16 @@ const CartHeader = React.forwardRef(({
   };
 
   const setType = (value) => {
-    setLabel(value);
-    setAnchorElement(null);
+    // setLabel(value);
+    // setAnchorElement(null);
+    initiateDownload(value);
+    closeHandler();
   };
 
   const getMenuItem = (type) => {
     let icon;
     switch (type) {
-      case EXPORT_TO_SEVEN_BRIDGES:
+      case EXPORT_TO_CANCER_GENOMICS_CLOUD:
         icon = cgcIcon;
         break;
       default:
@@ -199,19 +203,21 @@ const CartHeader = React.forwardRef(({
     }
     return (
       <StyledMenuItem onClick={() => setType(type)}>
-        <ListItemText
-          classes={{
-            primary: classes.listItemText,
-          }}
-          primary={type}
-        />
-        {
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+          <ListItemText
+            classes={{
+              primary: classes.listItemText,
+            }}
+            primary={type}
+          />
+          {
           icon && (
           <span>
             <img src={icon} alt="icon" />
           </span>
           )
         }
+        </div>
       </StyledMenuItem>
     );
   };
@@ -243,51 +249,38 @@ const CartHeader = React.forwardRef(({
         </div>
 
         <div className={classes.buttonContainer}>
-          <Button
-            classes={{
-              root: classes.readMeBtnRoot,
-              label: classes.readMeBtnLabel,
-            }}
-            variant="contained"
-            color="primary"
-            onClick={displayReadMeHandler}
-            endIcon={<ReadMoreSVG />}
-          >
-            <div>README</div>
-          </Button>
+          <div style={{}}>
+            <Button
+              onClick={displayReadMeHandler}
+              color="primary"
+              variant="contained"
+              endIcon={<ReadMoreSVG />}
+              classes={{
+                root: classes.readMeBtnRoot,
+                label: classes.readMeBtnLabel,
+              }}
+            >
+              README
+            </Button>
+          </div>
 
-          {/* Dropdown btns */}
           <div>
-            <ButtonGroup variant="contained" classes={{ root: classes.btnGrpRoot, contained: classes.btnGrpContained }}>
-              <Button
-                classes={{
-                  root: classes.availableDownloadDropdownBtn,
-                  label: classes.availableDownloadDropdownBtnLabel,
-                  contained: classes.availableDownloadBtnContained,
-                }}
-                startIcon={<KeyboardArrowDownIcon />}
-                onClick={exportOptionsClickHandler}
-              >
-                {isLoading ? (<p>Loading...</p>) : (
-                  <>
-                    {label}
-                  </>
-                )}
-              </Button>
-              <Button
-                disabled={LABEL === label}
-                onClick={() => initiateDownload(label)}
-                classes={{
-                  root: classes.availableDownloadBtn,
-                }}
-              >
-                <img
-                  style={{ height: '19px', width: '19px' }}
-                  alt="download icon"
-                  src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
-                />
-              </Button>
-            </ButtonGroup>
+            {' '}
+            <Button
+              classes={{
+                root: classes.availableDownloadDropdownBtn,
+                label: classes.availableDownloadDropdownBtnLabel,
+                contained: classes.availableDownloadBtnContained,
+              }}
+              startIcon={<KeyboardArrowDownIcon />}
+              onClick={exportOptionsClickHandler}
+            >
+              {isLoading ? (<p>Loading...</p>) : (
+                <>
+                  {label}
+                </>
+              )}
+            </Button>
             <StyledMenu
               id="customized-menu"
               anchorEl={anchorElement}
@@ -298,8 +291,6 @@ const CartHeader = React.forwardRef(({
               {options}
             </StyledMenu>
           </div>
-
-          {/* Download file manifest */}
           <div>
             <Button
               variant="contained"
@@ -314,7 +305,7 @@ const CartHeader = React.forwardRef(({
                   alt="download icon"
                   className={classes.downloadFileIcon}
                 />
-)}
+ )}
             >
               Download File Manifest
             </Button>
@@ -349,6 +340,7 @@ const CartHeader = React.forwardRef(({
               />
             </Tooltip>
           </div>
+
         </div>
       </div>
 
