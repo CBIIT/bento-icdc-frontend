@@ -5,9 +5,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import {
   Button,
+  IconButton,
   DialogContent, DialogContentText, withStyles,
 } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import CloseIcon from '@material-ui/icons/Close';
 import DownloadFileManifestIcon from './assets/dwnldFileManifest.svg';
 import { GET_MY_CART_DATA_QUERY, manifestData, myFilesPageData } from '../../../bento/fileCentricCartWorkflowData';
 import { downloadJson } from '../utils';
@@ -42,7 +44,12 @@ const useStyles = makeStyles({
     marginTop: '23px',
   },
   dialogHeaderSection: {
-    display: 'grid', gridTemplateColumns: '14fr 1fr',
+    display: 'flex',
+    alignItems: 'center',
+    paddingRight: '46px',
+  },
+  closeBtn: {
+    color: '#0d71a3',
   },
   dialogTitle: {
     fontFamily: 'Lato',
@@ -113,7 +120,15 @@ const DownloadFileManifestDialog = React.forwardRef(({
         <DialogTitle id="simple-dialog-title" classes={{ root: classes.dialogTitle }}>
           Optional User Comments
         </DialogTitle>
-        <Button onClick={handleClose}>x</Button>
+        <IconButton
+          className={classes.closBtnContainer}
+          onClick={handleClose}
+        >
+          <CloseIcon
+            fontSize="small"
+            className={classes.closeBtn}
+          />
+        </IconButton>
       </div>
 
       <CustomDialogContent>
