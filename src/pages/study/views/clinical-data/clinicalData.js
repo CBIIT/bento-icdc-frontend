@@ -13,8 +13,7 @@ import { filter } from 'lodash';
 import DownloadBtn from './components/downloadBtn';
 import { downloadAndZipJson, downloadJson } from '../../../fileCentricCart/utils';
 import useFetchCSVDownload from './hooks/useFetchCSVDownload';
-import
-{
+import {
   adverseEventNodeMetadata,
   agentAdministrationNodeMetadata,
   agentNodeMetadata,
@@ -27,7 +26,7 @@ import
   priorTherapyNodeMetadata,
   visitNodeMetadata, vitalSignsNodeMetadata,
 } from '../../../../bento/studyDetailsData';
-import { ToolTip as Tooltip } from '../../../../bento-core';
+import { ToolTip, ToolTip as Tooltip } from '../../../../bento-core';
 
 function splitArray(originalArray) {
   const mid = Math.ceil(originalArray.length / 2);
@@ -390,18 +389,20 @@ const ClinicalData = ({
                               <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
                               <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
                               <StyledEndTableCell align="center">
-                                <Button
-                                  onClick={() => handleCSVDownload(element)}
-                                  size="small"
-                                  classes={{
-                                    root: classes.csvBtn,
-                                  }}
-                                >
-                                  <img
-                                    src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
-                                    alt="csv download icon"
-                                  />
-                                </Button>
+                                <ToolTip title="Click to download the contents of this node">
+                                  <Button
+                                    onClick={() => handleCSVDownload(element)}
+                                    size="small"
+                                    classes={{
+                                      root: classes.csvBtn,
+                                    }}
+                                  >
+                                    <img
+                                      src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                      alt="csv download icon"
+                                    />
+                                  </Button>
+                                </ToolTip>
                               </StyledEndTableCell>
                             </TableRow>
                           );
@@ -526,18 +527,20 @@ const ClinicalData = ({
                               <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
                               <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
                               <StyledEndTableCell align="center">
-                                <Button
-                                  onClick={() => handleCSVDownload(element)}
-                                  size="small"
-                                  classes={{
-                                    root: classes.csvBtn,
-                                  }}
-                                >
-                                  <img
-                                    src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
-                                    alt="csv download icon"
-                                  />
-                                </Button>
+                                <ToolTip title="Click to download the contents of this node">
+                                  <Button
+                                    onClick={() => handleCSVDownload(element)}
+                                    size="small"
+                                    classes={{
+                                      root: classes.csvBtn,
+                                    }}
+                                  >
+                                    <img
+                                      src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                      alt="csv download icon"
+                                    />
+                                  </Button>
+                                </ToolTip>
                               </StyledEndTableCell>
                             </TableRow>
                           );
