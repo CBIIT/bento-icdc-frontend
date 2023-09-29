@@ -24,6 +24,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
+import WarningBanner from '../warning-banner/WarningBannerView';
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
 const ScrollToTop = () => {
@@ -37,6 +38,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <HashRouter>
       <>
         <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
+        <WarningBanner />
         <Header />
         <OverlayWindow />
         <NavBar />
@@ -99,7 +101,7 @@ const styles = (theme) => ({
     // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
     width: 'calc(100%)', // Remove this on adding sidebar
     background: theme.custom.bodyBackGround,
-    marginTop: '200px',
+    marginTop: '367.578px',
   },
   '@global': {
     '*::-webkit-scrollbar': {
