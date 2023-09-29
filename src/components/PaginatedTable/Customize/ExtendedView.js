@@ -1,11 +1,9 @@
 import { useApolloClient } from '@apollo/client';
-import { getFilters } from '../../../bento-core';
-import store from '../../../store/index';
 import { downloadJson } from '../utils';
 
 export const extendedViewConfigtest = '';
 
-export const ExtendedViewConfig = (config, propsFilters) => {
+export const ExtendedViewConfig = (config) => {
   const { extendedViewConfig } = config;
   if (!extendedViewConfig) {
     return null;
@@ -17,7 +15,8 @@ export const ExtendedViewConfig = (config, propsFilters) => {
     return extendedViewConfig;
   }
   /**
-  * configure table download
+  * configure custom table download
+  * extended data add or hide column different from table data
   */
   if (download) {
     const getQueryVeriables = (filters = {}) => {
@@ -28,22 +27,14 @@ export const ExtendedViewConfig = (config, propsFilters) => {
     };
 
     const client = useApolloClient();
-    download.downloadTable = () => {
-      const { filterState = {} } = store.getState()?.statusReducer;
-      /**
-      * combine both props and store filter.
-      * 1. dashboard uses store filter (filterState)
-      * 2. unifived view requires props filter
-      */
-      const activeFilters = getFilters({
-        ...propsFilters,
-        ...filterState,
-      });
+    // active filters or table query veriables
+    download.downloadTable = (filterItems = {}) => {
+      const queryVariables = getQueryVeriables(filterItems);
       client
         .query({
           query: download.query,
           variables: {
-            ...getQueryVeriables(activeFilters),
+            ...queryVariables,
           },
         })
         .then((result) => {
