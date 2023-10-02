@@ -2407,7 +2407,7 @@ export const tableLayOut = [
     clsName: 'container_footer_link',
     items: [
       {
-        title: 'Go to My Cart >',
+        title: 'Go to My Files >',
         clsName: 'go_to_cart',
         url: '#/fileCentricCart',
         type: types.LINK,
