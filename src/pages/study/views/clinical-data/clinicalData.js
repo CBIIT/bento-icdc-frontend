@@ -13,8 +13,7 @@ import { filter } from 'lodash';
 import DownloadBtn from './components/downloadBtn';
 import { downloadAndZipJson, downloadJson } from '../../../fileCentricCart/utils';
 import useFetchCSVDownload from './hooks/useFetchCSVDownload';
-import
-{
+import {
   adverseEventNodeMetadata,
   agentAdministrationNodeMetadata,
   agentNodeMetadata,
@@ -27,7 +26,7 @@ import
   priorTherapyNodeMetadata,
   visitNodeMetadata, vitalSignsNodeMetadata,
 } from '../../../../bento/studyDetailsData';
-import { ToolTip as Tooltip } from '../../../../bento-core';
+import { ToolTip, ToolTip as Tooltip } from '../../../../bento-core';
 
 function splitArray(originalArray) {
   const mid = Math.ceil(originalArray.length / 2);
@@ -47,6 +46,7 @@ const StyledTableCell = withStyles(() => ({
     fontWeight: '600',
     fontFamily: 'Raleway',
     fontStyle: 'normal',
+    paaddingLeft: 'center',
   },
   body: {
     fontSize: '13px',
@@ -96,6 +96,7 @@ const ScrollContainer = styled.div`
   border-top: 3px solid #004C73;
   border-bottom: 3px solid #004C73;
   width: 618px;
+  margin-bottom: 90px;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -306,7 +307,7 @@ const ClinicalData = ({
             <ScrollContainer>
               <TableContainer component={Paper}>
                 <Table aria-label="table">
-                  <TableHead>
+                  <TableHead className={classes.bottomHeader}>
                     <TableRow>
                       {
                         tableHeaders.map((header, index) => {
@@ -388,18 +389,20 @@ const ClinicalData = ({
                               <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
                               <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
                               <StyledEndTableCell align="center">
-                                <Button
-                                  onClick={() => handleCSVDownload(element)}
-                                  size="small"
-                                  classes={{
-                                    root: classes.csvBtn,
-                                  }}
-                                >
-                                  <img
-                                    src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
-                                    alt="csv download icon"
-                                  />
-                                </Button>
+                                <ToolTip title="Click to download the contents of this node">
+                                  <Button
+                                    onClick={() => handleCSVDownload(element)}
+                                    size="small"
+                                    classes={{
+                                      root: classes.csvBtn,
+                                    }}
+                                  >
+                                    <img
+                                      src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                      alt="csv download icon"
+                                    />
+                                  </Button>
+                                </ToolTip>
                               </StyledEndTableCell>
                             </TableRow>
                           );
@@ -442,7 +445,7 @@ const ClinicalData = ({
             <ScrollContainer>
               <TableContainer component={Paper}>
                 <Table aria-label="table">
-                  <TableHead>
+                  <TableHead className={classes.bottomHeader}>
                     <TableRow>
                       {
                         tableHeaders.map((header, index) => {
@@ -524,18 +527,20 @@ const ClinicalData = ({
                               <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
                               <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
                               <StyledEndTableCell align="center">
-                                <Button
-                                  onClick={() => handleCSVDownload(element)}
-                                  size="small"
-                                  classes={{
-                                    root: classes.csvBtn,
-                                  }}
-                                >
-                                  <img
-                                    src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
-                                    alt="csv download icon"
-                                  />
-                                </Button>
+                                <ToolTip title="Click to download the contents of this node">
+                                  <Button
+                                    onClick={() => handleCSVDownload(element)}
+                                    size="small"
+                                    classes={{
+                                      root: classes.csvBtn,
+                                    }}
+                                  >
+                                    <img
+                                      src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                      alt="csv download icon"
+                                    />
+                                  </Button>
+                                </ToolTip>
                               </StyledEndTableCell>
                             </TableRow>
                           );
@@ -567,8 +572,9 @@ const ClinicalData = ({
 };
 
 const styles = {
+  bottomHeader: { borderBottom: '3px solid #004C73' },
   leftArea: { gridArea: 'a', paddingLeft: '77px' },
-  rightArea: { gridArea: 'b', paddingLeft: '77px' },
+  rightArea: { gridArea: 'b', paddingLeft: '83px' },
   container: {
     display: 'grid',
     '@media (max-width: 1500px)': {
@@ -577,7 +583,7 @@ const styles = {
   },
   paragraphOne: { width: '617px' },
   paragraphTwo: { width: '623px' },
-  csvBtn: { minWidth: '35px', maxWidth: '35px' },
+  csvBtn: { minWidth: '35px', maxWidth: '35px', marginLeft: '15px' },
   tooltipText: {
     fontFamily: 'Munito',
     fontStyle: 'normal',
@@ -586,7 +592,7 @@ const styles = {
   },
   headerCellTooltip: {
     width: '12px',
-    marginBottom: '5px',
+    marginBottom: '15px',
   },
   paper: {
     display: 'grid',
