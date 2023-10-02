@@ -38,7 +38,6 @@ const ScrollToTop = () => {
 
 const Layout = ({ classes, isSidebarOpened }) => {
   const location = useLocation();
-  console.log(navBarExclusions.find((item) => item === location.hash));
   return (
     <>
       <CssBaseline />
