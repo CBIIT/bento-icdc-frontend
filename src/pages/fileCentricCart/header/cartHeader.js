@@ -26,8 +26,8 @@ const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
     width: '272px',
-    borderTopRightRadius: '6px',
-    borderTopLeftRadius: '6px',
+    borderTopRightRadius: '8px',
+    borderTopLeftRadius: '8px',
     borderBottomLeftRadius: '8px',
     borderBottomRightRadius: '8px',
   },
