@@ -44,7 +44,7 @@ export default (theme) => ({
     // width: '137px',
     // padding: '1px 8px',
     background: '#fff',
-    borderRadius: '5px',
+    borderRadius: '8px',
     border: '1px solid #003559',
     '&:hover': {
       backgroundColor: '#fff',
