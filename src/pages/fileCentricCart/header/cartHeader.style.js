@@ -89,7 +89,7 @@ export default (theme) => ({
   },
   downloadFileManifestBtn: {
     backgroundColor: '#1A8CCB',
-    borderRadius: '5px',
+    borderRadius: '8px',
     border: '1px solid #1A8CCB',
     boxShadow: 'none',
     width: '272px',
