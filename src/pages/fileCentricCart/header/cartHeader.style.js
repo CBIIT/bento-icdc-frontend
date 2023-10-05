@@ -40,11 +40,11 @@ export default (theme) => ({
     gap: '18px',
   },
   readMeBtnRoot: {
-    height: '38px',
-    width: '137px',
     boxShadow: 'none',
+    // width: '137px',
+    // padding: '1px 8px',
     background: '#fff',
-    borderRadius: '5px',
+    borderRadius: '8px',
     border: '1px solid #003559',
     '&:hover': {
       backgroundColor: '#fff',
@@ -89,13 +89,15 @@ export default (theme) => ({
   },
   downloadFileManifestBtn: {
     backgroundColor: '#1A8CCB',
-    borderRadius: '5px',
+    borderRadius: '8px',
     border: '1px solid #1A8CCB',
     boxShadow: 'none',
+    width: '235px',
     fontFamily: 'Lato',
     fontStyle: 'normal',
+    // maxWidth: '287px',
     fontWeight: 400,
-    fontSize: '18px',
+    fontSize: '16px',
     textTransform: 'none',
     color: '#fff',
     '&:hover': {
@@ -105,9 +107,10 @@ export default (theme) => ({
   },
   availableDownloadDropdownBtn: {
     backgroundColor: '#F2F2F2',
+    border: '1px solid #155F97',
     borderRadius: '8px',
     boxShadow: 'none',
-    maxWidth: '287px',
+    width: '235px',
     '&:hover': {
       backgroundColor: '#F2F2F2',
       boxShadow: 'none',
@@ -119,6 +122,7 @@ export default (theme) => ({
     fontWeight: 400,
     fontSize: '16px',
     fontFamily: 'Lato',
+    textTransform: 'capitalize',
   },
   availableDownloadBtn: {
     backgroundColor: '#155F97 !important',
@@ -143,6 +147,7 @@ export default (theme) => ({
     color: '#000',
     lineHeight: '15px',
   },
+  listItemText: { textWrap: 'balance', padding: '0px' },
   downloadFileManifestInfoIcon: {
     width: '15px',
     height: '15px',

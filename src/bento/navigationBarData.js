@@ -186,3 +186,7 @@ export const navBarCartData = {
   cartIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
   cartIconAlt: 'cart_logo',
 };
+
+export const navBarExclusions = [
+  '#/jBrowse/singleFileView',
+];
