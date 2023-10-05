@@ -43,6 +43,7 @@ const tooltipContent = ({ argument, originalValue }) => (
 );
 
 const SampleProfile = ({ classes, data }) => {
+  console.log('studi', data);
   const [, actions] = useDashboardTabs();
   const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
   const filterStudy = `${studyCode} (${accessionId})`;
@@ -131,8 +132,9 @@ const SampleProfile = ({ classes, data }) => {
                       value={valueConfiguration}
                     />
                     <SampleProfileModal
-                      sampleProfiles={sampleProfile}
+                      sampleProfile={sampleProfile}
                       data={data}
+                      studyCode={studyCode}
                       barChartObject={{
                         data: data[item.value],
                         palette,
