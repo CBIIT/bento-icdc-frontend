@@ -92,7 +92,7 @@ export default (theme) => ({
     borderRadius: '8px',
     border: '1px solid #1A8CCB',
     boxShadow: 'none',
-    width: '272px',
+    width: '235px',
     fontFamily: 'Lato',
     fontStyle: 'normal',
     // maxWidth: '287px',
@@ -110,7 +110,7 @@ export default (theme) => ({
     border: '1px solid #155F97',
     borderRadius: '8px',
     boxShadow: 'none',
-    width: '272px',
+    width: '235px',
     '&:hover': {
       backgroundColor: '#F2F2F2',
       boxShadow: 'none',
