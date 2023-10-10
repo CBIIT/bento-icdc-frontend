@@ -25,6 +25,7 @@ const styles = () => ({
   },
   filterCheckboxes: {
     padding: '4px 7px 3px 6px',
+    marginRight: '7px',
     borderRadius: 4,
     fontSize: 12,
     fontWeight: 600,

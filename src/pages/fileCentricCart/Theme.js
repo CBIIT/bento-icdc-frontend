@@ -1,5 +1,14 @@
 export const headerTheme = ({ primaryColor = '#004c73' }) => ({
   tblHeader: {
+    MuiCheckbox: {
+      colorPrimary: {
+        color: '#13344A',
+        marginLeft: '12px',
+        '&.Mui-checked': {
+          color: '#0B3556',
+        },
+      },
+    },
     MuiTableSortLabel: {
       root: {
         color: '#13344A',
@@ -29,8 +38,8 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
           padding: '0',
         },
         '&.del_all_row': {
-          textAlign: 'center',
           padding: '0px 20px, 0px, 0px',
+          width: '120px',
         },
         '&.group_1': {
           padding: '0',
@@ -87,89 +96,91 @@ export const tblContainer = {
       container: {
         margin: '50px 0px 30px 0px',
         background: '#f3f3f4',
-        padding: '30px 0px',
+        padding: '30px 30px',
         borderTopLeftRadius: '20px',
         borderTopRightRadius: '20px',
         borderBottomLeftRadius: '20px',
         borderBottomRightRadius: '20px',
       },
       root: {
-        padding: '0px 30px',
+        // padding: '0px 30px',
+        borderRadius: '15px',
+        paddingTop: '10px',
+        backgroundColor: '#fff',
       },
     },
   },
 };
 
-export const extendedView = ({
-  primaryColor = '#FF9742',
-  selectedRows = [],
-}) => {
-  const hidden = selectedRows.length > 0;
-  return {
-    extendedView: {
-      tblTopPgn: {
-        MuiTablePagination: {
-          root: {
-            paddingRight: '20px',
-            borderTop: `3px solid ${primaryColor}`,
+export const extendedView = () => ({
+  extendedView: {
+    tblTopPgn: {
+      MuiTablePagination: {
+        root: {
+          width: '30%',
+          float: 'right',
+          minWidth: '500px',
+        },
+        toolbar: {
+          minHeight: '45px',
+        },
+      },
+    },
+    MuiTooltip: {
+      root: {
+        background: '#fff',
+      },
+      tooltip: {
+        backgroundColor: '#ffffff',
+        color: '#1c2023',
+        maxWidth: '220px',
+        fontSize: '0.75rem',
+        fontFamily: 'Open Sans',
+        border: '2px solid #a7afb3',
+        fontWeight: '600',
+        textAlign: 'left',
+        lineHeight: '1.6',
+        padding: '10px 12px',
+        borderRadius: '0px',
+      },
+    },
+    MuiList: {
+      root: {
+        '&.viewColumnList': {
+          padding: '8px 42px 8px 10px',
+          '& img': {
+            width: '25px',
+            marginRight: '10px',
           },
         },
       },
-      MuiTooltip: {
-        root: {
-          background: '#fff',
-        },
-        tooltip: {
+    },
+    MuiToolbar: {
+      root: {
+        width: '40%',
+        display: 'block',
+        position: 'relative',
+        textAlign: 'right',
+        '&.downloadAndColumnView': {
+          width: '100px',
+          float: 'right',
+          padding: '0px',
+          marginRight: '5px',
           backgroundColor: '#ffffff',
-          color: '#1c2023',
-          maxWidth: '220px',
-          fontSize: '0.75rem',
-          border: '2px solid #a7afb3',
-          fontFamily: 'Open Sans',
-          fontWeight: '600',
-          textAlign: 'left',
-          lineHeight: '1.6',
-          padding: '10px 12px',
-          borderRadius: '0px',
-        },
-      },
-      MuiList: {
-        root: {
-          '&.viewColumnList': {
-            padding: '8px 42px 8px 10px',
-            '& img': {
-              width: '25px',
-              marginRight: '10px',
+          minHeight: '44px',
+          '& button': {
+            '&.download-icon': {
+              marginRight: '-10px',
             },
-          },
-        },
-      },
-      MuiToolbar: {
-        regular: {
-          background: '#fff',
-        },
-        root: {
-          display: 'block',
-          position: 'relative',
-          textAlign: 'right',
-          '&.downloadAndColumnView': {
-            '& button': {
-              '&.download-icon': {
-                marginRight: '-10px',
-                display: hidden ? 'none' : '',
-              },
-              '&.manageViewColumnBtn': {
-                display: hidden ? 'none' : '',
-                marginBottom: '0px',
-                zIndex: '10',
-              },
+            '&.manageViewColumnBtn': {
+              zIndex: '10',
             },
           },
         },
       },
     },
-  };
-};
+  },
+});
 
 export const customTheme = {
   MuiIconButton: {
@@ -209,7 +220,7 @@ export const customTheme = {
       '&.container_footer': {
         maxWidth: '100%',
         textAlign: 'left',
-        paddingLeft: '24px',
+        paddingLeft: '26px',
       },
     },
   },
@@ -295,10 +306,100 @@ const displayErr = {
   },
 };
 
+const toolbar = {
+  MuiToolbar: {
+    root: {
+      minHeight: '44px !important',
+    },
+    gutters: {
+      '@media (min-width: 600px)': {
+        paddingLeft: '20px',
+      },
+    },
+  },
+};
+
+const tblBody = {
+  MuiTooltip: {
+    tooltip: {
+      backgroundColor: '#ffffff',
+      color: '#1c2023',
+      maxWidth: '220px',
+      fontSize: '0.75rem',
+      border: '2px solid #a7afb3',
+      fontFamily: 'Open Sans',
+      fontWeight: '600',
+      textAlign: 'left',
+      lineHeight: '1.6',
+      padding: '10px 12px',
+      borderRadius: '0px',
+    },
+  },
+  MuiTableCell: {
+    root: {
+      minHeight: '45px',
+      padding: '0px 5px 0px 5px',
+      // padding: '16px',
+      color: '#004C73',
+      borderBottom: 'none',
+      '& a': {
+        color: '#DC762F',
+        cursor: 'pointer',
+        '& p': {
+          fontSize: '15px',
+        },
+      },
+      '& p': {
+        fontSize: '10pt',
+        fontStyle: 'normal',
+        fontFamily: 'Open Sans, sans-serif',
+        fontWeight: 'bold',
+        letterSpacing: '0.025em',
+      },
+    },
+    paddingCheckbox: {
+      width: '48px',
+      padding: '0',
+    },
+    body: {
+      color: '#13344A',
+      '&.file_name': {
+        maxWidth: '300px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.acl': {
+        textAlign: 'center',
+      },
+      '&.delete_row': {
+        textAlign: 'center',
+      },
+    },
+  },
+  MuiCheckbox: {
+    root: {
+      marginLeft: '5px',
+    },
+    colorSecondary: {
+      '&Mui-checked': {
+        color: '#0B3556',
+      },
+    },
+  },
+  MuiSvgIcon: {
+    root: {
+      color: '#0B3556',
+    },
+  },
+};
+
 export const themeConfig = (table) => ({
   ...headerTheme(table),
+  tblBody,
   ...extendedView(table),
   customTheme,
   tblPgn,
+  toolbar,
   displayErr,
 });

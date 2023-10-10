@@ -154,6 +154,9 @@ export default (theme) => ({
     lineHeight: '17px',
     paddingLeft: '3px',
   },
+  headerPropertyName: {
+    fontWeight: '400',
+  },
   headerSubTitleCate: {
     color: '#606061',
     fontWeight: '400',
