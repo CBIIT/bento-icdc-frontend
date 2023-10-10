@@ -35,21 +35,29 @@ const DataAvailabilityCellView = (props) => {
     <ul className={classes.crdcLinks}>
       {linksArray.map((link) => (
         <li>
-          <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
-            {`${link.repository} | ICDC-${clinicalStudyDesignation}`}
-            <img
-              style={{
-                width: '1.5em',
-              }}
-              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
-              alt="external link icon"
-            />
-          </a>
+          {
+            link.url.toLowerCase() !== 'api failed' ? (
+              <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
+                {`${link.repository} | ICDC-${clinicalStudyDesignation}`}
+                <img
+                  style={{
+                    width: '1.5em',
+                  }}
+                  src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
+                  alt="external link icon"
+                />
+              </a>
+            ) : (
+              <div className={classes.crdcApiFailed}>
+                {`${link.repository} | ${link.url}`}
+              </div>
+            )
+          }
         </li>
       ))}
     </ul>
   );
-  const studyData = interOpData.studiesByProgram;
+  const studyData = interOpData?.studiesByProgram;
   const generateIndicatorTooltipTitle = () => {
     switch (dataField) {
       case 'numberOfCaseFiles':
@@ -70,10 +78,10 @@ const DataAvailabilityCellView = (props) => {
   };
 
   const value = props[dataField];
-  const currentStudyData = interOpData.studiesByProgram
+  const currentStudyData = interOpData?.studiesByProgram
     .filter((study) => study.clinical_study_designation === studyDesignation);
   let flag;
-  if (currentStudyData.length) {
+  if (dataField === 'CRDCLinks' && currentStudyData?.[0]?.CRDCLinks.length) {
     flag = true;
   } else {
     flag = Array.isArray(value) ? value.length > 0 : value > 0;

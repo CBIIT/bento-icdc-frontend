@@ -74,6 +74,7 @@ export const customTheme = {
       },
       '&.add_selected_button': {
         marginRight: '10px',
+        textTransform: 'none',
       },
       '&.add_selected_button_sample': {
         backgroundColor: '#ff7e15',
