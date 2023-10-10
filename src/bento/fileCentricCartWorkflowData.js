@@ -425,24 +425,6 @@ const jBrowseBtn = {
 };
 
 export const tableLayOut = [
-  // {
-  //   container: 'outer_layout',
-  //   size: 'xl',
-  //   clsName: 'container_outer_layout',
-  //   items: [
-  //     {
-  //       clsName: 'cart_icon',
-  //       type: types.ICON,
-  //       src: myFilesPageData.headerIconSrc,
-  //       alt: myFilesPageData.headerIconAlt,
-  //     },
-  //     {
-  //       clsName: 'cart_header_text',
-  //       text: 'My Files',
-  //       type: types.TEXT,
-  //     },
-  //   ],
-  // },
   {
     container: 'paginatedTable',
     paginatedTable: true,
