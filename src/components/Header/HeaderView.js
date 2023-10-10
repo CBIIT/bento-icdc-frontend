@@ -35,7 +35,7 @@ const ICDCHeader = () => {
       query: async (search) => queryAutocompleteAPI(search),
       placeholder: 'SEARCH ICDC',
       searchKeys: ['programs', 'studies', 'cases', 'samples', 'files'],
-      searchFields: ['program_id', 'study_id', 'case_id', 'sample_id', 'file_id'],
+      searchFields: ['program_id', 'clinical_study_designation', 'case_id', 'sample_id', 'file_id'],
     },
   };
 
