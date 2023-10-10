@@ -50,7 +50,7 @@ const ProgramCard = ({
           <span className={classes.title}>
             External Url:
           </span>
-          <span className={classes.content}>
+          <span className={classes.contentLink}>
             <a target="_blank" rel="noreferrer" href={externalURL}>
               {externalURL}
             </a>

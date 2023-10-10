@@ -34,7 +34,7 @@ const StudyCardView = ({
           <span className={classes.title}>
             Program:
           </span>
-          <Link to={`/program/${programID}`} className={classes.content}>
+          <Link to={`/program/${programID}`} className={classes.contentLink}>
             {programID}
           </Link>
         </Grid>

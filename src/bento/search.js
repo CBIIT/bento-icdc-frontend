@@ -159,7 +159,7 @@ export const mockHeaderSuggestion = {
 export const aboutMock = [{
   type: 'about',
   title: 'Purpose',
-  page: '/bento',
+  page: '/purpose',
   text: [
     'Bento\'s reference implementation contains a data $model$ that is compatible with the Cancer Research Data',
     'Commons Harmonized $model$ (CRDC-H) such that Bento instances can be connected into and inter-operate',
@@ -172,8 +172,8 @@ export const modelModel = [{
   node_name: 'Program',
   property_name: 'passage_count',
   property_description: 'Number of passages (splits) between the original tissue and this model.',
-  property_required: 'false',
-  property_type: 'Int',
+  property_required: 'matching required, preferred or optional',
+  property_type: 'matching properties or Enum',
 }];
 
 export const allResult = [
