@@ -123,3 +123,20 @@ export function studyDisposition(value) {
   }
   return undefined;
 }
+
+export const reorderObjectKeys = (dataObject, orderObject) => {
+  const orderedData = {};
+
+  Object.keys(orderObject).forEach((key) => {
+    // eslint-disable-next-line no-prototype-builtins
+    if (dataObject && dataObject.hasOwnProperty(key)) {
+      orderedData[key] = dataObject[key];
+      // eslint-disable-next-line no-param-reassign
+      delete dataObject[key];
+    }
+  });
+
+  Object.assign(orderedData, dataObject);
+
+  return orderedData;
+};

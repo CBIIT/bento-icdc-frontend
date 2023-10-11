@@ -5,27 +5,21 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import {
-  CustomDataTable,
-  getOptions,
-  manipulateLinks,
-  ToolTip as Tooltip,
-} from 'bento-components';
 import { useSelector } from 'react-redux';
-import { FiberManualRecordRounded } from '@material-ui/icons';
 import { request, gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import {
-  pageData, textLabels,
+  pageData,
+  tableLayOut,
 } from '../../bento/studiesData';
 import Stats from '../../components/Stats/AllStatsController';
-import { navigatedToDashboard } from '../../utils/utils';
-import { studyDisposition } from '../study/utils';
-import pendingFileIcon from '../../assets/icons/PendingRelease-icons.Studies-Listing.svg';
 import InvalidAccesionModal from './InvalidAccesionModal';
 import StudiesThemeProvider from './studiesMuiThemConfig';
 import env from '../../utils/env';
+import {
+  TableContextProvider,
+} from '../../bento-core';
+import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
 
 const studiesByProgram = gql`
   query studiesByProgram {
@@ -53,166 +47,6 @@ const Studies = ({ classes, data, invalid }) => {
   const overlay = useSelector((state) => (
     state.dashboardTab
       ? state.dashboardTab.isOverlayOpen : false));
-
-  const tableOptions = getOptions(pageData.table, classes);
-
-  const embargoToolTipIcon = () => (
-    <Tooltip title="Under Embargo" arrow placement="bottom">
-      <img src={pageData.embargoFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
-    </Tooltip>
-  );
-
-  const pendingToolTipIcon = () => (
-    <Tooltip title="Release Pending" arrow placement="bottom">
-      <img src={pendingFileIcon} className={classes.embargoFileIcon} alt="icdc embargo file icon" />
-    </Tooltip>
-  );
-
-  /**
- * Conditionally returns a tooltip based on study disposition.
- * @param {String} param
- * @return {function}
- */
-  const renderSwitch = (param) => {
-    switch (param) {
-      case 'embargo':
-        return embargoToolTipIcon();
-      case 'pending':
-        return pendingToolTipIcon();
-      default:
-        return false;
-    }
-  };
-
-  const customStudyCodeLink = (column, value, tableMeta) => (
-    <>
-      <Link className={classes.link} to={`${column.actualLink}${tableMeta.rowData[column.actualLinkId]}`}>
-        {value}
-      </Link>
-      {
-          column.header !== 'Program' && renderSwitch(studyDisposition(tableMeta.rowData[10]))
-        }
-    </>
-  );
-
-  const customCaseNumbLink = (column, value, tableMeta) => (
-    renderSwitch(studyDisposition(tableMeta.rowData[10]))
-      ? (
-        renderSwitch(studyDisposition(tableMeta.rowData[10]))
-      ) : (
-        <Link
-          className={classes.buttonCaseNumb}
-          to={(location) => ({ ...location, pathname: '/explore' })}
-          onClick={() => navigatedToDashboard(tableMeta.rowData[0], 'Cases')}
-        >
-          {value}
-        </Link>
-      )
-  );
-
-  const generateCRDCLinks = (linksArray, clinicalStudyDesignation) => (
-    <ul className={classes.crdcLinks}>
-      {linksArray.map((link) => (
-        <li>
-          <a className={classes.crdcLinkStyle} target="_blank" rel="noreferrer" href={link.url}>
-            {`${link.repository} | ICDC-${clinicalStudyDesignation}`}
-            <img
-              style={{
-                width: '1.5em',
-              }}
-              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
-              alt="external link icon"
-            />
-          </a>
-        </li>
-      ))}
-    </ul>
-  );
-  const generateIndicatorTooltipTitle = (column, value, accessionId, studyData) => {
-    switch (column.dataField) {
-      case 'numberOfCaseFiles':
-        return `${value} Case File(s)`;
-      case 'numberOfStudyFiles':
-        return `${value} Study File(s)`;
-      case 'numberOfImageCollections': {
-        return `${studyData.length && studyData[0].numberOfImageCollections} Image Collection(s)`;
-      }
-      case 'numberOfPublications':
-        return `${value} Publication(s)`;
-      default: {
-        return studyData.length
-        && generateCRDCLinks(
-          studyData[0].CRDCLinks, studyData[0].clinical_study_designation,
-        );
-      }
-    }
-  };
-
-  const customIcon = (column, value, tableMeta) => {
-    const currentStudyData = interOpData.studiesByProgram
-      .filter((study) => study.clinical_study_designation === tableMeta.rowData[0]);
-    const flag = Array.isArray(value) ? value.length > 0 : value > 0;
-
-    const title = generateIndicatorTooltipTitle(
-      column,
-      value,
-      tableMeta.rowData[9],
-      currentStudyData,
-    );
-
-    return (
-      <>
-        {
-        flag && (
-        <div className={classes.dataAvailIndicator}>
-          <Tooltip classes={{ tooltip: column.dataField === 'CRDCLinks' ? classes.externalLinkDalTooltip : classes.defaultDalTooltip }} title={title} interactive={column.dataField === 'CRDCLinks'}>
-            {column.indicator && column.useImage
-              ? <img className={classes.dataAvailIndicatorImage} src={column.indicator} alt={`${column.header} icon`} />
-              : <FiberManualRecordRounded className={classes.dataAvailIndicatorIcon} />}
-          </Tooltip>
-        </div>
-        )
-      }
-      </>
-    );
-  };
-
-  const updatedTableWithLinks = manipulateLinks([
-    ...pageData.table.columns,
-    ...pageData.table.optionalColumns,
-  ]);
-
-  const columns = updatedTableWithLinks.map((column) => ({
-    name: column.dataField,
-    icon: !!column.icon,
-    csvNullValue: column.csvNullValue,
-    iconViewColumnsLabel: column.label,
-    iconLabel: column.iconLabel,
-    firstIcon: column.firstIcon,
-    lastIcon: column.lastIcon,
-    label: column.icon ? <img className={classes.dalIcon} src={column.icon} alt={`${column.label}'s icon`} />
-      : column.header,
-    options: {
-      display: column.display,
-      viewColumns: column.viewColumns,
-      customBodyRender: (value, tableMeta) => {
-        if (column.internalLink) {
-          if (column.totalNumberOfCases) {
-            return customCaseNumbLink(column, value, tableMeta);
-          }
-          return customStudyCodeLink(column, value, tableMeta);
-        }
-        if (column.icon) {
-          return customIcon(column, value, tableMeta);
-        }
-        return (
-          <>
-            {(`${value}` !== 'null') ? `${value}` : ''}
-          </>
-        );
-      },
-    },
-  }));
 
   if (isLoading) {
     return (
@@ -256,14 +90,14 @@ const Studies = ({ classes, data, invalid }) => {
           <div className={classes.tableDiv}>
             <Grid container>
               <Grid item xs={12} id="table_studies">
-                <CustomDataTable
-                  data={data[pageData.table.dataField]}
-                  columns={columns}
-                  options={{ ...tableOptions, ...textLabels }}
-                  components={{
-                    Tooltip,
-                  }}
-                />
+                <TableContextProvider>
+                  <StudiesTable
+                    data={data.studiesByProgram}
+                    interOpData={interOpData}
+                    table={pageData.table}
+                    tableLayOut={tableLayOut}
+                  />
+                </TableContextProvider>
               </Grid>
             </Grid>
           </div>

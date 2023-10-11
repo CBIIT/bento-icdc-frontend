@@ -7,15 +7,13 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import {
-  cn,
-} from 'bento-components';
-import { request, gql } from 'graphql-request';
+import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';
-import Snackbar from '../../components/Snackbar';
+import {
+  cn,
+} from '@bento-core/util';
 import StatsView from '../../components/Stats/StatsView';
-import { fetchDataForDashboardTabDataTable } from '../dashboardTab/store/dashboardReducer';
 import {
   studyDisposition,
 } from './utils';
@@ -26,6 +24,7 @@ import {
   embargoHeaderIcon,
   embargoFileIcon,
   tab,
+  studiesByProgram,
 } from '../../bento/studyDetailsData';
 import Tab from '../../components/Tab/Tab';
 import Overview from './views/overview/Overview';
@@ -40,41 +39,6 @@ import StudyThemeProvider from './studyDetailsThemeConfig';
 import SupportingData from './views/supporting-data/supportingData';
 import env from '../../utils/env';
 import ClinicalData from './views/clinical-data/clinicalData';
-
-const studiesByProgram = gql`
-  query studiesByProgram {
-    studiesByProgram {
-      clinical_study_designation
-      CRDCLinks {
-        url
-        repository
-        metadata {
-                ... on IDCMetadata {
-                    collection_id,
-                    cancer_type,
-                    date_updated,
-                    description,
-                    doi,
-                    image_types,
-                    location,
-                    species,
-                    subject_count,
-                    supporting_data
-                }
-                ... on TCIAMetadata {
-                    Collection,
-                    total_patient_IDs,
-                    unique_modalities,
-                    unique_bodyparts_examined,
-                    total_image_counts
-                }
-            }
-      }
-      numberOfCRDCNodes
-      numberOfImageCollections
-    }
-  }
-`;
 
 function hasPositiveValue(arr) {
   return arr.some((obj) => Object.values(obj).some((value) => value > 0));
@@ -109,7 +73,7 @@ const StudyDetailView = ({ classes, data }) => {
   });
 
   const studyData = data.study[0];
-  const studyCode = studyData.clinical_study_designation;
+  const { clinical_study_designation: studyCode } = studyData;
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
   const caseFileTypes = [...new Set(data.filesOfStudy.map((f) => (f.file_type))
@@ -133,10 +97,6 @@ const StudyDetailView = ({ classes, data }) => {
     volumeOfData: data.volumeOfDataOfStudy,
   };
 
-  React.useEffect(() => {
-    fetchDataForDashboardTabDataTable();
-  }, []);
-
   const breadCrumbJson = [{
     name: 'ALL PROGRAMS',
     to: '/programs',
@@ -146,19 +106,6 @@ const StudyDetailView = ({ classes, data }) => {
     to: '',
     isALink: false,
   }];
-
-  const [snackbarState, setsnackbarState] = React.useState({
-    open: false,
-    value: 0,
-  });
-
-  function openSnack(value) {
-    setsnackbarState({ open: true, value, action: 'added' });
-  }
-
-  function closeSnack() {
-    setsnackbarState({ open: false });
-  }
 
   const [currentTab, setCurrentTab] = React.useState(0);
   const handleTabChange = (event, value) => {
@@ -241,6 +188,9 @@ const StudyDetailView = ({ classes, data }) => {
     );
   }
 
+  const { accession_id: accessionId } = data.study[0];
+  const filterStudy = `${studyCode} (${accessionId})`;
+
   const currentStudy = interOpData?.studiesByProgram
     .find((item) => item.clinical_study_designation === studyData.clinical_study_designation);
 
@@ -280,13 +230,6 @@ const StudyDetailView = ({ classes, data }) => {
 
   return (
     <StudyThemeProvider>
-      <Snackbar
-        snackbarState={snackbarState}
-        closeSnack={closeSnack}
-        autoHideDuration={3000}
-        classes={classes}
-      />
-
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
@@ -299,8 +242,8 @@ const StudyDetailView = ({ classes, data }) => {
             <div className={classes.headerMainTitle}>
               <span>
                 {' '}
+                <span className={classes.headerPropertyName}> Study :</span>
                 <span>
-                  Study :
                   {' '}
                   {' '}
                   {studyData.clinical_study_designation}
@@ -352,8 +295,7 @@ const StudyDetailView = ({ classes, data }) => {
                     <Link
                       className={classes.headerButtonLink}
                       to={(location) => ({ ...location, pathname: '/explore' })}
-                      onClick={() => navigatedToDashboard(studyData
-                        .clinical_study_designation, 'Cases')}
+                      onClick={() => navigatedToDashboard(filterStudy)}
                     >
                       <div className={classes.headerButtonLinkNumber}>
                         {' '}
@@ -392,8 +334,6 @@ const StudyDetailView = ({ classes, data }) => {
                       studyData={studyData}
                       diagnoses={diagnoses}
                       caseFileTypes={caseFileTypes}
-                      closeSnack={closeSnack}
-                      openSnack={openSnack}
                       data={data}
                       nodeCount={clinicalDataNodeCount}
                       supportingDataCount={supportingDataCount}
@@ -414,8 +354,6 @@ const StudyDetailView = ({ classes, data }) => {
                 case 'STUDY FILES': return (
                   <TabPanel value={currentTab} index={index}>
                     <StudyFiles
-                      closeSnack={closeSnack}
-                      openSnack={openSnack}
                       data={data}
                       studyData={studyData}
                     />

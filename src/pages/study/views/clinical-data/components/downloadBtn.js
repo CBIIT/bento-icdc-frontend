@@ -1,23 +1,28 @@
-import { Button, withStyles } from '@material-ui/core';
-import { ToolTip as Tooltip } from 'bento-components';
+import { Button, CircularProgress, withStyles } from '@material-ui/core';
 import React from 'react';
+import { ToolTip as Tooltip } from '../../../../../bento-core';
 
-const DownloadBtn = ({ classes }) => (
+const DownloadBtn = ({ classes, loading, handleCSVDownload }) => (
   <div className={classes.downloadAllBtnContainer}>
     <Button
       variant="contained"
       classes={{ root: classes.downloadAllBtn }}
+      onClick={handleCSVDownload}
     >
-      Download All
-      <img
-        src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
-        alt="download icon"
-        style={{
-          width: '20px',
-          height: '20px',
-          marginLeft: '20px',
-        }}
-      />
+      {loading ? <CircularProgress size={25} /> : 'Download All'}
+      {
+            !loading && (
+            <img
+              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
+              alt="download icon"
+              style={{
+                width: '20px',
+                height: '20px',
+                marginLeft: '20px',
+              }}
+            />
+            )
+        }
     </Button>
     <Tooltip
       title={(

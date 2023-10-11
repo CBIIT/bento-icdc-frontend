@@ -119,6 +119,7 @@ export const customCasesTabDownloadCSV = {
   query: GET_CASES_TAB,
   apiVariable: 'caseOverview',
   fileName: 'ICDC_Cases_download',
+  manifestFileName: 'ICDC_Cases_download',
 };
 
 export const GET_SAMPLES_TAB = gql`
@@ -280,6 +281,7 @@ export const customSamplesTabDownloadCSV = {
   query: GET_SAMPLES_TAB,
   apiVariable: 'sampleOverview',
   fileName: 'ICDC_Samples_download',
+  manifestFileName: 'ICDC_Samples_download',
 };
 
 export const GET_FILES_TAB = gql`
@@ -565,6 +567,7 @@ export const customFilesTabDownloadCSV = {
   query: GET_FILES_TAB,
   apiVariable: 'fileOverview',
   fileName: 'ICDC_Files_download',
+  manifestFileName: 'ICDC_Files_download',
 };
 
 const customStudyFilesTabCoreDataFields = {
@@ -582,6 +585,7 @@ export const customStudyFilesTabDownloadCSV = {
   query: GET_FILES_TAB_STUDY_FILES,
   apiVariable: 'fileOverview',
   fileName: 'ICDC_Study_Files_download',
+  manifestFileName: 'ICDC_Study_Files_download',
 };
 
 export const MY_CART = gql`

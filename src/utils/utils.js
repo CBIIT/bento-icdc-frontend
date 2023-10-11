@@ -1,27 +1,10 @@
-import {
-  singleCheckBox, setSideBarToLoading, setDashboardTableLoading, fetchDataForDashboardTab,
-} from '../pages/dashboardTab/store/dashboardReducer';
+import { onClearAllAndSelectFacetValue } from '../components/sideBarFilter/BentoFilterUtils';
 
 /*
- * redirect to cases page and filter by study code
- */
-function filterCasePageOnStudyCode(study) {
-  setSideBarToLoading();
-  setDashboardTableLoading();
-  singleCheckBox([{
-    datafield: 'study',
-    groupName: 'Study',
-    isChecked: true,
-    name: study,
-    section: 'Filter By Cases',
-  }]);
-}
-
-export default filterCasePageOnStudyCode;
-
-export function navigatedToDashboard(studyCode, tab) {
-  fetchDataForDashboardTab(tab, null, null, null);
-  filterCasePageOnStudyCode(studyCode);
+* redirect to cases page and filter by study code
+*/
+export function navigatedToDashboard(studyCode) {
+  onClearAllAndSelectFacetValue('study', studyCode);
 }
 
 export const convertCRDCLinksToValue = (data, key) => {

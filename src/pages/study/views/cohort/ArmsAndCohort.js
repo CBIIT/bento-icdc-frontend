@@ -1,26 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Grid,
+  Typography,
   withStyles,
 } from '@material-ui/core';
 import {
-  CustomDataTable,
-  getOptions,
-  ToolTip as Tooltip,
-} from 'bento-components';
-import { Typography } from '../../../../components/Wrappers/Wrappers';
-import {
   table1,
-  textLabels,
-  title,
 } from '../../../../bento/studyDetailsData';
 import {
-  studyDetailSorting,
   fromArmTOCohorDoes,
   studyDisposition,
   isStudyUnderEmbargo,
+  studyDetailSorting,
 } from '../../utils';
-import CohortThemeProvider from './armsAndCohortThemeConfig';
+// import CohortThemeProvider from './armsAndCohortThemeConfig';
+import { TableContext, TableView } from '../../../../bento-core';
+import { themeConfig } from './Theme';
+import { CustomizeCellView } from '../../../../components/PaginatedTable/Customize/CellView';
+import { ExtendedViewConfig } from '../../../../components/PaginatedTable/Customize/ExtendedView';
 
 const ArmsAndCohort = ({
   classes,
@@ -81,8 +78,26 @@ const ArmsAndCohort = ({
     cohortAndDosingTableData.push(cohortAndDosing);
   }
 
-  const tableOneOptions = getOptions(table1, classes);
+  const initTblState = (initailState) => ({
+    ...initailState,
+    title: table1.name,
+    columns: CustomizeCellView(table1),
+    selectedRows: [],
+    tableMsg: table1.tableMsg,
+    sortBy: table1.defaultSortField,
+    sortOrder: table1.defaultSortDirection,
+    rowsPerPage: 10,
+    dataKey: table1.dataKey,
+    extendedViewConfig: ExtendedViewConfig(table1),
+    page: 0,
+  });
+
+  const { context } = useContext(TableContext);
   // const studyDisposition = studyDisposition(studyData.study_disposition);
+  const data = cohortAndDosingTableData.sort(
+    (a, b) => studyDetailSorting(a.arm, b.arm),
+  );
+
   return (
     <>
       {
@@ -91,30 +106,18 @@ const ArmsAndCohort = ({
         ? (
           <div className={classes.tableContainer}>
             <div className={classes.tableDiv}>
-              <Grid item xs={12}>
-                <Grid container>
-                  <Grid item xs={12} id="table_cohort_dosing">
-                    <CohortThemeProvider>
-                      <Typography>
-                        <CustomDataTable
-                          title={title.armsAndCohort}
-                          data={cohortAndDosingTableData.sort(
-                            (a, b) => studyDetailSorting(a.arm, b.arm),
-                          )}
-                          columns={table1.columns}
-                          options={{ ...tableOneOptions, ...textLabels }}
-                          components={{
-                            Tooltip,
-                          }}
-                        />
-                      </Typography>
-                    </CohortThemeProvider>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Typography />
-                  </Grid>
-                </Grid>
-              </Grid>
+              <Typography className={classes.tableText}>
+                This study is organized as follows:
+              </Typography>
+              <TableView
+                initState={initTblState}
+                tblRows={data}
+                totalRowCount={data.length}
+                server={false}
+                themeConfig={{
+                  ...themeConfig(context),
+                }}
+              />
             </div>
           </div>
         ) : (
@@ -167,6 +170,9 @@ const styles = (theme) => ({
     marginTop: '20px',
     fontSize: '12px',
     minHeight: '500px',
+  },
+  tableText: {
+    marginBottom: '-40px',
   },
 });
 

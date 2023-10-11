@@ -8,9 +8,9 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { cn } from 'bento-components';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import ReactPlayer from 'react-player/youtube';
+import { cn } from '@bento-core/util';
 import lbg from '../../assets/landing/Background.png';
 import { Button } from '../../components/Wrappers/Wrappers';
 import starImg from '../../assets/landing/Spark.png';

@@ -6,7 +6,7 @@ import {
   Tab,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { BarChart } from 'bento-components';
+import BarChart from '../../../components/BarCharts';
 import {
   sampleProfile,
   palette,
@@ -15,6 +15,7 @@ import {
 } from '../../../bento/studyDetailsData';
 import TabPanel from '../../../components/Tab/TabPanel';
 import { navigatedToDashboard } from '../../../utils/utils';
+import useDashboardTabs from '../../dashboard/components/dashboard-tabs-store';
 
 const tooltipContent = ({ argument, originalValue }) => (
   <>
@@ -41,7 +42,9 @@ const tooltipContent = ({ argument, originalValue }) => (
 );
 
 const SampleProfile = ({ classes, data }) => {
-  const studyCode = data.study[0].clinical_study_designation;
+  const [, actions] = useDashboardTabs();
+  const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
+  const filterStudy = `${studyCode} (${accessionId})`;
   const [currentTab, setCurrentTab] = useState(0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
@@ -50,7 +53,8 @@ const SampleProfile = ({ classes, data }) => {
     && data[tab.value].length > 0));
 
   const linkToDashboard = () => {
-    navigatedToDashboard(studyCode, 'Samples');
+    navigatedToDashboard(filterStudy, 'Samples');
+    actions.changeCurrentTab(1);
   };
 
   const tabItem = (items) => (

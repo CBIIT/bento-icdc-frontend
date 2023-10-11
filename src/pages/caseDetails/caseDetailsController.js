@@ -21,7 +21,11 @@ const CaseDetailContainer = ({ match }) => {
     );
   }
 
-  return <CaseDetailView data={data} />;
+  return (
+    <CaseDetailView
+      data={data}
+    />
+  );
 };
 
 export default CaseDetailContainer;

@@ -4,13 +4,13 @@ import {
   IconButton,
 } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
-import { ToolTip as Tooltip } from 'bento-components';
+import { ToolTip as Tooltip } from '../../../bento-core';
 import {
   clearTableSelections, fetchAllFileIDsForSelectAll, getCountForAddAllFilesModal,
 } from '../store/dashboardReducer';
 import Dialog from '../../../components/AddToCartDialog';
 import { addToCart, cartWillFull, getFilesIdsInCart } from '../../fileCentricCart/store/cart';
-import { selectAllToolTip } from '../../../bento/dashboardTabData';
+import { selectAllButtonText, selectAllToolTip } from '../../../bento/dashboardTabData';
 
 const styles = () => ({
   button: {
@@ -38,7 +38,7 @@ const styles = () => ({
 });
 
 const SelectAllModalDialog = ({
-  classes, openSnack, addAllButtonText, selectAllToolTipStatus, tabIndex, unifiedViewFlag,
+  classes, openSnack, selectAllToolTipStatus, tabIndex, unifiedViewFlag,
   unifiedViewCaseIds,
 }) => {
   const childRef = useRef();
@@ -91,7 +91,7 @@ const SelectAllModalDialog = ({
   return (
     <>
       <button type="button" onClick={handleClickOpen} className={classes.button}>
-        {addAllButtonText}
+        {selectAllButtonText[tabIndex]}
       </button>
       <Tooltip title={selectAllToolTip[tabIndex]} arrow placement="bottom">
         <IconButton aria-label="help" className={classes.helpIconButton}>
