@@ -28,6 +28,14 @@ const styles = () => ({
     verticalAlign: 'middle',
     borderRadius: '4px',
   },
+  content: {
+    color: '#000',
+    fontFamily: 'Nunito',
+    fontSize: '14px',
+    whiteSpace: 'normal',
+    paddingLeft: '6px',
+    letterSpacing: '0.7px',
+  },
 });
 
 export default styles;

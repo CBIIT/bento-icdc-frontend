@@ -27,9 +27,12 @@ const FileCardView = ({
       <Grid item xs={11} className={classes.propertyContainer}>
         <div>
           <span className={classes.detailContainerHeader}>File</span>
-          <span className={classes.cardTitle}>
+          <Link
+            to={`/case/${caseID}`}
+            className={classes.fileNameContentLink}
+          >
             {fileName}
-          </span>
+          </Link>
         </div>
         <Grid item xs={12}>
           <span className={classes.title}>
@@ -45,7 +48,7 @@ const FileCardView = ({
           </span>
           <Link
             to={`/program/${programName}`}
-            className={classes.content}
+            className={classes.contentLink}
           >
             {programName}
           </Link>
@@ -54,26 +57,34 @@ const FileCardView = ({
           <span className={classes.title}>
             Study:
           </span>
-          <Link to={`/study/${studyDesignation}`} className={classes.content}>
+          <Link to={`/study/${studyDesignation}`} className={classes.contentLink}>
             {studyDesignation}
           </Link>
         </Grid>
-        <Grid item xs={12}>
-          <span className={classes.title}>
-            Case:
-          </span>
-          <Link to={`/case/${caseID}`} className={classes.content}>
-            {caseID}
-          </Link>
-        </Grid>
-        <Grid item xs={12}>
-          <span className={classes.title}>
-            Sample:
-          </span>
-          <span className={classes.content}>
-            {sampleID}
-          </span>
-        </Grid>
+        {
+          caseID && (
+            <Grid item xs={12}>
+              <span className={classes.title}>
+                Case:
+              </span>
+              <Link to={`/case/${caseID}`} className={classes.contentLink}>
+                {caseID}
+              </Link>
+            </Grid>
+          )
+        }
+        {
+          sampleID && (
+            <Grid item xs={12}>
+              <span className={classes.title}>
+                Sample:
+              </span>
+              <Link to={`/case/${caseID}`} className={classes.contentLink}>
+                {sampleID}
+              </Link>
+            </Grid>
+          )
+        }
       </Grid>
     </Grid>
   );
