@@ -37,6 +37,21 @@ const styles = () => ({
     paddingLeft: '6px',
     letterSpacing: '0.7px',
   },
+  fileNameContentLink: {
+    color: '#667A87',
+    fontFamily: 'Nunito',
+    fontSize: '14px',
+    whiteSpace: 'normal',
+    paddingLeft: '6px',
+    letterSpacing: '0.7px',
+  },
+  contentLink: {
+    fontFamily: 'Nunito',
+    fontSize: '14px',
+    whiteSpace: 'normal',
+    paddingLeft: '6px',
+    letterSpacing: '0.7px',
+  },
   propertyContainer: {
     padding: '16px 16px 16px 0px',
     borderBottom: '2px solid #E7EEF5',

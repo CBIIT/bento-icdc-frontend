@@ -28,15 +28,15 @@ const SampleCardView = ({
       <Grid item xs={11} className={classes.propertyContainer}>
         <div>
           <span className={classes.detailContainerHeader}>Sample</span>
-          <span className={classes.cardTitle}>
+          <Link to={`/case/${caseID}`} className={classes.cardTitle}>
             {sampleID}
-          </span>
+          </Link>
         </div>
         <Grid item xs={12}>
           <span className={classes.title}>
             Program:
           </span>
-          <Link to={`/program/${programName}`} className={classes.content}>
+          <Link to={`/program/${programName}`} className={classes.contentLink}>
             {programName}
           </Link>
         </Grid>
@@ -46,7 +46,7 @@ const SampleCardView = ({
           </span>
           <Link
             to={`/study/${studyDesignation}`}
-            className={classes.content}
+            className={classes.contentLink}
           >
             {studyDesignation}
           </Link>
@@ -55,7 +55,7 @@ const SampleCardView = ({
           <span className={classes.title}>
             Case:
           </span>
-          <Link to={`/case/${caseID}`} className={classes.content}>
+          <Link to={`/case/${caseID}`} className={classes.contentLink}>
             {caseID}
           </Link>
         </Grid>
