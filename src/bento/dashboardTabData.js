@@ -2339,7 +2339,7 @@ export const tableContainers = [
     },
     id: 'study_file_tab',
     addFilesRequestVariableKey: 'file_name',
-    addFilesResponseKeys: ['fileIdsFromFileName'],
+    addFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
     addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
