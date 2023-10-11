@@ -4,8 +4,6 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN NODE_OPTIONS="--max-old-space-size=4096" npm install npm@7.7.6 -g
-
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm set progress=false
 
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci

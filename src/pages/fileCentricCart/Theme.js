@@ -1,5 +1,14 @@
 export const headerTheme = ({ primaryColor = '#004c73' }) => ({
   tblHeader: {
+    MuiCheckbox: {
+      colorPrimary: {
+        color: '#13344A',
+        marginLeft: '12px',
+        '&.Mui-checked': {
+          color: '#0B3556',
+        },
+      },
+    },
     MuiTableSortLabel: {
       root: {
         color: '#13344A',
@@ -29,8 +38,8 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
           padding: '0',
         },
         '&.del_all_row': {
-          textAlign: 'center',
           padding: '0px 20px, 0px, 0px',
+          width: '120px',
         },
         '&.group_1': {
           padding: '0',
@@ -112,6 +121,9 @@ export const extendedView = () => ({
           float: 'right',
           minWidth: '500px',
         },
+        toolbar: {
+          minHeight: '45px',
+        },
       },
     },
     MuiTooltip: {
@@ -124,6 +136,7 @@ export const extendedView = () => ({
         maxWidth: '220px',
         fontSize: '0.75rem',
         fontFamily: 'Open Sans',
+        border: '2px solid #a7afb3',
         fontWeight: '600',
         textAlign: 'left',
         lineHeight: '1.6',
@@ -152,6 +165,7 @@ export const extendedView = () => ({
           width: '100px',
           float: 'right',
           padding: '0px',
+          marginRight: '5px',
           backgroundColor: '#ffffff',
           minHeight: '44px',
           '& button': {
@@ -159,7 +173,6 @@ export const extendedView = () => ({
               marginRight: '-10px',
             },
             '&.manageViewColumnBtn': {
-              marginBottom: '0px',
               zIndex: '10',
             },
           },
@@ -207,7 +220,7 @@ export const customTheme = {
       '&.container_footer': {
         maxWidth: '100%',
         textAlign: 'left',
-        paddingLeft: '24px',
+        paddingLeft: '26px',
       },
     },
   },
@@ -298,11 +311,92 @@ const toolbar = {
     root: {
       minHeight: '44px !important',
     },
+    gutters: {
+      '@media (min-width: 600px)': {
+        paddingLeft: '20px',
+      },
+    },
+  },
+};
+
+const tblBody = {
+  MuiTooltip: {
+    tooltip: {
+      backgroundColor: '#ffffff',
+      color: '#1c2023',
+      maxWidth: '220px',
+      fontSize: '0.75rem',
+      border: '2px solid #a7afb3',
+      fontFamily: 'Open Sans',
+      fontWeight: '600',
+      textAlign: 'left',
+      lineHeight: '1.6',
+      padding: '10px 12px',
+      borderRadius: '0px',
+    },
+  },
+  MuiTableCell: {
+    root: {
+      minHeight: '45px',
+      padding: '0px 5px 0px 5px',
+      // padding: '16px',
+      color: '#004C73',
+      borderBottom: 'none',
+      '& a': {
+        color: '#DC762F',
+        cursor: 'pointer',
+        '& p': {
+          fontSize: '15px',
+        },
+      },
+      '& p': {
+        fontSize: '10pt',
+        fontStyle: 'normal',
+        fontFamily: 'Open Sans, sans-serif',
+        fontWeight: 'bold',
+        letterSpacing: '0.025em',
+      },
+    },
+    paddingCheckbox: {
+      width: '48px',
+      padding: '0',
+    },
+    body: {
+      color: '#13344A',
+      '&.file_name': {
+        maxWidth: '300px',
+        '& p': {
+          lineBreak: 'anywhere',
+        },
+      },
+      '&.acl': {
+        textAlign: 'center',
+      },
+      '&.delete_row': {
+        textAlign: 'center',
+      },
+    },
+  },
+  MuiCheckbox: {
+    root: {
+      marginLeft: '5px',
+    },
+    colorSecondary: {
+      '&Mui-checked': {
+        color: '#0B3556',
+      },
+    },
+  },
+  MuiSvgIcon: {
+    root: {
+      color: '#0B3556',
+    },
   },
 };
 
 export const themeConfig = (table) => ({
   ...headerTheme(table),
+  tblBody,
   ...extendedView(table),
   customTheme,
   tblPgn,
