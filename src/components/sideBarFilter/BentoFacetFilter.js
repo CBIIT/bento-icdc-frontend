@@ -15,7 +15,7 @@ import {
 } from '../../bento-core';
 
 import FacetFilterThemeProvider from './FilterThemeConfig';
-import styles, { customStyles } from './BentoFacetFilterStyle';
+import styles, { customStyles, uploadCustomStyles } from './BentoFacetFilterStyle';
 import { getAllIds, getAllSubjectIds } from './BentoFilterUtils';
 import store from '../../store';
 
@@ -96,7 +96,9 @@ const { UploadModal } = UploadModalGenerator({
     associateId: 'study_code',
     associateLabel: 'ASSOCIATED STUDY',
     projectName: 'ICDC',
+    uploadTooltipIcon: 'SPEECH_BUBBLE',
   },
+  customStyles: uploadCustomStyles,
 });
 const BentoFacetFilter = ({
   classes,

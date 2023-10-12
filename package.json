@@ -14,7 +14,7 @@
     "@bento-core/footer": "^0.3.0",
     "@bento-core/global-search": "0.2.0",
     "@bento-core/header": "^0.3.0",
-    "@bento-core/local-find": "1.0.1-icdc.0 ",
+    "@bento-core/local-find": "1.0.1-icdc.2",
     "@bento-core/nav-bar": "^0.2.0",
     "@bento-core/paginated-table": "1.0.1-icdc.11",
     "@bento-core/query-bar": "1.0.1-icdc.3",
