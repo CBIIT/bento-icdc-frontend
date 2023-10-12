@@ -35,7 +35,7 @@ const CaseCardView = ({
           <span className={classes.title}>
             Program:
           </span>
-          <Link to={`/program/${programName}`} className={classes.content}>
+          <Link to={`/program/${programName}`} className={classes.contentLink}>
             {programName}
           </Link>
         </Grid>
@@ -43,7 +43,7 @@ const CaseCardView = ({
           <span className={classes.title}>
             Study:
           </span>
-          <Link to={`/study/${studyDesignation}`} className={classes.content}>
+          <Link to={`/study/${studyDesignation}`} className={classes.contentLink}>
             {studyDesignation}
           </Link>
         </Grid>

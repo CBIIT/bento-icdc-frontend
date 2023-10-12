@@ -1,5 +1,6 @@
 import { Grid, withStyles } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './ModelCardStyle';
 
 const NodeCard = ({ data, classes, index }) => {
@@ -63,6 +64,14 @@ const NodeCard = ({ data, classes, index }) => {
           <span className={classes.content}>
             {propertyType}
           </span>
+        </Grid>
+        <Grid item xs={12}>
+          <span className={classes.title}>
+            Page Link:
+          </span>
+          <Link to="/icdc-data-model" className={classes.cardTitle}>
+            https://caninecommons.cancer.gov/#/icdc-data-model
+          </Link>
         </Grid>
       </Grid>
     </Grid>
