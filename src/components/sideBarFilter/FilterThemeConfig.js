@@ -175,6 +175,11 @@ const theme = {
         borderRadius: '0px',
       },
     },
+    MuiAutocomplete: {
+      popper: {
+        zIndex: '100',
+      },
+    },
   },
 };
 
