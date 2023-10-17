@@ -195,6 +195,13 @@ const BentoFacetFilter = ({
         <CustomExpansionPanelSummary
           onClick={collapseHandler}
           id={section}
+          className={clsx(
+            classes.customExpansionPanelSummaryRoot,
+            {
+              [classes.disableExpansion]: isUnifiedView,
+            },
+          )}
+          disabled={isUnifiedView}
         >
           <div className={classes.sectionSummaryTextContainer}>
             {name}
