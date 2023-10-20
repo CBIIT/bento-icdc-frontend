@@ -289,16 +289,6 @@ const theme = {
         marginBottom: '7px',
       },
     },
-    MuiCollapse: {
-      wrapperInner: {
-        '& img.min_input_box': {
-          background: 'yellow',
-        },
-        '& div.max_input_box': {
-          background: 'blue',
-        },
-      },
-    },
   },
 };
 
