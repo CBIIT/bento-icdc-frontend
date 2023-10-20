@@ -3,6 +3,64 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 const theme = {
   overrides: {
+    MuiContainer: {
+      root: {
+        paddingLeft: '0',
+        paddingRight: '0',
+        '@media (min-width: 180px)': {
+          paddingLeft: '0',
+          paddingRight: '0',
+        },
+        '&.floatRight': {
+          margin: '7px 0px 15px 6px',
+          paddingTop: '10px',
+        },
+      },
+    },
+    MuiButton: {
+      root: {
+        '&.resetButton': {
+          fontSize: '9px',
+          marginTop: '4px',
+          minHeight: '25px',
+          fontFamily: 'Lato, Open Sans, sans-serif',
+          marginLeft: '16px',
+          borderRadius: '100px',
+          textTransform: 'none',
+          '&:hover': {
+            backgroundColor: '#566672',
+            color: '#fff',
+          },
+        },
+        '&.uploadButton': {
+          color: '#fff',
+          width: '100%',
+          border: '1px solid #f2ab71',
+          height: '32px',
+          display: 'flex',
+          fontSize: '11px',
+          boxShadow: 'none',
+          boxSizing: 'border-box',
+          fontFamily: 'Lato',
+          fontWeight: '400',
+          paddingLeft: '16px',
+          borderRadius: '10px',
+          paddingRight: '12px',
+          justifyContent: 'space-between',
+          backgroundColor: '#FCA359',
+          '&:hover': {
+            backgroundColor: '#FCA359',
+          },
+          '& span.iconSpan': {
+            marginTop: '5.2px',
+            '& img.uploadIcon': {
+              height: '19px',
+              width: '19px',
+            },
+          },
+        },
+      },
+    },
     MuiTouchRipple: {
       child: {
         backgroundColor: '#ffffff',
@@ -21,9 +79,57 @@ const theme = {
       },
     },
     MuiAccordionSummary: {
+      root: {
+        '&.customExpansionPanelSummaryRoot': {
+          flexDirection: 'row-reverse',
+          paddingLeft: 0,
+          '& div.sectionSummaryText': {
+            marginLeft: '10px',
+            lineHeight: 0,
+            color: '#323232',
+            fontFamily: 'Raleway',
+            fontSize: '13px',
+            fontWeight: 'bold',
+            letterSpacing: '0.25px',
+          },
+        },
+      },
       content: {
         margin: '0',
         display: 'inherit',
+        '& div.searchContainer': {
+          paddingTop: '15px',
+          margin: '0 2px',
+          marginRight: 6,
+        },
+        '& div.sectionSummaryTextContainer': {
+          marginLeft: '10px',
+          color: '#323232',
+          fontFamily: 'Raleway',
+          fontSize: '15px',
+          fontWeight: 'bold',
+          letterSpacing: '0.25px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        },
+        '& div.findCaseButton': {
+          backgroundColor: '#FCA359',
+          boxSizing: 'border-box',
+          height: 30,
+          width: 40,
+          border: '1.25px solid #f2ab71',
+          cursor: 'pointer',
+          borderRadius: 11,
+          display: 'flex',
+          marginRight: 6,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        '& img.findCaseIcon': {
+          width: 17,
+          height: 17,
+        },
       },
     },
     MuiIconButton: {
@@ -178,6 +284,9 @@ const theme = {
     MuiAutocomplete: {
       popper: {
         zIndex: '100',
+      },
+      root: {
+        marginBottom: '7px',
       },
     },
   },
