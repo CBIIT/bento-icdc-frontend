@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import {
   AccordionSummary,
   Button,
+  Container,
   withStyles,
 } from '@material-ui/core';
 import {
@@ -157,11 +158,11 @@ const BentoFacetFilter = ({
   * 2. disable - true/ false
   */
   const CustomClearAllFiltersBtn = useCallback(({ onClearAllFilters, disable }) => (
-    <div className={classes.floatRight}>
+    <Container className="floatRight">
       <Button
         variant="outlined"
         disabled={disable}
-        className={classes.resetButton}
+        className="resetButton"
         onClick={() => {
           onClearAllFilters();
           store.dispatch(resetAllData());
@@ -170,7 +171,7 @@ const BentoFacetFilter = ({
       >
         CLEAR ALL
       </Button>
-    </div>
+    </Container>
   ), []);
 
   /** Note:
@@ -196,18 +197,22 @@ const BentoFacetFilter = ({
           onClick={collapseHandler}
           id={section}
           className={clsx(
-            classes.customExpansionPanelSummaryRoot,
             {
               [classes.disableExpansion]: isUnifiedView,
             },
+            'customExpansionPanelSummaryRoot',
           )}
           disabled={isUnifiedView}
         >
-          <div className={classes.sectionSummaryTextContainer}>
+          <div className="sectionSummaryTextContainer">
             {name}
             {hasSearch && (
-              <div className={classes.findCaseButton} onClick={toggleSearch}>
-                <img src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/FacetLocalFindSearchIcon.svg" className={classes.findCaseIcon} alt="search" />
+              <div className="findCaseButton" onClick={toggleSearch}>
+                <img
+                  src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/FacetLocalFindSearchIcon.svg"
+                  className="findCaseIcon"
+                  alt="search"
+                />
               </div>
             )}
           </div>
@@ -231,10 +236,10 @@ const BentoFacetFilter = ({
   * 2. Facet Section Name
   */
   const RedirectButton = useCallback(({ onClearAllFilters }) => (
-    <div className={classes.restBtn}>
+    <Container className="restBtn">
       <Button
         variant="outlined"
-        className={classes.resetButton}
+        className="resetButton"
         href="#/explore"
         onClick={() => {
           onClearAllFilters();
@@ -243,7 +248,7 @@ const BentoFacetFilter = ({
       >
         RESET QUERY
       </Button>
-    </div>
+    </Container>
   ), []);
 
   /**
@@ -263,12 +268,16 @@ const BentoFacetFilter = ({
             />
           )}
           id={facet.label}
-          className={classes.customExpansionPanelSummaryRoot}
+          className="customExpansionPanelSummaryRoot"
         >
           <div
             id={facet.label}
             className={
-              clsx(classes.sectionSummaryText, classes[clsName])
+              clsx(
+                classes.sectionSummaryText,
+                classes[clsName],
+                'sectionSummaryText',
+              )
             }
           >
             {facet.label}
