@@ -267,10 +267,9 @@ const styles = {
   },
   idcTableContainer: {
     width: '50%',
-    paddingTop: '8px',
   },
   idcTableItem: {
-    height: '63px',
+    height: '54px',
     paddingLeft: '20px',
   },
   tciaScrollConatiner: {
@@ -344,6 +343,7 @@ const styles = {
   },
   hrLine: {
     color: '#808080',
+    margin: '0',
   },
   keyTitle: {
     width: '130px',
