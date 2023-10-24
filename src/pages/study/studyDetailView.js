@@ -233,6 +233,9 @@ const StudyDetailView = ({ classes, data }) => {
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
+          <div className={classes.breadCrumb}>
+            <CustomBreadcrumb data={breadCrumbJson} />
+          </div>
           <div className={classes.logo}>
             {
               getHeaderIcon()
@@ -274,9 +277,6 @@ const StudyDetailView = ({ classes, data }) => {
                 {studyData.clinical_study_name}
               </span>
 
-            </div>
-            <div className={classes.breadCrumb}>
-              <CustomBreadcrumb data={breadCrumbJson} />
             </div>
           </div>
           {

@@ -10,7 +10,7 @@ export default (theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     position: 'relative',
-    padding: '5px 55px',
+    padding: '5px 20px 5px 35px',
     zIndex: '1',
     // paddingLeft: '27px',
     // paddingRight: '27px',
