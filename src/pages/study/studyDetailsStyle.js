@@ -135,7 +135,7 @@ export default (theme) => ({
     paddingLeft: '35px',
     paddingRight: '21px',
     borderBottom: '#81a6b9 4px solid',
-    height: '88px',
+    height: '130px',
     margin: 'auto',
   },
   headerTitle: {
@@ -143,6 +143,7 @@ export default (theme) => ({
     float: 'left',
     marginLeft: '110px',
     width: 'calc(100% - 465px)',
+    paddingTop: '20px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
@@ -183,7 +184,7 @@ export default (theme) => ({
     marginBottom: '-9px',
   },
   breadCrumb: {
-    marginLeft: '-3px',
+    // marginLeft: '-3px',
   },
   borderRight: {
     borderRight: '#81a6b9 1px solid',
