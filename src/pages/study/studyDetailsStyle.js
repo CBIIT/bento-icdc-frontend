@@ -208,7 +208,7 @@ export default (theme) => ({
     height: '33px',
     textAlign: 'center',
     background: '#f6f4f4',
-    padding: '5px 10px 5px 5px',
+    padding: '2px 10px 5px 5px',
   },
   headerButtonLinkSpan: {
     fontFamily: theme.custom.fontFamilySans,
