@@ -27,20 +27,20 @@ const ProgramCard = ({
         <div>
           <span className={classes.detailContainerHeader}>Program</span>
           <Link to={`/program/${programId}`} className={classes.cardTitle}>
-            {programId}
+            {fullName}
           </Link>
         </div>
         <Grid item xs={12}>
           <span className={classes.title}>
-            Program Name:
+            Program Acronym:
           </span>
           <span className={classes.content}>
-            {fullName}
+            {programId}
           </span>
         </Grid>
         <Grid item xs={12}>
           <span className={classes.title}>
-            Description:
+            Program Description:
           </span>
           <span className={classes.content}>
             {description}
@@ -48,11 +48,11 @@ const ProgramCard = ({
         </Grid>
         <Grid item xs={12}>
           <span className={classes.title}>
-            External Url:
+            Page Link:
           </span>
           <span className={classes.contentLink}>
             <a target="_blank" rel="noreferrer" href={externalURL}>
-              {externalURL}
+              <span className={classes.contentLink}>{externalURL}</span>
             </a>
           </span>
         </Grid>

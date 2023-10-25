@@ -48,6 +48,9 @@ const AboutCardView = ({
         </div>
         <div className={classes.text}>{getHighlightedText(results, searchText)}</div>
         <div className={classes.linkText}>
+          <span className={classes.title}>
+            Page Link:
+          </span>
           <Anchor link={data.page} text={`${window.location.origin}${data.page}`} classes={classes} />
         </div>
       </Grid>
