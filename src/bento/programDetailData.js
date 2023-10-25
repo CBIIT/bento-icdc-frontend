@@ -31,6 +31,8 @@ const table = {
       title: 'View Columns',
     },
   },
+  defaultSortField: 'clinical_study_designation',
+  defaultSortDirection: 'asc',
   columns: [
     {
       dataField: 'program_id',
