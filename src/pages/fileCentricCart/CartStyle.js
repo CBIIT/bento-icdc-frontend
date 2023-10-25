@@ -176,7 +176,7 @@ export default () => ({
     background: '#FFF',
     border: '1px solid #003559',
     borderRadius: '8px',
-    color: '#1D79A8',
+    color: '#13344A',
     height: '38px',
     width: '95px',
   },
