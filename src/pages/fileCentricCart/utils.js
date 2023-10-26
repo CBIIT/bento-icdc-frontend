@@ -1,5 +1,7 @@
+/*eslint-disable*/
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { json2csv } from 'json-2-csv';
 
 export function createFileName(fileName, format = '.csv') {
   const date = new Date();
@@ -53,19 +55,30 @@ export function convertToCSV(jsonse, comments, keysToInclude, header) {
   return str;
 }
 
-export function downloadJson(tableData, comments, fileName, manifestData) {
-  const jsonse = JSON.stringify(tableData);
-  const csv = convertToCSV(jsonse, comments, manifestData.keysToInclude, manifestData.header);
-  const exportData = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' });
-  const JsonURL = window.URL.createObjectURL(exportData);
-  let tempLink = '';
-  tempLink = document.createElement('a');
-  tempLink.setAttribute('href', JsonURL);
-  tempLink.setAttribute('download', createFileName(fileName));
-  document.body.appendChild(tempLink);
-  tempLink.click();
-  document.body.removeChild(tempLink);
-}
+export const downloadJson = (tableData, comments, fileName, manifestData) => {
+  const payload = tableData.map((el) => ({
+    ...el,
+    user_comments: comments || ''
+  }))
+  const json2csvCallback = (err, csv) => {
+    if (err) { throw err; }
+    const exportData = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' });
+    const JsonURL = window.URL.createObjectURL(exportData);
+    let tempLink = '';
+    tempLink = document.createElement('a');
+    tempLink.setAttribute('href', JsonURL);
+    tempLink.setAttribute('download', createFileName(fileName));
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+  };
+
+  const json2csvOptions = {
+    excludeKeys: ['__typename'],
+    keys: manifestData
+  };
+  json2csv(payload, json2csvCallback, json2csvOptions);
+};
 
 export const downloadAndZipJson = (dataArray, setLoading, studyCode) => {
   const filteredArr = dataArray.filter((el) => el.node.length !== 0);
