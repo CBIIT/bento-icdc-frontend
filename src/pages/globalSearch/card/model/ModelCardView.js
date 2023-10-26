@@ -27,7 +27,7 @@ const NodeCard = ({ data, classes, index }) => {
         </div>
         <Grid item xs={12}>
           <span className={classes.title}>
-            Node Name:
+            Data Model Node:
           </span>
           <span className={classes.content}>
             {nodeName}
@@ -69,8 +69,8 @@ const NodeCard = ({ data, classes, index }) => {
           <span className={classes.title}>
             Page Link:
           </span>
-          <Link to="/icdc-data-model" className={classes.cardTitle}>
-            https://caninecommons.cancer.gov/#/icdc-data-model
+          <Link to="/icdc-data-model">
+            <span className={classes.contentLink}>Data Model Navigator page</span>
           </Link>
         </Grid>
       </Grid>

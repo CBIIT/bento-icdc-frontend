@@ -33,6 +33,7 @@ export const studies = [
     clinical_study_name: 'Preclinical Comparison of Three Indenoisoquinoline Candidates in Tumor-Bearing Dogs',
     clinical_study_type: 'Clinical Trial',
     program_id: 'COP',
+    program_name: 'Comparative Oncology Program',
   },
   {
     type: 'study',
@@ -41,6 +42,7 @@ export const studies = [
     clinical_study_name: 'Evaluation of Orally Administered mTOR inhibitor Rapamycin in Dogs in the Adjuvant Setting with Osteosarcoma',
     clinical_study_type: 'Clinical Trial',
     program_id: 'COP',
+    program_name: 'Comparative Oncology Program',
   },
   {
     type: 'study',
@@ -49,6 +51,7 @@ export const studies = [
     clinical_study_name: 'Comparative Molecular Life History of Spontaneous Canine and Human Gliomas',
     clinical_study_type: 'Genomics',
     program_id: 'CMCP',
+    program_name: 'Comparative Molecular Characterization Program',
   },
   {
     type: 'study',
@@ -57,6 +60,7 @@ export const studies = [
     clinical_study_name: 'Molecular Homology and Differences Between Spontaneous Canine Mammary Cancer and Human Breast Cancer',
     clinical_study_type: 'Genomics',
     program_id: 'CMCP',
+    program_name: 'Comparative Molecular Characterization Program',
   },
   {
     type: 'study',
@@ -65,6 +69,7 @@ export const studies = [
     clinical_study_name: 'A Multi-Platform Sequencing Analysis of Canine Appendicular Osteosarcoma.',
     clinical_study_type: 'Genomics',
     program_id: 'CMCP',
+    program_name: 'Comparative Molecular Characterization Program',
   },
   {
     type: 'study',
@@ -73,6 +78,7 @@ export const studies = [
     clinical_study_name: 'Comparative analysis using whole genome bisulfite sequencing of human and canine osteosarcoma',
     clinical_study_type: 'Genomics',
     program_id: 'CMCP',
+    program_name: 'Comparative Molecular Characterization Program',
   },
 ];
 
