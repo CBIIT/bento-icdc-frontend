@@ -29,7 +29,7 @@ const FileCardView = ({
           <span className={classes.detailContainerHeader}>File</span>
           <Link
             to={`/case/${caseID}`}
-            className={classes.fileNameContentLink}
+            className={classes.cardTitle}
           >
             {fileName}
           </Link>
@@ -48,17 +48,16 @@ const FileCardView = ({
           </span>
           <Link
             to={`/program/${programName}`}
-            className={classes.contentLink}
           >
-            {programName}
+            <span className={classes.contentLink}>{programName}</span>
           </Link>
         </Grid>
         <Grid item xs={12}>
           <span className={classes.title}>
             Study:
           </span>
-          <Link to={`/study/${studyDesignation}`} className={classes.contentLink}>
-            {studyDesignation}
+          <Link to={`/study/${studyDesignation}`}>
+            <span className={classes.contentLink}>{studyDesignation}</span>
           </Link>
         </Grid>
         {
@@ -67,8 +66,8 @@ const FileCardView = ({
               <span className={classes.title}>
                 Case:
               </span>
-              <Link to={`/case/${caseID}`} className={classes.contentLink}>
-                {caseID}
+              <Link to={`/case/${caseID}`}>
+                <span className={classes.contentLink}>{caseID}</span>
               </Link>
             </Grid>
           )
@@ -79,8 +78,8 @@ const FileCardView = ({
               <span className={classes.title}>
                 Sample:
               </span>
-              <Link to={`/case/${caseID}`} className={classes.contentLink}>
-                {sampleID}
+              <Link to={`/case/${caseID}`}>
+                <span className={classes.contentLink}>{sampleID}</span>
               </Link>
             </Grid>
           )

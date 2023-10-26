@@ -1,3 +1,6 @@
+import backgroundImg from '../../assets/search/backgroundImg.svg';
+import searchIcon from '../../assets/search/searchIcon.svg';
+
 const styles = () => ({
   allText: {
     marginLeft: '8px',
@@ -6,14 +9,36 @@ const styles = () => ({
     color: '#142D64',
   },
   indicator: {
-    backgroundColor: '#142D64',
+    backgroundColor: '#1C75BC',
+
   },
   tabContainter: {
     display: 'flex',
     maxWidth: '840px',
     margin: '0 auto',
   },
-  tabColor: { color: '#142D64' },
+  tabColor: {
+    color: '#142D64',
+    '& span': {
+      '& span:first-child': {
+        color: '#0B3556',
+        fontSize: '13px',
+        fontWeight: '600',
+        lineHeight: '14px',
+        textTransform: 'uppercase',
+      },
+      '& span:last-child': {
+        marginLeft: '8px',
+        color: '#0B3556',
+        fontSize: '15px',
+        fontWeight: '300',
+        lineHeight: '14px',
+      },
+    },
+  },
+  '& .Mui-selected': {
+    color: 'red',
+  },
   buttonRoot: {
     minWidth: '100px',
     padding: '6px, 28px',
@@ -32,8 +57,8 @@ const styles = () => ({
   heroArea: {
     width: '100%',
     height: '167px',
-    background: '#D9E8F8',
     marginTop: '-47px',
+    backgroundImage: `url(${backgroundImg})`,
   },
   autocomplete: {
     margin: '0 auto',
@@ -97,7 +122,7 @@ const styles = () => ({
       paddingLeft: '20px',
       paddingTop: '2px',
       paddingBottom: '3px',
-      color: '#1479D3',
+      color: '#0B3557',
       fontFamily: 'Lato',
       fontSize: '25px',
       '& fieldset': {
@@ -114,12 +139,12 @@ const styles = () => ({
 
   root: {
     '& .MuiAutocomplete-listbox': {
-      borderRadius: '8px',
+      borderRadius: '4px',
+      border: '2px solid #044A84',
       fontFamily: 'Lato',
       fontSize: '18px',
       color: '#142D64',
       fontWeight: 500,
-      border: '2px solid #0088FF',
       padding: '0px',
       background: '#fff',
       '& li': {
@@ -131,6 +156,9 @@ const styles = () => ({
         backgroundColor: '#0088FF',
       },
     },
+    '& .MuiTabs-flexContainer': {
+      background: 'yellow',
+    },
   },
   searchIcon: {
     height: '22px',
@@ -139,6 +167,13 @@ const styles = () => ({
   searchIconSpan: {
     cursor: 'pointer',
     zIndex: 40,
+    width: '22px',
+    display: 'block',
+    height: '21px',
+    backgroundImage: `url(${searchIcon})`,
+    '& img': {
+      display: 'none',
+    },
   },
   clearIcon: {
     height: '18px',

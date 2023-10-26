@@ -35,16 +35,16 @@ const CaseCardView = ({
           <span className={classes.title}>
             Program:
           </span>
-          <Link to={`/program/${programName}`} className={classes.contentLink}>
-            {programName}
+          <Link to={`/program/${programName}`}>
+            <span className={classes.contentLink}>{programName}</span>
           </Link>
         </Grid>
         <Grid item xs={12}>
           <span className={classes.title}>
             Study:
           </span>
-          <Link to={`/study/${studyDesignation}`} className={classes.contentLink}>
-            {studyDesignation}
+          <Link to={`/study/${studyDesignation}`}>
+            <span className={classes.contentLink}>{studyDesignation}</span>
           </Link>
         </Grid>
         <Grid item xs={12}>
