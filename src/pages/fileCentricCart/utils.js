@@ -58,7 +58,7 @@ export function convertToCSV(jsonse, comments, keysToInclude, header) {
 export const downloadJson = (tableData, comments, fileName, manifestData) => {
   const payload = tableData.map((el) => ({
     ...el,
-    user_comments: comments || ''
+    user_comments: comments || null
   }))
   const json2csvCallback = (err, csv) => {
     if (err) { throw err; }
