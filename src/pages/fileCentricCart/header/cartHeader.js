@@ -25,11 +25,11 @@ import {
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
-    width: '272px',
-    borderTopRightRadius: '8px',
-    borderTopLeftRadius: '8px',
+    width: '236px',
     borderBottomLeftRadius: '8px',
     borderBottomRightRadius: '8px',
+    borderTopRightRadius: '0px',
+    borderTopLeftRadius: '0px',
   },
   list: {
     paddingTop: '0px',
@@ -61,6 +61,7 @@ const StyledMenuItem = withStyles((theme) => ({
       color: 'white',
       '& .MuiListItemText-primary': {
         color: theme.palette.common.white,
+        lineHeight: '1',
       },
     },
   },
@@ -268,11 +269,14 @@ const CartHeader = React.forwardRef(({
             {' '}
             <Button
               classes={{
-                root: classes.availableDownloadDropdownBtn,
+                root: anchorElement
+                  ? classes.availableDownloadDropdownBtnIsOpen
+                  : classes.availableDownloadDropdownBtn,
                 label: classes.availableDownloadDropdownBtnLabel,
                 contained: classes.availableDownloadBtnContained,
+                startIcon: classes.availableDownloadDropdownBtnStartIcon,
               }}
-              startIcon={<KeyboardArrowDownIcon />}
+              startIcon={<KeyboardArrowDownIcon style={{ fontSize: '32px' }} />}
               onClick={exportOptionsClickHandler}
             >
               {isLoading ? (<p>Loading...</p>) : (

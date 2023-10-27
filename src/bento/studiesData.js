@@ -28,6 +28,8 @@ export const pageData = {
     dataField: 'studiesByProgram',
     // toggle D.A.L unified tooltip above D.A.L icons on table toolbar
     legendTooltip: true,
+    defaultSortField: 'clinical_study_designation',
+    defaultSortDirection: 'asc',
     extendedViewConfig: {
       download: {
         customDownload: false,
