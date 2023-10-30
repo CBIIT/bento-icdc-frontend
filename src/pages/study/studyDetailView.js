@@ -98,7 +98,7 @@ const StudyDetailView = ({ classes, data }) => {
   };
 
   const breadCrumbJson = [{
-    name: 'All Studies',
+    name: 'ALL PROGRAMS',
     to: '/programs',
     isALink: true,
   }, {
@@ -234,7 +234,7 @@ const StudyDetailView = ({ classes, data }) => {
       <div className={classes.container}>
         <div className={classes.header}>
           <div className={classes.breadCrumb}>
-            <CustomBreadcrumb data={breadCrumbJson} classes={classes} />
+            <CustomBreadcrumb data={breadCrumbJson} />
           </div>
           <div className={classes.logo}>
             {
@@ -277,9 +277,6 @@ const StudyDetailView = ({ classes, data }) => {
                 {studyData.clinical_study_name}
               </span>
 
-            </div>
-            <div className={classes.breadCrumb}>
-              <CustomBreadcrumb data={breadCrumbJson} />
             </div>
           </div>
           {

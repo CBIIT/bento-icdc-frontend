@@ -135,7 +135,7 @@ export default (theme) => ({
     paddingLeft: '35px',
     paddingRight: '21px',
     borderBottom: '#81a6b9 4px solid',
-    height: '164px',
+    height: '130px',
     margin: 'auto',
   },
   headerTitle: {
@@ -143,6 +143,7 @@ export default (theme) => ({
     float: 'left',
     marginLeft: '110px',
     width: 'calc(100% - 465px)',
+    paddingTop: '20px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
@@ -183,9 +184,7 @@ export default (theme) => ({
     marginBottom: '-9px',
   },
   breadCrumb: {
-    marginTop: '-18px',
-    marginBottom: '33px',
-    fontFamily: 'Open Sans',
+    // marginLeft: '-3px',
   },
   borderRight: {
     borderRight: '#81a6b9 1px solid',
@@ -210,12 +209,12 @@ export default (theme) => ({
     height: '33px',
     textAlign: 'center',
     background: '#f6f4f4',
-    padding: '4px 10px 4px 5px',
+    padding: '2px 10px 5px 5px',
   },
   headerButtonLinkSpan: {
     fontFamily: theme.custom.fontFamilySans,
     width: '200px',
-    fontSize: '13px',
+    fontSize: '14px',
     display: 'inherit',
     height: '15px',
     marginTop: '-2px',
@@ -223,17 +222,13 @@ export default (theme) => ({
   headerButtonLinkText: {
     fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
-    fontSize: '13px',
-    fontStyle: 'normal',
-    fontWeight: '400',
-    lineHeight: '14px',
-    letterSpacing: '0.15px',
+    fontSize: '14px',
   },
   headerButtonLinkNumber: {
     fontFamily: 'sans-serif',
-    fontSize: '13px',
     paddingBottom: '3px',
     margin: '0',
+    fontSize: '16px',
     display: 'inherit',
     fontWeight: '900',
     marginRight: '4px',
@@ -257,6 +252,7 @@ export default (theme) => ({
   headerButtonLink: {
     textDecoration: 'none',
     lineHeight: '14px',
+    fontSize: '12px',
     fontWeight: 'bold',
     position: 'relative',
     top: '2px',
@@ -287,16 +283,5 @@ export default (theme) => ({
     letterSpacing: '0.017em',
     fontWeight: '600',
     textTransform: 'uppercase',
-  },
-  headerNavClickableLink: {
-    paddingLeft: '6px',
-    textTransform: 'none',
-    paddingRight: '6px',
-    textDecoration: 'none',
-    color: '#3E5C6F',
-    fontWeight: '900',
-    fontFamily: 'Open Sans',
-    fontSize: '11px',
-    letterSpacing: '0.025em',
   },
 });
