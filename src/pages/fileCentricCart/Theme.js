@@ -94,7 +94,7 @@ export const tblContainer = {
   overrides: {
     MuiGrid: {
       container: {
-        margin: '50px 0px 30px 0px',
+        margin: '50px 0px 20px 0px',
         background: '#f3f3f4',
         padding: '30px 30px',
         borderTopLeftRadius: '20px',
@@ -274,14 +274,14 @@ export const customTheme = {
 export const tblPgn = {
   MuiTablePagination: {
     root: {
-      background: '#fff',
-      paddingRight: '50px',
+      background: '#f3f3f4',
+      paddingRight: '43px',
       borderTop: '3px solid #004c73',
       paddingTop: '0',
       paddingBottom: '0',
-      borderBottom: '3px solid #e7e5e5',
+      borderBottom: '3px solid #004c73',
       '&:last-child': {
-        paddingRight: '28px',
+        paddingRight: '43px',
       },
     },
     toolbar: {
