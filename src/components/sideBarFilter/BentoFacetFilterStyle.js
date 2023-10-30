@@ -1,21 +1,4 @@
 export default () => ({
-  resetButton: {
-    fontSize: '9px',
-    marginTop: '4px',
-    minHeight: '25px',
-    fontFamily: 'Lato, Open Sans, sans-serif',
-    marginLeft: '16px',
-    borderRadius: '100px',
-    textTransform: 'none',
-    '&:hover': {
-      backgroundColor: '#566672',
-      color: '#fff',
-    },
-  },
-  floatRight: {
-    margin: '7px 0px 15px 6px',
-    paddingTop: '10px',
-  },
   restBtn: {
     margin: '7px 0px 15px 6px',
     paddingTop: '10px',
@@ -24,36 +7,12 @@ export default () => ({
   dropDownIconSection: {
     color: '#000000',
   },
-  sectionSummaryText: {
-    marginLeft: '10px',
-    lineHeight: 0,
-    color: '#323232',
-    fontFamily: 'Raleway',
-    fontSize: '13px',
-    fontWeight: 'bold',
-    letterSpacing: '0.25px',
-  },
   dropDownIconSubSection: {
     marginLeft: '0px',
     fill: '#000000',
   },
-  customExpansionPanelSummaryRoot: {
-    flexDirection: 'row-reverse',
-    paddingLeft: 0,
-  },
   disableExpansion: {
     backgroundColor: 'rgba(0, 0, 0 , 0.17)',
-  },
-  sectionSummaryTextContainer: {
-    marginLeft: '10px',
-    color: '#323232',
-    fontFamily: 'Raleway',
-    fontSize: '15px',
-    fontWeight: 'bold',
-    letterSpacing: '0.25px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
   activeFacetFilterByCases: {
     color: '#ff7f15',
@@ -64,56 +23,6 @@ export default () => ({
   activeFacetFilterByFiles: {
     color: '#667a87',
   },
-  searchContainer: {
-    paddingTop: '15px',
-    margin: '0 2px',
-    marginRight: 6,
-  },
-  findCaseButton: {
-    backgroundColor: '#FCA359',
-    boxSizing: 'border-box',
-    height: 30,
-    width: 40,
-    border: '1.25px solid #f2ab71',
-    cursor: 'pointer',
-    borderRadius: 11,
-    display: 'flex',
-    marginRight: 6,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  findCaseIcon: {
-    width: 17,
-    height: 17,
-  },
-  uploadButton: {
-    boxSizing: 'border-box',
-    fontWeight: '400',
-    height: 32,
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    backgroundColor: '#FCA359',
-    color: '#fff',
-    border: '1px solid #f2ab71',
-    borderRadius: 10,
-    fontFamily: 'Lato',
-    fontSize: 11,
-    boxShadow: 'none',
-    paddingLeft: 16,
-    paddingRight: 12,
-    '&:hover': {
-      backgroundColor: '#FCA359',
-    },
-  },
-  iconSpan: {
-    marginTop: '5.2px',
-  },
-  uploadIcon: {
-    height: 19,
-    width: 19,
-  },
-
 });
 
 export const customStyles = {
@@ -184,5 +93,106 @@ export const customStyles = {
     fontFamily: 'Lato',
     fontSize: '11px',
     fontStyle: 'italic',
+  },
+};
+
+export const uploadCustomStyles = {
+  uploadButton: {
+    backgroundColor: '#1D79A8',
+  },
+  tableColumn: {
+    color: '#0b3556',
+    fontFamily: 'Lato',
+    fontSize: '12px',
+    fontWeight: '500',
+    lineHeight: '22px',
+  },
+  programHeading: {
+    color: '#1d79a8',
+    fontFamily: 'Lato',
+    fontSize: '12px',
+    fontWeight: '500',
+    lineHeight: '22px',
+  },
+  modalContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingRight: 33,
+    paddingLeft: 33,
+    backgroundColor: '#CBE2EE',
+  },
+  summaryContainer: {
+    backgroundColor: '#CBE2EE',
+    paddingLeft: 33,
+    paddingRight: 33,
+  },
+  title: {
+    color: '#174479',
+    fontSize: '18px',
+    fontFamily: 'Lato',
+    fontWeight: '700',
+    lineHeight: '18px',
+    letterSpacing: '0em',
+    textAlign: 'center',
+  },
+  unselectedButton: {
+    fontSize: 12,
+    fontWeight: 500,
+    color: '#fff',
+    backgroundColor: '#437BBE',
+    cursor: 'pointer',
+    padding: '11px 22px',
+    fontFamily: 'Lato',
+    textTransform: 'uppercase',
+  },
+  summaryButton: {
+    fontSize: 12,
+    fontWeight: 500,
+    color: '#00387A',
+    backgroundColor: '#fff',
+    borderBottom: '4px solid #437bbe',
+    cursor: 'pointer',
+    padding: '11px 22px',
+    fontFamily: 'Lato',
+    textTransform: 'uppercase',
+  },
+  summary: {
+    color: '#000',
+    fontSize: '16px',
+    textAlign: 'center',
+    margin: 0,
+    paddingTop: 10,
+    fontFamily: 'Lato',
+    fontWeight: '400',
+    fontStyle: 'inherit',
+    lineHeight: '15px',
+    letterSpacing: '0em',
+  },
+  submitBtn: {
+    backgroundColor: '#FF9742',
+    fontFamily: 'Lato',
+    fontSize: '16px',
+    fontWeight: '400',
+    lineHeight: '16px',
+    textTransform: 'capitalize',
+  },
+  clearBtn: {
+    backgroundColor: '#0B3556',
+    fontFamily: 'Lato',
+    fontSize: '16px',
+    fontWeight: '400',
+    lineHeight: '16px',
+    textTransform: 'capitalize',
+  },
+  cancelBtn: {
+    backgroundColor: '#667A87',
+    fontFamily: 'Lato',
+    fontSize: '16px',
+    fontWeight: '400',
+    lineHeight: '16px',
+    textTransform: 'capitalize',
+  },
+  refresh: {
+    transform: 'rotateY(180deg)',
   },
 };

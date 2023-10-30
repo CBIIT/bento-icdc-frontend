@@ -26,9 +26,11 @@ import UnifiedDash from '../../pages/unifiedView/unifiedController';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
+import GlobalSearchController from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
 import CartView from '../../pages/fileCentricCart/CartController';
 import { navBarExclusions } from '../../bento/navigationBarData';
+
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
 const ScrollToTop = () => {
@@ -81,6 +83,8 @@ const Layout = ({ classes, isSidebarOpened }) => {
                 (dataDropdownRoute) => <Route path={dataDropdownRoute} component={About} />,
               )}
               <Route path="/graphql" component={GraphqlClient} />
+              <Route exact path="/search" component={GlobalSearchController} />
+              <Route path="/search/:id" component={GlobalSearchController} />
               <Route component={Error} />
             </Switch>
             <Footer data={{ isSidebarOpened }} />

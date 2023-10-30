@@ -4,8 +4,11 @@ import {
   Tooltip,
   withStyles,
 } from '@material-ui/core';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 const CustomHeaderRemove = ({
+  filesId = [],
   openDialogBox,
   classes: {
     removeBtn,
@@ -16,6 +19,7 @@ const CustomHeaderRemove = ({
       <Button
         classes={{ root: removeBtn }}
         onClick={openDialogBox}
+        disabled={filesId.length === 0}
       >
         Clear Cart
       </Button>
@@ -49,12 +53,23 @@ const styles = () => ({
     background: '#FFF',
     border: '1px solid #003559',
     borderRadius: '8px',
-    color: '#DA6300',
+    color: '#13344A',
     height: '38px',
     width: '95px',
     padding: '5px',
     textTransform: 'none',
+    backgroundColor: 'transparent !important',
+    '&:hover': {
+      border: '2px solid #7698AC',
+    },
   },
 });
 
-export default withStyles(styles)(CustomHeaderRemove);
+const mapStateToProps = (state) => ({
+  filesId: state.cartReducer.filesId,
+});
+
+export default compose(
+  connect(mapStateToProps, null),
+  withStyles(styles),
+)(CustomHeaderRemove);

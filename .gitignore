@@ -27,3 +27,6 @@ yarn-error.log*
 
 #Internal Ignores
 **/__snapshots__
+src/bento/.localSearchData.js.swp
+*.swp
+src/bento/.localSearchData.js.swp

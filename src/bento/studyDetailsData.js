@@ -1173,7 +1173,6 @@ export const GET_ADVERSE_EVENT_CLINICAL_DATA = gql`
       attribution_to_disease
       adverse_event_description
       adverse_event_grade
-      updated
       other_attribution_description
     }
   }

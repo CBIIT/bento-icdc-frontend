@@ -10,7 +10,7 @@ export default (theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     position: 'relative',
-    padding: '5px 55px',
+    padding: '5px 20px 5px 35px',
     zIndex: '1',
     // paddingLeft: '27px',
     // paddingRight: '27px',
@@ -28,6 +28,9 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     padding: '2px 28px',
+  },
+  availableDownloadDropdownBtnStartIcon: {
+    margin: '0px',
   },
   logoAndTitle: {
     display: 'flex',
@@ -104,6 +107,23 @@ export default (theme) => ({
       backgroundColor: '#1A8CCB',
       boxShadow: 'none',
     },
+  },
+  availableDownloadDropdownBtnIsOpen: {
+    backgroundColor: '#F2F2F2',
+    borderTop: '1px solid #155F97',
+    borderRight: '1px solid #155F97',
+    borderLeft: '1px solid #155F97',
+    borderTopRightRadius: '8px',
+    borderTopLeftRadius: '8px',
+    borderBottomRightRadius: '0px',
+    borderBottomLeftRadius: '0px',
+    boxShadow: 'none',
+    width: '235px',
+    '&:hover': {
+      backgroundColor: '#F2F2F2',
+      boxShadow: 'none',
+    },
+
   },
   availableDownloadDropdownBtn: {
     backgroundColor: '#F2F2F2',
