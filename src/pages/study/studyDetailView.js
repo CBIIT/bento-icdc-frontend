@@ -98,7 +98,7 @@ const StudyDetailView = ({ classes, data }) => {
   };
 
   const breadCrumbJson = [{
-    name: 'ALL PROGRAMS',
+    name: 'All Studies',
     to: '/programs',
     isALink: true,
   }, {
@@ -233,6 +233,9 @@ const StudyDetailView = ({ classes, data }) => {
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
+          <div className={classes.breadCrumb}>
+            <CustomBreadcrumb data={breadCrumbJson} classes={classes} />
+          </div>
           <div className={classes.logo}>
             {
               getHeaderIcon()
