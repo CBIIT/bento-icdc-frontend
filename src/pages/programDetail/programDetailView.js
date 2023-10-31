@@ -376,7 +376,7 @@ const styles = (theme) => ({
     paddingLeft: '74px',
   },
   tableDiv: {
-    padding: '31px 34px 51px 54px',
+    padding: '31px 34px 80px 54px',
   },
   headerButtonLink: {
     textDecoration: 'none',
