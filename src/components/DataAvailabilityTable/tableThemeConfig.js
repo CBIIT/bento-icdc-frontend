@@ -294,6 +294,9 @@ const tblPgn = {
       borderTop: '3px solid #42779a',
       borderBottom: '3px solid #e7e5e5',
     },
+    toolbar: {
+      paddingRight: '43px',
+    },
   },
 };
 
