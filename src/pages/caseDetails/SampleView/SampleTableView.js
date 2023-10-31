@@ -30,11 +30,8 @@ const SampleTableView = ({
     extendedViewConfig: ExtendedViewConfig(sampleTable),
     page: 0,
   });
-
+  const buttonConfiguration = data.length === 0 ? [] : sampleWrapperConfig;
   const { context } = useContext(TableContext);
-  if (data.length === 0) {
-    sampleWrapperConfig[1].items = [];
-  }
 
   const paginationOptions = {
     customizeToggleSelectAll: (event) => {
@@ -62,23 +59,22 @@ const SampleTableView = ({
       </Container>
 
       <div className={classes.tableContainer}>
+        <TableView
+          initState={initTblState}
+          themeConfig={{
+            ...themeConfig(context, data),
+          }}
+          tblRows={data}
+          totalRowCount={data.length}
+          server={false}
+          paginationOptions={paginationOptions}
+        />
         <Wrapper
-          wrapConfig={updateWrapperConfig(sampleTable, sampleWrapperConfig, context)}
+          wrapConfig={updateWrapperConfig(sampleTable, buttonConfiguration, context)}
           customTheme={customTheme}
           classes={classes}
           section={sampleTable.name}
-        >
-          <TableView
-            initState={initTblState}
-            themeConfig={{
-              ...themeConfig(context),
-            }}
-            tblRows={data}
-            totalRowCount={data.length}
-            server={false}
-            paginationOptions={paginationOptions}
-          />
-        </Wrapper>
+        />
       </div>
     </>
   );
