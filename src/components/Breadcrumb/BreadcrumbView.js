@@ -9,7 +9,9 @@ const CustomBreadcrumb = ({ classes, data }) => (
         if (current.isALink) {
           acc.push(
             <Link className={classes.headerNavLink} to={current.to} onClick={current.onClick}>
-              {current.name}
+              <span className={classes.headerNavClickableLink}>
+                {current.name}
+              </span>
             </Link>,
           );
         } else {

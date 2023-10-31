@@ -23,6 +23,7 @@ export const customTheme = {
     root: {
       background: '#f3f3f3',
       paddingTop: '5px',
+      paddingLeft: '19px !important',
       '& .add_selected_file_tooltip_icon': {
         width: '17px !important',
       },
@@ -225,7 +226,7 @@ export const extendedView = ({
       tblTopPgn: {
         MuiTablePagination: {
           root: {
-            paddingRight: '50px',
+            paddingRight: '43px',
             borderTop: `3px solid ${primaryColor}`,
           },
         },
@@ -280,10 +281,44 @@ export const extendedView = ({
   };
 };
 
-const tblPgn = {
-  MuiTablePagination: {
+export const tblePaginationTheme = (data) => ({
+  tblPgn: {
+    MuiTablePagination: {
+      root: {
+        background: '#f3f3f4',
+        paddingRight: '43px',
+        borderTop: '3px solid #004c73',
+        paddingTop: '0',
+        paddingBottom: '0',
+        borderBottom: `3px solid ${data.length > 0 ? '#004c73' : '#e7e5e5'}`,
+        '&:last-child': {
+          paddingRight: '43px',
+        },
+      },
+      toolbar: {
+        minHeight: '45px',
+      },
+    },
+  },
+});
+
+const tblContainer = {
+  MuiTableContainer: {
     root: {
-      backgroundColor: '#ffffff',
+      width: '100%',
+      overflowX: 'auto',
+      transform: 'rotateX(180deg)',
+      boxShadow: 'none',
+      borderRadius: '0',
+    },
+  },
+  MuiTable: {
+    root: {
+      transform: 'rotateX(180deg)',
+      width: '100%',
+      display: 'table',
+      borderSpacing: '0',
+      borderCollapse: 'collapse',
     },
   },
 };
@@ -294,10 +329,11 @@ const tblPgn = {
 //   tblBody,
 // };
 
-export const themeConfig = (table) => ({
+export const themeConfig = (table, data) => ({
   customTheme,
   tblBody,
   tblHeader,
-  tblPgn,
+  ...tblePaginationTheme(data),
+  tblContainer,
   ...extendedView(table),
 });
