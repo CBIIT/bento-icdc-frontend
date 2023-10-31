@@ -290,6 +290,7 @@ export const tblePaginationTheme = (data) => ({
         borderTop: '3px solid #004c73',
         paddingTop: '0',
         paddingBottom: '0',
+        display: `${data.length > 0 ? '' : 'none'}`,
         borderBottom: `3px solid ${data.length > 0 ? '#004c73' : '#e7e5e5'}`,
         '&:last-child': {
           paddingRight: '43px',

@@ -317,7 +317,7 @@ export const sampleTable = {
     },
   ],
   tableMsg: {
-    noMatch: 'No Matching Records Found',
+    noMatch: 'Sorry, no matching records found',
   },
   addFilesRequestVariableKey: 'sample_ids',
   addFilesResponseKeys: ['sampleOverview', 'files'],
@@ -442,7 +442,7 @@ export const fileTable = {
     },
   ],
   tableMsg: {
-    noMatch: 'No Matching Records Found',
+    noMatch: 'Sorry, no matching records found',
   },
   addFilesRequestVariableKey: 'file_name',
   addFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
