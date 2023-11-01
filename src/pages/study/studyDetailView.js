@@ -278,9 +278,6 @@ const StudyDetailView = ({ classes, data }) => {
               </span>
 
             </div>
-            <div className={classes.breadCrumb}>
-              <CustomBreadcrumb data={breadCrumbJson} />
-            </div>
           </div>
           {
             renderSwitch(
