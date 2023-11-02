@@ -96,6 +96,7 @@ const Studies = ({ classes, data, invalid }) => {
                     interOpData={interOpData}
                     table={pageData.table}
                     tableLayOut={tableLayOut}
+                    rowsPerPage={pageData.table.numbOfRowPerPage || 10}
                   />
                 </TableContextProvider>
               </Grid>

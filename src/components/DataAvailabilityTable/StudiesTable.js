@@ -10,6 +10,7 @@ const StudiesTable = ({
   tableLayOut,
   data,
   interOpData,
+  rowsPerPage,
 }) => {
   // access table state
   const { context } = useContext(TableContext);
@@ -24,6 +25,7 @@ const StudiesTable = ({
       tableLayOut={tableLayOut}
       totalRowCount={data.length || 0}
       customthemeConfig={{ ...themeConfig(context) }}
+      rowsPerPage={rowsPerPage}
     />
   );
 };

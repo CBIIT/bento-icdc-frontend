@@ -147,10 +147,11 @@ export const widgetsData = [
   },
   {
     type: 'donut',
-    title: 'Disease Site',
-    dataName: 'caseCountByDiseaseSite',
+    title: 'State of Disease',
+    dataName: 'caseCountByStageOfDisease',
     datatable_field: 'disease_site',
     show: true,
+    sliceTitle: 'Cases',
   },
   {
     type: 'donut',
@@ -161,10 +162,11 @@ export const widgetsData = [
   },
   {
     type: 'donut',
-    title: 'Stage of Disease',
-    dataName: 'caseCountByStageOfDisease',
+    title: 'File Type',
+    dataName: 'filterCaseCountByFileType',
     datatable_field: 'stage_of_disease',
     show: true,
+    sliceTitle: 'Files',
   },
 ];
 
