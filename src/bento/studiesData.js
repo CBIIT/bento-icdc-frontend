@@ -22,6 +22,7 @@ export const pageData = {
     alt: 'External link icon',
   },
   table: {
+    numbOfRowPerPage: 25,
     // Table title
     title: 'Studies',
     // Field name for table data, need to be updated only when using a different GraphQL query
