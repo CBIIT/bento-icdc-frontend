@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Button, CircularProgress,
+  CircularProgress,
   Paper,
   Table, TableBody, TableCell,
   TableContainer,
@@ -38,6 +38,12 @@ function splitArray(originalArray) {
 }
 
 const StyledTableCell = withStyles(() => ({
+  root: {
+    paddingRight: '0px',
+    '&:last-child': {
+      paddingRight: '0px',
+    },
+  },
   head: {
     backgroundColor: '#F5F5F5',
     color: '#194563',
@@ -46,7 +52,6 @@ const StyledTableCell = withStyles(() => ({
     fontWeight: '600',
     fontFamily: 'Raleway',
     fontStyle: 'normal',
-    paaddingLeft: 'center',
   },
   body: {
     fontSize: '13px',
@@ -307,7 +312,7 @@ const ClinicalData = ({
             <ScrollContainer>
               <TableContainer component={Paper}>
                 <Table aria-label="table">
-                  <TableHead className={classes.bottomHeader}>
+                  <TableHead>
                     <TableRow>
                       {
                         tableHeaders.map((header, index) => {
@@ -317,18 +322,17 @@ const ClinicalData = ({
                                 <StyledStarterTableCell
                                   key={index}
                                 >
-                                  <div className={classes.headerCellText}>
-                                    <div>
-                                      {header.title}
-                                      {' '}
-                                      <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
-                                        <img
-                                          src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
-                                          alt="tooltip"
-                                          className={classes.headerCellTooltip}
-                                        />
-                                      </Tooltip>
-                                    </div>
+                                  <div
+                                    className={classes.headerWrapper}
+                                  >
+                                    {header.title}
+                                    <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                      <img
+                                        className={classes.helpIcon}
+                                        src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                        alt="tooltip"
+                                      />
+                                    </Tooltip>
                                   </div>
                                 </StyledStarterTableCell>
                               );
@@ -338,18 +342,17 @@ const ClinicalData = ({
                                 key={index}
                                 align="center"
                               >
-                                <div className={classes.headerCellText}>
-                                  <div>
-                                    {header.title}
-                                    {' '}
-                                    <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
-                                      <img
-                                        src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
-                                        alt="tooltip"
-                                        className={classes.headerCellTooltip}
-                                      />
-                                    </Tooltip>
-                                  </div>
+                                <div
+                                  className={classes.headerWrapper}
+                                >
+                                  {header.title}
+                                  <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                    <img
+                                      className={classes.helpIcon}
+                                      src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                      alt="tooltip"
+                                    />
+                                  </Tooltip>
                                 </div>
                               </StyledTableCell>
                             );
@@ -390,18 +393,17 @@ const ClinicalData = ({
                               <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
                               <StyledEndTableCell align="center">
                                 <ToolTip title="Click to download the contents of this node">
-                                  <Button
+                                  <div
                                     onClick={() => handleCSVDownload(element)}
-                                    size="small"
-                                    classes={{
-                                      root: classes.csvBtn,
-                                    }}
                                   >
                                     <img
                                       src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
                                       alt="csv download icon"
+                                      style={{
+                                        width: '32px',
+                                      }}
                                     />
-                                  </Button>
+                                  </div>
                                 </ToolTip>
                               </StyledEndTableCell>
                             </TableRow>
@@ -455,18 +457,15 @@ const ClinicalData = ({
                                 <StyledStarterTableCell
                                   key={index}
                                 >
-                                  <div className={classes.headerCellText}>
-                                    <div>
-                                      {header.title}
-                                      {' '}
-                                      <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
-                                        <img
-                                          src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
-                                          alt="tooltip"
-                                          className={classes.headerCellTooltip}
-                                        />
-                                      </Tooltip>
-                                    </div>
+                                  <div className={classes.headerWrapper}>
+                                    {header.title}
+                                    <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                      <img
+                                        className={classes.helpIcon}
+                                        src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                        alt="tooltip"
+                                      />
+                                    </Tooltip>
                                   </div>
                                 </StyledStarterTableCell>
                               );
@@ -476,18 +475,15 @@ const ClinicalData = ({
                                 key={index}
                                 align="center"
                               >
-                                <div className={classes.headerCellText}>
-                                  <div>
-                                    {header.title}
-                                    {' '}
-                                    <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
-                                      <img
-                                        src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
-                                        alt="tooltip"
-                                        className={classes.headerCellTooltip}
-                                      />
-                                    </Tooltip>
-                                  </div>
+                                <div className={classes.headerWrapper}>
+                                  {header.title}
+                                  <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                    <img
+                                      className={classes.helpIcon}
+                                      src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                      alt="tooltip"
+                                    />
+                                  </Tooltip>
                                 </div>
                               </StyledTableCell>
                             );
@@ -526,20 +522,20 @@ const ClinicalData = ({
                               </StyledStarterFilledTableCell>
                               <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
                               <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
+
                               <StyledEndTableCell align="center">
                                 <ToolTip title="Click to download the contents of this node">
-                                  <Button
+                                  <div
                                     onClick={() => handleCSVDownload(element)}
-                                    size="small"
-                                    classes={{
-                                      root: classes.csvBtn,
-                                    }}
                                   >
                                     <img
                                       src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
                                       alt="csv download icon"
+                                      style={{
+                                        width: '32px',
+                                      }}
                                     />
-                                  </Button>
+                                  </div>
                                 </ToolTip>
                               </StyledEndTableCell>
                             </TableRow>
@@ -581,11 +577,21 @@ const styles = {
       placeItems: 'center',
     },
   },
+  helpIcon: {
+    width: '12px',
+    alignSelf: 'baseline',
+  },
+  headerWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '2px',
+  },
   paragraphOne: { width: '617px' },
   paragraphTwo: { width: '623px' },
-  csvBtn: { minWidth: '35px', maxWidth: '35px', marginLeft: '15px' },
+  csvBtn: { maxWidth: '35px' },
   tooltipText: {
-    fontFamily: 'Munito',
+    fontFamily: 'Nunito',
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: '12px',

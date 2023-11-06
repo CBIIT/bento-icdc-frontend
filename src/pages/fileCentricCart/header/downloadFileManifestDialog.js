@@ -12,7 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import CloseIcon from '@material-ui/icons/Close';
 import DownloadFileManifestIcon from './assets/dwnldFileManifest.svg';
 import { GET_MY_CART_DATA_QUERY, manifestData, myFilesPageData } from '../../../bento/fileCentricCartWorkflowData';
-import { downloadJson } from '../utils';
+import { downloadJsonV2 } from '../utils';
 
 const useStyles = makeStyles({
   dialogContainer: {
@@ -106,7 +106,7 @@ const DownloadFileManifestDialog = React.forwardRef(({
         first: 10000,
       },
     }).then((response) => response.data.filesInList);
-    downloadJson(
+    downloadJsonV2(
       result,
       comment,
       myFilesPageData.manifestFileName,
