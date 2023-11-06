@@ -49,6 +49,10 @@ const ICDCHeader = ({
 
   return (
     <>
+      <include-html
+        id="governmentShutdownAlert"
+        src=""
+      />
       {
         location.pathname.includes('/jBrowse') ? (
           <Header
