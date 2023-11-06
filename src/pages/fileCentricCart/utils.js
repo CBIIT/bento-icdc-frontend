@@ -55,7 +55,21 @@ export function convertToCSV(jsonse, comments, keysToInclude, header) {
   return str;
 }
 
-export const downloadJson = (tableData, comments, fileName, manifestData) => {
+export function downloadJson(tableData, comments, fileName, manifestData) {
+  const jsonse = JSON.stringify(tableData);
+  const csv = convertToCSV(jsonse, comments, manifestData.keysToInclude, manifestData.header);
+  const exportData = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' });
+  const JsonURL = window.URL.createObjectURL(exportData);
+  let tempLink = '';
+  tempLink = document.createElement('a');
+  tempLink.setAttribute('href', JsonURL);
+  tempLink.setAttribute('download', createFileName(fileName));
+  document.body.appendChild(tempLink);
+  tempLink.click();
+  document.body.removeChild(tempLink);
+}
+
+export const downloadJsonV2 = (tableData, comments, fileName, manifestData) => {
   const payload = tableData.map((el) => ({
     ...el,
     user_comments: comments || null
