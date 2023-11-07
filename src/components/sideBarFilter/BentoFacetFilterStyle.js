@@ -143,7 +143,7 @@ export const uploadCustomStyles = {
     cursor: 'pointer',
     padding: '11px 22px',
     fontFamily: 'Lato',
-    textTransform: 'uppercase',
+    textTransform: 'none',
   },
   summaryButton: {
     fontSize: 12,
@@ -154,7 +154,7 @@ export const uploadCustomStyles = {
     cursor: 'pointer',
     padding: '11px 22px',
     fontFamily: 'Lato',
-    textTransform: 'uppercase',
+    textTransform: 'none',
   },
   summary: {
     color: '#000',
@@ -194,5 +194,54 @@ export const uploadCustomStyles = {
   },
   refresh: {
     transform: 'rotateY(180deg)',
+  },
+  listTitle: {
+    fontFamily: 'Raleway',
+    fontSize: '17px',
+    fontWeight: '500',
+    lineHeight: '22px',
+    color: '#000000',
+  },
+  textSection: {
+    width: '50%',
+    border: '1px solid white',
+    margin: '20px 4px',
+    padding: '10px 25px 13px 29px',
+  },
+  uploadFile: {
+    width: '50%',
+    border: '1px solid white',
+    margin: '20px 4px',
+    padding: '10px',
+    textAlign: 'center',
+  },
+  tableBox: {
+    maxHeight: 150,
+    overflowY: 'auto',
+    maxWidth: '100%',
+  },
+  heading: {
+    color: '#437BBE',
+    fontFamily: 'Lato',
+    fontSize: '12px',
+    fontWeight: '400',
+    lineHeight: '22px',
+    letterSpacing: '0.01em',
+    textAlign: 'center',
+  },
+  fileName: {
+    color: '#000',
+    fontSize: '16px',
+    fontWeight: '400',
+    lineHeight: '15px',
+    letterSpacing: '0em',
+    textAlign: 'center',
+    maxWidth: '210px',
+  },
+  filesection: {
+    marginTop: '15px',
+  },
+  horizontal: {
+    marginTop: '20px',
   },
 };
