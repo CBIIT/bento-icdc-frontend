@@ -19,6 +19,7 @@ import FacetFilterThemeProvider from './FilterThemeConfig';
 import styles, { customStyles, uploadCustomStyles } from './BentoFacetFilterStyle';
 import { getAllIds, getAllSubjectIds } from './BentoFilterUtils';
 import store from '../../store';
+import { localFindConfig } from '../../bento/localSearchData';
 
 const CustomExpansionPanelSummary = withStyles({
   root: {
@@ -85,20 +86,7 @@ const { UploadModal } = UploadModalGenerator({
       }
     },
   },
-  config: {
-    title: 'Upload Case Set',
-    inputPlaceholder: 'eg. ICDC-CASE-06, ICDC-CASE-22',
-    inputTooltip: 'Enter valid Case IDs',
-    uploadTooltip: 'Select a file from your computer',
-    accept: '.csv,.txt',
-    maxSearchTerms: 1000,
-    matchedId: 'case_id',
-    matchedLabel: 'SUBMITTED CASE ID',
-    associateId: 'study_code',
-    associateLabel: 'ASSOCIATED STUDY',
-    projectName: 'ICDC',
-    uploadTooltipIcon: 'SPEECH_BUBBLE',
-  },
+  config: localFindConfig,
   customStyles: uploadCustomStyles,
 });
 const BentoFacetFilter = ({
