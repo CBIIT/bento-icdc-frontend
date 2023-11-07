@@ -184,7 +184,7 @@ export default (theme) => ({
   },
   breadCrumb: {
     marginTop: '-18px',
-    marginBottom: '33px',
+    marginBottom: '7px',
     fontFamily: 'Open Sans',
   },
   borderRight: {
