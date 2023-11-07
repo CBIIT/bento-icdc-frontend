@@ -8,6 +8,7 @@ import { studyDisposition } from '../DataAvailability/TableCell';
 import { navigatedToDashboard } from '../../../../utils/utils';
 import { pageData } from '../../../../bento/programDetailData';
 import pendingFileIcon from '../../../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+import useDashboardTabs from '../../../../pages/dashboard/components/dashboard-tabs-store';
 
 export const getStudyIcon = (classes, param) => {
   const embargoToolTipIcon = () => (
@@ -45,6 +46,7 @@ const NumberOfCasesView = ({
   accession_id: accessionId,
 }) => {
   const StudyIcon = getStudyIcon(classes, studyDisposition(studyDispositionValue));
+  const [, actions] = useDashboardTabs();
   return (
     <>
       {
@@ -57,7 +59,10 @@ const NumberOfCasesView = ({
             <Link
               to={(location) => ({ ...location, pathname: '/explore' })}
               className={classes.buttonCaseNumb}
-              onClick={() => navigatedToDashboard(`${studyDesignation} (${accessionId})`, 'Cases')}
+              onClick={() => {
+                actions.changeCurrentTab(0);
+                navigatedToDashboard(`${studyDesignation} (${accessionId})`, 'Cases');
+              }}
             >
               {numberOfCases}
             </Link>
