@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router';
+import { Container } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import {
   SearchBarGenerator,
@@ -48,10 +49,10 @@ const ICDCHeader = ({
   const { SearchBar } = SearchBarGenerator(SearchBarConfig);
 
   return (
-    <>
+    <Container>
       <include-html
         id="governmentShutdownAlert"
-        src=""
+        src="https://raw.githubusercontent.com/CBIIT/bento-icdc-frontend/ICDC-3331/public/template/GovShutDownBanner.html"
       />
       {
         location.pathname.includes('/jBrowse') ? (
@@ -71,7 +72,7 @@ const ICDCHeader = ({
           />
         )
       }
-    </>
+    </Container>
   );
 };
 
