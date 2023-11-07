@@ -244,4 +244,21 @@ export const uploadCustomStyles = {
   horizontal: {
     marginTop: '20px',
   },
+  orTitle: {
+    backgroundColor: '#CBE2EE',
+    color: '#437BBE',
+    width: '42px',
+    border: '1px solid #fff',
+    display: 'flex',
+    padding: '7px 8px 9px 12px',
+    position: 'fixed',
+    fontSize: '17px',
+    marginTop: '5px',
+    alignItems: 'center',
+    fontFamily: 'Lato',
+    fontWeight: 'bold',
+    marginLeft: '-36px',
+    borderRadius: '50%',
+    justifyCntent: 'center',
+  },
 };
