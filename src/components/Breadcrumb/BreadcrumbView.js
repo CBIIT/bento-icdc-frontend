@@ -33,10 +33,10 @@ const styles = (theme) => ({
     paddingBottom: '12px',
   },
   headerNavLink: {
-    paddingLeft: '6px',
-    paddingRight: '6px',
+    paddingLeft: '2px',
+    paddingRight: '2px',
     textDecoration: 'none',
-    color: '#5e8ca5',
+    color: '#3E5C6F',
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '11px',
