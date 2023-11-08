@@ -30,8 +30,8 @@ const JbrowseController = ({ match }) => {
 
   /**
   * 1. Generate possible jbrowse index files
-  * 2. result set include valid and invalid files use for retriving files uuid
-  * 3. file uuid will be used to get end point for Jbrowse
+  * 2. result set include valid and invalid index files which is use for retriving files uuid
+  * 3. if file name is valid it will return index file url for Jbrowse
   * @param {*} selectedFiles
   * @returns
   */
