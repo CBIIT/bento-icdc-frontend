@@ -79,8 +79,8 @@ export default (theme) => ({
   },
   accessionLabel: {
     fontSize: '14px',
-    fontWeight: '900',
-    color: '#5e8ca5',
+    fontWeight: '600',
+    color: '#385966',
   },
   accessionValue: {
     fontSize: '13px',
@@ -135,7 +135,7 @@ export default (theme) => ({
     paddingLeft: '35px',
     paddingRight: '21px',
     borderBottom: '#81a6b9 4px solid',
-    height: '164px',
+    height: '130px',
     margin: 'auto',
   },
   headerTitle: {
@@ -143,19 +143,21 @@ export default (theme) => ({
     float: 'left',
     marginLeft: '110px',
     width: 'calc(100% - 465px)',
+    marginTop: '20px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontWeight: 'bold',
+    fontWeight: '800',
     letterSpacing: '0.017em',
-    color: '#0296c9',
+    color: '#025F7E',
     fontSize: '19px',
     height: '12px',
     lineHeight: '17px',
     paddingLeft: '3px',
   },
   headerPropertyName: {
-    fontWeight: '400',
+    fontWeight: '600',
+    color: '#025F7E',
   },
   headerSubTitleCate: {
     color: '#606061',
@@ -184,7 +186,7 @@ export default (theme) => ({
   },
   breadCrumb: {
     marginTop: '-18px',
-    marginBottom: '7px',
+    marginBottom: '6px',
     fontFamily: 'Open Sans',
   },
   borderRight: {
@@ -291,7 +293,7 @@ export default (theme) => ({
   headerNavClickableLink: {
     paddingLeft: '6px',
     textTransform: 'none',
-    paddingRight: '6px',
+    paddingRight: '2px',
     textDecoration: 'none',
     color: '#3E5C6F',
     fontWeight: '900',
