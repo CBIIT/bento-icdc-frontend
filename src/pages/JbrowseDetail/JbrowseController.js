@@ -27,6 +27,14 @@ const JbrowseController = ({ match }) => {
   if (!allFiles) {
     return <CircularProgress />;
   }
+
+  /**
+  * 1. Generate possible jbrowse index files
+  * 2. result set include valid and invalid index files which is use for retriving files uuid
+  * 3. if file name is valid it will return index file url for Jbrowse
+  * @param {*} selectedFiles
+  * @returns
+  */
   const generateIndexFile = (selectedFiles) => {
     const files = [];
     const vcfFiles1 = selectedFiles.filter((item) => item.includes(FILE_TYPE_VCF));
@@ -52,8 +60,18 @@ const JbrowseController = ({ match }) => {
     const formatedFiles = [];
     selectedFiles.forEach((item) => {
       const fileName = `${item}`.replace(`.${FILE_TYPE_VCF}`, '').replace(`.${FILE_TYPE_BAM}`, '');
-      const file = files.filter((c) => c.file_name.includes(fileName));
-      formatedFiles.push(file);
+      const filteredFiles = files.filter((c) => c.file_name.includes(fileName));
+      // rename BAM index file - to BAM file
+      const renameIndexFiles = filteredFiles.map((file) => {
+        if (file.file_type === FILE_TYPE_BAI) {
+          return {
+            ...file,
+            file_name: `${fileName}.${FILE_TYPE_BAM}`,
+          };
+        }
+        return file;
+      });
+      formatedFiles.push(renameIndexFiles);
     });
     return formatedFiles;
   };
