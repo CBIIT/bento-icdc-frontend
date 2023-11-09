@@ -7,7 +7,7 @@ import { updateStat } from './utils';
 */
 const StatsView = ({ data }) => {
   const govAlertEl = document.getElementById('govAlertMsg');
-  const initialTopValue = govAlertEl.scrollHeight + 139; // Set your initial top value here
+  const initialTopValue = govAlertEl?.scrollHeight + 139; // Set your initial top value here
   const [topValue, setTopValue] = useState(initialTopValue);
   useEffect(() => {
     const handleScroll = () => {

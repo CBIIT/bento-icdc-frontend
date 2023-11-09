@@ -6,7 +6,7 @@ import {
 
 const BentoNavBar = ({ cartFieldIds = [] }) => {
   const govAlertEl = document.getElementById('govAlertMsg');
-  const initialTopValue = govAlertEl.scrollHeight + 100; // Set your initial top value here
+  const initialTopValue = govAlertEl?.scrollHeight + 100; // Set your initial top value here
   const [topValue, setTopValue] = useState(initialTopValue);
 
   useEffect(() => {
