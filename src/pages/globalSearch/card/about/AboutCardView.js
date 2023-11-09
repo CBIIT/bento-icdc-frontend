@@ -9,9 +9,9 @@ import styles from './AboutCardStyle';
 const AboutCardView = ({
   searchText, data, classes, index,
 }) => {
-  const results = data.text.map((result) => result.replaceAll('$', ''));
-
-  function getHighlightedText(text, highlight) {
+  // const results = data?.text?.split().map((result) => result.replaceAll('$', ''));
+  const results = data?.text.split('$');
+  function getHighlightedText(text = [], highlight = '') {
     // Split on highlight term and include term into parts, ignore case
     const textString = text.reduce((searchResults, currentString, currentIndex) => {
       let newResults = searchResults;

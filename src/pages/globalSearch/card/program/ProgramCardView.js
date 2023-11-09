@@ -12,7 +12,7 @@ const ProgramCard = ({
   index,
 }) => {
   const {
-    program_id: programId,
+    program_acronym: programId,
     program_external_url: externalURL,
     program_name: fullName,
     program_short_description: description,
