@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  CircularProgress,
   Grid,
   withStyles,
 } from '@material-ui/core';
@@ -32,6 +33,9 @@ const CaseDetail = ({
   };
 
   const caseDetail = data.case[0];
+  if (!caseDetail) {
+    return <CircularProgress />;
+  }
   const files = [...data.filesOfCase].map((f) => {
     const customF = { ...f };
     const parentSample = data.samplesByCaseId
@@ -336,8 +340,8 @@ const CaseDetail = ({
                         <span className={classes.title}>Assigned to Study</span>
                       </Grid>
                       <Grid item xs={6} className={classes.content}>
-                        {caseDetail.study
-                          ? caseDetail.study.clinical_study_designation : notProvided}
+                        {caseDetail?.study
+                          ? caseDetail?.study.clinical_study_designation : notProvided}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -348,8 +352,8 @@ const CaseDetail = ({
                       </Grid>
                       <Grid item xs={6} className={classes.content}>
                         {caseDetail.cohort
-                          ? (caseDetail.cohort.study_arm
-                            ? caseDetail.cohort.study_arm.arm : notProvided) : notProvided}
+                          ? (caseDetail?.cohort.study_arm
+                            ? caseDetail?.cohort.study_arm.arm : notProvided) : notProvided}
                       </Grid>
                     </Grid>
                   </Grid>
