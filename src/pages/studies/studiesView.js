@@ -96,6 +96,7 @@ const Studies = ({ classes, data, invalid }) => {
                     interOpData={interOpData}
                     table={pageData.table}
                     tableLayOut={tableLayOut}
+                    rowsPerPage={pageData.table.numbOfRowPerPage || 10}
                   />
                 </TableContextProvider>
               </Grid>
@@ -261,7 +262,7 @@ const styles = (theme) => ({
   },
   tableContainer: {
     background: '#eee',
-    paddingBottom: '50px',
+    paddingBottom: '80px',
   },
   tableDiv: {
     margin: 'auto',

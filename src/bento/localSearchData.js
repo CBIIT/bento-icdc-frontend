@@ -523,3 +523,18 @@ export const widgetsSearchData = [
 ];
 
 export const ageAtIndex = 10;
+
+export const localFindConfig = {
+  title: 'Upload Case Set',
+  inputPlaceholder: 'eg. ICDC-CASE-06, ICDC-CASE-22',
+  inputTooltip: 'Enter valid Case IDs',
+  uploadTooltip: 'Select a file from your computer',
+  accept: '.csv,.txt',
+  maxSearchTerms: 1000,
+  matchedId: 'case_id',
+  matchedLabel: 'Submitted Case ID',
+  associateId: 'study_code',
+  associateLabel: 'Associated Study',
+  projectName: 'ICDC',
+  uploadTooltipIcon: 'SPEECH_BUBBLE',
+};

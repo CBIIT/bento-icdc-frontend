@@ -50,7 +50,7 @@ const styles = () => ({
     fontStyle: 'normal',
     fontWeight: 400,
     fontSize: '15px',
-    background: '#FFF',
+    background: '#fff',
     border: '1px solid #003559',
     borderRadius: '8px',
     color: '#13344A',
@@ -58,7 +58,7 @@ const styles = () => ({
     width: '95px',
     padding: '5px',
     textTransform: 'none',
-    backgroundColor: 'transparent !important',
+    // backgroundColor: 'transparent !important',
     '&:hover': {
       border: '2px solid #7698AC',
     },

@@ -157,7 +157,7 @@ export const extendedView = ({
     tblTopPgn: {
       MuiTablePagination: {
         root: {
-          paddingRight: '50px',
+          paddingRight: '43px',
           borderTop: `3px solid ${primaryColor}`,
         },
       },
@@ -212,21 +212,24 @@ export const extendedView = ({
   },
 });
 
-export const tblPgn = {
-  MuiTablePagination: {
-    root: {
-      paddingRight: '50px',
-      borderTop: '5px solid #e7e5e5',
-      borderBottom: '3px solid #e7e5e5',
-      '&:last-child': {
-        paddingRight: '50px',
+export const tablePag = ({ primaryColor = '#004c73' }) => ({
+  tblPgn: {
+    MuiTablePagination: {
+      root: {
+        paddingRight: '43px',
+        background: '#f3f3f4',
+        borderTop: `3px solid ${primaryColor}`,
+        borderBottom: `3px solid ${primaryColor}`,
+        '&:last-child': {
+          paddingRight: '43px',
+        },
+      },
+      toolbar: {
+        minHeight: '45px',
       },
     },
-    toolbar: {
-      minHeight: '45px',
-    },
   },
-};
+});
 
 export const tblContainer = ({ primaryColor = '#004c73' }) => ({
   tblContainer: {
@@ -400,6 +403,6 @@ export const themeConfig = (styles = {}, table) => ({
   ...headerTheme(styles),
   tblBody,
   ...tblContainer(styles),
-  tblPgn,
+  ...tablePag(styles),
   ...extendedView({ ...styles, ...table }),
 });

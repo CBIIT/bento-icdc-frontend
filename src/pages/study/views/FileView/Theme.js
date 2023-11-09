@@ -233,7 +233,7 @@ export const extendedView = ({
       tblTopPgn: {
         MuiTablePagination: {
           root: {
-            paddingRight: '50px',
+            paddingRight: '43px',
             borderTop: `3px solid ${primaryColor}`,
           },
         },
@@ -291,9 +291,12 @@ export const extendedView = ({
 const tblPgn = {
   MuiTablePagination: {
     root: {
-      backgroundColor: '#ffffff',
+      background: '#f3f3f4',
       borderTop: '3px solid #42779a',
-      borderBottom: '1px solid #e7e5e5',
+      borderBottom: '3px solid #e7e5e5',
+      '&:last-child': {
+        paddingRight: '43px',
+      },
     },
   },
 };

@@ -34,9 +34,8 @@ const FileTableView = ({
   });
 
   const { context } = useContext(TableContext);
-  if (data.length === 0) {
-    fileWrapperConfig[1].items = [];
-  }
+
+  const buttonConfiguration = data.length === 0 ? [] : fileWrapperConfig;
 
   const paginationOptions = {
     customizeToggleSelectAll: (event) => {
@@ -56,7 +55,6 @@ const FileTableView = ({
 
   return (
     <>
-
       <Container className={classes.container}>
         <span className={classes.tableName}>
           {fileTable.tableTitle}
@@ -64,23 +62,22 @@ const FileTableView = ({
       </Container>
 
       <div className={classes.tableContainer}>
+        <TableView
+          initState={initTblState}
+          themeConfig={{
+            ...themeConfig(context, data),
+          }}
+          tblRows={data}
+          totalRowCount={data.length}
+          server={false}
+          paginationOptions={paginationOptions}
+        />
         <Wrapper
-          wrapConfig={updateWrapperConfig(fileTable, fileWrapperConfig, context)}
+          wrapConfig={updateWrapperConfig(fileTable, buttonConfiguration, context)}
           customTheme={customTheme}
           classes={classes}
           section={fileTable.name}
-        >
-          <TableView
-            initState={initTblState}
-            themeConfig={{
-              ...themeConfig(context),
-            }}
-            tblRows={data}
-            totalRowCount={data.length}
-            server={false}
-            paginationOptions={paginationOptions}
-          />
-        </Wrapper>
+        />
       </div>
     </>
   );

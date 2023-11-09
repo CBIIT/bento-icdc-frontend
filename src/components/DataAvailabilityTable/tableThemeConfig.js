@@ -232,7 +232,7 @@ export const extendedView = {
   tblTopPgn: {
     MuiTablePagination: {
       root: {
-        paddingRight: '50px',
+        paddingRight: '43px',
         borderTop: '3px solid #FF9742',
       },
     },
@@ -287,8 +287,22 @@ export const extendedView = {
   },
 };
 
+const tblPgn = {
+  MuiTablePagination: {
+    root: {
+      background: '#f3f3f4',
+      borderTop: '3px solid #42779a',
+      borderBottom: '3px solid #e7e5e5',
+    },
+    toolbar: {
+      paddingRight: '43px',
+    },
+  },
+};
+
 export const themeConfig = (table) => ({
   ...tblBody(table),
+  tblPgn,
   tblContainer,
   extendedView,
   ...headerTheme(table),
