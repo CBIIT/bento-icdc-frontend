@@ -1,3 +1,18 @@
+import gql from 'graphql-tag';
+import client from '../utils/graphqlClient';
+
+export const mapObjectKey = {
+  program: 'program',
+  study: 'study',
+  case: 'case',
+  sample: 'sample',
+  file: 'file',
+  about: 'about',
+  model: 'model',
+  node: 'model',
+  property: 'model',
+};
+
 export const programs = [
   {
     type: 'program',
@@ -162,6 +177,279 @@ export const mockHeaderSuggestion = {
   files: [],
 };
 
+export const STUDIES_PROGRAM = gql`
+  {
+    studiesByProgram {
+      program_id
+      clinical_study_designation
+    }
+  }
+`;
+
+export const SEARCH_PUBLIC = gql`
+    query globalSearch($input: String) {
+        globalSearch(input: $input) {
+          programs {
+            program_acronym
+          }
+          studies {
+            clinical_study_designation
+          }
+          cases {
+            case_id
+          }
+          samples {
+            sample_id
+          }
+          files {
+            file_name
+          }
+          model {
+            node_name
+          }
+        }
+    }
+`;
+
+export const SEARCH_PAGE_RESULTS = gql`
+    query globalSearch($input: String){
+        globalSearch(
+            input: $input
+        ) {
+            program_count
+            study_count
+            case_count
+            sample_count
+            file_count
+            model_count
+            about_count
+        }
+    }
+`;
+
+export const SEARCH_PAGE_RESULT_CASES = gql`
+    query globalSearch($input: String, $first: Int, $offset: Int){
+        globalSearch(
+            input: $input
+            first: $first
+            offset: $offset
+        ) {
+            cases {
+                type
+                case_id
+                program_name
+                clinical_study_designation
+                disease_term
+                breed
+            }
+        }
+    }
+`;
+
+export const SEARCH_PAGE_RESULT_SAMPLES = gql`
+    query globalSearch($input: String, $first: Int, $offset: Int){
+        globalSearch(
+            input: $input
+            first: $first
+            offset: $offset
+        ) {
+          samples {
+            type
+            case_id
+            sample_id
+            program_name
+            clinical_study_designation
+            sample_site
+            general_sample_pathology
+            physical_sample_type
+          }
+        }
+    }
+`;
+
+export const SEARCH_PAGE_RESULT_FILES = gql`
+    query globalSearch($input: String, $first: Int, $offset: Int){
+        globalSearch(
+            input: $input
+            first: $first
+            offset: $offset
+        ) {
+          files {
+            type
+            file_name
+            file_type
+            case_id
+            sample_id
+            program_name
+            clinical_study_designation
+          }
+      }
+    }
+`;
+
+export const SEARCH_PAGE_RESULT_PROGRAM = gql`
+    query globalSearch($input: String, $first: Int, $offset: Int){
+        globalSearch(
+            input: $input
+            first: $first
+            offset: $offset
+        ) {
+          programs {
+            type
+            program_acronym
+            program_external_url
+            program_name
+            program_short_description
+        }
+      }
+    }
+`;
+
+export const SEARCH_PAGE_RESULT_STUDIES = gql`
+    query globalSearch($input: String, $first: Int, $offset: Int){
+        globalSearch(
+            input: $input
+            first: $first
+            offset: $offset
+        ) {
+          studies {
+            type
+            clinical_study_designation
+            clinical_study_name
+            clinical_study_type
+            accession_id
+        }
+      }
+    }
+`;
+
+export const SEARCH_PAGE_RESULT_MODEL = gql`
+    query globalSearch($input: String, $first: Int, $offset: Int){
+        globalSearch(
+            input: $input
+            first: $first
+            offset: $offset
+        ) {
+          model {
+            type
+            highlight
+            node_name
+            property_name
+            property_description
+            property_required
+            property_type
+        }
+      }
+    }
+`;
+
+export const SEARCH_PAGE_RESULT_ABOUT = gql`
+    query globalSearch($input: String, $first: Int, $offset: Int){
+        globalSearch(
+            input: $input
+            first: $first
+            offset: $offset
+        ) {
+          about_page { 
+            type
+            page
+            title
+            text
+        }
+      }
+    }
+`;
+
+/**
+* Maps a datafield to the correct search query
+*
+* @param {string} field datatable field name
+* @param {boolean} isPublic whether the search is public or not
+*/
+export function getResultQueryByField(field) {
+  switch (field) {
+    case 'all':
+      return SEARCH_PAGE_RESULT_CASES;
+    case 'cases':
+      return SEARCH_PAGE_RESULT_CASES;
+    case 'samples':
+      return SEARCH_PAGE_RESULT_SAMPLES;
+    case 'files':
+      return SEARCH_PAGE_RESULT_FILES;
+    case 'programs':
+      return SEARCH_PAGE_RESULT_PROGRAM;
+    case 'studies':
+      return SEARCH_PAGE_RESULT_STUDIES;
+    case 'model':
+      return SEARCH_PAGE_RESULT_MODEL;
+    case 'about_page':
+      return SEARCH_PAGE_RESULT_ABOUT;
+    default:
+      return SEARCH_PAGE_RESULT_CASES;
+  }
+}
+
+/**
+ * Query the backend API for the search result counts by search string
+ *
+ * @param {string} inputValue search text
+ * @param {boolean} isPublic whether to use the public service or not
+ */
+export async function queryCountAPI(inputValue) {
+  const data = await client.query({
+    query: SEARCH_PAGE_RESULTS,
+    variables: {
+      input: inputValue,
+    },
+  })
+    .then((result) => result.data.globalSearch)
+    .catch(() => {});
+  return data;
+}
+
+/**
+ * Query the backend API for the search results by datafield
+ *
+ * @param {string} datafield
+ * @param {object} input search query variable input
+ * @param {boolean} isPublic is the search public or private
+ */
+export async function queryResultAPI(datafield, input) {
+  const data = await client.query({
+    query: getResultQueryByField(datafield),
+    variables: input,
+    context: {
+      clientName: '',
+    },
+  })
+    .then((result) => result.data.globalSearch)
+    .catch(() => []);
+  if (data[datafield]?.length > 0) {
+    const updateDataType = data[datafield]
+      .map((item) => ({ ...item, type: mapObjectKey[item.type] }));
+    return updateDataType;
+  }
+  return data[datafield] || [];
+}
+
+/**
+ * Query the backend API for autocomplete results
+ *
+ * @param {object} inputValue search text
+ * @param {boolean} isPublic is the search public or private
+ */
+export async function queryAutocompleteAPI(inputValue) {
+  const data = await client.query({
+    query: SEARCH_PUBLIC,
+    variables: {
+      input: inputValue,
+    },
+  })
+    .then((result) => result.data.globalSearch)
+    .catch(() => []);
+  return data;
+}
+
 export const aboutMock = [{
   type: 'about',
   title: 'Purpose',
@@ -207,4 +495,31 @@ export const mockSearchData = {
 export const programListingIcon = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/programIcon.svg',
   alt: 'Bento program logo',
+};
+
+export const searchKeys = ['programs', 'studies', 'cases', 'samples', 'files', 'model'];
+
+export const searchFields = ['program_acronym', 'clinical_study_designation', 'case_id', 'sample_id', 'file_name', 'node_name'];
+
+/** certain search data items */
+/** used by the Global Search header autocomplete */
+export const SEARCH_KEYS = {
+  public: [],
+  private: ['programs', 'studies', 'cases', 'samples', 'files'],
+};
+
+export const SEARCH_DATAFIELDS = {
+  public: [],
+  private: ['program_acronym', 'clinical_study_designation', 'case_id', 'sample_id', 'file_name'],
+};
+
+/** used by the Global Search page results */
+export const SEARCH_PAGE_KEYS = {
+  private: [...SEARCH_KEYS.private, 'model'],
+  public: [],
+};
+
+export const SEARCH_PAGE_DATAFIELDS = {
+  public: [],
+  private: [...SEARCH_DATAFIELDS.private, 'node_name'],
 };

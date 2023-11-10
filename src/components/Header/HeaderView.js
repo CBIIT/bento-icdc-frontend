@@ -6,9 +6,10 @@ import {
 } from '@bento-core/global-search';
 import headerData from '../../bento/globalHeaderData';
 import { Header } from '../../bento-core';
-import { mockHeaderSuggestion } from '../../bento/search';
+import { SEARCH_PUBLIC, searchKeys, searchFields } from '../../bento/search';
 import serachIcon from '../../assets/header/global_search_input_find.svg';
 import vectorIcon from '../../assets/header/Vector.svg';
+import client from '../../utils/graphqlClient';
 
 const customStyle = {
   nihLogoImg: {
@@ -27,20 +28,23 @@ const ICDCHeader = ({
   classes,
 }) => {
   const location = useLocation();
-  const queryAutocompleteAPI = (search) => {
-    console.log(search);
-    setTimeout(() => {
-      console.log('print');
-    }, 1000);
-    return mockHeaderSuggestion;
+  const queryAutocompleteAPI = async (inputValue) => {
+    const result = await client.query({
+      query: SEARCH_PUBLIC,
+      variables: {
+        input: inputValue,
+      },
+    })
+      .then((response) => response.data.globalSearch);
+    return result;
   };
 
   const SearchBarConfig = {
     config: {
       query: async (search) => queryAutocompleteAPI(search),
       placeholder: 'SEARCH THE ICDC',
-      searchKeys: ['programs', 'studies', 'cases', 'samples', 'files'],
-      searchFields: ['program_id', 'clinical_study_designation', 'case_id', 'sample_id', 'file_id'],
+      searchKeys,
+      searchFields,
     },
     classes,
   };

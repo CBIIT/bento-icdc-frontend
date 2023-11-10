@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   withStyles,
@@ -7,17 +7,15 @@ import { useHistory } from 'react-router-dom';
 import {
   SearchBarGenerator,
   SearchResultsGenerator,
+  countValues,
 } from '@bento-core/global-search';
 import styles from './GlobalSearchStyle';
 import {
-  cases,
-  programs,
-  studies,
-  samples,
-  files,
-  allResult,
-  aboutMock,
-  modelModel,
+  queryCountAPI,
+  queryResultAPI,
+  queryAutocompleteAPI,
+  SEARCH_PAGE_KEYS,
+  SEARCH_PAGE_DATAFIELDS,
 } from '../../bento/search';
 import ProgramCard from './card/program/ProgramCardView';
 import StudyCardView from './card/study/StudyCardView';
@@ -28,26 +26,89 @@ import AboutCardView from './card/about/AboutCardView';
 import ModelCardView from './card/model/ModelCardView';
 
 /**
- * Handle the tab selection change event, and redirect the user
- * to the login/request page if they are not authorized.
+ * Determine the correct datafield and offset for the All tab based
+ * off of the current offset and the number of results for each datafield
  *
- * @param {object} event change event
- * @param {*} newTab new tab value
- * @returns void
+ * @param {string} searchText
+ * @param {number} calcOffset
+ * @param {number} pageSize
+ * @param {boolean} isPublic
  */
-const onTabChange = (event, newTab) => {
-  console.log(event);
-  console.log(newTab);
-};
+async function getAllQueryField(searchText, calcOffset, pageSize) {
+  const searchResp = await queryCountAPI(searchText);
+  const custodianConfigForTabData = [{ countField: 'case_count', nameField: 'cases' },
+    { countField: 'sample_count', nameField: 'samples' },
+    { countField: 'file_count', nameField: 'files' },
+    { countField: 'program_count', nameField: 'programs' },
+    { countField: 'study_count', nameField: 'studies' },
+    { countField: 'model_count', nameField: 'model' },
+    { countField: 'about_count', nameField: 'about_page' }];
+
+  let acc = 0;
+  const mapCountAndName = custodianConfigForTabData.map((obj) => {
+    acc += searchResp[obj.countField] || 0;
+    return { ...obj, value: acc };
+  });
+  // Create filter for next Query
+  const filter = mapCountAndName.filter((obj) => obj.value > calcOffset)[0];
+  const filterForOffset = mapCountAndName.filter((obj) => obj.value <= calcOffset);
+  const val = filterForOffset.length === 0
+    ? 0
+    : filterForOffset[filterForOffset.length - 1].value;
+
+  if (filter !== undefined) {
+    return {
+      datafieldValue: filter.nameField,
+      offsetValue: (Math.abs(calcOffset - val) / pageSize) * pageSize,
+    };
+  }
+
+  return { datafieldValue: 'cases', offsetValue: 0 };
+}
+
+/**
+ * Wrapper for the queryResultAPI function to get the All tab's data
+ *
+ * @param {string} search the search input value
+ * @param {number} offset the offset value
+ * @param {number} pageSize the pagination page size
+ * @param {boolean} isPublic whether to use a public or private query
+ */
+async function queryAllAPI(search, offset, pageSize) {
+  const {
+    datafieldValue, offsetValue,
+  } = await getAllQueryField(search, offset, pageSize);
+
+  const input = {
+    input: search,
+    first: pageSize,
+    offset: offsetValue,
+  };
+
+  return queryResultAPI(datafieldValue, input);
+}
 
 const GlobalSearchView = ({
   classes,
   searchparam = '',
+  study2Program,
 }) => {
   const history = useHistory();
   const [searchText, setSearchText] = useState(searchparam);
   const [searchCounts, setSearchCounts] = useState([]);
 
+  /**
+   * Handle the tab selection change event, and redirect the user
+   * to the login/request page if they are not authorized.
+   *
+   * @param {object} event change event
+   * @param {*} newTab new tab value
+   * @returns void
+   */
+  // const onTabChange = (event, newTab) => {
+  // };
+
+  // getAllQueryField
   /**
    * Handle the search box input change event
    *
@@ -58,7 +119,12 @@ const GlobalSearchView = ({
     if (!value || typeof value !== 'string') { return; }
     if (value === searchText) { return; }
     if (value.trim() === '') { return; }
-    setSearchText(value);
+
+    queryCountAPI(value).then((d) => {
+      setSearchText(value);
+      setSearchCounts(d);
+      history.push(`/search/${value}`);
+    });
   };
 
   /**
@@ -69,10 +135,6 @@ const GlobalSearchView = ({
    * @param {string} reason reason for the function call
    */
   const getSearchSuggestions = async (_config, value, reason) => {
-    console.log(value);
-    console.log(reason);
-    console.log(_config);
-
     if (!value || typeof value !== 'string') {
       setSearchText('');
       setSearchCounts([]);
@@ -82,32 +144,16 @@ const GlobalSearchView = ({
       return [];
     }
     if (value.trim() === '') { return []; }
+    const res = await queryAutocompleteAPI(value);
+    const mapOption = (SEARCH_PAGE_KEYS.private).map(
+      (key, index) => res[key].map(
+        (id) => (id[SEARCH_PAGE_DATAFIELDS.private[index]]),
+      ),
+    );
+    const option = mapOption.length > 0
+      ? mapOption.reduce((acc = [], iterator) => [...acc, ...iterator]) : [];
 
-    // mock result sets
-    // update suggested result set from query
-    return [
-      'CASE',
-      'BENTO-CASE-9990',
-      'BENTO-CASE-9982',
-      'BENTO-CASE-9979',
-      'BENTO-CASE-9971',
-      'BENTO-CASE-9910',
-      'BENTO-CASE-9908',
-      'BENTO-CASE-9906',
-      'BENTO-CASE-9904',
-      'BENTO-CASE-9900',
-      'BENTO-CASE-9857',
-      'study_subject"',
-      'study_subject"',
-      'sample',
-      'aliquot',
-      'aliquot',
-      'aliquot',
-      'aliquot',
-      'aliquot',
-      'aliquot',
-      'aliquo',
-    ];
+    return [...[value.toUpperCase()], ...option];
   };
 
   /**
@@ -118,36 +164,50 @@ const GlobalSearchView = ({
   * @param {number} currentPage the current page offset
   */
   const getTabData = async (field, pageSize, currentPage) => {
-    console.log(field);
-    console.log(currentPage);
     if (field === 'all') {
-      return (allResult || []).slice(0, pageSize);
-    }
-    if (field === 'clinical_study_designation') {
-      return studies;
-    }
-    if (field === 'case_id') {
-      return cases;
-    }
-    if (field === 'sample_id') {
-      return samples;
-    }
-    if (field === 'file_name') {
-      return files;
-    }
-    if (field === 'about_page') {
-      return aboutMock;
-    }
-    if (field === 'model') {
-      return modelModel;
-    }
-    return programs;
-  };
+      const count = countValues(searchCounts);
+      let data = await queryAllAPI(searchText, (currentPage - 1) * pageSize, pageSize);
+      // If the current set of data is less than the page size,
+      // we need to query the next datafield for it's data
+      if (data && (data.length !== pageSize)) {
+        let apiQueries = 0;
+        let calcOffset2 = (currentPage - 1) * pageSize + data.length;
 
+        // eslint-disable-next-line max-len
+        while (apiQueries < 5 && data.length !== count && calcOffset2 < count && data.length !== pageSize) {
+          // eslint-disable-next-line no-await-in-loop
+          const data2 = await queryAllAPI(searchText, calcOffset2, pageSize);
+          data = [...data, ...data2];
+          data = data.map((item) => ({
+            ...item,
+            programName: study2Program[item.clinical_study_designation] || '',
+          }));
+          calcOffset2 = (currentPage - 1) * pageSize + data.length;
+          apiQueries += 1;
+        }
+      }
+      return (data || []).slice(0, pageSize);
+    }
+    // Handle all of the other tabs
+    const input = {
+      input: searchText,
+      first: pageSize,
+      offset: (currentPage - 1) * pageSize,
+    };
+    const data = await queryResultAPI(field, input);
+    if (field === 'studies') {
+      const stdData = data.map((item) => ({
+        ...item,
+        programName: study2Program[item.clinical_study_designation] || '',
+      }));
+      return stdData;
+    }
+    return (data || []).slice(0, pageSize);
+  };
   const { SearchBar } = SearchBarGenerator({
     classes,
     config: {
-      placeholder: '',
+      placeholder: 'SEARCH THE ICDC',
       iconType: 'image',
       maxSuggestions: 0,
       minimumInputLength: 0,
@@ -161,7 +221,6 @@ const GlobalSearchView = ({
   const { SearchResults } = SearchResultsGenerator({
     classes,
     functions: {
-      onTabChange,
       getTabData,
     },
     tabs: [
@@ -172,57 +231,57 @@ const GlobalSearchView = ({
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: searchCounts.all || 12,
+        count: countValues(searchCounts) || 0,
         value: '1',
       },
       {
         name: 'Program',
-        field: 'program_name',
+        field: 'programs',
         classes: {
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: 2,
+        count: searchCounts.program_count || 0,
         value: '2',
       },
       {
         name: 'Study',
-        field: 'clinical_study_designation',
+        field: 'studies',
         classes: {
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: 3,
+        count: searchCounts.study_count || 0,
         value: '3',
       },
       {
         name: 'Cases',
-        field: 'case_id',
+        field: 'cases',
         classes: {
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: 4,
+        count: searchCounts.case_count || 0,
         value: '4',
       },
       {
         name: 'Sample',
-        field: 'sample_id',
+        field: 'samples',
         classes: {
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: 5,
+        count: searchCounts.sample_count || 0,
         value: '5',
       },
       {
         name: 'File',
-        field: 'file_name',
+        field: 'files',
         classes: {
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: 6,
+        count: searchCounts.file_count || 0,
         value: '6',
       },
       {
@@ -232,7 +291,7 @@ const GlobalSearchView = ({
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: 5,
+        count: searchCounts.model_count || 0,
         value: '7',
       },
       {
@@ -242,7 +301,7 @@ const GlobalSearchView = ({
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: 1,
+        count: searchCounts.about_count || 0,
         value: '8',
       },
     ],
@@ -258,6 +317,16 @@ const GlobalSearchView = ({
       },
     },
   });
+
+  useEffect(() => {
+    if (searchparam.trim() === '') {
+      return;
+    }
+
+    queryCountAPI(searchparam).then((d) => {
+      setSearchCounts(d);
+    });
+  }, []);
 
   return (
     <>

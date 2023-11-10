@@ -33,38 +33,54 @@ const NodeCard = ({ data, classes, index }) => {
             {nodeName}
           </span>
         </Grid>
-        <Grid item xs={12}>
-          <span className={classes.title}>
-            Property Name:
-          </span>
-          <span className={classes.content}>
-            {propertyName}
-          </span>
-        </Grid>
-        <Grid item xs={12}>
-          <span className={classes.title}>
-            Property Description:
-          </span>
-          <span className={classes.content}>
-            {description}
-          </span>
-        </Grid>
-        <Grid item xs={12}>
-          <span className={classes.title}>
-            Property Required:
-          </span>
-          <span className={classes.content}>
-            {required}
-          </span>
-        </Grid>
-        <Grid item xs={12}>
-          <span className={classes.title}>
-            Property Type:
-          </span>
-          <span className={classes.content}>
-            {propertyType}
-          </span>
-        </Grid>
+        {
+          (propertyName) && (
+            <Grid item xs={12}>
+              <span className={classes.title}>
+                Property Name:
+              </span>
+              <span className={classes.content}>
+                {propertyName}
+              </span>
+            </Grid>
+          )
+        }
+        {
+          (description) && (
+            <Grid item xs={12}>
+              <span className={classes.title}>
+                Property Description:
+              </span>
+              <span className={classes.content}>
+                {description}
+              </span>
+            </Grid>
+          )
+        }
+        {
+          (required) && (
+            <Grid item xs={12}>
+              <span className={classes.title}>
+                Property Required:
+              </span>
+              <span className={classes.content}>
+                {required}
+              </span>
+            </Grid>
+          )
+        }
+        {
+          (propertyType) && (
+            <Grid item xs={12}>
+              <span className={classes.title}>
+                Property Type:
+              </span>
+              <span className={classes.content}>
+                {propertyType}
+              </span>
+            </Grid>
+          )
+        }
         <Grid item xs={12}>
           <span className={classes.title}>
             Page Link:
