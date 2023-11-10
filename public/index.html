@@ -34,6 +34,9 @@
     <script src="./injectEnv.js"></script>
     <script src="./js/session.js"></script>
 
+    <!-- Import web component -->
+    <script src="https://cbiit.github.io/nci-softwaresolutions-elements/components/include-html.js"></script>
+
     <!--
       Change line below to update title for the application.
       Ideal Length: <= 33 Characters.
@@ -57,6 +60,9 @@
   </head>
   <body >
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="govAlertMsg">
+      <include-html src="https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown.html"></include-html>
+    </div>
     <div id="root"></div>
     <!--
       This HTML file is a template.

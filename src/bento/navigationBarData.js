@@ -8,7 +8,7 @@ export const navBarstyling = {
     backgroundColor: '#0B3557',
     height: '39px',
     padding: '9px 20px 0px 20px',
-    marginTop: '120px',
+    marginTop: '20px',
     fontFamily: 'Raleway, sans-serif',
     activeLabel: '2px solid #35b9eb',
     paddingRight: '25px',
