@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { withStyles } from '@material-ui/styles';
 import {
@@ -19,7 +19,7 @@ const customStyle = {
     minHeight: '54px',
   },
   headerBar: {
-    top: '20px',
+    top: '120px',
     zIndex: '999',
   },
 };
@@ -37,6 +37,32 @@ const ICDCHeader = ({
     })
       .then((response) => response.data.globalSearch);
     return result;
+  };
+
+  const govAlertEl = document.getElementById('govAlertMsg');
+  console.log(govAlertEl);
+  const initialTopValue = govAlertEl?.scrollHeight; // Set your initial top value here
+  const [topValue, setTopValue] = useState(initialTopValue);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Calculate the new top value based on scroll position
+      const scrolledDownAmt = window.scrollY;
+      const newTopValue = Math.max(0, initialTopValue - scrolledDownAmt);
+
+      setTopValue(newTopValue);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [initialTopValue]);
+
+  const scrollingStyle = {
+    ...customStyle.headerBar,
+    top: `${topValue}px`,
   };
 
   const SearchBarConfig = {
@@ -59,14 +85,14 @@ const ICDCHeader = ({
             logo={headerData.globalHeaderLogo}
             alt={headerData.globalHeaderLogoAltText}
             noLink
-            customStyle={customStyle}
+            customStyle={{ ...customStyle, top: `${topValue}px`, headerBar: scrollingStyle }}
           />
         ) : (
           <Header
             logo={headerData.globalHeaderLogo}
             alt={headerData.globalHeaderLogoAltText}
             homeLink={headerData.globalHeaderLogoLink}
-            customStyle={customStyle}
+            customStyle={{ ...customStyle, headerBar: scrollingStyle }}
             SearchComponent={!location.pathname.match('/search') ? SearchBar : undefined}
           />
         )

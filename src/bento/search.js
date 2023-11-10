@@ -1,6 +1,18 @@
 import gql from 'graphql-tag';
 import client from '../utils/graphqlClient';
 
+export const mapObjectKey = {
+  program: 'program',
+  study: 'study',
+  case: 'case',
+  sample: 'sample',
+  file: 'file',
+  about: 'about',
+  model: 'model',
+  node: 'model',
+  property: 'model',
+};
+
 export const programs = [
   {
     type: 'program',
@@ -165,6 +177,15 @@ export const mockHeaderSuggestion = {
   files: [],
 };
 
+export const STUDIES_PROGRAM = gql`
+  {
+    studiesByProgram {
+      program_id
+      clinical_study_designation
+    }
+  }
+`;
+
 export const SEARCH_PUBLIC = gql`
     query globalSearch($input: String) {
         globalSearch(input: $input) {
@@ -297,7 +318,6 @@ export const SEARCH_PAGE_RESULT_STUDIES = gql`
             clinical_study_name
             clinical_study_type
             accession_id
-            program_id
         }
       }
     }
@@ -404,7 +424,11 @@ export async function queryResultAPI(datafield, input) {
   })
     .then((result) => result.data.globalSearch)
     .catch(() => []);
-
+  if (data[datafield]?.length > 0) {
+    const updateDataType = data[datafield]
+      .map((item) => ({ ...item, type: mapObjectKey[item.type] }));
+    return updateDataType;
+  }
   return data[datafield] || [];
 }
 
@@ -423,7 +447,6 @@ export async function queryAutocompleteAPI(inputValue) {
   })
     .then((result) => result.data.globalSearch)
     .catch(() => []);
-  console.log(data);
   return data;
 }
 

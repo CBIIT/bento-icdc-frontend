@@ -44,7 +44,7 @@ const FileCardView = ({
         </Grid>
         <Grid item xs={12}>
           <span className={classes.title}>
-            Program ID:
+            Program:
           </span>
           <Link
             to={`/program/${programName}`}
