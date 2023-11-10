@@ -91,6 +91,7 @@ async function queryAllAPI(search, offset, pageSize) {
 const GlobalSearchView = ({
   classes,
   searchparam = '',
+  study2Program,
 }) => {
   const history = useHistory();
   const [searchText, setSearchText] = useState(searchparam);
@@ -177,6 +178,10 @@ const GlobalSearchView = ({
           // eslint-disable-next-line no-await-in-loop
           const data2 = await queryAllAPI(searchText, calcOffset2, pageSize);
           data = [...data, ...data2];
+          data = data.map((item) => ({
+            ...item,
+            programName: study2Program[item.clinical_study_designation] || '',
+          }));
           calcOffset2 = (currentPage - 1) * pageSize + data.length;
           apiQueries += 1;
         }
@@ -190,6 +195,13 @@ const GlobalSearchView = ({
       offset: (currentPage - 1) * pageSize,
     };
     const data = await queryResultAPI(field, input);
+    if (field === 'studies') {
+      const stdData = data.map((item) => ({
+        ...item,
+        programName: study2Program[item.clinical_study_designation] || '',
+      }));
+      return stdData;
+    }
     return (data || []).slice(0, pageSize);
   };
   const { SearchBar } = SearchBarGenerator({
