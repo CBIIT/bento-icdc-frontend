@@ -19,8 +19,7 @@ const FileCardView = ({
     clinical_study_designation: studyDesignation,
     sample_id: sampleID,
   } = data;
-  const caseIds = `${caseID}`.split(',')
-    .map((item) => item.trim().replace('[', '').replace(']', ''));
+  const caseIds = `${caseID}`.split(',');
 
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
@@ -64,10 +63,10 @@ const FileCardView = ({
           </Link>
         </Grid>
         {
-          caseID && (
+          (caseIds.length === 1) && (
             <Grid item xs={12}>
               <span className={classes.title}>
-                {(caseIds.length > 1) ? 'Cases:' : 'Case:'}
+                Case:
               </span>
               {
                 caseIds.map((item) => (
