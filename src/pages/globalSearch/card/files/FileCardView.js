@@ -20,6 +20,7 @@ const FileCardView = ({
     sample_id: sampleID,
   } = data;
   const caseIds = `${caseID}`.split(',');
+  const filePathParam = (caseIds.length === 1) ? `/case/${caseID}` : `/study/${studyDesignation}`;
 
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
@@ -30,7 +31,7 @@ const FileCardView = ({
         <div>
           <span className={classes.detailContainerHeader}>File</span>
           <Link
-            to={`/case/${caseID}`}
+            to={filePathParam}
             className={classes.cardTitle}
           >
             {fileName}
