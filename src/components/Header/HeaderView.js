@@ -40,7 +40,6 @@ const ICDCHeader = ({
   };
 
   const govAlertEl = document.getElementById('govAlertMsg');
-  console.log(govAlertEl);
   const initialTopValue = govAlertEl?.scrollHeight; // Set your initial top value here
   const [topValue, setTopValue] = useState(initialTopValue);
 

@@ -39,6 +39,7 @@ function splitArray(originalArray) {
 
 const StyledTableCell = withStyles(() => ({
   root: {
+    width: '20%',
     paddingRight: '0px',
     '&:last-child': {
       paddingRight: '0px',
@@ -65,11 +66,14 @@ const StyledTableCell = withStyles(() => ({
 const StyledStarterTableCell = withStyles(() => ({
   head: {
     paddingLeft: '15px',
+    width: '30%',
   },
   body: {
     paddingLeft: '15px',
     borderLeft: '0',
     fontSize: '12px',
+    width: '30%',
+
   },
 }))(StyledTableCell);
 
@@ -326,7 +330,17 @@ const ClinicalData = ({
                                     className={classes.headerWrapper}
                                   >
                                     {header.title}
-                                    <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                    <Tooltip
+                                      maxWidth="auto"
+                                      fontFamily="Nunito"
+                                      fontSize="14px"
+                                      lineHeight="2"
+                                      fontWeight="500"
+                                      padding="10px 19px"
+                                      title={header.tooltip.content}
+                                      arrow
+                                      placement="top"
+                                    >
                                       <img
                                         className={classes.helpIcon}
                                         src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
@@ -346,7 +360,17 @@ const ClinicalData = ({
                                   className={classes.headerWrapper}
                                 >
                                   {header.title}
-                                  <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                  <Tooltip
+                                    maxWidth="auto"
+                                    fontFamily="Nunito"
+                                    fontSize="14px"
+                                    fontWeight="500"
+                                    lineHeight="2"
+                                    title={header.tooltip.content}
+                                    padding="10px 19px"
+                                    arrow
+                                    placement="top"
+                                  >
                                     <img
                                       className={classes.helpIcon}
                                       src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
@@ -392,7 +416,15 @@ const ClinicalData = ({
                               <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
                               <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
                               <StyledEndTableCell align="center">
-                                <ToolTip title="Click to download the contents of this node">
+                                <ToolTip
+                                  maxWidth="auto"
+                                  lineHeight="2"
+                                  fontFamily="Nunito"
+                                  fontSize="14px"
+                                  fontWeight="500"
+                                  padding="10px 19px"
+                                  title="Click to download the contents of this node"
+                                >
                                   <div
                                     onClick={() => handleCSVDownload(element)}
                                   >
@@ -459,7 +491,17 @@ const ClinicalData = ({
                                 >
                                   <div className={classes.headerWrapper}>
                                     {header.title}
-                                    <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                    <Tooltip
+                                      lineHeight="2"
+                                      maxWidth="auto"
+                                      fontFamily="Nunito"
+                                      fontSize="14px"
+                                      fontWeight="500"
+                                      padding="10px 19px"
+                                      title={header.tooltip.content}
+                                      arrow
+                                      placement="top"
+                                    >
                                       <img
                                         className={classes.helpIcon}
                                         src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
@@ -477,7 +519,17 @@ const ClinicalData = ({
                               >
                                 <div className={classes.headerWrapper}>
                                   {header.title}
-                                  <Tooltip title={<div className={classes.tooltipText}>{header.tooltip.content}</div>} arrow placement="top">
+                                  <Tooltip
+                                    lineHeight="2"
+                                    maxWidth="auto"
+                                    fontFamily="Nunito"
+                                    fontSize="14px"
+                                    fontWeight="500"
+                                    padding="10px 19px"
+                                    title={header.tooltip.content}
+                                    arrow
+                                    placement="top"
+                                  >
                                     <img
                                       className={classes.helpIcon}
                                       src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
@@ -524,7 +576,15 @@ const ClinicalData = ({
                               <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
 
                               <StyledEndTableCell align="center">
-                                <ToolTip title="Click to download the contents of this node">
+                                <ToolTip
+                                  maxWidth="auto"
+                                  lineHeight="2"
+                                  fontFamily="Nunito"
+                                  fontSize="14px"
+                                  fontWeight="500"
+                                  padding="10px 19px"
+                                  title="Click to download the contents of this node"
+                                >
                                   <div
                                     onClick={() => handleCSVDownload(element)}
                                   >
@@ -592,9 +652,15 @@ const styles = {
   csvBtn: { maxWidth: '35px' },
   tooltipText: {
     fontFamily: 'Nunito',
-    fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: '12px',
+    fontSize: '14px',
+    lineHeight: '20px',
+    textAlign: 'justify',
+    hyphen: 'auto',
+    width: 'fit-content',
+  },
+  tooltip: {
+    backgroundColor: 'red',
   },
   headerCellTooltip: {
     width: '12px',
