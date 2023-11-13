@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import { LinkBar } from 'bento-components';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import resourceDropdownRoutes from '../../bento/resourceDropdownRoutes';
 import dataDropdownRoutes from '../../bento/dataDropdownRoutes';
@@ -36,7 +35,6 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <CssBaseline />
     <HashRouter>
       <>
-        <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
         <Header />
         <OverlayWindow />
         <NavBar />
