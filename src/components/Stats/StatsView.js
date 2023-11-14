@@ -16,7 +16,10 @@ const updateStat = (stat) => {
 
 const StatsView = ({ data }) => {
   const govAlertEl = document.getElementById('govAlertMsg');
-  const initialTopValue = govAlertEl?.scrollHeight + 159; // Set your initial top value here
+  if (govAlertEl && !govAlertEl.scrollHeight) {
+    return null;
+  }
+  const initialTopValue = (govAlertEl?.scrollHeight || 0) + 159; // Set your initial top value here
   const [topValue, setTopValue] = useState(initialTopValue);
   useEffect(() => {
     const handleScroll = () => {
@@ -35,13 +38,13 @@ const StatsView = ({ data }) => {
     top: `${topValue}px`,
   };
   return (
-    <>
+    <div className="stats-bar">
       <StatsBar
         data={updateStat(data)}
         globalStatsData={globalStatsData}
         statsStyling={{ ...statsStyling, global: scrollingStyle }}
       />
-    </>
+    </div>
   );
 };
 

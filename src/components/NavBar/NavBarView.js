@@ -6,12 +6,11 @@ import {
 } from '../../bento/navigationBarData';
 import NavBarThemeProvider from './NavBarThemeConfig';
 
-const BentoNavBar = ({ cartFieldIds }) => {
+const BentoNavBar = ({ cartFieldIds, offsetHeight = 0 }) => {
   const location = useLocation();
   const { pathname } = location;
 
-  const govAlertEl = document.getElementById('govAlertMsg');
-  const initialTopValue = govAlertEl?.scrollHeight + 120; // Set your initial top value here
+  const initialTopValue = offsetHeight + 120; // Set your initial top value here
   const [topValue, setTopValue] = useState(initialTopValue);
 
   useEffect(() => {
@@ -28,7 +27,11 @@ const BentoNavBar = ({ cartFieldIds }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [initialTopValue]);
+  }, []);
+
+  useEffect(() => {
+    setTopValue(initialTopValue);
+  }, [offsetHeight]);
 
   const scrollingStyle = {
     ...navBarstyling.global,

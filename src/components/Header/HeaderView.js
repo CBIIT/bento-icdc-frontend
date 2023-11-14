@@ -19,10 +19,12 @@ const customStyle = {
 
 const ICDCHeader = ({
   classes,
+  offsetHeight = 0,
 }) => {
   const location = useLocation();
-  const govAlertEl = document.getElementById('govAlertMsg');
-  const initialTopValue = (govAlertEl?.scrollHeight || 0) + 20; // Set your initial top value here
+  // const govAlertEl = document.getElementById('govAlertMsg');
+  const initialTopValue = offsetHeight + 20; // Set your initial top value here
+
   const [topValue, setTopValue] = useState(initialTopValue);
 
   useEffect(() => {
@@ -30,21 +32,21 @@ const ICDCHeader = ({
       // Calculate the new top value based on scroll position
       const scrolledDownAmt = window.scrollY;
       const newTopValue = Math.max(0, initialTopValue - scrolledDownAmt);
-
       setTopValue(newTopValue);
     };
 
     window.addEventListener('scroll', handleScroll);
+    console.log('init top val ', topValue);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [initialTopValue]);
+  }, []);
 
-  const scrollingStyle = {
-    ...customStyle.headerBar,
-    top: `${topValue}px`,
-  };
+  useEffect(() => {
+    setTopValue(initialTopValue);
+  }, [offsetHeight]);
+
   return location.pathname.match('/search') ? (
     <>
       <LinkBar
@@ -55,7 +57,13 @@ const ICDCHeader = ({
         logo={headerData.globalHeaderLogo}
         alt={headerData.globalHeaderLogoAltText}
         homeLink={headerData.globalHeaderLogoLink}
-        customStyle={{ ...customStyle, headerBar: scrollingStyle }}
+        customStyle={{
+          ...customStyle,
+          headerBar: {
+            ...customStyle.headerBar,
+            top: `${topValue}px`,
+          },
+        }}
       />
     </>
   ) : (
@@ -68,7 +76,13 @@ const ICDCHeader = ({
         logo={headerData.globalHeaderLogo}
         alt={headerData.globalHeaderLogoAltText}
         homeLink={headerData.globalHeaderLogoLink}
-        customStyle={{ ...customStyle, headerBar: scrollingStyle }}
+        customStyle={{
+          ...customStyle,
+          headerBar: {
+            ...customStyle.headerBar,
+            top: `${topValue}px`,
+          },
+        }}
       />
     </>
   );

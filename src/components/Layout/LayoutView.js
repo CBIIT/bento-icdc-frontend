@@ -4,8 +4,8 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import resourceDropdownRoutes from '../../bento/resourceDropdownRoutes';
 import dataDropdownRoutes from '../../bento/dataDropdownRoutes';
-import Header from '../Header/HeaderView';
-import NavBar from '../NavBar/NavBarContainer';
+// import Header from '../Header/HeaderView';
+// import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
 import Home from '../../pages/landing/landingController';
@@ -23,6 +23,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
+import HeaderWithGovAlert from '../Header/NavHeaderWithAlert';
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
 const ScrollToTop = () => {
@@ -35,9 +36,9 @@ const Layout = ({ classes, isSidebarOpened }) => (
     <CssBaseline />
     <HashRouter>
       <>
-        <Header />
+        <HeaderWithGovAlert />
         <OverlayWindow />
-        <NavBar />
+        {/* <NavBar /> */}
         {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
         <div
