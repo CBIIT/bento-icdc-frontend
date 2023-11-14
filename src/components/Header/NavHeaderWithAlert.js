@@ -10,7 +10,7 @@ import NavBarContainer from '../NavBar/NavBarContainer';
 
 const urlLink = 'https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown.html';
 
-const useMutationObserver = (
+export const useMutationObserver = (
   ref,
   callback,
   options = {
@@ -71,7 +71,7 @@ const HeaderWithGovAlert = ({
       setHeight(govAlertRef?.current?.offsetHeight);
       const statsEl = document.querySelector('.stats-bar')?.querySelectorAll('div')[0];
       const adjHeight = govAlertRef?.current?.offsetHeight;
-      statsEl.style.marginTop = `${adjHeight}px`;
+      statsEl.style.top = `${adjHeight}px`;
     }, 100);
   };
 

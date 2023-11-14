@@ -36,7 +36,6 @@ const ICDCHeader = ({
     };
 
     window.addEventListener('scroll', handleScroll);
-    console.log('init top val ', topValue);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
