@@ -63,7 +63,7 @@ const HeaderWithGovAlert = ({
     );
   };
 
-  // this method is use only for testing purpose.
+  // Use only for testing purpose.
   // will remove this method after testing
   const detectMutation = async () => {
     interceptor();
