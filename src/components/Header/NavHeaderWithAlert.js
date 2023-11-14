@@ -8,6 +8,8 @@ import axios from 'axios';
 import HeaderView from './HeaderView';
 import NavBarContainer from '../NavBar/NavBarContainer';
 
+const urlLink = 'https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown.html';
+
 const useMutationObserver = (
   ref,
   callback,
@@ -31,12 +33,12 @@ const useMutationObserver = (
 const HeaderWithGovAlert = ({
   classes,
 }) => {
-  const parentRef = useRef();
+  const govAlertRef = useRef();
   const [alertBannerHeight, setHeight] = useState(0);
   const interceptor = async () => {
     axios.interceptors.response.use(
       (res) => {
-        setHeight(parentRef?.current?.offsetHeight);
+        setHeight(govAlertRef?.current?.offsetHeight);
         return res;
       },
       (err) => {
@@ -44,8 +46,6 @@ const HeaderWithGovAlert = ({
       },
     );
   };
-
-  const urlLink = 'https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown.html';
 
   useEffect(() => {
     interceptor();
@@ -63,28 +63,28 @@ const HeaderWithGovAlert = ({
     );
   };
 
-  // this method is used for only testing purpose only.
+  // this method is use only for testing purpose.
   // will remove this method after testing
   const detectMutation = async () => {
     interceptor();
     setTimeout(() => {
-      setHeight(parentRef?.current?.offsetHeight);
+      setHeight(govAlertRef?.current?.offsetHeight);
       const statsEl = document.querySelector('.stats-bar')?.querySelectorAll('div')[0];
-      const adjHeight = parentRef?.current?.offsetHeight;
+      const adjHeight = govAlertRef?.current?.offsetHeight;
       statsEl.style.marginTop = `${adjHeight}px`;
     }, 100);
   };
 
-  useMutationObserver(parentRef, detectMutation);
+  useMutationObserver(govAlertRef, detectMutation);
   return (
     <div>
-      <div id="govAlertMsg" ref={parentRef}>
+      <div id="govAlertMsg" ref={govAlertRef}>
         <p className={classes.placeholder} />
         {AlertPlaceholder(urlLink)}
       </div>
-      {(parentRef.current && parentRef.current.offsetHeight)
+      {(govAlertRef.current && govAlertRef.current.offsetHeight)
         && <HeaderView offsetHeight={alertBannerHeight} />}
-      {(parentRef.current && parentRef.current.offsetHeight)
+      {(govAlertRef.current && govAlertRef.current.offsetHeight)
         && <NavBarContainer offsetHeight={alertBannerHeight} />}
     </div>
   );
