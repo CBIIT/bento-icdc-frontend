@@ -345,7 +345,7 @@ const styles = (theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundAttachment: 'fixed',
-    marginTop: '-47px',
+    marginTop: '0px',
   },
   imageCaption: {
     textAlign: 'justify',

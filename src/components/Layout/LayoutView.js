@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { LinkBar } from 'bento-components';
@@ -24,6 +24,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
+import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
 const ScrollToTop = () => {
@@ -31,55 +32,88 @@ const ScrollToTop = () => {
   return null;
 };
 
-const Layout = ({ classes, isSidebarOpened }) => (
-  <>
-    <CssBaseline />
-    <HashRouter>
-      <>
-        <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
-        <Header />
-        <OverlayWindow />
-        <NavBar />
-        {/* Reminder: Ajay need to replace the ICDC with env variable and
+const Layout = ({ classes, isSidebarOpened }) => {
+  const headerRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        // Access the new size information from entry.contentRect
+        contentRef.current.style.height = `calc(100% - ${entry.contentRect.height}px)`;
+      });
+    });
+
+    // Attach the ResizeObserver to the target element (in this case, the containerRef)
+    if (headerRef.current) {
+      resizeObserver.observe(headerRef.current);
+    }
+
+    // Cleanup function to disconnect the ResizeObserver when the component unmounts
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  return (
+    <>
+      <CssBaseline />
+      <HashRouter>
+        <>
+          <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
+          <OverlayWindow />
+          <div className={classes.container}>
+            <div id="headerSection" ref={headerRef} className={classes.header}>
+              <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown.html" />
+              <Header />
+              <NavBar />
+            </div>
+
+            {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
-        <div
-          className={classes.content}
-        >
-          <Route component={ScrollToTop} />
-          { GA.init() && <GA.RouteTracker /> }
-          <Switch>
-            <Route exact path="/ICDC/" component={Home} />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/news" component={Home} />
-            <Route path="/study/:id" component={StudyDetail} />
-            <Route path="/studies" component={Studies} />
-            <Route path="/explore" component={Dashboard} />
-            <Route path="/unifiedView/:id" component={UnifiedView} />
-            <Route path="/fileCentricCart" component={Cart} />
-            <Route path="/programs" component={Programs} />
-            <Route path="/program/:id" component={ProgramDetail} />
-            <Route path="/case/:id" component={CaseDetails} />
-            <Route path="/jBrowse/:diplayMode" component={JbrowseController} />
-            <Route path="/icdc-data-model" component={ModelExplorer} />
-            {aboutPageRoutes.map(
-              (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
-            )}
-            {resourceDropdownRoutes.map(
-              (resourceDropdownRoute) => <Route path={resourceDropdownRoute} component={About} />,
-            )}
-            {dataDropdownRoutes.map(
-              (dataDropdownRoute) => <Route path={dataDropdownRoute} component={About} />,
-            )}
-            <Route path="/graphql" component={GraphqlClient} />
-            <Route component={Error} />
-          </Switch>
-          <Footer data={{ isSidebarOpened }} />
-        </div>
-      </>
-    </HashRouter>
-  </>
-);
+            <div
+              ref={contentRef}
+              className={classes.content}
+            >
+              <Route component={ScrollToTop} />
+              { GA.init() && <GA.RouteTracker /> }
+              <Switch>
+                <Route exact path="/ICDC/" component={Home} />
+                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/news" component={Home} />
+                <Route path="/study/:id" component={StudyDetail} />
+                <Route path="/studies" component={Studies} />
+                <Route path="/explore" component={Dashboard} />
+                <Route path="/unifiedView/:id" component={UnifiedView} />
+                <Route path="/fileCentricCart" component={Cart} />
+                <Route path="/programs" component={Programs} />
+                <Route path="/program/:id" component={ProgramDetail} />
+                <Route path="/case/:id" component={CaseDetails} />
+                <Route path="/jBrowse/:diplayMode" component={JbrowseController} />
+                <Route path="/icdc-data-model" component={ModelExplorer} />
+                {aboutPageRoutes.map(
+                  (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
+                )}
+                {resourceDropdownRoutes.map(
+                  (
+                    resourceDropdownRoute,
+                  ) => <Route path={resourceDropdownRoute} component={About} />,
+                )}
+                {dataDropdownRoutes.map(
+                  (dataDropdownRoute) => <Route path={dataDropdownRoute} component={About} />,
+                )}
+                <Route path="/graphql" component={GraphqlClient} />
+                <Route component={Error} />
+              </Switch>
+              <Footer data={{ isSidebarOpened }} />
+            </div>
+          </div>
+        </>
+      </HashRouter>
+    </>
+  );
+};
 
 const styles = (theme) => ({
   root: {
@@ -93,13 +127,6 @@ const styles = (theme) => ({
   },
   Header: {
     position: 'relative',
-  },
-  content: {
-    flexGrow: 1,
-    // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
-    width: 'calc(100%)', // Remove this on adding sidebar
-    background: theme.custom.bodyBackGround,
-    marginTop: '200px',
   },
   '@global': {
     '*::-webkit-scrollbar': {
@@ -115,6 +142,24 @@ const styles = (theme) => ({
       outline: '1px solid slategrey',
       borderRadius: '0px',
     },
+  },
+  container: {
+    top: '20px',
+    width: '100%',
+    height: '100%',
+    position: 'fixed',
+  },
+  header: {
+    width: '100%',
+    zIndex: '9999',
+  },
+  content: {
+    flexGrow: 1,
+    width: 'calc(100%)', // Remove this on adding sidebar
+    background: theme.custom.bodyBackGround,
+    overflowY: 'auto',
+    position: 'absolute',
+    height: '100%',
   },
 });
 

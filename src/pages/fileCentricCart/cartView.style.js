@@ -165,8 +165,8 @@ export default (theme) => ({
   paddingBottom28: {
     paddingBottom: '28px',
   },
-  marginTopNegative20: {
-    marginTop: '-38px',
+  marginTop2: {
+    marginTop: '2px',
   },
   helpBtn: {
     padding: '0px',

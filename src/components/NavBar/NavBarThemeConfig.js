@@ -15,7 +15,14 @@ export default ({
     },
   };
 
+  const MuiAppBar = {
+    positionFixed: {
+      position: 'relative',
+    },
+  };
+
   overridesObj.MuiButton = MuiButton;
+  overridesObj.MuiAppBar = MuiAppBar;
 
   style.push(overridesObj);
   const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });

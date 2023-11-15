@@ -379,6 +379,7 @@ const styles = (theme) => ({
   },
   container: {
     margin: 'auto',
+    paddingTop: '40px',
     paddingLeft: '27px',
     paddingRight: '27px',
   },
