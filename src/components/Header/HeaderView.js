@@ -11,8 +11,9 @@ const customStyle = {
     minHeight: '54px',
   },
   headerBar: {
-    top: '20px',
+    top: '0px',
     zIndex: '999',
+    position: 'relative',
   },
 };
 

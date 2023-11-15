@@ -172,7 +172,7 @@ const cartView = ({
   const numberOfFilesBeDeleted = myFilesPageData.popUpWindow.showNumberOfFileBeRemoved ? fileIDs.length : '';
 
   return (
-    <Grid className={classes.marginTopNegative20}>
+    <Grid className={classes.marginTop2}>
       {/* Section: DialogBox */}
       <DialogBox
         isOpen={modalStatus}

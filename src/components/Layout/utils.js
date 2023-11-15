@@ -71,7 +71,9 @@ const ModelExplorer = () => {
   }
   getData();
   return (
-    <ReduxDataDictionary pdfDownloadConfig={pdfDownloadConfig} />
+    <div style={{ marginTop: '40px' }}>
+      <ReduxDataDictionary pdfDownloadConfig={pdfDownloadConfig} />
+    </div>
   );
 };
 

@@ -12,21 +12,23 @@ const BentoNavBar = ({ cartFieldIds }) => {
 
   return (
     <NavBarThemeProvider>
-      <NavBar
-        navBarData={pathname.includes('/jBrowse/')
-          ? []
-          : navBarData}
-        navBarCartData={pathname.includes('/jBrowse/')
-          ? undefined
-          : navBarCartData}
-        navBarstyling={navBarstyling}
-        numberOfCases={cartFieldIds.length || 0}
-        externalLinksFlag
-        externalLinks={externalLinks}
-        components={{
-          Tooltip,
-        }}
-      />
+      <div style={{ position: 'relative' }}>
+        <NavBar
+          navBarData={pathname.includes('/jBrowse/')
+            ? []
+            : navBarData}
+          navBarCartData={pathname.includes('/jBrowse/')
+            ? undefined
+            : navBarCartData}
+          navBarstyling={navBarstyling}
+          numberOfCases={cartFieldIds.length || 0}
+          externalLinksFlag
+          externalLinks={externalLinks}
+          components={{
+            Tooltip,
+          }}
+        />
+      </div>
     </NavBarThemeProvider>
   );
 };

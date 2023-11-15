@@ -232,7 +232,7 @@ const styles = (theme) => ({
     display: 'flex',
     // maxWidth: '1800px',
     margin: 'auto',
-    paddingTop: '20px',
+    paddingTop: '63px',
   },
   widgetsContainer: {
     background: theme.palette.widgetBackground.main,
