@@ -19,6 +19,9 @@ const FileCardView = ({
     clinical_study_designation: studyDesignation,
     sample_id: sampleID,
   } = data;
+  const caseIds = `${caseID}`.split(',');
+  const filePathParam = (caseIds.length === 1) ? `/case/${caseID}` : `/study/${studyDesignation}`;
+
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
       <Grid item xs={1} className={classes.indexContainer}>
@@ -28,7 +31,7 @@ const FileCardView = ({
         <div>
           <span className={classes.detailContainerHeader}>File</span>
           <Link
-            to={`/case/${caseID}`}
+            to={filePathParam}
             className={classes.cardTitle}
           >
             {fileName}
@@ -61,14 +64,18 @@ const FileCardView = ({
           </Link>
         </Grid>
         {
-          caseID && (
+          (caseIds.length === 1) && (
             <Grid item xs={12}>
               <span className={classes.title}>
                 Case:
               </span>
-              <Link to={`/case/${caseID}`}>
-                <span className={classes.contentLink}>{caseID}</span>
-              </Link>
+              {
+                caseIds.map((item) => (
+                  <Link to={`/case/${item}`.replace(' ', '')}>
+                    <span className={classes.contentLink}>{item}</span>
+                  </Link>
+                ))
+              }
             </Grid>
           )
         }
