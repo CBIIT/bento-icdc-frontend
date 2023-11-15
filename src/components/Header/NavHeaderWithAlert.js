@@ -63,24 +63,12 @@ const HeaderWithGovAlert = ({
     );
   };
 
-  // line 66-81 Used only for testing purpose.
-  // will remove this method after testing
-  const detectMutation = async () => {
-    interceptor();
-    setTimeout(() => {
-      setHeight(govAlertRef?.current?.offsetHeight);
-      const statsEl = document.querySelector('.stats-bar')?.querySelectorAll('div')[0];
-      const adjHeight = govAlertRef?.current?.offsetHeight;
-      statsEl.style.top = `${adjHeight}px`;
-    }, 100);
-  };
   // add local store for testing purpose
   if (!localStorage.getItem('govAlertUrl')) {
     localStorage.setItem('govAlertUrl', urlLink);
   }
   const govAltUrl = localStorage.getItem('govAlertUrl');
 
-  useMutationObserver(govAlertRef, detectMutation);
   return (
     <div>
       <div id="govAlertMsg" ref={govAlertRef}>
