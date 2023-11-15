@@ -63,7 +63,7 @@ const HeaderWithGovAlert = ({
     );
   };
 
-  // Use only for testing purpose.
+  // line 66-81 Used only for testing purpose.
   // will remove this method after testing
   const detectMutation = async () => {
     interceptor();
@@ -74,13 +74,18 @@ const HeaderWithGovAlert = ({
       statsEl.style.top = `${adjHeight}px`;
     }, 100);
   };
+  // add local store for testing purpose
+  if (!localStorage.getItem('govAlertUrl')) {
+    localStorage.setItem('govAlertUrl', urlLink);
+  }
+  const govAltUrl = localStorage.getItem('govAlertUrl');
 
   useMutationObserver(govAlertRef, detectMutation);
   return (
     <div>
       <div id="govAlertMsg" ref={govAlertRef}>
         <p className={classes.placeholder} />
-        {AlertPlaceholder(urlLink)}
+        {AlertPlaceholder(govAltUrl)}
       </div>
       {(govAlertRef.current && govAlertRef.current.offsetHeight)
         && <HeaderView offsetHeight={alertBannerHeight} />}
