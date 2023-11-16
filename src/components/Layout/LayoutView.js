@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import {
   HashRouter, Route, Switch, useLocation,
@@ -30,6 +30,7 @@ import GlobalSearchController from '../../pages/globalSearch/GlobalSearchControl
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
 import CartView from '../../pages/fileCentricCart/CartController';
 import { navBarExclusions } from '../../bento/navigationBarData';
+import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
@@ -40,19 +41,45 @@ const ScrollToTop = () => {
 
 const Layout = ({ classes, isSidebarOpened }) => {
   const location = useLocation();
+  const headerRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        // Access the new size information from entry.contentRect
+        contentRef.current.style.height = `calc(100% - ${entry.contentRect.height}px)`;
+      });
+    });
+
+    // Attach the ResizeObserver to the target element (in this case, the containerRef)
+    if (headerRef.current) {
+      resizeObserver.observe(headerRef.current);
+    }
+
+    // Cleanup function to disconnect the ResizeObserver when the component unmounts
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
   return (
     <>
       <CssBaseline />
       <HashRouter>
         <>
           <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
-          <Header />
           <OverlayWindow />
-          {!navBarExclusions.find((item) => item === location.hash) && <NavBar />}
-
+          <div className={classes.container}>
+            <div id="headerSection" ref={headerRef} className={classes.header}>
+              <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown-test.html" />
+              <Header />
+              {!navBarExclusions.find((item) => item === location.hash) && <NavBar />}
+            </div>
+          </div>
           {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
           <div
+            ref={contentRef}
             className={classes.content}
           >
             <Route component={ScrollToTop} />
@@ -108,13 +135,6 @@ const styles = (theme) => ({
   Header: {
     position: 'relative',
   },
-  content: {
-    flexGrow: 1,
-    // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
-    width: 'calc(100%)', // Remove this on adding sidebar
-    background: theme.custom.bodyBackGround,
-    marginTop: '200px',
-  },
   '@global': {
     '*::-webkit-scrollbar': {
       width: 'none',
@@ -129,6 +149,23 @@ const styles = (theme) => ({
       outline: '1px solid slategrey',
       borderRadius: '0px',
     },
+  },
+  container: {
+    top: '20px',
+    width: '100%',
+    height: '100%',
+  },
+  header: {
+    width: '100%',
+    zIndex: '9999',
+  },
+  content: {
+    flexGrow: 1,
+    width: 'calc(100%)', // Remove this on adding sidebar
+    background: theme.custom.bodyBackGround,
+    overflowY: 'auto',
+    position: 'absolute',
+    height: '100%',
   },
 });
 

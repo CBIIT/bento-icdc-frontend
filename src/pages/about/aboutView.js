@@ -36,7 +36,7 @@ const styles = () => ({
     width: '100%',
   },
   container: {
-    paddingTop: '1px',
+    paddingTop: '43px',
   },
 });
 
