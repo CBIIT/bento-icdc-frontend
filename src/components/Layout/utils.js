@@ -7,6 +7,7 @@
 /* eslint-disable no-restricted-syntax */
 import React from 'react';
 import _ from 'lodash';
+import { withStyles } from '@material-ui/styles';
 import { ReduxDataDictionary, getModelExploreData } from 'data-model-navigator';
 import store from '../../store';
 import {
@@ -57,7 +58,9 @@ async function getData() {
 
 // added for demo - will be replaced with ReadMe file url for DMN
 
-const ModelExplorer = () => {
+const ModelExplorer = ({
+  classes,
+}) => {
   if (!DATA_MODEL || !DATA_MODEL_PROPS || !DATA_MODEL_README) {
     return (
       <Typography variant="h4" color="error" size="sm">
@@ -71,10 +74,16 @@ const ModelExplorer = () => {
   }
   getData();
   return (
-    <div style={{ marginTop: '40px' }}>
+    <div className={classes.container}>
       <ReduxDataDictionary pdfDownloadConfig={pdfDownloadConfig} />
     </div>
   );
 };
 
-export default ModelExplorer;
+const styles = () => ({
+  container: {
+    marginTop: '60px',
+  },
+});
+
+export default withStyles(styles)(ModelExplorer);
