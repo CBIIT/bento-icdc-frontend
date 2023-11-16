@@ -6,11 +6,11 @@ import styles from './ModelCardStyle';
 const NodeCard = ({ data, classes, index }) => {
   const {
     highlight,
-    node_name: nodeName,
-    property_name: propertyName,
-    property_description: description,
-    property_required: required,
-    property_type: propertyType,
+    node_name: nodeName = '',
+    property_name: propertyName = '',
+    property_description: description = '',
+    property_required: required = '',
+    property_type: propertyType = '',
   } = data;
 
   return (

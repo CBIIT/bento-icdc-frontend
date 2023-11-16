@@ -12,11 +12,11 @@ const CaseCardView = ({
   index,
 }) => {
   const {
-    case_id: caseId,
-    program_name: programName,
-    clinical_study_designation: studyDesignation,
-    disease_term: term,
-    breed,
+    case_id: caseId = '',
+    program_name: programName = '',
+    clinical_study_designation: studyDesignation = '',
+    disease_term: term = '',
+    breed = '',
   } = data;
 
   return (

@@ -12,11 +12,11 @@ const StudyCardView = ({
   index,
 }) => {
   const {
-    clinical_study_designation: studyDesignation,
-    clinical_study_name: studyName,
-    accession_id: accessionID,
-    clinical_study_type: studyType,
-    programName,
+    clinical_study_designation: studyDesignation = '',
+    clinical_study_name: studyName = '',
+    accession_id: accessionID = '',
+    clinical_study_type: studyType = '',
+    programName = '',
   } = data;
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
