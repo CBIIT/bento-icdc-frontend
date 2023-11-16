@@ -13,7 +13,7 @@ export default (theme) => ({
     width: '100%',
   },
   container: {
-    paddingTop: '100px',
+    paddingTop: '125px',
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '27px',
     paddingRight: '27px',

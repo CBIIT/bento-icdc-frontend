@@ -71,7 +71,7 @@ const Layout = ({ classes, isSidebarOpened }) => {
           <OverlayWindow />
           <div className={classes.container}>
             <div id="headerSection" ref={headerRef} className={classes.header}>
-              <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown-test.html" />
+              <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown.html" />
               <Header />
               {!navBarExclusions.find((item) => item === location.hash) && <NavBar />}
             </div>

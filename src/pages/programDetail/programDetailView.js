@@ -249,7 +249,7 @@ const styles = (theme) => ({
     paddingBottm: '17px',
   },
   container: {
-    paddingTop: '110px',
+    paddingTop: '120px',
     paddingBottom: '45px',
     fontFamily: 'Raleway, sans-serif',
     background: 'white',
