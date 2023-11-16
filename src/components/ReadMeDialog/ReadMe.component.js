@@ -29,6 +29,11 @@ const date = new Date().toLocaleString('en-us', { month: 'long', year: 'numeric'
    * all the html style from marked down file will be reflected on PDF
    */
 export const downloadMarkdownPdf = async (title, content) => {
+  const html = marked(content);
+  const htmlWithPageBreaks = html.replace(
+    /<!-- PAGE BREAK -->/g,
+    '<div class="page-break"></div>',
+  );
   /** create html elment for pdf - convert marked object to html */
   const readMeContent = document.createElement('div');
   /** add header logo on first page */
@@ -37,13 +42,13 @@ export const downloadMarkdownPdf = async (title, content) => {
   readMeContent.innerHTML += headerLogo;
   const titleEl = "<br><span style='color: #4D6787; font-size: 23px; font-family: Nunito Light'>".concat(title, '</span>');
   readMeContent.innerHTML += titleEl;
-  readMeContent.innerHTML += marked(content);
+  readMeContent.innerHTML += htmlWithPageBreaks;
 
   /** set pdf fileneame */
   const fileName = createFileName('ICDC-MY-FILES-CART-README', 'pdf');
   /** configure pdf increase pixel of the PDF */
   const options = {
-    margin: [0.85, 0.75, 1, 0.75],
+    margin: [0.5, 0.5, 0.5, 0.75],
     filename: fileName,
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: {
@@ -79,9 +84,9 @@ export const downloadMarkdownPdf = async (title, content) => {
         pdf.setFont('Source Sans Pro,sans-serif');
         pdf.setFontSize(8);
         pdf.setTextColor(0);
-        pdf.text(pgWidth - 1.75, pgHeight - 0.5, `${date} | ${i}`);
-        pdf.text(pgWidth - 7.75, pgHeight - 0.5, 'CANINECOMMONS.CANCER.GOV/#/FileCentricCart');
-        pdf.addImage(footerLine, 'JPEG', pgWidth - 7.75, pgHeight - 0.75, 7, 0.05);
+        pdf.text(pgWidth - 2.3, pgHeight - 0.5, `${date}     |      ${i}`);
+        pdf.text(pgWidth - 8, pgHeight - 0.5, 'CANINECOMMONS.CANCER.GOV/#/FileCentricCart');
+        pdf.addImage(footerLine, 'JPEG', pgWidth - 8, pgHeight - 0.75, 7.5, 0.05);
         // if (i === 1) {
         // pdf.addImage(nihLogo, 'JPEG', pgWidth - 7.75, pgHeight - 10.75, 4, 0.5);
         // pdf.addImage(footerLine, 'JPEG', pgWidth - 7.75, pgHeight - 10.15, 7, 0.05);

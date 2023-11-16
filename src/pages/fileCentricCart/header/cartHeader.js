@@ -295,7 +295,7 @@ const CartHeader = React.forwardRef(({
               {options}
             </StyledMenu>
           </div>
-          <div>
+          <div className={classes.downloadFileManifestTooltipWrapper}>
             <Button
               variant="contained"
               onClick={handleDownloadFileManifestDialogOpen}
@@ -313,36 +313,37 @@ const CartHeader = React.forwardRef(({
             >
               Download File Manifest
             </Button>
-            <Tooltip
-              arrow
-              interactive
-              title={(
-                <div className={classes.downloadFileManifestTooltip}>
-                  {/* eslint-disable-next-line max-len */}
-                  To access and analyze files select and remove unwanted files, click the 'Download File Manifest' button and upload the resulting manifest file to your
-                  {' '}
-                  <a
-                    style={{ color: '#DA6300' }}
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://cgc-accounts.sbgenomics.com/auth/login?next=https%3A%2F%2Fcgc-accounts.sbgenomics.com%2Foauth2%2Fauthorization%3Fresponse_type%3Dcode%26client_id%3D08bbb98f354e4554bd7fd315de64d955%26redirect_uri%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Foauth2%252Fredirect%26state%3Dp8aBZtr4Vo9DKxtCgjG8aKPSZVyNXq%26client_next%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Fimport-redirect%252Fdrs%252Fcsv%253FURL%253D%25257Bdownload%26scope%3Dopenid%26nonce%3D67182501315305605201684948090"
-                  >
-                    <span style={{ textDecoration: 'underline', margin: 0, padding: 0 }}>
-                      Seven Bridges Genomics
-                    </span>
-                  </a>
-                  {' '}
-                  account.
-                </div>
+            <div>
+              <Tooltip
+                arrow
+                interactive
+                title={(
+                  <div className={classes.downloadFileManifestTooltip}>
+                    {/* eslint-disable-next-line max-len */}
+                    To access and analyze files select and remove unwanted files, click the 'Download File Manifest' button and upload the resulting manifest file to your
+
+                    <a
+                      style={{ color: '#DA6300' }}
+                      target="_blank"
+                      rel="noreferrer"
+                      href="https://cgc-accounts.sbgenomics.com/auth/login?next=https%3A%2F%2Fcgc-accounts.sbgenomics.com%2Foauth2%2Fauthorization%3Fresponse_type%3Dcode%26client_id%3D08bbb98f354e4554bd7fd315de64d955%26redirect_uri%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Foauth2%252Fredirect%26state%3Dp8aBZtr4Vo9DKxtCgjG8aKPSZVyNXq%26client_next%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Fimport-redirect%252Fdrs%252Fcsv%253FURL%253D%25257Bdownload%26scope%3Dopenid%26nonce%3D67182501315305605201684948090"
+                    >
+                      <span style={{ textDecoration: 'underline', margin: 0, padding: 0 }}>
+                        Seven Bridges Genomics
+                      </span>
+                    </a>
+                    account.
+                  </div>
                             )}
-              placement="top"
-            >
-              <img
-                className={classes.downloadFileManifestInfoIcon}
-                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
-                alt="more info icon"
-              />
-            </Tooltip>
+                placement="top"
+              >
+                <img
+                  className={classes.downloadFileManifestInfoIcon}
+                  src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                  alt="more info icon"
+                />
+              </Tooltip>
+            </div>
           </div>
 
         </div>

@@ -18,6 +18,10 @@ export default (theme) => ({
     // height: '124px',
     // margin: 'auto 27px',
   },
+  downloadFileManifestTooltipWrapper: {
+    display: 'flex',
+    gap: '8px',
+  },
   divider: {
     position: 'relative',
     bottom: '17px',
@@ -130,7 +134,8 @@ export default (theme) => ({
     border: '1px solid #155F97',
     borderRadius: '8px',
     boxShadow: 'none',
-    width: '235px',
+    // width: '235px',
+    textWrap: 'nowrap',
     '&:hover': {
       backgroundColor: '#F2F2F2',
       boxShadow: 'none',
@@ -143,6 +148,7 @@ export default (theme) => ({
     fontSize: '16px',
     fontFamily: 'Lato',
     textTransform: 'capitalize',
+    paddingRight: '6px',
   },
   availableDownloadBtn: {
     backgroundColor: '#155F97 !important',
@@ -170,9 +176,5 @@ export default (theme) => ({
   listItemText: { textWrap: 'balance', padding: '0px' },
   downloadFileManifestInfoIcon: {
     width: '15px',
-    height: '15px',
-    position: 'relative',
-    bottom: '18px',
-    left: '8px',
   },
 });
