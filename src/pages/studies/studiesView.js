@@ -216,7 +216,7 @@ const styles = (theme) => ({
     margin: 'auto',
     paddingLeft: '27px',
     paddingRight: '27px',
-    paddingTop: '20px',
+    paddingTop: '60px',
   },
   paper: {
     textAlign: 'center',
