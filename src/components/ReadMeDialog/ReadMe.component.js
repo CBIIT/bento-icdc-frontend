@@ -155,7 +155,7 @@ const ReadMeDialogComponent = ({
           id="readMe_content"
         >
           <ReactMarkdown>
-            {content}
+            {content.replace(/<!-- PAGE BREAK -->/g, '')}
           </ReactMarkdown>
         </div>
       </Dialog>
