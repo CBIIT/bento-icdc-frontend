@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import _ from 'lodash';
 import {
   Button,
   Collapse,
@@ -23,11 +24,23 @@ const WidgetView = ({
   classes,
   data,
   theme,
+  activeFilters,
 }) => {
   const displayWidgets = formatWidgetData(data, widgetsData);
   const [collapse, setCollapse] = React.useState(true);
   const themeChanger = useTheme();
   const handleChange = () => setCollapse((prev) => !prev);
+
+  const modifyFileTypeData = (orginalData) => {
+    const { file_type: fileTypes = [] } = activeFilters;
+    if (fileTypes.length === 0) {
+      return orginalData;
+    }
+    const filterValue = _.filter(
+      orginalData, (item) => fileTypes.includes(item.group),
+    );
+    return filterValue;
+  };
 
   const widgetGeneratorConfig = {
     theme,
@@ -86,7 +99,10 @@ const WidgetView = ({
       <Collapse in={collapse} className={classes.backgroundWidgets}>
         <Grid container>
           {widgetsData.slice(0).map((widget, index) => {
-            const dataset = displayWidgets[widget.dataName];
+            let dataset = displayWidgets[widget.dataName];
+            if (index === 5) {
+              dataset = modifyFileTypeData(dataset);
+            }
             if (!dataset || dataset.length === 0) {
               return <></>;
             }
