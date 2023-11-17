@@ -329,7 +329,7 @@ const GlobalSearchView = ({
   }, []);
 
   return (
-    <>
+    <div className={classes.container}>
       <div className={classes.heroArea}>
         <div>
           <SearchBar value={searchText} clearable={!false} style={{ width: 750 }} />
@@ -340,7 +340,7 @@ const GlobalSearchView = ({
           <SearchResults searchText={searchText} />
         </Box>
       </div>
-    </>
+    </div>
   );
 };
 

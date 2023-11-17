@@ -12,12 +12,12 @@ const FileCardView = ({
   index,
 }) => {
   const {
-    file_name: fileName,
-    file_type: fileType,
-    case_id: caseID,
-    program_name: programName,
-    clinical_study_designation: studyDesignation,
-    sample_id: sampleID,
+    file_name: fileName = '',
+    file_type: fileType = '',
+    case_id: caseID = '',
+    program_name: programName = '',
+    clinical_study_designation: studyDesignation = '',
+    sample_id: sampleID = '',
   } = data;
   const caseIds = `${caseID}`.split(',');
   const filePathParam = (caseIds.length === 1) ? `/case/${caseID}` : `/study/${studyDesignation}`;

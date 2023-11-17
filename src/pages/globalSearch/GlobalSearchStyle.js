@@ -2,6 +2,9 @@ import backgroundImg from '../../assets/search/backgroundImg.svg';
 import searchIcon from '../../assets/search/searchIcon.svg';
 
 const styles = () => ({
+  container: {
+    paddingTop: '47px',
+  },
   allText: {
     marginLeft: '8px',
   },

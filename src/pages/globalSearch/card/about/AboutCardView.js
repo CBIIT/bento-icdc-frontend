@@ -7,7 +7,10 @@ import { Anchor } from '@bento-core/util';
 import styles from './AboutCardStyle';
 
 const AboutCardView = ({
-  searchText, data, classes, index,
+  searchText = '',
+  data,
+  classes,
+  index = 0,
 }) => {
   // const results = data?.text?.split().map((result) => result.replaceAll('$', ''));
   const results = data?.text.split('$');
