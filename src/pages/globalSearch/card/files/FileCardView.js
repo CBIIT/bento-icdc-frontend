@@ -18,6 +18,7 @@ const FileCardView = ({
     program_name: programName = '',
     clinical_study_designation: studyDesignation = '',
     sample_id: sampleID = '',
+    programId,
   } = data;
   const caseIds = `${caseID}`.split(',');
   const filePathParam = (caseIds.length === 1) ? `/case/${caseID}` : `/study/${studyDesignation}`;
@@ -50,7 +51,7 @@ const FileCardView = ({
             Program:
           </span>
           <Link
-            to={`/program/${programName}`}
+            to={`/program/${programId}`}
           >
             <span className={classes.contentLink}>{programName}</span>
           </Link>
