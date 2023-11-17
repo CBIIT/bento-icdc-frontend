@@ -12,11 +12,12 @@ const CaseCardView = ({
   index,
 }) => {
   const {
-    case_id: caseId,
-    program_name: programName,
-    clinical_study_designation: studyDesignation,
-    disease_term: term,
-    breed,
+    case_id: caseId = '',
+    program_name: programName = '',
+    programId,
+    clinical_study_designation: studyDesignation = '',
+    disease_term: term = '',
+    breed = '',
   } = data;
 
   return (
@@ -35,7 +36,7 @@ const CaseCardView = ({
           <span className={classes.title}>
             Program:
           </span>
-          <Link to={`/program/${programName}`}>
+          <Link to={`/program/${programId}`}>
             <span className={classes.contentLink}>{programName}</span>
           </Link>
         </Grid>

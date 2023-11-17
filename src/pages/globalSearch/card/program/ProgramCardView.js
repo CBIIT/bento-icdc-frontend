@@ -12,10 +12,10 @@ const ProgramCard = ({
   index,
 }) => {
   const {
-    program_acronym: programId,
-    program_external_url: externalURL,
-    program_name: fullName,
-    program_short_description: description,
+    program_acronym: programId = '',
+    program_external_url: externalURL = '',
+    program_name: fullName = '',
+    program_short_description: description = '',
   } = data;
 
   return (

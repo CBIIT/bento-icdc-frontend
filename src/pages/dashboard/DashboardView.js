@@ -41,6 +41,7 @@ const Dashboard = ({
             <QueryBarView data={searchCases} />
             <WidgetView
               data={searchCases}
+              activeFilters={activeFilters}
             />
           </div>
           <DashboardTabs

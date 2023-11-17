@@ -172,20 +172,20 @@ const GlobalSearchView = ({
       if (data && (data.length !== pageSize)) {
         let apiQueries = 0;
         let calcOffset2 = (currentPage - 1) * pageSize + data.length;
-
         // eslint-disable-next-line max-len
         while (apiQueries < 5 && data.length !== count && calcOffset2 < count && data.length !== pageSize) {
           // eslint-disable-next-line no-await-in-loop
           const data2 = await queryAllAPI(searchText, calcOffset2, pageSize);
           data = [...data, ...data2];
-          data = data.map((item) => ({
-            ...item,
-            programName: study2Program[item.clinical_study_designation] || '',
-          }));
           calcOffset2 = (currentPage - 1) * pageSize + data.length;
           apiQueries += 1;
         }
       }
+      // assign program to study
+      data = data.map((item) => ({
+        ...item,
+        programId: study2Program[item.clinical_study_designation] || '',
+      }));
       return (data || []).slice(0, pageSize);
     }
     // Handle all of the other tabs
@@ -194,14 +194,12 @@ const GlobalSearchView = ({
       first: pageSize,
       offset: (currentPage - 1) * pageSize,
     };
-    const data = await queryResultAPI(field, input);
-    if (field === 'studies') {
-      const stdData = data.map((item) => ({
-        ...item,
-        programName: study2Program[item.clinical_study_designation] || '',
-      }));
-      return stdData;
-    }
+    let data = await queryResultAPI(field, input);
+    // assign program to study
+    data = data.map((item) => ({
+      ...item,
+      programId: study2Program[item.clinical_study_designation] || '',
+    }));
     return (data || []).slice(0, pageSize);
   };
   const { SearchBar } = SearchBarGenerator({
@@ -329,7 +327,7 @@ const GlobalSearchView = ({
   }, []);
 
   return (
-    <>
+    <div className={classes.container}>
       <div className={classes.heroArea}>
         <div>
           <SearchBar value={searchText} clearable={!false} style={{ width: 750 }} />
@@ -340,7 +338,7 @@ const GlobalSearchView = ({
           <SearchResults searchText={searchText} />
         </Box>
       </div>
-    </>
+    </div>
   );
 };
 

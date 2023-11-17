@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router';
 import { withStyles } from '@material-ui/styles';
 import {
@@ -19,14 +19,13 @@ const customStyle = {
     minHeight: '54px',
   },
   headerBar: {
-    top: '120px',
+    top: '0px',
     zIndex: '999',
+    position: 'relative',
   },
 };
 
-const ICDCHeader = ({
-  classes,
-}) => {
+const ICDCHeader = () => {
   const location = useLocation();
   const queryAutocompleteAPI = async (inputValue) => {
     const result = await client.query({
@@ -39,31 +38,6 @@ const ICDCHeader = ({
     return result;
   };
 
-  const govAlertEl = document.getElementById('govAlertMsg');
-  const initialTopValue = govAlertEl?.scrollHeight; // Set your initial top value here
-  const [topValue, setTopValue] = useState(initialTopValue);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Calculate the new top value based on scroll position
-      const scrolledDownAmt = window.scrollY;
-      const newTopValue = Math.max(0, initialTopValue - scrolledDownAmt);
-
-      setTopValue(newTopValue);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [initialTopValue]);
-
-  const scrollingStyle = {
-    ...customStyle.headerBar,
-    top: `${topValue}px`,
-  };
-
   const SearchBarConfig = {
     config: {
       query: async (search) => queryAutocompleteAPI(search),
@@ -71,7 +45,6 @@ const ICDCHeader = ({
       searchKeys,
       searchFields,
     },
-    classes,
   };
 
   const { SearchBar } = SearchBarGenerator(SearchBarConfig);
@@ -84,14 +57,14 @@ const ICDCHeader = ({
             logo={headerData.globalHeaderLogo}
             alt={headerData.globalHeaderLogoAltText}
             noLink
-            customStyle={{ ...customStyle, top: `${topValue}px`, headerBar: scrollingStyle }}
+            customStyle={customStyle}
           />
         ) : (
           <Header
             logo={headerData.globalHeaderLogo}
             alt={headerData.globalHeaderLogoAltText}
             homeLink={headerData.globalHeaderLogoLink}
-            customStyle={{ ...customStyle, headerBar: scrollingStyle }}
+            customStyle={customStyle}
             SearchComponent={!location.pathname.match('/search') ? SearchBar : undefined}
           />
         )
