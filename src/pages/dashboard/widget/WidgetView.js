@@ -31,6 +31,11 @@ const WidgetView = ({
   const themeChanger = useTheme();
   const handleChange = () => setCollapse((prev) => !prev);
 
+  /**
+  * Update widget data for file types to match the table data
+  * @param {*} orginalData
+  * @returns modified widget data
+  */
   const modifyFileTypeData = (orginalData) => {
     const { file_type: fileTypes = [] } = activeFilters;
     if (fileTypes.length === 0) {
@@ -100,6 +105,7 @@ const WidgetView = ({
         <Grid container>
           {widgetsData.slice(0).map((widget, index) => {
             let dataset = displayWidgets[widget.dataName];
+            // modify file type widget data
             if (index === 5) {
               dataset = modifyFileTypeData(dataset);
             }
