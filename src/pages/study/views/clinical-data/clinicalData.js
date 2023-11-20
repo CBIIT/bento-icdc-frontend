@@ -40,9 +40,9 @@ function splitArray(originalArray) {
 const StyledTableCell = withStyles(() => ({
   root: {
     width: '20%',
-    paddingRight: '0px',
+    // paddingRight: '0px',
     '&:last-child': {
-      paddingRight: '0px',
+      // paddingRight: '0px',
     },
   },
   head: {
@@ -60,6 +60,7 @@ const StyledTableCell = withStyles(() => ({
     fontStyle: 'normal',
     fontWeight: '600',
     border: '1px solid black',
+    padding: '8px',
   },
 }))(TableCell);
 
@@ -334,7 +335,7 @@ const ClinicalData = ({
                                       maxWidth="auto"
                                       fontFamily="Nunito"
                                       fontSize="14px"
-                                      lineHeight="2"
+                                      lineHeight="1.5"
                                       fontWeight="500"
                                       padding="10px 19px"
                                       title={header.tooltip.content}
@@ -365,7 +366,7 @@ const ClinicalData = ({
                                     fontFamily="Nunito"
                                     fontSize="14px"
                                     fontWeight="500"
-                                    lineHeight="2"
+                                    lineHeight="1.5"
                                     title={header.tooltip.content}
                                     padding="10px 19px"
                                     arrow
@@ -418,7 +419,7 @@ const ClinicalData = ({
                               <StyledEndTableCell align="center">
                                 <ToolTip
                                   maxWidth="auto"
-                                  lineHeight="2"
+                                  lineHeight="1.5"
                                   fontFamily="Nunito"
                                   fontSize="14px"
                                   fontWeight="500"
@@ -492,7 +493,7 @@ const ClinicalData = ({
                                   <div className={classes.headerWrapper}>
                                     {header.title}
                                     <Tooltip
-                                      lineHeight="2"
+                                      lineHeight="1.5"
                                       maxWidth="auto"
                                       fontFamily="Nunito"
                                       fontSize="14px"
@@ -520,7 +521,7 @@ const ClinicalData = ({
                                 <div className={classes.headerWrapper}>
                                   {header.title}
                                   <Tooltip
-                                    lineHeight="2"
+                                    lineHeight="1.5"
                                     maxWidth="auto"
                                     fontFamily="Nunito"
                                     fontSize="14px"
@@ -578,7 +579,7 @@ const ClinicalData = ({
                               <StyledEndTableCell align="center">
                                 <ToolTip
                                   maxWidth="auto"
-                                  lineHeight="2"
+                                  lineHeight="1.5"
                                   fontFamily="Nunito"
                                   fontSize="14px"
                                   fontWeight="500"
