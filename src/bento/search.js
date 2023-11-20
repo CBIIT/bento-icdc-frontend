@@ -11,6 +11,7 @@ export const mapObjectKey = {
   model: 'model',
   node: 'model',
   property: 'model',
+  value: 'model',
 };
 
 export const programs = [
