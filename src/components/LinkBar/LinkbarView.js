@@ -20,7 +20,7 @@ const styles = () => ({
     height: '20px',
     margin: '0 auto',
     display: 'flex',
-    position: 'fixed',
+    // position: 'fixed',
     justifyContent: 'center',
     alignItems: 'center',
     top: '0px',
