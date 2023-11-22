@@ -14,4 +14,7 @@ export default () => ({
   expansionPanel: {
     width: '100%',
   },
+  sectionSummaryText: {
+    textTransform: 'uppercase',
+  },
 });
