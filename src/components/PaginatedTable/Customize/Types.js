@@ -5,6 +5,7 @@ export const customizeColumn = {
   studyDesignation: 'clinical_study_designation',
   Description: 'description',
   Cohort: 'does',
+  DataValue: 'dataValue',
 };
 
 export const customizeLandScapeView = {

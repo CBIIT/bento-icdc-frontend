@@ -7,6 +7,7 @@ export default () => ({
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
+    minHeight: '800px',
   },
   borderRight: {
     borderRight: '#81a6b9 1px solid',

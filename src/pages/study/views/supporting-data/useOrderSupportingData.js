@@ -22,6 +22,11 @@ const TCIAOrder = {
   unique_bodyparts_examined: 5,
 };
 
+const repoOrder = {
+  IDC: IDCOrder,
+  TCIA: TCIAOrder,
+};
+
 export const useOrderSupportingData = (data) => {
   const [IDCMetaData, setIDC] = React.useState({});
   const [TCIAMetaData, setTCIA] = React.useState({});
@@ -35,8 +40,21 @@ export const useOrderSupportingData = (data) => {
     setIDC(IDCObj);
     setTCIA(TCIAObj);
   }, [data]);
-
   return [IDCMetaData, TCIAMetaData];
 };
 
-export default useOrderSupportingData;
+export const useOrderSupportingDataByRepo = (data, repo, rows) => {
+  const keyVal = data?.CRDCLinks.filter((item) => item.repository === repo);
+  const tblData = reorderObjectKeys(keyVal?.[0]?.metadata, repoOrder[repo]);
+  /**
+  * prepare table data
+  */
+  if (Object.keys(tblData).length === 0) {
+    return [];
+  }
+  const tblRows = rows?.map((row) => ({
+    property: row.title,
+    dataValue: tblData[row.key],
+  }));
+  return tblRows;
+};
