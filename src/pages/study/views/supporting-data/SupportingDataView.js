@@ -7,6 +7,7 @@ import {
   CircularProgress,
   ThemeProvider,
   createTheme,
+  // TableContainer,
 } from '@material-ui/core';
 // import clsx from 'clsx';
 import CustomAccordionSummary from './summary/AccordionSummaryView';
@@ -72,6 +73,7 @@ const SupportingData = ({
           }}
         >
           <CustomAccordionSummary
+            classes={classes}
             expand={expand}
           >
             <div>

@@ -36,9 +36,14 @@ export default () => ({
     color: '#005C7A',
   },
   expansionPanelDetailsRoot: {
-    paddingLeft: '150px',
+    paddingLeft: '130px',
+    paddingTop: '0px',
   },
   hyperlink: {
     marginLeft: '15px',
+  },
+  ExpansionPanelIcon: {
+    marginTop: '-10px',
+    marginRight: '10px',
   },
 });

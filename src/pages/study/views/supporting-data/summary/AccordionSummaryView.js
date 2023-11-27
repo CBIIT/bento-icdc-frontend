@@ -38,7 +38,7 @@ const CustomAccordionSummary = ({
   <Summary
     expandIcon={<img src={expand ? collapseIcon : expandIcon} alt="exp-icon" />}
     classes={{
-      expandIcon: classes.ExpansionPaneldropDownIcon,
+      expandIcon: classes.ExpansionPanelIcon,
     }}
   >
     {children}

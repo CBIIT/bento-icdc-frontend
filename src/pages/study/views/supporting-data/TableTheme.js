@@ -1,13 +1,15 @@
 export const tblHeader = {
   MuiTableSortLabel: {
     root: {
-      color: '#003559',
       position: 'relative',
-      fontSize: '11pt',
-      fontFamily: 'Lato Regular,Raleway, sans-serif',
-      fontWeight: 'bold',
-      letterSpacing: '0.06em',
-      textDecoration: 'none',
+      fontFamily: 'Nunito Sans',
+      fontSize: '18px',
+      fontWeight: '400',
+      lineHeight: '18px',
+      color: '#0B3556 !important',
+      '&.active': {
+        color: '#0B3556',
+      },
       '&:hover': {
         color: '#003559',
       },
@@ -15,13 +17,23 @@ export const tblHeader = {
         color: '#003559',
       },
     },
+    icon: {
+      color: '#003559 !important',
+    },
   },
   MuiTableCell: {
     root: {
-      paddingLeft: '5px',
+      paddingLeft: '25px',
       paddingRight: '5px',
       paddingTop: '15px',
       paddingBottom: '15px',
+      '& span': {
+        color: '#0B3556',
+      },
+      '&.property': {
+        maxWidth: '400px',
+        width: '400px',
+      },
     },
   },
   MuiTableRow: {
@@ -57,98 +69,24 @@ export const tblHeader = {
   },
 };
 
-export const tblContainer = {
-  tblContainer: {
-    MuiTableContainer: {
-      root: {
-        width: '100%',
-        overflowX: 'auto',
-        transform: 'rotateX(180deg)',
-        boxShadow: 'none',
-        borderRadius: '0',
-      },
+const tblContainer = {
+  MuiTableContainer: {
+    root: {
+      overflowY: 'scroll',
+      boxShadow: 'none',
+      borderRadius: '0',
+      maxHeight: '420px',
     },
-    MuiTable: {
-      root: {
-        transform: 'rotateX(180deg)',
-        width: '100%',
-        display: 'table',
-        borderSpacing: '0',
-        borderCollapse: 'collapse',
-      },
+  },
+  MuiTable: {
+    root: {
+      width: '100%',
+      display: 'table',
+      borderSpacing: '0',
+      borderCollapse: 'collapse',
     },
   },
 };
-
-export const extendedView = () => ({
-  extendedView: {
-    tblTopPgn: {
-      MuiTablePagination: {
-        root: {
-          width: '30%',
-          float: 'right',
-          minWidth: '500px',
-        },
-        toolbar: {
-          minHeight: '45px',
-        },
-      },
-    },
-    MuiTooltip: {
-      root: {
-        background: '#fff',
-      },
-      tooltip: {
-        backgroundColor: '#ffffff',
-        color: '#1c2023',
-        maxWidth: '220px',
-        fontSize: '0.75rem',
-        fontFamily: 'Open Sans',
-        border: '2px solid #a7afb3',
-        fontWeight: '600',
-        textAlign: 'left',
-        lineHeight: '1.6',
-        padding: '10px 12px',
-        borderRadius: '0px',
-      },
-    },
-    MuiList: {
-      root: {
-        '&.viewColumnList': {
-          padding: '8px 42px 8px 10px',
-          '& img': {
-            width: '25px',
-            marginRight: '10px',
-          },
-        },
-      },
-    },
-    MuiToolbar: {
-      root: {
-        width: '40%',
-        display: 'block',
-        position: 'relative',
-        textAlign: 'right',
-        '&.downloadAndColumnView': {
-          width: '100px',
-          float: 'right',
-          padding: '0px',
-          marginRight: '5px',
-          backgroundColor: '#ffffff',
-          minHeight: '44px',
-          '& button': {
-            '&.download-icon': {
-              marginRight: '-10px',
-            },
-            '&.manageViewColumnBtn': {
-              zIndex: '10',
-            },
-          },
-        },
-      },
-    },
-  },
-});
 
 export const customTheme = {
   MuiAccordionDetails: {
@@ -159,6 +97,16 @@ export const customTheme = {
   MuiTable: {
     root: {
       borderTop: '5px solid red',
+    },
+  },
+  MuiTableContainer: {
+    root: {
+      width: '100%',
+      overflowX: 'auto',
+      transform: 'rotateX(180deg)',
+      boxShadow: 'none',
+      borderRadius: '0',
+      maxHeight: '400px',
     },
   },
 };
@@ -201,6 +149,12 @@ const toolbar = {
 };
 
 const tblBody = {
+  MuiTableBody: {
+    root: {
+      maxHeight: '400px',
+      overflow: 'scroll',
+    },
+  },
   MuiTooltip: {
     tooltip: {
       backgroundColor: '#ffffff',
@@ -219,20 +173,19 @@ const tblBody = {
   MuiTableCell: {
     root: {
       minHeight: '45px',
-      padding: '10px 5px 10px 5px',
+      padding: '10px 5px 10px 25px',
       // padding: '16px',
       color: '#004C73',
       borderBottom: 'none',
-      '&.dataValue': {
-        maxWidth: '420px',
-        minWidth: '300px',
-      },
-      '& p': {
-        fontSize: '10pt',
-        fontStyle: 'normal',
-        fontFamily: 'Open Sans, sans-serif',
-        fontWeight: 'bold',
-        letterSpacing: '0.025em',
+      '&.property': {
+        '& p': {
+          fontFamily: 'Open Sans',
+          fontSize: '15px',
+          fontWeight: '600',
+          lineHeight: '20px',
+          letterSpacing: '0em',
+          color: '#015774',
+        },
       },
     },
   },
@@ -241,7 +194,6 @@ const tblBody = {
 export const themeConfig = () => ({
   tblHeader,
   tblBody,
-  ...extendedView(),
   customTheme,
   tblPgn,
   toolbar,
