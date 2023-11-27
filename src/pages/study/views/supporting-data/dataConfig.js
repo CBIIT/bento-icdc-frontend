@@ -7,6 +7,7 @@ export const supportDataList = [
     title: 'Imaging Data Commons (IDC)',
     defaultExpand: true,
     repository: 'IDC',
+    repositoryUrl: 'https://portal.imaging.datacommons.cancer.gov/explore/',
     table: {
       defaultSortField: 'property',
       // 'asc' or 'desc'
@@ -29,7 +30,7 @@ export const supportDataList = [
       ],
       rows: [
         {
-          title: 'collection id 123',
+          title: 'collection id',
           key: 'collection_id',
         },
         {
@@ -78,6 +79,7 @@ export const supportDataList = [
     title: 'The Cancer Imaging Archive (TCIA)',
     defaultExpand: true,
     repository: 'TCIA',
+    repositoryUrl: 'https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=70227341#702273419937cb85808048c99e4b55fd520d63f2',
     table: {
       defaultSortField: 'property',
       // 'asc' or 'desc'

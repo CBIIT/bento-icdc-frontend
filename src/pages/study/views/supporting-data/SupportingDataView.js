@@ -5,6 +5,8 @@ import {
   AccordionDetails,
   Grid,
   CircularProgress,
+  ThemeProvider,
+  createTheme,
 } from '@material-ui/core';
 // import clsx from 'clsx';
 import CustomAccordionSummary from './summary/AccordionSummaryView';
@@ -12,6 +14,9 @@ import styles from './SupportingDataStyle';
 import { supportDataList, tableLayOut } from './dataConfig';
 import PaginatedTableView from '../../../../components/PaginatedTable/TableView';
 import { useOrderSupportingDataByRepo } from './useOrderSupportingData';
+import { customTheme, themeConfig } from './TableTheme';
+import hyperlinkIcon from '../../../../assets/icons/hyperlink.svg';
+import { ToolTip } from '../../../../bento-core';
 
 const CustomAccordion = withStyles({
   root: {
@@ -37,6 +42,7 @@ const SupportingData = ({
     title,
     table,
     repository = 'IDC',
+    repositoryUrl,
   }) => {
     // const supportData = useOrderSupportingData(data);
     // const tableData = supportData[dataIndex];
@@ -75,6 +81,11 @@ const SupportingData = ({
               <span className={classes.summaryTextTitle}>
                 {title}
               </span>
+              <ToolTip title="Click to view external link in new tab">
+                <a href={repositoryUrl} target="_blank" rel="noreferrer">
+                  <img className={classes.hyperlink} src={hyperlinkIcon} alt="exp-icon" />
+                </a>
+              </ToolTip>
             </div>
           </CustomAccordionSummary>
           <AccordionDetails
@@ -85,6 +96,7 @@ const SupportingData = ({
               tblRows={tableRows}
               config={table}
               tableLayOut={tableLayOut}
+              customthemeConfig={themeConfig()}
             />
           </AccordionDetails>
         </CustomAccordion>
@@ -93,7 +105,7 @@ const SupportingData = ({
   };
 
   return (
-    <>
+    <ThemeProvider theme={createTheme(customTheme)}>
       <div className={classes.supportDataContainer}>
         <Grid container justifyContent="center">
           {
@@ -101,7 +113,7 @@ const SupportingData = ({
           }
         </Grid>
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

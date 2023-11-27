@@ -11,10 +11,13 @@ const Summary = withStyles({
   root: {
     marginBottom: -1,
     minHeight: 48,
-    paddingLeft: 14,
-    paddingRight: 14,
-    paddingTop: 6,
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingTop: 15,
     width: '100%',
+    borderTop: '3px solid #007EA8',
+    borderBottom: '3px solid #007EA8',
+    background: '#f2fcff',
     '&$expanded': {
       minHeight: 48,
     },
