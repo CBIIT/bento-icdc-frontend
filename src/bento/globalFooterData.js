@@ -61,6 +61,10 @@ export default {
         {
           text: `BE Version: ${env.REACT_APP_BE_VERSION}`,
         },
+        {
+          text: 'System Info Page',
+          link: '/sysinfo',
+        },
       ],
     },
     {

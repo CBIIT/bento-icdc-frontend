@@ -27,6 +27,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import GraphqlClient from '../GraphqlClient/GraphqlView';
 import ModelExplorer from './utils';
 import GlobalSearchController from '../../pages/globalSearch/GlobalSearchController';
+import SysInfo from '../../pages/sysInfo';
 import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
 import CartView from '../../pages/fileCentricCart/CartController';
 import { navBarExclusions } from '../../bento/navigationBarData';
@@ -97,6 +98,7 @@ const Layout = ({ classes, isSidebarOpened }) => {
               <Route path="/myFiles" component={CartView} />
               <Route path="/programs" component={Programs} />
               <Route path="/program/:id" component={ProgramDetail} />
+              <Route path="/sysinfo" component={SysInfo} />
               <Route path="/case/:id" component={CaseDetails} />
               <Route path="/jBrowse/:diplayMode" component={JbrowseController} />
               <Route path="/icdc-data-model" component={ModelExplorer} />
