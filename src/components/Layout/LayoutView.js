@@ -67,11 +67,11 @@ const Layout = ({ classes, isSidebarOpened }) => {
       <CssBaseline />
       <HashRouter>
         <>
-          <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
           <OverlayWindow />
           <div className={classes.container}>
             <div id="headerSection" ref={headerRef} className={classes.header}>
               <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown.html" />
+              <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
               <Header />
               {!navBarExclusions.find((item) => item === location.hash) && <NavBar />}
             </div>
