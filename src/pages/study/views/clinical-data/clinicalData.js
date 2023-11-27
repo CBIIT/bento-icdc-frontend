@@ -41,7 +41,7 @@ const StyledTableCell = withStyles(() => ({
   root: {
     width: '20%',
     '&:last-child': {
-      paddingRight: '0px',
+      paddingRight: '8px',
     },
   },
   head: {
@@ -78,11 +78,9 @@ const StyledStarterTableCell = withStyles(() => ({
 }))(StyledTableCell);
 
 const StyledEndTableCell = withStyles(() => ({
-  head: {
-    paddingLeft: '15px',
-  },
+
   body: {
-    paddingLeft: '15px',
+    // paddingLeft: '15px',
     borderWidth: '1px 0 1px 1px',
     borderColor: 'black',
     borderStyle: 'solid',
@@ -430,6 +428,7 @@ const ClinicalData = ({
                                   title="Click to download the contents of this node"
                                 >
                                   <div
+                                    className={classes.tooltipImageWrapper}
                                     onClick={() => handleCSVDownload(element)}
                                   >
                                     <img
@@ -590,6 +589,7 @@ const ClinicalData = ({
                                   title="Click to download the contents of this node"
                                 >
                                   <div
+                                    className={classes.tooltipImageWrapper}
                                     onClick={() => handleCSVDownload(element)}
                                   >
                                     <img
@@ -683,6 +683,11 @@ const styles = {
     "b b b b"
     `,
     },
+  },
+  tooltipImageWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   topDownloadBtn: {
     '@media (max-width: 1500px)': {
