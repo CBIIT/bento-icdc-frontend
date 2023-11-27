@@ -40,9 +40,8 @@ function splitArray(originalArray) {
 const StyledTableCell = withStyles(() => ({
   root: {
     width: '20%',
-    // paddingRight: '0px',
     '&:last-child': {
-      // paddingRight: '0px',
+      paddingRight: '0px',
     },
   },
   head: {
@@ -79,7 +78,11 @@ const StyledStarterTableCell = withStyles(() => ({
 }))(StyledTableCell);
 
 const StyledEndTableCell = withStyles(() => ({
+  head: {
+    paddingLeft: '15px',
+  },
   body: {
+    paddingLeft: '15px',
     borderWidth: '1px 0 1px 1px',
     borderColor: 'black',
     borderStyle: 'solid',
