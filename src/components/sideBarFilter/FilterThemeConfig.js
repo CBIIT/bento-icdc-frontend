@@ -151,6 +151,7 @@ const theme = {
           '& li': {
             color: '#FCA359',
             paddingLeft: '17px !important',
+            paddingTop: '2px !important',
             fontSize: '11px',
             fontStyle: 'italic',
             fontFamily: 'Lato',
