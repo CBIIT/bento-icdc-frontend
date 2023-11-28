@@ -14,7 +14,7 @@ export const GET_ALL_IDS = gql`{
 export const GET_SUBJECT_IDS = gql`
 query caseOverview(
   $case_ids: [String] = [],
-  $first: Int = 10,
+  $first: Int = 1000,
   $offset: Int = 0,
 ){
   caseOverview
