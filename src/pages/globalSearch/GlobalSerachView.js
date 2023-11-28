@@ -253,7 +253,7 @@ const GlobalSearchView = ({
         value: '3',
       },
       {
-        name: 'Cases',
+        name: 'Case',
         field: 'cases',
         classes: {
           root: classes.buttonRoot,
