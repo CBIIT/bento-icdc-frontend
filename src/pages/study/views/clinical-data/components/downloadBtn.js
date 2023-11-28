@@ -27,7 +27,7 @@ const DownloadBtn = ({ classes, loading, handleCSVDownload }) => (
     <Tooltip
       maxWidth="auto"
       fontFamily="Nunito"
-      lineHeight="2"
+      lineHeight="1.5"
       fontSize="14px"
       fontWeight="500"
       padding="10px 19px"
