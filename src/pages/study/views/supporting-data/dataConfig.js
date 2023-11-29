@@ -71,7 +71,7 @@ export const supportDataList = [
         },
       ],
       tableMsg: {
-        noMatch: 'Sorry, no matching records found',
+        noMatch: 'Data unavailable at this time',
       },
     },
   },
@@ -123,7 +123,7 @@ export const supportDataList = [
         },
       ],
       tableMsg: {
-        noMatch: 'Sorry, no matching records found',
+        noMatch: 'Data unavailable at this time',
       },
     },
   },

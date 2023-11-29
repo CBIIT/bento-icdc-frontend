@@ -22,6 +22,11 @@ import { ToolTip } from '../../../../bento-core';
 const CustomAccordion = withStyles({
   root: {
     width: '100%',
+    boxShadow: 'none',
+    marginTop: '-2px',
+    '&.Mui-expanded': {
+      marginTop: '-2px',
+    },
   },
 })(Accordion);
 

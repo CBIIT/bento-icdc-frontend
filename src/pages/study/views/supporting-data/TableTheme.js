@@ -20,6 +20,9 @@ export const tblHeader = {
     icon: {
       color: '#003559 !important',
     },
+    active: {
+      textDecoration: 'underline',
+    },
   },
   MuiTableCell: {
     root: {
@@ -27,6 +30,7 @@ export const tblHeader = {
       paddingRight: '5px',
       paddingTop: '15px',
       paddingBottom: '15px',
+      borderBottom: '1px solid #686F7F',
       '& span': {
         color: '#0B3556',
       },
@@ -127,9 +131,11 @@ const displayErr = {
     maxWidthLg: {
       '@media (min-width: 1920px)': {
         maxWidth: '100%',
+        borderBottom: '1px solid rgba(224, 224, 224, 1)',
       },
       '@media (min-width: 1280px)': {
         maxWidth: '100%',
+        borderBottom: '1px solid rgba(224, 224, 224, 1)',
       },
     },
   },
@@ -175,7 +181,7 @@ const tblBody = {
       minHeight: '45px',
       padding: '10px 5px 10px 25px',
       // padding: '16px',
-      color: '#004C73',
+      color: '#0B3556 !important',
       borderBottom: 'none',
       '&.property': {
         '& p': {
