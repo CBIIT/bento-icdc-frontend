@@ -11,20 +11,15 @@ const Summary = withStyles({
   root: {
     marginBottom: -1,
     minHeight: 48,
-    paddingLeft: 25,
-    paddingRight: 25,
-    paddingTop: 15,
     width: '100%',
     borderTop: '3px solid #007EA8',
     borderBottom: '3px solid #007EA8',
     background: '#f2fcff',
-    '&$expanded': {
-      minHeight: 48,
-    },
   },
   content: {
+    margin: '15px 0px 10px 0px',
     '&$expanded': {
-      margin: '4px 0px 15px 0px',
+      margin: '15px 0px 10px 0px',
     },
   },
   expanded: {},
@@ -34,15 +29,24 @@ const CustomAccordionSummary = ({
   children,
   classes,
   expand,
-}) => (
-  <Summary
-    expandIcon={<img src={expand ? collapseIcon : expandIcon} alt="exp-icon" />}
-    classes={{
-      expandIcon: classes.ExpansionPanelIcon,
-    }}
-  >
-    {children}
-  </Summary>
-);
+}) => {
+  const expandCoppllapseIcon = () => (
+    <img
+      className={classes.ExpPanelIcon}
+      src={expand ? collapseIcon : expandIcon}
+      alt="exp-icon"
+    />
+  );
+  return (
+    <Summary
+      expandIcon={expandCoppllapseIcon()}
+      classes={{
+        expandIcon: classes.ExpansionPanelIcon,
+      }}
+    >
+      {children}
+    </Summary>
+  );
+};
 
 export default withStyles(style)(CustomAccordionSummary);
