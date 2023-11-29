@@ -113,6 +113,19 @@ export const customTheme = {
       maxHeight: '400px',
     },
   },
+  MuiAccordionSummary: {
+    root: {
+      '& span': {
+        fontFamily: 'Nunito Sans',
+        fontSize: '14px',
+        fontWeight: '400',
+        lineHeight: '30px',
+        letterSpacing: '0.25px',
+        textAlign: 'left',
+        textTransform: 'uppercase',
+      },
+    },
+  },
 };
 
 export const tblPgn = {
