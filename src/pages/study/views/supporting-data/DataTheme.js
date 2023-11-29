@@ -193,8 +193,6 @@ const tblBody = {
     root: {
       minHeight: '45px',
       padding: '10px 5px 10px 25px',
-      // padding: '16px',
-      color: '#0B3556 !important',
       borderBottom: 'none',
       '&.property': {
         '& p': {
@@ -204,6 +202,16 @@ const tblBody = {
           lineHeight: '20px',
           letterSpacing: '0em',
           color: '#015774',
+        },
+      },
+      '&.dataValue': {
+        '& span': {
+          fontFamily: 'Open Sans',
+          fontSize: '16px',
+          fontWeight: '400',
+          lineHeight: '20px',
+          letterSpacing: '0em',
+          color: '#0B3556',
         },
       },
     },
