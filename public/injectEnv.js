@@ -3,9 +3,10 @@ window.injectedEnv = {
   REACT_APP_LOGIN_URL: 'https://nci-crdc-staging.datacommons.io/user/oauth2/authorize?client_id=82pslYFJqA7auRvKYfTOK67jzQAMb8f6C33tlmZz&response_type=code&redirect_uri=https%3A%2F%2Fk9dc.essential-dev.com%2F&scope=openid%20user',
   REACT_APP_USER_LOGOUT_URL: 'https://k9dc.essential-dev.com/fence/logout',
   REACT_APP_BACKEND_API: 'https://caninecommons-dev.cancer.gov/v1/graphql/',
+  REACT_APP_BACKEND_VERSION: 'https://caninecommons-dev.cancer.gov/version',
   REACT_APP_APPLICATION_VERSION: 'YYYY_MM_DD/HH:MM',
   REACT_APP_FE_VERSION: 'v3.8.7-588',
-  REACT_APP_FILE_SERVICE_API: 'https://caninecommons.cancer.gov/api/files/version',
+  REACT_APP_FILE_SERVICE_VERSION: 'https://caninecommons.cancer.gov/api/files/version',
   REACT_APP_ABOUT_CONTENT_URL: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/aboutPagesContent.yaml',
   REACT_APP_GA_TRACKING_ID: 'UA-154442677-1',
   REACT_APP_FILE_SERVICE_API: 'https://caninecommons-dev.cancer.gov/api/files/',
@@ -16,5 +17,6 @@ window.injectedEnv = {
   REACT_APP_DMN_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/Data_Model_Navigator_README.md',
   REACT_APP_FOOTER_PRIVACY_POLICY: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/Privacy_Policy.md',
   REACT_APP_INTEROP_SERVICE_URL: 'https://caninecommons-dev.cancer.gov/api/interoperation/graphql',
+  REACT_APP_INTEROP_SERVICE_VERSION: 'https://caninecommons-dev.cancer.gov/api/interoperation/version',
   REACT_APP_FILE_CENTRIC_CART_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/My_Files_Cart_Page_README.md',
 };
