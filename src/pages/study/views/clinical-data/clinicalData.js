@@ -27,6 +27,7 @@ import {
   visitNodeMetadata, vitalSignsNodeMetadata,
 } from '../../../../bento/studyDetailsData';
 import { ToolTip, ToolTip as Tooltip } from '../../../../bento-core';
+import ClinicalDataTable from './clinicalDataTable';
 
 function splitArray(originalArray) {
   const mid = Math.ceil(originalArray.length / 2);
@@ -162,7 +163,7 @@ const ClinicalData = ({
   studyCode,
 }) => {
   const [loading, setLoading] = useState(false);
-
+  console.log(studyCode);
   const [
     agentNodeCSV,
     cycleNodeCSV,
@@ -314,6 +315,7 @@ const ClinicalData = ({
             within a node into which data has been propagated versus the number
             of records within such nodes.
           </p>
+          <ClinicalDataTable />
           <div>
             <ScrollContainer>
               <TableContainer component={Paper}>

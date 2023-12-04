@@ -40,7 +40,8 @@ import StudyThemeProvider from './studyDetailsThemeConfig';
 import SupportingData from './views/supporting-data/SupportingDataView';
 import env from '../../utils/env';
 import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
-import ClinicalData from './views/clinical-data/clinicalData';
+// import ClinicalData from './views/clinical-data/clinicalData';
+import ClinicalData from './views/clinical-data/ClinicalDataView';
 
 function hasPositiveValue(arr) {
   return arr.some((obj) => Object.values(obj).some((value) => value > 0));
@@ -372,7 +373,7 @@ const StudyDetailView = ({ classes, data }) => {
                 case 'CLINICAL DATA': return (
                   <TabPanel value={currentTab} index={index}>
                     {
-                              hasClinicalData
+                      (hasClinicalData && currentTab === index)
                         && (
                         <ClinicalData
                           data={processedClinicalDataTabData}
