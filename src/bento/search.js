@@ -427,7 +427,7 @@ export async function queryResultAPI(datafield, input) {
     .catch(() => []);
   if (data[datafield]?.length > 0) {
     const updateDataType = data[datafield]
-      .map((item) => ({ ...item, type: mapObjectKey[item.type] }));
+      .map((item) => ({ ...item, input, type: mapObjectKey[item.type] }));
     return updateDataType;
   }
   return data[datafield] || [];
