@@ -36,7 +36,8 @@ import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDe
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 import Styles from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
-import SupportingData from './views/supporting-data/supportingData';
+// import SupportingData from './views/supporting-data/supportingData';
+import SupportingData from './views/supporting-data/SupportingDataView';
 import env from '../../utils/env';
 import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
 import ClinicalData from './views/clinical-data/clinicalData';
@@ -386,13 +387,13 @@ const StudyDetailView = ({ classes, data }) => {
                 case 'SUPPORTING DATA': return (
                   <TabPanel value={currentTab} index={index}>
                     {
-                              currentStudy && (
-                              <SupportingData
-                                data={currentStudy}
-                                isLoading={isLoading}
-                              />
-                              )
-                          }
+                      currentStudy && (
+                        <SupportingData
+                          data={currentStudy}
+                          isLoading={isLoading}
+                        />
+                      )
+                    }
                   </TabPanel>
                 );
                 default:
