@@ -25,11 +25,13 @@ const DownloadBtn = ({ classes, loading, handleCSVDownload }) => (
         }
     </Button>
     <Tooltip
-      title={(
-        <div className={classes.tooltipText}>
-          Click to download all available clinical data in the form of multiple csv files
-        </div>
-      )}
+      maxWidth="auto"
+      fontFamily="Nunito"
+      lineHeight="1.5"
+      fontSize="14px"
+      fontWeight="500"
+      padding="10px 19px"
+      title="Click to download all available clinical data in the form of multiple csv files"
       arrow
       placement="top"
     >
@@ -55,7 +57,7 @@ const styles = {
     borderRadius: '10px',
   },
   tooltipText: {
-    fontFamily: 'Munito',
+    fontFamily: 'Nunito',
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: '12px',

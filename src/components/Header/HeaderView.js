@@ -19,14 +19,13 @@ const customStyle = {
     minHeight: '54px',
   },
   headerBar: {
-    top: '20px',
+    top: '0px',
     zIndex: '999',
+    position: 'relative',
   },
 };
 
-const ICDCHeader = ({
-  classes,
-}) => {
+const ICDCHeader = () => {
   const location = useLocation();
   const queryAutocompleteAPI = async (inputValue) => {
     const result = await client.query({
@@ -46,7 +45,6 @@ const ICDCHeader = ({
       searchKeys,
       searchFields,
     },
-    classes,
   };
 
   const { SearchBar } = SearchBarGenerator(SearchBarConfig);

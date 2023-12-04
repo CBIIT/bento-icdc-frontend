@@ -99,6 +99,9 @@ export const customStyles = {
 export const uploadCustomStyles = {
   uploadButton: {
     backgroundColor: '#1D79A8',
+    textTransform: 'capitalize',
+    fontSize: '16px',
+    lineHeight: '16px',
   },
   tableColumn: {
     color: '#0b3556',

@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import styles from './ProgramCardStyle';
+import hyperlinkIcon from '../../../../assets/hyperlink.svg';
 
 const ProgramCard = ({
   data = {},
@@ -12,10 +13,10 @@ const ProgramCard = ({
   index,
 }) => {
   const {
-    program_acronym: programId,
-    program_external_url: externalURL,
-    program_name: fullName,
-    program_short_description: description,
+    program_acronym: programId = '',
+    program_external_url: externalURL = '',
+    program_name: fullName = '',
+    program_short_description: description = '',
   } = data;
 
   return (
@@ -53,6 +54,9 @@ const ProgramCard = ({
           <span className={classes.contentLink}>
             <a target="_blank" rel="noreferrer" href={externalURL}>
               <span className={classes.contentLink}>{externalURL}</span>
+              {(`${externalURL}`.length > 0) && (
+                <img src={hyperlinkIcon} className={classes.hyperLink} alt="link-icon" />
+              )}
             </a>
           </span>
         </Grid>

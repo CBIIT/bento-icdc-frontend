@@ -418,6 +418,7 @@ const styles = (theme) => ({
     paddingBottom: '90px',
     '@media (min-width: 1200px)': {
       width: '1200px',
+      paddingTop: '60px',
     },
   },
   tabContainer: {

@@ -141,6 +141,30 @@ const theme = {
       padding: {
         paddingTop: '0',
         paddingBottom: '0',
+        '&#localFindCaseUploadSet': {
+          '& hr': {
+            height: '1px',
+            marginLeft: '12px',
+            marginRight: '11px',
+            backgroundColor: '#B1B1B1',
+          },
+          '& li': {
+            color: '#FCA359',
+            paddingLeft: '17px !important',
+            paddingTop: '2px !important',
+            fontSize: '11px',
+            fontStyle: 'italic',
+            fontFamily: 'Lato',
+            lineHeight: '20px',
+            minWidth: '200px',
+            '& div:nth-child(2)': {
+              marginLeft: '60%',
+            },
+          },
+          '& img': {
+            width: '10px',
+          },
+        },
       },
     },
     MuiCheckbox: {

@@ -12,11 +12,11 @@ const StudyCardView = ({
   index,
 }) => {
   const {
-    clinical_study_designation: studyDesignation,
-    clinical_study_name: studyName,
-    accession_id: accessionID,
-    clinical_study_type: studyType,
-    programName,
+    clinical_study_designation: studyDesignation = '',
+    clinical_study_name: studyName = '',
+    accession_id: accessionID = '',
+    clinical_study_type: studyType = '',
+    programId = '',
   } = data;
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
@@ -34,8 +34,8 @@ const StudyCardView = ({
           <span className={classes.title}>
             Program:
           </span>
-          <Link to={`/program/${programName}`}>
-            <span className={classes.contentLink}>{programName}</span>
+          <Link to={`/program/${programId}`}>
+            <span className={classes.contentLink}>{programId}</span>
           </Link>
         </Grid>
         <Grid item xs={12}>

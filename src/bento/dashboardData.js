@@ -147,7 +147,7 @@ export const widgetsData = [
   },
   {
     type: 'donut',
-    title: 'State of Disease',
+    title: 'Stage of Disease',
     dataName: 'caseCountByStageOfDisease',
     datatable_field: 'disease_site',
     show: true,
@@ -640,7 +640,7 @@ export const facetsConfig = [
     label: 'File Association',
     apiPath: 'filterCaseCountByFileAssociation',
     apiForFiltering: 'filterCaseCountByFileAssociation',
-    datafield: 'association',
+    datafield: 'file_association',
     field: GROUP,
     count: COUNT,
     type: InputTypes.CHECKBOX,

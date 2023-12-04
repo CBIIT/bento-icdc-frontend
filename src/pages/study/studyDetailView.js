@@ -38,6 +38,7 @@ import Styles from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
 import SupportingData from './views/supporting-data/supportingData';
 import env from '../../utils/env';
+import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
 import ClinicalData from './views/clinical-data/clinicalData';
 
 function hasPositiveValue(arr) {
@@ -64,6 +65,7 @@ const processData = (names, nodeCountArg, nodeCaseCountArg) => names.map((name) 
 });
 
 const StudyDetailView = ({ classes, data }) => {
+  const [, actions] = useDashboardTabs();
   const { data: interOpData, isLoading, isError } = useQuery({
     queryKey: ['studiesByProgram'],
     queryFn: async () => request(
@@ -295,14 +297,13 @@ const StudyDetailView = ({ classes, data }) => {
                     <Link
                       className={classes.headerButtonLink}
                       to={(location) => ({ ...location, pathname: '/explore' })}
-                      onClick={() => navigatedToDashboard(filterStudy)}
+                      onClick={() => {
+                        actions.changeCurrentTab(0);
+                        navigatedToDashboard(filterStudy);
+                      }}
                     >
                       <div className={classes.headerButtonLinkNumber}>
-                        {' '}
-                        {' '}
                         {data.caseCountOfStudy}
-                        {' '}
-                        {' '}
                       </div>
                       <span className={classes.headerButtonLinkText}>Associated Cases</span>
                     </Link>

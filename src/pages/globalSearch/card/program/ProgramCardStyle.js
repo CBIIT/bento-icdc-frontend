@@ -67,6 +67,9 @@ const styles = () => ({
       cursor: 'pointer',
     },
   },
+  hyperLink: {
+    marginLeft: '5px',
+  },
 });
 
 export default styles;

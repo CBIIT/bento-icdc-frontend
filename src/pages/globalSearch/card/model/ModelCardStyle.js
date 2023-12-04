@@ -63,9 +63,6 @@ const styles = () => ({
     paddingLeft: '9px',
     verticalAlign: 'middle',
     lineHeight: '16px',
-    '&:hover': {
-      cursor: 'pointer',
-    },
   },
 });
 
