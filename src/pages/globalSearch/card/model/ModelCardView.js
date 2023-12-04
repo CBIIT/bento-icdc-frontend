@@ -5,13 +5,37 @@ import styles from './ModelCardStyle';
 
 const NodeCard = ({ data, classes, index }) => {
   const {
-    highlight,
+    // highlight = '',
     node_name: nodeName = '',
     property_name: propertyName = '',
     property_description: description = '',
     property_required: required = '',
     property_type: propertyType = '',
+    input: text,
   } = data;
+
+  const highlightKey = () => {
+    const inputSerach = text?.input;
+    if (!inputSerach) {
+      return '';
+    }
+    if (`${nodeName}`.includes(inputSerach)) {
+      return nodeName;
+    }
+    if (`${propertyName}`.includes(inputSerach)) {
+      return propertyName;
+    }
+    if (`${description}`.includes(inputSerach)) {
+      return description;
+    }
+    if (`${required}`.includes(inputSerach)) {
+      return required;
+    }
+    if (`${propertyType}`.includes(inputSerach)) {
+      return propertyType;
+    }
+    return '';
+  };
 
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
@@ -22,7 +46,7 @@ const NodeCard = ({ data, classes, index }) => {
         <div>
           <span className={classes.detailContainerHeader}>Data Model</span>
           <span className={classes.cardTitle}>
-            {highlight}
+            {highlightKey()}
           </span>
         </div>
         <Grid item xs={12}>
