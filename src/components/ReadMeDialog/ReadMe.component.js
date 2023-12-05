@@ -48,7 +48,7 @@ export const downloadMarkdownPdf = async (title, content) => {
   const fileName = createFileName('ICDC-MY-FILES-CART-README', 'pdf');
   /** configure pdf increase pixel of the PDF */
   const options = {
-    margin: [0.5, 0.5, 0.5, 0.75],
+    margin: [0.5, 0.5, 0.8, 0.5],
     filename: fileName,
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: {
