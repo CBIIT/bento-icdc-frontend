@@ -41,7 +41,7 @@ import SupportingData from './views/supporting-data/SupportingDataView';
 import env from '../../utils/env';
 import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
 // import ClinicalData from './views/clinical-data/clinicalData';
-import ClinicalData from './views/clinical-data/ClinicalDataView';
+import ClinicalData from './views/clinical-data/ClinicalDataController';
 
 function hasPositiveValue(arr) {
   return arr.some((obj) => Object.values(obj).some((value) => value > 0));
@@ -77,6 +77,7 @@ const StudyDetailView = ({ classes, data }) => {
   });
 
   const studyData = data.study[0];
+  console.log(data);
   const { clinical_study_designation: studyCode } = studyData;
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
@@ -376,6 +377,10 @@ const StudyDetailView = ({ classes, data }) => {
                       (hasClinicalData && currentTab === index)
                         && (
                         <ClinicalData
+                          dataCount={{
+                            caseCount: clinicalDataNodeCaseCounts,
+                            nodeCount: clinicalDataNodeCounts,
+                          }}
                           data={processedClinicalDataTabData}
                           csvDownloadFlags={clinicalDataDownloadFlags}
                           studyCode={studyCode}

@@ -1,31 +1,50 @@
 import React from 'react';
 import {
-  CircularProgress,
   withStyles,
 } from '@material-ui/core';
-import { useQuery } from '@apollo/client';
 import styles from './ClinicalDataStyle';
-import { GET_CILICAL_DATA_OF_STUDY } from '../../../../bento/studyDetailsData';
+import PaginatedTableView from '../../../../components/PaginatedTable/TableView';
+import { table, tableLayOut } from '../../../../bento/studyDetailsData';
+import { themeConfig } from './DataTheme';
+import DownloadBtn from './components/downloadBtn';
+import { downloadAndZipJson } from '../../../fileCentricCart/utils';
 
 const ClinicalDataView = ({
+  tblRows,
+  classes,
   studyCode,
 }) => {
-  console.log('clinical data view ', studyCode);
-  const { data, loading } = useQuery(GET_CILICAL_DATA_OF_STUDY, {
-    variables: {
-      study_code: studyCode,
-    },
-  });
-  if (loading) {
-    return (
-      <CircularProgress />
-    );
-  }
-  console.log(loading);
-  console.log(data);
+  const downloadAndZipCvsFiles = () => {
+    downloadAndZipJson(tblRows, null, studyCode);
+  };
+
   return (
-    <>
-    </>
+    <div className={classes.container}>
+      <div>
+        <p className={classes.paragraphOne}>
+          Detailed clinical trial observations from this study can be downloaded from
+          any node for which a CSV download option is displayed.
+        </p>
+        <p className={classes.paragraphTwo}>
+          The node-specific counts indicate the number of cases represented
+          within a node into which data has been propagated versus the number
+          of records within such nodes.
+        </p>
+      </div>
+      <div className={classes.topDownloadBtn}>
+        <DownloadBtn handleCSVDownload={downloadAndZipCvsFiles} />
+      </div>
+      <div>
+        <PaginatedTableView
+          isServer={false}
+          tblRows={tblRows}
+          config={table}
+          rowsPerPage={100}
+          tableLayOut={tableLayOut}
+          customthemeConfig={themeConfig()}
+        />
+      </div>
+    </div>
   );
 };
 

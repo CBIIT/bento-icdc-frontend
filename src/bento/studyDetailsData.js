@@ -1421,3 +1421,162 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       }
   }
 `;
+
+export const table = {
+  title: 'Imaging Data Commons (IDC)',
+  defaultSortField: 'dataNode',
+  // 'asc' or 'desc'
+  defaultSortDirection: 'asc',
+  columns: [
+    {
+      dataField: 'dataNode',
+      header: 'Clinical Data Nodes',
+      sort: 'asc',
+      display: true,
+      tooltipText: 'sort',
+    },
+    {
+      dataField: 'description',
+      header: 'Definition',
+      sort: 'asc',
+      display: true,
+      tooltipText: 'sort',
+    },
+    {
+      dataField: 'caseCount',
+      header: 'Case',
+      sort: 'asc',
+      display: true,
+      tooltipText: 'sort',
+      columnDefaultValues: {
+        0: ' ',
+      },
+    },
+    {
+      dataField: 'recordCount',
+      header: 'Records',
+      sort: 'asc',
+      display: true,
+      tooltipText: 'sort',
+      columnDefaultValues: {
+        0: ' ',
+      },
+    },
+    {
+      dataField: 'csvDownload',
+      header: 'CSV',
+      display: true,
+      cellType: cellTypes.CUSTOM_ELEM,
+    },
+  ],
+  rows: [
+    {
+      title: 'adverse event',
+      nodeCount: 'adverse_event',
+      caseCount: 'adverse_event',
+      csvDownload: 'adverseEventNodeData',
+      manifest: agentNodeMetadata,
+    },
+    {
+      title: 'agent',
+      nodeCount: 'agent',
+      caseCount: 'agent',
+      csvDownload: 'agentNodeData',
+      manifest: agentNodeMetadata,
+    },
+    {
+      title: 'agent administration',
+      nodeCount: 'agent_administration',
+      caseCount: 'agent_administration',
+      csvDownload: 'agentAdministrationNodeData',
+      manifest: agentAdministrationNodeMetadata,
+    },
+    {
+      title: 'cycle',
+      nodeCount: 'cycle',
+      caseCount: 'cycle',
+      csvDownload: 'cycleNodeData',
+      manifest: cycleNodeMetadata,
+    },
+    {
+      title: 'disease extent',
+      nodeCount: 'disease_extent',
+      caseCount: 'disease_extent',
+      csvDownload: 'diseaseExtentNodeData',
+      manifest: diseaseExtentNodeMetadata,
+    },
+    {
+      title: 'follow_up',
+      nodeCount: 'follow_up',
+      caseCount: 'follow_up',
+      csvDownload: 'followUpNodeData',
+      manifest: followUpNodeMetadata,
+    },
+    {
+      title: 'lab exam',
+      nodeCount: 'lab_exam',
+      caseCount: 'lab_exam',
+      csvDownload: 'labExamNodeData',
+      manifest: labExamNodeMetadata,
+    },
+    {
+      title: 'off_study',
+      nodeCount: 'off_study',
+      caseCount: 'off_study',
+      csvDownload: 'offStudyNodeData',
+      manifest: offStudyNodeMetadata,
+    },
+    {
+      title: 'off_treatment',
+      nodeCount: 'off_treatment',
+      caseCount: 'off_treatment',
+      csvDownload: 'offTreatmentNodeData',
+      manifest: offTreatmentNodeMetadata,
+    },
+    {
+      title: 'physical exam',
+      nodeCount: 'physical_exam',
+      caseCount: 'physical_exam',
+      csvDownload: 'physicalExamNodeData',
+      manifest: physicalExamNodeMetadata,
+    },
+    {
+      title: 'prior surgery',
+      nodeCount: 'prior_surgery',
+      caseCount: 'prior_surgery',
+      csvDownload: 'priorSurgeryNodeData',
+      manifest: priorSurgeryNodeMetadata,
+    },
+    {
+      title: 'prior_therapy',
+      nodeCount: 'prior_therapy',
+      caseCount: 'prior_therapy',
+      csvDownload: 'priorTherapyNodeData',
+      manifest: priorTherapyNodeMetadata,
+    },
+    {
+      title: 'visit',
+      nodeCount: 'visit',
+      caseCount: 'visit',
+      csvDownload: 'visitNodeData',
+      manifest: visitNodeMetadata,
+    },
+    {
+      title: 'vital_signs',
+      nodeCount: 'vital_signs',
+      caseCount: 'vital_signs',
+      csvDownload: 'vitalSignsNodeData',
+      manifest: vitalSignsNodeMetadata,
+    },
+  ],
+  tableMsg: {
+    noMatch: 'Data unavailable at this time',
+  },
+};
+
+export const tableLayOut = [
+  {
+    container: 'paginatedTable',
+    paginatedTable: true,
+  },
+];

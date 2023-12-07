@@ -163,7 +163,6 @@ const ClinicalData = ({
   studyCode,
 }) => {
   const [loading, setLoading] = useState(false);
-  console.log(studyCode);
   const [
     agentNodeCSV,
     cycleNodeCSV,
@@ -181,6 +180,10 @@ const ClinicalData = ({
     offTreatmentNodeCSV,
     isLoading,
   ] = useFetchCSVDownload(csvDownloadFlags, studyCode);
+
+  if (!data) {
+    return null;
+  }
 
   // const useColumn = useMediaQuery('(max-width:1460px)');
   const [tableA, tableB] = splitArray(data);
@@ -292,7 +295,7 @@ const ClinicalData = ({
         {
           node: offTreatmentNodeCSV, comments: '', fileName: `${name}-OFF TREATMENT`, metadata: offTreatmentNodeMetadata,
         }];
-
+        console.log(nodes);
         return downloadAndZipJson(nodes, setLoading, studyCode);
       }
     }

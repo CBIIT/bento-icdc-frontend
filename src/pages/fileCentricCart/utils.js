@@ -44,7 +44,7 @@ export function convertToCSV(jsonse, comments, keysToInclude, header) {
     });
     if (index === 0) {
       // str = header.join(',');
-      let commentResult = comments.replace(/"/g, '""');
+      let commentResult = `${comments}`.replace(/"/g, '""');
       if (commentResult.search(/("|,|\n)/g) >= 0) commentResult = `"${commentResult}"`;
       str += `\r\n${line},${commentResult}\r\n`;
     } else {
@@ -117,5 +117,7 @@ export const downloadAndZipJson = (dataArray, setLoading, studyCode) => {
   zip.generateAsync({ type: 'blob' }).then((content) => {
     saveAs(content, createFileName(`ICDC_Clinical_Data-${studyCode}`, '.zip'));
   });
-  setLoading(false);
+  if (setLoading) {
+    setLoading(false);
+  }
 };

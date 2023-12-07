@@ -15,6 +15,7 @@ import StudyLink from './components/StudyLink';
 import CustomHeaderRemover from './components/CustomHeaderRemover';
 import DeleteButton from './components/DeleteButton';
 import DataValue from './components/DataValue';
+import CsvDownload from './components/CsvDownload';
 
 const CaseIdLink = (props) => {
   const {
@@ -110,6 +111,10 @@ export const CustomCellView = (props) => {
     case customizeColumn.DataValue:
       return (
         <DataValue {...props} />
+      );
+    case customizeColumn.csvDownload:
+      return (
+        <CsvDownload {...props} />
       );
     default:
       return (<></>);
