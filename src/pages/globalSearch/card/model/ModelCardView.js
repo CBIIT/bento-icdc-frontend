@@ -15,26 +15,26 @@ const NodeCard = ({ data, classes, index }) => {
   } = data;
 
   const highlightKey = () => {
-    const inputSerach = text?.input;
+    const inputSerach = `${text?.input}`.toLowerCase();
     if (!inputSerach) {
       return '';
     }
-    if (`${nodeName}`.includes(inputSerach)) {
+    if (`${nodeName}`.toLowerCase().includes(inputSerach)) {
       return nodeName;
     }
-    if (`${propertyName}`.includes(inputSerach)) {
+    if (`${propertyName}`.toLowerCase().includes(inputSerach)) {
       return propertyName;
     }
-    if (`${description}`.includes(inputSerach)) {
+    if (`${description}`.toLowerCase().includes(inputSerach)) {
       return description;
     }
-    if (`${required}`.includes(inputSerach)) {
+    if (`${required}`.toLowerCase().includes(inputSerach)) {
       return required;
     }
-    if (`${propertyType}`.includes(inputSerach)) {
+    if (`${propertyType}`.toLowerCase().includes(inputSerach)) {
       return propertyType;
     }
-    return '';
+    return inputSerach;
   };
 
   return (
