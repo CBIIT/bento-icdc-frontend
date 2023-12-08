@@ -26,16 +26,28 @@ export const tblHeader = {
   },
   MuiTableCell: {
     root: {
-      paddingLeft: '25px',
-      paddingRight: '5px',
-      paddingTop: '15px',
-      paddingBottom: '15px',
-      // borderBottom: '1px solid #686F7F',
+      padding: '15px 5px 15px 5px',
       '& span': {
         color: '#0B3556',
       },
+      '&.dataNode': {
+        width: '20%',
+        paddingLeft: '25px',
+      },
       '&.csvDownload': {
         width: '10%',
+        textAlign: 'center',
+      },
+      '&.description': {
+        width: '30%',
+        textAlign: 'center',
+      },
+      '&.caseCount': {
+        width: '20%',
+        textAlign: 'center',
+      },
+      '&.nodeCount': {
+        width: '20%',
         textAlign: 'center',
       },
     },
@@ -196,7 +208,7 @@ const tblBody = {
   MuiTableCell: {
     root: {
       minHeight: '45px',
-      padding: '10px 5px 10px 25px',
+      padding: '10px 5px 10px 5px',
       borderBottom: 'none',
       '&.property': {
         '& p': {
@@ -210,6 +222,7 @@ const tblBody = {
       },
       '&.dataNode': {
         width: '20%',
+        padding: '10px 5px 10px 25px',
         '& p': {
           fontFamily: 'Open Sans',
           fontSize: '15px',
@@ -222,12 +235,22 @@ const tblBody = {
       },
       '&.description': {
         width: '30%',
+        '& p': {
+          fontFamily: 'Open Sans',
+          fontSize: '16px',
+          fontWeight: '400',
+          lineHeight: '20px',
+          letterSpacing: '0em',
+          color: '#0B3556',
+        },
       },
       '&.caseCount': {
         width: '20%',
+        textAlign: 'center',
       },
       '&.nodeCount': {
         width: '20%',
+        textAlign: 'center',
       },
       '&.csvDownload': {
         width: '10%',
