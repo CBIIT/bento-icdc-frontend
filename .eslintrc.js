@@ -34,7 +34,5 @@ module.exports = {
     "react/jsx-props-no-spreading":"off",
     "react/jsx-no-bind":"off",
     "react/destructuring-assignment":"off",
-    'no-unused-vars': 'off',
-    'no-undef': 'off',
   },
 };
