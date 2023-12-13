@@ -111,7 +111,7 @@ class BarChart extends PureComponent {
             </Title>
             <ChartGrid visible={value.chartGrid.visible} />
             <Label position={value.label.position}>
-              <Font {...value.label} />
+              <Font  {...value.label} />
             </Label>
           </ValueAxis>
 

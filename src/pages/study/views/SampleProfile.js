@@ -21,8 +21,10 @@ const tooltipContent = ({ argument, originalValue }) => (
     <div>
       <span
         style={{
-          fontWeight: 600,
-          color: '#1C2023',
+          fontFamily: 'Inter',
+          fontWeight: 400,
+          fontSize: '13px',
+          color: '#444444',
         }}
       >
         {argument}
@@ -30,8 +32,10 @@ const tooltipContent = ({ argument, originalValue }) => (
       </span>
       <span
         style={{
-          color: '#000000',
-          fontWeight: 900,
+          fontFamily: 'Inter',
+          fontWeight: 700,
+          fontSize: '13px',
+          color: '#444444',
         }}
       >
         {originalValue}
@@ -189,6 +193,7 @@ const styles = (theme) => ({
     fontWeight: '700',
     paddingLeft: '5px',
   },
+
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
     border: '3px solid #81a6b9',
@@ -223,7 +228,7 @@ const styles = (theme) => ({
     },
   },
   headerButtonLinkNumber: {
-    fontFamily: 'sans-serif',
+    fontFamily: 'Roboto',
     fontSize: '13px',
     paddingBottom: '3px',
     margin: '0',
@@ -232,11 +237,11 @@ const styles = (theme) => ({
     marginRight: '4px',
   },
   headerButtonLinkText: {
-    fontFamily: theme.custom.fontFamilySans,
+    fontFamily: 'Roboto',
     color: '#0B3556',
     fontSize: '13px',
     fontStyle: 'normal',
-    fontWeight: '400',
+    fontWeight: '900',
     lineHeight: '14px',
     letterSpacing: '0.15px',
   },

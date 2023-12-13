@@ -11,20 +11,48 @@ const styles = () => ({
   legend: {
     // marginBottom: '10px',
     padding: '0px 8px',
+    display: 'flex',
+    gap: '8px',
   },
   legendIcon: {
-    marginRight: '10px',
+  },
+  groupText: {
+    fontFamily: 'Inter',
+    fontWeight: '400',
+    fontSize: '14px',
+    color: '#444444',
+  },
+  countText: {
+    fontFamily: 'Inter',
+    fontWeight: '700',
+    fontSize: '14px',
+    color: '#444444',
   },
   tooltipWrapper: {
     backgroundColor: '#fff',
     padding: '10px',
     border: '1px solid #ccc',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    display: 'flex',
+    gap: '4px',
   },
   container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  groupTooltipText: {
+    fontFamily: 'Inter',
+    fontWeight: 400,
+    fontSize: '13px',
+    color: '#444444',
+  },
+  countTooltipText: {
+    fontFamily: 'Inter',
+    fontWeight: 700,
+    fontSize: '13px',
+    color: '#444444',
+
   },
 });
 
@@ -40,8 +68,8 @@ const BarChartV2 = ({
 
       return (
         <div className={classes.tooltipWrapper}>
-          <p>{`Group: ${data.group}`}</p>
-          <p>{`Count: ${data.count}`}</p>
+          <p className={classes.groupTooltipText}>{`${data.group},`}</p>
+          <p className={classes.countTooltipText}>{`${data.count}`}</p>
         </div>
       );
     }
@@ -65,9 +93,11 @@ const BarChartV2 = ({
           <span className={classes.legendIcon} style={{ color: colors[index % colors.length] }}>
             ■
           </span>
-          {entry.group}
+          <div className={classes.groupText}>
+            {entry.group}
+          </div>
           {' '}
-          {entry.count}
+          <div className={classes.countText}>{entry.count}</div>
         </div>
       ))}
     </div>
@@ -86,9 +116,9 @@ const BarChartV2 = ({
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="group" tick={false} label={xAxisLabel} />
+        <XAxis dataKey="group" tick={false} label={{ value: xAxisLabel, style: { fontFamily: 'Inter', fontWeight: '500', color: '#444444' } }} />
         <YAxis label={{
-          value: yAxisLabel, angle: -90, position: 'insideLeft', offset: 10,
+          value: yAxisLabel, angle: -90, position: 'insideLeft', offset: 10, style: { fontFamily: 'Inter', fontWeight: '500', color: '#444444' },
         }}
         />
         <Tooltip content={<CustomTooltip />} />

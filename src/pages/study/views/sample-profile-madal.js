@@ -11,14 +11,14 @@ const onChange = (key) => {
   noop(key);
 };
 
-const generateLabel = (key) => {
+const generateLabel = (key, classes) => {
   switch (key) {
     case 0:
-      return 'Site';
+      return <div className={classes.tabText}>Site</div>;
     case 1:
-      return 'Type';
+      return <div className={classes.tabText}>Type</div>;
     case 2:
-      return 'Pathology';
+      return <div className={classes.tabText}>Pathology</div>;
     default:
       return undefined;
   }
@@ -54,7 +54,7 @@ const SampleProfileModal = ({
 
   const items = sampleProfile?.tabs?.map((item, index) => ({
     key: index,
-    label: generateLabel(index),
+    label: generateLabel(index, classes),
     children: (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div className={classes.headerButton}>
@@ -90,7 +90,7 @@ const SampleProfileModal = ({
           <div
             className={classes.titleWrapper}
           >
-            <div>{`Sample Profiles for the ${studyCode} study`}</div>
+            <div className={classes.titleText}>{`Sample Profiles for the ${studyCode} study`}</div>
             <div
               className={classes.modalTitleDivider}
             />
@@ -134,11 +134,21 @@ export default withStyles((theme) => ({
     color: '#DC762F',
     textDecoration: 'underline',
     cursor: 'pointer',
+    marginLeft: '45px',
+    fontFamily: 'Open Sans',
+    fontWeight: '600',
+    fontSize: '16px',
   },
   titleWrapper: {
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
+  },
+  titleText: {
+    fontFamily: 'Lato',
+    fontWeight: '700',
+    fontSize: '17px',
+    color: '#4D6787',
   },
   modalTitleDivider: {
     borderTop: '1px solid #d1dbe0',
@@ -166,7 +176,7 @@ export default withStyles((theme) => ({
     },
   },
   headerButtonLinkNumber: {
-    fontFamily: 'sans-serif',
+    fontFamily: 'Roboto',
     fontSize: '13px',
     paddingBottom: '3px',
     margin: '0',
@@ -174,12 +184,18 @@ export default withStyles((theme) => ({
     fontWeight: '900',
     marginRight: '4px',
   },
+  tabText: {
+    fontFamily: 'Roboto',
+    fontWeight: 500,
+    fontSize: '14px',
+    color: '#000',
+  },
   headerButtonLinkText: {
-    fontFamily: theme.custom.fontFamilySans,
+    fontFamily: 'Roboto',
     color: '#0B3556',
     fontSize: '13px',
     fontStyle: 'normal',
-    fontWeight: '400',
+    fontWeight: '900',
     lineHeight: '14px',
     letterSpacing: '0.15px',
   },

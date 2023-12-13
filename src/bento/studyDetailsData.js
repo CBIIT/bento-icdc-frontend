@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import React from 'react';
 import {
   cellTypes,
   dataFormatTypes,
@@ -23,21 +24,27 @@ export const embargoFileIcon = 'https://raw.githubusercontent.com/CBIIT/datacomm
 export const embargoHeaderIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-embargo-study-header.svg';
 export const headerIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg';
 export const externalIcon = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/cart_ExternalLink.svg';
+const sampleProfileTabTextStyle = {
+  fontFamily: 'Roboto',
+  fontWeight: '500',
+  fontSize: '14px',
+  color: '#000000',
+};
 export const sampleProfile = {
   tabs: [
     {
       index: 0,
-      label: 'SITE',
+      label: <div style={sampleProfileTabTextStyle}>SITE</div>,
       value: 'studySampleSiteCount',
     },
     {
       index: 1,
-      label: 'TYPE',
+      label: <div style={sampleProfileTabTextStyle}>TYPE</div>,
       value: 'studySampleTypeCount',
     },
     {
       index: 2,
-      label: 'PATHOLOGY',
+      label: <div style={sampleProfileTabTextStyle}>PATHOLOGY</div>,
       value: 'studySamplePathologyCount',
     },
   ],
@@ -52,7 +59,10 @@ export const argumentConfiguration = {
   size: 12,
   title: {
     text: 'Sample site',
-    size: 12,
+    size: 14,
+    family: 'Inter',
+    weight: '500',
+    color: '#000000',
   },
   label: {
     size: 20,
@@ -66,7 +76,10 @@ export const valueConfiguration = {
   allowDecimals: false,
   title: {
     text: 'Sample count',
-    size: 12,
+    size: 14,
+    family: 'Inter',
+    weight: '500',
+    color: '#000000',
   },
   chartGrid: {
     visible: false,
