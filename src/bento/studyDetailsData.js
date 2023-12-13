@@ -51,7 +51,8 @@ export const argumentConfiguration = {
   position: 'inside',
   size: 12,
   title: {
-    text: '',
+    text: 'Sample site',
+    size: 12,
   },
   label: {
     size: 20,

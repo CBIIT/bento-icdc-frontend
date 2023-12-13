@@ -44,7 +44,6 @@ class BarChart extends PureComponent {
     }
     // update data
     const { data } = this.props;
-    console.log('deets-->', data)
     this.state = { ...this.state, ...properties, data };
   }
 
@@ -139,7 +138,7 @@ class BarChart extends PureComponent {
           </CartToolTip>
           )}
 
-          <Legend visible />
+          {/*<Legend visible />*/}
         </Chart>
       </>
     );

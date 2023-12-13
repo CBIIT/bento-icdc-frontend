@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Modal, Tabs } from 'antd';
+import { Modal, Tabs } from 'antd';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core';
+import { noop } from 'antd/es/_util/warning';
 import { BarChartV2 } from '../../../components/BarChartV2';
+import useDashboardTabs from '../../dashboard/components/dashboard-tabs-store';
+import { navigatedToDashboard } from '../../../utils/utils';
 
 const onChange = (key) => {
-  console.log(key);
+  noop(key);
 };
 
 const generateLabel = (key) => {
@@ -20,9 +25,14 @@ const generateLabel = (key) => {
 };
 
 const palette = ['#62beeb', '#1651ea', '#a1df71', '#72d1d5', '#d98548'];
+const modalWidth = 1000;
 
-const SampleProfileModal = ({ sampleProfile, data, studyCode }) => {
+const SampleProfileModal = ({
+  sampleProfile, data, studyCode, classes, accessionId,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [, actions] = useDashboardTabs();
+  const filterStudy = `${studyCode} (${accessionId})`;
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -36,42 +46,142 @@ const SampleProfileModal = ({ sampleProfile, data, studyCode }) => {
     setIsModalOpen(false);
   };
 
+  const linkToDashboard = () => {
+    navigatedToDashboard(filterStudy, 'Samples');
+    setIsModalOpen(false);
+    actions.changeCurrentTab(1);
+  };
+
   const items = sampleProfile?.tabs?.map((item, index) => ({
     key: index,
     label: generateLabel(index),
     children: (
-      <div>
-        <BarChartV2 chartData={data[item.value]} palette={palette} />
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className={classes.headerButton}>
+          <span className={classes.headerButtonLinkSpan}>
+            <Link
+              className={classes.headerButtonLink}
+              to={(location) => ({ ...location, pathname: '/explore' })}
+              onClick={() => linkToDashboard()}
+            >
+              <div className={classes.headerButtonLinkNumber}>
+                {data.sampleCountOfStudy}
+              </div>
+              <span className={classes.headerButtonLinkText}>Associated Samples</span>
+            </Link>
+          </span>
+        </div>
+
+        <BarChartV2 chartData={data[item.value]} palette={palette} yAxisLabel="Sample count" xAxisLabel="Sample site" />
       </div>
     ),
   }));
 
-  console.log('items', items);
-
   return (
     <>
       <div
-        style={{
-          color: '#DC762F',
-          textDecoration: 'underline',
-          cursor: 'pointer',
-        }}
+        className={classes.triggerButton}
         onClick={showModal}
       >
         Open Expanded View
       </div>
       <Modal
-        title={`Sample Profiles for the ${studyCode} study`}
+        title={(
+          <div
+            className={classes.titleWrapper}
+          >
+            <div>{`Sample Profiles for the ${studyCode} study`}</div>
+            <div
+              className={classes.modalTitleDivider}
+            />
+          </div>
+)}
         open={isModalOpen}
-        width={1000}
+        width={modalWidth}
         onOk={handleOk}
         zIndex={2000}
         onCancel={handleCancel}
+        footer={[]}
       >
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+        <div className={classes.spacer} />
+        <div>
+          <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+        </div>
       </Modal>
     </>
   );
 };
 
-export default SampleProfileModal;
+export default withStyles((theme) => ({
+  headerButton: {
+    fontFamily: theme.custom.fontFamilySans,
+    border: '3px solid #81a6b9',
+    marginTop: '15px',
+    // float: 'right',
+    width: '220px',
+    height: '35px',
+    textAlign: 'center',
+    background: '#f6f4f4',
+    padding: '4px 10px 4px 5px',
+    alignSelf: 'end',
+    position: 'relative',
+    bottom: '90px',
+  },
+  spacer: {
+    height: '30px',
+  },
+  triggerButton: {
+    color: '#DC762F',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+  },
+  titleWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+  },
+  modalTitleDivider: {
+    borderTop: '1px solid #d1dbe0',
+    position: 'relative',
+    width: `${modalWidth}px`,
+    right: '24px',
+  },
+  headerButtonLinkSpan: {
+    fontFamily: theme.custom.fontFamilySans,
+    width: '200px',
+    fontSize: '13px',
+    display: 'inherit',
+    height: '15px',
+    marginTop: '-2px',
+  },
+  headerButtonLink: {
+    textDecoration: 'none',
+    lineHeight: '14px',
+    fontWeight: 'bold',
+    position: 'relative',
+    top: '2px',
+    color: '#dc762f',
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
+  headerButtonLinkNumber: {
+    fontFamily: 'sans-serif',
+    fontSize: '13px',
+    paddingBottom: '3px',
+    margin: '0',
+    display: 'inherit',
+    fontWeight: '900',
+    marginRight: '4px',
+  },
+  headerButtonLinkText: {
+    fontFamily: theme.custom.fontFamilySans,
+    color: '#0B3556',
+    fontSize: '13px',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    lineHeight: '14px',
+    letterSpacing: '0.15px',
+  },
+
+}), { withTheme: true })(SampleProfileModal);

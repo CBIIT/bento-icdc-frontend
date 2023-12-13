@@ -10,14 +10,9 @@ import {
   customSorting,
   studyDisposition,
 } from '../../utils';
-import {
-  // eslint-disable-next-line no-unused-vars
-  externalIcon,
-} from '../../../../bento/studyDetailsData';
+
 import SampleProfile from '../SampleProfile';
 import OverviewThemeProvider from './overviewThemeConfig';
-// eslint-disable-next-line no-unused-vars
-import { ToolTip as Tooltip } from '../../../../bento-core';
 
 const Overview = ({
   classes,
