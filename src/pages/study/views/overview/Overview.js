@@ -347,7 +347,7 @@ const styles = (theme) => ({
   },
   detailContainerRight: {
     padding: '32px 20px 5px 10px',
-    maxHeight: '500px',
+    maxHeight: '505px',
     overflowY: 'auto',
     overflowX: 'hidden',
     width: 'calc(100% + 8px)',

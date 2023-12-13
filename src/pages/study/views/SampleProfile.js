@@ -158,7 +158,7 @@ const styles = (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '8px',
+    // gap: '8px',
   },
   container: {
     fontFamily: 'Raleway, sans-serif',
