@@ -22,7 +22,7 @@ const lightenRate = 7.5;
 const darkenRate = 15;
 const tableHeaderBorder = '#42779A 3px solid';
 const tableHeaderFontColor = '#13344A';
-const tableFontFamily = "'Lato Regular','Raleway', sans-serif";
+const tableFontFamily = "'Lato','Raleway', sans-serif";
 const white = '#FFFFFF';
 
 export default {
@@ -33,7 +33,7 @@ export default {
     cardBackGround: '#f0f6f8',
     fontFamilySans: '"Open Sans", sans-serif',
     footorBackground: '#325068',
-    fontFamily: 'Lato,"Open Sans", sans-serif',
+    fontFamily: "'Lato','Open Sans', sans-serif",
     fontFamilyRaleway: "'Raleway', sans-serif",
     drawerWidth: '240px',
     widgetDivider: '#E2E7EC',

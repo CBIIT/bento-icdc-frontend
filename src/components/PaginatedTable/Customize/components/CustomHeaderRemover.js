@@ -36,7 +36,7 @@ const styles = () => ({
     fontSize: '11pt',
     borderTop: '#024466 3px solid',
     fontStyle: 'normal',
-    fontFamily: "'Lato Regular','Raleway', sans-serif",
+    fontFamily: "'Lato','Raleway', sans-serif",
     fontWeight: 'bold',
     paddingRight: '-15px',
     borderBottom: '#024466 3px solid',

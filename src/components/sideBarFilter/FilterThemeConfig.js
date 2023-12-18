@@ -23,7 +23,7 @@ const theme = {
           fontSize: '9px',
           marginTop: '4px',
           minHeight: '25px',
-          fontFamily: 'Lato, Open Sans, sans-serif',
+          fontFamily: "'Lato', 'Open Sans', sans-serif",
           marginLeft: '16px',
           borderRadius: '100px',
           textTransform: 'none',
