@@ -1,4 +1,4 @@
-import { clearAllAndSelectFacet } from '../../bento-core';
+import { clearAllAndSelectFacet, updateAutocompleteData, updateUploadData } from '../../bento-core';
 import store from '../../store';
 import client from '../../utils/graphqlClient';
 import {
@@ -8,11 +8,31 @@ import {
 export const getFacetValues = (facet, facetValue) => ({ [facet]: { [facetValue]: true } });
 
 /**
-* set filter item from Arm/Program details page (NUMBER OF CASES: button)
+* set active filter base on the path param
 */
 export const onClearAllAndSelectFacetValue = (facet, facetValue) => {
   const filterValue = getFacetValues(facet, facetValue);
   store.dispatch(clearAllAndSelectFacet(filterValue));
+};
+
+export const setActiveFilterByPathQuery = (match) => {
+  const query = decodeURI(match.params.filterQuery || '');
+  const filterObject = JSON.parse(query);
+  const { autocomplete = [], upload = [] } = filterObject;
+  const activeFilterValues = Object.keys(filterObject).reduce((curr, key) => {
+    const activeFilters = filterObject[key].reduce((value, item) => ({
+      ...value,
+      [item]: true,
+    }), {});
+
+    return {
+      ...curr,
+      [key]: activeFilters,
+    };
+  }, {});
+  store.dispatch(clearAllAndSelectFacet(activeFilterValues));
+  store.dispatch(updateAutocompleteData(autocomplete));
+  store.dispatch(updateUploadData(upload));
 };
 
 /**

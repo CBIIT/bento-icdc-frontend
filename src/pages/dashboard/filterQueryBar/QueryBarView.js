@@ -44,7 +44,7 @@ const QueryBarView = ({
     return {
       ...config,
       items: statusReducer[facet],
-      data: data[config.apiForFiltering],
+      data: data[config?.apiForFiltering],
     };
   });
   mappedFilterState.sort((a, b) => (
@@ -55,6 +55,8 @@ const QueryBarView = ({
       maxItems: 2,
       displayAllActiveFilters: true,
       count: 'count',
+      rootPath: 'http:localhost:3000/#/explore/',
+      viewQueryURL: true,
     },
     functions: {
       clearAll: () => {
@@ -92,7 +94,7 @@ const QueryBarView = ({
       },
     },
     customStyles,
-  }), [localFind]);
+  }), []);
 
   return (
     <ThemeProvider theme={createTheme(theme)}>

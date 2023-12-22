@@ -5,11 +5,13 @@ import { CircularProgress } from '@material-ui/core';
 import { getFilters } from '../../bento-core';
 import DashboardView from './DashboardView';
 import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';
+import { setActiveFilterByPathQuery } from '../../components/sideBarFilter/BentoFilterUtils';
 
 const getDashData = (states) => {
   const {
     filterState,
-    localFindUpload, localFindAutocomplete,
+    localFindUpload,
+    localFindAutocomplete,
   } = states;
 
   const client = useApolloClient();
@@ -46,6 +48,13 @@ const getDashData = (states) => {
 };
 
 const DashTemplateController = ((props) => {
+  const { match, history } = props;
+  if (match.params.filterQuery) {
+    setActiveFilterByPathQuery(match);
+    const redirectUrl = '/explore';
+    history.push(redirectUrl);
+  }
+
   const {
     dashData,
     activeFilters,
