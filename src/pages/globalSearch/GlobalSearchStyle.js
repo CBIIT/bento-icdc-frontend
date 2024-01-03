@@ -146,7 +146,7 @@ const styles = () => ({
 
   root: {
     '& .MuiAutocomplete-listbox': {
-      borderRadius: '4px',
+      borderRadius: '9px',
       border: '2px solid #044A84',
       fontFamily: 'Lato',
       fontSize: '18px',
