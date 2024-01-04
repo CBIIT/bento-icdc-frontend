@@ -39,9 +39,6 @@ const styles = () => ({
       },
     },
   },
-  '& .Mui-selected': {
-    color: 'red',
-  },
   buttonRoot: {
     minWidth: '100px',
     padding: '6px, 28px',
@@ -143,10 +140,9 @@ const styles = () => ({
       },
     },
   },
-
   root: {
     '& .MuiAutocomplete-listbox': {
-      borderRadius: '9px',
+      borderRadius: '4px',
       border: '2px solid #044A84',
       fontFamily: 'Lato',
       fontSize: '18px',
@@ -156,7 +152,7 @@ const styles = () => ({
       background: '#fff',
       '& li': {
         // list item specific styling
-        border: '1px solid #D2D2D2',
+        border: '1px solid #4A8ECB',
       },
       '& :hover': {
         color: 'white',
