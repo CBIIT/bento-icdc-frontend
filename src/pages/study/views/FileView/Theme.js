@@ -159,7 +159,7 @@ export const tblHeader = {
       color: '#13344A',
       position: 'relative',
       fontSize: '11pt',
-      fontFamily: 'Lato Regular,Raleway, sans-serif',
+      fontFamily: "'Lato','Raleway', sans-serif",
       fontWeight: 'bold',
       letterSpacing: '0.06em',
       textDecoration: 'none',

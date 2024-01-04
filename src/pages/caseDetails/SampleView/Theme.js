@@ -152,7 +152,7 @@ export const tblHeader = {
       color: '#13344A',
       position: 'relative',
       fontSize: '11pt',
-      fontFamily: 'Lato Regular,Raleway, sans-serif',
+      fontFamily: "'Lato', 'Raleway', sans-serif",
       fontWeight: 'bold',
       letterSpacing: '0.06em',
       textDecoration: 'none',
@@ -200,7 +200,7 @@ const tblBody = {
   MuiTypography: {
     body1: {
       fontSize: '10pt',
-      fontFamily: 'Open Sans, sans-serif',
+      fontFamily: "'Open Sans', sans-serif",
       fontWeight: '600',
       color: '#13344A',
       letterSpacing: '0.025em',
