@@ -36,7 +36,6 @@ const QueryBarView = ({
   classes,
 }) => {
   const dispatch = useDispatch();
-
   const sectionOrder = facetsConfig.map((v) => v.datafield);
   const mappedFilterState = Object.keys(statusReducer || {}).map((facet) => {
     const config = facetsConfig.find((configuration) => configuration.datafield === facet);
@@ -44,17 +43,18 @@ const QueryBarView = ({
     return {
       ...config,
       items: statusReducer[facet],
-      data: data[config.apiForFiltering],
+      data: data[config?.apiForFiltering],
     };
   });
   mappedFilterState.sort((a, b) => (
     sectionOrder.indexOf(a.datafield) - sectionOrder.indexOf(b.datafield)));
-
   const { QueryBar } = useCallback(QueryBarGenerator({
     config: {
       maxItems: 2,
       displayAllActiveFilters: true,
       count: 'count',
+      rootPath: `${window.location.href}/`,
+      viewQueryURL: true,
     },
     functions: {
       clearAll: () => {
@@ -92,7 +92,7 @@ const QueryBarView = ({
       },
     },
     customStyles,
-  }), [localFind]);
+  }), []);
 
   return (
     <ThemeProvider theme={createTheme(theme)}>

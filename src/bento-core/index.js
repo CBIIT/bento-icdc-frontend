@@ -48,6 +48,7 @@ import {
   SearchView,
   SearchBoxGenerator,
   UploadModalGenerator,
+  updateUploadData,
 } from '@bento-core/local-find';
 import StatsBar from '@bento-core/stats-bar';
 import { Tabs as BentoTabs } from '@bento-core/tab';
@@ -130,4 +131,5 @@ export {
   LocalFindReducerGenerator,
   resetUploadData,
   updateAutocompleteData,
+  updateUploadData,
 };
