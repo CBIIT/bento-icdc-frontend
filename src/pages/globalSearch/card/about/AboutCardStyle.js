@@ -10,7 +10,7 @@ const styles = () => ({
     fontSize: '13px',
   },
   propertyContainer: {
-    padding: '16px 16px 16px 0px',
+    padding: '16px 16px 16px 6px',
     borderBottom: '2px solid #E7EEF5',
   },
   cardTitle: {
@@ -35,6 +35,7 @@ const styles = () => ({
     letterSpacing: '0.9px',
     verticalAlign: 'middle',
     borderRadius: '4px',
+    marginLeft: '-6px',
   },
   title: {
     color: '#606060',

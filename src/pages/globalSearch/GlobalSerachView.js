@@ -226,6 +226,7 @@ const GlobalSearchView = ({
         name: 'All',
         field: 'all',
         classes: {
+          ...classes,
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
@@ -236,6 +237,7 @@ const GlobalSearchView = ({
         name: 'Program',
         field: 'programs',
         classes: {
+          ...classes,
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
@@ -246,6 +248,7 @@ const GlobalSearchView = ({
         name: 'Study',
         field: 'studies',
         classes: {
+          ...classes,
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
@@ -256,6 +259,7 @@ const GlobalSearchView = ({
         name: 'Case',
         field: 'cases',
         classes: {
+          ...classes,
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
@@ -266,6 +270,7 @@ const GlobalSearchView = ({
         name: 'Sample',
         field: 'samples',
         classes: {
+          ...classes,
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
@@ -276,6 +281,7 @@ const GlobalSearchView = ({
         name: 'File',
         field: 'files',
         classes: {
+          ...classes,
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
@@ -286,6 +292,7 @@ const GlobalSearchView = ({
         name: 'Data Model',
         field: 'model',
         classes: {
+          ...classes,
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
@@ -296,6 +303,7 @@ const GlobalSearchView = ({
         name: 'About',
         field: 'about_page',
         classes: {
+          ...classes,
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
@@ -335,7 +343,7 @@ const GlobalSearchView = ({
       </div>
       <div className={classes.bodyContainer}>
         <Box sx={{ width: '100%', typography: 'body1' }}>
-          <SearchResults searchText={searchText} />
+          <SearchResults searchText={searchText} classes={classes} />
         </Box>
       </div>
     </div>

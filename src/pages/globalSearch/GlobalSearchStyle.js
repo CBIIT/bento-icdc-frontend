@@ -17,7 +17,7 @@ const styles = () => ({
   },
   tabContainter: {
     display: 'flex',
-    maxWidth: '880px',
+    maxWidth: '1180px',
     margin: '0 auto',
   },
   tabColor: {
@@ -39,13 +39,14 @@ const styles = () => ({
       },
     },
   },
-  '& .Mui-selected': {
-    color: 'red',
-  },
   buttonRoot: {
     minWidth: '100px',
     padding: '6px, 28px',
+    marginRight: '30px',
     textTransform: 'none',
+    '&:last-child': {
+      marginRight: '0px',
+    },
   },
   notchedOutline: {
 
@@ -139,7 +140,6 @@ const styles = () => ({
       },
     },
   },
-
   root: {
     '& .MuiAutocomplete-listbox': {
       borderRadius: '4px',
@@ -152,7 +152,7 @@ const styles = () => ({
       background: '#fff',
       '& li': {
         // list item specific styling
-        border: '1px solid #D2D2D2',
+        border: '1px solid #4A8ECB',
       },
       '& :hover': {
         color: 'white',
@@ -181,6 +181,19 @@ const styles = () => ({
   clearIcon: {
     height: '18px',
     margin: '-8px 4px 0px 19px',
+  },
+  totalCount: {
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontSize: '20px',
+    fontWeight: '300',
+    lineHeight: '14px',
+  },
+  totalResults: {
+    fontWeight: '400',
+    fontFamily: 'Open Sans',
+    fontSize: '20px',
+    lineHeight: '20px',
+    margin: '16px auto 30px auto',
   },
 });
 
