@@ -5,7 +5,7 @@ export default () => ({
   content: {
     margin: 'auto',
     display: 'flex',
-    paddingTop: '30px',
+    paddingTop: '75px',
   },
   sideBar: {
     width: '250px',
