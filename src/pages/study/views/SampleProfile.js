@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Grid,
-  withStyles,
-  Tabs,
-  Tab,
-} from '@material-ui/core';
+import { Grid, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { Tabs } from 'antd'; // Importing Tabs from antd
 import BarChart from '../../../components/BarCharts';
 import {
   sampleProfile,
@@ -16,14 +12,19 @@ import {
 import TabPanel from '../../../components/Tab/TabPanel';
 import { navigatedToDashboard } from '../../../utils/utils';
 import useDashboardTabs from '../../dashboard/components/dashboard-tabs-store';
+import SampleProfileModal from './sample-profile-madal';
+
+const { TabPane } = Tabs;
 
 const tooltipContent = ({ argument, originalValue }) => (
   <>
     <div>
       <span
         style={{
-          fontWeight: 600,
-          color: '#1C2023',
+          fontFamily: 'Inter',
+          fontWeight: 400,
+          fontSize: '13px',
+          color: '#444444',
         }}
       >
         {argument}
@@ -31,8 +32,10 @@ const tooltipContent = ({ argument, originalValue }) => (
       </span>
       <span
         style={{
-          color: '#000000',
-          fontWeight: 900,
+          fontFamily: 'Inter',
+          fontWeight: 700,
+          fontSize: '13px',
+          color: '#444444',
         }}
       >
         {originalValue}
@@ -46,9 +49,11 @@ const SampleProfile = ({ classes, data }) => {
   const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
   const filterStudy = `${studyCode} (${accessionId})`;
   const [currentTab, setCurrentTab] = useState(0);
-  const handleTabChange = (event, value) => {
-    setCurrentTab(value);
+
+  const handleTabChange = (activeKey) => {
+    setCurrentTab(parseInt(activeKey, 10));
   };
+
   const tabCount = sampleProfile.tabs.filter((tab) => (data[tab.value]
     && data[tab.value].length > 0));
 
@@ -59,27 +64,13 @@ const SampleProfile = ({ classes, data }) => {
 
   const tabItem = (items) => (
     <Tabs
-      value={currentTab}
+      activeKey={String(currentTab)}
       onChange={handleTabChange}
       className={classes.tabs}
-      textColor="primary"
-      TabIndicatorProps={{
-        style: {
-          backgroundColor: '#ffffff',
-        },
-      }}
     >
-      { items.map((item, index) => (
-        <Tab
-          className={item.value}
-          classes={{
-            root: (item.value === 'studySamplePathologyCount') ? classes.tab2 : classes.tab,
-            labelContainer: classes.labelContainer,
-          }}
-          label={item.label}
-          key={index}
-        />
-      )) }
+      {items.map((item, index) => (
+        <TabPane tab={item.label} key={String(index)} />
+      ))}
     </Tabs>
   );
 
@@ -100,16 +91,10 @@ const SampleProfile = ({ classes, data }) => {
                   to={(location) => ({ ...location, pathname: '/explore' })}
                   onClick={() => linkToDashboard()}
                 >
-                  {' '}
-                  <span className={classes.headerButtonLinkText}> View </span>
-                  <span className={classes.headerButtonLinkNumber}>
-                    {' '}
-                    {' '}
+                  <div className={classes.headerButtonLinkNumber}>
                     {data.sampleCountOfStudy}
-                    {' '}
-                    {' '}
-                  </span>
-                  <span className={classes.headerButtonLinkText}>Samples</span>
+                  </div>
+                  <span className={classes.headerButtonLinkText}>Associated Samples</span>
                 </Link>
               </span>
             </div>
@@ -119,8 +104,8 @@ const SampleProfile = ({ classes, data }) => {
           </Grid>
           <Grid container className={classes.detailContainerItems}>
             { sampleProfile.tabs.map((item, index) => (
-              <>
-                <TabPanel index={item.index} value={currentTab} key={index}>
+              <TabPanel index={item.index} value={currentTab} key={index}>
+                <div className={classes.barChartWrapper}>
                   <BarChart
                     data={data[item.value]}
                     palette={palette}
@@ -128,8 +113,21 @@ const SampleProfile = ({ classes, data }) => {
                     argument={argumentConfiguration}
                     value={valueConfiguration}
                   />
-                </TabPanel>
-              </>
+                  <SampleProfileModal
+                    sampleProfile={sampleProfile}
+                    data={data}
+                    studyCode={studyCode}
+                    accessionId={accessionId}
+                    barChartObject={{
+                      data: data[item.value],
+                      palette,
+                      tooltipContent,
+                      argument: argumentConfiguration,
+                      value: valueConfiguration,
+                    }}
+                  />
+                </div>
+              </TabPanel>
             ))}
           </Grid>
         </>
@@ -160,6 +158,12 @@ const styles = (theme) => ({
   detailContainerItems: {
     paddingTop: '7px',
   },
+  barChartWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    // gap: '8px',
+  },
   container: {
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '33px',
@@ -189,45 +193,57 @@ const styles = (theme) => ({
     fontWeight: '700',
     paddingLeft: '5px',
   },
+
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,
+    border: '3px solid #81a6b9',
     marginTop: '15px',
-    float: 'right',
-    height: '33px',
-    background: '#F6F4F4',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-
+    // float: 'right',
+    width: '220px',
+    height: '35px',
+    textAlign: 'center',
+    background: '#f6f4f4',
+    padding: '4px 10px 4px 5px',
+    // alignSelf: 'end',
+    // position: 'relative',
+    // bottom: '90px'
   },
   headerButtonLinkSpan: {
     fontFamily: theme.custom.fontFamilySans,
-    height: '50px',
-    background: '#F5F3EE',
     width: '200px',
-    fontSize: '14px',
-  },
-  headerButtonLinkText: {
-    fontFamily: theme.custom.fontFamilySans,
-    color: '#0B3556',
-  },
-  headerButtonLinkNumber: {
-    fontFamily: theme.custom.fontFamilySans,
-    borderBottom: 'solid',
-    lineHeight: '30px',
-    paddingBottom: '3px',
-    margin: '0 4px',
-    fontSize: '14px',
-    color: '#dc762f',
+    fontSize: '13px',
+    display: 'inherit',
+    height: '15px',
+    marginTop: '-2px',
   },
   headerButtonLink: {
     textDecoration: 'none',
     lineHeight: '14px',
-    fontSize: '12px',
     fontWeight: 'bold',
-    color: '#0296c9',
+    position: 'relative',
+    top: '2px',
+    color: '#dc762f',
     '&:hover': {
-      textDecoration: 'underline',
+      textDecoration: 'none',
     },
+  },
+  headerButtonLinkNumber: {
+    fontFamily: 'Roboto',
+    fontSize: '13px',
+    paddingBottom: '3px',
+    margin: '0',
+    display: 'inherit',
+    fontWeight: '900',
+    marginRight: '4px',
+  },
+  headerButtonLinkText: {
+    fontFamily: 'Roboto',
+    color: '#0B3556',
+    fontSize: '13px',
+    fontStyle: 'normal',
+    fontWeight: '900',
+    lineHeight: '14px',
+    letterSpacing: '0.15px',
   },
   tabs: {
     '& .Mui-selected': {

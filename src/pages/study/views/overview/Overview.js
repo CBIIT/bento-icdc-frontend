@@ -10,14 +10,9 @@ import {
   customSorting,
   studyDisposition,
 } from '../../utils';
-import {
-  // eslint-disable-next-line no-unused-vars
-  externalIcon,
-} from '../../../../bento/studyDetailsData';
+
 import SampleProfile from '../SampleProfile';
 import OverviewThemeProvider from './overviewThemeConfig';
-// eslint-disable-next-line no-unused-vars
-import { ToolTip as Tooltip } from '../../../../bento-core';
 
 const Overview = ({
   classes,
@@ -352,7 +347,7 @@ const styles = (theme) => ({
   },
   detailContainerRight: {
     padding: '32px 20px 5px 10px',
-    maxHeight: '500px',
+    maxHeight: '505px',
     overflowY: 'auto',
     overflowX: 'hidden',
     width: 'calc(100% + 8px)',
