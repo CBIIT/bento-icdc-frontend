@@ -36,10 +36,12 @@ import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDe
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
 import Styles from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
-import SupportingData from './views/supporting-data/supportingData';
+// import SupportingData from './views/supporting-data/supportingData';
+import SupportingData from './views/supporting-data/SupportingDataView';
 import env from '../../utils/env';
 import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
-import ClinicalData from './views/clinical-data/clinicalData';
+// import ClinicalData from './views/clinical-data/clinicalData';
+import ClinicalData from './views/clinical-data/ClinicalDataController';
 
 function hasPositiveValue(arr) {
   return arr.some((obj) => Object.values(obj).some((value) => value > 0));
@@ -75,6 +77,7 @@ const StudyDetailView = ({ classes, data }) => {
   });
 
   const studyData = data.study[0];
+  console.log(data);
   const { clinical_study_designation: studyCode } = studyData;
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
@@ -371,9 +374,13 @@ const StudyDetailView = ({ classes, data }) => {
                 case 'CLINICAL DATA': return (
                   <TabPanel value={currentTab} index={index}>
                     {
-                              hasClinicalData
+                      (hasClinicalData && currentTab === index)
                         && (
                         <ClinicalData
+                          dataCount={{
+                            caseCount: clinicalDataNodeCaseCounts,
+                            nodeCount: clinicalDataNodeCounts,
+                          }}
                           data={processedClinicalDataTabData}
                           csvDownloadFlags={clinicalDataDownloadFlags}
                           studyCode={studyCode}
@@ -386,13 +393,13 @@ const StudyDetailView = ({ classes, data }) => {
                 case 'SUPPORTING DATA': return (
                   <TabPanel value={currentTab} index={index}>
                     {
-                              currentStudy && (
-                              <SupportingData
-                                data={currentStudy}
-                                isLoading={isLoading}
-                              />
-                              )
-                          }
+                      currentStudy && (
+                        <SupportingData
+                          data={currentStudy}
+                          isLoading={isLoading}
+                        />
+                      )
+                    }
                   </TabPanel>
                 );
                 default:

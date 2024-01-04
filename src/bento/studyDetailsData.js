@@ -1256,3 +1256,327 @@ export const GET_OFF_TREATMENT_CLINICAL_DATA = gql`
     }
   }
 `;
+
+export const GET_CILICAL_DATA_OF_STUDY = gql`
+  query studyClinicalData($study_code: String!) {
+    agentNodeData(study_code: $study_code) {
+      medication
+    }
+    cycleNodeData(study_code: $study_code) {
+        cycle_number
+        date_of_cycle_start
+        date_of_cycle_end
+        crf_id
+        case_id
+      }
+    visitNodeData(study_code: $study_code) {
+        inferred
+        visit_id
+        visit_date
+      }
+    priorTherapyNodeData(study_code: $study_code) {
+        date_of_first_dose
+        date_of_last_dose
+        agent_name
+        dose_schedule
+        total_dose
+        agent_units_of_measure
+        best_response_to_prior_therapy
+        nonresponse_therapy_type
+        prior_therapy_type
+        prior_steroid_exposure
+        number_of_prior_regimens_steroid
+        total_number_of_doses_steroid
+        date_of_last_dose_steroid
+        prior_nsaid_exposure
+        number_of_prior_regimens_nsaid
+        total_number_of_doses_nsaid
+        date_of_last_dose_nsaid
+        tx_loc_geo_loc_ind_nsaid
+        min_rsdl_dz_tx_ind_nsaids_treatment_pe
+        therapy_type
+        any_therapy
+        number_of_prior_regimens_any_therapy
+        total_number_of_doses_any_therapy
+        date_of_last_dose_any_therapy
+        treatment_performed_at_site
+        treatment_performed_in_minimal_residual
+      }
+    priorSurgeryNodeData(study_code: $study_code) {
+        date_of_surgery
+        procedure
+        anatomical_site_of_surgery
+        surgical_finding
+        residual_disease
+        therapeutic_indicator
+      }
+    agentAdministrationNodeData(study_code: $study_code) {
+        document_number
+        medication
+        route_of_administration
+        medication_lot_number
+        medication_vial_id
+        medication_actual_units_of_measure
+        medication_duration
+        medication_units_of_measure
+        medication_actual_dose
+        phase
+        start_time
+        stop_time
+        dose_level
+        dose_units_of_measure
+        date_of_missed_dose
+        medication_missed_dose
+        missed_dose_amount
+        missed_dose_units_of_measure
+        medication_course_number
+        comment
+      }
+    physicalExamNodeData(study_code: $study_code) {
+        date_of_examination
+        pe_comment
+        body_system
+        case_id
+        pe_finding
+      }
+     vitalSignsNodeData(study_code: $study_code) {
+        body_temperature_unit
+        systolic_bp_unit
+        respiration_pattern
+        pulse_ox_original_unit
+        body_surface_area
+        patient_weight_original_unit
+        body_surface_area_unit
+        systolic_bp_original_unit
+        body_surface_area_original_unit
+        patient_weight
+        patient_weight_unit
+        case_id
+        time_of_observation
+        pulse_original_unit
+        respiration_rate_original_unit
+        body_temperature_original_unit
+        body_surface_area_original
+        pulse_original
+        date_of_vital_signs
+        pulse_ox_unit
+        modified_ecog
+        respiration_rate_unit
+        patient_weight_original
+        pulse_unit
+        body_temperature
+        pulse
+        body_temperature_original
+      }
+    adverseEventNodeData(study_code: $study_code) {
+        dose_limiting_toxicity
+        unexpected_adverse_event
+        date_of_onset
+        adverse_event_grade_description
+        existing_adverse_event
+        ongoing_adverse_event
+        date_of_resolution
+        attribution_to_ind
+        attribution_to_research
+        adverse_event_term
+        attribution_to_commercial
+        adverse_event_agent_dose
+        attribution_to_other
+        adverse_event_agent_name
+        attribution_to_disease
+        adverse_event_description
+        adverse_event_grade
+        other_attribution_description
+      }
+    diseaseExtentNodeData(study_code: $study_code) {
+        lesion_number
+        lesion_site
+        lesion_description
+        previously_irradiated
+        previously_treated
+        measurable_lesion
+        target_lesion
+        date_of_evaluation
+        measured_how
+        longest_measurement
+        evaluation_number
+        evaluation_code
+      }
+    followUpNodeData(study_code: $study_code) {
+        document_number
+        date_of_last_contact
+        patient_status
+        explain_unknown_status
+        contact_type
+        treatment_since_last_contact
+        physical_exam_performed
+        physical_exam_changes
+      }
+    offStudyNodeData(study_code: $study_code) {
+        document_number
+        date_off_study
+        reason_off_study
+        date_of_disease_progression
+        date_off_treatment
+        best_resp_vet_tx_tp_secondary_response
+        date_last_medication_administration
+        best_resp_vet_tx_tp_best_response
+        date_of_best_response
+      }
+    offTreatmentNodeData(study_code: $study_code) {
+        document_number
+        date_off_treatment
+        reason_off_treatment
+        date_of_disease_progression
+        best_resp_vet_tx_tp_secondary_response
+        date_last_medication_administration
+        best_resp_vet_tx_tp_best_response
+        date_of_best_response
+      }
+  }
+`;
+
+export const table = {
+  title: 'Imaging Data Commons (IDC)',
+  defaultSortField: 'dataNode',
+  // 'asc' or 'desc'
+  defaultSortDirection: 'asc',
+  columns: [
+    {
+      dataField: 'dataNode',
+      header: 'Clinical Data Nodes',
+      sort: 'asc',
+      display: true,
+      tooltipText: 'sort',
+    },
+    {
+      dataField: 'description',
+      header: 'Definition',
+      sort: 'asc',
+      display: true,
+      tooltipText: 'sort',
+    },
+    {
+      dataField: 'caseCount',
+      header: 'Case',
+      sort: 'asc',
+      display: true,
+      tooltipText: 'sort',
+      columnDefaultValues: {
+        0: ' ',
+      },
+    },
+    {
+      dataField: 'recordCount',
+      header: 'Records',
+      sort: 'asc',
+      display: true,
+      tooltipText: 'sort',
+      columnDefaultValues: {
+        0: ' ',
+      },
+    },
+    {
+      dataField: 'csvDownload',
+      header: 'CSV',
+      display: true,
+      cellType: cellTypes.CUSTOM_ELEM,
+    },
+  ],
+  rows: [
+    {
+      title: 'adverse event',
+      countKey: 'adverse_event',
+      csvDownload: 'adverseEventNodeData',
+      manifest: agentNodeMetadata,
+    },
+    {
+      title: 'agent',
+      countKey: 'agent',
+      csvDownload: 'agentNodeData',
+      manifest: agentNodeMetadata,
+    },
+    {
+      title: 'agent administration',
+      countKey: 'agent_administration',
+      csvDownload: 'agentAdministrationNodeData',
+      manifest: agentAdministrationNodeMetadata,
+    },
+    {
+      title: 'cycle',
+      countKey: 'cycle',
+      csvDownload: 'cycleNodeData',
+      manifest: cycleNodeMetadata,
+    },
+    {
+      title: 'disease extent',
+      countKey: 'disease_extent',
+      csvDownload: 'diseaseExtentNodeData',
+      manifest: diseaseExtentNodeMetadata,
+    },
+    {
+      title: 'follow up',
+      countKey: 'follow_up',
+      csvDownload: 'followUpNodeData',
+      manifest: followUpNodeMetadata,
+    },
+    {
+      title: 'lab exam',
+      countKey: 'lab_exam',
+      csvDownload: 'labExamNodeData',
+      manifest: labExamNodeMetadata,
+    },
+    {
+      title: 'off study',
+      countKey: 'off_study',
+      csvDownload: 'offStudyNodeData',
+      manifest: offStudyNodeMetadata,
+    },
+    {
+      title: 'off_treatment',
+      countKey: 'off_treatment',
+      csvDownload: 'offTreatmentNodeData',
+      manifest: offTreatmentNodeMetadata,
+    },
+    {
+      title: 'physical exam',
+      countKey: 'physical_exam',
+      csvDownload: 'physicalExamNodeData',
+      manifest: physicalExamNodeMetadata,
+    },
+    {
+      title: 'prior surgery',
+      countKey: 'prior_surgery',
+      csvDownload: 'priorSurgeryNodeData',
+      manifest: priorSurgeryNodeMetadata,
+    },
+    {
+      title: 'prior therapy',
+      countKey: 'prior_therapy',
+      csvDownload: 'priorTherapyNodeData',
+      manifest: priorTherapyNodeMetadata,
+    },
+    {
+      title: 'visit',
+      countKey: 'visit',
+      csvDownload: 'visitNodeData',
+      manifest: visitNodeMetadata,
+    },
+    {
+      title: 'vital signs',
+      countKey: 'vital_signs',
+      csvDownload: 'vitalSignsNodeData',
+      manifest: vitalSignsNodeMetadata,
+    },
+  ],
+  tableMsg: {
+    noMatch: 'Data unavailable at this time',
+  },
+};
+
+export const tableLayOut = [
+  {
+    container: 'paginatedTable',
+    paginatedTable: true,
+  },
+];

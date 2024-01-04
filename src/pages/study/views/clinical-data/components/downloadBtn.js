@@ -46,15 +46,17 @@ const DownloadBtn = ({ classes, loading, handleCSVDownload }) => (
 
 const styles = {
   downloadAllBtn: {
-    width: '165px',
-    fontSize: '11px',
+    width: '190px',
+    fontSize: '16px',
+    lineHeight: '16px',
     fontWeight: 400,
     fontStyle: 'normal',
     fontFamily: 'Lato',
-    background: '#0D71A3',
+    background: '#1A8CCB',
     color: '#FFF',
     border: '1px solid #000',
     borderRadius: '10px',
+    textTransform: 'capitalize',
   },
   tooltipText: {
     fontFamily: 'Nunito',
