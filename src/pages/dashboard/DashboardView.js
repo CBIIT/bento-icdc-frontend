@@ -38,7 +38,7 @@ const Dashboard = ({
         </div>
         <div className={classes.rightContent}>
           <div className={classes.widgetsContainer}>
-            <QueryBarView data={searchCases} />
+            <QueryBarView data={searchCases} classes={classes} />
             <WidgetView
               data={searchCases}
               activeFilters={activeFilters}
