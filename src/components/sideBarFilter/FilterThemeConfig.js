@@ -85,7 +85,7 @@ const theme = {
           paddingLeft: 0,
           '& div.sectionSummaryText': {
             marginLeft: '10px',
-            lineHeight: 0,
+            lineHeight: 1,
             color: '#323232',
             fontFamily: 'Raleway',
             fontSize: '13px',
@@ -316,13 +316,7 @@ const theme = {
   },
 };
 
-export default ({
-  children,
-}) => {
+export default ({ children }) => {
   const computedTheme = createTheme(theme);
-  return (
-    <ThemeProvider theme={computedTheme}>
-      {children}
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={computedTheme}>{children}</ThemeProvider>;
 };
