@@ -13,11 +13,12 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
       root: {
         color: '#13344A',
         position: 'relative',
-        fontSize: '11pt',
-        fontFamily: "'Lato','Raleway', sans-serif",
-        fontWeight: 'bold',
-        letterSpacing: '0.06em',
         textDecoration: 'none',
+        fontFamily: 'Nunito Sans',
+        fontSize: '18px',
+        fontWeight: '400',
+        lineHeight: '18px',
+        letterSpacing: '0em',
         '&:hover': {
           color: '#13344A',
         },
@@ -274,7 +275,6 @@ export const customTheme = {
 export const tblPgn = {
   MuiTablePagination: {
     root: {
-      background: '#f3f3f4',
       paddingRight: '43px',
       borderTop: '3px solid #004c73',
       paddingTop: '0',
@@ -337,9 +337,9 @@ const tblBody = {
   },
   MuiTableCell: {
     root: {
-      minHeight: '45px',
+      minHeight: '50px',
+      height: '50px',
       padding: '0px 5px 0px 5px',
-      // padding: '16px',
       color: '#004C73',
       borderBottom: 'none',
       '& a': {
@@ -353,8 +353,9 @@ const tblBody = {
         fontSize: '10pt',
         fontStyle: 'normal',
         fontFamily: 'Open Sans, sans-serif',
-        fontWeight: 'bold',
+        fontWeight: '400',
         letterSpacing: '0.025em',
+        padding: '18px 0px 18px 0px',
       },
     },
     paddingCheckbox: {
