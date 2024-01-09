@@ -317,6 +317,13 @@ const toolbar = {
       },
     },
   },
+  MuiTypography: {
+    body1: {
+      '&:after': {
+        content: '" to view in JBrowse"',
+      },
+    },
+  },
 };
 
 const tblBody = {
