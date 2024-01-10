@@ -28,16 +28,7 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
     },
     MuiTableCell: {
       root: {
-        paddingLeft: '5px',
-        paddingRight: '5px',
-        paddingTop: '5px',
-        paddingBottom: '5px',
-        '&.data_availability': {
-          textAlign: 'center',
-          fontSize: '16px',
-          fontWeight: '600',
-          padding: '0',
-        },
+        padding: '5px',
         '&.del_all_row': {
           padding: '0px 20px, 0px, 0px',
           width: '120px',
