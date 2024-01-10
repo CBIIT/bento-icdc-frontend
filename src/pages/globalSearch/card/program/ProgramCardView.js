@@ -49,7 +49,7 @@ const ProgramCard = ({
         </Grid>
         <Grid item xs={12}>
           <span className={classes.title}>
-            Page Link:
+            Program URL:
           </span>
           <span className={classes.contentLink}>
             <a target="_blank" rel="noreferrer" href={externalURL}>
