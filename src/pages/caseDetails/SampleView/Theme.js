@@ -285,7 +285,6 @@ export const tblePaginationTheme = (data) => ({
   tblPgn: {
     MuiTablePagination: {
       root: {
-        background: '#f3f3f4',
         paddingRight: '43px',
         borderTop: '3px solid #004c73',
         paddingTop: '0',
