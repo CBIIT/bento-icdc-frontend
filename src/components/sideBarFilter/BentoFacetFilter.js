@@ -279,7 +279,6 @@ const BentoFacetFilter = ({
    */
   const CustomFacetView = useCallback(
     ({ facet, facetClasses, hasSelections, clearFacetSectionValues }) => {
-      console.log("hasSelections", hasSelections);
       const clsName = `${facetClasses}`.replace(/\s+/g, "");
       return (
         <>
