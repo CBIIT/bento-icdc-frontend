@@ -217,7 +217,7 @@ export const tablePag = ({ primaryColor = '#004c73' }) => ({
     MuiTablePagination: {
       root: {
         paddingRight: '43px',
-        background: '#f3f3f4',
+        background: '#ffffff',
         borderTop: `3px solid ${primaryColor}`,
         borderBottom: `3px solid ${primaryColor}`,
         '&:last-child': {

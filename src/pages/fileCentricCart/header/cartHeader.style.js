@@ -32,7 +32,7 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'column',
     padding: '2px 28px',
-    paddingTop: '60px',
+    paddingTop: '24px',
   },
   availableDownloadDropdownBtnStartIcon: {
     margin: '0px',
