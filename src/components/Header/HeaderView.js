@@ -25,7 +25,9 @@ const customStyle = {
   },
 };
 
-const ICDCHeader = () => {
+const ICDCHeader = ({
+  classes,
+}) => {
   const location = useLocation();
   const queryAutocompleteAPI = async (inputValue) => {
     const result = await client.query({
@@ -45,6 +47,7 @@ const ICDCHeader = () => {
       searchKeys,
       searchFields,
     },
+    classes,
   };
 
   const { SearchBar } = SearchBarGenerator(SearchBarConfig);
@@ -162,7 +165,7 @@ const styles = () => ({
     },
   },
   searchIconSpan: {
-    color: '#4A8ECB',
+    color: '#25557E',
     stroke: '#4A8ECB',
     strokeWidth: '1.1px',
     marginRight: '8px',
