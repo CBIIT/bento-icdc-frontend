@@ -20,10 +20,13 @@ const theme = {
     MuiButton: {
       root: {
         '&.resetButton': {
-          fontSize: '9px',
+          color: '#AEBDBE',
+          backgroundColor: '#FFF',
+          fontSize: '10px',
           marginTop: '4px',
           minHeight: '25px',
-          fontFamily: "'Lato', 'Open Sans', sans-serif",
+          fontFamily: 'Nunito sans',
+          fontWeight: '600',
           marginLeft: '16px',
           borderRadius: '100px',
           textTransform: 'none',
@@ -89,7 +92,7 @@ const theme = {
             color: '#323232',
             fontFamily: 'Raleway',
             fontSize: '13px',
-            fontWeight: 'bold',
+            fontWeight: '600',
             letterSpacing: '0.25px',
           },
         },
@@ -107,7 +110,7 @@ const theme = {
           color: '#323232',
           fontFamily: 'Raleway',
           fontSize: '15px',
-          fontWeight: 'bold',
+          fontWeight: '600',
           letterSpacing: '0.25px',
           display: 'flex',
           justifyContent: 'space-between',
@@ -180,44 +183,54 @@ const theme = {
     },
     MuiListItem: {
       root: {
+        color: '#000000',
+        fontFamily: 'Nunito',
+        fontWeight: '200',
+        fontSize: '14px',
         '& CheckBoxView-checkboxRoot': {
           marginLeft: '0',
         },
+        '& p': {
+          color: '#000000',
+          fontFamily: 'Nunito',
+          fontWeight: '200',
+          fontSize: '14px',
+        },
         padding: '10px 2px 10px 0px !important',
         '&.filter_by_casesCheckedEven': {
-          backgroundColor: '#fdf1e8',
+          backgroundColor: '#FDF3EB',
           '&:hover': {
-            backgroundColor: '#fdf1e8',
+            backgroundColor: '#FDF3EB',
           },
         },
         '&.filter_by_casesCheckedOdd': {
-          backgroundColor: '#fff9f5',
+          backgroundColor: '#F5EBE2',
           '&:hover': {
-            backgroundColor: '#fff9f5',
+            backgroundColor: '#F5EBE2',
           },
         },
         '&.filter_by_samplesCheckedEven': {
-          backgroundColor: '#dafafb',
+          backgroundColor: '#E5F2FA',
           '&:hover': {
-            backgroundColor: '#dafafb',
+            backgroundColor: '#E5F2FA',
           },
         },
         '&.filter_by_samplesCheckedOdd': {
-          backgroundColor: '#eafafb',
+          backgroundColor: '#D4E9F6',
           '&:hover': {
-            backgroundColor: '#eafafb',
+            backgroundColor: '#D4E9F6',
           },
         },
         '&.filter_by_filesCheckedEven': {
-          backgroundColor: '#d4ddf7',
+          backgroundColor: '#EAECED',
           '&:hover': {
-            backgroundColor: '#d4ddf7',
+            backgroundColor: '#EAECED',
           },
         },
         '&.filter_by_filesCheckedOdd': {
-          backgroundColor: '#e9eefb',
+          backgroundColor: '#CDD5DB',
           '&:hover': {
-            backgroundColor: '#e9eefb',
+            backgroundColor: '#CDD5DB',
           },
         },
       },
@@ -225,22 +238,22 @@ const theme = {
     MuiSvgIcon: {
       root: {
         '&.filter_by_casesCheckedIcon': {
-          color: '#ff7f15',
+          color: '#0B3556',
         },
         '&.filter_by_cases': {
-          color: '#ff7f15',
+          color: '#0B3556',
         },
         '&.filter_by_samplesCheckedIcon': {
-          color: '#9dc1d9',
+          color: '#0B3556',
         },
         '&.filter_by_samples': {
-          color: '#9dc1d9',
+          color: '#0B3556',
         },
         '&.filter_by_filesCheckedIcon': {
-          color: '#667a87',
+          color: '#0B3556',
         },
         '&.filter_by_files': {
-          color: '#667a87',
+          color: '#0B3556',
         },
       },
     },
@@ -249,20 +262,23 @@ const theme = {
         '&.filter_by_casesSubjects': {
           fontSize: '14px',
           fontFamily: 'Nunito',
+          fontWeight: '400',
           marginRight: '0px',
-          color: '#ff7f15',
+          color: '#505050',
         },
         '&.filter_by_samplesSubjects': {
           fontSize: '14px',
           fontFamily: 'Nunito',
+          fontWeight: '400',
           marginRight: '0px',
-          color: '#9dc1d9',
+          color: '#505050',
         },
         '&.filter_by_filesSubjects': {
           fontSize: '14px',
           fontFamily: 'Nunito',
+          fontWeight: '400',
           marginRight: '0px',
-          color: '#667a87',
+          color: '#505050',
         },
       },
     },
@@ -274,13 +290,13 @@ const theme = {
       root: {
         height: '7px',
         '&.divider0': {
-          backgroundColor: '#ff7f15',
+          backgroundColor: '#DA781B',
         },
         '&.divider1': {
-          backgroundColor: '#9dc1d9',
+          backgroundColor: '#60ADCF',
         },
         '&.divider2': {
-          backgroundColor: '#667a87',
+          backgroundColor: '#607280',
         },
       },
     },
