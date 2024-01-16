@@ -63,17 +63,11 @@ const HeaderWithGovAlert = ({
     );
   };
 
-  // add local store for testing purpose
-  if (!localStorage.getItem('govAlertUrl')) {
-    localStorage.setItem('govAlertUrl', urlLink);
-  }
-  const govAltUrl = localStorage.getItem('govAlertUrl');
-
   return (
     <div>
       <div id="govAlertMsg" ref={govAlertRef}>
         <p className={classes.placeholder} />
-        {AlertPlaceholder(govAltUrl)}
+        {AlertPlaceholder(urlLink)}
       </div>
       {(govAlertRef.current && govAlertRef.current.offsetHeight)
         && <HeaderView offsetHeight={alertBannerHeight} />}
