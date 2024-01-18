@@ -4,7 +4,6 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { noop } from 'lodash';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
@@ -21,11 +20,12 @@ import { GET_STORE_MANIFEST_DATA_QUERY } from '../../../bento/fileCentricCartWor
 import {
   ToolTip as Tooltip,
 } from '../../../bento-core';
+import arrowDownPng from './assets/arrowDown.png';
 
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
-    width: '236px',
+    width: '240px',
     borderBottomLeftRadius: '8px',
     borderBottomRightRadius: '8px',
     borderTopRightRadius: '0px',
@@ -276,7 +276,7 @@ const CartHeader = React.forwardRef(({
                 contained: classes.availableDownloadBtnContained,
                 startIcon: classes.availableDownloadDropdownBtnStartIcon,
               }}
-              startIcon={<KeyboardArrowDownIcon style={{ fontSize: '32px' }} />}
+              startIcon={<img style={{ marginRight: '8px' }} src={arrowDownPng} alt="arrow down icon" />}
               onClick={exportOptionsClickHandler}
             >
               {isLoading ? (<p>Loading...</p>) : (

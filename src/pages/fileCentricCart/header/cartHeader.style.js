@@ -100,7 +100,7 @@ export default (theme) => ({
     borderRadius: '8px',
     border: '1px solid #1A8CCB',
     boxShadow: 'none',
-    width: '235px',
+    width: '240px',
     fontFamily: 'Lato',
     fontStyle: 'normal',
     // maxWidth: '287px',
@@ -121,9 +121,9 @@ export default (theme) => ({
     borderTopRightRadius: '8px',
     borderTopLeftRadius: '8px',
     borderBottomRightRadius: '0px',
+    width: '240px',
     borderBottomLeftRadius: '0px',
     boxShadow: 'none',
-    width: '235px',
     '&:hover': {
       backgroundColor: '#F2F2F2',
       boxShadow: 'none',
@@ -135,7 +135,7 @@ export default (theme) => ({
     border: '1px solid #155F97',
     borderRadius: '8px',
     boxShadow: 'none',
-    // width: '235px',
+    width: '240px',
     textWrap: 'nowrap',
     '&:hover': {
       backgroundColor: '#F2F2F2',

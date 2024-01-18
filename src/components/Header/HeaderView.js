@@ -170,6 +170,7 @@ const styles = () => ({
     strokeWidth: '1.1px',
     marginRight: '8px',
     cursor: 'pointer',
+    backgroundRepeat: 'no-repeat',
     backgroundImage: `url(${serachIcon})`,
     '& path': {
       display: 'none',

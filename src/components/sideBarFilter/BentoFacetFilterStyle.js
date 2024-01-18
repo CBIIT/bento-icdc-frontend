@@ -14,6 +14,11 @@ export default () => ({
   disableExpansion: {
     backgroundColor: 'rgba(0, 0, 0 , 0.17)',
   },
+  dropdownIconTextWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
   activeFacetFilterByCases: {
     color: '#ff7f15',
   },

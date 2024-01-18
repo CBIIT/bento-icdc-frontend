@@ -17,7 +17,7 @@ const styles = () => ({
   },
   tabContainter: {
     display: 'flex',
-    maxWidth: '1180px',
+    maxWidth: '1080px',
     margin: '0 auto',
   },
   tabColor: {
@@ -183,9 +183,9 @@ const styles = () => ({
     margin: '-8px 4px 0px 19px',
   },
   totalCount: {
-    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontFamily: 'Open Sans',
     fontSize: '20px',
-    fontWeight: '300',
+    fontWeight: '400',
     lineHeight: '14px',
   },
   totalResults: {
