@@ -36,7 +36,15 @@ import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
 
 const ScrollToTop = () => {
-  window.scrollTo(0, 0);
+  const { pathname } = useLocation();
+  console.log('pathname', pathname);
+
+  useEffect(() => {
+    console.log('before-scroll-to');
+    window.scrollTo(0, 0);
+    console.log('after-scroll-to');
+  }, [pathname]);
+
   return null;
 };
 
@@ -67,6 +75,7 @@ const Layout = ({ classes, isSidebarOpened }) => {
     <>
       <CssBaseline />
       <HashRouter>
+        <ScrollToTop />
         <>
           <OverlayWindow />
           <div className={classes.container}>
@@ -83,7 +92,6 @@ const Layout = ({ classes, isSidebarOpened }) => {
             ref={contentRef}
             className={classes.content}
           >
-            <Route component={ScrollToTop} />
             {GA.init() && <GA.RouteTracker />}
             <Switch>
               <Route exact path="/ICDC/" component={Home} />
