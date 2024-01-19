@@ -32,26 +32,16 @@ import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
 import CartView from '../../pages/fileCentricCart/CartController';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
-
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  console.log('pathname', pathname);
-
-  useEffect(() => {
-    console.log('before-scroll-to');
-    window.scrollTo(0, 0);
-    console.log('after-scroll-to');
-  }, [pathname]);
-
-  return null;
-};
 
 const Layout = ({ classes, isSidebarOpened }) => {
   const location = useLocation();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
+
+  if (contentRef && contentRef.current) {
+    contentRef.current.scrollTo(0, 0);
+  }
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
@@ -75,7 +65,6 @@ const Layout = ({ classes, isSidebarOpened }) => {
     <>
       <CssBaseline />
       <HashRouter>
-        <ScrollToTop />
         <>
           <OverlayWindow />
           <div className={classes.container}>
