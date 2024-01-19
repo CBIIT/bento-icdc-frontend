@@ -32,18 +32,16 @@ import JbrowseController from '../../pages/JbrowseDetail/JbrowseController';
 import CartView from '../../pages/fileCentricCart/CartController';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
-
 // import Jbrowsetest from '../../pages/JbrowseDetail/JbrowseTest';
-
-const ScrollToTop = () => {
-  window.scrollTo(0, 0);
-  return null;
-};
 
 const Layout = ({ classes, isSidebarOpened }) => {
   const location = useLocation();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
+
+  if (contentRef && contentRef.current) {
+    contentRef.current.scrollTo(0, 0);
+  }
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
@@ -83,7 +81,6 @@ const Layout = ({ classes, isSidebarOpened }) => {
             ref={contentRef}
             className={classes.content}
           >
-            <Route component={ScrollToTop} />
             {GA.init() && <GA.RouteTracker />}
             <Switch>
               <Route exact path="/ICDC/" component={Home} />
