@@ -46,6 +46,63 @@ const theme = {
         },
       },
     },
+    MuiDialog: {
+      paperScrollPaper: {
+        borderRadius: '20px',
+        padding: '20px 0px 30px 0px',
+      },
+    },
+    MuiDialogContent: {
+      root: {
+        textAlign: 'center',
+        '& p': {
+          fontFamily: 'Nunito',
+          fontSize: '14px',
+          fontWeight: '600',
+          lineHeight: '20px',
+          color: '#000000',
+        },
+      },
+    },
+    MuiDialogActions: {
+      root: {
+        width: '125px',
+        height: '38px',
+        borderRadius: '8px',
+        border: '1px solid #1A8CCB',
+        margin: 'auto',
+        padding: '0',
+        backgroundColor: '#1A8CCB',
+      },
+    },
+    MuiButton: {
+      root: {
+        color: '#fff',
+        fontFamily: 'Lato',
+        fontSize: '16px',
+        fontWeight: '400',
+        lineHeight: '16px',
+        minWidth: '100px',
+        margin: 'auto',
+        backgroundColor: '#1A8CCB',
+        '&:hover': {
+          backgroundColor: '#1A8CCB',
+        },
+      },
+    },
+    MuiPaper: {
+      root: {
+        border: '2px solid #1D79A8',
+        width: '430px',
+        backgroundColor: '#E8EFEF',
+        padding: '20px 0px 30px 0px',
+      },
+    },
+    MuiBackdrop: {
+      root: {
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      },
+    },
   },
 };
 
