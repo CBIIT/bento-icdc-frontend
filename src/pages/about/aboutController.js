@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import yaml from 'js-yaml';
 import axios from 'axios';
-import YAMLData from '../../content/prod/aboutPagesContent.yaml';
+import YAMLData from '../../content/pre-prod/aboutPagesContent.yaml';
 import env from '../../utils/env';
 import AboutView from './aboutView';
 

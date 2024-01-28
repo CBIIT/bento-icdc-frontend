@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { parse } from 'yaml';
 import axios from 'axios';
-import YAMLData from '../../content/prod/aboutPagesContent.yaml';
+import YAMLData from '../../content/pre-prod/aboutPagesContent.yaml';
 import LandingView from './landingView';
 import NewsView from './views/newsView';
 import env from '../../utils/env';
