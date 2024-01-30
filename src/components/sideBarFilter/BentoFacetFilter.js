@@ -344,6 +344,7 @@ const BentoFacetFilter = ({
         CustomFacetSection={CustomFacetSection}
         CustomFacetView={CustomFacetView}
         enableClearSection
+        enableFacetCollapse
       />
     </FacetFilterThemeProvider>
   );
