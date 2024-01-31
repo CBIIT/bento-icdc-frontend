@@ -96,6 +96,9 @@ const theme = {
             letterSpacing: '0.25px',
           },
         },
+        '& div.facetSectionName': {
+          float: 'right',
+        },
       },
       content: {
         margin: '0',
@@ -104,6 +107,11 @@ const theme = {
           paddingTop: '15px',
           margin: '0 2px',
           marginRight: 6,
+        },
+        '& div.dropdownIconTextWrapper': {
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
         },
         '& div.sectionSummaryTextContainer': {
           marginLeft: '10px',
