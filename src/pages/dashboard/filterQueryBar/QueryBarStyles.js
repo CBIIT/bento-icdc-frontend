@@ -142,6 +142,7 @@ export const customStyles = {
     fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0em',
+    whiteSpace: 'nowrap',
   },
   facetSectionFilterByCasesBackground: {
     color: '#646464',

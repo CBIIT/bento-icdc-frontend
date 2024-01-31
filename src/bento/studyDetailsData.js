@@ -1488,7 +1488,7 @@ export const table = {
       title: 'adverse event',
       countKey: 'adverse_event',
       csvDownload: 'adverseEventNodeData',
-      manifest: agentNodeMetadata,
+      manifest: adverseEventNodeMetadata,
     },
     {
       title: 'agent',
