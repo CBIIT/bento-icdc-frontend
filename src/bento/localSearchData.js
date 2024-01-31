@@ -528,7 +528,7 @@ export const localFindConfig = {
   title: 'Upload Case Set',
   inputPlaceholder: 'eg. ICDC-CASE-06, ICDC-CASE-22',
   inputTooltip: 'Enter valid Case IDs',
-  uploadTooltip: 'Select a file from your computer',
+  uploadTooltip: 'Select a .tsv or .txt file from your computer',
   accept: '.csv,.txt',
   maxSearchTerms: 1000,
   matchedId: 'case_id',
@@ -538,5 +538,4 @@ export const localFindConfig = {
   projectName: 'ICDC',
   uploadTooltipIcon: 'SPEECH_BUBBLE',
   listTitleIds: 'Add a list of Case IDs:',
-  listTitleUpload: 'Select a .tsv or .txt file from your computer:',
 };
