@@ -537,4 +537,6 @@ export const localFindConfig = {
   associateLabel: 'Associated Study',
   projectName: 'ICDC',
   uploadTooltipIcon: 'SPEECH_BUBBLE',
+  listTitleIds: 'Add a list of Case IDs:',
+  listTitleUpload: 'Select a .tsv or .txt file from your computer:',
 };
