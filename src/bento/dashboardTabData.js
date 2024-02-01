@@ -2304,7 +2304,7 @@ export const tableContainers = [
       {
         dataField: 'access_file',
         header: 'Access',
-        role: cellTypes.DISPLAY,
+        cellType: cellTypes.CUSTOM_ELEM,
         tooltipText: 'sort',
         display: true,
         downloadDocument: true,
