@@ -119,6 +119,9 @@ const styles = () => ({
   facetSectionSamplesBackground: {
     backgroundColor: '#C3EAF5',
   },
+  viewLink: {
+    maxWidth: '1200px !important',
+  },
 });
 
 export const customStyles = {

@@ -138,7 +138,7 @@ const tblBody = {
   },
   MuiCheckbox: {
     colorSecondary: {
-      '&Mui-checked': {
+      '&.Mui-checked': {
         color: '#0B3556',
       },
     },
