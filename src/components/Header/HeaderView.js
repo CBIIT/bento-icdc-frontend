@@ -15,7 +15,7 @@ const customStyle = {
   nihLogoImg: {
     height: '54px',
     width: '463px',
-    marginLeft: '8px',
+    marginLeft: '29px',
     minHeight: '54px',
   },
   headerBar: {
