@@ -45,7 +45,8 @@ const CsvDownlaod = ({
 
 const styles = {
   icon: {
-    width: '32px',
+    width: '24.71px',
+    height: '24.72px',
   },
   tooltipImageWrapper: {
     cursor: 'pointer',
