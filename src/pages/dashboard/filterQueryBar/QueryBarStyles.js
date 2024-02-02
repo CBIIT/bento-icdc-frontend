@@ -145,6 +145,7 @@ export const customStyles = {
     fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0em',
+    whiteSpace: 'nowrap',
   },
   facetSectionFilterByCasesBackground: {
     color: '#646464',
@@ -157,6 +158,7 @@ export const customStyles = {
     fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0em',
+    whiteSpace: 'nowrap',
   },
   facetSectionFilterBySamples: {
     color: '#1F536A',
@@ -169,6 +171,7 @@ export const customStyles = {
     fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0em',
+    whiteSpace: 'nowrap',
   },
   facetSectionFilterBySamplesBackground: {
     color: '#000000',
@@ -181,6 +184,7 @@ export const customStyles = {
     fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0em',
+    whiteSpace: 'nowrap',
   },
   facetSectionFilterByFiles: {
     color: '#353F47',
@@ -192,6 +196,7 @@ export const customStyles = {
     fontSize: '12px',
     fontWeight: '600',
     lineHeight: '16px',
+    whiteSpace: 'nowrap',
     letterSpacing: '0em',
   },
   facetSectionFilterByFilesBackground: {
@@ -205,6 +210,7 @@ export const customStyles = {
     fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0em',
+    whiteSpace: 'nowrap',
   },
 };
 

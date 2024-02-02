@@ -220,14 +220,12 @@ const BentoFacetFilter = ({
             disabled={isUnifiedView}
           >
             <div className="sectionSummaryTextContainer">
-              <div
-                className={classes.dropdownIconTextWrapper}
-              >
+              <div className="dropdownIconTextWrapper">
                 <ArrowDropDownIcon style={{
                   transform: !expanded ? 'rotate(-90deg)' : 'none',
                 }}
                 />
-                <div>{name}</div>
+                <div className="facetSectionName">{name}</div>
               </div>
               {hasSearch && (
                 <div className="findCaseButton" onClick={toggleSearch}>
@@ -344,6 +342,7 @@ const BentoFacetFilter = ({
         CustomFacetSection={CustomFacetSection}
         CustomFacetView={CustomFacetView}
         enableClearSection
+        enableFacetCollapse
       />
     </FacetFilterThemeProvider>
   );
