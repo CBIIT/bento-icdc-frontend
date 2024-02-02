@@ -46,6 +46,9 @@ export const tblHeader = {
         width: '20%',
         textAlign: 'center',
       },
+      '&.recordCount': {
+        textAlign: 'center',
+      },
       '&.nodeCount': {
         width: '20%',
         textAlign: 'center',
@@ -247,9 +250,22 @@ const tblBody = {
       '&.caseCount': {
         width: '20%',
         textAlign: 'center',
+        '& p': {
+          color: '#0B3556',
+          fontFamily: 'Open Sans',
+          fontSize: '16px',
+        },
       },
       '&.nodeCount': {
         width: '20%',
+        textAlign: 'center',
+        '& p': {
+          color: '#0B3556',
+          fontFamily: 'Open Sans',
+          fontSize: '16px',
+        },
+      },
+      '&.recordCount': {
         textAlign: 'center',
       },
       '&.csvDownload': {
