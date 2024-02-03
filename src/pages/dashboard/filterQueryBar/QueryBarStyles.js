@@ -4,6 +4,8 @@ const styles = () => ({
     backgroundColor: '#F3F8FB !important',
     padding: '14px 14px 14px 35px !important',
     overflowY: 'auto',
+    display: 'grid',
+    gridTemplateRows: '1fr 1fr',
     borderBottom: '1px solid #D4D6D7',
   },
   queryContainer: {
@@ -19,7 +21,7 @@ const styles = () => ({
   filterName: {
     textTransform: 'uppercase',
     padding: '5px 6px 5px 7px',
-    borderRadius: 4,
+    borderRadius: '5px !important',
     fontSize: 12,
     fontWeight: 600,
     cursor: 'pointer',
@@ -29,7 +31,7 @@ const styles = () => ({
     marginRight: '5px !important',
     borderRadius: 5,
     fontSize: 12,
-    border: '0.5px solid #646464',
+    border: '0.5px solid #646464 !important',
     width: 'fit-content',
     backgroundColor: '#fff',
     cursor: 'pointer',
@@ -67,9 +69,12 @@ const styles = () => ({
   },
   clearQueryButton: {
     margin: '1px',
-    marginLeft: -6,
+    marginLeft: '0px !important',
     fontWeight: 600,
+    maxWidth: '52px',
     fontSize: '12px !important',
+    padding: '2px 7px 2px 7px',
+    cursor: 'pointer',
     color: '#fff',
     fontFamily: 'Nunito',
     lineHeight: '16px',
@@ -79,7 +84,6 @@ const styles = () => ({
     boxSizing: 'border-box',
     backgroundColor: '#646464 !important',
     border: '1px solid #B4B4B4',
-    padding: '2px 7px 2px 7px',
     '&:hover': {
       backgroundColor: '#646464 !important',
     },
@@ -93,31 +97,16 @@ const styles = () => ({
     color: '#ff7f15',
   },
   localFindBackground: {
-    color: '#646464',
+    color: '#000',
     padding: '2px 5px 2px 5px',
     borderRadius: '5px',
     border: '0.5px solid #646464',
-    backgroundColor: '#FDF3EB',
+    backgroundColor: '#fdf3eb',
     fontFamily: 'Nunito',
     fontSize: '12px',
     fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0em',
-  },
-  facetSectionCases: {
-    color: '#ff7f15',
-  },
-  facetSectionCasesBackground: {
-    backgroundColor: '#FFB170',
-  },
-  facetSectionFilesBackground: {
-    backgroundColor: '#F5C3F1',
-  },
-  facetSectionSamples: {
-    color: '#10BEFF',
-  },
-  facetSectionSamplesBackground: {
-    backgroundColor: '#C3EAF5',
   },
   viewLink: {
     maxWidth: '1200px !important',
@@ -126,13 +115,18 @@ const styles = () => ({
 
 export const customStyles = {
   localFind: {
-    color: '#ff7f15',
+    color: '#80430A',
   },
   localFindBackground: {
+    color: '#000',
+    borderRadius: '5px',
     // backgroundColor: '#FFB170',
   },
+  standAloneInputSet: {
+    color: '#80430A',
+  },
   facetSectionCases: {
-    color: '#ff7f15',
+    color: '#80430A',
   },
   facetSectionFilterByCases: {
     color: '#80430A',
@@ -142,17 +136,17 @@ export const customStyles = {
     backgroundColor: '#FFFFFF',
     fontFamily: 'Nunito',
     fontSize: '12px',
-    fontWeight: '600',
+    fontWeight: '500',
     lineHeight: '16px',
     letterSpacing: '0em',
     whiteSpace: 'nowrap',
   },
   facetSectionFilterByCasesBackground: {
-    color: '#646464',
+    color: '#000000',
     padding: '2px 5px 2px 5px',
     borderRadius: '5px',
     border: '0.5px solid #646464',
-    backgroundColor: '#FDF3EB',
+    backgroundColor: '#fdf3eb',
     fontFamily: 'Nunito',
     fontSize: '12px',
     fontWeight: '600',
@@ -168,7 +162,7 @@ export const customStyles = {
     backgroundColor: '#FFFFFF',
     fontFamily: 'Nunito',
     fontSize: '12px',
-    fontWeight: '600',
+    fontWeight: '500',
     lineHeight: '16px',
     letterSpacing: '0em',
     whiteSpace: 'nowrap',
@@ -194,7 +188,7 @@ export const customStyles = {
     backgroundColor: '#FFFFFF',
     fontFamily: 'Nunito',
     fontSize: '12px',
-    fontWeight: '600',
+    fontWeight: '500',
     lineHeight: '16px',
     whiteSpace: 'nowrap',
     letterSpacing: '0em',
