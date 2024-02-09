@@ -322,7 +322,7 @@
     - paragraph: "All three Cloud Resources provide support for data access through a web-based user interface in addition to programmatic access to analytic tools and workflows, and the capability of sharing results with collaborators. Each Cloud Resource is continually developing new functionality to improve the user experience and add new tools for researchers."
     - paragraph: "Currently the ICDC supports analysis via the SBG Cloud Resource."
 
-- page: /icdc-data-model
+- page: /guideline
   title: "ICDC Data and Model"
   primaryContentImage: "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/aboutPages/Photo-About_ICDC_model.jpeg"
   secondaryZoomImageTitle: "The ICDC Data Model"
