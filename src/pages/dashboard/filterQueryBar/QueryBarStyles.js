@@ -4,7 +4,7 @@ const styles = () => ({
     backgroundColor: '#F3F8FB !important',
     padding: '14px 14px 14px 35px !important',
     overflowY: 'auto',
-    display: 'grid',
+    // display: 'grid',
     gridTemplateRows: '1fr 1fr',
     borderBottom: '1px solid #D4D6D7',
   },
@@ -107,9 +107,6 @@ const styles = () => ({
     fontWeight: '600',
     lineHeight: '16px',
     letterSpacing: '0em',
-  },
-  viewLink: {
-    maxWidth: '1200px !important',
   },
 });
 

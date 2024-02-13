@@ -1,4 +1,9 @@
-import { clearAllAndSelectFacet, updateAutocompleteData, updateUploadData } from '../../bento-core';
+import {
+  clearAllAndSelectFacet,
+  updateAutocompleteData,
+  updateUploadData,
+  updateUploadMetadata,
+} from '../../bento-core';
 import store from '../../store';
 import client from '../../utils/graphqlClient';
 import {
@@ -19,6 +24,10 @@ export const setActiveFilterByPathQuery = (match) => {
   const query = decodeURI(match.params.filterQuery || '');
   const filterObject = JSON.parse(query);
   const { autocomplete = [], upload = [] } = filterObject;
+
+  const caseIds = upload.map((item) => `${item.case_id}\r\n`);
+  const searchTokens = caseIds.join().replace(',', '');
+
   const activeFilterValues = Object.keys(filterObject).reduce((curr, key) => {
     const activeFilters = filterObject[key].reduce((value, item) => ({
       ...value,
@@ -33,6 +42,10 @@ export const setActiveFilterByPathQuery = (match) => {
   store.dispatch(clearAllAndSelectFacet(activeFilterValues));
   store.dispatch(updateAutocompleteData(autocomplete));
   store.dispatch(updateUploadData(upload));
+  store.dispatch(updateUploadMetadata({
+    matched: upload,
+    fileContent: searchTokens,
+  }));
 };
 
 /**
