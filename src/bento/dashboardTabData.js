@@ -2237,7 +2237,7 @@ export const tableContainers = [
       pagination: true,
       download: {
         customDownload: true,
-        downloadCsv: 'Download Table Contents As CSV 123',
+        downloadCsv: 'Download Table Contents As CSV',
         ...customStudyFilesTabDownloadCSV,
       },
       manageViewColumns: {
