@@ -20,6 +20,7 @@ const BentoNavBar = ({ cartFieldIds = [] }) => (
           numberOfCases={cartFieldIds.length}
           externalLinksFlag
           externalLinks={externalLinks}
+          externalLinksFirst
         />
       </div>
     </NavBarThemeProvider>
