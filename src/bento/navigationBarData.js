@@ -1,9 +1,7 @@
-import env from '../utils/env';
+// import env from '../utils/env';
 
 export const navBarstyling = {
-  cart: {
-
-  },
+  cart: {},
   global: {
     backgroundColor: '#0B3557',
     height: '39px',
@@ -154,7 +152,7 @@ export const navBarData = [
   },
 ];
 
-export const externalLinks = {
+/* export const externalLinks = {
   resources: [
     {
       title: 'Wiki',
@@ -179,15 +177,23 @@ export const externalLinks = {
       link: 'https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_Data_Submission_Request_Template.docx',
     },
   ],
+}; */
+
+export const externalLinks = {
+  resources: [
+    {
+      title: 'Canine Training Center',
+      link: 'https://cbiit.github.io/icdc-bioinformatics/',
+    },
+  ],
 };
 
 export const navBarCartData = {
   cartLabel: 'MY Files',
   cartLink: '/fileCentricCart',
-  cartIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
+  cartIcon:
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
   cartIconAlt: 'cart_logo',
 };
 
-export const navBarExclusions = [
-  '#/jBrowse/singleFileView',
-];
+export const navBarExclusions = ['#/jBrowse/singleFileView'];
