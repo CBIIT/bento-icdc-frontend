@@ -4,11 +4,11 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN NODE_OPTIONS="--max-old-space-size=8192" npm set progress=false
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm set progress=false
 
-RUN NODE_OPTIONS="--max-old-space-size=8192" npm ci
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci
 
-RUN NODE_OPTIONS="--max-old-space-size=8192" npm run build --verbose
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --verbose
 
 FROM nginx:1.23.3-alpine
 
