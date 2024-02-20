@@ -99,11 +99,6 @@ export const navBarData = [
     type: 'dropdown',
 
     dropDownLinks: [
-      /* {
-        labelText: 'Canine Training Center',
-        link: '/graphql',
-        linkActiveStyle: 'white',
-      }, */
       {
         labelText: 'GraphQL',
         link: '/graphql',
