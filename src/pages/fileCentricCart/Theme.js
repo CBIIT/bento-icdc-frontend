@@ -348,7 +348,7 @@ const tblBody = {
         },
       },
       '& p': {
-        fontSize: '10pt',
+        fontSize: '16px',
         fontStyle: 'normal',
         fontFamily: 'Open Sans, sans-serif',
         fontWeight: '400',

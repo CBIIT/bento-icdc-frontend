@@ -24,7 +24,7 @@ import SampleCardView from './card/sample/SampleCardView';
 import FileCardView from './card/files/FileCardView';
 import AboutCardView from './card/about/AboutCardView';
 import ModelCardView from './card/model/ModelCardView';
-
+import GSThemeProvider from './ThemeConfig';
 /**
  * Determine the correct datafield and offset for the All tab based
  * off of the current offset and the number of results for each datafield
@@ -241,7 +241,7 @@ const GlobalSearchView = ({
           root: classes.buttonRoot,
           wrapper: classes.tabColor,
         },
-        count: searchCounts.program_count || 0,
+        count: searchCounts?.program_count || 0,
         value: '2',
       },
       {
@@ -335,18 +335,20 @@ const GlobalSearchView = ({
   }, []);
 
   return (
-    <div className={classes.container}>
-      <div className={classes.heroArea}>
-        <div>
-          <SearchBar value={searchText} clearable={!false} style={{ width: 750 }} />
+    <GSThemeProvider>
+      <div className={classes.container}>
+        <div className={classes.heroArea}>
+          <div>
+            <SearchBar value={searchText} clearable={!false} style={{ width: 750, color: 'red !important' }} />
+          </div>
+        </div>
+        <div className={classes.bodyContainer}>
+          <Box sx={{ width: '100%', typography: 'body1' }}>
+            <SearchResults searchText={searchText} classes={classes} />
+          </Box>
         </div>
       </div>
-      <div className={classes.bodyContainer}>
-        <Box sx={{ width: '100%', typography: 'body1' }}>
-          <SearchResults searchText={searchText} classes={classes} />
-        </Box>
-      </div>
-    </div>
+    </GSThemeProvider>
   );
 };
 
