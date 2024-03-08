@@ -13,6 +13,7 @@ import {
   clearFacetSection,
   clearSliderSection,
   toggleCheckBox,
+  sideBarActionTypes,
 } from '@bento-core/facet-filter';
 import {
   TableView,
@@ -86,6 +87,7 @@ export {
   clearFacetSection,
   clearSliderSection,
   toggleCheckBox,
+  sideBarActionTypes,
   TableView, // paginated-table (states/button actions)
   Wrapper,
   TableContext,
