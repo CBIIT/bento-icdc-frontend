@@ -76,8 +76,10 @@ const PaginatedTableView = (props) => {
     sortOrder: config.defaultSortDirection,
     extendedViewConfig: ExtendedViewConfig(config),
     columnGroups: ColumnGrouping(config.columnGroups),
+    rowsPerPageOptions: config.rowsPerPageOptions,
     rowsPerPage,
     page: 0,
+    tblAttr: config.tblAttr,
   });
 
   /**

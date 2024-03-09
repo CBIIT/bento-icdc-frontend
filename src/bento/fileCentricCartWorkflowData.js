@@ -326,6 +326,8 @@ export const cartTable = {
   defaultSortDirection: 'asc',
   paginationAPIField: 'filesInList',
   paginationAPIFieldDesc: 'filesInListDesc',
+  rowsPerPageOptions: [10, 25, 50, 100, 300],
+  tblAttr: { stickyHeader: true },
   Jbrowse: true,
   api: GET_MY_CART_DATA_QUERY,
   extendedViewConfig: {
