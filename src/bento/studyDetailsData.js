@@ -1468,7 +1468,7 @@ export const table = {
     },
     {
       dataField: 'caseCount',
-      header: 'Case',
+      header: 'Cases',
       sort: 'asc',
       display: true,
       tooltipText: 'sort',
