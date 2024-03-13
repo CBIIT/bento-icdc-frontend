@@ -841,6 +841,7 @@ export const labExamNodeMetadata = {
 
 export const adverseEventNodeMetadata = {
   keysToInclude: [
+    'case_id',
     'day_in_cycle',
     'date_of_onset',
     'existing_adverse_event',
@@ -862,6 +863,7 @@ export const adverseEventNodeMetadata = {
     'unexpected_adverse_event',
   ],
   header: [
+    'case_id',
     'day_in_cycle',
     'date_of_onset',
     'existing_adverse_event',
@@ -1379,6 +1381,8 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       body_temperature_original
     }
     adverseEventNodeData(study_code: $study_code) {
+      case_id
+      day_in_cycle
       dose_limiting_toxicity
       unexpected_adverse_event
       date_of_onset
