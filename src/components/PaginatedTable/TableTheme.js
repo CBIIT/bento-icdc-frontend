@@ -240,12 +240,11 @@ export const tblContainer = ({ primaryColor = '#004c73' }) => ({
         transform: 'rotateX(180deg)',
         boxShadow: 'none',
         borderRadius: '0',
-        maxHeight: 1300,
       },
     },
     MuiTable: {
       root: {
-        // transform: 'rotateX(180deg)',
+        transform: 'rotateX(180deg)',
         width: '100%',
         display: 'table',
         borderSpacing: '0',
