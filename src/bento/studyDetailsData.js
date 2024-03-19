@@ -1475,7 +1475,7 @@ export const table = {
       header: 'Cases',
       sort: 'asc',
       display: true,
-      tooltipText: 'sort',
+      tooltipText: 'For each of the nodes listed below, the number of cases represented by one or more records within that node',
       columnDefaultValues: {
         0: ' ',
       },
@@ -1485,7 +1485,7 @@ export const table = {
       header: 'Records',
       sort: 'asc',
       display: true,
-      tooltipText: 'sort',
+      tooltipText: 'For each of the nodes listed below, the total number of records within each node. Cases may have multiple/numerous records within certain nodes',
       columnDefaultValues: {
         0: ' ',
       },
