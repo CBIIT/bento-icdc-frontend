@@ -269,4 +269,10 @@ export const uploadCustomStyles = {
     borderRadius: '50%',
     justifyCntent: 'center',
   },
+  inputLabel: {
+    display: 'flex',
+    marginLeft: '10px',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 };
