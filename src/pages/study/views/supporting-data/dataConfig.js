@@ -9,7 +9,7 @@ export const supportDataList = [
     repository: 'IDC',
     repositoryUrl: 'https://portal.imaging.datacommons.cancer.gov/explore/',
     table: {
-      defaultSortField: 'property',
+      // defaultSortField: 'property',
       // 'asc' or 'desc'
       defaultSortDirection: 'asc',
       columns: [
@@ -81,7 +81,7 @@ export const supportDataList = [
     repository: 'TCIA',
     repositoryUrl: 'https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=70227341#702273419937cb85808048c99e4b55fd520d63f2',
     table: {
-      defaultSortField: 'property',
+      // defaultSortField: 'property',
       // 'asc' or 'desc'
       defaultSortDirection: 'asc',
       columns: [
