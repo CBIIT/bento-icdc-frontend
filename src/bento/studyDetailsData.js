@@ -1491,7 +1491,7 @@ export const table = {
       },
     },
     {
-      dataField: 'csvDownload',
+      dataField: 'csvDataRow',
       header: 'CSV',
       display: true,
       cellType: cellTypes.CUSTOM_ELEM,
