@@ -87,7 +87,7 @@ const SupportingData = ({
         </CustomAccordion>
       </>
     );
-  }, []);
+  }, [data]);
 
   return (
     <ThemeProvider theme={createTheme(customTheme)}>
