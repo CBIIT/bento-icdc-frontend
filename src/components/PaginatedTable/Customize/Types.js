@@ -6,7 +6,7 @@ export const customizeColumn = {
   Description: 'description',
   Cohort: 'does',
   DataValue: 'dataValue',
-  csvDownload: 'csvDownload',
+  csvDataRow: 'csvDataRow',
 };
 
 export const customizeLandScapeView = {
