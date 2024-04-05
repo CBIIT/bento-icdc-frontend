@@ -10,6 +10,9 @@ import {
   IconButton,
 } from '@material-ui/core';
 import {
+  Sector,
+} from 'recharts';
+import {
   WidgetGenerator,
   ToolTip,
 } from '../../../bento-core';
@@ -19,6 +22,74 @@ import { themeToggleTooltip, widgetsData } from '../../../bento/dashboardData';
 import colors from '../../../utils/colors';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 import { formatWidgetData } from './WidgetUtils';
+
+export const disableDonutConfig = {
+  styles: {
+    textColor: 'black',
+    fontFamily: 'Nunito',
+    fontWeight: 500,
+    fontSize: '12px',
+    cellPadding: 2,
+    showTotalCount: false,
+    textOverflowLength: 20,
+  },
+  functions: {
+    mergeProps: (props, extraProps, callback) => (callback({ ...props, ...extraProps })),
+    getLastIndex: (dataset) => ((dataset.length !== undefined) ? dataset.length - 1 : 0),
+    mapDatasetObject: (data) => ({ name: data.group, value: data.subjects }),
+    renderActiveShape: (props) => {
+      const {
+        cx, cy, innerRadius, outerRadius, sliceTitle,
+        fill, textColor, fontSize, fontFamily,
+      } = props;
+
+      return (
+        <g>
+          <text x={cx} y={cy} dy={0} textAnchor="middle" fill={textColor} fontSize={fontSize || '12px'} fontWeight="bold" fontFamily={fontFamily || 'Nunito'}>
+            0
+          </text>
+          <text x={cx} y={cy} dy={12} textAnchor="middle" fill={textColor} fontSize={fontSize || '12px'} fontWeight="light" fontFamily={fontFamily || 'Nunito'}>
+            {sliceTitle}
+          </text>
+          <Sector
+            cx={cx}
+            cy={cy}
+            startAngle={0}
+            endAngle={360}
+            innerRadius={innerRadius - 2}
+            outerRadius={innerRadius}
+            fill="#B7B7B7"
+            stroke="#B7B7B7"
+          />
+          <Sector
+            cx={cx}
+            cy={cy}
+            innerRadius={innerRadius}
+            outerRadius={outerRadius}
+            startAngle={0}
+            endAngle={360}
+            fill={fill}
+            stroke={fill}
+          />
+          <Sector
+            cx={cx}
+            cy={cy}
+            startAngle={0}
+            endAngle={360}
+            innerRadius={outerRadius}
+            outerRadius={outerRadius + 1}
+            fill="#B7B7B7"
+            stroke="#B7B7B7"
+          />
+        </g>
+      );
+    },
+  },
+  colors: {
+    even: ['#E4E3E3'],
+    odd: ['#E4E3E3'],
+  },
+};
 
 const WidgetView = ({
   classes,
@@ -64,6 +135,10 @@ const WidgetView = ({
     },
   };
   const { Widget } = useCallback(WidgetGenerator(widgetGeneratorConfig), [theme]);
+  const { Widget: CustmizeWidgetView } = useCallback(WidgetGenerator({
+    ...widgetGeneratorConfig,
+    DonutConfig: disableDonutConfig,
+  }), [theme]);
 
   return (
     <>
@@ -110,7 +185,28 @@ const WidgetView = ({
               dataset = modifyFileTypeData(dataset);
             }
             if (!dataset || dataset.length === 0) {
-              return <></>;
+              return (
+                <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
+                  <CustmizeWidgetView
+                    header={(
+                      <Typography size="md" weight="bold" family="Raleway" color="lochmara">
+                        {widget.title}
+                      </Typography>
+                    )}
+                    bodyClass={classes.fullHeightBody}
+                    className={classes.card}
+                    bottomDivider
+                    customBackGround
+                    padAngle={0}
+                    chartType="donut"
+                    sliceTitle={widget.sliceTitle}
+                    data={[{
+                      group: '',
+                      subjects: 1,
+                    }]}
+                  />
+                </Grid>
+              );
             }
             if (widget.type === 'sunburst' && (!dataset.children || !dataset.children.length)) {
               return <></>;
