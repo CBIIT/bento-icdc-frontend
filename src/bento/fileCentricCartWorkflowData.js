@@ -426,7 +426,7 @@ export const cartTable = {
     },
     {
       dataField: 'individual_id',
-      header: 'Canine ID',
+      header: 'Canine Code',
       display: true,
       tooltipText: 'sort',
       role: cellTypes.DISPLAY,

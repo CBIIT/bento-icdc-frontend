@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Grid,
   withStyles,
 } from '@material-ui/core';
 import Badge from '@material-ui/core/Badge';
@@ -17,63 +16,78 @@ const ProgramCard = ({
 
   return (
     <div className={classes.detailContainer}>
-      <Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.header} data-testid="header">
-          {data.program_name}
-        </Grid>
-        <Grid item lg={8} md={8} sm={8} xs={12} className={classes.detailContainerLeft}>
+      <div className={classes.detailContainerHeader}>
+        {data.program_name}
+      </div>
+      <div className={classes.detailContainerBody}>
+        <div className={classes.detailContainerButtonAndDesc}>
+          <div className={classes.content}>{data.program_short_description}</div>
+          <div className={classes.buttonAndLink}>
+            <Button variant="contained" className={classes.button} endIcon={<Badge color="primary" badgeContent={data.studies.length} data-testid="badge"> </Badge>}>
+              <Link to={`/program/${data.program_acronym}`} className={classes.headerButtonLink}>
+                <span className={classes.headerButtonLinkLeft}>VIEW STUDIES </span>
+              </Link>
+            </Button>
 
-          <Grid item lg={12} md={12} sm={12} xs={12} className={classes.content} data-testid="content">
-            {' '}
-            {data.program_short_description}
-            {' '}
-          </Grid>
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <span>
-              <Button variant="contained" className={classes.button}>
-                <Link to={`/program/${data.program_acronym}`} className={classes.headerButtonLink}>
-                  <span className={classes.headerButtonLinkLeft}>VIEW STUDIES </span>
-                  <span className={classes.headerButtonLinkBadge}>
-                    <Badge color="primary" badgeContent={data.studies.length} data-testid="badge"> </Badge>
-                  </span>
-                </Link>
-              </Button>
-            </span>
-            <span className={classes.paddingLeft15}>
-              <a href={`${data.program_external_url}`} target="icdc" className={classes.outLink} data-testid="outlink">
-                {data.program_external_url}
-              </a>
-            </span>
-            <span className={classes.paddingLeft5}>
+            <div>
+              <div className={classes.linkAndTooltip}>
+                <a href={`${data.program_external_url}`} target="icdc" className={classes.outLink} data-testid="outlink">
+                  {data.program_external_url}
+                </a>
+                {
+                  data.program_external_url
+                  && (
+                  <img
+                    src={pageData.externalIcon}
+                    alt="dog for program detail"
+                    className={classes.linkIcon}
+                  />
+                  )
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        {
+          programConfig && (
+            <div>
               <img
-                src={pageData.externalIcon}
-                alt="dog for program detail"
-                className={classes.linkIcon}
+                src={programImage}
+                alt={primaryImageAlt}
+                className={classes.dogImage}
               />
-            </span>
-          </Grid>
-        </Grid>
-        {programConfig && (
-        <Grid item lg={4} md={4} sm={4} xs={12} className={classes.detailContainerRight}>
-          <img
-            src={programImage}
-            alt={primaryImageAlt}
-            className={classes.dogImage}
-          />
-        </Grid>
-        )}
-      </Grid>
+            </div>
+          )
+        }
+      </div>
     </div>
   );
 };
 
 const styles = (theme) => ({
-  paddingLeft5: {
-    paddingLeft: '5px',
+  detailContainerBody: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingLeft: '16px',
+  },
+  buttonAndLink: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '16px',
+  },
+  detailContainerButtonAndDesc: {
+    paddingTop: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '23px',
+  },
+  linkAndTooltip: {
+    display: 'flex',
+    gap: '8px',
+    alignItems: 'center',
   },
   dogImage: {
     width: '100%',
-    paddingRight: '6px',
   },
   linkIcon: {
     width: '25px',
@@ -85,66 +99,27 @@ const styles = (theme) => ({
     textDecoration: 'underline',
     fontSize: '12px',
   },
-  paddingLeft8: {
-    paddingLeft: '12px',
-  },
-  paddingBottm17: {
-    paddingBottm: '17px',
-  },
   container: {
     paddingTop: '50px',
     fontFamily: 'Raleway, sans-serif',
     background: '#f3f3f3',
   },
-
   content: {
     fontSize: '12px',
     lineHeight: '17px',
-    minHeight: '50px',
-    paddingBottom: '10px',
-    margin: '0px',
-  },
-
-  paddingLeft15: {
-    paddingLeft: '15px',
-  },
-  warning: {
-    color: theme.palette.warning.main,
-  },
-  paper: {
-    textAlign: 'center',
-  },
-  fakeToolbar: {
-    ...theme.mixins.toolbar,
-  },
-  root: {
-    textTransform: 'uppercase',
-    fontFamily: '"Open Sans", sans-serif',
-    fontSize: '9px',
-    letterSpacing: '0.025em',
+    width: '622px',
+    fontFamily: 'Open Sans',
     color: '#000',
-    background: '#f3f3f3',
-    paddingLeft: '75px',
   },
-  header: {
+  detailContainerHeader: {
     background: '#fff',
     lineHeight: '30px',
-    padding: '4px 4px 4px 80px',
+    padding: '4px 4px 4px 12px',
     borderBottom: '4px solid #1db634',
     color: '#1db634',
     fontWeight: 'bold',
     fontSize: '16px',
-    margin: '15px 6px 0px 0px',
   },
-
-  headerTitle: {
-    maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
-    float: 'left',
-    marginLeft: '110px',
-    paddingLeft: '3px',
-  },
-
   headerButtonLinkLeft: {
     paddingRight: '39px',
     fontSize: '12px',
@@ -152,7 +127,6 @@ const styles = (theme) => ({
     fontWeight: '600',
   },
   headerButtonLinkBadge: {
-
   },
   logo: {
     position: 'absolute',
@@ -160,66 +134,25 @@ const styles = (theme) => ({
     marginTop: '-14px',
     width: '96px',
   },
-  detailContainerLeft: {
-    padding: '20px 2px 30px 90px',
-    minHeight: '230px',
-    float: 'left',
-  },
-  detailContainerRight: {
-    padding: '0px !important',
-    minHeight: '230px',
-    float: 'right',
-  },
-  tableContainer: {
-    background: '#f3f3f3',
-  },
-  tableHeader: {
-    paddingLeft: '64px',
-  },
-  tableDiv: {
-    padding: '31px 0px',
-    maxWidth: theme.custom.maxContentWidth,
-    margin: '10px auto',
-  },
   headerButtonLink: {
     textDecoration: 'none',
     color: '#ffffff',
-
   },
   button: {
     borderRadius: '0px',
-    width: '178px',
+    width: '165px',
     height: '30px',
     lineHeight: '18px',
-    fontSize: '10px',
+    fontSize: '12px',
     color: '#ffffff',
     textTransform: 'uppercase',
-    backgroundColor: '#3890c5',
+    backgroundColor: '#0296c9',
     fontFamily: theme.custom.fontFamilySans,
     '&:hover': {
       backgroundColor: '#3890c5',
       color: '#ffffff',
       textDecoration: 'none',
     },
-  },
-  detailContainerItems: {
-    paddingTop: '5px',
-    paddingLeft: '17px',
-  },
-  title: {
-    color: '#9d9d9c',
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '12px',
-    letterSpacing: '0.017em',
-    fontWeight: '600',
-    textTransform: 'uppercase',
-  },
-  tableTitle: {
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
-    letterSpacing: '0.017em',
-    color: '#1db634',
-    paddingBottom: '20px',
   },
 });
 

@@ -15,6 +15,7 @@ import {
   resetUploadData,
   updateAutocompleteData,
   QueryBarGenerator,
+  sideBarActionTypes,
 } from '../../../bento-core';
 import { facetsConfig } from '../../../bento/dashboardData';
 import theme from './QueryBarTheme';
@@ -55,6 +56,7 @@ const QueryBarView = ({
       count: 'count',
       rootPath: `${window.location.href}/`,
       viewQueryURL: true,
+      useSpanForClearButton: true,
     },
     functions: {
       clearAll: () => {
@@ -88,6 +90,10 @@ const QueryBarView = ({
           datafield: section.datafield,
           isChecked: false,
           name: checkbox,
+          actionType: {
+            [section.datafield]: sideBarActionTypes.FACET_VALUE_CHANGED,
+            isFacetOrigin: false,
+          },
         }));
       },
     },

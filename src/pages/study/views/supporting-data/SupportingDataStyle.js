@@ -24,6 +24,7 @@ export default () => ({
     letterSpacing: '0.25px',
     textAlign: 'left',
     textTransform: 'uppercase',
+    color: '#606061',
   },
   summaryTextTitle: {
     textTransform: 'capitalize',

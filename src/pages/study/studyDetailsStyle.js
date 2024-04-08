@@ -201,7 +201,7 @@ export default (theme) => ({
     fontSize: '14pt',
   },
   headerMSubTitle: {
-    paddingTop: '15px',
+    paddingTop: '8px',
   },
   headerButton: {
     fontFamily: theme.custom.fontFamilySans,

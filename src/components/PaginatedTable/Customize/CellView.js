@@ -112,7 +112,7 @@ export const CustomCellView = (props) => {
       return (
         <DataValue {...props} />
       );
-    case customizeColumn.csvDownload:
+    case customizeColumn.csvDataRow:
       return (
         <CsvDownload {...props} />
       );

@@ -314,7 +314,7 @@ const tblContainer = {
   },
   MuiTable: {
     root: {
-      transform: 'rotateX(180deg)',
+      // transform: 'rotateX(180deg)',
       width: '100%',
       display: 'table',
       borderSpacing: '0',

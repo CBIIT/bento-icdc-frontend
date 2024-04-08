@@ -29,30 +29,46 @@ export function createFileName(fileName, format = '.csv') {
 }
 
 export function convertToCSV(jsonse, comments, keysToInclude, header) {
-  const objArray = jsonse;
-  const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-  let str = header.join(',');
-  array.map((entry, index) => {
-    let line = '';
-    keysToInclude.map((keyName) => {
-      if (line !== '') line += ',';
-      let columnResult = entry[keyName];
-      if (typeof columnResult === 'string') columnResult.replace(/"/g, '""');
-      if (typeof columnResult === 'string' && columnResult.search(/("|,|\n)/g) >= 0) columnResult = `"${columnResult}"`;
-      line += columnResult !== null ? columnResult : ' ';
-      return line;
-    });
-    if (index === 0) {
-      // str = header.join(',');
-      let commentResult = `${comments}`.replace(/"/g, '""');
-      if (commentResult.search(/("|,|\n)/g) >= 0) commentResult = `"${commentResult}"`;
-      str += `\r\n${line},${commentResult}\r\n`;
-    } else {
-      str += `${line}\r\n`;
+  const objArray = typeof jsonse !== "object" ? JSON.parse(jsonse) : jsonse;
+
+  // Start with the header row
+  let csvString = header.join(",") + "\r\n";
+
+  objArray.forEach((entry, index) => {
+    let line = keysToInclude
+      .map((keyName) => {
+        let fieldValue = entry[keyName];
+
+        // Check if the field value is a string and contains characters that need to be escaped.
+        if (typeof fieldValue === "string") {
+          fieldValue = fieldValue.replace(/"/g, '""'); // Escape double quotes
+
+          // Enclose the field value in double quotes if it contains commas, newlines, or double quotes
+          if (fieldValue.search(/("|,|\n)/g) >= 0) {
+            fieldValue = `"${fieldValue}"`;
+          }
+        }
+
+        return fieldValue !== null && fieldValue !== undefined
+          ? fieldValue
+          : "";
+      })
+      .join(","); // Join all fields for the row with commas
+
+    // Add comments to the first data row
+    if (index === 0 && comments) {
+      let formattedComments = comments.replace(/"/g, '""');
+      if (formattedComments.search(/("|,|\n)/g) >= 0) {
+        formattedComments = `"${formattedComments}"`;
+      }
+      line += `,${formattedComments}`;
     }
-    return str;
+
+    // Append the current row to the CSV string
+    csvString += line + "\r\n";
   });
-  return str;
+
+  return csvString;
 }
 
 export function downloadJson(tableData, comments, fileName, manifestData) {

@@ -13,6 +13,7 @@ import {
   clearFacetSection,
   clearSliderSection,
   toggleCheckBox,
+  sideBarActionTypes,
 } from '@bento-core/facet-filter';
 import {
   TableView,
@@ -49,6 +50,7 @@ import {
   SearchBoxGenerator,
   UploadModalGenerator,
   updateUploadData,
+  updateUploadMetadata,
 } from '@bento-core/local-find';
 import StatsBar from '@bento-core/stats-bar';
 import { Tabs as BentoTabs } from '@bento-core/tab';
@@ -85,6 +87,7 @@ export {
   clearFacetSection,
   clearSliderSection,
   toggleCheckBox,
+  sideBarActionTypes,
   TableView, // paginated-table (states/button actions)
   Wrapper,
   TableContext,
@@ -132,4 +135,5 @@ export {
   resetUploadData,
   updateAutocompleteData,
   updateUploadData,
+  updateUploadMetadata,
 };
