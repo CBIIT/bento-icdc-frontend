@@ -180,7 +180,7 @@ const styles = () => ({
   },
   clearIcon: {
     height: '11px',
-    margin: '-4px 20px 0px 19px',
+    margin: '0px 20px 0px 19px',
   },
   totalCount: {
     fontFamily: 'Open Sans',
