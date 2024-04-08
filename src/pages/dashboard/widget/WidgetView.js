@@ -23,7 +23,7 @@ import colors from '../../../utils/colors';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 import { formatWidgetData } from './WidgetUtils';
 
-export const disableDonutConfig = {
+export const emptyResultsDonutViewConfig = {
   styles: {
     textColor: 'black',
     fontFamily: 'Nunito',
@@ -58,8 +58,8 @@ export const disableDonutConfig = {
             endAngle={360}
             innerRadius={innerRadius - 2}
             outerRadius={innerRadius}
-            fill="#B7B7B7"
-            stroke="#B7B7B7"
+            fill="#D9D9D9"
+            stroke="#D9D9D9"
           />
           <Sector
             cx={cx}
@@ -78,16 +78,16 @@ export const disableDonutConfig = {
             endAngle={360}
             innerRadius={outerRadius}
             outerRadius={outerRadius + 1}
-            fill="#B7B7B7"
-            stroke="#B7B7B7"
+            fill="#D9D9D9"
+            stroke="#D9D9D9"
           />
         </g>
       );
     },
   },
   colors: {
-    even: ['#E4E3E3'],
-    odd: ['#E4E3E3'],
+    even: ['#E2E7EC'],
+    odd: ['#E2E7EC'],
   },
 };
 
@@ -137,7 +137,7 @@ const WidgetView = ({
   const { Widget } = useCallback(WidgetGenerator(widgetGeneratorConfig), [theme]);
   const { Widget: CustmizeWidgetView } = useCallback(WidgetGenerator({
     ...widgetGeneratorConfig,
-    DonutConfig: disableDonutConfig,
+    DonutConfig: emptyResultsDonutViewConfig,
   }), [theme]);
 
   return (
