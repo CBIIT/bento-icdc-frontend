@@ -19,6 +19,7 @@ import { themeToggleTooltip, widgetsData } from '../../../bento/dashboardData';
 import colors from '../../../utils/colors';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 import { formatWidgetData } from './WidgetUtils';
+import emptyResultsDonutViewConfig from './CustomizeDonutViewConfig';
 
 const WidgetView = ({
   classes,
@@ -64,6 +65,10 @@ const WidgetView = ({
     },
   };
   const { Widget } = useCallback(WidgetGenerator(widgetGeneratorConfig), [theme]);
+  const { Widget: CustmizeWidgetView } = useCallback(WidgetGenerator({
+    ...widgetGeneratorConfig,
+    DonutConfig: emptyResultsDonutViewConfig(),
+  }), [theme]);
 
   return (
     <>
@@ -110,7 +115,28 @@ const WidgetView = ({
               dataset = modifyFileTypeData(dataset);
             }
             if (!dataset || dataset.length === 0) {
-              return <></>;
+              return (
+                <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
+                  <CustmizeWidgetView
+                    header={(
+                      <Typography size="md" weight="bold" family="Raleway" color="lochmara">
+                        {widget.title}
+                      </Typography>
+                    )}
+                    bodyClass={classes.fullHeightBody}
+                    className={classes.card}
+                    bottomDivider
+                    customBackGround
+                    padAngle={0}
+                    chartType="donut"
+                    sliceTitle={widget.sliceTitle}
+                    data={[{
+                      group: '',
+                      subjects: 1,
+                    }]}
+                  />
+                </Grid>
+              );
             }
             if (widget.type === 'sunburst' && (!dataset.children || !dataset.children.length)) {
               return <></>;
