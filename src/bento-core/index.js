@@ -1,4 +1,4 @@
-import { WidgetGenerator } from '@bento-core/widgets';
+import { WidgetGenerator, DonutChartGenerator } from '@bento-core/widgets';
 import { CustomDataTable } from '@bento-core/data-table';
 import { Header } from '@bento-core/header';
 import {
@@ -74,6 +74,7 @@ import ToolTip from '@bento-core/tool-tip';
 
 export {
   WidgetGenerator, // widgets
+  DonutChartGenerator,
   Footer, // footer
   Header, // header
   clearAllAndSelectFacet, // filters
