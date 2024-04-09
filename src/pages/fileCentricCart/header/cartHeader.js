@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button, Divider, ListItemText, Menu,
+  Button, Divider,
   withStyles,
 } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
@@ -9,6 +9,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
 import { cn } from '@bento-core/util';
 import gql from 'graphql-tag';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuList from '@material-ui/core/MenuList';
 import env from '../../../utils/env';
 import Styles from './cartHeader.style';
 import ReadMoreSVG from './readMore';
@@ -22,40 +27,13 @@ import {
 } from '../../../bento-core';
 import arrowDownPng from './assets/arrowDown.png';
 
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-    width: '240px',
-    borderBottomLeftRadius: '8px',
-    borderBottomRightRadius: '8px',
-    borderTopRightRadius: '0px',
-    borderTopLeftRadius: '0px',
-  },
-  list: {
-    paddingTop: '0px',
-    paddingBottom: '0px',
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'left',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'left',
-    }}
-    {...props}
-  />
-));
-
 const StyledMenuItem = withStyles((theme) => ({
   root: {
     // padding: '10px',
     padding: '2px 26px',
     color: '#095c85',
+    overflow: 'auto',
+    whiteSpace: 'wrap',
     '&:focus': {
       backgroundColor: '#0d71a3',
       color: 'white',
@@ -101,29 +79,61 @@ const CartHeader = React.forwardRef(({
   filesId,
 }) => {
   const [sbgUrl, setSBGUrl] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
 
   const getManifestPayload = () => {
     const { data: manifestData } = getManifestData(GET_STORE_MANIFEST_DATA_QUERY, filesId);
+
     if (!manifestData) {
       return null;
     }
     const processedStoreManifestPayload = manifestData.filesInList.map((el) => ({
-      file_name: el.file_name,
-      file_type: el.file_type,
-      association: el.association,
-      file_description: el.file_description,
-      file_format: el.file_format,
-      file_size: el.file_size,
-      case_id: el.case_id,
-      breed: el.breed,
-      diagnosis: el.diagnosis,
-      study_code: el.study_code,
-      file_uuid: el.file_uuid,
-      md5sum: el.md5sum,
-      sample_id: el.sample_id,
-      individual_id: el.individual_id,
-      name: el.name,
-      drs_uri: el.drs_uri,
+      file_name: el?.file_name,
+      file_type: el?.file_type,
+      association: el?.association,
+      file_description: el?.file_description,
+      file_format: el?.file_format,
+      file_size: el?.file_size,
+      case_id: el?.case_id,
+      breed: el?.breed,
+      diagnosis: el?.diagnosis,
+      study_code: el?.study_code,
+      file_uuid: el?.file_uuid,
+      md5sum: el?.md5sum,
+      sample_id: el?.sample_id,
+      individual_id: el?.individual_id,
+      name: el?.name,
+      drs_uri: el?.drs_uri,
     }));
     return processedStoreManifestPayload;
   };
@@ -141,7 +151,6 @@ const CartHeader = React.forwardRef(({
     }
   }, [data]);
 
-  const [anchorElement, setAnchorElement] = React.useState(null);
   const [label] = useState(LABEL);
   const [displayReadMe, setDisplayReadMe] = useState(false);
   const [content, setContent] = useState(undefined);
@@ -154,14 +163,6 @@ const CartHeader = React.forwardRef(({
   useEffect(() => {
     getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
   }, []);
-  const exportOptionsClickHandler = (event) => {
-    // setLabel('Available Downloads');
-    setAnchorElement(event.currentTarget);
-  };
-
-  const closeHandler = () => {
-    setAnchorElement(null);
-  };
 
   const initiateDownload = (currLabel) => {
     switch (currLabel) {
@@ -185,13 +186,6 @@ const CartHeader = React.forwardRef(({
     setDisplayReadMe(!displayReadMe);
   };
 
-  const setType = (value) => {
-    // setLabel(value);
-    // setAnchorElement(null);
-    initiateDownload(value);
-    closeHandler();
-  };
-
   const getMenuItem = (type) => {
     let icon;
     switch (type) {
@@ -203,22 +197,19 @@ const CartHeader = React.forwardRef(({
         break;
     }
     return (
-      <StyledMenuItem onClick={() => setType(type)}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
-          <ListItemText
-            classes={{
-              primary: classes.listItemText,
-            }}
-            primary={type}
-          />
-          {
+      <StyledMenuItem onClick={() => {
+        initiateDownload(type);
+        setOpen(false);
+      }}
+      >
+        <div>{type}</div>
+        {
           icon && (
           <span>
             <img src={icon} alt="icon" />
           </span>
           )
         }
-        </div>
       </StyledMenuItem>
     );
   };
@@ -269,7 +260,7 @@ const CartHeader = React.forwardRef(({
             {' '}
             <Button
               classes={{
-                root: anchorElement
+                root: open
                   ? classes.availableDownloadDropdownBtnIsOpen
                   : classes.availableDownloadDropdownBtn,
                 label: classes.availableDownloadDropdownBtnLabel,
@@ -277,7 +268,10 @@ const CartHeader = React.forwardRef(({
                 startIcon: classes.availableDownloadDropdownBtnStartIcon,
               }}
               startIcon={<img style={{ marginRight: '8px' }} src={arrowDownPng} alt="arrow down icon" />}
-              onClick={exportOptionsClickHandler}
+              ref={anchorRef}
+              aria-controls={open ? 'menu-list-grow' : undefined}
+              aria-haspopup="true"
+              onClick={handleToggle}
             >
               {isLoading ? (<p>Loading...</p>) : (
                 <>
@@ -285,16 +279,39 @@ const CartHeader = React.forwardRef(({
                 </>
               )}
             </Button>
-            <StyledMenu
-              id="customized-menu"
-              anchorEl={anchorElement}
-              keepMounted
-              open={Boolean(anchorElement)}
-              onClose={closeHandler}
+            <Popper
+              open={open}
+              anchorEl={anchorRef.current}
+              role={undefined}
+              transition
+              disablePortal
             >
-              {options}
-            </StyledMenu>
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                >
+                  <Paper
+                    className={classes.dropdownPaper}
+                  >
+                    <ClickAwayListener onClickAway={handleClose}>
+                      <MenuList
+                        autoFocusItem={open}
+                        id="menu-list-grow"
+                        onKeyDown={handleListKeyDown}
+                        classes={{
+                          root: classes.dropdownMenuList,
+                        }}
+                      >
+                        {options}
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
           </div>
+
           <div className={classes.downloadFileManifestTooltipWrapper}>
             <Button
               variant="contained"
