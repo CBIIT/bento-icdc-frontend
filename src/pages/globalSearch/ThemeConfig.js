@@ -25,7 +25,7 @@ export default ({
           padding: '2px 20px 3px 20px !important',
         },
         endAdornment: {
-          top: 'calc(50% - 15px)',
+          top: 'calc(50% - 17px)',
           right: '45px !important',
         },
         listbox: {
