@@ -20,9 +20,9 @@ export default () => ({
   },
   rightContent: {
     marginLeft: '20px',
-    paddingTop: '10px',
+    paddingTop: '15px',
     width: 'calc(100% - 250px)',
     position: 'relative',
-    borderRight: 'thin solid #B1B1B1',
+    // borderRight: 'thin solid #B1B1B1',
   },
 });
