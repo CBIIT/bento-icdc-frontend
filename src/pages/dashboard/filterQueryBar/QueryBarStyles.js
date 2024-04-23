@@ -3,7 +3,7 @@ const styles = () => ({
     minHeight: '77px !important',
     maxHeight: '150px',
     backgroundColor: '#F3F8FB !important',
-    padding: '5px 25px 12px 25px !important',
+    padding: '5px 17px 12px 17px !important',
     overflowY: 'auto',
     border: '1px solid #d4d6d7',
   },
@@ -39,22 +39,22 @@ const styles = () => ({
     fontWeight: '500',
     lineHeight: '16px',
     letterSpacing: '0em',
-    '&:after': {
-      content: '" "',
+    '&:last-child': {
+      marginRight: '0px !important',
     },
   },
   bracketsOpen: {
-    fontSize: 18,
+    fontSize: '20px !important',
     fontFamily: 'Nunito Sans Semibold',
     color: '#787878',
     marginRight: 3,
     fontWeight: 600,
   },
   bracketsClose: {
-    fontSize: 18,
+    fontSize: '20px !important',
     fontFamily: 'Nunito Sans Semibold',
     color: '#787878',
-    marginLeft: 3,
+    marginLeft: '0 !important',
     fontWeight: 600,
   },
   operators: {
@@ -97,6 +97,7 @@ const styles = () => ({
     height: '27px',
     '&::after': {
       content: '"|"',
+      fontSize: 'larger',
     },
   },
   /* Custom Styling by Project */
@@ -134,7 +135,7 @@ export const customStyles = {
   },
   facetSectionFilterByCases: {
     color: '#80430A',
-    padding: '2px 5px 2px 5px',
+    padding: '2px 5px 0px 5px',
     borderRadius: '5px',
     border: '0.5px solid #646464',
     backgroundColor: '#FFFFFF',
@@ -144,10 +145,13 @@ export const customStyles = {
     lineHeight: '16px',
     letterSpacing: '0em',
     whiteSpace: 'nowrap',
+    '&:last-child': {
+      marginRight: '25px !important',
+    },
   },
   facetSectionFilterByCasesBackground: {
     color: '#000000',
-    padding: '2px 5px 2px 5px',
+    padding: '2px 5px 1px 5px',
     borderRadius: '5px',
     border: '0.5px solid #646464',
     backgroundColor: '#fdf3eb',
@@ -209,6 +213,9 @@ export const customStyles = {
     lineHeight: '16px',
     letterSpacing: '0em',
     whiteSpace: 'nowrap',
+  },
+  collapseBtn: {
+    marginRight: '3px',
   },
 };
 
