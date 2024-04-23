@@ -1041,10 +1041,10 @@ export const studiesByProgram = gql`
           }
           ... on TCIAMetadata {
             Collection
-            total_patient_IDs
-            unique_modalities
-            unique_bodyparts_examined
-            total_image_counts
+            Aggregate_PatientID
+            Aggregate_Modality
+            Aggregate_BodyPartExamined
+            Aggregate_ImageCount
           }
         }
       }
