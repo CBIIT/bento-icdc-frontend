@@ -22,6 +22,13 @@ export default (theme) => ({
     display: 'flex',
     gap: '8px',
   },
+  dropdownMenuList: {
+    paddingTop: '0px',
+    paddingBottom: '0px',
+  },
+  dropdownPaper: {
+    maxWidth: '240px',
+  },
   divider: {
     position: 'relative',
     bottom: '17px',
