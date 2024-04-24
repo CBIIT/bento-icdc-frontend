@@ -16,10 +16,10 @@ const IDCOrder = {
 
 const TCIAOrder = {
   Collection: 1,
-  total_patient_IDs: 2,
-  total_image_counts: 3,
-  unique_modalities: 4,
-  unique_bodyparts_examined: 5,
+  Aggregate_PatientID: 2,
+  Aggregate_ImageCount: 3,
+  Aggregate_Modality: 4,
+  Aggregate_BodyPartExamined: 5,
 };
 
 const repoOrder = {
