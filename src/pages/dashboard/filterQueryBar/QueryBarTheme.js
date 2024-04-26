@@ -8,10 +8,9 @@ const theme = {
       },
       root: {
         '&.icdc_query_bar': {
-          padding: '0px 0px 0px 0px',
-          marginBottom: '1px',
+          padding: '0px 0px 1px 0px',
           '& .filter-by-cases': {
-            // color: '#ff7f15',
+            // borderLeft: '2px solid',
           },
           '& .filter-by-samples': {
             // color: '#9dc1d9',
