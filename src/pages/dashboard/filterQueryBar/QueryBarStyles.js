@@ -48,7 +48,7 @@ export const customStyles = {
   },
   queryWrapper: {
     minHeight: '77px',
-    maxHeight: '125px',
+    maxHeight: '143px',
     backgroundColor: '#F3F8FB',
     padding: '8px 17px 12px 17px',
     overflowY: 'auto',
@@ -72,14 +72,14 @@ export const customStyles = {
     cursor: 'pointer',
   },
   bracketsOpen: {
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: 'Nunito Sans',
     color: '#787878',
     marginRight: 3,
     fontWeight: 600,
   },
   bracketsClose: {
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: 'Nunito Sans',
     color: '#787878',
     marginLeft: 3,
@@ -211,6 +211,27 @@ export const customStyles = {
     display: 'flex',
     marginTop: 6,
     minHeight: '10px',
+  },
+  viewLinkToggleBtn: {
+    padding: '5px 10px 5px 10px',
+    height: '20px',
+    fontFamily: 'Nunito',
+    fontSize: '12px',
+    fontWeight: '500',
+    lineHeight: '16px',
+    letterSpacing: '0em',
+    textAlign: 'left',
+    backgroundColor: '#1D79A8',
+    textTransform: 'none',
+    color: '#fff',
+    float: 'left',
+    margin: '0px 10px 0px 0px',
+    borderRadius: '5px',
+    whiteSpace: 'nowrap',
+    '&:hover': {
+      backgroundColor: '#1D79A8',
+      color: '#fff',
+    },
   },
 };
 
