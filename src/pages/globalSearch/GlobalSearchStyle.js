@@ -159,9 +159,6 @@ const styles = () => ({
         backgroundColor: '#0088FF',
       },
     },
-    '& .MuiTabs-flexContainer': {
-      background: 'yellow',
-    },
   },
   searchIcon: {
     height: '22px',
@@ -179,7 +176,7 @@ const styles = () => ({
     },
   },
   clearIcon: {
-    height: '11px',
+    height: '13px',
     margin: '0px 20px 0px 19px',
   },
   totalCount: {
