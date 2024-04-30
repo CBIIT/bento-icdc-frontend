@@ -107,19 +107,19 @@ export const supportDataList = [
         },
         {
           title: 'TOTAL PATIENT IDS',
-          key: 'total_patient_IDs',
+          key: 'Aggregate_PatientID',
         },
         {
           title: 'total image counts',
-          key: 'total_image_counts',
+          key: 'Aggregate_ImageCount',
         },
         {
           title: 'unique modalities',
-          key: 'unique_modalities',
+          key: 'Aggregate_Modality',
         },
         {
           title: 'unique bodyparts examined',
-          key: 'unique_bodyparts_examined',
+          key: 'Aggregate_BodyPartExamined',
         },
       ],
       tableMsg: {

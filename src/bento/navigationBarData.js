@@ -182,7 +182,7 @@ export const navBarData = [
 export const externalLinks = {
   resources: [
     {
-      title: 'Canine Training Center',
+      title: 'Tutorials',
       link: 'https://cbiit.github.io/icdc-bioinformatics/',
     },
   ],

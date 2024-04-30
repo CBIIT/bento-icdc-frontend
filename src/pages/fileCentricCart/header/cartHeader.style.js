@@ -25,9 +25,15 @@ export default (theme) => ({
   dropdownMenuList: {
     paddingTop: '0px',
     paddingBottom: '0px',
+    backgroundColor: '#0d71a3',
+    color: 'white',
+    borderBottomRightRadius: '8px',
+    borderBottomLeftRadius: '8px',
   },
   dropdownPaper: {
     maxWidth: '240px',
+    borderBottomRightRadius: '8px',
+    borderBottomLeftRadius: '8px',
   },
   divider: {
     position: 'relative',
