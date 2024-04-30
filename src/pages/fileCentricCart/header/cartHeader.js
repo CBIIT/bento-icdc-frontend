@@ -27,21 +27,20 @@ import {
 } from '../../../bento-core';
 import arrowDownPng from './assets/arrowDown.png';
 
-const StyledMenuItem = withStyles((theme) => ({
+const StyledMenuItem = withStyles(() => ({
   root: {
-    // padding: '10px',
     padding: '2px 26px',
-    color: '#095c85',
+    color: '#fff',
     overflow: 'auto',
     whiteSpace: 'wrap',
-    '&:focus': {
+    /* '&:focus': {
       backgroundColor: '#0d71a3',
       color: 'white',
       '& .MuiListItemText-primary': {
         color: theme.palette.common.white,
         lineHeight: '1',
       },
-    },
+    }, */
   },
 }))(MenuItem);
 
