@@ -29,7 +29,6 @@ import arrowDownPng from './assets/arrowDown.png';
 
 const StyledMenuItem = withStyles(() => ({
   root: {
-    // padding: '10px',
     padding: '2px 26px',
     color: 'white',
     overflow: 'auto',
