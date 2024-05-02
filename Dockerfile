@@ -1,5 +1,5 @@
 # Build Stage
-FROM node:15.13.0-alpine as build
+FROM node:15.13.0-alpine AS build
 
 WORKDIR /usr/src/app
 
@@ -12,7 +12,7 @@ RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --verbose
 
 # Final Stage
-FROM nginx:1.25.4-alpine3.18 as final
+FROM nginx:1.25.4-alpine3.18 AS fnl_base_image
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 COPY --from=build /usr/src/app/configure/inject.template.js /usr/share/nginx/html/inject.template.js
