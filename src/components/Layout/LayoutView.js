@@ -7,7 +7,7 @@ import LinkBar from '../LinkBar';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import resourceDropdownRoutes from '../../bento/resourceDropdownRoutes';
 import dataDropdownRoutes from '../../bento/dataDropdownRoutes';
-import Header from '../Header/HeaderView';
+import Header from '../header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';

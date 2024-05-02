@@ -1,14 +1,16 @@
-FROM node:15.13.0-alpine   as build
+FROM node:20-alpine as build
 
 WORKDIR /usr/src/app
+
+COPY package*.json .
 
 COPY . .
 
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm set progress=false
 
-RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci --legacy-peer-deps
 
-RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build --verbose
+RUN NODE_OPTIONS="--openssl-legacy-provider --max-old-space-size=4096 " npm run build --verbose 
 
 # Final Stage
 FROM nginx:1.25.4-alpine3.18 as final
