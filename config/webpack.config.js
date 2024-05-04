@@ -6,8 +6,6 @@ const webpack = require('webpack');
 const resolve = require('resolve');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -75,194 +73,173 @@ module.exports = function(webpackEnv) {
       : isEnvDevelopment && 'eval-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
-    entry: [
-      // Include an alternative client for WebpackDevServer. A client's job is to
-      // connect to WebpackDevServer by a socket and get notified about changes.
-      // When you save a file, the client will either apply hot updates (in case
-      // of CSS changes), or refresh the page (in case of JS changes). When you
-      // make a syntax error, this client will display a syntax error overlay.
-      // Note: instead of the default WebpackDevServer client, we use a custom one
-      // to bring better experience for Create React App users. You can replace
-      // the line below with these two lines if you prefer the stock client:
-      // require.resolve('webpack-dev-server/client') + '?/',
-      // require.resolve('webpack/hot/dev-server'),
-      isEnvDevelopment &&
-        require.resolve('react-dev-utils/webpackHotDevClient'),
-      // Finally, this is your app's code:
-      paths.appIndexJs,
-      // We include the app code last so that if there is a runtime error during
-      // initialization, it doesn't blow up the WebpackDevServer client, and
-      // changing JS code would still trigger a refresh.
-    ].filter(Boolean),
+    entry: './src/index.js',
     output: {
-      // The build folder.
-      path: isEnvProduction ? paths.appBuild : undefined,
-      // Add /* filename */ comments to generated require()s in the output.
-      pathinfo: isEnvDevelopment,
-      // There will be one main bundle, and one file per asynchronous chunk.
-      // In development, it does not produce real files.
+      path: paths.appBuild,
       filename: isEnvProduction
-        ? 'static/js/[name].[chunkhash:8].js'
-        : isEnvDevelopment && 'static/js/bundle.js',
-      // There are also additional JS chunk files if you use code splitting.
-      chunkFilename: isEnvProduction
-        ? 'static/js/[name].[chunkhash:8].chunk.js'
-        : isEnvDevelopment && 'static/js/[name].chunk.js',
-      // We inferred the "public path" (such as / or /my-project) from homepage.
-      // We use "/" in development.
+          ? 'static/js/[name].[chunkhash:8].js'
+          : isEnvDevelopment && 'static/js/bundle.js',
       publicPath: publicPath,
-      // Point sourcemap entries to original disk location (format as URL on Windows)
-      devtoolModuleFilenameTemplate: isEnvProduction
-        ? info =>
-            path
-              .relative(paths.appSrc, info.absoluteResourcePath)
-              .replace(/\\/g, '/')
-        : isEnvDevelopment &&
-          (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     },
-    optimization: {
-      minimize: isEnvProduction,
-      minimizer: [
-        // This is only used in production mode
-        new TerserPlugin({
-          terserOptions: {
-            parse: {
-              // we want terser to parse ecma 8 code. However, we don't want it
-              // to apply any minfication steps that turns valid ecma 5 code
-              // into invalid ecma 5 code. This is why the 'compress' and 'output'
-              // sections only apply transformations that are ecma 5 safe
-              // https://github.com/facebook/create-react-app/pull/4234
-              ecma: 8,
-            },
-            compress: {
-              ecma: 5,
-              warnings: false,
-              // Disabled because of an issue with Uglify breaking seemingly valid code:
-              // https://github.com/facebook/create-react-app/issues/2376
-              // Pending further investigation:
-              // https://github.com/mishoo/UglifyJS2/issues/2011
-              comparisons: false,
-              // Disabled because of an issue with Terser breaking valid code:
-              // https://github.com/facebook/create-react-app/issues/5250
-              // Pending futher investigation:
-              // https://github.com/terser-js/terser/issues/120
-              inline: 2,
-            },
-            mangle: {
-              safari10: true,
-            },
-            output: {
-              ecma: 5,
-              comments: false,
-              // Turned on because emoji and regex is not minified properly using default
-              // https://github.com/facebook/create-react-app/issues/2488
-              ascii_only: true,
-            },
-          },
-          // Use multi-process parallel running to improve the build speed
-          // Default number of concurrent runs: os.cpus().length - 1
-          parallel: true,
-        }),
-        // This is only used in production mode
-        new OptimizeCSSAssetsPlugin({
-          cssProcessorOptions: {
-            parser: safePostCssParser,
-            map: shouldUseSourceMap
-              ? {
-                  // `inline: false` forces the sourcemap to be output into a
-                  // separate file
-                  inline: false,
-                  // `annotation: true` appends the sourceMappingURL to the end of
-                  // the css file, helping the browser find the sourcemap
-                  annotation: true,
-                }
-              : false,
-          },
-        }),
-      ],
-      // Automatically split vendor and commons
-      // https://twitter.com/wSokra/status/969633336732905474
-      // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
-      splitChunks: {
-        chunks: 'all',
-        name: false,
-      },
-      // Keep the runtime chunk separated to enable long term caching
-      // https://twitter.com/wSokra/status/969679223278505985
-      runtimeChunk: true,
-    },
-    // resolve: {
-    //   // This allows you to set a fallback for where Webpack should look for modules.
-    //   // We placed these paths second because we want `node_modules` to "win"
-    //   // if there are any conflicts. This matches Node resolution mechanism.
-    //   // https://github.com/facebook/create-react-app/issues/253
-    //   modules: ['node_modules', path.resolve('node_modules')].concat(
-    //     // It is guaranteed to exist because we tweak it in `env.js`
-    //     process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
-    //   ),
-    //   fallback: {
-    //     "fs": false,
-    //     "tls": false,
-    //     "net": false,
-    //     "path": false,
-    //     "zlib": false,
-    //     "http": false,
-    //     "https": false,
-    //     "stream": false,
-    //     "crypto": false,
-    //     "crypto-browserify": require.resolve('crypto-browserify'), 
+    // output: {
+    //   // The build folder.
+    //   path: isEnvProduction ? paths.appBuild : undefined,
+    //   // Add /* filename */ comments to generated require()s in the output.
+    //   pathinfo: isEnvDevelopment,
+    //   // There will be one main bundle, and one file per asynchronous chunk.
+    //   // In development, it does not produce real files.
+    //   filename: isEnvProduction
+    //     ? 'static/js/[name].[chunkhash:8].js'
+    //     : isEnvDevelopment && 'static/js/bundle.js',
+    //   // There are also additional JS chunk files if you use code splitting.
+    //   chunkFilename: isEnvProduction
+    //     ? 'static/js/[name].[chunkhash:8].chunk.js'
+    //     : isEnvDevelopment && 'static/js/[name].chunk.js',
+    //   // We inferred the "public path" (such as / or /my-project) from homepage.
+    //   // We use "/" in development.
+    //   publicPath: publicPath,
+    //   // Point sourcemap entries to original disk location (format as URL on Windows)
+    //   devtoolModuleFilenameTemplate: isEnvProduction
+    //     ? info =>
+    //         path
+    //           .relative(paths.appSrc, info.absoluteResourcePath)
+    //           .replace(/\\/g, '/')
+    //     : isEnvDevelopment &&
+    //       (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
+    // },
+    // optimization: {
+    //   minimize: isEnvProduction,
+    //   minimizer: [
+    //     // This is only used in production mode
+    //     new TerserPlugin({
+    //       terserOptions: {
+    //         parse: {
+    //           // we want terser to parse ecma 8 code. However, we don't want it
+    //           // to apply any minfication steps that turns valid ecma 5 code
+    //           // into invalid ecma 5 code. This is why the 'compress' and 'output'
+    //           // sections only apply transformations that are ecma 5 safe
+    //           // https://github.com/facebook/create-react-app/pull/4234
+    //           ecma: 8,
+    //         },
+    //         compress: {
+    //           ecma: 5,
+    //           warnings: false,
+    //           // Disabled because of an issue with Uglify breaking seemingly valid code:
+    //           // https://github.com/facebook/create-react-app/issues/2376
+    //           // Pending further investigation:
+    //           // https://github.com/mishoo/UglifyJS2/issues/2011
+    //           comparisons: false,
+    //           // Disabled because of an issue with Terser breaking valid code:
+    //           // https://github.com/facebook/create-react-app/issues/5250
+    //           // Pending futher investigation:
+    //           // https://github.com/terser-js/terser/issues/120
+    //           inline: 2,
+    //         },
+    //         mangle: {
+    //           safari10: true,
+    //         },
+    //         output: {
+    //           ecma: 5,
+    //           comments: false,
+    //           // Turned on because emoji and regex is not minified properly using default
+    //           // https://github.com/facebook/create-react-app/issues/2488
+    //           ascii_only: true,
+    //         },
+    //       },
+    //       // Use multi-process parallel running to improve the build speed
+    //       // Default number of concurrent runs: os.cpus().length - 1
+    //       parallel: true,
+    //     }),
+    //     // This is only used in production mode
+    //     new OptimizeCSSAssetsPlugin({
+    //       cssProcessorOptions: {
+    //         parser: safePostCssParser,
+    //         map: shouldUseSourceMap
+    //           ? {
+    //               // `inline: false` forces the sourcemap to be output into a
+    //               // separate file
+    //               inline: false,
+    //               // `annotation: true` appends the sourceMappingURL to the end of
+    //               // the css file, helping the browser find the sourcemap
+    //               annotation: true,
+    //             }
+    //           : false,
+    //       },
+    //     }),
+    //   ],
+    //   // Automatically split vendor and commons
+    //   // https://twitter.com/wSokra/status/969633336732905474
+    //   // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
+    //   splitChunks: {
+    //     chunks: 'all',
+    //     name: false,
     //   },
-    //   // These are the reasonable defaults supported by the Node ecosystem.
-    //   // We also include JSX as a common component filename extension to support
-    //   // some tools, although we do not recommend using it, see:
-    //   // https://github.com/facebook/create-react-app/issues/290
-    //   // `web` extension prefixes have been added for better support
-    //   // for React Native Web.
-    //   extensions: paths.moduleFileExtensions
-    //     .map(ext => `.${ext}`)
-    //     .filter(ext => useTypeScript || !ext.includes('ts')),
-    //   alias: {
-    //     // Support React Native Web
-    //     // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-    //     'react-native': 'react-native-web',
-    //     react: path.resolve('./node_modules/react'),
-    //     '@material-ui/core': path.resolve('./node_modules/@material-ui/core'),
-    //   },
+    //   // Keep the runtime chunk separated to enable long term caching
+    //   // https://twitter.com/wSokra/status/969679223278505985
+    //   runtimeChunk: true,
+    // },
+    // resolveLoader: {
     //   plugins: [
-    //     // Adds support for installing with Plug'n'Play, leading to faster installs and adding
-    //     // guards against forgotten dependencies and such.
-    //     PnpWebpackPlugin,
-    //     // Prevents users from importing files from outside of src/ (or node_modules/).
-    //     // This often causes confusion because we only process files within src/ with babel.
-    //     // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
-    //     // please link the files into your node_modules/ and let module-resolution kick in.
-    //     // Make sure your source files are compiled, as they will not be processed in any way.
-    //     new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+    //     // Also related to Plug'n'Play, but this time it tells Webpack to load its loaders
+    //     // from the current package.
+    //     PnpWebpackPlugin.moduleLoader(module),
     //   ],
     // },
-    resolveLoader: {
-      plugins: [
-        // Also related to Plug'n'Play, but this time it tells Webpack to load its loaders
-        // from the current package.
-        PnpWebpackPlugin.moduleLoader(module),
-      ],
-    },
     module: {
-      rules: [{
-          parser: { requireEnsure: false },
-        },
+      rules: [
         // Process application JS with Babel.
         // The preset includes JSX, Flow, TypeScript, and some ESnext features.
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env', '@babel/preset-react']
+              presets: [
+                '@babel/preset-env',
+                ['@babel/preset-react', {runtime:"automatic"}],
+              ]
             }
           }
         },
+        { 
+          test: /\.css$/i,                
+          use: [                  {                    
+            loader: MiniCssExtractPlugin.loader,                                       
+            options: { publicPath: "" },
+          },                  
+          "css-loader",                                                  
+          ],              
+        },
+        {
+          test: /\.(gif|png|jpe?g|svg)$/i,
+          use: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                mozjpeg: {
+                  progressive: true,
+                },
+                // optipng.enabled: false will disable optipng
+                optipng: {
+                  enabled: false,
+                },
+                pngquant: {
+                  quality: [0.65, 0.90],
+                  speed: 4
+                },
+                gifsicle: {
+                  interlaced: false,
+                },
+                // the webp option will enable WEBP
+                webp: {
+                  quality: 75
+                }
+              }
+            },
+          ],
+        }
       ],
     },
     plugins: [
@@ -273,33 +250,3 @@ module.exports = function(webpackEnv) {
     ]
   };
 };
-
-
-// const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-// module.exports = function(webpackEnv) {
-//   console.log(webpackEnv);
-//   return {
-//     entry: path.join(__dirname, "../src", "index.js"),
-//     output: {
-//       path:path.resolve(__dirname, "../dist"),
-//     },
-//     module: {
-//       rules: [
-//         {
-//           test: /\.?js$/,
-//           exclude: /node_modules/,
-//           use: {
-//             loader: "babel-loader",
-//           }
-//         },
-//       ]
-//     },
-//     plugins: [
-//       new HtmlWebpackPlugin({
-//         template: path.join(__dirname, "../public", "index.html"),
-//       }),
-//     ],
-//   }
-// } 
