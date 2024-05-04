@@ -1,10 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
+import "core-js";
+import "regenerator-runtime";
+import App from "./App";
 
-ReactDOM.render(
-  <>
-    <h2>ICDC Webpack 5 node v20</h2>
-  </>,
-  document.getElementById('root'),
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+  <React.StrictMode>
+    <App/>
+  </React.StrictMode>,
 );
-

@@ -16,7 +16,6 @@ process.on('unhandledRejection', (err) => {
 // Ensure environment variables are read.
 require('../config/env');
 
-
 const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
@@ -96,7 +95,7 @@ checkBrowsers(paths.appPath, isInteractive)
         disableDotRule: true
       }
     };
-    const devServer = new WebpackDevServer({ port: 5100, open: true, liveReload: true }, compiler);
+    const devServer = new WebpackDevServer({ port: port, open: true, liveReload: true }, compiler);
     // Launch WebpackDevServer.
     devServer.start()
     // devServer.onListening(port, HOST, function(err){
