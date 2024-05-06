@@ -34,8 +34,6 @@ const ICDCFooter = () => {
     getSystems();
   }, [FooterData]);
 
-  console.log(env);
-
   return (
     <CustomThemeProvider>
       <Footer data={footerUpdatedData} styles={ICDC_FOOTER_STYLE} />

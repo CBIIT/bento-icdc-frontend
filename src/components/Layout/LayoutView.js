@@ -6,22 +6,23 @@ import {
 } from 'react-router-dom';
 import Dashboard from "../../pages/dashboard/Dashboard";
 import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
+import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
 import Footer from '../../components/Footer/FooterView';
 
 const LayoutView = () => {
 
-    return (
-        <>
-          <HashRouter>
-            <Switch>
+  return (
+      <>
+        <HashRouter>
+          <Switch>
             <Route exact path="/" component={Dashboard} />
             <Route path="/search/:id" component={GlobalSearchView} />
-            </Switch>
-          </HashRouter>
-          <Footer />
-        </>
-    )
-
+            <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
+          </Switch>
+        </HashRouter>
+        <Footer />
+      </>
+  );
 };
 
 export default LayoutView;
