@@ -3,12 +3,15 @@ import {
   BrowserRouter,
 } from 'react-router-dom';
 import Layout from './components/Layout/LayoutView';
+import { CustomThemeProvider } from './ThemeContext';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
+    <CustomThemeProvider>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
+    </CustomThemeProvider>
   );
 };
 
