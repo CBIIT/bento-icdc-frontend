@@ -212,33 +212,12 @@ module.exports = function(webpackEnv) {
           ],              
         },
         {
-          test: /\.(gif|png|jpe?g|svg)$/i,
-          use: [
-            'file-loader',
-            {
-              loader: 'image-webpack-loader',
-              options: {
-                mozjpeg: {
-                  progressive: true,
-                },
-                // optipng.enabled: false will disable optipng
-                optipng: {
-                  enabled: false,
-                },
-                pngquant: {
-                  quality: [0.65, 0.90],
-                  speed: 4
-                },
-                gifsicle: {
-                  interlaced: false,
-                },
-                // the webp option will enable WEBP
-                webp: {
-                  quality: 75
-                }
-              }
-            },
-          ],
+          test: /\.(png|jpe?g|svg)$/i,
+          loader: require.resolve('url-loader'),
+          options: {
+            limit: 10000,
+            name: 'static/media/[name].[hash:8].[ext]',
+          },
         }
       ],
     },

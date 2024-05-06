@@ -1,16 +1,24 @@
 import React from 'react';
-import env from './utils/env';
+import {
+  BrowserRouter, HashRouter, Route, Switch
+} from 'react-router-dom';
+import GlobalSearch from './pages/globalSearch/GlobalSearch';
+import Footer from './components/Footer/FooterView';
+import Dashboard from './pages/dashboard/Dashboard';
 
 const App = () => {
-    
-    return (
-        <>
-            <p>
-                App Component
-            </p>
-            <p>{env.REACT_APP_GA_TRACKING_ID}</p>
-        </>
-    );
+  return (
+    <BrowserRouter>
+      <HashRouter>
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/search" component={GlobalSearch} />
+        </Switch>
+      </HashRouter>
+      <Footer />
+    </BrowserRouter>
+  )
 }
 
 export default App;
+
