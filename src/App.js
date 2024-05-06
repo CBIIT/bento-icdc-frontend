@@ -1,21 +1,13 @@
 import React from 'react';
 import {
-  BrowserRouter, HashRouter, Route, Switch
+  BrowserRouter,
 } from 'react-router-dom';
-import GlobalSearch from './pages/globalSearch/GlobalSearch';
-import Footer from './components/Footer/FooterView';
-import Dashboard from './pages/dashboard/Dashboard';
+import Layout from './components/Layout/LayoutView';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <HashRouter>
-        <Switch>
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/search" component={GlobalSearch} />
-        </Switch>
-      </HashRouter>
-      <Footer />
+      <Layout />
     </BrowserRouter>
   )
 }

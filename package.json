@@ -27,6 +27,7 @@
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@material-ui/styles": "^4.11.5",
     "@reduxjs/toolkit": "^2.2.3",
+    "@tanstack/react-query": "^5.35.1",
     "axios": "^1.6.8",
     "clsx": "^1.2.1",
     "file-loader": "^6.2.0",

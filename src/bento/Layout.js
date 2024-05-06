@@ -5,10 +5,6 @@ import GlobalSearch from "../pages/globalSearch/GlobalSearch";
 
 const Layout = () => (
     <>
-        {/* <Route path="expand" element={(<Dashboard />)} />
-        <Route path="search" element={(<GlobalSearch />)} />
-        <Route path="*" element={(<Dashboard />)} /> */}
-
         <p> transformAPIDataIntoCheckBoxData</p>
     </>
 );
