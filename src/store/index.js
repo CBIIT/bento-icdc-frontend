@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
+import { ddgraph, moduleReducers as submission, versionInfo } from 'data-model-navigator';
 import {
   sideBarReducerGenerator,
   cartReducerGenerator,
@@ -13,6 +14,9 @@ const { cartReducer } = cartReducerGenerator();
 
 const reducers = {
   localFind,
+  ddgraph,
+  versionInfo,
+  submission,
   statusReducer,
   cartReducer,
 };
