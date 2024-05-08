@@ -47,8 +47,7 @@ module.exports = function(webpackEnv) {
   // It requires a trailing slash, or the file assets will get an incorrect path.
   // In development, we always serve from the root. This makes config easier.
   const publicPath = isEnvProduction
-    ? paths.servedPath
-    : isEnvDevelopment && '/';
+    ? paths.servedPath : isEnvDevelopment && '/';
   // Some apps do not use client-side routing with pushState.
   // For these, "homepage" can be set to "." to enable relative asset paths.
   const shouldUseRelativeAssetPaths = publicPath === './';
@@ -123,6 +122,16 @@ module.exports = function(webpackEnv) {
             //   options: { publicPath: "" },
             // },
             'css-loader',
+            {
+              loader: "postcss-loader",
+              options: {
+                postcssOptions: {
+                  plugins: [
+                    "postcss-preset-env",
+                  ]
+                }
+              }
+            }
           ],
         },
         {
@@ -136,6 +145,7 @@ module.exports = function(webpackEnv) {
       new HtmlWebpackPlugin({
         template: paths.appHtml,
       }),
+      new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
