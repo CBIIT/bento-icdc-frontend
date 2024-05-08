@@ -4,12 +4,16 @@ export const statsStyling = {
   global: {
     horizontalStyle: false,
     statTitleFirst: false,
-    height: '75px',
+    height: '47px',
     background: '#CBE2EE',
     top: 'auto',
   },
+  statsSection: {
+    height: '60px',
+    alignItems: 'center',
+  },
   statsGroup: {
-    margin: '10px 0px',
+    margin: '0px',
     padding: '0.5% 6% 2% 6%',
     borderRight: '1px solid #0B3556',
   },
@@ -24,7 +28,6 @@ export const statsStyling = {
     fontSize: '16.8px',
     margin: '0px 0px -4px 8px',
     float: 'left',
-    padding: '4px 60px',
   },
   statTitle: {
     color: '#0B3556',
