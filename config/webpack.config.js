@@ -116,11 +116,13 @@ module.exports = function(webpackEnv) {
         },
         {
           test: /\.css$/i,
-          use: [                  {                    
-            loader: MiniCssExtractPlugin.loader,                                       
-            options: { publicPath: "" },
-          },                  
-          "css-loader",                                                  
+          use: [
+            'style-loader',
+            // {
+            //   loader: MiniCssExtractPlugin.loader,
+            //   options: { publicPath: "" },
+            // },
+            'css-loader',
           ],
         },
         {
