@@ -177,6 +177,12 @@ export const navBarData = [
         linkActiveStyle: 'white',
       },
       {
+        labelText: '- Working Groups',
+        link: '/Working Groups',
+        sublink: true,
+        linkActiveStyle: 'white',
+      },
+      {
         labelText: 'CRDC & Analysis',
         link: '/crdc',
         linkActiveStyle: 'white',
