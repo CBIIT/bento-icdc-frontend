@@ -611,24 +611,24 @@ export const agentNodeMetadata = {
 
 export const cycleNodeMetadata = {
   keysToInclude: [
+    'case_id',
     'cycle_number',
     'date_of_cycle_start',
     'date_of_cycle_end',
     'crf_id',
-    'case_id',
   ],
   header: [
+    'case_id',
     'cycle_number',
     'date_of_cycle_start',
     'date_of_cycle_end',
     'crf_id',
-    'case_id',
   ],
 };
 
 export const visitNodeMetadata = {
-  keysToInclude: ['inferred', 'visit_id', 'visit_date'],
-  header: ['inferred', 'visit_id', 'visit_date'],
+  keysToInclude: ['case_id', 'visit_date', 'visit_number', 'visit_id'],
+  header: ['case_id', 'visit_date', 'visit_number', 'visit_id'],
 };
 
 export const priorTherapyNodeMetadata = {
@@ -692,6 +692,7 @@ export const priorTherapyNodeMetadata = {
 
 export const priorSurgeryNodeMetadata = {
   keysToInclude: [
+    'case_id',
     'date_of_surgery',
     'procedure',
     'anatomical_site_of_surgery',
@@ -700,6 +701,7 @@ export const priorSurgeryNodeMetadata = {
     'therapeutic_indicator',
   ],
   header: [
+    'case_id',
     'date_of_surgery',
     'procedure',
     'anatomical_site_of_surgery',
@@ -819,18 +821,22 @@ export const vitalSignsNodeMetadata = {
 
 export const physicalExamNodeMetadata = {
   keysToInclude: [
-    'date_of_examination',
-    'pe_comment',
-    'body_system',
     'case_id',
+    'date_of_examination',
+    'day_in_cycle',
+    'body_system',
     'pe_finding',
+    'phase_pe',
+    'assessment_timepoint',
   ],
   header: [
-    'date_of_examination',
-    'pe_comment',
-    'body_system',
     'case_id',
+    'date_of_examination',
+    'day_in_cycle',
+    'body_system',
     'pe_finding',
+    'phase_pe',
+    'assessment_timepoint',
   ],
 };
 
@@ -888,6 +894,7 @@ export const adverseEventNodeMetadata = {
 
 export const diseaseExtentNodeMetadata = {
   keysToInclude: [
+    'case_id',
     'lesion_number',
     'lesion_site',
     'lesion_description',
@@ -902,6 +909,7 @@ export const diseaseExtentNodeMetadata = {
     'evaluation_code',
   ],
   header: [
+    'case_id',
     'lesion_number',
     'lesion_site',
     'lesion_description',
@@ -1282,9 +1290,10 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       case_id
     }
     visitNodeData(study_code: $study_code) {
-      inferred
-      visit_id
+      case_id
       visit_date
+      visit_number
+      visit_id
     }
     priorTherapyNodeData(study_code: $study_code) {
       date_of_first_dose
@@ -1315,6 +1324,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       treatment_performed_in_minimal_residual
     }
     priorSurgeryNodeData(study_code: $study_code) {
+      case_id
       date_of_surgery
       procedure
       anatomical_site_of_surgery
@@ -1345,11 +1355,14 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       comment
     }
     physicalExamNodeData(study_code: $study_code) {
-      date_of_examination
-      pe_comment
-      body_system
       case_id
+      date_of_examination
+      day_in_cycle
+      body_system
       pe_finding
+      pe_comment
+      phase_pe
+      assessment_timepoint
     }
     vitalSignsNodeData(study_code: $study_code) {
       body_temperature_unit
@@ -1403,6 +1416,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       other_attribution_description
     }
     diseaseExtentNodeData(study_code: $study_code) {
+      case_id
       lesion_number
       lesion_site
       lesion_description
@@ -1414,7 +1428,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       measured_how
       longest_measurement
       evaluation_number
-      evaluation_code
+      evaluation_code    
     }
     followUpNodeData(study_code: $study_code) {
       document_number
