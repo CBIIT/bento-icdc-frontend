@@ -4,15 +4,53 @@ export const navBarstyling = {
   cart: {},
   global: {
     backgroundColor: '#0B3557',
-    height: '39px',
+    height: '60px',
     padding: '9px 20px 0px 20px',
     marginTop: '0px',
     fontFamily: 'Raleway, sans-serif',
     activeLabel: '2px solid #35b9eb',
-    paddingRight: '25px',
+    paddingLeft: '150px',
+    alignItems: 'center',
     fontWeight: '600',
     letterSpacing: '1px',
     position: 'relative',
+  },
+  dropdownButtonRoot: {
+    padding: '0px',
+  },
+  aboutMenu: {
+    padding: '0px 20px',
+  },
+  myCasesPosition: {
+
+  },
+  buttonRootNoRightPadding: {
+    padding: '0px 38px 0px 0px',
+    border: '0',
+    cursor: 'pointer',
+    margin: '0',
+    textDecoration: 'none',
+    backgroundColor: 'transparent',
+    textTransform: 'uppercase',
+    lineHeight: '1.75',
+  },
+  buttonRoot: {
+    padding: '0px 20px 0px 20px',
+    border: '0',
+    cursor: 'pointer',
+    margin: '0',
+    display: 'inline-flex',
+    textDecoration: 'none',
+    backgroundColor: 'transparent',
+    textTransform: 'uppercase',
+    lineHeight: '1.75',
+  },
+  buttonContainer: {
+    height: '60px',
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'center',
   },
   myFiles: {
     right: '8px',
@@ -135,6 +173,12 @@ export const navBarData = [
       {
         labelText: '- Best Practices Sub-Committee(BPSC)',
         link: '/BPSC',
+        sublink: true,
+        linkActiveStyle: 'white',
+      },
+      {
+        labelText: '- Working Groups',
+        link: '/Working Groups',
         sublink: true,
         linkActiveStyle: 'white',
       },
