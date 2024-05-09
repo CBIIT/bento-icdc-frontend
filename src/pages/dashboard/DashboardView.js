@@ -6,6 +6,7 @@ import {
   facetsConfig,
   tooltipConfig,
 } from '../../bento/dashboardData';
+import StatsView from '../../components/Stats/StatsView';
 import BentoFacetFilter from '../../components/sideBarFilter/BentoFacetFilter';
 import WidgetView from './widget/WidgetView';
 import QueryBarView from './filterQueryBar/QueryBarView';
@@ -21,6 +22,7 @@ const Dashboard = ({
   localFindAutocomplete,
 }) => (
   <div className={classes.dashboardContainer}>
+    <StatsView data={searchCases} />
     <div>
       <div className={classes.content}>
         <div className={classes.sideBar}>
