@@ -165,7 +165,7 @@ export default {
       secondary: '#6E6E6E',
       hint: '#B9B9B9',
       link: '#1669aa',
-      footerText: 'white',
+      footerText: '#ffffff',
     },
     background: {
       default: '#fafafa',

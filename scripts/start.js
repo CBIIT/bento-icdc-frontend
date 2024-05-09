@@ -86,18 +86,10 @@ checkBrowsers(paths.appPath, isInteractive)
     //   proxyConfig,
     //   urls.lanUrlForConfig
     // );
-    const devConfig = {
-      hot: true,
-      port: 5000,
-      open: true,
-      historyApiFallback: true, 
-      historyApiFallback: {
-        disableDotRule: true
-      }
-    };
+    
     const devServer = new WebpackDevServer({ port: port, open: true, liveReload: true }, compiler);
     // Launch WebpackDevServer.
-    devServer.start()
+    devServer.start();
     // devServer.onListening(port, HOST, function(err){
     //   if (err) {
     //     console.error(err);

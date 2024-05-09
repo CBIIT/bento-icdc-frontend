@@ -11,6 +11,7 @@ import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
 import Footer from '../../components/Footer/FooterView';
 import Header from '../header/HeaderView';
 import NavigatorView from "../../pages/navigator/NavigatorView";
+import GraphQLView from "../graphql/GraphQLView";
 import styles from './LayoutStyle';
 
 const LayoutView = ({
@@ -30,6 +31,7 @@ const LayoutView = ({
             <Route path="/search/:id" component={GlobalSearchView} />
             <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
             <Route path="/navigator" component={NavigatorView} />
+            <Route path="/graphql" component={GraphQLView} />
           </Switch>
         </HashRouter>
         <Footer />

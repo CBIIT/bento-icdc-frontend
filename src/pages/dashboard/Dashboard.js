@@ -1,7 +1,10 @@
 import React from "react";
+import { withStyles } from "@material-ui/styles";
 import store from '../../store';
 
-const Dashboard = () => {
+const Dashboard = ({
+  classes
+}) => {
     store.dispatch({
         type: 'test-redux',
         value: 'storeconfigure-test'
@@ -9,9 +12,15 @@ const Dashboard = () => {
     console.log('dashboard');
     return (
         <>
-            <h2>Dashboard page</h2>
+            <h2 className={classes.mainContrainer}>Dashboard page</h2>
         </>
     );
 };
 
-export default Dashboard;
+const styles = () => ({
+    mainContrainer: {
+        color: '#d5d5d5',
+    },
+});
+
+export default withStyles(styles)(Dashboard);
