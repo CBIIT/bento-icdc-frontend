@@ -9,4 +9,5 @@ export default [
   '/support',
   '/submit',
   '/guideline',
+  '/Working Groups',
 ];

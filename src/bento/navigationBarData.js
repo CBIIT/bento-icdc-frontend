@@ -128,14 +128,20 @@ export const navBarData = [
         linkActiveStyle: 'white',
       },
       {
-        labelText: '- Data Governance Advisory Board(DGAB)',
+        labelText: '- Data Governance Advisory Board (DGAB)',
         link: '/DGAB',
         sublink: true,
         linkActiveStyle: 'white',
       },
       {
-        labelText: '- Best Practices Sub-Committee(BPSC)',
+        labelText: '- Best Practices Sub-Committee (BPSC)',
         link: '/BPSC',
+        sublink: true,
+        linkActiveStyle: 'white',
+      },
+      {
+        labelText: '- Working Groups',
+        link: '/Working Groups',
         sublink: true,
         linkActiveStyle: 'white',
       },
