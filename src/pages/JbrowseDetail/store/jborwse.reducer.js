@@ -17,7 +17,7 @@ export function initMultiview() {
   });
 }
 
-const reducers = {
+export const reducers = {
   JBROWSE_SELECTED_FILES: (state, item) => {
     localStorage.setItem('jbrowseFiles', JSON.stringify(item.filesName) || []);
     return {
@@ -31,7 +31,13 @@ const reducers = {
   }),
 };
 
-const storeKey = 'jbrowseView';
-// INJECT-REDUCERS INTO REDUX STORE
-store.injectReducer(storeKey, (state = initialState, { type, payload }) => (
-  reducers[type] ? reducers[type](state, payload) : state));
+export const jbrowseView = (state = initialState, { type, payload }) => {
+  return reducers[type] ? reducers[type](state, payload) : state;
+}
+
+
+// const storeKey = 'jbrowseView';
+// // INJECT-REDUCERS INTO REDUX STORE
+
+// store.addReducer(storeKey, (state = initialState, { type, payload }) => (
+//   reducers[type] ? reducers[type](state, payload) : state));

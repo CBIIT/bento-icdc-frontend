@@ -19,18 +19,14 @@ const GraphQLView = ({
 }) => {
   return (
     <div className={classes.grapqhQlContainer}>
-      <GraphiQL
-        fetcher={graphQLFetcher}
-        defaultQuery={defaultQuery}
-        defaultHeaders={'{"foo" : "bar"}'}
-      />
+      <GraphiQL fetcher={graphQLFetcher} />
     </div>
   );
 }
 
 const styles = () => ({
   grapqhQlContainer: {
-    height: '700px',
+    height: '900px',
     marginTop: '0px',
   },
 });

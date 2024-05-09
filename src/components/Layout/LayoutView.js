@@ -5,7 +5,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { withStyles } from "@material-ui/core";
-import Dashboard from "../../pages/dashboard/Dashboard";
+import Dashboard from "../../pages/dashboard/DashboardController";
 import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
 import Footer from '../../components/Footer/FooterView';

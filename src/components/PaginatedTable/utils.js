@@ -53,6 +53,7 @@ export function convertToCSV(jsonse, keysToInclude, header) {
 }
 
 export function downloadJson(tableData, tableDownloadCSV) {
+  console.log(tableData);
   const jsonse = JSON.stringify(tableData);
   const csv = convertToCSV(jsonse, tableDownloadCSV.keysToInclude, tableDownloadCSV.header);
   const exportData = new Blob([csv], { type: 'text/csv' });
