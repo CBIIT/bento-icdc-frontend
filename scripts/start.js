@@ -1,5 +1,4 @@
 'use strict';
-
 /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
 // Do this as the first thing so that any code reading it knows the right env.
@@ -31,7 +30,7 @@ const {
 const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
+const createDevServerConfig = require('../webpack/webpack.dev');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
@@ -72,7 +71,7 @@ checkBrowsers(paths.appPath, isInteractive)
       // We have not found a port.
       return;
     }
-    const config = configFactory('development');
+    const config = createDevServerConfig;
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(protocol, HOST, port);
