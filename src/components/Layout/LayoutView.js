@@ -9,6 +9,7 @@ import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";
 import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
+import Home from '../../pages/landing/landingController';
 import Footer from '../../components/Footer/FooterView';
 import Header from '../header/HeaderView';
 import NavigatorView from "../../pages/navigator/NavigatorView";
@@ -30,7 +31,9 @@ const LayoutView = ({
         </div>
         <HashRouter>
           <Switch>
-            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/ICDC/" component={Home} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/explore" component={Dashboard} />
             <Route path="/search/:id" component={GlobalSearchView} />
             <Route path="/jBrowse/:diplayMode" component={JbrowseView} />

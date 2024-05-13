@@ -20,7 +20,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(woff(2)?|ttf|eot|png|jpe?g|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot|png|jpe?g|svg|JPG)(\?v=\d+\.\d+\.\d+)?$/,
         type: 'asset/inline',
       }
     ],
