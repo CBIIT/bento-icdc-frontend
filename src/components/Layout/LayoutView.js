@@ -18,6 +18,10 @@ import NavigatorView from "../../pages/navigator/NavigatorView";
 import GraphQLView from "../graphql/GraphQLView";
 import NavBar from '../NavBar/NavBarContainer';
 import About from '../../pages/about/aboutController';
+import Studies from '../../pages/studies/studiesController';
+import Programs from '../../pages/programs/programsController';
+import ProgramDetail from '../../pages/programDetail/programDetailController';
+import StudyDetail from '../../pages/study/studyDetailController';
 import styles from './LayoutStyle';
 
 const LayoutView = ({
@@ -39,10 +43,14 @@ const LayoutView = ({
             <Route exact path="/explore" component={Dashboard} />
             <Route path="/unifiedView/:id" component={UnifiedDash} />
             <Route path="/fileCentricCart" component={CartView} />
+            <Route path="/studies" component={Studies} />
             <Route path="/search/:id" component={GlobalSearchView} />
             <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
+            <Route path="/programs" component={Programs} />
+            <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/icdc-data-model" component={NavigatorView} />
             <Route path="/graphql" component={GraphQLView} />
+            <Route path="/study/:id" component={StudyDetail} />
             {aboutPageRoutes.map(
               (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
             )}
