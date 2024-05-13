@@ -5,6 +5,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { withStyles } from "@material-ui/core";
+import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";
 import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
@@ -13,6 +14,7 @@ import Header from '../header/HeaderView';
 import NavigatorView from "../../pages/navigator/NavigatorView";
 import GraphQLView from "../graphql/GraphQLView";
 import NavBar from '../NavBar/NavBarContainer';
+import About from '../../pages/about/aboutController';
 import styles from './LayoutStyle';
 
 const LayoutView = ({
@@ -34,6 +36,9 @@ const LayoutView = ({
             <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
             <Route path="/icdc-data-model" component={NavigatorView} />
             <Route path="/graphql" component={GraphQLView} />
+            {aboutPageRoutes.map(
+              (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
+            )}
           </Switch>
         </HashRouter>
         <Footer />
