@@ -128,7 +128,8 @@
     "test": "jest",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
-    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js"
+    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js",
+    "prod": "NODE_ENV=production webpack-dev-server --config ./webpack/webpack.prod.js"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -135,7 +135,7 @@ module.exports = function(webpackEnv) {
           ],
         },
         {
-          test: /\.(woff(2)?|ttf|eot|png|jpe?g|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          test: /\.(woff(2)?|ttf|eot|png|jpe?g|JPG|svg)(\?v=\d+\.\d+\.\d+)?$/,
           type: 'asset/inline',
         }
       ],
