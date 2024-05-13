@@ -29,6 +29,7 @@ const LayoutView = ({
         <HashRouter>
           <Switch>
             <Route exact path="/" component={Dashboard} />
+            <Route exact path="/explore" component={Dashboard} />
             <Route path="/search/:id" component={GlobalSearchView} />
             <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
             <Route path="/icdc-data-model" component={NavigatorView} />

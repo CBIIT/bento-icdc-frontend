@@ -27,11 +27,6 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.(css)$/,
-        exclude: /node_modules/,
-        use: ['file-loader?name=[name].[ext]']
-      },
-      {
         test: /\.(sa|sc|c)ss$/,
         use: [
           {
