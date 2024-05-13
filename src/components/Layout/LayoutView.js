@@ -7,6 +7,8 @@ import {
 import { withStyles } from "@material-ui/core";
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";
+import UnifiedDash from '../../pages/unifiedView/unifiedController';
+import CartView from '../../pages/fileCentricCart/CartController';
 import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
 import Home from '../../pages/landing/landingController';
@@ -35,6 +37,8 @@ const LayoutView = ({
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/explore" component={Dashboard} />
+            <Route path="/unifiedView/:id" component={UnifiedDash} />
+            <Route path="/fileCentricCart" component={CartView} />
             <Route path="/search/:id" component={GlobalSearchView} />
             <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
             <Route path="/icdc-data-model" component={NavigatorView} />
