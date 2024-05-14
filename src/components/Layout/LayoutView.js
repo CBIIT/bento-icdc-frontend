@@ -14,7 +14,7 @@ import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
 import Home from '../../pages/landing/landingController';
 import Footer from '../../components/Footer/FooterView';
-import Header from '../Header/HeaderView';
+import Header from '../header/HeaderView';
 import NavigatorView from "../../pages/navigator/NavigatorView";
 import GraphQLView from "../graphql/GraphQLView";
 import NavBar from '../NavBar/NavBarContainer';
