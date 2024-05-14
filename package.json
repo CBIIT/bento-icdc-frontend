@@ -62,6 +62,7 @@
     "babel-preset-react-app": "^10.0.1",
     "bfj": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "copy-webpack-plugin": "^12.0.2",
     "core-js": "^3.37.0",
     "crypto-browserify": "^3.12.0",
     "css-loader": "^7.1.1",
@@ -128,8 +129,8 @@
     "test": "jest",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
-    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js",
-    "prod": "NODE_ENV=production webpack-dev-server --config ./webpack/webpack.prod.js"
+    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack/dev.js",
+    "prod": "NODE_ENV=production webpack --config ./webpack/prod.js"
   },
   "eslintConfig": {
     "extends": "react-app"

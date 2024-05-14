@@ -1,21 +1,29 @@
 const { merge } = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const common = require('./webpack.common');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CopyPlugin = require("copy-webpack-plugin");
+const common = require('./common');
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const paths = require('../config/paths');
 const getClientEnvironment = require('../config/env');
 
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
-const publicUrl = paths.servedPath;
+const publicUrl = '';
 const env = getClientEnvironment(publicUrl);
 
 module.exports = merge(common, {
-  mode: 'production',
+  mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    compress: true,
+    open: true,
+    port: 9000,
+    client: {
+      overlay: false,
+    },
+  },
   module: {
     rules: [
       {
@@ -24,9 +32,9 @@ module.exports = merge(common, {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
     ],
@@ -36,10 +44,12 @@ module.exports = merge(common, {
       filename: '[name].css',
     }),
     new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {from: path.join(__dirname, 'public/**/*.js'), to: path.join(__dirname, 'dist')}
-    //   ]
-    // })
+    new HtmlWebpackPlugin(
+      {
+        template: path.resolve(__dirname, "public", "index.html"),
+        inject: true,
+        template: paths.appHtml,
+      },
+    ),
   ],
 });

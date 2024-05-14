@@ -34,7 +34,7 @@ module.exports = {
     new HtmlWebpackPlugin({ template: paths.appHtml }),
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: 'static/js/[name].[chunkhash:8].js',
     path: path.resolve(__dirname, 'dist2'),
   },
 };
