@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router';
 import FooterData from '../../bento/globalFooterData';
 import env from '../../utils/env';
 import CustomThemeProvider from './FooterThemConfig';
@@ -12,8 +13,8 @@ const ICDC_FOOTER_STYLE = {
 };
 
 const ICDCFooter = () => {
-  // const location = useLocation();
-  // const { pathname } = location;
+  const location = useLocation();
+  const { pathname } = location;
 
   const [footerUpdatedData, setFooterUpdatedData] = useState(FooterData);
 
@@ -33,6 +34,10 @@ const ICDCFooter = () => {
     };
     getSystems();
   }, [FooterData]);
+
+  if (pathname.includes('/jBrowse/')) {
+    return null;
+  }
 
   return (
     <CustomThemeProvider>

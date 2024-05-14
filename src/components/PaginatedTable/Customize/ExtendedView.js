@@ -11,7 +11,6 @@ export const ExtendedViewConfig = (config) => {
 
   const { download } = extendedViewConfig;
   const { customDownload } = download;
-  console.log(customDownload);
   if (!customDownload) {
     return extendedViewConfig;
   }
@@ -20,7 +19,6 @@ export const ExtendedViewConfig = (config) => {
   * extended data add or hide column different from table data
   */
   if (download) {
-    console.log(download);
     const getQueryVeriables = (filters = {}) => {
       const variables = { ...filters };
       variables.offset = 0;
@@ -32,7 +30,6 @@ export const ExtendedViewConfig = (config) => {
     // active filters or table query veriables
     download.downloadTable = (filterItems = {}) => {
       const queryVariables = getQueryVeriables(filterItems);
-      console.log()
       client
         .query({
           query: download.query,
@@ -41,7 +38,6 @@ export const ExtendedViewConfig = (config) => {
           },
         })
         .then((result) => {
-          console.log(result);
           if (result.data[config.paginationAPIField]) {
             downloadJson(
               result.data[config.paginationAPIField],

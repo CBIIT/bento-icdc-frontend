@@ -203,7 +203,7 @@ export const graphViewConfig = {
     styles: {
       legendExpand: {
         position: 'absolute',
-        top: '240px',
+        top: '440px',
         backgroundColor: '#494949',
         border: '2px solid #5486AF',
         borderTopLeftRadius: '10px 10px',

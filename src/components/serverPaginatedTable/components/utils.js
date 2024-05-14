@@ -1,4 +1,4 @@
-import { formatBytes } from '../../bento-core';
+import { formatBytes } from '../../../bento-core';
 
 export function createFileName(fileName) {
   const date = new Date();
