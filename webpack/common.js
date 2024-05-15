@@ -35,6 +35,6 @@ module.exports = {
   ],
   output: {
     filename: 'static/js/[name].[chunkhash:8].js',
-    path: path.resolve(__dirname, 'dist2'),
+    path: path.resolve(__dirname, '../dist'),
   },
 };
