@@ -40,7 +40,7 @@ module.exports = merge(common, {
     new CopyPlugin({
       patterns: [
         {from: path.join(__dirname, '../public/injectEnv.js'), to: './[name].js'},
-        {from: path.join(__dirname, '../public/js/session.js'), to: './[name].js'},
+        {from: path.join(__dirname, '../public/js/session.js'), to: './js/[name].js'},
         {from: path.join(__dirname, '../public/manifest.json'), to: './[name].json'},
         {from: path.join(__dirname, '../public/404.html'), to: './[name].html'}
       ]
