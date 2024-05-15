@@ -64,7 +64,7 @@ const Studies = ({ classes, data, invalid }) => {
 
   return (
     <StudiesThemeProvider>
-      {/* <Stats /> */}
+      <Stats />
       {
         invalid && !overlay ? (
           <InvalidAccesionModal />

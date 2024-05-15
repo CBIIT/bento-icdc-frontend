@@ -8,6 +8,7 @@ import {
   LocalFindReducerGenerator,
 } from '../bento-core';
 import { jbrowseView } from '../pages/JbrowseDetail/store/jborwse.reducer';
+import stats from '../components/Stats/StatsState';
 
 const { localFind } = LocalFindReducerGenerator();
 const { statusReducer } = sideBarReducerGenerator();
@@ -20,7 +21,8 @@ const reducers = {
   submission,
   statusReducer,
   cartReducer,
-  jbrowseView
+  jbrowseView,
+  stats
 };
 
 const store = configureStore({

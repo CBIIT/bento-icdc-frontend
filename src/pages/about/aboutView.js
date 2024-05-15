@@ -9,7 +9,7 @@ const AboutView = ({ classes, data }) => {
   console.log(data.table);
   return (
     <>
-      {/* <Stats /> */}
+      <Stats />
       <div className={classes.container}>
         <AboutHeader title={data.title} />
         <AboutBody data={{

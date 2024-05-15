@@ -8,7 +8,7 @@ import ProgramCard from '../../components/ProgramCard/programCard';
 
 const Programs = ({ classes, data }) => (
   <>
-    {/* <Stats /> */}
+    <Stats />
     <div className={classes.container}>
       <div className={classes.header}>
         <div className={classes.logo}>
