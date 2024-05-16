@@ -8,7 +8,6 @@ export default compose(
   withRouter,
   connect(
     (state) => ({
-      isSidebarOpened: state.layout.isSidebarOpened,
       cartFieldIds: state.cartReducer.filesId,
     }),
     { toggleSidebar },

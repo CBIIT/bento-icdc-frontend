@@ -1,30 +1,37 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./components/App";
-import * as serviceWorker from "./serviceWorker";
+// import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux'
+import "core-js";
+import "regenerator-runtime";
 import { ApolloProvider } from '@apollo/client'
-import { Provider } from 'react-redux';
-import store from './store';
-import client from './utils/graphqlClient';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import client from "./utils/graphqlClient";
 import queryClient from './utils/react-query-client';
+import App from "./App";
+import store from "./store";
 
-
-ReactDOM.render(
-
-  <ApolloProvider client={client}>
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-      {/* <ReactQueryDevtools /> */}
-    </QueryClientProvider>
-  </ApolloProvider>,
-  document.getElementById('root'),
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+  <>
+    <ApolloProvider client={client}>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <App/>
+        </Provider>
+      </QueryClientProvider>
+    </ApolloProvider>
+  </>,
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// const rootNode = document.getElementById('root');
+// ReactDOM.render(
+//   <ApolloProvider client={client}>
+//     <QueryClientProvider client={queryClient}>
+//       <Provider store={store}>
+//         <App/>
+//       </Provider>
+//     </QueryClientProvider>
+//   </ApolloProvider>
+// , rootNode);

@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import ReduxThunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
 import { ddgraph, moduleReducers as submission, versionInfo } from 'data-model-navigator';
 import {
   sideBarReducerGenerator,
   cartReducerGenerator,
   LocalFindReducerGenerator,
 } from '../bento-core';
-import layout from '../components/Layout/LayoutState';
+import { jbrowseView } from '../pages/JbrowseDetail/store/jborwse.reducer';
 import stats from '../components/Stats/StatsState';
 
 const { localFind } = LocalFindReducerGenerator();
@@ -19,22 +19,16 @@ const reducers = {
   ddgraph,
   versionInfo,
   submission,
-  layout,
-  stats,
   statusReducer,
   cartReducer,
+  jbrowseView,
+  stats
 };
 
-const loggerMiddleware = createLogger();
-
-const store = createStore(
-  combineReducers(reducers),
-  applyMiddleware(ReduxThunk, loggerMiddleware),
-);
-
-store.injectReducer = (key, reducer) => {
-  reducers[key] = reducer;
-  store.replaceReducer(combineReducers(reducers));
-};
+const store = configureStore({
+  reducer: combineReducers(reducers),
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+});
 
 export default store;

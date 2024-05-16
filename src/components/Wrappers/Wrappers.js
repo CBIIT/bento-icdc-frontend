@@ -7,7 +7,7 @@ import {
   Button as ButtonBase,
 } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/styles";
-import classnames from "classnames";
+import clsx from "clsx";
 
 // styles
 var useStyles = makeStyles(theme => ({
@@ -32,7 +32,7 @@ function Badge({ children, colorBrightness, color, ...props }) {
       {styledProps => (
         <BadgeBase
           classes={{
-            badge: classnames(classes.badge, styledProps.classes.badge),
+            badge: clsx(classes.badge, styledProps.classes.badge),
           }}
           {...props}
         >
@@ -111,7 +111,7 @@ function Button({ children, color, bgColor, className, ...props }) {
             outlined: classes.outlined,
           }}
           {...props}
-          className={classnames(
+          className={clsx(
             {
               [classes.select]: props.select,
             },

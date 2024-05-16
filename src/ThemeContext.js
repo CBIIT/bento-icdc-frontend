@@ -1,9 +1,9 @@
 import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import themes, { overrides, typography } from '../themes';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import themes, { overrides, typography } from './themes';
 
-const lightTheme = createMuiTheme({ ...themes.light, ...overrides, ...typography });
-const darkTheme = createMuiTheme({ ...themes.dark, ...overrides, ...typography });
+const lightTheme = createTheme({ ...themes.light, ...overrides, ...typography });
+const darkTheme = createTheme({ ...themes.dark, ...overrides, ...typography });
 
 const defaultContextData = {
   dark: false,

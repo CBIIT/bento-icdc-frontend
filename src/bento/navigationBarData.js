@@ -4,7 +4,7 @@ export const navBarstyling = {
   cart: {},
   global: {
     backgroundColor: '#0B3557',
-    height: '60px',
+    minHeight: '39px',
     padding: '9px 20px 0px 20px',
     marginTop: '0px',
     fontFamily: 'Raleway, sans-serif',
@@ -46,7 +46,6 @@ export const navBarstyling = {
     lineHeight: '1.75',
   },
   buttonContainer: {
-    height: '60px',
     display: 'flex',
     alignItems: 'center',
     width: '100%',

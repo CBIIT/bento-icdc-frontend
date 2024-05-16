@@ -13,7 +13,7 @@ import {
   WidgetGenerator,
   ToolTip,
 } from '../../../bento-core';
-import { useTheme } from '../../../components/ThemeContext';
+import { useTheme } from '../../../ThemeContext';
 import styles from './WidgetStyle';
 import { themeToggleTooltip, widgetsData } from '../../../bento/dashboardData';
 import colors from '../../../utils/colors';

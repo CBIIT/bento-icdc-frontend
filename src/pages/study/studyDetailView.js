@@ -77,7 +77,6 @@ const StudyDetailView = ({ classes, data }) => {
   });
 
   const studyData = data.study[0];
-  console.log(data);
   const { clinical_study_designation: studyCode } = studyData;
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];

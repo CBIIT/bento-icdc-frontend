@@ -1,10 +1,3 @@
-/* eslint-disable block-scoped-var */
-/* eslint-disable no-plusplus */
-/* eslint-disable no-unused-vars */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-var */
-/* eslint-disable vars-on-top */
-/* eslint-disable no-restricted-syntax */
 import React from 'react';
 import _ from 'lodash';
 import { withStyles } from '@material-ui/styles';
@@ -18,7 +11,7 @@ import {
   graphViewConfig,
 } from '../../bento/dataDictionaryData';
 import env from '../../utils/env';
-import { Typography } from '../Wrappers/Wrappers';
+import { Typography } from '../../components/Wrappers/Wrappers';
 
 const DATA_MODEL = env.REACT_APP_DATA_MODEL;
 const DATA_MODEL_PROPS = env.REACT_APP_DATA_MODEL_PROPS;
@@ -58,7 +51,7 @@ async function getData() {
 
 // added for demo - will be replaced with ReadMe file url for DMN
 
-const ModelExplorer = ({
+const NavigatorView = ({
   classes,
 }) => {
   if (!DATA_MODEL || !DATA_MODEL_PROPS || !DATA_MODEL_README) {
@@ -86,4 +79,4 @@ const styles = () => ({
   },
 });
 
-export default withStyles(styles)(ModelExplorer);
+export default withStyles(styles)(NavigatorView);

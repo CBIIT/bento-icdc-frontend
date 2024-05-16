@@ -8,8 +8,10 @@ import {
   Typography,
   IconButton,
 } from '@material-ui/core';
-import { cn } from '@bento-core/util';
-import { ToolTip as Tooltip } from '../../../bento-core';
+import clsx from 'clsx';
+import {
+  ToolTip as Tooltip,
+} from '../../../bento-core';
 import {
   MAX_NUMBER_OF_FILES,
   MULTI_FILES_VIEW,
@@ -86,7 +88,7 @@ const ViewJBrowseButton = ({
       >
         <Button
           className={(isInvlaid || disable)
-            ? cn(classes.button, classes.disbaleButton) : classes.button}
+            ? clsx(classes.button, classes.disbaleButton) : classes.button}
           type="button"
           onClick={viewFilesOnJBrowse}
           disabled={isInvlaid}
@@ -97,7 +99,7 @@ const ViewJBrowseButton = ({
           <img
             src={(isInvlaid || disable) ? jbrowseIconSrc : jbrowseLogo}
             alt="jbrowse_icon"
-            className={cn(classes.jbrowseIcon)}
+            className={clsx(classes.jbrowseIcon)}
           />
           {ButtonText2}
         </Button>

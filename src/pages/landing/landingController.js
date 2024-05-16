@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { parse } from 'yaml';
 import axios from 'axios';
-import YAMLData from '../../content/pre-prod/aboutPagesContent.yaml';
 import LandingView from './landingView';
 import NewsView from './views/newsView';
 import env from '../../utils/env';
@@ -28,8 +27,6 @@ const LandingController = ({ match }) => {
           setNewsData(resultData);
         }
       } catch (error) {
-        result = await axios.get(YAMLData);
-        resultData = parse(result.data);
       }
     };
     fetchStaticContent(LANDING_CONTENT_URL, 'landing');
