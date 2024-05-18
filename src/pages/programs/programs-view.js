@@ -1,7 +1,5 @@
 import React from 'react';
 import { ProgramCard } from './program-card';
-import Clipboard from './assets/Group.png';
-import './program-view.css';
 import Stats from '../../components/Stats/AllStatsController';
 import { pageDataV2 as pageData } from '../../bento/programData';
 import {
@@ -22,7 +20,7 @@ const Programs = ({ classes, data }) => {
       <ProgramsContainer>
         <ProgramsHeader>
           <IconTitleWrapper>
-            <ClipboardIcon src={Clipboard} alt="Clipboard Icon" />
+            <ClipboardIcon src={pageData.headerIcon} alt="Clipboard Icon" />
             <ProgramsTitle>Programs</ProgramsTitle>
           </IconTitleWrapper>
         </ProgramsHeader>
