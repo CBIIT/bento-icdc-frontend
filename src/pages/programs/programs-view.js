@@ -12,8 +12,6 @@ import {
 } from './programs-view.styled';
 
 const Programs = ({ classes, data }) => {
-  console.log('data-here', data)
-
   return (
     <>
       <Stats />

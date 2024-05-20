@@ -17,8 +17,6 @@ const DataTable = () => {
   const getdata = async () => {
     const icdcMData = await getData(DATA_MODEL);
     const icdcMPData = await getData(DATA_MODEL_PROPS);
-    console.log(icdcMData);
-    console.log(icdcMPData);
   };
 
   getdata();

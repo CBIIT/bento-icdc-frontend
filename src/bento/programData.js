@@ -26,8 +26,8 @@ const pageData = {
 
 const pageDataV2 = {
   headerTitle: 'Programs',
-  headerIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-Programs.svg',
-  externalIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/program_ExternalLink.svg',
+  headerIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/program-listing-header.svg',
+  externalIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/programs-listing-external-link-icon.svg',
   programs: [
     {
       prgramName: 'COP',
