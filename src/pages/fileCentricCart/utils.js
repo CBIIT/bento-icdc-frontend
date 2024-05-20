@@ -72,7 +72,6 @@ export function convertToCSV(jsonse, comments, keysToInclude, header) {
 }
 
 export function downloadJson(tableData, comments, fileName, manifestData) {
-  console.log(tableData);
   const jsonse = JSON.stringify(tableData);
   const csv = convertToCSV(jsonse, comments, manifestData.keysToInclude, manifestData.header);
   const exportData = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' });
@@ -87,7 +86,6 @@ export function downloadJson(tableData, comments, fileName, manifestData) {
 }
 
 export const downloadJsonV2 = (tableData, comments, fileName, manifestData) => {
-  console.log(tableData);
   const payload = tableData.map((el) => ({
     ...el,
     user_comments: comments || null

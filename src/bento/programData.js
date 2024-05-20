@@ -24,6 +24,32 @@ const pageData = {
   },
 };
 
+const pageDataV2 = {
+  headerTitle: 'Programs',
+  headerIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/program-listing-header.svg',
+  externalIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/programs-listing-external-link-icon.svg',
+  programs: [
+    {
+      prgramName: 'COP',
+      primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png',
+      primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
+      secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.cop.jpg',
+    },
+    {
+      prgramName: 'CMCP',
+      primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png',
+      primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
+      secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg',
+    },
+    {
+      prgramName: 'PCCR',
+      primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png',
+      primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
+      secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg',
+    },
+   ]
+};
+
 // --------------- GraphQL query - Retrieve program info --------------
 const GET_PROGRAMS_DATA_QUERY = gql`{
   program(orderBy: program_sort_order_asc)
@@ -44,5 +70,6 @@ const GET_PROGRAMS_DATA_QUERY = gql`{
 
 export {
   pageData,
+  pageDataV2,
   GET_PROGRAMS_DATA_QUERY,
 };

@@ -6,7 +6,6 @@ import { AboutBody } from '../../bento-core';
 
 const AboutView = ({ classes, data }) => {
   const getImage = (imgPath, alt) => <img className={classes.img} src={imgPath != null ? imgPath : ''} alt={alt} />;
-  console.log(data.table);
   return (
     <>
       <Stats />
