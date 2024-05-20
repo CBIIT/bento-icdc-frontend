@@ -1736,6 +1736,67 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   }
   `;
 
+export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
+  query fileOverview(
+     $file_level: [String] = [],
+     $case_ids: [String] = [],
+     $sample_ids: [String] = [],
+     $program: [String] = [],
+     $study: [String], 
+     $study_type: [String], 
+     $breed: [String], 
+     $diagnosis: [String], 
+     $disease_site: [String], 
+     $stage_of_disease: [String], 
+     $response_to_treatment: [String], 
+     $sex: [String], 
+     $neutered_status: [String], 
+     $sample_type: [String], 
+     $sample_pathology: [String], 
+     $sample_site:[String],
+     $file_type: [String], 
+     $file_format: [String],
+     $biobank: [String],
+     $study_participation: [String],
+     $order_by: String = "file_name",
+     $sort_direction: String = "ASC",
+     $first: Int = 10,
+     $offset: Int = 0,
+   ){
+     fileOverview
+     (
+       file_level: $file_level,
+       case_ids: $case_ids,
+       sample_ids: $sample_ids,
+       program: $program,
+       study: $study, 
+       study_type: $study_type, 
+       breed: $breed, 
+       diagnosis: $diagnosis, 
+       disease_site: $disease_site, 
+       stage_of_disease: $stage_of_disease, 
+       response_to_treatment: $response_to_treatment, 
+       sex: $sex,
+       neutered_status: $neutered_status,
+       sample_type: $sample_type, 
+       sample_pathology: $sample_pathology, 
+       sample_site: $sample_site, 
+       file_association: ["sample"], 
+       file_type: $file_type,
+       file_format: $file_format,
+       biobank: $biobank,
+       study_participation: $study_participation,
+       order_by: $order_by,
+       sort_direction: $sort_direction,
+       first: $first,
+       offset: $offset,
+     )
+     {
+       file_uuid
+     }
+   }
+   `;
+
 export const GET_FILE_IDS_FROM_FILE_NAME = gql`
 query (
     $file_name: [String],
@@ -2053,13 +2114,12 @@ export const tableContainers = [
     // additional query variable specific to sample tab
     queryParam: {
       file_level: ['case'],
-      file_association: ['sample'],
     },
     addFilesRequestVariableKey: 'sample_ids',
     addFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
-    addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
-    addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+    addAllFileQuery: GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL,
+    addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL,
   },
   {
     name: 'Case Files',
