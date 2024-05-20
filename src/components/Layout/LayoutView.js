@@ -6,6 +6,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { withStyles, CssBaseline } from "@material-ui/core";
+import LinkBar from '../LinkBar';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";
 import UnifiedDash from '../../pages/unifiedView/unifiedController';
@@ -67,6 +68,7 @@ const LayoutView = ({
           <div className={classes.container}>
             <div id="headerSection" ref={headerRef} className={classes.header}>
               <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown.html" />
+              <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
               <Header />
               {!navBarExclusions.find((item) => item === location.hash) && <NavBar />}
             </div>
