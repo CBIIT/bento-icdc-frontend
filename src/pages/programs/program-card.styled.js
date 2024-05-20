@@ -54,6 +54,7 @@ export const ProgramDescription = styled('p')({
     fontWeight: '400',
     fontSize: '18px',
     lineHeight: '30px',
+    width: '80%',
 });
 
 
