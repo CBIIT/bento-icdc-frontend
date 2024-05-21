@@ -28,6 +28,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import styles from './LayoutStyle';
+import NewCartView from '../../pages/Cart/CartView';
 
 const LayoutView = ({
   classes,
@@ -84,6 +85,7 @@ const LayoutView = ({
               <Route exact path="/explore" component={Dashboard} />
               <Route path="/unifiedView/:id" component={UnifiedDash} />
               <Route path="/fileCentricCart" component={CartView} />
+              <Route path="/cart" component={NewCartView} />
               <Route path="/studies" component={Studies} />
               <Route path="/search/:id" component={GlobalSearchView} />
               <Route path="/jBrowse/:diplayMode" component={JbrowseView} />

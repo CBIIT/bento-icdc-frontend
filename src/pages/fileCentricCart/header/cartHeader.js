@@ -196,20 +196,41 @@ const CartHeader = React.forwardRef(({
         break;
     }
     return (
-      <StyledMenuItem onClick={() => {
-        initiateDownload(type);
-        setOpen(false);
-      }}
-      >
-        <div>{type}</div>
-        {
-          icon && (
-          <span>
-            <img src={icon} alt="icon" />
-          </span>
-          )
-        }
-      </StyledMenuItem>
+      <>
+        <StyledMenuItem onClick={() => {
+          initiateDownload(type);
+          setOpen(false);
+        }}
+        >
+          <div>{type}</div>
+          {
+            icon && (
+            <span>
+              <img src={icon} alt="icon" />
+            </span>
+            )
+          }
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <Button
+            variant="contained"
+            onClick={handleDownloadFileManifestDialogOpen}
+            disabled={filesId.length === 0}
+            classes={{
+              root: classes.downloadFileManifestBtn,
+            }}
+            endIcon={(
+              <img
+                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
+                alt="download icon"
+                className={classes.downloadFileIcon}
+              />
+            )}
+          >
+            Download File Manifest
+          </Button>
+        </StyledMenuItem>
+      </>
     );
   };
 
@@ -325,7 +346,7 @@ const CartHeader = React.forwardRef(({
                   alt="download icon"
                   className={classes.downloadFileIcon}
                 />
- )}
+              )}
             >
               Download File Manifest
             </Button>
