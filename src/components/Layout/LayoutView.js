@@ -28,7 +28,7 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import styles from './LayoutStyle';
-import NewCartView from '../../pages/Cart/CartView';
+import NewCartView from '../../pages/Cart/CartController';
 
 const LayoutView = ({
   classes,

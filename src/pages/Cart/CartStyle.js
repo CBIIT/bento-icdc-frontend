@@ -16,4 +16,13 @@ export default () => ({
     background: '#686F7F',
     marginTop: '-13px',
   },
+  tableContainer: {
+    marginTop: '15px',
+    padding: '0px 40px',
+  },
+  bodyWrapper: {
+    background: '#F2F2F2',
+    borderRadius: '20px',
+    paddingTop: '9px',
+  },
 });
