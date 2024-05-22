@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Grid,
   ThemeProvider,
@@ -12,19 +12,20 @@ import {
   Radio
 } from '@material-ui/core';
 import axios from 'axios';
-import DropDownview from './dropdown/DropDownview';
 import styles from './HeaderStyle';
 import {
   myFilesPageData,
-} from '../../bento/fileCentricCartWorkflowData';
-import ReadMeDialogComponent from '../../components/ReadMeDialog/ReadMe.controller';
-import ReadMoreSVG from './readMore';
-import env from '../../utils/env';
+} from '../../../../bento/fileCentricCartWorkflowData';
+import { TableContext } from '../../../../bento-core';
+import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
+import ReadMoreSVG from '../../readMore';
+import env from '../../../../utils/env';
+import DropDownView from '../dropdown/DropDownView';
 
 const HeaderView = ({
   classes,
+  filesId,
 }) => {
-
   const [displayReadMe, setDisplayReadMe] = useState(false);
   const [content, setContent] = useState(undefined);
 
@@ -40,6 +41,10 @@ const HeaderView = ({
   const displayReadMeHandler = () => {
     setDisplayReadMe(!displayReadMe);
   };
+
+  const tableContext = useContext(TableContext);
+  const { context } = tableContext;
+  console.log(context);
 
   return (
     <>
@@ -67,19 +72,17 @@ const HeaderView = ({
           README
         </Button>
       </div>
-      <Grid xs={12} md={12}>
-        <Divider classes={{ root: classes.divider }} />
-      </Grid>
-      <Grid xs={9} md={9} className={classes.allFilesBtn}>
-        <input type="radio" id="huey" name="drone" value="huey" />
+      <Divider classes={{ root: classes.divider }} />
+      <Grid xs={9} md={9} lg={9} className={classes.allFilesBtn}>
+        <input type="radio" name="donwloadFiles" value="allFiles" />
         <label for="huey">All Files</label>
       </Grid>
-      <Grid xs={1} md={1}>
-        <input type="radio" id="huey" name="drone" value="huey" />
+      <Grid xs={1} md={1} lg={1}>
+        <input type="radio" name="donwloadFiles" value="selected" />
         <label for="huey">Selected Files</label>
       </Grid>
-      <Grid xs={2} md={2}>
-        <DropDownview />
+      <Grid xs={2} md={2} lg={2}>
+        <DropDownView filesId={filesId} />
       </Grid>
       <ReadMeDialogComponent
         content={content}

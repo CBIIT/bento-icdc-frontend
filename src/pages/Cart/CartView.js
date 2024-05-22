@@ -12,7 +12,7 @@ import {
   cartTable,
   tableLayOut,
 } from '../../bento/fileCentricCartWorkflowData';
-import HeaderView from './HeaderView';
+import HeaderView from './components/header/HeaderView';
 import { TableContext } from '../../bento-core';
 import PaginatedTableView from '../../components/PaginatedTable/TableView';
 import { tblContainer, themeConfig } from './CartTheme';
@@ -40,7 +40,7 @@ const CartView = ({
   return (
     <>
       <Grid container spacing={1} className={classes.container}>
-        <HeaderView />
+        <HeaderView filesId={filesId} />
         <Grid xs={12} md={12} lg={12} className={classes.tableContainer}>
           <div className={classes.bodyWrapper}>
             <ThemeProvider theme={createTheme(tblContainer)}>

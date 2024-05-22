@@ -1,3 +1,5 @@
+import zIndex from "@material-ui/core/styles/zIndex";
+
 export default () => ({
   cartHeader: {
     // paddingTop: '20px',
@@ -21,7 +23,8 @@ export default () => ({
   },
   logo: {
     width: '85px',
-    marginRight: '10px',
+    marginRight: '15px',
+    zIndex: '100',
   },
   header: {
 
@@ -29,8 +32,9 @@ export default () => ({
   divider: {
     height: '3px',
     background: '#686F7F',
-    marginTop: '-13px',
+    marginTop: '-17px',
     width: '100%',
+    zIndex: '0',
   },
   readMeBtn: {
     paddingTop: '35px',

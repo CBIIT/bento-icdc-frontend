@@ -16,17 +16,16 @@ import {
 import { useQuery } from '@apollo/client';
 import { noop } from 'lodash';
 import axios from 'axios';
-import { cn } from '@bento-core/util';
 import gql from 'graphql-tag';
 import styles from './DropDownStyle';
-import cgcIcon from '../assets/cgc.svg';
-import arrowDownPng from '../assets/arrowDown.png';
+import cgcIcon from '../../assets/cgc.svg';
+import arrowDownPng from '../../assets/arrowDown.png';
 import {
   GET_STORE_MANIFEST_DATA_QUERY,
-  myFilesPageData,
-} from '../../../bento/fileCentricCartWorkflowData';
-import { getManifestData } from '../../fileCentricCart/util/TableService';
-import env from '../../../utils/env';
+} from '../../../../bento/fileCentricCartWorkflowData';
+import { getManifestData } from '../../../fileCentricCart/util/TableService';
+import env from '../../../../utils/env';
+import DownloadFileManifestDialog from './downloadFileManifestDialog';
 
 const StyledMenuItem = withStyles(() => ({
   root: {
@@ -267,6 +266,11 @@ const DropDownView = ({
           )}
         </Popper>
       </div>
+      <DownloadFileManifestDialog
+        onClose={handleDownloadFileManifestDialogClose}
+        open={downloadFileManifestDialogOpen}
+        filesId={filesId}
+      />
     </>
   );
 };
