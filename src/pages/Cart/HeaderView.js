@@ -43,15 +43,17 @@ const HeaderView = ({
 
   return (
     <>
-      <Grid xs={1}>
-        <div className={classes.logo}>
+      <div className={classes.cartHeader}>
+        <div className={classes.cartHeaderLogo}>
           <img
+              className={classes.logo}
               src={myFilesPageData.headerIconSrc}
               alt={myFilesPageData.headerIconAlt}
           />
+          <span className={classes.pageTitle}>My Files</span>
         </div>
-      </Grid>
-      <Grid xs={2} className={classes.readMeBtn}>
+      </div>
+      <div className={classes.readMeBtn}>
         <Button
           onClick={displayReadMeHandler}
           color="primary"
@@ -64,7 +66,7 @@ const HeaderView = ({
         >
           README
         </Button>
-      </Grid>
+      </div>
       <Grid xs={12} md={12}>
         <Divider classes={{ root: classes.divider }} />
       </Grid>

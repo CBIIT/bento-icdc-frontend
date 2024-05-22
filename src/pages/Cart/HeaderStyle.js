@@ -1,12 +1,27 @@
 export default () => ({
-  header: {
-    color: 'red',
+  cartHeader: {
+    // paddingTop: '20px',
+  },
+  cartHeaderLogo: {
+    float: 'left',
+    display: 'flex',
+    height: '100px',
+    lineHeight: '100px',
+    fontSize: '25px',
+    color: '#FF9742',
+    fontFamily: 'Raleway',
+    fontWeight: '500',
+    width: '215px',
+  },
+  pageTitle: {
+    maginLeft: '10px',
   },
   container: {
     padding: "30px 30px",
   },
   logo: {
-    width: '96px',
+    width: '85px',
+    marginRight: '10px',
   },
   header: {
 
@@ -18,20 +33,21 @@ export default () => ({
     width: '100%',
   },
   readMeBtn: {
-    paddingTop: '20px',
+    paddingTop: '35px',
   },
   readMeBtnRoot: {
     boxShadow: 'none',
-    background: '#fff',
+    background: '#3C597C',
     borderRadius: '8px',
-    border: '1px solid #003559',
+    border: '1.25px solid #0B3556',
+    height: '38px',
     '&:hover': {
-      backgroundColor: '#fff',
+      backgroundColor: '#3C597C',
       boxShadow: 'none',
     },
   },
   readMeBtnLabel: {
-    color: '#1D79A8',
+    color: '#ffffff',
     fontFamily: 'Lato',
     fontSize: '16px',
     fontWeight: 400,
