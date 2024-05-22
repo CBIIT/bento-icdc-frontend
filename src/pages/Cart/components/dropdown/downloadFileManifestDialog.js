@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -13,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import DownloadFileManifestIcon from '../../assets/dwnldFileManifest.svg';
 import { GET_MY_CART_DATA_QUERY, manifestData, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import { downloadJsonV2 } from '../../utils';
+import { TableContext } from '../../../../bento-core';
 
 const useStyles = makeStyles({
   dialogContainer: {
@@ -77,7 +78,11 @@ const CustomDialogContent = withStyles(() => ({
 ));
 
 const DownloadFileManifestDialog = React.forwardRef(({
-  onClose, selectedValue, open, filesId,
+  onClose,
+  selectedValue, 
+  open, 
+  filesId,
+  allFiles,
 }, ref) => {
   const [comment, setComment] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -97,12 +102,18 @@ const DownloadFileManifestDialog = React.forwardRef(({
     setComment(event.target.value);
   };
 
+  // download all or selected files
+  const tableContext = useContext(TableContext);
+  const { context } = tableContext;
+
   const client = useApolloClient();
   async function downloadSCSVFile() {
+    const { selectedFileIds = [] } = context;
+    const downloadFilesId = allFiles ? filesId : selectedFileIds;
     const result = await client.query({
       query: GET_MY_CART_DATA_QUERY,
       variables: {
-        uuids: filesId,
+        uuids: downloadFilesId,
         first: 10000,
       },
     }).then((response) => response.data.filesInList);

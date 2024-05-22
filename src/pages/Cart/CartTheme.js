@@ -272,7 +272,7 @@ export const tblPgn = {
       paddingBottom: '0',
       borderBottom: '3px solid #004c73',
       '&:last-child': {
-        paddingRight: '122px',
+        paddingRight: '105px',
       },
     },
     toolbar: {

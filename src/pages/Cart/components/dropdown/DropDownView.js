@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Grid,
-  ThemeProvider,
-  createTheme,
   withStyles,
-  Divider,
   MenuItem,
   MenuList,
   ClickAwayListener,
@@ -62,6 +58,7 @@ const STORE_MANIFEST_QUERY = gql`
 const DropDownView = ({
   classes,
   filesId = [],
+  allFiles,
 }) => {
   const [sbgUrl, setSBGUrl] = useState('');
   const [open, setOpen] = React.useState(false);
@@ -137,7 +134,6 @@ const DropDownView = ({
   }, [data]);
 
   const [label] = useState(LABEL);
-  const [displayReadMe, setDisplayReadMe] = useState(false);
   const [content, setContent] = useState(undefined);
   // eslint-disable-next-line no-unused-vars
   const [readMoreDialogOpen, setReadMoreDialogOpen] = React.useState(false);
@@ -165,10 +161,6 @@ const DropDownView = ({
 
   const handleDownloadFileManifestDialogClose = () => {
     setDownloadFileManifestDialogOpen(false);
-  };
-
-  const displayReadMeHandler = () => {
-    setDisplayReadMe(!displayReadMe);
   };
 
   const getMenuItem = (type) => {
@@ -270,6 +262,7 @@ const DropDownView = ({
         onClose={handleDownloadFileManifestDialogClose}
         open={downloadFileManifestDialogOpen}
         filesId={filesId}
+        allFiles={allFiles}
       />
     </>
   );

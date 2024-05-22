@@ -1,24 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
   Grid,
-  ThemeProvider,
-  createTheme,
   withStyles,
   Divider,
   Button,
-  FormControl,
-  FormControlLabel,
-  RadioGroup,
-  Radio
 } from '@material-ui/core';
 import axios from 'axios';
 import styles from './HeaderStyle';
 import {
   myFilesPageData,
 } from '../../../../bento/fileCentricCartWorkflowData';
-import { TableContext } from '../../../../bento-core';
 import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
-import ReadMoreSVG from '../../readMore';
+import ReadMoreSVG from '../readMore';
 import env from '../../../../utils/env';
 import DropDownView from '../dropdown/DropDownView';
 
@@ -28,6 +21,9 @@ const HeaderView = ({
 }) => {
   const [displayReadMe, setDisplayReadMe] = useState(false);
   const [content, setContent] = useState(undefined);
+
+  // if allFile radio button is true download all file with Download manifest btn
+  const [allFiles, setAllFiles] = useState(true);
 
   const getReadMe = async (url) => {
     const { data } = await axios.get(url);
@@ -41,10 +37,6 @@ const HeaderView = ({
   const displayReadMeHandler = () => {
     setDisplayReadMe(!displayReadMe);
   };
-
-  const tableContext = useContext(TableContext);
-  const { context } = tableContext;
-  console.log(context);
 
   return (
     <>
@@ -74,15 +66,30 @@ const HeaderView = ({
       </div>
       <Divider classes={{ root: classes.divider }} />
       <Grid xs={9} md={9} lg={9} className={classes.allFilesBtn}>
-        <input type="radio" name="donwloadFiles" value="allFiles" />
+        <input
+          type="radio"
+          name="selectAll"
+          value={allFiles}
+          onClick={() => setAllFiles(true)}
+          checked={allFiles}
+        />
         <label for="huey">All Files</label>
       </Grid>
       <Grid xs={1} md={1} lg={1}>
-        <input type="radio" name="donwloadFiles" value="selected" />
+        <input
+          type="radio"
+          name="selectAll"
+          checked={!allFiles}
+          value={!allFiles}
+          onClick={() => setAllFiles(false)}
+        />
         <label for="huey">Selected Files</label>
       </Grid>
       <Grid xs={2} md={2} lg={2}>
-        <DropDownView filesId={filesId} />
+        <DropDownView
+          filesId={filesId}
+          allFiles={allFiles}
+        />
       </Grid>
       <ReadMeDialogComponent
         content={content}

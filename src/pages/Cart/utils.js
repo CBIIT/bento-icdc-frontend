@@ -86,11 +86,14 @@ export function downloadJson(tableData, comments, fileName, manifestData) {
 }
 
 export const downloadJsonV2 = (tableData, comments, fileName, manifestData) => {
+  console.log("downloadJsonV2");
+  console.log(tableData);
   const payload = tableData.map((el) => ({
     ...el,
     user_comments: comments || null
   }))
   const json2csvCallback = (err, csv) => {
+    console.log("json2csvCallback");
     if (err) { throw err; }
     const exportData = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' });
     const JsonURL = window.URL.createObjectURL(exportData);
