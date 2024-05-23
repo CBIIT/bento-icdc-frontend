@@ -87,7 +87,7 @@ const HeaderView = ({
       </Grid>
       <Grid xs={2} md={2} lg={2}>
         <DropDownView
-          filesId={filesId}
+          filesId={filesId} 
           allFiles={allFiles}
         />
       </Grid>

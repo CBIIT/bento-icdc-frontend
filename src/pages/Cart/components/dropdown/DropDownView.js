@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   withStyles,
   MenuItem,
@@ -9,13 +9,16 @@ import {
   Grow,
   Paper,
 } from '@material-ui/core';
+import clsx from 'clsx';
 import { useQuery } from '@apollo/client';
 import { noop } from 'lodash';
 import axios from 'axios';
 import gql from 'graphql-tag';
+import { TableContext } from '../../../../bento-core';
 import styles from './DropDownStyle';
 import cgcIcon from '../../assets/cgc.svg';
 import arrowDownPng from '../../assets/arrowDown.png';
+import arrowUpPng from '../../assets/arrowUp.png';
 import {
   GET_STORE_MANIFEST_DATA_QUERY,
 } from '../../../../bento/fileCentricCartWorkflowData';
@@ -32,7 +35,7 @@ const StyledMenuItem = withStyles(() => ({
   },
 }))(MenuItem);
 
-const LABEL = 'Available Export Options';
+const LABEL = 'Export and Download';
 
 const {
   EXPORT_TO_CANCER_GENOMICS_CLOUD,
@@ -61,12 +64,15 @@ const DropDownView = ({
   allFiles,
 }) => {
   const [sbgUrl, setSBGUrl] = useState('');
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+
+  const dropDownIcon = open ? (<img src={arrowUpPng} alt="arrow down icon" />)
+    : (<img src={arrowDownPng} alt="arrow down icon" />);
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -136,10 +142,7 @@ const DropDownView = ({
   const [label] = useState(LABEL);
   const [content, setContent] = useState(undefined);
   // eslint-disable-next-line no-unused-vars
-  const [readMoreDialogOpen, setReadMoreDialogOpen] = React.useState(false);
   const [downloadFileManifestDialogOpen, setDownloadFileManifestDialogOpen] = React.useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [isLoading, setLoading] = React.useState(false);
 
   useEffect(() => {
     getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
@@ -201,30 +204,41 @@ const DropDownView = ({
 
   const options = OPTIONS.map((item) => getMenuItem(item));
 
+  // download all or selected files
+  const tableContext = useContext(TableContext);
+  const { context } = tableContext;
+  const { selectedRows = [] } = context;
+  const disableDropdown = !allFiles && selectedRows.length === 0;
+
+  // close dropdown if allFile is false and any row is not selected
+  useEffect(() => {
+    setOpen(false);
+  }, [selectedRows]);
+
   return (
     <>
       <div>
         {' '}
         <Button
+          disabled={disableDropdown}
           classes={{
-            root: open
-              ? classes.availableDownloadDropdownBtnIsOpen
-              : classes.availableDownloadDropdownBtn,
+            root: clsx({
+              [classes.availableDownloadDropdownBtnIsOpen]: open,
+              [classes.availableDownloadDropdownBtn]: !open,
+              [classes.disableDropDownBtn]: disableDropdown
+            }),
             label: classes.availableDownloadDropdownBtnLabel,
             contained: classes.availableDownloadBtnContained,
             startIcon: classes.availableDownloadDropdownBtnStartIcon,
+            endIcon: classes.endIcon,
           }}
-          startIcon={<img style={{ marginRight: '8px' }} src={arrowDownPng} alt="arrow down icon" />}
+          endIcon={dropDownIcon}
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          {isLoading ? (<p>Loading...</p>) : (
-            <>
-              {label}
-            </>
-          )}
+          {label}
         </Button>
         <Popper
           open={open}

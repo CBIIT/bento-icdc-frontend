@@ -1,4 +1,8 @@
 export default () => ({
+  disableDropDownBtn: {
+    opacity: '0.5',
+    backgroundColor: '#F2F2F2',
+  },
   availableDownloadDropdownBtnIsOpen: {
     backgroundColor: '#F2F2F2',
     borderTop: '1px solid #155F97',
@@ -7,7 +11,7 @@ export default () => ({
     borderTopRightRadius: '8px',
     borderTopLeftRadius: '8px',
     borderBottomRightRadius: '0px',
-    width: '240px',
+    width: '260px',
     borderBottomLeftRadius: '0px',
     boxShadow: 'none',
     '&:hover': {
@@ -20,7 +24,7 @@ export default () => ({
     border: '1px solid #155F97',
     borderRadius: '8px',
     boxShadow: 'none',
-    width: '240px',
+    width: '260px',
     textWrap: 'nowrap',
     '&:hover': {
       backgroundColor: '#F2F2F2',
@@ -50,12 +54,12 @@ export default () => ({
     paddingTop: '0px',
     paddingBottom: '0px',
     backgroundColor: '#0d71a3',
-    color: 'white',
+    color: '#ffffff',
     borderBottomRightRadius: '8px',
     borderBottomLeftRadius: '8px',
   },
   dropdownPaper: {
-    maxWidth: '240px',
+    maxWidth: '260px',
     borderBottomRightRadius: '8px',
     borderBottomLeftRadius: '8px',
   },
@@ -64,7 +68,7 @@ export default () => ({
     borderRadius: '8px',
     border: '1px solid #1A8CCB',
     boxShadow: 'none',
-    width: '240px',
+    width: '260px',
     fontFamily: 'Lato',
     fontStyle: 'normal',
     // maxWidth: '287px',
@@ -82,5 +86,9 @@ export default () => ({
     height: '20px',
     verticalAlign: 'middle',
     margingLeft: '4px',
+  },
+  endIcon: {
+    marginRight: '12px',
+    marginLeft: '30px',
   },
 });

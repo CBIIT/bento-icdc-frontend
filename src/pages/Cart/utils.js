@@ -86,8 +86,6 @@ export function downloadJson(tableData, comments, fileName, manifestData) {
 }
 
 export const downloadJsonV2 = (tableData, comments, fileName, manifestData) => {
-  console.log("downloadJsonV2");
-  console.log(tableData);
   const payload = tableData.map((el) => ({
     ...el,
     user_comments: comments || null
