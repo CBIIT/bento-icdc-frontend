@@ -2,6 +2,7 @@ export default () => ({
   disableDropDownBtn: {
     opacity: '0.5',
     backgroundColor: '#F2F2F2',
+    cursor: 'not-allowed',
   },
   availableDownloadDropdownBtnIsOpen: {
     backgroundColor: '#F2F2F2',
@@ -81,14 +82,41 @@ export default () => ({
       boxShadow: 'none',
     },
   },
-  downloadFileIcon: {
-    width: '20px',
-    height: '20px',
-    verticalAlign: 'middle',
-    margingLeft: '4px',
-  },
   endIcon: {
     marginRight: '12px',
     marginLeft: '30px',
+  },
+  downloadFileManifestTooltipWrapper: {
+    // display: 'flex',
+    gap: '8px',
+  },
+  downloadFileManifestTooltip: {
+    // display: 'flex',
+    gap: '8px'
+  },
+  cgcIcon: {
+    marginTop: '15px',
+  },
+  cgcLabal: {
+    float: 'left',
+    width: '180px',
+  },
+  linkIcon: {
+    width: '12px',
+    height: '12px',
+    marginLeft: '3px',
+  },
+  fileManifestLabal: {
+    float: 'left',
+    width: '180px',
+    height: '50px',
+    paddingTop: '15px',
+  },
+  downloadFileIcon: {
+    width: '20px',
+    height: '20px',
+    margingLeft: '4px',
+    float: 'right',
+    marginTop: '15px',
   },
 });

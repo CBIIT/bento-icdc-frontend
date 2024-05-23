@@ -14,9 +14,10 @@ import { useQuery } from '@apollo/client';
 import { noop } from 'lodash';
 import axios from 'axios';
 import gql from 'graphql-tag';
-import { TableContext } from '../../../../bento-core';
+import { TableContext, ToolTip as Tooltip } from '../../../../bento-core';
 import styles from './DropDownStyle';
 import cgcIcon from '../../assets/cgc.svg';
+import linkIcon from '../../assets/linkIcon.svg';
 import arrowDownPng from '../../assets/arrowDown.png';
 import arrowUpPng from '../../assets/arrowUp.png';
 import {
@@ -67,6 +68,17 @@ const DropDownView = ({
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
 
+  // download all or selected files
+  const tableContext = useContext(TableContext);
+  const { context } = tableContext;
+  const { selectedRows = [] } = context;
+  const disableDropdown = !allFiles && selectedRows.length === 0;
+
+  // close dropdown if allFile is false and any row is not selected
+  useEffect(() => {
+    setOpen(false);
+  }, [selectedRows]);
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -100,7 +112,10 @@ const DropDownView = ({
   }, [open]);
 
   const getManifestPayload = () => {
-    const { data: manifestData } = getManifestData(GET_STORE_MANIFEST_DATA_QUERY, filesId);
+    // if allFiles download all files in cart else selected files id
+    const { selectedFileIds = [] } = context;
+    const downloadFilesId = allFiles ? filesId : selectedFileIds;
+    const { data: manifestData } = getManifestData(GET_STORE_MANIFEST_DATA_QUERY, downloadFilesId);
 
     if (!manifestData) {
       return null;
@@ -178,25 +193,75 @@ const DropDownView = ({
     }
     return (
       <>
-        <StyledMenuItem onClick={() => {
-          initiateDownload(type);
-          setOpen(false);
-        }}
-        >
-          <div>{type}</div>
-          {
-            icon && (
-            <span>
-              <img src={icon} alt="icon" />
-            </span>
-            )
-          }
-        </StyledMenuItem>
-        <StyledMenuItem onClick={handleDownloadFileManifestDialogOpen}>
-          <div>Download File Manifest</div>
-          <span>
-            <img className={classes.downloadFileIcon} src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg" alt="icon" />
+        <StyledMenuItem>
+          <Tooltip
+            arrow
+            interactive
+            title={(
+              <div className={classes.downloadFileManifestTooltip}>
+                {/* eslint-disable-next-line max-len */}
+                Click this link to go to 
+                <a
+                  style={{ color: '#165F83' }}
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://cgc-accounts.sbgenomics.com/auth/login?next=https%3A%2F%2Fcgc-accounts.sbgenomics.com%2Foauth2%2Fauthorization%3Fresponse_type%3Dcode%26client_id%3D08bbb98f354e4554bd7fd315de64d955%26redirect_uri%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Foauth2%252Fredirect%26state%3Dp8aBZtr4Vo9DKxtCgjG8aKPSZVyNXq%26client_next%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Fimport-redirect%252Fdrs%252Fcsv%253FURL%253D%25257Bdownload%26scope%3Dopenid%26nonce%3D67182501315305605201684948090"
+                >
+                  <span style={{ textDecoration: 'underline', margin: 0, padding: 0 }}>
+                  {" Cancer Genomics Cloud "}
+                  <img className={classes.linkIcon} src={linkIcon} alt="linkIcon" />
+                  </span>
+                </a>
+                account.
+              </div>
+            )}
+            placement="right"
+          >
+          <span onClick={() => {
+            initiateDownload(EXPORT_TO_CANCER_GENOMICS_CLOUD);
+            setOpen(false);
+            }}
+          >
+            <span className={classes.cgcLabal}>{EXPORT_TO_CANCER_GENOMICS_CLOUD}</span>
+            <img className={classes.cgcIcon} src={cgcIcon} alt="icon" />
           </span>
+          </Tooltip>
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <Tooltip
+            arrow
+            interactive
+            maxWidth={250}
+            title={(
+              <div className={classes.downloadFileManifestTooltip}>
+                {/* eslint-disable-next-line max-len */}
+                {"To access and analyze files select and remove unwanted files, click the 'Download File Manifest' button and upload the resulting manifest file to your "}
+                <a
+                  style={{ color: '#165F83' }}
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://cgc-accounts.sbgenomics.com/auth/login?next=https%3A%2F%2Fcgc-accounts.sbgenomics.com%2Foauth2%2Fauthorization%3Fresponse_type%3Dcode%26client_id%3D08bbb98f354e4554bd7fd315de64d955%26redirect_uri%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Foauth2%252Fredirect%26state%3Dp8aBZtr4Vo9DKxtCgjG8aKPSZVyNXq%26client_next%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Fimport-redirect%252Fdrs%252Fcsv%253FURL%253D%25257Bdownload%26scope%3Dopenid%26nonce%3D67182501315305605201684948090"
+                >
+                  <span style={{ textDecoration: 'underline', margin: 0, padding: 0 }}>
+                    {"Seven Bridges Genomics"}
+                  </span>
+                </a>
+                {" account."}
+              </div>
+            )}
+            placement="right"
+          >
+            <span onClick={handleDownloadFileManifestDialogOpen}>
+              <span className={classes.fileManifestLabal}>
+                Download File Manifest
+              </span>
+              <img
+                className={classes.downloadFileIcon}
+                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
+                alt="icon"
+              />
+            </span>
+          </Tooltip>
         </StyledMenuItem>
       </>
     );
@@ -204,42 +269,40 @@ const DropDownView = ({
 
   const options = OPTIONS.map((item) => getMenuItem(item));
 
-  // download all or selected files
-  const tableContext = useContext(TableContext);
-  const { context } = tableContext;
-  const { selectedRows = [] } = context;
-  const disableDropdown = !allFiles && selectedRows.length === 0;
-
-  // close dropdown if allFile is false and any row is not selected
-  useEffect(() => {
-    setOpen(false);
-  }, [selectedRows]);
-
   return (
     <>
       <div>
         {' '}
-        <Button
-          disabled={disableDropdown}
-          classes={{
-            root: clsx({
-              [classes.availableDownloadDropdownBtnIsOpen]: open,
-              [classes.availableDownloadDropdownBtn]: !open,
-              [classes.disableDropDownBtn]: disableDropdown
-            }),
-            label: classes.availableDownloadDropdownBtnLabel,
-            contained: classes.availableDownloadBtnContained,
-            startIcon: classes.availableDownloadDropdownBtnStartIcon,
-            endIcon: classes.endIcon,
-          }}
-          endIcon={dropDownIcon}
-          ref={anchorRef}
-          aria-controls={open ? 'menu-list-grow' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
+        <Tooltip
+          arrow
+          maxWidth={200}
+          placement="left"
+          title={disableDropdown? "Select at least one file from the table below." : ""}
         >
-          {label}
-        </Button>
+          <div>
+            <Button
+              disabled={disableDropdown}
+              classes={{
+                root: clsx({
+                  [classes.availableDownloadDropdownBtnIsOpen]: open,
+                  [classes.availableDownloadDropdownBtn]: !open,
+                  [classes.disableDropDownBtn]: disableDropdown
+                }),
+                label: classes.availableDownloadDropdownBtnLabel,
+                contained: classes.availableDownloadBtnContained,
+                startIcon: classes.availableDownloadDropdownBtnStartIcon,
+                endIcon: classes.endIcon,
+              }}
+              endIcon={dropDownIcon}
+              ref={anchorRef}
+              aria-controls={open ? 'menu-list-grow' : undefined}
+              aria-haspopup="true"
+              onClick={handleToggle}
+            >
+              {label}
+            </Button>
+          </div>
+        </Tooltip>
         <Popper
           open={open}
           anchorEl={anchorRef.current}

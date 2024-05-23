@@ -65,7 +65,7 @@ const HeaderView = ({
         </Button>
       </div>
       <Divider classes={{ root: classes.divider }} />
-      <Grid xs={9} md={9} lg={9} className={classes.allFilesBtn}>
+      <Grid xs={8} md={8} lg={8} className={classes.allFilesBtn}>
         <input
           type="radio"
           name="selectAll"
