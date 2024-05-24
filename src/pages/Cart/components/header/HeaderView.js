@@ -4,6 +4,10 @@ import {
   withStyles,
   Divider,
   Button,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  FormControl,
 } from '@material-ui/core';
 import axios from 'axios';
 import styles from './HeaderStyle';
@@ -14,6 +18,7 @@ import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.co
 import ReadMoreSVG from '../readMore';
 import env from '../../../../utils/env';
 import DropDownView from '../dropdown/DropDownView';
+import HeaderThemeprovider from './HeaderTheme';
 
 const HeaderView = ({
   classes,
@@ -38,8 +43,13 @@ const HeaderView = ({
     setDisplayReadMe(!displayReadMe);
   };
 
+  const handleRadioChange = (event) => {
+    const isAllSelected = event.target.value === 'true';
+    setAllFiles(isAllSelected);
+  };
+
   return (
-    <>
+    <HeaderThemeprovider>
       <div className={classes.cartHeader}>
         <div className={classes.cartHeaderLogo}>
           <img
@@ -65,32 +75,36 @@ const HeaderView = ({
         </Button>
       </div>
       <Divider classes={{ root: classes.divider }} />
-      <Grid xs={8} md={8} lg={8} className={classes.allFilesBtn}>
-        <input
-          type="radio"
-          name="selectAll"
-          value={allFiles}
-          onClick={() => setAllFiles(true)}
-          checked={allFiles}
-        />
-        <label for="huey">All Files</label>
+      <Grid xs={12} md={12} lg={12} className={classes.actionBtn}>
+        <FormControl>
+          <RadioGroup
+            row
+            aria-labelledby="row-radio-label"
+            name="selectAll"
+            value={allFiles}
+            onChange={handleRadioChange}
+          >
+          <FormControlLabel
+            value={true}
+            control={
+              <Radio />
+            }
+            label="All Files"
+          />
+          <FormControlLabel
+            value={false}
+            control={<Radio />} 
+            className="selectFilesBtn"
+            label="Selected Files"
+          />
+        </RadioGroup>
+      </FormControl>
+      <DropDownView
+        filesId={filesId} 
+        allFiles={allFiles}
+      />
       </Grid>
-      <Grid xs={1} md={1} lg={1}>
-        <input
-          type="radio"
-          name="selectAll"
-          checked={!allFiles}
-          value={!allFiles}
-          onClick={() => setAllFiles(false)}
-        />
-        <label for="huey">Selected Files</label>
-      </Grid>
-      <Grid xs={2} md={2} lg={2}>
-        <DropDownView
-          filesId={filesId} 
-          allFiles={allFiles}
-        />
-      </Grid>
+      
       <ReadMeDialogComponent
         content={content}
         config={{
@@ -99,7 +113,7 @@ const HeaderView = ({
         display={displayReadMe}
         displayReadMeDialog={displayReadMeHandler}
       />
-    </>
+    </HeaderThemeprovider>
   );
 };
 

@@ -1,4 +1,9 @@
+import zIndex from "@material-ui/core/styles/zIndex";
+
 export default () => ({
+  dropDownBtnContainer : {
+    float: 'right',
+  },
   disableDropDownBtn: {
     opacity: '0.5',
     backgroundColor: '#F2F2F2',
@@ -12,7 +17,7 @@ export default () => ({
     borderTopRightRadius: '8px',
     borderTopLeftRadius: '8px',
     borderBottomRightRadius: '0px',
-    width: '260px',
+    width: '250px',
     borderBottomLeftRadius: '0px',
     boxShadow: 'none',
     '&:hover': {
@@ -25,7 +30,7 @@ export default () => ({
     border: '1px solid #155F97',
     borderRadius: '8px',
     boxShadow: 'none',
-    width: '260px',
+    width: '250px',
     textWrap: 'nowrap',
     '&:hover': {
       backgroundColor: '#F2F2F2',
@@ -42,7 +47,7 @@ export default () => ({
     paddingRight: '6px',
   },
   availableDownloadBtn: {
-    backgroundColor: '#155F97 !important',
+    backgroundColor: '#3C597C !important',
     boxShadow: 'none',
     '&:hover': {
       boxShadow: 'none',
@@ -60,16 +65,17 @@ export default () => ({
     borderBottomLeftRadius: '8px',
   },
   dropdownPaper: {
-    maxWidth: '260px',
+    maxWidth: '250px',
     borderBottomRightRadius: '8px',
     borderBottomLeftRadius: '8px',
+    zIndex: '100',
   },
   downloadFileManifestBtn: {
-    backgroundColor: '#1A8CCB',
+    backgroundColor: '#3C597C',
     borderRadius: '8px',
-    border: '1px solid #1A8CCB',
+    border: '1px solid #3C597C',
     boxShadow: 'none',
-    width: '260px',
+    width: '250px',
     fontFamily: 'Lato',
     fontStyle: 'normal',
     // maxWidth: '287px',
@@ -78,7 +84,7 @@ export default () => ({
     textTransform: 'none',
     color: '#fff',
     '&:hover': {
-      backgroundColor: '#1A8CCB',
+      backgroundColor: '#1A3D69',
       boxShadow: 'none',
     },
   },
@@ -95,11 +101,13 @@ export default () => ({
     gap: '8px'
   },
   cgcIcon: {
-    marginTop: '15px',
+    marginTop: '10px',
   },
   cgcLabal: {
     float: 'left',
     width: '180px',
+    textWrap: 'wrap',
+    lineHeight: '18px',
   },
   linkIcon: {
     width: '12px',
@@ -108,15 +116,15 @@ export default () => ({
   },
   fileManifestLabal: {
     float: 'left',
-    width: '180px',
-    height: '50px',
-    paddingTop: '15px',
+    width: '190px',
+    height: '35px',
+    lineHeight: '35px',
   },
   downloadFileIcon: {
     width: '20px',
     height: '20px',
     margingLeft: '4px',
     float: 'right',
-    marginTop: '15px',
+    marginTop: '10px',
   },
 });

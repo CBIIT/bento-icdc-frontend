@@ -27,15 +27,6 @@ import { getManifestData } from '../../../fileCentricCart/util/TableService';
 import env from '../../../../utils/env';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 
-const StyledMenuItem = withStyles(() => ({
-  root: {
-    padding: '2px 26px',
-    color: '#fff',
-    overflow: 'auto',
-    whiteSpace: 'wrap',
-  },
-}))(MenuItem);
-
 const LABEL = 'Export and Download';
 
 const {
@@ -193,7 +184,7 @@ const DropDownView = ({
     }
     return (
       <>
-        <StyledMenuItem>
+        <MenuItem>
           <Tooltip
             arrow
             interactive
@@ -226,8 +217,8 @@ const DropDownView = ({
             <img className={classes.cgcIcon} src={cgcIcon} alt="icon" />
           </span>
           </Tooltip>
-        </StyledMenuItem>
-        <StyledMenuItem>
+        </MenuItem>
+        <MenuItem className="donwloadManiFestBtn">
           <Tooltip
             arrow
             interactive
@@ -262,7 +253,7 @@ const DropDownView = ({
               />
             </span>
           </Tooltip>
-        </StyledMenuItem>
+        </MenuItem>
       </>
     );
   };
@@ -271,7 +262,7 @@ const DropDownView = ({
 
   return (
     <>
-      <div>
+      <div className={classes.dropDownBtnContainer}>
         {' '}
         <Tooltip
           arrow

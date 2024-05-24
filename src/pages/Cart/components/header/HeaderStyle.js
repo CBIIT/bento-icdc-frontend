@@ -1,5 +1,3 @@
-import zIndex from "@material-ui/core/styles/zIndex";
-
 export default () => ({
   cartHeader: {
     // paddingTop: '20px',
@@ -57,7 +55,11 @@ export default () => ({
     fontWeight: 400,
     fontStyle: 'normal',
   },
-  allFilesBtn: {
+  actionContainer: {
+    padding: '0px 40px',
+  },
+  actionBtn: {
     textAlign: 'right',
+    paddingRight: '80px',
   },
 });
