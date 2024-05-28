@@ -9,7 +9,6 @@ import { withStyles, CssBaseline } from "@material-ui/core";
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";
 import UnifiedDash from '../../pages/unifiedView/unifiedController';
-// import CartView from '../../pages/fileCentricCart/CartController';
 import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
 import Home from '../../pages/landing/landingController';
@@ -29,6 +28,7 @@ import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import styles from './LayoutStyle';
 import CartView from '../../pages/Cart/CartController';
+// import CartView from '../../pages/fileCentricCart/CartController';
 
 const LayoutView = ({
   classes,
