@@ -59,22 +59,22 @@ const HeaderView = ({
           />
           <span className={classes.pageTitle}>My Files</span>
         </div>
+        <div className={classes.readMeBtn}>
+          <Button
+            onClick={displayReadMeHandler}
+            color="primary"
+            variant="contained"
+            endIcon={<ReadMoreSVG />}
+            classes={{
+              root: classes.readMeBtnRoot,
+              label: classes.readMeBtnLabel,
+            }}
+          >
+            README
+          </Button>
+        </div>
       </div>
-      <div className={classes.readMeBtn}>
-        <Button
-          onClick={displayReadMeHandler}
-          color="primary"
-          variant="contained"
-          endIcon={<ReadMoreSVG />}
-          classes={{
-            root: classes.readMeBtnRoot,
-            label: classes.readMeBtnLabel,
-          }}
-        >
-          README
-        </Button>
-      </div>
-      <Divider classes={{ root: classes.divider }} />
+
       <Grid xs={12} md={12} lg={12} className={classes.actionBtn}>
         <FormControl>
           <RadioGroup

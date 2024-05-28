@@ -36,11 +36,9 @@ export default () => ({
   },
   diableLink: {
     pointerEvents: 'none',
-    marginRight: '-5px',
   },
   activeLink: {
     cursor: 'pointer',
-    marginRight: '-5px',
   },
   warning: {
     color: '#971818',

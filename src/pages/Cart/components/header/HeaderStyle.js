@@ -1,6 +1,9 @@
 export default () => ({
   cartHeader: {
-    // paddingTop: '20px',
+    marginBottom: '14px',
+    width: '100%',
+    height: '85px',
+    borderBottom: '3px solid #686F7F',
   },
   cartHeaderLogo: {
     float: 'left',
