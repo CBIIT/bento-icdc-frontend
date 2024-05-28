@@ -41,7 +41,15 @@ export default ({
             background: '#1A3D69',
           }
         },
-      }
+      },
+      MuiOutlinedInput: {
+        root: {
+          height: '100%',
+          '& textarea': {
+            height: '100%',
+          },
+        },
+      },
     }
   };
   return (

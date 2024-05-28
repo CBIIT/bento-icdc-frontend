@@ -473,7 +473,7 @@ export const tableLayOut = [
   {
     container: 'buttons',
     size: 'xl',
-    clsName: 'container_footer',
+    clsName: 'container_button',
     items: [
       jBrowseBtn,
     ],

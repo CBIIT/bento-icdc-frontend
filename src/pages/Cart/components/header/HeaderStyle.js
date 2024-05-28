@@ -36,6 +36,7 @@ export default () => ({
   },
   readMeBtn: {
     paddingTop: '35px',
+    marginLeft: '5px',
   },
   readMeBtnRoot: {
     boxShadow: 'none',

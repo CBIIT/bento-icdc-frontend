@@ -196,7 +196,7 @@ const DropDownView = ({
                   style={{ color: '#165F83' }}
                   target="_blank"
                   rel="noreferrer"
-                  href="https://cgc-accounts.sbgenomics.com/auth/login?next=https%3A%2F%2Fcgc-accounts.sbgenomics.com%2Foauth2%2Fauthorization%3Fresponse_type%3Dcode%26client_id%3D08bbb98f354e4554bd7fd315de64d955%26redirect_uri%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Foauth2%252Fredirect%26state%3Dp8aBZtr4Vo9DKxtCgjG8aKPSZVyNXq%26client_next%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Fimport-redirect%252Fdrs%252Fcsv%253FURL%253D%25257Bdownload%26scope%3Dopenid%26nonce%3D67182501315305605201684948090"
+                  href="https://www.cancergenomicscloud.org/"
                 >
                   <span style={{ textDecoration: 'underline', margin: 0, padding: 0 }}>
                   {" Cancer Genomics Cloud "}

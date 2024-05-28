@@ -41,7 +41,7 @@ export default () => ({
     color: '#1D79A8',
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: '16px',
+    fontSize: '15px',
     fontFamily: 'Lato',
     textTransform: 'capitalize',
     paddingRight: '6px',
@@ -63,6 +63,7 @@ export default () => ({
     color: '#ffffff',
     borderBottomRightRadius: '8px',
     borderBottomLeftRadius: '8px',
+    border: '2px solid #0d71a3',
   },
   dropdownPaper: {
     maxWidth: '250px',
@@ -102,12 +103,14 @@ export default () => ({
   },
   cgcIcon: {
     marginTop: '10px',
+    marginLeft: '7px',
   },
   cgcLabal: {
     float: 'left',
     width: '180px',
     textWrap: 'wrap',
     lineHeight: '18px',
+    fontSize: '15px',
   },
   linkIcon: {
     width: '12px',
@@ -119,6 +122,7 @@ export default () => ({
     width: '190px',
     height: '35px',
     lineHeight: '35px',
+    fontSize: '15px',
   },
   downloadFileIcon: {
     width: '20px',
