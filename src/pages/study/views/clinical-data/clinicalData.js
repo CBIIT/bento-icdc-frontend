@@ -295,7 +295,6 @@ const ClinicalData = ({
         {
           node: offTreatmentNodeCSV, comments: '', fileName: `${name}-OFF TREATMENT`, metadata: offTreatmentNodeMetadata,
         }];
-        console.log(nodes);
         return downloadAndZipJson(nodes, setLoading, studyCode);
       }
     }
