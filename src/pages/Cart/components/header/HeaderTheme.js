@@ -46,7 +46,7 @@ export default ({
         root: {
           height: '100%',
           '& textarea': {
-            height: '100%',
+            height: '172px !important',
           },
         },
       },
