@@ -28,6 +28,5 @@ export const getManifestData = (query, filesId) => {
       controller.abort();
     };
   }, [filesId]);
-
   return { data };
 };

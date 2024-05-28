@@ -10,7 +10,6 @@ import LinkBar from '../LinkBar';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";
 import UnifiedDash from '../../pages/unifiedView/unifiedController';
-import CartView from '../../pages/fileCentricCart/CartController';
 import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
 import Home from '../../pages/landing/landingController';
@@ -29,6 +28,8 @@ import OverlayWindow from '../OverlayWindow/OverlayWindow';
 import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import styles from './LayoutStyle';
+import CartView from '../../pages/Cart/CartController';
+// import CartView from '../../pages/fileCentricCart/CartController';
 
 const LayoutView = ({
   classes,
@@ -85,6 +86,7 @@ const LayoutView = ({
               <Route exact path="/home" component={Home} />
               <Route exact path="/explore" component={Dashboard} />
               <Route path="/unifiedView/:id" component={UnifiedDash} />
+              {/* <Route path="/fileCentricCart" component={CartView} /> */}
               <Route path="/fileCentricCart" component={CartView} />
               <Route path="/studies" component={Studies} />
               <Route path="/search/:id" component={GlobalSearchView} />

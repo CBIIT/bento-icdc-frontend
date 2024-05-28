@@ -38,7 +38,7 @@
     "graphql": "^16.8.1",
     "graphql-request": "^5.1.0",
     "graphql-ws": "^5.16.0",
-    "json-2-csv": "^5.5.1",
+    "json-2-csv": "^3.20.0",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

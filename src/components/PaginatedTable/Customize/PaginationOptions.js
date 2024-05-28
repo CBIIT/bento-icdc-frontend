@@ -26,6 +26,34 @@ export const myFileTablePaginationOptions = (context) => ({
     };
     dispatch(customPaginationAction(value));
   },
+  customizeOnRowSelect: (event, row) => {
+    // Override the select row pagination action for cart table,
+    // file_name and file_uuid are required to view in JBrowse
+    // and download files respectively.
+    event.stopPropagation();
+    const { dispatch, 
+      selectedRows = [], 
+      selectedFileIds = [],
+    } = context;
+    let selectedFilesName = [...selectedRows];
+    let updateFilesId = [...selectedFileIds];
+    const {
+      file_name: fileName,
+      file_uuid: fileId,
+    } = row;
+
+    if (!row.isChecked) {
+      selectedFilesName.push(fileName);
+      updateFilesId.push(fileId);
+    } else {
+      selectedFilesName = selectedFilesName.filter((file) => fileName !== file);
+      updateFilesId = updateFilesId.filter((id) => fileId !== id);
+    }
+    dispatch(customPaginationAction({
+      selectedRows: selectedFilesName,
+      selectedFileIds: updateFilesId,
+    }));
+  }
 });
 
 export const paginationOptions = (context, config) => {

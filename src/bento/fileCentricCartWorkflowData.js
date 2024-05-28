@@ -471,15 +471,15 @@ const jBrowseBtn = {
 
 export const tableLayOut = [
   {
-    container: 'paginatedTable',
-    paginatedTable: true,
-  },
-  {
     container: 'buttons',
     size: 'xl',
-    clsName: 'container_footer',
+    clsName: 'container_button',
     items: [
       jBrowseBtn,
     ],
+  },
+  {
+    container: 'paginatedTable',
+    paginatedTable: true,
   },
 ];

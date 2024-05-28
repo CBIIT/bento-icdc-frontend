@@ -31,6 +31,7 @@ import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
 import { setSelectedFiles } from '../util';
 import jbrowseLogo from '../../../assets/icons/JbrowseViewIcon2.svg';
 import './index.css';
+import styles from './JBrowseBtnStyle';
 
 const customTheme = {
   override: {
@@ -79,7 +80,12 @@ const ViewJBrowseButton = ({
   return (
     <>
       <Link
-        className={(isInvlaid || disable) ? classes.diableLink : classes.activeLink}
+        className={
+          clsx({
+            [classes.diableLink]: (isInvlaid || disable),
+            [classes.activeLink]: !(isInvlaid || disable),
+          })
+        }
         to={{
           pathname: `/jBrowse/${MULTI_FILES_VIEW}`,
         }}
@@ -87,8 +93,10 @@ const ViewJBrowseButton = ({
         rel="noreferrer noopener"
       >
         <Button
-          className={(isInvlaid || disable)
-            ? clsx(classes.button, classes.disbaleButton) : classes.button}
+          className={clsx (classes.button, {
+            [classes.disbaleButton]: (isInvlaid || disable),
+            "disbaleJbrowseButton": (isInvlaid || disable),
+          })}
           type="button"
           onClick={viewFilesOnJBrowse}
           disabled={isInvlaid}
@@ -99,7 +107,10 @@ const ViewJBrowseButton = ({
           <img
             src={(isInvlaid || disable) ? jbrowseIconSrc : jbrowseLogo}
             alt="jbrowse_icon"
-            className={clsx(classes.jbrowseIcon)}
+            className={clsx(
+              classes.jbrowseIcon,
+              "jbrowseIcon",
+            )}
           />
           {ButtonText2}
         </Button>
@@ -122,62 +133,5 @@ const ViewJBrowseButton = ({
     </>
   );
 };
-
-const styles = () => ({
-  button: {
-    borderRadius: '10px',
-    width: '210px',
-    lineHeight: '37px',
-    fontSize: '16px',
-    fontFamily: 'Lato',
-    color: '#ffffff',
-    backgroundColor: '#566672',
-    marginTop: '6px',
-    marginBottom: '10px',
-    textTransform: 'none',
-    marginRight: '5px',
-    '&:hover': {
-      backgroundColor: '#566672',
-    },
-  },
-  disbaleButton: {
-    // opacity: '0.7',
-    color: '#ffffff !important',
-    backgroundColor: '#CCD1D4',
-  },
-  helpIconButton: {
-    verticalAlign: 'top',
-    position: 'absolute',
-    '&:hover': {
-      backgroundColor: '#fff',
-    },
-  },
-  helpIcon: {
-    zIndex: '600',
-    width: '17px',
-  },
-  jbrowseIcon: {
-    width: '2.25em',
-  },
-  diableLink: {
-    pointerEvents: 'none',
-    marginRight: '-5px',
-  },
-  activeLink: {
-    cursor: 'pointer',
-    marginRight: '-5px',
-  },
-  warning: {
-    color: '#971818',
-    fontWeight: '900',
-  },
-  descripText: {
-    fontSize: '0.75rem',
-    fontWeight: '600',
-    lineHeight: '1.6',
-    textAlign: 'left',
-    fontFamily: 'Open Sans',
-  },
-});
 
 export default withStyles(styles)(ViewJBrowseButton);
