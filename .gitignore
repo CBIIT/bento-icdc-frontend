@@ -30,4 +30,4 @@ yarn-error.log*
 src/bento/.localSearchData.js.swp
 *.swp
 src/bento/.localSearchData.js.swp
-**/injectEnv.js
+public/injectEnv.js
