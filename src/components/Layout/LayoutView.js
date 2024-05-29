@@ -22,7 +22,7 @@ import NavBar from '../NavBar/NavBarContainer';
 import About from '../../pages/about/aboutController';
 import Studies from '../../pages/studies/studiesController';
 import Programs from '../../pages/programs/programsController';
-import ProgramDetail from '../../pages/programDetail/programDetailController';
+import ProgramDetail from '../../pages/programDetail/program-detail-controller';
 import StudyDetail from '../../pages/study/studyDetailController';
 import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';

@@ -5,6 +5,7 @@ import {
   withStyles,
 //   withStyles,
 } from '@material-ui/core';
+import SpeechBubble from '../../assets/speechBubble.svg'
 
 const ICDC_DATA_AVAIL_ICONS = [
   {
@@ -61,7 +62,7 @@ const AvailabilityColumnGrouping = ({
       <IconButton aria-label="help">
         <img
           style={{ width: '0.7em', marginBottom: '0.6em' }}
-          src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+          src={SpeechBubble}
           alt="tooltip"
         />
       </IconButton>

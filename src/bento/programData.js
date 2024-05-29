@@ -34,18 +34,26 @@ const pageDataV2 = {
       primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png',
       primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
       secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.cop.jpg',
+      video: 'https://www.youtube.com/watch?v=tU5N5jCZxcY',
+    },
+    {
+      prgramName: 'PRECINCT',
+      primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/png/precint_program_listing.png',
+      video: 'https://www.youtube.com/watch?v=Gpy3EWeYy3Y',
     },
     {
       prgramName: 'CMCP',
       primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png',
       primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
       secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg',
+      video: 'https://www.youtube.com/watch?v=sHUvbPM8H7A'
     },
     {
       prgramName: 'PCCR',
       primaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png',
       primaryImageAlt: 'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
       secondaryImage: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg',
+      video: 'https://www.youtube.com/watch?v=oVs7kXSzv3U'
     },
    ]
 };

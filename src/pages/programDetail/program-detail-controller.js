@@ -1,12 +1,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import ProgramView from './programDetailView';
+import ProgramDetailView from './program-detail-view';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_PROGRAM_DETAIL_DATA_QUERY } from '../../bento/programDetailData';
 import { convertCRDCLinksToValue } from '../../utils/utils';
 
-const ProgramDetailContainer = ({ match }) => {
+const ProgramDetailController = ({ match }) => {
   const { loading, error, data } = useQuery(GET_PROGRAM_DETAIL_DATA_QUERY, {
     variables: { programTitle: match.params.id },
   });
@@ -20,7 +20,7 @@ const ProgramDetailContainer = ({ match }) => {
     );
   }
 
-  return <ProgramView data={convertCRDCLinksToValue(data, 'studiesByProgramId')} />;
+  return <ProgramDetailView data={convertCRDCLinksToValue(data, 'studiesByProgramId')} />;
 };
 
-export default ProgramDetailContainer;
+export default ProgramDetailController;

@@ -1,4 +1,4 @@
-const dynamicDataAvailColStyling = (table) => {
+const dynamicDataAvailColStyling = (table, isBody = false) => {
   const dataAvailabilityCols = [
     'numberofcasefiles',
     'numberofstudyfiles',
@@ -16,20 +16,20 @@ const dynamicDataAvailColStyling = (table) => {
     const lastItem = displayDavaAvailCols[length - 1];
     if (length === 1) {
       customStyle[`&.${firstItem.dataField}`] = {
-        borderLeft: '1px solid #cfcfcc',
-        borderRight: '1px solid #cfcfcc',
+        borderLeft: isBody ? undefined : '1px solid #808080',
+        borderRight: isBody ? undefined : '1px solid #808080',
         textAlign: 'center',
         padding: '15px',
       };
     }
     if (length > 1) {
       customStyle[`&.${firstItem.dataField}`] = {
-        borderLeft: '1px solid #cfcfcc',
+        borderLeft: isBody ? undefined : '1px solid #808080',
         textAlign: 'center',
         padding: '15px',
       };
       customStyle[`&.${lastItem.dataField}`] = {
-        borderRight: '1px solid #cfcfcc',
+        borderRight: isBody ? undefined : '1px solid #808080',
         textAlign: 'center',
         padding: '15px',
       };
@@ -39,7 +39,7 @@ const dynamicDataAvailColStyling = (table) => {
 };
 
 export const tblBody = (table) => {
-  const customDataAvailColStyles = dynamicDataAvailColStyling(table);
+  const customDataAvailColStyles = dynamicDataAvailColStyling(table, true);
   return {
     tblBody: {
       MuiTableCell: {
@@ -49,17 +49,25 @@ export const tblBody = (table) => {
           color: '#004C73',
           borderBottom: 'none',
           '& a': {
-            color: '#DC762F',
+            color: '#00579E',
             cursor: 'pointer',
+            fontFamily: 'Open Sans',
+            fontWeight: '600',
             '& p': {
               fontSize: '15px',
+              textDecoration: 'underline',
+              fontWeight: '600'
             },
           },
+          '& a:hover': {
+            color: '#007ACC',
+            cursor: 'pointer',
+          },
           '& p': {
-            fontSize: '10pt',
+            fontSize: '16px',
             fontStyle: 'normal',
-            fontFamily: 'Open Sans, sans-serif',
-            fontWeight: 'bold',
+            fontFamily: 'Open Sans',
+            fontWeight: '400',
             letterSpacing: '0.025em',
           },
         },
@@ -68,7 +76,7 @@ export const tblBody = (table) => {
           padding: '0 0 0 5px',
         },
         body: {
-          color: '#13344A',
+          color: '#323232',
           padding: '15px',
           ...customDataAvailColStyles,
         },
@@ -121,11 +129,11 @@ export const headerTheme = (table) => {
     tblHeader: {
       MuiTableSortLabel: {
         root: {
-          color: '#13344A',
+          color: '#0B3556',
           position: 'relative',
-          fontSize: '11pt',
-          fontFamily: "'Lato','Raleway', sans-serif",
-          fontWeight: 'bold',
+          fontSize: '18px',
+          fontFamily: "Nunito Sans",
+          fontWeight: '400',
           letterSpacing: '0.06em',
           textDecoration: 'none',
           '&:hover': {
@@ -141,8 +149,10 @@ export const headerTheme = (table) => {
           paddingRight: '15px',
           '&.data_availability': {
             textAlign: 'center',
-            fontSize: '16px',
-            fontWeight: '600',
+            color: '#fff',
+            fontFamily: 'Nunito Sans',
+            fontSize: '18px',
+            fontWeight: '400',
             padding: '0',
           },
           '&.group_1': {
@@ -170,6 +180,14 @@ export const headerTheme = (table) => {
           },
           ...customDataAvailColStyles,
         },
+        head: {
+          '&.other_columns_right': {
+            borderLeft: '1px solid #EDF0F1'
+          },
+          '&.other_columns_left': {
+            borderRight: '1px solid #EDF0F1'
+          },
+        },
         paddingCheckbox: {
           '& label': {
             marginRight: '5px',
@@ -182,10 +200,11 @@ export const headerTheme = (table) => {
           borderBottom: '3px solid #004c73',
           background: '#f5f5f5',
           '&.column_grouping': {
-            background: '#fff',
+            background: '#4C6973',
             padding: '0',
             height: '55px',
           },
+          
         },
       },
       MuiTooltip: {
@@ -269,6 +288,9 @@ export const extendedView = {
       display: 'block',
       position: 'relative',
       textAlign: 'right',
+      '& svg': {
+        fill: '#fff'
+      },
       '&.downloadAndColumnView': {
         maxHeight: '2px',
         minHeight: '0px',

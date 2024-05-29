@@ -25,7 +25,7 @@ const Programs = ({ classes, data }) => {
         <ProgramsContent>
           {data.program.map((programData, index) => {
             return (
-              <ProgramCard cardTitle={data.program_name} key={index} {...programData} {...pageData.programs[index]} />
+              <ProgramCard cardTitle={data.program_name} key={index} {...programData} {...pageData.programs.find((program) => program.prgramName === programData.program_acronym)} />
             )
           })}
         </ProgramsContent>
