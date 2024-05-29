@@ -18,7 +18,7 @@ const CustomBreadcrumb = ({ classes, data }) => (
           acc.push(<span className={classes.headerNavLink}>{current.name}</span>);
         }
         if (index < data.length - 1) {
-          acc.push('/');
+          acc.push(<div style={{ fontSize: '15px'}}>{'>'}</div>);
         }
         return acc;
       }, []).map((item) => (item))
@@ -31,15 +31,18 @@ const styles = (theme) => ({
     paddingTop: '8px',
     color: '#5e8ca5',
     paddingBottom: '12px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
   },
   headerNavLink: {
     paddingLeft: '2px',
     paddingRight: '2px',
     textDecoration: 'none',
-    color: '#3E5C6F',
-    textTransform: 'uppercase',
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '11px',
+    color: '#0B4E75',
+    fontFamily: 'Lato',
+    fontWeight: '500',
+    fontSize: '15px',
     letterSpacing: '0.025em',
 
   },

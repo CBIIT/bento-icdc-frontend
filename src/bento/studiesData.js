@@ -171,7 +171,7 @@ export const pageData = {
     ],
     columnGroups: [
       {
-        clsName: 'other_columns',
+        clsName: 'other_columns_left',
         columnIndexes: [0, 2],
       },
       {
@@ -180,8 +180,8 @@ export const pageData = {
         columnIndexes: [3, 7],
       },
       {
-        clsName: 'other_columns',
-        columnIndexes: [8, 10],
+        clsName: 'other_columns_right',
+        columnIndexes: [8, 11],
       },
     ],
   },

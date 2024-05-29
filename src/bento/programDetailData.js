@@ -7,7 +7,8 @@ import {
 // --------------- Left Pannel configuration --------------
 // A maximum of 6 leftPanelattributes are allowed
 const pageData = {
-  headerIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-Programs.svg',
+  externalLinkIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/programs-listing-external-link-icon.svg',
+  headerIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/program-listing-header.svg',
   embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-Embargo-File.svg',
   pendingFileIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/PendingRelease-icons.Studies-Listing.svg',
 };
@@ -157,7 +158,7 @@ const table = {
   ],
   columnGroups: [
     {
-      clsName: 'other_columns',
+      clsName: 'other_columns_left',
       columnIndexes: [0, 2],
     },
     {
@@ -166,8 +167,8 @@ const table = {
       columnIndexes: [3, 7],
     },
     {
-      clsName: 'other_columns',
-      columnIndexes: [8, 10],
+      clsName: 'other_columns_right',
+      columnIndexes: [8, 11],
     },
   ],
   tableMsg: {
