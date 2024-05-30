@@ -29,6 +29,7 @@
     "@material-ui/styles": "^4.11.5",
     "@reduxjs/toolkit": "^2.2.3",
     "@tanstack/react-query": "^5.35.1",
+    "@tanstack/react-query-devtools": "^5.40.0",
     "antd": "^5.9.4",
     "axios": "^1.6.8",
     "bento-jbrowse": "^1.0.1",
