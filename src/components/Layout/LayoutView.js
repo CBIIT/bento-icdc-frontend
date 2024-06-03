@@ -85,9 +85,9 @@ const LayoutView = ({
               <Route exact path="/ICDC/" component={Home} />
               <Route exact path="/" component={Home} />
               <Route exact path="/home" component={Home} />
+              <Route exact path="/news" component={Home} />
               <Route exact path="/explore" component={Dashboard} />
               <Route path="/unifiedView/:id" component={UnifiedDash} />
-              {/* <Route path="/fileCentricCart" component={CartView} /> */}
               <Route path="/fileCentricCart" component={CartView} />
               <Route path="/studies" component={Studies} />
               <Route path="/search/:id" component={GlobalSearchView} />
