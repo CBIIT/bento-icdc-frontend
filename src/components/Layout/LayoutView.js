@@ -92,8 +92,8 @@ const LayoutView = ({
               <Route path="/unifiedView/:id" component={UnifiedDash} />
               <Route path="/fileCentricCart" component={CartView} />
               <Route path="/studies" component={Studies} />
-              <Route path="/search" component={GlobalSearchView} />
               <Route path="/search/:id" component={GlobalSearchView} />
+              <Route exact path="/search" component={GlobalSearchView} />
               <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
               <Route path="/programs" component={Programs} />
               <Route path="/program/:id" component={ProgramDetail} />
