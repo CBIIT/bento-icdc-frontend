@@ -29,7 +29,7 @@ import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import styles from './LayoutStyle';
 import CartView from '../../pages/Cart/CartController';
-import SysInfo from '../../pages/sysInfo/sysInfo';
+import SysInfo from '../../pages/sysinfo/sysInfo';
 import Error from '../../pages/error/Error';
 // import CartView from '../../pages/fileCentricCart/CartController';
 
