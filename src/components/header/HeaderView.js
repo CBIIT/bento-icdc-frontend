@@ -171,6 +171,7 @@ const styles = () => ({
     marginRight: '8px',
     cursor: 'pointer',
     backgroundRepeat: 'no-repeat',
+    marginTop: '5px',
     backgroundImage: `url(${serachIcon})`,
     '& path': {
       display: 'none',

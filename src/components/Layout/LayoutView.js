@@ -29,6 +29,8 @@ import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import styles from './LayoutStyle';
 import CartView from '../../pages/Cart/CartController';
+import SysInfo from '../../pages/sysInfo/sysInfo';
+import Error from '../../pages/error/Error';
 // import CartView from '../../pages/fileCentricCart/CartController';
 
 const LayoutView = ({
@@ -84,12 +86,14 @@ const LayoutView = ({
               <Route exact path="/ICDC/" component={Home} />
               <Route exact path="/" component={Home} />
               <Route exact path="/home" component={Home} />
+              <Route exact path="/news" component={Home} />
               <Route exact path="/explore" component={Dashboard} />
+              <Route path="/explore/:filterQuery" component={Dashboard} />
               <Route path="/unifiedView/:id" component={UnifiedDash} />
-              {/* <Route path="/fileCentricCart" component={CartView} /> */}
               <Route path="/fileCentricCart" component={CartView} />
               <Route path="/studies" component={Studies} />
               <Route path="/search/:id" component={GlobalSearchView} />
+              <Route exact path="/search" component={GlobalSearchView} />
               <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
               <Route path="/programs" component={Programs} />
               <Route path="/program/:id" component={ProgramDetail} />
@@ -97,9 +101,11 @@ const LayoutView = ({
               <Route path="/graphql" component={GraphQLView} />
               <Route path="/study/:id" component={StudyDetail} />
               <Route path="/case/:id" component={CaseDetails} />
+              <Route path="/sysinfo" component={SysInfo} />
               {aboutPageRoutes.map(
                 (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
               )}
+              <Route component={Error} />
             </Switch>
             <Footer />
           </div>
