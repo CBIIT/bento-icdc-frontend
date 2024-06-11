@@ -420,7 +420,7 @@ export const cartTable = {
     },
     {
       dataField: 'case_id',
-      header: 'Case ID',
+      header: 'Canine Code',
       display: true,
       tooltipText: 'sort',
     },

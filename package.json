@@ -34,7 +34,7 @@
     "axios": "^1.6.8",
     "bento-jbrowse": "^1.0.1",
     "clsx": "^1.2.1",
-    "data-model-navigator": "^1.1.29",
+    "data-model-navigator": "^1.1.32",
     "graphiql": "^3.2.0",
     "graphql": "^16.8.1",
     "graphql-request": "^5.1.0",
