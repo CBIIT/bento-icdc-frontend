@@ -11,7 +11,6 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
     },
     MuiTableSortLabel: {
       root: {
-        color: '#13344A',
         position: 'relative',
         textDecoration: 'none',
         fontFamily: 'Nunito Sans',
@@ -27,6 +26,9 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
       },
     },
     MuiTableCell: {
+      head: {
+        color: '#0B3556',
+      },
       root: {
         padding: '5px',
         '&.del_all_row': {
@@ -330,6 +332,7 @@ const toolbar = {
   },
   MuiTypography: {
     body1: {
+      color: '#000',
       '&:after': {
         content: '" to view in JBrowse"',
       },
@@ -381,7 +384,7 @@ const tblBody = {
       padding: '0',
     },
     body: {
-      color: '#13344A',
+      color: '#323232',
       '&.file_name': {
         maxWidth: '300px',
         '& p': {

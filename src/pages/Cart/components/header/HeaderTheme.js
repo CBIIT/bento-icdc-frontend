@@ -17,10 +17,16 @@ export default ({
         },
       },
       MuiFormControlLabel: {
+        label: {
+          color: '#525252',
+          fontFamily: 'Lato',
+          fontSize: '16px',
+          fontWeight: '400',
+        },
         root: {
-            "&.selectFilesBtn":{
-                marginRight: '30px',
-            }
+          "&.selectFilesBtn":{
+              marginRight: '30px',
+          }
         }
       },
       MuiList: {

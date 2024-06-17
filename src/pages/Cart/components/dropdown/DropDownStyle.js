@@ -38,7 +38,7 @@ export default () => ({
     },
   },
   availableDownloadDropdownBtnLabel: {
-    color: '#1D79A8',
+    color: '#09557B',
     fontStyle: 'normal',
     fontWeight: 400,
     fontSize: '15px',
@@ -111,6 +111,7 @@ export default () => ({
     textWrap: 'wrap',
     lineHeight: '18px',
     fontSize: '15px',
+    fontFamily: 'Lato',
   },
   linkIcon: {
     width: '12px',
@@ -123,6 +124,7 @@ export default () => ({
     height: '35px',
     lineHeight: '35px',
     fontSize: '15px',
+    fontFamily: 'Lato',
   },
   downloadFileIcon: {
     width: '20px',
