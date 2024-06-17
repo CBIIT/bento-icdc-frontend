@@ -420,13 +420,13 @@ export const cartTable = {
     },
     {
       dataField: 'case_id',
-      header: 'Canine Code',
+      header: 'Case ID',
       display: true,
       tooltipText: 'sort',
     },
     {
       dataField: 'individual_id',
-      header: 'Canine Code',
+      header: 'Canine ID',
       display: true,
       tooltipText: 'sort',
       role: cellTypes.DISPLAY,
