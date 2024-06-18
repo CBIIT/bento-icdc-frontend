@@ -52,8 +52,7 @@ const ProgramDetailView = ({ classes, data }) => {
   });
 
   const programDetail = data.program[0];
-  console.log('programDeets', programDetail);
-
+  
   const stat = {
     numberOfStudies: data.studyCountOfProgram,
     numberOfCases: data.caseCountOfProgram,
@@ -106,7 +105,7 @@ const ProgramDetailView = ({ classes, data }) => {
             <ProgramDetailTitle><div>Programs:</div> <ProgramDetailSubTitle>{`${programDetail.program_name}`} <ProgramDetailSubTitleAcronym>{`(${programDetail.program_acronym})`}</ProgramDetailSubTitleAcronym></ProgramDetailSubTitle></ProgramDetailTitle>
           </IconTitleWrapper>
 
-          <ProgramDetailHeaderExternalLinkWrapper>
+          { programDetail.program_external_url && <ProgramDetailHeaderExternalLinkWrapper>
             <ProgramDetailHeaderExternalLinkButton
               target="_blank"
               href={programDetail.program_external_url}
@@ -115,7 +114,7 @@ const ProgramDetailView = ({ classes, data }) => {
             >
               Go to Site
             </ProgramDetailHeaderExternalLinkButton>
-          </ProgramDetailHeaderExternalLinkWrapper>
+          </ProgramDetailHeaderExternalLinkWrapper>}
         </ProgramDetailHeader>
         <ProgramDetailContent>
           {
