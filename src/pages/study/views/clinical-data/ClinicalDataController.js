@@ -61,17 +61,22 @@ const ClinicalDataController = ({
   /**
   * prepare data for table row and download CVS File download
   */
-  const rows = table.rows.map((row) => ({
-    ...row,
-    dataNode: row.title,
-    description: description[row.countKey] || '',
-    recordCount: nodeCount[row.countKey] || 0,
-    caseCount: caseCount[row.countKey] || 0,
-    csvDataRow: data[row.csvDownload] || [],
-    fileName: getFileName(row.title),
-    node: data[row.csvDownload] || [],
-    metadata: row.manifest,
-  }));
+  const rows = table.rows.map((row) => {
+    const rowData = data[row.dataKey];
+    const caseCnt = rowData ? rowData[row.caseCountKey] : caseCount[row.countKey] || 0;
+    const csvDownloadData = rowData ? rowData[row.rowKey] : data[row.csvDownload] || [];
+    return {
+      ...row,
+      dataNode: row.title,
+      description: description[row.countKey] || '',
+      recordCount: nodeCount[row.countKey] || 0,
+      caseCount: caseCnt,
+      csvDataRow: csvDownloadData,
+      fileName: getFileName(row.title),
+      node: data[row.csvDownload] || [],
+      metadata: row.manifest
+    }; 
+  });
 
   return (
     <ClinicalDataView
