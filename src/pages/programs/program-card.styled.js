@@ -38,6 +38,7 @@ export const StudiesCount = styled('span')({
     fontWeight: '700',
     fontSize: '17px',
     color: '#ffffff',
+    cursor: 'pointer',
     '&:hover': {
         color: '#9bdfa6'
     }
