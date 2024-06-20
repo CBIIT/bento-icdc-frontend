@@ -311,6 +311,14 @@ export const extendedView = {
 
 const tblPgn = {
   MuiTablePagination: {
+    caption: {
+        fontFamily: 'Open Sans',
+        color: '#000000'
+    },
+    input: {
+        fontFamily: 'Open Sans',
+        color: '#000000'
+    },
     root: {
       paddingRight: '43px',
       background: '#ffffff',
