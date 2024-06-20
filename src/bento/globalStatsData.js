@@ -24,18 +24,20 @@ export const statsStyling = {
   },
   statCount: {
     color: '#263960',
-    fontFamily: 'sans-serif',
-    fontSize: '16.8px',
+    fontFamily: 'Inter',
+    fontSize: '17px',
+    fontWeight: '600',
     margin: '0px 0px -4px 8px',
     float: 'left',
   },
   statTitle: {
     color: '#0B3556',
-    fontFamily: 'sans-serif',
+    fontFamily: 'Inter',
     fontSize: '14px',
     textTransform: 'none',
     margin: '0px 0px 0px 8px',
     float: 'left',
+    fontWeight: 'normal'
   },
 };
 
