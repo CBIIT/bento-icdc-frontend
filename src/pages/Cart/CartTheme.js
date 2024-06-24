@@ -18,8 +18,9 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
         fontWeight: '400',
         lineHeight: '18px',
         letterSpacing: '0em',
-        '&:hover': {
-          color: '#13344A',
+        color: '#0B3556 !important',
+        '& svg': {
+          color: '#0B3556 !important',
         },
         '&:hover $svg': {
         },
@@ -27,7 +28,9 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
     },
     MuiTableCell: {
       head: {
-        color: '#0B3556',
+        '& span': {
+          color: '#0B3556',
+        },
       },
       root: {
         padding: '5px',

@@ -3,7 +3,7 @@ export default () => ({
     textAlign: 'center',
   },
   dataAvailIndicatorIcon: {
-    color: '#1A89C4',
+    color: '#00579E',
     height: '13px',
     width: '13px',
   },
