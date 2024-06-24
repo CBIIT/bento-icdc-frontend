@@ -1,198 +1,225 @@
 // import env from '../utils/env';
 
 export const navBarstyling = {
-  cart: {},
-  global: {
-    backgroundColor: '#0B3557',
-    minHeight: '39px',
-    padding: '9px 20px 0px 20px',
-    marginTop: '0px',
-    fontFamily: 'Raleway, sans-serif',
-    activeLabel: '2px solid #35b9eb',
-    paddingLeft: '150px',
-    alignItems: 'center',
-    fontWeight: '600',
-    letterSpacing: '1px',
-    position: 'relative',
-  },
-  dropdownButtonRoot: {
-    padding: '0px',
-  },
-  aboutMenu: {
-    padding: '0px 20px',
-  },
-  myCasesPosition: {
+    cart: {
+        iconSize: '44px',
+    },
+    dropDownMenuButton: {
+        whiteSpace: 'nowrap',
+        color: '#FFF',
+        fontFamily: 'Open Sans',
+        fontSize: '17px',
+        fontWeight: '600', 
+        letterSpacing: '0.5px'
+    },
+    cartCounter: {
+        fontSize: '16px',
+        fontFamily: 'Open Sans',
+        fontWeight: 'normal',
+        letterSpacing: '0.5px'
+    },
+    labelText: {
+        fontSize: '17px',
+        fontWeight: '600',
+        letterSpacing: '0.5px'
+    },
+    global: {
+        backgroundColor: '#0B3557',
+        minHeight: '39px',
+        padding: '9px 20px 0px 20px',
+        marginTop: '0px',
+        fontFamily: 'Open Sans',
+        activeLabel: '2px solid #35b9eb',
+        paddingLeft: '150px',
+        paddingTop: '8px',
+        labelTextFontSize: '17px',
+        paddingBottom: '8px',
+        alignItems: 'center',
+        fontWeight: '600',
+        letterSpacing: '1px',
+        position: 'relative',
+        cartLabelFontSize: '16px',
+        cartLabelFontWeight: '600',
+        cartLabelLetterSpacing: '0.5px'
+    },
+    dropdownButtonRoot: {
+        padding: '0px',
+    },
+    aboutMenu: {
+        padding: '0px 20px',
+    },
+    myCasesPosition: {
 
-  },
-  buttonRootNoRightPadding: {
-    padding: '0px 38px 0px 0px',
-    border: '0',
-    cursor: 'pointer',
-    margin: '0',
-    textDecoration: 'none',
-    backgroundColor: 'transparent',
-    textTransform: 'uppercase',
-    lineHeight: '1.75',
-  },
-  buttonRoot: {
-    padding: '0px 20px 0px 20px',
-    border: '0',
-    cursor: 'pointer',
-    margin: '0',
-    display: 'inline-flex',
-    textDecoration: 'none',
-    backgroundColor: 'transparent',
-    textTransform: 'uppercase',
-    lineHeight: '1.75',
-  },
-  buttonContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-    justifyContent: 'center',
-  },
-  myFiles: {
-    right: '8px',
-  },
-  dropDownIcon: {
-    displayIcon: true,
-    fontSize: '18px',
-    margin: '0px 0px 0px 0px',
-  },
-  dropdownMenu: {
-    paper: {
-      background: '#309EC4',
-      width: '200px',
-      padding: '5px 18px 18px 18px',
-      marginLeft: '15px',
-      position: 'absolute',
-      marginTop: '-1px',
-      borderRadius: '0',
     },
-    link: {
-      overflowWrap: 'normal',
-      textDecoration: 'none',
-      color: 'black',
-      fontSize: '14px',
-      fontWeight: '600',
-      lineSpacing: '1px',
-      lineHeight: '18px',
-      fontFamily: 'Raleway, sans-serif',
-      display: 'block',
-      marginTop: '10px',
-      '&:hover': {
+    buttonRootNoRightPadding: {
+        padding: '0px 38px 0px 0px',
+        border: '0',
         cursor: 'pointer',
-        color: 'white',
-      },
+        margin: '0',
+        textDecoration: 'none',
+        backgroundColor: 'transparent',
+        textTransform: 'uppercase',
+        lineHeight: '1.75',
     },
-  },
+    buttonRoot: {
+        padding: '0px 20px 0px 20px',
+        border: '0',
+        cursor: 'pointer',
+        margin: '0',
+        display: 'inline-flex',
+        textDecoration: 'none',
+        backgroundColor: 'transparent',
+        textTransform: 'uppercase',
+        lineHeight: '1.75',
+    },
+    buttonContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+        justifyContent: 'center',
+    },
+    myFiles: {
+        right: '8px',
+    },
+    dropDownIcon: {
+        displayIcon: true,
+        fontSize: '18px',
+        margin: '0px 0px 0px 0px',
+    },
+    dropdownMenu: {
+        paper: {
+            background: '#309EC4',
+            width: '200px',
+            padding: '5px 18px 18px 18px',
+            marginLeft: '15px',
+            position: 'absolute',
+            marginTop: '-1px',
+            borderRadius: '0',
+        },
+        link: {
+            overflowWrap: 'normal',
+            textDecoration: 'none',
+            color: 'black',
+            fontSize: '14px',
+            fontWeight: '600',
+            lineSpacing: '1px',
+            lineHeight: '18px',
+            fontFamily: 'Raleway, sans-serif',
+            display: 'block',
+            marginTop: '10px',
+            '&:hover': {
+                cursor: 'pointer',
+                color: 'white',
+            },
+        },
+    },
 };
 
 export const navBarData = [
-  {
-    labelText: 'home',
-    type: 'link',
-    link: '/home',
-  },
-  {
-    labelText: 'explore',
-    type: 'link',
-    link: '/explore',
-  },
-  {
-    labelText: 'programs',
-    type: 'link',
-    link: '/programs',
-  },
-  {
-    labelText: 'Studies',
-    type: 'link',
-    link: '/studies',
-  },
-  {
-    labelText: 'data',
-    type: 'dropdown',
+    {
+        labelText: 'home',
+        type: 'link',
+        link: '/home',
+    },
+    {
+        labelText: 'explore',
+        type: 'link',
+        link: '/explore',
+    },
+    {
+        labelText: 'programs',
+        type: 'link',
+        link: '/programs',
+    },
+    {
+        labelText: 'Studies',
+        type: 'link',
+        link: '/studies',
+    },
+    {
+        labelText: 'data',
+        type: 'dropdown',
 
-    dropDownLinks: [
-      {
-        labelText: 'Model Navigator',
-        link: '/icdc-data-model',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Data Use',
-        link: '/guideline',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Data Submission Guidelines',
-        link: '/submit',
-        linkActiveStyle: 'white',
-      },
-    ],
-  },
-  {
-    labelText: 'resources',
-    type: 'dropdown',
+        dropDownLinks: [
+            {
+                labelText: 'Model Navigator',
+                link: '/icdc-data-model',
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: 'Data Use',
+                link: '/guideline',
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: 'Data Submission Guidelines',
+                link: '/submit',
+                linkActiveStyle: 'white',
+            },
+        ],
+    },
+    {
+        labelText: 'resources',
+        type: 'dropdown',
 
-    dropDownLinks: [
-      {
-        labelText: 'GraphQL',
-        link: '/graphql',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Developers',
-        link: '/developers',
-        linkActiveStyle: 'white',
-      },
-    ],
-  },
-  {
-    labelText: 'about',
-    type: 'dropdown',
+        dropDownLinks: [
+            {
+                labelText: 'GraphQL',
+                link: '/graphql',
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: 'Developers',
+                link: '/developers',
+                linkActiveStyle: 'white',
+            },
+        ],
+    },
+    {
+        labelText: 'about',
+        type: 'dropdown',
 
-    dropDownLinks: [
-      {
-        labelText: 'Purpose',
-        link: '/purpose',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Steering Committee',
-        link: '/steeringCommittee',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: '- Data Governance Advisory Board(DGAB)',
-        link: '/DGAB',
-        sublink: true,
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: '- Best Practices Sub-Committee(BPSC)',
-        link: '/BPSC',
-        sublink: true,
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: '- Working Groups',
-        link: '/Working Groups',
-        sublink: true,
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'CRDC & Analysis',
-        link: '/crdc',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Support',
-        link: '/support',
-        linkActiveStyle: 'white',
-      },
-    ],
-  },
+        dropDownLinks: [
+            {
+                labelText: 'Purpose',
+                link: '/purpose',
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: 'Steering Committee',
+                link: '/steeringCommittee',
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: '- Data Governance Advisory Board(DGAB)',
+                link: '/DGAB',
+                sublink: true,
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: '- Best Practices Sub-Committee(BPSC)',
+                link: '/BPSC',
+                sublink: true,
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: '- Working Groups',
+                link: '/Working Groups',
+                sublink: true,
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: 'CRDC & Analysis',
+                link: '/crdc',
+                linkActiveStyle: 'white',
+            },
+            {
+                labelText: 'Support',
+                link: '/support',
+                linkActiveStyle: 'white',
+            },
+        ],
+    },
 ];
 
 /* export const externalLinks = {
@@ -223,20 +250,20 @@ export const navBarData = [
 }; */
 
 export const externalLinks = {
-  resources: [
-    {
-      title: 'Tutorials',
-      link: 'https://cbiit.github.io/icdc-bioinformatics/',
-    },
-  ],
+    resources: [
+        {
+            title: 'Tutorials',
+            link: 'https://cbiit.github.io/icdc-bioinformatics/',
+        },
+    ],
 };
 
 export const navBarCartData = {
-  cartLabel: 'MY Files',
-  cartLink: '/fileCentricCart',
-  cartIcon:
-    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
-  cartIconAlt: 'cart_logo',
+    cartLabel: 'My Files',
+    cartLink: '/fileCentricCart',
+    cartIcon:
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
+    cartIconAlt: 'cart_logo',
 };
 
 export const navBarExclusions = ['#/jBrowse/singleFileView'];

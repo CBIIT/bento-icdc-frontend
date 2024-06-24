@@ -9,6 +9,11 @@ export const ProgramCardContainer = styled('div')({
     margin: '10px 0',
     display: 'flex',
     flexDirection: 'column',
+    '&:hover': {
+        boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+        borderBottom: '1px solid #6ea368',
+        borderRight: '1px solid #6ea368',
+    }
 });
 
 export const ProgramHeader = styled('div')({
@@ -33,6 +38,10 @@ export const StudiesCount = styled('span')({
     fontWeight: '700',
     fontSize: '17px',
     color: '#ffffff',
+    cursor: 'pointer',
+    '&:hover': {
+        color: '#9bdfa6'
+    }
 });
 
 export const ProgramBody = styled('span')({
@@ -55,6 +64,7 @@ export const ProgramDescription = styled('p')({
     fontSize: '18px',
     lineHeight: '30px',
     width: '80%',
+    color: '#000'
 });
 
 
