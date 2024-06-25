@@ -63,6 +63,7 @@ const ClinicalDataController = ({
   */
   const rows = table.rows.map((row) => {
     const rowData = data[row.dataKey];
+    // ICDC-3579
     const caseCnt = rowData ? rowData[row.caseCountKey] : caseCount[row.countKey] || 0;
     const csvDownloadData = rowData ? rowData[row.rowKey] : data[row.csvDownload] || [];
     return {
