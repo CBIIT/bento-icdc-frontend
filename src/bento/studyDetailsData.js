@@ -1587,7 +1587,7 @@ export const table = {
     {
       title: 'prior surgery',
       countKey: 'prior_surgery',
-      dataKey: 'priorSurgeryNodeDataOverview',
+      dataKey: 'priorSurgeryNodeDataOverview', // ICDC-3579
       caseCountKey: 'case_count',
       rowKey: 'prior_surgeries',
       csvDownload: 'priorSurgeryNodeData',
