@@ -1332,6 +1332,18 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       residual_disease
       therapeutic_indicator
     }
+    priorSurgeryNodeDataOverview(study_code: $study_code) {
+      case_count
+      prior_surgeries {
+        case_id
+        date_of_surgery
+        procedure
+        anatomical_site_of_surgery
+        surgical_finding
+        residual_disease
+        therapeutic_indicator
+      }
+  }
     agentAdministrationNodeData(study_code: $study_code) {
       document_number
       medication
@@ -1575,6 +1587,9 @@ export const table = {
     {
       title: 'prior surgery',
       countKey: 'prior_surgery',
+      dataKey: 'priorSurgeryNodeDataOverview', // ICDC-3579
+      caseCountKey: 'case_count',
+      rowKey: 'prior_surgeries',
       csvDownload: 'priorSurgeryNodeData',
       manifest: priorSurgeryNodeMetadata,
     },
