@@ -30,6 +30,54 @@ const ArmsAndCohort = ({
     noArmsCohort,
     noArmsCohort2,
   } = table1;
+  const getTableData = () => {
+    const { study_arms : studyArms, cohorts: cohortsWithoutArm } = studyData;
+    const tableRows = [];
+    // cohort types. without arms 1. without arms 2. with arms 
+    // cohort without arms
+    if (studyArms.length === 0 && cohortsWithoutArm.length > 0)
+    {
+      // iterate over each cohor wihtout arms
+      cohortsWithoutArm.forEach((cohort, index) => {
+        const { cohort_dose: dose, cohort_description: cohortDesc } = cohort;
+        // Row grouping display arm and description at zero index
+        tableRows.push({
+          arm: 'This study is not divided into arms',
+          description: '',
+          does: dose,
+          cohortDescription: cohortDesc
+        });
+      });
+      return tableRows;
+    }
+
+    // iterate over arms
+    studyArms.forEach((item, armIndex) => {
+      const { arm, cohorts: armChorts, arm_description: desc } = item;
+      if (armChorts.length === 0)
+      {
+        return tableRows.push({ arm: arm, description: desc });
+      }
+      // iterate over each cohors with in arm
+      armChorts.forEach((cohort, index) => {
+        const {
+          cohort_dose: dose,
+          cohort_description: cohortDesc,
+        } = cohort;
+        // Row grouping display arm and description at zero index
+        tableRows.push({
+          arm: arm,
+          description: desc,
+          does: dose,
+          cohortDescription: cohortDesc,
+        });
+      });
+    });
+    return tableRows;
+  }
+
+  const tblRows = getTableData();
+
   if (!studyData.cohorts || studyData.cohorts.length === 0) {
   // no cohort under studyData
     if (studyData.study_arms && studyData.study_arms.length !== 0) {
@@ -85,8 +133,9 @@ const ArmsAndCohort = ({
     selectedRows: [],
     tableMsg: table1.tableMsg,
     sortBy: table1.defaultSortField,
+    groupBy: table1.groupBy,
     sortOrder: table1.defaultSortDirection,
-    rowsPerPage: 10,
+    rowsPerPage: 25,
     dataKey: table1.dataKey,
     extendedViewConfig: ExtendedViewConfig(table1),
     page: 0,
@@ -111,8 +160,8 @@ const ArmsAndCohort = ({
               </Typography>
               <TableView
                 initState={initTblState}
-                tblRows={data}
-                totalRowCount={data.length}
+                tblRows={tblRows}
+                totalRowCount={tblRows.length}
                 server={false}
                 themeConfig={{
                   ...themeConfig(context),

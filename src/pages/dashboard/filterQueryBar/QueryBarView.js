@@ -56,7 +56,6 @@ const QueryBarView = ({
       count: 'count',
       rootPath: `${window.location.href}/`,
       viewQueryURL: true,
-      useSpanForClearButton: true,
     },
     functions: {
       clearAll: () => {
