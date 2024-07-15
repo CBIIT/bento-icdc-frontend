@@ -434,11 +434,11 @@ export const table1 = {
       cellType: cellTypes.CUSTOM_ELEM,
     },
     {
-      dataField: 'description',
+      dataField: 'armDescription',
       header: 'Arm Description',
       display: true,
       tooltipText: 'sort',
-      role: cellTypes.DISPLAY,
+      cellType: cellTypes.CUSTOM_ELEM,
     },
     {
       dataField: 'cohortDescription',

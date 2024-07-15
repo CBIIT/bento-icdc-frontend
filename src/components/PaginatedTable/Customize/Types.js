@@ -6,6 +6,7 @@ export const customizeColumn = {
   Description: 'description',
   Cohort: 'does',
   Arm: 'arm',
+  ArmDescription: 'armDescription',
   DataValue: 'dataValue',
   csvDataRow: 'csvDataRow',
 };

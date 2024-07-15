@@ -67,7 +67,7 @@ const ArmsAndCohort = ({
         // Row grouping display arm and description at zero index
         tableRows.push({
           arm: arm,
-          description: desc,
+          armDescription: desc,
           does: dose,
           cohortDescription: cohortDesc,
         });

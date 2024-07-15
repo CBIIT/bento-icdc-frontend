@@ -68,6 +68,18 @@ const ArmView = (props) => {
   )
 }
 
+const ArmDescView = (props) => {
+  const { groupIndex } = props;
+  return (
+    <>
+      {
+        (groupIndex === 0)
+          && (<span> {props.armDescription} </span>)
+      }
+    </>
+  )
+}
+
 const DocumentDownloadView = ({
   file_size: fileSize,
   file_format: fileFormat,
@@ -110,9 +122,11 @@ export const CustomCellView = (props) => {
     case customizeColumn.Description:
     case customizeColumn.Arm:
       return (
-        <>
-          <ArmView {...props} />
-        </>
+        <ArmView {...props} />
+      );
+    case customizeColumn.ArmDescription:
+      return (
+        <ArmDescView {...props} />
       );
     case customizeColumn.Cohort:
       return (
