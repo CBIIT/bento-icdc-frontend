@@ -31,10 +31,10 @@ const ArmsAndCohort = ({
     noArmsCohort2,
   } = table1;
   const getTableData = () => {
+    // Cohort types 1. without arms 2. with arms 
     const { study_arms : studyArms, cohorts: cohortsWithoutArm } = studyData;
     const tableRows = [];
-    // cohort types. without arms 1. without arms 2. with arms 
-    // cohort without arms
+    // 1. cohort without arms
     if (studyArms.length === 0 && cohortsWithoutArm.length > 0)
     {
       // iterate over each cohor wihtout arms
@@ -51,6 +51,7 @@ const ArmsAndCohort = ({
       return tableRows;
     }
 
+    // 2. cohort with Arm
     // iterate over arms
     studyArms.forEach((item, armIndex) => {
       const { arm, cohorts: armChorts, arm_description: desc } = item;
@@ -78,53 +79,53 @@ const ArmsAndCohort = ({
 
   const tblRows = getTableData();
 
-  if (!studyData.cohorts || studyData.cohorts.length === 0) {
-  // no cohort under studyData
-    if (studyData.study_arms && studyData.study_arms.length !== 0) {
-    // no cohort under studyData , has arms
-      studyData.study_arms.forEach((arm) => {
-      // decide arm
-        let cohortAndDosing = {
-          arm: arm.arm || arm.arm === '' ? arm.arm : '',
-          description: arm.description ? arm.description : '',
-          does: '',
-          cohortDescription: '',
-        };
-        cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
-        cohortAndDosingTableData.push(cohortAndDosing);
-      });
-    } else { // no cohort under studyData no arms
-      // setNoArmsAndCohort(true);
-      cohortAndDosingTableData.push({
-        arm: noArmMessage,
-        description: '',
-        does: noCohortMessage,
-        cohortDescription: '',
-      });
-    }
-  } else if (studyData.study_arms && studyData.study_arms.length !== 0) {
-    // has cohort under studyData and arms
-    studyData.study_arms.forEach((arm) => {
-      // decide arm
-      let cohortAndDosing = {
-        arm: arm.arm || arm.arm === '' ? arm.arm : '',
-        description: arm.description ? arm.description : '',
-        does: '',
-        cohortDescription: '',
-      };
-      cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
-      cohortAndDosingTableData.push(cohortAndDosing);
-    });
-  } else { // has cohort under studyData , no arms
-    let cohortAndDosing = {
-      arm: noArmMessage,
-      description: '',
-      does: '',
-      cohortDescription: '',
-    };
-    cohortAndDosing = fromArmTOCohorDoes(studyData.cohorts, cohortAndDosing);
-    cohortAndDosingTableData.push(cohortAndDosing);
-  }
+  // if (!studyData.cohorts || studyData.cohorts.length === 0) {
+  // // no cohort under studyData
+  //   if (studyData.study_arms && studyData.study_arms.length !== 0) {
+  //   // no cohort under studyData , has arms
+  //     studyData.study_arms.forEach((arm) => {
+  //     // decide arm
+  //       let cohortAndDosing = {
+  //         arm: arm.arm || arm.arm === '' ? arm.arm : '',
+  //         description: arm.description ? arm.description : '',
+  //         does: '',
+  //         cohortDescription: '',
+  //       };
+  //       cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
+  //       cohortAndDosingTableData.push(cohortAndDosing);
+  //     });
+  //   } else { // no cohort under studyData no arms
+  //     // setNoArmsAndCohort(true);
+  //     cohortAndDosingTableData.push({
+  //       arm: noArmMessage,
+  //       description: '',
+  //       does: noCohortMessage,
+  //       cohortDescription: '',
+  //     });
+  //   }
+  // } else if (studyData.study_arms && studyData.study_arms.length !== 0) {
+  //   // has cohort under studyData and arms
+  //   studyData.study_arms.forEach((arm) => {
+  //     // decide arm
+  //     let cohortAndDosing = {
+  //       arm: arm.arm || arm.arm === '' ? arm.arm : '',
+  //       description: arm.description ? arm.description : '',
+  //       does: '',
+  //       cohortDescription: '',
+  //     };
+  //     cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
+  //     cohortAndDosingTableData.push(cohortAndDosing);
+  //   });
+  // } else { // has cohort under studyData , no arms
+  //   let cohortAndDosing = {
+  //     arm: noArmMessage,
+  //     description: '',
+  //     does: '',
+  //     cohortDescription: '',
+  //   };
+  //   cohortAndDosing = fromArmTOCohorDoes(studyData.cohorts, cohortAndDosing);
+  //   cohortAndDosingTableData.push(cohortAndDosing);
+  // }
 
   const initTblState = (initailState) => ({
     ...initailState,
@@ -143,9 +144,9 @@ const ArmsAndCohort = ({
 
   const { context } = useContext(TableContext);
   // const studyDisposition = studyDisposition(studyData.study_disposition);
-  const data = cohortAndDosingTableData.sort(
-    (a, b) => studyDetailSorting(a.arm, b.arm),
-  );
+  // const data = cohortAndDosingTableData.sort(
+  //   (a, b) => studyDetailSorting(a.arm, b.arm),
+  // );
 
   return (
     <>
