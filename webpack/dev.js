@@ -19,7 +19,7 @@ module.exports = merge(common, {
   devServer: {
     compress: true,
     open: true,
-    port: 9000,
+    port: 7000,
     client: {
       overlay: false,
     },

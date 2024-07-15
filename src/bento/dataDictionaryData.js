@@ -212,7 +212,7 @@ export const graphViewConfig = {
       },
       legendCollapse: {
         position: 'absolute',
-        top: '240px',
+        top: '340px',
         backgroundColor: '#18588C',
         border: '1px solid #125C5D',
         borderTopLeftRadius: '10px 10px',
