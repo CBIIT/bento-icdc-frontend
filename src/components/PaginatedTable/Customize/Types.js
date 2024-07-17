@@ -5,6 +5,8 @@ export const customizeColumn = {
   studyDesignation: 'clinical_study_designation',
   Description: 'description',
   Cohort: 'does',
+  Arm: 'arm',
+  ArmDescription: 'armDescription',
   DataValue: 'dataValue',
   csvDataRow: 'csvDataRow',
 };

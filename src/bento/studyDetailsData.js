@@ -414,6 +414,7 @@ export const table1 = {
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
   // Set 'selectableRows' to true to show the row selection
+  groupBy: 'arm',
   extendedViewConfig: {
     download: {
       customDownload: false,
@@ -427,25 +428,31 @@ export const table1 = {
   columns: [
     {
       dataField: 'arm',
-      header: 'Arms',
+      header: 'Arm',
       display: true,
       tooltipText: 'sort',
+      cellType: cellTypes.CUSTOM_ELEM,
     },
     {
-      dataField: 'description',
-      header: 'Description',
+      dataField: 'armDescription',
+      header: 'Arm Description',
       display: true,
       tooltipText: 'sort',
-      role: cellTypes.DISPLAY,
       cellType: cellTypes.CUSTOM_ELEM,
+    },
+    {
+      dataField: 'cohortDescription',
+      header: 'Cohort Description',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY
     },
     {
       dataField: 'does',
-      header: 'Cohorts',
+      header: 'Cohort Dose',
       display: true,
       tooltipText: 'sort',
-      role: cellTypes.DISPLAY,
-      cellType: cellTypes.CUSTOM_ELEM,
+      role: cellTypes.DISPLAY
     },
   ],
   noArmMessage: 'This study is not divided into arms',
@@ -568,6 +575,7 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
       }
       study_arms {
         arm
+        arm_description
         ctep_treatment_assignment_code
         cohorts {
           cohort_dose
