@@ -8,7 +8,7 @@ const customTheme = {
   MuiTab: {
     root: {
       marginTop: '15px',
-      color: '#6E6E6E',
+      color: '#696969 !important',
       height: '45px',
       overflow: 'hidden',
       background: '#EAEAEA',
@@ -23,19 +23,19 @@ const customTheme = {
       borderTop: '7px solid #c6c9cd',
       '&.Mui-selected': {
         '&.cases': {
-          color: '#FF9742',
+          color: '#AD4E00 !important',
           borderTop: '7px solid #FF9742',
         },
         '&.samples': {
-          color: '#9DC1D9',
+          color: '#3A6D8D !important',
           borderTop: '7px solid #9DC1D9',
         },
         '&.case_files': {
-          color: '#667A87',
+          color: '#667A87 !important',
           borderTop: '7px solid #667A87',
         },
         '&.study_files': {
-          color: '#39C0F0',
+          color: '#0A6F94 !important',
           borderTop: '7px solid #39C0F0',
         },
       },

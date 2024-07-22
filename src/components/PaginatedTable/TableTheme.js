@@ -102,7 +102,7 @@ const tblBody = {
       color: '#004C73',
       borderBottom: 'none',
       '& a': {
-        color: '#DC762F',
+        color: '#B75E1F',
         cursor: 'pointer',
         '& p': {
           fontSize: '15px',
@@ -331,7 +331,7 @@ export const customTheme = {
         color: '#fff',
         borderRadius: '10px',
         fontSize: '16px',
-        backgroundColor: '#ff7f15',
+        backgroundColor: '#c25700',
         textTransform: 'none',
         '& img': {
           width: '2.25em',
@@ -345,7 +345,7 @@ export const customTheme = {
         width: '133px',
         height: '45px',
         cursor: 'pointer',
-        background: '#98a19e',
+        background: '#757575',
       },
       '&.noBtn': {
         width: '133px',
