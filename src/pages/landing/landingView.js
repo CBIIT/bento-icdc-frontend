@@ -447,7 +447,7 @@ const styles = (theme) => ({
   },
   carouselDescription: {
     width: '300px',
-    color: '#F5A313',
+    color: '#FFF',
     fontFamily: 'Raleway',
     fontSize: '17px',
     fontWeight: '600',
@@ -495,7 +495,7 @@ const styles = (theme) => ({
     fontWeight: 'bolder',
     color: '#ffffff',
     textTransform: 'uppercase',
-    backgroundColor: '#CB8311',
+    backgroundColor: '#A0680D',
     fontFamily: theme.custom.fontFamilySans,
     textDecoration: 'none',
     boxShadow: 'none !important',
