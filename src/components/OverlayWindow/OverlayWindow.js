@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
 // import { useSelector } from 'react-redux';
-import text from './OverlayText.json';
+import * as text from './OverlayText.json';
 import DialogThemeProvider from './OverlayThemConfig';
 
 const OverlayWindow = () => {
