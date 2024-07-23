@@ -5,8 +5,7 @@ import FooterData from '../../bento/globalFooterData';
 import env from '../../utils/env';
 import CustomThemeProvider from './FooterThemConfig';
 import { Footer } from '../../bento-core';
-
-const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_API;
+// const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_VERSION;
 
 const ICDC_FOOTER_STYLE = {
   padding: '24px 294px 45px',
@@ -20,7 +19,7 @@ const ICDCFooter = () => {
 
   useEffect(() => {
     const getSystems = async () => {
-      const response = await axios.get(`${FILE_SERVICE_API}version`);
+      const response = await axios.get(env.REACT_APP_FILE_SERVICE_VERSION);
       try {
         const { data } = response;
         // const FSverison = { FileServiceVersion: data.version || '' };
@@ -33,6 +32,12 @@ const ICDCFooter = () => {
       }
     };
     getSystems();
+    const setBEVersion = async () => {
+      const data = await (await axios.get(env.REACT_APP_BACKEND_VERSION)).data;
+      const BEversion = FooterData?.link_sections[2]?.items;
+      BEversion[2] = {text: `BE Version: ${data.version || ''}`};
+    };
+    setBEVersion();
   }, [FooterData]);
 
   if (pathname.includes('/jBrowse/')) {
