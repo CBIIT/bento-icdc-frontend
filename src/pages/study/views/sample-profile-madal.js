@@ -7,6 +7,7 @@ import { BarChartV2 } from '../../../components/BarChartV2';
 import useDashboardTabs from '../../dashboard/components/dashboard-tabs-store';
 import { navigatedToDashboard } from '../../../utils/utils';
 import { palette } from '../../../bento/studyDetailsData';
+import { useSampleProfileModal } from './sample-profile-modal-store'
 
 const onChange = (key) => {
   noop(key);
@@ -34,7 +35,7 @@ const SampleProfileModal = ({
   classes,
   accessionId,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [{ isModalOpen }, { setIsModalOpen }] = useSampleProfileModal();
   const [, actions] = useDashboardTabs();
   const filterStudy = `${studyCode} (${accessionId})`;
 
