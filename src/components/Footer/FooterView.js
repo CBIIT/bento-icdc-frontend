@@ -32,12 +32,12 @@ const ICDCFooter = () => {
       }
     };
     getSystems();
-    const getBEVersion = async () => {
+    const setBEVersion = async () => {
       const data = await (await axios.get(env.REACT_APP_BACKEND_VERSION)).data;
-      const BEvers = FooterData.link_sections[2].items;
-      BEvers[2] = {text: `BE Version: ${data.version || ''}`};
+      const BEversion = FooterData?.link_sections[2]?.items;
+      BEversion[2] = {text: `BE Version: ${data.version || ''}`};
     };
-    getBEVersion();
+    setBEVersion();
   }, [FooterData]);
 
   if (pathname.includes('/jBrowse/')) {
