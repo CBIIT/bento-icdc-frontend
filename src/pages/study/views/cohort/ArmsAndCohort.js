@@ -29,7 +29,18 @@ const ArmsAndCohort = ({
     noCohortMessage,
     noArmsCohort,
     noArmsCohort2,
+    defaultSortField
   } = table1;
+
+  const sortRow = (rows) => {
+    return rows.sort((a, b) => `${a[defaultSortField]}`.localeCompare(
+      `${b[defaultSortField]}`, undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      },
+    ));
+  };
+
   const getTableData = () => {
     // Cohort types 1. without arms 2. with arms 
     const { study_arms : studyArms, cohorts: cohortsWithoutArm } = studyData;
@@ -48,7 +59,7 @@ const ArmsAndCohort = ({
           cohortDescription: cohortDesc
         });
       });
-      return tableRows;
+      return sortRow([...tableRows]);
     }
 
     // 2. cohort with Arm
@@ -74,7 +85,7 @@ const ArmsAndCohort = ({
         });
       });
     });
-    return tableRows;
+    return sortRow([...tableRows]);
   }
 
   const tblRows = getTableData();
