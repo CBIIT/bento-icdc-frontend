@@ -13,6 +13,7 @@ import TabPanel from '../../../components/Tab/TabPanel';
 import { navigatedToDashboard } from '../../../utils/utils';
 import useDashboardTabs from '../../dashboard/components/dashboard-tabs-store';
 import SampleProfileModal from './sample-profile-madal';
+import { useSampleProfileModal } from './sample-profile-modal-store';
 
 const { TabPane } = Tabs;
 
@@ -45,6 +46,7 @@ const tooltipContent = ({ argument, originalValue }) => (
 );
 
 const SampleProfile = ({ classes, data }) => {
+    const [_, {setIsModalOpen}] = useSampleProfileModal()
   const [, actions] = useDashboardTabs();
   const { accession_id: accessionId, clinical_study_designation: studyCode } = data.study[0];
   const filterStudy = `${studyCode} (${accessionId})`;
@@ -106,6 +108,7 @@ const SampleProfile = ({ classes, data }) => {
             { sampleProfile.tabs.map((item, index) => (
               <TabPanel index={item.index} value={currentTab} key={index}>
                 <div className={classes.barChartWrapper}>
+                  <div onClick={() => setIsModalOpen(true)}>
                   <BarChart
                     data={data[item.value]}
                     palette={palette}
@@ -113,6 +116,7 @@ const SampleProfile = ({ classes, data }) => {
                     argument={argumentConfiguration}
                     value={valueConfiguration}
                   />
+                  </div>
                   <SampleProfileModal
                     sampleProfile={sampleProfile}
                     data={data}
