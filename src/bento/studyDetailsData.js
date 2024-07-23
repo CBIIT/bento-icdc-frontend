@@ -407,10 +407,8 @@ export const table1 = {
   display: true,
   // Table title
   tableTitle: 'This study is organized as follows:',
-  // Field name for files data, need to be updated only when using a different GraphQL query
-  subjectDetailField: 'samples',
   // Value must be one of the 'dataField's in fileTableColumns
-  defaultSortField: 'sample_id',
+  defaultSortField: 'cohortDescription',
   // 'asc' or 'desc'
   defaultSortDirection: 'asc',
   // Set 'selectableRows' to true to show the row selection
