@@ -17,6 +17,7 @@ const success = '#3CD4A0';
 const info = '#3f2b2f';
 const tableHeader = '#f5f5f5';
 const black = 'black';
+const widgetTitle = '#3376A3'
 const lochmara = '#3478A5';
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -100,6 +101,17 @@ export default {
       contrastText: 'lochmara',
       contrastTextColor: '#3478A5',
     },
+    widgetTitle: {
+        main: widgetTitle,
+        light: tinycolor(widgetTitle)
+          .lighten(widgetTitle)
+          .toHexString(),
+        dark: tinycolor(widgetTitle)
+          .darken(darkenRate)
+          .toHexString(),
+        contrastText: 'widgetTitle',
+        contrastTextColor: '#3376A3',
+      },
     white: {
       main: white,
       light: tinycolor(white)
