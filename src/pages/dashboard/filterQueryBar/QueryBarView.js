@@ -97,7 +97,7 @@ const QueryBarView = ({
       },
     },
     customStyles,
-  }), []);
+  }), [localFind]);
 
   return (
     <ThemeProvider theme={createTheme(theme)}>
