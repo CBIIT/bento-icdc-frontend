@@ -308,7 +308,7 @@ const DropDownView = ({
     }
     return (
       <>
-        <MenuItem className={isDropDownDisabled && classes.disableDropDownBtn}>
+        <MenuItem>
           <Tooltip
             arrow
             interactive
@@ -329,7 +329,7 @@ const DropDownView = ({
           </span>
           </Tooltip>
         </MenuItem>
-        <MenuItem style={{ cursor: isDropDownDisabled && 'not-allowed'}} className={clsx({[classes.disableDropDownBtn]: isDropDownDisabled, downloadManifestBtn: !isDropDownDisabled})}>
+        <MenuItem style={{ cursor: isDropDownDisabled && 'not-allowed'}} className="downloadManifestBtn">
           <Tooltip
             arrow
             interactive
