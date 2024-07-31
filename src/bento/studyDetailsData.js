@@ -1579,7 +1579,7 @@ export const table = {
       manifest: offStudyNodeMetadata,
     },
     {
-      title: 'off_treatment',
+      title: 'off treatment',
       countKey: 'off_treatment',
       csvDownload: 'offTreatmentNodeData',
       manifest: offTreatmentNodeMetadata,
