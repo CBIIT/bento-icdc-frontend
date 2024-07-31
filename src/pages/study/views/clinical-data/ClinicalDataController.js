@@ -68,8 +68,8 @@ const ClinicalDataController = ({
     const csvDownloadData = rowData ? rowData[row.rowKey] : data[row.csvDownload] || [];
     return {
       ...row,
-      dataNode: row.title,
-      description: description[row.countKey] || '',
+      clinicalDataNode: row.title,
+      clinicalDataDescription: description[row.countKey] || '',
       recordCount: nodeCount[row.countKey] || 0,
       caseCount: caseCnt,
       csvDataRow: csvDownloadData,

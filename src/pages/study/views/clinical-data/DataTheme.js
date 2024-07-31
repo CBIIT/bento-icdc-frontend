@@ -30,7 +30,7 @@ export const tblHeader = {
       '& span': {
         color: '#0B3556',
       },
-      '&.dataNode': {
+      '&.clinicalDataNode': {
         width: '20%',
         paddingLeft: '25px',
       },
@@ -38,7 +38,7 @@ export const tblHeader = {
         width: '10%',
         textAlign: 'center',
       },
-      '&.description': {
+      '&.clinicalDataDescription': {
         width: '30%',
         textAlign: 'center',
       },
@@ -223,7 +223,7 @@ const tblBody = {
           color: '#015774',
         },
       },
-      '&.dataNode': {
+      '&.clinicalDataNode': {
         width: '20%',
         padding: '10px 5px 10px 25px',
         '& p': {
@@ -236,7 +236,7 @@ const tblBody = {
           textTransform: 'uppercase',
         },
       },
-      '&.description': {
+      '&.clinicalDataDescription': {
         width: '30%',
         '& p': {
           fontFamily: 'Open Sans',

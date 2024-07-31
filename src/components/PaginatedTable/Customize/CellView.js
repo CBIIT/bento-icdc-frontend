@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Link,
   Typography,
+  styled,
 } from '@material-ui/core';
 import { cellTypes, headerTypes } from '../../../bento-core';
 import DocumentDownload from '../../DocumentDownload/DocumentDownloadView';
@@ -16,6 +17,24 @@ import CustomHeaderRemover from './components/CustomHeaderRemover';
 import DeleteButton from './components/DeleteButton';
 import DataValue from './components/DataValue';
 import CsvDownload from './components/CsvDownload';
+import { defaultTo } from 'lodash';
+
+const ClinicalDataNodeWrapper = styled('span')({
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '0em',
+    textTransform: 'uppercase',
+})
+
+const ClinicalDataDescriptionWrapper = styled('span')({
+    fontFamily: 'Open Sans',
+    fontSize: '16px',
+    fontWeight: '400',
+    lineHeight: '20px',
+    letterSpacing: '0em',
+})
 
 const CaseIdLink = (props) => {
   const {
@@ -100,7 +119,8 @@ const DocumentDownloadView = ({
 );
 
 export const CustomCellView = (props) => {
-  const { dataField } = props;
+  const { dataField, clinicalDataDescription, clinicalDataNode, caseCount, csvDataRow } = props;
+  const hasNoValues = caseCount === " " && defaultTo(csvDataRow, []).length === 0;
 
   switch (dataField) {
     case customizeColumn.DOCUMENT_DOWNLOAD:
@@ -148,6 +168,10 @@ export const CustomCellView = (props) => {
       return (
         <CsvDownload {...props} />
       );
+    case customizeColumn.clinicalDataNode: 
+      return <ClinicalDataNodeWrapper style={{ color: hasNoValues ? '#A1A1A1' : '#0296C9' }}>{clinicalDataNode}</ClinicalDataNodeWrapper>
+    case customizeColumn.clinicalDataDescription:
+        return <ClinicalDataDescriptionWrapper style={{ color: hasNoValues ? '#A1A1A1' : '#0B3556' }}>{clinicalDataDescription}</ClinicalDataDescriptionWrapper>
     default:
       return (<></>);
   }
