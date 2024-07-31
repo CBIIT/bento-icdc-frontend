@@ -1489,17 +1489,19 @@ export const table = {
   defaultSortDirection: 'asc',
   columns: [
     {
-      dataField: 'dataNode',
+      dataField: 'clinicalDataNode',
       header: 'Clinical Data Nodes',
       sort: 'asc',
       display: true,
+      cellType: cellTypes.CUSTOM_ELEM,
       tooltipText: 'sort',
     },
     {
-      dataField: 'description',
+      dataField: 'clinicalDataDescription',
       header: 'Definition',
       sort: 'asc',
       display: true,
+      cellType: cellTypes.CUSTOM_ELEM,
       tooltipText: 'sort',
     },
     {

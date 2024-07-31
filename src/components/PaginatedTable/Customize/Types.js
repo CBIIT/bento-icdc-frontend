@@ -9,6 +9,8 @@ export const customizeColumn = {
   ArmDescription: 'armDescription',
   DataValue: 'dataValue',
   csvDataRow: 'csvDataRow',
+  clinicalDataNode: 'clinicalDataNode',
+  clinicalDataDescription: 'clinicalDataDescription'
 };
 
 export const customizeLandScapeView = {
