@@ -93,7 +93,7 @@ export const customStyles = {
     },
   },
   searchResultDetailText: {
-    color: '#AC5911',
+    color: '#BF5803',
     fontWeight: '400',
     lineHeight: '20px',
     fontFamily: 'Lato',
