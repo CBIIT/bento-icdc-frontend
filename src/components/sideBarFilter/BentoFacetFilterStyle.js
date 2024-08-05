@@ -165,6 +165,15 @@ export const uploadCustomStyles = {
     fontFamily: 'Lato',
     textTransform: 'none',
   },
+  header: {
+    color: '#4077BA',
+    fontWeight: '400',
+    fontSize: '12px',
+    textAlign: 'center',
+    fontFamily: 'lato',
+    letterSpacing: '0.5px',
+    paddingBottom: '10px',
+  },
   summary: {
     color: '#000',
     fontSize: '16px',
