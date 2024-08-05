@@ -93,7 +93,8 @@ export const customStyles = {
     },
   },
   searchResultDetailText: {
-    color: '#FCA359',
+    color: '#BF5803',
+    fontWeight: '400',
     lineHeight: '20px',
     fontFamily: 'Lato',
     fontSize: '11px',
@@ -163,6 +164,15 @@ export const uploadCustomStyles = {
     padding: '11px 22px',
     fontFamily: 'Lato',
     textTransform: 'none',
+  },
+  header: {
+    color: '#4077BA',
+    fontWeight: '400',
+    fontSize: '12px',
+    textAlign: 'center',
+    fontFamily: 'lato',
+    letterSpacing: '0.5px',
+    paddingBottom: '10px',
   },
   summary: {
     color: '#000',

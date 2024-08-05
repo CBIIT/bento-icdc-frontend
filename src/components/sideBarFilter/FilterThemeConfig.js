@@ -272,7 +272,7 @@ const theme = {
           fontFamily: 'Nunito',
           fontWeight: '400',
           marginRight: '0px',
-          color: '#505050',
+          color: '#B35000',
         },
         '&.filter_by_samplesSubjects': {
           fontSize: '14px',
