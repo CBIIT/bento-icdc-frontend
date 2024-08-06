@@ -11,7 +11,7 @@ const AboutView = ({ classes, data }) => {
       <Stats />
       <div className={classes.container}>
         <AboutHeader title={data.title} />
-        <AboutBody data={{
+        <AboutBody linkColor="#027DA7" data={{
           fontFamily: '"Open Sans", sans-serif',
           lineHeight: '25px',
           image: getImage(data.primaryContentImage, data.title),
