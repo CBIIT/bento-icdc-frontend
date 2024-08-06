@@ -127,7 +127,7 @@ const WidgetView = ({
                     className={classes.card}
                     bottomDivider
                     customBackGround
-                    padAngle={0}
+                    padAngle={0.02}
                     chartType="donut"
                     sliceTitle={widget.sliceTitle}
                     data={[{
