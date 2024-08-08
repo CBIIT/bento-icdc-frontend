@@ -160,7 +160,8 @@ const theme = {
             backgroundColor: '#B1B1B1',
           },
           '& li': {
-            color: '#FCA359',
+            color: '#BF5803',
+            fontWeight: '400',
             paddingLeft: '17px !important',
             paddingTop: '2px !important',
             fontSize: '11px',
