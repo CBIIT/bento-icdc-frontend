@@ -95,6 +95,13 @@ export const manifestData = [
 
 ];
 
+export const CREATE_MANIFEST = gql`
+query createManifest($uuid: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="") {
+    createManifest(uuid: $uuid, offset: $offset, first: $first, order_by: $order_by)
+}
+`
+
+
 // --------------- GraphQL query - Retrieve selected cases info --------------
 export const GET_MY_CART_DATA_QUERY = gql`
 query filesInList($uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
