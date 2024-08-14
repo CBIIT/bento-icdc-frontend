@@ -12,7 +12,7 @@ export const VideoView = ({programDetail, programVideo}) => {
     return (
         <Container>
                 <DescriptionContainer>
-                    <DescriptionTitle>Overview</DescriptionTitle>
+                    <DescriptionTitle>OVERVIEW</DescriptionTitle>
                     <Description>{programDetail.program_full_description}</Description>
                 </DescriptionContainer>
                 <VideoContainer>

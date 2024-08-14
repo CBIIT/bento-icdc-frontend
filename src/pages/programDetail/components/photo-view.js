@@ -7,7 +7,7 @@ export const PhotoAndVideoView = ({programDetail, programImage, programVideo}) =
         <Container>
             <DescriptionAndPhotoContainer>
               <DescriptionContainer>
-                <DescriptionTitle>Overview</DescriptionTitle>
+                <DescriptionTitle>OVERVIEW</DescriptionTitle>
                 <Description>{programDetail.program_full_description}</Description>
               </DescriptionContainer>
                 <PhotoContainer><Photo src={programImage} alt="program image"/></PhotoContainer>
