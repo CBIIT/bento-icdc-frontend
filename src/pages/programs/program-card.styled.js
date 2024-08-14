@@ -94,12 +94,10 @@ export const ActionButtonOne = withStyles({
         color: '#fff',
         height: '38px',
         fontFamily: "Lato",
-        /*'&:hover': {
-          backgroundColor: '#0069d9',
-          borderColor: '#0062cc',
-          boxShadow: 'none',
+        '&:hover': {
+          color: '#000'
         },
-        '&:active': {
+        /*'&:active': {
           boxShadow: 'none',
           backgroundColor: '#0062cc',
           borderColor: '#005cbf',

@@ -243,7 +243,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     fontWeight: '500',
     letterSpacing: '0.025em',
-    color: '#0296c9',
+    color: '#0290C0',
     fontSize: '28px',
     position: 'absolute',
     marginTop: '12px',

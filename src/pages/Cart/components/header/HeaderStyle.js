@@ -11,7 +11,7 @@ export default () => ({
     height: '100px',
     lineHeight: '100px',
     fontSize: '25px',
-    color: '#FF9742',
+    color: '#C25700',
     fontFamily: 'Raleway',
     fontWeight: '500',
     width: '215px',
