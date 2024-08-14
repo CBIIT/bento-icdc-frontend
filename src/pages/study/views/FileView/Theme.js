@@ -88,7 +88,7 @@ export const customTheme = {
         backgroundColor: '#ff7e15',
       },
       '&.add_selected_button_file': {
-        backgroundColor: '#ff7e15',
+        backgroundColor: '#C25700',
       },
       '&#jbrowse_multi_view_button': {
         padding: '0px 6px',

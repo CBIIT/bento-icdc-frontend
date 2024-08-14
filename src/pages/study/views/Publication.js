@@ -176,7 +176,7 @@ const styles = (theme) => ({
     paddingTop: '5px !important',
   },
   label: {
-    color: '#0296c9',
+    color: '#027DA7',
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '12px',
     letterSpacing: '0.017em',
@@ -187,7 +187,7 @@ const styles = (theme) => ({
     fontSize: '12px',
   },
   outLink: {
-    color: '#DD752F',
+    color: '#B85C1E',
     textDecoration: 'none',
     fontSize: '12px',
   },
