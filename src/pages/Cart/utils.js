@@ -28,6 +28,20 @@ export function createFileName(fileName, format = '.csv') {
   return `${fileName} ${todaysDate} ${hours}-${minutes}-${seconds}${format}`;
 }
 
+export const downloadCsvString = (csvString, fileName) => {
+    const blob = new Blob([csvString], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${fileName}.csv`;
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url); 
+}
+
 export function convertToCSV(jsonse, comments, keysToInclude, header) {
   const objArray = typeof jsonse !== "object" ? JSON.parse(jsonse) : jsonse;
 
@@ -91,7 +105,6 @@ export const downloadJsonV2 = (tableData, comments, fileName, manifestData) => {
     user_comments: comments || null
   }))
   const json2csvCallback = (err, csv) => {
-    console.log("json2csvCallback");
     if (err) { throw err; }
     const exportData = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' });
     const JsonURL = window.URL.createObjectURL(exportData);

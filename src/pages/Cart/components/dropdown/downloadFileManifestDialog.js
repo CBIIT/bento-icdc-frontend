@@ -11,8 +11,8 @@ import {
 import TextField from '@material-ui/core/TextField';
 import CloseIcon from '@material-ui/icons/Close';
 import DownloadFileManifestIcon from '../../assets/dwnldFileManifest.svg';
-import { GET_MY_CART_DATA_QUERY, manifestData, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
-import { downloadJsonV2 } from '../../utils';
+import { CREATE_MANIFEST, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
+import { downloadCsvString } from '../../utils';
 import { TableContext } from '../../../../bento-core';
 
 const useStyles = makeStyles({
@@ -111,18 +111,12 @@ const DownloadFileManifestDialog = React.forwardRef(({
     const { selectedFileIds = [] } = context;
     const downloadFilesId = allFiles ? filesId : selectedFileIds;
     const result = await client.query({
-      query: GET_MY_CART_DATA_QUERY,
+      query: CREATE_MANIFEST,
       variables: {
-        uuids: downloadFilesId,
-        first: 10000,
+        uuid: downloadFilesId,
       },
-    }).then((response) => response.data.filesInList);
-    downloadJsonV2(
-      result,
-      comment,
-      myFilesPageData.manifestFileName,
-      manifestData,
-    );
+    }).then((response) => response.data.createManifest);
+    downloadCsvString(result, myFilesPageData.manifestFileName)
   }
 
   return (
