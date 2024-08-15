@@ -73,56 +73,26 @@ const DropDownView = ({
   const { selectedRows = [], selectedFileIds = [] } = context;
   const noSelectedRows = useMemo(() => selectedRows.length === 0, [selectedRows]);
   const cartIsEmpty = useMemo(() => filesId.length === 0, [filesId]);
-  const [manifestString, setManifestString] = useState('');
-  const [filesInListJSONObject, setFileInListJSONObject] = useState(undefined);
+  const [manifest, setManifest] = useState('');
 
-  const {loading: createManifestIsLoading} = useQuery(CREATE_MANIFEST, {
+  useQuery(CREATE_MANIFEST, {
     variables: { uuid: allFiles ? filesId : selectedFileIds},
     skip: allFiles ? !filesId : !selectedFileIds,
     onCompleted: ({ createManifest}) => {
-        setManifestString(createManifest);
+        setManifest(createManifest);
     }
   })
 
-  const {loading: storeManifestDataIsLoading} = useQuery(GET_STORE_MANIFEST_DATA_QUERY, {
-    variables: { uuids: allFiles ? filesId : selectedFileIds},
-    skip: allFiles ? !filesId : !selectedFileIds,
-    onCompleted: ({filesInList}) => {
-
-        const processedStoreManifestPayload = filesInList.map((el) => ({
-            file_name: el?.file_name,
-            file_type: el?.file_type,
-            association: el?.association,
-            file_description: el?.file_description,
-            file_format: el?.file_format,
-            file_size: el?.file_size,
-            case_id: el?.case_id,
-            breed: el?.breed,
-            diagnosis: el?.diagnosis,
-            study_code: el?.study_code,
-            file_uuid: el?.file_uuid,
-            md5sum: el?.md5sum,
-            sample_id: el?.sample_id,
-            individual_id: el?.individual_id,
-            name: el?.name,
-            drs_uri: el?.drs_uri,
-          }));
-
-        setFileInListJSONObject(JSON.stringify(processedStoreManifestPayload));
-    }
-  })
-
-  const {data, loading: sbgURLIsLoading}= useQuery(STORE_MANIFEST_QUERY, {
+  const {data}= useQuery(STORE_MANIFEST_QUERY, {
     variables: {
-        manifest: filesInListJSONObject
+        manifest
     },
-    skip: !filesInListJSONObject,
+    skip: !manifest,
     context: { clientName: 'interopService' },
     fetchPolicy: 'no-cache',
 })
 
   const sbgUrl = useMemo(() => defaultTo(data?.storeManifest, ""), [data]);
-  const areQueriesLoading = useMemo(() => createManifestIsLoading || storeManifestDataIsLoading || sbgURLIsLoading, [createManifestIsLoading, storeManifestDataIsLoading, sbgURLIsLoading])
 
   
 
@@ -300,7 +270,7 @@ const DropDownView = ({
         break;
       }
       case DOWNLOAD_FILE_MANIFEST: {
-        downloadCsvString(manifestString, myFilesPageData.manifestFileName)
+        downloadCsvString(manifest, myFilesPageData.manifestFileName)
         break;
       }
       default: noop(data);
