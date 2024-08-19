@@ -20,19 +20,25 @@ import cgcIcon from '../../assets/cgc.svg';
 import linkIcon from '../../assets/linkIcon.svg';
 import arrowDownPng from '../../assets/arrowDown.png';
 import arrowUpPng from '../../assets/arrowUp.png';
+import { defaultTo } from 'lodash';
 import {
+    CREATE_MANIFEST,
   GET_STORE_MANIFEST_DATA_QUERY,
+  myFilesPageData,
 } from '../../../../bento/fileCentricCartWorkflowData';
 import { getManifestData } from '../../../fileCentricCart/util/TableService';
 import env from '../../../../utils/env';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
+import { downloadCsvString } from '../../utils';
 
 const LABEL = 'Export and Download';
 
 const {
   EXPORT_TO_CANCER_GENOMICS_CLOUD,
+  DOWNLOAD_FILE_MANIFEST,
 } = {
   EXPORT_TO_CANCER_GENOMICS_CLOUD: 'Export to Cancer Genomics Cloud',
+  DOWNLOAD_FILE_MANIFEST: 'Download File Manifest'
 };
 
 const OPTIONS = [
@@ -58,26 +64,46 @@ const DropDownView = ({
   filesId = [],
   allFiles,
 }) => {
-  const [sbgUrl, setSBGUrl] = useState('');
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
 
   // download all or selected files
   const tableContext = useContext(TableContext);
   const { context } = tableContext;
-  const { selectedRows = [] } = context;
+  const { selectedRows = [], selectedFileIds = [] } = context;
   const noSelectedRows = useMemo(() => selectedRows.length === 0, [selectedRows]);
   const cartIsEmpty = useMemo(() => filesId.length === 0, [filesId]);
+  const [manifest, setManifest] = useState('');
+
+  useQuery(CREATE_MANIFEST, {
+    variables: { uuid: allFiles ? filesId : selectedFileIds},
+    skip: allFiles ? !filesId : !selectedFileIds,
+    onCompleted: ({ createManifest}) => {
+        setManifest(createManifest);
+    }
+  })
+
+  const {data}= useQuery(STORE_MANIFEST_QUERY, {
+    variables: {
+        manifest
+    },
+    skip: !manifest,
+    context: { clientName: 'interopService' },
+    fetchPolicy: 'no-cache',
+})
+
+  const sbgUrl = useMemo(() => defaultTo(data?.storeManifest, ""), [data]);
+
+  
 
   const isDropDownDisabled = useMemo(() => {
     switch (allFiles) {
         case true:
             return cartIsEmpty
-            break;
         case false:
             return noSelectedRows
     }
-  }, [allFiles, filesId, selectedRows])
+  }, [allFiles, filesId, noSelectedRows])
 
   const dropDownTooltipTitle = useMemo(() => {
     switch (allFiles) {
@@ -226,49 +252,6 @@ const DropDownView = ({
     prevOpen.current = open;
   }, [open]);
 
-  const getManifestPayload = () => {
-    // if allFiles download all files in cart else selected files id
-    const { selectedFileIds = [] } = context;
-    const downloadFilesId = allFiles ? filesId : selectedFileIds;
-    const { data: manifestData } = getManifestData(GET_STORE_MANIFEST_DATA_QUERY, downloadFilesId);
-
-    if (!manifestData) {
-      return null;
-    }
-    const processedStoreManifestPayload = manifestData.filesInList.map((el) => ({
-      file_name: el?.file_name,
-      file_type: el?.file_type,
-      association: el?.association,
-      file_description: el?.file_description,
-      file_format: el?.file_format,
-      file_size: el?.file_size,
-      case_id: el?.case_id,
-      breed: el?.breed,
-      diagnosis: el?.diagnosis,
-      study_code: el?.study_code,
-      file_uuid: el?.file_uuid,
-      md5sum: el?.md5sum,
-      sample_id: el?.sample_id,
-      individual_id: el?.individual_id,
-      name: el?.name,
-      drs_uri: el?.drs_uri,
-    }));
-    return processedStoreManifestPayload;
-  };
-
-  const { data } = useQuery(STORE_MANIFEST_QUERY, {
-    variables: { manifest: JSON.stringify(getManifestPayload()) },
-    context: { clientName: 'interopService' },
-    skip: !getManifestPayload(),
-    fetchPolicy: 'no-cache',
-  });
-
-  useEffect(() => {
-    if (data?.storeManifest) {
-      setSBGUrl(data.storeManifest);
-    }
-  }, [data]);
-
   const [label] = useState(LABEL);
   const [content, setContent] = useState(undefined);
   // eslint-disable-next-line no-unused-vars
@@ -278,10 +261,18 @@ const DropDownView = ({
     getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
   }, []);
 
-  const initiateDownload = (currLabel) => {
+  const initiateDownload = async (currLabel) => {
     switch (currLabel) {
-      case 'Export to Cancer Genomics Cloud': window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`, '_blank');
+      case EXPORT_TO_CANCER_GENOMICS_CLOUD: {
+        if (sbgUrl) {
+            window.open(`https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`, '_blank');
+        }
         break;
+      }
+      case DOWNLOAD_FILE_MANIFEST: {
+        downloadCsvString(manifest, myFilesPageData.manifestFileName)
+        break;
+      }
       default: noop(data);
         break;
     }
@@ -337,7 +328,12 @@ const DropDownView = ({
             title={downloadFileManifestTooltipTitle}
             placement="right"
           >
-            <span onClick={isDropDownDisabled ? noop : handleDownloadFileManifestDialogOpen}>
+            <span onClick={() => {
+                if(isDropDownDisabled) {
+                    return noop()
+                }
+                initiateDownload(DOWNLOAD_FILE_MANIFEST)
+            }}>
               <span className={classes.fileManifestLabal}>
                 Download File Manifest
               </span>
