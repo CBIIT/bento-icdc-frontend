@@ -104,6 +104,7 @@ const tblBody = {
       '& a': {
         color: '#DC762F',
         cursor: 'pointer',
+        textDecoration: 'underline',
         '& p': {
           fontSize: '15px',
         },
