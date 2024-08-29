@@ -6,16 +6,14 @@ COPY package*.json .
 
 COPY . .
 
-RUN NODE_OPTIONS="--max-old-space-size=8192" npm set progress=false
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm set progress=false
 
-RUN NODE_OPTIONS="--max-old-space-size=8192" npm ci --legacy-peer-deps
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci --legacy-peer-deps
 
-RUN NODE_OPTIONS="--openssl-legacy-provider --max-old-space-size=8192 " npm run build --verbose 
+RUN NODE_OPTIONS="--openssl-legacy-provider --max-old-space-size=4096 " npm run build --verbose 
 
 # Final Stage
-# FROM nginx:1.25.4-alpine3.18 AS fnl_base_image
-FROM nginx:1.27.1-alpine-slim AS fnl_base_image 
-# FROM nginx:1.27.1-alpine AS fnl_base_image 
+FROM nginx:1.25.4-alpine3.18 AS fnl_base_image
 
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 COPY --from=build /usr/src/app/configure/inject.template.js /usr/share/nginx/html/inject.template.js
