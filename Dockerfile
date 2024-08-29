@@ -8,7 +8,7 @@ COPY . .
 
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm set progress=false
 
-RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci --legacy-peer-deps
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm ci --legacy-peer-deps --verbose
 
 RUN NODE_OPTIONS="--openssl-legacy-provider --max-old-space-size=4096 " npm run build --verbose 
 
