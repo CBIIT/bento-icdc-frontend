@@ -1,4 +1,5 @@
-FROM node:20-alpine as build
+#FROM node:20-alpine as build
+FROM nginx:1.27.1-alpine-slim as build
 
 WORKDIR /usr/src/app
 
