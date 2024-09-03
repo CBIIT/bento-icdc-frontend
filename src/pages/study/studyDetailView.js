@@ -66,7 +66,7 @@ const processData = (names, nodeCountArg, nodeCaseCountArg) => names.map((name) 
   };
 });
 
-const StudyDetailView = ({ classes, data }) => {
+const StudyDetailView = ({ classes, data, initTab }) => {
   const [, actions] = useDashboardTabs();
   const { data: interOpData, isLoading, isError } = useQuery({
     queryKey: ['studiesByProgram'],
@@ -111,7 +111,7 @@ const StudyDetailView = ({ classes, data }) => {
     isALink: false,
   }];
 
-  const [currentTab, setCurrentTab] = React.useState(0);
+  const [currentTab, setCurrentTab] = React.useState(initTab === 'file' ? 2 : 0);
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
   };
