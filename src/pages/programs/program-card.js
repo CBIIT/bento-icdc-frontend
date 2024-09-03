@@ -17,7 +17,7 @@ import {
 
 
 
-export const ProgramCard = ({ cardTitle, program_acronym, program_short_description, studies, program_external_url, program_name, primaryImageAlt, primaryImage, secondaryImage }) => {
+export const ProgramCard = ({ program_acronym, program_short_description, studies, program_external_url, program_name, primaryImageAlt, primaryImage }) => {
     const history = useHistory();
     const count = studies?.length;
 
@@ -36,7 +36,7 @@ export const ProgramCard = ({ cardTitle, program_acronym, program_short_descript
                     <ProgramDescription>{program_short_description}</ProgramDescription>
                     <ActionWrapper>
                         <ActionButtonOne variant="contained" onClick={handleNavigate}>Associated Studies</ActionButtonOne>
-                        {program_external_url && <ActionButtonTwo target="_blank" href={program_external_url} variant="contained" endIcon={<img src={pageData.externalIcon} style={{ width: '20px' }} />}>Go to site</ActionButtonTwo>
+                        {program_external_url && <ActionButtonTwo target="_blank" href={program_external_url} variant="contained" endIcon={<img src={pageData.externalIcon} alt='external-link-icon' style={{ width: '20px' }} />}>Go to site</ActionButtonTwo>
                         }
                     </ActionWrapper>
                 </ProgramDescriptionActionWrapper>
