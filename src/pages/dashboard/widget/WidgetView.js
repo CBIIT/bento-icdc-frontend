@@ -70,6 +70,29 @@ const WidgetView = ({
     DonutConfig: emptyResultsDonutViewConfig(),
   }), [theme]);
 
+  const EmptyWidget = ({ index = 0, widget }) => (
+    <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
+      <CustmizeWidgetView
+        header={(
+          <Typography size="md" weight="bold" family="Raleway" color="widgetTitle">
+            {widget.title}
+          </Typography>
+        )}
+        bodyClass={classes.fullHeightBody}
+        className={classes.card}
+        bottomDivider
+        customBackGround
+        padAngle={0.02}
+        chartType="donut"
+        sliceTitle={widget.sliceTitle}
+        data={[{
+          group: '',
+          subjects: 1,
+        }]}
+      />
+    </Grid>
+  );
+
   return (
     <>
       <div className={classes.widgetsCollapse}>
@@ -115,31 +138,10 @@ const WidgetView = ({
               dataset = modifyFileTypeData(dataset);
             }
             if (!dataset || dataset.length === 0) {
-              return (
-                <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
-                  <CustmizeWidgetView
-                    header={(
-                      <Typography size="md" weight="bold" family="Raleway" color="widgetTitle">
-                        {widget.title}
-                      </Typography>
-                    )}
-                    bodyClass={classes.fullHeightBody}
-                    className={classes.card}
-                    bottomDivider
-                    customBackGround
-                    padAngle={0.02}
-                    chartType="donut"
-                    sliceTitle={widget.sliceTitle}
-                    data={[{
-                      group: '',
-                      subjects: 1,
-                    }]}
-                  />
-                </Grid>
-              );
+              return <EmptyWidget widget={widget} index={index} />
             }
             if (widget.type === 'sunburst' && (!dataset.children || !dataset.children.length)) {
-              return <></>;
+              return <EmptyWidget widget={widget} index={index} />;
             }
             return (
               <Grid key={index} item lg={4} md={6} sm={12} xs={12}>
