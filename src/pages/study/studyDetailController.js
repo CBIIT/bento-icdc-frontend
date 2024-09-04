@@ -37,7 +37,7 @@ const StudyDetailContainer = ({ match, history }) => {
     );
   }
 
-  return <StudyDetailView data={data} />;
+  return <StudyDetailView data={data} initTab={match?.params?.fileType} />;
 };
 
 export default StudyDetailContainer;

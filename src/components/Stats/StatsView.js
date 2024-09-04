@@ -11,6 +11,7 @@ const StatsView = ({ data }) => {
     name: e.statTitle,
     val: updateData[e.statAPI],
     statIconSrc: e.statIconSrc,
+    statIconAlt: `${e.statTitle}-icon`
   }));
 
   return (

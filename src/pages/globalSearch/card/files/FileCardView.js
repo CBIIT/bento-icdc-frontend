@@ -14,15 +14,19 @@ const FileCardView = ({
   const {
     file_name: fileName = '',
     file_type: fileType = '',
+    file_association: fileAssociation = '',
     case_id: caseID = '',
     program_name: programName = '',
     clinical_study_designation: studyDesignation = '',
     sample_id: sampleID = '',
     programId,
   } = data;
-  const caseIds = `${caseID}`.split(',');
-  const filePathParam = (caseIds.length === 1) ? `/case/${caseID}` : `/study/${studyDesignation}`;
 
+  const caseIds = `${caseID}`.split(',');
+  const studyPath = fileAssociation === 'study'
+    ? `/study/file/${studyDesignation}` : `/study/${studyDesignation}`;
+  const filePathParam = (caseIds.length === 1) ? `/case/${caseID}` : studyPath;
+  
   return (
     <Grid item container className={classes.card} id={`global_search_card_${index}`}>
       <Grid item xs={1} className={classes.indexContainer}>

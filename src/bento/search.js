@@ -279,6 +279,7 @@ export const SEARCH_PAGE_RESULT_FILES = gql`
             type
             file_name
             file_type
+            file_association
             case_id
             sample_id
             program_name
