@@ -99,6 +99,7 @@ const LayoutView = ({
               <Route path="/program/:id" component={ProgramDetail} />
               <Route path="/icdc-data-model" component={NavigatorView} />
               <Route path="/graphql" component={GraphQLView} />
+              <Route path="/study/:fileType/:id" component={StudyDetail} />
               <Route path="/study/:id" component={StudyDetail} />
               <Route path="/case/:id" component={CaseDetails} />
               <Route path="/sysinfo" component={SysInfo} />
