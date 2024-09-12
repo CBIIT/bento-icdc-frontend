@@ -22,6 +22,7 @@ import {
   SearchBoxGenerator,
   UploadModalGenerator,
 } from '../../bento-core';
+import ClearIcon from './assets/clearIcon.svg';
 
 import FacetFilterThemeProvider from './FilterThemeConfig';
 import styles, {
@@ -221,10 +222,6 @@ const BentoFacetFilter = ({
           >
             <div className="sectionSummaryTextContainer">
               <div className="dropdownIconTextWrapper">
-                <ArrowDropDownIcon style={{
-                  transform: !expanded ? 'rotate(-90deg)' : 'none',
-                }}
-                />
                 <div className="facetSectionName">{name}</div>
               </div>
               {hasSearch && (
@@ -343,6 +340,7 @@ const BentoFacetFilter = ({
         CustomFacetView={CustomFacetView}
         enableClearSection
         enableFacetCollapse
+        clearIcon={ClearIcon}
       />
     </FacetFilterThemeProvider>
   );

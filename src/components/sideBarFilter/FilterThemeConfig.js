@@ -17,6 +17,24 @@ const theme = {
         },
       },
     },
+    MuiCollapse: {
+        wrapperInner: {
+            '&> div': {
+                '&> div:nth-child(1)': {
+                    '&> span:nth-child(2)': {
+                        color: '#62737F',
+                        fontFamily: 'Nunito',
+                        fontWeight: 'bold'
+                    },
+                    '&> span:nth-child(3)': {
+                        color: '#62737F',
+                        fontFamily: 'Nunito',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+        }
+    },
     MuiButton: {
       root: {
         '&.resetButton': {
@@ -50,7 +68,7 @@ const theme = {
           borderRadius: '10px',
           paddingRight: '12px',
           justifyContent: 'space-between',
-          backgroundColor: '#FCA359',
+          backgroundColor: '#BD5B00',
           '&:hover': {
             backgroundColor: '#FCA359',
           },
@@ -84,6 +102,7 @@ const theme = {
     MuiAccordionSummary: {
       root: {
         '&.customExpansionPanelSummaryRoot': {
+          gap: '8px',
           flexDirection: 'row-reverse',
           paddingLeft: 0,
           '& div.sectionSummaryText': {
@@ -91,7 +110,7 @@ const theme = {
             lineHeight: 1,
             color: '#323232',
             fontFamily: 'Raleway',
-            fontSize: '13px',
+            fontSize: '15px',
             fontWeight: '600',
             letterSpacing: '0.25px',
           },
@@ -117,7 +136,7 @@ const theme = {
           marginLeft: '10px',
           color: '#323232',
           fontFamily: 'Raleway',
-          fontSize: '15px',
+          fontSize: '19px',
           fontWeight: '600',
           letterSpacing: '0.25px',
           display: 'flex',
@@ -125,7 +144,7 @@ const theme = {
           alignItems: 'center',
         },
         '& div.findCaseButton': {
-          backgroundColor: '#FCA359',
+          backgroundColor: '#BD5B00',
           boxSizing: 'border-box',
           height: 30,
           width: 40,
@@ -194,7 +213,7 @@ const theme = {
       root: {
         color: '#000000',
         fontFamily: 'Nunito',
-        fontWeight: '200',
+        fontWeight: '400',
         fontSize: '14px',
         '& CheckBoxView-checkboxRoot': {
           marginLeft: '0',
@@ -202,7 +221,7 @@ const theme = {
         '& p': {
           color: '#000000',
           fontFamily: 'Nunito',
-          fontWeight: '200',
+          fontWeight: '400',
           fontSize: '14px',
         },
         padding: '10px 2px 10px 0px !important',
@@ -269,25 +288,25 @@ const theme = {
     MuiTypography: {
       root: {
         '&.filter_by_casesSubjects': {
-          fontSize: '14px',
+          fontSize: '13px',
           fontFamily: 'Nunito',
           fontWeight: '400',
           marginRight: '0px',
-          color: '#B35000',
+          color: '#565656',
         },
         '&.filter_by_samplesSubjects': {
-          fontSize: '14px',
-          fontFamily: 'Nunito',
-          fontWeight: '400',
-          marginRight: '0px',
-          color: '#505050',
+            fontSize: '13px',
+            fontFamily: 'Nunito',
+            fontWeight: '400',
+            marginRight: '0px',
+            color: '#565656',        
         },
         '&.filter_by_filesSubjects': {
-          fontSize: '14px',
-          fontFamily: 'Nunito',
-          fontWeight: '400',
-          marginRight: '0px',
-          color: '#505050',
+            fontSize: '13px',
+            fontFamily: 'Nunito',
+            fontWeight: '400',
+            marginRight: '0px',
+            color: '#565656',                
         },
       },
     },
