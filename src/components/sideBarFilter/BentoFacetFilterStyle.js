@@ -4,12 +4,26 @@ export default () => ({
     paddingTop: '10px',
     textAlign: 'center',
   },
+  uploadButton: {
+    width: '100%',
+    backgroundColor: '#BD5B00',
+    borderRadius: '10px',
+    color: '#FFFFFF',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  uploadIcon: {
+    height: '19px',
+    width: '19px',
+  },
   dropDownIconSection: {
     color: '#000000',
   },
   dropDownIconSubSection: {
     marginLeft: '0px',
     fill: '#000000',
+    fontSize: '20px !important'
   },
   disableExpansion: {
     backgroundColor: 'rgba(0, 0, 0 , 0.17)',
@@ -89,16 +103,15 @@ export const customStyles = {
     },
     '& fieldset': {
       borderWidth: '1.25px !important',
-      borderColor: '#FCA359 !important',
+      borderColor: '#874100 !important',
     },
   },
   searchResultDetailText: {
-    color: '#BF5803',
+    color: '#B35000',
     fontWeight: '400',
     lineHeight: '20px',
-    fontFamily: 'Lato',
-    fontSize: '11px',
-    fontStyle: 'italic',
+    fontFamily: 'Roboto',
+    fontSize: '14px',
   },
 };
 

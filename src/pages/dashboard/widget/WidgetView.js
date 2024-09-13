@@ -8,6 +8,7 @@ import {
   Switch,
   withStyles,
   IconButton,
+  makeStyles,
 } from '@material-ui/core';
 import {
   WidgetGenerator,
@@ -48,8 +49,58 @@ const WidgetView = ({
     return filterValue;
   };
 
+  const customClasses = makeStyles({
+    widgetWrapper: {
+      display: 'flex',
+      minHeight: '100%',
+      paddingBottom: '32px',
+    },
+    widgetHeader: { },
+    widgetDivider: {
+      background: (theme && theme.custom ? theme.custom.widgetDivider : 'transparent'),
+      height: '6px',
+      width: '180px',
+      border: 'none',
+      margin: '16px auto 0px auto',
+    },
+    paddedTitle: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        padding: '0px 132px',
+        marginTop: '32px',
+        alignItems: 'center',
+        marginBottom: '8px',
+      },
+    noPaddedTitle: {
+      margin: '0px 0px 0px 0px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    widgetRoot: { },
+    widgetBody: {
+      margin: '0px auto',
+      paddingRight: (theme && theme.spacing ? theme.spacing.unit * 3 : 0),
+      paddingLeft: (theme && theme.spacing ? theme.spacing.unit * 3 : 0),
+    },
+    noPadding: {
+      padding: 0,
+    },
+    paper: {
+      display: 'flex',
+      flexDirection: 'column',
+      flexGrow: 1,
+      overflow: 'hidden',
+      boxShadow: 'none',
+    },
+    customBackGround: {
+      background: (theme && theme.palette ? theme.palette.widgetBackground.main : 'transparent'),
+    },
+  });
+
   const widgetGeneratorConfig = {
     theme,
+    classes: customClasses,
     DonutConfig: {
       colors,
       styles: {
