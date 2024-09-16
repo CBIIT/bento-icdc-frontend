@@ -141,6 +141,14 @@ const styles = () => ({
     height: '12px',
     margin: '0px 18px 0px 6px',
   },
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  inputLabel: {
+    width: '0%',
+    opacity: '0'
+  },
   inputRoot: {
     borderRadius: '8px',
     color: '#25557E',

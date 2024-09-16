@@ -240,7 +240,7 @@ export const tblContainer = ({ primaryColor = '#004c73' }) => ({
       root: {
         width: '100%',
         overflowX: 'auto',
-        transform: 'rotateX(180deg)',
+        // transform: 'rotateX(180deg)',
         boxShadow: 'none',
         borderRadius: '0',
       },
