@@ -79,7 +79,6 @@ const HeaderView = ({
         <FormControl>
           <RadioGroup
             row
-            aria-labelledby="row-radio-label"
             name="selectAll"
             value={allFiles}
             onChange={handleRadioChange}
