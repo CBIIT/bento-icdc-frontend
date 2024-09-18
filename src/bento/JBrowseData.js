@@ -35,6 +35,7 @@ export const DISABLE_RIPPLE = true;
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
+  alt: 'help icon'
 };
 
 export const jbrowseIconSrc = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/jbrowseIcons/jbrowseLogo.svg';

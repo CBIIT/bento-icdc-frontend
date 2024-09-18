@@ -50,6 +50,7 @@ const DeleteButton = ({
         disableElevation
         disableFocusRipple
         onClick={() => deleteCartFile(row, onDeleteRow)}
+        aria-label='delete'
       >
         {delIcon}
       </IconButton>
