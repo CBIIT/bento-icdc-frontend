@@ -166,6 +166,9 @@ const WidgetView = ({
             }}
             className={classes.customSwitch}
             disableRipple
+            inputProps={{
+                "aria-label": 'collapse widget view switch'
+            }}
             checked={themeChanger.dark}
             onChange={themeChanger.toggleTheme}
           />
