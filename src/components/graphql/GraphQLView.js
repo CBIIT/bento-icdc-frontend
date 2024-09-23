@@ -1,8 +1,8 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
 import GraphiQL from 'graphiql';
 import env from '../../utils/env';
 import 'graphiql/graphiql.min.css';
+import { styled } from '../../dependencies/material-ui-6';
 
 const BACKEND = env.REACT_APP_BACKEND_API;
 
@@ -14,21 +14,15 @@ function graphQLFetcher(graphQLParams) {
   }).then((response) => response.json());
 }
 
-const GraphQLView = ({
-  classes,
-}) => {
-  return (
-    <div className={classes.grapqhQlContainer}>
-      <GraphiQL fetcher={graphQLFetcher} />
-    </div>
-  );
-}
-
-const styles = () => ({
-  grapqhQlContainer: {
-    height: '900px',
-    marginTop: '0px',
-  },
+const OuterLayer = styled('div')({
+  height: '1100px',
+  marginTop: '0px',
 });
 
-export default withStyles(styles)(GraphQLView);
+const GraphQLView = () => (
+  <OuterLayer>
+    <GraphiQL fetcher={graphQLFetcher} />
+  </OuterLayer>
+);
+
+export default GraphQLView;
