@@ -290,13 +290,13 @@ export default {
     },
     MUIDataTable: {
       responsiveStacked: {
-        transform: 'rotateX(180deg)',
+        // transform: 'rotateX(180deg)',
       },
       responsiveBase: {
-        transform: 'rotateX(180deg)',
+        // transform: 'rotateX(180deg)',
       },
       tableRoot: {
-        transform: 'rotateX(180deg)',
+        // transform: 'rotateX(180deg)',
         borderTop: '3px solid #e7e5e5',
       },
     },

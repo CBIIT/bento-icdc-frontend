@@ -107,7 +107,7 @@ export const customTheme = {
     root: {
       width: '100%',
       overflowX: 'auto',
-      transform: 'rotateX(180deg)',
+      // transform: 'rotateX(180deg)',
       boxShadow: 'none',
       borderRadius: '0',
       maxHeight: '400px',
