@@ -1,5 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import themes, { overrides, typography } from './themes';
 
 const lightTheme = createTheme({ ...themes.light, ...overrides, ...typography });
@@ -38,7 +38,7 @@ const CustomThemeProvider = ({ children }) => {
   const computedTheme = themeState.dark ? darkTheme : lightTheme;
 
   return (
-    <MuiThemeProvider theme={computedTheme}>
+    <ThemeProvider theme={computedTheme}>
       <ThemeContext.Provider
         value={{
           dark: themeState.dark,
@@ -47,7 +47,7 @@ const CustomThemeProvider = ({ children }) => {
       >
         {children}
       </ThemeContext.Provider>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 };
 
