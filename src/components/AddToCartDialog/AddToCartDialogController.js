@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import Dialog from './AddToCartDialogView';
 import Alert from './AddToCartDialogAlertView';
 

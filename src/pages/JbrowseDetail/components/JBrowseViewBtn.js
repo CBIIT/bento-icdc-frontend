@@ -1,13 +1,14 @@
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
-  withStyles,
   Button,
   Typography,
   IconButton,
-} from '@material-ui/core';
+  ThemeProvider as MuiThemeProvider,
+  createTheme
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import clsx from 'clsx';
 import {
   ToolTip as Tooltip,

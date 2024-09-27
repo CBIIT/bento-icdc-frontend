@@ -1,5 +1,5 @@
 import React from 'react';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import themes, { overrides, typography } from './themes';
 
 const lightTheme = createTheme({ ...themes.light, ...overrides, ...typography });
@@ -36,6 +36,7 @@ const CustomThemeProvider = ({ children }) => {
   };
 
   const computedTheme = themeState.dark ? darkTheme : lightTheme;
+  console.log('theme-state', themeState);
 
   return (
     <ThemeProvider theme={computedTheme}>

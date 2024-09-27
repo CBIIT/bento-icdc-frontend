@@ -1,11 +1,9 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { Button, Menu, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import {ArrowDropDown as ArrowDropDownIcon} from '@mui/icons-material';
 import { multiStudyIcon } from '../../../bento/caseDetailsData';
+import { withStyles } from "@mui/styles";
 
 const MuiMenu = withStyles({
   paper: {

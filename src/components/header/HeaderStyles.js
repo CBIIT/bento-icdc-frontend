@@ -1,4 +1,4 @@
-// import { withStyles } from '@material-ui/core';
+// import { withStyles } from "@mui/styles";
 
 /**
  * Default styling classes for the SearchBar component

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider } from '@material-ui/core';
+import {ThemeProvider as MuiThemeProvider } from '@mui/material';
 
 export default ({
     children,

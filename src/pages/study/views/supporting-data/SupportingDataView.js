@@ -1,12 +1,12 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import {
-  withStyles,
   AccordionDetails,
   Grid,
   ThemeProvider,
   createTheme,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import CustomAccordionSummary from './summary/AccordionSummaryView';
 import styles from './SupportingDataStyle';
 import { supportDataList, tableLayOut } from './dataConfig';

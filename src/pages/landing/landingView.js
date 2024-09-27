@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import {
-  Grid,
-  withStyles,
+  Grid2 as Grid,
   createTheme,
-  MuiThemeProvider,
-} from '@material-ui/core';
+  ThemeProvider as MuiThemeProvider,
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
@@ -109,6 +109,15 @@ const custumTheme = createTheme({
         marginLeft: '-60px',
       },
     },
+    components: {
+        MuiGrid2: {
+          defaultProps: {
+            // all grids under this theme will apply
+            // negative margin on the top and left sides.
+            disableEqualOverflow: true,
+          },
+        },
+      },
     MuiTypography: {
       root: {
         paddingRight: '50px',
@@ -226,8 +235,8 @@ const LandingView = ({
     <MuiThemeProvider theme={custumTheme}>
       <div className={classes.page}>
         <div className={classes.container}>
-          <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30)}>
-            <Grid item lg={2} md={2} sm={12} xs={12} className={classes.carouselTabs}>
+          <Grid container direction="row" className={cn(classes.paddingTop30)}>
+            <Grid className={classes.carouselTabs}>
               <Tab
                 styleClasses={classes}
                 disableRipple
@@ -237,7 +246,7 @@ const LandingView = ({
                 orientation="vertical"
               />
             </Grid>
-            <Grid item lg={10} md={10} sm={12} xs={12} className={classes.carouselContent}>
+            <Grid className={classes.carouselContent}>
               {
                 pageData.tabs.map((item, index) => (
                   <TabPanel value={currentTab} index={index}>
@@ -345,7 +354,7 @@ const styles = (theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundAttachment: 'fixed',
-    marginTop: '-47px',
+    // marginTop: '-47px',
   },
   imageCaption: {
     textAlign: 'justify',

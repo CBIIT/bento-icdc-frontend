@@ -5,7 +5,8 @@ import {
   Switch,
   useLocation,
 } from 'react-router-dom';
-import { withStyles, CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@mui/material";
+import { withStyles } from "@mui/styles";
 import LinkBar from '../LinkBar';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";

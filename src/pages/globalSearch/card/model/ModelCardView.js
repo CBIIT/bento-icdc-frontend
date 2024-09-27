@@ -1,4 +1,5 @@
-import { Grid, withStyles } from '@material-ui/core';
+import { Grid2 as Grid } from '@mui/material';
+import { withStyles } from "@mui/styles";
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ModelCardStyle';

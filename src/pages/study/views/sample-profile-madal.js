@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Tabs } from 'antd';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from "@mui/styles";
 import { noop } from 'antd/es/_util/warning';
 import { BarChartV2 } from '../../../components/BarChartV2';
 import useDashboardTabs from '../../dashboard/components/dashboard-tabs-store';

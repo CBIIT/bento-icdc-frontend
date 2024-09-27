@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import {
   SearchBarGenerator,
 } from '@bento-core/global-search';

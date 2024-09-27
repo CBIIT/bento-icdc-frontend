@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Typography,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import {

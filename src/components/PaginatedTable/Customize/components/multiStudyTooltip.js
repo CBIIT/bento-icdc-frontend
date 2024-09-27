@@ -1,13 +1,13 @@
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import {ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material';
 import {
   Typography,
-  withStyles,
   Link,
   Box,
   List,
   ListItem,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { ToolTip as Tooltip } from '../../../../bento-core';
 import {
   multiStudyData,

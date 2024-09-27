@@ -3,16 +3,16 @@ import {
   AccordionSummary,
   Button,
   Container,
-  withStyles,
-} from '@material-ui/core';
+  IconButton
+} from '@mui/material';
+import { withStyles } from '@mui/styles';
 import {
   // ArrowDropDown as ArrowDropDownIcon,
   ExpandMore as ExpandMoreIcon,
-} from '@material-ui/icons';
+  Refresh as RefreshIcon,
+  ArrowDropDown as ArrowDropDownIcon
+} from '@mui/icons-material';
 import clsx from 'clsx';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {
   ClearAllFiltersBtn,
   FacetFilter,

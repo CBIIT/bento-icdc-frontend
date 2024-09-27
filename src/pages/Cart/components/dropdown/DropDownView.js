@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext, useMemo } from 'react';
 import {
-  withStyles,
   MenuItem,
   MenuList,
   ClickAwayListener,
@@ -8,7 +7,8 @@ import {
   Button,
   Grow,
   Paper,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import clsx from 'clsx';
 import { useQuery } from '@apollo/client';
 import { noop } from 'lodash';

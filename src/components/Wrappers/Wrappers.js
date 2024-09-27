@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React from "react";
 import {
-  withStyles,
   Badge as BadgeBase,
   Typography as TypographyBase,
   Button as ButtonBase,
-} from "@material-ui/core";
-import { useTheme, makeStyles } from "@material-ui/styles";
+  useTheme,
+} from "@mui/material";
+import { withStyles, makeStyles } from "@mui/styles";
 import clsx from "clsx";
 
 // styles

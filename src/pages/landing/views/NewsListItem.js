@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  withStyles,
   ListItem,
   ListItemText,
   Typography,
@@ -10,8 +9,9 @@ import {
   DialogTitle,
   DialogContent,
   IconButton,
-} from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
+import { Close } from '@mui/icons-material';
 
 const NewsItem = ({
   paragraph, index, total, classes, label, blurb,

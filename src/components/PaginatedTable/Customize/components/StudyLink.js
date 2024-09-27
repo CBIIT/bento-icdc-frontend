@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  withStyles,
   Link,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { studyDisposition } from '../DataAvailability/TableCell';
 import { getStudyIcon } from './NumberOfCases';
 import { cellTypes } from '../../../../bento-core';

@@ -1,9 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
 import {
-  Grid,
-  withStyles,
-} from '@material-ui/core';
+  Grid2 as Grid,
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import FileTableView from './FileView/FileTableView';
 import {
   TableContextProvider,

@@ -4,7 +4,7 @@ import {
   Icon,
   ThemeProvider,
   createTheme,
-} from '@material-ui/core';
+} from '@mui/material';
 import deleteIcon from '../../assets/deleteIcon.svg';
 
 const theme = {
