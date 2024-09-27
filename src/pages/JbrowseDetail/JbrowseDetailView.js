@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {CircularProgress} from '@mui/material';
 import {
   JBrowseComponent,
 } from 'bento-jbrowse';

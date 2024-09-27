@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {CircularProgress} from '@mui/material';
 import {
   GET_FILES_ID_BY_NAME,
   FILE_TYPE_BAI,

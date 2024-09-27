@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import {
-  Grid,
+  Grid2 as Grid,
   ThemeProvider,
   createTheme,
-  withStyles,
   Divider,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import styles from './CartStyle';
 import {
   myFilesPageData,

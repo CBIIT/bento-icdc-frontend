@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { useHistory } from 'react-router-dom';
 import {
   SearchBarGenerator,

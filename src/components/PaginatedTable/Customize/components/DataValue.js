@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {
   ThemeProvider,
   createTheme,
-} from '@material-ui/core';
+} from '@mui/material';
 import { ToolTip } from '../../../../bento-core';
 
 const theme = {

@@ -4,10 +4,10 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  withStyles,
   ImageListItem,
-} from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
+import { Close } from '@mui/icons-material';
 
 const NewsViewImage = ({
   img, classes, label, caption,

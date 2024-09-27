@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import {
-  Grid,
-  withStyles,
-} from '@material-ui/core';
+  Grid2 as Grid,
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
-import HelpIcon from '@material-ui/icons/Help';
+import {Help as HelpIcon} from '@mui/icons-material';
 import { addToCart, cartWillFull } from '../../pages/fileCentricCart/store/cart';
 import Message from '../Message';
 import AddToCartAlertDialog from '../AddToCartDialog';

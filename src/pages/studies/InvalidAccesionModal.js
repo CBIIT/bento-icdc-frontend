@@ -6,8 +6,8 @@ import {
   Fade,
   Typography,
   IconButton,
-} from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+} from '@mui/material';
+import { Close } from '@mui/icons-material';
 import SadDog from './Sad_dog.png';
 
 const boxStyle = {

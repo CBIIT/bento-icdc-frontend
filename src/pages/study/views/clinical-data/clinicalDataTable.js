@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import axios from 'axios';
 import yaml from 'js-yaml';
 import styles from './ClinicalDataStyle';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@mui/material';
 import ArmsAndCohort from '../ArmsAndCohort';
 import * as mockStudyData from './data.json';
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   CircularProgress,
-  Grid,
+  Grid2 as Grid,
   Typography,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { useSelector } from 'react-redux';
 import { request, gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';

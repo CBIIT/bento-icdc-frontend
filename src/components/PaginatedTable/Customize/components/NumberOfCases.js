@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   Tooltip,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { Link } from 'react-router-dom';
 import { studyDisposition } from '../DataAvailability/TableCell';
 import { navigatedToDashboard } from '../../../../utils/utils';

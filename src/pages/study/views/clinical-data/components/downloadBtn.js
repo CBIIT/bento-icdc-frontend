@@ -1,4 +1,5 @@
-import { Button, CircularProgress, withStyles } from '@material-ui/core';
+import { Button, CircularProgress } from '@mui/material';
+import { withStyles } from "@mui/styles";
 import React from 'react';
 import { ToolTip as Tooltip } from '../../../../../bento-core';
 

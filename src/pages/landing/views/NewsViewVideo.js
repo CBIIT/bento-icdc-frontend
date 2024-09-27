@@ -4,10 +4,10 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import ReactPlayer from 'react-player/youtube';
-import { Close } from '@material-ui/icons';
+import { Close } from '@mui/icons-material';
 
 const NewsViewVideo = ({
   url, label, classes, description,

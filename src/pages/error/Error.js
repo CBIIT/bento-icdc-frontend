@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Grid, Paper, Typography, withStyles,
-} from '@material-ui/core';
+  Grid, Paper, Typography,
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import LeftBg from '../../assets/error/leftBg.png';
 import rightBg from '../../assets/error/rightBg.png';
 

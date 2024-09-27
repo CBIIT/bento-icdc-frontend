@@ -11,8 +11,8 @@ import {
   ListItemText,
   ListItemIcon,
   DialogActions,
-} from '@material-ui/core';
-import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
+} from '@mui/material';
+import {FiberManualRecord} from '@mui/icons-material';
 // import { useSelector } from 'react-redux';
 import * as text from './OverlayText.json';
 import DialogThemeProvider from './OverlayThemConfig';

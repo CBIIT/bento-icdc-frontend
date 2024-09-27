@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  withStyles,
   IconButton,
   Backdrop,
   Dialog,
   Button,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 // import { saveAs } from 'file-saver';
 // import MarkdownPDF from "markdown-pdf";
-import CloseIcon from '@material-ui/icons/Close';
+import {Close as CloseIcon} from '@mui/icons-material';
 // import { pdf } from '@react-pdf/renderer';
 import ReactMarkdown from 'react-markdown';
 import { marked } from 'marked';

@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@mui/material';
 import themes, { overrides } from '../../themes';
 
 export default ({

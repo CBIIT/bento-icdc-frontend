@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { styled, withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { styled, Button} from '@mui/material';
+import { withStyles } from "@mui/styles";
 
 export const ProgramDetailContainer = styled('div')({
     width: '100%',

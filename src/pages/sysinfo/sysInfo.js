@@ -2,7 +2,8 @@
 import React from 'react';
 import { CustomDataTable } from '@bento-core/data-table';
 import { getColumns } from '@bento-core/util';
-import { makeStyles, Grid } from '@material-ui/core';
+import { Grid2 as Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import env from '../../utils/env';

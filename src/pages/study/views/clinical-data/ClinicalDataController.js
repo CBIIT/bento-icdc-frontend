@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   CircularProgress,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import axios from 'axios';
 import yaml from 'js-yaml';
 import { useQuery } from '@apollo/client';

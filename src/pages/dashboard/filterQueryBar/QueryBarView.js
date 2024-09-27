@@ -4,8 +4,8 @@ import {
   Container,
   ThemeProvider,
   createTheme,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import {
   clearAllFilters,
   clearFacetSection,

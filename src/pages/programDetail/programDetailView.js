@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Grid,
-  withStyles,
+  Grid2 aas Grid,
   Typography,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { request, gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import {

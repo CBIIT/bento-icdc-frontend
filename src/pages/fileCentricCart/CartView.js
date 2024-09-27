@@ -3,8 +3,8 @@ import {
   Grid,
   ThemeProvider,
   createTheme,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { TableContext } from '../../bento-core';
 import {
   cartTable,

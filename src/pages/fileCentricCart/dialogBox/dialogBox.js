@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  withStyles, Dialog, DialogActions, DialogContent, DialogContentText,
-} from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+  Dialog, DialogActions, DialogContent, DialogContentText,
+  Button
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import Styles from './dialogBox.style';
 import DialogThemeProvider from './dialogThemeConfig';
 

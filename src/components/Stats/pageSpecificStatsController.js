@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { CircularProgress } from '@mui/material';
 import { filterData } from '../../bento-core';
 
 import StatsView from './StatsView';

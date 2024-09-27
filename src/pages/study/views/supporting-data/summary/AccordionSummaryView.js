@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   AccordionSummary,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import style from './AccordionSummaryStyle';
 import expandIcon from '../../../../../assets/icons/expandIcon.svg';
 import collapseIcon from '../../../../../assets/icons/CollapseIcon.svg';

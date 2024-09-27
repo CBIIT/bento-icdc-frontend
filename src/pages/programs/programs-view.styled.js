@@ -1,6 +1,5 @@
 
-import React from 'react';
-import { styled } from '@material-ui/core/styles';
+import { styled } from '@mui/material';
 
 export const ProgramsContainer = styled('div')({
     width: '100%',

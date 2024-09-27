@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import {
-  Grid,
+  Grid2 as Grid,
   Typography,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import {
   table1,
 } from '../../../../bento/studyDetailsData';

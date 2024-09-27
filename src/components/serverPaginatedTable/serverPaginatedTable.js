@@ -1,11 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/state-in-constructor */
 import React from 'react';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
-import cloneDeep from 'lodash/cloneDeep';
-import { CircularProgress, Backdrop, withStyles } from '@material-ui/core';
+import {TableFooter, TableRow, TablePagination, CircularProgress, Backdrop} from '@mui/material';
+import { withStyles } from "@mui/styles";
+import {cloneDeep} from 'lodash';
 import { ToolTip as Tooltip, CustomDataTable } from '../../bento-core';
 import client from '../../utils/graphqlClient';
 import CSVDownloadToolbar from './components/CSVDownloadCustomToolbar';

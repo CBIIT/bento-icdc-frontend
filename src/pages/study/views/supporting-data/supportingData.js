@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Grid,
-  withStyles,
+  Grid2 as Grid,
   Paper,
   CircularProgress,
   // eslint-disable-next-line no-unused-vars
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import _ from 'lodash';
 import styled from 'styled-components';
 import { useOrderSupportingData } from './useOrderSupportingData';

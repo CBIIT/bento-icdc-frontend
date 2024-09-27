@@ -2,8 +2,9 @@
 *
 */
 import React from 'react';
-import { withStyles, Tooltip } from '@material-ui/core';
-import { FiberManualRecordRounded } from '@material-ui/icons';
+import { Tooltip } from '@mui/material';
+import { withStyles } from "@mui/styles";
+import { FiberManualRecordRounded } from '@mui/icons-material';
 import Styles from './CellStyle';
 import CustomThemeProvider from './CustomTheme';
 

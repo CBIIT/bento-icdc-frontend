@@ -2,8 +2,8 @@ import React from 'react';
 import {
   Button,
   Tooltip,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 

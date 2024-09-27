@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  withStyles,
   List,
   ImageList,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { TwitterTimelineEmbed, TwitterTweetEmbed } from 'react-twitter-embed';
 import lbg from '../../../assets/landing/Background.png';
 import NewsItem from './NewsListItem';

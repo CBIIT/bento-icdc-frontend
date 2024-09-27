@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@mui/material';
 import GlobalSearchView from './GlobalSerachView';
 import { STUDIES_PROGRAM } from '../../bento/search';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import GraphiQL from 'graphiql';
 import env from '../../utils/env';
 import 'graphiql/graphiql.min.css';

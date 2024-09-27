@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Grid, withStyles } from '@material-ui/core';
+import { Grid2 as Grid } from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { Link } from 'react-router-dom';
 import { Tabs } from 'antd'; // Importing Tabs from antd
 import BarChart from '../../../components/BarCharts';

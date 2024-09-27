@@ -5,6 +5,11 @@ const paths = require('../config/paths');
 
 module.exports = {
   entry: paths.appIndexJs,
+  resolve: {
+        alias: {
+          '@mui/styled-engine': '@mui/styled-engine-sc'
+        },
+      },
   module: {
     rules: [
       {
