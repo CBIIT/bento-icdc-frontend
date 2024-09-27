@@ -1,9 +1,9 @@
 import React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
 import themes, { overrides, typography } from './themes';
 
-const lightTheme = createTheme({ ...themes.light, ...overrides, ...typography });
-const darkTheme = createTheme({ ...themes.dark, ...overrides, ...typography });
+const lightTheme = createTheme(adaptV4Theme({ ...themes.light, ...overrides, ...typography }));
+const darkTheme = createTheme(adaptV4Theme({ ...themes.dark, ...overrides, ...typography }));
 
 const defaultContextData = {
   dark: false,
@@ -39,16 +39,18 @@ const CustomThemeProvider = ({ children }) => {
   console.log('theme-state', themeState);
 
   return (
-    <ThemeProvider theme={computedTheme}>
-      <ThemeContext.Provider
-        value={{
-          dark: themeState.dark,
-          toggleTheme,
-        }}
-      >
-        {children}
-      </ThemeContext.Provider>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={computedTheme}>
+        <ThemeContext.Provider
+          value={{
+            dark: themeState.dark,
+            toggleTheme,
+          }}
+        >
+          {children}
+        </ThemeContext.Provider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

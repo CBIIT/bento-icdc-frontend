@@ -1,4 +1,5 @@
 import React from 'react';
+import { adaptV4Theme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
@@ -6,7 +7,8 @@ import {
   Typography,
   IconButton,
   ThemeProvider as MuiThemeProvider,
-  createTheme
+  StyledEngineProvider,
+  createTheme,
 } from '@mui/material';
 import { withStyles } from "@mui/styles";
 import clsx from 'clsx';
@@ -70,68 +72,71 @@ const ViewJBrowseButton = ({
   );
 
   const renderTooltipContent = () => (
-    <MuiThemeProvider theme={createTheme(customTheme)}>
-      <Typography align="center" color="inherit" className={classes.descripText}>
-        {(isInactive || disable) ? tooltipMsg1
-          : (isInvlaid) ? <InValidToottipMsg /> : tooltipMsg2}
-      </Typography>
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <MuiThemeProvider theme={createTheme(adaptV4Theme(customTheme))}>
+        <Typography align="center" color="inherit" className={classes.descripText}>
+          {(isInactive || disable) ? tooltipMsg1
+            : (isInvlaid) ? <InValidToottipMsg /> : tooltipMsg2}
+        </Typography>
+      </MuiThemeProvider>
+    </StyledEngineProvider>
   );
-  return (
-    <>
-      <Link
-        className={
-          clsx({
-            [classes.diableLink]: (isInvlaid || disable),
-            [classes.activeLink]: !(isInvlaid || disable),
-          })
-        }
-        to={{
-          pathname: `/jBrowse/${MULTI_FILES_VIEW}`,
-        }}
-        target="_blank"
-        rel="noreferrer noopener"
+  return (<>
+    <Link
+      className={
+        clsx({
+          [classes.diableLink]: (isInvlaid || disable),
+          [classes.activeLink]: !(isInvlaid || disable),
+        })
+      }
+      to={{
+        pathname: `/jBrowse/${MULTI_FILES_VIEW}`,
+      }}
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      <Button
+        className={clsx (classes.button, {
+          [classes.disbaleButton]: (isInvlaid || disable),
+          "disbaleJbrowseButton": (isInvlaid || disable),
+        })}
+        type="button"
+        onClick={viewFilesOnJBrowse}
+        disabled={isInvlaid}
+        id={JBROWSE_BTN_ID}
+        disableRipple={DISABLE_RIPPLE}
       >
-        <Button
-          className={clsx (classes.button, {
-            [classes.disbaleButton]: (isInvlaid || disable),
-            "disbaleJbrowseButton": (isInvlaid || disable),
-          })}
-          type="button"
-          onClick={viewFilesOnJBrowse}
-          disabled={isInvlaid}
-          id={JBROWSE_BTN_ID}
-          disableRipple={DISABLE_RIPPLE}
-        >
-          {ButtonText1}
-          <img
-            src={(isInvlaid || disable) ? jbrowseIconSrc : jbrowseLogo}
-            alt="jbrowse_icon"
-            className={clsx(
-              classes.jbrowseIcon,
-              "jbrowseIcon",
-            )}
-          />
-          {ButtonText2}
-        </Button>
-      </Link>
-      <Tooltip
-        title={renderTooltipContent()}
-        placement="right"
-        maxWidth={230}
-        arrow
-      >
-        <IconButton className={classes.helpIconButton} id={JBROWSE_HELP_ICON_BTN}>
-          <img
-            src={tooltipContent.src}
-            alt={tooltipContent.alt}
-            id={JBROWSE_TOOLTIP_ICON_ID}
-            className={customClass}
-          />
-        </IconButton>
-      </Tooltip>
-    </>
-  );
+        {ButtonText1}
+        <img
+          src={(isInvlaid || disable) ? jbrowseIconSrc : jbrowseLogo}
+          alt="jbrowse_icon"
+          className={clsx(
+            classes.jbrowseIcon,
+            "jbrowseIcon",
+          )}
+        />
+        {ButtonText2}
+      </Button>
+    </Link>
+    <Tooltip
+      title={renderTooltipContent()}
+      placement="right"
+      maxWidth={230}
+      arrow
+    >
+      <IconButton
+        className={classes.helpIconButton}
+        id={JBROWSE_HELP_ICON_BTN}
+        size="large">
+        <img
+          src={tooltipContent.src}
+          alt={tooltipContent.alt}
+          id={JBROWSE_TOOLTIP_ICON_ID}
+          className={customClass}
+        />
+      </IconButton>
+    </Tooltip>
+  </>);
 };
 
 export default withStyles(styles)(ViewJBrowseButton);

@@ -283,45 +283,43 @@ const BentoFacetFilter = ({
       facet, facetClasses, hasSelections, clearFacetSectionValues,
     }) => {
       const clsName = `${facetClasses}`.replace(/\s+/g, '');
-      return (
-        <>
-          <CustomExpansionPanelSummary
-            expandIcon={(
-              <ExpandMoreIcon
-                classes={{ root: classes.dropDownIconSubSection }}
-                style={{ fontSize: 26 }}
-              />
-            )}
-            id={facet.label}
-            className="customExpansionPanelSummaryRoot"
+      return (<>
+        <CustomExpansionPanelSummary
+          expandIcon={(
+            <ExpandMoreIcon
+              classes={{ root: classes.dropDownIconSubSection }}
+              style={{ fontSize: 26 }}
+            />
+          )}
+          id={facet.label}
+          className="customExpansionPanelSummaryRoot"
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
           >
             <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
+              id={facet.label}
+              className={clsx(
+                classes.sectionSummaryText,
+                classes[clsName],
+                'sectionSummaryText',
+              )}
             >
-              <div
-                id={facet.label}
-                className={clsx(
-                  classes.sectionSummaryText,
-                  classes[clsName],
-                  'sectionSummaryText',
-                )}
-              >
-                {facet.label}
-              </div>
-
-              {hasSelections ? (
-                <IconButton onClick={clearFacetSectionValues}>
-                  <RefreshIcon />
-                </IconButton>
-              ) : null}
+              {facet.label}
             </div>
-          </CustomExpansionPanelSummary>
-        </>
-      );
+
+            {hasSelections ? (
+              <IconButton onClick={clearFacetSectionValues} size="large">
+                <RefreshIcon />
+              </IconButton>
+            ) : null}
+          </div>
+        </CustomExpansionPanelSummary>
+      </>);
     },
     [],
   );

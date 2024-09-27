@@ -120,22 +120,18 @@ const DownloadFileManifestDialog = React.forwardRef(({
   }
 
   return (
-    <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} classes={{ paper: classes.dialogContainer }}>
+    (<Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} classes={{ paper: classes.dialogContainer }}>
       <div className={classes.dialogHeaderSection}>
         <DialogTitle id="simple-dialog-title" classes={{ root: classes.dialogTitle }}>
           Optional User Comments
         </DialogTitle>
-        <IconButton
-          className={classes.closBtnContainer}
-          onClick={handleClose}
-        >
+        <IconButton className={classes.closBtnContainer} onClick={handleClose} size="large">
           <CloseIcon
             fontSize="small"
             className={classes.closeBtn}
           />
         </IconButton>
       </div>
-
       <CustomDialogContent>
         <DialogContentText classes={{ root: classes.contentText }}>
           {/* eslint-disable-next-line max-len */}
@@ -161,7 +157,7 @@ const DownloadFileManifestDialog = React.forwardRef(({
           />
         </Button>
       </CustomDialogContent>
-    </Dialog>
+    </Dialog>)
   );
 });
 

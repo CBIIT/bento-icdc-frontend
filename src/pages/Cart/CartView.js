@@ -1,10 +1,6 @@
 import React, { useContext } from 'react';
-import {
-  Grid2 as Grid,
-  ThemeProvider,
-  createTheme,
-  Divider,
-} from '@mui/material';
+import { adaptV4Theme } from '@mui/material/styles';
+import { Grid2 as Grid, ThemeProvider, StyledEngineProvider, createTheme, Divider } from '@mui/material';
 import { withStyles } from "@mui/styles";
 import styles from './CartStyle';
 import {
@@ -37,13 +33,13 @@ const CartView = ({
   const tableContext = useContext(TableContext);
   const { context } = tableContext;
 
-  return (
-    <>
-      <Grid container spacing={1} className={classes.container}>
-        <HeaderView filesId={filesId} />
-        <Grid xs={12} md={12} lg={12} className={classes.tableContainer}>
-          <div className={classes.bodyWrapper}>
-            <ThemeProvider theme={createTheme(tblContainer)}>
+  return (<>
+    <Grid container spacing={1} className={classes.container}>
+      <HeaderView filesId={filesId} />
+      <Grid xs={12} md={12} lg={12} className={classes.tableContainer}>
+        <div className={classes.bodyWrapper}>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={createTheme(adaptV4Theme(tblContainer))}>
               <PaginatedTableView
                 tableReduxActions={{
                   deleteAllFiles,
@@ -56,11 +52,11 @@ const CartView = ({
                 customthemeConfig={themeConfig(context)}
               />
             </ThemeProvider>
-          </div>
-        </Grid>
+          </StyledEngineProvider>
+        </div>
       </Grid>
-    </>
-  );
+    </Grid>
+  </>);
 };
 
 export default withStyles(styles)(CartView);

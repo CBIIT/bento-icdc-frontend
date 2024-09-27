@@ -1,5 +1,6 @@
 import React from 'react';
-import {ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material';
+import { adaptV4Theme } from '@mui/material/styles';
+import { ThemeProvider as MuiThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
 
 export default ({
   children,
@@ -59,10 +60,12 @@ export default ({
     },
   };
 
-  const computedTheme = createTheme(theme);
+  const computedTheme = createTheme(adaptV4Theme(theme));
   return (
-    <MuiThemeProvider theme={computedTheme}>
-      {children}
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <MuiThemeProvider theme={computedTheme}>
+        {children}
+      </MuiThemeProvider>
+    </StyledEngineProvider>
   );
 };

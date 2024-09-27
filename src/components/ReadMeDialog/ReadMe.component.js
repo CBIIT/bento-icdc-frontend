@@ -142,7 +142,7 @@ const ReadMeDialogComponent = ({
             <IconButton
               className={classes.closBtnContainer}
               onClick={displayReadMeDialog}
-            >
+              size="large">
               <CloseIcon
                 fontSize="small"
                 className={classes.closeBtn}

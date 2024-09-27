@@ -24,6 +24,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@graphiql/react": "^0.22.0",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^6.1.1",
     "@mui/lab": "^6.0.0-beta.10",
     "@mui/material": "^6.1.1",
@@ -52,6 +53,7 @@
     "react-sweet-state": "^2.7.1",
     "react-twitter-embed": "^4.0.4",
     "recompose": "^0.30.0",
+    "styled-components": "^6.1.13",
     "tinycolor2": "^1.6.0"
   },
   "devDependencies": {

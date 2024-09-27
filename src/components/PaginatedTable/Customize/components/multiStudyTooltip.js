@@ -1,5 +1,6 @@
 import React from 'react';
-import {ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material';
+import { adaptV4Theme } from '@mui/material/styles';
+import { ThemeProvider as MuiThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
 import {
   Typography,
   Link,
@@ -141,28 +142,30 @@ const MultiStudyToolTip = ({
   };
 
   return (
-    <MuiThemeProvider theme={createTheme(theme)}>
-      <Box style={{ marginLeft: '5px' }}>
-        <Tooltip
-          title={renderMultiStudyTooltipText()}
-          renderComponent={renderMultiStudyTooltipText()}
-          placement="bottom"
-          interactive
-          borderRadius="8%"
-          padding="0"
-          maxWidth="250px"
-        >
-          <Box component="span" id="badge">
-            <StudyCount length={tableMeta.length} />
-            <img
-              src={multiStudyData.icon}
-              alt={multiStudyData.alt}
-              style={{ height: '2em' }}
-            />
-          </Box>
-        </Tooltip>
-      </Box>
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <MuiThemeProvider theme={createTheme(adaptV4Theme(theme))}>
+        <Box style={{ marginLeft: '5px' }}>
+          <Tooltip
+            title={renderMultiStudyTooltipText()}
+            renderComponent={renderMultiStudyTooltipText()}
+            placement="bottom"
+            interactive
+            borderRadius="8%"
+            padding="0"
+            maxWidth="250px"
+          >
+            <Box component="span" id="badge">
+              <StudyCount length={tableMeta.length} />
+              <img
+                src={multiStudyData.icon}
+                alt={multiStudyData.alt}
+                style={{ height: '2em' }}
+              />
+            </Box>
+          </Tooltip>
+        </Box>
+      </MuiThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

@@ -58,7 +58,7 @@ const AvailabilityColumnGrouping = ({
       }}
       placement="top"
     >
-      <IconButton aria-label="help">
+      <IconButton aria-label="help" size="large">
         <img
           style={{ width: '0.7em', marginBottom: '0.6em' }}
           src={SpeechBubble}

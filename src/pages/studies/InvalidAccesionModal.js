@@ -30,7 +30,7 @@ const InvalidAccesionModal = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    (<div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -52,7 +52,7 @@ const InvalidAccesionModal = () => {
                 top: '6px',
                 color: 'black',
               }}
-            >
+              size="large">
               <Close
                 style={{
                   width: '15px',
@@ -107,7 +107,7 @@ const InvalidAccesionModal = () => {
           </Box>
         </Fade>
       </Modal>
-    </div>
+    </div>)
   );
 };
 

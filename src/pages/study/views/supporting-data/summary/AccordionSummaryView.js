@@ -41,7 +41,7 @@ const CustomAccordionSummary = ({
     <Summary
       expandIcon={expandCoppllapseIcon()}
       classes={{
-        expandIcon: classes.ExpansionPanelIcon,
+        expandIcon: classes.AccordionIcon,
       }}
     >
       {children}

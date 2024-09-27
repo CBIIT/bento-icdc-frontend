@@ -1,5 +1,6 @@
 import React from 'react';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { adaptV4Theme } from '@mui/material/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
 
 export default ({
   children,
@@ -66,8 +67,10 @@ export default ({
   };
 
   return (
-    <ThemeProvider theme={createTheme(theme)}>
-      {children}
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={createTheme(adaptV4Theme(theme))}>
+        {children}
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };

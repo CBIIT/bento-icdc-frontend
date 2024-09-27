@@ -26,7 +26,7 @@ const NewsItem = ({
   };
 
   return (
-    <div className={classes.container}>
+    (<div className={classes.container}>
       <ListItem classes={{ root: classes.listItem }} alignItems="flex-start">
         <div className={classes.listItemContent}>
           <div className={classes.listItemCount}>
@@ -58,16 +58,12 @@ const NewsItem = ({
       >
         READ MORE
       </Button>
-
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} classes={{ paperWidthSm: classes.paper }}>
         <div className={classes.dialogTitle}>
           <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitle}>
             <h3 className={classes.title}>{`Update: ${label}`}</h3>
           </DialogTitle>
-          <IconButton
-            onClick={handleClose}
-            className={classes.closeIconButton}
-          >
+          <IconButton onClick={handleClose} className={classes.closeIconButton} size="large">
             <Close
               className={classes.closeIcon}
             />
@@ -83,7 +79,7 @@ const NewsItem = ({
         </DialogContent>
       </Dialog>
       <Divider />
-    </div>
+    </div>)
   );
 };
 

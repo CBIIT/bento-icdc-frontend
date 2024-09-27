@@ -1,5 +1,6 @@
 import React from 'react';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { adaptV4Theme } from '@mui/material/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
 
 const theme = {
   overrides: {
@@ -361,6 +362,10 @@ const theme = {
 };
 
 export default ({ children }) => {
-  const computedTheme = createTheme(theme);
-  return <ThemeProvider theme={computedTheme}>{children}</ThemeProvider>;
+  const computedTheme = createTheme(adaptV4Theme(theme));
+  return (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={computedTheme}>{children}</ThemeProvider>
+    </StyledEngineProvider>
+  );
 };

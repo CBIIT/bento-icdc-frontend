@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  IconButton,
-  Icon,
-  ThemeProvider,
-  createTheme,
-} from '@mui/material';
+import { adaptV4Theme } from '@mui/material/styles';
+import { IconButton, Icon, ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
 import deleteIcon from '../../assets/deleteIcon.svg';
 
 const theme = {
@@ -44,17 +40,19 @@ const DeleteButton = ({
     </Icon>
   );
   return (
-    <ThemeProvider theme={createTheme(theme)}>
-      <IconButton
-        disableRipple
-        disableElevation
-        disableFocusRipple
-        onClick={() => deleteCartFile(row, onDeleteRow)}
-        aria-label='delete'
-      >
-        {delIcon}
-      </IconButton>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={createTheme(adaptV4Theme(theme))}>
+        <IconButton
+          disableRipple
+          disableElevation
+          disableFocusRipple
+          onClick={() => deleteCartFile(row, onDeleteRow)}
+          aria-label='delete'
+          size="large">
+          {delIcon}
+        </IconButton>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

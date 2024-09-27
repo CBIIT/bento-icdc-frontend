@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThemeProvider as MuiThemeProvider } from '@mui/material';
+import { ThemeProvider as MuiThemeProvider, StyledEngineProvider } from '@mui/material';
 
 export default ({
     children,
@@ -59,8 +59,10 @@ export default ({
     }
   };
   return (
-    <MuiThemeProvider theme={theme}>
-      {children}
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <MuiThemeProvider theme={theme}>
+        {children}
+      </MuiThemeProvider>
+    </StyledEngineProvider>
   );
 };

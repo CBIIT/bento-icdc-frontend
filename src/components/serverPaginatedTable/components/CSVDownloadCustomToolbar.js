@@ -40,18 +40,16 @@ const CustomToolbar = ({
     );
   }
 
-  return (
-    <>
-      <Tooltip title="Download Table Contents As CSV" placement="bottom">
-        <IconButton
-          className={classes.iconButton}
-          onClick={() => prepareDownload(tableDownloadCSV)}
-        >
-          <DownloadIcon className={classes.downloadIcon} />
-        </IconButton>
-      </Tooltip>
-    </>
-  );
+  return (<>
+    <Tooltip title="Download Table Contents As CSV" placement="bottom">
+      <IconButton
+        className={classes.iconButton}
+        onClick={() => prepareDownload(tableDownloadCSV)}
+        size="large">
+        <DownloadIcon className={classes.downloadIcon} />
+      </IconButton>
+    </Tooltip>
+  </>);
 };
 
 export default withStyles(defaultToolbarStyles, { name: 'CustomToolbar' })(CustomToolbar);
