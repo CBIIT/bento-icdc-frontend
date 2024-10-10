@@ -76,7 +76,10 @@ const DropDownView = ({
   const [manifest, setManifest] = useState('');
 
   useQuery(CREATE_MANIFEST, {
-    variables: { uuid: allFiles ? filesId : selectedFileIds},
+    variables: {
+      uuid: allFiles ? filesId : selectedFileIds,
+      first: allFiles ? filesId.length : selectedFileIds.length
+    },
     skip: allFiles ? !filesId : !selectedFileIds,
     onCompleted: ({ createManifest}) => {
         setManifest(createManifest);
