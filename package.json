@@ -17,7 +17,7 @@
     "@bento-core/query-bar": "1.0.1-icdc.24",
     "@bento-core/stats-bar": "^1.0.1-icdc.1",
     "@bento-core/tab": "^0.2.0",
-    "@bento-core/table": "1.0.1-icdc.5",
+    "@bento-core/table": "1.0.1-icdc.11",
     "@bento-core/tool-tip": "^0.3.0",
     "@bento-core/util": "1.0.1-icdc.1",
     "@bento-core/widgets": "^1.0.1-icdc.1",
