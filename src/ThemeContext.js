@@ -45,7 +45,6 @@ const CustomThemeProvider = ({ children }) => {
   };
 
   const computedTheme = themeState.dark ? darkTheme : lightTheme;
-  console.log('theme-state', themeState);
 
   return (
     <StyledEngineProvider injectFirst>
