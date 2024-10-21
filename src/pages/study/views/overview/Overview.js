@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  Grid2 as Grid,
+  Grid,
 } from '@mui/material';
-import { withStyles } from "@mui/styles";
+// import { withStyles } from "@mui/styles";
+import { withStyles } from '@material-ui/core';
 import {
   cn,
 } from '@bento-core/util';

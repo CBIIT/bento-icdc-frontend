@@ -1,7 +1,14 @@
 import React from 'react';
-import { adaptV4Theme } from '@mui/material/styles';
+// import { adaptV4Theme } from '@mui/material/styles';
 import _ from 'lodash';
-import { ThemeProvider as MuiThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
+import {
+    MuiThemeProvider,
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 import themes, { overrides } from '../../themes';
 
 export default ({
@@ -14,10 +21,10 @@ export default ({
     },
   };
 
-  const computedTheme = createTheme(adaptV4Theme({
+  const computedTheme = createTheme({
     ...themesLight,
     ...overrides,
-  }));
+  });
 
   return (
     <StyledEngineProvider injectFirst>

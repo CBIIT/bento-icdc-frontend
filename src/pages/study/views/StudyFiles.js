@@ -3,7 +3,8 @@ import _ from 'lodash';
 import {
   Grid2 as Grid,
 } from '@mui/material';
-import { withStyles } from "@mui/styles";
+// import { withStyles } from "@mui/styles";
+import { withStyles } from '@material-ui/core';
 import FileTableView from './FileView/FileTableView';
 import {
   TableContextProvider,

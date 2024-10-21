@@ -1,10 +1,11 @@
 import React from 'react';
 import {
   Grid2 as Grid,
-  styled,
+  // styled,
   Paper,
 } from '@mui/material';
-import { withStyles, makeStyles } from "@mui/styles";
+// import { withStyles, makeStyles } from "@mui/styles";
+import { withStyles, makeStyles, styled } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { pageData } from '../../../bento/landingPageData';
 

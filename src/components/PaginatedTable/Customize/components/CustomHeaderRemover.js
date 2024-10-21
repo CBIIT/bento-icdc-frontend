@@ -3,7 +3,7 @@ import {
   Button,
   Tooltip,
 } from '@mui/material';
-import { withStyles } from "@mui/styles";
+import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 

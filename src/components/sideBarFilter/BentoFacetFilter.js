@@ -3,9 +3,9 @@ import {
   AccordionSummary,
   Button,
   Container,
-  IconButton
-} from '@mui/material';
-import { withStyles } from '@mui/styles';
+  IconButton,
+  withStyles,
+} from '@material-ui/core';
 import {
   // ArrowDropDown as ArrowDropDownIcon,
   ExpandMore as ExpandMoreIcon,

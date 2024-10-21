@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Grid2 as Grid } from '@mui/material';
-import { withStyles } from "@mui/styles";
+import { Grid, withStyles } from '@material-ui/core';
 import {
   TableView,
   Wrapper,

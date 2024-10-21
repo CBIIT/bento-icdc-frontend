@@ -1,8 +1,14 @@
 import React, { useCallback } from 'react';
-import { adaptV4Theme } from '@mui/material/styles';
+// import { adaptV4Theme } from '@mui/material/styles';
 import { connect, useDispatch } from 'react-redux';
-import { Container, ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
-import { withStyles } from "@mui/styles";
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme,
+    // Container
+} from '@mui/material';
+import { withStyles, ThemeProvider, Container } from '@material-ui/core'
+//import { withStyles } from "@mui/styles";
 import {
   clearAllFilters,
   clearFacetSection,
@@ -98,7 +104,7 @@ const QueryBarView = ({
 
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={createTheme(adaptV4Theme(theme))}>
+      <ThemeProvider theme={createTheme(theme)}>
         <Container
           maxWidth="xl"
           className="icdc_query_bar"

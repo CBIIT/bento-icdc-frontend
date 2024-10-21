@@ -1,9 +1,18 @@
 import React from 'react';
-import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
+// import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
+import {
+    MuiThemeProvider as ThemeProvider,
+    // createTheme 
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 import themes, { overrides, typography } from './themes';
 
-const lightTheme = createTheme(adaptV4Theme({ ...themes.light, ...overrides, ...typography }));
-const darkTheme = createTheme(adaptV4Theme({ ...themes.dark, ...overrides, ...typography }));
+const lightTheme = createTheme({ ...themes.light, ...overrides, ...typography });
+const darkTheme = createTheme({ ...themes.dark, ...overrides, ...typography });
 
 const defaultContextData = {
   dark: false,

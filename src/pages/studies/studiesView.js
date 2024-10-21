@@ -4,7 +4,8 @@ import {
   Grid2 as Grid,
   Typography,
 } from '@mui/material';
-import { withStyles } from "@mui/styles";
+// import { withStyles } from "@mui/styles";
+import { withStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { request, gql } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';

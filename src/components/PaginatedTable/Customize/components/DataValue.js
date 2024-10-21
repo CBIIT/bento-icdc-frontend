@@ -1,7 +1,15 @@
 import React from 'react';
-import { adaptV4Theme } from '@mui/material/styles';
+// import { adaptV4Theme } from '@mui/material/styles';
 import _ from 'lodash';
-import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
+import {
+    MuiThemeProvider,
+    // createTheme 
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 import { ToolTip } from '../../../../bento-core';
 
 const theme = {
@@ -20,7 +28,7 @@ const DataValue = (props) => {
   }
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={createTheme(adaptV4Theme(theme))}>
+      <MuiThemeProvider theme={createTheme(theme)}>
         {content.length > 90 ? (
           <ToolTip
             title={Array.isArray(`${props[dataField]}`)
@@ -37,7 +45,7 @@ const DataValue = (props) => {
             {Array.isArray(content) ? content.join(', ') : content}
           </span>
         )}
-      </ThemeProvider>
+      </MuiThemeProvider>
     </StyledEngineProvider>
   );
 };

@@ -1,6 +1,14 @@
 import React from 'react';
-import { adaptV4Theme } from '@mui/material/styles';
-import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
+// import { adaptV4Theme } from '@mui/material/styles';
+import {
+    MuiThemeProvider as ThemeProvider,
+    // createTheme 
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 import themes, { overrides } from '../../themes';
 
 export default ({
@@ -129,7 +137,7 @@ export default ({
   overridesObj.MuiDialogActions = MuiDialogActions;
 
   style.push(overridesObj);
-  const computedTheme = createTheme(adaptV4Theme({ ...themes.light, ...overrides, ...style }));
+  const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });
 
   return (
     <StyledEngineProvider injectFirst>

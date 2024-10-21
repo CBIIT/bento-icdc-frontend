@@ -3,7 +3,7 @@ import {
   Link,
   Typography,
   styled,
-} from '@mui/material';
+} from '@material-ui/core';
 import { cellTypes, headerTypes } from '../../../bento-core';
 import DocumentDownload from '../../DocumentDownload/DocumentDownloadView';
 import { hasMultiStudyParticipants } from '../../../utils/columnsUtil';

@@ -4,9 +4,10 @@ import {
   Badge as BadgeBase,
   Typography as TypographyBase,
   Button as ButtonBase,
-  useTheme,
+  // useTheme,
 } from "@mui/material";
-import { withStyles, makeStyles } from "@mui/styles";
+// import { withStyles, makeStyles } from "@mui/styles";
+import {useTheme, withStyles, makeStyles} from '@material-ui/core'
 import clsx from "clsx";
 
 // styles

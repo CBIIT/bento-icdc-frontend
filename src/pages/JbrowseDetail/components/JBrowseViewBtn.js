@@ -1,16 +1,22 @@
 import React from 'react';
-import { adaptV4Theme } from '@mui/material/styles';
+// import { adaptV4Theme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
-  Button,
-  Typography,
-  IconButton,
-  ThemeProvider as MuiThemeProvider,
-  StyledEngineProvider,
-  createTheme,
+    MuiThemeProvider,
+    withStyles,
+    Button,
+    Typography,
+    IconButton,
+    // createTheme 
+} from '@material-ui/core';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5,
+   
+    StyledEngineProvider,
+    createTheme
 } from '@mui/material';
-import { withStyles } from "@mui/styles";
+// import { withStyles } from "@mui/styles";
 import clsx from 'clsx';
 import {
   ToolTip as Tooltip,
@@ -73,7 +79,7 @@ const ViewJBrowseButton = ({
 
   const renderTooltipContent = () => (
     <StyledEngineProvider injectFirst>
-      <MuiThemeProvider theme={createTheme(adaptV4Theme(customTheme))}>
+      <MuiThemeProvider theme={createTheme(customTheme)}>
         <Typography align="center" color="inherit" className={classes.descripText}>
           {(isInactive || disable) ? tooltipMsg1
             : (isInvlaid) ? <InValidToottipMsg /> : tooltipMsg2}

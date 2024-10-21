@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { adaptV4Theme } from '@mui/material/styles';
 import {
-  Grid2 as Grid,
+  Grid,
+  withStyles,
   createTheme,
-  ThemeProvider as MuiThemeProvider,
-  StyledEngineProvider,
-} from '@mui/material';
-import { withStyles } from "@mui/styles";
+  MuiThemeProvider,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
@@ -101,7 +99,7 @@ const Star = styled.div`
   animation: ${star} 20s  0s 1;
 `;
 
-const custumTheme = createTheme(adaptV4Theme({
+const custumTheme = createTheme({
   overrides: {
     MuiTabs: {
       root: {
@@ -111,22 +109,13 @@ const custumTheme = createTheme(adaptV4Theme({
         marginLeft: '-60px',
       },
     },
-    components: {
-        MuiGrid2: {
-          defaultProps: {
-            // all grids under this theme will apply
-            // negative margin on the top and left sides.
-            disableEqualOverflow: true,
-          },
-        },
-      },
     MuiTypography: {
       root: {
         paddingRight: '50px',
       },
     },
   },
-}));
+});
 
 const LineText = (props) => {
   const { text } = props;
@@ -234,120 +223,118 @@ const LandingView = ({
   };
 
   return (
-    <StyledEngineProvider injectFirst>
-      <MuiThemeProvider theme={custumTheme}>
-        <div className={classes.page}>
-          <div className={classes.container}>
-            <Grid container direction="row" className={cn(classes.paddingTop30)}>
-              <Grid className={classes.carouselTabs}>
-                <Tab
-                  styleClasses={classes}
-                  disableRipple
-                  tabItems={pageData.tabs}
-                  currentTab={currentTab}
-                  handleTabChange={handleTabChange}
-                  orientation="vertical"
-                />
-              </Grid>
-              <Grid className={classes.carouselContent}>
-                {
-                  pageData.tabs.map((item, index) => (
-                    <TabPanel value={currentTab} index={index}>
-                      <Grid container className={classes.tabContainer} spacing={1}>
-                        <Grid
-                          item
-                          lg={index === 3 ? 5 : 3}
-                          md={index === 3 ? 5 : 3}
-                          sm={12}
-                          xs={12}
-                          className={classes.carouselType}
-                        >
-                          <div
-                            className={index === 3
-                              ? classes.spotLightcarouselTitle : classes.carouselTitle}
-                          >
-                            <LineText text={item.content.callToActionTitle} />
-                          </div>
-                          <div className={classes.divider}>
-                            <hr className={classes.hrDivider} />
-                          </div>
-                          <div className={classes.carouselDescription}>
-                            <LineText text={item.content.callToActionDescription} />
-                          </div>
-                          <div className={classes.headerButtonSection}>
-                            {
-                                item.content.externalLink ? (
-                                  <a href={item.content.callToActionLink} target="_blank" rel="noreferrer" className={classes.headerLink}>
-                                    <Button className={classes.headerButton}>
-                                      {item.content.callToActionButtonText}
-                                    </Button>
-                                  </a>
-                                ) : (
-                                  <Link
-                                    to={item.content.callToActionLink}
-                                    className={classes.headerLink}
-                                  >
-                                    <Button className={classes.headerButton}>
-                                      {item.content.callToActionButtonText}
-                                    </Button>
-                                  </Link>
-                                )
-                              }
-
-                          </div>
-                        </Grid>
-                        <Grid
-                          item
-                          lg={index === 3 ? 7 : 9}
-                          md={index === 3 ? 7 : 9}
-                          sm={12}
-                          xs={12}
-                        >
-                          { (index === 0) && (
-                          <div>
-                            <div className={classes.animationContainer}>
-                              <SlideDown className={classes.dog}>
-                                <img className={classes.dogImg} src={dogImg} width="320px" alt="Dog" />
-                              </SlideDown>
-                              <SlideUp className={classes.human}>
-                                <img className={classes.humanImg} src={humanImg} width="320px" alt="human" />
-                              </SlideUp>
-                              <Star className={classes.star}>
-                                <img className={classes.starImg} src={starImg} alt="star" />
-                                <img className={classes.starImg} src={flare} alt="flare" />
-                              </Star>
-                            </div>
-                          </div>
-                          )}
-                          { (index === 1) && (
-                            <div className={classes.datadictionaryContainer}>
-                              <img src={item.content.image} alt="icdc_studies" />
-                            </div>
-                          )}
-                          { (index === 2) && (
-                            <div className={classes.carouselImgContainer}>
-                              <img src={item.content.image} alt="icdc_studies" />
-                            </div>
-                          )}
-                          { (index === 3)
-                                && generateSpotlightContent(
-                                  item.content.template,
-                                  classes,
-                                  item.content[item.content.template],
-                                )}
-                        </Grid>
-                      </Grid>
-                    </TabPanel>
-                  ))
-                }
-              </Grid>
-              <Widgets activeTemplate={pageData.tabs[3].content.template} />
+    <MuiThemeProvider theme={custumTheme}>
+      <div className={classes.page}>
+        <div className={classes.container}>
+          <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30)}>
+            <Grid item lg={2} md={2} sm={12} xs={12} className={classes.carouselTabs}>
+              <Tab
+                styleClasses={classes}
+                disableRipple
+                tabItems={pageData.tabs}
+                currentTab={currentTab}
+                handleTabChange={handleTabChange}
+                orientation="vertical"
+              />
             </Grid>
+            <Grid item lg={10} md={10} sm={12} xs={12} className={classes.carouselContent}>
+              {
+                pageData.tabs.map((item, index) => (
+                  <TabPanel value={currentTab} index={index}>
+                    <Grid container className={classes.tabContainer} spacing={1}>
+                      <Grid
+                        item
+                        lg={index === 3 ? 5 : 3}
+                        md={index === 3 ? 5 : 3}
+                        sm={12}
+                        xs={12}
+                        className={classes.carouselType}
+                      >
+                        <div
+                          className={index === 3
+                            ? classes.spotLightcarouselTitle : classes.carouselTitle}
+                        >
+                          <LineText text={item.content.callToActionTitle} />
+                        </div>
+                        <div className={classes.divider}>
+                          <hr className={classes.hrDivider} />
+                        </div>
+                        <div className={classes.carouselDescription}>
+                          <LineText text={item.content.callToActionDescription} />
+                        </div>
+                        <div className={classes.headerButtonSection}>
+                          {
+                              item.content.externalLink ? (
+                                <a href={item.content.callToActionLink} target="_blank" rel="noreferrer" className={classes.headerLink}>
+                                  <Button className={classes.headerButton}>
+                                    {item.content.callToActionButtonText}
+                                  </Button>
+                                </a>
+                              ) : (
+                                <Link
+                                  to={item.content.callToActionLink}
+                                  className={classes.headerLink}
+                                >
+                                  <Button className={classes.headerButton}>
+                                    {item.content.callToActionButtonText}
+                                  </Button>
+                                </Link>
+                              )
+                            }
 
-          </div>
+                        </div>
+                      </Grid>
+                      <Grid
+                        item
+                        lg={index === 3 ? 7 : 9}
+                        md={index === 3 ? 7 : 9}
+                        sm={12}
+                        xs={12}
+                      >
+                        { (index === 0) && (
+                        <div>
+                          <div className={classes.animationContainer}>
+                            <SlideDown className={classes.dog}>
+                              <img className={classes.dogImg} src={dogImg} width="320px" alt="Dog" />
+                            </SlideDown>
+                            <SlideUp className={classes.human}>
+                              <img className={classes.humanImg} src={humanImg} width="320px" alt="human" />
+                            </SlideUp>
+                            <Star className={classes.star}>
+                              <img className={classes.starImg} src={starImg} alt="star" />
+                              <img className={classes.starImg} src={flare} alt="flare" />
+                            </Star>
+                          </div>
+                        </div>
+                        )}
+                        { (index === 1) && (
+                          <div className={classes.datadictionaryContainer}>
+                            <img src={item.content.image} alt="icdc_studies" />
+                          </div>
+                        )}
+                        { (index === 2) && (
+                          <div className={classes.carouselImgContainer}>
+                            <img src={item.content.image} alt="icdc_studies" />
+                          </div>
+                        )}
+                        { (index === 3)
+                              && generateSpotlightContent(
+                                item.content.template,
+                                classes,
+                                item.content[item.content.template],
+                              )}
+                      </Grid>
+                    </Grid>
+                  </TabPanel>
+                ))
+              }
+            </Grid>
+            <Widgets activeTemplate={pageData.tabs[3].content.template} />
+          </Grid>
+
         </div>
-      </MuiThemeProvider>
-    </StyledEngineProvider>
+      </div>
+    </MuiThemeProvider>
   );
 };
 

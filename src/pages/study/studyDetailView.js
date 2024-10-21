@@ -5,7 +5,8 @@ import {
   Typography,
   CircularProgress,
 } from '@mui/material';
-import { withStyles } from "@mui/styles";
+// import { withStyles } from "@mui/styles";
+import { withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';

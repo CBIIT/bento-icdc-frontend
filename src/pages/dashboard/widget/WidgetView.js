@@ -4,11 +4,12 @@ import {
   Button,
   Collapse,
   FormControlLabel,
-  Grid2 as Grid,
+  // Grid2 as Grid,
   Switch,
   IconButton,
 } from '@mui/material';
-import { withStyles, makeStyles } from "@mui/styles";
+// import { withStyles, makeStyles } from "@mui/styles";
+import { withStyles, makeStyles, Grid } from '@material-ui/core';
 import {
   WidgetGenerator,
   ToolTip,

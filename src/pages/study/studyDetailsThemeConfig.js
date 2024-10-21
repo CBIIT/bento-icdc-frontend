@@ -1,7 +1,8 @@
 import React from 'react';
-import { adaptV4Theme } from '@mui/material/styles';
+//import { adaptV4Theme } from '@mui/material/styles';
+import {ThemeProvider} from '@material-ui/core'
 import _ from 'lodash';
-import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
+import { StyledEngineProvider, createTheme } from '@mui/material';
 import themes, { overrides } from '../../themes';
 
 export default ({
@@ -21,10 +22,10 @@ export default ({
     },
   };
 
-  const computedTheme = createTheme(adaptV4Theme({
+  const computedTheme = createTheme({
     ...themesLight,
     ...overrides,
-  }));
+  });
 
   return (
     <StyledEngineProvider injectFirst>

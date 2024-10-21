@@ -1,6 +1,16 @@
 import React from 'react';
-import { adaptV4Theme } from '@mui/material/styles';
-import { IconButton, Icon, ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
+// import { adaptV4Theme } from '@mui/material/styles';
+import {
+    MuiThemeProvider,
+    // createTheme 
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5,
+    IconButton,
+    Icon,
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 import deleteIcon from '../../assets/deleteIcon.svg';
 
 const theme = {
@@ -41,7 +51,7 @@ const DeleteButton = ({
   );
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={createTheme(adaptV4Theme(theme))}>
+      <MuiThemeProvider theme={createTheme(theme)}>
         <IconButton
           disableRipple
           disableElevation
@@ -51,7 +61,7 @@ const DeleteButton = ({
           size="large">
           {delIcon}
         </IconButton>
-      </ThemeProvider>
+      </MuiThemeProvider>
     </StyledEngineProvider>
   );
 };

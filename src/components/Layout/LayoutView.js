@@ -6,7 +6,8 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { CssBaseline } from "@mui/material";
-import { withStyles } from "@mui/styles";
+// import { withStyles } from "@mui/styles";
+import { withStyles } from "@material-ui/core";
 import LinkBar from '../LinkBar';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";
