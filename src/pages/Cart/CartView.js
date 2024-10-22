@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { adaptV4Theme } from '@mui/material/styles';
-import { Grid2 as Grid, ThemeProvider, StyledEngineProvider, createTheme, Divider } from '@mui/material';
-import { withStyles } from "@mui/styles";
+import { Grid, StyledEngineProvider, createTheme, Divider } from '@mui/material';
+// import { withStyles } from "@mui/styles";
+import { withStyles, ThemeProvider } from '@material-ui/core';
 import styles from './CartStyle';
 import {
   myFilesPageData,
@@ -39,7 +40,7 @@ const CartView = ({
       <Grid xs={12} md={12} lg={12} className={classes.tableContainer}>
         <div className={classes.bodyWrapper}>
           <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={createTheme(adaptV4Theme(tblContainer))}>
+            <ThemeProvider theme={createTheme(tblContainer)}>
               <PaginatedTableView
                 tableReduxActions={{
                   deleteAllFiles,

@@ -2,11 +2,13 @@ import React from 'react';
 // import { adaptV4Theme } from '@mui/material/styles';
 import {
     MuiThemeProvider,
+    // Icon,
+     IconButton
     // createTheme 
-} from '@material-ui/core/styles';
+} from '@material-ui/core';
 import {
     // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5,
-    IconButton,
+    // IconButton,
     Icon,
     StyledEngineProvider,
     createTheme

@@ -8,6 +8,7 @@ export default () => ({
   },
   titleContent: {
     width: '100%',
+    paddingLeft: '22px'
   },
   title: {
     fontSize: '23px',
