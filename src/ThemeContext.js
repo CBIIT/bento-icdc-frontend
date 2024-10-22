@@ -1,5 +1,14 @@
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+// import { createTheme, ThemeProvider, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
+import {
+    MuiThemeProvider as ThemeProvider,
+    // createTheme 
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 import themes, { overrides, typography } from './themes';
 
 const lightTheme = createTheme({ ...themes.light, ...overrides, ...typography });
@@ -38,16 +47,18 @@ const CustomThemeProvider = ({ children }) => {
   const computedTheme = themeState.dark ? darkTheme : lightTheme;
 
   return (
-    <MuiThemeProvider theme={computedTheme}>
-      <ThemeContext.Provider
-        value={{
-          dark: themeState.dark,
-          toggleTheme,
-        }}
-      >
-        {children}
-      </ThemeContext.Provider>
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={computedTheme}>
+        <ThemeContext.Provider
+          value={{
+            dark: themeState.dark,
+            toggleTheme,
+          }}
+        >
+          {children}
+        </ThemeContext.Provider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

@@ -1,6 +1,14 @@
 import React from 'react';
+// import { adaptV4Theme } from '@mui/material/styles';
 import _ from 'lodash';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import {
+    MuiThemeProvider,
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 import themes, { overrides } from '../../themes';
 
 export default ({
@@ -19,8 +27,10 @@ export default ({
   });
 
   return (
-    <MuiThemeProvider theme={computedTheme}>
-      {children}
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <MuiThemeProvider theme={computedTheme}>
+        {children}
+      </MuiThemeProvider>
+    </StyledEngineProvider>
   );
 };

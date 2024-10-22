@@ -2,9 +2,8 @@ import React from 'react';
 import {
   IconButton,
   Tooltip,
-  withStyles,
-//   withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import SpeechBubble from '../../assets/speechBubble.svg'
 
 const ICDC_DATA_AVAIL_ICONS = [
@@ -59,7 +58,7 @@ const AvailabilityColumnGrouping = ({
       }}
       placement="top"
     >
-      <IconButton aria-label="help">
+      <IconButton aria-label="help" size="large">
         <img
           style={{ width: '0.7em', marginBottom: '0.6em' }}
           src={SpeechBubble}

@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { useApolloClient } from '@apollo/client';
-import { makeStyles } from '@material-ui/core/styles';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
 import {
   Button,
   IconButton,
-  DialogContent, DialogContentText, withStyles,
-} from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import CloseIcon from '@material-ui/icons/Close';
+  DialogContent, DialogContentText,
+  TextField,
+  DialogTitle,
+  Dialog
+} from '@mui/material';
+import { withStyles, makeStyles } from "@mui/styles";
+import {Close as CloseIcon} from '@mui/icons-material';
 import DownloadFileManifestIcon from '../../assets/dwnldFileManifest.svg';
 import { CREATE_MANIFEST, myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import { downloadCsvString } from '../../utils';
@@ -120,22 +120,18 @@ const DownloadFileManifestDialog = React.forwardRef(({
   }
 
   return (
-    <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} classes={{ paper: classes.dialogContainer }}>
+    (<Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} classes={{ paper: classes.dialogContainer }}>
       <div className={classes.dialogHeaderSection}>
         <DialogTitle id="simple-dialog-title" classes={{ root: classes.dialogTitle }}>
           Optional User Comments
         </DialogTitle>
-        <IconButton
-          className={classes.closBtnContainer}
-          onClick={handleClose}
-        >
+        <IconButton className={classes.closBtnContainer} onClick={handleClose} size="large">
           <CloseIcon
             fontSize="small"
             className={classes.closeBtn}
           />
         </IconButton>
       </div>
-
       <CustomDialogContent>
         <DialogContentText classes={{ root: classes.contentText }}>
           {/* eslint-disable-next-line max-len */}
@@ -161,7 +157,7 @@ const DownloadFileManifestDialog = React.forwardRef(({
           />
         </Button>
       </CustomDialogContent>
-    </Dialog>
+    </Dialog>)
   );
 });
 

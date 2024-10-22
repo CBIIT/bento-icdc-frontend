@@ -1,10 +1,7 @@
 import React, { useContext } from 'react';
-import {
-  Grid,
-  ThemeProvider,
-  createTheme,
-  withStyles,
-} from '@material-ui/core';
+import { adaptV4Theme } from '@mui/material/styles';
+import { Grid, ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { TableContext } from '../../bento-core';
 import {
   cartTable,
@@ -34,7 +31,7 @@ const CartView = (props) => {
   const { context } = tableContext;
 
   return (
-    <Grid className={classes.marginTopNegative20}>
+    (<Grid className={classes.marginTopNegative20}>
       <Grid item xs={12} className={classes.headerGrid}>
         <CartHeader filesId={filesId} context={context} />
       </Grid>
@@ -42,23 +39,25 @@ const CartView = (props) => {
         <div id="table_selected_files" className={classes.bodyWrapper}>
           <div className={classes.tableWrapper}>
             {/* Section: Header */}
-            <ThemeProvider theme={createTheme(tblContainer)}>
-              <PaginatedTableView
-                tableReduxActions={{
-                  deleteAllFiles,
-                  deleteCartFile,
-                }}
-                config={cartTable}
-                tableLayOut={tableLayOut}
-                activeFilters={variables}
-                totalRowCount={filesId.length}
-                customthemeConfig={themeConfig(context)}
-              />
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+              <ThemeProvider theme={createTheme(adaptV4Theme(tblContainer))}>
+                <PaginatedTableView
+                  tableReduxActions={{
+                    deleteAllFiles,
+                    deleteCartFile,
+                  }}
+                  config={cartTable}
+                  tableLayOut={tableLayOut}
+                  activeFilters={variables}
+                  totalRowCount={filesId.length}
+                  customthemeConfig={themeConfig(context)}
+                />
+              </ThemeProvider>
+            </StyledEngineProvider>
           </div>
         </div>
       </Grid>
-    </Grid>
+    </Grid>)
   );
 };
 

@@ -2,8 +2,9 @@ import React from 'react';
 import {
   CircularProgress,
   Grid,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+// import { withStyles } from "@mui/styles";
+import { withStyles  } from '@material-ui/core';
 import { cn } from '@bento-core/util';
 import {
   TableContextProvider,

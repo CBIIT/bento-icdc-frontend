@@ -1,5 +1,6 @@
 import React from 'react';
-import { withStyles, Icon } from '@material-ui/core';
+import { Icon } from '@mui/material';
+import { withStyles } from "@mui/styles";
 
 const Logo = ({
   imgSrc,

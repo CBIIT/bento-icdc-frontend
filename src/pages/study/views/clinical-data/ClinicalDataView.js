@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  withStyles,
-} from '@material-ui/core';
+import { withStyles } from "@mui/styles";
 import styles from './ClinicalDataStyle';
 import PaginatedTableView from '../../../../components/PaginatedTable/TableView';
 import { table, tableLayOut } from '../../../../bento/studyDetailsData';

@@ -1,4 +1,5 @@
-import { Accordion, withStyles } from '@material-ui/core';
+import { withStyles } from "@mui/styles";
+import { Accordion } from "@mui/material";
 
 const CustomAccordion = withStyles({
   root: {

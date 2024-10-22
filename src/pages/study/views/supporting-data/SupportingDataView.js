@@ -1,12 +1,14 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { adaptV4Theme } from '@mui/material/styles';
 import {
-  withStyles,
   AccordionDetails,
-  Grid,
+  Grid2 as Grid,
   ThemeProvider,
+  StyledEngineProvider,
   createTheme,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import CustomAccordionSummary from './summary/AccordionSummaryView';
 import styles from './SupportingDataStyle';
 import { supportDataList, tableLayOut } from './dataConfig';
@@ -90,15 +92,17 @@ const SupportingData = ({
   }, [data]);
 
   return (
-    <ThemeProvider theme={createTheme(customTheme)}>
-      <div className={classes.supportDataContainer}>
-        <Grid container justifyContent="center">
-          {
-            supportDataList.map((item) => <CustomAccordian {...item} styledClasses={classes} />)
-          }
-        </Grid>
-      </div>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={createTheme(adaptV4Theme(customTheme))}>
+        <div className={classes.supportDataContainer}>
+          <Grid container justifyContent="center">
+            {
+              supportDataList.map((item) => <CustomAccordian {...item} styledClasses={classes} />)
+            }
+          </Grid>
+        </div>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

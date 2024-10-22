@@ -6,8 +6,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import styled from 'styled-components';
 import { filter } from 'lodash';
 import DownloadBtn from './components/downloadBtn';

@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   Grid,
-  withStyles,
-  styled,
+  // styled,
   Paper,
-  makeStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+// import { withStyles, makeStyles } from "@mui/styles";
+import { withStyles, makeStyles, styled } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { pageData } from '../../../bento/landingPageData';
 
@@ -27,10 +27,10 @@ const Widgets = ({ classes, ...props }) => {
   const { root } = useStyles(props);
 
   return (
-    <Grid className={root} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
+    <Grid className={root} container >
       {
         pageData.widgets.map((widget) => (
-          <Grid item xs={3} className={classes.widget}>
+          <Grid className={classes.widget}>
             <Item>
               <Link to={widget.callToActionLink}>
                 <div className={classes.container}>

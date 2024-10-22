@@ -1,9 +1,15 @@
 import React from 'react';
+// import { adaptV4Theme } from '@mui/material/styles';
 import _ from 'lodash';
 import {
-  ThemeProvider,
-  createTheme,
-} from '@material-ui/core';
+    MuiThemeProvider,
+    // createTheme 
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 import { ToolTip } from '../../../../bento-core';
 
 const theme = {
@@ -21,24 +27,26 @@ const DataValue = (props) => {
     content = _.truncate(content, { length: 92, separator: ' ' });
   }
   return (
-    <ThemeProvider theme={createTheme(theme)}>
-      {content.length > 90 ? (
-        <ToolTip
-          title={Array.isArray(`${props[dataField]}`)
-            ? `${props[dataField]}`.join(', ')
-            : `${props[dataField]}`}
-          placement="bottom"
-        >
+    <StyledEngineProvider injectFirst>
+      <MuiThemeProvider theme={createTheme(theme)}>
+        {content.length > 90 ? (
+          <ToolTip
+            title={Array.isArray(`${props[dataField]}`)
+              ? `${props[dataField]}`.join(', ')
+              : `${props[dataField]}`}
+            placement="bottom"
+          >
+            <span>
+              {Array.isArray(content) ? content.join(', ') : content}
+            </span>
+          </ToolTip>
+        ) : (
           <span>
             {Array.isArray(content) ? content.join(', ') : content}
           </span>
-        </ToolTip>
-      ) : (
-        <span>
-          {Array.isArray(content) ? content.join(', ') : content}
-        </span>
-      )}
-    </ThemeProvider>
+        )}
+      </MuiThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

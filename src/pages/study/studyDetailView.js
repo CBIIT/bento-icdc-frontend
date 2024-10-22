@@ -1,11 +1,12 @@
 /* eslint-disable no-shadow */
 import React from 'react';
 import {
-  Grid,
-  withStyles,
+  Grid2 as Grid,
   Typography,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
+// import { withStyles } from "@mui/styles";
+import { withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';

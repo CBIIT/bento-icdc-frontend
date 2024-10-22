@@ -1,5 +1,6 @@
 import React from 'react';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { adaptV4Theme } from '@mui/material/styles';
+import { ThemeProvider as MuiThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
 import themes, { overrides } from '../../themes';
 
 export default ({
@@ -88,11 +89,13 @@ export default ({
   };
 
   style.push(overridesObj);
-  const computedTheme = createTheme({ ...themes.light, ...overrides, ...style });
+  const computedTheme = createTheme(adaptV4Theme({ ...themes.light, ...overrides, ...style }));
 
   return (
-    <MuiThemeProvider theme={computedTheme}>
-      {children}
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <MuiThemeProvider theme={computedTheme}>
+        {children}
+      </MuiThemeProvider>
+    </StyledEngineProvider>
   );
 };

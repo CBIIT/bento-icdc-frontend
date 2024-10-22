@@ -2,7 +2,7 @@ export default () => ({
   dropDownIconSection: {
     fill: '#000000',
   },
-  ExpansionPaneldropDownIcon: {
+  AccordiondropDownIcon: {
   },
   expansionPanelDetailsRoot: {
     display: 'block',

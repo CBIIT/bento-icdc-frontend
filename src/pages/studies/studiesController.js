@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {CircularProgress} from '@mui/material';
 import Studies from './studiesView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_STUDY_DATA_QUERY } from '../../bento/studiesData';

@@ -1,7 +1,7 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import DownloadIcon from '@material-ui/icons/CloudDownload';
-import { withStyles } from '@material-ui/core/styles';
+import {Download as DownloadIcon} from '@mui/icons-material';
+import { IconButton } from '@mui/material';
+import { withStyles } from "@mui/styles";
 import { ToolTip as Tooltip } from '../../../bento-core';
 import client from '../../../utils/graphqlClient';
 import { downloadJson } from './utils';
@@ -40,18 +40,16 @@ const CustomToolbar = ({
     );
   }
 
-  return (
-    <>
-      <Tooltip title="Download Table Contents As CSV" placement="bottom">
-        <IconButton
-          className={classes.iconButton}
-          onClick={() => prepareDownload(tableDownloadCSV)}
-        >
-          <DownloadIcon className={classes.downloadIcon} />
-        </IconButton>
-      </Tooltip>
-    </>
-  );
+  return (<>
+    <Tooltip title="Download Table Contents As CSV" placement="bottom">
+      <IconButton
+        className={classes.iconButton}
+        onClick={() => prepareDownload(tableDownloadCSV)}
+        size="large">
+        <DownloadIcon className={classes.downloadIcon} />
+      </IconButton>
+    </Tooltip>
+  </>);
 };
 
 export default withStyles(defaultToolbarStyles, { name: 'CustomToolbar' })(CustomToolbar);

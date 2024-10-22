@@ -411,13 +411,14 @@ const styles = (theme) => ({
   },
   container: {
     paddingTop: '10px',
+    width: '100%',
     fontFamily: 'Raleway, sans-serif',
     paddingRight: '32px',
     margin: '0 auto',
     paddingLeft: '32px',
     paddingBottom: '90px',
     '@media (min-width: 1200px)': {
-      width: '1200px',
+      width: '1228px',
       paddingTop: '60px',
     },
   },

@@ -43,7 +43,7 @@ export default () => ({
   hyperlink: {
     marginLeft: '15px',
   },
-  ExpansionPanelIcon: {
+  AccordionIcon: {
     marginTop: '0px',
     marginRight: '10px',
   },

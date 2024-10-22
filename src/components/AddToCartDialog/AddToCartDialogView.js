@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Dialog, DialogActions, DialogContent, DialogContentText, Button,
-} from '@material-ui/core';
+} from '@mui/material';
 import DialogThemeProvider from './dialogThemeConfig';
 
 function AddToCartDialogView(props) {

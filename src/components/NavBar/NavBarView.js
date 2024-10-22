@@ -12,7 +12,6 @@ import NavBarThemeProvider from './NavBarThemeConfig';
 const BentoNavBar = ({ cartFieldIds = [] }) => (
   <>
     <NavBarThemeProvider>
-      <div style={{ position: 'relative' }}>
         <NavBar
           navBarData={navBarData}
           navBarCartData={navBarCartData}
@@ -22,7 +21,6 @@ const BentoNavBar = ({ cartFieldIds = [] }) => (
           externalLinks={externalLinks}
           externalLinksFirst
         />
-      </div>
     </NavBarThemeProvider>
   </>
 );

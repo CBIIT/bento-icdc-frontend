@@ -1,8 +1,6 @@
 import React from 'react';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
-import { withStyles } from '@material-ui/core/styles';
+import {TableFooter, TableRow, TablePagination} from '@mui/material';
+import { withStyles } from "@mui/styles";
 
 const defaultFooterStyles = {
 
@@ -21,8 +19,8 @@ const CustomFooter = ({
         count={count}
         page={page}
         rowsPerPage={rowsPerPage}
-        onChangePage={onChangePage}
-        onChangeRowsPerPage={onChangeRowsPerPage}
+        onPageChange={onChangePage}
+        onRowsPerPageChange={onChangeRowsPerPage}
       />
     </TableRow>
     <TableRow />

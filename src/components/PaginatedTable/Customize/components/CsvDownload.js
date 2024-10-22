@@ -1,5 +1,6 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+// import { withStyles } from '@mui/styles';
+import { withStyles } from '@material-ui/core';
 import downloadIcon from '../../../../assets/icons/clinical_data_csv_icon.svg';
 import { downloadJson } from '../../../../pages/fileCentricCart/utils';
 import { ToolTip } from '../../../../bento-core';

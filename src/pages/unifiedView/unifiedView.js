@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  withStyles,
   Chip,
-} from '@material-ui/core';
+} from '@mui/material';
+import { withStyles } from "@mui/styles";
 import styles from './unifiedStyle';
 import StatsView from '../../components/Stats/StatsView';
 import BentoFacetFilter from '../../components/sideBarFilter/BentoFacetFilter';

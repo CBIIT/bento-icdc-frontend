@@ -1,6 +1,7 @@
 import React from 'react';
+import { adaptV4Theme } from '@mui/material/styles';
 import _ from 'lodash';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider, StyledEngineProvider, createTheme } from '@mui/material';
 import themes, { overrides } from '../../themes';
 
 export default ({
@@ -52,14 +53,16 @@ export default ({
       },
     },
   };
-  const computedTheme = createTheme({
+  const computedTheme = createTheme(adaptV4Theme({
     ...themesLight,
     ...overrides,
-  });
+  }));
 
   return (
-    <MuiThemeProvider theme={computedTheme}>
-      {children}
-    </MuiThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <MuiThemeProvider theme={computedTheme}>
+        {children}
+      </MuiThemeProvider>
+    </StyledEngineProvider>
   );
 };

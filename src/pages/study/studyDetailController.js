@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {CircularProgress} from '@mui/material';
 import StudyDetailView from './studyDetailView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import {

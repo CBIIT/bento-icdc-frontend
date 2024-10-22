@@ -1,5 +1,14 @@
 import React from 'react';
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+// import { adaptV4Theme } from '@mui/material/styles';
+import {
+    MuiThemeProvider as ThemeProvider,
+    // createTheme 
+} from '@material-ui/core/styles';
+import {
+    // ThemeProvider as MuiThemeProvider, // use this after bento-frontend has been migrated to v5
+    StyledEngineProvider,
+    createTheme
+} from '@mui/material';
 
 const theme = {
   overrides: {
@@ -362,5 +371,9 @@ const theme = {
 
 export default ({ children }) => {
   const computedTheme = createTheme(theme);
-  return <ThemeProvider theme={computedTheme}>{children}</ThemeProvider>;
+  return (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={computedTheme}>{children}</ThemeProvider>
+    </StyledEngineProvider>
+  );
 };

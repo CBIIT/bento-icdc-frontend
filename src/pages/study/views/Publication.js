@@ -1,8 +1,9 @@
 import React from 'react';
 import {
   Grid,
-  withStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+// import { withStyles } from "@mui/styles";
+import { withStyles } from '@material-ui/core';
 import {
   externalIcon,
 } from '../../../bento/studyDetailsData';
