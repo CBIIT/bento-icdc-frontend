@@ -1,18 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import {
+/*import {
   Grid,
   withStyles,
   createTheme,
   MuiThemeProvider,
-} from '@material-ui/core';
+} from '@material-ui/core';*/
+import { ThemeProvider, Grid, Button } from '@mui/material';
+import { withStyles } from '@mui/styles';
+import { createTheme, adaptV4Theme, StyledEngineProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import ReactPlayer from 'react-player/youtube';
 import { cn } from '@bento-core/util';
 import lbg from '../../assets/landing/Background.png';
-import { Button } from '../../components/Wrappers/Wrappers';
+// import { Button } from '../../components/Wrappers/Wrappers';
 import starImg from '../../assets/landing/Spark.png';
 import flare from '../../assets/landing/flare_bkgd.png';
 import dogImg from '../../assets/landing/canine_bubble.png';
@@ -23,72 +27,64 @@ import TabPanel from '../../components/Tab/TabPanel';
 // import themes from '../../themes';
 
 const slideDown = keyframes`
-from {
-  transform: translateY(0px);
-}
-33.3% {
-  transform: translateY(350px);
-}
-66.6% {
-  transform: translateY(0px);
-}
-to {
+  from {
+    transform: translateY(0px);
+  }
+  33.3% {
+    transform: translateY(350px);
+  }
+  66.6% {
+    transform: translateY(0px);
+  }
+  to {
     transform: translateY(175px);
-}
+  }
 `;
 
 const slideUp = keyframes`
-from {
-  transform: translateY(-800px);
-}
-33.3% {
-  transform: translateY(-1200px);
-}
-66.6% {
-  transform: translateY(-800px);
-}
-to {
-  transform: translateY(-1030px);
-}
+  from {
+    transform: translateY(-800px);
+  }
+  33.3% {
+    transform: translateY(-1200px);
+  }
+  66.6% {
+    transform: translateY(-800px);
+  }
+  to {
+    transform: translateY(-1030px);
+  }
 `;
 
 const star = keyframes`
   0% {
     opacity: 0;
   }
-
-  8%{
+  8% {
     opacity: 0;
   }
-
-  13%{
+  13% {
     opacity: 1;
   }
-
-  25%{
+  25% {
     opacity: 0;
   }
-  
-  40%{
+  40% {
     opacity: 0;
   } 
-
   46% {
     opacity: 1;
   }
-
   55% {
     opacity: 0;
   }
-
   80% {
     opacity: 0;
   }
-
 `;
 
 const SlideDown = styled.div`
-  animation: ${slideDown} 20s  0s 1;
+  animation: ${slideDown} 20s 0s 1;
 `;
 
 const SlideUp = styled.div`
@@ -96,26 +92,48 @@ const SlideUp = styled.div`
 `;
 
 const Star = styled.div`
-  animation: ${star} 20s  0s 1;
+  animation: ${star} 20s 0s 1;
 `;
 
-const custumTheme = createTheme({
-  overrides: {
-    MuiTabs: {
-      root: {
-        paddingTop: '20px',
-        paddingBottom: '20px',
-        borderRight: '1px solid #ffffff',
-        marginLeft: '-60px',
+const CallToActionButton = styled(Button)(({ theme }) => {
+console.log('theme', theme);
+    return ({
+        borderRadius: '17px',
+        width: '178px',
+        height: '37px',
+        lineHeight: '18px',
+        fontSize: '14px',
+        fontWeight: 'bolder',
+        color: '#ffffff',
+        textTransform: 'uppercase',
+        backgroundColor: '#A0680D',
+        fontFamily: theme.custom.fontFamilySans,
+        textDecoration: 'none',
+        boxShadow: 'none !important',
+        '&:hover': {
+          backgroundColor: '#CB8311',
+          color: '#ffffff',
+        },
+    })
+})
+
+const custumTheme = createTheme(adaptV4Theme({
+    overrides: {
+      MuiTabs: {
+        root: {
+          paddingTop: '20px',
+          paddingBottom: '20px',
+          borderRight: '1px solid #ffffff',
+          marginLeft: '-60px',
+        },
+      },
+      MuiTypography: {
+        root: {
+          paddingRight: '50px',
+        },
       },
     },
-    MuiTypography: {
-      root: {
-        paddingRight: '50px',
-      },
-    },
-  },
-});
+  }));
 
 const LineText = (props) => {
   const { text } = props;
@@ -223,7 +241,8 @@ const LandingView = ({
   };
 
   return (
-    <MuiThemeProvider theme={custumTheme}>
+   <StyledEngineProvider>
+    <ThemeProvider theme={custumTheme}>
       <div className={classes.page}>
         <div className={classes.container}>
           <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30)}>
@@ -266,18 +285,18 @@ const LandingView = ({
                           {
                               item.content.externalLink ? (
                                 <a href={item.content.callToActionLink} target="_blank" rel="noreferrer" className={classes.headerLink}>
-                                  <Button className={classes.headerButton}>
+                                  <CallToActionButton variant='contained'>
                                     {item.content.callToActionButtonText}
-                                  </Button>
+                                  </CallToActionButton>
                                 </a>
                               ) : (
                                 <Link
                                   to={item.content.callToActionLink}
                                   className={classes.headerLink}
                                 >
-                                  <Button className={classes.headerButton}>
+                                  <CallToActionButton variant='contained'>
                                     {item.content.callToActionButtonText}
-                                  </Button>
+                                  </CallToActionButton>
                                 </Link>
                               )
                             }
@@ -334,7 +353,8 @@ const LandingView = ({
 
         </div>
       </div>
-    </MuiThemeProvider>
+    </ThemeProvider>
+   </StyledEngineProvider> 
   );
 };
 
@@ -485,24 +505,6 @@ const styles = (theme) => ({
     },
   },
   headerButtonSection: {
-  },
-  headerButton: {
-    borderRadius: '17px',
-    width: '178px',
-    height: '37px',
-    lineHeight: '18px',
-    fontSize: '14px',
-    fontWeight: 'bolder',
-    color: '#ffffff',
-    textTransform: 'uppercase',
-    backgroundColor: '#A0680D',
-    fontFamily: theme.custom.fontFamilySans,
-    textDecoration: 'none',
-    boxShadow: 'none !important',
-    '&:hover': {
-      backgroundColor: '#CB8311',
-      color: '#ffffff',
-    },
   },
   headerLink: {
     color: '#ffffff',

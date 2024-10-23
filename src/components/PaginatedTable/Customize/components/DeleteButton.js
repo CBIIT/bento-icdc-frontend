@@ -9,7 +9,7 @@ import deleteIcon from '../../assets/deleteIcon.svg';
 
 const theme = {
   overrides: {
-    MuiIconButton: {
+    /*MuiIconButton: {
       root: {
         padding: '0',
         '&:hover': {
@@ -23,7 +23,7 @@ const theme = {
           height: '45px',
         },
       },
-    },
+    },*/
     MuiIcon: {
       root: {
         width: '1.2em',

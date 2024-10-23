@@ -1,11 +1,14 @@
 import React from 'react';
-import {
+/*import {
   Grid,
   withStyles,
   styled,
   Paper,
   makeStyles,
-} from '@material-ui/core';
+} from '@material-ui/core';*/
+import { withStyles, makeStyles } from '@mui/styles';
+import styled from '@emotion/styled';
+import { Paper, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { pageData } from '../../../bento/landingPageData';
 
@@ -85,7 +88,7 @@ const styles = (theme) => ({
   },
   image: {
     '& img': {
-      maxWidth: '100%',
+      width: '100%',
     },
   },
 });

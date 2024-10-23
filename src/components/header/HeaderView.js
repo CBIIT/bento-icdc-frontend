@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router';
-import { withStyles } from '@material-ui/styles';
+// import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import {
   SearchBarGenerator,
 } from '@bento-core/global-search';
@@ -43,7 +44,7 @@ const ICDCHeader = ({
   const SearchBarConfig = {
     config: {
       query: async (search) => queryAutocompleteAPI(search),
-      placeholder: 'SEARCH THE ICDC',
+      placeholder: 'SEARCH THE ICDC now',
       searchKeys,
       searchFields,
     },

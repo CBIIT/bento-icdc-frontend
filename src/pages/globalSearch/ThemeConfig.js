@@ -13,13 +13,13 @@ export default ({
           color: '#0B3557',
         },
       },
-      MuiIconButton: {
+      /*MuiIconButton: {
         root: {
           '&:hover': {
             backgroundColor: 'transparent !important',
           },
         },
-      },
+      },*/
       MuiAutocomplete: {
         inputRoot: {
           padding: '2px 20px 3px 20px !important',

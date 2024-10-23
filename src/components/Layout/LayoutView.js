@@ -5,7 +5,9 @@ import {
   Switch,
   useLocation,
 } from 'react-router-dom';
-import { withStyles, CssBaseline } from "@material-ui/core";
+// import { withStyles, CssBaseline } from "@material-ui/core";
+import { withStyles } from '@mui/styles';
+import { CssBaseline } from '@mui/material'
 import LinkBar from '../LinkBar';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
 import Dashboard from "../../pages/dashboard/DashboardController";
@@ -67,7 +69,7 @@ const LayoutView = ({
       <>
         <CssBaseline />
         <HashRouter>
-          <OverlayWindow />
+          {/*<OverlayWindow />*/}
           <div className={classes.container}>
             <div id="headerSection" ref={headerRef} className={classes.header}>
               <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown.html" />

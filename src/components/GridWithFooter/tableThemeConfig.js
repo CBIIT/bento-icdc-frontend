@@ -64,7 +64,7 @@ export default ({
   overridesObj.MuiTablePagination.actions.marginRight = '6px';
   overridesObj.MuiTableCell.head.paddingLeft = '37px';
   overridesObj.MuiTableCell.body.paddingLeft = '37px';
-  overridesObj.MuiIconButton = {
+  /*overridesObj.MuiIconButton = {
     ...overridesObj.MuiIconButton,
     root: {
       '&:first-child': {
@@ -74,7 +74,7 @@ export default ({
         marginRight: '-20px',
       },
     },
-  };
+  };*/
 
   overridesObj.MuiButton = {
     root: {

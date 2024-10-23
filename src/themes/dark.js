@@ -463,11 +463,11 @@ export default {
         },
       },
     },
-    MuiIconButton: {
+    /*MuiIconButton: {
       root: {
         padding: '5px',
       },
-    },
+    },*/
     MuiTablePagination: {
       toolbar: {
         textTransform: 'uppercase',

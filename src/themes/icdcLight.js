@@ -367,11 +367,11 @@ export default {
         fontStyle: 'normal',
       },
     },
-    MuiIconButton: {
+    /*MuiIconButton: {
       root: {
         padding: '5px',
       },
-    },
+    },*/
     MuiGrid: {
       container: {
         width: '100% !important',

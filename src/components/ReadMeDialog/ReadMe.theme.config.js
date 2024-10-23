@@ -40,7 +40,7 @@ export default ({
           marginLeft: '0',
         },
       },
-      MuiIconButton: {
+      /*MuiIconButton: {
         root: {
           marginRight: '10px',
           textTransform: 'none',
@@ -50,7 +50,7 @@ export default ({
             cursor: 'pointer',
           },
         },
-      },
+      },*/
       MuiSvgIcon: {
         root: {
           color: '#0d71a3',

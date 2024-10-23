@@ -6,10 +6,12 @@ import {
   FormControlLabel,
   Grid,
   Switch,
-  withStyles,
+  // withStyles,
   IconButton,
-  makeStyles,
+  // makeStyles,
 } from '@material-ui/core';
+import { withStyles, makeStyles } from '@mui/styles';
+// import { IconButton } from '@mui/material';
 import {
   WidgetGenerator,
   ToolTip,

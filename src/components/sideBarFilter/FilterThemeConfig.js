@@ -162,11 +162,11 @@ const theme = {
         },
       },
     },
-    MuiIconButton: {
+    /*MuiIconButton: {
       root: {
         padding: '5px',
       },
-    },
+    },*/
     MuiList: {
       padding: {
         paddingTop: '0',

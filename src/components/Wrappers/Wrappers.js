@@ -1,65 +1,24 @@
-/* eslint-disable */
 import React from "react";
-import {
-  withStyles,
-  Badge as BadgeBase,
-  Typography as TypographyBase,
-  Button as ButtonBase,
-} from "@material-ui/core";
-import { useTheme, makeStyles } from "@material-ui/styles";
+import { Badge as BadgeBase, Typography as TypographyBase, Button as ButtonBase } from "@mui/material";
+import { styled } from "@mui/system";
 import clsx from "clsx";
 
-// styles
-var useStyles = makeStyles(theme => ({
-  badge: {
-    fontWeight: 600,
-    height: 16,
-    minWidth: 16,
-  },
+// Custom Badge using styled API
+const Badge = styled(BadgeBase)(({ theme, colorBrightness, color }) => ({
+  fontWeight: 600,
+  height: 16,
+  minWidth: 16,
+  backgroundColor: getColor(color, theme, colorBrightness),
 }));
 
-function Badge({ children, colorBrightness, color, ...props }) {
-  var classes = useStyles();
-  var theme = useTheme();
-  var Styled = createStyled({
-    badge: {
-      backgroundColor: getColor(color, theme, colorBrightness),
-    },
-  });
-
-  return (
-    <Styled>
-      {styledProps => (
-        <BadgeBase
-          classes={{
-            badge: clsx(classes.badge, styledProps.classes.badge),
-          }}
-          {...props}
-        >
-          {children}
-        </BadgeBase>
-      )}
-    </Styled>
-  );
-}
-
-function Typography({
-  children,
-  weight,
-  size,
-  colorBrightness,
-  color,
-  family,
-  ...props
-}) {
-  var theme = useTheme();
-
+// Custom Typography component using sx prop
+function Typography({ children, weight, size, colorBrightness, color, family, ...props }) {
   return (
     <TypographyBase
-      style={{
-        color: getColor(color, theme, colorBrightness),
+      sx={{
+        color: (theme) => getColor(color, theme, colorBrightness),
         fontWeight: getFontWeight(weight),
-        fontSize: getFontSize(size, props.variant, theme),
+        fontSize: (theme) => getFontSize(size, props.variant, theme),
         fontFamily: family,
       }}
       {...props}
@@ -69,74 +28,44 @@ function Typography({
   );
 }
 
+// Custom Button component using styled API
+const StyledButton = styled(ButtonBase)(({ theme, color, bgColor }) => ({
+  color: getColor(color, theme),
+  backgroundColor: getColor(bgColor, theme),
+  "&:hover": {
+    backgroundColor: getColor(bgColor, theme),
+  },
+  "&.MuiButton-contained": {
+    boxShadow: theme.customShadows.widget,
+    "&:hover": {
+      boxShadow: theme.customShadows.widgetWide,
+    },
+  },
+  "&.MuiButton-outlined": {
+    borderColor: getColor(color, theme),
+  },
+}));
+
 function Button({ children, color, bgColor, className, ...props }) {
-  var theme = useTheme();
-
-  var Styled = createStyled({
-    root: {
-      color: getColor(color, theme),
-      backgroundColor: getColor(bgColor, theme),
-      "&:hover": {
-        backgroundColor: getColor(bgColor, theme),
-      }
-    },
-    contained: {
-      boxShadow: theme.customShadows.widget,
-      color: `${color ? "white" : theme.palette.text.primary} !important`,
-      "&:hover": {
-        backgroundColor: getColor(bgColor, theme),
-        boxShadow: theme.customShadows.widgetWide,
-      },
-      "&:active": {
-        boxShadow: theme.customShadows.widgetWide,
-      },
-    },
-    outlined: {
-      color: getColor(color, theme),
-      borderColor: getColor(color, theme),
-    },
-    select: {
-      backgroundColor: theme.palette.primary.main,
-      color: "#fff",
-    },
-  });
-
   return (
-    <Styled>
-      {({ classes }) => (
-        <ButtonBase
-          classes={{
-            contained: classes.contained,
-            root: classes.root,
-            outlined: classes.outlined,
-          }}
-          {...props}
-          className={clsx(
-            {
-              [classes.select]: props.select,
-            },
-            className,
-          )}
-        >
-          {children}
-        </ButtonBase>
-      )}
-    </Styled>
+    <StyledButton
+      {...props}
+      className={clsx({ select: props.select }, className)}
+    >
+      {children}
+    </StyledButton>
   );
 }
 
 export { Badge, Typography, Button };
 
-// ########################################################################
-
-function getColor(color, theme, brigtness = "main") {
-  if (color && theme.palette[color] && theme.palette[color][brigtness]) {
-    return theme.palette[color][brigtness];
-  }
+// Helper functions
+function getColor(color, theme, brightness = "main") {
+  return theme.palette[color]?.[brightness];
 }
 
-function getFontWeight(style) {
-  switch (style) {
+function getFontWeight(weight) {
+  switch (weight) {
     case "light":
       return 300;
     case "medium":
@@ -149,45 +78,19 @@ function getFontWeight(style) {
 }
 
 function getFontSize(size, variant = "", theme) {
-  var multiplier;
+  const multiplier = {
+    xs: 0.5,
+    sm: 0.8,
+    md: 1.2,
+    l: 1.5,
+    xl: 1.7,
+    xxl: 2,
+  }[size] || 1;
 
-  switch (size) {
-    case 'xs':
-      multiplier = 0.5;
-      break;
-    case 'sm':
-      multiplier = 0.8;
-      break;
-    case 'md':
-      multiplier = 1.2;
-      break;
-    case 'l':
-      multiplier = 1.5;
-      break;
-    case 'xl':
-      multiplier = 1.7;
-      break;
-    case 'xxl':
-      multiplier = 2;
-      break;
-    default:
-      multiplier = 1;
-      break;
-  }
-
-  var defaultSize =
-    variant && theme.typography[variant]
+  const defaultSize =
+    variant && theme.typography[variant]?.fontSize
       ? theme.typography[variant].fontSize
-      : theme.typography.fontSize + "px";
+      : theme.typography.fontSize;
 
-  return `calc(${defaultSize} * ${multiplier})`;
-}
-
-function createStyled(styles, options) {
-  var Styled = function(props) {
-    const { children, ...other } = props;
-    return children(other);
-  };
-
-  return withStyles(styles, options)(Styled);
+  return `calc(${defaultSize}px * ${multiplier})`;
 }
