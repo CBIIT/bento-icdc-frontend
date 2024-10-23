@@ -19,6 +19,7 @@ import ReadMoreSVG from '../readMore';
 import env from '../../../../utils/env';
 import DropDownView from '../dropdown/DropDownView';
 import HeaderThemeprovider from './HeaderTheme';
+import { ReadMeButtonOuterLayer, ReadMeButton } from './StyledComponents';
 
 const HeaderView = ({
   classes,
@@ -53,26 +54,22 @@ const HeaderView = ({
       <div className={classes.cartHeader}>
         <div className={classes.cartHeaderLogo}>
           <img
-              className={classes.logo}
-              src={myFilesPageData.headerIconSrc}
-              alt={myFilesPageData.headerIconAlt}
+            className={classes.logo}
+            src={myFilesPageData.headerIconSrc}
+            alt={myFilesPageData.headerIconAlt}
           />
           <span className={classes.pageTitle}>My Files</span>
         </div>
-        <div className={classes.readMeBtn}>
-          <Button
+        <ReadMeButtonOuterLayer>
+          <ReadMeButton
             onClick={displayReadMeHandler}
             color="primary"
             variant="contained"
             endIcon={<ReadMoreSVG />}
-            classes={{
-              root: classes.readMeBtnRoot,
-              label: classes.readMeBtnLabel,
-            }}
           >
-            README
-          </Button>
-        </div>
+            README 1
+          </ReadMeButton>
+        </ReadMeButtonOuterLayer>
       </div>
 
       <Grid xs={12} md={12} lg={12} className={classes.actionBtn}>
