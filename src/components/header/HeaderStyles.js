@@ -1,4 +1,4 @@
-// import { withStyles } from '@material-ui/core';
+// import { withStyles } from '@mui/material';
 
 /**
  * Default styling classes for the SearchBar component
@@ -23,10 +23,10 @@ const styles = {
         '&:nth-last-child(1)': {
           borderBottom: 'none',
           fontSize: '14px',
-          color: 'black',
+          color: '#000000',
           backgroundColor: '#ECECEC',
           '& :hover': {
-            color: 'black',
+            color: '#000000',
             backgroundColor: '#ECECEC',
             pointerEvents: 'none',
           },

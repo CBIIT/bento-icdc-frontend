@@ -59,7 +59,7 @@ const StyledTableCell = withStyles(() => ({
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '600',
-    border: '1px solid black',
+    border: '1px solid #000000',
     padding: '8px',
   },
 }))(TableCell);
@@ -83,7 +83,7 @@ const StyledEndTableCell = withStyles(() => ({
   body: {
     // paddingLeft: '15px',
     borderWidth: '1px 0 1px 1px',
-    borderColor: 'black',
+    borderColor: '#000000',
     borderStyle: 'solid',
   },
 }))(StyledTableCell);

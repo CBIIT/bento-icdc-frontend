@@ -50,7 +50,7 @@ const InvalidAccesionModal = () => {
                 position: 'absolute',
                 left: '542px',
                 top: '6px',
-                color: 'black',
+                color: '#000000',
               }}
             >
               <Close
