@@ -1,4 +1,4 @@
-import { createStore, createHook } from 'react-sweet-state';
+import { createStore, createHook } from "react-sweet-state";
 
 const DashboardTabsStore = createStore({
   // value of the store on initialisation
@@ -8,7 +8,8 @@ const DashboardTabsStore = createStore({
   // actions that trigger store mutation
   actions: {
     changeCurrentTab:
-      (value) => ({ setState }) => {
+      (value) =>
+      ({ setState }) => {
         // mutate state synchronously
         setState({
           currentTab: value,
@@ -16,7 +17,7 @@ const DashboardTabsStore = createStore({
       },
   },
   // optional, unique, mostly used for easy debugging
-  name: 'dashboard-tabs-store',
+  name: "dashboard-tabs-store",
 });
 
 const useDashboardTabs = createHook(DashboardTabsStore);

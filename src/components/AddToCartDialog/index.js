@@ -1,1 +1,1 @@
-export { default } from './AddToCartDialogController';
+export { default } from "./AddToCartDialogController";

@@ -9,18 +9,14 @@
 
 ### New Features
 
-
 ### Breaking Changes
-
 
 ### Bug Fixes
 
-
 ### Improvements
-
 
 ### Dependency updates
 
-
 ### Deployment changes
+
 <!-- This section should only contain important things devops should know when updating service versions. -->

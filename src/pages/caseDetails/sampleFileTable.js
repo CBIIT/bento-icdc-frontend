@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 /*  To check if this row is selectable or not.
     I want the system to visually communicate ("flag") which of

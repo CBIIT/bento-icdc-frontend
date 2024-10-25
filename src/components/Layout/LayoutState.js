@@ -2,7 +2,7 @@ export const initialState = {
   isSidebarOpened: true,
 };
 
-export const TOGGLE_SIDEBAR = 'Layout/TOGGLE_SIDEBAR';
+export const TOGGLE_SIDEBAR = "Layout/TOGGLE_SIDEBAR";
 
 export const toggleSidebar = () => ({
   type: TOGGLE_SIDEBAR,

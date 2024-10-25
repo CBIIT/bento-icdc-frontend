@@ -2,17 +2,16 @@
 
 The intention of this guide is to provide a set of conventions that encourage good code.
 It is the distillation of many combined man-years of software engineering and Java development
-experience.  While some suggestions are more strict than others, you should always practice good
+experience. While some suggestions are more strict than others, you should always practice good
 judgement.
 
 If following the guide causes unnecessary hoop-jumping or otherwise less-readable code,
-*readability trumps the guide*.  However, if the more 'readable' variant comes with
+_readability trumps the guide_. However, if the more 'readable' variant comes with
 perils or pitfalls, readability may be sacrificed.
 
 In general, much of our style and conventions mirror the
 [Code Conventions for the Java Programming Language](http://www.oracle.com/technetwork/java/codeconvtoc-136057.html)
 and [Google's Java Style Guide](https://google.github.io/styleguide/javaguide.html).
-
 
 ## Table of contents
 
@@ -47,6 +46,7 @@ and [Google's Java Style Guide](https://google.github.io/styleguide/javaguide.ht
   - [The 'fast' implementation](https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/styleguide.md#the-fast-implementation)
 
 ## Recommended reading
+
 - [Effective Java](http://www.amazon.com/Effective-Java-Edition-Joshua-Bloch/dp/0321356683)
 
 - [Java Concurrency in Practice](http://jcip.net/)
@@ -59,17 +59,19 @@ and [Google's Java Style Guide](https://google.github.io/styleguide/javaguide.ht
 ### Formatting
 
 #### Use line breaks wisely
+
 There are generally two reasons to insert a line break:
 
 1. Your statement exceeds the column limit.
 
 2. You want to logically separate a thought.<br />
-Writing code is like telling a story.  Written language constructs like chapters, paragraphs,
-and punctuation (e.g. semicolons, commas, periods, hyphens) convey thought hierarchy and
-separation.  We have similar constructs in programming languages; you should use them to your
-advantage to effectively tell the story to those reading the code.
+   Writing code is like telling a story. Written language constructs like chapters, paragraphs,
+   and punctuation (e.g. semicolons, commas, periods, hyphens) convey thought hierarchy and
+   separation. We have similar constructs in programming languages; you should use them to your
+   advantage to effectively tell the story to those reading the code.
 
 #### Indent style
+
 We use the "one true brace style" ([1TBS](http://en.wikipedia.org/wiki/Indent_style#Variant:_1TBS)).
 Indent size is 2 columns.
 
@@ -88,7 +90,7 @@ Indent size is 2 columns.
     // Also not like this.
     if (x < 0) negative(x);
 
-Continuation indent is 4 columns.  Nested continuations may add 4 columns or 2 at each level.
+Continuation indent is 4 columns. Nested continuations may add 4 columns or 2 at each level.
 
     :::java
     // Bad.
@@ -188,9 +190,11 @@ Method declaration continuations.
         .build();
 
 #### No tabs
-An oldie, but goodie.  We've found tab characters to cause more harm than good.
+
+An oldie, but goodie. We've found tab characters to cause more harm than good.
 
 #### 100 column limit
+
 You should follow the convention set by the body of code you are working with.
 We tend to use 100 columns for a balance between fewer continuation lines but still easily
 fitting two editor tabs side-by-side on a reasonably-high resolution display.
@@ -198,6 +202,7 @@ fitting two editor tabs side-by-side on a reasonably-high resolution display.
 #### CamelCase for types, camelCase for variables, UPPER_SNAKE for constants
 
 #### No trailing whitespace
+
 Trailing whitespace characters, while logically benign, add nothing to the program.
 However, they do serve to frustrate developers when using keyboard shortcuts to navigate code.
 
@@ -258,7 +263,8 @@ ordering (sections
     Amount<Integer, Data> fileSize;
 
 #### Don't embed metadata in variable names
-A variable name should describe the variable's purpose.  Adding extra information like scope and
+
+A variable name should describe the variable's purpose. Adding extra information like scope and
 type is generally a sign of a bad variable name.
 
 Avoid embedding the field type in the field name.
@@ -272,7 +278,7 @@ Avoid embedding the field type in the field name.
     Map<Integer, User> usersById;
     String value;
 
-Also avoid embedding scope information in a variable.  Hierarchy-based naming suggests that a class
+Also avoid embedding scope information in a variable. Hierarchy-based naming suggests that a class
 is too complex and should be broken apart.
 
     :::java
@@ -294,6 +300,7 @@ is too complex and should be broken apart.
     int foo = a + b + 1;
 
 ### Be explicit about operator precedence
+
 Don't make your reader open the
 [spec](http://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html) to confirm,
 if you expect a specific operation ordering, make it obvious with parenthesis.
@@ -305,7 +312,7 @@ if you expect a specific operation ordering, make it obvious with parenthesis.
     // Good.
     return (a << (8 * n) + 1) | 0xFF;
 
-It's even good to be *really* obvious.
+It's even good to be _really_ obvious.
 
     :::java
     if ((values != null) && (10 > values.size())) {
@@ -318,6 +325,7 @@ The more visible a piece of code is (and by extension - the farther away consume
 the more documentation is needed.
 
 #### "I'm writing a report about..."
+
 Your elementary school teacher was right - you should never start a statement this way.
 Likewise, you shouldn't write documentation this way.
 
@@ -339,9 +347,10 @@ Likewise, you shouldn't write documentation this way.
     }
 
 #### Documenting a class
+
 Documentation for a class may range from a single sentence
 to paragraphs with code examples. Documentation should serve to disambiguate any conceptual
-blanks in the API, and make it easier to quickly and *correctly* use your API.
+blanks in the API, and make it easier to quickly and _correctly_ use your API.
 A thorough class doc usually has a one sentence summary and, if necessary,
 a more detailed explanation.
 
@@ -357,7 +366,8 @@ a more detailed explanation.
     }
 
 #### Documenting a method
-A method doc should tell what the method *does*.  Depending on the argument types, it may
+
+A method doc should tell what the method _does_. Depending on the argument types, it may
 also be important to document input format.
 
     :::java
@@ -394,8 +404,9 @@ also be important to document input format.
     List<String> split(String s);
 
 #### Be professional
+
 We've all encountered frustration when dealing with other libraries, but ranting about it doesn't
-do you any favors.  Suppress the expletives and get to the point.
+do you any favors. Suppress the expletives and get to the point.
 
     :::java
     // Bad.
@@ -463,14 +474,16 @@ do you any favors.  Suppress the expletives and get to the point.
 #### Use javadoc features
 
 ##### No author tags
+
 Code can change hands numerous times in its lifetime, and quite often the original author of a
-source file is irrelevant after several iterations.  We find it's better to trust commit
+source file is irrelevant after several iterations. We find it's better to trust commit
 history and `OWNERS` files to determine ownership of a body of code.
 
 ### Imports
 
 #### Import ordering
-Imports are grouped by top-level package, with blank lines separating groups.  Static imports are
+
+Imports are grouped by top-level package, with blank lines separating groups. Static imports are
 grouped in the same way, in a section below traditional imports.
 
     :::java
@@ -490,9 +503,10 @@ grouped in the same way, in a section below traditional imports.
     import static *
 
 #### No wildcard imports
-Wildcard imports make the source of an imported class less clear.  They also tend to hide a high
-class [fan-out](http://en.wikipedia.org/wiki/Coupling_(computer_programming)#Module_coupling).<br />
-*See also [texas imports](#stay-out-of-texas)*
+
+Wildcard imports make the source of an imported class less clear. They also tend to hide a high
+class [fan-out](<http://en.wikipedia.org/wiki/Coupling_(computer_programming)#Module_coupling>).<br />
+_See also [texas imports](#stay-out-of-texas)_
 
     :::java
     // Bad.
@@ -515,7 +529,8 @@ class [fan-out](http://en.wikipedia.org/wiki/Coupling_(computer_programming)#Mod
 ### Use annotations wisely
 
 #### @Nullable
-By default - disallow `null`.  When a variable, parameter, or method return value may be `null`,
+
+By default - disallow `null`. When a variable, parameter, or method return value may be `null`,
 be explicit about it by marking
 [@Nullable](http://code.google.com/p/jsr-305/source/browse/trunk/ri/src/main/java/javax/annotation/Nullable.java?r=24).
 This is advisable even for fields/methods with private visibility.
@@ -535,8 +550,9 @@ This is advisable even for fields/methods with private visibility.
     }
 
 #### @VisibleForTesting
+
 Sometimes it makes sense to hide members and functions in general, but they may still be required
-for good test coverage.  It's usually preferred to make these package-private and tag with
+for good test coverage. It's usually preferred to make these package-private and tag with
 [@VisibleForTesting](http://docs.guava-libraries.googlecode.com/git-history/v11.0.2/javadoc/com/google/common/annotations/VisibleForTesting.html)
 to indicate the purpose for visibility.
 
@@ -579,6 +595,7 @@ Constants are a great example of things that are frequently exposed in this way.
     }
 
 ### Use interfaces
+
 Interfaces decouple functionality from implementation, allowing you to use multiple implementations
 without changing consumers.
 Interfaces are a great way to isolate packages - provide a set of interfaces, and keep your
@@ -601,8 +618,9 @@ Consider the pattern below as an alternative.
     }
 
 #### Leverage or extend existing interfaces
+
 Sometimes an existing interface allows your class to easily 'plug in' to other related classes.
-This leads to highly [cohesive](http://en.wikipedia.org/wiki/Cohesion_(computer_science)) code.
+This leads to highly [cohesive](<http://en.wikipedia.org/wiki/Cohesion_(computer_science)>) code.
 
     :::java
     // An unfortunate lack of consideration.  Anyone who wants to interact with Blobs will need to
@@ -622,18 +640,20 @@ This leads to highly [cohesive](http://en.wikipedia.org/wiki/Cohesion_(computer_
       }
     }
 
-Warning - don't bend the definition of an existing interface to make this work.  If the interface
+Warning - don't bend the definition of an existing interface to make this work. If the interface
 doesn't conceptually apply cleanly, it's best to avoid this.
 
 ## Writing testable code
-Writing unit tests doesn't have to be hard.  You can make it easy for yourself if you keep
+
+Writing unit tests doesn't have to be hard. You can make it easy for yourself if you keep
 testability in mind while designing your classes and interfaces.
 
 ### Fakes and mocks
+
 When testing a class, you often need to provide some kind of canned functionality as a replacement
-for real-world behavior.  For example, rather than fetching a row from a real database, you have
-a test row that you want to return.  This is most commonly performed with a fake object or a mock
-object.  While the difference sounds subtle, mocks have major benefits over fakes.
+for real-world behavior. For example, rather than fetching a row from a real database, you have
+a test row that you want to return. This is most commonly performed with a fake object or a mock
+object. While the difference sounds subtle, mocks have major benefits over fakes.
 
     :::java
     class RpcClient {
@@ -719,7 +739,8 @@ object.  While the difference sounds subtle, mocks have major benefits over fake
     }
 
 ### Testing multithreaded code
-Testing code that uses multiple threads is notoriously hard.  When approached carefully, however,
+
+Testing code that uses multiple threads is notoriously hard. When approached carefully, however,
 it can be accomplished without deadlocks or unnecessary time-wait statements.
 
 If you are testing code that needs to perform periodic background tasks
@@ -730,7 +751,7 @@ avoiding the actual scheduling.
 If you are testing code that submits tasks to an
 [ExecutorService](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html),
 you might consider allowing the executor to be injected, and supplying a
-[single-thread executor](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executors.html#newSingleThreadExecutor()) in tests.
+[single-thread executor](<http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executors.html#newSingleThreadExecutor()>) in tests.
 
 In cases where multiple threads are inevitable,
 [java.util.concurrent](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/package-summary.html)
@@ -746,9 +767,10 @@ is useful for state/operation synchronization when a queue does not apply.
 ### Testing antipatterns
 
 #### Time-dependence
+
 Code that captures real wall time can be difficult to test repeatably, especially when time deltas
-are meaningful.  Therefore, try to avoid `new Date()`, `System.currentTimeMillis()`, and
-`System.nanoTime()`.  A suitable replacement for these is
+are meaningful. Therefore, try to avoid `new Date()`, `System.currentTimeMillis()`, and
+`System.nanoTime()`. A suitable replacement for these is
 [Clock](https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/util/Clock.java); using
 [Clock.SYSTEM_CLOCK](https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/util/Clock.java#L32)
 when running normally, and
@@ -756,24 +778,27 @@ when running normally, and
 in tests.
 
 #### The hidden stress test
-Avoid writing unit tests that attempt to verify a certain amount of performance.  This type of
+
+Avoid writing unit tests that attempt to verify a certain amount of performance. This type of
 testing should be handled separately, and run in a more controlled environment than unit tests
 typically are.
 
 #### Thread.sleep()
-Sleeping is rarely warranted, especially in test code.  Sleeping is expressing an expectation that
-something else is happening while the executing thread is suspended.  This quickly leads to
+
+Sleeping is rarely warranted, especially in test code. Sleeping is expressing an expectation that
+something else is happening while the executing thread is suspended. This quickly leads to
 brittleness; for example if the background thread was not scheduled while you were sleeping.
 
 Sleeping in tests is also bad because it sets a firm lower bound on how fast tests can execute.
 No matter how fast the machine is, a test that sleeps for one second can never execute in less than
-one second.  Over time, this leads to very long test execution cycles.
+one second. Over time, this leads to very long test execution cycles.
 
 ### Avoid randomness in tests
+
 Using random values may seem like a good idea in a test, as it allows you to cover more test cases
-with less code.  The problem is that you lose control over which test cases you're covering.  When
-you do encounter a test failure, it may be difficult to reproduce.  Pseudorandom input with a fixed
-seed is slightly better, but in practice rarely improves test coverage.  In general it's better to
+with less code. The problem is that you lose control over which test cases you're covering. When
+you do encounter a test failure, it may be difficult to reproduce. Pseudorandom input with a fixed
+seed is slightly better, but in practice rarely improves test coverage. In general it's better to
 use fixed input data that exercises known edge cases.
 
 ## Best practices
@@ -781,18 +806,20 @@ use fixed input data that exercises known edge cases.
 ### Defensive programming
 
 #### Avoid assert
+
 We avoid the assert statement since it can be
 [disabled](http://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html#enable-disable)
 at execution time, and prefer to enforce these types of invariants at all times.
 
-*See also [preconditions](#preconditions)*
+_See also [preconditions](#preconditions)_
 
 #### Preconditions
+
 Preconditions checks are a good practice, since they serve as a well-defined barrier against bad
-input from callers.  As a convention, object parameters to public constructors and methods should
+input from callers. As a convention, object parameters to public constructors and methods should
 always be checked against null, unless null is explicitly allowed.
 
-*See also [be wary of null](#be-wary-of-null), [@Nullable](#nullable)*
+_See also [be wary of null](#be-wary-of-null), [@Nullable](#nullable)_
 
     :::java
     // Bad.
@@ -825,7 +852,7 @@ always be checked against null, unless null is explicitly allowed.
 #### Minimize visibility
 
 In a class API, you should support access to any methods and fields that you make accessible.
-Therefore, only expose what you intend the caller to use.  This can be imperative when
+Therefore, only expose what you intend the caller to use. This can be imperative when
 writing thread-safe code.
 
     :::java
@@ -854,7 +881,7 @@ writing thread-safe code.
 
 #### Favor immutability
 
-Mutable objects carry a burden - you need to make sure that those who are *able* to mutate it are
+Mutable objects carry a burden - you need to make sure that those who are _able_ to mutate it are
 not violating expectations of other users of the object, and that it's even safe for them to modify.
 
     :::java
@@ -892,9 +919,10 @@ not violating expectations of other users of the object, and that it's even safe
     }
 
 #### Be wary of null
+
 Use `@Nullable` where prudent, but favor
 [Optional](http://docs.guava-libraries.googlecode.com/git-history/v11.0.2/javadoc/com/google/common/base/Optional.html)
-over `@Nullable`.  `Optional` provides better semantics around absence of a value.
+over `@Nullable`. `Optional` provides better semantics around absence of a value.
 
 #### Clean up with finally
 
@@ -942,10 +970,10 @@ to guarantee resource symmetry.
       }
     }
 
-
 ### Clean code
 
 #### Disambiguate
+
 Favor readability - if there's an ambiguous and unambiguous route, always favor unambiguous.
 
     :::java
@@ -957,9 +985,11 @@ Favor readability - if there's an ambiguous and unambiguous route, always favor 
     long count = 100L + n;
 
 #### Remove dead code
-Delete unused code (imports, fields, parameters, methods, classes).  They will only rot.
+
+Delete unused code (imports, fields, parameters, methods, classes). They will only rot.
 
 #### Use general types
+
 When declaring fields and methods, it's better to use general types whenever possible.
 This avoids implementation detail leak via your API, and allows you to change the types used
 internally without affecting users or peripheral code.
@@ -978,8 +1008,8 @@ internally without affecting users or peripheral code.
       Iterable<User> fetchUsers(String query);
     }
 
-
 #### Always use type parameters
+
 Java 5 introduced support for
 [generics](http://docs.oracle.com/javase/tutorial/java/generics/index.html). This added type
 parameters to collection types, and allowed users to implement their own type-parameterized classes.
@@ -991,40 +1021,46 @@ We conventionally include type parameters on every declaration where the type is
 Even if the type is unknown, it's preferable to include a wildcard or wide type.
 
 #### Stay out of [Texas](http://en.wikipedia.org/wiki/Texas-sized)
-Try to keep your classes bite-sized and with clearly-defined responsibilities.  This can be
-*really* hard as a program evolves.
+
+Try to keep your classes bite-sized and with clearly-defined responsibilities. This can be
+_really_ hard as a program evolves.
 
 - texas imports
 - texas constructors: Can the class be cleanly broken apart?<br />
-If not, consider builder pattern.
+  If not, consider builder pattern.
 - texas methods
 
 We could do some science and come up with a statistics-driven threshold for each of these, but it
-probably wouldn't be very useful.  This is usually just a gut instinct, and these are traits
+probably wouldn't be very useful. This is usually just a gut instinct, and these are traits
 of classes that are too large or complex and should be broken up.
 
 #### Avoid typecasting
-Typecasting is a sign of poor class design, and can often be avoided.  An obvious exception here is
+
+Typecasting is a sign of poor class design, and can often be avoided. An obvious exception here is
 overriding
-[equals](http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object)).
+[equals](<http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object)>).
 
 #### Use final fields
-*See also [favor immutability](#favor-immutability)*
 
-Final fields are useful because they declare that a field may not be reassigned.  When it comes to
+_See also [favor immutability](#favor-immutability)_
+
+Final fields are useful because they declare that a field may not be reassigned. When it comes to
 checking for thread-safety, a final field is one less thing that needs to be checked.
 
 #### Avoid mutable static state
-Mutable static state is rarely necessary, and causes loads of problems when present.  A very simple
-case that mutable static state complicates is unit testing.  Since unit tests runs are typically in
-a single VM, static state will persist through all test cases.  In general, mutable static state is
+
+Mutable static state is rarely necessary, and causes loads of problems when present. A very simple
+case that mutable static state complicates is unit testing. Since unit tests runs are typically in
+a single VM, static state will persist through all test cases. In general, mutable static state is
 a sign of poor class design.
 
 #### Exceptions
+
 ##### Catch narrow exceptions
+
 Sometimes when using try/catch blocks, it may be tempting to just `catch Exception`, `Error`,
-or `Throwable` so you don't have to worry about what type was thrown.  This is usually a bad idea,
-as you can end up catching more than you really wanted to deal with.  For example,
+or `Throwable` so you don't have to worry about what type was thrown. This is usually a bad idea,
+as you can end up catching more than you really wanted to deal with. For example,
 `catch Exception` would capture `NullPointerException`, and `catch Throwable` would capture
 `OutOfMemoryError`.
 
@@ -1044,13 +1080,15 @@ as you can end up catching more than you really wanted to deal with.  For exampl
     }
 
 ##### Don't swallow exceptions
-An empty `catch` block is usually a bad idea, as you have no signal of a problem.  Coupled with
+
+An empty `catch` block is usually a bad idea, as you have no signal of a problem. Coupled with
 [narrow exception](#catch-narrow-exceptions) violations, it's a recipe for disaster.
 
 ##### When interrupted, reset thread interrupted state
+
 Many blocking operations throw
 [InterruptedException](http://docs.oracle.com/javase/7/docs/api/java/lang/InterruptedException.html)
-so that you may be awaken for events like a JVM shutdown.  When catching `InterruptedException`,
+so that you may be awaken for events like a JVM shutdown. When catching `InterruptedException`,
 it is good practice to ensure that the thread interrupted state is preserved.
 
 IBM has a good [article](http://www.ibm.com/developerworks/java/library/j-jtp05236/index.html) on
@@ -1075,9 +1113,10 @@ this topic.
     }
 
 ##### Throw appropriate exception types
+
 Let your API users obey [catch narrow exceptions](#catch-narrow-exceptions), don't throw Exception.
 Even if you are calling another naughty API that throws Exception, at least hide that so it doesn't
-bubble up even further.  You should also make an effort to hide implementation details from your
+bubble up even further. You should also make an effort to hide implementation details from your
 callers when it comes to exceptions.
 
     :::java
@@ -1107,10 +1146,12 @@ callers when it comes to exceptions.
 ### Use newer/better libraries
 
 #### StringBuilder over StringBuffer
+
 [StringBuffer](http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuffer.html) is thread-safe,
 which is rarely needed.
 
 #### ScheduledExecutorService over Timer
+
 Drawing from [Java Concurrency in Practice](#recommended-reading) (directly borrowed from
 a stackoverflow
 [question](http://stackoverflow.com/questions/409932/java-timer-vs-executorservice)).
@@ -1120,28 +1161,31 @@ a stackoverflow
 - `Timer` has only one execution thread, so long-running task can delay other tasks.
 
 - `ScheduledThreadPoolExecutor` can be configured with multiple threads and a `ThreadFactory`<br />
-  *See [manage threads properly](#manage-threads-properly)*
+  _See [manage threads properly](#manage-threads-properly)_
 
 - Exceptions thrown in `TimerTask` kill the thread, rendering the `Timer` ineffective.
 
 - ThreadPoolExecutor provides `afterExceute` so you can explicitly handle execution results.
 
 #### List over Vector
-`Vector` is synchronized, which is often unneeded.  When synchronization is desirable,
-a [synchronized list](http://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#synchronizedList(java.util.List))
+
+`Vector` is synchronized, which is often unneeded. When synchronization is desirable,
+a [synchronized list](<http://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#synchronizedList(java.util.List)>)
 can usually serve as a drop-in replacement for `Vector`.
 
 ### equals() and hashCode()
+
 If you override one, you must implement both.
-*See the equals/hashCode
-[contract](http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#hashCode())*
+_See the equals/hashCode
+[contract](<http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#hashCode()>)_
 
 [Objects.equal()](http://docs.guava-libraries.googlecode.com/git-history/v11.0.2/javadoc/com/google/common/base/Objects.html#equal(java.lang.Object, java.lang.Object))
 and
-[Objects.hashCode()](http://docs.guava-libraries.googlecode.com/git-history/v11.0.2/javadoc/com/google/common/base/Objects.html#hashCode(java.lang.Object...))
+[Objects.hashCode()](<http://docs.guava-libraries.googlecode.com/git-history/v11.0.2/javadoc/com/google/common/base/Objects.html#hashCode(java.lang.Object...)>)
 make it very easy to follow these contracts.
 
 ### Premature optimization is the root of all evil.
+
 Donald Knuth is a smart guy, and he had a few things to
 [say](http://c2.com/cgi/wiki?PrematureOptimization) on the topic.
 
@@ -1149,16 +1193,18 @@ Unless you have strong evidence that an optimization is necessary, it's usually 
 the un-optimized version first (possibly leaving notes about where optimizations could be made).
 
 So before you spend a week writing your memory-mapped compressed huffman-encoded hashmap, use the
-stock stuff first and *measure*.
+stock stuff first and _measure_.
 
 ### TODOs
 
 #### Leave TODOs early and often
+
 A TODO isn't a bad thing - it's signaling a future developer (possibly yourself) that a
-consideration was made, but omitted for various reasons.  It can also serve as a useful signal when
+consideration was made, but omitted for various reasons. It can also serve as a useful signal when
 debugging.
 
 #### Leave no TODO unassigned
+
 TODOs should have owners, otherwise they are unlikely to ever be resolved.
 
     :::java
@@ -1170,17 +1216,20 @@ TODOs should have owners, otherwise they are unlikely to ever be resolved.
     // TODO(George Washington): Implement request backoff.
 
 #### Adopt TODOs
+
 You should adopt an orphan if the owner has left the company/project, or if you make
 modifications to the code directly related to the TODO topic.
 
 ### Obey the Law of Demeter ([LoD](http://en.wikipedia.org/wiki/Law_of_Demeter))
+
 The Law of Demeter is most obviously violated by breaking the
 [one dot rule](http://en.wikipedia.org/wiki/Law_of_Demeter#In_object-oriented_programming), but
 there are other code structures that lead to violations of the spirit of the law.
 
 #### In classes
-Take what you need, nothing more.  This often relates to [texas constructors](#stay-out-of-texas)
-but it can also hide in constructors or methods that take few parameters.  The key idea is
+
+Take what you need, nothing more. This often relates to [texas constructors](#stay-out-of-texas)
+but it can also hide in constructors or methods that take few parameters. The key idea is
 to defer assembly to the layers of the code that know enough to assemble and instead just
 take the minimal interface you need to get your work done.
 
@@ -1212,10 +1261,11 @@ Weigher only take the things it actually uses it becomes easier to unit-test and
 the system involves.
 
 #### In methods
+
 If a method has multiple isolated blocks consider naming these blocks by extracting them
-to helper methods that do just one thing.  Besides making the calling sites read less
+to helper methods that do just one thing. Besides making the calling sites read less
 like code and more like english, the extracted sites are often easier to flow-analyse for
-human eyes.  The classic case is branched variable assignment.  In the extreme, never do
+human eyes. The classic case is branched variable assignment. In the extreme, never do
 this:
 
     :::java
@@ -1267,6 +1317,7 @@ A code reader that generally trusts methods do what they say can scan calculate
 quickly now and drill down only to those methods where I want to learn more.
 
 ### Don't Repeat Yourself ([DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself))
+
 For a more long-winded discussion on this topic, read
 [here](http://c2.com/cgi/wiki?DontRepeatYourself).
 
@@ -1275,8 +1326,9 @@ For a more long-winded discussion on this topic, read
 #### Centralize duplicate logic in utility functions
 
 ### Manage threads properly
+
 When spawning a thread, either directly or with a thread pool, you need to take special care that
-you properly manage the lifecycle.  Please familiarize yourself with the concept
+you properly manage the lifecycle. Please familiarize yourself with the concept
 of daemon and non-daemon threads (and their effect on the JVM lifecycle) by reading the
 documentation for [Thread](http://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html).
 Failing to understand these concepts can cause your application to hang at shutdown.
@@ -1285,7 +1337,7 @@ Shutting down an
 [ExecutorService](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html)
 properly is a slightly tricky process (see javadoc).
 If your code manages an executor service with non-daemon threads, you need to follow this procedure.
-[ExecutorServiceShutdown]([ExecutorService](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html))
+[ExecutorServiceShutdown](<[ExecutorService](http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html)>)
 very nicely contains this behavior for you.
 
 If you want to automatically perform cleanup like this when the VM is shutting down, consider
@@ -1293,6 +1345,7 @@ registering with
 [ShutdownRegistry](https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/application/ShutdownRegistry.java).
 
 ### Avoid unnecessary code
+
 #### Superfluous temporary variables.
 
     :::java
@@ -1325,6 +1378,7 @@ registering with
     }
 
 ### The 'fast' implementation
+
 Don't bewilder your API users with a 'fast' or 'optimized' implementation of a method.
 
     :::java

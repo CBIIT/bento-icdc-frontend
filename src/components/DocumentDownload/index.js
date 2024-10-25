@@ -1,1 +1,1 @@
-export { default } from './DocumentDownloadView';
+export { default } from "./DocumentDownloadView";

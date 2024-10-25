@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
-import client from '../../../utils/graphqlClient';
+import { useEffect, useState } from "react";
+import client from "../../../utils/graphqlClient";
 
-export const getDataTest = '';
+export const getDataTest = "";
 
 export const getManifestData = (query, filesId) => {
   async function getData() {
-    const result = await client.query({
-      query,
-      variables: {
-        uuids: filesId,
-      },
-    })
+    const result = await client
+      .query({
+        query,
+        variables: {
+          uuids: filesId,
+        },
+      })
       .then((response) => response.data);
     return result;
   }

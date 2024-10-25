@@ -1,9 +1,9 @@
-import { customPaginationAction } from '../../../bento-core';
+import { customPaginationAction } from "../../../bento-core";
 import {
   GET_MY_CART_DATA_QUERY,
   GET_MY_CART_DATA_QUERY_DESC,
   cartTable,
-} from '../../../bento/fileCentricCartWorkflowData';
+} from "../../../bento/fileCentricCartWorkflowData";
 
 // pagination table behavior
 // customizeOnRowSelect,
@@ -16,13 +16,16 @@ import {
 export const myFileTablePaginationOptions = (context) => ({
   customizeSortByColumn: (column, order) => {
     const { dispatch, sortBy } = context;
-    const sort = (order === 'asc' && sortBy === column) ? 'desc' : 'asc';
+    const sort = order === "asc" && sortBy === column ? "desc" : "asc";
     const value = {
       sortOrder: sort,
       sortBy: column,
-      query: sort === 'asc' ? GET_MY_CART_DATA_QUERY : GET_MY_CART_DATA_QUERY_DESC,
-      paginationAPIField: sort === 'asc' ? cartTable.paginationAPIField
-        : cartTable.paginationAPIFieldDesc,
+      query:
+        sort === "asc" ? GET_MY_CART_DATA_QUERY : GET_MY_CART_DATA_QUERY_DESC,
+      paginationAPIField:
+        sort === "asc"
+          ? cartTable.paginationAPIField
+          : cartTable.paginationAPIFieldDesc,
     };
     dispatch(customPaginationAction(value));
   },
@@ -31,16 +34,10 @@ export const myFileTablePaginationOptions = (context) => ({
     // file_name and file_uuid are required to view in JBrowse
     // and download files respectively.
     event.stopPropagation();
-    const { dispatch, 
-      selectedRows = [], 
-      selectedFileIds = [],
-    } = context;
+    const { dispatch, selectedRows = [], selectedFileIds = [] } = context;
     let selectedFilesName = [...selectedRows];
     let updateFilesId = [...selectedFileIds];
-    const {
-      file_name: fileName,
-      file_uuid: fileId,
-    } = row;
+    const { file_name: fileName, file_uuid: fileId } = row;
 
     if (!row.isChecked) {
       selectedFilesName.push(fileName);
@@ -49,16 +46,18 @@ export const myFileTablePaginationOptions = (context) => ({
       selectedFilesName = selectedFilesName.filter((file) => fileName !== file);
       updateFilesId = updateFilesId.filter((id) => fileId !== id);
     }
-    dispatch(customPaginationAction({
-      selectedRows: selectedFilesName,
-      selectedFileIds: updateFilesId,
-    }));
-  }
+    dispatch(
+      customPaginationAction({
+        selectedRows: selectedFilesName,
+        selectedFileIds: updateFilesId,
+      }),
+    );
+  },
 });
 
 export const paginationOptions = (context, config) => {
   switch (config?.title) {
-    case 'myFiles':
+    case "myFiles":
       return {
         ...myFileTablePaginationOptions(context),
       };

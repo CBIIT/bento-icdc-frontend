@@ -1,15 +1,15 @@
-import { GET_GLOBAL_STATS_DATA_QUERY as STATS_QUERY } from '../../bento/globalStatsData';
-import client from '../../utils/graphqlClient';
+import { GET_GLOBAL_STATS_DATA_QUERY as STATS_QUERY } from "../../bento/globalStatsData";
+import client from "../../utils/graphqlClient";
 
-export const RECIEVE_STATS = 'RECIEVE_STATS';
-export const STATS_QUERY_ERR = 'STATS_QUERY_ERR';
-export const READY_STATS = 'READY_STATS';
-export const REQUEST_STATS = 'REQUEST_STATS';
+export const RECIEVE_STATS = "RECIEVE_STATS";
+export const STATS_QUERY_ERR = "STATS_QUERY_ERR";
+export const READY_STATS = "READY_STATS";
+export const REQUEST_STATS = "REQUEST_STATS";
 
 export const initialState = {
   isFetched: false,
   isLoading: false,
-  error: '',
+  error: "",
   hasError: false,
   data: [],
 };
@@ -27,10 +27,9 @@ function readyStats() {
 function receiveStats(json) {
   return {
     type: RECIEVE_STATS,
-    payload:
-{
-  data: json.data,
-},
+    payload: {
+      data: json.data,
+    },
   };
 }
 
@@ -42,12 +41,13 @@ function errorhandler(error, type) {
 }
 
 function fetchStats(statQuery) {
-  return (dispatch) => client
-    .query({
-      query: statQuery,
-    })
-    .then((result) => dispatch(receiveStats(result)))
-    .catch((error) => dispatch(errorhandler(error, STATS_QUERY_ERR)));
+  return (dispatch) =>
+    client
+      .query({
+        query: statQuery,
+      })
+      .then((result) => dispatch(receiveStats(result)))
+      .catch((error) => dispatch(errorhandler(error, STATS_QUERY_ERR)));
 }
 
 export function fetchDataForStats() {

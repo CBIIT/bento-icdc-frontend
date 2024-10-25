@@ -1,6 +1,6 @@
-import { WidgetGenerator, DonutChartGenerator } from '@bento-core/widgets';
-import { CustomDataTable } from '@bento-core/data-table';
-import { Header } from '@bento-core/header';
+import { WidgetGenerator, DonutChartGenerator } from "@bento-core/widgets";
+import { CustomDataTable } from "@bento-core/data-table";
+import { Header } from "@bento-core/header";
 import {
   clearAllAndSelectFacet,
   ClearAllFiltersBtn,
@@ -14,7 +14,7 @@ import {
   clearSliderSection,
   toggleCheckBox,
   sideBarActionTypes,
-} from '@bento-core/facet-filter';
+} from "@bento-core/facet-filter";
 import {
   TableView,
   Wrapper,
@@ -31,15 +31,15 @@ import {
   onRowSeclect,
   setTotalRowCount,
   customPaginationAction,
-} from '@bento-core/paginated-table';
-import { Footer } from '@bento-core/footer';
+} from "@bento-core/paginated-table";
+import { Footer } from "@bento-core/footer";
 import {
   cellTypes,
   dataFormatTypes,
   headerTypes,
   formatBytes,
-} from '@bento-core/table';
-import { cartReducerGenerator } from '@bento-core/cart';
+} from "@bento-core/table";
+import { cartReducerGenerator } from "@bento-core/cart";
 import {
   LocalFindReducerGenerator,
   resetAllData,
@@ -51,10 +51,10 @@ import {
   UploadModalGenerator,
   updateUploadData,
   updateUploadMetadata,
-} from '@bento-core/local-find';
-import StatsBar from '@bento-core/stats-bar';
-import { Tabs as BentoTabs } from '@bento-core/tab';
-import { QueryBarGenerator } from '@bento-core/query-bar';
+} from "@bento-core/local-find";
+import StatsBar from "@bento-core/stats-bar";
+import { Tabs as BentoTabs } from "@bento-core/tab";
+import { QueryBarGenerator } from "@bento-core/query-bar";
 import {
   transformInitialDataForSunburst,
   filterData,
@@ -68,9 +68,9 @@ import {
   transformAPIDataIntoCheckBoxData,
   getColumns,
   getDefaultCustomFooter,
-} from '@bento-core/util';
-import { AboutBody } from '@bento-core/about';
-import ToolTip from '@bento-core/tool-tip';
+} from "@bento-core/util";
+import { AboutBody } from "@bento-core/about";
+import ToolTip from "@bento-core/tool-tip";
 
 export {
   WidgetGenerator, // widgets
