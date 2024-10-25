@@ -20351,7 +20351,7 @@
       "file_uuid": "5895c712-a8ac-5513-953c-152e30daa87a",
       "individual_id": null,
       "md5sum": "f5d91b56967b5375331410912c54dcc8",
-
+    },
     {
       "association": "case",
       "breed": "Boxer",
