@@ -93,7 +93,7 @@ const styles = () => ({
     marginBottom: '32px',
     marginRight: '24px',
     borderWidth: '1px',
-    borderColor: 'black',
+    borderColor: '#000000',
   },
   bodyContainer: {
     background: '#FFFFFF',

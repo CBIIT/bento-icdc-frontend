@@ -99,7 +99,7 @@ export const navBarstyling = {
         link: {
             overflowWrap: 'normal',
             textDecoration: 'none',
-            color: 'black',
+            color: '#000000',
             fontSize: '14px',
             fontWeight: '600',
             lineSpacing: '1px',

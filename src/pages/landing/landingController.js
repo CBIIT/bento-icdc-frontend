@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@mui/material';
 import { parse } from 'yaml';
 import axios from 'axios';
 import LandingView from './landingView';

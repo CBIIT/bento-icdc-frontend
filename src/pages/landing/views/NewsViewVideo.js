@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  withStyles,
-} from '@material-ui/core';
+import { IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
 import ReactPlayer from 'react-player/youtube';
-import { Close } from '@material-ui/icons';
+import { Close } from '@mui/icons-material';
 
 const NewsViewVideo = ({
   url, label, classes, description,
@@ -26,43 +21,38 @@ const NewsViewVideo = ({
     setOpen(false);
   };
 
-  return (
-    <>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} classes={{ paperWidthSm: classes.paper }}>
-        <div className={classes.dialogTitle}>
-          <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitle}>
-            <h3 className={classes.title}>{`Video: ${label}`}</h3>
-          </DialogTitle>
-          <IconButton
-            onClick={handleClose}
-            className={classes.closeIconButton}
-          >
-            <Close
-              className={classes.closeIcon}
-            />
-          </IconButton>
+  return (<>
+    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} classes={{ paperWidthSm: classes.paper }}>
+      <div className={classes.dialogTitle}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitle}>
+          <h3 className={classes.title}>{`Video: ${label}`}</h3>
+        </DialogTitle>
+        <IconButton onClick={handleClose} className={classes.closeIconButton} size="large">
+          <Close
+            className={classes.closeIcon}
+          />
+        </IconButton>
+      </div>
+      <DialogContent
+        dividers
+        className={classes.dialogContent}
+      >
+        <div className={classes.videoContainer}>
+          <ReactPlayer
+            playing
+            onProgress={({ playedSeconds }) => open || setSecondsElapsed(playedSeconds)}
+            url={`${url}&start=${secondsElapsed}`}
+            height="30em"
+            width="100%"
+          />
         </div>
-        <DialogContent
-          dividers
-          className={classes.dialogContent}
-        >
-          <div className={classes.videoContainer}>
-            <ReactPlayer
-              playing
-              onProgress={({ playedSeconds }) => open || setSecondsElapsed(playedSeconds)}
-              url={`${url}&start=${secondsElapsed}`}
-              height="30em"
-              width="100%"
-            />
-          </div>
-          <p className={classes.dialogParagraph}>
-            {description}
-          </p>
-        </DialogContent>
-      </Dialog>
-      <ReactPlayer playing={playing} muted onPlay={handleClickOpen} url={url} height="100%" width="100%" />
-    </>
-  );
+        <p className={classes.dialogParagraph}>
+          {description}
+        </p>
+      </DialogContent>
+    </Dialog>
+    <ReactPlayer playing={playing} muted onPlay={handleClickOpen} url={url} height="100%" width="100%" />
+  </>);
 };
 
 const styles = () => ({

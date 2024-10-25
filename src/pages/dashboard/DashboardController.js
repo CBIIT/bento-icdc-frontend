@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { connect } from 'react-redux';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@mui/material';
 import { getFilters } from '../../bento-core';
 import DashboardView from './DashboardView';
 import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';

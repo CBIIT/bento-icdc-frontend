@@ -1,6 +1,7 @@
+/* Do not import mui v5 */
 import React from 'react';
 import { useLocation } from 'react-router';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import {
   SearchBarGenerator,
 } from '@bento-core/global-search';
@@ -100,10 +101,10 @@ const styles = () => ({
         '&:nth-last-child(1)': {
           borderBottom: 'none',
           fontSize: '16px',
-          color: 'black',
+          color: '#000000',
           backgroundColor: '#E9E9E9',
           '& :hover': {
-            color: 'black',
+            color: '#000000',
             backgroundColor: '#E9E9E9',
             pointerEvents: 'none',
           },

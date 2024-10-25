@@ -1,11 +1,7 @@
 import React, { useCallback } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import {
-  Container,
-  ThemeProvider,
-  createTheme,
-  withStyles,
-} from '@material-ui/core';
+import { Container, ThemeProvider, StyledEngineProvider, createTheme, adaptV4Theme } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
 import {
   clearAllFilters,
   clearFacetSection,
@@ -100,19 +96,21 @@ const QueryBarView = ({
   }), [localFind]);
 
   return (
-    <ThemeProvider theme={createTheme(theme)}>
-      <Container
-        maxWidth="xl"
-        className="icdc_query_bar"
-      >
-        <QueryBar
-          statusReducer={mappedFilterState}
-          localFind={localFind}
-          classes={classes}
-          styles={classes}
-        />
-      </Container>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={createTheme(adaptV4Theme(theme))}>
+        <Container
+          maxWidth="xl"
+          className="icdc_query_bar"
+        >
+          <QueryBar
+            statusReducer={mappedFilterState}
+            localFind={localFind}
+            classes={classes}
+            styles={classes}
+          />
+        </Container>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

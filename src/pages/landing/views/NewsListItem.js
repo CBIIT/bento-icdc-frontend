@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  withStyles,
   ListItem,
   ListItemText,
   Typography,
@@ -10,8 +9,9 @@ import {
   DialogTitle,
   DialogContent,
   IconButton,
-} from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+} from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
+import { Close } from '@mui/icons-material';
 
 const NewsItem = ({
   paragraph, index, total, classes, label, blurb,
@@ -58,16 +58,12 @@ const NewsItem = ({
       >
         READ MORE
       </Button>
-
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} classes={{ paperWidthSm: classes.paper }}>
         <div className={classes.dialogTitle}>
           <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitle}>
             <h3 className={classes.title}>{`Update: ${label}`}</h3>
           </DialogTitle>
-          <IconButton
-            onClick={handleClose}
-            className={classes.closeIconButton}
-          >
+          <IconButton onClick={handleClose} className={classes.closeIconButton} size="large">
             <Close
               className={classes.closeIcon}
             />
