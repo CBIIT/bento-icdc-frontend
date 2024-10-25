@@ -23,7 +23,10 @@ module.exports = merge(common, {
         },
         compress: true,
         open: true,
-        port: 3000,
+        port: 7000,
+        client: {
+            overlay: false,
+          },
     },
     module: {
         rules: [
