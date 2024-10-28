@@ -42,7 +42,7 @@ We use **NVM (Node Version Manager)** to ensure everyone is using the correct No
    npm install --legacy-peer-deps
    ```
 4. Set up your editior to use [Prettier](https://prettier.io/docs/en/editors).
-5. Reach out to team member for [env variables](#environment-variables).
+5. Create a `.env` file in `config/` Reach out to team member for values. Read [this](#environment-variables) section.
 6. Start dev server:
     ```
     npm run dev
