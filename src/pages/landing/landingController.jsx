@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { CircularProgress } from "@material-ui/core";
-import { parse } from "yaml";
-import axios from "axios";
-import LandingView from "./landingView";
-import NewsView from "./views/newsView";
-import env from "../../utils/env";
+import React, { useState, useEffect } from 'react';
+import { CircularProgress } from '@mui/material';
+import { parse } from 'yaml';
+import axios from 'axios';
+import LandingView from './landingView';
+import NewsView from './views/newsView';
+import env from '../../utils/env';
 
 const LANDING_CONTENT_URL = env.REACT_APP_LANDING_DATA;
 const NEWS_CONTENT_URL = env.REACT_APP_NEWS_DATA;
-const NEWS_PATH = "/news";
+const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {
   const [newsData, setNewsData] = useState(undefined);
@@ -21,7 +21,7 @@ const LandingController = ({ match }) => {
         result = await axios.get(url);
 
         resultData = parse(result.data);
-        if (setter === "landing") {
+        if (setter === 'landing') {
           setLandingPageData(resultData[0]);
         } else {
           setNewsData(resultData);
@@ -30,8 +30,8 @@ const LandingController = ({ match }) => {
         console.error(error);
       }
     };
-    fetchStaticContent(LANDING_CONTENT_URL, "landing");
-    fetchStaticContent(NEWS_CONTENT_URL, "news");
+    fetchStaticContent(LANDING_CONTENT_URL, 'landing');
+    fetchStaticContent(NEWS_CONTENT_URL, 'news');
   }, []);
 
   if (
@@ -53,7 +53,7 @@ const LandingController = ({ match }) => {
 
   return (
     <LandingView
-      link={newsData.sourceLink1 || "testlink"}
+      link={newsData.sourceLink1 || 'testlink'}
       pageData={landingPageData && landingPageData}
       primaryContentImage={newsData && newsData.primaryContentImage}
     />

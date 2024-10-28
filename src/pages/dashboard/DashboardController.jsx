@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useApolloClient } from "@apollo/client";
-import { connect } from "react-redux";
-import { CircularProgress } from "@material-ui/core";
-import { getFilters } from "../../bento-core";
-import DashboardView from "./DashboardView";
-import { DASHBOARD_QUERY } from "../../bento/dashboardTabData";
-import { setActiveFilterByPathQuery } from "../../components/sideBarFilter/BentoFilterUtils";
+import React, { useEffect, useState } from 'react';
+import { useApolloClient } from '@apollo/client';
+import { connect } from 'react-redux';
+import { CircularProgress } from '@mui/material';
+import { getFilters } from '../../bento-core';
+import DashboardView from './DashboardView';
+import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';
+import { setActiveFilterByPathQuery } from '../../components/sideBarFilter/BentoFilterUtils';
 
-const getDashData = (states) => {
+const getDashData = states => {
   const { filterState, localFindUpload, localFindAutocomplete } = states;
 
   const client = useApolloClient();
@@ -17,7 +17,7 @@ const getDashData = (states) => {
         query: DASHBOARD_QUERY,
         variables: activeFilters,
       })
-      .then((response) => response.data);
+      .then(response => response.data);
     return result;
   }
 
@@ -26,14 +26,14 @@ const getDashData = (states) => {
   const activeFilters = {
     ...getFilters(filterState),
     case_ids: [
-      ...(localFindUpload || []).map((obj) => obj.case_id),
-      ...(localFindAutocomplete || []).map((obj) => obj.title),
+      ...(localFindUpload || []).map(obj => obj.case_id),
+      ...(localFindAutocomplete || []).map(obj => obj.title),
     ],
   };
 
   useEffect(() => {
     const controller = new AbortController();
-    getData(activeFilters).then((result) => {
+    getData(activeFilters).then(result => {
       if (result) {
         setDashData(result);
       }
@@ -44,11 +44,11 @@ const getDashData = (states) => {
   return { dashData, activeFilters };
 };
 
-const DashTemplateController = (props) => {
+const DashTemplateController = props => {
   const { match, history } = props;
   if (match.params.filterQuery) {
     setActiveFilterByPathQuery(match);
-    const redirectUrl = "/explore";
+    const redirectUrl = '/explore';
     history.push(redirectUrl);
   }
 
@@ -76,7 +76,7 @@ const DashTemplateController = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   filterState: state.statusReducer.filterState,
   localFindUpload: state.localFind.upload,
   localFindAutocomplete: state.localFind.autocomplete,

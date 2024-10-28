@@ -3,17 +3,17 @@ import {
   ResultOf,
   DocumentTypeDecoration,
   TypedDocumentNode,
-} from "@graphql-typed-document-node/core";
-import { FragmentDefinitionNode } from "graphql";
-import { Incremental } from "./graphql";
+} from '@graphql-typed-document-node/core';
+import { FragmentDefinitionNode } from 'graphql';
+import { Incremental } from './graphql';
 
 export type FragmentType<
   TDocumentType extends DocumentTypeDecoration<any, any>,
 > =
   TDocumentType extends DocumentTypeDecoration<infer TType, any>
-    ? [TType] extends [{ " $fragmentName"?: infer TKey }]
+    ? [TType] extends [{ ' $fragmentName'?: infer TKey }]
       ? TKey extends string
-        ? { " $fragmentRefs"?: { [key in TKey]: TType } }
+        ? { ' $fragmentRefs'?: { [key in TKey]: TType } }
         : never
       : never
     : never;
@@ -21,17 +21,17 @@ export type FragmentType<
 // return non-nullable if `fragmentType` is non-nullable
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
-  fragmentType: FragmentType<DocumentTypeDecoration<TType, any>>,
+  fragmentType: FragmentType<DocumentTypeDecoration<TType, any>>
 ): TType;
 // return nullable if `fragmentType` is undefined
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
-  fragmentType: FragmentType<DocumentTypeDecoration<TType, any>> | undefined,
+  fragmentType: FragmentType<DocumentTypeDecoration<TType, any>> | undefined
 ): TType | undefined;
 // return nullable if `fragmentType` is nullable
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
-  fragmentType: FragmentType<DocumentTypeDecoration<TType, any>> | null,
+  fragmentType: FragmentType<DocumentTypeDecoration<TType, any>> | null
 ): TType | null;
 // return nullable if `fragmentType` is nullable or undefined
 export function useFragment<TType>(
@@ -39,12 +39,12 @@ export function useFragment<TType>(
   fragmentType:
     | FragmentType<DocumentTypeDecoration<TType, any>>
     | null
-    | undefined,
+    | undefined
 ): TType | null | undefined;
 // return array of non-nullable if `fragmentType` is array of non-nullable
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
-  fragmentType: Array<FragmentType<DocumentTypeDecoration<TType, any>>>,
+  fragmentType: Array<FragmentType<DocumentTypeDecoration<TType, any>>>
 ): Array<TType>;
 // return array of nullable if `fragmentType` is array of nullable
 export function useFragment<TType>(
@@ -52,12 +52,12 @@ export function useFragment<TType>(
   fragmentType:
     | Array<FragmentType<DocumentTypeDecoration<TType, any>>>
     | null
-    | undefined,
+    | undefined
 ): Array<TType> | null | undefined;
 // return readonly array of non-nullable if `fragmentType` is array of non-nullable
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
-  fragmentType: ReadonlyArray<FragmentType<DocumentTypeDecoration<TType, any>>>,
+  fragmentType: ReadonlyArray<FragmentType<DocumentTypeDecoration<TType, any>>>
 ): ReadonlyArray<TType>;
 // return readonly array of nullable if `fragmentType` is array of nullable
 export function useFragment<TType>(
@@ -65,7 +65,7 @@ export function useFragment<TType>(
   fragmentType:
     | ReadonlyArray<FragmentType<DocumentTypeDecoration<TType, any>>>
     | null
-    | undefined,
+    | undefined
 ): ReadonlyArray<TType> | null | undefined;
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
@@ -74,7 +74,7 @@ export function useFragment<TType>(
     | Array<FragmentType<DocumentTypeDecoration<TType, any>>>
     | ReadonlyArray<FragmentType<DocumentTypeDecoration<TType, any>>>
     | null
-    | undefined,
+    | undefined
 ): TType | Array<TType> | ReadonlyArray<TType> | null | undefined {
   return fragmentType as any;
 }
@@ -91,7 +91,7 @@ export function isFragmentReady<TQuery, TFrag>(
   data:
     | FragmentType<TypedDocumentNode<Incremental<TFrag>, any>>
     | null
-    | undefined,
+    | undefined
 ): data is FragmentType<typeof fragmentNode> {
   const deferredFields = (
     queryNode as {
@@ -107,5 +107,5 @@ export function isFragmentReady<TQuery, TFrag>(
   const fragName = fragDef?.name?.value;
 
   const fields = (fragName && deferredFields[fragName]) || [];
-  return fields.length > 0 && fields.every((field) => data && field in data);
+  return fields.length > 0 && fields.every(field => data && field in data);
 }

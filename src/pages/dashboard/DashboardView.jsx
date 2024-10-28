@@ -1,17 +1,17 @@
-import React from "react";
-import { withStyles } from "@material-ui/core";
-import styles from "./DashboardStyle";
+import React from 'react';
+import withStyles from '@mui/styles/withStyles';
+import styles from './DashboardStyle';
 import {
   facetSectionVariables,
   facetsConfig,
   tooltipConfig,
-} from "../../bento/dashboardData";
-import StatsView from "../../components/Stats/StatsView";
-import BentoFacetFilter from "../../components/sideBarFilter/BentoFacetFilter";
-import WidgetView from "./widget/WidgetView";
-import QueryBarView from "./filterQueryBar/QueryBarView";
-import DashboardTabs from "./components/DashboardTabs";
-import { updateStat } from "../../components/Stats/utils";
+} from '../../bento/dashboardData';
+import StatsView from '../../components/Stats/StatsView';
+import BentoFacetFilter from '../../components/sideBarFilter/BentoFacetFilter';
+import WidgetView from './widget/WidgetView';
+import QueryBarView from './filterQueryBar/QueryBarView';
+import DashboardTabs from './components/DashboardTabs';
+import { updateStat } from '../../components/Stats/utils';
 
 const Dashboard = ({
   classes,

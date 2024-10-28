@@ -1,6 +1,9 @@
-import React from "react";
-import { Tabs, Tab, withStyles } from "@material-ui/core";
-import TabLabel from "./TabLable";
+import React from 'react';
+import {} from // Tabs, Tab, withStyles,
+'@material-ui/core';
+import { Tabs, Tab } from '@mui/material';
+import { withStyles } from '@mui/styles';
+import TabLabel from './TabLable';
 
 const TabItems = ({
   tabItems,
@@ -37,7 +40,7 @@ const TabItems = ({
       <Tabs
         onChange={(event, value) => handleTabChange(event, value)}
         value={currentTab}
-        TabIndicatorProps={{ style: { background: "none" } }}
+        TabIndicatorProps={{ style: { background: 'none' } }}
         orientation={orientation}
       >
         {TABs}
@@ -49,18 +52,18 @@ const TabItems = ({
 
 const styles = () => ({
   defaultStyle: {
-    fontFamily: "Open Sans",
-    textTransform: "none",
-    fontSize: "17px",
+    fontFamily: 'Open Sans',
+    textTransform: 'none',
+    fontSize: '17px',
   },
   flexContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   indicator: {
-    display: "none",
+    display: 'none',
   },
   tabHighlightColor: {
-    color: "#ffffff",
+    color: '#ffffff',
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -11,18 +11,18 @@ import {
   ListItemText,
   ListItemIcon,
   DialogActions,
-} from "@material-ui/core";
-import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
+} from '@mui/material';
+import FiberManualRecord from '@mui/icons-material/FiberManualRecord';
 // import { useSelector } from 'react-redux';
-import { text } from "./OverlayText.js";
-import DialogThemeProvider from "./OverlayThemConfig";
+import { text } from './OverlayText';
+import DialogThemeProvider from './OverlayThemConfig';
 
 const OverlayWindow = () => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
-    sessionStorage.setItem("overlayLoad", "true");
+    sessionStorage.setItem('overlayLoad', 'true');
   };
 
   useEffect(() => {
@@ -32,7 +32,10 @@ const OverlayWindow = () => {
   }, [open]);
 
   const content = text.content.map((item, index) => (
-    <DialogContentText key={`${item}-${index}`} id="alert-dialog-description">
+    <DialogContentText
+      key={`dialog-content-text-${index}`}
+      id="alert-dialog-description"
+    >
       {item}
     </DialogContentText>
   ));
@@ -60,7 +63,7 @@ const OverlayWindow = () => {
             <DialogContent>
               {content}
               {
-                " By using this system, you understand and consent to the following: "
+                ' By using this system, you understand and consent to the following: '
               }
               <List>{list}</List>
             </DialogContent>

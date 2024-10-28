@@ -8,7 +8,7 @@ import prettierConfig from 'eslint-config-prettier';
 export default tseslint.config(
     {
       files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
-      ignores: ['webpack/**', '**/src/serviceWorker.js', 'config/**/**', '**/postcss.config.js', 'scripts/**/**', '**src/generated-types/**'],
+      ignores: ['webpack/**', '**/src/serviceWorker.js', 'config/**/**', '**/postcss.config.js', 'scripts/**/**', '**/src/generated-types/**'],
       languageOptions: {
         globals: globals.browser,
         parserOptions: {

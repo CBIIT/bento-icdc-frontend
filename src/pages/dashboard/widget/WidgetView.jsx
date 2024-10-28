@@ -1,78 +1,78 @@
-import React, { useCallback } from "react";
-import _ from "lodash";
+import React, { useCallback } from 'react';
+import _ from 'lodash';
 import {
   Button,
   Collapse,
   FormControlLabel,
   Grid,
   Switch,
-  withStyles,
   IconButton,
-  makeStyles,
-} from "@material-ui/core";
-import { WidgetGenerator, ToolTip } from "../../../bento-core";
-import { useTheme } from "../../../ThemeContext";
-import styles from "./WidgetStyle";
-import { themeToggleTooltip, widgetsData } from "../../../bento/dashboardData";
-import colors from "../../../utils/colors";
-import { Typography } from "../../../components/Wrappers/Wrappers";
-import { formatWidgetData } from "./WidgetUtils";
-import emptyResultsDonutViewConfig from "./CustomizeDonutViewConfig";
+} from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import { WidgetGenerator, ToolTip } from '../../../bento-core';
+import { useTheme } from '../../../ThemeContext';
+import styles from './WidgetStyle';
+import { themeToggleTooltip, widgetsData } from '../../../bento/dashboardData';
+import colors from '../../../utils/colors';
+import { Typography } from '../../../components/Wrappers/Wrappers';
+import { formatWidgetData } from './WidgetUtils';
+import emptyResultsDonutViewConfig from './CustomizeDonutViewConfig';
 
 const WidgetView = ({ classes, data, theme, activeFilters }) => {
   const displayWidgets = formatWidgetData(data, widgetsData);
   const [collapse, setCollapse] = React.useState(true);
   const themeChanger = useTheme();
-  const handleChange = () => setCollapse((prev) => !prev);
+  const handleChange = () => setCollapse(prev => !prev);
 
   /**
    * Update widget data for file types to match the table data
    * @param {*} orginalData
    * @returns modified widget data
    */
-  const modifyFileTypeData = (orginalData) => {
+  const modifyFileTypeData = orginalData => {
     const { file_type: fileTypes = [] } = activeFilters;
     if (fileTypes.length === 0) {
       return orginalData;
     }
-    const filterValue = _.filter(orginalData, (item) =>
-      fileTypes.includes(item.group),
+    const filterValue = _.filter(orginalData, item =>
+      fileTypes.includes(item.group)
     );
     return filterValue;
   };
 
   const customClasses = makeStyles({
     widgetWrapper: {
-      display: "flex",
-      minHeight: "100%",
-      paddingBottom: "32px",
+      display: 'flex',
+      minHeight: '100%',
+      paddingBottom: '32px',
     },
     widgetHeader: {},
     widgetDivider: {
       background:
-        theme && theme.custom ? theme.custom.widgetDivider : "transparent",
-      height: "6px",
-      width: "180px",
-      border: "none",
-      margin: "16px auto 0px auto",
+        theme && theme.custom ? theme.custom.widgetDivider : 'transparent',
+      height: '6px',
+      width: '180px',
+      border: 'none',
+      margin: '16px auto 0px auto',
     },
     paddedTitle: {
-      display: "flex",
-      justifyContent: "flex-start",
-      padding: "0px 132px",
-      marginTop: "32px",
-      alignItems: "center",
-      marginBottom: "8px",
+      display: 'flex',
+      justifyContent: 'flex-start',
+      padding: '0px 132px',
+      marginTop: '32px',
+      alignItems: 'center',
+      marginBottom: '8px',
     },
     noPaddedTitle: {
-      margin: "0px 0px 0px 0px",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
+      margin: '0px 0px 0px 0px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
     },
     widgetRoot: {},
     widgetBody: {
-      margin: "0px auto",
+      margin: '0px auto',
       paddingRight: theme && theme.spacing ? theme.spacing.unit * 3 : 0,
       paddingLeft: theme && theme.spacing ? theme.spacing.unit * 3 : 0,
     },
@@ -80,17 +80,17 @@ const WidgetView = ({ classes, data, theme, activeFilters }) => {
       padding: 0,
     },
     paper: {
-      display: "flex",
-      flexDirection: "column",
+      display: 'flex',
+      flexDirection: 'column',
       flexGrow: 1,
-      overflow: "hidden",
-      boxShadow: "none",
+      overflow: 'hidden',
+      boxShadow: 'none',
     },
     customBackGround: {
       background:
         theme && theme.palette
           ? theme.palette.widgetBackground.main
-          : "transparent",
+          : 'transparent',
     },
   });
 
@@ -119,7 +119,7 @@ const WidgetView = ({ classes, data, theme, activeFilters }) => {
       ...widgetGeneratorConfig,
       DonutConfig: emptyResultsDonutViewConfig(),
     }),
-    [theme],
+    [theme]
   );
 
   const EmptyWidget = ({ index = 0, widget }) => (
@@ -144,7 +144,7 @@ const WidgetView = ({ classes, data, theme, activeFilters }) => {
         sliceTitle={widget.sliceTitle}
         data={[
           {
-            group: "",
+            group: '',
             subjects: 1,
           },
         ]}
@@ -160,7 +160,7 @@ const WidgetView = ({ classes, data, theme, activeFilters }) => {
           <FormControlLabel
             control={
               <Button className={classes.customButton} onClick={handleChange}>
-                {collapse ? "COLLAPSE VIEW" : "OPEN VIEW"}
+                {collapse ? 'COLLAPSE VIEW' : 'OPEN VIEW'}
               </Button>
             }
           />
@@ -175,7 +175,7 @@ const WidgetView = ({ classes, data, theme, activeFilters }) => {
             className={classes.customSwitch}
             disableRipple
             inputProps={{
-              "aria-label": "collapse widget view switch",
+              'aria-label': 'collapse widget view switch',
             }}
             checked={themeChanger.dark}
             onChange={themeChanger.toggleTheme}
@@ -185,7 +185,11 @@ const WidgetView = ({ classes, data, theme, activeFilters }) => {
             arrow
             placement="bottom"
           >
-            <IconButton className={classes.iconButton} aria-label="help">
+            <IconButton
+              className={classes.iconButton}
+              aria-label="help"
+              size="large"
+            >
               <img
                 src={themeToggleTooltip.tooltipIcon}
                 alt={themeToggleTooltip.tooltipAlt}
@@ -206,19 +210,19 @@ const WidgetView = ({ classes, data, theme, activeFilters }) => {
             if (!dataset || dataset.length === 0) {
               return (
                 <EmptyWidget
+                  key={`empty-widget-${index}`}
                   widget={widget}
                   index={index}
-                  key={`emptyWidget-${index}`}
                 />
               );
             }
             if (
-              widget.type === "sunburst" &&
+              widget.type === 'sunburst' &&
               (!dataset.children || !dataset.children.length)
             ) {
               return (
                 <EmptyWidget
-                  key={`sunburst-emptyWidget-${index}`}
+                  key={`empty-widget-${index}`}
                   widget={widget}
                   index={index}
                 />
