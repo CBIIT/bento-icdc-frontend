@@ -5,7 +5,7 @@
   "dependencies": {
     "@bento-core/about": "^0.3.0",
     "@bento-core/all": "^0.2.0",
-    "@bento-core/cart": "^0.3.0",
+    "@bento-core/cart": "^1.0.0",
     "@bento-core/data-table": "^0.3.0",
     "@bento-core/facet-filter": "^1.0.1-icdc.15",
     "@bento-core/footer": "1.0.1-icdc.1",
