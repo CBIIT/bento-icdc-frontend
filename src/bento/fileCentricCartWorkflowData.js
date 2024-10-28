@@ -116,7 +116,7 @@ export const CREATE_MANIFEST = gql`
 
 // --------------- GraphQL query - Retrieve selected cases info --------------
 export const GET_MY_CART_DATA_QUERY = gql`
-  query filesInList(
+  query getMyCartDataQuery(
     $uuids: [String]
     $offset: Int = 0
     $first: Int = 10
@@ -182,7 +182,7 @@ export const GET_MY_CART_DATA_QUERY = gql`
 
 // --------------- GraphQL query - Retrieve selected files info Desc --------------
 export const GET_MY_CART_DATA_QUERY_DESC = gql`
-  query filesInListDesc(
+  query getMyCartDataQueryDesc(
     $uuids: [String]
     $offset: Int = 0
     $first: Int = 10
@@ -247,7 +247,7 @@ export const GET_MY_CART_DATA_QUERY_DESC = gql`
 `;
 
 export const GET_STORE_MANIFEST_DATA_QUERY = gql`
-  query filesInList($uuids: [String]) {
+  query getStoreManifestDataQuery($uuids: [String]) {
     filesInList(uuids: $uuids) {
       file_name
       file_type

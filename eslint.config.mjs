@@ -8,7 +8,7 @@ import prettierConfig from 'eslint-config-prettier';
 export default tseslint.config(
     {
       files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
-      ignores: ['webpack/**', '**/src/serviceWorker.js', 'config/**/**', '**/postcss.config.js', 'scripts/**/**'],
+      ignores: ['webpack/**', '**/src/serviceWorker.js', 'config/**/**', '**/postcss.config.js', 'scripts/**/**', '**src/generated-types/**'],
       languageOptions: {
         globals: globals.browser,
         parserOptions: {
@@ -23,6 +23,7 @@ export default tseslint.config(
       rules: {
         'react/prop-types': 'off',
         "no-unused-vars": "off",
+        "no-console": ["error", { "allow": ["warn", "error"] }],
     "@typescript-eslint/no-unused-vars": [
       "error", // or "error"
       {
@@ -40,7 +41,12 @@ export default tseslint.config(
         ...tseslint.configs.recommendedTypeChecked,
         pluginReact.configs.flat.recommended,
         prettierConfig,
-      ]
+      ],
+      settings: {
+        react: {
+            version: "detect", // Automatically detect react version
+        }
+      }
     },
     {
       files: ["**/*.{js,jsx}"],

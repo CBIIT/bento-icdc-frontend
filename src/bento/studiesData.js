@@ -199,7 +199,7 @@ export const textLabels = {
 
 // --------------- GraphQL query - Retrieve program info --------------
 export const GET_STUDY_DATA_QUERY = gql`
-  {
+  query getStudyDataQueryStudiesData {
     studiesByProgram {
       program_id
       clinical_study_designation

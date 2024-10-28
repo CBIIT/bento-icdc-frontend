@@ -27,6 +27,7 @@ import {
 } from "../../../../bento/fileCentricCartWorkflowData";
 import DownloadFileManifestDialog from "./downloadFileManifestDialog";
 import { downloadCsvString } from "../../utils";
+import env from "../../../../utils/env";
 
 const LABEL = "Export and Download";
 
@@ -310,6 +311,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
     React.useState(false);
 
   useEffect(() => {
+    //TODO: investigate this env usage
     getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
   }, []);
 

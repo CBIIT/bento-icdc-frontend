@@ -17,7 +17,7 @@ import { TableContextProvider } from "../../bento-core";
 import StudiesTable from "../../components/DataAvailabilityTable/StudiesTable";
 
 const studiesByProgram = gql`
-  query studiesByProgram {
+  query getStudiesByProgramStudiesView {
     studiesByProgram {
       clinical_study_designation
       CRDCLinks {

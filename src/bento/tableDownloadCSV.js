@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const GET_CASES_TAB = gql`
-  query subjectOverViewPaged(
+  query getCasesTab(
     $case_ids: [String]
     $biobank: [String]
     $breed: [String]
@@ -342,7 +342,7 @@ export const customSamplesTabDownloadCSV = {
 };
 
 export const GET_FILES_TAB = gql`
-  query fileOverview(
+  query getFilesTabTableDownloadCSV(
     $case_ids: [String]
     $file_level: [String] = ["case"]
     $biobank: [String]
@@ -441,7 +441,7 @@ export const GET_FILES_TAB = gql`
 `;
 
 export const GET_FILES_TAB_STUDY_FILES = gql`
-  query fileOverview(
+  query getFilesTabForStudyFiles(
     $case_ids: [String]
     $file_level: [String] = ["study"]
     $biobank: [String]
@@ -688,7 +688,7 @@ export const customStudyFilesTabDownloadCSV = {
 };
 
 export const MY_CART = gql`
-  query filesInList($uuids: [String], $first: Int = 2000) {
+  query getMyCart($uuids: [String], $first: Int = 2000) {
     filesInList(uuids: $uuids, first: $first) {
       file_type
       file_name

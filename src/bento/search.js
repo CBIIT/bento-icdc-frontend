@@ -188,7 +188,7 @@ export const mockHeaderSuggestion = {
 };
 
 export const STUDIES_PROGRAM = gql`
-  {
+  query studesProgram {
     studiesByProgram {
       program_id
       clinical_study_designation
@@ -197,7 +197,7 @@ export const STUDIES_PROGRAM = gql`
 `;
 
 export const SEARCH_PUBLIC = gql`
-  query globalSearch($input: String) {
+  query searchPublic($input: String) {
     globalSearch(input: $input) {
       programs {
         program_acronym
@@ -222,7 +222,7 @@ export const SEARCH_PUBLIC = gql`
 `;
 
 export const SEARCH_PAGE_RESULTS = gql`
-  query globalSearch($input: String) {
+  query searchPageResults($input: String) {
     globalSearch(input: $input) {
       program_count
       study_count
@@ -236,7 +236,7 @@ export const SEARCH_PAGE_RESULTS = gql`
 `;
 
 export const SEARCH_PAGE_RESULT_CASES = gql`
-  query globalSearch($input: String, $first: Int, $offset: Int) {
+  query searchPageResultCases($input: String, $first: Int, $offset: Int) {
     globalSearch(input: $input, first: $first, offset: $offset) {
       cases {
         type
@@ -251,7 +251,7 @@ export const SEARCH_PAGE_RESULT_CASES = gql`
 `;
 
 export const SEARCH_PAGE_RESULT_SAMPLES = gql`
-  query globalSearch($input: String, $first: Int, $offset: Int) {
+  query searchPageResultSamples($input: String, $first: Int, $offset: Int) {
     globalSearch(input: $input, first: $first, offset: $offset) {
       samples {
         type
@@ -268,7 +268,7 @@ export const SEARCH_PAGE_RESULT_SAMPLES = gql`
 `;
 
 export const SEARCH_PAGE_RESULT_FILES = gql`
-  query globalSearch($input: String, $first: Int, $offset: Int) {
+  query searchPageResultFiles($input: String, $first: Int, $offset: Int) {
     globalSearch(input: $input, first: $first, offset: $offset) {
       files {
         type
@@ -285,7 +285,7 @@ export const SEARCH_PAGE_RESULT_FILES = gql`
 `;
 
 export const SEARCH_PAGE_RESULT_PROGRAM = gql`
-  query globalSearch($input: String, $first: Int, $offset: Int) {
+  query searchPageResultProgram($input: String, $first: Int, $offset: Int) {
     globalSearch(input: $input, first: $first, offset: $offset) {
       programs {
         type
@@ -299,7 +299,7 @@ export const SEARCH_PAGE_RESULT_PROGRAM = gql`
 `;
 
 export const SEARCH_PAGE_RESULT_STUDIES = gql`
-  query globalSearch($input: String, $first: Int, $offset: Int) {
+  query searchPageResultStudies($input: String, $first: Int, $offset: Int) {
     globalSearch(input: $input, first: $first, offset: $offset) {
       studies {
         type
@@ -313,7 +313,7 @@ export const SEARCH_PAGE_RESULT_STUDIES = gql`
 `;
 
 export const SEARCH_PAGE_RESULT_MODEL = gql`
-  query globalSearch($input: String, $first: Int, $offset: Int) {
+  query searchPageResultModel($input: String, $first: Int, $offset: Int) {
     globalSearch(input: $input, first: $first, offset: $offset) {
       model {
         type
@@ -329,7 +329,7 @@ export const SEARCH_PAGE_RESULT_MODEL = gql`
 `;
 
 export const SEARCH_PAGE_RESULT_ABOUT = gql`
-  query globalSearch($input: String, $first: Int, $offset: Int) {
+  query searchPageResultAbout($input: String, $first: Int, $offset: Int) {
     globalSearch(input: $input, first: $first, offset: $offset) {
       about_page {
         type

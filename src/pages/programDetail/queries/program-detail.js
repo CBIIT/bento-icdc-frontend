@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
 export const studiesByProgram = gql`
-  query studiesByProgram {
+  query getStudiesByProgramProgramDetailTwo {
     studiesByProgram {
       clinical_study_designation
       CRDCLinks {

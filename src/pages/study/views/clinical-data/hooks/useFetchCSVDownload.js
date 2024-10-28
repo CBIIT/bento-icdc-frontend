@@ -7,7 +7,6 @@ import {
   GET_CYCLE_CLINICAL_DATA,
   GET_DISEASE_EXTENT_CLINICAL_DATA,
   GET_FOLLOW_UP_CLINICAL_DATA,
-  GET_LAB_EXAM_CLINICAL_DATA,
   GET_OFF_STUDY_CLINICAL_DATA,
   GET_OFF_TREATMENT_CLINICAL_DATA,
   GET_PHYSICAL_EXAM_CLINICAL_DATA,
@@ -28,7 +27,6 @@ const useFetchCSVDownload = (csvDownloadFlags, study_code) => {
   );
   const [physicalExamNodeCSV, setPhysicalExamNodeCSV] = useState([]);
   const [vitalSignsNodeCSV, setVitalSignsNodeCSV] = useState([]);
-  const [labExamNodeCSV, setLabExamNodeCSV] = useState([]);
   const [adverseEventNodeCSV, setAdverseEventNodeCSV] = useState([]);
   const [diseaseExtentNodeCSV, setDiseaseExtentNodeCSV] = useState([]);
   const [followUpNodeCSV, setFollowUpNodeCSV] = useState([]);
@@ -116,16 +114,6 @@ const useFetchCSVDownload = (csvDownloadFlags, study_code) => {
     },
   );
 
-  const { data: labExamNodeData, isLoading: labExamLoading } = useQuery(
-    GET_LAB_EXAM_CLINICAL_DATA,
-    {
-      variables: {
-        study_code,
-      },
-      onCompleted: () => setLabExamNodeCSV(labExamNodeData?.labExamNodeData),
-    },
-  );
-
   const { data: adverseEventNodeData, isLoading: adverseEventLoading } =
     useQuery(GET_ADVERSE_EVENT_CLINICAL_DATA, {
       variables: {
@@ -181,7 +169,6 @@ const useFetchCSVDownload = (csvDownloadFlags, study_code) => {
     priorSurgeryLoading ||
     agentAdministrationLoading ||
     vitalSignsLoading ||
-    labExamLoading ||
     adverseEventLoading ||
     diseaseExtentLoading ||
     followUpLoading ||
@@ -198,7 +185,6 @@ const useFetchCSVDownload = (csvDownloadFlags, study_code) => {
     agentAdministrationNodeCSV,
     physicalExamNodeCSV,
     vitalSignsNodeCSV,
-    labExamNodeCSV,
     adverseEventNodeCSV,
     diseaseExtentNodeCSV,
     followUpNodeCSV,

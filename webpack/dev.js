@@ -1,5 +1,6 @@
 const { merge } = require("webpack-merge");
 const common = require("./common");
+const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -45,6 +46,7 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
+    new webpack.DefinePlugin(env.stringified),
     new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
     new HtmlWebpackPlugin({
       template: paths.appDevHtml, // Environment-specific template

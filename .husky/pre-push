@@ -1,0 +1,5 @@
+# .husky/pre-push
+#!/bin/sh
+
+# Run the branch naming check before pushing
+bash .husky/scripts/check-branch.sh

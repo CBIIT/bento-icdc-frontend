@@ -81,7 +81,7 @@ export const multiStudyIcon = {
 };
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
-  query sampleOverview(
+  query getAllFieldIdsSamplesTabForSelectAll(
     $case_ids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
@@ -139,7 +139,7 @@ export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
-  query fileOverview(
+  query getAllFileIdsCaseDetails(
     $file_level: [String] = []
     $case_ids: [String] = []
     $program: [String] = []
@@ -197,7 +197,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
-  query fileOverview($file_name: [String]) {
+  query getAllFileIdsOnFileTabForSelectAll($file_name: [String]) {
     fileIdsFromFileName(file_name: $file_name) {
       file_uuid
     }

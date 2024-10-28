@@ -618,7 +618,7 @@ export const tabIndex = [
 ];
 
 export const DASHBOARD_QUERY = gql`
-  query searchCases(
+  query dashboardSearchQuery(
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -784,7 +784,7 @@ export const DASHBOARD_QUERY = gql`
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_NAME_QUERY = gql`
-  query fileOverview(
+  query getFileName(
     $file_level: [String] = []
     $program: [String] = []
     $study: [String]
@@ -995,7 +995,7 @@ export const FILTER_QUERY = gql`
 
 // --------------- GraphQL query - Retrieve files tab details --------------
 export const GET_FILES_OVERVIEW_QUERY = gql`
-  query fileOverview(
+  query getFilesOverview(
     $file_level: [String] = []
     $case_ids: [String] = []
     $program: [String] = []
@@ -1096,7 +1096,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
 `;
 
 export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
-  query fileOverview(
+  query getFileOverviewDesc(
     $file_level: [String] = []
     $program: [String] = []
     $study: [String]
@@ -1196,7 +1196,7 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
 
 // --------------- GraphQL query - Retrieve sample tab details --------------
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
-  query sampleOverview(
+  query getSampleOverview(
     $case_ids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -1289,7 +1289,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
-  query sampleOverview(
+  query getSamplesOverviewDescQuery(
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -1380,7 +1380,7 @@ export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_CASES_OVERVIEW_QUERY = gql`
-  query caseOverview(
+  query getCasesOverviewQueryDashboardTab(
     $case_ids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -1462,7 +1462,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
 // --------------- GraphQL query - Retrieve sample tab details --------------
 
 export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
-  query caseOverview(
+  query getCasesOverviewDescQuery(
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -1597,7 +1597,7 @@ export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
-  query sampleOverview(
+  query getAllFileIdsForSampleTabForSelectAll(
     $case_ids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
@@ -1655,7 +1655,7 @@ export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
-  query fileOverview(
+  query getAllFileIdsDashboardTab(
     $file_level: [String] = []
     $case_ids: [String] = []
     $sample_ids: [String] = []
@@ -1715,7 +1715,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
-  query fileOverview(
+  query getAllFiledsForSampleTabForSelectAll(
     $file_level: [String] = []
     $case_ids: [String] = []
     $sample_ids: [String] = []
@@ -1774,7 +1774,12 @@ export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_FILE_IDS_FROM_FILE_NAME = gql`
-  query ($file_name: [String], $offset: Int, $first: Int, $order_by: String) {
+  query getFileIdsFromFileName(
+    $file_name: [String]
+    $offset: Int
+    $first: Int
+    $order_by: String
+  ) {
     fileIdsFromFileNameDesc(
       file_name: $file_name
       offset: $offset
@@ -1787,7 +1792,7 @@ export const GET_FILE_IDS_FROM_FILE_NAME = gql`
 `;
 
 export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
-  query fileOverview($file_name: [String]) {
+  query getAllFileIdsOnFileTabForSelectAll($file_name: [String]) {
     fileIdsFromFileName(file_name: $file_name) {
       file_uuid
     }

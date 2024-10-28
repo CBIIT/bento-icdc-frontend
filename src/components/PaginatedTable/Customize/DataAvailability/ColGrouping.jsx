@@ -50,7 +50,7 @@ export const generateDataAvailabilityTooltipText = () => (
 );
 
 const AvailabilityColumnGrouping = ({ classes }) => (
-  <span style={classes.group}>
+  <span className={classes.group}>
     Data Availability
     <Tooltip
       title={generateDataAvailabilityTooltipText()}

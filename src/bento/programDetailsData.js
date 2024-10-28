@@ -58,7 +58,7 @@ export const pageData = {
 
 // --------------- GraphQL query - Retrieve program info --------------
 export const GET_STUDY_DATA_QUERY = gql`
-  {
+  query getStudyDataQueryProgramDetails {
     studiesByProgram {
       program_id
       clinical_study_designation

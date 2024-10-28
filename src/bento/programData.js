@@ -81,7 +81,7 @@ const pageDataV2 = {
 
 // --------------- GraphQL query - Retrieve program info --------------
 const GET_PROGRAMS_DATA_QUERY = gql`
-  {
+  query getProgramsDataQuery {
     program(orderBy: program_sort_order_asc) {
       program_name
       program_acronym

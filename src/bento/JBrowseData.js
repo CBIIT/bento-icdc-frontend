@@ -598,7 +598,7 @@ export const GET_JBROWSE_DETAIL_DATA_QUERY = gql`
 `;
 
 export const GET_FILES_ID_BY_NAME = gql`
-  query subjectOverViewPaged($file_name: [String]) {
+  query getFileIdByName($file_name: [String]) {
     fileIdsFromFileName(file_name: $file_name) {
       file_uuid
       file_name

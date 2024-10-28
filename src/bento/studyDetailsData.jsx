@@ -202,7 +202,7 @@ export const fileWrapperConfig = [
 ];
 
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
-  query fileOverview(
+  query getAllFileIdsStudyDetails(
     $file_level: [String] = []
     $case_ids: [String] = []
     $program: [String] = []
@@ -260,7 +260,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
-  query fileOverview($file_name: [String]) {
+  query getAllFileIdsOnFileTabForSelectAll($file_name: [String]) {
     fileIdsFromFileName(file_name: $file_name) {
       file_uuid
     }
@@ -848,11 +848,6 @@ export const physicalExamNodeMetadata = {
   ],
 };
 
-export const labExamNodeMetadata = {
-  keysToInclude: [],
-  header: [],
-};
-
 export const adverseEventNodeMetadata = {
   keysToInclude: [
     "case_id",
@@ -1028,7 +1023,6 @@ export const GET_AGENT_CLINICAL_DATA = gql`
 export const GET_VISIT_CLINICAL_DATA = gql`
   query visitNodeData($study_code: String!) {
     visitNodeData(study_code: $study_code) {
-      inferred
       visit_id
       visit_date
     }
@@ -1036,7 +1030,7 @@ export const GET_VISIT_CLINICAL_DATA = gql`
 `;
 
 export const studiesByProgram = gql`
-  query studiesByProgram {
+  query getStudiesByProgramStudyDetails {
     studiesByProgram {
       clinical_study_designation
       CRDCLinks {
@@ -1186,12 +1180,6 @@ export const GET_VITAL_SIGNS_CLINICAL_DATA = gql`
       pulse
       body_temperature_original
     }
-  }
-`;
-
-export const GET_LAB_EXAM_CLINICAL_DATA = gql`
-  query labExamNodeData($study_code: String!) {
-    labExamNodeData(study_code: $study_code)
   }
 `;
 
@@ -1571,12 +1559,6 @@ export const table = {
       countKey: "follow_up",
       csvDownload: "followUpNodeData",
       manifest: followUpNodeMetadata,
-    },
-    {
-      title: "lab exam",
-      countKey: "lab_exam",
-      csvDownload: "labExamNodeData",
-      manifest: labExamNodeMetadata,
     },
     {
       title: "off study",

@@ -11,7 +11,7 @@ const studiesContainer = ({ invalid }) => {
   if (loading) return <CircularProgress />;
   if (error)
     return (
-      <Typography variant="headline" color="error" size="sm">
+      <Typography variant="h2" color="error" size="sm">
         {error
           ? `An error has occurred in loading stats component: ${error}`
           : "Recieved wrong data"}

@@ -85,12 +85,6 @@ export const table = {
       csvDownload: "followUpNodeData",
     },
     {
-      title: "lab exam",
-      nodeCount: "lab_exam",
-      caseCount: "lab_exam",
-      csvDownload: "labExamNodeData",
-    },
-    {
       title: "off_study",
       nodeCount: "off_study",
       caseCount: "off_study",

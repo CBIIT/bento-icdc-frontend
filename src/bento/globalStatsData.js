@@ -112,7 +112,7 @@ export const globalStatsData = [
 
 // --------------- GraphQL query - Retrieve stats details --------------
 export const GET_GLOBAL_STATS_DATA_QUERY = gql`
-  {
+  query getGlobalStatsDataQuery {
     numberOfStudies
     numberOfCases
     numberOfSamples
