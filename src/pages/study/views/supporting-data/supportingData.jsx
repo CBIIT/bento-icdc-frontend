@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import {
-  Grid,
-  withStyles,
-  Paper,
-  CircularProgress,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Typography,
-} from "@material-ui/core";
-import _ from "lodash";
-import styled from "styled-components";
-import { useOrderSupportingData } from "./useOrderSupportingData";
-import { ToolTip } from "../../../../bento-core";
+import React, { useState } from 'react';
+import { Grid, withStyles, Paper, CircularProgress } from '@material-ui/core';
+import _ from 'lodash';
+import styled from 'styled-components';
+import { useOrderSupportingData } from './useOrderSupportingData';
+import { ToolTip } from '../../../../bento-core';
 
 const ScrollContainer = styled.div`
   overflow: auto;
@@ -57,7 +50,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
             <Grid container direction="row" className={classes.containerLeft}>
               <Grid item xs={12}>
                 <div className={classes.headerText}>
-                  Repository:{" "}
+                  Repository:{' '}
                   <span className={classes.headerSpan}>
                     Imaging Data Commons (IDC)
                   </span>
@@ -65,7 +58,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
               </Grid>
               <Grid item xs={12}>
                 <div className={classes.externalLinkWrapper}>
-                  <span>Go to site:</span>{" "}
+                  <span>Go to site:</span>{' '}
                   <ToolTip title="Click to view external link in new tab">
                     <a
                       href="https://portal.imaging.datacommons.cancer.gov/explore/"
@@ -74,8 +67,8 @@ const SupportingData = ({ classes, data, isLoading }) => {
                     >
                       <img
                         style={{
-                          width: "1.5em",
-                          marginTop: "3px",
+                          width: '1.5em',
+                          marginTop: '3px',
                         }}
                         src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
                         alt="external link icon"
@@ -95,12 +88,12 @@ const SupportingData = ({ classes, data, isLoading }) => {
                     >
                       {Object.keys(IDCMetaData).length > 0 ? (
                         Object.keys(IDCMetaData).map((item, index) => {
-                          const title = _.replace(item, "_", " ");
+                          const title = _.replace(item, '_', ' ');
                           let content = IDCMetaData[item];
                           if (content.length > 92) {
                             content = _.truncate(content, {
                               length: 92,
-                              separator: " ",
+                              separator: ' ',
                             });
                           }
 
@@ -127,7 +120,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
                                   <ToolTip
                                     title={
                                       Array.isArray(content)
-                                        ? content.join(", ")
+                                        ? content.join(', ')
                                         : content
                                     }
                                     placement="bottom"
@@ -139,7 +132,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
                                       className={classes.content}
                                     >
                                       {Array.isArray(content)
-                                        ? content.join(", ")
+                                        ? content.join(', ')
                                         : content}
                                     </Grid>
                                   </ToolTip>
@@ -151,7 +144,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
                                     className={classes.content}
                                   >
                                     {Array.isArray(content)
-                                      ? content.join(", ")
+                                      ? content.join(', ')
                                       : content}
                                   </Grid>
                                 )}
@@ -184,7 +177,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
             <Grid container direction="row" className={classes.containerLeft}>
               <Grid item xs={12}>
                 <div className={classes.tciaHeaderText}>
-                  Repository:{" "}
+                  Repository:{' '}
                   <span className={classes.headerSpan}>
                     The Cancer Imaging Archive (TCIA)
                   </span>
@@ -192,7 +185,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
               </Grid>
               <Grid item xs={12}>
                 <div className={classes.tciaExternalLinkWrapper}>
-                  Go to site:{" "}
+                  Go to site:{' '}
                   <ToolTip title="Click to view external link in new tab">
                     <a
                       href="https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=70227341#702273419937cb85808048c99e4b55fd520d63f2"
@@ -201,8 +194,8 @@ const SupportingData = ({ classes, data, isLoading }) => {
                     >
                       <img
                         style={{
-                          width: "1.5em",
-                          marginTop: "3px",
+                          width: '1.5em',
+                          marginTop: '3px',
                         }}
                         src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
                         alt="external link icon"
@@ -222,17 +215,21 @@ const SupportingData = ({ classes, data, isLoading }) => {
                     >
                       {Object.keys(TCIAMetaData).length > 0 ? (
                         Object.keys(TCIAMetaData).map((item, index) => {
-                          const title = _.replace(item, "_", " ");
+                          const title = _.replace(item, '_', ' ');
                           let content = TCIAMetaData[item];
                           if (content.length > 92) {
                             content = _.truncate(content, {
                               length: 92,
-                              separator: " ",
+                              separator: ' ',
                             });
                           }
 
                           return (
-                            <Grid item xs={12} key={`${item}-${key}`}>
+                            <Grid
+                              item
+                              xs={12}
+                              key={`supporting-data-grid-${index}`}
+                            >
                               <Grid
                                 item
                                 container
@@ -254,7 +251,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
                                   <ToolTip
                                     title={
                                       Array.isArray(content)
-                                        ? content.join(", ")
+                                        ? content.join(', ')
                                         : content
                                     }
                                     placement="bottom"
@@ -266,7 +263,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
                                       className={classes.content}
                                     >
                                       {Array.isArray(content)
-                                        ? content.join(", ")
+                                        ? content.join(', ')
                                         : content}
                                     </Grid>
                                   </ToolTip>
@@ -278,7 +275,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
                                     className={classes.content}
                                   >
                                     {Array.isArray(content)
-                                      ? content.join(", ")
+                                      ? content.join(', ')
                                       : content}
                                   </Grid>
                                 )}
@@ -311,127 +308,127 @@ const SupportingData = ({ classes, data, isLoading }) => {
 
 const styles = {
   paper: {
-    boxShadow: "none",
+    boxShadow: 'none',
   },
   apiFailed: {
-    width: "100%",
-    textAlign: "center",
-    fontFamily: "Open Sans",
+    width: '100%',
+    textAlign: 'center',
+    fontFamily: 'Open Sans',
   },
   supportDataContainer: {
-    margin: "auto",
-    paddingLeft: "77px",
-    paddingRight: "77px",
+    margin: 'auto',
+    paddingLeft: '77px',
+    paddingRight: '77px',
     // fontFamily: theme.custom.fontFamilySans,
-    letterSpacing: "0.014em",
-    color: "#000000",
-    size: "12px",
-    lineHeight: "23px",
+    letterSpacing: '0.014em',
+    color: '#000000',
+    size: '12px',
+    lineHeight: '23px',
   },
   borderRight: {
-    borderRight: "#81a6b9 1px solid",
+    borderRight: '#81a6b9 1px solid',
   },
   containerLeft: {
-    display: "block",
-    padding: "28px 20px 5px 10px",
-    minHeight: "700px",
-    maxHeight: "600px",
-    overflowY: "auto",
-    overflowX: "hidden",
-    width: "calc(100% + 8px) !important",
-    margin: "0px -8px",
+    display: 'block',
+    padding: '28px 20px 5px 10px',
+    minHeight: '700px',
+    maxHeight: '600px',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    width: 'calc(100% + 8px) !important',
+    margin: '0px -8px',
   },
   idcScrollContainer: {
-    width: "80%",
-    marginTop: "37px",
+    width: '80%',
+    marginTop: '37px',
   },
   topIdcBorder: {
-    backgroundColor: "#004C73",
-    width: "100%",
-    height: "3px",
+    backgroundColor: '#004C73',
+    width: '100%',
+    height: '3px',
   },
   idcTableContainer: {
-    width: "50%",
+    width: '50%',
   },
   idcTableItem: {
-    height: "54px",
-    paddingLeft: "20px",
+    height: '54px',
+    paddingLeft: '20px',
   },
   tciaScrollConatiner: {
-    marginLeft: "30px",
-    width: "80%",
-    marginTop: "37px",
+    marginLeft: '30px',
+    width: '80%',
+    marginTop: '37px',
   },
   topTciaBorder: {
-    backgroundColor: "#004C73",
-    width: "100%",
-    height: "3px",
+    backgroundColor: '#004C73',
+    width: '100%',
+    height: '3px',
   },
   headerText: {
-    color: "#0296C9",
-    fontFamily: "Open Sans",
-    fontWeight: "400",
-    fontSize: "17px",
-    textTransform: "uppercase",
+    color: '#0296C9',
+    fontFamily: 'Open Sans',
+    fontWeight: '400',
+    fontSize: '17px',
+    textTransform: 'uppercase',
   },
   tciaHeaderText: {
-    color: "#0296C9",
-    fontFamily: "Open Sans",
-    fontWeight: "400",
-    fontSize: "17px",
-    marginLeft: "30px",
-    textTransform: "uppercase",
+    color: '#0296C9',
+    fontFamily: 'Open Sans',
+    fontWeight: '400',
+    fontSize: '17px',
+    marginLeft: '30px',
+    textTransform: 'uppercase',
   },
   headerSpan: {
-    color: "#007299",
-    fontWeight: "900",
-    fontSize: "18px",
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
-    paddingLeft: "5px",
-    textTransform: "Capitalize",
+    color: '#007299',
+    fontWeight: '900',
+    fontSize: '18px',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    paddingLeft: '5px',
+    textTransform: 'Capitalize',
   },
   externalLinkWrapper: {
-    color: "#000",
-    fontWeight: "400",
-    fontSize: "12px",
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
-    textTransform: "uppercase",
-    display: "flex",
-    alignItems: "center",
+    color: '#000',
+    fontWeight: '400',
+    fontSize: '12px',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
   },
   tciaExternalLinkWrapper: {
-    color: "#000",
-    fontWeight: "400",
-    fontSize: "12px",
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
-    marginLeft: "30px",
-    textTransform: "uppercase",
-    display: "flex",
-    alignItems: "center",
+    color: '#000',
+    fontWeight: '400',
+    fontSize: '12px',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    marginLeft: '30px',
+    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
   },
   title: {
-    color: "#0296C9",
-    fontWeight: "600",
-    fontSize: "12px",
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
+    color: '#0296C9',
+    fontWeight: '600',
+    fontSize: '12px',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
   },
   content: {
-    color: "#223D4C",
-    fontWeight: "600",
-    fontSize: "13px",
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
+    color: '#223D4C',
+    fontWeight: '600',
+    fontSize: '13px',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
   },
   hrLine: {
-    color: "#808080",
-    margin: "0",
+    color: '#808080',
+    margin: '0',
   },
   keyTitle: {
-    width: "130px",
+    width: '130px',
   },
 };
 

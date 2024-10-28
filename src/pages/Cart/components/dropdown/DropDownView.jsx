@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useMemo } from "react";
+import React, { useEffect, useState, useContext, useMemo } from 'react';
 import {
   withStyles,
   MenuItem,
@@ -8,32 +8,32 @@ import {
   Button,
   Grow,
   Paper,
-} from "@material-ui/core";
-import clsx from "clsx";
-import { useQuery } from "@apollo/client";
-import { noop } from "lodash";
-import axios from "axios";
-import gql from "graphql-tag";
-import { TableContext, ToolTip as Tooltip } from "../../../../bento-core";
-import styles from "./DropDownStyle";
-import cgcIcon from "../../assets/cgc.svg";
-import linkIcon from "../../assets/linkIcon.svg";
-import arrowDownPng from "../../assets/arrowDown.png";
-import arrowUpPng from "../../assets/arrowUp.png";
-import { defaultTo } from "lodash";
+} from '@material-ui/core';
+import clsx from 'clsx';
+import { useQuery } from '@apollo/client';
+import { noop } from 'lodash';
+import axios from 'axios';
+import gql from 'graphql-tag';
+import { TableContext, ToolTip as Tooltip } from '../../../../bento-core';
+import styles from './DropDownStyle';
+import cgcIcon from '../../assets/cgc.svg';
+import linkIcon from '../../assets/linkIcon.svg';
+import arrowDownPng from '../../assets/arrowDown.png';
+import arrowUpPng from '../../assets/arrowUp.png';
+import { defaultTo } from 'lodash';
 import {
   CREATE_MANIFEST,
   myFilesPageData,
-} from "../../../../bento/fileCentricCartWorkflowData";
-import DownloadFileManifestDialog from "./downloadFileManifestDialog";
-import { downloadCsvString } from "../../utils";
-import env from "../../../../utils/env";
+} from '../../../../bento/fileCentricCartWorkflowData';
+import DownloadFileManifestDialog from './downloadFileManifestDialog';
+import { downloadCsvString } from '../../utils';
+import env from '../../../../utils/env';
 
-const LABEL = "Export and Download";
+const LABEL = 'Export and Download';
 
 const { EXPORT_TO_CANCER_GENOMICS_CLOUD, DOWNLOAD_FILE_MANIFEST } = {
-  EXPORT_TO_CANCER_GENOMICS_CLOUD: "Export to Cancer Genomics Cloud",
-  DOWNLOAD_FILE_MANIFEST: "Download File Manifest",
+  EXPORT_TO_CANCER_GENOMICS_CLOUD: 'Export to Cancer Genomics Cloud',
+  DOWNLOAD_FILE_MANIFEST: 'Download File Manifest',
 };
 
 const OPTIONS = [EXPORT_TO_CANCER_GENOMICS_CLOUD];
@@ -49,9 +49,9 @@ const STORE_MANIFEST_QUERY = gql`
   }
 `;
 
-const emptyCartTooltipContent = "Add some files to the cart to get started.";
+const emptyCartTooltipContent = 'Add some files to the cart to get started.';
 const noSelectedRowsTooltipContent =
-  "Select at least one file from the table below.";
+  'Select at least one file from the table below.';
 
 const DropDownView = ({ classes, filesId = [], allFiles }) => {
   const [open, setOpen] = useState(false);
@@ -63,10 +63,10 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
   const { selectedRows = [], selectedFileIds = [] } = context;
   const noSelectedRows = useMemo(
     () => selectedRows.length === 0,
-    [selectedRows],
+    [selectedRows]
   );
   const cartIsEmpty = useMemo(() => filesId.length === 0, [filesId]);
-  const [manifest, setManifest] = useState("");
+  const [manifest, setManifest] = useState('');
 
   useQuery(CREATE_MANIFEST, {
     variables: { uuid: allFiles ? filesId : selectedFileIds },
@@ -81,11 +81,11 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
       manifest,
     },
     skip: !manifest,
-    context: { clientName: "interopService" },
-    fetchPolicy: "no-cache",
+    context: { clientName: 'interopService' },
+    fetchPolicy: 'no-cache',
   });
 
-  const sbgUrl = useMemo(() => defaultTo(data?.storeManifest, ""), [data]);
+  const sbgUrl = useMemo(() => defaultTo(data?.storeManifest, ''), [data]);
 
   const isDropDownDisabled = useMemo(() => {
     switch (allFiles) {
@@ -99,14 +99,14 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
   const dropDownTooltipTitle = useMemo(() => {
     switch (allFiles) {
       case true:
-        return cartIsEmpty ? emptyCartTooltipContent : "";
+        return cartIsEmpty ? emptyCartTooltipContent : '';
         break;
       case false:
         return cartIsEmpty
           ? emptyCartTooltipContent
           : noSelectedRows
             ? noSelectedRowsTooltipContent
-            : "";
+            : '';
     }
   }, [allFiles, noSelectedRows, cartIsEmpty]);
 
@@ -119,19 +119,19 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
               <>
                 Files in the cart can be easily exported into the
                 <a
-                  style={{ color: "#165F83" }}
+                  style={{ color: '#165F83' }}
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.cancergenomicscloud.org/"
                 >
                   <span
                     style={{
-                      textDecoration: "underline",
+                      textDecoration: 'underline',
                       margin: 0,
                       padding: 0,
                     }}
                   >
-                    {" Cancer Genomics Cloud."}
+                    {' Cancer Genomics Cloud.'}
                     <img
                       className={classes.linkIcon}
                       src={linkIcon}
@@ -142,7 +142,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
               </>
             );
           case false:
-            return "";
+            return '';
           default:
             break;
         }
@@ -155,19 +155,19 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
               <>
                 Files in the cart can be easily exported into the
                 <a
-                  style={{ color: "#165F83" }}
+                  style={{ color: '#165F83' }}
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.cancergenomicscloud.org/"
                 >
                   <span
                     style={{
-                      textDecoration: "underline",
+                      textDecoration: 'underline',
                       margin: 0,
                       padding: 0,
                     }}
                   >
-                    {" Cancer Genomics Cloud."}
+                    {' Cancer Genomics Cloud.'}
                     <img
                       className={classes.linkIcon}
                       src={linkIcon}
@@ -178,7 +178,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
               </>
             );
           case false:
-            return "";
+            return '';
           default:
             break;
         }
@@ -193,33 +193,33 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
           case true:
             return (
               <>
-                Files in the cart can be downloaded as a file manifest with{" "}
+                Files in the cart can be downloaded as a file manifest with{' '}
                 <a
-                  style={{ color: "#165F83" }}
+                  style={{ color: '#165F83' }}
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.ga4gh.org/product/data-repository-service-drs/"
                 >
                   <span
                     style={{
-                      textDecoration: "underline",
+                      textDecoration: 'underline',
                       margin: 0,
                       padding: 0,
                     }}
                   >
-                    {"DRS"}
+                    {'DRS'}
                     <img
                       className={classes.linkIcon}
                       src={linkIcon}
                       alt="linkIcon"
                     />
                   </span>
-                </a>{" "}
+                </a>{' '}
                 identifiers and other useful metadata.
               </>
             );
           case false:
-            return "";
+            return '';
           default:
             break;
         }
@@ -230,33 +230,33 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
           case true:
             return (
               <>
-                Files in the cart can be downloaded as a file manifest with{" "}
+                Files in the cart can be downloaded as a file manifest with{' '}
                 <a
-                  style={{ color: "#165F83" }}
+                  style={{ color: '#165F83' }}
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.ga4gh.org/product/data-repository-service-drs/"
                 >
                   <span
                     style={{
-                      textDecoration: "underline",
+                      textDecoration: 'underline',
                       margin: 0,
                       padding: 0,
                     }}
                   >
-                    {"DRS"}
+                    {'DRS'}
                     <img
                       className={classes.linkIcon}
                       src={linkIcon}
                       alt="linkIcon"
                     />
                   </span>
-                </a>{" "}
+                </a>{' '}
                 identifiers and other useful metadata.
               </>
             );
           case false:
-            return "";
+            return '';
           default:
             break;
         }
@@ -270,7 +270,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
   }, [selectedRows]);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
   const dropDownIcon = open ? (
@@ -279,7 +279,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
     <img src={arrowDownPng} alt="arrow down icon" />
   );
 
-  const handleClose = (event) => {
+  const handleClose = event => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -288,7 +288,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === "Tab") {
+    if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
     }
@@ -315,13 +315,13 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
     getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
   }, []);
 
-  const initiateDownload = async (currLabel) => {
+  const initiateDownload = async currLabel => {
     switch (currLabel) {
       case EXPORT_TO_CANCER_GENOMICS_CLOUD: {
         if (sbgUrl) {
           window.open(
             `https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`,
-            "_blank",
+            '_blank'
           );
         }
         break;
@@ -345,8 +345,8 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
     setDownloadFileManifestDialogOpen(false);
   };
 
-  const getMenuItem = (type) => {
-    let icon;
+  const getMenuItem = _type => {
+    /*let icon;
     switch (type) {
       case EXPORT_TO_CANCER_GENOMICS_CLOUD:
         icon = cgcIcon;
@@ -356,7 +356,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         icon = undefined;
         break;
-    }
+    }*/
     return (
       <>
         <MenuItem>
@@ -367,7 +367,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
             placement="right"
           >
             <span
-              style={{ cursor: isDropDownDisabled && "not-allowed" }}
+              style={{ cursor: isDropDownDisabled && 'not-allowed' }}
               onClick={() => {
                 if (isDropDownDisabled) {
                   return noop();
@@ -385,7 +385,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
           </Tooltip>
         </MenuItem>
         <MenuItem
-          style={{ cursor: isDropDownDisabled && "not-allowed" }}
+          style={{ cursor: isDropDownDisabled && 'not-allowed' }}
           className="downloadManifestBtn"
         >
           <Tooltip
@@ -418,12 +418,12 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
     );
   };
 
-  const options = OPTIONS.map((item) => getMenuItem(item));
+  const options = OPTIONS.map(item => getMenuItem(item));
 
   return (
     <>
       <div className={classes.dropDownBtnContainer}>
-        {" "}
+        {' '}
         <Tooltip
           arrow
           maxWidth={200}
@@ -446,7 +446,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
               }}
               endIcon={dropDownIcon}
               ref={anchorRef}
-              aria-controls={open ? "menu-list-grow" : undefined}
+              aria-controls={open ? 'menu-list-grow' : undefined}
               aria-haspopup="true"
               onClick={handleToggle}
             >
@@ -466,7 +466,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
               {...TransitionProps}
               style={{
                 transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom",
+                  placement === 'bottom' ? 'center top' : 'center bottom',
               }}
             >
               <Paper className={classes.dropdownPaper}>
