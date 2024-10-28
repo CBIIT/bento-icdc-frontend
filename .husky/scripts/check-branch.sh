@@ -15,7 +15,7 @@ release_build_branch="^[0-9]+\.[0-9]+\.[0-9]+\.build$"
 hotfix_branch="^hotfix\/[a-zA-Z0-9_-]+$"
 
 # Check if the branch name matches any of the valid patterns
-if [[ $branch_name =~ $main_branch || $branch_name =~ $develop_branch || $branch_name =~ $feature_branch || $branch_name =~ $bugfix_branch || $branch_name =~ $release_branch || $branch_name =~ $hotfix_branch || $branch_name =~ $release_build_branch]]; then
+if [[ $branch_name =~ $main_branch || $branch_name =~ $develop_branch || $branch_name =~ $feature_branch || $branch_name =~ $bugfix_branch || $branch_name =~ $release_branch || $branch_name =~ $hotfix_branch || $branch_name =~ $release_build_branch ]]; then
   echo "✅ Branch name '$branch_name' is valid."
   exit 0
 else
@@ -27,7 +27,7 @@ else
   echo "- bugfix/<issue-id>"
   echo "- release/<version>"
   echo "- hotfix/<issue-id>"
-  echo "- <version>.build"
+  echo "- <issue-id>.build"
   echo "where <issue-id> can be alphanumeric (letters, numbers, hyphens, or underscores)."
   echo "example feature/ICDC-2555"
   exit 1
