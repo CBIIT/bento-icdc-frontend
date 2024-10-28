@@ -1,24 +1,19 @@
 import React, { useEffect, useRef } from 'react';
-import {
-  HashRouter,
-  Route,
-  Switch,
-  useLocation,
-} from 'react-router-dom';
+import { HashRouter, Route, Switch, useLocation } from 'react-router-dom';
 // import { withStyles, CssBaseline } from "@material-ui/core";
 import { CssBaseline } from '@mui/material';
 import { withStyles } from '@mui/styles';
 import LinkBar from '../LinkBar';
 import aboutPageRoutes from '../../bento/aboutPagesRoutes';
-import Dashboard from "../../pages/dashboard/DashboardController";
+import Dashboard from '../../pages/dashboard/DashboardController';
 import UnifiedDash from '../../pages/unifiedView/unifiedController';
 import GlobalSearchView from '../../pages/globalSearch/GlobalSearchController';
 import JbrowseView from '../../pages/JbrowseDetail/JbrowseController';
 import Home from '../../pages/landing/landingController';
 import Footer from '../../components/Footer/FooterView';
 import Header from '../header/HeaderView';
-import NavigatorView from "../../pages/navigator/NavigatorView";
-import GraphQLView from "../graphql/GraphQLView";
+import NavigatorView from '../../pages/navigator/NavigatorView';
+import GraphQLView from '../graphql/GraphQLView';
 import NavBar from '../NavBar/NavBarContainer';
 import About from '../../pages/about/aboutController';
 import Studies from '../../pages/studies/studiesController';
@@ -35,9 +30,7 @@ import SysInfo from '../../pages/sysinfo/sysInfo';
 import Error from '../../pages/error/Error';
 // import CartView from '../../pages/fileCentricCart/CartController';
 
-const LayoutView = ({
-  classes,
-}) => {
+const LayoutView = ({ classes }) => {
   const location = useLocation();
   const headerRef = useRef(null);
   const contentRef = useRef(null);
@@ -47,8 +40,8 @@ const LayoutView = ({
   }
 
   useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
+    const resizeObserver = new ResizeObserver(entries => {
+      entries.forEach(entry => {
         // Access the new size information from entry.contentRect
         contentRef.current.style.height = `calc(100% - ${entry.contentRect.height}px)`;
       });
@@ -66,54 +59,57 @@ const LayoutView = ({
   }, []);
 
   return (
-      <>
-        <CssBaseline />
-        <HashRouter>
-          <OverlayWindow />
-          <div className={classes.container}>
-            <div id="headerSection" ref={headerRef} className={classes.header}>
-              <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown.html" />
-              <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
-              <Header />
-              {!navBarExclusions.find((item) => item === location.hash) && <NavBar />}
-            </div>
+    <>
+      <CssBaseline />
+      <HashRouter>
+        <OverlayWindow />
+        <div className={classes.container}>
+          <div id="headerSection" ref={headerRef} className={classes.header}>
+            <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown.html" />
+            <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
+            <Header />
+            {!navBarExclusions.find(item => item === location.hash) && (
+              <NavBar />
+            )}
           </div>
-          {/* Reminder: Ajay need to replace the ICDC with env variable and
+        </div>
+        {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
-          <div
-            ref={contentRef}
-            className={classes.content}
-          >
-            <Switch>
-              <Route exact path="/ICDC/" component={Home} />
-              <Route exact path="/" component={Home} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/news" component={Home} />
-              <Route exact path="/explore" component={Dashboard} />
-              <Route path="/explore/:filterQuery" component={Dashboard} />
-              <Route path="/unifiedView/:id" component={UnifiedDash} />
-              <Route path="/fileCentricCart" component={CartView} />
-              <Route path="/studies" component={Studies} />
-              <Route path="/search/:id" component={GlobalSearchView} />
-              <Route exact path="/search" component={GlobalSearchView} />
-              <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
-              <Route path="/programs" component={Programs} />
-              <Route path="/program/:id" component={ProgramDetail} />
-              <Route path="/icdc-data-model" component={NavigatorView} />
-              <Route path="/graphql" component={GraphQLView} />
-              <Route path="/study/:fileType/:id" component={StudyDetail} />
-              <Route path="/study/:id" component={StudyDetail} />
-              <Route path="/case/:id" component={CaseDetails} />
-              <Route path="/sysinfo" component={SysInfo} />
-              {aboutPageRoutes.map(
-                (aboutPageRoute) => <Route path={aboutPageRoute} component={About} />,
-              )}
-              <Route component={Error} />
-            </Switch>
-            <Footer />
-          </div>
-        </HashRouter>
-      </>
+        <div ref={contentRef} className={classes.content}>
+          <Switch>
+            <Route exact path="/ICDC/" component={Home} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/news" component={Home} />
+            <Route exact path="/explore" component={Dashboard} />
+            <Route path="/explore/:filterQuery" component={Dashboard} />
+            <Route path="/unifiedView/:id" component={UnifiedDash} />
+            <Route path="/fileCentricCart" component={CartView} />
+            <Route path="/studies" component={Studies} />
+            <Route path="/search/:id" component={GlobalSearchView} />
+            <Route exact path="/search" component={GlobalSearchView} />
+            <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
+            <Route path="/programs" component={Programs} />
+            <Route path="/program/:id" component={ProgramDetail} />
+            <Route path="/icdc-data-model" component={NavigatorView} />
+            <Route path="/graphql" component={GraphQLView} />
+            <Route path="/study/:fileType/:id" component={StudyDetail} />
+            <Route path="/study/:id" component={StudyDetail} />
+            <Route path="/case/:id" component={CaseDetails} />
+            <Route path="/sysinfo" component={SysInfo} />
+            {aboutPageRoutes.map((aboutPageRoute, index) => (
+              <Route
+                key={`about-route-path-${index}`}
+                path={aboutPageRoute}
+                component={About}
+              />
+            ))}
+            <Route component={Error} />
+          </Switch>
+          <Footer />
+        </div>
+      </HashRouter>
+    </>
   );
 };
 

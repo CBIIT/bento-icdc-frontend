@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import {
   CircularProgress,
   Paper,
-  Table, TableBody, TableCell,
+  Table,
+  TableBody,
+  TableCell,
   TableContainer,
   TableHead,
   TableRow,
@@ -11,20 +13,26 @@ import {
 import styled from 'styled-components';
 import { filter } from 'lodash';
 import DownloadBtn from './components/downloadBtn';
-import { downloadAndZipJson, downloadJson } from '../../../fileCentricCart/utils';
+import {
+  downloadAndZipJson,
+  downloadJson,
+} from '../../../fileCentricCart/utils';
 import useFetchCSVDownload from './hooks/useFetchCSVDownload';
 import {
   adverseEventNodeMetadata,
   agentAdministrationNodeMetadata,
   agentNodeMetadata,
   cycleNodeMetadata,
-  diseaseExtentNodeMetadata, followUpNodeMetadata,
+  diseaseExtentNodeMetadata,
+  followUpNodeMetadata,
   labExamNodeMetadata,
-  offStudyNodeMetadata, offTreatmentNodeMetadata,
+  offStudyNodeMetadata,
+  offTreatmentNodeMetadata,
   physicalExamNodeMetadata,
   priorSurgeryNodeMetadata,
   priorTherapyNodeMetadata,
-  visitNodeMetadata, vitalSignsNodeMetadata,
+  visitNodeMetadata,
+  vitalSignsNodeMetadata,
 } from '../../../../bento/studyDetailsData';
 import { ToolTip, ToolTip as Tooltip } from '../../../../bento-core';
 import ClinicalDataTable from './clinicalDataTable';
@@ -74,12 +82,10 @@ const StyledStarterTableCell = withStyles(() => ({
     borderLeft: '0',
     fontSize: '12px',
     width: '30%',
-
   },
 }))(StyledTableCell);
 
 const StyledEndTableCell = withStyles(() => ({
-
   body: {
     // paddingLeft: '15px',
     borderWidth: '1px 0 1px 1px',
@@ -105,8 +111,8 @@ const ScrollContainer = styled.div`
   max-height: 450px;
   min-height: fit-content;
   margin-top: 37px;
-  border-top: 3px solid #004C73;
-  border-bottom: 3px solid #004C73;
+  border-top: 3px solid #004c73;
+  border-bottom: 3px solid #004c73;
   width: 618px;
   margin-bottom: 90px;
 
@@ -115,16 +121,15 @@ const ScrollContainer = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #81ACDF;
+    background-color: #81acdf;
   }
 
   &::-webkit-scrollbar-track {
     background-color: #fff;
   }
 
-  scrollbar-color: #81ACDF #fff;
+  scrollbar-color: #81acdf #fff;
   scrollbar-width: thin;
-
 `;
 
 const tableHeaders = [
@@ -138,14 +143,16 @@ const tableHeaders = [
     title: 'Cases',
     tooltip: {
       display: true,
-      content: 'For each of the nodes listed below, the number of cases represented by one or more records within that node',
+      content:
+        'For each of the nodes listed below, the number of cases represented by one or more records within that node',
     },
   },
   {
     title: 'Records',
     tooltip: {
       display: true,
-      content: 'For each of the nodes listed below, the total number of records within each node. Cases may have multiple/numerous records within certain nodes.',
+      content:
+        'For each of the nodes listed below, the total number of records within each node. Cases may have multiple/numerous records within certain nodes.',
     },
   },
   {
@@ -156,12 +163,7 @@ const tableHeaders = [
   },
 ];
 
-const ClinicalData = ({
-  classes,
-  data,
-  csvDownloadFlags,
-  studyCode,
-}) => {
+const ClinicalData = ({ classes, data, csvDownloadFlags, studyCode }) => {
   const [loading, setLoading] = useState(false);
   const [
     agentNodeCSV,
@@ -188,113 +190,257 @@ const ClinicalData = ({
   // const useColumn = useMediaQuery('(max-width:1460px)');
   const [tableA, tableB] = splitArray(data);
 
-  const handleCSVDownload = (element) => {
+  const handleCSVDownload = element => {
     const fileName = `ICDC_Clinical_Data-${studyCode}-${element.name}`;
     switch (element.name) {
       case 'AGENT': {
-        const processedAgentNodeCSV = filter(agentNodeCSV, (el) => el !== null);
-        return downloadJson(processedAgentNodeCSV, '', fileName, agentNodeMetadata);
+        const processedAgentNodeCSV = filter(agentNodeCSV, el => el !== null);
+        return downloadJson(
+          processedAgentNodeCSV,
+          '',
+          fileName,
+          agentNodeMetadata
+        );
       }
       case 'CYCLE': {
-        const processedCycleNodeCSV = filter(cycleNodeCSV, (el) => el !== null);
-        return downloadJson(processedCycleNodeCSV, '', fileName, cycleNodeMetadata);
+        const processedCycleNodeCSV = filter(cycleNodeCSV, el => el !== null);
+        return downloadJson(
+          processedCycleNodeCSV,
+          '',
+          fileName,
+          cycleNodeMetadata
+        );
       }
       case 'VISIT': {
-        const processedVisitNodeCSV = filter(visitNodeCSV, (el) => el !== null);
-        return downloadJson(processedVisitNodeCSV, '', fileName, visitNodeMetadata);
+        const processedVisitNodeCSV = filter(visitNodeCSV, el => el !== null);
+        return downloadJson(
+          processedVisitNodeCSV,
+          '',
+          fileName,
+          visitNodeMetadata
+        );
       }
       case 'PRIOR THERAPY': {
-        const processedPriorTherapyNodeCSV = filter(priorTherapyNodeCSV, (el) => el !== null);
-        return downloadJson(processedPriorTherapyNodeCSV, '', fileName, priorTherapyNodeMetadata);
+        const processedPriorTherapyNodeCSV = filter(
+          priorTherapyNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedPriorTherapyNodeCSV,
+          '',
+          fileName,
+          priorTherapyNodeMetadata
+        );
       }
       case 'PRIOR SURGERY': {
-        const processedPriorSurgeryNodeCSV = filter(priorSurgeryNodeCSV, (el) => el !== null);
-        return downloadJson(processedPriorSurgeryNodeCSV, '', fileName, priorSurgeryNodeMetadata);
+        const processedPriorSurgeryNodeCSV = filter(
+          priorSurgeryNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedPriorSurgeryNodeCSV,
+          '',
+          fileName,
+          priorSurgeryNodeMetadata
+        );
       }
       case 'AGENT ADMINISTRATION': {
         const processedAgentAdministrationNodeCSV = filter(
           agentAdministrationNodeCSV,
-          (el) => el !== null,
+          el => el !== null
         );
-        return downloadJson(processedAgentAdministrationNodeCSV, '', fileName, agentAdministrationNodeMetadata);
+        return downloadJson(
+          processedAgentAdministrationNodeCSV,
+          '',
+          fileName,
+          agentAdministrationNodeMetadata
+        );
       }
       case 'PHYSICAL EXAM': {
-        const processedPhysicalExamNodeCSV = filter(physicalExamNodeCSV, (el) => el !== null);
-        return downloadJson(processedPhysicalExamNodeCSV, '', fileName, physicalExamNodeMetadata);
+        const processedPhysicalExamNodeCSV = filter(
+          physicalExamNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedPhysicalExamNodeCSV,
+          '',
+          fileName,
+          physicalExamNodeMetadata
+        );
       }
       case 'VITAL SIGNS': {
-        const processedVitalSignsNodeCSV = filter(vitalSignsNodeCSV, (el) => el !== null);
-        return downloadJson(processedVitalSignsNodeCSV, '', fileName, vitalSignsNodeMetadata);
+        const processedVitalSignsNodeCSV = filter(
+          vitalSignsNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedVitalSignsNodeCSV,
+          '',
+          fileName,
+          vitalSignsNodeMetadata
+        );
       }
       case 'LAB EXAM': {
-        const processedLabExamNodeCSV = filter(labExamNodeCSV, (el) => el !== null);
-        return downloadJson(processedLabExamNodeCSV, '', fileName, labExamNodeMetadata);
+        const processedLabExamNodeCSV = filter(
+          labExamNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedLabExamNodeCSV,
+          '',
+          fileName,
+          labExamNodeMetadata
+        );
       }
       case 'ADVERSE EVENT': {
-        const processedAdverseEventNodeCSV = filter(adverseEventNodeCSV, (el) => el !== null);
-        return downloadJson(processedAdverseEventNodeCSV, '', fileName, adverseEventNodeMetadata);
+        const processedAdverseEventNodeCSV = filter(
+          adverseEventNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedAdverseEventNodeCSV,
+          '',
+          fileName,
+          adverseEventNodeMetadata
+        );
       }
       case 'DISEASE EXTENT': {
-        const processedDiseaseExtentNodeCSV = filter(diseaseExtentNodeCSV, (el) => el !== null);
-        return downloadJson(processedDiseaseExtentNodeCSV, '', fileName, diseaseExtentNodeMetadata);
+        const processedDiseaseExtentNodeCSV = filter(
+          diseaseExtentNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedDiseaseExtentNodeCSV,
+          '',
+          fileName,
+          diseaseExtentNodeMetadata
+        );
       }
       case 'FOLLOW UP': {
-        const processedFollowUpNodeCSV = filter(followUpNodeCSV, (el) => el !== null);
-        return downloadJson(processedFollowUpNodeCSV, '', fileName, followUpNodeMetadata);
+        const processedFollowUpNodeCSV = filter(
+          followUpNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedFollowUpNodeCSV,
+          '',
+          fileName,
+          followUpNodeMetadata
+        );
       }
       case 'OFF STUDY': {
-        const processedOffStudyNodeCSV = filter(offStudyNodeCSV, (el) => el !== null);
-        return downloadJson(processedOffStudyNodeCSV, '', fileName, offStudyNodeMetadata);
+        const processedOffStudyNodeCSV = filter(
+          offStudyNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedOffStudyNodeCSV,
+          '',
+          fileName,
+          offStudyNodeMetadata
+        );
       }
       case 'OFF TREATMENT': {
-        const processedOffTreatmentNodeCSV = filter(offTreatmentNodeCSV, (el) => el !== null);
-        return downloadJson(processedOffTreatmentNodeCSV, '', fileName, offTreatmentNodeMetadata);
+        const processedOffTreatmentNodeCSV = filter(
+          offTreatmentNodeCSV,
+          el => el !== null
+        );
+        return downloadJson(
+          processedOffTreatmentNodeCSV,
+          '',
+          fileName,
+          offTreatmentNodeMetadata
+        );
       }
       default: {
         setLoading(true);
         const name = `ICDC_Clinical_Data-${studyCode}`;
-        const nodes = [{
-          node: agentNodeCSV, comments: '', fileName: `${name}-AGENT`, metadata: agentNodeMetadata,
-        },
-        {
-          node: cycleNodeCSV, comments: '', fileName: `${name}-CYCLE`, metadata: cycleNodeMetadata,
-        },
-        {
-          node: visitNodeCSV, comments: '', fileName: `${name}-VISIT`, metadata: visitNodeMetadata,
-        },
-        {
-          node: priorTherapyNodeCSV, comments: '', fileName: `${name}-PRIOR THERAPY`, metadata: priorTherapyNodeMetadata,
-        },
-        {
-          node: priorSurgeryNodeCSV, comments: '', fileName: `${name}-PRIOR SURGERY`, metadata: priorSurgeryNodeMetadata,
-        },
-        {
-          node: agentAdministrationNodeCSV, comments: '', fileName: `${name}-AGENT ADMINISTRATION`, metadata: agentAdministrationNodeMetadata,
-        },
-        {
-          node: physicalExamNodeCSV, comments: '', fileName: `${name}-PHYSICAL EXAM`, metadata: physicalExamNodeMetadata,
-        },
-        {
-          node: vitalSignsNodeCSV, comments: '', fileName: `${name}-VITAL SIGN`, metadata: vitalSignsNodeMetadata,
-        },
-        {
-          node: labExamNodeCSV, comments: '', fileName: `${name}-LAB EXAM`, metadata: labExamNodeMetadata,
-        },
-        {
-          node: adverseEventNodeCSV, comments: '', fileName: `${name}-ADVERSE EVENT`, metadata: adverseEventNodeMetadata,
-        },
-        {
-          node: diseaseExtentNodeCSV, comments: '', fileName: `${name}-DISEASE EXTENT`, metadata: diseaseExtentNodeMetadata,
-        },
-        {
-          node: followUpNodeCSV, comments: '', fileName: `${name}-FOLLOW UP`, metadata: followUpNodeMetadata,
-        },
-        {
-          node: offStudyNodeCSV, comments: '', fileName: `${name}-OFF STUDY`, metadata: offStudyNodeMetadata,
-        },
-        {
-          node: offTreatmentNodeCSV, comments: '', fileName: `${name}-OFF TREATMENT`, metadata: offTreatmentNodeMetadata,
-        }];
+        const nodes = [
+          {
+            node: agentNodeCSV,
+            comments: '',
+            fileName: `${name}-AGENT`,
+            metadata: agentNodeMetadata,
+          },
+          {
+            node: cycleNodeCSV,
+            comments: '',
+            fileName: `${name}-CYCLE`,
+            metadata: cycleNodeMetadata,
+          },
+          {
+            node: visitNodeCSV,
+            comments: '',
+            fileName: `${name}-VISIT`,
+            metadata: visitNodeMetadata,
+          },
+          {
+            node: priorTherapyNodeCSV,
+            comments: '',
+            fileName: `${name}-PRIOR THERAPY`,
+            metadata: priorTherapyNodeMetadata,
+          },
+          {
+            node: priorSurgeryNodeCSV,
+            comments: '',
+            fileName: `${name}-PRIOR SURGERY`,
+            metadata: priorSurgeryNodeMetadata,
+          },
+          {
+            node: agentAdministrationNodeCSV,
+            comments: '',
+            fileName: `${name}-AGENT ADMINISTRATION`,
+            metadata: agentAdministrationNodeMetadata,
+          },
+          {
+            node: physicalExamNodeCSV,
+            comments: '',
+            fileName: `${name}-PHYSICAL EXAM`,
+            metadata: physicalExamNodeMetadata,
+          },
+          {
+            node: vitalSignsNodeCSV,
+            comments: '',
+            fileName: `${name}-VITAL SIGN`,
+            metadata: vitalSignsNodeMetadata,
+          },
+          {
+            node: labExamNodeCSV,
+            comments: '',
+            fileName: `${name}-LAB EXAM`,
+            metadata: labExamNodeMetadata,
+          },
+          {
+            node: adverseEventNodeCSV,
+            comments: '',
+            fileName: `${name}-ADVERSE EVENT`,
+            metadata: adverseEventNodeMetadata,
+          },
+          {
+            node: diseaseExtentNodeCSV,
+            comments: '',
+            fileName: `${name}-DISEASE EXTENT`,
+            metadata: diseaseExtentNodeMetadata,
+          },
+          {
+            node: followUpNodeCSV,
+            comments: '',
+            fileName: `${name}-FOLLOW UP`,
+            metadata: followUpNodeMetadata,
+          },
+          {
+            node: offStudyNodeCSV,
+            comments: '',
+            fileName: `${name}-OFF STUDY`,
+            metadata: offStudyNodeMetadata,
+          },
+          {
+            node: offTreatmentNodeCSV,
+            comments: '',
+            fileName: `${name}-OFF TREATMENT`,
+            metadata: offTreatmentNodeMetadata,
+          },
+        ];
         return downloadAndZipJson(nodes, setLoading, studyCode);
       }
     }
@@ -309,8 +455,9 @@ const ClinicalData = ({
       <div className={classes.leftArea}>
         <div className={classes.container}>
           <p className={classes.paragraphOne}>
-            Detailed clinical trial observations from this study can be downloaded from
-            any node for which a CSV download option is displayed.
+            Detailed clinical trial observations from this study can be
+            downloaded from any node for which a CSV download option is
+            displayed.
           </p>
           <p className={classes.paragraphTwo}>
             The node-specific counts indicate the number of cases represented
@@ -324,56 +471,21 @@ const ClinicalData = ({
                 <Table aria-label="table">
                   <TableHead>
                     <TableRow>
-                      {
-                        tableHeaders.map((header, index) => {
-                          if (header.tooltip.display) {
-                            if (index === 0) {
-                              return (
-                                <StyledStarterTableCell
-                                  key={index}
-                                >
-                                  <div
-                                    className={classes.headerWrapper}
-                                  >
-                                    {header.title}
-                                    <Tooltip
-                                      maxWidth="auto"
-                                      fontFamily="Nunito"
-                                      fontSize="14px"
-                                      lineHeight="1.5"
-                                      fontWeight="500"
-                                      padding="10px 19px"
-                                      title={header.tooltip.content}
-                                      arrow
-                                      placement="top"
-                                    >
-                                      <img
-                                        className={classes.helpIcon}
-                                        src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
-                                        alt="tooltip"
-                                      />
-                                    </Tooltip>
-                                  </div>
-                                </StyledStarterTableCell>
-                              );
-                            }
+                      {tableHeaders.map((header, index) => {
+                        if (header.tooltip.display) {
+                          if (index === 0) {
                             return (
-                              <StyledTableCell
-                                key={index}
-                                align="center"
-                              >
-                                <div
-                                  className={classes.headerWrapper}
-                                >
+                              <StyledStarterTableCell key={index}>
+                                <div className={classes.headerWrapper}>
                                   {header.title}
                                   <Tooltip
                                     maxWidth="auto"
                                     fontFamily="Nunito"
                                     fontSize="14px"
-                                    fontWeight="500"
                                     lineHeight="1.5"
-                                    title={header.tooltip.content}
+                                    fontWeight="500"
                                     padding="10px 19px"
+                                    title={header.tooltip.content}
                                     arrow
                                     placement="top"
                                   >
@@ -384,98 +496,129 @@ const ClinicalData = ({
                                     />
                                   </Tooltip>
                                 </div>
-                              </StyledTableCell>
-                            );
-                          }
-
-                          if (index === 0) {
-                            return (
-                              <StyledStarterTableCell
-                                key={index}
-                                align={index === 0 ? 'left' : 'center'}
-                              >
-                                {header.title}
                               </StyledStarterTableCell>
                             );
                           }
                           return (
-                            <StyledTableCell
+                            <StyledTableCell key={index} align="center">
+                              <div className={classes.headerWrapper}>
+                                {header.title}
+                                <Tooltip
+                                  maxWidth="auto"
+                                  fontFamily="Nunito"
+                                  fontSize="14px"
+                                  fontWeight="500"
+                                  lineHeight="1.5"
+                                  title={header.tooltip.content}
+                                  padding="10px 19px"
+                                  arrow
+                                  placement="top"
+                                >
+                                  <img
+                                    className={classes.helpIcon}
+                                    src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                    alt="tooltip"
+                                  />
+                                </Tooltip>
+                              </div>
+                            </StyledTableCell>
+                          );
+                        }
+
+                        if (index === 0) {
+                          return (
+                            <StyledStarterTableCell
                               key={index}
                               align={index === 0 ? 'left' : 'center'}
                             >
                               {header.title}
-                            </StyledTableCell>
-                          );
-                        })
-                      }
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {
-                      tableA.map((element, index) => {
-                        if (element.isEmpty === false) {
-                          return (
-                            <TableRow key={index}>
-                              <StyledStarterFilledTableCell>
-                                {element.name}
-                              </StyledStarterFilledTableCell>
-                              <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
-                              <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
-                              <StyledEndTableCell align="center">
-                                <ToolTip
-                                  maxWidth="auto"
-                                  lineHeight="1.5"
-                                  fontFamily="Nunito"
-                                  fontSize="14px"
-                                  fontWeight="500"
-                                  padding="10px 19px"
-                                  title="Click to download the contents of this node"
-                                >
-                                  <div
-                                    className={classes.tooltipImageWrapper}
-                                    onClick={() => handleCSVDownload(element)}
-                                  >
-                                    <img
-                                      src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
-                                      alt="csv download icon"
-                                      style={{
-                                        width: '32px',
-                                      }}
-                                    />
-                                  </div>
-                                </ToolTip>
-                              </StyledEndTableCell>
-                            </TableRow>
+                            </StyledStarterTableCell>
                           );
                         }
                         return (
+                          <StyledTableCell
+                            key={index}
+                            align={index === 0 ? 'left' : 'center'}
+                          >
+                            {header.title}
+                          </StyledTableCell>
+                        );
+                      })}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {tableA.map((element, index) => {
+                      if (element.isEmpty === false) {
+                        return (
                           <TableRow key={index}>
-                            <StyledStarterEmptyTableCell>
+                            <StyledStarterFilledTableCell>
                               {element.name}
-                            </StyledStarterEmptyTableCell>
-                            <StyledTableCell align="center">{' '}</StyledTableCell>
-                            <StyledTableCell align="center">{' '}</StyledTableCell>
-                            <StyledEndTableCell align="center">{' '}</StyledEndTableCell>
+                            </StyledStarterFilledTableCell>
+                            <StyledTableCell align="center">
+                              {element.nodeCaseCount}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                              {element.nodeCount}
+                            </StyledTableCell>
+                            <StyledEndTableCell align="center">
+                              <ToolTip
+                                maxWidth="auto"
+                                lineHeight="1.5"
+                                fontFamily="Nunito"
+                                fontSize="14px"
+                                fontWeight="500"
+                                padding="10px 19px"
+                                title="Click to download the contents of this node"
+                              >
+                                <div
+                                  className={classes.tooltipImageWrapper}
+                                  onClick={() => handleCSVDownload(element)}
+                                >
+                                  <img
+                                    src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                    alt="csv download icon"
+                                    style={{
+                                      width: '32px',
+                                    }}
+                                  />
+                                </div>
+                              </ToolTip>
+                            </StyledEndTableCell>
                           </TableRow>
                         );
-                      })
-                    }
+                      }
+                      return (
+                        <TableRow key={index}>
+                          <StyledStarterEmptyTableCell>
+                            {element.name}
+                          </StyledStarterEmptyTableCell>
+                          <StyledTableCell align="center"> </StyledTableCell>
+                          <StyledTableCell align="center"> </StyledTableCell>
+                          <StyledEndTableCell align="center">
+                            {' '}
+                          </StyledEndTableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </TableContainer>
             </ScrollContainer>
             <div className={classes.topDownloadBtn}>
-              <DownloadBtn loading={loading} handleCSVDownload={handleCSVDownload} />
+              <DownloadBtn
+                loading={loading}
+                handleCSVDownload={handleCSVDownload}
+              />
             </div>
           </div>
         </div>
-
       </div>
       <div className={classes.rightArea}>
         <div className={classes.container}>
           <p className={classes.paragraphOne} style={{ color: 'transparent' }}>
-            Detailed clinical trial observations from this study can be downloaded from
-            any node for which a CSV download option is displayed.
+            Detailed clinical trial observations from this study can be
+            downloaded from any node for which a CSV download option is
+            displayed.
           </p>
           <p className={classes.paragraphTwo} style={{ color: 'transparent' }}>
             The node-specific counts indicate the number of cases represented
@@ -488,42 +631,11 @@ const ClinicalData = ({
                 <Table aria-label="table">
                   <TableHead className={classes.bottomHeader}>
                     <TableRow>
-                      {
-                        tableHeaders.map((header, index) => {
-                          if (header.tooltip.display) {
-                            if (index === 0) {
-                              return (
-                                <StyledStarterTableCell
-                                  key={index}
-                                >
-                                  <div className={classes.headerWrapper}>
-                                    {header.title}
-                                    <Tooltip
-                                      lineHeight="1.5"
-                                      maxWidth="auto"
-                                      fontFamily="Nunito"
-                                      fontSize="14px"
-                                      fontWeight="500"
-                                      padding="10px 19px"
-                                      title={header.tooltip.content}
-                                      arrow
-                                      placement="top"
-                                    >
-                                      <img
-                                        className={classes.helpIcon}
-                                        src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
-                                        alt="tooltip"
-                                      />
-                                    </Tooltip>
-                                  </div>
-                                </StyledStarterTableCell>
-                              );
-                            }
+                      {tableHeaders.map((header, index) => {
+                        if (header.tooltip.display) {
+                          if (index === 0) {
                             return (
-                              <StyledTableCell
-                                key={index}
-                                align="center"
-                              >
+                              <StyledStarterTableCell key={index}>
                                 <div className={classes.headerWrapper}>
                                   {header.title}
                                   <Tooltip
@@ -544,89 +656,120 @@ const ClinicalData = ({
                                     />
                                   </Tooltip>
                                 </div>
-                              </StyledTableCell>
-                            );
-                          }
-
-                          if (index === 0) {
-                            return (
-                              <StyledStarterTableCell
-                                key={index}
-                                align={index === 0 ? 'left' : 'center'}
-                              >
-                                {header.title}
                               </StyledStarterTableCell>
                             );
                           }
                           return (
-                            <StyledTableCell
-                              key={index}
-                              align={index === 0 ? 'left' : 'center'}
-                            >
-                              {header.title}
-                            </StyledTableCell>
-                          );
-                        })
-                      }
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {
-                      tableB.map((element, index) => {
-                        if (element.isEmpty === false) {
-                          return (
-                            <TableRow key={index}>
-                              <StyledStarterFilledTableCell>
-                                {element.name}
-                              </StyledStarterFilledTableCell>
-                              <StyledTableCell align="center">{element.nodeCaseCount}</StyledTableCell>
-                              <StyledTableCell align="center">{element.nodeCount}</StyledTableCell>
-
-                              <StyledEndTableCell align="center">
-                                <ToolTip
-                                  maxWidth="auto"
+                            <StyledTableCell key={index} align="center">
+                              <div className={classes.headerWrapper}>
+                                {header.title}
+                                <Tooltip
                                   lineHeight="1.5"
+                                  maxWidth="auto"
                                   fontFamily="Nunito"
                                   fontSize="14px"
                                   fontWeight="500"
                                   padding="10px 19px"
-                                  title="Click to download the contents of this node"
+                                  title={header.tooltip.content}
+                                  arrow
+                                  placement="top"
                                 >
-                                  <div
-                                    className={classes.tooltipImageWrapper}
-                                    onClick={() => handleCSVDownload(element)}
-                                  >
-                                    <img
-                                      src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
-                                      alt="csv download icon"
-                                      style={{
-                                        width: '32px',
-                                      }}
-                                    />
-                                  </div>
-                                </ToolTip>
-                              </StyledEndTableCell>
-                            </TableRow>
+                                  <img
+                                    className={classes.helpIcon}
+                                    src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg"
+                                    alt="tooltip"
+                                  />
+                                </Tooltip>
+                              </div>
+                            </StyledTableCell>
+                          );
+                        }
+
+                        if (index === 0) {
+                          return (
+                            <StyledStarterTableCell
+                              key={index}
+                              align={index === 0 ? 'left' : 'center'}
+                            >
+                              {header.title}
+                            </StyledStarterTableCell>
                           );
                         }
                         return (
+                          <StyledTableCell
+                            key={index}
+                            align={index === 0 ? 'left' : 'center'}
+                          >
+                            {header.title}
+                          </StyledTableCell>
+                        );
+                      })}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {tableB.map((element, index) => {
+                      if (element.isEmpty === false) {
+                        return (
                           <TableRow key={index}>
-                            <StyledStarterEmptyTableCell>
+                            <StyledStarterFilledTableCell>
                               {element.name}
-                            </StyledStarterEmptyTableCell>
-                            <StyledTableCell align="center">{' '}</StyledTableCell>
-                            <StyledTableCell align="center">{' '}</StyledTableCell>
-                            <StyledEndTableCell align="center">{' '}</StyledEndTableCell>
+                            </StyledStarterFilledTableCell>
+                            <StyledTableCell align="center">
+                              {element.nodeCaseCount}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                              {element.nodeCount}
+                            </StyledTableCell>
+
+                            <StyledEndTableCell align="center">
+                              <ToolTip
+                                maxWidth="auto"
+                                lineHeight="1.5"
+                                fontFamily="Nunito"
+                                fontSize="14px"
+                                fontWeight="500"
+                                padding="10px 19px"
+                                title="Click to download the contents of this node"
+                              >
+                                <div
+                                  className={classes.tooltipImageWrapper}
+                                  onClick={() => handleCSVDownload(element)}
+                                >
+                                  <img
+                                    src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/clinical_data_csv_icon.svg"
+                                    alt="csv download icon"
+                                    style={{
+                                      width: '32px',
+                                    }}
+                                  />
+                                </div>
+                              </ToolTip>
+                            </StyledEndTableCell>
                           </TableRow>
                         );
-                      })
-                    }
+                      }
+                      return (
+                        <TableRow key={index}>
+                          <StyledStarterEmptyTableCell>
+                            {element.name}
+                          </StyledStarterEmptyTableCell>
+                          <StyledTableCell align="center"> </StyledTableCell>
+                          <StyledTableCell align="center"> </StyledTableCell>
+                          <StyledEndTableCell align="center">
+                            {' '}
+                          </StyledEndTableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </TableContainer>
             </ScrollContainer>
             <div className={classes.bottomDownloadBtn}>
-              <DownloadBtn loading={loading} handleCSVDownload={handleCSVDownload} />
+              <DownloadBtn
+                loading={loading}
+                handleCSVDownload={handleCSVDownload}
+              />
             </div>
           </div>
         </div>

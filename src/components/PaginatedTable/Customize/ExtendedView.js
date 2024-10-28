@@ -1,7 +1,7 @@
-import { useApolloClient } from '@apollo/client';
-import { downloadJson } from '../utils';
+import { useApolloClient } from "@apollo/client";
+import { downloadJson } from "../utils";
 
-export const extendedViewConfigtest = '';
+export const extendedViewConfigtest = "";
 
 export const ExtendedViewConfig = (config) => {
   const { extendedViewConfig } = config;
@@ -15,9 +15,9 @@ export const ExtendedViewConfig = (config) => {
     return extendedViewConfig;
   }
   /**
-  * configure custom table download
-  * extended data add or hide column different from table data
-  */
+   * configure custom table download
+   * extended data add or hide column different from table data
+   */
   if (download) {
     const getQueryVeriables = (filters = {}) => {
       const variables = { ...filters };
@@ -39,10 +39,7 @@ export const ExtendedViewConfig = (config) => {
         })
         .then((result) => {
           if (result.data[config.paginationAPIField]) {
-            downloadJson(
-              result.data[config.paginationAPIField],
-              download,
-            );
+            downloadJson(result.data[config.paginationAPIField], download);
           }
         });
     };

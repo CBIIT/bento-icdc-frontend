@@ -1,13 +1,17 @@
 export function customSorting(a, b, flag, i = 0) {
-  if (flag === 'alphabetical') {
+  if (flag === "alphabetical") {
     if (b[i] && !a[i]) {
       return -1;
     }
     if (!b[i] && a[i]) {
       return 1;
     }
-    if (b[i] > a[i]) { return -1; }
-    if (b[i] < a[i]) { return 1; }
+    if (b[i] > a[i]) {
+      return -1;
+    }
+    if (b[i] < a[i]) {
+      return 1;
+    }
     if (b[i] === a[i]) {
       if (b[i] && a[i]) {
         return customSorting(a, b, flag, i + 1);
@@ -36,7 +40,7 @@ export function studyDetailSorting(a, b) {
     }
   }
 
-  return customSorting(a, b, 'alphabetical', 0);
+  return customSorting(a, b, "alphabetical", 0);
 }
 
 export function fromArmTOCohorDoes(cohorts, cohortDosing) {
@@ -46,28 +50,36 @@ export function fromArmTOCohorDoes(cohorts, cohortDosing) {
   // get cohort_does and cohort_description
   cohorts.forEach((cohort) => {
     // get cohort_does
-    if (cohort.cohort_dose
-              && cohort.cohort_dose !== ''
-              && cohort.cohort_dose !== null) {
+    if (
+      cohort.cohort_dose &&
+      cohort.cohort_dose !== "" &&
+      cohort.cohort_dose !== null
+    ) {
       arrayDoes.push(cohort.cohort_dose);
     }
     // get cohort_description
-    if (cohort.cohort_description
-              && cohort.cohort_description !== ''
-                && cohort.cohort_description !== null) {
+    if (
+      cohort.cohort_description &&
+      cohort.cohort_description !== "" &&
+      cohort.cohort_description !== null
+    ) {
       arrayCohortDes.push(cohort.cohort_description);
     }
   });
   if (arrayDoes.length === 0) {
     if (arrayCohortDes.length === 0) {
-      cohortAndDosing.does = '';
+      cohortAndDosing.does = "";
     } else {
       // replace cohort does with cohort desc
       arrayDoes = arrayCohortDes;
-      cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
+      cohortAndDosing.does = arrayDoes
+        .sort((a, b) => studyDetailSorting(a, b))
+        .join("#");
     }
   } else {
-    cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
+    cohortAndDosing.does = arrayDoes
+      .sort((a, b) => studyDetailSorting(a, b))
+      .join("#");
   }
   return cohortAndDosing;
 }
@@ -100,7 +112,7 @@ export function FileOnRowsSelect(data, allRowsSelected) {
 }
 
 export function isStudyUnderEmbargo(value) {
-  const studyDispositionn = 'under embargo';
+  const studyDispositionn = "under embargo";
   if (value === null || value === undefined) {
     return false;
   }
@@ -113,13 +125,13 @@ export function isStudyUnderEmbargo(value) {
  * @return {String}
  */
 export function studyDisposition(value) {
-  const embargo = 'under embargo';
-  const pending = 'pending';
+  const embargo = "under embargo";
+  const pending = "pending";
   if (value.toString().toLowerCase() === embargo) {
-    return 'embargo';
+    return "embargo";
   }
   if (value.toString().toLowerCase() === pending) {
-    return 'pending';
+    return "pending";
   }
   return undefined;
 }
@@ -131,7 +143,6 @@ export const reorderObjectKeys = (dataObject, orderObject) => {
     // eslint-disable-next-line no-prototype-builtins
     if (dataObject && dataObject.hasOwnProperty(key)) {
       orderedData[key] = dataObject[key];
-      // eslint-disable-next-line no-param-reassign
       delete dataObject[key];
     }
   });

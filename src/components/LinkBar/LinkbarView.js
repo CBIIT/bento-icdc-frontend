@@ -4,7 +4,9 @@ import { withStyles } from '@mui/styles';
 const LinkBar = ({ classes, title, url }) => (
   <>
     <div className={classes.wrapper}>
-      <a className={classes.link} href={url}>{title}</a>
+      <a className={classes.link} href={url}>
+        {title}
+      </a>
     </div>
   </>
 );

@@ -1,11 +1,15 @@
 import React from 'react';
-import { IconButton, Dialog, DialogTitle, DialogContent, ImageListItem } from '@mui/material';
+import {
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  ImageListItem,
+} from '@mui/material';
 import withStyles from '@mui/styles/withStyles';
 import { Close } from '@mui/icons-material';
 
-const NewsViewImage = ({
-  img, classes, label, caption,
-}) => {
+const NewsViewImage = ({ img, classes, label, caption }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -15,34 +19,46 @@ const NewsViewImage = ({
     setOpen(false);
   };
 
-  return (<>
-    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} classes={{ paperWidthSm: classes.paper }}>
-      <div className={classes.dialogTitle}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitle}>
-          <h3 className={classes.title}>{`Image: ${label}`}</h3>
-        </DialogTitle>
-        <IconButton onClick={handleClose} className={classes.closeIconButton} size="large">
-          <Close
-            className={classes.closeIcon}
-          />
-        </IconButton>
-      </div>
-      <DialogContent
-        dividers
-        className={classes.dialogContent}
+  return (
+    <>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        classes={{ paperWidthSm: classes.paper }}
       >
-        <div className={classes.imgContainer}>
-          <img src={img} alt="icdc news" className={classes.img} />
+        <div className={classes.dialogTitle}>
+          <DialogTitle
+            id="customized-dialog-title"
+            onClose={handleClose}
+            className={classes.dialogTitle}
+          >
+            <h3 className={classes.title}>{`Image: ${label}`}</h3>
+          </DialogTitle>
+          <IconButton
+            onClick={handleClose}
+            className={classes.closeIconButton}
+            size="large"
+          >
+            <Close className={classes.closeIcon} />
+          </IconButton>
         </div>
-        <p className={classes.dialogParagraph}>
-          {caption}
-        </p>
-      </DialogContent>
-    </Dialog>
-    <ImageListItem onClick={handleClickOpen} classes={{ root: classes.imageListItem }} key={img}>
-      <img src={img} alt={label} className={classes.img} />
-    </ImageListItem>
-  </>);
+        <DialogContent dividers className={classes.dialogContent}>
+          <div className={classes.imgContainer}>
+            <img src={img} alt="icdc news" className={classes.img} />
+          </div>
+          <p className={classes.dialogParagraph}>{caption}</p>
+        </DialogContent>
+      </Dialog>
+      <ImageListItem
+        onClick={handleClickOpen}
+        classes={{ root: classes.imageListItem }}
+        key={img}
+      >
+        <img src={img} alt={label} className={classes.img} />
+      </ImageListItem>
+    </>
+  );
 };
 
 const styles = () => ({

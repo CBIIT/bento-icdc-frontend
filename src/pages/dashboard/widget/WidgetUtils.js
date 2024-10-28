@@ -1,9 +1,4 @@
-/* eslint-disable camelcase */
-/* eslint-disable import/prefer-default-export */
-
-import {
-  transformInitialDataForSunburst,
-} from '../../../bento-core';
+import { transformInitialDataForSunburst } from "../../../bento-core";
 
 /**
  * Removes empty subjects from donut data.
@@ -33,12 +28,24 @@ const removeEmptyCountFromDonutData = (data) => {
 export function formatWidgetData(data, custodianConfig) {
   const formatted = custodianConfig.reduce((acc, widget) => {
     const {
-      type, dataName, datatable_level1_field, datatable_level2_field,
-      datatable_level1_colors, datatable_level2_colors,
+      type,
+      dataName,
+      datatable_level1_field,
+      datatable_level2_field,
+      datatable_level1_colors,
+      datatable_level2_colors,
     } = widget;
-    const dataset = type === 'sunburst'
-      ? transformInitialDataForSunburst(data[dataName], datatable_level1_field, datatable_level2_field, 'studies', datatable_level1_colors, datatable_level2_colors)
-      : removeEmptyCountFromDonutData(data[dataName]);
+    const dataset =
+      type === "sunburst"
+        ? transformInitialDataForSunburst(
+            data[dataName],
+            datatable_level1_field,
+            datatable_level2_field,
+            "studies",
+            datatable_level1_colors,
+            datatable_level2_colors,
+          )
+        : removeEmptyCountFromDonutData(data[dataName]);
 
     return { ...acc, [dataName]: dataset };
   }, {});

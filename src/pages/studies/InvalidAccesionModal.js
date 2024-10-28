@@ -77,7 +77,7 @@ const InvalidAccesionModal = () => {
                 marginTop: '32px',
               }}
             >
-              Sorry! We Can't seem to find the page you're looking for...
+              {`Sorry! We Can't seem to find the page you're looking for...`}
             </Typography>
             <Typography
               id="transition-modal-description"
@@ -94,12 +94,16 @@ const InvalidAccesionModal = () => {
                 marginLeft: '45px',
               }}
             >
-              This Accession ID is invalid. We're redirecting you to  list of valid Studies.
-              Please contact your administrator for more information.
+              {`This Accession ID is invalid. We're redirecting you to list of
+              valid Studies. Please contact your administrator for more
+              information.`}
             </Typography>
             <img
               style={{
-                height: '252px', width: '402px', marginTop: '46px', marginLeft: '43px',
+                height: '252px',
+                width: '402px',
+                marginTop: '46px',
+                marginLeft: '43px',
               }}
               src={SadDog}
               alt="Sad Dog"

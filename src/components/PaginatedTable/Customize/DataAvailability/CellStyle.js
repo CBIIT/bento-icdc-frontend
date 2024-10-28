@@ -1,54 +1,54 @@
 export default () => ({
   dataAvailIndicator: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   dataAvailIndicatorIcon: {
-    color: '#00579E',
-    height: '13px',
-    width: '13px',
+    color: "#00579E",
+    height: "13px",
+    width: "13px",
   },
   dalIcon: {
-    width: '25px',
+    width: "25px",
   },
   dataAvailIndicatorImage: {
-    height: '20px',
-    width: '20px',
+    height: "20px",
+    width: "20px",
   },
   crdcLinkStyle: {
-    color: '#DC762F',
+    color: "#DC762F",
   },
   crdcApiFailed: {
-    color: '#DC762F',
+    color: "#DC762F",
   },
   defaultDalTooltip: {
-    maxWidth: 'none',
+    maxWidth: "none",
   },
   externalLinkDalTooltip: {
-    maxWidth: 'none',
-    padding: '0px 12px',
+    maxWidth: "none",
+    padding: "0px 12px",
   },
   legend: {
-    zIndex: '1000',
+    zIndex: "1000",
   },
   crdcLinks: {
-    paddingLeft: '1em',
-    textAlign: 'left',
+    paddingLeft: "1em",
+    textAlign: "left",
   },
   legendTooltip: {
-    position: 'relative',
-    bottom: '0.5em',
+    position: "relative",
+    bottom: "0.5em",
   },
   link: {
-    textDecoration: 'underline',
-    fontFamily: 'Open Sans',
-    fontSize: '15px',
-    fontWeight: 'bold',
-    color: '#DC762F',
-    lineSpacing: '19pt',
-    float: 'left',
-    marginRight: '5px',
-    '&:hover': {
-      textDecoration: 'underline',
+    textDecoration: "underline",
+    fontFamily: "Open Sans",
+    fontSize: "15px",
+    fontWeight: "bold",
+    color: "#DC762F",
+    lineSpacing: "19pt",
+    float: "left",
+    marginRight: "5px",
+    "&:hover": {
+      textDecoration: "underline",
     },
   },
 });

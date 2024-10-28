@@ -41,192 +41,116 @@ export default {
   palette: {
     primary: {
       main: midNightBlue,
-      light: tinycolor(midNightBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(midNightBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(midNightBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(midNightBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     secondary: {
       main: deepSkyBlue,
-      light: tinycolor(deepSkyBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(deepSkyBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(deepSkyBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(deepSkyBlue).darken(darkenRate).toHexString(),
       contrastText: '#0E273A',
     },
     curiousBlue: {
       main: curiousBlue,
-      light: tinycolor(curiousBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(curiousBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(curiousBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(curiousBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     neonBlue: {
       main: neonBlue,
-      light: tinycolor(curiousBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(curiousBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(curiousBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(curiousBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     deepSkyBlue: {
       main: deepSkyBlue,
-      light: tinycolor(deepSkyBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(deepSkyBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(deepSkyBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(deepSkyBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     lochmara: {
       main: lochmara,
-      light: tinycolor(lochmara)
-        .lighten(lochmara)
-        .toHexString(),
-      dark: tinycolor(lochmara)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(lochmara).lighten(lochmara).toHexString(),
+      dark: tinycolor(lochmara).darken(darkenRate).toHexString(),
       contrastText: 'lochmara',
       contrastTextColor: '#3478A5',
     },
     widgetTitle: {
-        main: widgetTitle,
-        light: tinycolor(widgetTitle)
-          .lighten(widgetTitle)
-          .toHexString(),
-        dark: tinycolor(widgetTitle)
-          .darken(darkenRate)
-          .toHexString(),
-        contrastText: 'widgetTitle',
-        contrastTextColor: '#3376A3',
-      },
+      main: widgetTitle,
+      light: tinycolor(widgetTitle).lighten(widgetTitle).toHexString(),
+      dark: tinycolor(widgetTitle).darken(darkenRate).toHexString(),
+      contrastText: 'widgetTitle',
+      contrastTextColor: '#3376A3',
+    },
     white: {
       main: white,
-      light: tinycolor(white)
-        .lighten(white)
-        .toHexString(),
-      dark: tinycolor(white)
-        .darken(white)
-        .toHexString(),
+      light: tinycolor(white).lighten(white).toHexString(),
+      dark: tinycolor(white).darken(white).toHexString(),
       contrastText: 'white',
     },
     airForceBlue: {
       main: airForceBlue,
-      light: tinycolor(airForceBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(whisper)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(airForceBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(whisper).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     qQhite: {
       main: qQhite,
-      light: tinycolor(qQhite)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(qQhite)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(qQhite).lighten(lightenRate).toHexString(),
+      dark: tinycolor(qQhite).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     orange: {
       main: orange,
-      light: tinycolor(orange)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(orange)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(orange).lighten(lightenRate).toHexString(),
+      dark: tinycolor(orange).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     dodgeBlue: {
       main: dodgeBlue,
-      light: tinycolor(dodgeBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(dodgeBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(dodgeBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(dodgeBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     green: {
       main: green,
-      light: tinycolor(green)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(green)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(green).lighten(lightenRate).toHexString(),
+      dark: tinycolor(green).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     cobolt: {
       main: cobolt,
-      light: tinycolor(cobolt)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(cobolt)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(cobolt).lighten(lightenRate).toHexString(),
+      dark: tinycolor(cobolt).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     widgetBackground: {
       main: '#3A3B3B',
-      light: tinycolor(black)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(black)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(black).lighten(lightenRate).toHexString(),
+      dark: tinycolor(black).darken(darkenRate).toHexString(),
       contrastText: '#CBCACA',
       contrastSwicthColor: '#60479D',
     },
     warning: {
       main: warning,
-      light: tinycolor(warning)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(warning)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(warning).lighten(lightenRate).toHexString(),
+      dark: tinycolor(warning).darken(darkenRate).toHexString(),
     },
     success: {
       main: success,
-      light: tinycolor(success)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(success)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(success).lighten(lightenRate).toHexString(),
+      dark: tinycolor(success).darken(darkenRate).toHexString(),
     },
     info: {
       main: info,
-      light: tinycolor(info)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(info)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(info).lighten(lightenRate).toHexString(),
+      dark: tinycolor(info).darken(darkenRate).toHexString(),
     },
     textWithBackground: {
       main: 'white',
-      light: tinycolor(info)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(info)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(info).lighten(lightenRate).toHexString(),
+      dark: tinycolor(info).darken(darkenRate).toHexString(),
     },
     text: {
       withbackground: 'white',
@@ -311,7 +235,6 @@ export default {
         borderBottom: '#004c73 3px solid',
         color: tableHeaderFontColor,
         backgroundColor: tableHeader,
-
       },
       checkboxRoot: {
         color: 'inherit',
@@ -319,7 +242,6 @@ export default {
           color: '#8DCAFF',
         },
       },
-
     },
     MuiBackdrop: {
       root: {
@@ -360,7 +282,6 @@ export default {
         cursor: 'pointer',
         display: 'inline-flex',
         outline: 'none',
-
       },
     },
     MuiTableSortLabel: {
@@ -424,7 +345,6 @@ export default {
         backgroundColor: tableHeader,
       },
       titleText: {
-
         color: tableHeaderFontColor,
         // fontSize: '25.2pt',
         fontFamily: tableFontFamily,

@@ -1,1 +1,1 @@
-export { default } from './sysInfo';
+export { default } from "./sysInfo";

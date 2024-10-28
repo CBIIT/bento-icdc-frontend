@@ -1,3 +1,3 @@
-import BarChart from './BarCharts';
+import BarChart from "./BarCharts";
 
 export default BarChart;

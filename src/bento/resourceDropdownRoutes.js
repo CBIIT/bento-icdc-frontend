@@ -1,3 +1,1 @@
-export default [
-  '/developers',
-];
+export default ["/developers"];

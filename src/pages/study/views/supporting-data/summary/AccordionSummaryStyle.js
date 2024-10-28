@@ -1,14 +1,13 @@
 export default () => ({
   dropDownIconSection: {
-    fill: '#000000',
+    fill: "#000000",
   },
-  ExpansionPaneldropDownIcon: {
-  },
+  ExpansionPaneldropDownIcon: {},
   expansionPanelDetailsRoot: {
-    display: 'block',
+    display: "block",
   },
   ExpPanelIcon: {
-    height: '18px',
-    width: '18px',
+    height: "18px",
+    width: "18px",
   },
 });

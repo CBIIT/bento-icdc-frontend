@@ -34,130 +34,78 @@ export default {
   palette: {
     primary: {
       main: navyBlue,
-      light: tinycolor(navyBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(navyBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(navyBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(navyBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     curiousBlue: {
       main: curiousBlue,
-      light: tinycolor(curiousBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(curiousBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(curiousBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(curiousBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     airForceBlue: {
       main: airForceBlue,
-      light: tinycolor(airForceBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(navyBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(airForceBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(navyBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     qQhite: {
       main: qQhite,
-      light: tinycolor(qQhite)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(qQhite)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(qQhite).lighten(lightenRate).toHexString(),
+      dark: tinycolor(qQhite).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     orange: {
       main: orange,
-      light: tinycolor(orange)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(orange)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(orange).lighten(lightenRate).toHexString(),
+      dark: tinycolor(orange).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     dodgeBlue: {
       main: dodgeBlue,
-      light: tinycolor(dodgeBlue)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(dodgeBlue)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(dodgeBlue).lighten(lightenRate).toHexString(),
+      dark: tinycolor(dodgeBlue).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     green: {
       main: green,
-      light: tinycolor(green)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(green)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(green).lighten(lightenRate).toHexString(),
+      dark: tinycolor(green).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     cobolt: {
       main: cobolt,
-      light: tinycolor(cobolt)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(cobolt)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(cobolt).lighten(lightenRate).toHexString(),
+      dark: tinycolor(cobolt).darken(darkenRate).toHexString(),
       contrastText: '#FFFFFF',
     },
     widgetBackground: {
       main: '#F3F8FB',
-      light: tinycolor(black)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(black)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(black).lighten(lightenRate).toHexString(),
+      dark: tinycolor(black).darken(darkenRate).toHexString(),
       contrastText: black,
       lattice: '#F3F8F8',
     },
     warning: {
       main: warning,
-      light: tinycolor(warning)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(warning)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(warning).lighten(lightenRate).toHexString(),
+      dark: tinycolor(warning).darken(darkenRate).toHexString(),
     },
     success: {
       main: success,
-      light: tinycolor(success)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(success)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(success).lighten(lightenRate).toHexString(),
+      dark: tinycolor(success).darken(darkenRate).toHexString(),
     },
     info: {
       main: info,
-      light: tinycolor(info)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(info)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(info).lighten(lightenRate).toHexString(),
+      dark: tinycolor(info).darken(darkenRate).toHexString(),
     },
     textWithBackground: {
       main: black,
-      light: tinycolor(info)
-        .lighten(lightenRate)
-        .toHexString(),
-      dark: tinycolor(info)
-        .darken(darkenRate)
-        .toHexString(),
+      light: tinycolor(info).lighten(lightenRate).toHexString(),
+      dark: tinycolor(info).darken(darkenRate).toHexString(),
     },
     text: {
       withbackground: 'white',
@@ -230,12 +178,10 @@ export default {
         borderBottom: tableHeaderBorder,
         color: tableHeaderFontColor,
         backgroundColor: tableHeader,
-
       },
       checkboxRoot: {
         color: 'inherit',
       },
-
     },
     MuiBackdrop: {
       root: {
@@ -375,7 +321,6 @@ export default {
     MuiGrid: {
       container: {
         width: '100% !important',
-
       },
     },
     MuiSwitch: {

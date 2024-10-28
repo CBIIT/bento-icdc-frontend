@@ -13,9 +13,7 @@ import {
 import withStyles from '@mui/styles/withStyles';
 import { Close } from '@mui/icons-material';
 
-const NewsItem = ({
-  paragraph, index, total, classes, label, blurb,
-}) => {
+const NewsItem = ({ paragraph, index, total, classes, label, blurb }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -29,15 +27,13 @@ const NewsItem = ({
     <div className={classes.container}>
       <ListItem classes={{ root: classes.listItem }} alignItems="flex-start">
         <div className={classes.listItemContent}>
-          <div className={classes.listItemCount}>
-            {`${index}/${total}`}
-          </div>
+          <div className={classes.listItemCount}>{`${index}/${total}`}</div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ListItemText
-              secondary={(
+              secondary={
                 <>
                   <Typography
-                      // sx={{ display: 'inline' }}
+                    // sx={{ display: 'inline' }}
                     component="span"
                     variant="body2"
                     color="text.primary"
@@ -46,36 +42,38 @@ const NewsItem = ({
                     {`${blurb}...`}
                   </Typography>
                 </>
-            )}
+              }
             />
-
           </div>
         </div>
       </ListItem>
-      <Button
-        onClick={handleClickOpen}
-        className={classes.btn}
-      >
+      <Button onClick={handleClickOpen} className={classes.btn}>
         READ MORE
       </Button>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} classes={{ paperWidthSm: classes.paper }}>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        classes={{ paperWidthSm: classes.paper }}
+      >
         <div className={classes.dialogTitle}>
-          <DialogTitle id="customized-dialog-title" onClose={handleClose} className={classes.dialogTitle}>
+          <DialogTitle
+            id="customized-dialog-title"
+            onClose={handleClose}
+            className={classes.dialogTitle}
+          >
             <h3 className={classes.title}>{`Update: ${label}`}</h3>
           </DialogTitle>
-          <IconButton onClick={handleClose} className={classes.closeIconButton} size="large">
-            <Close
-              className={classes.closeIcon}
-            />
+          <IconButton
+            onClick={handleClose}
+            className={classes.closeIconButton}
+            size="large"
+          >
+            <Close className={classes.closeIcon} />
           </IconButton>
         </div>
-        <DialogContent
-          dividers
-          className={classes.dialogContent}
-        >
-          <p className={classes.dialogParagraph}>
-            {paragraph}
-          </p>
+        <DialogContent dividers className={classes.dialogContent}>
+          <p className={classes.dialogParagraph}>{paragraph}</p>
         </DialogContent>
       </Dialog>
       <Divider />

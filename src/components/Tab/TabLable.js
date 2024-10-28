@@ -3,16 +3,10 @@ import React from 'react';
 import { withStyles } from '@mui/styles';
 import { cn } from '@bento-core/util';
 
-const tabLabel = ({
-  classes, title, primaryColorClass, icon,
-}) => (
+const tabLabel = ({ classes, title, primaryColorClass, icon }) => (
   <div className={cn(classes.defaultStyle, primaryColorClass)}>
-    {(icon && (<img src={icon} alt="icdc_carousel_tabs" />))}
-    <span>
-      {title}
-      {' '}
-
-    </span>
+    {icon && <img src={icon} alt="icdc_carousel_tabs" />}
+    <span>{title} </span>
   </div>
 );
 

@@ -1,10 +1,13 @@
 import React from 'react';
-import { ThemeProvider, StyledEngineProvider, createTheme, adaptV4Theme } from '@mui/material/styles';
+import {
+  ThemeProvider,
+  StyledEngineProvider,
+  createTheme,
+  adaptV4Theme,
+} from '@mui/material/styles';
 import themes, { overrides } from '../../themes';
 
-export default ({
-  children,
-}) => {
+export const OverlayWindow = ({ children }) => {
   const style = [];
 
   const overridesObj = themes.light.overrides;
@@ -128,13 +131,15 @@ export default ({
   overridesObj.MuiDialogActions = MuiDialogActions;
 
   style.push(overridesObj);
-  const computedTheme = createTheme(adaptV4Theme({ ...themes.light, ...overrides, ...style }));
+  const computedTheme = createTheme(
+    adaptV4Theme({ ...themes.light, ...overrides, ...style })
+  );
 
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={computedTheme}>
-        {children}
-      </ThemeProvider>
+      <ThemeProvider theme={computedTheme}>{children}</ThemeProvider>
     </StyledEngineProvider>
   );
 };
+
+export default OverlayWindow;

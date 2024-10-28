@@ -1,1 +1,1 @@
-export { default } from './invertedMessage';
+export { default } from "./invertedMessage";

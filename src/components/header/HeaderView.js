@@ -2,9 +2,7 @@
 import React from 'react';
 import { useLocation } from 'react-router';
 import { withStyles } from '@mui/styles';
-import {
-  SearchBarGenerator,
-} from '@bento-core/global-search';
+import { SearchBarGenerator } from '@bento-core/global-search';
 import headerData from '../../bento/globalHeaderData';
 import { Header } from '../../bento-core';
 import { SEARCH_PUBLIC, searchKeys, searchFields } from '../../bento/search';
@@ -26,24 +24,23 @@ const customStyle = {
   },
 };
 
-const ICDCHeader = ({
-  classes,
-}) => {
+const ICDCHeader = ({ classes }) => {
   const location = useLocation();
-  const queryAutocompleteAPI = async (inputValue) => {
-    const result = await client.query({
-      query: SEARCH_PUBLIC,
-      variables: {
-        input: inputValue,
-      },
-    })
-      .then((response) => response.data.globalSearch);
+  const queryAutocompleteAPI = async inputValue => {
+    const result = await client
+      .query({
+        query: SEARCH_PUBLIC,
+        variables: {
+          input: inputValue,
+        },
+      })
+      .then(response => response.data.globalSearch);
     return result;
   };
 
   const SearchBarConfig = {
     config: {
-      query: async (search) => queryAutocompleteAPI(search),
+      query: async search => queryAutocompleteAPI(search),
       placeholder: 'SEARCH THE ICDC',
       searchKeys,
       searchFields,
@@ -55,24 +52,24 @@ const ICDCHeader = ({
 
   return (
     <>
-      {
-        location.pathname.includes('/jBrowse') ? (
-          <Header
-            logo={headerData.globalHeaderLogo}
-            alt={headerData.globalHeaderLogoAltText}
-            noLink
-            customStyle={customStyle}
-          />
-        ) : (
-          <Header
-            logo={headerData.globalHeaderLogo}
-            alt={headerData.globalHeaderLogoAltText}
-            homeLink={headerData.globalHeaderLogoLink}
-            customStyle={customStyle}
-            SearchComponent={!location.pathname.match('/search') ? SearchBar : undefined}
-          />
-        )
-      }
+      {location.pathname.includes('/jBrowse') ? (
+        <Header
+          logo={headerData.globalHeaderLogo}
+          alt={headerData.globalHeaderLogoAltText}
+          noLink
+          customStyle={customStyle}
+        />
+      ) : (
+        <Header
+          logo={headerData.globalHeaderLogo}
+          alt={headerData.globalHeaderLogoAltText}
+          homeLink={headerData.globalHeaderLogoLink}
+          customStyle={customStyle}
+          SearchComponent={
+            !location.pathname.match('/search') ? SearchBar : undefined
+          }
+        />
+      )}
     </>
   );
 };
@@ -148,7 +145,7 @@ const styles = () => ({
   },
   inputLabel: {
     width: '0%',
-    opacity: '0'
+    opacity: '0',
   },
   inputRoot: {
     borderRadius: '8px',

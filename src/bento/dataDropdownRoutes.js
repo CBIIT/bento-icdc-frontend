@@ -1,3 +1,1 @@
-export default [
-  '/submit',
-];
+export default ["/submit"];

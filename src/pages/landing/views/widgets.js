@@ -1,13 +1,12 @@
 import React from 'react';
 import { Grid, styled, Paper } from '@mui/material';
-import withStyles from '@mui/styles/withStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { withStyles, makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { pageData } from '../../../bento/landingPageData';
 
 const useStyles = makeStyles({
   root: {
-    marginTop: (props) => (props.activeTemplate === 'twitter' ? '3em' : '1em'),
+    marginTop: props => (props.activeTemplate === 'twitter' ? '3em' : '1em'),
   },
 });
 
@@ -23,33 +22,39 @@ const Widgets = ({ classes, ...props }) => {
   const { root } = useStyles(props);
 
   return (
-    <Grid className={root} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
-      {
-        pageData.widgets.map((widget) => (
-          <Grid item xs={3} className={classes.widget}>
-            <Item>
-              <Link to={widget.callToActionLink}>
-                <div className={classes.container}>
-                  <div className={classes.title}>
-                    {widget.titleText}
-                  </div>
-                  <div className={classes.image}>
-                    <img src={widget.img} alt={widget.alt} />
-                  </div>
-                  <div className={classes.description}>
-                    {widget.descriptionText}
-                  </div>
+    <Grid
+      className={root}
+      container
+      rowSpacing={1}
+      columnSpacing={{ xs: 1, sm: 1, md: 1 }}
+    >
+      {pageData.widgets.map((widget, index) => (
+        <Grid
+          key={`page-data-widget-grid-${index}`}
+          item
+          xs={3}
+          className={classes.widget}
+        >
+          <Item>
+            <Link to={widget.callToActionLink}>
+              <div className={classes.container}>
+                <div className={classes.title}>{widget.titleText}</div>
+                <div className={classes.image}>
+                  <img src={widget.img} alt={widget.alt} />
                 </div>
-              </Link>
-            </Item>
-          </Grid>
-        ))
-      }
+                <div className={classes.description}>
+                  {widget.descriptionText}
+                </div>
+              </div>
+            </Link>
+          </Item>
+        </Grid>
+      ))}
     </Grid>
   );
 };
 
-const styles = (theme) => ({
+const styles = theme => ({
   widget: {
     paddingLeft: theme.spacing(2),
   },

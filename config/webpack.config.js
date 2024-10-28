@@ -1,53 +1,54 @@
-'use strict';
+"use strict";
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 // const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-const paths = require('./paths');
-const getClientEnvironment = require('./env');
+const paths = require("./paths");
+const getClientEnvironment = require("./env");
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-module.exports = function(webpackEnv) {
-  const isEnvDevelopment = webpackEnv === 'development';
-  const isEnvProduction = webpackEnv === 'production';
+module.exports = function (webpackEnv) {
+  const isEnvDevelopment = webpackEnv === "development";
+  const isEnvProduction = webpackEnv === "production";
 
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
   // In development, we always serve from the root. This makes config easier.
   const publicPath = isEnvProduction
-    ? paths.servedPath : isEnvDevelopment && '/';
+    ? paths.servedPath
+    : isEnvDevelopment && "/";
 
   // `publicUrl` is just like `publicPath`, but we will provide it to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
   // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
   const publicUrl = isEnvProduction
     ? publicPath.slice(0, -1)
-    : isEnvDevelopment && '';
+    : isEnvDevelopment && "";
   // Get environment variables to inject into our app.
   const env = getClientEnvironment(publicUrl);
 
   return {
-    mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
+    mode: isEnvProduction ? "production" : isEnvDevelopment && "development",
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
       ? shouldUseSourceMap
-        ? 'source-map'
+        ? "source-map"
         : false
-      : isEnvDevelopment && 'eval-source-map',
+      : isEnvDevelopment && "eval-source-map",
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
-    entry: './src/index.js',
+    entry: "./src/index.js",
     output: {
       path: paths.appBuild,
       filename: isEnvProduction
-          ? 'static/js/[name].[chunkhash:8].js'
-          : isEnvDevelopment && 'static/js/bundle.js',
+        ? "static/js/[name].[chunkhash:8].js"
+        : isEnvDevelopment && "static/js/bundle.js",
       publicPath: publicPath,
     },
     module: {
@@ -57,19 +58,19 @@ module.exports = function(webpackEnv) {
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           include: paths.appSrc,
-          loader: require.resolve('babel-loader'),
+          loader: require.resolve("babel-loader"),
           options: {
             customize: require.resolve(
-              'babel-preset-react-app/webpack-overrides'
+              "babel-preset-react-app/webpack-overrides",
             ),
             presets: ["@babel/preset-env", "@babel/preset-react"],
             plugins: [
               [
-                require.resolve('babel-plugin-named-asset-import'),
+                require.resolve("babel-plugin-named-asset-import"),
                 {
                   loaderMap: {
                     svg: {
-                      ReactComponent: '@svgr/webpack?-svgo![path]',
+                      ReactComponent: "@svgr/webpack?-svgo![path]",
                     },
                   },
                 },
@@ -86,28 +87,26 @@ module.exports = function(webpackEnv) {
         {
           test: /\.css$/i,
           use: [
-            'style-loader',
+            "style-loader",
             // {
             //   loader: MiniCssExtractPlugin.loader,
             //   options: { publicPath: "" },
             // },
-            'css-loader',
+            "css-loader",
             {
               loader: "postcss-loader",
               options: {
                 postcssOptions: {
-                  plugins: [
-                    "postcss-preset-env",
-                  ]
-                }
-              }
-            }
+                  plugins: ["postcss-preset-env"],
+                },
+              },
+            },
           ],
         },
         {
           test: /\.(woff(2)?|ttf|eot|png|jpe?g|JPG|svg)(\?v=\d+\.\d+\.\d+)?$/,
-          type: 'asset/inline',
-        }
+          type: "asset/inline",
+        },
       ],
     },
     plugins: [
@@ -119,9 +118,9 @@ module.exports = function(webpackEnv) {
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
-        filename: 'static/css/[name].[contenthash:8].css',
-        chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+        filename: "static/css/[name].[contenthash:8].css",
+        chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
       }),
-    ]
+    ],
   };
 };

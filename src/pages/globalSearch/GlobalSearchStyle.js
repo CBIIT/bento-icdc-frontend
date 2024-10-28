@@ -13,7 +13,6 @@ const styles = () => ({
   },
   indicator: {
     backgroundColor: '#1C75BC',
-
   },
   tabContainter: {
     display: 'flex',
@@ -48,9 +47,7 @@ const styles = () => ({
       marginRight: '0px',
     },
   },
-  notchedOutline: {
-
-  },
+  notchedOutline: {},
   input: {
     borderRadius: '8px',
     borderColor: '#616161',
