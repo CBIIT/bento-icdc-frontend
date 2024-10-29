@@ -1,6 +1,6 @@
-import React from "react";
-import { pageDataV2 as pageData } from "../../bento/programData";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { pageDataV2 as pageData } from '../../bento/programData';
+import { useHistory } from 'react-router-dom';
 import {
   ProgramCardContainer,
   ProgramHeader,
@@ -13,7 +13,7 @@ import {
   ProgramImage,
   ActionButtonOne,
   ActionButtonTwo,
-} from "./program-card.styled";
+} from './program-card.styled';
 
 export const ProgramCard = ({
   program_acronym,
@@ -53,7 +53,7 @@ export const ProgramCard = ({
                   <img
                     src={pageData.externalIcon}
                     alt="external-link-icon"
-                    style={{ width: "20px" }}
+                    style={{ width: '20px' }}
                   />
                 }
               >
