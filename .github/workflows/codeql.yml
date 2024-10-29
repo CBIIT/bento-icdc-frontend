@@ -17,7 +17,7 @@ on:
   pull_request:
     branches: [ "development", "Bento*", "Develop", "bento", "main", "master", "v3.*", "v4*" ]
   schedule:
-    - cron: '31 16 * * 0'
+    - cron: '45 5 * * 2'
 
 jobs:
   analyze:
