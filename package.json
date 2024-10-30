@@ -19,7 +19,7 @@
     "@bento-core/tab": "^0.2.0",
     "@bento-core/table": "^1.0.1-icdc.12",
     "@bento-core/tool-tip": "^0.3.0",
-    "@bento-core/util": "1.0.1-icdc.1",
+    "@bento-core/util": "1.0.1",
     "@bento-core/widgets": "^1.0.1-icdc.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
