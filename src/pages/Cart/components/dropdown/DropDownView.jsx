@@ -1,21 +1,11 @@
 import React, { useEffect, useState, useContext, useMemo } from 'react';
-import {
-  withStyles,
-  MenuItem,
-  MenuList,
-  ClickAwayListener,
-  Popper,
-  Button,
-  Grow,
-  Paper,
-} from '@material-ui/core';
-import clsx from 'clsx';
+import Popper from '@mui/material/Popper';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { useQuery } from '@apollo/client';
 import { noop } from 'lodash';
 import axios from 'axios';
 import gql from 'graphql-tag';
 import { TableContext, ToolTip as Tooltip } from '../../../../bento-core';
-import styles from './DropDownStyle';
 import cgcIcon from '../../assets/cgc.svg';
 import linkIcon from '../../assets/linkIcon.svg';
 import arrowDownPng from '../../assets/arrowDown.png';
@@ -28,6 +18,27 @@ import {
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import { downloadCsvString } from '../../utils';
 import env from '../../../../utils/env';
+import {
+  CancerGenomicsCloudLink,
+  CancerGenomicsCloudLinkIcon,
+  CancerGenomicsCloudLinkText,
+  DownloadFileManifestLink,
+  DownloadFileManifestLinkIcon,
+  DownloadFileManifestLinkText,
+  DisplayLinksDropDownButton,
+  CancerGenomicsCloudButtonLabel,
+  CancerGenomicsCloudButtonIcon,
+  CancerGenomicsCloudButton,
+  DownloadFileManifestButtonLabel,
+  DownloadFileManifestButtonIcon,
+  DownloadFileManifestButton,
+  CancerGenomicsCloudMenuItem,
+  DownloadFileManifestMenuItem,
+  DropDownMenuList,
+  DropDownMenuContainer,
+  MuiStyledPaper,
+  MuiStyledGrow
+} from './DropDown.styled';
 
 const LABEL = 'Export and Download';
 
@@ -53,7 +64,7 @@ const emptyCartTooltipContent = 'Add some files to the cart to get started.';
 const noSelectedRowsTooltipContent =
   'Select at least one file from the table below.';
 
-const DropDownView = ({ classes, filesId = [], allFiles }) => {
+const DropDownView = ({ filesId = [], allFiles }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
 
@@ -100,7 +111,6 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
     switch (allFiles) {
       case true:
         return cartIsEmpty ? emptyCartTooltipContent : '';
-        break;
       case false:
         return cartIsEmpty
           ? emptyCartTooltipContent
@@ -118,27 +128,19 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
             return (
               <>
                 Files in the cart can be easily exported into the
-                <a
-                  style={{ color: '#165F83' }}
+                <CancerGenomicsCloudLink
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.cancergenomicscloud.org/"
                 >
-                  <span
-                    style={{
-                      textDecoration: 'underline',
-                      margin: 0,
-                      padding: 0,
-                    }}
-                  >
+                  <CancerGenomicsCloudLinkText>
                     {' Cancer Genomics Cloud.'}
-                    <img
-                      className={classes.linkIcon}
+                    <CancerGenomicsCloudLinkIcon
                       src={linkIcon}
                       alt="linkIcon"
                     />
-                  </span>
-                </a>
+                  </CancerGenomicsCloudLinkText>
+                </CancerGenomicsCloudLink>
               </>
             );
           case false:
@@ -154,27 +156,19 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
             return (
               <>
                 Files in the cart can be easily exported into the
-                <a
-                  style={{ color: '#165F83' }}
+                <CancerGenomicsCloudLink
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.cancergenomicscloud.org/"
                 >
-                  <span
-                    style={{
-                      textDecoration: 'underline',
-                      margin: 0,
-                      padding: 0,
-                    }}
-                  >
+                  <CancerGenomicsCloudLinkText>
                     {' Cancer Genomics Cloud.'}
-                    <img
-                      className={classes.linkIcon}
+                    <CancerGenomicsCloudLinkIcon
                       src={linkIcon}
                       alt="linkIcon"
                     />
-                  </span>
-                </a>
+                  </CancerGenomicsCloudLinkText>
+                </CancerGenomicsCloudLink>
               </>
             );
           case false:
@@ -194,27 +188,19 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
             return (
               <>
                 Files in the cart can be downloaded as a file manifest with{' '}
-                <a
-                  style={{ color: '#165F83' }}
+                <DownloadFileManifestLink
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.ga4gh.org/product/data-repository-service-drs/"
                 >
-                  <span
-                    style={{
-                      textDecoration: 'underline',
-                      margin: 0,
-                      padding: 0,
-                    }}
-                  >
+                  <DownloadFileManifestLinkText>
                     {'DRS'}
-                    <img
-                      className={classes.linkIcon}
+                    <DownloadFileManifestLinkIcon
                       src={linkIcon}
                       alt="linkIcon"
                     />
-                  </span>
-                </a>{' '}
+                  </DownloadFileManifestLinkText>
+                </DownloadFileManifestLink>{' '}
                 identifiers and other useful metadata.
               </>
             );
@@ -231,27 +217,19 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
             return (
               <>
                 Files in the cart can be downloaded as a file manifest with{' '}
-                <a
-                  style={{ color: '#165F83' }}
+                <DownloadFileManifestLink
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.ga4gh.org/product/data-repository-service-drs/"
                 >
-                  <span
-                    style={{
-                      textDecoration: 'underline',
-                      margin: 0,
-                      padding: 0,
-                    }}
-                  >
+                  <DownloadFileManifestLinkText>
                     {'DRS'}
-                    <img
-                      className={classes.linkIcon}
+                    <DownloadFileManifestLinkIcon
                       src={linkIcon}
                       alt="linkIcon"
                     />
-                  </span>
-                </a>{' '}
+                  </DownloadFileManifestLinkText>
+                </DownloadFileManifestLink>{' '}
                 identifiers and other useful metadata.
               </>
             );
@@ -274,7 +252,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
   };
 
   const dropDownIcon = open ? (
-    <img src={arrowUpPng} alt="arrow down icon" />
+    <img src={arrowUpPng} alt="arrow up icon" />
   ) : (
     <img src={arrowDownPng} alt="arrow down icon" />
   );
@@ -359,35 +337,30 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
     }*/
     return (
       <>
-        <MenuItem>
+        <CancerGenomicsCloudMenuItem>
           <Tooltip
             arrow
             interactive
             title={exportToCGCTooltipTitle}
             placement="right"
           >
-            <span
-              style={{ cursor: isDropDownDisabled && 'not-allowed' }}
+            <CancerGenomicsCloudButton
               onClick={() => {
                 if (isDropDownDisabled) {
                   return noop();
                 }
-
                 initiateDownload(EXPORT_TO_CANCER_GENOMICS_CLOUD);
                 setOpen(false);
               }}
             >
-              <span className={classes.cgcLabal}>
+              <CancerGenomicsCloudButtonLabel>
                 {EXPORT_TO_CANCER_GENOMICS_CLOUD}
-              </span>
-              <img className={classes.cgcIcon} src={cgcIcon} alt="icon" />
-            </span>
+              </CancerGenomicsCloudButtonLabel>
+              <CancerGenomicsCloudButtonIcon src={cgcIcon} alt="icon" />
+            </CancerGenomicsCloudButton>
           </Tooltip>
-        </MenuItem>
-        <MenuItem
-          style={{ cursor: isDropDownDisabled && 'not-allowed' }}
-          className="downloadManifestBtn"
-        >
+        </CancerGenomicsCloudMenuItem>
+        <DownloadFileManifestMenuItem isDropDownDisabled={isDropDownDisabled}>
           <Tooltip
             arrow
             interactive
@@ -395,7 +368,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
             title={downloadFileManifestTooltipTitle}
             placement="right"
           >
-            <span
+            <DownloadFileManifestButton
               onClick={() => {
                 if (isDropDownDisabled) {
                   return noop();
@@ -403,17 +376,16 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
                 initiateDownload(DOWNLOAD_FILE_MANIFEST);
               }}
             >
-              <span className={classes.fileManifestLabal}>
+              <DownloadFileManifestButtonLabel>
                 Download File Manifest
-              </span>
-              <img
-                className={classes.downloadFileIcon}
+              </DownloadFileManifestButtonLabel>
+              <DownloadFileManifestButtonIcon
                 src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
                 alt="icon"
               />
-            </span>
+            </DownloadFileManifestButton>
           </Tooltip>
-        </MenuItem>
+        </DownloadFileManifestMenuItem>
       </>
     );
   };
@@ -422,7 +394,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
 
   return (
     <>
-      <div className={classes.dropDownBtnContainer}>
+      <DropDownMenuContainer>
         {' '}
         <Tooltip
           arrow
@@ -431,7 +403,7 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
           title={dropDownTooltipTitle}
         >
           <div>
-            <Button
+            {/* <Button
               // disabled={isDropDownDisabled}
               classes={{
                 root: clsx({
@@ -451,7 +423,18 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
               onClick={handleToggle}
             >
               {label}
-            </Button>
+            </Button> */}
+            <DisplayLinksDropDownButton
+              open={open}
+              isDropDownDisabled={isDropDownDisabled}
+              endIcon={dropDownIcon}
+              ref={anchorRef}
+              aria-controls={open ? 'menu-list-grow' : undefined}
+              aria-haspopup="true"
+              onClick={handleToggle}
+            >
+              {label}
+            </DisplayLinksDropDownButton>
           </div>
         </Tooltip>
         <Popper
@@ -462,31 +445,25 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
           disablePortal
         >
           {({ TransitionProps, placement }) => (
-            <Grow
+            <MuiStyledGrow
               {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom' ? 'center top' : 'center bottom',
-              }}
+              placement={placement}
             >
-              <Paper className={classes.dropdownPaper}>
+              <MuiStyledPaper>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
+                  <DropDownMenuList
                     autoFocusItem={open}
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
-                    classes={{
-                      root: classes.dropdownMenuList,
-                    }}
                   >
                     {options}
-                  </MenuList>
+                  </DropDownMenuList>
                 </ClickAwayListener>
-              </Paper>
-            </Grow>
+              </MuiStyledPaper>
+            </MuiStyledGrow>
           )}
         </Popper>
-      </div>
+      </DropDownMenuContainer>
       <DownloadFileManifestDialog
         onClose={handleDownloadFileManifestDialogClose}
         open={downloadFileManifestDialogOpen}
@@ -497,4 +474,4 @@ const DropDownView = ({ classes, filesId = [], allFiles }) => {
   );
 };
 
-export default withStyles(styles)(DropDownView);
+export default DropDownView;
