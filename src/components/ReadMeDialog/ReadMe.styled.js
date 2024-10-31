@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
-import { styled } from '@mui/system';
+import styled from '@emotion/styled';
 
 export const TitleContent = styled('div')({
   width: "100%",
