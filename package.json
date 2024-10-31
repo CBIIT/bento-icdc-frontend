@@ -150,7 +150,7 @@
     "test": "jest",
     "lint": "npx eslint src",
     "format": "npx prettier --write src/",
-    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack/dev.js",
+    "dev": "npm i --legacy-peer-deps && NODE_ENV=development webpack-dev-server --config ./webpack/dev.js",
     "build": "NODE_ENV=production webpack --config ./webpack/prod.js",
     "serve": "http-server dist",
     "prepare": "husky",
