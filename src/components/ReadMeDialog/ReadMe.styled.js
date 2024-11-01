@@ -68,12 +68,18 @@ export const ReadMeContentContainer = styled('div')({
     fontWeight: "700",
     lineHeight: "40px",
   },
-  "& p": {
+  "& p, li": {
     marginTop: "5px",
-    fontSize: "14px",
+    fontSize: "18px",
+    letterSpacing: "0.2px",
+    lineHeight: "30px",
     fontWeight: "300",
     marginBottom: "0px",
+    fontFamily: "Open Sans"
   },
+  "& a": {
+    color: "#B85300",
+  }
 });
 
 export const DialogBox = styled(Dialog)({

@@ -221,22 +221,6 @@ export const customTheme = {
       },
     },
   },
-  MuiButton: {
-    root: {
-      "&#jbrowse_multi_view_button": {
-        marginLeft: "22px",
-        height: "43px",
-        color: "#09557B !important",
-        backgroundColor: "#ffffff",
-        textTransform: "inherit",
-        border: "2px solid #09557B",
-        fontSize: "16px",
-        "& img.jbrowseIcon": {
-          width: "35px",
-        },
-      },
-    },
-  },
   MuiButtonBase: {
     root: {
       "&#jbrowse_help_icon_btn": {

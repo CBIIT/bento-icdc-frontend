@@ -18,27 +18,7 @@ import {
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import { downloadCsvString } from '../../utils';
 import env from '../../../../utils/env';
-import {
-  CancerGenomicsCloudLink,
-  CancerGenomicsCloudLinkIcon,
-  CancerGenomicsCloudLinkText,
-  DownloadFileManifestLink,
-  DownloadFileManifestLinkIcon,
-  DownloadFileManifestLinkText,
-  DisplayLinksDropDownButton,
-  CancerGenomicsCloudButtonLabel,
-  CancerGenomicsCloudButtonIcon,
-  CancerGenomicsCloudButton,
-  DownloadFileManifestButtonLabel,
-  DownloadFileManifestButtonIcon,
-  DownloadFileManifestButton,
-  CancerGenomicsCloudMenuItem,
-  DownloadFileManifestMenuItem,
-  DropDownMenuList,
-  DropDownMenuContainer,
-  MuiStyledPaper,
-  MuiStyledGrow
-} from './DropDown.styled';
+import * as Styled from './DropDown.styled';
 
 const LABEL = 'Export and Download';
 
@@ -128,19 +108,19 @@ const DropDownView = ({ filesId = [], allFiles }) => {
             return (
               <>
                 Files in the cart can be easily exported into the
-                <CancerGenomicsCloudLink
+                <Styled.CancerGenomicsCloudLink
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.cancergenomicscloud.org/"
                 >
-                  <CancerGenomicsCloudLinkText>
+                  <Styled.CancerGenomicsCloudLinkText>
                     {' Cancer Genomics Cloud.'}
-                    <CancerGenomicsCloudLinkIcon
+                    <Styled.CancerGenomicsCloudLinkIcon
                       src={linkIcon}
                       alt="linkIcon"
                     />
-                  </CancerGenomicsCloudLinkText>
-                </CancerGenomicsCloudLink>
+                  </Styled.CancerGenomicsCloudLinkText>
+                </Styled.CancerGenomicsCloudLink>
               </>
             );
           case false:
@@ -156,19 +136,19 @@ const DropDownView = ({ filesId = [], allFiles }) => {
             return (
               <>
                 Files in the cart can be easily exported into the
-                <CancerGenomicsCloudLink
+                <Styled.CancerGenomicsCloudLink
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.cancergenomicscloud.org/"
                 >
-                  <CancerGenomicsCloudLinkText>
+                  <Styled.CancerGenomicsCloudLinkText>
                     {' Cancer Genomics Cloud.'}
-                    <CancerGenomicsCloudLinkIcon
+                    <Styled.CancerGenomicsCloudLinkIcon
                       src={linkIcon}
                       alt="linkIcon"
                     />
-                  </CancerGenomicsCloudLinkText>
-                </CancerGenomicsCloudLink>
+                  </Styled.CancerGenomicsCloudLinkText>
+                </Styled.CancerGenomicsCloudLink>
               </>
             );
           case false:
@@ -188,19 +168,19 @@ const DropDownView = ({ filesId = [], allFiles }) => {
             return (
               <>
                 Files in the cart can be downloaded as a file manifest with{' '}
-                <DownloadFileManifestLink
+                <Styled.DownloadFileManifestLink
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.ga4gh.org/product/data-repository-service-drs/"
                 >
-                  <DownloadFileManifestLinkText>
+                  <Styled.DownloadFileManifestLinkText>
                     {'DRS'}
-                    <DownloadFileManifestLinkIcon
+                    <Styled.DownloadFileManifestLinkIcon
                       src={linkIcon}
                       alt="linkIcon"
                     />
-                  </DownloadFileManifestLinkText>
-                </DownloadFileManifestLink>{' '}
+                  </Styled.DownloadFileManifestLinkText>
+                </Styled.DownloadFileManifestLink>{' '}
                 identifiers and other useful metadata.
               </>
             );
@@ -217,19 +197,19 @@ const DropDownView = ({ filesId = [], allFiles }) => {
             return (
               <>
                 Files in the cart can be downloaded as a file manifest with{' '}
-                <DownloadFileManifestLink
+                <Styled.DownloadFileManifestLink
                   target="_blank"
                   rel="noreferrer"
                   href="https://www.ga4gh.org/product/data-repository-service-drs/"
                 >
-                  <DownloadFileManifestLinkText>
+                  <Styled.DownloadFileManifestLinkText>
                     {'DRS'}
-                    <DownloadFileManifestLinkIcon
+                    <Styled.DownloadFileManifestLinkIcon
                       src={linkIcon}
                       alt="linkIcon"
                     />
-                  </DownloadFileManifestLinkText>
-                </DownloadFileManifestLink>{' '}
+                  </Styled.DownloadFileManifestLinkText>
+                </Styled.DownloadFileManifestLink>{' '}
                 identifiers and other useful metadata.
               </>
             );
@@ -337,14 +317,14 @@ const DropDownView = ({ filesId = [], allFiles }) => {
     }*/
     return (
       <>
-        <CancerGenomicsCloudMenuItem>
+        <Styled.CancerGenomicsCloudMenuItem>
           <Tooltip
             arrow
             interactive
             title={exportToCGCTooltipTitle}
             placement="right"
           >
-            <CancerGenomicsCloudButton
+            <Styled.CancerGenomicsCloudButton
               onClick={() => {
                 if (isDropDownDisabled) {
                   return noop();
@@ -353,14 +333,14 @@ const DropDownView = ({ filesId = [], allFiles }) => {
                 setOpen(false);
               }}
             >
-              <CancerGenomicsCloudButtonLabel>
+              <Styled.CancerGenomicsCloudButtonLabel>
                 {EXPORT_TO_CANCER_GENOMICS_CLOUD}
-              </CancerGenomicsCloudButtonLabel>
-              <CancerGenomicsCloudButtonIcon src={cgcIcon} alt="icon" />
-            </CancerGenomicsCloudButton>
+              </Styled.CancerGenomicsCloudButtonLabel>
+              <Styled.CancerGenomicsCloudButtonIcon src={cgcIcon} alt="icon" />
+            </Styled.CancerGenomicsCloudButton>
           </Tooltip>
-        </CancerGenomicsCloudMenuItem>
-        <DownloadFileManifestMenuItem isDropDownDisabled={isDropDownDisabled}>
+        </Styled.CancerGenomicsCloudMenuItem>
+        <Styled.DownloadFileManifestMenuItem isDropDownDisabled={isDropDownDisabled}>
           <Tooltip
             arrow
             interactive
@@ -368,7 +348,7 @@ const DropDownView = ({ filesId = [], allFiles }) => {
             title={downloadFileManifestTooltipTitle}
             placement="right"
           >
-            <DownloadFileManifestButton
+            <Styled.DownloadFileManifestButton
               onClick={() => {
                 if (isDropDownDisabled) {
                   return noop();
@@ -376,16 +356,16 @@ const DropDownView = ({ filesId = [], allFiles }) => {
                 initiateDownload(DOWNLOAD_FILE_MANIFEST);
               }}
             >
-              <DownloadFileManifestButtonLabel>
+              <Styled.DownloadFileManifestButtonLabel>
                 Download File Manifest
-              </DownloadFileManifestButtonLabel>
-              <DownloadFileManifestButtonIcon
+              </Styled.DownloadFileManifestButtonLabel>
+              <Styled.DownloadFileManifestButtonIcon
                 src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
                 alt="icon"
               />
-            </DownloadFileManifestButton>
+            </Styled.DownloadFileManifestButton>
           </Tooltip>
-        </DownloadFileManifestMenuItem>
+        </Styled.DownloadFileManifestMenuItem>
       </>
     );
   };
@@ -394,76 +374,53 @@ const DropDownView = ({ filesId = [], allFiles }) => {
 
   return (
     <>
-      <DropDownMenuContainer>
-        {' '}
-        <Tooltip
-          arrow
-          maxWidth={200}
-          placement="left"
-          title={dropDownTooltipTitle}
+    <Styled.DropDownMenuContainer>
+      <Tooltip
+        arrow
+        maxWidth={200}
+        placement="left"
+        title={dropDownTooltipTitle}
+      >
+        <Styled.DisplayLinksDropDownButton
+          open={open}
+          isDropDownDisabled={isDropDownDisabled}
+          endIcon={dropDownIcon}
+          ref={anchorRef}
+          aria-controls={open ? 'menu-list-grow' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
         >
-          <div>
-            {/* <Button
-              // disabled={isDropDownDisabled}
-              classes={{
-                root: clsx({
-                  [classes.availableDownloadDropdownBtnIsOpen]: open,
-                  [classes.availableDownloadDropdownBtn]: !open,
-                  [classes.disableDropDownBtn]: isDropDownDisabled,
-                }),
-                label: classes.availableDownloadDropdownBtnLabel,
-                contained: classes.availableDownloadBtnContained,
-                startIcon: classes.availableDownloadDropdownBtnStartIcon,
-                endIcon: classes.endIcon,
-              }}
-              endIcon={dropDownIcon}
-              ref={anchorRef}
-              aria-controls={open ? 'menu-list-grow' : undefined}
-              aria-haspopup="true"
-              onClick={handleToggle}
-            >
-              {label}
-            </Button> */}
-            <DisplayLinksDropDownButton
-              open={open}
-              isDropDownDisabled={isDropDownDisabled}
-              endIcon={dropDownIcon}
-              ref={anchorRef}
-              aria-controls={open ? 'menu-list-grow' : undefined}
-              aria-haspopup="true"
-              onClick={handleToggle}
-            >
-              {label}
-            </DisplayLinksDropDownButton>
-          </div>
-        </Tooltip>
-        <Popper
+          {label}
+        </Styled.DisplayLinksDropDownButton>
+      </Tooltip>
+      <Popper
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
+          placement="bottom-start"
           transition
           disablePortal
         >
           {({ TransitionProps, placement }) => (
-            <MuiStyledGrow
-              {...TransitionProps}
+            <Styled.MuiStyledGrow
               placement={placement}
+              {...TransitionProps}
             >
-              <MuiStyledPaper>
+              <Styled.MuiStyledPaper>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <DropDownMenuList
+                  <Styled.DropDownMenuList
                     autoFocusItem={open}
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
                   >
                     {options}
-                  </DropDownMenuList>
+                  </Styled.DropDownMenuList>
                 </ClickAwayListener>
-              </MuiStyledPaper>
-            </MuiStyledGrow>
+              </Styled.MuiStyledPaper>
+            </Styled.MuiStyledGrow>
           )}
         </Popper>
-      </DropDownMenuContainer>
+      </Styled.DropDownMenuContainer>
       <DownloadFileManifestDialog
         onClose={handleDownloadFileManifestDialogClose}
         open={downloadFileManifestDialogOpen}
