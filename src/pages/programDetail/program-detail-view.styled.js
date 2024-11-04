@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { styled } from '@emotion/styled';
+import styled from '@emotion/styled';
 
 export const ProgramDetailContainer = styled('div')({
   width: '100%',

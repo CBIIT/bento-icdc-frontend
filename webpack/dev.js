@@ -19,7 +19,7 @@ module.exports = merge(common, {
     open: true,
     port: 7000,
     client: {
-      overlay: false,
+      overlay: true,
     },
   },
   module: {
