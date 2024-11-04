@@ -1,9 +1,5 @@
 import React from "react";
-import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { withStyles, Button, Typography, IconButton } from "@material-ui/core";
-import clsx from "clsx";
 import { ToolTip as Tooltip } from "../../../bento-core";
 import {
   MAX_NUMBER_OF_FILES,
@@ -23,15 +19,10 @@ import {
 import { setJborwseSelectedFiles } from "../store/jborwse.reducer";
 import { setSelectedFiles } from "../util";
 import jbrowseLogo from "../../../assets/icons/JbrowseViewIcon2.svg";
-import styles from "./JBrowseBtnStyle";
-
-const customTheme = {
-  override: {},
-};
+import * as Styled from './JBrowseBtn.styled';
 
 const ViewJBrowseButton = ({
   customClass,
-  classes,
   disable,
   selectedFileNames,
 }) => {
@@ -57,17 +48,16 @@ const ViewJBrowseButton = ({
 
   const InValidToottipMsg = () => (
     <>
-      <span className={classes.warning}>{"Warning: "}</span>
+      <Styled.WarningLabel>{"Warning: "}</Styled.WarningLabel>
       <span>{tooltipErrMsg}</span>
     </>
   );
 
   const renderTooltipContent = () => (
-    <MuiThemeProvider theme={createTheme(customTheme)}>
-      <Typography
+    <>
+      <Styled.TooltipContent
         align="center"
         color="inherit"
-        className={classes.descripText}
       >
         {isInactive || disable ? (
           tooltipMsg1
@@ -76,62 +66,53 @@ const ViewJBrowseButton = ({
         ) : (
           tooltipMsg2
         )}
-      </Typography>
-    </MuiThemeProvider>
+      </Styled.TooltipContent>
+    </>
   );
   return (
     <>
-      <Link
-        className={clsx({
-          [classes.diableLink]: isInvlaid || disable,
-          [classes.activeLink]: !(isInvlaid || disable),
-        })}
+      <Styled.JBrowsePageLink
+        isInvlaid={isInvlaid}
+        disable={disable}
         to={{
           pathname: `/jBrowse/${MULTI_FILES_VIEW}`,
         }}
         target="_blank"
         rel="noreferrer noopener"
       >
-        <Button
-          className={clsx(classes.button, {
-            [classes.disbaleButton]: isInvlaid || disable,
-            disbaleJbrowseButton: isInvlaid || disable,
-          })}
+        <Styled.JBrowseButton
           type="button"
           onClick={viewFilesOnJBrowse}
-          disabled={isInvlaid}
+          disabled={disable}
+          isInvlaid={isInvlaid}
           id={JBROWSE_BTN_ID}
           disableRipple={DISABLE_RIPPLE}
         >
           {ButtonText1}
-          <img
+          <Styled.JBrowseIcon
             src={isInvlaid || disable ? jbrowseIconSrc : jbrowseLogo}
             alt="jbrowse_icon"
-            className={clsx(classes.jbrowseIcon, "jbrowseIcon")}
           />
           {ButtonText2}
-        </Button>
-      </Link>
+        </Styled.JBrowseButton>
+      </Styled.JBrowsePageLink>
       <Tooltip
         title={renderTooltipContent()}
         placement="right"
         maxWidth={230}
         arrow
       >
-        <IconButton
-          className={classes.helpIconButton}
-          id={JBROWSE_HELP_ICON_BTN}
-        >
-          <img
+        <Styled.HelpIconButton id={JBROWSE_HELP_ICON_BTN}>
+          <Styled.HelpIconImg
             src={tooltipContent.src}
             alt={tooltipContent.alt}
             id={JBROWSE_TOOLTIP_ICON_ID}
             className={customClass}
           />
-        </IconButton>
+        </Styled.HelpIconButton>
       </Tooltip>
     </>
   );
 };
 
-export default withStyles(styles)(ViewJBrowseButton);
+export default ViewJBrowseButton;

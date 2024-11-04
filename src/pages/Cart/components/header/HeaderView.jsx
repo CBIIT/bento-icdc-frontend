@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {
-  Grid,
-  withStyles,
-  Button,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  FormControl,
-} from "@material-ui/core";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 import axios from "axios";
-import styles from "./HeaderStyle";
 import { myFilesPageData } from "../../../../bento/fileCentricCartWorkflowData";
 import ReadMeDialogComponent from "../../../../components/ReadMeDialog/ReadMe.controller";
 import ReadMoreSVG from "../readMore";
 import env from "../../../../utils/env";
 import DropDownView from "../dropdown/DropDownView";
-import HeaderThemeprovider from "./HeaderTheme";
+import * as Styled from './Header.styled';
 
-const HeaderView = ({ classes, filesId }) => {
+const HeaderView = ({ filesId }) => {
   const [displayReadMe, setDisplayReadMe] = useState(false);
   const [content, setContent] = useState(undefined);
 
@@ -43,33 +37,28 @@ const HeaderView = ({ classes, filesId }) => {
   };
 
   return (
-    <HeaderThemeprovider>
-      <div className={classes.cartHeader}>
-        <div className={classes.cartHeaderLogo}>
-          <img
-            className={classes.logo}
+    <>
+      <Styled.CartHeader>
+        <Styled.CartHeaderLogo>
+          <Styled.CartHeaderLogoIcon
             src={myFilesPageData.headerIconSrc}
             alt={myFilesPageData.headerIconAlt}
           />
-          <span className={classes.pageTitle}>My Files</span>
-        </div>
-        <div className={classes.readMeBtn}>
-          <Button
+          <Styled.PageTitle>My Files</Styled.PageTitle>
+        </Styled.CartHeaderLogo>
+        <Styled.ReadMeBtnDiv>
+          <Styled.ReadMeButton
             onClick={displayReadMeHandler}
             color="primary"
             variant="contained"
             endIcon={<ReadMoreSVG />}
-            classes={{
-              root: classes.readMeBtnRoot,
-              label: classes.readMeBtnLabel,
-            }}
           >
             README
-          </Button>
-        </div>
-      </div>
+          </Styled.ReadMeButton>
+        </Styled.ReadMeBtnDiv>
+      </Styled.CartHeader>
 
-      <Grid xs={12} md={12} lg={12} className={classes.actionBtn}>
+      <Styled.SelectFilesActionContainer container>
         <FormControl>
           <RadioGroup
             row
@@ -77,22 +66,22 @@ const HeaderView = ({ classes, filesId }) => {
             value={allFiles}
             onChange={handleRadioChange}
           >
-            <FormControlLabel
+            <Styled.SelectAllFilesBtn
               value={true}
-              control={<Radio />}
+              control={<Styled.RadioInput />}
               label="All Files"
             />
-            <FormControlLabel
+            <Styled.SelectFilesBtn
               value={false}
-              control={<Radio />}
+              control={<Styled.RadioInput />}
               className="selectFilesBtn"
               label="Selected Files"
             />
           </RadioGroup>
         </FormControl>
         <DropDownView filesId={filesId} allFiles={allFiles} />
-      </Grid>
-
+      </Styled.SelectFilesActionContainer>
+      
       <ReadMeDialogComponent
         content={content}
         config={{
@@ -101,8 +90,8 @@ const HeaderView = ({ classes, filesId }) => {
         display={displayReadMe}
         displayReadMeDialog={displayReadMeHandler}
       />
-    </HeaderThemeprovider>
+    </>
   );
 };
 
-export default withStyles(styles)(HeaderView);
+export default HeaderView;

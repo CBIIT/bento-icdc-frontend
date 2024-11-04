@@ -315,16 +315,6 @@ export const customTheme = {
         backgroundColor: "#142D64",
         textTransform: "none",
       },
-      "&#jbrowse_multi_view_button": {
-        padding: "0px",
-        color: "#ffffff",
-        height: "43px",
-        marginLeft: "22px",
-        textTransform: "inherit",
-        "& img": {
-          width: "2.25em",
-        },
-      },
       "&.add_selected_button": {
         marginRight: "10px",
         marginLeft: "25px",

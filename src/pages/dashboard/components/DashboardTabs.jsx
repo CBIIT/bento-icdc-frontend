@@ -9,6 +9,7 @@ import {
 } from "../../../bento/dashboardTabData";
 import PaginatedTableView from "../../../components/PaginatedTable/TableView";
 import useDashboardTabs from "./dashboard-tabs-store";
+import DashboardThemeProvider from "./DashboardThemeProvider";
 
 const DashboardTabsView = ({
   dashboardStats,
@@ -21,7 +22,7 @@ const DashboardTabsView = ({
   };
 
   return (
-    <>
+    <DashboardThemeProvider>
       <TabsView
         dashboardStats={dashboardStats}
         currentTab={state.currentTab}
@@ -48,7 +49,7 @@ const DashboardTabsView = ({
           </div>
         </TableContextProvider>
       ))}
-    </>
+    </DashboardThemeProvider>
   );
 };
 
