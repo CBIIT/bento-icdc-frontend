@@ -59,10 +59,11 @@ export const HelpIconButton = styled(IconButton)
   zIndex: "600",
   verticalAlign: "top",
   position: "absolute",
-  width: "34px",
-  paddingTop: 5,
+  width: "25px",
+  paddingTop: 0,
+  paddingLeft: 0,
   "&:hover": {
-    backgroundColor: "#fff",
+    backgroundColor: "transparent",
   },
 });
 

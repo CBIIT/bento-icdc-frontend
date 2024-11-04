@@ -33,6 +33,7 @@ export const CancerGenomicsCloudButtonLabel = styled('span')({
 export const CancerGenomicsCloudButtonIcon = styled('img')({
   marginTop: "10px",
   marginLeft: "7px",
+  width: "30px",
 });
 
 export const CancerGenomicsCloudButton = styled('span')(({isDropDownDisabled}) => ({
@@ -76,21 +77,30 @@ export const DownloadFileManifestLinkIcon = styled('img')({
 
 export const CancerGenomicsCloudMenuItem = styled(MenuItem)({
   textAlign: "left",
+  backgroundColor: "#3C597C",
+  '&: hover': {
+    backgroundColor: "#3C597C",
+  }
 });
+
 export const DownloadFileManifestMenuItem = styled(MenuItem)
 (({isDropDownDisabled}) => ({
   textAlign: "left",
-  cursor: isDropDownDisabled && 'not-allowed'
+  cursor: isDropDownDisabled && 'not-allowed',
+  backgroundColor: "#1A3D69",
+  marginTop: '1px',
+  '&: hover': {
+    backgroundColor: "#1A3D69",
+  }
 }));
 
 export const DropDownMenuList = styled(MenuList)({
-    paddingTop: "0px",
-    paddingBottom: "0px",
-    backgroundColor: "#0d71a3",
-    color: "#ffffff",
-    borderBottomRightRadius: "8px",
-    borderBottomLeftRadius: "8px",
-    border: "2px solid #0d71a3",
+  paddingTop: "0px",
+  paddingBottom: "0px",
+  color: "#ffffff",
+  borderBottomRightRadius: "8px",
+  borderBottomLeftRadius: "8px",
+  border: "2px solid #0d71a3",
 });
 
 export const DisplayLinksDropDownButton = styled(Button)
@@ -123,7 +133,7 @@ export const DisplayLinksDropDownButton = styled(Button)
     fontWeight: 400,
     fontSize: "15px",
     fontFamily: "Lato",
-    textTransform: "capitalize",
+    textTransform: "none",
     paddingRight: "6px",
     backgroundColor: "#F2F2F2",
     width: "250px",

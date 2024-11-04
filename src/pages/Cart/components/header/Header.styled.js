@@ -31,7 +31,7 @@ export const PageTitle = styled('span')({
   color: "#C25700",
   fontFamily: "Lato",
   fontSize: "25px",
-  fontWeight: 800,
+  fontWeight: 700,
 });
 
 export const ReadMeBtnDiv = styled('div')({

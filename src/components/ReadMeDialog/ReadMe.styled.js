@@ -73,7 +73,7 @@ export const ReadMeContentContainer = styled('div')({
     fontSize: "18px",
     letterSpacing: "0.2px",
     lineHeight: "30px",
-    fontWeight: "300",
+    fontWeight: "400",
     marginBottom: "0px",
     fontFamily: "Open Sans"
   },
