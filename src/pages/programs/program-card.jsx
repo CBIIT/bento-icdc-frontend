@@ -13,6 +13,7 @@ import {
   ProgramImage,
   ActionButtonOne,
   ActionButtonTwo,
+  ExternalIcon,
 } from './program-card.styled';
 
 export const ProgramCard = ({
@@ -50,10 +51,9 @@ export const ProgramCard = ({
                 href={program_external_url}
                 variant="contained"
                 endIcon={
-                  <img
+                  <ExternalIcon
                     src={pageData.externalIcon}
                     alt="external-link-icon"
-                    style={{ width: '20px' }}
                   />
                 }
               >

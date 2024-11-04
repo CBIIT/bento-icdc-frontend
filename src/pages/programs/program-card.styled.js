@@ -113,3 +113,7 @@ export const ActionButtonTwo = styled(Button)({
     backgroundColor: '#D3D8DB',
   },
 });
+
+export const ExternalIcon = styled('img')({
+  width: '20px'
+});
