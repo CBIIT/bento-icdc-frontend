@@ -14,6 +14,7 @@ import HeaderView from "./components/header/HeaderView";
 import { TableContext } from "../../bento-core";
 import PaginatedTableView from "../../components/PaginatedTable/TableView";
 import { tblContainer, themeConfig } from "./CartTheme";
+import CartThemeProvider from './CartThemeProvider';
 
 const CartView = ({
   classes,
@@ -42,17 +43,19 @@ const CartView = ({
         <Grid xs={12} md={12} lg={12} className={classes.tableContainer}>
           <div className={classes.bodyWrapper}>
             <ThemeProvider theme={createTheme(tblContainer)}>
-              <PaginatedTableView
-                tableReduxActions={{
-                  deleteAllFiles,
-                  deleteCartFile,
-                }}
-                config={cartTable}
-                tableLayOut={tableLayOut}
-                activeFilters={variables}
-                totalRowCount={filesId.length}
-                customthemeConfig={themeConfig(context)}
-              />
+              <CartThemeProvider>
+                <PaginatedTableView
+                  tableReduxActions={{
+                    deleteAllFiles,
+                    deleteCartFile,
+                  }}
+                  config={cartTable}
+                  tableLayOut={tableLayOut}
+                  activeFilters={variables}
+                  totalRowCount={filesId.length}
+                  customthemeConfig={themeConfig(context)}
+                />
+              </CartThemeProvider>
             </ThemeProvider>
           </div>
         </Grid>

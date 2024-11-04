@@ -1,25 +1,28 @@
 import React from "react";
-import {
-  withStyles,
-  IconButton,
-  Backdrop,
-  Dialog,
-  Button,
-} from "@material-ui/core";
 // import { saveAs } from 'file-saver';
 // import MarkdownPDF from "markdown-pdf";
-import CloseIcon from "@material-ui/icons/Close";
+// import CloseIcon from "@material-ui/icons/Close";
 // import { pdf } from '@react-pdf/renderer';
 import ReactMarkdown from "react-markdown";
 import { marked } from "marked";
 import html2pdf from "html2pdf.js";
 // import PdfTemplate from './ReadMePdf';
-import styles from "./ReadMe.style";
 import CustomTheme from "./ReadMe.theme.config";
 import footerLine from "./assets/footer_line.png";
 import nihLogo from "./assets/icdc_nih_logo.png";
 import { createFileName } from "../../pages/fileCentricCart/utils";
 import PdfDownloadIcon from "./assets/Download_PDF.svg";
+import {
+  TitleContent,
+  Title,
+  DialogActionContent,
+  DownloadButton,
+  DownloadIcon,
+  ClosButton,
+  CloseBtnIcon,
+  ReadMeContentContainer,
+  DialogBox
+} from './ReadMe.styled';
 
 const date = new Date().toLocaleString("en-us", {
   month: "long",
@@ -116,7 +119,6 @@ export const downloadMarkdownPdf = async (title, content) => {
 };
 
 const ReadMeDialogComponent = ({
-  classes,
   display,
   displayReadMeDialog,
   content,
@@ -128,50 +130,35 @@ const ReadMeDialogComponent = ({
 
   return (
     <CustomTheme>
-      <Dialog
-        classes={{
-          paper: classes.dialogPaper,
-        }}
+      <DialogBox
         open={display}
         onClose={displayReadMeDialog}
         maxWidth="md"
-        className={classes.dialogBox}
-        BackdropProps={{
-          timeout: 500,
-        }}
-        BackdropComponent={Backdrop}
       >
-        <div className={classes.titleContent}>
-          <div className={classes.title}>
+        <TitleContent>  
+          <Title>
             <span>{title}</span>
-          </div>
-          <div className={classes.closeBtn}>
-            <Button
-              className={classes.downloadBtn}
-              onClick={() => downloadMarkdownPdf(title, content)}
-            >
-              <img
+          </Title>
+          <DialogActionContent>
+            <DownloadButton onClick={() => downloadMarkdownPdf(title, content)}>
+              <DownloadIcon
                 src={PdfDownloadIcon}
                 alt="pdf download icon"
-                className={classes.downloadIcon}
               />
-            </Button>
-            <IconButton
-              className={classes.closBtnContainer}
-              onClick={displayReadMeDialog}
-            >
-              <CloseIcon fontSize="small" className={classes.closeBtn} />
-            </IconButton>
-          </div>
-        </div>
-        <div className={classes.content} id="readMe_content">
+            </DownloadButton>
+            <ClosButton onClick={displayReadMeDialog}>
+              <CloseBtnIcon fontSize="small"/>
+            </ClosButton>
+          </DialogActionContent>
+        </TitleContent>
+        <ReadMeContentContainer id="readMe_content">
           <ReactMarkdown>
             {content.replace(/<!-- PAGE BREAK -->/g, "")}
           </ReactMarkdown>
-        </div>
-      </Dialog>
+        </ReadMeContentContainer>
+      </DialogBox>
     </CustomTheme>
   );
 };
 
-export default withStyles(styles)(ReadMeDialogComponent);
+export default ReadMeDialogComponent;
