@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Radio from '@mui/material/Radio';
+import React, { useEffect, useState } from 'react';
 import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import axios from "axios";
-import { myFilesPageData } from "../../../../bento/fileCentricCartWorkflowData";
-import ReadMeDialogComponent from "../../../../components/ReadMeDialog/ReadMe.controller";
-import ReadMoreSVG from "../readMore";
-import env from "../../../../utils/env";
-import DropDownView from "../dropdown/DropDownView";
+import axios from 'axios';
+import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
+import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
+import ReadMoreSVG from '../readMore';
+import env from '../../../../utils/env';
+import DropDownView from '../dropdown/DropDownView';
 import * as Styled from './Header.styled';
 
 const HeaderView = ({ filesId }) => {
@@ -18,7 +16,7 @@ const HeaderView = ({ filesId }) => {
   // if allFile radio button is true download all file with Download manifest btn
   const [allFiles, setAllFiles] = useState(true);
 
-  const getReadMe = async (url) => {
+  const getReadMe = async url => {
     const { data } = await axios.get(url);
     setContent(data);
   };
@@ -31,8 +29,8 @@ const HeaderView = ({ filesId }) => {
     setDisplayReadMe(!displayReadMe);
   };
 
-  const handleRadioChange = (event) => {
-    const isAllSelected = event.target.value === "true";
+  const handleRadioChange = event => {
+    const isAllSelected = event.target.value === 'true';
     setAllFiles(isAllSelected);
   };
 
@@ -81,11 +79,11 @@ const HeaderView = ({ filesId }) => {
         </FormControl>
         <DropDownView filesId={filesId} allFiles={allFiles} />
       </Styled.SelectFilesActionContainer>
-      
+
       <ReadMeDialogComponent
         content={content}
         config={{
-          readMeTitle: "Understanding the “My Files” Cart Page",
+          readMeTitle: 'Understanding the “My Files” Cart Page',
         }}
         display={displayReadMe}
         displayReadMeDialog={displayReadMeHandler}
