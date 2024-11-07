@@ -200,9 +200,9 @@ export const headerTheme = table => {
         head: {
           height: '40px',
           borderBottom: '3px solid #004c73',
-          background: '#f5f5f5',
+          background: '#fff',
           '&.column_grouping': {
-            background: '#ffffff',
+            background: '#4C6973',
             padding: '0',
             height: '44px',
           },

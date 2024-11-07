@@ -11,9 +11,8 @@ export const ProgramDetailHeader = styled('div')({
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '300px',
-  padding: '10px 64px 10px 64px',
+  padding: '0px 64px 10px 64px',
   borderBottom: '4px solid #81A6B9',
-  paddingTop: '25px',
 });
 
 export const ProgramDetailHeaderExternalLinkWrapper = styled('div')({
