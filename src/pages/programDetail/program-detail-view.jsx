@@ -1,16 +1,16 @@
-import React from "react";
-import { Typography, CircularProgress } from "@material-ui/core";
-import { request } from "graphql-request";
-import { useQuery } from "@tanstack/react-query";
-import { getOptions } from "@bento-core/util";
-import Stats from "../../components/Stats/StatsView";
-import { table, pageData, tableLayOut } from "../../bento/programDetailData";
-import { pageDataV2 as programImageConfig } from "../../bento/programData";
-import CustomBreadcrumb from "../../components/Breadcrumb/BreadcrumbView";
-import env from "../../utils/env";
-import { TableContextProvider } from "../../bento-core";
-import StudiesTable from "../../components/DataAvailabilityTable/StudiesTable";
-import { studiesByProgram } from "./queries/program-detail";
+import React from 'react';
+import { Typography, CircularProgress } from '@material-ui/core';
+import { request } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
+import { getOptions } from '@bento-core/util';
+import Stats from '../../components/Stats/StatsView';
+import { table, pageData, tableLayOut } from '../../bento/programDetailData';
+import { pageDataV2 as programImageConfig } from '../../bento/programData';
+import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import env from '../../utils/env';
+import { TableContextProvider } from '../../bento-core';
+import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
+import { studiesByProgram } from './queries/program-detail';
 import {
   ProgramDetailContainer,
   ProgramDetailHeader,
@@ -20,13 +20,12 @@ import {
   ProgramDetailContent,
   ProgramDetailSubTitle,
   ProgramDetailHeaderExternalLinkWrapper,
-  ProgramDetailSubTitleAcronym,
   ProgramDetailHeaderExternalLinkButton,
   TableContainer,
   TableContainerTitle,
-} from "./program-detail-view.styled";
-import PhotoView from "./components/photo-view";
-import VideoView from "./components/video-view";
+} from './program-detail-view.styled';
+import PhotoView from './components/photo-view';
+import VideoView from './components/video-view';
 
 const ProgramDetailView = ({ classes, data }) => {
   const {
@@ -34,7 +33,7 @@ const ProgramDetailView = ({ classes, data }) => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["studiesByProgram"],
+    queryKey: ['studiesByProgram'],
     queryFn: async () =>
       request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
   });
@@ -56,27 +55,27 @@ const ProgramDetailView = ({ classes, data }) => {
 
   const breadCrumbJson = [
     {
-      name: "All Programs",
-      to: "/programs",
+      name: 'All Programs',
+      to: '/programs',
       isALink: true,
     },
     {
       name: programDetail.program_acronym,
-      to: "/explore",
+      to: '/explore',
       isALink: true,
     },
   ];
 
   const programConfig = programImageConfig.programs.find(
-    (element) => element.prgramName === programDetail.program_acronym,
+    element => element.prgramName === programDetail.program_acronym
   );
-  const programImage = programConfig ? programConfig.secondaryImage : "";
-  const programVideo = programConfig?.video ? programConfig.video : "";
+  const programImage = programConfig ? programConfig.secondaryImage : '';
+  const programVideo = programConfig?.video ? programConfig.video : '';
   const tableOptions = getOptions(table, classes);
   tableOptions.downloadOptions.filename =
     tableOptions.downloadOptions.filename.replace(
-      "Program",
-      `${programDetail.program_acronym}`,
+      'Program',
+      `${programDetail.program_acronym}`
     );
 
   if (isLoading) {
@@ -100,10 +99,9 @@ const ProgramDetailView = ({ classes, data }) => {
           <IconTitleWrapper>
             <ClipboardIcon src={pageData.headerIcon} alt="Clipboard Icon" />
             <ProgramDetailTitle>
-              <div>Programs:</div>{" "}
+              <div>Programs:</div>
               <ProgramDetailSubTitle>
-                {`${programDetail.program_name}`}{" "}
-                <ProgramDetailSubTitleAcronym>{`(${programDetail.program_acronym})`}</ProgramDetailSubTitleAcronym>
+                {`${programDetail.program_name} (${programDetail.program_acronym})`}
               </ProgramDetailSubTitle>
             </ProgramDetailTitle>
           </IconTitleWrapper>
