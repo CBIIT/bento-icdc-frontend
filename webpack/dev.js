@@ -49,6 +49,5 @@ module.exports = merge(common, {
       template: paths.appDevHtml, // Environment-specific template
       inject: true,
     }),
-    new webpack.HotModuleReplacementPlugin(), // HMR plugin for dev mode
   ],
 });
