@@ -1,50 +1,50 @@
-import React from "react";
+import React from 'react';
 import {
   Grid,
   withStyles,
   Typography,
   CircularProgress,
-} from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { request } from "graphql-request";
-import { useQuery } from "@tanstack/react-query";
-import _ from "lodash";
-import { cn } from "@bento-core/util";
-import StatsView from "../../components/Stats/StatsView";
-import { studyDisposition } from "./utils";
-import { navigatedToDashboard } from "../../utils/utils";
-import CustomBreadcrumb from "../../components/Breadcrumb/BreadcrumbView";
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { request } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
+import _ from 'lodash';
+import { cn } from '@bento-core/util';
+import StatsView from '../../components/Stats/StatsView';
+import { studyDisposition } from './utils';
+import { navigatedToDashboard } from '../../utils/utils';
+import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
   headerIcon,
   embargoHeaderIcon,
   embargoFileIcon,
   tab,
   studiesByProgram,
-} from "../../bento/studyDetailsData";
-import Tab from "../../components/Tab/Tab";
-import Overview from "./views/overview/Overview";
-import Publication from "./views/Publication";
-import ArmsAndCohort from "./views/cohort/ArmsAndCohort";
-import StudyFiles from "./views/StudyFiles";
-import TabPanel from "../../components/Tab/TabPanel";
-import pendingHeaderIcon from "../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg";
-import pendingFileIcon from "../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg";
-import Styles from "./studyDetailsStyle";
-import StudyThemeProvider from "./studyDetailsThemeConfig";
+} from '../../bento/studyDetailsData';
+import Tab from '../../components/Tab/Tab';
+import Overview from './views/overview/Overview';
+import Publication from './views/Publication';
+import ArmsAndCohort from './views/cohort/ArmsAndCohort';
+import StudyFiles from './views/StudyFiles';
+import TabPanel from '../../components/Tab/TabPanel';
+import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
+import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+import Styles from './studyDetailsStyle';
+import StudyThemeProvider from './studyDetailsThemeConfig';
 // import SupportingData from './views/supporting-data/supportingData';
-import SupportingData from "./views/supporting-data/SupportingDataView";
-import env from "../../utils/env";
-import useDashboardTabs from "../dashboard/components/dashboard-tabs-store";
+import SupportingData from './views/supporting-data/SupportingDataView';
+import env from '../../utils/env';
+import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
 // import ClinicalData from './views/clinical-data/clinicalData';
-import ClinicalData from "./views/clinical-data/ClinicalDataController";
+import ClinicalData from './views/clinical-data/ClinicalDataController';
 
 function hasPositiveValue(arr) {
-  return arr.some((obj) => Object.values(obj).some((value) => value > 0));
+  return arr.some(obj => Object.values(obj).some(value => value > 0));
 }
 
 const processData = (names, nodeCountArg, nodeCaseCountArg) =>
-  names.map((name) => {
-    const objMatcher = _.toLower(_.replace(name, " ", "_"));
+  names.map(name => {
+    const objMatcher = _.toLower(_.replace(name, ' ', '_'));
     const nodeCount = nodeCountArg[objMatcher];
     const nodeCaseCount = nodeCaseCountArg[objMatcher];
 
@@ -69,7 +69,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["studiesByProgram"],
+    queryKey: ['studiesByProgram'],
     queryFn: async () =>
       request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
   });
@@ -82,21 +82,21 @@ const StudyDetailView = ({ classes, data, initTab }) => {
         (output, caseData) =>
           output.concat(
             caseData.diagnoses
-              ? caseData.diagnoses.map((diagnosis) =>
-                  diagnosis.disease_term ? diagnosis.disease_term : "",
+              ? caseData.diagnoses.map(diagnosis =>
+                  diagnosis.disease_term ? diagnosis.disease_term : ''
                 )
-              : [],
+              : []
           ),
-        [],
-      ),
+        []
+      )
     ),
   ];
-  const studyFileTypes = [...new Set(data.studyFiles.map((f) => f.file_type))];
+  const studyFileTypes = [...new Set(data.studyFiles.map(f => f.file_type))];
   const caseFileTypes = [
     ...new Set(
       data.filesOfStudy
-        .map((f) => f.file_type)
-        .filter((f) => !studyFileTypes.includes(f)),
+        .map(f => f.file_type)
+        .filter(f => !studyFileTypes.includes(f))
     ),
   ];
   const {
@@ -127,19 +127,22 @@ const StudyDetailView = ({ classes, data, initTab }) => {
 
   const breadCrumbJson = [
     {
-      name: "All Studies",
-      to: "/programs",
+      name: 'All Studies',
+      to: '/studies',
       isALink: true,
     },
     {
       name: studyData.program.program_acronym,
-      to: "",
+      isALink: false,
+    },
+    {
+      name: studyData.clinical_study_designation,
       isALink: false,
     },
   ];
 
   const [currentTab, setCurrentTab] = React.useState(
-    initTab === "file" ? 2 : 0,
+    initTab === 'file' ? 2 : 0
   );
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
@@ -181,9 +184,9 @@ const StudyDetailView = ({ classes, data, initTab }) => {
 
   const renderSwitch = (param, embargoFunction, pendingFunction) => {
     switch (param) {
-      case "embargo":
+      case 'embargo':
         return embargoFunction;
-      case "pending":
+      case 'pending':
         return pendingFunction;
       default:
         return undefined;
@@ -193,19 +196,19 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   const getHeaderIcon = renderSwitch(
     studyDisposition(studyData.study_disposition),
     renderEmbargoHeaderIcon,
-    renderPendingHeaderIcon,
+    renderPendingHeaderIcon
   )
     ? renderSwitch(
         studyDisposition(studyData.study_disposition),
         renderEmbargoHeaderIcon,
-        renderPendingHeaderIcon,
+        renderPendingHeaderIcon
       )
     : renderDefaultHeaderIcon;
 
   const getLabel = renderSwitch(
     studyDisposition(studyData.study_disposition),
     renderEmbargoLabel,
-    renderPendingLabel,
+    renderPendingLabel
   );
 
   if (isLoading) {
@@ -224,29 +227,27 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   const filterStudy = `${studyCode} (${accessionId})`;
 
   const currentStudy = interOpData?.studiesByProgram.find(
-    (item) =>
-      item.clinical_study_designation === studyData.clinical_study_designation,
+    item =>
+      item.clinical_study_designation === studyData.clinical_study_designation
   );
 
   let processedTabs;
   if (!currentStudy) {
-    processedTabs = tab.items.filter(
-      (item) => item.label !== "SUPPORTING DATA",
-    );
+    processedTabs = tab.items.filter(item => item.label !== 'SUPPORTING DATA');
   } else {
     processedTabs = tab.items;
   }
 
   if (!hasClinicalData) {
     processedTabs = processedTabs.filter(
-      (item) => item.label !== "CLINICAL DATA",
+      item => item.label !== 'CLINICAL DATA'
     );
   }
 
   const processedClinicalDataTabData = processData(
     clinicalDataTabData.names,
     clinicalDataTabData.nodeCount,
-    clinicalDataTabData.nodeCaseCount,
+    clinicalDataTabData.nodeCaseCount
   );
 
   let clinicalDataNodeCount = 0;
@@ -254,7 +255,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
 
   const clinicalDataDownloadFlags = {};
 
-  processedClinicalDataTabData.forEach((el) => {
+  processedClinicalDataTabData.forEach(el => {
     if (el?.isEmpty === false) {
       clinicalDataNodeCount += 1;
       clinicalDataDownloadFlags[el.name] = true;
@@ -264,10 +265,10 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   });
 
   const supportingDataTabIndex = processedTabs.findIndex(
-    (tab) => tab.label === "SUPPORTING DATA",
+    tab => tab.label === 'SUPPORTING DATA'
   );
   const clinicalDataTabIndex = processedTabs.findIndex(
-    (tab) => tab.label === "CLINICAL DATA",
+    tab => tab.label === 'CLINICAL DATA'
   );
 
   return (
@@ -282,18 +283,18 @@ const StudyDetailView = ({ classes, data, initTab }) => {
           <div className={classes.headerTitle}>
             <div className={classes.headerMainTitle}>
               <span>
-                {" "}
+                {' '}
                 <span className={classes.headerPropertyName}> Study :</span>
                 <span> {studyData.clinical_study_designation}</span>
               </span>
               {studyData.accession_id !== null &&
                 studyData.accession_id !== undefined &&
-                studyData.accession_id !== "" && (
+                studyData.accession_id !== '' && (
                   <>
                     <span className={classes.headerBar}> | </span>
                     <span className={classes.headerAccessionItem}>
                       <span className={classes.accessionLabel}>
-                        {"Accession ID : "}
+                        {'Accession ID : '}
                       </span>
                       <span className={classes.accessionValue}>
                         {studyData.accession_id}
@@ -315,7 +316,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
           {renderSwitch(
             studyDisposition(studyData.study_disposition),
             renderEmbargoLabel,
-            renderPendingLabel,
+            renderPendingLabel
           ) ? (
             getLabel()
           ) : (
@@ -324,7 +325,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
                 {/* <span className={classes.headerButtonLinkText}> View </span> */}
                 <Link
                   className={classes.headerButtonLink}
-                  to={(location) => ({ ...location, pathname: "/explore" })}
+                  to={location => ({ ...location, pathname: '/explore' })}
                   onClick={() => {
                     actions.changeCurrentTab(0);
                     navigatedToDashboard(filterStudy);
@@ -357,7 +358,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
       </div>
       {processedTabs.map((processedTab, index) => {
         switch (processedTab.label) {
-          case "OVERVIEW":
+          case 'OVERVIEW':
             return (
               <TabPanel value={currentTab} index={index}>
                 <Overview
@@ -374,19 +375,19 @@ const StudyDetailView = ({ classes, data, initTab }) => {
               </TabPanel>
             );
 
-          case "ARMS & COHORTS":
+          case 'ARMS & COHORTS':
             return (
               <TabPanel value={currentTab} index={index}>
                 <ArmsAndCohort studyData={studyData} />
               </TabPanel>
             );
-          case "STUDY FILES":
+          case 'STUDY FILES':
             return (
               <TabPanel value={currentTab} index={index}>
                 <StudyFiles data={data} studyData={studyData} />
               </TabPanel>
             );
-          case "PUBLICATIONS":
+          case 'PUBLICATIONS':
             return (
               <TabPanel value={currentTab} index={index}>
                 <Publication
@@ -395,7 +396,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
                 />
               </TabPanel>
             );
-          case "CLINICAL DATA":
+          case 'CLINICAL DATA':
             return (
               <TabPanel value={currentTab} index={index}>
                 {hasClinicalData && currentTab === index && (
@@ -411,7 +412,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
                 )}
               </TabPanel>
             );
-          case "SUPPORTING DATA":
+          case 'SUPPORTING DATA':
             return (
               <TabPanel value={currentTab} index={index}>
                 {currentStudy && (
