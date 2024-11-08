@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Grid, withStyles } from "@material-ui/core";
-import { TableView, Wrapper, TableContext } from "../../bento-core";
-import styles from "./TableStyle";
-import { themeConfig, customTheme } from "./TableTheme";
-import { CustomizeCellView } from "./Customize/CellView";
-import { updateWrapperConfig } from "./Customize/TableView";
-import { ExtendedViewConfig } from "./Customize/ExtendedView";
-import { ColumnGrouping } from "./Customize/ColumnGrouping";
-import { paginationOptions } from "./Customize/PaginationOptions";
+import React, { useEffect, useState, useContext } from 'react';
+import { Grid, withStyles } from '@material-ui/core';
+import { TableView, Wrapper, TableContext } from '../../bento-core';
+import styles from './TableStyle';
+import { themeConfig, customTheme } from './TableTheme';
+import { CustomizeCellView } from './Customize/CellView';
+import { updateWrapperConfig } from './Customize/TableView';
+import { ExtendedViewConfig } from './Customize/ExtendedView';
+import { ColumnGrouping } from './Customize/ColumnGrouping';
+import { paginationOptions } from './Customize/PaginationOptions';
 
-const PaginatedTableView = (props) => {
+const PaginatedTableView = props => {
   /**
    * initialize state for useReducer
    * @param {*} initailState
@@ -28,6 +28,7 @@ const PaginatedTableView = (props) => {
     isServer = true,
     customthemeConfig,
     tableReduxActions,
+    overriedTableState,
   } = props;
   // access table state
   const tableContext = useContext(TableContext);
@@ -57,7 +58,7 @@ const PaginatedTableView = (props) => {
    * 11. selectedRows: (Optional) provides ids of the selected row (id defined by dataKey)
    * 12. themeConfig - (optional) configure table style
    */
-  const initTblState = (initailState) => ({
+  const initTblState = initailState => ({
     ...initailState,
     title: config.name,
     query: config.api,
@@ -99,6 +100,11 @@ const PaginatedTableView = (props) => {
     };
   };
 
+  // override table state
+  if (overriedTableState) {
+    overriedTableState(context);
+  }
+
   return (
     <>
       <Wrapper
@@ -106,7 +112,7 @@ const PaginatedTableView = (props) => {
           config,
           tableLayOut,
           context,
-          totalRowCount,
+          totalRowCount
         )}
         customTheme={{
           ...customTheme,

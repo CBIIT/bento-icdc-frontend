@@ -20,6 +20,7 @@ const Dashboard = ({
   biospecimenSource,
   activeFilters,
   localFindAutocomplete,
+  searchText,
 }) => (
   <div className={classes.dashboardContainer}>
     <StatsView data={searchCases} />
@@ -44,6 +45,7 @@ const Dashboard = ({
           <DashboardTabs
             dashboardStats={updateStat(searchCases)}
             activeFilters={activeFilters}
+            searchText={searchText}
           />
         </div>
       </div>
