@@ -1,10 +1,8 @@
 const { merge } = require('webpack-merge');
 const common = require('./common');
 const webpack = require('webpack');
-const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const paths = require('../config/paths');
 const getClientEnvironment = require('../config/env');
 
@@ -19,8 +17,9 @@ module.exports = merge(common, {
     open: true,
     port: 7000,
     client: {
-      overlay: false,
+      overlay: false, // Set to true to display build errors directly in the browser
     },
+    hot: true, // Enable Hot Module Replacement (HMR) for faster reloads
   },
   module: {
     rules: [
@@ -46,11 +45,10 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-    new webpack.DefinePlugin(env.stringified),
-    new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
     new HtmlWebpackPlugin({
       template: paths.appDevHtml, // Environment-specific template
       inject: true,
     }),
+    new webpack.HotModuleReplacementPlugin(), // HMR plugin for dev mode
   ],
 });
