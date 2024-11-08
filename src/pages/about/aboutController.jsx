@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import yaml from "js-yaml";
-import axios from "axios";
-import env from "../../utils/env";
-import AboutView from "./aboutView";
+import React, { useState, useEffect } from 'react';
+import yaml from 'js-yaml';
+import axios from 'axios';
+import AboutView from './aboutView';
 
-const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
+const ABOUT_CONTENT_URL = process.env.REACT_APP_ABOUT_CONTENT_URL;
 
 const About = ({ match }) => {
   const [data, setData] = useState([]);

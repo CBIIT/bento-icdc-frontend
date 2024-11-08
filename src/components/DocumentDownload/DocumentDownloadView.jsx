@@ -1,34 +1,33 @@
-import React from "react";
-import { withStyles } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { ToolTip } from "../../bento-core";
+import React from 'react';
+import { withStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { ToolTip } from '../../bento-core';
 
-import CustomIcon from "../CustomIcon";
+import CustomIcon from '../CustomIcon';
 import {
   jBrowseOptions,
   JbrowserFiles,
   SINGLE_FILE_VIEW,
-} from "../../bento/JBrowseData";
-import { setSelectedFiles } from "../../pages/JbrowseDetail/util";
-import { setJborwseSelectedFiles } from "../../pages/JbrowseDetail/store/jborwse.reducer";
-import env from "../../utils/env";
-import jbrowseLogo from "../../assets/icons/JbrowseViewIcon.svg";
+} from '../../bento/JBrowseData';
+import { setSelectedFiles } from '../../pages/JbrowseDetail/util';
+import { setJborwseSelectedFiles } from '../../pages/JbrowseDetail/store/jborwse.reducer';
+import jbrowseLogo from '../../assets/icons/JbrowseViewIcon.svg';
 
-const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_API;
+const FILE_SERVICE_API = process.env.REACT_APP_FILE_SERVICE_API;
 
-const fetchFileToDownload = (fileURL = "") => {
+const fetchFileToDownload = (fileURL = '') => {
   fetch(`${FILE_SERVICE_API}${fileURL}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/pdf",
+      'Content-Type': 'application/pdf',
     },
   })
-    .then((response) => response.text())
-    .then((filePath) => {
+    .then(response => response.text())
+    .then(filePath => {
       // Create blob link to download
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       link.href = filePath;
-      link.setAttribute("download", "fileURL");
+      link.setAttribute('download', 'fileURL');
 
       // Append to html link element page
       document.body.appendChild(link);
@@ -37,22 +36,22 @@ const fetchFileToDownload = (fileURL = "") => {
     });
 };
 
-const viewFileOnJbrowse = (file) => {
+const viewFileOnJbrowse = file => {
   const files = setSelectedFiles([file]);
   setJborwseSelectedFiles(files);
 };
 
 const DocumentDownload = ({
   fileSize = 0,
-  fileFormat = "",
+  fileFormat = '',
   maxFileSize = 2000,
-  toolTipTextFileDownload = "Download a copy of this file",
-  toolTipTextFilePreview = "Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow",
-  toolTipTextFileViewer = "View in JBrowse",
-  iconFileDownload = "",
-  iconFilePreview = "",
-  fileLocation = "",
-  caseId = "",
+  toolTipTextFileDownload = 'Download a copy of this file',
+  toolTipTextFilePreview = 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+  toolTipTextFileViewer = 'View in JBrowse',
+  iconFileDownload = '',
+  iconFilePreview = '',
+  fileLocation = '',
+  caseId = '',
   classes,
 }) => (
   <>
@@ -93,9 +92,9 @@ const DocumentDownload = ({
 
 const styles = () => ({
   jbrowseIcon: {
-    left: "0",
-    height: "2em",
-    width: "3.5em",
+    left: '0',
+    height: '2em',
+    width: '3.5em',
   },
 });
 

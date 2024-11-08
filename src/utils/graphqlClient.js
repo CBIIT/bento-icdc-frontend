@@ -3,11 +3,10 @@ import {
   InMemoryCache,
   ApolloLink,
   HttpLink,
-} from "@apollo/client";
-import env from "./env";
+} from '@apollo/client';
 
-const BACKEND = env.REACT_APP_BACKEND_API;
-const INTEROP_SERVICE = `${env.REACT_APP_INTEROP_SERVICE_URL}`;
+const BACKEND = process.env.REACT_APP_BACKEND_API;
+const INTEROP_SERVICE = process.env.REACT_APP_INTEROP_SERVICE_URL;
 
 const backendService = new HttpLink({
   uri: BACKEND,
@@ -21,9 +20,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: BACKEND,
   link: ApolloLink.split(
-    (op) => op.getContext().clientName === "interopService",
+    op => op.getContext().clientName === 'interopService',
     interopService,
-    backendService,
+    backendService
   ),
 });
 export default client;

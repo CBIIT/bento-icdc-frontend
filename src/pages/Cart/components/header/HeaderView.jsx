@@ -5,7 +5,6 @@ import axios from 'axios';
 import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
 import ReadMoreSVG from '../readMore';
-import env from '../../../../utils/env';
 import DropDownView from '../dropdown/DropDownView';
 import * as Styled from './Header.styled';
 
@@ -22,7 +21,7 @@ const HeaderView = ({ filesId }) => {
   };
 
   useEffect(() => {
-    getReadMe(env.REACT_APP_FILE_CENTRIC_CART_README);
+    getReadMe(process.env.REACT_APP_FILE_CENTRIC_CART_README);
   }, []);
 
   const displayReadMeHandler = () => {

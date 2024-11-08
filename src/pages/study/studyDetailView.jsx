@@ -33,7 +33,6 @@ import Styles from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
 // import SupportingData from './views/supporting-data/supportingData';
 import SupportingData from './views/supporting-data/SupportingDataView';
-import env from '../../utils/env';
 import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
 // import ClinicalData from './views/clinical-data/clinicalData';
 import ClinicalData from './views/clinical-data/ClinicalDataController';
@@ -71,7 +70,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   } = useQuery({
     queryKey: ['studiesByProgram'],
     queryFn: async () =>
-      request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
+      request(process.env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
   });
 
   const studyData = data.study[0];

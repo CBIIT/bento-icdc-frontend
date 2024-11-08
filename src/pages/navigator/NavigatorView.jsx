@@ -1,33 +1,32 @@
-import React from "react";
-import _ from "lodash";
-import { withStyles } from "@material-ui/styles";
-import { ReduxDataDictionary, getModelExploreData } from "data-model-navigator";
-import store from "../../store";
+import React from 'react';
+import _ from 'lodash';
+import { withStyles } from '@material-ui/styles';
+import { ReduxDataDictionary, getModelExploreData } from 'data-model-navigator';
+import store from '../../store';
 import {
   filterConfig,
   pdfDownloadConfig,
   readMeConfig,
   controlVocabConfig,
   graphViewConfig,
-} from "../../bento/dataDictionaryData";
-import env from "../../utils/env";
-import { Typography } from "../../components/Wrappers/Wrappers";
+} from '../../bento/dataDictionaryData';
+import { Typography } from '../../components/Wrappers/Wrappers';
 
-const DATA_MODEL = env.REACT_APP_DATA_MODEL;
-const DATA_MODEL_PROPS = env.REACT_APP_DATA_MODEL_PROPS;
-const DATA_MODEL_README = env.REACT_APP_DMN_README;
+const DATA_MODEL = process.env.REACT_APP_DATA_MODEL;
+const DATA_MODEL_PROPS = process.env.REACT_APP_DATA_MODEL_PROPS;
+const DATA_MODEL_README = process.env.REACT_APP_DMN_README;
 
 async function getData() {
   const response = await getModelExploreData(DATA_MODEL, DATA_MODEL_PROPS);
   Promise.all([
     store.dispatch({
-      type: "REACT_FLOW_GRAPH_DICTIONARY",
+      type: 'REACT_FLOW_GRAPH_DICTIONARY',
       dictionary: response.data,
       pdfDownloadConfig,
       graphViewConfig,
     }),
     store.dispatch({
-      type: "RECEIVE_DICTIONARY",
+      type: 'RECEIVE_DICTIONARY',
       payload: {
         data: response.data,
         facetfilterConfig: filterConfig,
@@ -41,7 +40,7 @@ async function getData() {
       },
     }),
     store.dispatch({
-      type: "RECEIVE_VERSION_INFO",
+      type: 'RECEIVE_VERSION_INFO',
       data: response.version,
     }),
   ]);
@@ -71,7 +70,7 @@ const NavigatorView = ({ classes }) => {
 
 const styles = () => ({
   container: {
-    marginTop: "60px",
+    marginTop: '60px',
   },
 });
 

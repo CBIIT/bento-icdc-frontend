@@ -4,10 +4,9 @@ import { parse } from 'yaml';
 import axios from 'axios';
 import LandingView from './landingView';
 import NewsView from './views/newsView';
-import env from '../../utils/env';
 
-const LANDING_CONTENT_URL = env.REACT_APP_LANDING_DATA;
-const NEWS_CONTENT_URL = env.REACT_APP_NEWS_DATA;
+const LANDING_CONTENT_URL = process.env.REACT_APP_LANDING_DATA;
+const NEWS_CONTENT_URL = process.env.REACT_APP_NEWS_DATA;
 const NEWS_PATH = '/news';
 
 const LandingController = ({ match }) => {

@@ -1,20 +1,19 @@
-import React from "react";
+import React from 'react';
 import {
   Grid,
   withStyles,
   Typography,
   CircularProgress,
-} from "@material-ui/core";
-import { request, gql } from "graphql-request";
-import { useQuery } from "@tanstack/react-query";
-import { cn, getOptions } from "@bento-core/util";
-import StatsView from "../../components/Stats/StatsView";
-import { table, pageData, tableLayOut } from "../../bento/programDetailData";
-import { pageData as ProgramImageConfig } from "../../bento/programData";
-import CustomBreadcrumb from "../../components/Breadcrumb/BreadcrumbView";
-import env from "../../utils/env";
-import { TableContextProvider } from "../../bento-core";
-import StudiesTable from "../../components/DataAvailabilityTable/StudiesTable";
+} from '@material-ui/core';
+import { request, gql } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
+import { cn, getOptions } from '@bento-core/util';
+import StatsView from '../../components/Stats/StatsView';
+import { table, pageData, tableLayOut } from '../../bento/programDetailData';
+import { pageData as ProgramImageConfig } from '../../bento/programData';
+import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import { TableContextProvider } from '../../bento-core';
+import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
 
 const studiesByProgram = gql`
   query getStudiesByProgramProgramDetail {
@@ -36,9 +35,9 @@ const ProgramView = ({ classes, data }) => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["studiesByProgram"],
+    queryKey: ['studiesByProgram'],
     queryFn: async () =>
-      request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
+      request(process.env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
   });
 
   const programDetail = data.program[0];
@@ -58,24 +57,24 @@ const ProgramView = ({ classes, data }) => {
 
   const breadCrumbJson = [
     {
-      name: "ALL PROGRAMS",
-      to: "/programs",
+      name: 'ALL PROGRAMS',
+      to: '/programs',
       isALink: true,
     },
     {
       name: programDetail.program_acronym,
-      to: "/explore",
+      to: '/explore',
       isALink: true,
     },
   ];
 
   const programConfig = ProgramImageConfig[programDetail.program_acronym];
-  const programImage = programConfig ? programConfig.secondaryImage : "";
+  const programImage = programConfig ? programConfig.secondaryImage : '';
   const tableOptions = getOptions(table, classes);
   tableOptions.downloadOptions.filename =
     tableOptions.downloadOptions.filename.replace(
-      "Program",
-      `${programDetail.program_acronym}`,
+      'Program',
+      `${programDetail.program_acronym}`
     );
 
   if (isLoading) {
@@ -122,7 +121,7 @@ const ProgramView = ({ classes, data }) => {
               <span className={classes.content}>
                 {programDetail.program_full_description
                   ? programDetail.program_full_description
-                      .split("**")
+                      .split('**')
                       .map((item, i) => <p key={i}>{item}</p>)
                   : null}
               </span>
@@ -175,260 +174,260 @@ const ProgramView = ({ classes, data }) => {
   );
 };
 
-const styles = (theme) => ({
+const styles = theme => ({
   crdcLinks: {
-    paddingLeft: "1em",
-    textAlign: "left",
+    paddingLeft: '1em',
+    textAlign: 'left',
   },
   legend: {
-    zIndex: "1000",
+    zIndex: '1000',
   },
   legendTooltip: {
-    position: "relative",
-    bottom: "0.5em",
+    position: 'relative',
+    bottom: '0.5em',
   },
   dalIcon: {
-    width: "25px",
+    width: '25px',
   },
   dataAvailIndicator: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   dataAvailIndicatorIcon: {
-    color: "#1A89C4",
-    height: "13px",
-    width: "13px",
+    color: '#1A89C4',
+    height: '13px',
+    width: '13px',
   },
   crdcLinkStyle: {
-    color: "#DC762F",
+    color: '#DC762F',
   },
   dataAvailIndicatorImage: {
-    height: "20px",
-    width: "20px",
+    height: '20px',
+    width: '20px',
   },
   defaultDalTooltip: {
-    maxWidth: "none",
+    maxWidth: 'none',
   },
   externalLinkDalTooltip: {
-    maxWidth: "none",
-    padding: "0px 12px",
+    maxWidth: 'none',
+    padding: '0px 12px',
   },
   link: {
-    fontWeight: "bold",
-    fontFamily: "Open Sans",
-    fontSize: "15px",
-    textDecoration: "underline",
-    lineSpacing: "19pt",
-    color: "#DC762F",
-    float: "left",
-    marginRight: "5px",
-    "&:hover": {
-      textDecoration: "underline",
+    fontWeight: 'bold',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
+    textDecoration: 'underline',
+    lineSpacing: '19pt',
+    color: '#DC762F',
+    float: 'left',
+    marginRight: '5px',
+    '&:hover': {
+      textDecoration: 'underline',
     },
   },
   embargoFileIcon: {
-    width: "20px",
+    width: '20px',
   },
   embargoToolTip: {
-    visibility: "hidden",
-    fontWeight: "500",
-    zIndex: "400",
-    background: "#fff",
-    border: "2px solid #A61401",
-    borderRadius: "7px",
-    fontSize: "12px",
-    width: "110px",
-    padding: "5px 0px 0px 2px",
-    marginTop: "-30px",
-    marginLeft: "-100px",
+    visibility: 'hidden',
+    fontWeight: '500',
+    zIndex: '400',
+    background: '#fff',
+    border: '2px solid #A61401',
+    borderRadius: '7px',
+    fontSize: '12px',
+    width: '110px',
+    padding: '5px 0px 0px 2px',
+    marginTop: '-30px',
+    marginLeft: '-100px',
   },
   buttonCaseNumb: {
-    background: "none!important",
-    border: "none",
-    padding: "0!important",
-    textDecoration: "underline",
-    fontWeight: "bold",
-    fontSize: "15px",
-    lineSpacing: "19pt",
-    color: "#DC762F",
-    cursor: "pointer",
-    "&:hover": {
-      textDecoration: "underline",
+    background: 'none!important',
+    border: 'none',
+    padding: '0!important',
+    textDecoration: 'underline',
+    fontWeight: 'bold',
+    fontSize: '15px',
+    lineSpacing: '19pt',
+    color: '#DC762F',
+    cursor: 'pointer',
+    '&:hover': {
+      textDecoration: 'underline',
     },
   },
   dogImage: {
-    width: "100%",
-    paddingTop: "15px",
+    width: '100%',
+    paddingTop: '15px',
   },
   paddingLeft8: {
-    paddingLeft: "12px",
+    paddingLeft: '12px',
   },
   paddingBottm17: {
-    paddingBottm: "17px",
+    paddingBottm: '17px',
   },
   container: {
-    paddingTop: "120px",
-    paddingBottom: "45px",
-    fontFamily: "Raleway, sans-serif",
-    background: "white",
+    paddingTop: '120px',
+    paddingBottom: '45px',
+    fontFamily: 'Raleway, sans-serif',
+    background: 'white',
   },
   content: {
-    fontSize: "16px",
-    lineHeight: "25px",
+    fontSize: '16px',
+    lineHeight: '25px',
   },
   marginTop18: {
-    marginTop: "18px",
+    marginTop: '18px',
   },
   warning: {
     color: theme.palette.warning.main,
   },
   table: {
-    paddingTop: "0px !important",
+    paddingTop: '0px !important',
   },
   paper: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   fakeToolbar: {
     ...theme.mixins.toolbar,
   },
   root: {
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',
-    fontSize: "9px",
-    letterSpacing: "0.025em",
-    color: "#000",
+    fontSize: '9px',
+    letterSpacing: '0.025em',
+    color: '#000',
   },
   header: {
-    paddingLeft: "32px",
-    paddingRight: "32px",
-    borderBottom: "#81a6b9 4px solid",
-    height: "76px",
-    margin: "auto 33px",
+    paddingLeft: '32px',
+    paddingRight: '32px',
+    borderBottom: '#81a6b9 4px solid',
+    height: '76px',
+    margin: 'auto 33px',
   },
 
   headerTitle: {
     maxWidth: theme.custom.maxContentWidth,
-    margin: "auto",
-    float: "left",
-    marginLeft: "110px",
-    paddingLeft: "3px",
+    margin: 'auto',
+    float: 'left',
+    marginLeft: '110px',
+    paddingLeft: '3px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontWeight: "bold",
-    letterSpacing: "0.017em",
-    color: "#1db634",
-    fontSize: "30px",
-    lineHeight: "18px",
-    paddingLeft: "5px",
-    paddingBottom: "8px",
+    fontWeight: 'bold',
+    letterSpacing: '0.017em',
+    color: '#1db634',
+    fontSize: '30px',
+    lineHeight: '18px',
+    paddingLeft: '5px',
+    paddingBottom: '8px',
   },
   headerMSubTitle: {
-    paddingTop: "8px",
+    paddingTop: '8px',
   },
   headerSubTitleCate: {
-    color: "#606061",
-    fontWeight: "bold",
+    color: '#606061',
+    fontWeight: 'bold',
     fontFamily: theme.custom.fontFamilyRaleway,
-    textTransform: "uppercase",
-    letterSpacing: "0.023em",
-    fontSize: "12px",
-    maxHeight: "30px",
-    overflow: "hidden",
-    paddingLeft: "3px",
+    textTransform: 'uppercase',
+    letterSpacing: '0.023em',
+    fontSize: '12px',
+    maxHeight: '30px',
+    overflow: 'hidden',
+    paddingLeft: '3px',
   },
   headerSubTitleContent: {
-    color: "#000000",
-    fontWeight: "bold",
+    color: '#000000',
+    fontWeight: 'bold',
     fontFamily: theme.custom.fontFamilyRaleway,
-    textTransform: "uppercase",
-    letterSpacing: "0.023em",
-    fontSize: "12px",
-    paddingLeft: "3px",
+    textTransform: 'uppercase',
+    letterSpacing: '0.023em',
+    fontSize: '12px',
+    paddingLeft: '3px',
   },
 
   logo: {
-    position: "absolute",
-    float: "left",
-    marginTop: "-14px",
-    width: "96px",
+    position: 'absolute',
+    float: 'left',
+    marginTop: '-14px',
+    width: '96px',
   },
   detailContainer: {
-    margin: "auto",
-    paddingTop: "12px",
-    paddingLeft: "87px",
-    paddingRight: "30px",
+    margin: 'auto',
+    paddingTop: '12px',
+    paddingLeft: '87px',
+    paddingRight: '30px',
     fontFamily: theme.custom.fontFamilySans,
-    letterSpacing: "0.014em",
-    color: "#000000",
-    size: "12px",
-    lineHeight: "23px",
-    paddingBottom: "40px",
+    letterSpacing: '0.014em',
+    color: '#000000',
+    size: '12px',
+    lineHeight: '23px',
+    paddingBottom: '40px',
   },
   detailContainerHeader: {
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: "17px",
-    letterSpacing: "0.017em",
-    color: "#1db634",
+    fontSize: '17px',
+    letterSpacing: '0.017em',
+    color: '#1db634',
   },
   detailContainerBottom: {
-    borderTop: "#81a6b9 1px solid",
-    marginTop: "8px",
-    padding: " 35px 2px 63px 2px !important",
+    borderTop: '#81a6b9 1px solid',
+    marginTop: '8px',
+    padding: ' 35px 2px 63px 2px !important',
   },
   detailContainerLeft: {
-    padding: "20px 25px 30px 0px !important",
-    minHeight: "100px",
-    maxHeight: "450px",
-    overflowY: "auto",
+    padding: '20px 25px 30px 0px !important',
+    minHeight: '100px',
+    maxHeight: '450px',
+    overflowY: 'auto',
   },
   detailContainerRight: {
-    padding: "20px 15px 30px 20px !important",
-    minHeight: "330px",
+    padding: '20px 15px 30px 20px !important',
+    minHeight: '330px',
   },
   tableContainer: {
-    background: "#f3f3f3",
+    background: '#f3f3f3',
   },
   tableHeader: {
-    paddingLeft: "74px",
+    paddingLeft: '74px',
   },
   tableDiv: {
-    padding: "31px 34px 80px 54px",
+    padding: '31px 34px 80px 54px',
   },
   headerButtonLink: {
-    textDecoration: "none",
+    textDecoration: 'none',
   },
   button: {
-    borderRadius: "10px",
-    width: "178px",
-    height: "27px",
-    lineHeight: "18px",
-    fontSize: "10px",
-    color: "#ffffff",
-    textTransform: "uppercase",
-    backgroundColor: "#ff8a00",
+    borderRadius: '10px',
+    width: '178px',
+    height: '27px',
+    lineHeight: '18px',
+    fontSize: '10px',
+    color: '#ffffff',
+    textTransform: 'uppercase',
+    backgroundColor: '#ff8a00',
     fontFamily: theme.custom.fontFamilySans,
-    "&:hover": {
-      backgroundColor: "#ff8a00",
+    '&:hover': {
+      backgroundColor: '#ff8a00',
     },
   },
   detailContainerItems: {
-    paddingTop: "5px",
-    paddingLeft: "17px",
+    paddingTop: '5px',
+    paddingLeft: '17px',
   },
   title: {
-    color: "#9d9d9c",
+    color: '#9d9d9c',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: "12px",
-    letterSpacing: "0.017em",
-    fontWeight: "600",
-    textTransform: "uppercase",
+    fontSize: '12px',
+    letterSpacing: '0.017em',
+    fontWeight: '600',
+    textTransform: 'uppercase',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: "17px",
-    letterSpacing: "0.017em",
-    color: "#1db634",
+    fontSize: '17px',
+    letterSpacing: '0.017em',
+    color: '#1db634',
   },
 });
 

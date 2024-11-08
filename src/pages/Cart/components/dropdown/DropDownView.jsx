@@ -17,7 +17,6 @@ import {
 } from '../../../../bento/fileCentricCartWorkflowData';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import { downloadCsvString } from '../../utils';
-import env from '../../../../utils/env';
 import * as Styled from './DropDown.styled';
 
 const LABEL = 'Export and Download';
@@ -270,7 +269,7 @@ const DropDownView = ({ filesId = [], allFiles }) => {
 
   useEffect(() => {
     //TODO: investigate this env usage
-    getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
+    getReadMe(setContent, process.env.REACT_APP_FILE_CENTRIC_CART_README);
   }, []);
 
   const initiateDownload = async currLabel => {
@@ -340,7 +339,9 @@ const DropDownView = ({ filesId = [], allFiles }) => {
             </Styled.CancerGenomicsCloudButton>
           </Tooltip>
         </Styled.CancerGenomicsCloudMenuItem>
-        <Styled.DownloadFileManifestMenuItem isDropDownDisabled={isDropDownDisabled}>
+        <Styled.DownloadFileManifestMenuItem
+          isDropDownDisabled={isDropDownDisabled}
+        >
           <Tooltip
             arrow
             interactive
@@ -374,26 +375,26 @@ const DropDownView = ({ filesId = [], allFiles }) => {
 
   return (
     <>
-    <Styled.DropDownMenuContainer>
-      <Tooltip
-        arrow
-        maxWidth={200}
-        placement="left"
-        title={dropDownTooltipTitle}
-      >
-        <Styled.DisplayLinksDropDownButton
-          open={open}
-          isDropDownDisabled={isDropDownDisabled}
-          endIcon={dropDownIcon}
-          ref={anchorRef}
-          aria-controls={open ? 'menu-list-grow' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
+      <Styled.DropDownMenuContainer>
+        <Tooltip
+          arrow
+          maxWidth={200}
+          placement="left"
+          title={dropDownTooltipTitle}
         >
-          {label}
-        </Styled.DisplayLinksDropDownButton>
-      </Tooltip>
-      <Popper
+          <Styled.DisplayLinksDropDownButton
+            open={open}
+            isDropDownDisabled={isDropDownDisabled}
+            endIcon={dropDownIcon}
+            ref={anchorRef}
+            aria-controls={open ? 'menu-list-grow' : undefined}
+            aria-haspopup="true"
+            onClick={handleToggle}
+          >
+            {label}
+          </Styled.DisplayLinksDropDownButton>
+        </Tooltip>
+        <Popper
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
@@ -402,10 +403,7 @@ const DropDownView = ({ filesId = [], allFiles }) => {
           disablePortal
         >
           {({ TransitionProps, placement }) => (
-            <Styled.MuiStyledGrow
-              placement={placement}
-              {...TransitionProps}
-            >
+            <Styled.MuiStyledGrow placement={placement} {...TransitionProps}>
               <Styled.MuiStyledPaper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <Styled.DropDownMenuList

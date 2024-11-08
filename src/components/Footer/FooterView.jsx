@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useLocation } from "react-router";
-import FooterData from "../../bento/globalFooterData";
-import env from "../../utils/env";
-import CustomThemeProvider from "./FooterThemConfig";
-import { Footer } from "../../bento-core";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useLocation } from 'react-router';
+import FooterData from '../../bento/globalFooterData';
+import CustomThemeProvider from './FooterThemConfig';
+import { Footer } from '../../bento-core';
 // const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_VERSION;
 
 const ICDC_FOOTER_STYLE = {
-  padding: "24px 294px 45px",
+  padding: '24px 294px 45px',
 };
 
 const ICDCFooter = () => {
@@ -19,7 +18,9 @@ const ICDCFooter = () => {
 
   useEffect(() => {
     const getSystems = async () => {
-      const response = await axios.get(env.REACT_APP_FILE_SERVICE_VERSION);
+      const response = await axios.get(
+        process.env.REACT_APP_FILE_SERVICE_VERSION
+      );
       try {
         const { data } = response;
         // const FSverison = { FileServiceVersion: data.version || '' };
@@ -28,21 +29,23 @@ const ICDCFooter = () => {
         setFooterUpdatedData({ ...FooterData, ...SystemInfo });
       } catch (_error) {
         const FSverison = {
-          FileServiceVersion: "Error in getting File service verison",
+          FileServiceVersion: 'Error in getting File service verison',
         };
         setFooterUpdatedData({ ...FooterData, ...FSverison });
       }
     };
     getSystems();
     const setBEVersion = async () => {
-      const data = await (await axios.get(env.REACT_APP_BACKEND_VERSION)).data;
+      const data = await (
+        await axios.get(process.env.REACT_APP_BACKEND_VERSION)
+      ).data;
       const BEversion = FooterData?.link_sections[2]?.items;
-      BEversion[2] = { text: `BE Version: ${data.version || ""}` };
+      BEversion[2] = { text: `BE Version: ${data.version || ''}` };
     };
     setBEVersion();
   }, [FooterData]);
 
-  if (pathname.includes("/jBrowse/")) {
+  if (pathname.includes('/jBrowse/')) {
     return null;
   }
 

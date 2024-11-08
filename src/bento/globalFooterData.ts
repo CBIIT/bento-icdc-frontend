@@ -1,13 +1,28 @@
-import axios from 'axios';
+interface GlobalFooterData {
+  bg: string;
+  footerLogoAltText: string;
+  footerLogoText: string;
+  footerLogoSubText: string;
+  footerLogoHyperlink: string;
+  version: string | undefined;
+  BEversion: string;
+  link_sections: {
+    title: string;
+    systemInfoInLinkSection?: boolean;
+    items: {
+      text: string;
+      link?: string;
+      type?: string;
+      content?: string;
+    }[];
+  }[];
+  global_footer_links: {
+    text: string;
+    link: string;
+  }[];
+}
 
-const getPrivacy = async () => {
-  const data = await (
-    await axios.get(process.env.REACT_APP_FOOTER_PRIVACY_POLICY)
-  ).data;
-  return data;
-};
-
-export default {
+const data: GlobalFooterData = {
   bg: '#325068',
   // footerLogoImage: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/footer/FNL_logo.png',
   footerLogoAltText: 'Footer Logo',
@@ -90,7 +105,7 @@ export default {
         {
           text: 'Privacy',
           type: 'modal',
-          content: getPrivacy(),
+          content: process.env.REACT_APP_FOOTER_PRIVACY_POLICY,
         },
       ],
     },
@@ -114,3 +129,5 @@ export default {
     },
   ],
 };
+
+export default data;

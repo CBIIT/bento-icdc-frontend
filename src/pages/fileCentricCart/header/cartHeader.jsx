@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { Button, Divider, withStyles } from "@material-ui/core";
-import { useQuery } from "@apollo/client";
-import { noop } from "lodash";
-import MenuItem from "@material-ui/core/MenuItem";
-import axios from "axios";
-import { cn } from "@bento-core/util";
-import gql from "graphql-tag";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import MenuList from "@material-ui/core/MenuList";
-import env from "../../../utils/env";
-import Styles from "./cartHeader.style";
-import ReadMoreSVG from "./readMore";
-import DownloadFileManifestDialog from "./downloadFileManifestDialog";
-import ReadMeDialogComponent from "../../../components/ReadMeDialog/ReadMe.controller";
-import cgcIcon from "./assets/cgc.svg";
-import { getManifestData } from "../util/TableService";
-import { GET_STORE_MANIFEST_DATA_QUERY } from "../../../bento/fileCentricCartWorkflowData";
-import { ToolTip as Tooltip } from "../../../bento-core";
-import arrowDownPng from "./assets/arrowDown.png";
+import React, { useEffect, useState } from 'react';
+import { Button, Divider, withStyles } from '@material-ui/core';
+import { useQuery } from '@apollo/client';
+import { noop } from 'lodash';
+import MenuItem from '@material-ui/core/MenuItem';
+import axios from 'axios';
+import { cn } from '@bento-core/util';
+import gql from 'graphql-tag';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuList from '@material-ui/core/MenuList';
+import Styles from './cartHeader.style';
+import ReadMoreSVG from './readMore';
+import DownloadFileManifestDialog from './downloadFileManifestDialog';
+import ReadMeDialogComponent from '../../../components/ReadMeDialog/ReadMe.controller';
+import cgcIcon from './assets/cgc.svg';
+import { getManifestData } from '../util/TableService';
+import { GET_STORE_MANIFEST_DATA_QUERY } from '../../../bento/fileCentricCartWorkflowData';
+import { ToolTip as Tooltip } from '../../../bento-core';
+import arrowDownPng from './assets/arrowDown.png';
 
 const StyledMenuItem = withStyles(() => ({
   root: {
-    padding: "2px 26px",
-    color: "#fff",
-    overflow: "auto",
-    whiteSpace: "wrap",
+    padding: '2px 26px',
+    color: '#fff',
+    overflow: 'auto',
+    whiteSpace: 'wrap',
     /* '&:focus': {
       backgroundColor: '#0d71a3',
       color: 'white',
@@ -39,10 +38,10 @@ const StyledMenuItem = withStyles(() => ({
   },
 }))(MenuItem);
 
-const LABEL = "Available Export Options";
+const LABEL = 'Available Export Options';
 
 const { EXPORT_TO_CANCER_GENOMICS_CLOUD } = {
-  EXPORT_TO_CANCER_GENOMICS_CLOUD: "Export to Cancer Genomics Cloud",
+  EXPORT_TO_CANCER_GENOMICS_CLOUD: 'Export to Cancer Genomics Cloud',
 };
 
 const OPTIONS = [EXPORT_TO_CANCER_GENOMICS_CLOUD];
@@ -69,15 +68,15 @@ const CartHeader = React.forwardRef(
     // manifestPayload,
     filesId,
   }) => {
-    const [sbgUrl, setSBGUrl] = useState("");
+    const [sbgUrl, setSBGUrl] = useState('');
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
 
     const handleToggle = () => {
-      setOpen((prevOpen) => !prevOpen);
+      setOpen(prevOpen => !prevOpen);
     };
 
-    const handleClose = (event) => {
+    const handleClose = event => {
       if (anchorRef.current && anchorRef.current.contains(event.target)) {
         return;
       }
@@ -86,7 +85,7 @@ const CartHeader = React.forwardRef(
     };
 
     function handleListKeyDown(event) {
-      if (event.key === "Tab") {
+      if (event.key === 'Tab') {
         event.preventDefault();
         setOpen(false);
       }
@@ -105,14 +104,14 @@ const CartHeader = React.forwardRef(
     const getManifestPayload = () => {
       const { data: manifestData } = getManifestData(
         GET_STORE_MANIFEST_DATA_QUERY,
-        filesId,
+        filesId
       );
 
       if (!manifestData) {
         return null;
       }
       const processedStoreManifestPayload = manifestData.filesInList.map(
-        (el) => ({
+        el => ({
           file_name: el?.file_name,
           file_type: el?.file_type,
           association: el?.association,
@@ -129,16 +128,16 @@ const CartHeader = React.forwardRef(
           individual_id: el?.individual_id,
           name: el?.name,
           drs_uri: el?.drs_uri,
-        }),
+        })
       );
       return processedStoreManifestPayload;
     };
 
     const { data } = useQuery(STORE_MANIFEST_QUERY, {
       variables: { manifest: JSON.stringify(getManifestPayload()) },
-      context: { clientName: "interopService" },
+      context: { clientName: 'interopService' },
       skip: !getManifestPayload(),
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     });
 
     useEffect(() => {
@@ -155,15 +154,15 @@ const CartHeader = React.forwardRef(
     const [isLoading, _setLoading] = React.useState(false);
 
     useEffect(() => {
-      getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
+      getReadMe(setContent, process.env.REACT_APP_FILE_CENTRIC_CART_README);
     }, []);
 
-    const initiateDownload = (currLabel) => {
+    const initiateDownload = currLabel => {
       switch (currLabel) {
-        case "Export to Cancer Genomics Cloud":
+        case 'Export to Cancer Genomics Cloud':
           window.open(
             `https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`,
-            "_blank",
+            '_blank'
           );
           break;
         default:
@@ -185,7 +184,7 @@ const CartHeader = React.forwardRef(
       setDisplayReadMe(!displayReadMe);
     };
 
-    const getMenuItem = (type) => {
+    const getMenuItem = type => {
       let icon;
       switch (type) {
         case EXPORT_TO_CANCER_GENOMICS_CLOUD:
@@ -233,7 +232,7 @@ const CartHeader = React.forwardRef(
       );
     };
 
-    const options = OPTIONS.map((item) => getMenuItem(item));
+    const options = OPTIONS.map(item => getMenuItem(item));
     return (
       <div className={classes.container}>
         <div className={classes.header}>
@@ -269,7 +268,7 @@ const CartHeader = React.forwardRef(
             </div>
 
             <div>
-              {" "}
+              {' '}
               <Button
                 classes={{
                   root: open
@@ -281,13 +280,13 @@ const CartHeader = React.forwardRef(
                 }}
                 startIcon={
                   <img
-                    style={{ marginRight: "8px" }}
+                    style={{ marginRight: '8px' }}
                     src={arrowDownPng}
                     alt="arrow down icon"
                   />
                 }
                 ref={anchorRef}
-                aria-controls={open ? "menu-list-grow" : undefined}
+                aria-controls={open ? 'menu-list-grow' : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
               >
@@ -305,7 +304,7 @@ const CartHeader = React.forwardRef(
                     {...TransitionProps}
                     style={{
                       transformOrigin:
-                        placement === "bottom" ? "center top" : "center bottom",
+                        placement === 'bottom' ? 'center top' : 'center bottom',
                     }}
                   >
                     <Paper className={classes.dropdownPaper}>
@@ -355,14 +354,14 @@ const CartHeader = React.forwardRef(
                       files, click the 'Download File Manifest' button and
                       upload the resulting manifest file to your`}
                       <a
-                        style={{ color: "#DA6300" }}
+                        style={{ color: '#DA6300' }}
                         target="_blank"
                         rel="noreferrer"
                         href="https://cgc-accounts.sbgenomics.com/auth/login?next=https%3A%2F%2Fcgc-accounts.sbgenomics.com%2Foauth2%2Fauthorization%3Fresponse_type%3Dcode%26client_id%3D08bbb98f354e4554bd7fd315de64d955%26redirect_uri%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Foauth2%252Fredirect%26state%3Dp8aBZtr4Vo9DKxtCgjG8aKPSZVyNXq%26client_next%3Dhttps%253A%252F%252Fcgc.sbgenomics.com%252Fimport-redirect%252Fdrs%252Fcsv%253FURL%253D%25257Bdownload%26scope%3Dopenid%26nonce%3D67182501315305605201684948090"
                       >
                         <span
                           style={{
-                            textDecoration: "underline",
+                            textDecoration: 'underline',
                             margin: 0,
                             padding: 0,
                           }}
@@ -390,7 +389,7 @@ const CartHeader = React.forwardRef(
         <ReadMeDialogComponent
           content={content}
           config={{
-            readMeTitle: "Understanding the “My Files” Cart Page",
+            readMeTitle: 'Understanding the “My Files” Cart Page',
           }}
           display={displayReadMe}
           displayReadMeDialog={displayReadMeHandler}
@@ -404,9 +403,9 @@ const CartHeader = React.forwardRef(
         />
       </div>
     );
-  },
+  }
 );
 
-CartHeader.displayName = "CartHeader";
+CartHeader.displayName = 'CartHeader';
 
 export default withStyles(Styles, { withTheme: true })(CartHeader);
