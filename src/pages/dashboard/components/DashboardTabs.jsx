@@ -1,24 +1,45 @@
-import React from "react";
-import _ from "lodash";
-import { TableContextProvider } from "../../../bento-core";
-import TabsView from "../../../components/Tabs/TabsView";
+import React from 'react';
+import _ from 'lodash';
+import {
+  customPaginationAction,
+  TableContextProvider,
+} from '../../../bento-core';
+import TabsView from '../../../components/Tabs/TabsView';
 import {
   tableContainers,
   tableLayOut,
   tabIndex,
-} from "../../../bento/dashboardTabData";
-import PaginatedTableView from "../../../components/PaginatedTable/TableView";
-import useDashboardTabs from "./dashboard-tabs-store";
-import DashboardThemeProvider from "./DashboardThemeProvider";
+} from '../../../bento/dashboardTabData';
+import PaginatedTableView from '../../../components/PaginatedTable/TableView';
+import useDashboardTabs from './dashboard-tabs-store';
+import DashboardThemeProvider from './DashboardThemeProvider';
 
 const DashboardTabsView = ({
   dashboardStats,
   activeFilters,
   unifiedQueryParam = {},
+  searchText,
 }) => {
   const [state, actions] = useDashboardTabs();
   const handleTabChange = (_event, value) => {
     actions.changeCurrentTab(value);
+  };
+
+  // page specific state initialization
+  // override any table state at page label
+  // set input serch for all the tables
+  const dashboardTableInitActions = context => {
+    if (searchText !== undefined) {
+      const { dispatch, searchQuery: tableSearch } = context;
+      if (dispatch && tableSearch != searchText) {
+        // override the search query foreach of the tables
+        dispatch(
+          customPaginationAction({
+            searchQuery: searchText,
+          })
+        );
+      }
+    }
   };
 
   return (
@@ -45,6 +66,7 @@ const DashboardTabsView = ({
                 ...tab?.queryParam,
                 ...unifiedQueryParam,
               }}
+              overriedTableState={dashboardTableInitActions}
             />
           </div>
         </TableContextProvider>
