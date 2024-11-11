@@ -18,7 +18,6 @@ const DashboardTabsView = ({
   dashboardStats,
   activeFilters,
   unifiedQueryParam = {},
-  searchText,
 }) => {
   const [state, actions] = useDashboardTabs();
   const handleTabChange = (_event, value) => {
@@ -29,17 +28,27 @@ const DashboardTabsView = ({
   // override any table state at page label
   // set input serch for all the tables
   const dashboardTableInitActions = context => {
-    if (searchText !== undefined) {
+    if (state.searchText !== undefined) {
       const { dispatch, searchQuery: tableSearch } = context;
-      if (dispatch && tableSearch != searchText) {
+      if (dispatch && tableSearch != state.searchText) {
         // override the search query foreach of the tables
         dispatch(
           customPaginationAction({
-            searchQuery: searchText,
+            searchQuery: state.searchText,
           })
         );
       }
     }
+  };
+
+  // override paginated actions
+  // pageination actions
+  const overridePaginatedActions = () => {
+    return {
+      customizeSearchQueryChange: query => {
+        actions.setSearchText(query);
+      },
+    };
   };
 
   return (
@@ -67,6 +76,7 @@ const DashboardTabsView = ({
                 ...unifiedQueryParam,
               }}
               overriedTableState={dashboardTableInitActions}
+              overridePaginatedActions={overridePaginatedActions}
             />
           </div>
         </TableContextProvider>
