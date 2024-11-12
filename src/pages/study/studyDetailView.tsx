@@ -1,15 +1,8 @@
 import React from 'react';
-import {
-  Grid,
-  withStyles,
-  Typography,
-  CircularProgress,
-} from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Grid, Typography, CircularProgress } from '@mui/material';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
-import _ from 'lodash';
-import { cn } from '@bento-core/util';
+import _, { defaultTo } from 'lodash';
 import StatsView from '../../components/Stats/StatsView';
 import { studyDisposition } from './utils';
 import { navigatedToDashboard } from '../../utils/utils';
@@ -19,7 +12,6 @@ import {
   embargoHeaderIcon,
   embargoFileIcon,
   tab,
-  studiesByProgram,
 } from '../../bento/studyDetailsData';
 import Tab from '../../components/Tab/Tab';
 import Overview from './views/overview/Overview';
@@ -29,22 +21,55 @@ import StudyFiles from './views/StudyFiles';
 import TabPanel from '../../components/Tab/TabPanel';
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
-import Styles from './studyDetailsStyle';
+import {
+  AccessionLabel,
+  AccessionValue,
+  Breadcrumb,
+  Container,
+  DetailContainer,
+  EmbargoWrapper,
+  FileIcon,
+  Header,
+  HeaderAccessionItem,
+  HeaderBar,
+  HeaderButton,
+  HeaderButtonLink,
+  HeaderButtonLinkNumber,
+  HeaderButtonLinkSpan,
+  HeaderButtonLinkText,
+  HeaderMainTitle,
+  HeaderPropertyName,
+  HeaderTitle,
+  Logo,
+  NameWrapper,
+  PendingWrapper,
+} from './studyDetailsStyle';
 import StudyThemeProvider from './studyDetailsThemeConfig';
-// import SupportingData from './views/supporting-data/supportingData';
 import SupportingData from './views/supporting-data/SupportingDataView';
 import env from '../../utils/env';
 import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
-// import ClinicalData from './views/clinical-data/clinicalData';
 import ClinicalData from './views/clinical-data/ClinicalDataController';
+import {
+  GetStudiesByProgramStudyDetailsDocument,
+  StudyQuery,
+} from '../../generated-types/graphql';
+import { ClinicalDataNodeCounts } from '../../generated-types/types';
 
-function hasPositiveValue(arr) {
-  return arr.some(obj => Object.values(obj).some(value => value > 0));
+function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
+  return arr.some(obj =>
+    Object.values(obj || '').some(value => (value as number) > 0)
+  );
 }
 
-const processData = (names, nodeCountArg, nodeCaseCountArg) =>
-  names.map(name => {
-    const objMatcher = _.toLower(_.replace(name, ' ', '_'));
+const processData = (
+  names: (string | null)[] | null | undefined,
+  nodeCountArg: ClinicalDataNodeCounts,
+  nodeCaseCountArg: ClinicalDataNodeCounts
+) =>
+  names?.map(name => {
+    const objMatcher = _.toLower(
+      _.replace(name || '', ' ', '_')
+    ) as keyof ClinicalDataNodeCounts;
     const nodeCount = nodeCountArg[objMatcher];
     const nodeCaseCount = nodeCaseCountArg[objMatcher];
 
@@ -62,7 +87,12 @@ const processData = (names, nodeCountArg, nodeCaseCountArg) =>
     };
   });
 
-const StudyDetailView = ({ classes, data, initTab }) => {
+interface StudyDetailViewProps {
+  data: StudyQuery;
+  initTab: string;
+}
+
+const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   const [, actions] = useDashboardTabs();
   const {
     data: interOpData,
@@ -71,19 +101,22 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   } = useQuery({
     queryKey: ['studiesByProgram'],
     queryFn: async () =>
-      request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
+      request(
+        (env as Record<string, string>).REACT_APP_INTEROP_SERVICE_URL,
+        GetStudiesByProgramStudyDetailsDocument
+      ),
   });
 
   const studyData = data.study[0];
   const { clinical_study_designation: studyCode } = studyData;
   const diagnoses = [
     ...new Set(
-      studyData.cases.reduce(
+      defaultTo(studyData.cases, []).reduce<string[]>(
         (output, caseData) =>
           output.concat(
-            caseData.diagnoses
+            caseData?.diagnoses
               ? caseData.diagnoses.map(diagnosis =>
-                  diagnosis.disease_term ? diagnosis.disease_term : ''
+                  diagnosis?.disease_term ? diagnosis.disease_term : ''
                 )
               : []
           ),
@@ -91,10 +124,12 @@ const StudyDetailView = ({ classes, data, initTab }) => {
       )
     ),
   ];
-  const studyFileTypes = [...new Set(data.studyFiles.map(f => f.file_type))];
+  const studyFileTypes = [
+    ...new Set(defaultTo(data.studyFiles, []).map(f => f?.file_type)),
+  ];
   const caseFileTypes = [
     ...new Set(
-      data.filesOfStudy
+      defaultTo(data.filesOfStudy, [])
         .map(f => f.file_type)
         .filter(f => !studyFileTypes.includes(f))
     ),
@@ -132,8 +167,9 @@ const StudyDetailView = ({ classes, data, initTab }) => {
       isALink: true,
     },
     {
-      name: studyData.program.program_acronym,
-      isALink: false,
+      name: studyData.program?.program_acronym,
+      to: `/program/${studyData.program?.program_acronym}`,
+      isALink: true,
     },
     {
       name: studyData.clinical_study_designation,
@@ -144,72 +180,46 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   const [currentTab, setCurrentTab] = React.useState(
     initTab === 'file' ? 2 : 0
   );
-  const handleTabChange = (event, value) => {
+  const handleTabChange = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: number
+  ) => {
     setCurrentTab(value);
   };
 
-  const renderEmbargoHeaderIcon = () => (
-    <img src={embargoHeaderIcon} alt="ICDC case detail header logo" />
-  );
-
-  const renderPendingHeaderIcon = () => (
-    <img src={pendingHeaderIcon} alt="ICDC case detail header logo" />
-  );
-
-  const renderDefaultHeaderIcon = () => (
-    <img src={headerIcon} alt="ICDC case detail header logo" />
-  );
-
-  const renderEmbargoLabel = () => (
-    <div className={classes.embargo}>
-      <p className={classes.embarLabel}> UNDER EMBARGO </p>
-      <img
-        src={embargoFileIcon}
-        className={classes.embargoFileIcon}
-        alt="icdc embargo file icon"
-      />
-    </div>
-  );
-
-  const renderPendingLabel = () => (
-    <div className={classes.pending}>
-      <p className={classes.pendLabel}>RELEASE PENDING</p>
-      <img
-        src={pendingFileIcon}
-        className={classes.embargoFileIcon}
-        alt="icdc embargo file icon"
-      />
-    </div>
-  );
-
-  const renderSwitch = (param, embargoFunction, pendingFunction) => {
-    switch (param) {
-      case 'embargo':
-        return embargoFunction;
-      case 'pending':
-        return pendingFunction;
-      default:
-        return undefined;
-    }
+  const renderHeaderIcon = () => {
+    const disposition = studyDisposition(
+      defaultTo(studyData.study_disposition, '')
+    );
+    if (disposition === 'embargo')
+      return <img src={embargoHeaderIcon} alt="Embargo Header Icon" />;
+    if (disposition === 'pending')
+      return <img src={pendingHeaderIcon} alt="Pending Header Icon" />;
+    return <img src={headerIcon} alt="Default Header Icon" />;
   };
 
-  const getHeaderIcon = renderSwitch(
-    studyDisposition(studyData.study_disposition),
-    renderEmbargoHeaderIcon,
-    renderPendingHeaderIcon
-  )
-    ? renderSwitch(
-        studyDisposition(studyData.study_disposition),
-        renderEmbargoHeaderIcon,
-        renderPendingHeaderIcon
-      )
-    : renderDefaultHeaderIcon;
-
-  const getLabel = renderSwitch(
-    studyDisposition(studyData.study_disposition),
-    renderEmbargoLabel,
-    renderPendingLabel
-  );
+  const renderLabel = () => {
+    const disposition = studyDisposition(
+      defaultTo(studyData.study_disposition, '')
+    );
+    if (disposition === 'embargo') {
+      return (
+        <EmbargoWrapper>
+          <p> UNDER EMBARGO </p>
+          <FileIcon src={embargoFileIcon} alt="Embargo File Icon" />
+        </EmbargoWrapper>
+      );
+    }
+    if (disposition === 'pending') {
+      return (
+        <PendingWrapper>
+          <p>RELEASE PENDING</p>
+          <FileIcon src={pendingFileIcon} alt="Pending File Icon" />
+        </PendingWrapper>
+      );
+    }
+    return null;
+  };
 
   if (isLoading) {
     return <CircularProgress />;
@@ -217,7 +227,7 @@ const StudyDetailView = ({ classes, data, initTab }) => {
 
   if (isError) {
     return (
-      <Typography variant="h5" color="error" size="sm">
+      <Typography variant="h5" color="error">
         An error has occurred in interoperability api
       </Typography>
     );
@@ -226,12 +236,12 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   const { accession_id: accessionId } = data.study[0];
   const filterStudy = `${studyCode} (${accessionId})`;
 
-  const currentStudy = interOpData?.studiesByProgram.find(
+  const currentStudy = interOpData?.studiesByProgram?.find(
     item =>
-      item.clinical_study_designation === studyData.clinical_study_designation
+      item?.clinical_study_designation === studyData.clinical_study_designation
   );
 
-  let processedTabs;
+  let processedTabs: typeof tab.items;
   if (!currentStudy) {
     processedTabs = tab.items.filter(item => item.label !== 'SUPPORTING DATA');
   } else {
@@ -251,9 +261,9 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   );
 
   let clinicalDataNodeCount = 0;
-  const supportingDataCount = currentStudy?.CRDCLinks.length;
+  const supportingDataCount = currentStudy?.CRDCLinks?.length;
 
-  const clinicalDataDownloadFlags = {};
+  const clinicalDataDownloadFlags: Record<string, boolean> = {};
 
   processedClinicalDataTabData.forEach(el => {
     if (el?.isEmpty === false) {
@@ -274,88 +284,85 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   return (
     <StudyThemeProvider>
       <StatsView data={stat} />
-      <div className={classes.container}>
-        <div className={classes.header}>
-          <div className={classes.breadCrumb}>
-            <CustomBreadcrumb data={breadCrumbJson} classes={classes} />
-          </div>
-          <div className={classes.logo}>{getHeaderIcon()}</div>
-          <div className={classes.headerTitle}>
-            <div className={classes.headerMainTitle}>
+      <Container>
+        <Header>
+          <Breadcrumb>
+            <CustomBreadcrumb data={breadCrumbJson} />
+          </Breadcrumb>
+          <Logo>{renderHeaderIcon()}</Logo>
+          <HeaderTitle>
+            <HeaderMainTitle>
               <span>
                 {' '}
-                <span className={classes.headerPropertyName}> Study :</span>
+                <HeaderPropertyName> Study :</HeaderPropertyName>
                 <span> {studyData.clinical_study_designation}</span>
               </span>
               {studyData.accession_id !== null &&
                 studyData.accession_id !== undefined &&
                 studyData.accession_id !== '' && (
                   <>
-                    <span className={classes.headerBar}> | </span>
-                    <span className={classes.headerAccessionItem}>
-                      <span className={classes.accessionLabel}>
-                        {'Accession ID : '}
-                      </span>
-                      <span className={classes.accessionValue}>
-                        {studyData.accession_id}
-                      </span>
-                    </span>
+                    <HeaderBar> | </HeaderBar>
+                    <HeaderAccessionItem>
+                      <AccessionLabel>{'Accession ID : '}</AccessionLabel>
+                      <AccessionValue>{studyData.accession_id}</AccessionValue>
+                    </HeaderAccessionItem>
                   </>
                 )}
-            </div>
-            <div
-              className={
-                String(studyData.clinical_study_name).length > 85
-                  ? cn(classes.headerMSubTitle, classes.lowLetterSpace)
-                  : cn(classes.headerMSubTitle, classes.headerSubTitleCate)
-              }
+            </HeaderMainTitle>
+            <NameWrapper
+              isLong={String(studyData.clinical_study_name).length > 85}
             >
               <span> {studyData.clinical_study_name}</span>
-            </div>
-          </div>
-          {renderSwitch(
-            studyDisposition(studyData.study_disposition),
-            renderEmbargoLabel,
-            renderPendingLabel
-          ) ? (
-            getLabel()
-          ) : (
-            <div className={classes.headerButton}>
-              <span className={classes.headerButtonLinkSpan}>
-                {/* <span className={classes.headerButtonLinkText}> View </span> */}
-                <Link
-                  className={classes.headerButtonLink}
+            </NameWrapper>
+          </HeaderTitle>
+          {renderLabel() || (
+            <HeaderButton>
+              <HeaderButtonLinkSpan>
+                <HeaderButtonLink
                   to={location => ({ ...location, pathname: '/explore' })}
                   onClick={() => {
                     actions.changeCurrentTab(0);
                     navigatedToDashboard(filterStudy);
                   }}
                 >
-                  <div className={classes.headerButtonLinkNumber}>
+                  <HeaderButtonLinkNumber>
                     {data.caseCountOfStudy}
-                  </div>
-                  <span className={classes.headerButtonLinkText}>
-                    Associated Cases
-                  </span>
-                </Link>
-              </span>
-            </div>
+                  </HeaderButtonLinkNumber>
+                  <HeaderButtonLinkText>Associated Cases</HeaderButtonLinkText>
+                </HeaderButtonLink>
+              </HeaderButtonLinkSpan>
+            </HeaderButton>
           )}
-        </div>
+        </Header>
 
-        <div className={classes.detailContainer}>
+        <DetailContainer>
           <Grid container>
             <Grid item xs={12}>
               <Tab
-                styleClasses={classes}
+                styleClasses={{
+                  tabPrimaryColor: {
+                    color: '#81a6b9',
+                    fontWeight: '700',
+                  },
+                  tabHighlightColor: {
+                    color: '#0B3556',
+                    fontWeight: '700',
+                    borderBottom: '5px solid rgb(53, 185, 235)',
+                  },
+                  hrLine: {
+                    marginTop: '-2px',
+                    marginBottom: '0',
+                    borderTop: '1px solid #81a6b9',
+                  },
+                }}
                 tabItems={processedTabs}
                 currentTab={currentTab}
                 handleTabChange={handleTabChange}
               />
             </Grid>
           </Grid>
-        </div>
-      </div>
+        </DetailContainer>
+      </Container>
       {processedTabs.map((processedTab, index) => {
         switch (processedTab.label) {
           case 'OVERVIEW':
@@ -405,8 +412,6 @@ const StudyDetailView = ({ classes, data, initTab }) => {
                       caseCount: clinicalDataNodeCaseCounts,
                       nodeCount: clinicalDataNodeCounts,
                     }}
-                    data={processedClinicalDataTabData}
-                    csvDownloadFlags={clinicalDataDownloadFlags}
                     studyCode={studyCode}
                   />
                 )}
@@ -428,4 +433,4 @@ const StudyDetailView = ({ classes, data, initTab }) => {
   );
 };
 
-export default withStyles(Styles, { withTheme: true })(StudyDetailView);
+export default StudyDetailView;
