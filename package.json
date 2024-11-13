@@ -40,7 +40,7 @@
     "bento-jbrowse": "^1.0.1",
     "clsx": "^1.2.1",
     "data-model-navigator": "^1.1.36",
-    "graphiql": "^3.2.0",
+    "graphiql": "^3.7.2",
     "graphql": "^16.8.1",
     "graphql-request": "^5.1.0",
     "graphql-ws": "^5.16.0",
