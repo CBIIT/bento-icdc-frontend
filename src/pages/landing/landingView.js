@@ -269,7 +269,33 @@ const LandingView = ({
                 className={classes.carouselTabs}
               >
                 <Tab
-                  styleClasses={classes}
+                  styleClasses={{
+                    tabPrimaryColor: {
+                      color: '#ffffff',
+                      fontWeight: '700',
+                      fontSize: '14px',
+                      height: '140px',
+                      '& img': {
+                        width: '90px',
+                        display: 'block',
+                        margin: 'auto',
+                      },
+                    },
+                    tabHighlightColor: {
+                      color: '#ffffff',
+                      fontWeight: '700',
+                      fontSize: '18px',
+                      height: '175px',
+                      '& img': {
+                        margin: 'auto',
+                        width: '113px',
+                        display: 'block',
+                      },
+                    },
+                    hrLine: {
+                      display: 'none',
+                    },
+                  }}
                   disableRipple
                   tabItems={pageData.tabs}
                   currentTab={currentTab}
@@ -666,31 +692,6 @@ const styles = theme => ({
   },
   paddingLeft2: {
     paddingLeft: '2px',
-  },
-  tabPrimaryColor: {
-    color: '#ffffff',
-    fontWeight: '700',
-    fontSize: '14px',
-    height: '140px',
-    '& img': {
-      width: '90px',
-      display: 'block',
-      margin: 'auto',
-    },
-  },
-  tabHighlightColor: {
-    color: '#ffffff',
-    fontWeight: '700',
-    fontSize: '18px',
-    height: '175px',
-    '& img': {
-      margin: 'auto',
-      width: '113px',
-      display: 'block',
-    },
-  },
-  hrLine: {
-    display: 'none',
   },
   divider: {
     marginTop: '30px',

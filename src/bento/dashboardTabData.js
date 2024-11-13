@@ -1800,7 +1800,7 @@ export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_STUDY_CODE = gql`
-  query study($clinical_study_designation: String) {
+  query getStudyCode($clinical_study_designation: String) {
     study(clinical_study_designation: $clinical_study_designation) {
       clinical_study_designation
       accession_id
@@ -1812,7 +1812,6 @@ export const GET_STUDY_CODE = gql`
 export const tableContainers = [
   {
     name: 'Cases',
-    title: 'case',
     dataField: 'dataCase',
     api: GET_CASES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add Files for All Cases',
@@ -1961,7 +1960,6 @@ export const tableContainers = [
   },
   {
     name: 'Samples',
-    title: 'samples',
     dataField: 'dataSample',
     api: GET_SAMPLES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add Files for All Samples',
