@@ -17,7 +17,7 @@ export const ProgramDetailHeader = styled('div')({
 
 export const ProgramDetailHeaderExternalLinkWrapper = styled('div')({
   position: 'relative',
-  top: '25px',
+  top: '15px',
 });
 
 export const IconTitleWrapper = styled('div')({

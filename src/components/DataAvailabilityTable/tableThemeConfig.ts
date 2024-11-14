@@ -1,4 +1,6 @@
-const dynamicDataAvailColStyling = (table, isBody = false) => {
+import { ExtendedCSSProperties, TableConfig } from './types';
+
+const dynamicDataAvailColStyling = (table: TableConfig, isBody = false) => {
   const dataAvailabilityCols = [
     'numberofcasefiles',
     'numberofstudyfiles',
@@ -12,7 +14,7 @@ const dynamicDataAvailColStyling = (table, isBody = false) => {
       dataAvailabilityCols.includes(`${col.dataField}`.toLowerCase()) &&
       col.display
   );
-  const customStyle = {};
+  const customStyle: ExtendedCSSProperties = {};
   if (displayDavaAvailCols) {
     const { length } = displayDavaAvailCols;
     const firstItem = displayDavaAvailCols[0];
@@ -41,7 +43,7 @@ const dynamicDataAvailColStyling = (table, isBody = false) => {
   return customStyle;
 };
 
-export const tblBody = table => {
+export const tblBody = (table: TableConfig) => {
   const customDataAvailColStyles = dynamicDataAvailColStyling(table, true);
   return {
     tblBody: {
@@ -125,7 +127,7 @@ export const tblBody = table => {
   };
 };
 
-export const headerTheme = table => {
+export const headerTheme = (table: TableConfig) => {
   const customDataAvailColStyles = dynamicDataAvailColStyling(table);
 
   return {
@@ -337,10 +339,12 @@ const tblPgn = {
   },
 };
 
-export const themeConfig = table => ({
-  ...tblBody(table),
-  tblPgn,
-  tblContainer,
-  extendedView,
-  ...headerTheme(table),
-});
+export const themeConfig = (table: TableConfig) => {
+  return {
+    ...tblBody(table),
+    tblPgn,
+    tblContainer,
+    extendedView,
+    ...headerTheme(table),
+  };
+};

@@ -1,18 +1,18 @@
-import { styled } from '@material-ui/core/styles';
+import styled from '@emotion/styled';
 
-export const Container = styled('div')({
+export const Container = styled.div({
   display: 'flex',
   gap: '75px',
 });
 
-export const DescriptionTitle = styled('h3')({
+export const DescriptionTitle = styled.h3({
   fontFamily: 'Open Sans',
   fontWeight: '400',
   fontSize: '17px',
   color: '#00660F',
 });
 
-export const Description = styled('p')({
+export const Description = styled.p({
   fontFamily: 'Open Sans',
   fontWeight: '400',
   fontSize: '18px',
@@ -20,12 +20,12 @@ export const Description = styled('p')({
   color: '#000000',
 });
 
-export const DescriptionContainer = styled('div')({
+export const DescriptionContainer = styled.div({
   maxWidth: '800px',
   marginRight: '16px',
 });
 
-export const VideoContainer = styled('div')({
+export const VideoContainer = styled.div({
   paddingTop: '20px',
   borderRadius: '8px',
   '& iframe': {
@@ -33,7 +33,7 @@ export const VideoContainer = styled('div')({
   },
 });
 
-export const Photo = styled('img')({
+export const Photo = styled.img({
   maxWidth: '462px',
   maxHeight: '316px',
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Container,
   DescriptionAndPhotoContainer,
@@ -7,9 +7,18 @@ import {
   PhotoContainer,
   Photo,
   Description,
-} from "./photo-view.styled";
+} from './photo-view.styled';
+import { Program } from '../../../generated-types/types';
 
-export const PhotoAndVideoView = ({ programDetail, programImage }) => {
+interface PhotoAndVideoViewProps {
+  programDetail: Program;
+  programImage: string;
+}
+
+export const PhotoAndVideoView: React.FC<PhotoAndVideoViewProps> = ({
+  programDetail,
+  programImage,
+}) => {
   return (
     <Container>
       <DescriptionAndPhotoContainer>

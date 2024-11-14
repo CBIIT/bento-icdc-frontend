@@ -26,8 +26,17 @@ import {
 } from './program-detail-view.styled';
 import PhotoView from './components/photo-view';
 import VideoView from './components/video-view';
+import { ProgramQuery } from '../../generated-types/graphql';
 
-const ProgramDetailView = ({ classes, data }) => {
+interface ProgramDetailViewProps {
+  data: ProgramQuery;
+  classes?: any;
+}
+
+const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
+  classes,
+  data,
+}) => {
   const {
     data: interOpData,
     isLoading,
@@ -35,6 +44,7 @@ const ProgramDetailView = ({ classes, data }) => {
   } = useQuery({
     queryKey: ['studiesByProgram'],
     queryFn: async () =>
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
       request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
   });
 
@@ -71,8 +81,11 @@ const ProgramDetailView = ({ classes, data }) => {
   );
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const programVideo = programConfig?.video ? programConfig.video : '';
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const tableOptions = getOptions(table, classes);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   tableOptions.downloadOptions.filename =
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     tableOptions.downloadOptions.filename.replace(
       'Program',
       `${programDetail.program_acronym}`
@@ -109,7 +122,6 @@ const ProgramDetailView = ({ classes, data }) => {
           {programDetail.program_external_url && (
             <ProgramDetailHeaderExternalLinkWrapper>
               <ProgramDetailHeaderExternalLinkButton
-                target="_blank"
                 href={programDetail.program_external_url}
                 variant="contained"
                 endIcon={
@@ -134,7 +146,6 @@ const ProgramDetailView = ({ classes, data }) => {
             <PhotoView
               programDetail={programDetail}
               programImage={programImage}
-              programVideo={programVideo}
             />
           )}
         </ProgramDetailContent>
@@ -144,6 +155,7 @@ const ProgramDetailView = ({ classes, data }) => {
         <div>
           <TableContextProvider>
             <StudiesTable
+              rowsPerPage={8}
               data={data.studiesByProgramId}
               interOpData={interOpData}
               table={table}
