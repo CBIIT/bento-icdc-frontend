@@ -83,7 +83,7 @@ const FileTableView = ({ data }) => {
               responseKeys={fileTable.addFilesResponseKeys}
               addFileQuery={fileTable.addSelectedFilesQuery}
               tooltipCofig={associateFilesTooltipConfig}
-              buttonType={btnTypes.AddSelectedFilesButton}
+              buttonType={btnTypes.ADD_SELECTED_FILES}
             />
             <JBrowseThemeProvider>
               <ViewJBrowseButton selectedFileNames={selectedRows} />

@@ -77,7 +77,7 @@ const SampleTableView = ({ data }) => {
                 responseKeys={sampleTable.addFilesResponseKeys}
                 addFileQuery={sampleTable.addSelectedFilesQuery}
                 tooltipCofig={sampleFilesTooltipConfig}
-                buttonType={btnTypes.AddSelectedFilesButton}
+                buttonType={btnTypes.ADD_SELECTED_FILES}
               />
             </Container>
           </AddFilesButtonTheme>
