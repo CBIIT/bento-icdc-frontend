@@ -12,7 +12,7 @@ import { Program } from '../../../generated-types/types';
 
 interface PhotoAndVideoViewProps {
   programDetail: Program;
-  programImage: string;
+  programImage: string | undefined;
 }
 
 export const PhotoAndVideoView: React.FC<PhotoAndVideoViewProps> = ({

@@ -97,7 +97,7 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
 
   if (isError) {
     return (
-      <Typography variant="h5" color="error" size="sm">
+      <Typography component="h5" color="error">
         An error has occurred in interoperability api
       </Typography>
     );
