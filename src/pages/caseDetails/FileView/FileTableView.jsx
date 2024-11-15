@@ -15,7 +15,12 @@ import { ExtendedViewConfig } from '../../../components/PaginatedTable/Customize
 import { themeConfig } from '../SampleView/Theme';
 import { AddSelectedFilesButton } from '../../../components/PaginatedTable/components/AddFilesButtons';
 import ViewJBrowseButton from '../../JbrowseDetail/components/JBrowseViewBtn';
-import * as Styled from './FilteTable.styled';
+import {
+  TitleContainer,
+  TableTitle,
+  TableContainer,
+  ButtonContainer,
+} from './FilteTable.styled';
 import AddFilesButtonTheme from '../../../components/PaginatedTable/components/AddButtonTheme';
 import JBrowseThemeProvider from './JBrowseTheme';
 
@@ -57,11 +62,11 @@ const FileTableView = ({ data }) => {
 
   return (
     <>
-      <Styled.TitleContainer maxWidth={false}>
-        <Styled.TableTitle>{fileTable.tableTitle}</Styled.TableTitle>
-      </Styled.TitleContainer>
+      <TitleContainer maxWidth={false}>
+        <TableTitle>{fileTable.tableTitle}</TableTitle>
+      </TitleContainer>
 
-      <Styled.TableContainer>
+      <TableContainer>
         <TableView
           initState={initTblState}
           themeConfig={{
@@ -72,8 +77,8 @@ const FileTableView = ({ data }) => {
           server={false}
           paginationOptions={paginationOptions}
         />
-      </Styled.TableContainer>
-      <Styled.ButtonContainer maxWidth={false}>
+      </TableContainer>
+      <ButtonContainer maxWidth={false}>
         <AddFilesButtonTheme>
           <Container maxWidth="xl">
             <AddSelectedFilesButton
@@ -90,7 +95,7 @@ const FileTableView = ({ data }) => {
             </JBrowseThemeProvider>
           </Container>
         </AddFilesButtonTheme>
-      </Styled.ButtonContainer>
+      </ButtonContainer>
     </>
   );
 };
