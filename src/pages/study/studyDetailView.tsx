@@ -6,7 +6,9 @@ import _, { defaultTo } from 'lodash';
 import StatsView from '../../components/Stats/StatsView';
 import { studyDisposition } from './utils';
 import { navigatedToDashboard } from '../../utils/utils';
-import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import CustomBreadcrumb, {
+  BreadcrumbData,
+} from '../../components/Breadcrumb/BreadcrumbView';
 import {
   headerIcon,
   embargoHeaderIcon,
@@ -64,15 +66,15 @@ function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
 
 const processData = (
   names: (string | null)[] | null | undefined,
-  nodeCountArg: ClinicalDataNodeCounts,
-  nodeCaseCountArg: ClinicalDataNodeCounts
+  nodeCountArg: ClinicalDataNodeCounts | undefined | null,
+  nodeCaseCountArg: ClinicalDataNodeCounts | undefined | null
 ) =>
   names?.map(name => {
     const objMatcher = _.toLower(
       _.replace(name || '', ' ', '_')
     ) as keyof ClinicalDataNodeCounts;
-    const nodeCount = nodeCountArg[objMatcher];
-    const nodeCaseCount = nodeCaseCountArg[objMatcher];
+    const nodeCount = nodeCountArg?.[objMatcher];
+    const nodeCaseCount = nodeCaseCountArg?.[objMatcher];
 
     if (nodeCaseCount === 0 && nodeCount === 0) {
       return {
@@ -161,7 +163,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     volumeOfData: data.volumeOfDataOfStudy,
   };
 
-  const breadCrumbJson = [
+  const breadCrumbJson: BreadcrumbData[] = [
     {
       name: 'All Studies',
       to: '/studies',
@@ -266,12 +268,12 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
   const clinicalDataDownloadFlags: Record<string, boolean> = {};
 
-  processedClinicalDataTabData.forEach(el => {
+  defaultTo(processedClinicalDataTabData, []).forEach(el => {
     if (el?.isEmpty === false) {
       clinicalDataNodeCount += 1;
-      clinicalDataDownloadFlags[el.name] = true;
+      clinicalDataDownloadFlags[el?.name || ''] = true;
     } else {
-      clinicalDataDownloadFlags[el.name] = false;
+      clinicalDataDownloadFlags[el?.name || ''] = false;
     }
   });
 

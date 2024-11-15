@@ -5,12 +5,13 @@ import {
   Container,
 } from './BreadcrumbView.styled';
 
+export interface BreadcrumbData {
+  name: string | undefined | null;
+  to?: string;
+  isALink: boolean;
+}
 interface CustomBreadcrumbProps {
-  data: {
-    name: string;
-    to: string;
-    isALink: boolean;
-  }[];
+  data: BreadcrumbData[];
 }
 
 const CustomBreadcrumb: React.FC<CustomBreadcrumbProps> = ({ data }) => {
@@ -18,7 +19,7 @@ const CustomBreadcrumb: React.FC<CustomBreadcrumbProps> = ({ data }) => {
     <Container>
       {data
         .reduce<React.ReactNode[]>((acc, current, index) => {
-          if (current.isALink) {
+          if (current.isALink && current.to) {
             acc.push(
               <BreadcrumbNavLink to={current.to}>
                 {current.name}
