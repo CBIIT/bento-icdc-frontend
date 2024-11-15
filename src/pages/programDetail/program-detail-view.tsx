@@ -71,8 +71,6 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
     },
     {
       name: programDetail.program_acronym,
-      to: '/explore',
-      isALink: true,
     },
   ];
 
