@@ -82,7 +82,7 @@ export const tblBody = (table: TableConfig) => {
         },
         body: {
           color: '#323232',
-          padding: '15px',
+          padding: '15px 32px',
           ...customDataAvailColStyles,
         },
       },
@@ -298,7 +298,6 @@ export const extendedView = {
         maxHeight: '2px',
         minHeight: '0px',
         '& button': {
-          marginBottom: '-50px',
           zIndex: '10',
           '&.download-icon': {
             marginRight: '-10px',
