@@ -1,16 +1,15 @@
-import React from "react";
-import { Typography, CircularProgress } from "@material-ui/core";
-import { request } from "graphql-request";
-import { useQuery } from "@tanstack/react-query";
-import { getOptions } from "@bento-core/util";
-import Stats from "../../components/Stats/StatsView";
-import { table, pageData, tableLayOut } from "../../bento/programDetailData";
-import { pageDataV2 as programImageConfig } from "../../bento/programData";
-import CustomBreadcrumb from "../../components/Breadcrumb/BreadcrumbView";
-import env from "../../utils/env";
-import { TableContextProvider } from "../../bento-core";
-import StudiesTable from "../../components/DataAvailabilityTable/StudiesTable";
-import { studiesByProgram } from "./queries/program-detail";
+import React from 'react';
+import { Typography, CircularProgress } from '@material-ui/core';
+import { request } from 'graphql-request';
+import { useQuery } from '@tanstack/react-query';
+import { getOptions } from '@bento-core/util';
+import Stats from '../../components/Stats/StatsView';
+import { table, pageData, tableLayOut } from '../../bento/programDetailData';
+import { pageDataV2 as programImageConfig } from '../../bento/programData';
+import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import env from '../../utils/env';
+import { TableContextProvider } from '../../bento-core';
+import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
 import {
   ProgramDetailContainer,
   ProgramDetailHeader,
@@ -20,23 +19,38 @@ import {
   ProgramDetailContent,
   ProgramDetailSubTitle,
   ProgramDetailHeaderExternalLinkWrapper,
-  ProgramDetailSubTitleAcronym,
   ProgramDetailHeaderExternalLinkButton,
   TableContainer,
   TableContainerTitle,
-} from "./program-detail-view.styled";
-import PhotoView from "./components/photo-view";
-import VideoView from "./components/video-view";
+} from './program-detail-view.styled';
+import PhotoView from './components/photo-view';
+import VideoView from './components/video-view';
+import {
+  GetStudiesByProgramProgramDetailTwoDocument,
+  ProgramQuery,
+} from '../../generated-types/graphql';
 
-const ProgramDetailView = ({ classes, data }) => {
+interface ProgramDetailViewProps {
+  data: ProgramQuery;
+  classes?: any;
+}
+
+const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
+  classes,
+  data,
+}) => {
   const {
     data: interOpData,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["studiesByProgram"],
+    queryKey: ['studiesByProgram'],
     queryFn: async () =>
-      request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
+      request(
+        /* eslint-disable-next-line */
+        env.REACT_APP_INTEROP_SERVICE_URL,
+        GetStudiesByProgramProgramDetailTwoDocument
+      ),
   });
 
   const programDetail = data.program[0];
@@ -56,27 +70,28 @@ const ProgramDetailView = ({ classes, data }) => {
 
   const breadCrumbJson = [
     {
-      name: "All Programs",
-      to: "/programs",
+      name: 'All Programs',
+      to: '/programs',
       isALink: true,
     },
     {
       name: programDetail.program_acronym,
-      to: "/explore",
-      isALink: true,
     },
   ];
 
   const programConfig = programImageConfig.programs.find(
-    (element) => element.prgramName === programDetail.program_acronym,
+    element => element.prgramName === programDetail.program_acronym
   );
-  const programImage = programConfig ? programConfig.secondaryImage : "";
-  const programVideo = programConfig?.video ? programConfig.video : "";
+  const programImage = programConfig ? programConfig.secondaryImage : '';
+  const programVideo = programConfig?.video ? programConfig.video : '';
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const tableOptions = getOptions(table, classes);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   tableOptions.downloadOptions.filename =
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     tableOptions.downloadOptions.filename.replace(
-      "Program",
-      `${programDetail.program_acronym}`,
+      'Program',
+      `${programDetail.program_acronym}`
     );
 
   if (isLoading) {
@@ -85,7 +100,7 @@ const ProgramDetailView = ({ classes, data }) => {
 
   if (isError) {
     return (
-      <Typography variant="h5" color="error" size="sm">
+      <Typography component="h5" color="error">
         An error has occurred in interoperability api
       </Typography>
     );
@@ -100,10 +115,9 @@ const ProgramDetailView = ({ classes, data }) => {
           <IconTitleWrapper>
             <ClipboardIcon src={pageData.headerIcon} alt="Clipboard Icon" />
             <ProgramDetailTitle>
-              <div>Programs:</div>{" "}
+              <div>Programs:</div>
               <ProgramDetailSubTitle>
-                {`${programDetail.program_name}`}{" "}
-                <ProgramDetailSubTitleAcronym>{`(${programDetail.program_acronym})`}</ProgramDetailSubTitleAcronym>
+                {`${programDetail.program_name} (${programDetail.program_acronym})`}
               </ProgramDetailSubTitle>
             </ProgramDetailTitle>
           </IconTitleWrapper>
@@ -111,7 +125,6 @@ const ProgramDetailView = ({ classes, data }) => {
           {programDetail.program_external_url && (
             <ProgramDetailHeaderExternalLinkWrapper>
               <ProgramDetailHeaderExternalLinkButton
-                target="_blank"
                 href={programDetail.program_external_url}
                 variant="contained"
                 endIcon={
@@ -136,7 +149,6 @@ const ProgramDetailView = ({ classes, data }) => {
             <PhotoView
               programDetail={programDetail}
               programImage={programImage}
-              programVideo={programVideo}
             />
           )}
         </ProgramDetailContent>
