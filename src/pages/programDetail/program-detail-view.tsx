@@ -10,7 +10,6 @@ import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import env from '../../utils/env';
 import { TableContextProvider } from '../../bento-core';
 import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
-import { studiesByProgram } from './queries/program-detail';
 import {
   ProgramDetailContainer,
   ProgramDetailHeader,
@@ -26,7 +25,10 @@ import {
 } from './program-detail-view.styled';
 import PhotoView from './components/photo-view';
 import VideoView from './components/video-view';
-import { ProgramQuery } from '../../generated-types/graphql';
+import {
+  GetStudiesByProgramProgramDetailTwoDocument,
+  ProgramQuery,
+} from '../../generated-types/graphql';
 
 interface ProgramDetailViewProps {
   data: ProgramQuery;
@@ -45,7 +47,10 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
     queryKey: ['studiesByProgram'],
     queryFn: async () =>
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
-      request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
+      request(
+        env.REACT_APP_INTEROP_SERVICE_URL,
+        GetStudiesByProgramProgramDetailTwoDocument
+      ),
   });
 
   const programDetail = data.program[0];
@@ -153,7 +158,6 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
         <div>
           <TableContextProvider>
             <StudiesTable
-              rowsPerPage={8}
               data={data.studiesByProgramId}
               interOpData={interOpData}
               table={table}
