@@ -28,7 +28,7 @@ const StudiesTable: React.FC<StudiesTableProps> = ({
 }) => {
   // access table state
   const { context } = useContext<{ context: TableConfigDAL }>(
-    TableContext as never
+    TableContext as React.Context<{ context: TableConfigDAL }>
   );
   return (
     <PaginatedTableView

@@ -46,8 +46,8 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
   } = useQuery({
     queryKey: ['studiesByProgram'],
     queryFn: async () =>
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
       request(
+        /* eslint-disable-next-line */
         env.REACT_APP_INTEROP_SERVICE_URL,
         GetStudiesByProgramProgramDetailTwoDocument
       ),
