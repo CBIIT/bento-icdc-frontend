@@ -54,8 +54,8 @@ const documents = {
     types.GetAllFiledsForSampleTabForSelectAllDocument,
   '\n  query getFileIdsFromFileName(\n    $file_name: [String]\n    $offset: Int\n    $first: Int\n    $order_by: String\n  ) {\n    fileIdsFromFileNameDesc(\n      file_name: $file_name\n      offset: $offset\n      first: $first\n      order_by: $order_by\n    ) {\n      file_uuid\n    }\n  }\n':
     types.GetFileIdsFromFileNameDocument,
-  '\n  query study($clinical_study_designation: String) {\n    study(clinical_study_designation: $clinical_study_designation) {\n      clinical_study_designation\n      accession_id\n    }\n  }\n':
-    types.StudyDocument,
+  '\n  query getStudyCode($clinical_study_designation: String) {\n    study(clinical_study_designation: $clinical_study_designation) {\n      clinical_study_designation\n      accession_id\n    }\n  }\n':
+    types.GetStudyCodeDocument,
   '\n  query createManifest(\n    $uuid: [String]\n    $offset: Int = 0\n    $first: Int = 10\n    $order_by: String = ""\n  ) {\n    createManifest(\n      uuid: $uuid\n      offset: $offset\n      first: $first\n      order_by: $order_by\n    )\n  }\n':
     types.CreateManifestDocument,
   '\n  query getMyCartDataQuery(\n    $uuids: [String]\n    $offset: Int = 0\n    $first: Int = 10\n    $order_by: String = ""\n  ) {\n    filesInList(\n      uuids: $uuids\n      offset: $offset\n      first: $first\n      order_by: $order_by\n    ) {\n      file_name\n      drs_uri\n      study_code\n      case_id\n      file_type\n      association\n      file_description\n      file_format\n      file_size\n      case_id\n      file_uuid\n      individual_id\n      breed\n      diagnosis\n      study_code\n      sample_id\n      sample_site\n      physical_sample_type\n      general_sample_pathology\n      tumor_sample_origin\n      summarized_sample_type\n      specific_sample_pathology\n      date_of_sample_collection\n      tumor_grade\n      sample_chronology\n      percentage_tumor\n      necropsy_sample\n      sample_preservation\n      comment\n      patient_age_at_enrollment\n      sex\n      neutered_indicator\n      weight\n      weight_unit\n      primary_disease_site\n      stage_of_disease\n      date_of_diagnosis\n      histology_cytopathology\n      histological_grade\n      best_response\n      pathology_report\n      treatment_data\n      follow_up_data\n      concurrent_disease\n      concurrent_disease_type\n      arm\n      other_cases\n      cohort_description\n    }\n  }\n':
@@ -288,8 +288,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  query study($clinical_study_designation: String) {\n    study(clinical_study_designation: $clinical_study_designation) {\n      clinical_study_designation\n      accession_id\n    }\n  }\n'
-): (typeof documents)['\n  query study($clinical_study_designation: String) {\n    study(clinical_study_designation: $clinical_study_designation) {\n      clinical_study_designation\n      accession_id\n    }\n  }\n'];
+  source: '\n  query getStudyCode($clinical_study_designation: String) {\n    study(clinical_study_designation: $clinical_study_designation) {\n      clinical_study_designation\n      accession_id\n    }\n  }\n'
+): (typeof documents)['\n  query getStudyCode($clinical_study_designation: String) {\n    study(clinical_study_designation: $clinical_study_designation) {\n      clinical_study_designation\n      accession_id\n    }\n  }\n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

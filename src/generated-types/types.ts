@@ -25225,11 +25225,11 @@ export type GetFileIdsFromFileNameQuery = {
   } | null> | null;
 };
 
-export type StudyQueryVariables = Exact<{
+export type GetStudyCodeQueryVariables = Exact<{
   clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
 }>;
 
-export type StudyQuery = {
+export type GetStudyCodeQuery = {
   __typename?: 'QueryType';
   study: Array<{
     __typename?: 'study';

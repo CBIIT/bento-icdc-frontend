@@ -1,17 +1,17 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   AccordionSummary,
   Button,
   Container,
   withStyles,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   // ArrowDropDown as ArrowDropDownIcon,
   ExpandMore as ExpandMoreIcon,
-} from "@material-ui/icons";
-import clsx from "clsx";
-import RefreshIcon from "@material-ui/icons/Refresh";
-import IconButton from "@material-ui/core/IconButton";
+} from '@material-ui/icons';
+import clsx from 'clsx';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import IconButton from '@material-ui/core/IconButton';
 import {
   ClearAllFiltersBtn,
   FacetFilter,
@@ -20,17 +20,17 @@ import {
   SearchView,
   SearchBoxGenerator,
   UploadModalGenerator,
-} from "../../bento-core";
-import ClearIcon from "./assets/clearIcon.svg";
+} from '../../bento-core';
+import ClearIcon from './assets/clearIcon.svg';
 
-import FacetFilterThemeProvider from "./FilterThemeConfig";
+import FacetFilterThemeProvider from './FilterThemeConfig';
 import styles, {
   customStyles,
   uploadCustomStyles,
-} from "./BentoFacetFilterStyle";
-import { getAllIds, getAllSubjectIds } from "./BentoFilterUtils";
-import store from "../../store";
-import { localFindConfig } from "../../bento/localSearchData";
+} from './BentoFacetFilterStyle';
+import { getAllIds, getAllSubjectIds } from './BentoFilterUtils';
+import store from '../../store';
+import { localFindConfig } from '../../bento/localSearchData';
 
 const CustomExpansionPanelSummary = withStyles({
   root: {
@@ -39,13 +39,13 @@ const CustomExpansionPanelSummary = withStyles({
     paddingLeft: 14,
     paddingRight: 14,
     minHeight: 48,
-    "&$expanded": {
+    '&$expanded': {
       minHeight: 48,
     },
   },
   content: {
-    display: "block",
-    "&$expanded": {
+    display: 'block',
+    '&$expanded': {
       // margin: "4px 0px 15px 0px",
     },
   },
@@ -56,11 +56,11 @@ const CustomExpansionPanelSummary = withStyles({
 
 const { SearchBox } = SearchBoxGenerator({
   functions: {
-    getSuggestions: async (searchType) => {
+    getSuggestions: async searchType => {
       try {
         const response = await getAllIds(searchType).catch(() => []);
         return response && response instanceof Array
-          ? response.map((id) => ({ type: searchType, title: id }))
+          ? response.map(id => ({ type: searchType, title: id }))
           : [];
       } catch (_e) {
         return [];
@@ -68,9 +68,9 @@ const { SearchBox } = SearchBoxGenerator({
     },
   },
   config: {
-    inputPlaceholder: "e.g. ICDC-CASE-06, ICDC-CASE-22",
-    noOptionsText: "No matching items found",
-    searchType: "case_id",
+    inputPlaceholder: 'e.g. ICDC-CASE-06, ICDC-CASE-22',
+    noOptionsText: 'No matching items found',
+    searchType: 'case_id',
   },
   customStyles,
 });
@@ -78,22 +78,22 @@ const { SearchBox } = SearchBoxGenerator({
 // Generate UploadModal Component
 const { UploadModal } = UploadModalGenerator({
   functions: {
-    searchMatches: async (inputArray) => {
+    searchMatches: async inputArray => {
       try {
         // Split the search terms into chunks of 500
         const caseChunks = chunkSplit(inputArray, 500);
         const matched = (
           await Promise.allSettled(
-            caseChunks.map((chunk) => getAllSubjectIds(chunk)),
+            caseChunks.map(chunk => getAllSubjectIds(chunk))
           )
         )
-          .filter((result) => result.status === "fulfilled")
-          .map((result) => result.value || [])
+          .filter(result => result.status === 'fulfilled')
+          .map(result => result.value || [])
           .flat(1);
 
         // Combine the results and remove duplicates
         const unmatched = new Set(inputArray);
-        matched.forEach((obj) => unmatched.delete(obj?.case_id.toUpperCase()));
+        matched.forEach(obj => unmatched.delete(obj?.case_id.toUpperCase()));
         return { matched, unmatched: [...unmatched] };
       } catch (_e) {
         return { matched: [], unmatched: [] };
@@ -126,7 +126,7 @@ const BentoFacetFilter = ({
           [datafield]: { ...acc[datafield], [item[acronym]]: item[name] },
         };
       }, {}),
-    [],
+    []
   );
 
   /**
@@ -135,11 +135,11 @@ const BentoFacetFilter = ({
    */
   const updateFacetConfig = useMemo(
     () =>
-      facetsConfig.map((item) => ({
+      facetsConfig.map(item => ({
         ...item,
-        customCount: (text) => `${text || 0}`,
+        customCount: text => `${text || 0}`,
       })),
-    [],
+    []
   );
 
   const filterData = facetsConfig.reduce((acc, item) => {
@@ -148,7 +148,7 @@ const BentoFacetFilter = ({
       return acc;
     }
     if (item.tooltipKey) {
-      const subjectCounts = [...facetValues].map((checkbox) => {
+      const subjectCounts = [...facetValues].map(checkbox => {
         const text = tooltipText[item.tooltipKey];
         return {
           ...checkbox,
@@ -187,7 +187,7 @@ const BentoFacetFilter = ({
         </Button>
       </Container>
     ),
-    [],
+    []
   );
 
   /** Note:
@@ -202,7 +202,7 @@ const BentoFacetFilter = ({
       const [expanded, setExpanded] = useState(expandSection);
       const [showSearch, setShowSearch] = useState(true);
 
-      const toggleSearch = (e) => {
+      const toggleSearch = e => {
         e.stopPropagation();
         setShowSearch(!showSearch);
       };
@@ -217,7 +217,7 @@ const BentoFacetFilter = ({
               {
                 [classes.disableExpansion]: isUnifiedView,
               },
-              "customExpansionPanelSummaryRoot",
+              'customExpansionPanelSummaryRoot'
             )}
             disabled={isUnifiedView}
           >
@@ -247,7 +247,7 @@ const BentoFacetFilter = ({
         </>
       );
     },
-    [localFindAutocomplete],
+    [localFindAutocomplete]
   );
 
   /** Note:
@@ -271,7 +271,7 @@ const BentoFacetFilter = ({
         </Button>
       </Container>
     ),
-    [],
+    []
   );
 
   /**
@@ -281,7 +281,7 @@ const BentoFacetFilter = ({
    */
   const CustomFacetView = useCallback(
     ({ facet, facetClasses, hasSelections, clearFacetSectionValues }) => {
-      const clsName = `${facetClasses}`.replace(/\s+/g, "");
+      const clsName = `${facetClasses}`.replace(/\s+/g, '');
       return (
         <>
           <CustomExpansionPanelSummary
@@ -296,9 +296,9 @@ const BentoFacetFilter = ({
           >
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
               }}
             >
               <div
@@ -306,14 +306,17 @@ const BentoFacetFilter = ({
                 className={clsx(
                   classes.sectionSummaryText,
                   classes[clsName],
-                  "sectionSummaryText",
+                  'sectionSummaryText'
                 )}
               >
                 {facet.label}
               </div>
 
               {hasSelections ? (
-                <IconButton onClick={clearFacetSectionValues}>
+                <IconButton
+                  onClick={clearFacetSectionValues}
+                  aria-label="refresh-icon"
+                >
                   <RefreshIcon />
                 </IconButton>
               ) : null}
@@ -322,7 +325,7 @@ const BentoFacetFilter = ({
         </>
       );
     },
-    [],
+    []
   );
   return (
     <FacetFilterThemeProvider>

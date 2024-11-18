@@ -20803,11 +20803,11 @@ export type GetFileIdsFromFileNameQuery = {
   } | null> | null;
 };
 
-export type StudyQueryVariables = Exact<{
+export type GetStudyCodeQueryVariables = Exact<{
   clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
 }>;
 
-export type StudyQuery = {
+export type GetStudyCodeQuery = {
   __typename?: 'QueryType';
   study: Array<{
     __typename?: 'study';
@@ -32552,13 +32552,13 @@ export const GetFileIdsFromFileNameDocument = {
   GetFileIdsFromFileNameQuery,
   GetFileIdsFromFileNameQueryVariables
 >;
-export const StudyDocument = {
+export const GetStudyCodeDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'study' },
+      name: { kind: 'Name', value: 'getStudyCode' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -32603,7 +32603,7 @@ export const StudyDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<StudyQuery, StudyQueryVariables>;
+} as unknown as DocumentNode<GetStudyCodeQuery, GetStudyCodeQueryVariables>;
 export const CreateManifestDocument = {
   kind: 'Document',
   definitions: [
