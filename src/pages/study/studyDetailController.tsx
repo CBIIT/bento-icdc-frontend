@@ -49,7 +49,7 @@ const StudyDetailContainer = ({
   }
 
   if (loading) return <CircularProgress />;
-  if (error) {
+  if (error || !data) {
     return (
       <Typography
         variant="h5"
