@@ -170,11 +170,6 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
       isALink: true,
     },
     {
-      name: studyData.program?.program_acronym,
-      to: `/program/${studyData.program?.program_acronym}`,
-      isALink: true,
-    },
-    {
       name: studyData.clinical_study_designation,
       isALink: false,
     },
