@@ -1,6 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { ToolTip as Tooltip } from "../../../bento-core";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { ToolTip as Tooltip } from '../../../bento-core';
 import {
   MAX_NUMBER_OF_FILES,
   MULTI_FILES_VIEW,
@@ -15,23 +15,19 @@ import {
   tooltipMsg1,
   tooltipMsg2,
   tooltipErrMsg,
-} from "../../../bento/JBrowseData";
-import { setJborwseSelectedFiles } from "../store/jborwse.reducer";
-import { setSelectedFiles } from "../util";
-import jbrowseLogo from "../../../assets/icons/JbrowseViewIcon2.svg";
+} from '../../../bento/JBrowseData';
+import { setJborwseSelectedFiles } from '../store/jborwse.reducer';
+import { setSelectedFiles } from '../util';
+import jbrowseLogo from '../../../assets/icons/JbrowseViewIcon2.svg';
 import * as Styled from './JBrowseBtn.styled';
 
-const ViewJBrowseButton = ({
-  customClass,
-  disable,
-  selectedFileNames,
-}) => {
-  const selectedDashFiles = useSelector((state) =>
+const ViewJBrowseButton = ({ disable, selectedFileNames }) => {
+  const selectedDashFiles = useSelector(state =>
     state.dashboardTab &&
     state.dashboardTab.dataFileSelected &&
     state.dashboardTab.dataFileSelected.selectedRowInfo
       ? state.dashboardTab.dataFileSelected.selectedRowInfo
-      : null,
+      : null
   );
 
   const filesName =
@@ -48,17 +44,14 @@ const ViewJBrowseButton = ({
 
   const InValidToottipMsg = () => (
     <>
-      <Styled.WarningLabel>{"Warning: "}</Styled.WarningLabel>
+      <Styled.WarningLabel>{'Warning: '}</Styled.WarningLabel>
       <span>{tooltipErrMsg}</span>
     </>
   );
 
   const renderTooltipContent = () => (
     <>
-      <Styled.TooltipContent
-        align="center"
-        color="inherit"
-      >
+      <Styled.TooltipContent align="center" color="inherit">
         {isInactive || disable ? (
           tooltipMsg1
         ) : isInvlaid ? (
@@ -107,7 +100,6 @@ const ViewJBrowseButton = ({
             src={tooltipContent.src}
             alt={tooltipContent.alt}
             id={JBROWSE_TOOLTIP_ICON_ID}
-            className={customClass}
           />
         </Styled.HelpIconButton>
       </Tooltip>
