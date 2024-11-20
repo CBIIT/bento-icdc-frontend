@@ -8,6 +8,11 @@ const themeOptions: ThemeOptions = {
         root: {
           height: '43px',
           marginLeft: '22px',
+          '&#jbrowse_multi_view_button': {
+            '& img': {
+              width: '2.25em',
+            },
+          },
         },
       },
     },
