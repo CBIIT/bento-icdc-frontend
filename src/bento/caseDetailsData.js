@@ -1,21 +1,35 @@
-import gql from "graphql-tag";
-import { btnTypes } from "@bento-core/paginated-table";
-import { cellTypes, types, dataFormatTypes } from "../bento-core";
+import gql from 'graphql-tag';
+import { btnTypes } from '@bento-core/paginated-table';
+import { cellTypes, types, dataFormatTypes } from '../bento-core';
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
-  icon: "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg",
-  alt: "tooltipIcon",
-  sample: "Add files associated with selected sample(s) to My Files",
-  file: "Add selected file(s) to My Files",
+  icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
+  alt: 'tooltipIcon',
+  sample: 'Add files associated with selected sample(s) to My Files',
+  file: 'Add selected file(s) to My Files',
   arrow: true,
-  clsName: "addSelectedTooltip",
+  clsName: 'addSelectedTooltip',
+};
+
+export const associateFilesTooltipConfig = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
+  alt: 'tooltipIcon',
+  arrow: true,
+  tooltipText: 'Add selected file(s) to My Files',
+};
+
+export const sampleFilesTooltipConfig = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
+  alt: 'tooltipIcon',
+  arrow: true,
+  tooltipText: 'Add files associated with selected sample(s) to My Files',
 };
 
 // --------------- table wrapper configuration --------------
 export const addSampleFilesBtn = {
-  title: "Add Files for Selected Samples",
-  clsName: "add_selected_button",
+  title: 'Add Files for Selected Samples',
+  clsName: 'add_selected_button',
   type: types.BUTTON,
   role: btnTypes.ADD_SELECTED_FILES,
   btnType: btnTypes.ADD_SELECTED_FILES,
@@ -24,8 +38,8 @@ export const addSampleFilesBtn = {
 };
 
 export const addSelectedFilesBtn = {
-  title: "Add Selected Files",
-  clsName: "add_selected_button",
+  title: 'Add Selected Files',
+  clsName: 'add_selected_button',
   type: types.BUTTON,
   role: btnTypes.ADD_SELECTED_FILES,
   btnType: btnTypes.ADD_SELECTED_FILES,
@@ -40,44 +54,44 @@ export const jBrowseBtn = {
 
 export const sampleWrapperConfig = [
   {
-    container: "paginatedTable",
+    container: 'paginatedTable',
     paginatedTable: true,
   },
   {
-    container: "buttons",
-    size: "xl",
-    clsName: "container_footer",
+    container: 'buttons',
+    size: 'xl',
+    clsName: 'container_footer',
     items: [addSampleFilesBtn],
   },
 ];
 
 export const fileWrapperConfig = [
   {
-    container: "paginatedTable",
+    container: 'paginatedTable',
     paginatedTable: true,
   },
   {
-    container: "buttons",
-    size: "xl",
-    clsName: "container_footer",
+    container: 'buttons',
+    size: 'xl',
+    clsName: 'container_footer',
     items: [addSelectedFilesBtn, jBrowseBtn],
   },
 ];
 
 export const headerIcon =
-  "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-CaseDetail.svg";
+  'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-CaseDetail.svg';
 
 // Ideal size for externalLinkIcon is 16x16 px
 export const externalLinkIcon = {
-  src: "https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/program/externalLinkIcon.svg",
-  alt: "External link icon",
+  src: 'https://raw.githubusercontent.com/CBIIT/bento-frontend/master/src/assets/program/externalLinkIcon.svg',
+  alt: 'External link icon',
 };
 
 // multi study icon
 
 export const multiStudyIcon = {
-  src: "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/icon-multiStudy.svg",
-  alt: "multi study icon",
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/icon-multiStudy.svg',
+  alt: 'multi study icon',
 };
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
@@ -207,26 +221,26 @@ export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
 // --------------- Case Table configuration --------------
 export const sampleTable = {
   // Set 'display' to false to hide the table entirely
-  name: "sample",
+  name: 'sample',
   display: true,
-  dataKey: "sample_id",
+  dataKey: 'sample_id',
   // Table title
-  tableTitle: "ASSOCIATED SAMPLES",
+  tableTitle: 'ASSOCIATED SAMPLES',
   // Field name for files data, need to be updated only when using a different GraphQL query
-  subjectDetailField: "samples",
+  subjectDetailField: 'samples',
   // Value must be one of the 'dataField's in fileTableColumns
-  defaultSortField: "sample_id",
+  defaultSortField: 'sample_id',
   // 'asc' or 'desc'
-  defaultSortDirection: "asc",
+  defaultSortDirection: 'asc',
   // Set 'selectableRows' to true to show the row selection
   extendedViewConfig: {
     download: {
       customDownload: false,
-      downloadCsv: "Download Table Contents As CSV",
-      downloadFileName: "ICDC_Samples_download",
+      downloadCsv: 'Download Table Contents As CSV',
+      downloadFileName: 'ICDC_Samples_download',
     },
     manageViewColumns: {
-      title: "View Columns",
+      title: 'View Columns',
     },
   },
   columns: [
@@ -235,77 +249,77 @@ export const sampleTable = {
       display: true,
     },
     {
-      dataField: "sample_id",
-      header: "Sample ID",
-      sort: "asc",
+      dataField: 'sample_id',
+      header: 'Sample ID',
+      sort: 'asc',
       primary: true,
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
     },
     {
-      dataField: "sample_site",
-      header: "Sample Site",
+      dataField: 'sample_site',
+      header: 'Sample Site',
       dataFromRoot: true,
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "summarized_sample_type",
-      header: "Sample Type",
+      dataField: 'summarized_sample_type',
+      header: 'Sample Type',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "specific_sample_pathology",
-      header: "Pathology/Morphology",
+      dataField: 'specific_sample_pathology',
+      header: 'Pathology/Morphology',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "tumor_grade",
-      header: "Tumor Grade",
+      dataField: 'tumor_grade',
+      header: 'Tumor Grade',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "sample_chronology",
-      header: "Sample Chronology",
+      dataField: 'sample_chronology',
+      header: 'Sample Chronology',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "percentage_tumor",
-      header: "Percentage Tumor",
+      dataField: 'percentage_tumor',
+      header: 'Percentage Tumor',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "necropsy_sample",
-      header: "Necropsy Sample",
+      dataField: 'necropsy_sample',
+      header: 'Necropsy Sample',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "sample_preservation",
-      header: "Sample Preservation",
+      dataField: 'sample_preservation',
+      header: 'Sample Preservation',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
   ],
   tableMsg: {
-    noMatch: "Sorry, no matching records found",
+    noMatch: 'Sorry, no matching records found',
   },
-  addFilesRequestVariableKey: "sample_ids",
-  addFilesResponseKeys: ["sampleOverview", "files"],
-  addAllFilesResponseKeys: ["sampleOverview", "files"],
+  addFilesRequestVariableKey: 'sample_ids',
+  addFilesResponseKeys: ['sampleOverview', 'files'],
+  addAllFilesResponseKeys: ['sampleOverview', 'files'],
   addAllFileQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
   addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL,
 };
@@ -314,26 +328,26 @@ export const fileTable = {
   // Set 'display' to false to hide the table entirely
   display: true,
   // Table title
-  tableTitle: "ASSOCIATED FILES",
+  tableTitle: 'ASSOCIATED FILES',
   // Field name for files data, need to be updated only when using a different GraphQL query
-  subjectDetailField: "files",
+  subjectDetailField: 'files',
   // Value must be one of the 'dataField's in fileTableColumns
-  defaultSortField: "sample_id",
+  defaultSortField: 'sample_id',
   // 'asc' or 'desc'
-  defaultSortDirection: "asc",
+  defaultSortDirection: 'asc',
   // Set 'display' to false to hide the table entirely
-  name: "file",
-  dataKey: "file_name",
-  helpMessage: "Here help message",
+  name: 'file',
+  dataKey: 'file_name',
+  helpMessage: 'Here help message',
   jbrowse: true,
   // A maximum of 10 columns are allowed
   extendedViewConfig: {
     download: {
-      downloadFileName: "ICDC_Case_Files_download",
-      downloadCsv: "Download Table Contents As CSV",
+      downloadFileName: 'ICDC_Case_Files_download',
+      downloadCsv: 'Download Table Contents As CSV',
     },
     manageViewColumns: {
-      title: "View Columns",
+      title: 'View Columns',
     },
   },
   columns: [
@@ -342,115 +356,115 @@ export const fileTable = {
       display: true,
     },
     {
-      dataField: "sample_id",
-      header: "Sample ID",
-      sort: "asc",
+      dataField: 'sample_id',
+      header: 'Sample ID',
+      sort: 'asc',
       primary: true,
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "file_name",
-      header: "File Name",
+      dataField: 'file_name',
+      header: 'File Name',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
     },
     {
-      dataField: "access_file",
-      header: "Access",
-      sort: "asc",
+      dataField: 'access_file',
+      header: 'Access',
+      sort: 'asc',
       display: true,
       downloadDocument: true,
       documentDownloadProps: {
         maxFileSize: 12000000,
-        toolTipTextFileDownload: "Download a copy of this file",
+        toolTipTextFileDownload: 'Download a copy of this file',
         toolTipTextFilePreview:
-          "Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow",
-        fileSizeColumn: "file_size",
-        fileFormatColumn: "file_format",
-        fileLocationColumn: "uuid",
-        caseIdColumn: "file_name",
+          'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+        fileSizeColumn: 'file_size',
+        fileFormatColumn: 'file_format',
+        fileLocationColumn: 'uuid',
+        caseIdColumn: 'file_name',
         iconFilePreview:
-          "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg",
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
         iconFileDownload:
-          "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg",
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
         iconFileViewer:
-          "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg",
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
       cellType: cellTypes.CUSTOM_ELEM,
       role: cellTypes.DISPLAY,
-      tooltipText: "sort",
+      tooltipText: 'sort',
     },
     {
-      dataField: "file_type",
-      header: "File Type",
+      dataField: 'file_type',
+      header: 'File Type',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "file_format",
-      header: "Format",
+      dataField: 'file_format',
+      header: 'Format',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "file_size",
-      header: "Size",
+      dataField: 'file_size',
+      header: 'Size',
       dataFormatType: dataFormatTypes.FORMAT_BYTES,
       cellType: cellTypes.FORMAT_DATA,
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "parent",
-      header: "Association",
+      dataField: 'parent',
+      header: 'Association',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "file_description",
-      header: "Description",
+      dataField: 'file_description',
+      header: 'Description',
       display: true,
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
     {
-      dataField: "uuid",
-      header: "UUID",
+      dataField: 'uuid',
+      header: 'UUID',
       display: false,
       primary: true,
       // set formatBytes to true to display file size (in bytes) in a more human readable format
-      tooltipText: "sort",
+      tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
   ],
   tableMsg: {
-    noMatch: "Sorry, no matching records found",
+    noMatch: 'Sorry, no matching records found',
   },
-  addFilesRequestVariableKey: "file_name",
-  addFilesResponseKeys: ["fileIdsFromFileName", "file_uuid"],
-  addAllFilesResponseKeys: ["fileIdsFromFileName", "file_uuid"],
+  addFilesRequestVariableKey: 'file_name',
+  addFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
+  addAllFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
   addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
   addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
 };
 
 // --------- Table Wrapper configuration --------------
 export const alertMessage =
-  "The cart is limited to 1000 files. Please narrow the search criteria or remove some files from the cart to add more.";
+  'The cart is limited to 1000 files. Please narrow the search criteria or remove some files from the cart to add more.';
 
 export const textLabels = {
   textLabels: {
     toolbar: {
-      search: "Search",
-      downloadCsv: "Download Table Contents As CSV",
-      print: "Print",
-      viewColumns: "View Columns",
-      filterTable: "Filter Table",
+      search: 'Search',
+      downloadCsv: 'Download Table Contents As CSV',
+      print: 'Print',
+      viewColumns: 'View Columns',
+      filterTable: 'Filter Table',
     },
   },
 };
