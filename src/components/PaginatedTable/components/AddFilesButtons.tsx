@@ -47,6 +47,7 @@ export const AddSelectedFilesButton: React.FC<ComponentProps> = ({
       tooltipCofig={tooltipCofig}
       alertMessage={alertMessage}
       activeFilters={activeFilters}
+      maxFileLimit={10000}
     />
   );
 };

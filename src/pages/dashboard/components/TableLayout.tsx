@@ -48,6 +48,7 @@ interface ComponentProps {
 export const TableLayout: React.FC<ComponentProps> = ({
   addFilesRequestVariableKey,
   addSelectedFilesResponseKeys,
+  addAllFilesResponseKeys,
   addAllFileQuery,
   addSelectedFilesQuery,
   activeFilters,
@@ -87,7 +88,7 @@ export const TableLayout: React.FC<ComponentProps> = ({
             title={addAllFilesButtonText}
             clsName="add_all_button"
             dataKey={addFilesRequestVariableKey}
-            responseKeys={addSelectedFilesResponseKeys}
+            responseKeys={addAllFilesResponseKeys}
             addFileQuery={addAllFileQuery}
             tooltipCofig={addAllFilesTooltipConfig}
             buttonType={PgTableButton.ADD_ALL_FILES}
