@@ -55,7 +55,7 @@ const pageDataV2 = {
       prgramName: 'PRECINCT',
       primaryImageAlt: 'PRECINT-primary-image',
       primaryImage:
-        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/icdc_3790/icdc/images/png/precint_program_listing.png',
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/precint_program_listing.png',
       video: 'https://www.youtube.com/watch?v=Gpy3EWeYy3Y',
     },
     {
