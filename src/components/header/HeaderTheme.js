@@ -1,10 +1,47 @@
 import React from 'react';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import vectorIcon from '../../assets/header/Vector.svg';
+import searchIcon from '../../assets/header/global_search_input_find.svg';
 
 const HeaderThemeProvider = ({ children }) => {
   const computedTheme = createTheme({
     overrides: {
+      MuiGrid: {
+        container: {
+          '& div#header': {
+            zIndex: 0,
+          },
+        },
+      },
+      MuiTextField: {
+        root: {
+          margin: '0 auto',
+          paddingTop: '25px',
+          width: '260px',
+          height: '37px',
+        },
+      },
+      MuiInputLabel: {
+        root: {
+          width: '0%',
+          opacity: '0',
+        },
+      },
+      MuiSvgIcon: {
+        root: {
+          color: '#25557E',
+          stroke: '#4A8ECB',
+          strokeWidth: '1.1px',
+          marginRight: '8px',
+          cursor: 'pointer',
+          backgroundRepeat: 'no-repeat',
+          marginTop: '5px',
+          backgroundImage: `url(${searchIcon})`,
+          '& path': {
+            display: 'none',
+          },
+        },
+      },
       MuiInputBase: {
         root: {
           fontFamily: 'Open Sans',
@@ -25,11 +62,20 @@ const HeaderThemeProvider = ({ children }) => {
           border: '#4A8ECB solid 1px',
           borderRadius: '8px',
         },
+
         notchedOutline: {
           border: 'none',
         },
+        inputAdornedEnd: {
+          padding: '0 8px !important',
+        },
       },
       MuiAutocomplete: {
+        inputRoot: {
+          '&[class*="MuiOutlinedInput-root"]': {
+            padding: '2px',
+          },
+        },
         paper: {
           borderRadius: '8px',
         },
