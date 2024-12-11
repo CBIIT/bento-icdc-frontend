@@ -15,6 +15,12 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
         '&:hover $svg': {},
       },
     },
+    MuiTypography: {
+      root: {
+        height: 0,
+        width: 0,
+      },
+    },
     MuiTableCell: {
       head: {
         '& span': {
