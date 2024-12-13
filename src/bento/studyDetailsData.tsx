@@ -36,16 +36,22 @@ export const sampleProfile = {
     {
       index: 0,
       label: <div style={sampleProfileTabTextStyle}>SITE</div>,
+      xAxisLabel: 'Sample site',
+      yAxisLabel: 'Sample count',
       value: 'studySampleSiteCount',
     },
     {
       index: 1,
       label: <div style={sampleProfileTabTextStyle}>TYPE</div>,
+      xAxisLabel: 'Sample type',
+      yAxisLabel: 'Sample count',
       value: 'studySampleTypeCount',
     },
     {
       index: 2,
       label: <div style={sampleProfileTabTextStyle}>PATHOLOGY</div>,
+      xAxisLabel: 'Sample pathology',
+      yAxisLabel: 'Sample count',
       value: 'studySamplePathologyCount',
     },
   ],
@@ -74,13 +80,13 @@ export const palette = [
   '#02ad0f',
 ];
 
-export const argumentConfiguration = {
+export const argumentConfiguration = (text: string) => ({
   field: 'group',
   visible: false,
   position: 'inside',
   size: 12,
   title: {
-    text: 'Sample site',
+    text,
     size: 14,
     family: 'Inter',
     weight: '500',
@@ -91,7 +97,7 @@ export const argumentConfiguration = {
     position: 'inside',
     staggeringSpacing: 10,
   },
-};
+});
 export const valueConfiguration = {
   field: 'count',
   size: 12,
