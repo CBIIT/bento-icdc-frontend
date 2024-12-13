@@ -28,6 +28,9 @@ const GlobalSearchThemeProvider = ({ children }) => {
         inputRoot: {
           padding: '2px 20px 3px 20px !important',
         },
+        input: {
+          padding: '9.5px 4px',
+        },
         endAdornment: {
           top: 'calc(50% - 17px)',
           right: '45px !important',

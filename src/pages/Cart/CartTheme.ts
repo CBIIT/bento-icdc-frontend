@@ -1,5 +1,11 @@
 export const headerTheme = ({ primaryColor = '#004c73' }: any) => ({
   tblHeader: {
+    MuiTypography: {
+      root: {
+        height: 0,
+        width: 0,
+      },
+    },
     MuiCheckbox: {
       colorPrimary: {
         color: '#13344A',

@@ -1,7 +1,7 @@
 /* Do not import mui v5 */
 import React from 'react';
 import { useLocation } from 'react-router';
-import { Grid } from '@material-ui/core';
+import { Grid, withStyles } from '@material-ui/core';
 import { SearchBarGenerator } from '@bento-core/global-search';
 import headerData from '../../bento/globalHeaderData';
 import { Header } from '../../bento-core';
@@ -44,7 +44,7 @@ const ICDCHeader = () => {
       searchKeys,
       searchFields,
     },
-    classes: {},
+    classes: withStyles({}),
   };
 
   const { SearchBar } = SearchBarGenerator(SearchBarConfig);

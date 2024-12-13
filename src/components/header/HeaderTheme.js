@@ -16,7 +16,6 @@ const HeaderThemeProvider = ({ children }) => {
       MuiTextField: {
         root: {
           margin: '0 auto',
-          paddingTop: '25px',
           width: '260px',
           height: '37px',
         },
@@ -46,7 +45,6 @@ const HeaderThemeProvider = ({ children }) => {
         root: {
           fontFamily: 'Open Sans',
           fontSize: '13.5px',
-          color: '#25557E',
           fontWeight: 400,
           padding: '0px',
           fontStyle: '1rem',
@@ -55,6 +53,7 @@ const HeaderThemeProvider = ({ children }) => {
         },
         input: {
           fontSize: '1rem',
+          color: '#25557E',
         },
       },
       MuiOutlinedInput: {
@@ -67,6 +66,7 @@ const HeaderThemeProvider = ({ children }) => {
           border: 'none',
         },
         inputAdornedEnd: {
+          height: '35px',
           padding: '0 8px !important',
         },
       },
