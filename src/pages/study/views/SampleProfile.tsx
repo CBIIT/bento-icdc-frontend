@@ -149,7 +149,7 @@ const SampleProfile: React.FC<SampleProfileProps> = ({ data }) => {
                       data={data[item.value as keyof StudyQuery]}
                       palette={palette}
                       tooltipContent={tooltipContent}
-                      argument={argumentConfiguration}
+                      argument={argumentConfiguration(item.xAxisLabel)}
                       value={valueConfiguration}
                     />
                   </div>

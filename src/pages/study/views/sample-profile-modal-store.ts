@@ -2,10 +2,12 @@ import { createStore, createHook, Action } from 'react-sweet-state';
 
 type State = {
   isModalOpen: boolean;
+  currentTab: string;
 };
 
 const initialState: State = {
   isModalOpen: false,
+  currentTab: '1',
 };
 
 const actions = {
@@ -13,7 +15,14 @@ const actions = {
     (isModalOpen: boolean): Action<State> =>
     ({ setState }) => {
       setState({
-        isModalOpen: isModalOpen,
+        isModalOpen,
+      });
+    },
+  setCurrentTab:
+    (currentTab: string): Action<State> =>
+    ({ setState }) => {
+      setState({
+        currentTab,
       });
     },
 };

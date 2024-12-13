@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React from 'react';
 import { BarChartV2 } from '../../../components/BarChartV2';
@@ -39,13 +40,17 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
   studyCode,
   accessionId,
 }) => {
-  const [{ isModalOpen }, { setIsModalOpen }] = useSampleProfileModal();
-  const [value, setValue] = React.useState('1');
+  const [{ isModalOpen, currentTab }, { setIsModalOpen, setCurrentTab }] =
+    useSampleProfileModal();
+
   const [, actions] = useDashboardTabs();
   const filterStudy = `${studyCode} (${accessionId})`;
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+  const handleTabChange = async (
+    event: React.SyntheticEvent,
+    newValue: string
+  ) => {
+    await setCurrentTab(newValue);
   };
 
   const showModal = async () => {
@@ -87,7 +92,7 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
           </IconButton>
         </StyledDialogTitle>
         <StyledDialogContent>
-          <TabContext value={value}>
+          <TabContext value={currentTab}>
             <Box sx={{ height: '100%' }}>
               <Box
                 sx={{
@@ -198,8 +203,8 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
                       <BarChartV2
                         chartData={data[item.value as keyof StudyQuery]}
                         palette={palette}
-                        yAxisLabel="Sample count"
-                        xAxisLabel="Sample site"
+                        yAxisLabel={item.yAxisLabel}
+                        xAxisLabel={item.xAxisLabel}
                       />
                     </StyledTabPanel>
                   );
