@@ -23,8 +23,8 @@ const tableFontFamily = "'Raleway', sans-serif";
 export default {
   custom: {
     maxContentWidth: '1440px',
-    maxContent: 'white',
-    bodyBackGround: 'white',
+    maxContent: '#ffffff',
+    bodyBackGround: '#ffffff',
     cardBackGround: '#f0f6f8',
     footorBackground: '#325068',
     fontFamilySans: '"Open Sans", sans-serif',
@@ -108,7 +108,7 @@ export default {
       dark: tinycolor(info).darken(darkenRate).toHexString(),
     },
     text: {
-      withbackground: 'white',
+      withbackground: '#ffffff',
       primary: '#4A4A4A',
       secondary: '#6E6E6E',
       hint: '#B9B9B9',
@@ -195,7 +195,7 @@ export default {
     },
     MuiTouchRipple: {
       child: {
-        backgroundColor: 'white',
+        backgroundColor: '#ffffff',
       },
     },
     MUIDataTableHeadCell: {

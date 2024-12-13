@@ -28,8 +28,8 @@ const white = '#FFFFFF';
 export default {
   custom: {
     maxContentWidth: '1440px',
-    maxContent: 'white',
-    bodyBackGround: 'white',
+    maxContent: '#ffffff',
+    bodyBackGround: '#ffffff',
     cardBackGround: '#f0f6f8',
     fontFamilySans: '"Open Sans", sans-serif',
     footorBackground: '#325068',
@@ -71,23 +71,23 @@ export default {
     },
     lochmara: {
       main: lochmara,
-      light: tinycolor(lochmara).lighten(lochmara).toHexString(),
+      light: tinycolor(lochmara).lighten(10).toHexString(),
       dark: tinycolor(lochmara).darken(darkenRate).toHexString(),
       contrastText: 'lochmara',
       contrastTextColor: '#3478A5',
     },
     widgetTitle: {
       main: widgetTitle,
-      light: tinycolor(widgetTitle).lighten(widgetTitle).toHexString(),
+      light: tinycolor(widgetTitle).lighten(lightenRate).toHexString(),
       dark: tinycolor(widgetTitle).darken(darkenRate).toHexString(),
       contrastText: 'widgetTitle',
       contrastTextColor: '#3376A3',
     },
     white: {
       main: white,
-      light: tinycolor(white).lighten(white).toHexString(),
-      dark: tinycolor(white).darken(white).toHexString(),
-      contrastText: 'white',
+      light: tinycolor(white).lighten(lightenRate).toHexString(),
+      dark: tinycolor(white).darken(darkenRate).toHexString(),
+      contrastText: '#ffffff',
     },
     airForceBlue: {
       main: airForceBlue,
@@ -148,12 +148,12 @@ export default {
       dark: tinycolor(info).darken(darkenRate).toHexString(),
     },
     textWithBackground: {
-      main: 'white',
+      main: '#ffffff',
       light: tinycolor(info).lighten(lightenRate).toHexString(),
       dark: tinycolor(info).darken(darkenRate).toHexString(),
     },
     text: {
-      withbackground: 'white',
+      withbackground: '#ffffff',
       primary: '#4A4A4A',
       secondary: '#6E6E6E',
       hint: '#B9B9B9',
@@ -255,7 +255,7 @@ export default {
     },
     MuiTouchRipple: {
       child: {
-        backgroundColor: 'white',
+        backgroundColor: '#ffffff',
       },
     },
     MUIDataTableHeadCell: {
