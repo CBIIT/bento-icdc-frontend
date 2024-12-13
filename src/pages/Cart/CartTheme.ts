@@ -1,4 +1,4 @@
-export const headerTheme = ({ primaryColor = '#004c73' }) => ({
+export const headerTheme = ({ primaryColor = '#004c73' }: any) => ({
   tblHeader: {
     MuiTypography: {
       root: {
@@ -325,9 +325,6 @@ const toolbar = {
   MuiTypography: {
     body1: {
       color: '#000',
-      '&:after': {
-        content: '" to view in JBrowse"',
-      },
     },
   },
 };
@@ -408,10 +405,10 @@ const tblBody = {
   },
 };
 
-export const themeConfig = table => ({
+export const themeConfig = (table: any) => ({
   ...headerTheme(table),
   tblBody,
-  ...extendedView(table),
+  ...extendedView(),
   customTheme,
   tblPgn,
   toolbar,
