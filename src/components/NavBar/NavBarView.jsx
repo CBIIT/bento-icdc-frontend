@@ -12,7 +12,6 @@ import styled from '@emotion/styled';
 
 const NavContrainer = styled('div')({
   position: 'relative',
-  zIndex: 0,
 });
 
 const BentoNavBar = ({ cartFieldIds = [] }) => (

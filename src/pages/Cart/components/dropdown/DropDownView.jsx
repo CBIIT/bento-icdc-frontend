@@ -320,7 +320,7 @@ const DropDownView = ({ filesId = [], allFiles }) => {
     }*/
     return (
       <>
-        <Styled.CancerGenomicsCloudMenuItem>
+        <Styled.MenuItem isDropDownDisabled={isDropDownDisabled}>
           <Tooltip
             arrow
             interactive
@@ -342,10 +342,8 @@ const DropDownView = ({ filesId = [], allFiles }) => {
               <Styled.CancerGenomicsCloudButtonIcon src={cgcIcon} alt="icon" />
             </Styled.CancerGenomicsCloudButton>
           </Tooltip>
-        </Styled.CancerGenomicsCloudMenuItem>
-        <Styled.DownloadFileManifestMenuItem
-          isDropDownDisabled={isDropDownDisabled}
-        >
+        </Styled.MenuItem>
+        <Styled.MenuItem isDropDownDisabled={isDropDownDisabled}>
           <Tooltip
             arrow
             interactive
@@ -370,7 +368,7 @@ const DropDownView = ({ filesId = [], allFiles }) => {
               />
             </Styled.DownloadFileManifestButton>
           </Tooltip>
-        </Styled.DownloadFileManifestMenuItem>
+        </Styled.MenuItem>
       </>
     );
   };
