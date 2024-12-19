@@ -13,13 +13,11 @@ import {
 import PaginatedTableView from '../../../components/PaginatedTable/TableView';
 import useDashboardTabs from './dashboard-tabs-store';
 import DashboardThemeProvider from './DashboardThemeProvider';
-import { TableLayout } from './TableLayout';
 
 const DashboardTabsView = ({
   dashboardStats,
   activeFilters,
   unifiedQueryParam = {},
-  searchText,
 }) => {
   const [state, actions] = useDashboardTabs();
   const handleTabChange = (_event, value) => {
@@ -30,17 +28,27 @@ const DashboardTabsView = ({
   // override any table state at page label
   // set input serch for all the tables
   const dashboardTableInitActions = context => {
-    if (searchText !== undefined) {
+    if (state.searchText !== undefined) {
       const { dispatch, searchQuery: tableSearch } = context;
-      if (dispatch && tableSearch != searchText) {
+      if (dispatch && tableSearch != state.searchText) {
         // override the search query foreach of the tables
         dispatch(
           customPaginationAction({
-            searchQuery: searchText,
+            searchQuery: state.searchText,
           })
         );
       }
     }
+  };
+
+  // override paginated actions
+  // pageination actions
+  const overridePaginatedActions = () => {
+    return {
+      customizeSearchQueryChange: query => {
+        actions.setSearchText(query);
+      },
+    };
   };
 
   return (
@@ -53,39 +61,23 @@ const DashboardTabsView = ({
       {tableContainers.map((tab, index) => (
         <TableContextProvider key={`tableCont-${index}`}>
           <div hidden={state.currentTab !== index}>
-            <TableLayout
-              queryParam={tab?.queryParam}
-              addFilesRequestVariableKey={tab.addFilesRequestVariableKey}
-              addSelectedFilesResponseKeys={tab.addFilesResponseKeys}
-              addAllFilesResponseKeys={tab.addAllFilesResponseKeys}
-              addAllFileQuery={tab.addAllFileQuery}
-              addSelectedFilesQuery={tab.addSelectedFilesQuery}
-              addFileTooltipCofig={tab.addFilesTooltopConfig}
-              addAllFilesButtonText={tab.selectAllButtonText}
-              addSelectedFilesButtonText={tab.selectedButtonText}
+            <PaginatedTableView
+              config={{
+                ...tab,
+                unifiedView: !_.isEmpty(unifiedQueryParam),
+              }}
+              tableLayOut={tableLayOut}
+              totalRowCount={dashboardStats[tab.count]}
+              activeTab={index === state.currentTab}
+              tabStyles={tabIndex[index]}
               activeFilters={{
                 ...activeFilters,
                 ...tab?.queryParam,
                 ...unifiedQueryParam,
               }}
               overriedTableState={dashboardTableInitActions}
-            >
-              <PaginatedTableView
-                config={{
-                  ...tab,
-                  unifiedView: !_.isEmpty(unifiedQueryParam),
-                }}
-                tableLayOut={tableLayOut}
-                totalRowCount={dashboardStats[tab.count]}
-                activeTab={index === state.currentTab}
-                tabStyles={tabIndex[index]}
-                activeFilters={{
-                  ...activeFilters,
-                  ...tab?.queryParam,
-                  ...unifiedQueryParam,
-                }}
-              />
-            </TableLayout>
+              overridePaginatedActions={overridePaginatedActions}
+            />
           </div>
         </TableContextProvider>
       ))}
