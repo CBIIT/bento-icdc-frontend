@@ -1,11 +1,15 @@
 import React from 'react';
 import { ButtonView } from '../../../bento-core';
 
-interface TooltipConfig {
+// type clean up
+export interface TooltipConfig {
   src: string;
+  icon: string;
   alt: string;
   arrow: boolean;
   tooltipText: string;
+  toolTipText: string;
+  clsName: string;
 }
 
 interface ComponentProps {
@@ -16,7 +20,8 @@ interface ComponentProps {
   responseKeys: string[];
   tooltipCofig: TooltipConfig;
   buttonType: string;
-  classes: unknown;
+  alertMessage: string;
+  activeFilters: object;
 }
 
 export const AddSelectedFilesButton: React.FC<ComponentProps> = ({
@@ -26,19 +31,23 @@ export const AddSelectedFilesButton: React.FC<ComponentProps> = ({
   addFileQuery,
   responseKeys,
   tooltipCofig,
-  classes = {},
   buttonType,
+  alertMessage = '',
+  activeFilters = {},
 }) => {
   return (
     <ButtonView
       btnType={buttonType}
       title={title}
       clsName={clsName}
-      classes={classes}
       dataKey={dataKey}
       addFileQuery={addFileQuery}
+      classes={{}}
       responseKeys={responseKeys}
       tooltipCofig={tooltipCofig}
+      alertMessage={alertMessage}
+      activeFilters={activeFilters}
+      maxFileLimit={10000}
     />
   );
 };

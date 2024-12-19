@@ -4,6 +4,8 @@ import {
   GET_MY_CART_DATA_QUERY_DESC,
   cartTable,
 } from '../../../bento/fileCentricCartWorkflowData';
+import { onInputSearchQueryChange } from '../../../pages/dashboard/store/Actions';
+import store from '../../../store';
 
 // pagination table behavior
 // customizeOnRowSelect,
@@ -91,6 +93,15 @@ export const paginationOptions = (context, config) => {
     case 'myFiles':
       return {
         ...myFileTablePaginationOptions(context),
+      };
+    case 'case':
+    case 'samples':
+      return {
+        customizeSearchQueryChange: query => {
+          // dashboard uses global redux to update the searchQuery
+          // to update the search text
+          store.dispatch(onInputSearchQueryChange(query));
+        },
       };
     default:
       return {};

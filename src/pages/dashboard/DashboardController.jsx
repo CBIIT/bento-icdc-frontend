@@ -80,6 +80,7 @@ const mapStateToProps = state => ({
   filterState: state.statusReducer.filterState,
   localFindUpload: state.localFind.upload,
   localFindAutocomplete: state.localFind.autocomplete,
+  searchText: state.dashboardReducer.searchQuery,
 });
 
 export default connect(mapStateToProps, null)(DashTemplateController);

@@ -170,11 +170,6 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
       isALink: true,
     },
     {
-      name: studyData.program?.program_acronym,
-      to: `/program/${studyData.program?.program_acronym}`,
-      isALink: true,
-    },
-    {
       name: studyData.clinical_study_designation,
       isALink: false,
     },
@@ -323,8 +318,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
               <HeaderButtonLinkSpan>
                 <HeaderButtonLink
                   to={location => ({ ...location, pathname: '/explore' })}
-                  onClick={() => {
-                    actions.changeCurrentTab(0);
+                  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                  onClick={async () => {
+                    await actions.changeCurrentTab(0);
                     navigatedToDashboard(filterStudy);
                   }}
                 >

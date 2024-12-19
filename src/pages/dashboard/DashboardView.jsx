@@ -18,6 +18,7 @@ const Dashboard = ({
   biospecimenSource,
   activeFilters,
   localFindAutocomplete,
+  searchText,
 }) => (
   <Styled.DashboardContainer>
     <StatsView data={searchCases} />
@@ -42,6 +43,7 @@ const Dashboard = ({
           <DashboardTabs
             dashboardStats={updateStat(searchCases)}
             activeFilters={activeFilters}
+            searchText={searchText}
           />
         </Styled.WidgetTableContent>
       </Styled.Content>

@@ -447,4 +447,4 @@ export default {
     // Overriding Bento MUIDatatable properties with exsisting ICDC's MUIDatatable properties
     ...icdcLightTheme.overrides,
   },
-};
+} as Record<string, any>;

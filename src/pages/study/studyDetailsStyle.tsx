@@ -3,7 +3,7 @@ import { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div({
-  paddingTop: '100px',
+  paddingTop: '27px',
   fontFamily: 'Raleway, sans-serif',
   paddingLeft: '27px',
   paddingRight: '27px',
