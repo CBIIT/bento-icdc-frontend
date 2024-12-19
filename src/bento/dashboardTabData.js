@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
-import { cellTypes, dataFormatTypes, btnTypes, types } from '../bento-core';
+import { cellTypes, dataFormatTypes } from '../bento-core';
+
 import {
   customCasesTabDownloadCSV,
   customFilesTabDownloadCSV,
@@ -17,6 +18,36 @@ export const tooltipContent = {
   'Study Files': 'Add selected files to My Files',
   arrow: true,
   clsName: 'addSelectedTooltip',
+};
+
+export const baseToolTipConfig = {
+  src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
+  alt: 'tooltipIcon',
+  arrow: true,
+  clsName: 'addSelectedTooltip',
+};
+
+export const addFileTooltipText = {
+  case: {
+    addAllFilesText:
+      'Add filtered files associated with all cases in the current results set to My Files',
+    addSelectedFilesText:
+      'Add filtered files associated with selected case(s) to My Files',
+  },
+  sample: {
+    addAllFilesText:
+      'Add filtered files associated with all cases in the current results set to My Files',
+    addSelectedFilesText:
+      'Add filtered files associated with selected sample(s) to My Files',
+  },
+  caseFiles: {
+    addAllFilesText: 'Add all filtered files to My Files',
+    addSelectedFilesText: 'Add selected files to My Files',
+  },
+  studyFiles: {
+    addAllFilesText: 'Add all filtered files to My Files',
+    addSelectedFilesText: 'Add selected files to My Files',
+  },
 };
 
 // --------------- Tooltip configuration --------------
@@ -1800,7 +1831,7 @@ export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
 `;
 
 export const GET_STUDY_CODE = gql`
-  query study($clinical_study_designation: String) {
+  query getStudyCode($clinical_study_designation: String) {
     study(clinical_study_designation: $clinical_study_designation) {
       clinical_study_designation
       accession_id
@@ -1958,6 +1989,10 @@ export const tableContainers = [
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
     addSelectedFilesQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
+    addFilesTooltopConfig: {
+      ...baseToolTipConfig,
+      ...addFileTooltipText.case,
+    },
   },
   {
     name: 'Samples',
@@ -2095,12 +2130,17 @@ export const tableContainers = [
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFileQuery: GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL,
     addSelectedFilesQuery: GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL,
+    addFilesTooltopConfig: {
+      ...baseToolTipConfig,
+      ...addFileTooltipText.sample,
+    },
   },
   {
     name: 'Case Files',
     dataField: 'dataFile',
     api: GET_FILES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add All Files',
+    selectedButtonText: 'Add Selected Files',
     paginationAPIField: 'fileOverview',
     defaultSortField: 'file_name',
     defaultSortDirection: 'asc',
@@ -2258,12 +2298,17 @@ export const tableContainers = [
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
     addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
+    addFilesTooltopConfig: {
+      ...baseToolTipConfig,
+      ...addFileTooltipText.caseFiles,
+    },
   },
   {
     name: 'Study Files',
     dataField: 'dataStudyFile',
     api: GET_FILES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add All Files',
+    selectedButtonText: 'Add Selected Files',
     paginationAPIField: 'fileOverview',
     defaultSortField: 'file_name',
     defaultSortDirection: 'asc',
@@ -2381,74 +2426,25 @@ export const tableContainers = [
       noMatch: 'No Matching Records Found',
     },
     id: 'study_file_tab',
+    addSlectedFileButtonLabel: '',
     addFilesRequestVariableKey: 'file_name',
     addFilesResponseKeys: ['fileIdsFromFileName', 'file_uuid'],
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
     addSelectedFilesQuery: GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL,
+    addFilesTooltopConfig: {
+      ...baseToolTipConfig,
+      ...addFileTooltipText.studyFiles,
+    },
   },
 ];
 
 export const alertMessage =
   'The cart is limited to 1000 files. Please narrow the search criteria or remove some files from the cart to add more.';
 
-const addAllFiles = {
-  title: 'Add Associated Files For All',
-  clsName: 'add_all_button',
-  type: types.BUTTON,
-  role: btnTypes.ADD_ALL_FILES,
-  btnType: btnTypes.ADD_ALL_FILES,
-  conditional: false,
-  tooltipCofig: selectAllToolTip,
-  maxFileLimit: 10000,
-  alertMessage,
-};
-
-const addSelectedFiles = {
-  title: 'Add Selected Files ',
-  clsName: 'add_selected_button',
-  type: types.BUTTON,
-  role: btnTypes.ADD_SELECTED_FILES,
-  btnType: btnTypes.ADD_SELECTED_FILES,
-  tooltipCofig: tooltipContent,
-  conditional: true,
-  applyActiveFilter: true,
-  maxFileLimit: 10000,
-};
-
-const jBrowseBtn = {
-  type: types.CUSTOM_ELEM,
-  Jbrowse: true,
-};
-
 export const tableLayOut = [
-  {
-    container: 'buttons',
-    size: 'xl',
-    clsName: 'container_header',
-    items: [addAllFiles, addSelectedFiles, jBrowseBtn],
-  },
   {
     container: 'paginatedTable',
     paginatedTable: true,
-  },
-  {
-    container: 'buttons',
-    size: 'xl',
-    clsName: 'container_footer',
-    items: [addSelectedFiles, jBrowseBtn],
-  },
-  {
-    container: 'buttons',
-    size: 'xl',
-    clsName: 'container_footer_link',
-    items: [
-      {
-        title: 'Go to My Files >',
-        clsName: 'go_to_cart',
-        url: '#/fileCentricCart',
-        type: types.LINK,
-      },
-    ],
   },
 ];

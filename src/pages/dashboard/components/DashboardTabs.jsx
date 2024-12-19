@@ -13,6 +13,7 @@ import {
 import PaginatedTableView from '../../../components/PaginatedTable/TableView';
 import useDashboardTabs from './dashboard-tabs-store';
 import DashboardThemeProvider from './DashboardThemeProvider';
+import { TableLayout } from './TableLayout';
 
 const DashboardTabsView = ({
   dashboardStats,
@@ -52,22 +53,39 @@ const DashboardTabsView = ({
       {tableContainers.map((tab, index) => (
         <TableContextProvider key={`tableCont-${index}`}>
           <div hidden={state.currentTab !== index}>
-            <PaginatedTableView
-              config={{
-                ...tab,
-                unifiedView: !_.isEmpty(unifiedQueryParam),
-              }}
-              tableLayOut={tableLayOut}
-              totalRowCount={dashboardStats[tab.count]}
-              activeTab={index === state.currentTab}
-              tabStyles={tabIndex[index]}
+            <TableLayout
+              queryParam={tab?.queryParam}
+              addFilesRequestVariableKey={tab.addFilesRequestVariableKey}
+              addSelectedFilesResponseKeys={tab.addFilesResponseKeys}
+              addAllFilesResponseKeys={tab.addAllFilesResponseKeys}
+              addAllFileQuery={tab.addAllFileQuery}
+              addSelectedFilesQuery={tab.addSelectedFilesQuery}
+              addFileTooltipCofig={tab.addFilesTooltopConfig}
+              addAllFilesButtonText={tab.selectAllButtonText}
+              addSelectedFilesButtonText={tab.selectedButtonText}
               activeFilters={{
                 ...activeFilters,
                 ...tab?.queryParam,
                 ...unifiedQueryParam,
               }}
               overriedTableState={dashboardTableInitActions}
-            />
+            >
+              <PaginatedTableView
+                config={{
+                  ...tab,
+                  unifiedView: !_.isEmpty(unifiedQueryParam),
+                }}
+                tableLayOut={tableLayOut}
+                totalRowCount={dashboardStats[tab.count]}
+                activeTab={index === state.currentTab}
+                tabStyles={tabIndex[index]}
+                activeFilters={{
+                  ...activeFilters,
+                  ...tab?.queryParam,
+                  ...unifiedQueryParam,
+                }}
+              />
+            </TableLayout>
           </div>
         </TableContextProvider>
       ))}

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { withStyles } from "@material-ui/core";
+import React, { useState } from 'react';
+import { withStyles } from '@material-ui/core';
 import {
   BarChart,
   Bar,
@@ -8,55 +8,58 @@ import {
   CartesianGrid,
   Tooltip,
   Cell,
-} from "recharts";
+} from 'recharts';
 
-const styles = () => ({
+const styles = theme => ({
   legendWrapper: {
-    paddingLeft: "20px",
+    paddingLeft: '20px',
   },
   legend: {
     // marginBottom: '10px',
-    padding: "0px 8px",
-    display: "flex",
-    gap: "8px",
+    padding: '0px 8px',
+    display: 'flex',
+    gap: '8px',
   },
   legendIcon: {},
   groupText: {
-    fontFamily: "Inter",
-    fontWeight: "400",
-    fontSize: "14px",
-    color: "#444444",
+    fontFamily: 'Inter',
+    fontWeight: '400',
+    fontSize: '14px',
+    color: '#444444',
   },
   countText: {
-    fontFamily: "Inter",
-    fontWeight: "700",
-    fontSize: "14px",
-    color: "#444444",
+    fontFamily: 'Inter',
+    fontWeight: '700',
+    fontSize: '14px',
+    color: '#444444',
   },
   tooltipWrapper: {
-    backgroundColor: "#fff",
-    padding: "10px",
-    border: "1px solid #ccc",
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-    display: "flex",
-    gap: "4px",
+    backgroundColor: '#fff',
+    padding: '10px',
+    border: '1px solid #ccc',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    display: 'flex',
+    gap: '4px',
   },
   container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+    },
   },
   groupTooltipText: {
-    fontFamily: "Inter",
+    fontFamily: 'Inter',
     fontWeight: 400,
-    fontSize: "13px",
-    color: "#444444",
+    fontSize: '13px',
+    color: '#444444',
   },
   countTooltipText: {
-    fontFamily: "Inter",
+    fontFamily: 'Inter',
     fontWeight: 700,
-    fontSize: "13px",
-    color: "#444444",
+    fontSize: '13px',
+    color: '#444444',
   },
 });
 
@@ -93,12 +96,12 @@ const BarChartV2 = ({
           key={`item-${index}`}
           className={classes.legend}
           style={{
-            backgroundColor: index % 2 === 0 ? "#f2f2f2" : "transparent",
-            fontWeight: hoveredGroup === entry.group ? "bold" : "normal",
+            backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'transparent',
+            fontWeight: hoveredGroup === entry.group ? 'bold' : 'normal',
             boxShadow:
               hoveredGroup === entry.group
-                ? "0px 0px 10px rgba(0,0,0,0.5)"
-                : "none",
+                ? '0px 0px 10px rgba(0,0,0,0.5)'
+                : 'none',
           }}
         >
           <span
@@ -107,7 +110,7 @@ const BarChartV2 = ({
           >
             ■
           </span>
-          <div className={classes.groupText}>{entry.group}</div>{" "}
+          <div className={classes.groupText}>{entry.group}</div>{' '}
           <div className={classes.countText}>{entry.count}</div>
         </div>
       ))}
@@ -133,16 +136,16 @@ const BarChartV2 = ({
           tick={false}
           label={{
             value: xAxisLabel,
-            style: { fontFamily: "Inter", fontWeight: "500", color: "#444444" },
+            style: { fontFamily: 'Inter', fontWeight: '500', color: '#444444' },
           }}
         />
         <YAxis
           label={{
             value: yAxisLabel,
             angle: -90,
-            position: "insideLeft",
+            position: 'insideLeft',
             offset: 10,
-            style: { fontFamily: "Inter", fontWeight: "500", color: "#444444" },
+            style: { fontFamily: 'Inter', fontWeight: '500', color: '#444444' },
           }}
         />
         <Tooltip content={<CustomTooltip />} />

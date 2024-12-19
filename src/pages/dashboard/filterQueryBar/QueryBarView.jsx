@@ -1,11 +1,6 @@
-import React, { useCallback } from "react";
-import { connect, useDispatch } from "react-redux";
-import {
-  Container,
-  ThemeProvider,
-  createTheme,
-  withStyles,
-} from "@material-ui/core";
+import React, { useCallback } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { Container, withStyles } from '@material-ui/core';
 import {
   clearAllFilters,
   clearFacetSection,
@@ -16,10 +11,10 @@ import {
   updateAutocompleteData,
   QueryBarGenerator,
   sideBarActionTypes,
-} from "../../../bento-core";
-import { facetsConfig } from "../../../bento/dashboardData";
-import theme from "./QueryBarTheme";
-import styles, { customStyles } from "./QueryBarStyles";
+} from '../../../bento-core';
+import { facetsConfig } from '../../../bento/dashboardData';
+import { QueryBarTheme } from './QueryBarTheme';
+import styles, { customStyles } from './QueryBarStyles';
 
 /**
  * Generate the Explore Tab Query Bar
@@ -32,10 +27,10 @@ import styles, { customStyles } from "./QueryBarStyles";
  */
 const QueryBarView = ({ data, statusReducer, localFind, classes }) => {
   const dispatch = useDispatch();
-  const sectionOrder = facetsConfig.map((v) => v.datafield);
-  const mappedFilterState = Object.keys(statusReducer || {}).map((facet) => {
+  const sectionOrder = facetsConfig.map(v => v.datafield);
+  const mappedFilterState = Object.keys(statusReducer || {}).map(facet => {
     const config = facetsConfig.find(
-      (configuration) => configuration.datafield === facet,
+      configuration => configuration.datafield === facet
     );
 
     return {
@@ -46,14 +41,14 @@ const QueryBarView = ({ data, statusReducer, localFind, classes }) => {
   });
   mappedFilterState.sort(
     (a, b) =>
-      sectionOrder.indexOf(a.datafield) - sectionOrder.indexOf(b.datafield),
+      sectionOrder.indexOf(a.datafield) - sectionOrder.indexOf(b.datafield)
   );
   const { QueryBar } = useCallback(
     QueryBarGenerator({
       config: {
         maxItems: 2,
         displayAllActiveFilters: true,
-        count: "count",
+        count: 'count',
         rootPath: `${window.location.href}/`,
         viewQueryURL: true,
       },
@@ -68,20 +63,20 @@ const QueryBarView = ({ data, statusReducer, localFind, classes }) => {
         clearAutocomplete: () => {
           dispatch(updateAutocompleteData([]));
         },
-        deleteAutocompleteItem: (title) => {
+        deleteAutocompleteItem: title => {
           const { autocomplete } = localFind;
           const newdata = [...autocomplete];
-          const index = newdata.findIndex((v) => v.title === title);
+          const index = newdata.findIndex(v => v.title === title);
 
           if (index > -1) {
             newdata.splice(index, 1);
             dispatch(updateAutocompleteData(newdata));
           }
         },
-        resetFacetSection: (section) => {
+        resetFacetSection: section => {
           dispatch(clearFacetSection(section));
         },
-        resetFacetSlider: (section) => {
+        resetFacetSlider: section => {
           dispatch(clearSliderSection(section));
         },
         resetFacetCheckbox: (section, checkbox) => {
@@ -94,17 +89,17 @@ const QueryBarView = ({ data, statusReducer, localFind, classes }) => {
                 [section.datafield]: sideBarActionTypes.FACET_VALUE_CHANGED,
                 isFacetOrigin: false,
               },
-            }),
+            })
           );
         },
       },
       customStyles,
     }),
-    [localFind],
+    [localFind]
   );
 
   return (
-    <ThemeProvider theme={createTheme(theme)}>
+    <QueryBarTheme>
       <Container maxWidth="xl" className="icdc_query_bar">
         <QueryBar
           statusReducer={mappedFilterState}
@@ -113,11 +108,11 @@ const QueryBarView = ({ data, statusReducer, localFind, classes }) => {
           styles={classes}
         />
       </Container>
-    </ThemeProvider>
+    </QueryBarTheme>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   statusReducer: state.statusReducer.filterState,
   localFind: state.localFind,
 });

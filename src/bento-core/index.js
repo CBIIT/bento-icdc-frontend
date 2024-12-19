@@ -31,7 +31,6 @@ import {
   onRowSeclect,
   setTotalRowCount,
   customPaginationAction,
-  onInputSearchQueryChange,
 } from '@bento-core/paginated-table';
 import { Footer } from '@bento-core/footer';
 import {
@@ -106,7 +105,6 @@ export {
   onRowSeclect,
   setTotalRowCount,
   customPaginationAction,
-  onInputSearchQueryChange,
   dataFormatTypes, // table (views)
   cellTypes,
   formatBytes,
