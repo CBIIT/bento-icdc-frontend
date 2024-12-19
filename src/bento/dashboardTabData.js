@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 import { cellTypes, dataFormatTypes } from '../bento-core';
-
 import {
   customCasesTabDownloadCSV,
   customFilesTabDownloadCSV,
