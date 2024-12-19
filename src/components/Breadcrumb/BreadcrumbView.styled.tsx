@@ -16,7 +16,8 @@ export const BreadcrumbNavLink = styled(Link)({
   fontFamily: 'Lato',
   fontWeight: '700',
   fontSize: '12px',
-  letterSpacing: '0.025em',
+  letterSpacing: '0.12px',
+  lineHeight: '17.16px',
 });
 
 export const BreadcrumbSpan = styled.span({
@@ -27,5 +28,6 @@ export const BreadcrumbSpan = styled.span({
   fontFamily: 'Lato',
   fontWeight: '500',
   fontSize: '12px',
-  letterSpacing: '0.025em',
+  letterSpacing: '0.12px',
+  lineHeight: '17.16px',
 });

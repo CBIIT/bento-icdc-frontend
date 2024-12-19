@@ -63,7 +63,6 @@ const styles = () => ({
   },
   autocomplete: {
     margin: '0 auto',
-    paddingTop: '57px',
   },
   chipSection: {
     display: 'flex',

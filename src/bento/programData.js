@@ -1,80 +1,80 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 const pageData = {
-  headerTitle: "Programs",
+  headerTitle: 'Programs',
   headerIcon:
-    "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-Programs.svg",
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-Programs.svg',
   externalIcon:
-    "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/program_ExternalLink.svg",
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/program_ExternalLink.svg',
   COP: {
-    prgramName: "COP",
+    prgramName: 'COP',
     primaryImage:
-      "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png",
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png',
     primaryImageAlt:
-      "The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.",
+      'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
     secondaryImage:
-      "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.cop.jpg",
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.cop.jpg',
   },
   CMCP: {
-    prgramName: "CMCP",
+    prgramName: 'CMCP',
     primaryImage:
-      "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png",
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png',
     primaryImageAlt:
-      "The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.",
+      'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
     secondaryImage:
-      "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg",
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg',
   },
   PCCR: {
-    prgramName: "PCCR",
+    prgramName: 'PCCR',
     primaryImage:
-      "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png",
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png',
     primaryImageAlt:
-      "The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.",
+      'The Center for Cancer Research (CCR) is the largest division of the NCI intramural research program and comprises nearly 250 basic and clinical research groups located on two campuses outside of Washington, DC.',
     secondaryImage:
-      "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg",
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg',
   },
 };
 
 const pageDataV2 = {
-  headerTitle: "Programs",
+  headerTitle: 'Programs',
   headerIcon:
-    "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/program-listing-header.svg",
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/program-listing-header.svg',
   externalIcon:
-    "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/programs-listing-external-link-icon.svg",
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/programs-listing-external-link-icon.svg',
   programs: [
     {
-      prgramName: "COP",
+      prgramName: 'COP',
       primaryImage:
-        "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png",
-      primaryImageAlt: "COP-primary-image",
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png',
+      primaryImageAlt: 'COP-primary-image',
       secondaryImage:
-        "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.cop.jpg",
-      video: "https://www.youtube.com/watch?v=tU5N5jCZxcY",
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.cop.jpg',
+      video: 'https://www.youtube.com/watch?v=tU5N5jCZxcY',
     },
     {
-      prgramName: "PRECINCT",
-      primaryImageAlt: "PRECINT-primary-image",
+      prgramName: 'PRECINCT',
+      primaryImageAlt: 'PRECINT-primary-image',
       primaryImage:
-        "https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/png/precint_program_listing.png",
-      video: "https://www.youtube.com/watch?v=Gpy3EWeYy3Y",
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/icdc_3790/icdc/images/png/precint_program_listing.png',
+      video: 'https://www.youtube.com/watch?v=Gpy3EWeYy3Y',
     },
     {
-      prgramName: "CMCP",
+      prgramName: 'CMCP',
       primaryImage:
-        "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png",
-      primaryImageAlt: "CMCP-primary-image",
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png',
+      primaryImageAlt: 'CMCP-primary-image',
       secondaryImage:
-        "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg",
-      video: "https://www.youtube.com/watch?v=sHUvbPM8H7A",
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg',
+      video: 'https://www.youtube.com/watch?v=sHUvbPM8H7A',
     },
     {
-      prgramName: "PCCR",
+      prgramName: 'PCCR',
       primaryImage:
-        "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png",
-      primaryImageAlt: "PCCR-primary-image",
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png',
+      primaryImageAlt: 'PCCR-primary-image',
       secondaryImage:
-        "https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg",
-      video: "https://www.youtube.com/watch?v=oVs7kXSzv3U",
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg',
+      video: 'https://www.youtube.com/watch?v=oVs7kXSzv3U',
     },
   ],
 };
