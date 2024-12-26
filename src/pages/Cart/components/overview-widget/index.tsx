@@ -13,7 +13,7 @@ import Studies from '../../assets/studies.svg';
 import Cases from '../../assets/cases.svg';
 import { Dialog, DialogContent, DialogTitle, Tab } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { upperCase } from 'lodash';
+import { startCase, upperCase } from 'lodash';
 
 export const modalWidth = '1000px';
 
@@ -80,6 +80,7 @@ export const StyledTabPanel = styled(TabPanel)({
 
 export const Container = styled.div({
   width: '100%',
+  padding: '24px',
 });
 
 export const Wrapper = styled.div({
@@ -278,6 +279,7 @@ export const OverviewWidget = () => {
                     chartData={
                       mockData.charts[item as keyof MockData['charts']]
                     }
+                    yAxisLabel={startCase(item)}
                   />
                 </StyledTabPanel>
               ))}

@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   TooltipPayload,
 } from 'recharts';
@@ -89,15 +88,17 @@ export const palette = [
 
 interface ChartProps {
   chartData: ChartData[];
+  yAxisLabel: string;
 }
 
-export const Chart: React.FC<ChartProps> = ({ chartData }) => {
+export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
 
-  const tickFormatter = (value: string) => {
-    const limit = 10; // put your maximum character
-    if (value.length < limit) return value;
-    return `${value.substring(0, limit)}...`;
+  const tickFormatter = (_value: string) => {
+    // const limit = 10; // put your maximum character
+    // if (value.length < limit) return value;
+    // return `${value.substring(0, limit)}...`;
+    return '';
   };
 
   const CustomLegend = ({
@@ -183,16 +184,39 @@ export const Chart: React.FC<ChartProps> = ({ chartData }) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis type="number" /> {/* Numerical data for horizontal axis */}
+          <XAxis
+            type="number"
+            label={{
+              value: 'File Count',
+              offset: -5,
+              position: 'insideBottom',
+              style: {
+                fontFamily: 'Inter',
+                fontWeight: '500',
+                fontSize: '13px',
+                color: '#444444',
+              },
+            }}
+          />
           <YAxis
             tickFormatter={tickFormatter}
             type="category"
             dataKey="label"
             interval={0}
-          />{' '}
-          {/* Categorical data for vertical axis */}
+            label={{
+              value: yAxisLabel,
+              angle: -90,
+              position: 'inside',
+              offset: 5,
+              style: {
+                fontFamily: 'Inter',
+                fontWeight: '500',
+                color: '#444444',
+                fontSize: '13px',
+              },
+            }}
+          />
           <Tooltip content={<CustomTooltip />} />
-          <Legend />
           <Bar dataKey="value" fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>
