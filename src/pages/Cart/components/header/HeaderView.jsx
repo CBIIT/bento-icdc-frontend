@@ -8,6 +8,7 @@ import ReadMoreSVG from '../readMore';
 import env from '../../../../utils/env';
 import DropDownView from '../dropdown/DropDownView';
 import * as Styled from './Header.styled';
+import { OverviewWidget } from '../overview-widget';
 
 const HeaderView = ({ filesId }) => {
   const [displayReadMe, setDisplayReadMe] = useState(false);
@@ -55,6 +56,10 @@ const HeaderView = ({ filesId }) => {
           </Styled.ReadMeButton>
         </Styled.ReadMeBtnDiv>
       </Styled.CartHeader>
+
+      <Styled.OverviewWidgetWrapper>
+        <OverviewWidget />
+      </Styled.OverviewWidgetWrapper>
 
       <Styled.SelectFilesActionContainer container>
         <FormControl>

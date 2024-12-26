@@ -1,0 +1,202 @@
+import React, { useState } from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  TooltipPayload,
+} from 'recharts';
+import styled from '@emotion/styled';
+import { ChartData } from './data';
+
+export const CustomTooltipWrapper = styled.div({
+  backgroundColor: '#fff',
+  padding: '10px',
+  border: '1px solid #ccc',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  display: 'flex',
+  gap: '4px',
+  '& .label-text': {
+    fontFamily: 'Inter',
+    fontWeight: 400,
+    fontSize: '13px',
+    color: '#444444',
+  },
+  '& .value-text': {
+    fontFamily: 'Inter',
+    fontWeight: 700,
+    fontSize: '13px',
+    color: '#444444',
+  },
+});
+
+export const LegendWrapper = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  '& .icon-and-text-wrapper': {
+    display: 'flex',
+    gap: '16px',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    overflow: 'hidden', // Prevent overflow
+    textOverflow: 'ellipsis', // Add ellipsis for long text
+    whiteSpace: 'nowrap', // Prevent wrapping
+    '& .icon-and-label': {
+      display: 'flex',
+      gap: '8px',
+      '& .label-text': {
+        fontFamily: 'Inter',
+        fontWeight: '400',
+        fontSize: '14px',
+        color: '#444444',
+      },
+    },
+    '& .value-text': {
+      fontFamily: 'Inter',
+      fontWeight: '700',
+      fontSize: '14px',
+      color: '#444444',
+    },
+  },
+});
+
+export const palette = [
+  '#294b83',
+  '#9f2b23',
+  '#a8c4df',
+  '#cc703e',
+  '#dfc798',
+  '#c2c1c0',
+  '#517d98',
+  '#0b3556',
+  '#1d79a8',
+  '#ff7f15',
+  '#39c0f0',
+  '#8e9cef',
+  '#667b86',
+  '#4bc41e',
+  '#ca8312',
+  '#00b6d4',
+  '#00785a',
+  '#1c75bc',
+  '#b532a9',
+  '#02ad0f',
+];
+
+interface ChartProps {
+  chartData: ChartData[];
+}
+
+export const Chart: React.FC<ChartProps> = ({ chartData }) => {
+  const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
+
+  const tickFormatter = (value: string) => {
+    const limit = 10; // put your maximum character
+    if (value.length < limit) return value;
+    return `${value.substring(0, limit)}...`;
+  };
+
+  const CustomLegend = ({
+    data,
+    colors,
+  }: {
+    data: ChartData[];
+    colors: string[];
+  }) => {
+    return (
+      <LegendWrapper>
+        {data.map((entry, index) => (
+          <div
+            key={`item-${index}`}
+            className="icon-and-text-wrapper"
+            style={{
+              backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'transparent',
+              fontWeight: hoveredGroup === entry.label ? 'bold' : 'normal',
+              height: '20px',
+              boxShadow:
+                hoveredGroup === entry.label
+                  ? '0px 0px 10px rgba(0,0,0,0.5)'
+                  : 'none',
+            }}
+          >
+            <div className="icon-and-label">
+              <div
+                style={{
+                  width: '20px',
+                  background: colors[index % colors.length],
+                }}
+              />
+              <div className="label-text">{entry.label}</div>
+            </div>
+            <div>
+              <div className="value-text">{entry.value}</div>
+            </div>
+          </div>
+        ))}
+      </LegendWrapper>
+    );
+  };
+
+  const CustomTooltip = ({
+    active,
+    payload,
+  }: {
+    active?: boolean;
+    payload?: TooltipPayload[];
+  }) => {
+    if (active && payload && payload.length) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      const data = payload[0].payload as ChartData;
+      setHoveredGroup(data.label);
+
+      return (
+        <CustomTooltipWrapper>
+          <p className="label-text">{`${data.label},`}</p>
+          <p className="value-text">{`${data.value}`}</p>
+        </CustomTooltipWrapper>
+      );
+    }
+
+    setHoveredGroup(null);
+    return null;
+  };
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+      }}
+    >
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart
+          layout="vertical" // Make the bars horizontal
+          data={chartData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis type="number" /> {/* Numerical data for horizontal axis */}
+          <YAxis
+            tickFormatter={tickFormatter}
+            type="category"
+            dataKey="label"
+            interval={0}
+          />{' '}
+          {/* Categorical data for vertical axis */}
+          <Tooltip content={<CustomTooltip />} />
+          <Legend />
+          <Bar dataKey="value" fill="#8884d8" />
+        </BarChart>
+      </ResponsiveContainer>
+      <CustomLegend data={chartData} colors={palette} />
+    </div>
+  );
+};
