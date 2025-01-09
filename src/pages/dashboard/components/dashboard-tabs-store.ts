@@ -2,6 +2,7 @@ import { createStore, createHook, Action } from 'react-sweet-state';
 
 type State = {
   currentTab: number;
+  searchText: string;
 };
 
 const actions = {
@@ -13,10 +14,19 @@ const actions = {
         currentTab: value,
       });
     },
+  setSearchText:
+    (value: string): Action<State> =>
+    ({ setState }) => {
+      // mutate state synchronously
+      setState({
+        searchText: value,
+      });
+    },
 };
 
 const initialState: State = {
   currentTab: 0,
+  searchText: '',
 };
 
 type Actions = typeof actions;

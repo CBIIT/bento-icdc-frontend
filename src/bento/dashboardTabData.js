@@ -668,6 +668,7 @@ export const DASHBOARD_QUERY = gql`
     $biobank: [String]
     $study_participation: [String]
     $case_ids: [String] = []
+    $filter_text: [String] = [""]
   ) {
     searchCases(
       program: $program
@@ -689,6 +690,7 @@ export const DASHBOARD_QUERY = gql`
       biobank: $biobank
       study_participation: $study_participation
       case_ids: $case_ids
+      filter_text: $filter_text
     ) {
       numberOfStudies
       numberOfCases
@@ -889,6 +891,7 @@ export const FILTER_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
+    $filter_text: [String] = [""]
   ) {
     searchCases(
       program: $program
@@ -909,6 +912,7 @@ export const FILTER_QUERY = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
+      filter_text: $filter_text
     ) {
       numberOfStudies
       numberOfCases
@@ -1046,6 +1050,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
+    $filter_text: String
     $order_by: String = "file_name"
     $sort_direction: String = "ASC"
     $first: Int = 10
@@ -1072,6 +1077,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
+      filter_text: $filter_text
       order_by: $order_by
       sort_direction: $sort_direction
       first: $first
@@ -1246,6 +1252,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
+    $filter_text: String
     $order_by: String = "sample_ids"
     $sort_direction: String = "ASC"
     $first: Int = 10
@@ -1271,6 +1278,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
+      filter_text: $filter_text
       order_by: $order_by
       sort_direction: $sort_direction
       first: $first
@@ -1430,9 +1438,10 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
+    $filter_text: String
     $order_by: String = "case_ids"
     $sort_direction: String = "ASC"
-    $first: Int = 10
+    $first: Int = 15
     $offset: Int = 0
   ) {
     caseOverview(
@@ -1454,6 +1463,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
+      filter_text: $filter_text
       order_by: $order_by
       sort_direction: $sort_direction
       first: $first
@@ -1707,6 +1717,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
+    $search_query: String = "test_Case"
     $order_by: String = "file_name"
     $sort_direction: String = "ASC"
     $first: Int = 10
@@ -1734,6 +1745,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
+      search_query: $search_query
       order_by: $order_by
       sort_direction: $sort_direction
       first: $first
@@ -1766,6 +1778,7 @@ export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
+    $search_query: String = "test"
     $order_by: String = "file_name"
     $sort_direction: String = "ASC"
     $first: Int = 10
@@ -1793,6 +1806,7 @@ export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
+      search_query: $search_query
       order_by: $order_by
       sort_direction: $sort_direction
       first: $first
@@ -2150,6 +2164,7 @@ export const tableContainers = [
       file_level: ['case'],
     },
     extendedViewConfig: {
+      searchInput: true,
       pagination: true,
       download: {
         customDownload: true,
@@ -2317,6 +2332,7 @@ export const tableContainers = [
       file_level: ['study'],
     },
     extendedViewConfig: {
+      searchInput: true,
       pagination: true,
       download: {
         customDownload: true,
