@@ -42,7 +42,7 @@
     "clsx": "^1.2.1",
     "data-model-navigator": "^1.1.36",
     "graphiql": "^3.7.2",
-    "graphql": "^16.8.1",
+    "graphql": "^16.10.0",
     "graphql-request": "^7.1.2",
     "graphql-ws": "^5.16.0",
     "json-2-csv": "^5.5.7",
