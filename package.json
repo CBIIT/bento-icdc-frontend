@@ -68,7 +68,7 @@
     "@graphql-codegen/client-preset": "^4.5.1",
     "@graphql-codegen/typescript": "^4.1.2",
     "@graphql-codegen/typescript-operations": "^4.3.1",
-    "@types/lodash": "^4.17.13",
+    "@types/lodash": "^4.17.14",
     "@types/react-router-dom": "^5.3.3",
     "@types/tinycolor2": "^1.4.6",
     "ajv": "^7.2.4",
