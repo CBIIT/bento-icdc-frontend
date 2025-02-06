@@ -8,8 +8,8 @@ import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';
 import { setActiveFilterByPathQuery } from '../../components/sideBarFilter/BentoFilterUtils';
 
 const getDashData = states => {
-  const { filterState, localFindUpload, localFindAutocomplete } = states;
-
+  const { filterState, localFindUpload, localFindAutocomplete, searchText } =
+    states;
   const client = useApolloClient();
   async function getData(activeFilters) {
     const result = await client
@@ -25,6 +25,7 @@ const getDashData = states => {
 
   const activeFilters = {
     ...getFilters(filterState),
+    search_text: searchText || '',
     case_ids: [
       ...(localFindUpload || []).map(obj => obj.case_id),
       ...(localFindAutocomplete || []).map(obj => obj.title),
@@ -39,7 +40,7 @@ const getDashData = states => {
       }
     });
     return () => controller.abort();
-  }, [filterState, localFindUpload, localFindAutocomplete]);
+  }, [filterState, localFindUpload, localFindAutocomplete, searchText]);
 
   return { dashData, activeFilters };
 };
@@ -65,9 +66,22 @@ const DashTemplateController = props => {
     searchCases,
   } = dashData;
 
+  const {
+    caseIds,
+    sampleIds,
+    fileIds: caseFileIds,
+    studyFileIds,
+  } = searchCases;
+
   return (
     <DashboardView
       {...props}
+      searchResultIds={{
+        caseIds,
+        sampleIds,
+        caseFileIds,
+        studyFileIds,
+      }}
       searchCases={searchCases}
       biospecimenSource={biospecimenSource}
       program={program}

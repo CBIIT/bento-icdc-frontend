@@ -29,7 +29,6 @@ const PaginatedTableView = props => {
     customthemeConfig,
     tableReduxActions,
     overriedTableState,
-    overridePaginatedActions,
   } = props;
   // access table state
   const tableContext = useContext(TableContext);
@@ -136,11 +135,7 @@ const PaginatedTableView = props => {
               activeTab={activeTab}
               tblRows={tblRows}
               server={isServer}
-              paginationOptions={
-                overridePaginatedActions
-                  ? overridePaginatedActions(context, config)
-                  : paginationOptions(context, config)
-              }
+              paginationOptions={paginationOptions(context, config)}
             />
           </Grid>
         </Grid>

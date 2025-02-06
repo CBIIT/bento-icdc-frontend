@@ -19,6 +19,7 @@ const Dashboard = ({
   activeFilters,
   localFindAutocomplete,
   searchText,
+  searchResultIds,
 }) => (
   <Styled.DashboardContainer>
     <StatsView data={searchCases} />
@@ -44,6 +45,7 @@ const Dashboard = ({
             dashboardStats={updateStat(searchCases)}
             activeFilters={activeFilters}
             searchText={searchText}
+            searchResultIds={searchResultIds}
           />
         </Styled.WidgetTableContent>
       </Styled.Content>

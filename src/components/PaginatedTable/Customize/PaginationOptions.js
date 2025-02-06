@@ -96,6 +96,8 @@ export const paginationOptions = (context, config) => {
       };
     case 'case':
     case 'samples':
+    case 'studyFiles':
+    case 'caseFiles':
       return {
         customizeSearchQueryChange: query => {
           // dashboard uses global redux to update the searchQuery
