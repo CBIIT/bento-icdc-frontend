@@ -69,6 +69,9 @@ const BarChartV2 = ({
   xAxisLabel,
   yAxisLabel,
   classes,
+  width,
+  height,
+  showLegend = false,
 }) => {
   const [hoveredGroup, setHoveredGroup] = useState(null);
 
@@ -120,8 +123,8 @@ const BarChartV2 = ({
   return (
     <div className={classes.container}>
       <BarChart
-        width={600}
-        height={300}
+        width={width}
+        height={height}
         data={chartData}
         margin={{
           top: 5,
@@ -149,7 +152,7 @@ const BarChartV2 = ({
           }}
         />
         <Tooltip content={<CustomTooltip />} />
-        <Bar dataKey="count">
+        <Bar dataKey="count" barSize={50}>
           {chartData.map((_entry, index) => (
             <Cell
               key={`cell-${index}`}
@@ -158,7 +161,7 @@ const BarChartV2 = ({
           ))}
         </Bar>
       </BarChart>
-      <CustomLegend data={chartData} colors={palette} />
+      {showLegend && <CustomLegend data={chartData} colors={palette} />}
     </div>
   );
 };

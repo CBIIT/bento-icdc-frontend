@@ -205,6 +205,9 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
                         palette={palette}
                         yAxisLabel={item.yAxisLabel}
                         xAxisLabel={item.xAxisLabel}
+                        height={300}
+                        width={600}
+                        showLegend
                       />
                     </StyledTabPanel>
                   );
