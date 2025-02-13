@@ -76,7 +76,6 @@ const PaginatedTableView = props => {
     rowsPerPage,
     page: 0,
   });
-
   /**
    * 1. update active Filter query for table only after
    * dashboard state change

@@ -42,6 +42,12 @@ const DashboardTabsView = ({
       }
     }
   };
+  const getTextFilterRequestParam = ({
+    searchTextRequestKey,
+    searchTextResultKey,
+  }) => ({
+    [searchTextRequestKey]: searchResultIds[searchTextResultKey],
+  });
 
   return (
     <DashboardThemeProvider>
@@ -67,7 +73,7 @@ const DashboardTabsView = ({
                 ...activeFilters,
                 ...tab?.queryParam,
                 ...unifiedQueryParam,
-                case_ids: searchResultIds[tab.searchTextResultKey],
+                ...getTextFilterRequestParam(tab),
               }}
               overriedTableState={dashboardTableInitActions}
             />

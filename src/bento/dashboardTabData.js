@@ -533,6 +533,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
   query getFilesOverview(
     $file_level: [String] = []
     $case_ids: [String] = []
+    $file_uuids: [String] = []
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -559,6 +560,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
     fileOverview(
       file_level: $file_level
       case_ids: $case_ids
+      file_uuids: $file_uuids
       program: $program
       study: $study
       study_type: $study_type
@@ -733,6 +735,7 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
   query getSampleOverview(
     $case_ids: [String] = []
+    $sample_ids: [String] = []
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -758,6 +761,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
   ) {
     sampleOverview(
       case_ids: $case_ids
+      sample_ids: $sample_ids
       program: $program
       study: $study
       study_type: $study_type
@@ -1362,6 +1366,7 @@ export const tableContainers = [
     dataKey: 'case_id',
     defaultSortField: 'case_id',
     defaultSortDirection: 'asc',
+    searchTextRequestKey: 'case_ids',
     searchTextResultKey: 'caseIds',
     extendedViewConfig: {
       searchInput: true,
@@ -1516,6 +1521,7 @@ export const tableContainers = [
     dataKey: 'sample_id',
     defaultSortField: 'sample_id',
     defaultSortDirection: 'asc',
+    searchTextRequestKey: 'sample_ids',
     searchTextResultKey: 'sampleIds',
     extendedViewConfig: {
       searchInput: true,
@@ -1658,6 +1664,7 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
     dataKey: 'file_name',
+    searchTextRequestKey: 'file_uuids',
     searchTextResultKey: 'caseFileIds',
     jbrowse: true,
     queryParam: {
@@ -1829,6 +1836,7 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     count: 'numberOfStudyFiles',
     dataKey: 'file_name',
+    searchTextRequestKey: 'file_uuids',
     searchTextResultKey: 'studyFileIds',
     queryParam: {
       file_level: ['study'],
