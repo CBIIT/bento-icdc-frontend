@@ -52,7 +52,7 @@
     "react-player": "^2.10.0",
     "react-redux": "^9.2.0",
     "react-router": "^5.1.2",
-    "react-router-dom": "^7.1.5",
+    "react-router-dom": "^5.3.4",
     "react-sweet-state": "^2.7.1",
     "react-twitter-embed": "^4.0.4",
     "recompose": "^0.30.0",
