@@ -4,6 +4,7 @@ import {
   BreadcrumbSpan,
   Container,
 } from './BreadcrumbView.styled';
+import { toUpper } from 'lodash';
 
 export interface BreadcrumbData {
   name: string | undefined | null;
@@ -22,7 +23,7 @@ const CustomBreadcrumb: React.FC<CustomBreadcrumbProps> = ({ data }) => {
           if (current.isALink && current.to) {
             acc.push(
               <BreadcrumbNavLink to={current.to}>
-                {current.name}
+                {toUpper(current.name)}
               </BreadcrumbNavLink>
             );
           } else {
