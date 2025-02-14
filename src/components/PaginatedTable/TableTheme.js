@@ -164,7 +164,7 @@ export const extendedView = ({ primaryColor = '#FF9742' }) => ({
       MuiTablePagination: {
         root: {
           paddingRight: '43px',
-          borderTop: `3px solid ${primaryColor}`,
+          // borderTop: `3px solid ${primaryColor}`,
         },
       },
     },
@@ -200,6 +200,7 @@ export const extendedView = ({ primaryColor = '#FF9742' }) => ({
         position: 'relative',
         textAlign: 'right',
         '&.downloadAndColumnView': {
+          borderBottom: `3px solid ${primaryColor}`,
           maxHeight: '2px',
           minHeight: '0px',
           '& button': {
@@ -218,6 +219,7 @@ export const extendedView = ({ primaryColor = '#FF9742' }) => ({
     MuiFormControl: {
       root: {
         '&.filterTextInput': {
+          float: 'left',
           width: '275px',
           marginTop: '10px',
         },
@@ -271,6 +273,9 @@ export const extendedView = ({ primaryColor = '#FF9742' }) => ({
           strokeWidth: '1.1px',
           marginRight: '8px',
           marginTop: '5px',
+        },
+        '&.checkBoxIcon': {
+          color: '#0B3556',
         },
       },
     },

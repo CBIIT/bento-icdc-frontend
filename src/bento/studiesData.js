@@ -183,6 +183,9 @@ export const pageData = {
         columnIndexes: [8, 11],
       },
     ],
+    tableMsg: {
+      noMatch: 'Sorry, no matching records found',
+    },
   },
 };
 

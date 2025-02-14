@@ -17,7 +17,22 @@ const getDashData = states => {
         query: DASHBOARD_QUERY,
         variables: activeFilters,
       })
-      .then(response => response.data);
+      .then(response => {
+        if (response.data) {
+          const {
+            dashboard: searchCases,
+            searchTextResults,
+            biospecimen_source,
+            program,
+          } = response.data;
+          return {
+            searchCases,
+            searchTextResults,
+            biospecimen_source,
+            program,
+          };
+        }
+      });
     return result;
   }
 
@@ -64,6 +79,7 @@ const DashTemplateController = props => {
     biospecimen_source: biospecimenSource,
     program,
     searchCases,
+    searchTextResults,
   } = dashData;
 
   const {
@@ -71,7 +87,7 @@ const DashTemplateController = props => {
     sampleIds,
     fileIds: caseFileIds,
     studyFileIds,
-  } = searchCases;
+  } = searchTextResults;
 
   return (
     <DashboardView
@@ -82,7 +98,7 @@ const DashTemplateController = props => {
         caseFileIds,
         studyFileIds,
       }}
-      searchCases={searchCases}
+      searchCases={{ ...searchCases, ...searchTextResults }}
       biospecimenSource={biospecimenSource}
       program={program}
       activeFilters={activeFilters}

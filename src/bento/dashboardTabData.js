@@ -169,7 +169,7 @@ export const DASHBOARD_QUERY = gql`
     $case_ids: [String] = []
     $search_text: String = ""
   ) {
-    searchCases(
+    dashboard: searchCases(
       program: $program
       study: $study
       study_type: $study_type
@@ -189,7 +189,6 @@ export const DASHBOARD_QUERY = gql`
       biobank: $biobank
       study_participation: $study_participation
       case_ids: $case_ids
-      search_text: $search_text
     ) {
       numberOfStudies
       numberOfCases
@@ -305,12 +304,44 @@ export const DASHBOARD_QUERY = gql`
         }
       }
     }
-    biospecimen_source {
+    searchTextResults: searchCases(
+      program: $program
+      study: $study
+      study_type: $study_type
+      breed: $breed
+      diagnosis: $diagnosis
+      disease_site: $disease_site
+      stage_of_disease: $stage_of_disease
+      response_to_treatment: $response_to_treatment
+      sex: $sex
+      neutered_status: $neutered_status
+      sample_type: $sample_type
+      sample_pathology: $sample_pathology
+      sample_site: $sample_site
+      file_association: $file_association
+      file_type: $file_type
+      file_format: $file_format
+      biobank: $biobank
+      study_participation: $study_participation
+      case_ids: $case_ids
+      search_text: $search_text
+    ) {
+      numberOfCases
+      numberOfSamples
+      numberOfFiles
+      numberOfStudyFiles
+      caseIds
+      sampleIds
+      fileIds
+      studyFileIds
+    }
+
+    biospecimen_source: biospecimen_source {
       biospecimen_repository_acronym
       biospecimen_repository_full_name
     }
 
-    program {
+    program: program {
       program_acronym
       program_name
     }
@@ -1197,6 +1228,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   query getAllFileIdsDashboardTab(
     $file_level: [String] = []
     $case_ids: [String] = []
+    $file_uuids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -1216,7 +1248,6 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $search_query: String = "test_Case"
     $order_by: String = "file_name"
     $sort_direction: String = "ASC"
     $first: Int = 10
@@ -1226,6 +1257,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
       file_level: $file_level
       case_ids: $case_ids
       sample_ids: $sample_ids
+      file_uuids: $file_uuids
       program: $program
       study: $study
       study_type: $study_type
@@ -1244,7 +1276,6 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
-      search_query: $search_query
       order_by: $order_by
       sort_direction: $sort_direction
       first: $first
@@ -1277,7 +1308,6 @@ export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $search_query: String = "test"
     $order_by: String = "file_name"
     $sort_direction: String = "ASC"
     $first: Int = 10
@@ -1305,7 +1335,6 @@ export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
-      search_query: $search_query
       order_by: $order_by
       sort_direction: $sort_direction
       first: $first
