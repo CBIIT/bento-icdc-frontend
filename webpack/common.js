@@ -28,7 +28,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true, // Enable Babel caching
+            cacheDirectory: false, // Enable Babel caching
             presets: [['@babel/preset-env', { targets: 'defaults' }]],
           },
         },

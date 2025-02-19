@@ -309,6 +309,65 @@ export const extendedView = {
       },
     },
   },
+  MuiFormControl: {
+    root: {
+      '&.filterTextInput': {
+        width: '275px',
+        marginTop: '10px',
+      },
+    },
+  },
+  MuiInputBase: {
+    root: {
+      fontFamily: 'Open Sans',
+      fontSize: '13.5px',
+      fontWeight: 400,
+      padding: '0px',
+      fontStyle: '1rem',
+      lineHeight: '16px',
+      texttransform: 'uppercase',
+    },
+    input: {
+      fontSize: '1rem',
+      color: '#25557E',
+    },
+  },
+  MuiOutlinedInput: {
+    root: {
+      border: '#4A8ECB solid 1px',
+      borderRadius: '8px',
+    },
+    notchedOutline: {
+      border: 'none',
+    },
+    inputAdornedEnd: {
+      height: '35px',
+      padding: '0 8px !important',
+    },
+  },
+  MuiInputAdornment: {
+    root: {
+      '&.filterTextSearchButton': {
+        width: '12px',
+      },
+    },
+  },
+  MuiSvgIcon: {
+    root: {
+      cursor: 'pointer',
+      '&.filterTextCrossIcon': {
+        color: '#25557E',
+        stroke: '#4A8ECB',
+      },
+      '&.filterTextSearchIcon': {
+        color: '#25557E',
+        stroke: '#4A8ECB',
+        strokeWidth: '1.1px',
+        marginRight: '8px',
+        marginTop: '5px',
+      },
+    },
+  },
 };
 
 const tblPgn = {
