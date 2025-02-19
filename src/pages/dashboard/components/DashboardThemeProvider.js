@@ -4,6 +4,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const DashboardThemeProvider = ({ children }) => {
   const theme = {
     components: {
+      MuiGrid: {
+        styleOverrides: {
+          root: {
+            borderTop: '5px solid red',
+          },
+        },
+      },
       MuiButton: {
         styleOverrides: {
           root: {

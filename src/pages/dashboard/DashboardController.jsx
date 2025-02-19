@@ -8,8 +8,8 @@ import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';
 import { setActiveFilterByPathQuery } from '../../components/sideBarFilter/BentoFilterUtils';
 
 const getDashData = states => {
-  const { filterState, localFindUpload, localFindAutocomplete } = states;
-
+  const { filterState, localFindUpload, localFindAutocomplete, searchText } =
+    states;
   const client = useApolloClient();
   async function getData(activeFilters) {
     const result = await client
@@ -17,7 +17,22 @@ const getDashData = states => {
         query: DASHBOARD_QUERY,
         variables: activeFilters,
       })
-      .then(response => response.data);
+      .then(response => {
+        if (response.data) {
+          const {
+            dashboard: searchCases,
+            searchTextResults,
+            biospecimen_source,
+            program,
+          } = response.data;
+          return {
+            searchCases,
+            searchTextResults,
+            biospecimen_source,
+            program,
+          };
+        }
+      });
     return result;
   }
 
@@ -25,6 +40,7 @@ const getDashData = states => {
 
   const activeFilters = {
     ...getFilters(filterState),
+    search_text: searchText || '',
     case_ids: [
       ...(localFindUpload || []).map(obj => obj.case_id),
       ...(localFindAutocomplete || []).map(obj => obj.title),
@@ -39,7 +55,7 @@ const getDashData = states => {
       }
     });
     return () => controller.abort();
-  }, [filterState, localFindUpload, localFindAutocomplete]);
+  }, [filterState, localFindUpload, localFindAutocomplete, searchText]);
 
   return { dashData, activeFilters };
 };
@@ -63,12 +79,26 @@ const DashTemplateController = props => {
     biospecimen_source: biospecimenSource,
     program,
     searchCases,
+    searchTextResults,
   } = dashData;
+
+  const {
+    caseIds,
+    sampleIds,
+    fileIds: caseFileIds,
+    studyFileIds,
+  } = searchTextResults;
 
   return (
     <DashboardView
       {...props}
-      searchCases={searchCases}
+      searchResultIds={{
+        caseIds,
+        sampleIds,
+        caseFileIds,
+        studyFileIds,
+      }}
+      searchCases={{ ...searchCases, ...searchTextResults }}
       biospecimenSource={biospecimenSource}
       program={program}
       activeFilters={activeFilters}
@@ -80,6 +110,7 @@ const mapStateToProps = state => ({
   filterState: state.statusReducer.filterState,
   localFindUpload: state.localFind.upload,
   localFindAutocomplete: state.localFind.autocomplete,
+  searchText: state.dashboardReducer.searchQuery,
 });
 
 export default connect(mapStateToProps, null)(DashTemplateController);

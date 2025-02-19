@@ -1,6 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
-import { TableContextProvider } from '../../../bento-core';
+import {
+  customPaginationAction,
+  TableContextProvider,
+} from '../../../bento-core';
 import TabsView from '../../../components/Tabs/TabsView';
 import {
   tableContainers,
@@ -16,11 +19,37 @@ const DashboardTabsView = ({
   dashboardStats,
   activeFilters,
   unifiedQueryParam = {},
+  searchResultIds,
+  searchText,
 }) => {
   const [state, actions] = useDashboardTabs();
   const handleTabChange = (_event, value) => {
     actions.changeCurrentTab(value);
   };
+
+  // page specific state initialization
+  // override any table state at page label
+  // set input serch for all the tables
+  const dashboardTableInitActions = context => {
+    if (searchText !== undefined) {
+      const { dispatch, searchQuery: tableSearch } = context;
+      if (dispatch && tableSearch != searchText) {
+        // override the search query foreach of the tables
+        dispatch(
+          customPaginationAction({
+            searchQuery: searchText,
+          })
+        );
+      }
+    }
+  };
+
+  const getTextFilterRequestParam = ({
+    searchTextRequestKey,
+    searchTextResultKey,
+  }) => ({
+    [searchTextRequestKey]: searchResultIds[searchTextResultKey],
+  });
 
   return (
     <DashboardThemeProvider>
@@ -46,6 +75,7 @@ const DashboardTabsView = ({
                 ...activeFilters,
                 ...tab?.queryParam,
                 ...unifiedQueryParam,
+                ...getTextFilterRequestParam(tab),
               }}
             >
               <PaginatedTableView
@@ -60,8 +90,9 @@ const DashboardTabsView = ({
                 activeFilters={{
                   ...activeFilters,
                   ...tab?.queryParam,
-                  ...unifiedQueryParam,
+                  ...getTextFilterRequestParam(tab),
                 }}
+                overriedTableState={dashboardTableInitActions}
               />
             </TableLayout>
           </div>
