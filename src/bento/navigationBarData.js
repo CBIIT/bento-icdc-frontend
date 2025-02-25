@@ -264,4 +264,7 @@ export const navBarCartData = {
   cartIconAlt: 'cart_logo',
 };
 
-export const navBarExclusions = ['#/jBrowse/singleFileView'];
+export const navBarExclusions = [
+  '#/jBrowse/singleFileView',
+  '#/jBrowse/multiFileView',
+];
