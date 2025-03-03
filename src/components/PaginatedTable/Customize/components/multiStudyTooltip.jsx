@@ -1,5 +1,5 @@
-import React from "react";
-import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import React from 'react';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import {
   Typography,
   withStyles,
@@ -7,90 +7,102 @@ import {
   Box,
   List,
   ListItem,
-} from "@material-ui/core";
-import { ToolTip as Tooltip } from "../../../../bento-core";
-import { multiStudyData } from "../../../../bento/dashboardTabData";
+} from '@material-ui/core';
+import { ToolTip as Tooltip } from '../../../../bento-core';
+import { multiStudyData } from '../../../../bento/dashboardTabData';
 
 const theme = {
   overrides: {
     MuiLink: {
       root: {
-        color: "#DC762F",
-        fontSize: "14px",
-        fontFmily: "Open Sans",
-        fontWeight: "bold",
-        lineSpacing: "19pt",
-        textDecoration: "underline",
+        fontSize: '14px',
+        fontFmily: 'Open Sans',
+        fontWeight: 'bold',
+        lineSpacing: '19pt',
+        textDecoration: 'underline',
+        color: '#B55E08',
+        cursor: 'pointer',
+        '&:hover': {
+          color: '#B85300',
+        },
       },
     },
     MuiTooltip: {
       toottip: {
-        borderRadius: "8%",
-        padding: "auto",
-        maxWidth: "250px",
-        "&#customTooltip": {
-          borderRadius: "8%",
+        borderRadius: '8%',
+        padding: 'auto',
+        maxWidth: '250px',
+        '&#customTooltip': {
+          borderRadius: '8%',
         },
       },
     },
     MuiTypography: {
       root: {
-        "&#descripText": {
-          fontWeight: "600",
-          fontSize: "14px",
-          letterSpacing: "0.05px",
-          lineHeight: "18px",
-          paddingBottom: "5px",
+        '&#descripText': {
+          fontWeight: '600',
+          fontSize: '14px',
+          letterSpacing: '0.05px',
+          lineHeight: '18px',
+          paddingBottom: '5px',
         },
-        "&#viewAllCases": {
-          color: "#DC762F",
-          fontSize: "14px",
-          textDecoration: "underline",
-          "&:hover": {
-            textDecoration: "underline",
+        '&#viewAllCases': {
+          color: '#B55E08',
+          cursor: 'pointer',
+          fontSize: '14px',
+          textDecoration: 'underline',
+          '&:hover': {
+            textDecoration: 'underline',
+            color: '#B85300',
           },
         },
       },
       alignCenter: {
-        fontSize: "14px",
+        fontSize: '14px',
       },
     },
     MuiList: {
       root: {
-        listStyleType: "none",
-        padding: "0px",
+        listStyleType: 'none',
+        padding: '0px',
       },
       padding: {
-        paddingBottom: "0px",
+        paddingBottom: '0px',
       },
     },
     MuiListItem: {
       root: {
-        padding: "0px",
+        padding: '0px',
       },
       gutters: {
-        fontSize: "14px",
-        lineHeight: "18px",
-        paddingTop: "1px",
-        paddingBottom: "1px",
-        lineSpacing: "19pt",
-        paddingLeft: "0px",
-        paddingRight: "0px",
-        justifyContent: "center",
-        textDecoration: "underline",
-        "&:hover": {
-          textDecoration: "underline",
+        fontSize: '14px',
+        lineHeight: '18px',
+        paddingTop: '1px',
+        paddingBottom: '1px',
+        lineSpacing: '19pt',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        justifyContent: 'center',
+        textDecoration: 'underline',
+        '&:hover': {
+          textDecoration: 'underline',
         },
-        "& .caseLink": {
-          fontSize: "14px",
-          color: "#DC762F",
+        '& .caseLink': {
+          fontSize: '14px',
+          color: '#B55E08',
+          fontFmily: 'Open Sans',
+          textDecoration: 'underline',
+          cursor: 'pointer',
+          '&:hover': {
+            color: '#B85300',
+          },
         },
       },
     },
     cartCounter: {
-      marginTop: "-5px",
-      display: "block",
-      float: "right",
+      marginTop: '-5px',
+      display: 'block',
+      float: 'right',
     },
   },
 };
@@ -109,7 +121,7 @@ const MultiStudyToolTip = ({ tableMeta, value }) => {
         <Typography align="center" color="inherit" id="descripText">
           {multiStudyData.toolTipText}
         </Typography>
-        <Box component="div" style={{ marginTop: "-10px" }}>
+        <Box component="div" style={{ marginTop: '-10px' }}>
           <List>
             {tableMeta.map((elem, elemIdx) => (
               <ListItem key={elemIdx}>
@@ -135,7 +147,7 @@ const MultiStudyToolTip = ({ tableMeta, value }) => {
 
   return (
     <MuiThemeProvider theme={createTheme(theme)}>
-      <Box style={{ marginLeft: "5px" }}>
+      <Box style={{ marginLeft: '5px' }}>
         <Tooltip
           title={renderMultiStudyTooltipText()}
           renderComponent={renderMultiStudyTooltipText()}
@@ -150,7 +162,7 @@ const MultiStudyToolTip = ({ tableMeta, value }) => {
             <img
               src={multiStudyData.icon}
               alt={multiStudyData.alt}
-              style={{ height: "2em" }}
+              style={{ height: '2em' }}
             />
           </Box>
         </Tooltip>

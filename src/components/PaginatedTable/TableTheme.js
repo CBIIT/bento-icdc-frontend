@@ -112,9 +112,14 @@ const tblBody = {
       color: '#004C73',
       borderBottom: 'none',
       '& a': {
-        color: '#B85300',
+        color: '#B55E08',
         cursor: 'pointer',
+        fontFamily: 'Open Sans',
+        fontWeight: '600',
         textDecoration: 'underline',
+        '&:hover': {
+          color: '#B85300',
+        },
         '& p': {
           fontFamily: 'Open Sans',
           fontWeight: '700',
