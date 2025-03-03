@@ -313,10 +313,7 @@ const BentoFacetFilter = ({
               </div>
 
               {hasSelections ? (
-                <IconButton
-                  onClick={clearFacetSectionValues}
-                  aria-label="refresh-icon"
-                >
+                <IconButton onClick={clearFacetSectionValues}>
                   <RefreshIcon />
                 </IconButton>
               ) : null}

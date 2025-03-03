@@ -90,507 +90,6 @@ export const fileViewer = {
   toolTipText: 'View in JBrowse',
 };
 
-// --------------- Tabs Table configuration --------------
-export const tabContainers = [
-  {
-    name: 'Cases',
-    dataField: 'dataCase',
-    api: 'GET_CASES_OVERVIEW_QUERY',
-    paginationAPIField: 'caseOverview',
-    count: 'numberOfCases',
-    dataKey: 'case_id',
-    defaultSortField: 'case_id',
-    defaultSortDirection: 'asc',
-    buttonText: 'Add Associated Files',
-    displayViewJBowseBtn: true,
-    disableViewJBowseBtn: true,
-    addAllButtonText: 'Add Associated Files for All',
-    saveButtonDefaultStyle: {
-      borderRadius: '10px',
-      width: '180px',
-      lineHeight: '37px',
-      fontSize: '16px',
-      color: '#fff',
-      backgroundColor: '#ff7f15',
-    },
-    ActiveSaveButtonDefaultStyle: {
-      cursor: 'pointer',
-      opacity: 'unset',
-      border: 'unset',
-    },
-    DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.7',
-      cursor: 'auto',
-    },
-    columns: [
-      {
-        dataField: 'case_id',
-        header: 'Case ID',
-        sort: 'asc',
-        link: '/case/{case_id}',
-        primary: true,
-        display: true,
-        viewColumns: false,
-      },
-      {
-        dataField: 'other_cases',
-        header: 'Matching Cases',
-        display: false,
-      },
-      {
-        dataField: 'study_code',
-        header: 'Study Code',
-        link: '/study/{study_code}',
-        display: true,
-      },
-      {
-        dataField: 'study_type',
-        header: 'Study Type',
-        display: true,
-      },
-      {
-        dataField: 'breed',
-        header: 'Breed',
-        display: true,
-      },
-      {
-        dataField: 'diagnosis',
-        header: 'Diagnosis',
-        display: true,
-      },
-      {
-        dataField: 'stage_of_disease',
-        header: 'Stage Of Disease',
-        display: true,
-      },
-      {
-        dataField: 'age',
-        header: 'Age',
-        display: true,
-      },
-      {
-        dataField: 'sex',
-        header: 'Sex',
-        display: true,
-      },
-      {
-        dataField: 'neutered_status',
-        header: 'Neutered Status',
-        display: true,
-      },
-      {
-        dataField: 'weight',
-        header: 'Weight (kg)',
-        display: true,
-      },
-      {
-        dataField: 'response_to_treatment',
-        header: 'Response to Treatment',
-        display: true,
-      },
-      {
-        dataField: 'cohort',
-        header: 'Cohort',
-        display: true,
-      },
-    ],
-    id: 'case_tab',
-    onRowsSelect: 'type3',
-    disableRowSelection: 'type3',
-    tableID: 'case_tab_table',
-    selectableRows: true,
-    tabIndex: '0',
-    tableDownloadCSV: customCasesTabDownloadCSV,
-    viewColumns: true,
-    downloadFileName: 'Bento_Dashboard_cases_download',
-    headerPagination: true,
-    footerPagination: true,
-  },
-  {
-    name: 'Samples',
-    dataField: 'dataSample',
-    api: 'GET_SAMPLES_OVERVIEW_QUERY',
-    count: 'numberOfSamples',
-    displayViewJBowseBtn: true,
-    disableViewJBowseBtn: true,
-    paginationAPIField: 'sampleOverview',
-    dataKey: 'sample_id',
-    defaultSortField: 'sample_id',
-    saveButtonDefaultStyle: {
-      borderRadius: '10px',
-      width: '180px',
-      lineHeight: '37px',
-      fontSize: '16px',
-      color: '#fff',
-      backgroundColor: '#ff7f15',
-    },
-    DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.7',
-      cursor: 'auto',
-    },
-    ActiveSaveButtonDefaultStyle: {
-      cursor: 'pointer',
-      opacity: 'unset',
-      border: 'unset',
-    },
-    columns: [
-      {
-        dataField: 'sample_id',
-        header: 'Sample ID',
-        sort: 'asc',
-        primary: true,
-        display: true,
-      },
-      {
-        dataField: 'case_id',
-        header: 'Case ID',
-        sort: 'asc',
-        link: '/case/{case_id}',
-        display: true,
-        viewColumns: false,
-      },
-      {
-        dataField: 'breed',
-        header: 'Breed',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'diagnosis',
-        header: 'Diagnosis',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'sample_site',
-        header: 'Sample Site',
-        display: true,
-      },
-      {
-        dataField: 'sample_type',
-        header: 'Sample Type',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'sample_pathology',
-        header: 'Pathology/Morphology',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'tumor_grade',
-        header: 'Tumor Grade',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'sample_chronology',
-        header: 'Sample Chronology',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'percentage_tumor',
-        header: 'Percentage Tumor',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'necropsy_sample',
-        header: 'Necropsy Sample',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'sample_preservation',
-        header: 'Sample Preservation',
-        sort: 'asc',
-        display: true,
-      },
-    ],
-    id: 'sample_tab',
-    onRowsSelect: 'type3',
-    disableRowSelection: 'type2',
-    buttonText: 'Add Associated Files',
-    addAllButtonText: 'Add Associated Files for All',
-    tableID: 'sample_tab_table',
-    tableDownloadCSV: customSamplesTabDownloadCSV,
-    viewColumns: true,
-    selectableRows: true,
-    tabIndex: '1',
-    downloadFileName: 'Bento_Dashboard_cases_download',
-    headerPagination: true,
-    footerPagination: true,
-  },
-  {
-    name: 'Files',
-    dataField: 'dataFile',
-    api: 'GET_FILES_OVERVIEW_QUERY',
-    paginationAPIField: 'fileOverview',
-    defaultSortField: 'file_name',
-    defaultSortDirection: 'asc',
-    count: 'numberOfFiles',
-    buttonText: 'Add Selected Files',
-    displayViewJBowseBtn: true,
-    disableViewJBowseBtn: false,
-    addAllButtonText: 'Add All Filtered Files',
-    dataKey: 'file_name',
-    associations: 'other',
-    saveButtonDefaultStyle: {
-      borderRadius: '10px',
-      width: '180px',
-      lineHeight: '37px',
-      fontSize: '16px',
-      color: '#fff',
-      backgroundColor: '#ff7f15',
-    },
-    DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.7',
-      cursor: 'auto',
-    },
-    ActiveSaveButtonDefaultStyle: {
-      cursor: 'pointer',
-      opacity: 'unset',
-      border: 'unset',
-    },
-    columns: [
-      {
-        dataField: 'file_name',
-        header: 'File Name',
-        sort: 'asc',
-        primary: true,
-        display: true,
-      },
-      {
-        dataField: 'access_file',
-        header: 'Access',
-        sort: 'asc',
-        display: true,
-        downloadDocument: true,
-        documentDownloadProps: {
-          maxFileSize: 12000000,
-          toolTipTextFileDownload: 'Download a copy of this file',
-          toolTipTextFilePreview:
-            'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
-          fileSizeColumn: 'file_size',
-          fileFormatColumn: 'file_format',
-          fileLocationColumn: 'file_uuid',
-          caseIdColumn: 'file_name',
-          iconFilePreview:
-            'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-          iconFileDownload:
-            'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-          iconFileViewer:
-            'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
-        },
-      },
-      {
-        dataField: 'file_format',
-        header: 'Format',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'file_type',
-        header: 'File Type',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'file_size',
-        header: 'Size',
-        sort: 'asc',
-        display: true,
-        formatBytes: true,
-      },
-      {
-        dataField: 'association',
-        header: 'Association',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'file_description',
-        header: 'Description',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'sample_id',
-        header: 'Sample ID',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'case_id',
-        header: 'Case ID',
-        sort: 'asc',
-        link: '/case/{case_id}',
-        display: true,
-        viewColumns: false,
-      },
-      {
-        dataField: 'breed',
-        header: 'Breed',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'diagnosis',
-        header: 'Diagnosis',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'file_uuid',
-        header: 'File uuid',
-        sort: 'asc',
-        primary: true,
-        display: false,
-      },
-      {
-        dataField: 'study_code',
-        header: 'Study Code',
-        sort: 'asc',
-        link: '/study/{study_code}',
-        display: true,
-      },
-    ],
-    id: 'file_tab',
-    onRowsSelect: 'type2',
-    disableRowSelection: 'type3',
-    tableID: 'file_tab_table',
-    selectableRows: true,
-    tableDownloadCSV: customFilesTabDownloadCSV,
-    viewColumns: true,
-    tabIndex: '2',
-    downloadFileName: 'Bento_Dashboard_cases_download',
-    headerPagination: true,
-    footerPagination: true,
-  },
-  {
-    name: 'StudyFiles',
-    dataField: 'dataStudyFile',
-    api: 'GET_FILES_OVERVIEW_QUERY',
-    paginationAPIField: 'fileOverview',
-    defaultSortField: 'file_name',
-    defaultSortDirection: 'asc',
-    count: 'numberOfStudyFiles',
-    buttonText: 'Add Selected Files',
-    addAllButtonText: 'Add All Filtered Files',
-    dataKey: 'file_name',
-    associations: 'study',
-    displayViewJBowseBtn: true,
-    disableViewJBowseBtn: true,
-    saveButtonDefaultStyle: {
-      borderRadius: '10px',
-      width: '180px',
-      lineHeight: '37px',
-      fontSize: '16px',
-      color: '#fff',
-      backgroundColor: '#ff7f15',
-    },
-    DeactiveSaveButtonDefaultStyle: {
-      opacity: '0.7',
-      cursor: 'auto',
-    },
-    ActiveSaveButtonDefaultStyle: {
-      cursor: 'pointer',
-      opacity: 'unset',
-      border: 'unset',
-    },
-    columns: [
-      {
-        dataField: 'file_name',
-        header: 'File Name',
-        sort: 'asc',
-        primary: true,
-        display: true,
-      },
-      {
-        dataField: 'file_uuid',
-        header: 'File uuid',
-        sort: 'asc',
-        primary: true,
-        display: false,
-      },
-      {
-        dataField: 'file_type',
-        header: 'File Type',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'association',
-        header: 'Association',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'file_description',
-        header: 'Description',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'file_format',
-        header: 'Format',
-        sort: 'asc',
-        display: true,
-      },
-      {
-        dataField: 'file_size',
-        header: 'Size',
-        sort: 'asc',
-        display: true,
-        formatBytes: true,
-      },
-      {
-        dataField: 'access_file',
-        header: 'Access',
-        sort: 'asc',
-        display: true,
-        downloadDocument: true,
-        documentDownloadProps: {
-          maxFileSize: 12000000,
-          toolTipTextFileDownload: 'Download a copy of this file',
-          toolTipTextFilePreview:
-            'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
-          fileSizeColumn: 'file_size',
-          fileFormatColumn: 'file_format',
-          fileLocationColumn: 'file_uuid',
-          caseIdColumn: 'file_name',
-          iconFilePreview:
-            'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-          iconFileDownload:
-            'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-          iconFileViewer:
-            'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
-        },
-      },
-      {
-        dataField: 'study_code',
-        header: 'Study Code',
-        sort: 'asc',
-        link: '/study/{study_code}',
-        display: true,
-      },
-    ],
-    id: 'file_tab',
-    onRowsSelect: 'type2',
-    disableRowSelection: 'type3',
-    tableID: 'file_tab_table',
-    selectableRows: true,
-    tableDownloadCSV: customStudyFilesTabDownloadCSV,
-    viewColumns: true,
-    tabIndex: '3',
-    downloadFileName: 'Bento_Dashboard_cases_download',
-    headerPagination: true,
-    footerPagination: true,
-  },
-];
-
 // --------------- Tabs Header Data configuration --------------
 export const tabs = [
   {
@@ -668,8 +167,9 @@ export const DASHBOARD_QUERY = gql`
     $biobank: [String]
     $study_participation: [String]
     $case_ids: [String] = []
+    $search_text: String = ""
   ) {
-    searchCases(
+    dashboard: searchCases(
       program: $program
       study: $study
       study_type: $study_type
@@ -698,6 +198,10 @@ export const DASHBOARD_QUERY = gql`
       numberOfPrograms
       numberOfAliquots
       volumeOfData
+      caseIds
+      sampleIds
+      fileIds
+      studyFileIds
 
       caseCountByDiagnosis {
         group
@@ -800,12 +304,44 @@ export const DASHBOARD_QUERY = gql`
         }
       }
     }
-    biospecimen_source {
+    searchTextResults: searchCases(
+      program: $program
+      study: $study
+      study_type: $study_type
+      breed: $breed
+      diagnosis: $diagnosis
+      disease_site: $disease_site
+      stage_of_disease: $stage_of_disease
+      response_to_treatment: $response_to_treatment
+      sex: $sex
+      neutered_status: $neutered_status
+      sample_type: $sample_type
+      sample_pathology: $sample_pathology
+      sample_site: $sample_site
+      file_association: $file_association
+      file_type: $file_type
+      file_format: $file_format
+      biobank: $biobank
+      study_participation: $study_participation
+      case_ids: $case_ids
+      search_text: $search_text
+    ) {
+      numberOfCases
+      numberOfSamples
+      numberOfFiles
+      numberOfStudyFiles
+      caseIds
+      sampleIds
+      fileIds
+      studyFileIds
+    }
+
+    biospecimen_source: biospecimen_source {
       biospecimen_repository_acronym
       biospecimen_repository_full_name
     }
 
-    program {
+    program: program {
       program_acronym
       program_name
     }
@@ -1028,6 +564,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
   query getFilesOverview(
     $file_level: [String] = []
     $case_ids: [String] = []
+    $file_uuids: [String] = []
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -1054,6 +591,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
     fileOverview(
       file_level: $file_level
       case_ids: $case_ids
+      file_uuids: $file_uuids
       program: $program
       study: $study
       study_type: $study_type
@@ -1228,6 +766,7 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
   query getSampleOverview(
     $case_ids: [String] = []
+    $sample_ids: [String] = []
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -1253,6 +792,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
   ) {
     sampleOverview(
       case_ids: $case_ids
+      sample_ids: $sample_ids
       program: $program
       study: $study
       study_type: $study_type
@@ -1432,7 +972,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
     $study_participation: [String]
     $order_by: String = "case_ids"
     $sort_direction: String = "ASC"
-    $first: Int = 10
+    $first: Int = 15
     $offset: Int = 0
   ) {
     caseOverview(
@@ -1688,6 +1228,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   query getAllFileIdsDashboardTab(
     $file_level: [String] = []
     $case_ids: [String] = []
+    $file_uuids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -1716,6 +1257,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
       file_level: $file_level
       case_ids: $case_ids
       sample_ids: $sample_ids
+      file_uuids: $file_uuids
       program: $program
       study: $study
       study_type: $study_type
@@ -1842,16 +1384,21 @@ export const GET_STUDY_CODE = gql`
 export const tableContainers = [
   {
     name: 'Cases',
+    title: 'case',
     dataField: 'dataCase',
     api: GET_CASES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add Files for All Cases',
     selectedButtonText: 'Add Files for Selected Cases',
     paginationAPIField: 'caseOverview',
     count: 'numberOfCases',
+    tableCount: 'numberOfTextFilteredCases',
     dataKey: 'case_id',
     defaultSortField: 'case_id',
     defaultSortDirection: 'asc',
+    searchTextRequestKey: 'case_ids',
+    searchTextResultKey: 'caseIds',
     extendedViewConfig: {
+      searchInput: true,
       pagination: true,
       download: {
         customDownload: true,
@@ -1993,6 +1540,7 @@ export const tableContainers = [
   },
   {
     name: 'Samples',
+    title: 'samples',
     dataField: 'dataSample',
     api: GET_SAMPLES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add Files for All Samples',
@@ -2002,7 +1550,10 @@ export const tableContainers = [
     dataKey: 'sample_id',
     defaultSortField: 'sample_id',
     defaultSortDirection: 'asc',
+    searchTextRequestKey: 'sample_ids',
+    searchTextResultKey: 'sampleIds',
     extendedViewConfig: {
+      searchInput: true,
       pagination: true,
       download: {
         customDownload: true,
@@ -2132,6 +1683,7 @@ export const tableContainers = [
   },
   {
     name: 'Case Files',
+    title: 'caseFiles',
     dataField: 'dataFile',
     api: GET_FILES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add All Files',
@@ -2141,11 +1693,14 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     count: 'numberOfFiles',
     dataKey: 'file_name',
+    searchTextRequestKey: 'file_uuids',
+    searchTextResultKey: 'caseFileIds',
     jbrowse: true,
     queryParam: {
       file_level: ['case'],
     },
     extendedViewConfig: {
+      searchInput: true,
       pagination: true,
       download: {
         customDownload: true,
@@ -2300,6 +1855,7 @@ export const tableContainers = [
   },
   {
     name: 'Study Files',
+    title: 'studyFiles',
     dataField: 'dataStudyFile',
     api: GET_FILES_OVERVIEW_QUERY,
     selectAllButtonText: 'Add All Files',
@@ -2309,10 +1865,13 @@ export const tableContainers = [
     defaultSortDirection: 'asc',
     count: 'numberOfStudyFiles',
     dataKey: 'file_name',
+    searchTextRequestKey: 'file_uuids',
+    searchTextResultKey: 'studyFileIds',
     queryParam: {
       file_level: ['study'],
     },
     extendedViewConfig: {
+      searchInput: true,
       pagination: true,
       download: {
         customDownload: true,

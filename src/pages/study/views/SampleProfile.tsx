@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import { Tabs } from 'antd';
-import BarChart from '../../../components/BarCharts';
-import {
-  sampleProfile,
-  palette,
-  valueConfiguration,
-  argumentConfiguration,
-} from '../../../bento/studyDetailsData';
+import { sampleProfile, palette } from '../../../bento/studyDetailsData';
 import TabPanel from '../../../components/Tab/TabPanel';
 import { navigatedToDashboard } from '../../../utils/utils';
 import useDashboardTabs from '../../dashboard/components/dashboard-tabs-store';
@@ -27,42 +21,43 @@ import {
   MarginTopTenGrid,
   StyledTabs,
 } from './sample-profile.styled';
+import { BarChartV2 } from '../../../components/BarChartV2';
 
 const { TabPane } = Tabs;
 
-const tooltipContent = ({
-  argument,
-  originalValue,
-}: {
-  argument: string;
-  originalValue: string;
-}) => (
-  <>
-    <div>
-      <span
-        style={{
-          fontFamily: 'Inter',
-          fontWeight: 400,
-          fontSize: '13px',
-          color: '#444444',
-        }}
-      >
-        {argument}
-        {', '}
-      </span>
-      <span
-        style={{
-          fontFamily: 'Inter',
-          fontWeight: 700,
-          fontSize: '13px',
-          color: '#444444',
-        }}
-      >
-        {originalValue}
-      </span>
-    </div>
-  </>
-);
+// const tooltipContent = ({
+//   argument,
+//   originalValue,
+// }: {
+//   argument: string;
+//   originalValue: string;
+// }) => (
+//   <>
+//     <div>
+//       <span
+//         style={{
+//           fontFamily: 'Inter',
+//           fontWeight: 400,
+//           fontSize: '13px',
+//           color: '#444444',
+//         }}
+//       >
+//         {argument}
+//         {', '}
+//       </span>
+//       <span
+//         style={{
+//           fontFamily: 'Inter',
+//           fontWeight: 700,
+//           fontSize: '13px',
+//           color: '#444444',
+//         }}
+//       >
+//         {originalValue}
+//       </span>
+//     </div>
+//   </>
+// );
 
 interface SampleProfileProps {
   data: StudyQuery;
@@ -145,12 +140,13 @@ const SampleProfile: React.FC<SampleProfileProps> = ({ data }) => {
                       await setIsModalOpen(true);
                     }}
                   >
-                    <BarChart
-                      data={data[item.value as keyof StudyQuery]}
+                    <BarChartV2
+                      chartData={data[item.value as keyof StudyQuery]}
                       palette={palette}
-                      tooltipContent={tooltipContent}
-                      argument={argumentConfiguration(item.xAxisLabel)}
-                      value={valueConfiguration}
+                      yAxisLabel={item.yAxisLabel}
+                      xAxisLabel={item.xAxisLabel}
+                      width={300}
+                      height={300}
                     />
                   </div>
                   <SampleProfileModal

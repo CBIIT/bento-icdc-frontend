@@ -1,6 +1,4 @@
 import React from 'react';
-import withStyles from '@mui/styles/withStyles';
-import styles from './DashboardStyle';
 import {
   facetSectionVariables,
   facetsConfig,
@@ -12,20 +10,22 @@ import WidgetView from './widget/WidgetView';
 import QueryBarView from './filterQueryBar/QueryBarView';
 import DashboardTabs from './components/DashboardTabs';
 import { updateStat } from '../../components/Stats/utils';
+import * as Styled from './Dashboard.styled';
 
 const Dashboard = ({
-  classes,
   searchCases,
   program,
   biospecimenSource,
   activeFilters,
   localFindAutocomplete,
+  searchText,
+  searchResultIds,
 }) => (
-  <div className={classes.dashboardContainer}>
+  <Styled.DashboardContainer>
     <StatsView data={searchCases} />
     <div>
-      <div className={classes.content}>
-        <div className={classes.sideBar}>
+      <Styled.Content>
+        <Styled.SideBar>
           <BentoFacetFilter
             tooltipItems={[...program, ...biospecimenSource]}
             searchData={searchCases}
@@ -35,20 +35,22 @@ const Dashboard = ({
             tooltipConfig={tooltipConfig}
             localFindAutocomplete={localFindAutocomplete}
           />
-        </div>
-        <div className={classes.rightContent}>
-          <div className={classes.widgetsContainer}>
-            <QueryBarView data={searchCases} classes={classes} />
+        </Styled.SideBar>
+        <Styled.WidgetTableContent>
+          <div>
+            <QueryBarView data={searchCases} />
             <WidgetView data={searchCases} activeFilters={activeFilters} />
           </div>
           <DashboardTabs
             dashboardStats={updateStat(searchCases)}
             activeFilters={activeFilters}
+            searchText={searchText}
+            searchResultIds={searchResultIds}
           />
-        </div>
-      </div>
+        </Styled.WidgetTableContent>
+      </Styled.Content>
     </div>
-  </div>
+  </Styled.DashboardContainer>
 );
 
-export default withStyles(styles)(Dashboard);
+export default Dashboard;

@@ -156,11 +156,6 @@ const tblBody = {
       },
     },
   },
-  MuiSvgIcon: {
-    root: {
-      color: '#0B3556',
-    },
-  },
 };
 
 export const extendedView = ({ primaryColor = '#FF9742' }) => ({
@@ -169,7 +164,7 @@ export const extendedView = ({ primaryColor = '#FF9742' }) => ({
       MuiTablePagination: {
         root: {
           paddingRight: '43px',
-          borderTop: `3px solid ${primaryColor}`,
+          // borderTop: `3px solid ${primaryColor}`,
         },
       },
     },
@@ -205,6 +200,7 @@ export const extendedView = ({ primaryColor = '#FF9742' }) => ({
         position: 'relative',
         textAlign: 'right',
         '&.downloadAndColumnView': {
+          borderBottom: `3px solid ${primaryColor}`,
           maxHeight: '2px',
           minHeight: '0px',
           '& button': {
@@ -217,6 +213,69 @@ export const extendedView = ({ primaryColor = '#FF9742' }) => ({
               zIndex: '10',
             },
           },
+        },
+      },
+    },
+    MuiFormControl: {
+      root: {
+        '&.filterTextInput': {
+          float: 'left',
+          width: '275px',
+          marginTop: '10px',
+        },
+      },
+    },
+    MuiInputBase: {
+      root: {
+        fontFamily: 'Open Sans',
+        fontSize: '13.5px',
+        fontWeight: 400,
+        padding: '0px',
+        fontStyle: '1rem',
+        lineHeight: '16px',
+        texttransform: 'uppercase',
+      },
+      input: {
+        fontSize: '1rem',
+        color: '#25557E',
+      },
+    },
+    MuiOutlinedInput: {
+      root: {
+        border: '#4A8ECB solid 1px',
+        borderRadius: '8px',
+      },
+      notchedOutline: {
+        border: 'none',
+      },
+      inputAdornedEnd: {
+        height: '35px',
+        padding: '0 8px !important',
+      },
+    },
+    MuiInputAdornment: {
+      root: {
+        '&.filterTextSearchButton': {
+          width: '12px',
+        },
+      },
+    },
+    MuiSvgIcon: {
+      root: {
+        cursor: 'pointer',
+        '&.filterTextCrossIcon': {
+          color: '#25557E',
+          stroke: '#4A8ECB',
+        },
+        '&.filterTextSearchIcon': {
+          color: '#25557E',
+          stroke: '#4A8ECB',
+          strokeWidth: '1.1px',
+          marginRight: '8px',
+          marginTop: '5px',
+        },
+        '&.checkBoxIcon': {
+          color: '#0B3556',
         },
       },
     },
