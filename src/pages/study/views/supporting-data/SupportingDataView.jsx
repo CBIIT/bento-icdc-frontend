@@ -1,25 +1,25 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   withStyles,
   AccordionDetails,
   Grid,
   ThemeProvider,
   createTheme,
-  CircularProgress,
-} from "@material-ui/core";
-import CustomAccordionSummary from "./summary/AccordionSummaryView";
-import styles from "./SupportingDataStyle";
-import { supportDataList, tableLayOut } from "./dataConfig";
-import PaginatedTableView from "../../../../components/PaginatedTable/TableView";
-import { useOrderSupportingDataByRepo } from "./useOrderSupportingData";
-import { customTheme, themeConfig } from "./DataTheme";
-import hyperlinkIcon from "../../../../assets/icons/hyperlink.svg";
-import { ToolTip } from "../../../../bento-core";
-import CustomAccordion from "./accordian/CustomAccordion";
+} from '@material-ui/core';
+import CustomAccordionSummary from './summary/AccordionSummaryView';
+import styles from './SupportingDataStyle';
+import { supportDataList, tableLayOut } from './dataConfig';
+import PaginatedTableView from '../../../../components/PaginatedTable/TableView';
+import { useOrderSupportingDataByRepo } from './useOrderSupportingData';
+import { customTheme, themeConfig } from './DataTheme';
+import hyperlinkIcon from '../../../../assets/icons/hyperlink.svg';
+import { ToolTip } from '../../../../bento-core';
+import CustomAccordion from './accordian/CustomAccordion';
+import { SkeletonLoader } from '../../../../components/Skeleton';
 
 const SupportingData = ({ classes, data, isLoading }) => {
   if (isLoading) {
-    return <CircularProgress />;
+    return <SkeletonLoader />;
   }
   /**
    * Generate Custom Accordian Section Component
@@ -29,7 +29,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
       defaultExpand = false,
       title,
       table,
-      repository = "IDC",
+      repository = 'IDC',
       repositoryUrl,
       styledClasses,
     }) => {
@@ -86,7 +86,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
         </>
       );
     },
-    [data],
+    [data]
   );
 
   return (

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { connect } from 'react-redux';
-import { CircularProgress } from '@mui/material';
 import { getFilters } from '../../bento-core';
 import DashboardView from './DashboardView';
 import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';
 import { setActiveFilterByPathQuery } from '../../components/sideBarFilter/BentoFilterUtils';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 const getDashData = states => {
   const { filterState, localFindUpload, localFindAutocomplete, searchText } =
@@ -71,7 +71,7 @@ const DashTemplateController = props => {
   const { dashData, activeFilters } = getDashData(props);
 
   if (!dashData) {
-    return <CircularProgress />;
+    return <SkeletonLoader />;
   }
 
   // set dashfilter tooltip text

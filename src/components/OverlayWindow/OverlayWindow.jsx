@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Dialog,
   DialogContent,
@@ -13,24 +13,10 @@ import {
   DialogActions,
 } from '@mui/material';
 import FiberManualRecord from '@mui/icons-material/FiberManualRecord';
-// import { useSelector } from 'react-redux';
 import { text } from './OverlayText';
 import DialogThemeProvider from './OverlayThemConfig';
 
-const OverlayWindow = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-    sessionStorage.setItem('overlayLoad', 'true');
-  };
-
-  useEffect(() => {
-    if (!sessionStorage.length) {
-      setOpen(true);
-    }
-  }, [open]);
-
+const OverlayWindow = ({ open, handleClose }) => {
   const content = text.content.map((item, index) => (
     <DialogContentText
       key={`dialog-content-text-${index}`}
