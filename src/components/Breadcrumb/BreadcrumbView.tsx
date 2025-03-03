@@ -5,12 +5,8 @@ import {
   Container,
 } from './BreadcrumbView.styled';
 import { toUpper } from 'lodash';
+import { BreadcrumbData } from '../../pages/caseDetails/caseDetailsView';
 
-export interface BreadcrumbData {
-  name: string | undefined | null;
-  to?: string;
-  isALink: boolean;
-}
 interface CustomBreadcrumbProps {
   data: BreadcrumbData[];
 }

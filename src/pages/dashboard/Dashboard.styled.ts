@@ -1,6 +1,7 @@
 import { styled } from '@material-ui/styles';
 export const DashboardContainer = styled('div')({
   backgroundColor: '#FFFFFF',
+  flex: 1,
 });
 export const Content = styled('div')({
   margin: 'auto',

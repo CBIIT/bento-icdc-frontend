@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { CircularProgress } from '@mui/material';
 import StudyDetailView from './studyDetailView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import Studies from '../studies/studiesController';
@@ -10,6 +9,7 @@ import {
   StudyQueryVariables,
 } from '../../generated-types/graphql';
 import { RouteComponentProps } from 'react-router-dom';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 interface MatchProps extends RouteComponentProps {
   params: {
@@ -48,7 +48,7 @@ const StudyDetailContainer = ({
     }
   }
 
-  if (loading) return <CircularProgress />;
+  if (loading) return <SkeletonLoader variant="withRounded" />;
   if (error || !data) {
     return (
       <Typography

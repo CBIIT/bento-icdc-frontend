@@ -1,11 +1,11 @@
-import React from "react";
-import { withStyles } from "@material-ui/core";
-import styles from "./ClinicalDataStyle";
-import PaginatedTableView from "../../../../components/PaginatedTable/TableView";
-import { table, tableLayOut } from "../../../../bento/studyDetailsData";
-import { themeConfig } from "./DataTheme";
-import DownloadBtn from "./components/downloadBtn";
-import { downloadAndZipJson } from "../../../fileCentricCart/utils";
+import React from 'react';
+import { withStyles } from '@material-ui/core';
+import styles from './ClinicalDataStyle';
+import PaginatedTableView from '../../../../components/PaginatedTable/TableView';
+import { table, tableLayOut } from '../../../../bento/studyDetailsData';
+import { themeConfig } from './DataTheme';
+import DownloadBtn from './components/downloadBtn';
+import { downloadAndZipJson } from '../../../fileCentricCart/utils';
 
 const ClinicalDataView = ({ tblRows, classes, studyCode }) => {
   const downloadAndZipCvsFiles = () => {
@@ -28,7 +28,7 @@ const ClinicalDataView = ({ tblRows, classes, studyCode }) => {
       <div className={classes.topDownloadBtn}>
         <DownloadBtn handleCSVDownload={downloadAndZipCvsFiles} />
       </div>
-      <div>
+      <div className={classes.paginatedTableWrapper}>
         <PaginatedTableView
           isServer={false}
           tblRows={tblRows}
