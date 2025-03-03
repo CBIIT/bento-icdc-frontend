@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import _ from "lodash";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { JBrowseComponent } from "bento-jbrowse";
+import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
+import { SkeletonLoader } from '../../components/Skeleton';
+import { JBrowseComponent } from 'bento-jbrowse';
 import {
   assemblies,
   theme,
@@ -10,14 +10,14 @@ import {
   alignemntLocation,
   variantLocation,
   defaultSession,
-} from "../../bento/JBrowseData";
+} from '../../bento/JBrowseData';
 import {
   setVarientUrl,
   setAlignmentUrl,
   createAlignmentTrack,
   createVarientTrack,
   getDefaultSession,
-} from "./util";
+} from './util';
 
 const JbrowseDetailView = ({
   displayMode,
@@ -40,7 +40,7 @@ const JbrowseDetailView = ({
         const alignmentTrack = createAlignmentTrack(
           alignmentUris,
           alignment1,
-          displayMode,
+          displayMode
         );
         tracks.push(alignmentTrack);
       }
@@ -67,7 +67,7 @@ const JbrowseDetailView = ({
   }, [jbrowseFiles]);
 
   if (trackList && trackList.length === 0) {
-    return <CircularProgress />;
+    return <SkeletonLoader />;
   }
 
   return (

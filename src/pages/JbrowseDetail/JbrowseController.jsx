@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useQuery } from "@apollo/client";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
 import {
   GET_FILES_ID_BY_NAME,
   FILE_TYPE_BAI,
@@ -9,24 +8,25 @@ import {
   FILE_TYPE_VCF,
   FILE_TYPE_VCF_INDEX,
   jBrowseOptions,
-} from "../../bento/JBrowseData";
-import { Typography } from "../../components/Wrappers/Wrappers";
-import Error from "../error/Error";
-import { getAllFilesUri } from "./util";
-import JbrowseDetailView from "./JbrowseDetailView";
+} from '../../bento/JBrowseData';
+import { Typography } from '../../components/Wrappers/Wrappers';
+import Error from '../error/Error';
+import { getAllFilesUri } from './util';
+import JbrowseDetailView from './JbrowseDetailView';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 const JbrowseController = ({ match }) => {
   const { params } = match;
   const [jbrowseFiles, setJbrowseFiles] = useState([]);
-  const allFiles = useSelector((state) =>
+  const allFiles = useSelector(state =>
     state.jbrowseView &&
     state.jbrowseView.jbrowseFiles &&
     state.jbrowseView.jbrowseFiles.filesName
       ? state.jbrowseView.jbrowseFiles.filesName
-      : JSON.parse(localStorage.getItem("jbrowseFiles")),
+      : JSON.parse(localStorage.getItem('jbrowseFiles'))
   );
   if (!allFiles) {
-    return <CircularProgress />;
+    return <SkeletonLoader />;
   }
 
   /**
@@ -36,19 +36,19 @@ const JbrowseController = ({ match }) => {
    * @param {*} selectedFiles
    * @returns
    */
-  const generateIndexFile = (selectedFiles) => {
+  const generateIndexFile = selectedFiles => {
     const files = [];
-    const vcfFiles1 = selectedFiles.filter((item) =>
-      item.includes(FILE_TYPE_VCF),
+    const vcfFiles1 = selectedFiles.filter(item =>
+      item.includes(FILE_TYPE_VCF)
     );
-    const bamFiles1 = selectedFiles.filter((item) =>
-      item.includes(FILE_TYPE_BAM),
+    const bamFiles1 = selectedFiles.filter(item =>
+      item.includes(FILE_TYPE_BAM)
     );
-    vcfFiles1.forEach((fileName) => {
+    vcfFiles1.forEach(fileName => {
       files.push(fileName);
       files.push(`${fileName}.${FILE_TYPE_VCF_INDEX}`);
     });
-    bamFiles1.forEach((fileName) => {
+    bamFiles1.forEach(fileName => {
       files.push(fileName);
       files.push(`${fileName}.${FILE_TYPE_BAI}`);
       files.push(`${fileName}`.replace(`${FILE_TYPE_BAM}`, `${FILE_TYPE_BAI}`));
@@ -63,13 +63,13 @@ const JbrowseController = ({ match }) => {
 
   const formatFiles = (files, selectedFiles) => {
     const formatedFiles = [];
-    selectedFiles.forEach((item) => {
+    selectedFiles.forEach(item => {
       const fileName = `${item}`
-        .replace(`.${FILE_TYPE_VCF}`, "")
-        .replace(`.${FILE_TYPE_BAM}`, "");
-      const filteredFiles = files.filter((c) => c.file_name.includes(fileName));
+        .replace(`.${FILE_TYPE_VCF}`, '')
+        .replace(`.${FILE_TYPE_BAM}`, '');
+      const filteredFiles = files.filter(c => c.file_name.includes(fileName));
       // rename BAM index file - to BAM file
-      const renameIndexFiles = filteredFiles.map((file) => {
+      const renameIndexFiles = filteredFiles.map(file => {
         if (file.file_type === FILE_TYPE_BAI) {
           return {
             ...file,
@@ -98,7 +98,7 @@ const JbrowseController = ({ match }) => {
     }
   }, [data]);
 
-  if (loading || jbrowseFiles.length === 0) return <CircularProgress />;
+  if (loading || jbrowseFiles.length === 0) return <SkeletonLoader />;
   if (data.fileIdsFromFileName && data.fileIdsFromFileName.length === 0) {
     return <Error />;
   }
@@ -107,7 +107,7 @@ const JbrowseController = ({ match }) => {
       <Typography variant="h5" color="error" size="sm">
         {error
           ? `An error has occurred in loading component: ${error}`
-          : "Recieved wrong data"}
+          : 'Recieved wrong data'}
       </Typography>
     );
   }

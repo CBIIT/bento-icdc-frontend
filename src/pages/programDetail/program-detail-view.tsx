@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, CircularProgress } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import { getOptions } from '@bento-core/util';
@@ -29,6 +29,7 @@ import {
   GetStudiesByProgramProgramDetailTwoDocument,
   ProgramQuery,
 } from '../../generated-types/graphql';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 interface ProgramDetailViewProps {
   data: ProgramQuery;
@@ -95,7 +96,7 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
     );
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <SkeletonLoader variant="withRounded" />;
   }
 
   if (isError) {
