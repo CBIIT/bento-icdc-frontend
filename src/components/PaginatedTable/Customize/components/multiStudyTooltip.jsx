@@ -20,10 +20,10 @@ const theme = {
         fontWeight: 'bold',
         lineSpacing: '19pt',
         textDecoration: 'underline',
-        color: '#B55E08',
+        color: '#B85300',
         cursor: 'pointer',
         '&:hover': {
-          color: '#B85300',
+          color: '#9E4700',
         },
       },
     },
@@ -47,13 +47,12 @@ const theme = {
           paddingBottom: '5px',
         },
         '&#viewAllCases': {
-          color: '#B55E08',
+          color: '#B85300',
           cursor: 'pointer',
           fontSize: '14px',
           textDecoration: 'underline',
           '&:hover': {
-            textDecoration: 'underline',
-            color: '#B85300',
+            color: '#9E4700',
           },
         },
       },
@@ -89,12 +88,12 @@ const theme = {
         },
         '& .caseLink': {
           fontSize: '14px',
-          color: '#B55E08',
+          color: '#B85300',
           fontFmily: 'Open Sans',
           textDecoration: 'underline',
           cursor: 'pointer',
           '&:hover': {
-            color: '#B85300',
+            color: '#9E4700',
           },
         },
       },

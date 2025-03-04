@@ -107,7 +107,7 @@ export const customStyles = {
     },
   },
   searchResultDetailText: {
-    color: '#B55E08',
+    color: '#B85300',
     fontWeight: '600',
     lineHeight: '20px',
     fontFamily: 'Roboto',
@@ -115,7 +115,7 @@ export const customStyles = {
     fontFamily: 'Open Sans',
     textDecoration: 'underline',
     '&:hover': {
-      color: '#B85300',
+      color: '#9E4700',
     },
   },
 };
