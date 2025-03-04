@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Container = styled.div({
   display: 'flex',
-  gap: '75px',
+  justifyContent: 'space-between',
 });
 
 export const DescriptionTitle = styled.h3({
@@ -21,8 +21,7 @@ export const Description = styled.p({
 });
 
 export const DescriptionContainer = styled.div({
-  maxWidth: '800px',
-  marginRight: '16px',
+  marginRight: '32px',
 });
 
 export const VideoContainer = styled.div({

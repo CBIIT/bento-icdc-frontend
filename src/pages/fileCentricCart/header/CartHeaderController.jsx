@@ -1,15 +1,6 @@
-import React from "react";
-// import { useQuery } from '@apollo/client';
-// import {
-//   CircularProgress,
-//   Container,
-// } from '@material-ui/core';
-import {
-  // GET_STORE_MANIFEST_DATA_QUERY,
-  myFilesPageData,
-} from "../../../bento/fileCentricCartWorkflowData";
-import CartHeader from "./cartHeader";
-// import { getManifestData } from '../util/TableService';
+import React from 'react';
+import { myFilesPageData } from '../../../bento/fileCentricCartWorkflowData';
+import CartHeader from './cartHeader';
 
 const CartHeaderController = ({ filesId }) => (
   <>

@@ -1,8 +1,8 @@
-import React from "react";
-import { useQuery } from "@apollo/client";
-import { CircularProgress } from "@material-ui/core";
-import GlobalSearchView from "./GlobalSerachView";
-import { STUDIES_PROGRAM } from "../../bento/search";
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import GlobalSearchView from './GlobalSerachView';
+import { STUDIES_PROGRAM } from '../../bento/search';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 const GlobalSearchController = ({ match }) => {
   /**
@@ -11,7 +11,7 @@ const GlobalSearchController = ({ match }) => {
   const { loading, data } = useQuery(STUDIES_PROGRAM);
 
   if (loading || !data) {
-    return <CircularProgress />;
+    return <SkeletonLoader />;
   }
   // get study program
   const study2Program = data.studiesByProgram.reduce((acc, item) => {

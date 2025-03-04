@@ -6,6 +6,8 @@ export const Container = styled.div({
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
+  marginBottom: '8px',
+  whiteSpace: 'nowrap',
 });
 
 export const BreadcrumbNavLink = styled(Link)({

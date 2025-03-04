@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, CircularProgress } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _, { defaultTo } from 'lodash';
@@ -56,6 +56,7 @@ import {
   StudyQuery,
 } from '../../generated-types/graphql';
 import { ClinicalDataNodeCounts } from '../../generated-types/types';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
   return arr.some(
@@ -220,7 +221,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   };
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <SkeletonLoader variant="withRounded" />;
   }
 
   if (isError) {
