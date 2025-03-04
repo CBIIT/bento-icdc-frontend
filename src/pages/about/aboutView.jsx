@@ -28,13 +28,13 @@ const AboutView = ({ classes, data }) => {
             maxWidth: '100%',
           },
           '& a': {
-            color: '#B55E08',
+            color: '#B85300',
             cursor: 'pointer',
             fontFamily: 'Open Sans',
             fontWeight: '600',
             textDecoration: 'underline',
             '&:hover': {
-              color: '#B85300',
+              color: '#9E4700',
             },
           },
         },

@@ -77,13 +77,13 @@ export const ReadMeContentContainer = styled('div')({
     fontFamily: 'Open Sans',
   },
   '& a': {
-    color: '#B55E08',
+    color: '#B85300',
     fontFamily: 'Open Sans',
     fontWeight: '600',
     textDecoration: 'underline',
     cursor: 'pointer',
     '&:hover': {
-      color: '#B85300',
+      color: '#9E4700',
     },
   },
 });
