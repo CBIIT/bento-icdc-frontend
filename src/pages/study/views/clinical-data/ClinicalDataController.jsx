@@ -20,7 +20,7 @@ const ClinicalDataController = ({ studyCode, classes, dataCount }) => {
   const DATA_MODEL = env.REACT_APP_DATA_MODEL;
   const getNodeDescription = async () => {
     const response = await axios.get(DATA_MODEL);
-    const dictionary = yaml.safeLoad(response.data);
+    const dictionary = yaml.load(response.data);
     const { Nodes: allNodes } = dictionary;
     const nodeDescription = Object.keys(allNodes || []).reduce((acc, node) => {
       acc[node] = allNodes[node].Desc;
