@@ -98,6 +98,7 @@ export const LeftContainerSection = styled.div<{ error: boolean }>(props => ({
   fontWeight: '700',
   fontFamily: 'Lato',
   lineHeight: '19px',
+  textAlign: 'center',
 }));
 export const RightContainerSection = styled.div({
   display: 'flex',
@@ -115,6 +116,7 @@ export const LeftPanelSection = styled.div({
     fontSize: '23px',
     fontWeight: '700',
     fontFamily: 'Lato',
+    textAlign: 'center',
     lineHeight: '19px',
   },
   // gap: "16px",
