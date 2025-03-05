@@ -29,7 +29,6 @@ export type Scalars = {
 };
 
 export type AdverseEventNodeData = {
-  __typename?: 'AdverseEventNodeData';
   adverse_event_agent_dose?: Maybe<Scalars['String']['output']>;
   adverse_event_agent_name?: Maybe<Scalars['String']['output']>;
   adverse_event_description?: Maybe<Scalars['String']['output']>;
@@ -53,7 +52,6 @@ export type AdverseEventNodeData = {
 };
 
 export type AgentAdministrationNodeData = {
-  __typename?: 'AgentAdministrationNodeData';
   comment?: Maybe<Scalars['String']['output']>;
   date_of_missed_dose?: Maybe<Scalars['String']['output']>;
   document_number?: Maybe<Scalars['String']['output']>;
@@ -77,19 +75,56 @@ export type AgentAdministrationNodeData = {
 };
 
 export type AgentNodeData = {
-  __typename?: 'AgentNodeData';
   document_number?: Maybe<Scalars['String']['output']>;
   medication?: Maybe<Scalars['String']['output']>;
 };
 
 export type BreedCaseCount = {
-  __typename?: 'BreedCaseCount';
   breed?: Maybe<Scalars['String']['output']>;
   cases?: Maybe<Scalars['Int']['output']>;
 };
 
+export type CartChartData = {
+  fileAssociation?: Maybe<Array<Maybe<CartChartItem>>>;
+  fileFormat?: Maybe<Array<Maybe<CartChartItem>>>;
+  fileType?: Maybe<Array<Maybe<CartChartItem>>>;
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type CartChartDataFileAssociationArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartDataFileFormatArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartDataFileTypeArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartItem = {
+  label?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CartOverviewData = {
+  charts?: Maybe<CartChartData>;
+  studiesInCart?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  totalNumberOfCases?: Maybe<Scalars['Int']['output']>;
+  totalNumberOfFiles?: Maybe<Scalars['Int']['output']>;
+};
+
 export type CaseDetail = {
-  __typename?: 'CaseDetail';
   arm?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
@@ -119,7 +154,6 @@ export type CaseDetail = {
 };
 
 export type CaseOverview = {
-  __typename?: 'CaseOverview';
   age?: Maybe<Scalars['Float']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
   case_id?: Maybe<Scalars['String']['output']>;
@@ -155,7 +189,6 @@ export type CaseOverviewSample_ListArgs = {
 };
 
 export type CaseOverview2 = {
-  __typename?: 'CaseOverview2';
   age?: Maybe<Scalars['Float']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
@@ -185,7 +218,6 @@ export type CaseOverview2 = {
 };
 
 export type CaseOverviewEs = {
-  __typename?: 'CaseOverviewES';
   age?: Maybe<Scalars['Float']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
@@ -216,7 +248,6 @@ export type CaseOverviewEs = {
 };
 
 export type CaseOverviewEs2 = {
-  __typename?: 'CaseOverviewES2';
   age?: Maybe<Scalars['Float']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
@@ -246,7 +277,6 @@ export type CaseOverviewEs2 = {
 };
 
 export type ClinicalDataNodeCounts = {
-  __typename?: 'ClinicalDataNodeCounts';
   adverse_event?: Maybe<Scalars['Int']['output']>;
   agent?: Maybe<Scalars['Int']['output']>;
   agent_administration?: Maybe<Scalars['Int']['output']>;
@@ -264,7 +294,6 @@ export type ClinicalDataNodeCounts = {
 };
 
 export type CycleNodeData = {
-  __typename?: 'CycleNodeData';
   case_id?: Maybe<Scalars['String']['output']>;
   crf_id?: Maybe<Scalars['String']['output']>;
   cycle_number?: Maybe<Scalars['Int']['output']>;
@@ -273,7 +302,6 @@ export type CycleNodeData = {
 };
 
 export type DiseaseExtentNodeData = {
-  __typename?: 'DiseaseExtentNodeData';
   case_id?: Maybe<Scalars['String']['output']>;
   date_of_evaluation?: Maybe<Scalars['String']['output']>;
   evaluation_code?: Maybe<Scalars['String']['output']>;
@@ -290,7 +318,6 @@ export type DiseaseExtentNodeData = {
 };
 
 export type FileDetail = {
-  __typename?: 'FileDetail';
   GUID?: Maybe<Scalars['String']['output']>;
   acl?: Maybe<Scalars['String']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
@@ -336,7 +363,6 @@ export type FileDetail = {
 };
 
 export type FileInList = {
-  __typename?: 'FileInList';
   additional_breed_detail?: Maybe<Scalars['String']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
   association?: Maybe<Scalars['String']['output']>;
@@ -403,7 +429,6 @@ export type FileInList = {
 };
 
 export type FileInfo = {
-  __typename?: 'FileInfo';
   GUID?: Maybe<Scalars['String']['output']>;
   acl?: Maybe<Scalars['String']['output']>;
   md5?: Maybe<Scalars['String']['output']>;
@@ -412,7 +437,6 @@ export type FileInfo = {
 };
 
 export type FileOverview = {
-  __typename?: 'FileOverview';
   arm?: Maybe<Scalars['String']['output']>;
   association?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
@@ -460,7 +484,6 @@ export type FileOverview = {
 };
 
 export type FileOverview2 = {
-  __typename?: 'FileOverview2';
   file_description?: Maybe<Scalars['String']['output']>;
   file_format?: Maybe<Scalars['String']['output']>;
   file_location?: Maybe<Scalars['String']['output']>;
@@ -474,7 +497,6 @@ export type FileOverview2 = {
 };
 
 export type FileOverviewEs = {
-  __typename?: 'FileOverviewES';
   arm?: Maybe<Scalars['String']['output']>;
   association?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
@@ -523,7 +545,6 @@ export type FileOverviewEs = {
 };
 
 export type FilesOfCase = {
-  __typename?: 'FilesOfCase';
   case_id?: Maybe<Scalars['String']['output']>;
   file_description?: Maybe<Scalars['String']['output']>;
   file_format?: Maybe<Scalars['String']['output']>;
@@ -538,7 +559,6 @@ export type FilesOfCase = {
 };
 
 export type FollowUpNodeData = {
-  __typename?: 'FollowUpNodeData';
   contact_type?: Maybe<Scalars['String']['output']>;
   date_of_last_contact?: Maybe<Scalars['String']['output']>;
   document_number?: Maybe<Scalars['String']['output']>;
@@ -550,7 +570,6 @@ export type FollowUpNodeData = {
 };
 
 export type Gs_About = {
-  __typename?: 'GS_About';
   page?: Maybe<Scalars['String']['output']>;
   text?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -558,7 +577,6 @@ export type Gs_About = {
 };
 
 export type Gs_Cases = {
-  __typename?: 'GS_Cases';
   breed?: Maybe<Scalars['String']['output']>;
   case_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
@@ -568,7 +586,6 @@ export type Gs_Cases = {
 };
 
 export type Gs_File = {
-  __typename?: 'GS_File';
   case_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
   file_association?: Maybe<Scalars['String']['output']>;
@@ -580,7 +597,6 @@ export type Gs_File = {
 };
 
 export type Gs_Model = {
-  __typename?: 'GS_Model';
   highlight?: Maybe<Scalars['String']['output']>;
   node_name?: Maybe<Scalars['String']['output']>;
   property_description?: Maybe<Scalars['String']['output']>;
@@ -592,7 +608,6 @@ export type Gs_Model = {
 };
 
 export type Gs_Program = {
-  __typename?: 'GS_Program';
   program_acronym?: Maybe<Scalars['String']['output']>;
   program_external_url?: Maybe<Scalars['String']['output']>;
   program_id?: Maybe<Scalars['String']['output']>;
@@ -602,7 +617,6 @@ export type Gs_Program = {
 };
 
 export type Gs_Sample = {
-  __typename?: 'GS_Sample';
   case_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
   general_sample_pathology?: Maybe<Scalars['String']['output']>;
@@ -614,7 +628,6 @@ export type Gs_Sample = {
 };
 
 export type Gs_Study = {
-  __typename?: 'GS_Study';
   accession_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
   clinical_study_name?: Maybe<Scalars['String']['output']>;
@@ -624,7 +637,6 @@ export type Gs_Study = {
 };
 
 export type GlobalSearchResult = {
-  __typename?: 'GlobalSearchResult';
   about_count?: Maybe<Scalars['Int']['output']>;
   about_page?: Maybe<Array<Maybe<Gs_About>>>;
   case_count?: Maybe<Scalars['Int']['output']>;
@@ -642,20 +654,17 @@ export type GlobalSearchResult = {
 };
 
 export type GroupCount = {
-  __typename?: 'GroupCount';
   code?: Maybe<Scalars['String']['output']>;
   count?: Maybe<Scalars['Int']['output']>;
   group?: Maybe<Scalars['String']['output']>;
 };
 
 export type GroupCountEs = {
-  __typename?: 'GroupCountES';
   count?: Maybe<Scalars['Int']['output']>;
   group?: Maybe<Scalars['String']['output']>;
 };
 
 export type IdcMetadata = {
-  __typename?: 'IDCMetadata';
   cancer_type?: Maybe<Scalars['String']['output']>;
   collection_id?: Maybe<Scalars['String']['output']>;
   date_updated?: Maybe<Scalars['String']['output']>;
@@ -669,7 +678,6 @@ export type IdcMetadata = {
 };
 
 export type Link = {
-  __typename?: 'Link';
   metadata?: Maybe<Metadata>;
   repository?: Maybe<Scalars['String']['output']>;
   text?: Maybe<Scalars['String']['output']>;
@@ -679,7 +687,6 @@ export type Link = {
 export type Metadata = IdcMetadata | TciaMetadata;
 
 export type MultiStudyCases = {
-  __typename?: 'MultiStudyCases';
   caseIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   fileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   individualId?: Maybe<Scalars['String']['output']>;
@@ -688,11 +695,13 @@ export type MultiStudyCases = {
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
   createAdverseEventNodeData: AdverseEventNodeData;
   createAgentAdministrationNodeData: AgentAdministrationNodeData;
   createAgentNodeData: AgentNodeData;
   createBreedCaseCount: BreedCaseCount;
+  createCartChartData: CartChartData;
+  createCartChartItem: CartChartItem;
+  createCartOverviewData: CartOverviewData;
   createCaseDetail: CaseDetail;
   createCaseOverview: CaseOverview;
   createCaseOverview2: CaseOverview2;
@@ -811,6 +820,21 @@ export type MutationCreateAgentNodeDataArgs = {
 export type MutationCreateBreedCaseCountArgs = {
   breed?: InputMaybe<Scalars['String']['input']>;
   cases?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateCartChartDataArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateCartChartItemArgs = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateCartOverviewDataArgs = {
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type MutationCreateCaseDetailArgs = {
@@ -1769,7 +1793,6 @@ export type MutationCreatevital_SignsArgs = {
 };
 
 export type OffStudyNodeData = {
-  __typename?: 'OffStudyNodeData';
   best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
   best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
   date_last_medication_administration?: Maybe<Scalars['String']['output']>;
@@ -1782,7 +1805,6 @@ export type OffStudyNodeData = {
 };
 
 export type OffTreatmentNodeData = {
-  __typename?: 'OffTreatmentNodeData';
   best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
   best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
   date_last_medication_administration?: Maybe<Scalars['String']['output']>;
@@ -1794,7 +1816,6 @@ export type OffTreatmentNodeData = {
 };
 
 export type PhysicalExamNodeData = {
-  __typename?: 'PhysicalExamNodeData';
   assessment_timepoint?: Maybe<Scalars['Int']['output']>;
   body_system?: Maybe<Scalars['String']['output']>;
   case_id?: Maybe<Scalars['String']['output']>;
@@ -1806,7 +1827,6 @@ export type PhysicalExamNodeData = {
 };
 
 export type PriorSurgeryNodeData = {
-  __typename?: 'PriorSurgeryNodeData';
   anatomical_site_of_surgery?: Maybe<Scalars['String']['output']>;
   case_id?: Maybe<Scalars['String']['output']>;
   date_of_surgery?: Maybe<Scalars['String']['output']>;
@@ -1821,7 +1841,6 @@ export type PriorSurgeryNodeData = {
  *  }
  */
 export type PriorSurgeryNodeDataOverview = {
-  __typename?: 'PriorSurgeryNodeDataOverview';
   case_count?: Maybe<Scalars['Int']['output']>;
   prior_surgeries?: Maybe<Array<Maybe<PriorSurgeryNodeData>>>;
 };
@@ -1838,7 +1857,6 @@ export type PriorSurgeryNodeDataOverviewPrior_SurgeriesArgs = {
 };
 
 export type PriorTherapyNodeData = {
-  __typename?: 'PriorTherapyNodeData';
   agent_name?: Maybe<Scalars['String']['output']>;
   agent_units_of_measure?: Maybe<Scalars['String']['output']>;
   any_therapy?: Maybe<Scalars['Boolean']['output']>;
@@ -1868,14 +1886,12 @@ export type PriorTherapyNodeData = {
 };
 
 export type ProgramStudies = {
-  __typename?: 'ProgramStudies';
   caseSize?: Maybe<Scalars['Int']['output']>;
   program?: Maybe<Scalars['String']['output']>;
   studies?: Maybe<Array<Maybe<StudyInfo>>>;
 };
 
 export type QueryType = {
-  __typename?: 'QueryType';
   adverseEventNodeData?: Maybe<Array<Maybe<AdverseEventNodeData>>>;
   adverse_event: Array<Adverse_Event>;
   agent: Array<Agent>;
@@ -1891,6 +1907,10 @@ export type QueryType = {
   biospecimen_source: Array<Biospecimen_Source>;
   breedCaseCount: Array<BreedCaseCount>;
   canine_individual: Array<Canine_Individual>;
+  cartChartData: Array<CartChartData>;
+  cartChartItem: Array<CartChartItem>;
+  cartOverview?: Maybe<CartOverviewData>;
+  cartOverviewData: Array<CartOverviewData>;
   case: Array<Case>;
   caseCountOfProgram?: Maybe<Scalars['Int']['output']>;
   caseCountOfStudy?: Maybe<Scalars['Int']['output']>;
@@ -2159,6 +2179,37 @@ export type QueryTypeCanine_IndividualArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_Canine_IndividualOrdering>>;
+};
+
+export type QueryTypeCartChartDataArgs = {
+  filter?: InputMaybe<_CartChartDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartDataOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeCartChartItemArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type QueryTypeCartOverviewArgs = {
+  file_uuids?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type QueryTypeCartOverviewDataArgs = {
+  filter?: InputMaybe<_CartOverviewDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartOverviewDataOrdering>>;
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type QueryTypeCaseArgs = {
@@ -3012,6 +3063,7 @@ export type QueryTypeSearchCasesArgs = {
   sample_pathology?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sample_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sample_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  search_text?: InputMaybe<Scalars['String']['input']>;
   sex?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   stage_of_disease?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   study?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3280,7 +3332,6 @@ export enum RelationDirection {
 }
 
 export type SampleOverview = {
-  __typename?: 'SampleOverview';
   arm?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
@@ -3320,7 +3371,6 @@ export type SampleOverview = {
 };
 
 export type SampleOverviewEs = {
-  __typename?: 'SampleOverviewES';
   arm?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
@@ -3361,7 +3411,6 @@ export type SampleOverviewEs = {
 };
 
 export type SearchResult = {
-  __typename?: 'SearchResult';
   caseCountByBiobank?: Maybe<Array<Maybe<GroupCountEs>>>;
   caseCountByBreed?: Maybe<Array<Maybe<GroupCountEs>>>;
   caseCountByDiagnosis?: Maybe<Array<Maybe<GroupCountEs>>>;
@@ -3374,6 +3423,8 @@ export type SearchResult = {
   caseCountByStudyCode?: Maybe<Array<Maybe<GroupCountEs>>>;
   caseCountByStudyParticipation?: Maybe<Array<Maybe<GroupCountEs>>>;
   caseCountByStudyType?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  fileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   filterCaseCountByBiobank?: Maybe<Array<Maybe<GroupCountEs>>>;
   filterCaseCountByBreed?: Maybe<Array<Maybe<GroupCountEs>>>;
   filterCaseCountByDiagnosis?: Maybe<Array<Maybe<GroupCountEs>>>;
@@ -3400,6 +3451,8 @@ export type SearchResult = {
   numberOfStudies?: Maybe<Scalars['Int']['output']>;
   numberOfStudyFiles?: Maybe<Scalars['Int']['output']>;
   programsAndStudies?: Maybe<Array<Maybe<ProgramStudies>>>;
+  sampleIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  studyFileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   volumeOfData?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -3411,7 +3464,6 @@ export enum SortDirection {
 }
 
 export type StudyDetail = {
-  __typename?: 'StudyDetail';
   MD5?: Maybe<Scalars['String']['output']>;
   association?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
@@ -3423,13 +3475,11 @@ export type StudyDetail = {
 };
 
 export type StudyInfo = {
-  __typename?: 'StudyInfo';
   caseSize?: Maybe<Scalars['Int']['output']>;
   study?: Maybe<Scalars['String']['output']>;
 };
 
 export type StudyOfProgram = {
-  __typename?: 'StudyOfProgram';
   CRDCLinks?: Maybe<Array<Maybe<Link>>>;
   accession_id?: Maybe<Scalars['String']['output']>;
   clinical_study_description?: Maybe<Scalars['String']['output']>;
@@ -3457,7 +3507,6 @@ export type StudyOfProgramCrdcLinksArgs = {
 };
 
 export type StudyStat = {
-  __typename?: 'StudyStat';
   cases?: Maybe<Scalars['Int']['output']>;
   files?: Maybe<Scalars['Int']['output']>;
   samples?: Maybe<Scalars['Int']['output']>;
@@ -3466,7 +3515,6 @@ export type StudyStat = {
 };
 
 export type TciaMetadata = {
-  __typename?: 'TCIAMetadata';
   Aggregate_BodyPartExamined?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   Aggregate_ImageCount?: Maybe<Scalars['Int']['output']>;
   Aggregate_Modality?: Maybe<Scalars['String']['output']>;
@@ -3475,7 +3523,6 @@ export type TciaMetadata = {
 };
 
 export type UnifiedCounts = {
-  __typename?: 'UnifiedCounts';
   numberOfAliquots?: Maybe<Scalars['Int']['output']>;
   numberOfCases?: Maybe<Scalars['Int']['output']>;
   numberOfFiles?: Maybe<Scalars['Int']['output']>;
@@ -3487,7 +3534,6 @@ export type UnifiedCounts = {
 };
 
 export type VisitNodeData = {
-  __typename?: 'VisitNodeData';
   case_id?: Maybe<Scalars['String']['output']>;
   visit_date?: Maybe<Scalars['String']['output']>;
   visit_id?: Maybe<Scalars['String']['output']>;
@@ -3495,7 +3541,6 @@ export type VisitNodeData = {
 };
 
 export type VitalSignsNodeData = {
-  __typename?: 'VitalSignsNodeData';
   body_surface_area?: Maybe<Scalars['Float']['output']>;
   body_surface_area_original?: Maybe<Scalars['Float']['output']>;
   body_surface_area_original_unit?: Maybe<Scalars['String']['output']>;
@@ -4587,6 +4632,203 @@ export enum _BreedCaseCountOrdering {
   BreedDesc = 'breed_desc',
   CasesAsc = 'cases_asc',
   CasesDesc = 'cases_desc',
+}
+
+export type _CartChartDataFilter = {
+  AND?: InputMaybe<Array<_CartChartDataFilter>>;
+  NOT?: InputMaybe<Array<_CartChartDataFilter>>;
+  OR?: InputMaybe<Array<_CartChartDataFilter>>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileAssociation`-relations */
+  fileAssociation?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationships matches this filter */
+  fileAssociation_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileAssociation`-relationships matches this filter */
+  fileAssociation_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileAssociation`-relation */
+  fileAssociation_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileAssociation`-relationship matches this filter */
+  fileAssociation_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileAssociation`-relationship matches this filter */
+  fileAssociation_some?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileFormat`-relations */
+  fileFormat?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationships matches this filter */
+  fileFormat_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileFormat`-relationships matches this filter */
+  fileFormat_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileFormat`-relation */
+  fileFormat_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileFormat`-relationship matches this filter */
+  fileFormat_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileFormat`-relationship matches this filter */
+  fileFormat_some?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileType`-relations */
+  fileType?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationships matches this filter */
+  fileType_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileType`-relationships matches this filter */
+  fileType_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileType`-relation */
+  fileType_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileType`-relationship matches this filter */
+  fileType_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileType`-relationship matches this filter */
+  fileType_some?: InputMaybe<_CartChartItemFilter>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_gt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_gte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_lt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_lte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+};
+
+export type _CartChartDataInput = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _CartChartDataOrdering {
+  SchemaValidationPlaceholderAsc = 'schema_validation_placeholder_asc',
+  SchemaValidationPlaceholderDesc = 'schema_validation_placeholder_desc',
+}
+
+export type _CartChartItemFilter = {
+  AND?: InputMaybe<Array<_CartChartItemFilter>>;
+  NOT?: InputMaybe<Array<_CartChartItemFilter>>;
+  OR?: InputMaybe<Array<_CartChartItemFilter>>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  label_contains?: InputMaybe<Scalars['String']['input']>;
+  label_ends_with?: InputMaybe<Scalars['String']['input']>;
+  label_gt?: InputMaybe<Scalars['String']['input']>;
+  label_gte?: InputMaybe<Scalars['String']['input']>;
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  label_lt?: InputMaybe<Scalars['String']['input']>;
+  label_lte?: InputMaybe<Scalars['String']['input']>;
+  label_matches?: InputMaybe<Scalars['String']['input']>;
+  label_not?: InputMaybe<Scalars['String']['input']>;
+  label_not_contains?: InputMaybe<Scalars['String']['input']>;
+  label_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  label_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  label_starts_with?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+  value_gt?: InputMaybe<Scalars['Int']['input']>;
+  value_gte?: InputMaybe<Scalars['Int']['input']>;
+  value_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  value_lt?: InputMaybe<Scalars['Int']['input']>;
+  value_lte?: InputMaybe<Scalars['Int']['input']>;
+  value_not?: InputMaybe<Scalars['Int']['input']>;
+  value_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+export type _CartChartItemInput = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum _CartChartItemOrdering {
+  LabelAsc = 'label_asc',
+  LabelDesc = 'label_desc',
+  ValueAsc = 'value_asc',
+  ValueDesc = 'value_desc',
+}
+
+export type _CartOverviewDataFilter = {
+  AND?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  NOT?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  OR?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  /** Filters only those `CartOverviewData` for which the `charts`-relationship matches this filter. If `null` is passed to this field, only those `CartOverviewData` will be filtered which has no `charts`-relations */
+  charts?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts_not`-field */
+  charts_none?: InputMaybe<_CartChartDataFilter>;
+  /** Filters only those `CartOverviewData` for which the `charts`-relationship does not match this filter. If `null` is passed to this field, only those `CartOverviewData` will be filtered which has any `charts`-relation */
+  charts_not?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts`-field directly (without any suffix) */
+  charts_single?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts`-field directly (without any suffix) */
+  charts_some?: InputMaybe<_CartChartDataFilter>;
+  studiesInCart?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_contains?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_ends_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_gt?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_gte?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  studiesInCart_lt?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_lte?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_matches?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_contains?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  studiesInCart_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_starts_with?: InputMaybe<Scalars['String']['input']>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_gt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_gte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfCases_lt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_lte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_not?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_gt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_gte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfFiles_lt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_lte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_not?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+};
+
+export type _CartOverviewDataInput = {
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum _CartOverviewDataOrdering {
+  StudiesInCartAsc = 'studiesInCart_asc',
+  StudiesInCartDesc = 'studiesInCart_desc',
+  TotalNumberOfCasesAsc = 'totalNumberOfCases_asc',
+  TotalNumberOfCasesDesc = 'totalNumberOfCases_desc',
+  TotalNumberOfFilesAsc = 'totalNumberOfFiles_asc',
+  TotalNumberOfFilesDesc = 'totalNumberOfFiles_desc',
 }
 
 export type _CaseDetailFilter = {
@@ -10470,7 +10712,6 @@ export enum _MultiStudyCasesOrdering {
 }
 
 export type _Neo4jDate = {
-  __typename?: '_Neo4jDate';
   day?: Maybe<Scalars['Int']['output']>;
   formatted?: Maybe<Scalars['String']['output']>;
   month?: Maybe<Scalars['Int']['output']>;
@@ -10485,7 +10726,6 @@ export type _Neo4jDateInput = {
 };
 
 export type _Neo4jDateTime = {
-  __typename?: '_Neo4jDateTime';
   day?: Maybe<Scalars['Int']['output']>;
   formatted?: Maybe<Scalars['String']['output']>;
   hour?: Maybe<Scalars['Int']['output']>;
@@ -10514,7 +10754,6 @@ export type _Neo4jDateTimeInput = {
 };
 
 export type _Neo4jLocalDateTime = {
-  __typename?: '_Neo4jLocalDateTime';
   day?: Maybe<Scalars['Int']['output']>;
   formatted?: Maybe<Scalars['String']['output']>;
   hour?: Maybe<Scalars['Int']['output']>;
@@ -10541,7 +10780,6 @@ export type _Neo4jLocalDateTimeInput = {
 };
 
 export type _Neo4jLocalTime = {
-  __typename?: '_Neo4jLocalTime';
   formatted?: Maybe<Scalars['String']['output']>;
   hour?: Maybe<Scalars['Int']['output']>;
   microsecond?: Maybe<Scalars['Int']['output']>;
@@ -10562,7 +10800,6 @@ export type _Neo4jLocalTimeInput = {
 };
 
 export type _Neo4jPoint = {
-  __typename?: '_Neo4jPoint';
   /**
    *  The coordinate reference systems (CRS)
    *  -------------------------------------
@@ -10618,7 +10855,6 @@ export type _Neo4jPointInput = {
 };
 
 export type _Neo4jTime = {
-  __typename?: '_Neo4jTime';
   formatted?: Maybe<Scalars['String']['output']>;
   hour?: Maybe<Scalars['Int']['output']>;
   microsecond?: Maybe<Scalars['Int']['output']>;
@@ -22377,7 +22613,6 @@ export enum _Vital_SignsOrdering {
 }
 
 export type Adverse_Event = {
-  __typename?: 'adverse_event';
   adverse_event_agent_dose?: Maybe<Scalars['String']['output']>;
   adverse_event_agent_name?: Maybe<Scalars['String']['output']>;
   adverse_event_description?: Maybe<Scalars['String']['output']>;
@@ -22412,7 +22647,6 @@ export type Adverse_EventCasesArgs = {
 };
 
 export type Agent = {
-  __typename?: 'agent';
   adverse_events?: Maybe<Array<Maybe<Adverse_Event>>>;
   agent_administrations?: Maybe<Array<Maybe<Agent_Administration>>>;
   document_number?: Maybe<Scalars['String']['output']>;
@@ -22442,7 +22676,6 @@ export type AgentStudy_ArmsArgs = {
 };
 
 export type Agent_Administration = {
-  __typename?: 'agent_administration';
   agent?: Maybe<Agent>;
   comment?: Maybe<Scalars['String']['output']>;
   date_of_missed_dose?: Maybe<Scalars['String']['output']>;
@@ -22480,7 +22713,6 @@ export type Agent_Administration = {
 };
 
 export type Assay = {
-  __typename?: 'assay';
   files?: Maybe<Array<Maybe<File>>>;
   images?: Maybe<Array<Maybe<Image>>>;
   sample?: Maybe<Sample>;
@@ -22502,13 +22734,11 @@ export type AssayImagesArgs = {
 };
 
 export type Biospecimen_Source = {
-  __typename?: 'biospecimen_source';
   biospecimen_repository_acronym?: Maybe<Scalars['String']['output']>;
   biospecimen_repository_full_name?: Maybe<Scalars['String']['output']>;
 };
 
 export type Canine_Individual = {
-  __typename?: 'canine_individual';
   canine_individual_id?: Maybe<Scalars['String']['output']>;
   cases?: Maybe<Array<Maybe<Case>>>;
 };
@@ -22521,7 +22751,6 @@ export type Canine_IndividualCasesArgs = {
 };
 
 export type Case = {
-  __typename?: 'case';
   adverse_event?: Maybe<Adverse_Event>;
   adverse_events?: Maybe<Array<Maybe<Adverse_Event>>>;
   canine_individual?: Maybe<Canine_Individual>;
@@ -22601,7 +22830,6 @@ export type CaseVisitsArgs = {
 };
 
 export type Cohort = {
-  __typename?: 'cohort';
   cases?: Maybe<Array<Maybe<Case>>>;
   cohort_description?: Maybe<Scalars['String']['output']>;
   cohort_dose?: Maybe<Scalars['String']['output']>;
@@ -22618,7 +22846,6 @@ export type CohortCasesArgs = {
 };
 
 export type Cycle = {
-  __typename?: 'cycle';
   case?: Maybe<Case>;
   cycle_number?: Maybe<Scalars['Int']['output']>;
   date_of_cycle_end?: Maybe<Scalars['String']['output']>;
@@ -22634,7 +22861,6 @@ export type CycleVisitsArgs = {
 };
 
 export type Demographic = {
-  __typename?: 'demographic';
   additional_breed_detail?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
   case?: Maybe<Case>;
@@ -22653,7 +22879,6 @@ export type Demographic = {
 };
 
 export type Diagnosis = {
-  __typename?: 'diagnosis';
   best_response?: Maybe<Scalars['String']['output']>;
   case?: Maybe<Case>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
@@ -22680,7 +22905,6 @@ export type DiagnosisFilesArgs = {
 };
 
 export type Disease_Extent = {
-  __typename?: 'disease_extent';
   date_of_evaluation?: Maybe<Scalars['String']['output']>;
   evaluation_code?: Maybe<Scalars['String']['output']>;
   evaluation_number?: Maybe<Scalars['String']['output']>;
@@ -22700,7 +22924,6 @@ export type Disease_Extent = {
 };
 
 export type Enrollment = {
-  __typename?: 'enrollment';
   case?: Maybe<Case>;
   date_of_informed_consent?: Maybe<Scalars['String']['output']>;
   date_of_registration?: Maybe<Scalars['String']['output']>;
@@ -22737,7 +22960,6 @@ export type EnrollmentPrior_TherapiesArgs = {
 };
 
 export type File = {
-  __typename?: 'file';
   assay?: Maybe<Assay>;
   case?: Maybe<Case>;
   diagnosis?: Maybe<Diagnosis>;
@@ -22755,7 +22977,6 @@ export type File = {
 };
 
 export type Follow_Up = {
-  __typename?: 'follow_up';
   case?: Maybe<Case>;
   contact_type?: Maybe<Scalars['String']['output']>;
   date_of_last_contact?: Maybe<Scalars['String']['output']>;
@@ -22768,13 +22989,11 @@ export type Follow_Up = {
 };
 
 export type Image = {
-  __typename?: 'image';
   assay?: Maybe<Assay>;
   schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
 };
 
 export type Image_Collection = {
-  __typename?: 'image_collection';
   collection_access?: Maybe<Scalars['String']['output']>;
   image_collection_name?: Maybe<Scalars['String']['output']>;
   image_collection_url?: Maybe<Scalars['String']['output']>;
@@ -22784,13 +23003,11 @@ export type Image_Collection = {
 };
 
 export type Lab_Exam = {
-  __typename?: 'lab_exam';
   schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
   visit?: Maybe<Visit>;
 };
 
 export type Off_Study = {
-  __typename?: 'off_study';
   best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
   best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
   case?: Maybe<Case>;
@@ -22804,7 +23021,6 @@ export type Off_Study = {
 };
 
 export type Off_Treatment = {
-  __typename?: 'off_treatment';
   best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
   best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
   case?: Maybe<Case>;
@@ -22817,7 +23033,6 @@ export type Off_Treatment = {
 };
 
 export type Physical_Exam = {
-  __typename?: 'physical_exam';
   assessment_timepoint?: Maybe<Scalars['Int']['output']>;
   body_system?: Maybe<Scalars['String']['output']>;
   date_of_examination?: Maybe<Scalars['String']['output']>;
@@ -22830,7 +23045,6 @@ export type Physical_Exam = {
 };
 
 export type Principal_Investigator = {
-  __typename?: 'principal_investigator';
   pi_first_name?: Maybe<Scalars['String']['output']>;
   pi_last_name?: Maybe<Scalars['String']['output']>;
   pi_middle_initial?: Maybe<Scalars['String']['output']>;
@@ -22845,7 +23059,6 @@ export type Principal_InvestigatorStudiesArgs = {
 };
 
 export type Prior_Surgery = {
-  __typename?: 'prior_surgery';
   anatomical_site_of_surgery?: Maybe<Scalars['String']['output']>;
   date_of_surgery?: Maybe<Scalars['String']['output']>;
   enrollment?: Maybe<Enrollment>;
@@ -22858,7 +23071,6 @@ export type Prior_Surgery = {
 };
 
 export type Prior_Therapy = {
-  __typename?: 'prior_therapy';
   agent_name?: Maybe<Scalars['String']['output']>;
   agent_units_of_measure?: Maybe<Scalars['String']['output']>;
   any_therapy?: Maybe<Scalars['Boolean']['output']>;
@@ -22894,7 +23106,6 @@ export type Prior_Therapy = {
 };
 
 export type Program = {
-  __typename?: 'program';
   program_acronym?: Maybe<Scalars['String']['output']>;
   program_external_url?: Maybe<Scalars['String']['output']>;
   program_full_description?: Maybe<Scalars['String']['output']>;
@@ -22912,7 +23123,6 @@ export type ProgramStudiesArgs = {
 };
 
 export type Publication = {
-  __typename?: 'publication';
   authorship?: Maybe<Scalars['String']['output']>;
   digital_object_id?: Maybe<Scalars['String']['output']>;
   journal_citation?: Maybe<Scalars['String']['output']>;
@@ -22923,7 +23133,6 @@ export type Publication = {
 };
 
 export type Registration = {
-  __typename?: 'registration';
   cases?: Maybe<Array<Maybe<Case>>>;
   registration_id?: Maybe<Scalars['String']['output']>;
   registration_origin?: Maybe<Scalars['String']['output']>;
@@ -22937,7 +23146,6 @@ export type RegistrationCasesArgs = {
 };
 
 export type Sample = {
-  __typename?: 'sample';
   assays?: Maybe<Array<Maybe<Assay>>>;
   case?: Maybe<Case>;
   comment?: Maybe<Scalars['String']['output']>;
@@ -22988,7 +23196,6 @@ export type SampleFilesArgs = {
 };
 
 export type Study = {
-  __typename?: 'study';
   accession_id?: Maybe<Scalars['String']['output']>;
   cases?: Maybe<Array<Maybe<Case>>>;
   clinical_study_description?: Maybe<Scalars['String']['output']>;
@@ -23066,7 +23273,6 @@ export type StudyStudy_SitesArgs = {
 };
 
 export type Study_Arm = {
-  __typename?: 'study_arm';
   agents?: Maybe<Array<Maybe<Agent>>>;
   arm?: Maybe<Scalars['String']['output']>;
   arm_description?: Maybe<Scalars['String']['output']>;
@@ -23099,7 +23305,6 @@ export type Study_ArmCohortsArgs = {
 };
 
 export type Study_Site = {
-  __typename?: 'study_site';
   registering_institution?: Maybe<Scalars['String']['output']>;
   site_short_name?: Maybe<Scalars['String']['output']>;
   studies?: Maybe<Array<Maybe<Study>>>;
@@ -23114,7 +23319,6 @@ export type Study_SiteStudiesArgs = {
 };
 
 export type Visit = {
-  __typename?: 'visit';
   agent_administrations?: Maybe<Array<Maybe<Agent_Administration>>>;
   case?: Maybe<Case>;
   cycle?: Maybe<Cycle>;
@@ -23173,7 +23377,6 @@ export type VisitVital_SignsArgs = {
 };
 
 export type Vital_Signs = {
-  __typename?: 'vital_signs';
   assessment_timepoint?: Maybe<Scalars['Int']['output']>;
   body_surface_area?: Maybe<Scalars['Float']['output']>;
   body_surface_area_original?: Maybe<Scalars['Float']['output']>;
@@ -23216,9 +23419,7 @@ export type SampleQueryVariables = Exact<{
 }>;
 
 export type SampleQuery = {
-  __typename?: 'QueryType';
   filesBySampleId?: Array<{
-    __typename?: 'file';
     file_type?: string | null;
     uuid?: string | null;
     file_format?: string | null;
@@ -23235,9 +23436,7 @@ export type GetFileIdByNameQueryVariables = Exact<{
 }>;
 
 export type GetFileIdByNameQuery = {
-  __typename?: 'QueryType';
   fileIdsFromFileName?: Array<{
-    __typename?: 'FileOverview';
     file_uuid?: string | null;
     file_name?: string | null;
   } | null> | null;
@@ -23331,11 +23530,7 @@ export type GetAllFieldIdsSamplesTabForSelectAllQueryVariables = Exact<{
 }>;
 
 export type GetAllFieldIdsSamplesTabForSelectAllQuery = {
-  __typename?: 'QueryType';
-  sampleOverview?: Array<{
-    __typename?: 'SampleOverviewES';
-    files?: Array<string | null> | null;
-  } | null> | null;
+  sampleOverview?: Array<{ files?: Array<string | null> | null } | null> | null;
 };
 
 export type GetAllFileIdsCaseDetailsQueryVariables = Exact<{
@@ -23426,11 +23621,7 @@ export type GetAllFileIdsCaseDetailsQueryVariables = Exact<{
 }>;
 
 export type GetAllFileIdsCaseDetailsQuery = {
-  __typename?: 'QueryType';
-  fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
-    file_uuid?: string | null;
-  } | null> | null;
+  fileOverview?: Array<{ file_uuid?: string | null } | null> | null;
 };
 
 export type GetAllFileIdsOnFileTabForSelectAllQueryVariables = Exact<{
@@ -23441,11 +23632,7 @@ export type GetAllFileIdsOnFileTabForSelectAllQueryVariables = Exact<{
 }>;
 
 export type GetAllFileIdsOnFileTabForSelectAllQuery = {
-  __typename?: 'QueryType';
-  fileIdsFromFileName?: Array<{
-    __typename?: 'FileOverview';
-    file_uuid?: string | null;
-  } | null> | null;
+  fileIdsFromFileName?: Array<{ file_uuid?: string | null } | null> | null;
 };
 
 export type CaseQueryVariables = Exact<{
@@ -23453,7 +23640,6 @@ export type CaseQueryVariables = Exact<{
 }>;
 
 export type CaseQuery = {
-  __typename?: 'QueryType';
   sampleCountOfCase?: number | null;
   fileCountOfCase?: number | null;
   aliquotCountOfCase?: number | null;
@@ -23461,7 +23647,6 @@ export type CaseQuery = {
   programsCountOfCase?: number | null;
   volumeOfDataOfCase?: number | null;
   multiStudyCases?: {
-    __typename?: 'MultiStudyCases';
     caseIds?: Array<string | null> | null;
     sampleIds?: Array<string | null> | null;
     fileIds?: Array<string | null> | null;
@@ -23469,21 +23654,15 @@ export type CaseQuery = {
     individualId?: string | null;
   } | null;
   case: Array<{
-    __typename?: 'case';
     case_id?: string | null;
     patient_id?: string | null;
     patient_first_name?: string | null;
     study?: {
-      __typename?: 'study';
       clinical_study_name?: string | null;
       clinical_study_designation?: string | null;
-      program?: {
-        __typename?: 'program';
-        program_acronym?: string | null;
-      } | null;
+      program?: { program_acronym?: string | null } | null;
     } | null;
     demographic?: {
-      __typename?: 'demographic';
       breed?: string | null;
       sex?: string | null;
       patient_age_at_enrollment?: number | null;
@@ -23491,16 +23670,13 @@ export type CaseQuery = {
       weight?: number | null;
     } | null;
     cohort?: {
-      __typename?: 'cohort';
       cohort_description?: string | null;
       study_arm?: {
-        __typename?: 'study_arm';
         arm?: string | null;
         ctep_treatment_assignment_code?: string | null;
       } | null;
     } | null;
     enrollment?: {
-      __typename?: 'enrollment';
       site_short_name?: string | null;
       date_of_registration?: string | null;
       patient_subgroup?: string | null;
@@ -23508,7 +23684,6 @@ export type CaseQuery = {
       initials?: string | null;
     } | null;
     diagnoses?: Array<{
-      __typename?: 'diagnosis';
       best_response?: string | null;
       disease_term?: string | null;
       stage_of_disease?: string | null;
@@ -23519,7 +23694,6 @@ export type CaseQuery = {
     } | null> | null;
   }>;
   filesOfCase?: Array<{
-    __typename?: 'FilesOfCase';
     parent?: string | null;
     file_name?: string | null;
     file_type?: string | null;
@@ -23530,7 +23704,6 @@ export type CaseQuery = {
     uuid?: string | null;
   } | null> | null;
   samplesByCaseId?: Array<{
-    __typename?: 'sample';
     sample_id?: string | null;
     sample_site?: string | null;
     summarized_sample_type?: string | null;
@@ -23540,7 +23713,7 @@ export type CaseQuery = {
     percentage_tumor?: string | null;
     necropsy_sample?: string | null;
     sample_preservation?: string | null;
-    files?: Array<{ __typename?: 'file'; uuid?: string | null } | null> | null;
+    files?: Array<{ uuid?: string | null } | null> | null;
   } | null> | null;
 };
 
@@ -23621,12 +23794,11 @@ export type DashboardSearchQueryQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
+  search_text?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 export type DashboardSearchQueryQuery = {
-  __typename?: 'QueryType';
-  searchCases?: {
-    __typename?: 'SearchResult';
+  dashboard?: {
     numberOfStudies?: number | null;
     numberOfCases?: number | null;
     numberOfSamples?: number | null;
@@ -23635,139 +23807,126 @@ export type DashboardSearchQueryQuery = {
     numberOfPrograms?: number | null;
     numberOfAliquots?: number | null;
     volumeOfData?: number | null;
+    caseIds?: Array<string | null> | null;
+    sampleIds?: Array<string | null> | null;
+    fileIds?: Array<string | null> | null;
+    studyFileIds?: Array<string | null> | null;
     caseCountByDiagnosis?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     caseCountByGender?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     caseCountByBreed?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     caseCountByStageOfDisease?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     caseCountByDiseaseSite?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByProgram?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByStudyCode?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByStudyType?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByBreed?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByDiagnosis?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByDiseaseSite?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByStageOfDisease?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByResponseToTreatment?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountBySex?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByNeuteredStatus?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountBySampleType?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountBySamplePathology?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountBySampleSite?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByFileAssociation?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByFileType?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByBiobank?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByStudyParticipation?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByFileFormat?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     programsAndStudies?: Array<{
-      __typename?: 'ProgramStudies';
       program?: string | null;
       caseSize?: number | null;
       studies?: Array<{
-        __typename?: 'StudyInfo';
         study?: string | null;
         caseSize?: number | null;
       } | null> | null;
     } | null> | null;
   } | null;
+  searchTextResults?: {
+    numberOfCases?: number | null;
+    numberOfSamples?: number | null;
+    numberOfFiles?: number | null;
+    numberOfStudyFiles?: number | null;
+    caseIds?: Array<string | null> | null;
+    sampleIds?: Array<string | null> | null;
+    fileIds?: Array<string | null> | null;
+    studyFileIds?: Array<string | null> | null;
+  } | null;
   biospecimen_source: Array<{
-    __typename?: 'biospecimen_source';
     biospecimen_repository_acronym?: string | null;
     biospecimen_repository_full_name?: string | null;
   }>;
   program: Array<{
-    __typename?: 'program';
     program_acronym?: string | null;
     program_name?: string | null;
   }>;
@@ -23857,11 +24016,7 @@ export type GetFileNameQueryVariables = Exact<{
 }>;
 
 export type GetFileNameQuery = {
-  __typename?: 'QueryType';
-  fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
-    file_name?: string | null;
-  } | null> | null;
+  fileOverview?: Array<{ file_name?: string | null } | null> | null;
 };
 
 export type SearchCasesQueryVariables = Exact<{
@@ -23940,9 +24095,7 @@ export type SearchCasesQueryVariables = Exact<{
 }>;
 
 export type SearchCasesQuery = {
-  __typename?: 'QueryType';
   searchCases?: {
-    __typename?: 'SearchResult';
     numberOfStudies?: number | null;
     numberOfCases?: number | null;
     numberOfSamples?: number | null;
@@ -23952,126 +24105,101 @@ export type SearchCasesQuery = {
     numberOfAliquots?: number | null;
     volumeOfData?: number | null;
     caseCountByDiagnosis?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     caseCountByGender?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     caseCountByBreed?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     caseCountByStageOfDisease?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     caseCountByDiseaseSite?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByProgram?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByStudyCode?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByStudyType?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByBreed?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByDiagnosis?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByDiseaseSite?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByStageOfDisease?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByResponseToTreatment?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountBySex?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByNeuteredStatus?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountBySampleType?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountBySamplePathology?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountBySampleSite?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByFileAssociation?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByFileType?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByFileFormat?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByBiobank?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     filterCaseCountByStudyParticipation?: Array<{
-      __typename?: 'GroupCountES';
       group?: string | null;
       count?: number | null;
     } | null> | null;
     programsAndStudies?: Array<{
-      __typename?: 'ProgramStudies';
       program?: string | null;
       caseSize?: number | null;
       studies?: Array<{
-        __typename?: 'StudyInfo';
         study?: string | null;
         caseSize?: number | null;
       } | null> | null;
@@ -24085,6 +24213,10 @@ export type GetFilesOverviewQueryVariables = Exact<{
     | InputMaybe<Scalars['String']['input']>
   >;
   case_ids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
+  file_uuids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -24167,9 +24299,7 @@ export type GetFilesOverviewQueryVariables = Exact<{
 }>;
 
 export type GetFilesOverviewQuery = {
-  __typename?: 'QueryType';
   fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
     file_name?: string | null;
     file_type?: string | null;
     association?: string | null;
@@ -24301,9 +24431,7 @@ export type GetFileOverviewDescQueryVariables = Exact<{
 }>;
 
 export type GetFileOverviewDescQuery = {
-  __typename?: 'QueryType';
   fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
     file_name?: string | null;
     file_type?: string | null;
     association?: string | null;
@@ -24353,6 +24481,10 @@ export type GetFileOverviewDescQuery = {
 
 export type GetSampleOverviewQueryVariables = Exact<{
   case_ids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
+  sample_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -24435,9 +24567,7 @@ export type GetSampleOverviewQueryVariables = Exact<{
 }>;
 
 export type GetSampleOverviewQuery = {
-  __typename?: 'QueryType';
   sampleOverview?: Array<{
-    __typename?: 'SampleOverviewES';
     sample_id?: string | null;
     case_id?: string | null;
     breed?: string | null;
@@ -24557,9 +24687,7 @@ export type GetSamplesOverviewDescQueryQueryVariables = Exact<{
 }>;
 
 export type GetSamplesOverviewDescQueryQuery = {
-  __typename?: 'QueryType';
   sampleOverview?: Array<{
-    __typename?: 'SampleOverviewES';
     sample_id?: string | null;
     case_id?: string | null;
     breed?: string | null;
@@ -24683,9 +24811,7 @@ export type GetCasesOverviewQueryDashboardTabQueryVariables = Exact<{
 }>;
 
 export type GetCasesOverviewQueryDashboardTabQuery = {
-  __typename?: 'QueryType';
   caseOverview?: Array<{
-    __typename?: 'CaseOverviewES';
     case_id?: string | null;
     study_code?: string | null;
     study_type?: string | null;
@@ -24795,9 +24921,7 @@ export type GetCasesOverviewDescQueryQueryVariables = Exact<{
 }>;
 
 export type GetCasesOverviewDescQueryQuery = {
-  __typename?: 'QueryType';
   caseOverview?: Array<{
-    __typename?: 'CaseOverviewES';
     case_id?: string | null;
     study_code?: string | null;
     study_type?: string | null;
@@ -24911,11 +25035,7 @@ export type CaseOverviewQueryVariables = Exact<{
 }>;
 
 export type CaseOverviewQuery = {
-  __typename?: 'QueryType';
-  caseOverview?: Array<{
-    __typename?: 'CaseOverviewES';
-    files?: Array<string | null> | null;
-  } | null> | null;
+  caseOverview?: Array<{ files?: Array<string | null> | null } | null> | null;
 };
 
 export type GetAllFileIdsForSampleTabForSelectAllQueryVariables = Exact<{
@@ -25006,11 +25126,7 @@ export type GetAllFileIdsForSampleTabForSelectAllQueryVariables = Exact<{
 }>;
 
 export type GetAllFileIdsForSampleTabForSelectAllQuery = {
-  __typename?: 'QueryType';
-  sampleOverview?: Array<{
-    __typename?: 'SampleOverviewES';
-    files?: Array<string | null> | null;
-  } | null> | null;
+  sampleOverview?: Array<{ files?: Array<string | null> | null } | null> | null;
 };
 
 export type GetAllFileIdsDashboardTabQueryVariables = Exact<{
@@ -25019,6 +25135,10 @@ export type GetAllFileIdsDashboardTabQueryVariables = Exact<{
     | InputMaybe<Scalars['String']['input']>
   >;
   case_ids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
+  file_uuids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -25105,11 +25225,7 @@ export type GetAllFileIdsDashboardTabQueryVariables = Exact<{
 }>;
 
 export type GetAllFileIdsDashboardTabQuery = {
-  __typename?: 'QueryType';
-  fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
-    file_uuid?: string | null;
-  } | null> | null;
+  fileOverview?: Array<{ file_uuid?: string | null } | null> | null;
 };
 
 export type GetAllFiledsForSampleTabForSelectAllQueryVariables = Exact<{
@@ -25200,11 +25316,7 @@ export type GetAllFiledsForSampleTabForSelectAllQueryVariables = Exact<{
 }>;
 
 export type GetAllFiledsForSampleTabForSelectAllQuery = {
-  __typename?: 'QueryType';
-  fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
-    file_uuid?: string | null;
-  } | null> | null;
+  fileOverview?: Array<{ file_uuid?: string | null } | null> | null;
 };
 
 export type GetFileIdsFromFileNameQueryVariables = Exact<{
@@ -25218,11 +25330,7 @@ export type GetFileIdsFromFileNameQueryVariables = Exact<{
 }>;
 
 export type GetFileIdsFromFileNameQuery = {
-  __typename?: 'QueryType';
-  fileIdsFromFileNameDesc?: Array<{
-    __typename?: 'FileOverview';
-    file_uuid?: string | null;
-  } | null> | null;
+  fileIdsFromFileNameDesc?: Array<{ file_uuid?: string | null } | null> | null;
 };
 
 export type GetStudyCodeQueryVariables = Exact<{
@@ -25230,9 +25338,7 @@ export type GetStudyCodeQueryVariables = Exact<{
 }>;
 
 export type GetStudyCodeQuery = {
-  __typename?: 'QueryType';
   study: Array<{
-    __typename?: 'study';
     clinical_study_designation?: string | null;
     accession_id?: string | null;
   }>;
@@ -25248,10 +25354,7 @@ export type CreateManifestQueryVariables = Exact<{
   order_by?: InputMaybe<Scalars['String']['input']>;
 }>;
 
-export type CreateManifestQuery = {
-  __typename?: 'QueryType';
-  createManifest?: string | null;
-};
+export type CreateManifestQuery = { createManifest?: string | null };
 
 export type GetMyCartDataQueryQueryVariables = Exact<{
   uuids?: InputMaybe<
@@ -25264,9 +25367,7 @@ export type GetMyCartDataQueryQueryVariables = Exact<{
 }>;
 
 export type GetMyCartDataQueryQuery = {
-  __typename?: 'QueryType';
   filesInList?: Array<{
-    __typename?: 'FileInList';
     file_name?: string | null;
     drs_uri?: string | null;
     study_code?: string | null;
@@ -25327,9 +25428,7 @@ export type GetMyCartDataQueryDescQueryVariables = Exact<{
 }>;
 
 export type GetMyCartDataQueryDescQuery = {
-  __typename?: 'QueryType';
   filesInListDesc?: Array<{
-    __typename?: 'FileInList';
     file_name?: string | null;
     drs_uri?: string | null;
     study_code?: string | null;
@@ -25387,9 +25486,7 @@ export type GetStoreManifestDataQueryQueryVariables = Exact<{
 }>;
 
 export type GetStoreManifestDataQueryQuery = {
-  __typename?: 'QueryType';
   filesInList?: Array<{
-    __typename?: 'FileInList';
     file_name?: string | null;
     file_type?: string | null;
     association?: string | null;
@@ -25409,12 +25506,39 @@ export type GetStoreManifestDataQueryQuery = {
   } | null> | null;
 };
 
+export type GetCartOverviewDataQueryVariables = Exact<{
+  file_uuids?: InputMaybe<
+    Array<Scalars['String']['input']> | Scalars['String']['input']
+  >;
+}>;
+
+export type GetCartOverviewDataQuery = {
+  cartOverview?: {
+    totalNumberOfFiles?: number | null;
+    studiesInCart?: Array<string | null> | null;
+    totalNumberOfCases?: number | null;
+    charts?: {
+      fileType?: Array<{
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+      fileAssociation?: Array<{
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+      fileFormat?: Array<{
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+    } | null;
+  } | null;
+};
+
 export type GetGlobalStatsDataQueryQueryVariables = Exact<{
   [key: string]: never;
 }>;
 
 export type GetGlobalStatsDataQueryQuery = {
-  __typename?: 'QueryType';
   numberOfStudies?: number | null;
   numberOfCases?: number | null;
   numberOfSamples?: number | null;
@@ -25433,9 +25557,7 @@ export type UnifiedViewDataQueryVariables = Exact<{
 }>;
 
 export type UnifiedViewDataQuery = {
-  __typename?: 'QueryType';
   searchCases?: {
-    __typename?: 'SearchResult';
     numberOfStudies?: number | null;
     numberOfCases?: number | null;
     numberOfFiles?: number | null;
@@ -25452,9 +25574,7 @@ export type GetProgramsDataQueryQueryVariables = Exact<{
 }>;
 
 export type GetProgramsDataQueryQuery = {
-  __typename?: 'QueryType';
   program: Array<{
-    __typename?: 'program';
     program_name?: string | null;
     program_acronym?: string | null;
     program_full_description?: string | null;
@@ -25462,7 +25582,6 @@ export type GetProgramsDataQueryQuery = {
     program_sort_order?: number | null;
     program_external_url?: string | null;
     studies?: Array<{
-      __typename?: 'study';
       clinical_study_designation?: string | null;
     } | null> | null;
   }>;
@@ -25473,7 +25592,6 @@ export type ProgramQueryVariables = Exact<{
 }>;
 
 export type ProgramQuery = {
-  __typename?: 'QueryType';
   sampleCountOfProgram?: number | null;
   fileCountOfProgram?: number | null;
   studyFileCountOfProgram?: number | null;
@@ -25482,7 +25600,6 @@ export type ProgramQuery = {
   caseCountOfProgram?: number | null;
   volumeOfDataOfProgram?: number | null;
   program: Array<{
-    __typename?: 'program';
     program_name?: string | null;
     program_acronym?: string | null;
     program_short_description?: string | null;
@@ -25491,7 +25608,6 @@ export type ProgramQuery = {
     program_sort_order?: number | null;
   }>;
   studiesByProgramId?: Array<{
-    __typename?: 'StudyOfProgram';
     program_id?: string | null;
     clinical_study_id?: string | null;
     clinical_study_designation?: string | null;
@@ -25507,7 +25623,6 @@ export type ProgramQuery = {
     study_disposition?: string | null;
     numberOfCRDCNodes?: number | null;
     CRDCLinks?: Array<{
-      __typename?: 'Link';
       text?: string | null;
       url?: string | null;
     } | null> | null;
@@ -25519,9 +25634,7 @@ export type GetStudyDataQueryProgramDetailsQueryVariables = Exact<{
 }>;
 
 export type GetStudyDataQueryProgramDetailsQuery = {
-  __typename?: 'QueryType';
   studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
     program_id?: string | null;
     clinical_study_designation?: string | null;
     clinical_study_name?: string | null;
@@ -25533,9 +25646,7 @@ export type GetStudyDataQueryProgramDetailsQuery = {
 export type StudesProgramQueryVariables = Exact<{ [key: string]: never }>;
 
 export type StudesProgramQuery = {
-  __typename?: 'QueryType';
   studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
     program_id?: string | null;
     clinical_study_designation?: string | null;
   } | null> | null;
@@ -25546,33 +25657,15 @@ export type SearchPublicQueryVariables = Exact<{
 }>;
 
 export type SearchPublicQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
-    programs?: Array<{
-      __typename?: 'GS_Program';
-      program_acronym?: string | null;
-    } | null> | null;
+    programs?: Array<{ program_acronym?: string | null } | null> | null;
     studies?: Array<{
-      __typename?: 'GS_Study';
       clinical_study_designation?: string | null;
     } | null> | null;
-    cases?: Array<{
-      __typename?: 'GS_Cases';
-      case_id?: string | null;
-    } | null> | null;
-    samples?: Array<{
-      __typename?: 'GS_Sample';
-      sample_id?: string | null;
-    } | null> | null;
-    files?: Array<{
-      __typename?: 'GS_File';
-      file_name?: string | null;
-    } | null> | null;
-    model?: Array<{
-      __typename?: 'GS_Model';
-      node_name?: string | null;
-    } | null> | null;
+    cases?: Array<{ case_id?: string | null } | null> | null;
+    samples?: Array<{ sample_id?: string | null } | null> | null;
+    files?: Array<{ file_name?: string | null } | null> | null;
+    model?: Array<{ node_name?: string | null } | null> | null;
   } | null;
 };
 
@@ -25581,9 +25674,7 @@ export type SearchPageResultsQueryVariables = Exact<{
 }>;
 
 export type SearchPageResultsQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
     program_count?: number | null;
     study_count?: number | null;
     case_count?: number | null;
@@ -25601,11 +25692,8 @@ export type SearchPageResultCasesQueryVariables = Exact<{
 }>;
 
 export type SearchPageResultCasesQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
     cases?: Array<{
-      __typename?: 'GS_Cases';
       type?: string | null;
       case_id?: string | null;
       program_name?: string | null;
@@ -25623,11 +25711,8 @@ export type SearchPageResultSamplesQueryVariables = Exact<{
 }>;
 
 export type SearchPageResultSamplesQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
     samples?: Array<{
-      __typename?: 'GS_Sample';
       type?: string | null;
       case_id?: string | null;
       sample_id?: string | null;
@@ -25647,11 +25732,8 @@ export type SearchPageResultFilesQueryVariables = Exact<{
 }>;
 
 export type SearchPageResultFilesQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
     files?: Array<{
-      __typename?: 'GS_File';
       type?: string | null;
       file_name?: string | null;
       file_type?: string | null;
@@ -25671,11 +25753,8 @@ export type SearchPageResultProgramQueryVariables = Exact<{
 }>;
 
 export type SearchPageResultProgramQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
     programs?: Array<{
-      __typename?: 'GS_Program';
       type?: string | null;
       program_acronym?: string | null;
       program_external_url?: string | null;
@@ -25692,11 +25771,8 @@ export type SearchPageResultStudiesQueryVariables = Exact<{
 }>;
 
 export type SearchPageResultStudiesQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
     studies?: Array<{
-      __typename?: 'GS_Study';
       type?: string | null;
       clinical_study_designation?: string | null;
       clinical_study_name?: string | null;
@@ -25713,11 +25789,8 @@ export type SearchPageResultModelQueryVariables = Exact<{
 }>;
 
 export type SearchPageResultModelQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
     model?: Array<{
-      __typename?: 'GS_Model';
       type?: string | null;
       highlight?: string | null;
       node_name?: string | null;
@@ -25736,11 +25809,8 @@ export type SearchPageResultAboutQueryVariables = Exact<{
 }>;
 
 export type SearchPageResultAboutQuery = {
-  __typename?: 'QueryType';
   globalSearch?: {
-    __typename?: 'GlobalSearchResult';
     about_page?: Array<{
-      __typename?: 'GS_About';
       type?: string | null;
       page?: string | null;
       title?: string | null;
@@ -25754,9 +25824,7 @@ export type GetStudyDataQueryStudiesDataQueryVariables = Exact<{
 }>;
 
 export type GetStudyDataQueryStudiesDataQuery = {
-  __typename?: 'QueryType';
   studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
     program_id?: string | null;
     clinical_study_designation?: string | null;
     clinical_study_name?: string | null;
@@ -25770,7 +25838,6 @@ export type GetStudyDataQueryStudiesDataQuery = {
     study_disposition?: string | null;
     numberOfCRDCNodes?: number | null;
     CRDCLinks?: Array<{
-      __typename?: 'Link';
       text?: string | null;
       url?: string | null;
     } | null> | null;
@@ -25865,11 +25932,7 @@ export type GetAllFileIdsStudyDetailsQueryVariables = Exact<{
 }>;
 
 export type GetAllFileIdsStudyDetailsQuery = {
-  __typename?: 'QueryType';
-  fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
-    file_uuid?: string | null;
-  } | null> | null;
+  fileOverview?: Array<{ file_uuid?: string | null } | null> | null;
 };
 
 export type StudyQueryVariables = Exact<{
@@ -25878,7 +25941,6 @@ export type StudyQueryVariables = Exact<{
 }>;
 
 export type StudyQuery = {
-  __typename?: 'QueryType';
   sampleCountOfStudy?: number | null;
   fileCountOfStudy?: number | null;
   fileCountOfStudyFiles?: number | null;
@@ -25888,7 +25950,6 @@ export type StudyQuery = {
   caseCountOfStudy?: number | null;
   volumeOfDataOfStudy?: number | null;
   clinicalDataNodeCounts?: {
-    __typename?: 'ClinicalDataNodeCounts';
     agent?: number | null;
     cycle?: number | null;
     physical_exam?: number | null;
@@ -25905,7 +25966,6 @@ export type StudyQuery = {
     lab_exam?: number | null;
   } | null;
   clinicalDataNodeCaseCounts?: {
-    __typename?: 'ClinicalDataNodeCounts';
     agent?: number | null;
     cycle?: number | null;
     visit?: number | null;
@@ -25922,26 +25982,19 @@ export type StudyQuery = {
     lab_exam?: number | null;
   } | null;
   studySampleSiteCount?: Array<{
-    __typename?: 'GroupCount';
     group?: string | null;
     count?: number | null;
   } | null> | null;
   studySampleTypeCount?: Array<{
-    __typename?: 'GroupCount';
     group?: string | null;
     count?: number | null;
   } | null> | null;
   studySamplePathologyCount?: Array<{
-    __typename?: 'GroupCount';
     group?: string | null;
     count?: number | null;
   } | null> | null;
-  filesOfStudy?: Array<{
-    __typename?: 'file';
-    file_type?: string | null;
-  } | null> | null;
+  filesOfStudy?: Array<{ file_type?: string | null } | null> | null;
   studyFiles?: Array<{
-    __typename?: 'file';
     file_description?: string | null;
     file_format?: string | null;
     file_location?: string | null;
@@ -25953,7 +26006,6 @@ export type StudyQuery = {
     uuid?: string | null;
   } | null> | null;
   study: Array<{
-    __typename?: 'study';
     clinical_study_id?: string | null;
     clinical_study_name?: string | null;
     clinical_study_designation?: string | null;
@@ -25963,34 +26015,26 @@ export type StudyQuery = {
     accession_id?: string | null;
     study_disposition?: string | null;
     dates_of_conduct?: string | null;
-    program?: {
-      __typename?: 'program';
-      program_acronym?: string | null;
-    } | null;
+    program?: { program_acronym?: string | null } | null;
     cohorts?: Array<{
-      __typename?: 'cohort';
       cohort_dose?: string | null;
       cohort_description?: string | null;
     } | null> | null;
     study_arms?: Array<{
-      __typename?: 'study_arm';
       arm?: string | null;
       arm_description?: string | null;
       ctep_treatment_assignment_code?: string | null;
       cohorts?: Array<{
-        __typename?: 'cohort';
         cohort_dose?: string | null;
         cohort_description?: string | null;
       } | null> | null;
     } | null> | null;
     principal_investigators?: Array<{
-      __typename?: 'principal_investigator';
       pi_first_name?: string | null;
       pi_last_name?: string | null;
       pi_middle_initial?: string | null;
     } | null> | null;
     publications?: Array<{
-      __typename?: 'publication';
       publication_title?: string | null;
       authorship?: string | null;
       year_of_publication?: number | null;
@@ -25999,7 +26043,6 @@ export type StudyQuery = {
       pubmed_id?: number | null;
     } | null> | null;
     image_collections?: Array<{
-      __typename?: 'image_collection';
       image_collection_name?: string | null;
       image_collection_url?: string | null;
       repository_name?: string | null;
@@ -26007,12 +26050,8 @@ export type StudyQuery = {
       collection_access?: string | null;
     } | null> | null;
     cases?: Array<{
-      __typename?: 'case';
       case_id?: string | null;
-      diagnoses?: Array<{
-        __typename?: 'diagnosis';
-        disease_term?: string | null;
-      } | null> | null;
+      diagnoses?: Array<{ disease_term?: string | null } | null> | null;
     } | null> | null;
   }>;
 };
@@ -26022,9 +26061,7 @@ export type CycleNodeDataQueryVariables = Exact<{
 }>;
 
 export type CycleNodeDataQuery = {
-  __typename?: 'QueryType';
   cycleNodeData?: Array<{
-    __typename?: 'CycleNodeData';
     cycle_number?: number | null;
     date_of_cycle_start?: string | null;
     date_of_cycle_end?: string | null;
@@ -26038,9 +26075,7 @@ export type AgentNodeDataQueryVariables = Exact<{
 }>;
 
 export type AgentNodeDataQuery = {
-  __typename?: 'QueryType';
   agentNodeData?: Array<{
-    __typename?: 'AgentNodeData';
     medication?: string | null;
     document_number?: string | null;
   } | null> | null;
@@ -26051,9 +26086,7 @@ export type VisitNodeDataQueryVariables = Exact<{
 }>;
 
 export type VisitNodeDataQuery = {
-  __typename?: 'QueryType';
   visitNodeData?: Array<{
-    __typename?: 'VisitNodeData';
     visit_id?: string | null;
     visit_date?: string | null;
   } | null> | null;
@@ -26064,19 +26097,15 @@ export type GetStudiesByProgramStudyDetailsQueryVariables = Exact<{
 }>;
 
 export type GetStudiesByProgramStudyDetailsQuery = {
-  __typename?: 'QueryType';
   studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
     clinical_study_designation?: string | null;
     numberOfCRDCNodes?: number | null;
     numberOfImageCollections?: number | null;
     CRDCLinks?: Array<{
-      __typename?: 'Link';
       url?: string | null;
       repository?: string | null;
       metadata?:
         | {
-            __typename?: 'IDCMetadata';
             collection_id?: string | null;
             cancer_type?: string | null;
             date_updated?: string | null;
@@ -26089,7 +26118,6 @@ export type GetStudiesByProgramStudyDetailsQuery = {
             supporting_data?: string | null;
           }
         | {
-            __typename?: 'TCIAMetadata';
             Collection?: string | null;
             Aggregate_PatientID?: number | null;
             Aggregate_Modality?: string | null;
@@ -26106,9 +26134,7 @@ export type PriorTherapyNodeDataQueryVariables = Exact<{
 }>;
 
 export type PriorTherapyNodeDataQuery = {
-  __typename?: 'QueryType';
   priorTherapyNodeData?: Array<{
-    __typename?: 'PriorTherapyNodeData';
     date_of_first_dose?: string | null;
     date_of_last_dose?: string | null;
     agent_name?: string | null;
@@ -26143,9 +26169,7 @@ export type PriorSurgeryNodeDataQueryVariables = Exact<{
 }>;
 
 export type PriorSurgeryNodeDataQuery = {
-  __typename?: 'QueryType';
   priorSurgeryNodeData?: Array<{
-    __typename?: 'PriorSurgeryNodeData';
     date_of_surgery?: string | null;
     procedure?: string | null;
     anatomical_site_of_surgery?: string | null;
@@ -26160,9 +26184,7 @@ export type AgentAdministrationNodeDataQueryVariables = Exact<{
 }>;
 
 export type AgentAdministrationNodeDataQuery = {
-  __typename?: 'QueryType';
   agentAdministrationNodeData?: Array<{
-    __typename?: 'AgentAdministrationNodeData';
     document_number?: string | null;
     medication?: string | null;
     route_of_administration?: string | null;
@@ -26191,9 +26213,7 @@ export type PhysicalExamNodeDataQueryVariables = Exact<{
 }>;
 
 export type PhysicalExamNodeDataQuery = {
-  __typename?: 'QueryType';
   physicalExamNodeData?: Array<{
-    __typename?: 'PhysicalExamNodeData';
     date_of_examination?: string | null;
     pe_comment?: string | null;
     body_system?: string | null;
@@ -26207,9 +26227,7 @@ export type VitalSignsNodeDataQueryVariables = Exact<{
 }>;
 
 export type VitalSignsNodeDataQuery = {
-  __typename?: 'QueryType';
   vitalSignsNodeData?: Array<{
-    __typename?: 'VitalSignsNodeData';
     body_temperature_unit?: string | null;
     systolic_bp_unit?: string | null;
     respiration_pattern?: string | null;
@@ -26245,9 +26263,7 @@ export type AdverseEventNodeDataQueryVariables = Exact<{
 }>;
 
 export type AdverseEventNodeDataQuery = {
-  __typename?: 'QueryType';
   adverseEventNodeData?: Array<{
-    __typename?: 'AdverseEventNodeData';
     dose_limiting_toxicity?: string | null;
     unexpected_adverse_event?: string | null;
     date_of_onset?: string | null;
@@ -26274,9 +26290,7 @@ export type DiseaseExtentNodeDataQueryVariables = Exact<{
 }>;
 
 export type DiseaseExtentNodeDataQuery = {
-  __typename?: 'QueryType';
   diseaseExtentNodeData?: Array<{
-    __typename?: 'DiseaseExtentNodeData';
     lesion_number?: number | null;
     lesion_site?: string | null;
     lesion_description?: string | null;
@@ -26297,9 +26311,7 @@ export type FollowUpNodeDataQueryVariables = Exact<{
 }>;
 
 export type FollowUpNodeDataQuery = {
-  __typename?: 'QueryType';
   followUpNodeData?: Array<{
-    __typename?: 'FollowUpNodeData';
     document_number?: string | null;
     date_of_last_contact?: string | null;
     patient_status?: string | null;
@@ -26316,9 +26328,7 @@ export type OffStudyNodeDataQueryVariables = Exact<{
 }>;
 
 export type OffStudyNodeDataQuery = {
-  __typename?: 'QueryType';
   offStudyNodeData?: Array<{
-    __typename?: 'OffStudyNodeData';
     document_number?: string | null;
     date_off_study?: string | null;
     reason_off_study?: string | null;
@@ -26336,9 +26346,7 @@ export type OffTreatmentNodeDataQueryVariables = Exact<{
 }>;
 
 export type OffTreatmentNodeDataQuery = {
-  __typename?: 'QueryType';
   offTreatmentNodeData?: Array<{
-    __typename?: 'OffTreatmentNodeData';
     document_number?: string | null;
     date_off_treatment?: string | null;
     reason_off_treatment?: string | null;
@@ -26355,13 +26363,8 @@ export type StudyClinicalDataQueryVariables = Exact<{
 }>;
 
 export type StudyClinicalDataQuery = {
-  __typename?: 'QueryType';
-  agentNodeData?: Array<{
-    __typename?: 'AgentNodeData';
-    medication?: string | null;
-  } | null> | null;
+  agentNodeData?: Array<{ medication?: string | null } | null> | null;
   cycleNodeData?: Array<{
-    __typename?: 'CycleNodeData';
     cycle_number?: number | null;
     date_of_cycle_start?: string | null;
     date_of_cycle_end?: string | null;
@@ -26369,14 +26372,12 @@ export type StudyClinicalDataQuery = {
     case_id?: string | null;
   } | null> | null;
   visitNodeData?: Array<{
-    __typename?: 'VisitNodeData';
     case_id?: string | null;
     visit_date?: string | null;
     visit_number?: number | null;
     visit_id?: string | null;
   } | null> | null;
   priorTherapyNodeData?: Array<{
-    __typename?: 'PriorTherapyNodeData';
     date_of_first_dose?: string | null;
     date_of_last_dose?: string | null;
     agent_name?: string | null;
@@ -26405,7 +26406,6 @@ export type StudyClinicalDataQuery = {
     treatment_performed_in_minimal_residual?: boolean | null;
   } | null> | null;
   priorSurgeryNodeData?: Array<{
-    __typename?: 'PriorSurgeryNodeData';
     case_id?: string | null;
     date_of_surgery?: string | null;
     procedure?: string | null;
@@ -26415,10 +26415,8 @@ export type StudyClinicalDataQuery = {
     therapeutic_indicator?: string | null;
   } | null> | null;
   priorSurgeryNodeDataOverview?: {
-    __typename?: 'PriorSurgeryNodeDataOverview';
     case_count?: number | null;
     prior_surgeries?: Array<{
-      __typename?: 'PriorSurgeryNodeData';
       case_id?: string | null;
       date_of_surgery?: string | null;
       procedure?: string | null;
@@ -26429,7 +26427,6 @@ export type StudyClinicalDataQuery = {
     } | null> | null;
   } | null;
   agentAdministrationNodeData?: Array<{
-    __typename?: 'AgentAdministrationNodeData';
     document_number?: string | null;
     medication?: string | null;
     route_of_administration?: string | null;
@@ -26452,7 +26449,6 @@ export type StudyClinicalDataQuery = {
     comment?: string | null;
   } | null> | null;
   physicalExamNodeData?: Array<{
-    __typename?: 'PhysicalExamNodeData';
     case_id?: string | null;
     date_of_examination?: string | null;
     day_in_cycle?: number | null;
@@ -26463,7 +26459,6 @@ export type StudyClinicalDataQuery = {
     assessment_timepoint?: number | null;
   } | null> | null;
   vitalSignsNodeData?: Array<{
-    __typename?: 'VitalSignsNodeData';
     body_temperature_unit?: string | null;
     systolic_bp_unit?: string | null;
     respiration_pattern?: string | null;
@@ -26493,7 +26488,6 @@ export type StudyClinicalDataQuery = {
     body_temperature_original?: number | null;
   } | null> | null;
   adverseEventNodeData?: Array<{
-    __typename?: 'AdverseEventNodeData';
     case_id?: string | null;
     day_in_cycle?: number | null;
     dose_limiting_toxicity?: string | null;
@@ -26516,7 +26510,6 @@ export type StudyClinicalDataQuery = {
     other_attribution_description?: string | null;
   } | null> | null;
   diseaseExtentNodeData?: Array<{
-    __typename?: 'DiseaseExtentNodeData';
     case_id?: string | null;
     lesion_number?: number | null;
     lesion_site?: string | null;
@@ -26532,7 +26525,6 @@ export type StudyClinicalDataQuery = {
     evaluation_code?: string | null;
   } | null> | null;
   followUpNodeData?: Array<{
-    __typename?: 'FollowUpNodeData';
     document_number?: string | null;
     date_of_last_contact?: string | null;
     patient_status?: string | null;
@@ -26543,7 +26535,6 @@ export type StudyClinicalDataQuery = {
     physical_exam_changes?: boolean | null;
   } | null> | null;
   offStudyNodeData?: Array<{
-    __typename?: 'OffStudyNodeData';
     document_number?: string | null;
     date_off_study?: string | null;
     reason_off_study?: string | null;
@@ -26555,7 +26546,6 @@ export type StudyClinicalDataQuery = {
     date_of_best_response?: string | null;
   } | null> | null;
   offTreatmentNodeData?: Array<{
-    __typename?: 'OffTreatmentNodeData';
     document_number?: string | null;
     date_off_treatment?: string | null;
     reason_off_treatment?: string | null;
@@ -26648,9 +26638,7 @@ export type GetCasesTabQueryVariables = Exact<{
 }>;
 
 export type GetCasesTabQuery = {
-  __typename?: 'QueryType';
   caseOverview?: Array<{
-    __typename?: 'CaseOverviewES';
     case_id?: string | null;
     study_code?: string | null;
     study_type?: string | null;
@@ -26767,9 +26755,7 @@ export type SampleOverviewQueryVariables = Exact<{
 }>;
 
 export type SampleOverviewQuery = {
-  __typename?: 'QueryType';
   sampleOverview?: Array<{
-    __typename?: 'SampleOverviewES';
     sample_id?: string | null;
     case_id?: string | null;
     breed?: string | null;
@@ -26896,9 +26882,7 @@ export type GetFilesTabTableDownloadCsvQueryVariables = Exact<{
 }>;
 
 export type GetFilesTabTableDownloadCsvQuery = {
-  __typename?: 'QueryType';
   fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
     file_name?: string | null;
     file_type?: string | null;
     sample_id?: string | null;
@@ -27033,9 +27017,7 @@ export type GetFilesTabForStudyFilesQueryVariables = Exact<{
 }>;
 
 export type GetFilesTabForStudyFilesQuery = {
-  __typename?: 'QueryType';
   fileOverview?: Array<{
-    __typename?: 'FileOverviewES';
     file_name?: string | null;
     file_type?: string | null;
     sample_id?: string | null;
@@ -27092,9 +27074,7 @@ export type GetMyCartQueryVariables = Exact<{
 }>;
 
 export type GetMyCartQuery = {
-  __typename?: 'QueryType';
   filesInList?: Array<{
-    __typename?: 'FileInList';
     file_type?: string | null;
     file_name?: string | null;
     association?: string | null;
@@ -27148,43 +27128,18 @@ export type StoreManifestQueryVariables = Exact<{
   manifest: Scalars['String']['input'];
 }>;
 
-export type StoreManifestQuery = {
-  __typename?: 'QueryType';
-  storeManifest?: string | null;
-};
-
-export type GetStudiesByProgramProgramDetailQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetStudiesByProgramProgramDetailQuery = {
-  __typename?: 'QueryType';
-  studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
-    clinical_study_designation?: string | null;
-    numberOfCRDCNodes?: number | null;
-    numberOfImageCollections?: number | null;
-    CRDCLinks?: Array<{
-      __typename?: 'Link';
-      url?: string | null;
-      repository?: string | null;
-    } | null> | null;
-  } | null> | null;
-};
+export type StoreManifestQuery = { storeManifest?: string | null };
 
 export type GetStudiesByProgramProgramDetailTwoQueryVariables = Exact<{
   [key: string]: never;
 }>;
 
 export type GetStudiesByProgramProgramDetailTwoQuery = {
-  __typename?: 'QueryType';
   studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
     clinical_study_designation?: string | null;
     numberOfCRDCNodes?: number | null;
     numberOfImageCollections?: number | null;
     CRDCLinks?: Array<{
-      __typename?: 'Link';
       url?: string | null;
       repository?: string | null;
     } | null> | null;
@@ -27196,14 +27151,11 @@ export type GetStudiesByProgramStudiesViewQueryVariables = Exact<{
 }>;
 
 export type GetStudiesByProgramStudiesViewQuery = {
-  __typename?: 'QueryType';
   studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
     clinical_study_designation?: string | null;
     numberOfCRDCNodes?: number | null;
     numberOfImageCollections?: number | null;
     CRDCLinks?: Array<{
-      __typename?: 'Link';
       url?: string | null;
       repository?: string | null;
     } | null> | null;

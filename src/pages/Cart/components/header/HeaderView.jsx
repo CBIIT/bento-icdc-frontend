@@ -58,7 +58,7 @@ const HeaderView = ({ filesId }) => {
       </Styled.CartHeader>
 
       <Styled.OverviewWidgetWrapper>
-        <OverviewWidget />
+        <OverviewWidget fileIds={filesId} />
       </Styled.OverviewWidgetWrapper>
 
       <Styled.SelectFilesActionContainer container>

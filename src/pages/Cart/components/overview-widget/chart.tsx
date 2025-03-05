@@ -6,11 +6,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
   TooltipPayload,
 } from 'recharts';
 import styled from '@emotion/styled';
-import { ChartData } from './data';
+import { CartChartItem } from '../../../../generated-types/types';
 
 export const CustomTooltipWrapper = styled.div({
   backgroundColor: '#fff',
@@ -36,6 +35,7 @@ export const CustomTooltipWrapper = styled.div({
 export const LegendWrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  marginLeft: '32px',
   '& .icon-and-text-wrapper': {
     display: 'flex',
     gap: '16px',
@@ -87,7 +87,7 @@ export const palette = [
 ];
 
 interface ChartProps {
-  chartData: ChartData[];
+  chartData: CartChartItem[];
   yAxisLabel: string;
 }
 
@@ -105,7 +105,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
     data,
     colors,
   }: {
-    data: ChartData[];
+    data: CartChartItem[];
     colors: string[];
   }) => {
     return (
@@ -150,8 +150,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
     payload?: TooltipPayload[];
   }) => {
     if (active && payload && payload.length) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      const data = payload[0].payload as ChartData;
+      const data = payload[0].payload as CartChartItem;
       setHoveredGroup(data.label);
 
       return (
@@ -167,60 +166,56 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-      }}
-    >
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart
-          layout="vertical" // Make the bars horizontal
-          data={chartData}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
+    <>
+      <BarChart
+        layout="vertical" // Make the bars horizontal
+        data={chartData}
+        height={600}
+        width={800}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis
+          type="number"
+          label={{
+            value: 'File Count',
+            offset: -5,
+            position: 'insideBottom',
+            style: {
+              fontFamily: 'Inter',
+              fontWeight: '500',
+              fontSize: '13px',
+              color: '#444444',
+            },
           }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            type="number"
-            label={{
-              value: 'File Count',
-              offset: -5,
-              position: 'insideBottom',
-              style: {
-                fontFamily: 'Inter',
-                fontWeight: '500',
-                fontSize: '13px',
-                color: '#444444',
-              },
-            }}
-          />
-          <YAxis
-            tickFormatter={tickFormatter}
-            type="category"
-            dataKey="label"
-            interval={0}
-            label={{
-              value: yAxisLabel,
-              angle: -90,
-              position: 'inside',
-              offset: 5,
-              style: {
-                fontFamily: 'Inter',
-                fontWeight: '500',
-                color: '#444444',
-                fontSize: '13px',
-              },
-            }}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Bar dataKey="value" fill="#8884d8" />
-        </BarChart>
-      </ResponsiveContainer>
+        />
+        <YAxis
+          tickFormatter={tickFormatter}
+          type="category"
+          dataKey="label"
+          interval={0}
+          label={{
+            value: yAxisLabel,
+            angle: -90,
+            position: 'inside',
+            offset: 5,
+            style: {
+              fontFamily: 'Inter',
+              fontWeight: '500',
+              color: '#444444',
+              fontSize: '13px',
+            },
+          }}
+        />
+        <Tooltip content={<CustomTooltip />} />
+        <Bar dataKey="value" fill="#8884d8" barSize={50} />
+      </BarChart>
       <CustomLegend data={chartData} colors={palette} />
-    </div>
+    </>
   );
 };

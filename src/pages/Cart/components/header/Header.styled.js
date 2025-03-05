@@ -9,6 +9,7 @@ export const CartHeader = styled('div')({
   width: '100%',
   height: '85px',
   borderBottom: '3px solid #686F7F',
+  minWidth: '1500px',
 });
 
 export const CartHeaderLogo = styled('div')({
@@ -22,7 +23,8 @@ export const CartHeaderLogo = styled('div')({
 
 export const OverviewWidgetWrapper = styled.div({
   marginBottom: '16px',
-  width: '100%',
+  display: 'flex',
+  flex: 1,
 });
 
 export const CartHeaderLogoIcon = styled('img')({
@@ -59,6 +61,7 @@ export const ReadMeButton = styled(Button)({
 
 export const SelectFilesActionContainer = styled(Box)({
   width: '100%',
+  minWidth: '1279px',
   textAlign: 'right',
   paddingRight: '80px',
   justifyContent: 'flex-end',

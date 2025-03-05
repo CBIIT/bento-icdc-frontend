@@ -1,190 +1,83 @@
-import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Box from '@mui/material/Box';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
 import { Chart } from './chart';
-import { MockData, mockData } from './data';
 import Open from '../../assets/open.svg';
 import Collapse from '../../assets/collapse.svg';
 import Files from '../../assets/files.svg';
 import Studies from '../../assets/studies.svg';
 import Cases from '../../assets/cases.svg';
-import { Dialog, DialogContent, DialogTitle, Tab } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { startCase, upperCase } from 'lodash';
+import { Tab } from '@mui/material';
+import { defaultTo, startCase, upperCase } from 'lodash';
+import { useQuery } from '@apollo/client';
+import { GetCartOverviewDataDocument } from '../../../../generated-types/graphql';
+import {
+  Container,
+  Wrapper,
+  LeftContainerSection,
+  RightContainerSection,
+  Panel,
+  LeftPanelSection,
+  IconAndTextContainer,
+  IconAndTextWrapper,
+  RightPanelSection,
+} from './overview-widget.styled';
+import { SkeletonLoader } from '../../../../components/Skeleton';
+import { CartChartData } from '../../../../generated-types/types';
 
-export const modalWidth = '1000px';
+type CartChartKeys = keyof Omit<CartChartData, 'schema_validation_placeholder'>;
 
-export const StyledLink = styled(Link)({
-  textDecoration: 'none',
-  lineHeight: '14px',
-  fontWeight: 'bold',
-  position: 'relative',
-  top: '2px',
-  color: '#dc762f',
-  '&:hover': {
-    textDecoration: 'none',
-  },
-});
-
-export const StyledDialog = styled(Dialog)({
-  '& .MuiDialog-paper': {
-    maxWidth: modalWidth,
-    height: '100%',
-    width: '100%',
-    overflowY: 'hidden',
-  },
-});
-
-export const StyledDialogContent = styled(DialogContent)({
-  '&.MuiDialogContent-root': {
-    padding: '32px 16px',
-    overflowY: 'hidden',
-  },
-});
-
-export const StyledTab = styled(Tab)({
-  '&.MuiTab-root': {
-    fontFamily: 'Roboto',
-    fontWeight: 500,
-    fontSize: '14px',
-    color: '#000',
-  },
-});
-
-export const StyledDialogTitle = styled(DialogTitle)({
-  '&.MuiDialogTitle-root': {
-    borderBottom: '1px solid #d1dbe0',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-});
-
-export const StyledTabPanel = styled(TabPanel)({
-  '&.MuiTabPanel-root': {
-    '& .recharts-responsive-container': {
-      width: '580px',
+export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
+  const { loading, error, data } = useQuery(GetCartOverviewDataDocument, {
+    variables: {
+      file_uuids: defaultTo(fileIds, []),
     },
-    '& > div': {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    '@media (max-width: 959px)': {
-      height: '100%',
-    },
-  },
-});
+    skip: !fileIds,
+  });
 
-export const Container = styled.div({
-  width: '100%',
-  padding: '24px',
-});
+  const cartOverviewData = useMemo(
+    () => defaultTo(data?.cartOverview, {}),
+    [data]
+  );
+  const { totalNumberOfFiles, totalNumberOfCases, studiesInCart, charts } =
+    cartOverviewData;
+  const chartKeys = useMemo(
+    () =>
+      Object.keys(defaultTo(charts, {})).filter(
+        item => item !== '__typename'
+      ) as CartChartKeys[],
+    [charts]
+  );
 
-export const Wrapper = styled.div({
-  // background: "yellow",
-  display: 'grid',
-  gridTemplateColumns: '1fr 2fr',
-  borderRadius: '8px',
-  border: '1px solid black',
-  height: '60px',
-});
-
-export const Panel = styled(Wrapper)({
-  height: '100%',
-});
-export const LeftContainerSection = styled.div({
-  borderRight: '1px solid black',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '16px',
-  color: '#CB8311',
-  fontSize: '23px',
-  fontWeight: '700',
-  fontFamily: 'Lato',
-  lineHeight: '19px',
-});
-export const RightContainerSection = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-});
-export const LeftPanelSection = styled.div({
-  borderRight: '1px solid black',
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '24px',
-  alignItems: 'center',
-  '& .left-panel-title': {
-    color: '#CB8311',
-    fontSize: '23px',
-    fontWeight: '700',
-    fontFamily: 'Lato',
-    lineHeight: '19px',
-  },
-  // gap: "16px",
-});
-export const RightPanelSection = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-});
-export const IconAndTextWrapper = styled.div({
-  display: 'flex',
-  gap: '32px',
-  '& .icon': {
-    height: '50px',
-    width: '50px',
-  },
-  '& .title-wrapper': {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
-  },
-  '& .title': {
-    color: '#6A6A6A',
-    fontSize: '16px',
-    fontWeight: '500',
-    fontFamily: 'Lato',
-    lineHeight: '19px',
-  },
-  '& .subtitle': {
-    color: '#383838',
-    fontSize: '24px',
-    fontWeight: '700',
-    fontFamily: 'Lato',
-    lineHeight: '19px',
-  },
-});
-export const IconAndTextContainer = styled.div({
-  display: 'grid',
-  gridTemplateRows: '1fr 1fr 1fr',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '100%',
-  width: '100%',
-});
-
-export const OverviewWidget = () => {
   const [isPanelVisible, setIsPanelVisible] = useState(false);
-  const [value, setValue] = React.useState<string | number>(0);
+  const [value, setValue] = React.useState<number>(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const handleTogglePanel = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (error) return;
+    setIsPanelVisible(!isPanelVisible);
+  };
+
+  if (loading) {
+    return <SkeletonLoader />;
+  }
 
   return (
     <Container>
       {!isPanelVisible && (
-        <Wrapper
-          onClick={e => {
-            e.preventDefault();
-            setIsPanelVisible(!isPanelVisible);
-          }}
-        >
-          <LeftContainerSection>{'Case Count Overview'}</LeftContainerSection>
+        <Wrapper onClick={handleTogglePanel}>
+          <LeftContainerSection error={!!error}>
+            {!error
+              ? 'Case Count Overview'
+              : 'Error fetching cart overview data'}
+          </LeftContainerSection>
 
           <RightContainerSection>
             <div
@@ -200,19 +93,14 @@ export const OverviewWidget = () => {
       )}
       {isPanelVisible && (
         <Panel>
-          <LeftPanelSection
-            onClick={e => {
-              e.preventDefault();
-              setIsPanelVisible(!isPanelVisible);
-            }}
-          >
+          <LeftPanelSection onClick={handleTogglePanel}>
             <div className="left-panel-title">Case Count Overview</div>
             <IconAndTextContainer>
               <IconAndTextWrapper>
                 <img className="icon" src={Files} />
                 <div className="title-wrapper">
                   <div className="title">Total Number of Files</div>
-                  <div className="subtitle">926 Files</div>
+                  <div className="subtitle">{totalNumberOfFiles} Files</div>
                 </div>
               </IconAndTextWrapper>
 
@@ -220,7 +108,7 @@ export const OverviewWidget = () => {
                 <img className="icon" src={Studies} />
                 <div className="title-wrapper">
                   <div className="title">Studies in this Cart</div>
-                  <div className="subtitle">GLIOMA01, MGT01</div>
+                  <div className="subtitle">{studiesInCart.join(', ')}</div>
                 </div>
               </IconAndTextWrapper>
 
@@ -228,27 +116,19 @@ export const OverviewWidget = () => {
                 <img className="icon" src={Cases} />
                 <div className="title-wrapper">
                   <div className="title">Total Number of Cases</div>
-                  <div className="subtitle">94 Cases</div>
+                  <div className="subtitle">{totalNumberOfCases} Cases</div>
                 </div>
               </IconAndTextWrapper>
             </IconAndTextContainer>
           </LeftPanelSection>
 
-          <RightPanelSection
-            onClick={e => {
-              e.preventDefault();
-              // setIsPanelVisible(!isPanelVisible);
-            }}
-          >
+          <RightPanelSection>
             <div
               style={{
                 alignSelf: 'end',
                 marginRight: '16px',
               }}
-              onClick={e => {
-                e.preventDefault();
-                setIsPanelVisible(!isPanelVisible);
-              }}
+              onClick={handleTogglePanel}
             >
               <img src={Collapse} />
             </div>
@@ -264,25 +144,33 @@ export const OverviewWidget = () => {
                   onChange={handleChange}
                   aria-label="lab API tabs example"
                 >
-                  {Object.keys(mockData.charts).map((item, index) => (
-                    <Tab
-                      label={upperCase(item)}
-                      value={index}
-                      key={`${item}`}
-                    />
-                  ))}
+                  {chartKeys.map((item, index) => {
+                    return (
+                      <Tab
+                        label={upperCase(item)}
+                        value={index}
+                        key={`${item}`}
+                      />
+                    );
+                  })}
                 </TabList>
               </Box>
-              {Object.keys(mockData.charts).map((item, index) => (
-                <StyledTabPanel value={index} key={`${item}`}>
+              {
+                <div
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '32px',
+                  }}
+                >
                   <Chart
-                    chartData={
-                      mockData.charts[item as keyof MockData['charts']]
-                    }
-                    yAxisLabel={startCase(item)}
+                    chartData={charts[chartKeys[value]]}
+                    yAxisLabel={startCase(chartKeys[value])}
                   />
-                </StyledTabPanel>
-              ))}
+                </div>
+              }
             </TabContext>
           </RightPanelSection>
         </Panel>
