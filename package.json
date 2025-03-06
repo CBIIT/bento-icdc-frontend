@@ -118,7 +118,7 @@
     "sass": "^1.83.0",
     "sass-loader": "^16.0.3",
     "style-loader": "^4.0.0",
-    "terser-webpack-plugin": "^5.3.11",
+    "terser-webpack-plugin": "^5.3.13",
     "thread-loader": "^4.0.4",
     "ts-loader": "^9.5.2",
     "typescript": "^5.6.3",
