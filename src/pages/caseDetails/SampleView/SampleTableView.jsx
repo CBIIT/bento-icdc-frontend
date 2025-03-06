@@ -33,6 +33,7 @@ const SampleTableView = ({ data }) => {
 
   // accesss table state
   const { context } = useContext(TableContext);
+  const hasSelected = Boolean(context?.selectedRows?.length);
 
   const paginationOptions = {
     customizeToggleSelectAll: event => {
@@ -52,11 +53,10 @@ const SampleTableView = ({ data }) => {
 
   return (
     <>
-      <Styled.TitleContainer maxWidth={false}>
-        <Styled.TableTitle>{sampleTable.tableTitle}</Styled.TableTitle>
-      </Styled.TitleContainer>
-
-      <Styled.TableContainer>
+      <Styled.TableContainer hasSelected={hasSelected}>
+        <Styled.TitleContainer maxWidth={false}>
+          <Styled.TableTitle>{sampleTable.tableTitle}</Styled.TableTitle>
+        </Styled.TitleContainer>
         <TableView
           initState={initTblState}
           themeConfig={{

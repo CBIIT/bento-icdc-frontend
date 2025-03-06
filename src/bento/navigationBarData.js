@@ -266,5 +266,5 @@ export const navBarCartData = {
 
 export const navBarExclusions = [
   '#/jBrowse/singleFileView',
-  '#/jBrowse/multiFileView',
+  '#/jBrowse/multiFilesView',
 ];
