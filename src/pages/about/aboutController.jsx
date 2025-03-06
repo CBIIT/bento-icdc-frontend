@@ -16,7 +16,7 @@ const About = ({ match }) => {
       let result = [];
       try {
         result = await axios.get(ABOUT_CONTENT_URL);
-        resultData = yaml.safeLoad(result.data);
+        resultData = yaml.load(result.data);
       } catch (_error) {
         // result = await axios.get(YAMLData);
         // resultData = yaml.safeLoad(result.data);
