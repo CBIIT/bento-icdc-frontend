@@ -1,40 +1,38 @@
 import React from 'react';
-import {
-  Container,
-  createTheme,
-  ThemeProvider,
-  withStyles,
-} from '@material-ui/core';
+import { Container, createTheme, ThemeProvider } from '@mui/material';
 import AboutHeader from './aboutHeader';
 import Stats from '../../components/Stats/AllStatsController';
 import { AboutBody } from '../../bento-core';
+import {
+  Container as StyledContainer,
+  Image as StyledImage,
+} from './about.styled';
 
-const AboutView = ({ classes, data }) => {
+const AboutView = ({ data }) => {
   const getImage = (imgPath, alt) => (
-    <img
-      className={classes.img}
-      src={imgPath != null ? imgPath : ''}
-      alt={alt}
-    />
+    <StyledImage src={imgPath != null ? imgPath : ''} alt={alt} />
   );
+
   const theme = {
-    overrides: {
+    components: {
       MuiGrid: {
-        root: {
-          '@media (min-width: 1920px)': {
-            maxWidth: '100%',
-          },
-          '@media (min-width: 1280px)': {
-            maxWidth: '100%',
-          },
-          '& a': {
-            color: '#B85300',
-            cursor: 'pointer',
-            fontFamily: 'Open Sans',
-            fontWeight: '600',
-            textDecoration: 'underline',
-            '&:hover': {
-              color: '#9E4700',
+        styleOverrides: {
+          root: {
+            '@media (min-width: 1920px)': {
+              maxWidth: '100%',
+            },
+            '@media (min-width: 1280px)': {
+              maxWidth: '100%',
+            },
+            '& a': {
+              color: '#B85300',
+              cursor: 'pointer',
+              fontFamily: 'Open Sans',
+              fontWeight: '600',
+              textDecoration: 'underline',
+              '&:hover': {
+                color: '#9E4700',
+              },
             },
           },
         },
@@ -45,7 +43,7 @@ const AboutView = ({ classes, data }) => {
   return (
     <ThemeProvider theme={createTheme(theme)}>
       <Stats />
-      <div className={classes.container}>
+      <StyledContainer>
         <AboutHeader title={data.title} />
         <Container>
           <AboutBody
@@ -71,17 +69,9 @@ const AboutView = ({ classes, data }) => {
             }}
           />
         </Container>
-      </div>
+      </StyledContainer>
     </ThemeProvider>
   );
 };
-const styles = () => ({
-  img: {
-    width: '100%',
-  },
-  container: {
-    paddingTop: '43px',
-  },
-});
 
-export default withStyles(styles)(AboutView);
+export default AboutView;
