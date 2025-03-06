@@ -58,15 +58,15 @@ export const tblBody = (table: TableConfig) => {
             cursor: 'pointer',
             fontFamily: 'Open Sans',
             fontWeight: '600',
+            textDecoration: 'underline',
+            '&:hover': {
+              color: '#9E4700',
+            },
             '& p': {
               fontSize: '15px',
               textDecoration: 'underline',
               fontWeight: '600',
             },
-          },
-          '& a:hover': {
-            color: '#007ACC',
-            cursor: 'pointer',
           },
           '& p': {
             fontSize: '16px',
