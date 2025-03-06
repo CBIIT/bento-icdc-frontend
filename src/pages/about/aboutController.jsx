@@ -3,7 +3,7 @@ import yaml from 'js-yaml';
 import axios from 'axios';
 import env from '../../utils/env';
 import AboutView from './aboutView';
-import { CircularProgress } from '@mui/material';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
 
@@ -28,7 +28,7 @@ const About = ({ match }) => {
     fetchData();
   }, [match.path]);
   if (!data) {
-    return <CircularProgress />;
+    return <SkeletonLoader />;
   }
   return <AboutView data={data} />;
 };
