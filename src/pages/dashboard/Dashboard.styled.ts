@@ -1,11 +1,12 @@
 import { styled } from '@material-ui/styles';
 export const DashboardContainer = styled('div')({
   backgroundColor: '#FFFFFF',
+  flex: 1,
 });
 export const Content = styled('div')({
   margin: 'auto',
   display: 'flex',
-  // paddingTop: '60px',
+  marginTop: '60px',
 });
 export const SideBar = styled('div')({
   width: '250px',

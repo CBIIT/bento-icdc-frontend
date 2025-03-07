@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import ProgramDetailView from './program-detail-view';
 import { convertCRDCLinksToValue } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
@@ -10,6 +9,7 @@ import {
   ProgramQuery,
   ProgramQueryVariables,
 } from '../../generated-types/graphql';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 interface ProgramDetailControllerProps {
   match: RouteComponentProps<{ id: string }>['match'];
@@ -24,7 +24,7 @@ const ProgramDetailController: React.FC<ProgramDetailControllerProps> = ({
     variables: { programTitle: match.params.id },
   });
 
-  if (loading) return <CircularProgress />;
+  if (loading) return <SkeletonLoader variant="withRounded" />;
   if (!data || data.program.length === 0) {
     return (
       <Typography color="error">

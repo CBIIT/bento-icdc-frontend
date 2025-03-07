@@ -1,9 +1,26 @@
-import React from "react";
+import React from 'react';
+import styled from '@emotion/styled';
 
-const TabPanel = ({ children, value, index }) => (
-  <div role="tabpanel" hidden={value !== index}>
-    <div>{children}</div>
-  </div>
+export const Container = styled.div(props => ({
+  ...props.styles,
+}));
+
+export const InnerContaner = styled.div(props => ({
+  ...props.styles,
+}));
+
+const TabPanel = ({ children, value, index, style, innerDivStyle }) => (
+  <Container
+    role="tabpanel"
+    hidden={value !== index}
+    styles={
+      style
+        ? { ...style, display: value !== index ? 'none' : 'flex' }
+        : undefined
+    }
+  >
+    <InnerContaner styles={{ ...innerDivStyle }}>{children}</InnerContaner>
+  </Container>
 );
 
 export default TabPanel;

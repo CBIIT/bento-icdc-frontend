@@ -1,14 +1,14 @@
-import React from "react";
-import { withStyles } from "@material-ui/styles";
-import axios from "axios";
-import yaml from "js-yaml";
-import styles from "./ClinicalDataStyle";
-import env from "../../../../utils/env";
+import React from 'react';
+import { withStyles } from '@material-ui/styles';
+import axios from 'axios';
+import yaml from 'js-yaml';
+import styles from './ClinicalDataStyle';
+import env from '../../../../utils/env';
 
 const DataTable = () => {
-  const getData = async (url) => {
+  const getData = async url => {
     const response = await axios.get(url);
-    const data = yaml.safeLoad(response.data);
+    const data = yaml.load(response.data);
     return data;
   };
   const DATA_MODEL = env.REACT_APP_DATA_MODEL;

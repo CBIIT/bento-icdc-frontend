@@ -24,9 +24,12 @@ const AddFilesButtonTheme = ({ children }) => {
           '@media (min-width: 1920px)': {
             maxWidth: '100%',
             background: '#f3f3f3',
+            paddingTop: '0px !important',
           },
         },
         root: {
+          background: '#f3f3f3',
+          paddingTop: '0px !important',
           paddingLeft: '19px !important',
           '& img': {
             width: '17px',
@@ -55,7 +58,7 @@ const AddFilesButtonTheme = ({ children }) => {
           textTransform: 'uppercase',
           '&.add_selected_button': {
             color: '#fff',
-            backgroundColor: '#ff7e15',
+            backgroundColor: '#C25700',
             marginRight: '10px',
             textTransform: 'none',
           },

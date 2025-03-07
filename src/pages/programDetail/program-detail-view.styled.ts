@@ -3,14 +3,14 @@ import styled from '@emotion/styled';
 
 export const ProgramDetailContainer = styled('div')({
   width: '100%',
-  padding: '12px 47px 60px 47px',
+  padding: '70px 47px 60px 47px',
 });
 
 export const ProgramDetailHeader = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '300px',
+  // gap: '300px',
   padding: '0px 64px 10px 64px',
   borderBottom: '4px solid #81A6B9',
 });
@@ -25,12 +25,13 @@ export const IconTitleWrapper = styled('div')({
   alignItems: 'center',
   position: 'relative',
   top: '25px',
-  gap: '16px',
+  marginRight: '32px',
 });
 
 export const ClipboardIcon = styled('img')({
   width: '88px',
   height: '88px',
+  marginRight: '16px',
 });
 
 export const ProgramDetailTitle = styled('div')({
@@ -73,6 +74,7 @@ export const TableContainer = styled('div')({
   backgroundColor: '#F3F6F7',
   padding: '47px',
   paddingBottom: '88px',
+  flex: '1',
 });
 
 export const TableContainerTitle = styled('h3')({

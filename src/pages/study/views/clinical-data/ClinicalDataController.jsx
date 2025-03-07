@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { CircularProgress, withStyles } from "@material-ui/core";
-import axios from "axios";
-import yaml from "js-yaml";
-import { useQuery } from "@apollo/client";
-import ClinicalDataView from "./ClinicalDataView";
-import styles from "./ClinicalDataStyle";
+import React, { useEffect, useState } from 'react';
+import { withStyles } from '@material-ui/core';
+import axios from 'axios';
+import yaml from 'js-yaml';
+import { useQuery } from '@apollo/client';
+import ClinicalDataView from './ClinicalDataView';
+import styles from './ClinicalDataStyle';
 import {
   GET_CILICAL_DATA_OF_STUDY,
   table,
-} from "../../../../bento/studyDetailsData";
-import env from "../../../../utils/env";
+} from '../../../../bento/studyDetailsData';
+import env from '../../../../utils/env';
+import { SkeletonLoader } from '../../../../components/Skeleton';
 
 const ClinicalDataController = ({ studyCode, classes, dataCount }) => {
   /**
@@ -19,7 +20,7 @@ const ClinicalDataController = ({ studyCode, classes, dataCount }) => {
   const DATA_MODEL = env.REACT_APP_DATA_MODEL;
   const getNodeDescription = async () => {
     const response = await axios.get(DATA_MODEL);
-    const dictionary = yaml.safeLoad(response.data);
+    const dictionary = yaml.load(response.data);
     const { Nodes: allNodes } = dictionary;
     const nodeDescription = Object.keys(allNodes || []).reduce((acc, node) => {
       acc[node] = allNodes[node].Desc;
@@ -43,20 +44,20 @@ const ClinicalDataController = ({ studyCode, classes, dataCount }) => {
   if (loading || !description) {
     return (
       <div className={classes.container}>
-        <CircularProgress />
+        <SkeletonLoader />
       </div>
     );
   }
 
   const { caseCount, nodeCount } = dataCount;
 
-  const getFileName = (title) =>
-    `ICDC_Clinical_Data-${studyCode}-${title.toUpperCase()}`.replace(" ", "_");
+  const getFileName = title =>
+    `ICDC_Clinical_Data-${studyCode}-${title.toUpperCase()}`.replace(' ', '_');
 
   /**
    * prepare data for table row and download CVS File download
    */
-  const rows = table.rows.map((row) => {
+  const rows = table.rows.map(row => {
     const rowData = data[row.dataKey];
     // ICDC-3579
     const caseCnt = rowData
@@ -68,7 +69,7 @@ const ClinicalDataController = ({ studyCode, classes, dataCount }) => {
     return {
       ...row,
       clinicalDataNode: row.title,
-      clinicalDataDescription: description[row.countKey] || "",
+      clinicalDataDescription: description[row.countKey] || '',
       recordCount: nodeCount[row.countKey] || 0,
       caseCount: caseCnt,
       csvDataRow: csvDownloadData,

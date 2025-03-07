@@ -4,7 +4,7 @@ export const Container = styled.div({});
 
 export const DescriptionAndPhotoContainer = styled.div({
   display: 'flex',
-  gap: '75px',
+  justifyContent: 'space-between',
 });
 
 export const DescriptionTitle = styled.h3({
@@ -23,8 +23,7 @@ export const Description = styled.p({
 });
 
 export const DescriptionContainer = styled.div({
-  maxWidth: '800px',
-  marginRight: '8px',
+  marginRight: '32px',
 });
 
 export const PhotoContainer = styled.div({

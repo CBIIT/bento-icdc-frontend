@@ -353,10 +353,15 @@ const tblBody = {
       color: '#004C73',
       borderBottom: 'none',
       '& a': {
-        color: '#DC762F',
+        color: '#B85300',
+        fontFamily: 'Open Sans',
+        fontWeight: '600',
         cursor: 'pointer',
         '& p': {
           fontSize: '15px',
+        },
+        '&:hover': {
+          color: '#9E4700',
         },
       },
       '& p': {
