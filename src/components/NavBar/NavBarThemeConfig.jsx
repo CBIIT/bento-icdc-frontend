@@ -7,13 +7,14 @@ const NavBarThemeProvider = ({ children }) => {
   const overridesObj = themes.light.overrides;
   const MuiButton = {
     root: {
-      '&#button_navbar_mycases': {
-        marginRight: '-16px',
-      },
+      '&#button_navbar_mycases': {},
     },
   };
 
   const MuiAppBar = {
+    root: {
+      width: '100% !important',
+    },
     positionFixed: {
       position: 'relative',
       zIndex: 10,

@@ -44,7 +44,7 @@ const commonCardInnerContainer = {
 };
 
 export const Container = styled.div({
-  paddingTop: '8px',
+  paddingTop: '70px',
   fontFamily: 'Raleway, sans-serif',
   paddingLeft: '27px',
   paddingRight: '27px',

@@ -3,38 +3,50 @@ import { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div({
-  paddingTop: '27px',
+  marginTop: '80px',
   fontFamily: 'Raleway, sans-serif',
   paddingLeft: '27px',
   paddingRight: '27px',
+  minWidth: '1404px',
 });
 
 export const Header = styled.div({
-  paddingLeft: '35px',
-  paddingRight: '21px',
   borderBottom: '#81a6b9 4px solid',
   height: '130px',
   margin: 'auto',
+  display: 'flex',
+  position: 'relative',
+  '& .header-content': {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+    top: '39px',
+    flex: 1,
+    width: '100%',
+
+    '& .title-and-button': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flex: 1,
+      marginRight: '18px',
+    },
+  },
 });
 
 export const Breadcrumb = styled.div({
-  marginTop: '-18px',
-  marginBottom: '6px',
   fontFamily: 'Open Sans',
+  padding: '0 18px',
 });
 
 export const Logo = styled.div({
-  position: 'absolute',
-  float: 'left',
   width: '94px',
+  margin: '0 18px',
 });
 
 export const HeaderTitle = styled.div({
-  margin: 'auto',
-  float: 'left',
-  marginLeft: '110px',
-  width: 'calc(100% - 465px)',
-  marginTop: '20px',
+  display: 'flex',
+  flexDirection: 'column',
 });
 
 export const HeaderMainTitle = styled.div({
@@ -45,36 +57,45 @@ export const HeaderMainTitle = styled.div({
   fontSize: '19px',
   height: '12px',
   lineHeight: '17px',
-  paddingLeft: '3px',
+  marginBottom: '8px',
+  display: 'flex',
+  alignItems: 'center',
+
+  '& .title-wrapper': {
+    display: 'flex',
+    alignItems: 'center',
+  },
 });
 
-export const HeaderPropertyName = styled.span({
+export const HeaderPropertyName = styled.div({
   fontWeight: '600',
   color: '#025F7E',
+  marginRight: '4px',
 });
 
-export const HeaderBar = styled.span({
+export const HeaderBar = styled.div({
   fontWeight: '10',
   color: '#5e8ca5',
-  margin: '0px 15px 0 15px',
 });
 
-export const HeaderAccessionItem = styled.span({
+export const HeaderAccessionItem = styled.div({
   borderRadius: '100px',
   border: '2px solid',
-  textAlign: 'center',
-  padding: '0 16px',
   background: 'rgb(203 226 238 / 11%)',
   fontSize: '15px',
+  display: 'flex',
+  alignItems: 'center',
+  height: 'fit-content',
+  padding: '4px',
 });
 
-export const AccessionLabel = styled.span({
+export const AccessionLabel = styled.div({
   fontSize: '14px',
   fontWeight: '600',
   color: '#385966',
 });
 
-export const AccessionValue = styled.span({
+export const AccessionValue = styled.div({
   fontSize: '13px',
   fontWeight: '800',
 });
@@ -140,21 +161,15 @@ export const EmbargoWrapper = styled.div({
 
 export const FileIcon = styled.img({
   width: '20px',
-  float: 'right',
-  marginLeft: '5px',
 });
 
 export const PendingWrapper = styled.div({
   color: '#6D6E71',
-  float: 'right',
   background: '#fff6f6',
   width: '220px',
   height: '33px',
   marginTop: '25px',
   fontWight: 'bolder',
-  paddingLeft: '15px',
-  paddingRight: '14px',
-  paddingTop: '3px',
   textAlign: 'center',
   fontFamily: 'Open Sans',
   border: '3px solid #F3A933',
@@ -163,20 +178,16 @@ export const PendingWrapper = styled.div({
     fontWeight: '600',
     width: '122px',
     fontSize: '13px',
-    marginTop: '3px',
   },
 });
 
 export const HeaderButton = styled.div({
   fontFamily: 'Open Sans',
   border: '3px solid #81a6b9',
-  marginTop: '15px',
-  float: 'right',
   width: '220px',
   height: '33px',
   textAlign: 'center',
   background: '#f6f4f4',
-  padding: '4px 10px 4px 5px',
 });
 
 export const HeaderButtonLinkSpan = styled.span({
@@ -185,7 +196,6 @@ export const HeaderButtonLinkSpan = styled.span({
   fontSize: '13px',
   display: 'inherit',
   height: '15px',
-  marginTop: '-2px',
 });
 
 export const HeaderButtonLink = styled(Link)({
@@ -204,10 +214,8 @@ export const HeaderButtonLinkNumber = styled.div({
   fontFamily: 'sans-serif',
   fontSize: '13px',
   paddingBottom: '3px',
-  margin: '0',
   display: 'inherit',
   fontWeight: '900',
-  marginRight: '4px',
 });
 
 export const HeaderButtonLinkText = styled.span({
@@ -230,4 +238,5 @@ export const DetailContainer = styled.div({
   color: '#000000',
   size: '12px',
   lineHeight: '23px',
+  minWidth: '1404px',
 });

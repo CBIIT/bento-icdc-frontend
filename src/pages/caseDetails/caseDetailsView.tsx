@@ -331,7 +331,12 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
         </div>
       </TableContainer>
 
-      <TableContainer id="case_detail_table_associated_files">
+      <TableContainer
+        id="case_detail_table_associated_files"
+        style={{
+          paddingBottom: '72px',
+        }}
+      >
         <div className="table-wrapper show-icons">
           <TableContextProvider>
             <FileTableView data={files} />
