@@ -6,7 +6,7 @@ export const DashboardContainer = styled('div')({
 export const Content = styled('div')({
   margin: 'auto',
   display: 'flex',
-  // paddingTop: '60px',
+  marginTop: '60px',
 });
 export const SideBar = styled('div')({
   width: '250px',

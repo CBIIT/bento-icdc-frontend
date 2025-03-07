@@ -6,9 +6,7 @@ import _, { defaultTo } from 'lodash';
 import StatsView from '../../components/Stats/StatsView';
 import { studyDisposition } from './utils';
 import { navigatedToDashboard } from '../../utils/utils';
-import CustomBreadcrumb, {
-  BreadcrumbData,
-} from '../../components/Breadcrumb/BreadcrumbView';
+import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import {
   headerIcon,
   embargoHeaderIcon,
@@ -57,6 +55,7 @@ import {
 } from '../../generated-types/graphql';
 import { ClinicalDataNodeCounts } from '../../generated-types/types';
 import { SkeletonLoader } from '../../components/Skeleton';
+import { BreadcrumbData } from '../caseDetails/caseDetailsView';
 
 function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
   return arr.some(
@@ -284,55 +283,63 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     <StudyThemeProvider>
       <StatsView data={stat} />
       <Container>
+        <Breadcrumb>
+          <CustomBreadcrumb data={breadCrumbJson} />
+        </Breadcrumb>
         <Header>
-          <Breadcrumb>
-            <CustomBreadcrumb data={breadCrumbJson} />
-          </Breadcrumb>
-          <Logo>{renderHeaderIcon()}</Logo>
-          <HeaderTitle>
-            <HeaderMainTitle>
-              <span>
-                {' '}
-                <HeaderPropertyName> Study :</HeaderPropertyName>
-                <span> {studyData.clinical_study_designation}</span>
-              </span>
-              {studyData.accession_id !== null &&
-                studyData.accession_id !== undefined &&
-                studyData.accession_id !== '' && (
-                  <>
-                    <HeaderBar> | </HeaderBar>
-                    <HeaderAccessionItem>
-                      <AccessionLabel>{'Accession ID : '}</AccessionLabel>
-                      <AccessionValue>{studyData.accession_id}</AccessionValue>
-                    </HeaderAccessionItem>
-                  </>
-                )}
-            </HeaderMainTitle>
-            <NameWrapper
-              isLong={String(studyData.clinical_study_name).length > 85}
-            >
-              <span> {studyData.clinical_study_name}</span>
-            </NameWrapper>
-          </HeaderTitle>
-          {renderLabel() || (
-            <HeaderButton>
-              <HeaderButtonLinkSpan>
-                <HeaderButtonLink
-                  to={location => ({ ...location, pathname: '/explore' })}
-                  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                  onClick={async () => {
-                    await actions.changeCurrentTab(0);
-                    navigatedToDashboard(filterStudy);
-                  }}
+          <div className="header-content">
+            <Logo>{renderHeaderIcon()}</Logo>
+            <div className="title-and-button">
+              <HeaderTitle>
+                <HeaderMainTitle>
+                  <div className="title-wrapper">
+                    {' '}
+                    <HeaderPropertyName>{`Study: `}</HeaderPropertyName>
+                    <div> {` ${studyData.clinical_study_designation}`}</div>
+                  </div>
+                  {studyData.accession_id !== null &&
+                    studyData.accession_id !== undefined &&
+                    studyData.accession_id !== '' && (
+                      <>
+                        <HeaderBar> | </HeaderBar>
+                        <HeaderAccessionItem>
+                          <AccessionLabel>{'Accession ID: '}</AccessionLabel>
+                          <AccessionValue>
+                            {studyData.accession_id}
+                          </AccessionValue>
+                        </HeaderAccessionItem>
+                      </>
+                    )}
+                </HeaderMainTitle>
+                <NameWrapper
+                  isLong={String(studyData.clinical_study_name).length > 85}
                 >
-                  <HeaderButtonLinkNumber>
-                    {data.caseCountOfStudy}
-                  </HeaderButtonLinkNumber>
-                  <HeaderButtonLinkText>Associated Cases</HeaderButtonLinkText>
-                </HeaderButtonLink>
-              </HeaderButtonLinkSpan>
-            </HeaderButton>
-          )}
+                  <span> {studyData.clinical_study_name}</span>
+                </NameWrapper>
+              </HeaderTitle>
+              {renderLabel() || (
+                <HeaderButton>
+                  <HeaderButtonLinkSpan>
+                    <HeaderButtonLink
+                      to={location => ({ ...location, pathname: '/explore' })}
+                      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                      onClick={async () => {
+                        await actions.changeCurrentTab(0);
+                        navigatedToDashboard(filterStudy);
+                      }}
+                    >
+                      <HeaderButtonLinkNumber>
+                        {`${data.caseCountOfStudy} `}
+                      </HeaderButtonLinkNumber>
+                      <HeaderButtonLinkText>
+                        Associated Cases
+                      </HeaderButtonLinkText>
+                    </HeaderButtonLink>
+                  </HeaderButtonLinkSpan>
+                </HeaderButton>
+              )}
+            </div>
+          </div>
         </Header>
 
         <DetailContainer>
@@ -367,7 +374,13 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
         switch (processedTab.label) {
           case 'OVERVIEW':
             return (
-              <TabPanel value={currentTab} index={index}>
+              <TabPanel
+                style={{
+                  minWidth: '1404px',
+                }}
+                value={currentTab}
+                index={index}
+              >
                 <Overview
                   studyData={studyData}
                   diagnoses={diagnoses}
@@ -384,19 +397,37 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
           case 'ARMS & COHORTS':
             return (
-              <TabPanel value={currentTab} index={index}>
+              <TabPanel
+                style={{
+                  minWidth: '1404px',
+                }}
+                value={currentTab}
+                index={index}
+              >
                 <ArmsAndCohort studyData={studyData} />
               </TabPanel>
             );
           case 'STUDY FILES':
             return (
-              <TabPanel value={currentTab} index={index}>
+              <TabPanel
+                style={{
+                  minWidth: '1404px',
+                }}
+                value={currentTab}
+                index={index}
+              >
                 <StudyFiles data={data} studyData={studyData} />
               </TabPanel>
             );
           case 'PUBLICATIONS':
             return (
-              <TabPanel value={currentTab} index={index}>
+              <TabPanel
+                style={{
+                  minWidth: '1404px',
+                }}
+                value={currentTab}
+                index={index}
+              >
                 <Publication
                   publications={studyData.publications}
                   display={tab.publication}
@@ -405,7 +436,13 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
             );
           case 'CLINICAL DATA':
             return (
-              <TabPanel value={currentTab} index={index}>
+              <TabPanel
+                style={{
+                  minWidth: '1404px',
+                }}
+                value={currentTab}
+                index={index}
+              >
                 {hasClinicalData && currentTab === index && (
                   <ClinicalData
                     dataCount={{
@@ -419,7 +456,13 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
             );
           case 'SUPPORTING DATA':
             return (
-              <TabPanel value={currentTab} index={index}>
+              <TabPanel
+                style={{
+                  minWidth: '1404px',
+                }}
+                value={currentTab}
+                index={index}
+              >
                 {currentStudy && (
                   <SupportingData data={currentStudy} isLoading={isLoading} />
                 )}
