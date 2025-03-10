@@ -7,6 +7,7 @@ import {
   Container as StyledContainer,
   Image as StyledImage,
 } from './about.styled';
+import externalLinkLogo from '../../assets/icons/externalLink.svg';
 
 const AboutView = ({ data }) => {
   const getImage = (imgPath, alt) => (
@@ -46,6 +47,7 @@ const AboutView = ({ data }) => {
         <Container>
           <AboutBody
             linkColor="#027DA7"
+            externalIconImage={externalLinkLogo}
             data={{
               fontFamily: '"Open Sans", sans-serif',
               lineHeight: '25px',
