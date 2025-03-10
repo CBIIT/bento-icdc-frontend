@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, createTheme, ThemeProvider } from '@mui/material';
+import { Container, createTheme, ThemeProvider } from '@material-ui/core';
 import AboutHeader from './aboutHeader';
 import Stats from '../../components/Stats/AllStatsController';
 import { AboutBody } from '../../bento-core';
@@ -7,6 +7,7 @@ import {
   Container as StyledContainer,
   Image as StyledImage,
 } from './about.styled';
+import externalLinkLogo from '../../assets/icons/externalLink.svg';
 
 const AboutView = ({ data }) => {
   const getImage = (imgPath, alt) => (
@@ -14,25 +15,23 @@ const AboutView = ({ data }) => {
   );
 
   const theme = {
-    components: {
+    overrides: {
+      '@media (min-width: 1920px)': {
+        maxWidth: '100%',
+      },
+      '@media (min-width: 1280px)': {
+        maxWidth: '100%',
+      },
       MuiGrid: {
-        styleOverrides: {
-          root: {
-            '@media (min-width: 1920px)': {
-              maxWidth: '100%',
-            },
-            '@media (min-width: 1280px)': {
-              maxWidth: '100%',
-            },
-            '& a': {
-              color: '#B85300',
-              cursor: 'pointer',
-              fontFamily: 'Open Sans',
-              fontWeight: '600',
-              textDecoration: 'underline',
-              '&:hover': {
-                color: '#9E4700',
-              },
+        root: {
+          '& a': {
+            color: '#B85300',
+            cursor: 'pointer',
+            fontFamily: 'Open Sans',
+            fontWeight: '600',
+            textDecoration: 'underline',
+            '&:hover': {
+              color: '#9E4700',
             },
           },
         },
@@ -48,6 +47,7 @@ const AboutView = ({ data }) => {
         <Container>
           <AboutBody
             linkColor="#027DA7"
+            externalIconImage={externalLinkLogo}
             data={{
               fontFamily: '"Open Sans", sans-serif',
               lineHeight: '25px',
