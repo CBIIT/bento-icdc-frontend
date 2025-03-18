@@ -217,9 +217,21 @@ const Overview: React.FC<OverviewProps> = ({
                                     setCurrentTab(clinicalDataTabIndex)
                                   }
                                 >
-                                  {nodeCount > 1
-                                    ? `${nodeCount} Nodes`
-                                    : `${nodeCount} Node`}
+                                  {nodeCount > 1 ? (
+                                    <div>
+                                      <span className="number">
+                                        {nodeCount}
+                                      </span>{' '}
+                                      Nodes
+                                    </div>
+                                  ) : (
+                                    <div>
+                                      <span className="number">
+                                        {nodeCount}
+                                      </span>{' '}
+                                      Node
+                                    </div>
+                                  )}
                                 </AdditionalDataLink>
                               </ContentGrid>
                             </Grid>
@@ -236,9 +248,21 @@ const Overview: React.FC<OverviewProps> = ({
                                     setCurrentTab(supportingDataTabIndex)
                                   }
                                 >
-                                  {supportingDataCount > 1
-                                    ? `${supportingDataCount} Repositories`
-                                    : `${supportingDataCount} Repository`}
+                                  {supportingDataCount > 1 ? (
+                                    <div>
+                                      <span className="number">
+                                        {supportingDataCount}
+                                      </span>{' '}
+                                      Repositories
+                                    </div>
+                                  ) : (
+                                    <div>
+                                      <span className="number">
+                                        {supportingDataCount}
+                                      </span>{' '}
+                                      Repository
+                                    </div>
+                                  )}
                                 </AdditionalDataLink>
                               </ContentGrid>
                             </Grid>

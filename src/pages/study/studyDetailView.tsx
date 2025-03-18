@@ -43,7 +43,7 @@ import {
   Logo,
   NameWrapper,
   PendingWrapper,
-} from './studyDetailsStyle';
+} from './studyDetails.styled.';
 import StudyThemeProvider from './studyDetailsThemeConfig';
 import SupportingData from './views/supporting-data/SupportingDataView';
 import env from '../../utils/env';

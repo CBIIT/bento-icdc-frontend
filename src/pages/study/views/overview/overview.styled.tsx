@@ -129,14 +129,19 @@ export const MarginTopTenGrid = styled(Grid)({
 });
 
 export const AdditionalDataLink = styled.button({
-  color: '#DC762F',
   fontStyle: 'normal',
-  fontWeight: 600,
+  fontWeight: 400,
+  color: '#000000',
   fontFamily: 'Open Sans',
   fontSize: '13px',
   background: 'none !important',
   border: 'none',
   padding: '0 !important',
-  textDecoration: 'underline',
+  textDecoration: 'none',
   cursor: 'pointer',
+
+  '& .number': {
+    color: '#B85300',
+    textDecoration: 'underline',
+  },
 });
