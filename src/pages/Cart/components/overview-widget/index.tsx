@@ -155,22 +155,10 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                   })}
                 </TabList>
               </Box>
-              {
-                <div
-                  style={{
-                    flex: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '32px',
-                  }}
-                >
-                  <Chart
-                    chartData={charts[chartKeys[value]]}
-                    yAxisLabel={startCase(chartKeys[value])}
-                  />
-                </div>
-              }
+              <Chart
+                chartData={charts[chartKeys[value]]}
+                yAxisLabel={startCase(chartKeys[value])}
+              />
             </TabContext>
           </RightPanelSection>
         </Panel>

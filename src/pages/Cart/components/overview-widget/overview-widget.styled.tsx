@@ -70,7 +70,7 @@ export const StyledTabPanel = styled(TabPanel)({
 });
 
 export const Container = styled.div({
-  padding: '24px',
+  padding: '24px 38px',
   flex: 1,
 });
 

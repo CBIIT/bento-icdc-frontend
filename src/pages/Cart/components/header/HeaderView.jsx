@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControl from '@mui/material/FormControl';
 import axios from 'axios';
 import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
 import ReadMoreSVG from '../readMore';
 import env from '../../../../utils/env';
-import DropDownView from '../dropdown/DropDownView';
 import * as Styled from './Header.styled';
 import { OverviewWidget } from '../overview-widget';
 
@@ -14,8 +11,6 @@ const HeaderView = ({ filesId }) => {
   const [displayReadMe, setDisplayReadMe] = useState(false);
   const [content, setContent] = useState(undefined);
 
-  // if allFile radio button is true download all file with Download manifest btn
-  const [allFiles, setAllFiles] = useState(true);
 
   const getReadMe = async url => {
     const { data } = await axios.get(url);
@@ -28,11 +23,6 @@ const HeaderView = ({ filesId }) => {
 
   const displayReadMeHandler = () => {
     setDisplayReadMe(!displayReadMe);
-  };
-
-  const handleRadioChange = event => {
-    const isAllSelected = event.target.value === 'true';
-    setAllFiles(isAllSelected);
   };
 
   return (
@@ -59,31 +49,7 @@ const HeaderView = ({ filesId }) => {
 
       <Styled.OverviewWidgetWrapper>
         <OverviewWidget fileIds={filesId} />
-      </Styled.OverviewWidgetWrapper>
-
-      <Styled.SelectFilesActionContainer container>
-        <FormControl>
-          <RadioGroup
-            row
-            name="selectAll"
-            value={allFiles}
-            onChange={handleRadioChange}
-          >
-            <Styled.SelectAllFilesBtn
-              value={true}
-              control={<Styled.RadioInput />}
-              label="All Files"
-            />
-            <Styled.SelectFilesBtn
-              value={false}
-              control={<Styled.RadioInput />}
-              className="selectFilesBtn"
-              label="Selected Files"
-            />
-          </RadioGroup>
-        </FormControl>
-        <DropDownView filesId={filesId} allFiles={allFiles} />
-      </Styled.SelectFilesActionContainer>
+      </Styled.OverviewWidgetWrapper> 
 
       <ReadMeDialogComponent
         content={content}
