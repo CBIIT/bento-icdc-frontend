@@ -55,7 +55,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
       fields: [
         {
           key: 'breed',
-          value: defaultTo(caseDetail?.demographic.breed, noValue),
+          value: defaultTo(caseDetail?.demographic?.breed, noValue),
         },
         { key: 'Sex', value: defaultTo(caseDetail?.demographic?.sex, noValue) },
         {
@@ -72,7 +72,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
         {
           key: 'Age at enrollment',
           value: defaultTo(
-            caseDetail.demographic.patient_age_at_enrollment,
+            caseDetail?.demographic?.patient_age_at_enrollment,
             noValue
           ),
         },
@@ -126,36 +126,39 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
         {
           key: 'Assigned to study',
           value: defaultTo(
-            caseDetail?.study.clinical_study_designation,
+            caseDetail?.study?.clinical_study_designation,
             noValue
           ),
         },
         {
           key: 'Assigned to arm',
-          value: defaultTo(caseDetail?.cohort.study_arm.arm, noValue),
+          value: defaultTo(caseDetail?.cohort?.study_arm?.arm, noValue),
         },
         {
           key: 'Assigned to cohort',
-          value: defaultTo(caseDetail.cohort.cohort_description, noValue),
+          value: defaultTo(caseDetail?.cohort?.cohort_description, noValue),
         },
         {
           key: 'Patient subgroup',
-          value: defaultTo(caseDetail.enrollment.patient_subgroup, noValue),
+          value: defaultTo(caseDetail?.enrollment?.patient_subgroup, noValue),
         },
         {
           key: 'Date of informed consent',
           value: defaultTo(
-            caseDetail.enrollment.date_of_informed_consent,
+            caseDetail?.enrollment?.date_of_informed_consent,
             noValue
           ),
         },
         {
           key: 'Date of registration',
-          value: defaultTo(caseDetail.enrollment.date_of_registration, noValue),
+          value: defaultTo(
+            caseDetail?.enrollment?.date_of_registration,
+            noValue
+          ),
         },
         {
           key: 'Study site',
-          value: defaultTo(caseDetail.enrollment.site_short_name, noValue),
+          value: defaultTo(caseDetail?.enrollment?.site_short_name, noValue),
         },
       ],
     }),
@@ -198,6 +201,9 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
     <>
       <StatsView data={stat} />
       <Container>
+        <div className="breadcrumbs-wrapper">
+          <CustomBreadcrumb data={breadCrumbJson} />
+        </div>
         <Header>
           <div className="logo">
             <img src={headerIcon} alt="ICDC case detail header logo" />
@@ -213,17 +219,17 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
             <div className="header-title">
               <div className="main-title">
                 <span>
-                  <span> Case : {caseDetail.case_id}</span>
+                  {' '}
+                  <span className="prefix">Case:</span> {caseDetail.case_id}
                 </span>
               </div>
-
-              <CustomBreadcrumb data={breadCrumbJson} />
             </div>
           ) : (
             <div className="header-title">
               <div className="main-title">
                 <span>
-                  <span> Case : {caseDetail.case_id}</span>
+                  {' '}
+                  <span className="prefix">Case:</span> {caseDetail.case_id}
                 </span>
               </div>
               <div className="sub-title">
@@ -231,7 +237,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
                 caseDetail.patient_first_name === null ? (
                   ''
                 ) : (
-                  <span>
+                  <span className="case-wrapper">
                     <span className="case-key">CASE NAME - </span>
                     <span className="case-value">
                       {caseDetail.patient_first_name}
@@ -241,8 +247,8 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
                 {caseDetail.enrollment &&
                 caseDetail.enrollment.initials !== '' &&
                 caseDetail.enrollment.initials !== null ? (
-                  <span>
-                    <span className="initial-key">INITIALS </span>
+                  <span className="case-wrapper">
+                    <span>INITIALS </span>
                     <span className="initial-value">
                       {caseDetail.enrollment.initials}
                     </span>
@@ -251,8 +257,6 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
                   ''
                 )}
               </div>
-
-              <CustomBreadcrumb data={breadCrumbJson} />
             </div>
           )}
           {data.multiStudyCases &&
@@ -278,7 +282,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
                     key={`${value}-${index}`}
                     className="key-value-container"
                   >
-                    <div className="key">{key}</div>
+                    <div className="key">{key}:</div>
                     <div className="value">{value}</div>
                   </div>
                 )
@@ -296,7 +300,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
                     key={`${value}-${index}`}
                     className="key-value-container"
                   >
-                    <div className="key">{key}</div>
+                    <div className="key">{key}:</div>
                     <div className="value">{value}</div>
                   </div>
                 )
@@ -310,7 +314,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
 
               {defaultTo(studyCard.fields, []).map(({ key, value }, index) => (
                 <div key={`${value}-${index}`} className="key-value-container">
-                  <div className="key">{key}</div>
+                  <div className="key">{key}:</div>
                   <div className="value">{value}</div>
                 </div>
               ))}
@@ -320,15 +324,20 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
       </Container>
 
       <TableContainer id="case_detail_table_associated_samples">
-        <div className="table-wrapper">
+        <div className="table-wrapper hide-icons">
           <TableContextProvider>
             <SampleTableView data={data.samplesByCaseId} />
           </TableContextProvider>
         </div>
       </TableContainer>
 
-      <TableContainer id="case_detail_table_associated_files">
-        <div>
+      <TableContainer
+        id="case_detail_table_associated_files"
+        style={{
+          paddingBottom: '72px',
+        }}
+      >
+        <div className="table-wrapper show-icons">
           <TableContextProvider>
             <FileTableView data={files} />
           </TableContextProvider>

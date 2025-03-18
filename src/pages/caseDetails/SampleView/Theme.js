@@ -23,7 +23,6 @@ export const customTheme = {
     root: {
       background: '#f3f3f3',
       paddingTop: '5px',
-      paddingLeft: '19px !important',
       '& .add_selected_file_tooltip_icon': {
         width: '17px !important',
       },
@@ -146,53 +145,68 @@ export const customTheme = {
   },
 };
 
-export const tblHeader = {
-  MuiTypography: {
-    root: {
-      height: 0,
-      width: 0,
+export const tblHeader = ({ selectedRows = [] }) => {
+  const hasSelectedRows = Boolean(selectedRows?.length);
+
+  return {
+    MuiTypography: {
+      root: {
+        height: 0,
+        width: 0,
+      },
     },
-  },
-  MuiTableSortLabel: {
-    root: {
-      color: '#13344A',
-      position: 'relative',
-      fontSize: '11pt',
-      fontFamily: "'Lato', 'Raleway', sans-serif",
-      fontWeight: 'bold',
-      letterSpacing: '0.06em',
-      textDecoration: 'none',
-      '&:hover': {
+    MuiTableSortLabel: {
+      root: {
         color: '#13344A',
+        position: 'relative',
+        fontSize: '11pt',
+        fontFamily: "'Lato', 'Raleway', sans-serif",
+        fontWeight: 'bold',
+        letterSpacing: '0.06em',
+        textDecoration: 'none',
+        '&:hover': {
+          color: '#13344A',
+        },
       },
     },
-  },
-  MuiTableCell: {
-    head: {
-      '& span': {
-        color: '#0B3556',
+    MuiTableRow: {
+      head: {
+        borderStyle: 'solid',
+        borderWidth: !hasSelectedRows ? '3px 0' : '0 0 3px',
+        borderColor: '#606060',
       },
     },
-    root: {
-      backgroundColor: '#f5f5f5',
-      color: '#194563',
+    MuiTableCell: {
+      head: {
+        '& span': {
+          color: '#194563',
+          fontSize: '15px',
+          fontFamily: 'Raleway',
+          fontWeight: 600,
+          lineHeight: '15px',
+        },
+      },
+      root: {
+        backgroundColor: '#f5f5f5',
+        color: '#194563',
+      },
     },
-  },
-  MuiTooltip: {
-    tooltip: {
-      backgroundColor: '#ffffff',
-      color: '#1c2023',
-      maxWidth: '220px',
-      fontSize: '0.75rem',
-      border: '2px solid #a7afb3',
-      fontFamily: 'Open Sans',
-      fontWeight: '600',
-      textAlign: 'left',
-      lineHeight: '1.6',
-      padding: '10px 12px',
-      borderRadius: '0px',
+    MuiTooltip: {
+      tooltip: {
+        backgroundColor: '#ffffff',
+        color: '#1c2023',
+        maxWidth: '220px',
+        fontSize: '0.75rem',
+        border: '2px solid #a7afb3',
+        fontFamily: 'Open Sans',
+        fontWeight: '600',
+        textAlign: 'left',
+        lineHeight: '1.6',
+        padding: '10px 12px',
+        borderRadius: '0px',
+      },
     },
-  },
+  };
 };
 
 const tblBody = {
@@ -210,11 +224,11 @@ const tblBody = {
   },
   MuiTypography: {
     body1: {
-      fontSize: '10pt',
-      fontFamily: "'Open Sans', sans-serif",
-      fontWeight: '600',
-      color: '#13344A',
-      letterSpacing: '0.025em',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
+      fontSize: '13px',
+      lineHeight: '19px',
+      color: '#22104c',
     },
   },
   MuiSvgIcon: {
@@ -297,14 +311,31 @@ export const tblePaginationTheme = data => ({
     MuiTablePagination: {
       root: {
         paddingRight: '43px',
-        borderTop: '3px solid #004c73',
+        background: '#fff',
+        borderTop: '3px solid #606060',
         paddingTop: '0',
         paddingBottom: '0',
         display: `${data.length > 0 ? '' : 'none'}`,
-        borderBottom: `3px solid ${data.length > 0 ? '#004c73' : '#e7e5e5'}`,
+        borderBottom: `3px solid ${data.length > 0 ? '#606060' : '#e7e5e5'}`,
         '&:last-child': {
           paddingRight: '43px',
         },
+      },
+      caption: {
+        color: '#000',
+        fontFamily: 'Open Sans',
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '14px',
+        textTransform: 'uppercase',
+      },
+      input: {
+        color: '#000',
+        fontFamily: 'Open Sans',
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '14px',
+        textTransform: 'uppercase',
       },
       toolbar: {
         minHeight: '45px',
@@ -343,7 +374,7 @@ const tblContainer = {
 export const themeConfig = (table, data) => ({
   customTheme,
   tblBody,
-  tblHeader,
+  tblHeader: tblHeader(table),
   ...tblePaginationTheme(data),
   tblContainer,
   ...extendedView(table),

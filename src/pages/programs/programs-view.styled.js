@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const ProgramsContainer = styled('div')({
   width: '100%',
-  padding: '2px 47px 60px 47px',
+  padding: '70px 47px 60px 47px',
   background: '#f3f3f3',
   flex: '1',
 });

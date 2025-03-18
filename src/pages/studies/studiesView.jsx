@@ -11,6 +11,7 @@ import env from '../../utils/env';
 import { TableContextProvider } from '../../bento-core';
 import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
 import { SkeletonLoader } from '../../components/Skeleton';
+import { TableContainer } from './studiesView.styled';
 
 const studiesByProgram = gql`
   query getStudiesByProgramStudiesView {
@@ -26,7 +27,7 @@ const studiesByProgram = gql`
   }
 `;
 
-const Studies = ({ classes, data, invalid }) => {
+const Studies = ({ data, invalid }) => {
   const {
     data: interOpData,
     isLoading,
@@ -57,25 +58,21 @@ const Studies = ({ classes, data, invalid }) => {
     <StudiesThemeProvider>
       <Stats />
       {invalid && !overlay ? <InvalidAccesionModal /> : null}
-      <div className={classes.tableContainer}>
-        <div className={classes.container}>
-          <div className={classes.header}>
-            <div className={classes.logo}>
-              <img
-                src={pageData.studyListingIcon.src}
-                alt={pageData.studyListingIcon.alt}
-              />
-            </div>
-            <div className={classes.headerTitle}>
-              <div className={classes.headerMainTitle}>
-                <span className={classes.headerMainTitle}>
-                  {pageData.table.title}
-                </span>
+      <TableContainer>
+        <div className="container">
+          <div className="header">
+            <div className="logo-and-title-wrapper">
+              <div className="logo">
+                <img
+                  src={pageData.studyListingIcon.src}
+                  alt={pageData.studyListingIcon.alt}
+                />
               </div>
+              <div className="header-title">{pageData.table.title}</div>
             </div>
           </div>
 
-          <div className={classes.tableDiv}>
+          <div className="table-div">
             <Grid container>
               <Grid item xs={12} id="table_studies">
                 <TableContextProvider>
@@ -91,171 +88,9 @@ const Studies = ({ classes, data, invalid }) => {
             </Grid>
           </div>
         </div>
-      </div>
+      </TableContainer>
     </StudiesThemeProvider>
   );
 };
 
-const styles = theme => ({
-  dataAvailIndicator: {
-    textAlign: 'center',
-  },
-  dataAvailIndicatorIcon: {
-    color: '#1A89C4',
-    height: '13px',
-    width: '13px',
-  },
-  dalIcon: {
-    width: '25px',
-  },
-  dataAvailIndicatorImage: {
-    height: '20px',
-    width: '20px',
-  },
-  crdcLinkStyle: {
-    color: '#DC762F',
-  },
-  defaultDalTooltip: {
-    maxWidth: 'none',
-  },
-  externalLinkDalTooltip: {
-    maxWidth: 'none',
-    padding: '0px 12px',
-  },
-  legend: {
-    zIndex: '1000',
-  },
-  crdcLinks: {
-    paddingLeft: '1em',
-    textAlign: 'left',
-  },
-  legendTooltip: {
-    position: 'relative',
-    bottom: '0.5em',
-  },
-  link: {
-    textDecoration: 'underline',
-    fontFamily: 'Open Sans',
-    fontSize: '15px',
-    fontWeight: 'bold',
-    color: '#DC762F',
-    lineSpacing: '19pt',
-    float: 'left',
-    marginRight: '5px',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-  embargoFileIcon: {
-    width: '20px',
-  },
-  embargoToolTip: {
-    visibility: 'hidden',
-    fontWeight: '500',
-    zIndex: '400',
-    background: '#fff',
-    border: '2px solid #A61401',
-    borderRadius: '7px',
-    fontSize: '12px',
-    width: '110px',
-    padding: '5px 0px 0px 2px',
-    marginTop: '-30px',
-    marginLeft: '-100px',
-  },
-  embargoToolTipMsgLeft: {},
-  embargoToolTipMsgRight: {},
-  buttonCaseNumb: {
-    background: 'none!important',
-    fontFamily: 'Open Sans',
-    fontSize: '15px',
-    border: 'none',
-    lineSpacing: '19pt',
-    padding: '0!important',
-    textDecoration: 'underline',
-    fontWeight: 'bold',
-    color: '#DC762F',
-    cursor: 'pointer',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-  button: {
-    background: 'none!important',
-    border: 'none',
-    padding: '0!important',
-    textDecoration: 'none',
-    fontWeight: 'bold',
-    color: '#DC762F',
-    cursor: 'pointer',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-  card: {
-    minHeight: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  container: {
-    flex: 1,
-    paddingLeft: '27px',
-    paddingRight: '27px',
-  },
-  paper: {
-    textAlign: 'center',
-  },
-  fakeToolbar: {
-    ...theme.mixins.toolbar,
-  },
-  root: {
-    fontFamily: '"Open Sans", sans-serif',
-    fontSize: '9pt',
-    letterSpacing: '0.025em',
-    color: '#000',
-    background: '#eee',
-  },
-  header: {
-    background: '#eee',
-    paddingLeft: '35px',
-    paddingRight: '50px',
-    borderBottom: '#004c73 10px solid',
-    height: '154px',
-    paddingTop: '60px',
-  },
-  headerMainTitle: {
-    fontFamily: theme.custom.fontFamilyRaleway,
-    fontWeight: '500',
-    letterSpacing: '0.025em',
-    color: '#0290C0',
-    fontSize: '28px',
-    position: 'absolute',
-    marginTop: '12px',
-    marginLeft: '10px',
-    lineHeight: '25px',
-  },
-  headerTitle: {
-    margin: 'auto',
-    float: 'left',
-    marginLeft: '90px',
-  },
-  logo: {
-    position: 'absolute',
-    float: 'left',
-    width: '94px',
-    zIndex: '10',
-  },
-  tableContainer: {
-    background: '#eee',
-    paddingBottom: '80px',
-    flex: 1,
-  },
-  tableDiv: {
-    margin: 'auto',
-    fontSize: '10pt',
-    fontFamily: '"Open Sans", sans-serif',
-    letterSpacing: '0.025em',
-    textAlign: 'left',
-  },
-});
-
-export default withStyles(styles, { withTheme: true })(Studies);
+export default withStyles({}, { withTheme: true })(Studies);

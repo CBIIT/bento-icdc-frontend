@@ -7,6 +7,8 @@ const commonCardInnerContainer = {
   margin: '32px 0',
   '& .header-text': {
     color: '#BD5B00',
+    lineHeight: '30px',
+    letterSpacing: '0.3%',
     fontSize: '17px',
     fontFamily: 'Open Sans',
     fontWeight: 400,
@@ -23,6 +25,8 @@ const commonCardInnerContainer = {
       margin: '0 74px 0 8px',
       fontFamily: 'Open Sans',
       fontWeight: 600,
+      lineHeight: '23px',
+      letterSpacing: '0.2px',
       fontSize: '13px',
       color: '#01769D',
       textTransform: 'uppercase',
@@ -33,15 +37,20 @@ const commonCardInnerContainer = {
       fontWeight: 400,
       fontSize: '18px',
       color: '#000',
+      lineHeight: '22px',
+      letterSpacing: '0.2px',
     },
   },
 };
 
 export const Container = styled.div({
-  paddingTop: '125px',
+  paddingTop: '70px',
   fontFamily: 'Raleway, sans-serif',
   paddingLeft: '27px',
   paddingRight: '27px',
+  '& .breadcrumbs-wrapper': {
+    marginLeft: '35px',
+  },
 });
 
 export const Header = styled.div({
@@ -67,12 +76,17 @@ export const Header = styled.div({
     marginLeft: '99px',
 
     '& .main-title': {
+      '& .prefix': {
+        fontFamily: 'Raleway',
+        fontWeight: 600,
+        fontSize: '19px',
+      },
       fontFamily: 'Open Sans',
-      fontWeight: 'bold',
-      letterSpacing: '0.017em',
-      color: '#ff8a00',
-      fontSize: '21px',
-      lineHeight: '18px',
+      fontWeight: 700,
+      color: '#BD5B00',
+      fontSize: '19px',
+      lineHeight: '17px',
+      letterSpacing: '0.32px',
       paddingLeft: '5px',
       marginTop: '24px',
     },
@@ -89,48 +103,22 @@ export const Header = styled.div({
       overflow: 'hidden',
       paddingLeft: '3px',
 
-      '& .case-key': {
-        color: '#606061',
-        fontWeight: 'bold',
-        fontFamily: 'Raleway',
+      '& .case-wrapper': {
+        fontFamily: 'Inter',
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '20.02px',
+        letterSpacing: '0.35px',
         textTransform: 'uppercase',
-        letterSpacing: '0.023em',
-        fontSize: '12px',
-        maxHeight: '30px',
-        overflow: 'hidden',
-        paddingLeft: '3px',
-      },
-
-      '& .case-value': {
-        color: '#000000',
-        fontWeight: 'bold',
-        fontFamily: 'Raleway',
-        textTransform: 'uppercase',
-        letterSpacing: '0.023em',
-        fontSize: '12px',
-        paddingLeft: '3px',
-      },
-
-      '& .initial-key': {
-        color: '#606061',
-        fontWeight: 'bold',
-        fontFamily: 'Raleway',
-        textTransform: 'uppercase',
-        letterSpacing: '0.023em',
-        fontSize: '12px',
-        maxHeight: '30px',
-        overflow: 'hidden',
-        paddingLeft: '12px',
-        paddingBottom: '17px', // corrected typo
+        marginRight: '4px',
       },
       '& .initial-value': {
-        color: '#000000',
-        fontWeight: 'bold',
-        fontFamily: 'Raleway',
+        fontFamily: 'Inter',
+        fontWeight: 600,
+        fontSize: '14px',
+        lineHeight: '20.02px',
+        letterSpacing: '0.35px',
         textTransform: 'uppercase',
-        letterSpacing: '0.023em',
-        fontSize: '12px',
-        paddingLeft: '3px',
       },
     },
   },
@@ -173,7 +161,33 @@ export const TableContainer = styled.div({
   background: '#f3f3f3',
 
   '& .table-wrapper': {
-    padding: '31px 27px',
+    padding: '42px 27px',
     margin: '0 auto',
+  },
+
+  '& .show-icons': {
+    '& .download-icon': {
+      zIndex: '2',
+      position: 'absolute',
+      top: '32px',
+      right: '80px',
+    },
+
+    '& .manageViewColumnBtn': {
+      zIndex: '2',
+      position: 'absolute',
+      top: '32px',
+      right: '32px',
+    },
+  },
+
+  '& .hide-icons': {
+    '& .download-icon': {
+      display: 'none',
+    },
+
+    '& .manageViewColumnBtn': {
+      display: 'none',
+    },
   },
 });

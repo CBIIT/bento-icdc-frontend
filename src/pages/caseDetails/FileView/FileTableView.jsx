@@ -41,6 +41,7 @@ const FileTableView = ({ data }) => {
 
   const { context } = useContext(TableContext);
   const { selectedRows } = context;
+  const hasSelected = Boolean(selectedRows?.length);
 
   // const buttonConfiguration = data.length === 0 ? [] : fileWrapperConfig;
 
@@ -62,11 +63,10 @@ const FileTableView = ({ data }) => {
 
   return (
     <>
-      <TitleContainer maxWidth={false}>
-        <TableTitle>{fileTable.tableTitle}</TableTitle>
-      </TitleContainer>
-
-      <TableContainer>
+      <TableContainer hasSelected={hasSelected}>
+        <TitleContainer maxWidth={false}>
+          <TableTitle>{fileTable.tableTitle}</TableTitle>
+        </TitleContainer>
         <TableView
           initState={initTblState}
           themeConfig={{

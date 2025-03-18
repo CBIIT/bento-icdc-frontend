@@ -58,11 +58,15 @@ const LayoutView = () => {
           body {
             height: 100%;
             margin: 0;
+            display: flex;
+          }
+          body {
+            flex: 1;
           }
           #root {
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            flex: 1;
           }
           *::-webkit-scrollbar {
             width: none;

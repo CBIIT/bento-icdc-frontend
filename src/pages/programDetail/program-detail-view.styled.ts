@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 export const ProgramDetailContainer = styled('div')({
   width: '100%',
-  padding: '12px 47px 60px 47px',
+  padding: '70px 47px 60px 47px',
 });
 
 export const ProgramDetailHeader = styled('div')({
