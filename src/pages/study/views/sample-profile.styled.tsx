@@ -48,7 +48,6 @@ export const HeaderButtonLink = styled(Link)({
   fontWeight: 'bold',
   position: 'relative',
   top: '2px',
-  color: '#dc762f',
   '&:hover': {
     textDecoration: 'none',
   },
@@ -59,6 +58,7 @@ export const HeaderButtonLinkNumber = styled.div({
   fontSize: '13px',
   paddingBottom: '3px',
   margin: '0',
+  color: '#B85300',
   display: 'inherit',
   fontWeight: '900',
   marginRight: '4px',

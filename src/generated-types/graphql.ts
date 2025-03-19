@@ -30,11 +30,3481 @@ export type Scalars = {
   DynamicProperties: { input: any; output: any };
 };
 
+export type AdverseEventNodeData = {
+  __typename?: 'AdverseEventNodeData';
+  adverse_event_agent_dose?: Maybe<Scalars['String']['output']>;
+  adverse_event_agent_name?: Maybe<Scalars['String']['output']>;
+  adverse_event_description?: Maybe<Scalars['String']['output']>;
+  adverse_event_grade?: Maybe<Scalars['String']['output']>;
+  adverse_event_grade_description?: Maybe<Scalars['String']['output']>;
+  adverse_event_term?: Maybe<Scalars['String']['output']>;
+  attribution_to_commercial?: Maybe<Scalars['String']['output']>;
+  attribution_to_disease?: Maybe<Scalars['String']['output']>;
+  attribution_to_ind?: Maybe<Scalars['String']['output']>;
+  attribution_to_other?: Maybe<Scalars['String']['output']>;
+  attribution_to_research?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  date_of_onset?: Maybe<Scalars['String']['output']>;
+  date_of_resolution?: Maybe<Scalars['String']['output']>;
+  day_in_cycle?: Maybe<Scalars['Int']['output']>;
+  dose_limiting_toxicity?: Maybe<Scalars['String']['output']>;
+  existing_adverse_event?: Maybe<Scalars['String']['output']>;
+  ongoing_adverse_event?: Maybe<Scalars['String']['output']>;
+  other_attribution_description?: Maybe<Scalars['String']['output']>;
+  unexpected_adverse_event?: Maybe<Scalars['String']['output']>;
+};
+
+export type AgentAdministrationNodeData = {
+  __typename?: 'AgentAdministrationNodeData';
+  comment?: Maybe<Scalars['String']['output']>;
+  date_of_missed_dose?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  dose_level?: Maybe<Scalars['Float']['output']>;
+  dose_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication?: Maybe<Scalars['String']['output']>;
+  medication_actual_dose?: Maybe<Scalars['Float']['output']>;
+  medication_actual_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication_course_number?: Maybe<Scalars['String']['output']>;
+  medication_duration?: Maybe<Scalars['Float']['output']>;
+  medication_lot_number?: Maybe<Scalars['String']['output']>;
+  medication_missed_dose?: Maybe<Scalars['String']['output']>;
+  medication_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication_vial_id?: Maybe<Scalars['String']['output']>;
+  missed_dose_amount?: Maybe<Scalars['Float']['output']>;
+  missed_dose_units_of_measure?: Maybe<Scalars['String']['output']>;
+  phase?: Maybe<Scalars['String']['output']>;
+  route_of_administration?: Maybe<Scalars['String']['output']>;
+  start_time?: Maybe<Scalars['String']['output']>;
+  stop_time?: Maybe<Scalars['String']['output']>;
+};
+
+export type AgentNodeData = {
+  __typename?: 'AgentNodeData';
+  document_number?: Maybe<Scalars['String']['output']>;
+  medication?: Maybe<Scalars['String']['output']>;
+};
+
+export type BreedCaseCount = {
+  __typename?: 'BreedCaseCount';
+  breed?: Maybe<Scalars['String']['output']>;
+  cases?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CartChartData = {
+  __typename?: 'CartChartData';
+  fileAssociation?: Maybe<Array<Maybe<CartChartItem>>>;
+  fileFormat?: Maybe<Array<Maybe<CartChartItem>>>;
+  fileType?: Maybe<Array<Maybe<CartChartItem>>>;
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type CartChartDataFileAssociationArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartDataFileFormatArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartDataFileTypeArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartItem = {
+  __typename?: 'CartChartItem';
+  label?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CartOverviewData = {
+  __typename?: 'CartOverviewData';
+  charts?: Maybe<CartChartData>;
+  studiesInCart?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  totalNumberOfCases?: Maybe<Scalars['Int']['output']>;
+  totalNumberOfFiles?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CaseDetail = {
+  __typename?: 'CaseDetail';
+  arm?: Maybe<Scalars['String']['output']>;
+  best_response?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  clinical_study_name?: Maybe<Scalars['String']['output']>;
+  cohort_description?: Maybe<Scalars['String']['output']>;
+  ctep_treatment_assignment_code?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  date_of_informed_consent?: Maybe<Scalars['String']['output']>;
+  date_of_registration?: Maybe<Scalars['String']['output']>;
+  disease_term?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  neutered_indicator?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment?: Maybe<Scalars['Float']['output']>;
+  patient_first_name?: Maybe<Scalars['String']['output']>;
+  patient_id?: Maybe<Scalars['String']['output']>;
+  patient_subgroup?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  program_acronym?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  site_short_name?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['Float']['output']>;
+};
+
+export type CaseOverview = {
+  __typename?: 'CaseOverview';
+  age?: Maybe<Scalars['Float']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  data_types?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  demographic?: Maybe<Demographic>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  diagnosis_obj?: Maybe<Diagnosis>;
+  disease_site?: Maybe<Scalars['String']['output']>;
+  file_formats?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  files?: Maybe<Array<Maybe<FileOverview2>>>;
+  neutered_status?: Maybe<Scalars['String']['output']>;
+  program?: Maybe<Scalars['String']['output']>;
+  sample_list?: Maybe<Array<Maybe<Sample>>>;
+  samples?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  sex?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+  study_type?: Maybe<Scalars['String']['output']>;
+};
+
+export type CaseOverviewFilesArgs = {
+  filter?: InputMaybe<_FileOverview2Filter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOverview2Ordering>>;
+};
+
+export type CaseOverviewSample_ListArgs = {
+  filter?: InputMaybe<_SampleFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_SampleOrdering>>;
+};
+
+export type CaseOverview2 = {
+  __typename?: 'CaseOverview2';
+  age?: Maybe<Scalars['Float']['output']>;
+  arm?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  cohort?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  disease_site?: Maybe<Scalars['String']['output']>;
+  files?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  individual_id?: Maybe<Scalars['String']['output']>;
+  neutered_status?: Maybe<Scalars['String']['output']>;
+  other_cases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  response_to_treatment?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+  study_type?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['Float']['output']>;
+};
+
+export type CaseOverviewEs = {
+  __typename?: 'CaseOverviewES';
+  age?: Maybe<Scalars['Float']['output']>;
+  arm?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  case_id_lc?: Maybe<Scalars['String']['output']>;
+  cohort?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  disease_site?: Maybe<Scalars['String']['output']>;
+  files?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  individual_id?: Maybe<Scalars['String']['output']>;
+  neutered_status?: Maybe<Scalars['String']['output']>;
+  other_cases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  response_to_treatment?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+  study_type?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['Float']['output']>;
+};
+
+export type CaseOverviewEs2 = {
+  __typename?: 'CaseOverviewES2';
+  age?: Maybe<Scalars['Float']['output']>;
+  arm?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  cohort?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  disease_site?: Maybe<Scalars['String']['output']>;
+  files?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  individual_id?: Maybe<Scalars['String']['output']>;
+  neutered_status?: Maybe<Scalars['String']['output']>;
+  other_cases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  response_to_treatment?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+  study_type?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ClinicalDataNodeCounts = {
+  __typename?: 'ClinicalDataNodeCounts';
+  adverse_event?: Maybe<Scalars['Int']['output']>;
+  agent?: Maybe<Scalars['Int']['output']>;
+  agent_administration?: Maybe<Scalars['Int']['output']>;
+  cycle?: Maybe<Scalars['Int']['output']>;
+  disease_extent?: Maybe<Scalars['Int']['output']>;
+  follow_up?: Maybe<Scalars['Int']['output']>;
+  lab_exam?: Maybe<Scalars['Int']['output']>;
+  off_study?: Maybe<Scalars['Int']['output']>;
+  off_treatment?: Maybe<Scalars['Int']['output']>;
+  physical_exam?: Maybe<Scalars['Int']['output']>;
+  prior_surgery?: Maybe<Scalars['Int']['output']>;
+  prior_therapy?: Maybe<Scalars['Int']['output']>;
+  visit?: Maybe<Scalars['Int']['output']>;
+  vital_signs?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CycleNodeData = {
+  __typename?: 'CycleNodeData';
+  case_id?: Maybe<Scalars['String']['output']>;
+  crf_id?: Maybe<Scalars['String']['output']>;
+  cycle_number?: Maybe<Scalars['Int']['output']>;
+  date_of_cycle_end?: Maybe<Scalars['String']['output']>;
+  date_of_cycle_start?: Maybe<Scalars['String']['output']>;
+};
+
+export type DiseaseExtentNodeData = {
+  __typename?: 'DiseaseExtentNodeData';
+  case_id?: Maybe<Scalars['String']['output']>;
+  date_of_evaluation?: Maybe<Scalars['String']['output']>;
+  evaluation_code?: Maybe<Scalars['String']['output']>;
+  evaluation_number?: Maybe<Scalars['String']['output']>;
+  lesion_description?: Maybe<Scalars['String']['output']>;
+  lesion_number?: Maybe<Scalars['Int']['output']>;
+  lesion_site?: Maybe<Scalars['String']['output']>;
+  longest_measurement?: Maybe<Scalars['String']['output']>;
+  measurable_lesion?: Maybe<Scalars['String']['output']>;
+  measured_how?: Maybe<Scalars['String']['output']>;
+  previously_irradiated?: Maybe<Scalars['String']['output']>;
+  previously_treated?: Maybe<Scalars['String']['output']>;
+  target_lesion?: Maybe<Scalars['String']['output']>;
+};
+
+export type FileDetail = {
+  __typename?: 'FileDetail';
+  GUID?: Maybe<Scalars['String']['output']>;
+  acl?: Maybe<Scalars['String']['output']>;
+  arm?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  clinical_study_name?: Maybe<Scalars['String']['output']>;
+  cohort_description?: Maybe<Scalars['String']['output']>;
+  cohort_dose?: Maybe<Scalars['String']['output']>;
+  comment?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['Boolean']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_sample_collection?: Maybe<Scalars['String']['output']>;
+  day_in_cycle?: Maybe<Scalars['Int']['output']>;
+  disease_term?: Maybe<Scalars['String']['output']>;
+  file_description?: Maybe<Scalars['String']['output']>;
+  file_format?: Maybe<Scalars['String']['output']>;
+  file_location?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_size?: Maybe<Scalars['Float']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  general_sample_pathology?: Maybe<Scalars['String']['output']>;
+  md5?: Maybe<Scalars['String']['output']>;
+  md5sum?: Maybe<Scalars['String']['output']>;
+  necropsy_sample?: Maybe<Scalars['Boolean']['output']>;
+  neutered_indicator?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment?: Maybe<Scalars['Float']['output']>;
+  percentage_stroma?: Maybe<Scalars['Float']['output']>;
+  percentage_tumor?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  sample_site?: Maybe<Scalars['String']['output']>;
+  sample_type?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
+  specific_sample_pathology?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['String']['output']>;
+  visit_date?: Maybe<Scalars['String']['output']>;
+  visit_number?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['Float']['output']>;
+};
+
+export type FileInList = {
+  __typename?: 'FileInList';
+  additional_breed_detail?: Maybe<Scalars['String']['output']>;
+  arm?: Maybe<Scalars['String']['output']>;
+  association?: Maybe<Scalars['String']['output']>;
+  best_response?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  case_name?: Maybe<Scalars['String']['output']>;
+  cohort_description?: Maybe<Scalars['String']['output']>;
+  cohort_dose?: Maybe<Scalars['String']['output']>;
+  cohort_id?: Maybe<Scalars['String']['output']>;
+  comment?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_birth?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  date_of_sample_collection?: Maybe<Scalars['String']['output']>;
+  demographic_id?: Maybe<Scalars['String']['output']>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  diagnosis_id?: Maybe<Scalars['String']['output']>;
+  disease_term?: Maybe<Scalars['String']['output']>;
+  drs_uri?: Maybe<Scalars['String']['output']>;
+  file_description?: Maybe<Scalars['String']['output']>;
+  file_format?: Maybe<Scalars['String']['output']>;
+  file_location?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_size?: Maybe<Scalars['Float']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  file_uuid?: Maybe<Scalars['String']['output']>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  general_sample_pathology?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  histology_date?: Maybe<Scalars['String']['output']>;
+  individual_id?: Maybe<Scalars['String']['output']>;
+  md5sum?: Maybe<Scalars['String']['output']>;
+  molecular_subtype?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  necropsy_sample?: Maybe<Scalars['String']['output']>;
+  neutered_indicator?: Maybe<Scalars['String']['output']>;
+  other_cases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment?: Maybe<Scalars['String']['output']>;
+  patient_id?: Maybe<Scalars['String']['output']>;
+  percentage_tumor?: Maybe<Scalars['String']['output']>;
+  physical_sample_type?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  sample_chronology?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  sample_preservation?: Maybe<Scalars['String']['output']>;
+  sample_site?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  specific_sample_pathology?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+  summarized_sample_type?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+  tumor_grade?: Maybe<Scalars['String']['output']>;
+  tumor_length?: Maybe<Scalars['String']['output']>;
+  tumor_sample_origin?: Maybe<Scalars['String']['output']>;
+  tumor_volume?: Maybe<Scalars['String']['output']>;
+  tumor_width?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['String']['output']>;
+  weight_unit?: Maybe<Scalars['String']['output']>;
+};
+
+export type FileInfo = {
+  __typename?: 'FileInfo';
+  GUID?: Maybe<Scalars['String']['output']>;
+  acl?: Maybe<Scalars['String']['output']>;
+  md5?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type FileOverview = {
+  __typename?: 'FileOverview';
+  arm?: Maybe<Scalars['String']['output']>;
+  association?: Maybe<Scalars['String']['output']>;
+  best_response?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  cohort_description?: Maybe<Scalars['String']['output']>;
+  comment?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  date_of_sample_collection?: Maybe<Scalars['String']['output']>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  file_description?: Maybe<Scalars['String']['output']>;
+  file_format?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_size?: Maybe<Scalars['Float']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  file_uuid?: Maybe<Scalars['String']['output']>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  general_sample_pathology?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  individual_id?: Maybe<Scalars['String']['output']>;
+  necropsy_sample?: Maybe<Scalars['String']['output']>;
+  neutered_indicator?: Maybe<Scalars['String']['output']>;
+  other_cases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment?: Maybe<Scalars['String']['output']>;
+  percentage_tumor?: Maybe<Scalars['String']['output']>;
+  physical_sample_type?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  sample_chronology?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  sample_preservation?: Maybe<Scalars['String']['output']>;
+  sample_site?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  specific_sample_pathology?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+  summarized_sample_type?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+  tumor_grade?: Maybe<Scalars['String']['output']>;
+  tumor_sample_origin?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['String']['output']>;
+};
+
+export type FileOverview2 = {
+  __typename?: 'FileOverview2';
+  file_description?: Maybe<Scalars['String']['output']>;
+  file_format?: Maybe<Scalars['String']['output']>;
+  file_location?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_size?: Maybe<Scalars['Float']['output']>;
+  file_status?: Maybe<Scalars['String']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  md5sum?: Maybe<Scalars['String']['output']>;
+  parent?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['String']['output']>;
+};
+
+export type FileOverviewEs = {
+  __typename?: 'FileOverviewES';
+  arm?: Maybe<Scalars['String']['output']>;
+  association?: Maybe<Scalars['String']['output']>;
+  best_response?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  case_id_lc?: Maybe<Scalars['String']['output']>;
+  cohort_description?: Maybe<Scalars['String']['output']>;
+  comment?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  date_of_sample_collection?: Maybe<Scalars['String']['output']>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  file_description?: Maybe<Scalars['String']['output']>;
+  file_format?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_size?: Maybe<Scalars['Float']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  file_uuid?: Maybe<Scalars['String']['output']>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  general_sample_pathology?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  individual_id?: Maybe<Scalars['String']['output']>;
+  necropsy_sample?: Maybe<Scalars['String']['output']>;
+  neutered_indicator?: Maybe<Scalars['String']['output']>;
+  other_cases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment?: Maybe<Scalars['String']['output']>;
+  percentage_tumor?: Maybe<Scalars['String']['output']>;
+  physical_sample_type?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  sample_chronology?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  sample_preservation?: Maybe<Scalars['String']['output']>;
+  sample_site?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  specific_sample_pathology?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+  summarized_sample_type?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+  tumor_grade?: Maybe<Scalars['String']['output']>;
+  tumor_sample_origin?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['String']['output']>;
+};
+
+export type FilesOfCase = {
+  __typename?: 'FilesOfCase';
+  case_id?: Maybe<Scalars['String']['output']>;
+  file_description?: Maybe<Scalars['String']['output']>;
+  file_format?: Maybe<Scalars['String']['output']>;
+  file_location?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_size?: Maybe<Scalars['Float']['output']>;
+  file_status?: Maybe<Scalars['String']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  md5sum?: Maybe<Scalars['String']['output']>;
+  parent?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['String']['output']>;
+};
+
+export type FollowUpNodeData = {
+  __typename?: 'FollowUpNodeData';
+  contact_type?: Maybe<Scalars['String']['output']>;
+  date_of_last_contact?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  explain_unknown_status?: Maybe<Scalars['String']['output']>;
+  patient_status?: Maybe<Scalars['String']['output']>;
+  physical_exam_changes?: Maybe<Scalars['Boolean']['output']>;
+  physical_exam_performed?: Maybe<Scalars['Boolean']['output']>;
+  treatment_since_last_contact?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type Gs_About = {
+  __typename?: 'GS_About';
+  page?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type Gs_Cases = {
+  __typename?: 'GS_Cases';
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  disease_term?: Maybe<Scalars['String']['output']>;
+  program_name?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type Gs_File = {
+  __typename?: 'GS_File';
+  case_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  file_association?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  program_name?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type Gs_Model = {
+  __typename?: 'GS_Model';
+  highlight?: Maybe<Scalars['String']['output']>;
+  node_name?: Maybe<Scalars['String']['output']>;
+  property_description?: Maybe<Scalars['String']['output']>;
+  property_name?: Maybe<Scalars['String']['output']>;
+  property_required?: Maybe<Scalars['String']['output']>;
+  property_type?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+export type Gs_Program = {
+  __typename?: 'GS_Program';
+  program_acronym?: Maybe<Scalars['String']['output']>;
+  program_external_url?: Maybe<Scalars['String']['output']>;
+  program_id?: Maybe<Scalars['String']['output']>;
+  program_name?: Maybe<Scalars['String']['output']>;
+  program_short_description?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type Gs_Sample = {
+  __typename?: 'GS_Sample';
+  case_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  general_sample_pathology?: Maybe<Scalars['String']['output']>;
+  physical_sample_type?: Maybe<Scalars['String']['output']>;
+  program_name?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  sample_site?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type Gs_Study = {
+  __typename?: 'GS_Study';
+  accession_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  clinical_study_name?: Maybe<Scalars['String']['output']>;
+  clinical_study_type?: Maybe<Scalars['String']['output']>;
+  program_id?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type GlobalSearchResult = {
+  __typename?: 'GlobalSearchResult';
+  about_count?: Maybe<Scalars['Int']['output']>;
+  about_page?: Maybe<Array<Maybe<Gs_About>>>;
+  case_count?: Maybe<Scalars['Int']['output']>;
+  cases?: Maybe<Array<Maybe<Gs_Cases>>>;
+  file_count?: Maybe<Scalars['Int']['output']>;
+  files?: Maybe<Array<Maybe<Gs_File>>>;
+  model?: Maybe<Array<Maybe<Gs_Model>>>;
+  model_count?: Maybe<Scalars['Int']['output']>;
+  program_count?: Maybe<Scalars['Int']['output']>;
+  programs?: Maybe<Array<Maybe<Gs_Program>>>;
+  sample_count?: Maybe<Scalars['Int']['output']>;
+  samples?: Maybe<Array<Maybe<Gs_Sample>>>;
+  studies?: Maybe<Array<Maybe<Gs_Study>>>;
+  study_count?: Maybe<Scalars['Int']['output']>;
+};
+
+export type GroupCount = {
+  __typename?: 'GroupCount';
+  code?: Maybe<Scalars['String']['output']>;
+  count?: Maybe<Scalars['Int']['output']>;
+  group?: Maybe<Scalars['String']['output']>;
+};
+
+export type GroupCountEs = {
+  __typename?: 'GroupCountES';
+  count?: Maybe<Scalars['Int']['output']>;
+  group?: Maybe<Scalars['String']['output']>;
+};
+
+export type IdcMetadata = {
+  __typename?: 'IDCMetadata';
+  cancer_type?: Maybe<Scalars['String']['output']>;
+  collection_id?: Maybe<Scalars['String']['output']>;
+  date_updated?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  doi?: Maybe<Scalars['String']['output']>;
+  image_types?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  species?: Maybe<Scalars['String']['output']>;
+  subject_count?: Maybe<Scalars['Int']['output']>;
+  supporting_data?: Maybe<Scalars['String']['output']>;
+};
+
+export type Link = {
+  __typename?: 'Link';
+  metadata?: Maybe<Metadata>;
+  repository?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type Metadata = IdcMetadata | TciaMetadata;
+
+export type MultiStudyCases = {
+  __typename?: 'MultiStudyCases';
+  caseIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  fileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  individualId?: Maybe<Scalars['String']['output']>;
+  sampleIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  studyFileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createAdverseEventNodeData: AdverseEventNodeData;
+  createAgentAdministrationNodeData: AgentAdministrationNodeData;
+  createAgentNodeData: AgentNodeData;
+  createBreedCaseCount: BreedCaseCount;
+  createCartChartData: CartChartData;
+  createCartChartItem: CartChartItem;
+  createCartOverviewData: CartOverviewData;
+  createCaseDetail: CaseDetail;
+  createCaseOverview: CaseOverview;
+  createCaseOverview2: CaseOverview2;
+  createClinicalDataNodeCounts: ClinicalDataNodeCounts;
+  createCycleNodeData: CycleNodeData;
+  createDiseaseExtentNodeData: DiseaseExtentNodeData;
+  createFileDetail: FileDetail;
+  createFileInList: FileInList;
+  createFileInfo: FileInfo;
+  createFileOverview: FileOverview;
+  createFileOverview2: FileOverview2;
+  createFilesOfCase: FilesOfCase;
+  createFollowUpNodeData: FollowUpNodeData;
+  createGroupCount: GroupCount;
+  createLink: Link;
+  createMultiStudyCases: MultiStudyCases;
+  createOffStudyNodeData: OffStudyNodeData;
+  createOffTreatmentNodeData: OffTreatmentNodeData;
+  createPhysicalExamNodeData: PhysicalExamNodeData;
+  createPriorSurgeryNodeData: PriorSurgeryNodeData;
+  createPriorSurgeryNodeDataOverview: PriorSurgeryNodeDataOverview;
+  createPriorTherapyNodeData: PriorTherapyNodeData;
+  createSampleOverview: SampleOverview;
+  createStudyDetail: StudyDetail;
+  createStudyOfProgram: StudyOfProgram;
+  createStudyStat: StudyStat;
+  createUnifiedCounts: UnifiedCounts;
+  createVisitNodeData: VisitNodeData;
+  createVitalSignsNodeData: VitalSignsNodeData;
+  createadverse_event: Adverse_Event;
+  createagent: Agent;
+  createagent_administration: Agent_Administration;
+  createassay: Assay;
+  createbiospecimen_source: Biospecimen_Source;
+  createcanine_individual: Canine_Individual;
+  createcase: Case;
+  createcohort: Cohort;
+  createcycle: Cycle;
+  createdemographic: Demographic;
+  creatediagnosis: Diagnosis;
+  createdisease_extent: Disease_Extent;
+  createenrollment: Enrollment;
+  createfile: File;
+  createfollow_up: Follow_Up;
+  createimage: Image;
+  createimage_collection: Image_Collection;
+  createlab_exam: Lab_Exam;
+  createoff_study: Off_Study;
+  createoff_treatment: Off_Treatment;
+  createphysical_exam: Physical_Exam;
+  createprincipal_investigator: Principal_Investigator;
+  createprior_surgery: Prior_Surgery;
+  createprior_therapy: Prior_Therapy;
+  createprogram: Program;
+  createpublication: Publication;
+  createregistration: Registration;
+  createsample: Sample;
+  createstudy: Study;
+  createstudy_arm: Study_Arm;
+  createstudy_site: Study_Site;
+  createvisit: Visit;
+  createvital_signs: Vital_Signs;
+};
+
+export type MutationCreateAdverseEventNodeDataArgs = {
+  adverse_event_agent_dose?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_agent_name?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_description?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_grade?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_grade_description?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_term?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_commercial?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_disease?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_ind?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_other?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_research?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  date_of_onset?: InputMaybe<Scalars['String']['input']>;
+  date_of_resolution?: InputMaybe<Scalars['String']['input']>;
+  day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
+  dose_limiting_toxicity?: InputMaybe<Scalars['String']['input']>;
+  existing_adverse_event?: InputMaybe<Scalars['String']['input']>;
+  ongoing_adverse_event?: InputMaybe<Scalars['String']['input']>;
+  other_attribution_description?: InputMaybe<Scalars['String']['input']>;
+  unexpected_adverse_event?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateAgentAdministrationNodeDataArgs = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  dose_level?: InputMaybe<Scalars['Float']['input']>;
+  dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number?: InputMaybe<Scalars['String']['input']>;
+  medication_duration?: InputMaybe<Scalars['Float']['input']>;
+  medication_lot_number?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration?: InputMaybe<Scalars['String']['input']>;
+  start_time?: InputMaybe<Scalars['String']['input']>;
+  stop_time?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateAgentNodeDataArgs = {
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateBreedCaseCountArgs = {
+  breed?: InputMaybe<Scalars['String']['input']>;
+  cases?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateCartChartDataArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateCartChartItemArgs = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateCartOverviewDataArgs = {
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateCaseDetailArgs = {
+  arm?: InputMaybe<Scalars['String']['input']>;
+  best_response?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_name?: InputMaybe<Scalars['String']['input']>;
+  cohort_description?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  date_of_informed_consent?: InputMaybe<Scalars['String']['input']>;
+  date_of_registration?: InputMaybe<Scalars['String']['input']>;
+  disease_term?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  initials?: InputMaybe<Scalars['String']['input']>;
+  neutered_indicator?: InputMaybe<Scalars['String']['input']>;
+  patient_age_at_enrollment?: InputMaybe<Scalars['Float']['input']>;
+  patient_first_name?: InputMaybe<Scalars['String']['input']>;
+  patient_id?: InputMaybe<Scalars['String']['input']>;
+  patient_subgroup?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  program_acronym?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  site_short_name?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type MutationCreateCaseOverviewArgs = {
+  age?: InputMaybe<Scalars['Float']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  data_types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  diagnosis?: InputMaybe<Scalars['String']['input']>;
+  disease_site?: InputMaybe<Scalars['String']['input']>;
+  file_formats?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  neutered_status?: InputMaybe<Scalars['String']['input']>;
+  program?: InputMaybe<Scalars['String']['input']>;
+  samples?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+  study_type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateCaseOverview2Args = {
+  age?: InputMaybe<Scalars['Float']['input']>;
+  arm?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  cohort?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  diagnosis?: InputMaybe<Scalars['String']['input']>;
+  disease_site?: InputMaybe<Scalars['String']['input']>;
+  files?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  follow_up_data?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  individual_id?: InputMaybe<Scalars['String']['input']>;
+  neutered_status?: InputMaybe<Scalars['String']['input']>;
+  other_cases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pathology_report?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  response_to_treatment?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+  study_type?: InputMaybe<Scalars['String']['input']>;
+  treatment_data?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type MutationCreateClinicalDataNodeCountsArgs = {
+  adverse_event?: InputMaybe<Scalars['Int']['input']>;
+  agent?: InputMaybe<Scalars['Int']['input']>;
+  agent_administration?: InputMaybe<Scalars['Int']['input']>;
+  cycle?: InputMaybe<Scalars['Int']['input']>;
+  disease_extent?: InputMaybe<Scalars['Int']['input']>;
+  follow_up?: InputMaybe<Scalars['Int']['input']>;
+  lab_exam?: InputMaybe<Scalars['Int']['input']>;
+  off_study?: InputMaybe<Scalars['Int']['input']>;
+  off_treatment?: InputMaybe<Scalars['Int']['input']>;
+  physical_exam?: InputMaybe<Scalars['Int']['input']>;
+  prior_surgery?: InputMaybe<Scalars['Int']['input']>;
+  prior_therapy?: InputMaybe<Scalars['Int']['input']>;
+  visit?: InputMaybe<Scalars['Int']['input']>;
+  vital_signs?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateCycleNodeDataArgs = {
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  crf_id?: InputMaybe<Scalars['String']['input']>;
+  cycle_number?: InputMaybe<Scalars['Int']['input']>;
+  date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
+  date_of_cycle_start?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateDiseaseExtentNodeDataArgs = {
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
+  evaluation_code?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number?: InputMaybe<Scalars['String']['input']>;
+  lesion_description?: InputMaybe<Scalars['String']['input']>;
+  lesion_number?: InputMaybe<Scalars['Int']['input']>;
+  lesion_site?: InputMaybe<Scalars['String']['input']>;
+  longest_measurement?: InputMaybe<Scalars['String']['input']>;
+  measurable_lesion?: InputMaybe<Scalars['String']['input']>;
+  measured_how?: InputMaybe<Scalars['String']['input']>;
+  previously_irradiated?: InputMaybe<Scalars['String']['input']>;
+  previously_treated?: InputMaybe<Scalars['String']['input']>;
+  target_lesion?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateFileDetailArgs = {
+  GUID?: InputMaybe<Scalars['String']['input']>;
+  acl?: InputMaybe<Scalars['String']['input']>;
+  arm?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_name?: InputMaybe<Scalars['String']['input']>;
+  cohort_description?: InputMaybe<Scalars['String']['input']>;
+  cohort_dose?: InputMaybe<Scalars['String']['input']>;
+  comment?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['Boolean']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
+  day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
+  disease_term?: InputMaybe<Scalars['String']['input']>;
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_location?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  md5?: InputMaybe<Scalars['String']['input']>;
+  md5sum?: InputMaybe<Scalars['String']['input']>;
+  necropsy_sample?: InputMaybe<Scalars['Boolean']['input']>;
+  neutered_indicator?: InputMaybe<Scalars['String']['input']>;
+  patient_age_at_enrollment?: InputMaybe<Scalars['Float']['input']>;
+  percentage_stroma?: InputMaybe<Scalars['Float']['input']>;
+  percentage_tumor?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  sample_id?: InputMaybe<Scalars['String']['input']>;
+  sample_site?: InputMaybe<Scalars['String']['input']>;
+  sample_type?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  specific_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  uuid?: InputMaybe<Scalars['String']['input']>;
+  visit_date?: InputMaybe<Scalars['String']['input']>;
+  visit_number?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type MutationCreateFileInListArgs = {
+  additional_breed_detail?: InputMaybe<Scalars['String']['input']>;
+  arm?: InputMaybe<Scalars['String']['input']>;
+  association?: InputMaybe<Scalars['String']['input']>;
+  best_response?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_name?: InputMaybe<Scalars['String']['input']>;
+  cohort_description?: InputMaybe<Scalars['String']['input']>;
+  cohort_dose?: InputMaybe<Scalars['String']['input']>;
+  cohort_id?: InputMaybe<Scalars['String']['input']>;
+  comment?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_birth?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
+  demographic_id?: InputMaybe<Scalars['String']['input']>;
+  diagnosis?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id?: InputMaybe<Scalars['String']['input']>;
+  disease_term?: InputMaybe<Scalars['String']['input']>;
+  drs_uri?: InputMaybe<Scalars['String']['input']>;
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_location?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  file_uuid?: InputMaybe<Scalars['String']['input']>;
+  follow_up_data?: InputMaybe<Scalars['String']['input']>;
+  general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  histology_date?: InputMaybe<Scalars['String']['input']>;
+  individual_id?: InputMaybe<Scalars['String']['input']>;
+  md5sum?: InputMaybe<Scalars['String']['input']>;
+  molecular_subtype?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  necropsy_sample?: InputMaybe<Scalars['String']['input']>;
+  neutered_indicator?: InputMaybe<Scalars['String']['input']>;
+  other_cases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pathology_report?: InputMaybe<Scalars['String']['input']>;
+  patient_age_at_enrollment?: InputMaybe<Scalars['String']['input']>;
+  patient_id?: InputMaybe<Scalars['String']['input']>;
+  percentage_tumor?: InputMaybe<Scalars['String']['input']>;
+  physical_sample_type?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  sample_chronology?: InputMaybe<Scalars['String']['input']>;
+  sample_id?: InputMaybe<Scalars['String']['input']>;
+  sample_preservation?: InputMaybe<Scalars['String']['input']>;
+  sample_site?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  specific_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+  summarized_sample_type?: InputMaybe<Scalars['String']['input']>;
+  treatment_data?: InputMaybe<Scalars['String']['input']>;
+  tumor_grade?: InputMaybe<Scalars['String']['input']>;
+  tumor_length?: InputMaybe<Scalars['String']['input']>;
+  tumor_sample_origin?: InputMaybe<Scalars['String']['input']>;
+  tumor_volume?: InputMaybe<Scalars['String']['input']>;
+  tumor_width?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['String']['input']>;
+  weight_unit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateFileInfoArgs = {
+  GUID?: InputMaybe<Scalars['String']['input']>;
+  acl?: InputMaybe<Scalars['String']['input']>;
+  md5?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateFileOverviewArgs = {
+  arm?: InputMaybe<Scalars['String']['input']>;
+  association?: InputMaybe<Scalars['String']['input']>;
+  best_response?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  cohort_description?: InputMaybe<Scalars['String']['input']>;
+  comment?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
+  diagnosis?: InputMaybe<Scalars['String']['input']>;
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  file_uuid?: InputMaybe<Scalars['String']['input']>;
+  follow_up_data?: InputMaybe<Scalars['String']['input']>;
+  general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  individual_id?: InputMaybe<Scalars['String']['input']>;
+  necropsy_sample?: InputMaybe<Scalars['String']['input']>;
+  neutered_indicator?: InputMaybe<Scalars['String']['input']>;
+  other_cases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pathology_report?: InputMaybe<Scalars['String']['input']>;
+  patient_age_at_enrollment?: InputMaybe<Scalars['String']['input']>;
+  percentage_tumor?: InputMaybe<Scalars['String']['input']>;
+  physical_sample_type?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  sample_chronology?: InputMaybe<Scalars['String']['input']>;
+  sample_id?: InputMaybe<Scalars['String']['input']>;
+  sample_preservation?: InputMaybe<Scalars['String']['input']>;
+  sample_site?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  specific_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+  summarized_sample_type?: InputMaybe<Scalars['String']['input']>;
+  treatment_data?: InputMaybe<Scalars['String']['input']>;
+  tumor_grade?: InputMaybe<Scalars['String']['input']>;
+  tumor_sample_origin?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateFileOverview2Args = {
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_location?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_status?: InputMaybe<Scalars['String']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  md5sum?: InputMaybe<Scalars['String']['input']>;
+  parent?: InputMaybe<Scalars['String']['input']>;
+  uuid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateFilesOfCaseArgs = {
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_location?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_status?: InputMaybe<Scalars['String']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  md5sum?: InputMaybe<Scalars['String']['input']>;
+  parent?: InputMaybe<Scalars['String']['input']>;
+  uuid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateFollowUpNodeDataArgs = {
+  contact_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status?: InputMaybe<Scalars['String']['input']>;
+  patient_status?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes?: InputMaybe<Scalars['Boolean']['input']>;
+  physical_exam_performed?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_since_last_contact?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type MutationCreateGroupCountArgs = {
+  code?: InputMaybe<Scalars['String']['input']>;
+  count?: InputMaybe<Scalars['Int']['input']>;
+  group?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateLinkArgs = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateMultiStudyCasesArgs = {
+  caseIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  fileIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  individualId?: InputMaybe<Scalars['String']['input']>;
+  sampleIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  studyFileIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type MutationCreateOffStudyNodeDataArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_study?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateOffTreatmentNodeDataArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatePhysicalExamNodeDataArgs = {
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  body_system?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  date_of_examination?: InputMaybe<Scalars['String']['input']>;
+  day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
+  pe_comment?: InputMaybe<Scalars['String']['input']>;
+  pe_finding?: InputMaybe<Scalars['String']['input']>;
+  phase_pe?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreatePriorSurgeryNodeDataArgs = {
+  anatomical_site_of_surgery?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  date_of_surgery?: InputMaybe<Scalars['String']['input']>;
+  procedure?: InputMaybe<Scalars['String']['input']>;
+  residual_disease?: InputMaybe<Scalars['String']['input']>;
+  surgical_finding?: InputMaybe<Scalars['String']['input']>;
+  therapeutic_indicator?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatePriorSurgeryNodeDataOverviewArgs = {
+  case_count?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreatePriorTherapyNodeDataArgs = {
+  agent_name?: InputMaybe<Scalars['String']['input']>;
+  agent_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  any_therapy?: InputMaybe<Scalars['Boolean']['input']>;
+  best_response_to_prior_therapy?: InputMaybe<Scalars['String']['input']>;
+  date_of_first_dose?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_any_therapy?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_nsaid?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_steroid?: InputMaybe<Scalars['String']['input']>;
+  dose_schedule?: InputMaybe<Scalars['String']['input']>;
+  min_rsdl_dz_tx_ind_nsaids_treatment_pe?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nonresponse_therapy_type?: InputMaybe<Scalars['String']['input']>;
+  number_of_prior_regimens_any_therapy?: InputMaybe<Scalars['Int']['input']>;
+  number_of_prior_regimens_nsaid?: InputMaybe<Scalars['Int']['input']>;
+  number_of_prior_regimens_steroid?: InputMaybe<Scalars['Int']['input']>;
+  prior_nsaid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
+  prior_steroid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
+  prior_therapy_type?: InputMaybe<Scalars['String']['input']>;
+  therapy_type?: InputMaybe<Scalars['String']['input']>;
+  total_dose?: InputMaybe<Scalars['Float']['input']>;
+  total_number_of_doses_any_therapy?: InputMaybe<Scalars['Int']['input']>;
+  total_number_of_doses_nsaid?: InputMaybe<Scalars['Int']['input']>;
+  total_number_of_doses_steroid?: InputMaybe<Scalars['Int']['input']>;
+  treatment_performed_at_site?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_performed_in_minimal_residual?: InputMaybe<
+    Scalars['Boolean']['input']
+  >;
+  tx_loc_geo_loc_ind_nsaid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateSampleOverviewArgs = {
+  arm?: InputMaybe<Scalars['String']['input']>;
+  best_response?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  cohort_description?: InputMaybe<Scalars['String']['input']>;
+  comment?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  diagnosis?: InputMaybe<Scalars['String']['input']>;
+  files?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  follow_up_data?: InputMaybe<Scalars['String']['input']>;
+  general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  individual_id?: InputMaybe<Scalars['String']['input']>;
+  necropsy_sample?: InputMaybe<Scalars['String']['input']>;
+  neutered_indicator?: InputMaybe<Scalars['String']['input']>;
+  other_cases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pathology_report?: InputMaybe<Scalars['String']['input']>;
+  patient_age_at_enrollment?: InputMaybe<Scalars['String']['input']>;
+  percentage_tumor?: InputMaybe<Scalars['String']['input']>;
+  physical_sample_type?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  sample_chronology?: InputMaybe<Scalars['String']['input']>;
+  sample_id?: InputMaybe<Scalars['String']['input']>;
+  sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  sample_preservation?: InputMaybe<Scalars['String']['input']>;
+  sample_site?: InputMaybe<Scalars['String']['input']>;
+  sample_type?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  treatment_data?: InputMaybe<Scalars['String']['input']>;
+  tumor_grade?: InputMaybe<Scalars['String']['input']>;
+  tumor_sample_origin?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateStudyDetailArgs = {
+  MD5?: InputMaybe<Scalars['String']['input']>;
+  association?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  format?: InputMaybe<Scalars['String']['input']>;
+  size?: InputMaybe<Scalars['Float']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateStudyOfProgramArgs = {
+  accession_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_description?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_name?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_iacuc_approval?: InputMaybe<Scalars['String']['input']>;
+  dates_of_conduct?: InputMaybe<Scalars['String']['input']>;
+  numberOfCRDCNodes?: InputMaybe<Scalars['Int']['input']>;
+  numberOfCaseFiles?: InputMaybe<Scalars['Int']['input']>;
+  numberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  numberOfImageCollections?: InputMaybe<Scalars['Int']['input']>;
+  numberOfPublications?: InputMaybe<Scalars['Int']['input']>;
+  numberOfStudyFiles?: InputMaybe<Scalars['Int']['input']>;
+  program_id?: InputMaybe<Scalars['String']['input']>;
+  study_disposition?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateStudyStatArgs = {
+  cases?: InputMaybe<Scalars['Int']['input']>;
+  files?: InputMaybe<Scalars['Int']['input']>;
+  samples?: InputMaybe<Scalars['Int']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+  total_size_MB?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type MutationCreateUnifiedCountsArgs = {
+  numberOfAliquots?: InputMaybe<Scalars['Int']['input']>;
+  numberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  numberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+  numberOfPrograms?: InputMaybe<Scalars['Int']['input']>;
+  numberOfSamples?: InputMaybe<Scalars['Int']['input']>;
+  numberOfStudies?: InputMaybe<Scalars['Int']['input']>;
+  numberOfStudyFiles?: InputMaybe<Scalars['Int']['input']>;
+  volumeOfData?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type MutationCreateVisitNodeDataArgs = {
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  visit_date?: InputMaybe<Scalars['String']['input']>;
+  visit_id?: InputMaybe<Scalars['String']['input']>;
+  visit_number?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateVitalSignsNodeDataArgs = {
+  body_surface_area?: InputMaybe<Scalars['Float']['input']>;
+  body_surface_area_original?: InputMaybe<Scalars['Float']['input']>;
+  body_surface_area_original_unit?: InputMaybe<Scalars['String']['input']>;
+  body_surface_area_unit?: InputMaybe<Scalars['String']['input']>;
+  body_temperature?: InputMaybe<Scalars['Float']['input']>;
+  body_temperature_original?: InputMaybe<Scalars['Float']['input']>;
+  body_temperature_original_unit?: InputMaybe<Scalars['String']['input']>;
+  body_temperature_unit?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
+  modified_ecog?: InputMaybe<Scalars['String']['input']>;
+  patient_weight?: InputMaybe<Scalars['Float']['input']>;
+  patient_weight_original?: InputMaybe<Scalars['Float']['input']>;
+  patient_weight_original_unit?: InputMaybe<Scalars['String']['input']>;
+  patient_weight_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse?: InputMaybe<Scalars['Int']['input']>;
+  pulse_original?: InputMaybe<Scalars['Int']['input']>;
+  pulse_original_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_ox_original_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_ox_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_unit?: InputMaybe<Scalars['String']['input']>;
+  respiration_pattern?: InputMaybe<Scalars['String']['input']>;
+  respiration_rate_original_unit?: InputMaybe<Scalars['String']['input']>;
+  respiration_rate_unit?: InputMaybe<Scalars['String']['input']>;
+  systolic_bp_original_unit?: InputMaybe<Scalars['String']['input']>;
+  systolic_bp_unit?: InputMaybe<Scalars['String']['input']>;
+  time_of_observation?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateadverse_EventArgs = {
+  adverse_event_agent_dose?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_agent_name?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_description?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_grade?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_grade_description?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_term?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_commercial?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_disease?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_ind?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_other?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_research?: InputMaybe<Scalars['String']['input']>;
+  date_of_onset?: InputMaybe<Scalars['String']['input']>;
+  date_of_resolution?: InputMaybe<Scalars['String']['input']>;
+  day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
+  dose_limiting_toxicity?: InputMaybe<Scalars['String']['input']>;
+  existing_adverse_event?: InputMaybe<Scalars['String']['input']>;
+  ongoing_adverse_event?: InputMaybe<Scalars['String']['input']>;
+  other_attribution_description?: InputMaybe<Scalars['String']['input']>;
+  unexpected_adverse_event?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateagentArgs = {
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateagent_AdministrationArgs = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  dose_level?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number?: InputMaybe<Scalars['String']['input']>;
+  medication_duration?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration?: InputMaybe<Scalars['String']['input']>;
+  start_time?: InputMaybe<Scalars['String']['input']>;
+  stop_time?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateassayArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatebiospecimen_SourceArgs = {
+  biospecimen_repository_acronym?: InputMaybe<Scalars['String']['input']>;
+  biospecimen_repository_full_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatecanine_IndividualArgs = {
+  canine_individual_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatecaseArgs = {
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  patient_first_name?: InputMaybe<Scalars['String']['input']>;
+  patient_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatecohortArgs = {
+  cohort_description?: InputMaybe<Scalars['String']['input']>;
+  cohort_dose?: InputMaybe<Scalars['String']['input']>;
+  cohort_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatecycleArgs = {
+  cycle_number?: InputMaybe<Scalars['Int']['input']>;
+  date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
+  date_of_cycle_start?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatedemographicArgs = {
+  additional_breed_detail?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  date_of_birth?: InputMaybe<Scalars['String']['input']>;
+  demographic_id?: InputMaybe<Scalars['String']['input']>;
+  neutered_indicator?: InputMaybe<Scalars['String']['input']>;
+  patient_age_at_enrollment?: InputMaybe<Scalars['Float']['input']>;
+  patient_age_at_enrollment_original?: InputMaybe<Scalars['Float']['input']>;
+  patient_age_at_enrollment_original_unit?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  patient_age_at_enrollment_unit?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['Float']['input']>;
+  weight_original?: InputMaybe<Scalars['Float']['input']>;
+  weight_original_unit?: InputMaybe<Scalars['String']['input']>;
+  weight_unit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatediagnosisArgs = {
+  best_response?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  date_of_histology_confirmation?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id?: InputMaybe<Scalars['String']['input']>;
+  disease_term?: InputMaybe<Scalars['String']['input']>;
+  follow_up_data?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  pathology_report?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  treatment_data?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatedisease_ExtentArgs = {
+  date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
+  evaluation_code?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number?: InputMaybe<Scalars['String']['input']>;
+  lesion_description?: InputMaybe<Scalars['String']['input']>;
+  lesion_number?: InputMaybe<Scalars['String']['input']>;
+  lesion_site?: InputMaybe<Scalars['String']['input']>;
+  longest_measurement?: InputMaybe<Scalars['Float']['input']>;
+  longest_measurement_original?: InputMaybe<Scalars['Float']['input']>;
+  longest_measurement_original_unit?: InputMaybe<Scalars['String']['input']>;
+  longest_measurement_unit?: InputMaybe<Scalars['String']['input']>;
+  measurable_lesion?: InputMaybe<Scalars['String']['input']>;
+  measured_how?: InputMaybe<Scalars['String']['input']>;
+  previously_irradiated?: InputMaybe<Scalars['String']['input']>;
+  previously_treated?: InputMaybe<Scalars['String']['input']>;
+  target_lesion?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateenrollmentArgs = {
+  date_of_informed_consent?: InputMaybe<Scalars['String']['input']>;
+  date_of_registration?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id?: InputMaybe<Scalars['String']['input']>;
+  initials?: InputMaybe<Scalars['String']['input']>;
+  patient_subgroup?: InputMaybe<Scalars['String']['input']>;
+  registering_institution?: InputMaybe<Scalars['String']['input']>;
+  site_short_name?: InputMaybe<Scalars['String']['input']>;
+  veterinary_medical_center?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatefileArgs = {
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_location?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_status?: InputMaybe<Scalars['String']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  md5sum?: InputMaybe<Scalars['String']['input']>;
+  uuid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatefollow_UpArgs = {
+  contact_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status?: InputMaybe<Scalars['String']['input']>;
+  patient_status?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_performed?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_since_last_contact?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type MutationCreateimageArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateimage_CollectionArgs = {
+  collection_access?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url?: InputMaybe<Scalars['String']['input']>;
+  image_type_included?: InputMaybe<Scalars['String']['input']>;
+  repository_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatelab_ExamArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateoff_StudyArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_study?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateoff_TreatmentArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatephysical_ExamArgs = {
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  body_system?: InputMaybe<Scalars['String']['input']>;
+  date_of_examination?: InputMaybe<Scalars['String']['input']>;
+  day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
+  pe_comment?: InputMaybe<Scalars['String']['input']>;
+  pe_finding?: InputMaybe<Scalars['String']['input']>;
+  phase_pe?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateprincipal_InvestigatorArgs = {
+  pi_first_name?: InputMaybe<Scalars['String']['input']>;
+  pi_last_name?: InputMaybe<Scalars['String']['input']>;
+  pi_middle_initial?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateprior_SurgeryArgs = {
+  anatomical_site_of_surgery?: InputMaybe<Scalars['String']['input']>;
+  date_of_surgery?: InputMaybe<Scalars['String']['input']>;
+  procedure?: InputMaybe<Scalars['String']['input']>;
+  residual_disease?: InputMaybe<Scalars['String']['input']>;
+  surgical_finding?: InputMaybe<Scalars['String']['input']>;
+  therapeutic_indicator?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateprior_TherapyArgs = {
+  agent_name?: InputMaybe<Scalars['String']['input']>;
+  agent_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  any_therapy?: InputMaybe<Scalars['Boolean']['input']>;
+  best_response_to_prior_therapy?: InputMaybe<Scalars['String']['input']>;
+  date_of_first_dose?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_any_therapy?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_nsaid?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_steroid?: InputMaybe<Scalars['String']['input']>;
+  dose_schedule?: InputMaybe<Scalars['String']['input']>;
+  min_rsdl_dz_tx_ind_nsaids_treatment_pe?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nonresponse_therapy_type?: InputMaybe<Scalars['String']['input']>;
+  number_of_prior_regimens_any_therapy?: InputMaybe<Scalars['Int']['input']>;
+  number_of_prior_regimens_nsaid?: InputMaybe<Scalars['Int']['input']>;
+  number_of_prior_regimens_steroid?: InputMaybe<Scalars['Int']['input']>;
+  prior_nsaid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
+  prior_steroid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
+  prior_therapy_type?: InputMaybe<Scalars['String']['input']>;
+  therapy_type?: InputMaybe<Scalars['String']['input']>;
+  total_dose?: InputMaybe<Scalars['Float']['input']>;
+  total_dose_original?: InputMaybe<Scalars['Float']['input']>;
+  total_dose_original_unit?: InputMaybe<Scalars['String']['input']>;
+  total_dose_unit?: InputMaybe<Scalars['String']['input']>;
+  total_number_of_doses_any_therapy?: InputMaybe<Scalars['Int']['input']>;
+  total_number_of_doses_nsaid?: InputMaybe<Scalars['Int']['input']>;
+  total_number_of_doses_steroid?: InputMaybe<Scalars['Int']['input']>;
+  treatment_performed_at_site?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_performed_in_minimal_residual?: InputMaybe<
+    Scalars['Boolean']['input']
+  >;
+  tx_loc_geo_loc_ind_nsaid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateprogramArgs = {
+  program_acronym?: InputMaybe<Scalars['String']['input']>;
+  program_external_url?: InputMaybe<Scalars['String']['input']>;
+  program_full_description?: InputMaybe<Scalars['String']['input']>;
+  program_name?: InputMaybe<Scalars['String']['input']>;
+  program_short_description?: InputMaybe<Scalars['String']['input']>;
+  program_sort_order?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreatepublicationArgs = {
+  authorship?: InputMaybe<Scalars['String']['input']>;
+  digital_object_id?: InputMaybe<Scalars['String']['input']>;
+  journal_citation?: InputMaybe<Scalars['String']['input']>;
+  publication_title?: InputMaybe<Scalars['String']['input']>;
+  pubmed_id?: InputMaybe<Scalars['Float']['input']>;
+  year_of_publication?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type MutationCreateregistrationArgs = {
+  registration_id?: InputMaybe<Scalars['String']['input']>;
+  registration_origin?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatesampleArgs = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
+  general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  length_of_tumor?: InputMaybe<Scalars['Float']['input']>;
+  length_of_tumor_original?: InputMaybe<Scalars['Float']['input']>;
+  length_of_tumor_original_unit?: InputMaybe<Scalars['String']['input']>;
+  length_of_tumor_unit?: InputMaybe<Scalars['String']['input']>;
+  molecular_subtype?: InputMaybe<Scalars['String']['input']>;
+  necropsy_sample?: InputMaybe<Scalars['String']['input']>;
+  percentage_tumor?: InputMaybe<Scalars['String']['input']>;
+  physical_sample_type?: InputMaybe<Scalars['String']['input']>;
+  sample_chronology?: InputMaybe<Scalars['String']['input']>;
+  sample_id?: InputMaybe<Scalars['String']['input']>;
+  sample_preservation?: InputMaybe<Scalars['String']['input']>;
+  sample_site?: InputMaybe<Scalars['String']['input']>;
+  specific_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  summarized_sample_type?: InputMaybe<Scalars['String']['input']>;
+  tumor_grade?: InputMaybe<Scalars['String']['input']>;
+  tumor_sample_origin?: InputMaybe<Scalars['String']['input']>;
+  volume_of_tumor?: InputMaybe<Scalars['Float']['input']>;
+  volume_of_tumor_original?: InputMaybe<Scalars['Float']['input']>;
+  volume_of_tumor_original_unit?: InputMaybe<Scalars['String']['input']>;
+  volume_of_tumor_unit?: InputMaybe<Scalars['String']['input']>;
+  width_of_tumor?: InputMaybe<Scalars['Float']['input']>;
+  width_of_tumor_original?: InputMaybe<Scalars['Float']['input']>;
+  width_of_tumor_original_unit?: InputMaybe<Scalars['String']['input']>;
+  width_of_tumor_unit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatestudyArgs = {
+  accession_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_description?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_name?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_iacuc_approval?: InputMaybe<Scalars['String']['input']>;
+  dates_of_conduct?: InputMaybe<Scalars['String']['input']>;
+  study_disposition?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatestudy_ArmArgs = {
+  arm?: InputMaybe<Scalars['String']['input']>;
+  arm_description?: InputMaybe<Scalars['String']['input']>;
+  arm_id?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatestudy_SiteArgs = {
+  registering_institution?: InputMaybe<Scalars['String']['input']>;
+  site_short_name?: InputMaybe<Scalars['String']['input']>;
+  veterinary_medical_center?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatevisitArgs = {
+  visit_date?: InputMaybe<Scalars['String']['input']>;
+  visit_id?: InputMaybe<Scalars['String']['input']>;
+  visit_number?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatevital_SignsArgs = {
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  body_surface_area?: InputMaybe<Scalars['Float']['input']>;
+  body_surface_area_original?: InputMaybe<Scalars['Float']['input']>;
+  body_surface_area_original_unit?: InputMaybe<Scalars['String']['input']>;
+  body_surface_area_unit?: InputMaybe<Scalars['String']['input']>;
+  body_temperature?: InputMaybe<Scalars['Float']['input']>;
+  body_temperature_original?: InputMaybe<Scalars['Float']['input']>;
+  body_temperature_original_unit?: InputMaybe<Scalars['String']['input']>;
+  body_temperature_unit?: InputMaybe<Scalars['String']['input']>;
+  date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
+  ecg?: InputMaybe<Scalars['String']['input']>;
+  modified_ecog?: InputMaybe<Scalars['String']['input']>;
+  patient_weight?: InputMaybe<Scalars['Float']['input']>;
+  patient_weight_original?: InputMaybe<Scalars['Float']['input']>;
+  patient_weight_original_unit?: InputMaybe<Scalars['String']['input']>;
+  patient_weight_unit?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  pulse?: InputMaybe<Scalars['Int']['input']>;
+  pulse_original?: InputMaybe<Scalars['Int']['input']>;
+  pulse_original_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_ox?: InputMaybe<Scalars['Float']['input']>;
+  pulse_ox_original?: InputMaybe<Scalars['Float']['input']>;
+  pulse_ox_original_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_ox_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_unit?: InputMaybe<Scalars['String']['input']>;
+  respiration_pattern?: InputMaybe<Scalars['String']['input']>;
+  respiration_rate?: InputMaybe<Scalars['Int']['input']>;
+  respiration_rate_original?: InputMaybe<Scalars['Int']['input']>;
+  respiration_rate_original_unit?: InputMaybe<Scalars['String']['input']>;
+  respiration_rate_unit?: InputMaybe<Scalars['String']['input']>;
+  systolic_bp?: InputMaybe<Scalars['Int']['input']>;
+  systolic_bp_original?: InputMaybe<Scalars['Int']['input']>;
+  systolic_bp_original_unit?: InputMaybe<Scalars['String']['input']>;
+  systolic_bp_unit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type OffStudyNodeData = {
+  __typename?: 'OffStudyNodeData';
+  best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
+  best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
+  date_last_medication_administration?: Maybe<Scalars['String']['output']>;
+  date_of_best_response?: Maybe<Scalars['String']['output']>;
+  date_of_disease_progression?: Maybe<Scalars['String']['output']>;
+  date_off_study?: Maybe<Scalars['String']['output']>;
+  date_off_treatment?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  reason_off_study?: Maybe<Scalars['String']['output']>;
+};
+
+export type OffTreatmentNodeData = {
+  __typename?: 'OffTreatmentNodeData';
+  best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
+  best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
+  date_last_medication_administration?: Maybe<Scalars['String']['output']>;
+  date_of_best_response?: Maybe<Scalars['String']['output']>;
+  date_of_disease_progression?: Maybe<Scalars['String']['output']>;
+  date_off_treatment?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  reason_off_treatment?: Maybe<Scalars['String']['output']>;
+};
+
+export type PhysicalExamNodeData = {
+  __typename?: 'PhysicalExamNodeData';
+  assessment_timepoint?: Maybe<Scalars['Int']['output']>;
+  body_system?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  date_of_examination?: Maybe<Scalars['String']['output']>;
+  day_in_cycle?: Maybe<Scalars['Int']['output']>;
+  pe_comment?: Maybe<Scalars['String']['output']>;
+  pe_finding?: Maybe<Scalars['String']['output']>;
+  phase_pe?: Maybe<Scalars['Int']['output']>;
+};
+
+export type PriorSurgeryNodeData = {
+  __typename?: 'PriorSurgeryNodeData';
+  anatomical_site_of_surgery?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  date_of_surgery?: Maybe<Scalars['String']['output']>;
+  procedure?: Maybe<Scalars['String']['output']>;
+  residual_disease?: Maybe<Scalars['String']['output']>;
+  surgical_finding?: Maybe<Scalars['String']['output']>;
+  therapeutic_indicator?: Maybe<Scalars['String']['output']>;
+};
+
+/**
+ *  type LabExamNodeData {
+ *  }
+ */
+export type PriorSurgeryNodeDataOverview = {
+  __typename?: 'PriorSurgeryNodeDataOverview';
+  case_count?: Maybe<Scalars['Int']['output']>;
+  prior_surgeries?: Maybe<Array<Maybe<PriorSurgeryNodeData>>>;
+};
+
+/**
+ *  type LabExamNodeData {
+ *  }
+ */
+export type PriorSurgeryNodeDataOverviewPrior_SurgeriesArgs = {
+  filter?: InputMaybe<_PriorSurgeryNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_PriorSurgeryNodeDataOrdering>>;
+};
+
+export type PriorTherapyNodeData = {
+  __typename?: 'PriorTherapyNodeData';
+  agent_name?: Maybe<Scalars['String']['output']>;
+  agent_units_of_measure?: Maybe<Scalars['String']['output']>;
+  any_therapy?: Maybe<Scalars['Boolean']['output']>;
+  best_response_to_prior_therapy?: Maybe<Scalars['String']['output']>;
+  date_of_first_dose?: Maybe<Scalars['String']['output']>;
+  date_of_last_dose?: Maybe<Scalars['String']['output']>;
+  date_of_last_dose_any_therapy?: Maybe<Scalars['String']['output']>;
+  date_of_last_dose_nsaid?: Maybe<Scalars['String']['output']>;
+  date_of_last_dose_steroid?: Maybe<Scalars['String']['output']>;
+  dose_schedule?: Maybe<Scalars['String']['output']>;
+  min_rsdl_dz_tx_ind_nsaids_treatment_pe?: Maybe<Scalars['String']['output']>;
+  nonresponse_therapy_type?: Maybe<Scalars['String']['output']>;
+  number_of_prior_regimens_any_therapy?: Maybe<Scalars['Int']['output']>;
+  number_of_prior_regimens_nsaid?: Maybe<Scalars['Int']['output']>;
+  number_of_prior_regimens_steroid?: Maybe<Scalars['Int']['output']>;
+  prior_nsaid_exposure?: Maybe<Scalars['Boolean']['output']>;
+  prior_steroid_exposure?: Maybe<Scalars['Boolean']['output']>;
+  prior_therapy_type?: Maybe<Scalars['String']['output']>;
+  therapy_type?: Maybe<Scalars['String']['output']>;
+  total_dose?: Maybe<Scalars['Float']['output']>;
+  total_number_of_doses_any_therapy?: Maybe<Scalars['Int']['output']>;
+  total_number_of_doses_nsaid?: Maybe<Scalars['Int']['output']>;
+  total_number_of_doses_steroid?: Maybe<Scalars['Int']['output']>;
+  treatment_performed_at_site?: Maybe<Scalars['Boolean']['output']>;
+  treatment_performed_in_minimal_residual?: Maybe<Scalars['Boolean']['output']>;
+  tx_loc_geo_loc_ind_nsaid?: Maybe<Scalars['String']['output']>;
+};
+
+export type ProgramStudies = {
+  __typename?: 'ProgramStudies';
+  caseSize?: Maybe<Scalars['Int']['output']>;
+  program?: Maybe<Scalars['String']['output']>;
+  studies?: Maybe<Array<Maybe<StudyInfo>>>;
+};
+
+export type QueryType = {
+  __typename?: 'QueryType';
+  adverseEventNodeData?: Maybe<Array<Maybe<AdverseEventNodeData>>>;
+  adverse_event: Array<Adverse_Event>;
+  agent: Array<Agent>;
+  agentAdministrationNodeData?: Maybe<
+    Array<Maybe<AgentAdministrationNodeData>>
+  >;
+  agentNodeData?: Maybe<Array<Maybe<AgentNodeData>>>;
+  agent_administration: Array<Agent_Administration>;
+  aliquotCountOfCase?: Maybe<Scalars['Int']['output']>;
+  aliquotCountOfProgram?: Maybe<Scalars['Int']['output']>;
+  aliquotCountOfStudy?: Maybe<Scalars['Int']['output']>;
+  assay: Array<Assay>;
+  biospecimen_source: Array<Biospecimen_Source>;
+  breedCaseCount: Array<BreedCaseCount>;
+  canine_individual: Array<Canine_Individual>;
+  cartChartData: Array<CartChartData>;
+  cartChartItem: Array<CartChartItem>;
+  cartOverview?: Maybe<CartOverviewData>;
+  cartOverviewData: Array<CartOverviewData>;
+  case: Array<Case>;
+  caseCountOfProgram?: Maybe<Scalars['Int']['output']>;
+  caseCountOfStudy?: Maybe<Scalars['Int']['output']>;
+  caseDetail?: Maybe<CaseDetail>;
+  caseOverview?: Maybe<Array<Maybe<CaseOverviewEs>>>;
+  caseOverview2: Array<CaseOverview2>;
+  /** Find nodes with parameters */
+  casesByStudyId?: Maybe<Array<Maybe<Case>>>;
+  casesInList?: Maybe<Array<Maybe<CaseOverview>>>;
+  clinicalDataNodeCaseCounts?: Maybe<ClinicalDataNodeCounts>;
+  clinicalDataNodeCounts?: Maybe<ClinicalDataNodeCounts>;
+  clinicalDataNodeNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  cohort: Array<Cohort>;
+  createManifest?: Maybe<Scalars['String']['output']>;
+  cycle: Array<Cycle>;
+  cycleNodeData?: Maybe<Array<Maybe<CycleNodeData>>>;
+  demographic: Array<Demographic>;
+  diagnosis: Array<Diagnosis>;
+  diseaseExtentNodeData?: Maybe<Array<Maybe<DiseaseExtentNodeData>>>;
+  disease_extent: Array<Disease_Extent>;
+  enrollment: Array<Enrollment>;
+  file: Array<File>;
+  fileCountOfCase?: Maybe<Scalars['Int']['output']>;
+  fileCountOfProgram?: Maybe<Scalars['Int']['output']>;
+  fileCountOfStudy?: Maybe<Scalars['Int']['output']>;
+  fileCountOfStudyFiles?: Maybe<Scalars['Int']['output']>;
+  /** For SBG to replace manifest */
+  fileDetail?: Maybe<Array<Maybe<FileDetail>>>;
+  fileIdsFromFileName?: Maybe<Array<Maybe<FileOverview>>>;
+  fileIdsFromFileNameDesc?: Maybe<Array<Maybe<FileOverview>>>;
+  fileInList: Array<FileInList>;
+  /** For IndexD to replace manifest */
+  fileInfo?: Maybe<Array<Maybe<FileInfo>>>;
+  fileOverview?: Maybe<Array<Maybe<FileOverviewEs>>>;
+  fileOverview2: Array<FileOverview2>;
+  filesBySampleId?: Maybe<Array<Maybe<File>>>;
+  filesInList?: Maybe<Array<Maybe<FileInList>>>;
+  filesInListDesc?: Maybe<Array<Maybe<FileInList>>>;
+  filesOfCase?: Maybe<Array<Maybe<FilesOfCase>>>;
+  filesOfCases?: Maybe<Array<Maybe<FilesOfCase>>>;
+  filesOfStudy?: Maybe<Array<Maybe<File>>>;
+  followUpNodeData?: Maybe<Array<Maybe<FollowUpNodeData>>>;
+  follow_up: Array<Follow_Up>;
+  globalSearch?: Maybe<GlobalSearchResult>;
+  groupCount: Array<GroupCount>;
+  image: Array<Image>;
+  image_collection: Array<Image_Collection>;
+  lab_exam: Array<Lab_Exam>;
+  link: Array<Link>;
+  multiStudyCases?: Maybe<MultiStudyCases>;
+  numberOfAliquots?: Maybe<Scalars['Int']['output']>;
+  numberOfCases?: Maybe<Scalars['Int']['output']>;
+  numberOfFiles?: Maybe<Scalars['Int']['output']>;
+  numberOfPrograms?: Maybe<Scalars['Int']['output']>;
+  numberOfSamples?: Maybe<Scalars['Int']['output']>;
+  /** Simple count */
+  numberOfStudies?: Maybe<Scalars['Int']['output']>;
+  numberOfStudyFiles?: Maybe<Scalars['Int']['output']>;
+  offStudyNodeData?: Maybe<Array<Maybe<OffStudyNodeData>>>;
+  offTreatmentNodeData?: Maybe<Array<Maybe<OffTreatmentNodeData>>>;
+  off_study: Array<Off_Study>;
+  off_treatment: Array<Off_Treatment>;
+  physicalExamNodeData?: Maybe<Array<Maybe<PhysicalExamNodeData>>>;
+  physical_exam: Array<Physical_Exam>;
+  principal_investigator: Array<Principal_Investigator>;
+  priorSurgeryNodeData?: Maybe<Array<Maybe<PriorSurgeryNodeData>>>;
+  /**
+   *  labExamNodeData(study_code: String!): [LabExamNodeData] @cypher(statement: """
+   *  MATCH (s:study)
+   *  WHERE s.clinical_study_designation = $study_code
+   *  MATCH (s)<-[*1..2]-(c:case)
+   *  MATCH (c)<-[*1..2]-(v:visit)
+   *  MATCH (v)<-[:on_visit]-(le:lab_exam)
+   *  RETURN DISTINCT le {.*}
+   *  """, passThrough: true)
+   */
+  priorSurgeryNodeDataOverview?: Maybe<PriorSurgeryNodeDataOverview>;
+  priorTherapyNodeData?: Maybe<Array<Maybe<PriorTherapyNodeData>>>;
+  prior_surgery: Array<Prior_Surgery>;
+  prior_therapy: Array<Prior_Therapy>;
+  program: Array<Program>;
+  programCountOfStudy?: Maybe<Scalars['Int']['output']>;
+  programsCountOfCase?: Maybe<Scalars['Int']['output']>;
+  publication: Array<Publication>;
+  registration: Array<Registration>;
+  sample: Array<Sample>;
+  sampleCountOfCase?: Maybe<Scalars['Int']['output']>;
+  sampleCountOfProgram?: Maybe<Scalars['Int']['output']>;
+  /** Count with parameter */
+  sampleCountOfStudy?: Maybe<Scalars['Int']['output']>;
+  sampleOverview?: Maybe<Array<Maybe<SampleOverviewEs>>>;
+  samplesByCaseId?: Maybe<Array<Maybe<Sample>>>;
+  /** Version */
+  schemaVersion?: Maybe<Scalars['String']['output']>;
+  searchCases?: Maybe<SearchResult>;
+  storeManifest?: Maybe<Scalars['String']['output']>;
+  studiesByProgram?: Maybe<Array<Maybe<StudyOfProgram>>>;
+  /** Combined info */
+  studiesByProgramId?: Maybe<Array<Maybe<StudyOfProgram>>>;
+  study: Array<Study>;
+  studyCountOfProgram?: Maybe<Scalars['Int']['output']>;
+  studyDetail?: Maybe<Array<Maybe<StudyDetail>>>;
+  studyFileCountOfCase?: Maybe<Scalars['Int']['output']>;
+  studyFileCountOfProgram?: Maybe<Scalars['Int']['output']>;
+  studyFiles?: Maybe<Array<Maybe<File>>>;
+  studyLinks?: Maybe<Array<Maybe<Link>>>;
+  studyOfProgram: Array<StudyOfProgram>;
+  studySamplePathologyCount?: Maybe<Array<Maybe<GroupCount>>>;
+  studySampleSiteCount?: Maybe<Array<Maybe<GroupCount>>>;
+  studySampleTypeCount?: Maybe<Array<Maybe<GroupCount>>>;
+  studyStat: Array<StudyStat>;
+  studyStats?: Maybe<Array<Maybe<StudyStat>>>;
+  study_arm: Array<Study_Arm>;
+  study_site: Array<Study_Site>;
+  unifiedCounts: Array<UnifiedCounts>;
+  unifiedViewData?: Maybe<UnifiedCounts>;
+  visit: Array<Visit>;
+  visitNodeData?: Maybe<Array<Maybe<VisitNodeData>>>;
+  vitalSignsNodeData?: Maybe<Array<Maybe<VitalSignsNodeData>>>;
+  vital_signs: Array<Vital_Signs>;
+  volumeOfData?: Maybe<Scalars['Float']['output']>;
+  volumeOfDataOfCase?: Maybe<Scalars['Float']['output']>;
+  volumeOfDataOfProgram?: Maybe<Scalars['Float']['output']>;
+  volumeOfDataOfStudy?: Maybe<Scalars['Float']['output']>;
+};
+
+export type QueryTypeAdverseEventNodeDataArgs = {
+  filter?: InputMaybe<_AdverseEventNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AdverseEventNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeAdverse_EventArgs = {
+  adverse_event_agent_dose?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_agent_name?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_description?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_grade?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_grade_description?: InputMaybe<Scalars['String']['input']>;
+  adverse_event_term?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_commercial?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_disease?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_ind?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_other?: InputMaybe<Scalars['String']['input']>;
+  attribution_to_research?: InputMaybe<Scalars['String']['input']>;
+  date_of_onset?: InputMaybe<Scalars['String']['input']>;
+  date_of_resolution?: InputMaybe<Scalars['String']['input']>;
+  day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
+  dose_limiting_toxicity?: InputMaybe<Scalars['String']['input']>;
+  existing_adverse_event?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Adverse_EventFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  ongoing_adverse_event?: InputMaybe<Scalars['String']['input']>;
+  orderBy?: InputMaybe<Array<_Adverse_EventOrdering>>;
+  other_attribution_description?: InputMaybe<Scalars['String']['input']>;
+  unexpected_adverse_event?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeAgentArgs = {
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_AgentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AgentOrdering>>;
+};
+
+export type QueryTypeAgentAdministrationNodeDataArgs = {
+  filter?: InputMaybe<_AgentAdministrationNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AgentAdministrationNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeAgentNodeDataArgs = {
+  filter?: InputMaybe<_AgentNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AgentNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeAgent_AdministrationArgs = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  dose_level?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Agent_AdministrationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number?: InputMaybe<Scalars['String']['input']>;
+  medication_duration?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Agent_AdministrationOrdering>>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration?: InputMaybe<Scalars['String']['input']>;
+  start_time?: InputMaybe<Scalars['String']['input']>;
+  stop_time?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeAliquotCountOfCaseArgs = {
+  case_id: Scalars['String']['input'];
+};
+
+export type QueryTypeAliquotCountOfProgramArgs = {
+  program_id: Scalars['String']['input'];
+};
+
+export type QueryTypeAliquotCountOfStudyArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeAssayArgs = {
+  filter?: InputMaybe<_AssayFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AssayOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeBiospecimen_SourceArgs = {
+  biospecimen_repository_acronym?: InputMaybe<Scalars['String']['input']>;
+  biospecimen_repository_full_name?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Biospecimen_SourceFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Biospecimen_SourceOrdering>>;
+};
+
+export type QueryTypeBreedCaseCountArgs = {
+  breed?: InputMaybe<Scalars['String']['input']>;
+  cases?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<_BreedCaseCountFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_BreedCaseCountOrdering>>;
+};
+
+export type QueryTypeCanine_IndividualArgs = {
+  canine_individual_id?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Canine_IndividualFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Canine_IndividualOrdering>>;
+};
+
+export type QueryTypeCartChartDataArgs = {
+  filter?: InputMaybe<_CartChartDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartDataOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeCartChartItemArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type QueryTypeCartOverviewArgs = {
+  file_uuids?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type QueryTypeCartOverviewDataArgs = {
+  filter?: InputMaybe<_CartOverviewDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartOverviewDataOrdering>>;
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type QueryTypeCaseArgs = {
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_CaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOrdering>>;
+  patient_first_name?: InputMaybe<Scalars['String']['input']>;
+  patient_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeCaseCountOfProgramArgs = {
+  program_id: Scalars['String']['input'];
+};
+
+export type QueryTypeCaseCountOfStudyArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeCaseDetailArgs = {
+  case_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeCaseOverviewArgs = {
+  biobank?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  breed?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  diagnosis?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  disease_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_association?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_format?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  neutered_status?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+  program?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  response_to_treatment?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  sample_pathology?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sex?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sort_direction?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  study?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  study_participation?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  study_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeCaseOverview2Args = {
+  age?: InputMaybe<Scalars['Float']['input']>;
+  arm?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  cohort?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  diagnosis?: InputMaybe<Scalars['String']['input']>;
+  disease_site?: InputMaybe<Scalars['String']['input']>;
+  files?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  filter?: InputMaybe<_CaseOverview2Filter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  follow_up_data?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  individual_id?: InputMaybe<Scalars['String']['input']>;
+  neutered_status?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOverview2Ordering>>;
+  other_cases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pathology_report?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  response_to_treatment?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+  study_type?: InputMaybe<Scalars['String']['input']>;
+  treatment_data?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type QueryTypeCasesByStudyIdArgs = {
+  filter?: InputMaybe<_CaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOrdering>>;
+  study_id: Scalars['String']['input'];
+};
+
+export type QueryTypeCasesInListArgs = {
+  case_ids: Array<Scalars['String']['input']>;
+  filter?: InputMaybe<_CaseOverviewFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOverviewOrdering>>;
+};
+
+export type QueryTypeClinicalDataNodeCaseCountsArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeClinicalDataNodeCountsArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeCohortArgs = {
+  cohort_description?: InputMaybe<Scalars['String']['input']>;
+  cohort_dose?: InputMaybe<Scalars['String']['input']>;
+  cohort_id?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_CohortFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CohortOrdering>>;
+};
+
+export type QueryTypeCreateManifestArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+  sort_direction?: InputMaybe<Scalars['String']['input']>;
+  uuid?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeCycleArgs = {
+  cycle_number?: InputMaybe<Scalars['Int']['input']>;
+  date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
+  date_of_cycle_start?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_CycleFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CycleOrdering>>;
+};
+
+export type QueryTypeCycleNodeDataArgs = {
+  filter?: InputMaybe<_CycleNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CycleNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeDemographicArgs = {
+  additional_breed_detail?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  date_of_birth?: InputMaybe<Scalars['String']['input']>;
+  demographic_id?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_DemographicFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  neutered_indicator?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_DemographicOrdering>>;
+  patient_age_at_enrollment?: InputMaybe<Scalars['Float']['input']>;
+  patient_age_at_enrollment_original?: InputMaybe<Scalars['Float']['input']>;
+  patient_age_at_enrollment_original_unit?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  patient_age_at_enrollment_unit?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['Float']['input']>;
+  weight_original?: InputMaybe<Scalars['Float']['input']>;
+  weight_original_unit?: InputMaybe<Scalars['String']['input']>;
+  weight_unit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeDiagnosisArgs = {
+  best_response?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  date_of_histology_confirmation?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id?: InputMaybe<Scalars['String']['input']>;
+  disease_term?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_DiagnosisFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  follow_up_data?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_DiagnosisOrdering>>;
+  pathology_report?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  treatment_data?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeDiseaseExtentNodeDataArgs = {
+  filter?: InputMaybe<_DiseaseExtentNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_DiseaseExtentNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeDisease_ExtentArgs = {
+  date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
+  evaluation_code?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Disease_ExtentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  lesion_description?: InputMaybe<Scalars['String']['input']>;
+  lesion_number?: InputMaybe<Scalars['String']['input']>;
+  lesion_site?: InputMaybe<Scalars['String']['input']>;
+  longest_measurement?: InputMaybe<Scalars['Float']['input']>;
+  longest_measurement_original?: InputMaybe<Scalars['Float']['input']>;
+  longest_measurement_original_unit?: InputMaybe<Scalars['String']['input']>;
+  longest_measurement_unit?: InputMaybe<Scalars['String']['input']>;
+  measurable_lesion?: InputMaybe<Scalars['String']['input']>;
+  measured_how?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Disease_ExtentOrdering>>;
+  previously_irradiated?: InputMaybe<Scalars['String']['input']>;
+  previously_treated?: InputMaybe<Scalars['String']['input']>;
+  target_lesion?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeEnrollmentArgs = {
+  date_of_informed_consent?: InputMaybe<Scalars['String']['input']>;
+  date_of_registration?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_EnrollmentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  initials?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_EnrollmentOrdering>>;
+  patient_subgroup?: InputMaybe<Scalars['String']['input']>;
+  registering_institution?: InputMaybe<Scalars['String']['input']>;
+  site_short_name?: InputMaybe<Scalars['String']['input']>;
+  veterinary_medical_center?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeFileArgs = {
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_location?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_status?: InputMaybe<Scalars['String']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  md5sum?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+  uuid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeFileCountOfCaseArgs = {
+  case_id: Scalars['String']['input'];
+};
+
+export type QueryTypeFileCountOfProgramArgs = {
+  program_id: Scalars['String']['input'];
+};
+
+export type QueryTypeFileCountOfStudyArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeFileCountOfStudyFilesArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeFileDetailArgs = {
+  file_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  filter?: InputMaybe<_FileDetailFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileDetailOrdering>>;
+};
+
+export type QueryTypeFileIdsFromFileNameArgs = {
+  file_name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  filter?: InputMaybe<_FileOverviewFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOverviewOrdering>>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeFileIdsFromFileNameDescArgs = {
+  file_name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  filter?: InputMaybe<_FileOverviewFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOverviewOrdering>>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeFileInListArgs = {
+  additional_breed_detail?: InputMaybe<Scalars['String']['input']>;
+  arm?: InputMaybe<Scalars['String']['input']>;
+  association?: InputMaybe<Scalars['String']['input']>;
+  best_response?: InputMaybe<Scalars['String']['input']>;
+  breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_name?: InputMaybe<Scalars['String']['input']>;
+  cohort_description?: InputMaybe<Scalars['String']['input']>;
+  cohort_dose?: InputMaybe<Scalars['String']['input']>;
+  cohort_id?: InputMaybe<Scalars['String']['input']>;
+  comment?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease?: InputMaybe<Scalars['String']['input']>;
+  concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_birth?: InputMaybe<Scalars['String']['input']>;
+  date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
+  date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
+  demographic_id?: InputMaybe<Scalars['String']['input']>;
+  diagnosis?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id?: InputMaybe<Scalars['String']['input']>;
+  disease_term?: InputMaybe<Scalars['String']['input']>;
+  drs_uri?: InputMaybe<Scalars['String']['input']>;
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_location?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  file_uuid?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_FileInListFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  follow_up_data?: InputMaybe<Scalars['String']['input']>;
+  general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  histological_grade?: InputMaybe<Scalars['String']['input']>;
+  histology_cytopathology?: InputMaybe<Scalars['String']['input']>;
+  histology_date?: InputMaybe<Scalars['String']['input']>;
+  individual_id?: InputMaybe<Scalars['String']['input']>;
+  md5sum?: InputMaybe<Scalars['String']['input']>;
+  molecular_subtype?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  necropsy_sample?: InputMaybe<Scalars['String']['input']>;
+  neutered_indicator?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileInListOrdering>>;
+  other_cases?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  pathology_report?: InputMaybe<Scalars['String']['input']>;
+  patient_age_at_enrollment?: InputMaybe<Scalars['String']['input']>;
+  patient_id?: InputMaybe<Scalars['String']['input']>;
+  percentage_tumor?: InputMaybe<Scalars['String']['input']>;
+  physical_sample_type?: InputMaybe<Scalars['String']['input']>;
+  primary_disease_site?: InputMaybe<Scalars['String']['input']>;
+  sample_chronology?: InputMaybe<Scalars['String']['input']>;
+  sample_id?: InputMaybe<Scalars['String']['input']>;
+  sample_preservation?: InputMaybe<Scalars['String']['input']>;
+  sample_site?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Scalars['String']['input']>;
+  specific_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Scalars['String']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+  summarized_sample_type?: InputMaybe<Scalars['String']['input']>;
+  treatment_data?: InputMaybe<Scalars['String']['input']>;
+  tumor_grade?: InputMaybe<Scalars['String']['input']>;
+  tumor_length?: InputMaybe<Scalars['String']['input']>;
+  tumor_sample_origin?: InputMaybe<Scalars['String']['input']>;
+  tumor_volume?: InputMaybe<Scalars['String']['input']>;
+  tumor_width?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['String']['input']>;
+  weight_unit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeFileInfoArgs = {
+  file_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  filter?: InputMaybe<_FileInfoFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileInfoOrdering>>;
+};
+
+export type QueryTypeFileOverviewArgs = {
+  biobank?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  breed?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  diagnosis?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  disease_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_association?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_format?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_level?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_uuids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  neutered_status?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+  program?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  response_to_treatment?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  sample_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_pathology?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sex?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sort_direction?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  study?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  study_participation?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  study_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeFileOverview2Args = {
+  file_description?: InputMaybe<Scalars['String']['input']>;
+  file_format?: InputMaybe<Scalars['String']['input']>;
+  file_location?: InputMaybe<Scalars['String']['input']>;
+  file_name?: InputMaybe<Scalars['String']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_status?: InputMaybe<Scalars['String']['input']>;
+  file_type?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_FileOverview2Filter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  md5sum?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOverview2Ordering>>;
+  parent?: InputMaybe<Scalars['String']['input']>;
+  uuid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeFilesBySampleIdArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+  sample_id: Scalars['String']['input'];
+};
+
+export type QueryTypeFilesInListArgs = {
+  filter?: InputMaybe<_FileInListFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileInListOrdering>>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+  uuids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeFilesInListDescArgs = {
+  filter?: InputMaybe<_FileInListFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileInListOrdering>>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+  uuids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeFilesOfCaseArgs = {
+  case_id: Scalars['String']['input'];
+  filter?: InputMaybe<_FilesOfCaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FilesOfCaseOrdering>>;
+};
+
+export type QueryTypeFilesOfCasesArgs = {
+  case_ids: Array<Scalars['String']['input']>;
+  filter?: InputMaybe<_FilesOfCaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FilesOfCaseOrdering>>;
+};
+
+export type QueryTypeFilesOfStudyArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeFollowUpNodeDataArgs = {
+  filter?: InputMaybe<_FollowUpNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FollowUpNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeFollow_UpArgs = {
+  contact_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Follow_UpFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Follow_UpOrdering>>;
+  patient_status?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_performed?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_since_last_contact?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryTypeGlobalSearchArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  input?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type QueryTypeGroupCountArgs = {
+  code?: InputMaybe<Scalars['String']['input']>;
+  count?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<_GroupCountFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  group?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_GroupCountOrdering>>;
+};
+
+export type QueryTypeImageArgs = {
+  filter?: InputMaybe<_ImageFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_ImageOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeImage_CollectionArgs = {
+  collection_access?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Image_CollectionFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  image_collection_name?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url?: InputMaybe<Scalars['String']['input']>;
+  image_type_included?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Image_CollectionOrdering>>;
+  repository_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeLab_ExamArgs = {
+  filter?: InputMaybe<_Lab_ExamFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Lab_ExamOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeLinkArgs = {
+  filter?: InputMaybe<_LinkFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_LinkOrdering>>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeMultiStudyCasesArgs = {
+  case_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeOffStudyNodeDataArgs = {
+  filter?: InputMaybe<_OffStudyNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_OffStudyNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeOffTreatmentNodeDataArgs = {
+  filter?: InputMaybe<_OffTreatmentNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_OffTreatmentNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeOff_StudyArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_study?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Off_StudyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Off_StudyOrdering>>;
+  reason_off_study?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeOff_TreatmentArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Off_TreatmentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Off_TreatmentOrdering>>;
+  reason_off_treatment?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypePhysicalExamNodeDataArgs = {
+  filter?: InputMaybe<_PhysicalExamNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_PhysicalExamNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypePhysical_ExamArgs = {
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  body_system?: InputMaybe<Scalars['String']['input']>;
+  date_of_examination?: InputMaybe<Scalars['String']['input']>;
+  day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<_Physical_ExamFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Physical_ExamOrdering>>;
+  pe_comment?: InputMaybe<Scalars['String']['input']>;
+  pe_finding?: InputMaybe<Scalars['String']['input']>;
+  phase_pe?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypePrincipal_InvestigatorArgs = {
+  filter?: InputMaybe<_Principal_InvestigatorFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Principal_InvestigatorOrdering>>;
+  pi_first_name?: InputMaybe<Scalars['String']['input']>;
+  pi_last_name?: InputMaybe<Scalars['String']['input']>;
+  pi_middle_initial?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypePriorSurgeryNodeDataArgs = {
+  filter?: InputMaybe<_PriorSurgeryNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_PriorSurgeryNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypePriorSurgeryNodeDataOverviewArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypePriorTherapyNodeDataArgs = {
+  filter?: InputMaybe<_PriorTherapyNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_PriorTherapyNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypePrior_SurgeryArgs = {
+  anatomical_site_of_surgery?: InputMaybe<Scalars['String']['input']>;
+  date_of_surgery?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Prior_SurgeryFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Prior_SurgeryOrdering>>;
+  procedure?: InputMaybe<Scalars['String']['input']>;
+  residual_disease?: InputMaybe<Scalars['String']['input']>;
+  surgical_finding?: InputMaybe<Scalars['String']['input']>;
+  therapeutic_indicator?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypePrior_TherapyArgs = {
+  agent_name?: InputMaybe<Scalars['String']['input']>;
+  agent_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  any_therapy?: InputMaybe<Scalars['Boolean']['input']>;
+  best_response_to_prior_therapy?: InputMaybe<Scalars['String']['input']>;
+  date_of_first_dose?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_any_therapy?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_nsaid?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_dose_steroid?: InputMaybe<Scalars['String']['input']>;
+  dose_schedule?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Prior_TherapyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  min_rsdl_dz_tx_ind_nsaids_treatment_pe?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nonresponse_therapy_type?: InputMaybe<Scalars['String']['input']>;
+  number_of_prior_regimens_any_therapy?: InputMaybe<Scalars['Int']['input']>;
+  number_of_prior_regimens_nsaid?: InputMaybe<Scalars['Int']['input']>;
+  number_of_prior_regimens_steroid?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Prior_TherapyOrdering>>;
+  prior_nsaid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
+  prior_steroid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
+  prior_therapy_type?: InputMaybe<Scalars['String']['input']>;
+  therapy_type?: InputMaybe<Scalars['String']['input']>;
+  total_dose?: InputMaybe<Scalars['Float']['input']>;
+  total_dose_original?: InputMaybe<Scalars['Float']['input']>;
+  total_dose_original_unit?: InputMaybe<Scalars['String']['input']>;
+  total_dose_unit?: InputMaybe<Scalars['String']['input']>;
+  total_number_of_doses_any_therapy?: InputMaybe<Scalars['Int']['input']>;
+  total_number_of_doses_nsaid?: InputMaybe<Scalars['Int']['input']>;
+  total_number_of_doses_steroid?: InputMaybe<Scalars['Int']['input']>;
+  treatment_performed_at_site?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_performed_in_minimal_residual?: InputMaybe<
+    Scalars['Boolean']['input']
+  >;
+  tx_loc_geo_loc_ind_nsaid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeProgramArgs = {
+  filter?: InputMaybe<_ProgramFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_ProgramOrdering>>;
+  program_acronym?: InputMaybe<Scalars['String']['input']>;
+  program_external_url?: InputMaybe<Scalars['String']['input']>;
+  program_full_description?: InputMaybe<Scalars['String']['input']>;
+  program_name?: InputMaybe<Scalars['String']['input']>;
+  program_short_description?: InputMaybe<Scalars['String']['input']>;
+  program_sort_order?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type QueryTypeProgramCountOfStudyArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeProgramsCountOfCaseArgs = {
+  case_id: Scalars['String']['input'];
+};
+
+export type QueryTypePublicationArgs = {
+  authorship?: InputMaybe<Scalars['String']['input']>;
+  digital_object_id?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_PublicationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  journal_citation?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_PublicationOrdering>>;
+  publication_title?: InputMaybe<Scalars['String']['input']>;
+  pubmed_id?: InputMaybe<Scalars['Float']['input']>;
+  year_of_publication?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type QueryTypeRegistrationArgs = {
+  filter?: InputMaybe<_RegistrationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_RegistrationOrdering>>;
+  registration_id?: InputMaybe<Scalars['String']['input']>;
+  registration_origin?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeSampleArgs = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_SampleFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  length_of_tumor?: InputMaybe<Scalars['Float']['input']>;
+  length_of_tumor_original?: InputMaybe<Scalars['Float']['input']>;
+  length_of_tumor_original_unit?: InputMaybe<Scalars['String']['input']>;
+  length_of_tumor_unit?: InputMaybe<Scalars['String']['input']>;
+  molecular_subtype?: InputMaybe<Scalars['String']['input']>;
+  necropsy_sample?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_SampleOrdering>>;
+  percentage_tumor?: InputMaybe<Scalars['String']['input']>;
+  physical_sample_type?: InputMaybe<Scalars['String']['input']>;
+  sample_chronology?: InputMaybe<Scalars['String']['input']>;
+  sample_id?: InputMaybe<Scalars['String']['input']>;
+  sample_preservation?: InputMaybe<Scalars['String']['input']>;
+  sample_site?: InputMaybe<Scalars['String']['input']>;
+  specific_sample_pathology?: InputMaybe<Scalars['String']['input']>;
+  summarized_sample_type?: InputMaybe<Scalars['String']['input']>;
+  tumor_grade?: InputMaybe<Scalars['String']['input']>;
+  tumor_sample_origin?: InputMaybe<Scalars['String']['input']>;
+  volume_of_tumor?: InputMaybe<Scalars['Float']['input']>;
+  volume_of_tumor_original?: InputMaybe<Scalars['Float']['input']>;
+  volume_of_tumor_original_unit?: InputMaybe<Scalars['String']['input']>;
+  volume_of_tumor_unit?: InputMaybe<Scalars['String']['input']>;
+  width_of_tumor?: InputMaybe<Scalars['Float']['input']>;
+  width_of_tumor_original?: InputMaybe<Scalars['Float']['input']>;
+  width_of_tumor_original_unit?: InputMaybe<Scalars['String']['input']>;
+  width_of_tumor_unit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeSampleCountOfCaseArgs = {
+  case_id: Scalars['String']['input'];
+};
+
+export type QueryTypeSampleCountOfProgramArgs = {
+  program_id: Scalars['String']['input'];
+};
+
+export type QueryTypeSampleCountOfStudyArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeSampleOverviewArgs = {
+  biobank?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  breed?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  diagnosis?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  disease_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_association?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_format?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  neutered_status?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+  program?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  response_to_treatment?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  sample_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_pathology?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sex?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sort_direction?: InputMaybe<Scalars['String']['input']>;
+  stage_of_disease?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  study?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  study_participation?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  study_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeSamplesByCaseIdArgs = {
+  case_id: Scalars['String']['input'];
+  filter?: InputMaybe<_SampleFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_SampleOrdering>>;
+};
+
+export type QueryTypeSearchCasesArgs = {
+  biobank?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  breed?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  diagnosis?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  disease_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_association?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_format?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  file_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  neutered_status?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  program?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  response_to_treatment?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  sample_pathology?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sample_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  search_text?: InputMaybe<Scalars['String']['input']>;
+  sex?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  stage_of_disease?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  study?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  study_participation?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  study_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeStoreManifestArgs = {
+  manifest: Scalars['String']['input'];
+};
+
+export type QueryTypeStudiesByProgramArgs = {
+  filter?: InputMaybe<_StudyOfProgramFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyOfProgramOrdering>>;
+};
+
+export type QueryTypeStudiesByProgramIdArgs = {
+  filter?: InputMaybe<_StudyOfProgramFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyOfProgramOrdering>>;
+  program_id: Scalars['String']['input'];
+};
+
+export type QueryTypeStudyArgs = {
+  accession_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_description?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_name?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_iacuc_approval?: InputMaybe<Scalars['String']['input']>;
+  dates_of_conduct?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_StudyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyOrdering>>;
+  study_disposition?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeStudyCountOfProgramArgs = {
+  program_id: Scalars['String']['input'];
+};
+
+export type QueryTypeStudyDetailArgs = {
+  filter?: InputMaybe<_StudyDetailFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyDetailOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeStudyFileCountOfCaseArgs = {
+  case_id: Scalars['String']['input'];
+};
+
+export type QueryTypeStudyFileCountOfProgramArgs = {
+  program_id: Scalars['String']['input'];
+};
+
+export type QueryTypeStudyFilesArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+  study_codes?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type QueryTypeStudyLinksArgs = {
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeStudyOfProgramArgs = {
+  accession_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_description?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_id?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_name?: InputMaybe<Scalars['String']['input']>;
+  clinical_study_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_iacuc_approval?: InputMaybe<Scalars['String']['input']>;
+  dates_of_conduct?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_StudyOfProgramFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  numberOfCRDCNodes?: InputMaybe<Scalars['Int']['input']>;
+  numberOfCaseFiles?: InputMaybe<Scalars['Int']['input']>;
+  numberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  numberOfImageCollections?: InputMaybe<Scalars['Int']['input']>;
+  numberOfPublications?: InputMaybe<Scalars['Int']['input']>;
+  numberOfStudyFiles?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyOfProgramOrdering>>;
+  program_id?: InputMaybe<Scalars['String']['input']>;
+  study_disposition?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeStudySamplePathologyCountArgs = {
+  filter?: InputMaybe<_GroupCountFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_GroupCountOrdering>>;
+  study_codes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeStudySampleSiteCountArgs = {
+  filter?: InputMaybe<_GroupCountFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_GroupCountOrdering>>;
+  study_codes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeStudySampleTypeCountArgs = {
+  filter?: InputMaybe<_GroupCountFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_GroupCountOrdering>>;
+  study_codes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeStudyStatArgs = {
+  cases?: InputMaybe<Scalars['Int']['input']>;
+  files?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<_StudyStatFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyStatOrdering>>;
+  samples?: InputMaybe<Scalars['Int']['input']>;
+  study_code?: InputMaybe<Scalars['String']['input']>;
+  total_size_MB?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type QueryTypeStudyStatsArgs = {
+  filter?: InputMaybe<_StudyStatFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyStatOrdering>>;
+};
+
+export type QueryTypeStudy_ArmArgs = {
+  arm?: InputMaybe<Scalars['String']['input']>;
+  arm_description?: InputMaybe<Scalars['String']['input']>;
+  arm_id?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Study_ArmFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Study_ArmOrdering>>;
+};
+
+export type QueryTypeStudy_SiteArgs = {
+  filter?: InputMaybe<_Study_SiteFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Study_SiteOrdering>>;
+  registering_institution?: InputMaybe<Scalars['String']['input']>;
+  site_short_name?: InputMaybe<Scalars['String']['input']>;
+  veterinary_medical_center?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeUnifiedCountsArgs = {
+  filter?: InputMaybe<_UnifiedCountsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  numberOfAliquots?: InputMaybe<Scalars['Int']['input']>;
+  numberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  numberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+  numberOfPrograms?: InputMaybe<Scalars['Int']['input']>;
+  numberOfSamples?: InputMaybe<Scalars['Int']['input']>;
+  numberOfStudies?: InputMaybe<Scalars['Int']['input']>;
+  numberOfStudyFiles?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_UnifiedCountsOrdering>>;
+  volumeOfData?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type QueryTypeUnifiedViewDataArgs = {
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeVisitArgs = {
+  filter?: InputMaybe<_VisitFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_VisitOrdering>>;
+  visit_date?: InputMaybe<Scalars['String']['input']>;
+  visit_id?: InputMaybe<Scalars['String']['input']>;
+  visit_number?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeVisitNodeDataArgs = {
+  filter?: InputMaybe<_VisitNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_VisitNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeVitalSignsNodeDataArgs = {
+  filter?: InputMaybe<_VitalSignsNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_VitalSignsNodeDataOrdering>>;
+  study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeVital_SignsArgs = {
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  body_surface_area?: InputMaybe<Scalars['Float']['input']>;
+  body_surface_area_original?: InputMaybe<Scalars['Float']['input']>;
+  body_surface_area_original_unit?: InputMaybe<Scalars['String']['input']>;
+  body_surface_area_unit?: InputMaybe<Scalars['String']['input']>;
+  body_temperature?: InputMaybe<Scalars['Float']['input']>;
+  body_temperature_original?: InputMaybe<Scalars['Float']['input']>;
+  body_temperature_original_unit?: InputMaybe<Scalars['String']['input']>;
+  body_temperature_unit?: InputMaybe<Scalars['String']['input']>;
+  date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
+  ecg?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Vital_SignsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  modified_ecog?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Vital_SignsOrdering>>;
+  patient_weight?: InputMaybe<Scalars['Float']['input']>;
+  patient_weight_original?: InputMaybe<Scalars['Float']['input']>;
+  patient_weight_original_unit?: InputMaybe<Scalars['String']['input']>;
+  patient_weight_unit?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  pulse?: InputMaybe<Scalars['Int']['input']>;
+  pulse_original?: InputMaybe<Scalars['Int']['input']>;
+  pulse_original_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_ox?: InputMaybe<Scalars['Float']['input']>;
+  pulse_ox_original?: InputMaybe<Scalars['Float']['input']>;
+  pulse_ox_original_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_ox_unit?: InputMaybe<Scalars['String']['input']>;
+  pulse_unit?: InputMaybe<Scalars['String']['input']>;
+  respiration_pattern?: InputMaybe<Scalars['String']['input']>;
+  respiration_rate?: InputMaybe<Scalars['Int']['input']>;
+  respiration_rate_original?: InputMaybe<Scalars['Int']['input']>;
+  respiration_rate_original_unit?: InputMaybe<Scalars['String']['input']>;
+  respiration_rate_unit?: InputMaybe<Scalars['String']['input']>;
+  systolic_bp?: InputMaybe<Scalars['Int']['input']>;
+  systolic_bp_original?: InputMaybe<Scalars['Int']['input']>;
+  systolic_bp_original_unit?: InputMaybe<Scalars['String']['input']>;
+  systolic_bp_unit?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeVolumeOfDataOfCaseArgs = {
+  case_id: Scalars['String']['input'];
+};
+
+export type QueryTypeVolumeOfDataOfProgramArgs = {
+  program_id: Scalars['String']['input'];
+};
+
+export type QueryTypeVolumeOfDataOfStudyArgs = {
+  study_code: Scalars['String']['input'];
+};
+
 export enum RelationDirection {
   Both = 'BOTH',
   In = 'IN',
   Out = 'OUT',
 }
+
+export type SampleOverview = {
+  __typename?: 'SampleOverview';
+  arm?: Maybe<Scalars['String']['output']>;
+  best_response?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  cohort_description?: Maybe<Scalars['String']['output']>;
+  comment?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  files?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  general_sample_pathology?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  individual_id?: Maybe<Scalars['String']['output']>;
+  necropsy_sample?: Maybe<Scalars['String']['output']>;
+  neutered_indicator?: Maybe<Scalars['String']['output']>;
+  other_cases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment?: Maybe<Scalars['String']['output']>;
+  percentage_tumor?: Maybe<Scalars['String']['output']>;
+  physical_sample_type?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  sample_chronology?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  sample_pathology?: Maybe<Scalars['String']['output']>;
+  sample_preservation?: Maybe<Scalars['String']['output']>;
+  sample_site?: Maybe<Scalars['String']['output']>;
+  sample_type?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+  tumor_grade?: Maybe<Scalars['String']['output']>;
+  tumor_sample_origin?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['String']['output']>;
+};
+
+export type SampleOverviewEs = {
+  __typename?: 'SampleOverviewES';
+  arm?: Maybe<Scalars['String']['output']>;
+  best_response?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  case_id_lc?: Maybe<Scalars['String']['output']>;
+  cohort_description?: Maybe<Scalars['String']['output']>;
+  comment?: Maybe<Scalars['String']['output']>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  diagnosis?: Maybe<Scalars['String']['output']>;
+  files?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  general_sample_pathology?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  individual_id?: Maybe<Scalars['String']['output']>;
+  necropsy_sample?: Maybe<Scalars['String']['output']>;
+  neutered_indicator?: Maybe<Scalars['String']['output']>;
+  other_cases?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment?: Maybe<Scalars['String']['output']>;
+  percentage_tumor?: Maybe<Scalars['String']['output']>;
+  physical_sample_type?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  sample_chronology?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  sample_pathology?: Maybe<Scalars['String']['output']>;
+  sample_preservation?: Maybe<Scalars['String']['output']>;
+  sample_site?: Maybe<Scalars['String']['output']>;
+  sample_type?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+  tumor_grade?: Maybe<Scalars['String']['output']>;
+  tumor_sample_origin?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['String']['output']>;
+};
+
+export type SearchResult = {
+  __typename?: 'SearchResult';
+  caseCountByBiobank?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByBreed?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByDiagnosis?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByDiseaseSite?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByFileFormat?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByGender?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByNeuteredStatus?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByProgram?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByStageOfDisease?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByStudyCode?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByStudyParticipation?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseCountByStudyType?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  fileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  filterCaseCountByBiobank?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByBreed?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByDiagnosis?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByDiseaseSite?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByFileAssociation?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByFileFormat?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByFileType?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByNeuteredStatus?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByProgram?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByResponseToTreatment?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountBySamplePathology?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountBySampleSite?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountBySampleType?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountBySex?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByStageOfDisease?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByStudyCode?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByStudyParticipation?: Maybe<Array<Maybe<GroupCountEs>>>;
+  filterCaseCountByStudyType?: Maybe<Array<Maybe<GroupCountEs>>>;
+  numberOfAliquots?: Maybe<Scalars['Int']['output']>;
+  numberOfCases?: Maybe<Scalars['Int']['output']>;
+  numberOfFiles?: Maybe<Scalars['Int']['output']>;
+  numberOfPrograms?: Maybe<Scalars['Int']['output']>;
+  numberOfSamples?: Maybe<Scalars['Int']['output']>;
+  numberOfStudies?: Maybe<Scalars['Int']['output']>;
+  numberOfStudyFiles?: Maybe<Scalars['Int']['output']>;
+  programsAndStudies?: Maybe<Array<Maybe<ProgramStudies>>>;
+  sampleIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  studyFileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  volumeOfData?: Maybe<Scalars['Float']['output']>;
+};
 
 export enum SortDirection {
   /** Sort by field values in ascending order. */
@@ -42,6 +3512,121 @@ export enum SortDirection {
   /** Sort by field values in descending order. */
   Desc = 'DESC',
 }
+
+export type StudyDetail = {
+  __typename?: 'StudyDetail';
+  MD5?: Maybe<Scalars['String']['output']>;
+  association?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  format?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['Float']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+};
+
+export type StudyInfo = {
+  __typename?: 'StudyInfo';
+  caseSize?: Maybe<Scalars['Int']['output']>;
+  study?: Maybe<Scalars['String']['output']>;
+};
+
+export type StudyOfProgram = {
+  __typename?: 'StudyOfProgram';
+  CRDCLinks?: Maybe<Array<Maybe<Link>>>;
+  accession_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_description?: Maybe<Scalars['String']['output']>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  clinical_study_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_name?: Maybe<Scalars['String']['output']>;
+  clinical_study_type?: Maybe<Scalars['String']['output']>;
+  date_of_iacuc_approval?: Maybe<Scalars['String']['output']>;
+  dates_of_conduct?: Maybe<Scalars['String']['output']>;
+  numberOfCRDCNodes?: Maybe<Scalars['Int']['output']>;
+  numberOfCaseFiles?: Maybe<Scalars['Int']['output']>;
+  numberOfCases?: Maybe<Scalars['Int']['output']>;
+  numberOfImageCollections?: Maybe<Scalars['Int']['output']>;
+  numberOfPublications?: Maybe<Scalars['Int']['output']>;
+  numberOfStudyFiles?: Maybe<Scalars['Int']['output']>;
+  program_id?: Maybe<Scalars['String']['output']>;
+  study_disposition?: Maybe<Scalars['String']['output']>;
+};
+
+export type StudyOfProgramCrdcLinksArgs = {
+  filter?: InputMaybe<_LinkFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_LinkOrdering>>;
+};
+
+export type StudyStat = {
+  __typename?: 'StudyStat';
+  cases?: Maybe<Scalars['Int']['output']>;
+  files?: Maybe<Scalars['Int']['output']>;
+  samples?: Maybe<Scalars['Int']['output']>;
+  study_code?: Maybe<Scalars['String']['output']>;
+  total_size_MB?: Maybe<Scalars['Float']['output']>;
+};
+
+export type TciaMetadata = {
+  __typename?: 'TCIAMetadata';
+  Aggregate_BodyPartExamined?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  Aggregate_ImageCount?: Maybe<Scalars['Int']['output']>;
+  Aggregate_Modality?: Maybe<Scalars['String']['output']>;
+  Aggregate_PatientID?: Maybe<Scalars['Int']['output']>;
+  Collection?: Maybe<Scalars['String']['output']>;
+};
+
+export type UnifiedCounts = {
+  __typename?: 'UnifiedCounts';
+  numberOfAliquots?: Maybe<Scalars['Int']['output']>;
+  numberOfCases?: Maybe<Scalars['Int']['output']>;
+  numberOfFiles?: Maybe<Scalars['Int']['output']>;
+  numberOfPrograms?: Maybe<Scalars['Int']['output']>;
+  numberOfSamples?: Maybe<Scalars['Int']['output']>;
+  numberOfStudies?: Maybe<Scalars['Int']['output']>;
+  numberOfStudyFiles?: Maybe<Scalars['Int']['output']>;
+  volumeOfData?: Maybe<Scalars['Float']['output']>;
+};
+
+export type VisitNodeData = {
+  __typename?: 'VisitNodeData';
+  case_id?: Maybe<Scalars['String']['output']>;
+  visit_date?: Maybe<Scalars['String']['output']>;
+  visit_id?: Maybe<Scalars['String']['output']>;
+  visit_number?: Maybe<Scalars['Int']['output']>;
+};
+
+export type VitalSignsNodeData = {
+  __typename?: 'VitalSignsNodeData';
+  body_surface_area?: Maybe<Scalars['Float']['output']>;
+  body_surface_area_original?: Maybe<Scalars['Float']['output']>;
+  body_surface_area_original_unit?: Maybe<Scalars['String']['output']>;
+  body_surface_area_unit?: Maybe<Scalars['String']['output']>;
+  body_temperature?: Maybe<Scalars['Float']['output']>;
+  body_temperature_original?: Maybe<Scalars['Float']['output']>;
+  body_temperature_original_unit?: Maybe<Scalars['String']['output']>;
+  body_temperature_unit?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  date_of_vital_signs?: Maybe<Scalars['String']['output']>;
+  modified_ecog?: Maybe<Scalars['String']['output']>;
+  patient_weight?: Maybe<Scalars['Float']['output']>;
+  patient_weight_original?: Maybe<Scalars['Float']['output']>;
+  patient_weight_original_unit?: Maybe<Scalars['String']['output']>;
+  patient_weight_unit?: Maybe<Scalars['String']['output']>;
+  pulse?: Maybe<Scalars['Int']['output']>;
+  pulse_original?: Maybe<Scalars['Int']['output']>;
+  pulse_original_unit?: Maybe<Scalars['String']['output']>;
+  pulse_ox_original_unit?: Maybe<Scalars['String']['output']>;
+  pulse_ox_unit?: Maybe<Scalars['String']['output']>;
+  pulse_unit?: Maybe<Scalars['String']['output']>;
+  respiration_pattern?: Maybe<Scalars['String']['output']>;
+  respiration_rate_original_unit?: Maybe<Scalars['String']['output']>;
+  respiration_rate_unit?: Maybe<Scalars['String']['output']>;
+  systolic_bp_original_unit?: Maybe<Scalars['String']['output']>;
+  systolic_bp_unit?: Maybe<Scalars['String']['output']>;
+  time_of_observation?: Maybe<Scalars['String']['output']>;
+};
 
 export type _AdverseEventNodeDataFilter = {
   AND?: InputMaybe<Array<_AdverseEventNodeDataFilter>>;
@@ -1105,6 +4690,203 @@ export enum _BreedCaseCountOrdering {
   BreedDesc = 'breed_desc',
   CasesAsc = 'cases_asc',
   CasesDesc = 'cases_desc',
+}
+
+export type _CartChartDataFilter = {
+  AND?: InputMaybe<Array<_CartChartDataFilter>>;
+  NOT?: InputMaybe<Array<_CartChartDataFilter>>;
+  OR?: InputMaybe<Array<_CartChartDataFilter>>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileAssociation`-relations */
+  fileAssociation?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationships matches this filter */
+  fileAssociation_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileAssociation`-relationships matches this filter */
+  fileAssociation_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileAssociation`-relation */
+  fileAssociation_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileAssociation`-relationship matches this filter */
+  fileAssociation_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileAssociation`-relationship matches this filter */
+  fileAssociation_some?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileFormat`-relations */
+  fileFormat?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationships matches this filter */
+  fileFormat_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileFormat`-relationships matches this filter */
+  fileFormat_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileFormat`-relation */
+  fileFormat_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileFormat`-relationship matches this filter */
+  fileFormat_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileFormat`-relationship matches this filter */
+  fileFormat_some?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileType`-relations */
+  fileType?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationships matches this filter */
+  fileType_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileType`-relationships matches this filter */
+  fileType_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileType`-relation */
+  fileType_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileType`-relationship matches this filter */
+  fileType_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileType`-relationship matches this filter */
+  fileType_some?: InputMaybe<_CartChartItemFilter>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_gt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_gte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_lt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_lte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+};
+
+export type _CartChartDataInput = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _CartChartDataOrdering {
+  SchemaValidationPlaceholderAsc = 'schema_validation_placeholder_asc',
+  SchemaValidationPlaceholderDesc = 'schema_validation_placeholder_desc',
+}
+
+export type _CartChartItemFilter = {
+  AND?: InputMaybe<Array<_CartChartItemFilter>>;
+  NOT?: InputMaybe<Array<_CartChartItemFilter>>;
+  OR?: InputMaybe<Array<_CartChartItemFilter>>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  label_contains?: InputMaybe<Scalars['String']['input']>;
+  label_ends_with?: InputMaybe<Scalars['String']['input']>;
+  label_gt?: InputMaybe<Scalars['String']['input']>;
+  label_gte?: InputMaybe<Scalars['String']['input']>;
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  label_lt?: InputMaybe<Scalars['String']['input']>;
+  label_lte?: InputMaybe<Scalars['String']['input']>;
+  label_matches?: InputMaybe<Scalars['String']['input']>;
+  label_not?: InputMaybe<Scalars['String']['input']>;
+  label_not_contains?: InputMaybe<Scalars['String']['input']>;
+  label_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  label_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  label_starts_with?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+  value_gt?: InputMaybe<Scalars['Int']['input']>;
+  value_gte?: InputMaybe<Scalars['Int']['input']>;
+  value_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  value_lt?: InputMaybe<Scalars['Int']['input']>;
+  value_lte?: InputMaybe<Scalars['Int']['input']>;
+  value_not?: InputMaybe<Scalars['Int']['input']>;
+  value_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+export type _CartChartItemInput = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum _CartChartItemOrdering {
+  LabelAsc = 'label_asc',
+  LabelDesc = 'label_desc',
+  ValueAsc = 'value_asc',
+  ValueDesc = 'value_desc',
+}
+
+export type _CartOverviewDataFilter = {
+  AND?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  NOT?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  OR?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  /** Filters only those `CartOverviewData` for which the `charts`-relationship matches this filter. If `null` is passed to this field, only those `CartOverviewData` will be filtered which has no `charts`-relations */
+  charts?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts_not`-field */
+  charts_none?: InputMaybe<_CartChartDataFilter>;
+  /** Filters only those `CartOverviewData` for which the `charts`-relationship does not match this filter. If `null` is passed to this field, only those `CartOverviewData` will be filtered which has any `charts`-relation */
+  charts_not?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts`-field directly (without any suffix) */
+  charts_single?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts`-field directly (without any suffix) */
+  charts_some?: InputMaybe<_CartChartDataFilter>;
+  studiesInCart?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_contains?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_ends_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_gt?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_gte?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  studiesInCart_lt?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_lte?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_matches?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_contains?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  studiesInCart_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_starts_with?: InputMaybe<Scalars['String']['input']>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_gt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_gte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfCases_lt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_lte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_not?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_gt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_gte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfFiles_lt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_lte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_not?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+};
+
+export type _CartOverviewDataInput = {
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum _CartOverviewDataOrdering {
+  StudiesInCartAsc = 'studiesInCart_asc',
+  StudiesInCartDesc = 'studiesInCart_desc',
+  TotalNumberOfCasesAsc = 'totalNumberOfCases_asc',
+  TotalNumberOfCasesDesc = 'totalNumberOfCases_desc',
+  TotalNumberOfFilesAsc = 'totalNumberOfFiles_asc',
+  TotalNumberOfFilesDesc = 'totalNumberOfFiles_desc',
 }
 
 export type _CaseDetailFilter = {
@@ -6987,11 +10769,34 @@ export enum _MultiStudyCasesOrdering {
   StudyFileIdsDesc = 'studyFileIds_desc',
 }
 
+export type _Neo4jDate = {
+  __typename?: '_Neo4jDate';
+  day?: Maybe<Scalars['Int']['output']>;
+  formatted?: Maybe<Scalars['String']['output']>;
+  month?: Maybe<Scalars['Int']['output']>;
+  year?: Maybe<Scalars['Int']['output']>;
+};
+
 export type _Neo4jDateInput = {
   day?: InputMaybe<Scalars['Int']['input']>;
   formatted?: InputMaybe<Scalars['String']['input']>;
   month?: InputMaybe<Scalars['Int']['input']>;
   year?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type _Neo4jDateTime = {
+  __typename?: '_Neo4jDateTime';
+  day?: Maybe<Scalars['Int']['output']>;
+  formatted?: Maybe<Scalars['String']['output']>;
+  hour?: Maybe<Scalars['Int']['output']>;
+  microsecond?: Maybe<Scalars['Int']['output']>;
+  millisecond?: Maybe<Scalars['Int']['output']>;
+  minute?: Maybe<Scalars['Int']['output']>;
+  month?: Maybe<Scalars['Int']['output']>;
+  nanosecond?: Maybe<Scalars['Int']['output']>;
+  second?: Maybe<Scalars['Int']['output']>;
+  timezone?: Maybe<Scalars['String']['output']>;
+  year?: Maybe<Scalars['Int']['output']>;
 };
 
 export type _Neo4jDateTimeInput = {
@@ -7008,6 +10813,20 @@ export type _Neo4jDateTimeInput = {
   year?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type _Neo4jLocalDateTime = {
+  __typename?: '_Neo4jLocalDateTime';
+  day?: Maybe<Scalars['Int']['output']>;
+  formatted?: Maybe<Scalars['String']['output']>;
+  hour?: Maybe<Scalars['Int']['output']>;
+  microsecond?: Maybe<Scalars['Int']['output']>;
+  millisecond?: Maybe<Scalars['Int']['output']>;
+  minute?: Maybe<Scalars['Int']['output']>;
+  month?: Maybe<Scalars['Int']['output']>;
+  nanosecond?: Maybe<Scalars['Int']['output']>;
+  second?: Maybe<Scalars['Int']['output']>;
+  year?: Maybe<Scalars['Int']['output']>;
+};
+
 export type _Neo4jLocalDateTimeInput = {
   day?: InputMaybe<Scalars['Int']['input']>;
   formatted?: InputMaybe<Scalars['String']['input']>;
@@ -7021,6 +10840,17 @@ export type _Neo4jLocalDateTimeInput = {
   year?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type _Neo4jLocalTime = {
+  __typename?: '_Neo4jLocalTime';
+  formatted?: Maybe<Scalars['String']['output']>;
+  hour?: Maybe<Scalars['Int']['output']>;
+  microsecond?: Maybe<Scalars['Int']['output']>;
+  millisecond?: Maybe<Scalars['Int']['output']>;
+  minute?: Maybe<Scalars['Int']['output']>;
+  nanosecond?: Maybe<Scalars['Int']['output']>;
+  second?: Maybe<Scalars['Int']['output']>;
+};
+
 export type _Neo4jLocalTimeInput = {
   formatted?: InputMaybe<Scalars['String']['input']>;
   hour?: InputMaybe<Scalars['Int']['input']>;
@@ -7029,6 +10859,51 @@ export type _Neo4jLocalTimeInput = {
   minute?: InputMaybe<Scalars['Int']['input']>;
   nanosecond?: InputMaybe<Scalars['Int']['input']>;
   second?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type _Neo4jPoint = {
+  __typename?: '_Neo4jPoint';
+  /**
+   *  The coordinate reference systems (CRS)
+   *  -------------------------------------
+   *  posible values:
+   *  * `wgs-84`: A 2D geographic point in the WGS 84 CRS is specified in one of two ways:
+   *    * longitude and latitude (if these are specified, and the crs is not, then the crs is assumed to be WGS-84)
+   *    * x and y (in this case the crs must be specified, or will be assumed to be Cartesian)
+   *  * `wgs-84-3d`: A 3D geographic point in the WGS 84 CRS is specified one of in two ways:
+   *    * longitude, latitude and either height or z (if these are specified, and the crs is not, then the crs is assumed to be WGS-84-3D)
+   *    * x, y and z (in this case the crs must be specified, or will be assumed to be Cartesian-3D)
+   *  * `cartesian`: A 2D point in the Cartesian CRS is specified with a map containing x and y coordinate values
+   *  * `cartesian-3d`: A 3D point in the Cartesian CRS is specified with a map containing x, y and z coordinate values
+   */
+  crs?: Maybe<Scalars['String']['output']>;
+  /**  The third element of the Coordinate for geographic CRS, meters above the ellipsoid defined by the datum (WGS-84) */
+  height?: Maybe<Scalars['Float']['output']>;
+  /**
+   *  The second element of the Coordinate for geographic CRS, degrees North of the equator
+   *  Range -90.0 to 90.0
+   */
+  latitude?: Maybe<Scalars['Float']['output']>;
+  /**
+   *  The first element of the Coordinate for geographic CRS, degrees East of the prime meridian
+   *  Range -180.0 to 180.0
+   */
+  longitude?: Maybe<Scalars['Float']['output']>;
+  /**
+   *  The internal Neo4j ID for the CRS
+   *  One of:
+   *  * `4326`: represents CRS `wgs-84`
+   *  * `4979`: represents CRS `wgs-84-3d`
+   *  * `7203`: represents CRS `cartesian`
+   *  * `9157`: represents CRS `cartesian-3d`
+   */
+  srid?: Maybe<Scalars['Int']['output']>;
+  /**  The first element of the Coordinate */
+  x?: Maybe<Scalars['Float']['output']>;
+  /**  The second element of the Coordinate */
+  y?: Maybe<Scalars['Float']['output']>;
+  /**  The third element of the Coordinate */
+  z?: Maybe<Scalars['Float']['output']>;
 };
 
 export type _Neo4jPointInput = {
@@ -7040,6 +10915,18 @@ export type _Neo4jPointInput = {
   x?: InputMaybe<Scalars['Float']['input']>;
   y?: InputMaybe<Scalars['Float']['input']>;
   z?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type _Neo4jTime = {
+  __typename?: '_Neo4jTime';
+  formatted?: Maybe<Scalars['String']['output']>;
+  hour?: Maybe<Scalars['Int']['output']>;
+  microsecond?: Maybe<Scalars['Int']['output']>;
+  millisecond?: Maybe<Scalars['Int']['output']>;
+  minute?: Maybe<Scalars['Int']['output']>;
+  nanosecond?: Maybe<Scalars['Int']['output']>;
+  second?: Maybe<Scalars['Int']['output']>;
+  timezone?: Maybe<Scalars['String']['output']>;
 };
 
 export type _Neo4jTimeInput = {
@@ -18789,6 +22676,841 @@ export enum _Vital_SignsOrdering {
   SystolicBpUnitDesc = 'systolic_bp_unit_desc',
 }
 
+export type Adverse_Event = {
+  __typename?: 'adverse_event';
+  adverse_event_agent_dose?: Maybe<Scalars['String']['output']>;
+  adverse_event_agent_name?: Maybe<Scalars['String']['output']>;
+  adverse_event_description?: Maybe<Scalars['String']['output']>;
+  adverse_event_grade?: Maybe<Scalars['String']['output']>;
+  adverse_event_grade_description?: Maybe<Scalars['String']['output']>;
+  adverse_event_term?: Maybe<Scalars['String']['output']>;
+  agent?: Maybe<Agent>;
+  attribution_to_commercial?: Maybe<Scalars['String']['output']>;
+  attribution_to_disease?: Maybe<Scalars['String']['output']>;
+  attribution_to_ind?: Maybe<Scalars['String']['output']>;
+  attribution_to_other?: Maybe<Scalars['String']['output']>;
+  attribution_to_research?: Maybe<Scalars['String']['output']>;
+  case?: Maybe<Case>;
+  cases?: Maybe<Array<Maybe<Case>>>;
+  date_of_onset?: Maybe<Scalars['String']['output']>;
+  date_of_resolution?: Maybe<Scalars['String']['output']>;
+  day_in_cycle?: Maybe<Scalars['Int']['output']>;
+  dose_limiting_toxicity?: Maybe<Scalars['String']['output']>;
+  existing_adverse_event?: Maybe<Scalars['String']['output']>;
+  next_adverse_event?: Maybe<Adverse_Event>;
+  ongoing_adverse_event?: Maybe<Scalars['String']['output']>;
+  other_attribution_description?: Maybe<Scalars['String']['output']>;
+  prior_adverse_event?: Maybe<Adverse_Event>;
+  unexpected_adverse_event?: Maybe<Scalars['String']['output']>;
+};
+
+export type Adverse_EventCasesArgs = {
+  filter?: InputMaybe<_CaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOrdering>>;
+};
+
+export type Agent = {
+  __typename?: 'agent';
+  adverse_events?: Maybe<Array<Maybe<Adverse_Event>>>;
+  agent_administrations?: Maybe<Array<Maybe<Agent_Administration>>>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  medication?: Maybe<Scalars['String']['output']>;
+  study_arms?: Maybe<Array<Maybe<Study_Arm>>>;
+};
+
+export type AgentAdverse_EventsArgs = {
+  filter?: InputMaybe<_Adverse_EventFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Adverse_EventOrdering>>;
+};
+
+export type AgentAgent_AdministrationsArgs = {
+  filter?: InputMaybe<_Agent_AdministrationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Agent_AdministrationOrdering>>;
+};
+
+export type AgentStudy_ArmsArgs = {
+  filter?: InputMaybe<_Study_ArmFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Study_ArmOrdering>>;
+};
+
+export type Agent_Administration = {
+  __typename?: 'agent_administration';
+  agent?: Maybe<Agent>;
+  comment?: Maybe<Scalars['String']['output']>;
+  date_of_missed_dose?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  dose_level?: Maybe<Scalars['Float']['output']>;
+  dose_level_original?: Maybe<Scalars['Float']['output']>;
+  dose_level_original_unit?: Maybe<Scalars['String']['output']>;
+  dose_level_unit?: Maybe<Scalars['String']['output']>;
+  dose_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication?: Maybe<Scalars['String']['output']>;
+  medication_actual_dose?: Maybe<Scalars['Float']['output']>;
+  medication_actual_dose_original?: Maybe<Scalars['Float']['output']>;
+  medication_actual_dose_original_unit?: Maybe<Scalars['String']['output']>;
+  medication_actual_dose_unit?: Maybe<Scalars['String']['output']>;
+  medication_actual_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication_course_number?: Maybe<Scalars['String']['output']>;
+  medication_duration?: Maybe<Scalars['Float']['output']>;
+  medication_duration_original?: Maybe<Scalars['Float']['output']>;
+  medication_duration_original_unit?: Maybe<Scalars['String']['output']>;
+  medication_duration_unit?: Maybe<Scalars['String']['output']>;
+  medication_lot_number?: Maybe<Scalars['String']['output']>;
+  medication_missed_dose?: Maybe<Scalars['String']['output']>;
+  medication_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication_vial_id?: Maybe<Scalars['String']['output']>;
+  missed_dose_amount?: Maybe<Scalars['Float']['output']>;
+  missed_dose_amount_original?: Maybe<Scalars['Float']['output']>;
+  missed_dose_amount_original_unit?: Maybe<Scalars['String']['output']>;
+  missed_dose_amount_unit?: Maybe<Scalars['String']['output']>;
+  missed_dose_units_of_measure?: Maybe<Scalars['String']['output']>;
+  phase?: Maybe<Scalars['String']['output']>;
+  route_of_administration?: Maybe<Scalars['String']['output']>;
+  start_time?: Maybe<Scalars['String']['output']>;
+  stop_time?: Maybe<Scalars['String']['output']>;
+  visit?: Maybe<Visit>;
+};
+
+export type Assay = {
+  __typename?: 'assay';
+  files?: Maybe<Array<Maybe<File>>>;
+  images?: Maybe<Array<Maybe<Image>>>;
+  sample?: Maybe<Sample>;
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type AssayFilesArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+};
+
+export type AssayImagesArgs = {
+  filter?: InputMaybe<_ImageFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_ImageOrdering>>;
+};
+
+export type Biospecimen_Source = {
+  __typename?: 'biospecimen_source';
+  biospecimen_repository_acronym?: Maybe<Scalars['String']['output']>;
+  biospecimen_repository_full_name?: Maybe<Scalars['String']['output']>;
+};
+
+export type Canine_Individual = {
+  __typename?: 'canine_individual';
+  canine_individual_id?: Maybe<Scalars['String']['output']>;
+  cases?: Maybe<Array<Maybe<Case>>>;
+};
+
+export type Canine_IndividualCasesArgs = {
+  filter?: InputMaybe<_CaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOrdering>>;
+};
+
+export type Case = {
+  __typename?: 'case';
+  adverse_event?: Maybe<Adverse_Event>;
+  adverse_events?: Maybe<Array<Maybe<Adverse_Event>>>;
+  canine_individual?: Maybe<Canine_Individual>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  cohort?: Maybe<Cohort>;
+  cycles?: Maybe<Array<Maybe<Cycle>>>;
+  demographic?: Maybe<Demographic>;
+  diagnoses?: Maybe<Array<Maybe<Diagnosis>>>;
+  enrollment?: Maybe<Enrollment>;
+  files?: Maybe<Array<Maybe<File>>>;
+  follow_ups?: Maybe<Array<Maybe<Follow_Up>>>;
+  off_study?: Maybe<Off_Study>;
+  off_treatment?: Maybe<Off_Treatment>;
+  patient_first_name?: Maybe<Scalars['String']['output']>;
+  patient_id?: Maybe<Scalars['String']['output']>;
+  registrations?: Maybe<Array<Maybe<Registration>>>;
+  samples?: Maybe<Array<Maybe<Sample>>>;
+  study?: Maybe<Study>;
+  study_arm?: Maybe<Study_Arm>;
+  visits?: Maybe<Array<Maybe<Visit>>>;
+};
+
+export type CaseAdverse_EventsArgs = {
+  filter?: InputMaybe<_Adverse_EventFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Adverse_EventOrdering>>;
+};
+
+export type CaseCyclesArgs = {
+  filter?: InputMaybe<_CycleFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CycleOrdering>>;
+};
+
+export type CaseDiagnosesArgs = {
+  filter?: InputMaybe<_DiagnosisFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_DiagnosisOrdering>>;
+};
+
+export type CaseFilesArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+};
+
+export type CaseFollow_UpsArgs = {
+  filter?: InputMaybe<_Follow_UpFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Follow_UpOrdering>>;
+};
+
+export type CaseRegistrationsArgs = {
+  filter?: InputMaybe<_RegistrationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_RegistrationOrdering>>;
+};
+
+export type CaseSamplesArgs = {
+  filter?: InputMaybe<_SampleFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_SampleOrdering>>;
+};
+
+export type CaseVisitsArgs = {
+  filter?: InputMaybe<_VisitFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_VisitOrdering>>;
+};
+
+export type Cohort = {
+  __typename?: 'cohort';
+  cases?: Maybe<Array<Maybe<Case>>>;
+  cohort_description?: Maybe<Scalars['String']['output']>;
+  cohort_dose?: Maybe<Scalars['String']['output']>;
+  cohort_id?: Maybe<Scalars['String']['output']>;
+  study?: Maybe<Study>;
+  study_arm?: Maybe<Study_Arm>;
+};
+
+export type CohortCasesArgs = {
+  filter?: InputMaybe<_CaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOrdering>>;
+};
+
+export type Cycle = {
+  __typename?: 'cycle';
+  case?: Maybe<Case>;
+  cycle_number?: Maybe<Scalars['Int']['output']>;
+  date_of_cycle_end?: Maybe<Scalars['String']['output']>;
+  date_of_cycle_start?: Maybe<Scalars['String']['output']>;
+  visits?: Maybe<Array<Maybe<Visit>>>;
+};
+
+export type CycleVisitsArgs = {
+  filter?: InputMaybe<_VisitFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_VisitOrdering>>;
+};
+
+export type Demographic = {
+  __typename?: 'demographic';
+  additional_breed_detail?: Maybe<Scalars['String']['output']>;
+  breed?: Maybe<Scalars['String']['output']>;
+  case?: Maybe<Case>;
+  date_of_birth?: Maybe<Scalars['String']['output']>;
+  demographic_id?: Maybe<Scalars['String']['output']>;
+  neutered_indicator?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment?: Maybe<Scalars['Float']['output']>;
+  patient_age_at_enrollment_original?: Maybe<Scalars['Float']['output']>;
+  patient_age_at_enrollment_original_unit?: Maybe<Scalars['String']['output']>;
+  patient_age_at_enrollment_unit?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  weight?: Maybe<Scalars['Float']['output']>;
+  weight_original?: Maybe<Scalars['Float']['output']>;
+  weight_original_unit?: Maybe<Scalars['String']['output']>;
+  weight_unit?: Maybe<Scalars['String']['output']>;
+};
+
+export type Diagnosis = {
+  __typename?: 'diagnosis';
+  best_response?: Maybe<Scalars['String']['output']>;
+  case?: Maybe<Case>;
+  concurrent_disease?: Maybe<Scalars['String']['output']>;
+  concurrent_disease_type?: Maybe<Scalars['String']['output']>;
+  date_of_diagnosis?: Maybe<Scalars['String']['output']>;
+  date_of_histology_confirmation?: Maybe<Scalars['String']['output']>;
+  diagnosis_id?: Maybe<Scalars['String']['output']>;
+  disease_term?: Maybe<Scalars['String']['output']>;
+  files?: Maybe<Array<Maybe<File>>>;
+  follow_up_data?: Maybe<Scalars['String']['output']>;
+  histological_grade?: Maybe<Scalars['String']['output']>;
+  histology_cytopathology?: Maybe<Scalars['String']['output']>;
+  pathology_report?: Maybe<Scalars['String']['output']>;
+  primary_disease_site?: Maybe<Scalars['String']['output']>;
+  stage_of_disease?: Maybe<Scalars['String']['output']>;
+  treatment_data?: Maybe<Scalars['String']['output']>;
+};
+
+export type DiagnosisFilesArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+};
+
+export type Disease_Extent = {
+  __typename?: 'disease_extent';
+  date_of_evaluation?: Maybe<Scalars['String']['output']>;
+  evaluation_code?: Maybe<Scalars['String']['output']>;
+  evaluation_number?: Maybe<Scalars['String']['output']>;
+  lesion_description?: Maybe<Scalars['String']['output']>;
+  lesion_number?: Maybe<Scalars['String']['output']>;
+  lesion_site?: Maybe<Scalars['String']['output']>;
+  longest_measurement?: Maybe<Scalars['Float']['output']>;
+  longest_measurement_original?: Maybe<Scalars['Float']['output']>;
+  longest_measurement_original_unit?: Maybe<Scalars['String']['output']>;
+  longest_measurement_unit?: Maybe<Scalars['String']['output']>;
+  measurable_lesion?: Maybe<Scalars['String']['output']>;
+  measured_how?: Maybe<Scalars['String']['output']>;
+  previously_irradiated?: Maybe<Scalars['String']['output']>;
+  previously_treated?: Maybe<Scalars['String']['output']>;
+  target_lesion?: Maybe<Scalars['String']['output']>;
+  visit?: Maybe<Visit>;
+};
+
+export type Enrollment = {
+  __typename?: 'enrollment';
+  case?: Maybe<Case>;
+  date_of_informed_consent?: Maybe<Scalars['String']['output']>;
+  date_of_registration?: Maybe<Scalars['String']['output']>;
+  enrollment_id?: Maybe<Scalars['String']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  patient_subgroup?: Maybe<Scalars['String']['output']>;
+  physical_exams?: Maybe<Array<Maybe<Physical_Exam>>>;
+  prior_surgeries?: Maybe<Array<Maybe<Prior_Surgery>>>;
+  prior_therapies?: Maybe<Array<Maybe<Prior_Therapy>>>;
+  registering_institution?: Maybe<Scalars['String']['output']>;
+  site_short_name?: Maybe<Scalars['String']['output']>;
+  veterinary_medical_center?: Maybe<Scalars['String']['output']>;
+};
+
+export type EnrollmentPhysical_ExamsArgs = {
+  filter?: InputMaybe<_Physical_ExamFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Physical_ExamOrdering>>;
+};
+
+export type EnrollmentPrior_SurgeriesArgs = {
+  filter?: InputMaybe<_Prior_SurgeryFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Prior_SurgeryOrdering>>;
+};
+
+export type EnrollmentPrior_TherapiesArgs = {
+  filter?: InputMaybe<_Prior_TherapyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Prior_TherapyOrdering>>;
+};
+
+export type File = {
+  __typename?: 'file';
+  assay?: Maybe<Assay>;
+  case?: Maybe<Case>;
+  diagnosis?: Maybe<Diagnosis>;
+  file_description?: Maybe<Scalars['String']['output']>;
+  file_format?: Maybe<Scalars['String']['output']>;
+  file_location?: Maybe<Scalars['String']['output']>;
+  file_name?: Maybe<Scalars['String']['output']>;
+  file_size?: Maybe<Scalars['Float']['output']>;
+  file_status?: Maybe<Scalars['String']['output']>;
+  file_type?: Maybe<Scalars['String']['output']>;
+  md5sum?: Maybe<Scalars['String']['output']>;
+  sample?: Maybe<Sample>;
+  study?: Maybe<Study>;
+  uuid?: Maybe<Scalars['String']['output']>;
+};
+
+export type Follow_Up = {
+  __typename?: 'follow_up';
+  case?: Maybe<Case>;
+  contact_type?: Maybe<Scalars['String']['output']>;
+  date_of_last_contact?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  explain_unknown_status?: Maybe<Scalars['String']['output']>;
+  patient_status?: Maybe<Scalars['String']['output']>;
+  physical_exam_changes?: Maybe<Scalars['String']['output']>;
+  physical_exam_performed?: Maybe<Scalars['Boolean']['output']>;
+  treatment_since_last_contact?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type Image = {
+  __typename?: 'image';
+  assay?: Maybe<Assay>;
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type Image_Collection = {
+  __typename?: 'image_collection';
+  collection_access?: Maybe<Scalars['String']['output']>;
+  image_collection_name?: Maybe<Scalars['String']['output']>;
+  image_collection_url?: Maybe<Scalars['String']['output']>;
+  image_type_included?: Maybe<Scalars['String']['output']>;
+  repository_name?: Maybe<Scalars['String']['output']>;
+  study?: Maybe<Study>;
+};
+
+export type Lab_Exam = {
+  __typename?: 'lab_exam';
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+  visit?: Maybe<Visit>;
+};
+
+export type Off_Study = {
+  __typename?: 'off_study';
+  best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
+  best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
+  case?: Maybe<Case>;
+  date_last_medication_administration?: Maybe<Scalars['String']['output']>;
+  date_of_best_response?: Maybe<Scalars['String']['output']>;
+  date_of_disease_progression?: Maybe<Scalars['String']['output']>;
+  date_off_study?: Maybe<Scalars['String']['output']>;
+  date_off_treatment?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  reason_off_study?: Maybe<Scalars['String']['output']>;
+};
+
+export type Off_Treatment = {
+  __typename?: 'off_treatment';
+  best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
+  best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
+  case?: Maybe<Case>;
+  date_last_medication_administration?: Maybe<Scalars['String']['output']>;
+  date_of_best_response?: Maybe<Scalars['String']['output']>;
+  date_of_disease_progression?: Maybe<Scalars['String']['output']>;
+  date_off_treatment?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  reason_off_treatment?: Maybe<Scalars['String']['output']>;
+};
+
+export type Physical_Exam = {
+  __typename?: 'physical_exam';
+  assessment_timepoint?: Maybe<Scalars['Int']['output']>;
+  body_system?: Maybe<Scalars['String']['output']>;
+  date_of_examination?: Maybe<Scalars['String']['output']>;
+  day_in_cycle?: Maybe<Scalars['Int']['output']>;
+  enrollment?: Maybe<Enrollment>;
+  pe_comment?: Maybe<Scalars['String']['output']>;
+  pe_finding?: Maybe<Scalars['String']['output']>;
+  phase_pe?: Maybe<Scalars['String']['output']>;
+  visit?: Maybe<Visit>;
+};
+
+export type Principal_Investigator = {
+  __typename?: 'principal_investigator';
+  pi_first_name?: Maybe<Scalars['String']['output']>;
+  pi_last_name?: Maybe<Scalars['String']['output']>;
+  pi_middle_initial?: Maybe<Scalars['String']['output']>;
+  studies?: Maybe<Array<Maybe<Study>>>;
+};
+
+export type Principal_InvestigatorStudiesArgs = {
+  filter?: InputMaybe<_StudyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyOrdering>>;
+};
+
+export type Prior_Surgery = {
+  __typename?: 'prior_surgery';
+  anatomical_site_of_surgery?: Maybe<Scalars['String']['output']>;
+  date_of_surgery?: Maybe<Scalars['String']['output']>;
+  enrollment?: Maybe<Enrollment>;
+  next_prior_surgery?: Maybe<Prior_Surgery>;
+  prior_prior_surgery?: Maybe<Prior_Surgery>;
+  procedure?: Maybe<Scalars['String']['output']>;
+  residual_disease?: Maybe<Scalars['String']['output']>;
+  surgical_finding?: Maybe<Scalars['String']['output']>;
+  therapeutic_indicator?: Maybe<Scalars['String']['output']>;
+};
+
+export type Prior_Therapy = {
+  __typename?: 'prior_therapy';
+  agent_name?: Maybe<Scalars['String']['output']>;
+  agent_units_of_measure?: Maybe<Scalars['String']['output']>;
+  any_therapy?: Maybe<Scalars['Boolean']['output']>;
+  best_response_to_prior_therapy?: Maybe<Scalars['String']['output']>;
+  date_of_first_dose?: Maybe<Scalars['String']['output']>;
+  date_of_last_dose?: Maybe<Scalars['String']['output']>;
+  date_of_last_dose_any_therapy?: Maybe<Scalars['String']['output']>;
+  date_of_last_dose_nsaid?: Maybe<Scalars['String']['output']>;
+  date_of_last_dose_steroid?: Maybe<Scalars['String']['output']>;
+  dose_schedule?: Maybe<Scalars['String']['output']>;
+  enrollment?: Maybe<Enrollment>;
+  min_rsdl_dz_tx_ind_nsaids_treatment_pe?: Maybe<Scalars['String']['output']>;
+  next_prior_therapy?: Maybe<Prior_Therapy>;
+  nonresponse_therapy_type?: Maybe<Scalars['String']['output']>;
+  number_of_prior_regimens_any_therapy?: Maybe<Scalars['Int']['output']>;
+  number_of_prior_regimens_nsaid?: Maybe<Scalars['Int']['output']>;
+  number_of_prior_regimens_steroid?: Maybe<Scalars['Int']['output']>;
+  prior_nsaid_exposure?: Maybe<Scalars['Boolean']['output']>;
+  prior_prior_therapy?: Maybe<Prior_Therapy>;
+  prior_steroid_exposure?: Maybe<Scalars['Boolean']['output']>;
+  prior_therapy_type?: Maybe<Scalars['String']['output']>;
+  therapy_type?: Maybe<Scalars['String']['output']>;
+  total_dose?: Maybe<Scalars['Float']['output']>;
+  total_dose_original?: Maybe<Scalars['Float']['output']>;
+  total_dose_original_unit?: Maybe<Scalars['String']['output']>;
+  total_dose_unit?: Maybe<Scalars['String']['output']>;
+  total_number_of_doses_any_therapy?: Maybe<Scalars['Int']['output']>;
+  total_number_of_doses_nsaid?: Maybe<Scalars['Int']['output']>;
+  total_number_of_doses_steroid?: Maybe<Scalars['Int']['output']>;
+  treatment_performed_at_site?: Maybe<Scalars['Boolean']['output']>;
+  treatment_performed_in_minimal_residual?: Maybe<Scalars['Boolean']['output']>;
+  tx_loc_geo_loc_ind_nsaid?: Maybe<Scalars['String']['output']>;
+};
+
+export type Program = {
+  __typename?: 'program';
+  program_acronym?: Maybe<Scalars['String']['output']>;
+  program_external_url?: Maybe<Scalars['String']['output']>;
+  program_full_description?: Maybe<Scalars['String']['output']>;
+  program_name?: Maybe<Scalars['String']['output']>;
+  program_short_description?: Maybe<Scalars['String']['output']>;
+  program_sort_order?: Maybe<Scalars['Int']['output']>;
+  studies?: Maybe<Array<Maybe<Study>>>;
+};
+
+export type ProgramStudiesArgs = {
+  filter?: InputMaybe<_StudyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyOrdering>>;
+};
+
+export type Publication = {
+  __typename?: 'publication';
+  authorship?: Maybe<Scalars['String']['output']>;
+  digital_object_id?: Maybe<Scalars['String']['output']>;
+  journal_citation?: Maybe<Scalars['String']['output']>;
+  publication_title?: Maybe<Scalars['String']['output']>;
+  pubmed_id?: Maybe<Scalars['Float']['output']>;
+  study?: Maybe<Study>;
+  year_of_publication?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Registration = {
+  __typename?: 'registration';
+  cases?: Maybe<Array<Maybe<Case>>>;
+  registration_id?: Maybe<Scalars['String']['output']>;
+  registration_origin?: Maybe<Scalars['String']['output']>;
+};
+
+export type RegistrationCasesArgs = {
+  filter?: InputMaybe<_CaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOrdering>>;
+};
+
+export type Sample = {
+  __typename?: 'sample';
+  assays?: Maybe<Array<Maybe<Assay>>>;
+  case?: Maybe<Case>;
+  comment?: Maybe<Scalars['String']['output']>;
+  date_of_sample_collection?: Maybe<Scalars['String']['output']>;
+  files?: Maybe<Array<Maybe<File>>>;
+  general_sample_pathology?: Maybe<Scalars['String']['output']>;
+  length_of_tumor?: Maybe<Scalars['Float']['output']>;
+  length_of_tumor_original?: Maybe<Scalars['Float']['output']>;
+  length_of_tumor_original_unit?: Maybe<Scalars['String']['output']>;
+  length_of_tumor_unit?: Maybe<Scalars['String']['output']>;
+  molecular_subtype?: Maybe<Scalars['String']['output']>;
+  necropsy_sample?: Maybe<Scalars['String']['output']>;
+  next_sample?: Maybe<Sample>;
+  percentage_tumor?: Maybe<Scalars['String']['output']>;
+  physical_sample_type?: Maybe<Scalars['String']['output']>;
+  prior_sample?: Maybe<Sample>;
+  sample_chronology?: Maybe<Scalars['String']['output']>;
+  sample_id?: Maybe<Scalars['String']['output']>;
+  sample_preservation?: Maybe<Scalars['String']['output']>;
+  sample_site?: Maybe<Scalars['String']['output']>;
+  specific_sample_pathology?: Maybe<Scalars['String']['output']>;
+  summarized_sample_type?: Maybe<Scalars['String']['output']>;
+  tumor_grade?: Maybe<Scalars['String']['output']>;
+  tumor_sample_origin?: Maybe<Scalars['String']['output']>;
+  visit?: Maybe<Visit>;
+  volume_of_tumor?: Maybe<Scalars['Float']['output']>;
+  volume_of_tumor_original?: Maybe<Scalars['Float']['output']>;
+  volume_of_tumor_original_unit?: Maybe<Scalars['String']['output']>;
+  volume_of_tumor_unit?: Maybe<Scalars['String']['output']>;
+  width_of_tumor?: Maybe<Scalars['Float']['output']>;
+  width_of_tumor_original?: Maybe<Scalars['Float']['output']>;
+  width_of_tumor_original_unit?: Maybe<Scalars['String']['output']>;
+  width_of_tumor_unit?: Maybe<Scalars['String']['output']>;
+};
+
+export type SampleAssaysArgs = {
+  filter?: InputMaybe<_AssayFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AssayOrdering>>;
+};
+
+export type SampleFilesArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+};
+
+export type Study = {
+  __typename?: 'study';
+  accession_id?: Maybe<Scalars['String']['output']>;
+  cases?: Maybe<Array<Maybe<Case>>>;
+  clinical_study_description?: Maybe<Scalars['String']['output']>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  clinical_study_id?: Maybe<Scalars['String']['output']>;
+  clinical_study_name?: Maybe<Scalars['String']['output']>;
+  clinical_study_type?: Maybe<Scalars['String']['output']>;
+  cohorts?: Maybe<Array<Maybe<Cohort>>>;
+  date_of_iacuc_approval?: Maybe<Scalars['String']['output']>;
+  dates_of_conduct?: Maybe<Scalars['String']['output']>;
+  files?: Maybe<Array<Maybe<File>>>;
+  image_collections?: Maybe<Array<Maybe<Image_Collection>>>;
+  principal_investigators?: Maybe<Array<Maybe<Principal_Investigator>>>;
+  program?: Maybe<Program>;
+  publications?: Maybe<Array<Maybe<Publication>>>;
+  study_arms?: Maybe<Array<Maybe<Study_Arm>>>;
+  study_disposition?: Maybe<Scalars['String']['output']>;
+  study_sites?: Maybe<Array<Maybe<Study_Site>>>;
+};
+
+export type StudyCasesArgs = {
+  filter?: InputMaybe<_CaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOrdering>>;
+};
+
+export type StudyCohortsArgs = {
+  filter?: InputMaybe<_CohortFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CohortOrdering>>;
+};
+
+export type StudyFilesArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+};
+
+export type StudyImage_CollectionsArgs = {
+  filter?: InputMaybe<_Image_CollectionFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Image_CollectionOrdering>>;
+};
+
+export type StudyPrincipal_InvestigatorsArgs = {
+  filter?: InputMaybe<_Principal_InvestigatorFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Principal_InvestigatorOrdering>>;
+};
+
+export type StudyPublicationsArgs = {
+  filter?: InputMaybe<_PublicationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_PublicationOrdering>>;
+};
+
+export type StudyStudy_ArmsArgs = {
+  filter?: InputMaybe<_Study_ArmFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Study_ArmOrdering>>;
+};
+
+export type StudyStudy_SitesArgs = {
+  filter?: InputMaybe<_Study_SiteFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Study_SiteOrdering>>;
+};
+
+export type Study_Arm = {
+  __typename?: 'study_arm';
+  agents?: Maybe<Array<Maybe<Agent>>>;
+  arm?: Maybe<Scalars['String']['output']>;
+  arm_description?: Maybe<Scalars['String']['output']>;
+  arm_id?: Maybe<Scalars['String']['output']>;
+  cases?: Maybe<Array<Maybe<Case>>>;
+  cohorts?: Maybe<Array<Maybe<Cohort>>>;
+  ctep_treatment_assignment_code?: Maybe<Scalars['String']['output']>;
+  study?: Maybe<Study>;
+};
+
+export type Study_ArmAgentsArgs = {
+  filter?: InputMaybe<_AgentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AgentOrdering>>;
+};
+
+export type Study_ArmCasesArgs = {
+  filter?: InputMaybe<_CaseFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CaseOrdering>>;
+};
+
+export type Study_ArmCohortsArgs = {
+  filter?: InputMaybe<_CohortFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CohortOrdering>>;
+};
+
+export type Study_Site = {
+  __typename?: 'study_site';
+  registering_institution?: Maybe<Scalars['String']['output']>;
+  site_short_name?: Maybe<Scalars['String']['output']>;
+  studies?: Maybe<Array<Maybe<Study>>>;
+  veterinary_medical_center?: Maybe<Scalars['String']['output']>;
+};
+
+export type Study_SiteStudiesArgs = {
+  filter?: InputMaybe<_StudyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_StudyOrdering>>;
+};
+
+export type Visit = {
+  __typename?: 'visit';
+  agent_administrations?: Maybe<Array<Maybe<Agent_Administration>>>;
+  case?: Maybe<Case>;
+  cycle?: Maybe<Cycle>;
+  disease_extents?: Maybe<Array<Maybe<Disease_Extent>>>;
+  lab_exams?: Maybe<Array<Maybe<Lab_Exam>>>;
+  next_visit?: Maybe<Visit>;
+  physical_exams?: Maybe<Array<Maybe<Physical_Exam>>>;
+  prior_visit?: Maybe<Visit>;
+  samples?: Maybe<Array<Maybe<Sample>>>;
+  visit_date?: Maybe<Scalars['String']['output']>;
+  visit_id?: Maybe<Scalars['String']['output']>;
+  visit_number?: Maybe<Scalars['String']['output']>;
+  vital_signs?: Maybe<Array<Maybe<Vital_Signs>>>;
+};
+
+export type VisitAgent_AdministrationsArgs = {
+  filter?: InputMaybe<_Agent_AdministrationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Agent_AdministrationOrdering>>;
+};
+
+export type VisitDisease_ExtentsArgs = {
+  filter?: InputMaybe<_Disease_ExtentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Disease_ExtentOrdering>>;
+};
+
+export type VisitLab_ExamsArgs = {
+  filter?: InputMaybe<_Lab_ExamFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Lab_ExamOrdering>>;
+};
+
+export type VisitPhysical_ExamsArgs = {
+  filter?: InputMaybe<_Physical_ExamFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Physical_ExamOrdering>>;
+};
+
+export type VisitSamplesArgs = {
+  filter?: InputMaybe<_SampleFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_SampleOrdering>>;
+};
+
+export type VisitVital_SignsArgs = {
+  filter?: InputMaybe<_Vital_SignsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Vital_SignsOrdering>>;
+};
+
+export type Vital_Signs = {
+  __typename?: 'vital_signs';
+  assessment_timepoint?: Maybe<Scalars['Int']['output']>;
+  body_surface_area?: Maybe<Scalars['Float']['output']>;
+  body_surface_area_original?: Maybe<Scalars['Float']['output']>;
+  body_surface_area_original_unit?: Maybe<Scalars['String']['output']>;
+  body_surface_area_unit?: Maybe<Scalars['String']['output']>;
+  body_temperature?: Maybe<Scalars['Float']['output']>;
+  body_temperature_original?: Maybe<Scalars['Float']['output']>;
+  body_temperature_original_unit?: Maybe<Scalars['String']['output']>;
+  body_temperature_unit?: Maybe<Scalars['String']['output']>;
+  date_of_vital_signs?: Maybe<Scalars['String']['output']>;
+  ecg?: Maybe<Scalars['String']['output']>;
+  modified_ecog?: Maybe<Scalars['String']['output']>;
+  patient_weight?: Maybe<Scalars['Float']['output']>;
+  patient_weight_original?: Maybe<Scalars['Float']['output']>;
+  patient_weight_original_unit?: Maybe<Scalars['String']['output']>;
+  patient_weight_unit?: Maybe<Scalars['String']['output']>;
+  phase?: Maybe<Scalars['String']['output']>;
+  pulse?: Maybe<Scalars['Int']['output']>;
+  pulse_original?: Maybe<Scalars['Int']['output']>;
+  pulse_original_unit?: Maybe<Scalars['String']['output']>;
+  pulse_ox?: Maybe<Scalars['Float']['output']>;
+  pulse_ox_original?: Maybe<Scalars['Float']['output']>;
+  pulse_ox_original_unit?: Maybe<Scalars['String']['output']>;
+  pulse_ox_unit?: Maybe<Scalars['String']['output']>;
+  pulse_unit?: Maybe<Scalars['String']['output']>;
+  respiration_pattern?: Maybe<Scalars['String']['output']>;
+  respiration_rate?: Maybe<Scalars['Int']['output']>;
+  respiration_rate_original?: Maybe<Scalars['Int']['output']>;
+  respiration_rate_original_unit?: Maybe<Scalars['String']['output']>;
+  respiration_rate_unit?: Maybe<Scalars['String']['output']>;
+  systolic_bp?: Maybe<Scalars['Int']['output']>;
+  systolic_bp_original?: Maybe<Scalars['Int']['output']>;
+  systolic_bp_original_unit?: Maybe<Scalars['String']['output']>;
+  systolic_bp_unit?: Maybe<Scalars['String']['output']>;
+  visit?: Maybe<Visit>;
+};
+
 export type SampleQueryVariables = Exact<{
   sample_id: Scalars['String']['input'];
 }>;
@@ -19067,6 +23789,7 @@ export type CaseQuery = {
       patient_age_at_enrollment?: number | null;
       neutered_indicator?: string | null;
       weight?: number | null;
+      additional_breed_detail?: string | null;
     } | null;
     cohort?: {
       __typename?: 'cohort';
@@ -19199,11 +23922,12 @@ export type DashboardSearchQueryQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
+  search_text?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 export type DashboardSearchQueryQuery = {
   __typename?: 'QueryType';
-  searchCases?: {
+  dashboard?: {
     __typename?: 'SearchResult';
     numberOfStudies?: number | null;
     numberOfCases?: number | null;
@@ -19213,6 +23937,10 @@ export type DashboardSearchQueryQuery = {
     numberOfPrograms?: number | null;
     numberOfAliquots?: number | null;
     volumeOfData?: number | null;
+    caseIds?: Array<string | null> | null;
+    sampleIds?: Array<string | null> | null;
+    fileIds?: Array<string | null> | null;
+    studyFileIds?: Array<string | null> | null;
     caseCountByDiagnosis?: Array<{
       __typename?: 'GroupCountES';
       group?: string | null;
@@ -19338,6 +24066,17 @@ export type DashboardSearchQueryQuery = {
         caseSize?: number | null;
       } | null> | null;
     } | null> | null;
+  } | null;
+  searchTextResults?: {
+    __typename?: 'SearchResult';
+    numberOfCases?: number | null;
+    numberOfSamples?: number | null;
+    numberOfFiles?: number | null;
+    numberOfStudyFiles?: number | null;
+    caseIds?: Array<string | null> | null;
+    sampleIds?: Array<string | null> | null;
+    fileIds?: Array<string | null> | null;
+    studyFileIds?: Array<string | null> | null;
   } | null;
   biospecimen_source: Array<{
     __typename?: 'biospecimen_source';
@@ -19666,6 +24405,10 @@ export type GetFilesOverviewQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
+  file_uuids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
   program?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
@@ -19931,6 +24674,10 @@ export type GetFileOverviewDescQuery = {
 
 export type GetSampleOverviewQueryVariables = Exact<{
   case_ids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
+  sample_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -20597,6 +25344,10 @@ export type GetAllFileIdsDashboardTabQueryVariables = Exact<{
     | InputMaybe<Scalars['String']['input']>
   >;
   case_ids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
+  file_uuids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -22731,25 +27482,6 @@ export type StoreManifestQuery = {
   storeManifest?: string | null;
 };
 
-export type GetStudiesByProgramProgramDetailQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetStudiesByProgramProgramDetailQuery = {
-  __typename?: 'QueryType';
-  studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
-    clinical_study_designation?: string | null;
-    numberOfCRDCNodes?: number | null;
-    numberOfImageCollections?: number | null;
-    CRDCLinks?: Array<{
-      __typename?: 'Link';
-      url?: string | null;
-      repository?: string | null;
-    } | null> | null;
-  } | null> | null;
-};
-
 export type GetStudiesByProgramProgramDetailTwoQueryVariables = Exact<{
   [key: string]: never;
 }>;
@@ -24275,6 +29007,13 @@ export const CaseDocument = {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'weight' },
                       },
+                      {
+                        kind: 'Field',
+                        name: {
+                          kind: 'Name',
+                          value: 'additional_breed_detail',
+                        },
+                      },
                     ],
                   },
                 },
@@ -24750,12 +29489,22 @@ export const DashboardSearchQueryDocument = {
           },
           defaultValue: { kind: 'ListValue', values: [] },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'search_text' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          defaultValue: { kind: 'StringValue', value: '', block: false },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
+            alias: { kind: 'Name', value: 'dashboard' },
             name: { kind: 'Name', value: 'searchCases' },
             arguments: [
               {
@@ -24945,6 +29694,13 @@ export const DashboardSearchQueryDocument = {
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'volumeOfData' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'caseIds' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'sampleIds' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'fileIds' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'studyFileIds' },
                 },
                 {
                   kind: 'Field',
@@ -25256,6 +30012,202 @@ export const DashboardSearchQueryDocument = {
           },
           {
             kind: 'Field',
+            alias: { kind: 'Name', value: 'searchTextResults' },
+            name: { kind: 'Name', value: 'searchCases' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'program' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'study' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'study' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'study_type' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'study_type' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'breed' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'breed' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'diagnosis' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'diagnosis' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'disease_site' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'disease_site' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'stage_of_disease' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'stage_of_disease' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'response_to_treatment' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'response_to_treatment' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sex' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sex' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'neutered_status' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'neutered_status' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sample_type' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sample_type' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sample_pathology' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sample_pathology' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sample_site' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sample_site' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'file_association' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'file_association' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'file_type' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'file_type' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'file_format' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'file_format' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'biobank' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'biobank' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'study_participation' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'study_participation' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'case_ids' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'case_ids' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'search_text' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'search_text' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfCases' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfSamples' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfFiles' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfStudyFiles' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'caseIds' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'sampleIds' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'fileIds' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'studyFileIds' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            alias: { kind: 'Name', value: 'biospecimen_source' },
             name: { kind: 'Name', value: 'biospecimen_source' },
             selectionSet: {
               kind: 'SelectionSet',
@@ -25279,6 +30231,7 @@ export const DashboardSearchQueryDocument = {
           },
           {
             kind: 'Field',
+            alias: { kind: 'Name', value: 'program' },
             name: { kind: 'Name', value: 'program' },
             selectionSet: {
               kind: 'SelectionSet',
@@ -26621,6 +31574,21 @@ export const GetFilesOverviewDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
+            name: { kind: 'Name', value: 'file_uuids' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+          defaultValue: { kind: 'ListValue', values: [] },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
             name: { kind: 'Name', value: 'program' },
           },
           type: {
@@ -26929,6 +31897,14 @@ export const GetFilesOverviewDocument = {
                 value: {
                   kind: 'Variable',
                   name: { kind: 'Name', value: 'case_ids' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'file_uuids' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'file_uuids' },
                 },
               },
               {
@@ -27913,6 +32889,21 @@ export const GetSampleOverviewDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
+            name: { kind: 'Name', value: 'sample_ids' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+          defaultValue: { kind: 'ListValue', values: [] },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
             name: { kind: 'Name', value: 'program' },
           },
           type: {
@@ -28213,6 +33204,14 @@ export const GetSampleOverviewDocument = {
                 value: {
                   kind: 'Variable',
                   name: { kind: 'Name', value: 'case_ids' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sample_ids' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sample_ids' },
                 },
               },
               {
@@ -29415,7 +34414,7 @@ export const GetCasesOverviewQueryDashboardTabDocument = {
             name: { kind: 'Name', value: 'first' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
-          defaultValue: { kind: 'IntValue', value: '10' },
+          defaultValue: { kind: 'IntValue', value: '15' },
         },
         {
           kind: 'VariableDefinition',
@@ -31370,6 +36369,21 @@ export const GetAllFileIdsDashboardTabDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
+            name: { kind: 'Name', value: 'file_uuids' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+          defaultValue: { kind: 'ListValue', values: [] },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
             name: { kind: 'Name', value: 'sample_ids' },
           },
           type: {
@@ -31701,6 +36715,14 @@ export const GetAllFileIdsDashboardTabDocument = {
                 value: {
                   kind: 'Variable',
                   name: { kind: 'Name', value: 'sample_ids' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'file_uuids' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'file_uuids' },
                 },
               },
               {
@@ -41088,59 +46110,6 @@ export const StoreManifestDocument = {
     },
   ],
 } as unknown as DocumentNode<StoreManifestQuery, StoreManifestQueryVariables>;
-export const GetStudiesByProgramProgramDetailDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getStudiesByProgramProgramDetail' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'studiesByProgram' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_designation' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'CRDCLinks' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'repository' },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfImageCollections' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetStudiesByProgramProgramDetailQuery,
-  GetStudiesByProgramProgramDetailQueryVariables
->;
 export const GetStudiesByProgramProgramDetailTwoDocument = {
   kind: 'Document',
   definitions: [

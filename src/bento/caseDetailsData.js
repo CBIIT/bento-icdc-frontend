@@ -503,6 +503,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
         patient_age_at_enrollment
         neutered_indicator
         weight
+        additional_breed_detail
       }
       cohort {
         cohort_description

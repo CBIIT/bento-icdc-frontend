@@ -88,6 +88,49 @@ export type BreedCaseCount = {
   cases?: Maybe<Scalars['Int']['output']>;
 };
 
+export type CartChartData = {
+  __typename?: 'CartChartData';
+  fileAssociation?: Maybe<Array<Maybe<CartChartItem>>>;
+  fileFormat?: Maybe<Array<Maybe<CartChartItem>>>;
+  fileType?: Maybe<Array<Maybe<CartChartItem>>>;
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type CartChartDataFileAssociationArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartDataFileFormatArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartDataFileTypeArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+};
+
+export type CartChartItem = {
+  __typename?: 'CartChartItem';
+  label?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CartOverviewData = {
+  __typename?: 'CartOverviewData';
+  charts?: Maybe<CartChartData>;
+  studiesInCart?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  totalNumberOfCases?: Maybe<Scalars['Int']['output']>;
+  totalNumberOfFiles?: Maybe<Scalars['Int']['output']>;
+};
+
 export type CaseDetail = {
   __typename?: 'CaseDetail';
   arm?: Maybe<Scalars['String']['output']>;
@@ -693,6 +736,9 @@ export type Mutation = {
   createAgentAdministrationNodeData: AgentAdministrationNodeData;
   createAgentNodeData: AgentNodeData;
   createBreedCaseCount: BreedCaseCount;
+  createCartChartData: CartChartData;
+  createCartChartItem: CartChartItem;
+  createCartOverviewData: CartOverviewData;
   createCaseDetail: CaseDetail;
   createCaseOverview: CaseOverview;
   createCaseOverview2: CaseOverview2;
@@ -811,6 +857,21 @@ export type MutationCreateAgentNodeDataArgs = {
 export type MutationCreateBreedCaseCountArgs = {
   breed?: InputMaybe<Scalars['String']['input']>;
   cases?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateCartChartDataArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateCartChartItemArgs = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type MutationCreateCartOverviewDataArgs = {
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type MutationCreateCaseDetailArgs = {
@@ -1891,6 +1952,10 @@ export type QueryType = {
   biospecimen_source: Array<Biospecimen_Source>;
   breedCaseCount: Array<BreedCaseCount>;
   canine_individual: Array<Canine_Individual>;
+  cartChartData: Array<CartChartData>;
+  cartChartItem: Array<CartChartItem>;
+  cartOverview?: Maybe<CartOverviewData>;
+  cartOverviewData: Array<CartOverviewData>;
   case: Array<Case>;
   caseCountOfProgram?: Maybe<Scalars['Int']['output']>;
   caseCountOfStudy?: Maybe<Scalars['Int']['output']>;
@@ -2159,6 +2224,37 @@ export type QueryTypeCanine_IndividualArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_Canine_IndividualOrdering>>;
+};
+
+export type QueryTypeCartChartDataArgs = {
+  filter?: InputMaybe<_CartChartDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartDataOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeCartChartItemArgs = {
+  filter?: InputMaybe<_CartChartItemFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartChartItemOrdering>>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type QueryTypeCartOverviewArgs = {
+  file_uuids?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type QueryTypeCartOverviewDataArgs = {
+  filter?: InputMaybe<_CartOverviewDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_CartOverviewDataOrdering>>;
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type QueryTypeCaseArgs = {
@@ -3012,6 +3108,7 @@ export type QueryTypeSearchCasesArgs = {
   sample_pathology?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sample_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sample_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  search_text?: InputMaybe<Scalars['String']['input']>;
   sex?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   stage_of_disease?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   study?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3374,6 +3471,8 @@ export type SearchResult = {
   caseCountByStudyCode?: Maybe<Array<Maybe<GroupCountEs>>>;
   caseCountByStudyParticipation?: Maybe<Array<Maybe<GroupCountEs>>>;
   caseCountByStudyType?: Maybe<Array<Maybe<GroupCountEs>>>;
+  caseIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  fileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   filterCaseCountByBiobank?: Maybe<Array<Maybe<GroupCountEs>>>;
   filterCaseCountByBreed?: Maybe<Array<Maybe<GroupCountEs>>>;
   filterCaseCountByDiagnosis?: Maybe<Array<Maybe<GroupCountEs>>>;
@@ -3400,6 +3499,8 @@ export type SearchResult = {
   numberOfStudies?: Maybe<Scalars['Int']['output']>;
   numberOfStudyFiles?: Maybe<Scalars['Int']['output']>;
   programsAndStudies?: Maybe<Array<Maybe<ProgramStudies>>>;
+  sampleIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  studyFileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   volumeOfData?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -4587,6 +4688,203 @@ export enum _BreedCaseCountOrdering {
   BreedDesc = 'breed_desc',
   CasesAsc = 'cases_asc',
   CasesDesc = 'cases_desc',
+}
+
+export type _CartChartDataFilter = {
+  AND?: InputMaybe<Array<_CartChartDataFilter>>;
+  NOT?: InputMaybe<Array<_CartChartDataFilter>>;
+  OR?: InputMaybe<Array<_CartChartDataFilter>>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileAssociation`-relations */
+  fileAssociation?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationships matches this filter */
+  fileAssociation_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileAssociation`-relationships matches this filter */
+  fileAssociation_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileAssociation`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileAssociation`-relation */
+  fileAssociation_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileAssociation`-relationship matches this filter */
+  fileAssociation_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileAssociation`-relationship matches this filter */
+  fileAssociation_some?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileFormat`-relations */
+  fileFormat?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationships matches this filter */
+  fileFormat_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileFormat`-relationships matches this filter */
+  fileFormat_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileFormat`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileFormat`-relation */
+  fileFormat_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileFormat`-relationship matches this filter */
+  fileFormat_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileFormat`-relationship matches this filter */
+  fileFormat_some?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationship matches this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has no `fileType`-relations */
+  fileType?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationships matches this filter */
+  fileType_every?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which none of the `fileType`-relationships matches this filter */
+  fileType_none?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which all `fileType`-relationship does not match this filter. If `null` is passed to this field, only those `CartChartData` will be filtered which has any `fileType`-relation */
+  fileType_not?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which exactly one `fileType`-relationship matches this filter */
+  fileType_single?: InputMaybe<_CartChartItemFilter>;
+  /** Filters only those `CartChartData` for which at least one `fileType`-relationship matches this filter */
+  fileType_some?: InputMaybe<_CartChartItemFilter>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_gt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_gte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_lt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_lte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+};
+
+export type _CartChartDataInput = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _CartChartDataOrdering {
+  SchemaValidationPlaceholderAsc = 'schema_validation_placeholder_asc',
+  SchemaValidationPlaceholderDesc = 'schema_validation_placeholder_desc',
+}
+
+export type _CartChartItemFilter = {
+  AND?: InputMaybe<Array<_CartChartItemFilter>>;
+  NOT?: InputMaybe<Array<_CartChartItemFilter>>;
+  OR?: InputMaybe<Array<_CartChartItemFilter>>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  label_contains?: InputMaybe<Scalars['String']['input']>;
+  label_ends_with?: InputMaybe<Scalars['String']['input']>;
+  label_gt?: InputMaybe<Scalars['String']['input']>;
+  label_gte?: InputMaybe<Scalars['String']['input']>;
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  label_lt?: InputMaybe<Scalars['String']['input']>;
+  label_lte?: InputMaybe<Scalars['String']['input']>;
+  label_matches?: InputMaybe<Scalars['String']['input']>;
+  label_not?: InputMaybe<Scalars['String']['input']>;
+  label_not_contains?: InputMaybe<Scalars['String']['input']>;
+  label_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  label_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  label_starts_with?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+  value_gt?: InputMaybe<Scalars['Int']['input']>;
+  value_gte?: InputMaybe<Scalars['Int']['input']>;
+  value_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  value_lt?: InputMaybe<Scalars['Int']['input']>;
+  value_lte?: InputMaybe<Scalars['Int']['input']>;
+  value_not?: InputMaybe<Scalars['Int']['input']>;
+  value_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+export type _CartChartItemInput = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum _CartChartItemOrdering {
+  LabelAsc = 'label_asc',
+  LabelDesc = 'label_desc',
+  ValueAsc = 'value_asc',
+  ValueDesc = 'value_desc',
+}
+
+export type _CartOverviewDataFilter = {
+  AND?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  NOT?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  OR?: InputMaybe<Array<_CartOverviewDataFilter>>;
+  /** Filters only those `CartOverviewData` for which the `charts`-relationship matches this filter. If `null` is passed to this field, only those `CartOverviewData` will be filtered which has no `charts`-relations */
+  charts?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts_not`-field */
+  charts_none?: InputMaybe<_CartChartDataFilter>;
+  /** Filters only those `CartOverviewData` for which the `charts`-relationship does not match this filter. If `null` is passed to this field, only those `CartOverviewData` will be filtered which has any `charts`-relation */
+  charts_not?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts`-field directly (without any suffix) */
+  charts_single?: InputMaybe<_CartChartDataFilter>;
+  /** @deprecated Use the `charts`-field directly (without any suffix) */
+  charts_some?: InputMaybe<_CartChartDataFilter>;
+  studiesInCart?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_contains?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_ends_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_gt?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_gte?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  studiesInCart_lt?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_lte?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_matches?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_contains?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  studiesInCart_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  studiesInCart_starts_with?: InputMaybe<Scalars['String']['input']>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_gt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_gte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfCases_lt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_lte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_not?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfCases_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_gt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_gte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+  totalNumberOfFiles_lt?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_lte?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_not?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Int']['input']>>
+  >;
+};
+
+export type _CartOverviewDataInput = {
+  studiesInCart?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  totalNumberOfCases?: InputMaybe<Scalars['Int']['input']>;
+  totalNumberOfFiles?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum _CartOverviewDataOrdering {
+  StudiesInCartAsc = 'studiesInCart_asc',
+  StudiesInCartDesc = 'studiesInCart_desc',
+  TotalNumberOfCasesAsc = 'totalNumberOfCases_asc',
+  TotalNumberOfCasesDesc = 'totalNumberOfCases_desc',
+  TotalNumberOfFilesAsc = 'totalNumberOfFiles_asc',
+  TotalNumberOfFilesDesc = 'totalNumberOfFiles_desc',
 }
 
 export type _CaseDetailFilter = {
@@ -23489,6 +23787,7 @@ export type CaseQuery = {
       patient_age_at_enrollment?: number | null;
       neutered_indicator?: string | null;
       weight?: number | null;
+      additional_breed_detail?: string | null;
     } | null;
     cohort?: {
       __typename?: 'cohort';
@@ -23621,11 +23920,12 @@ export type DashboardSearchQueryQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
+  search_text?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 export type DashboardSearchQueryQuery = {
   __typename?: 'QueryType';
-  searchCases?: {
+  dashboard?: {
     __typename?: 'SearchResult';
     numberOfStudies?: number | null;
     numberOfCases?: number | null;
@@ -23635,6 +23935,10 @@ export type DashboardSearchQueryQuery = {
     numberOfPrograms?: number | null;
     numberOfAliquots?: number | null;
     volumeOfData?: number | null;
+    caseIds?: Array<string | null> | null;
+    sampleIds?: Array<string | null> | null;
+    fileIds?: Array<string | null> | null;
+    studyFileIds?: Array<string | null> | null;
     caseCountByDiagnosis?: Array<{
       __typename?: 'GroupCountES';
       group?: string | null;
@@ -23760,6 +24064,17 @@ export type DashboardSearchQueryQuery = {
         caseSize?: number | null;
       } | null> | null;
     } | null> | null;
+  } | null;
+  searchTextResults?: {
+    __typename?: 'SearchResult';
+    numberOfCases?: number | null;
+    numberOfSamples?: number | null;
+    numberOfFiles?: number | null;
+    numberOfStudyFiles?: number | null;
+    caseIds?: Array<string | null> | null;
+    sampleIds?: Array<string | null> | null;
+    fileIds?: Array<string | null> | null;
+    studyFileIds?: Array<string | null> | null;
   } | null;
   biospecimen_source: Array<{
     __typename?: 'biospecimen_source';
@@ -24088,6 +24403,10 @@ export type GetFilesOverviewQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
+  file_uuids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
   program?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
@@ -24353,6 +24672,10 @@ export type GetFileOverviewDescQuery = {
 
 export type GetSampleOverviewQueryVariables = Exact<{
   case_ids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
+  sample_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -25019,6 +25342,10 @@ export type GetAllFileIdsDashboardTabQueryVariables = Exact<{
     | InputMaybe<Scalars['String']['input']>
   >;
   case_ids?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
+  file_uuids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -27151,25 +27478,6 @@ export type StoreManifestQueryVariables = Exact<{
 export type StoreManifestQuery = {
   __typename?: 'QueryType';
   storeManifest?: string | null;
-};
-
-export type GetStudiesByProgramProgramDetailQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetStudiesByProgramProgramDetailQuery = {
-  __typename?: 'QueryType';
-  studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
-    clinical_study_designation?: string | null;
-    numberOfCRDCNodes?: number | null;
-    numberOfImageCollections?: number | null;
-    CRDCLinks?: Array<{
-      __typename?: 'Link';
-      url?: string | null;
-      repository?: string | null;
-    } | null> | null;
-  } | null> | null;
 };
 
 export type GetStudiesByProgramProgramDetailTwoQueryVariables = Exact<{
