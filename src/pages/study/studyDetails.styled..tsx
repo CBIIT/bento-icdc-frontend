@@ -204,7 +204,6 @@ export const HeaderButtonLink = styled(Link)({
   fontWeight: 'bold',
   position: 'relative',
   top: '2px',
-  color: '#dc762f',
   '&:hover': {
     textDecoration: 'none',
   },
@@ -216,6 +215,7 @@ export const HeaderButtonLinkNumber = styled.div({
   paddingBottom: '3px',
   display: 'inherit',
   fontWeight: '900',
+  color: '#B85300',
 });
 
 export const HeaderButtonLinkText = styled.span({
