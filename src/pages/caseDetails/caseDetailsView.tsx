@@ -57,6 +57,13 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
           key: 'breed',
           value: defaultTo(caseDetail?.demographic?.breed, noValue),
         },
+        {
+          key: 'Additional Breed Detail',
+          value: defaultTo(
+            caseDetail?.demographic?.additional_breed_detail,
+            noValue
+          ),
+        },
         { key: 'Sex', value: defaultTo(caseDetail?.demographic?.sex, noValue) },
         {
           key: 'Neutered status',
