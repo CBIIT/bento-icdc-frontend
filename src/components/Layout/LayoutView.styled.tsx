@@ -9,6 +9,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
+  height: 100%;
   margin-top: 179px;
   display: flex;
   flex: 1;
