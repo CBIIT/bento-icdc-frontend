@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import Grow from '@mui/material/Grow';
 
 export const CancerGenomicsCloudLink = styled('a')({
-  color: '#165F83',
+  color: '#B85300',
 });
 
 export const CancerGenomicsCloudLinkText = styled('span')({
@@ -62,7 +62,7 @@ export const DownloadFileManifestButtonIcon = styled('img')({
 export const DownloadFileManifestButton = styled('span')({});
 
 export const DownloadFileManifestLink = styled('a')({
-  color: '#165F83',
+  color: '#B85300',
 });
 
 export const DownloadFileManifestLinkText = styled('span')({
