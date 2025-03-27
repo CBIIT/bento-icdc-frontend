@@ -105,6 +105,7 @@ const LayoutView = () => {
           body {
           }
           #root {
+            height: 100%;
           }
           *::-webkit-scrollbar {
             width: none;
