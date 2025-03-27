@@ -1,15 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import Box from '@mui/material/Box';
 import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
 import { Chart } from './chart';
 import Open from '../../assets/open.svg';
 import Collapse from '../../assets/collapse.svg';
 import Files from '../../assets/files.svg';
 import Studies from '../../assets/studies.svg';
 import Cases from '../../assets/cases.svg';
-import { Tab } from '@mui/material';
-import { defaultTo, startCase, upperCase } from 'lodash';
+import { defaultTo, startCase, toString, upperCase } from 'lodash';
 import { useQuery } from '@apollo/client';
 import { GetCartOverviewDataDocument } from '../../../../generated-types/graphql';
 import {
@@ -22,11 +20,16 @@ import {
   IconAndTextContainer,
   IconAndTextWrapper,
   RightPanelSection,
+  StyledTab,
+  StyledTabs,
 } from './overview-widget.styled';
 import { SkeletonLoader } from '../../../../components/Skeleton';
 import { CartChartData } from '../../../../generated-types/types';
 
-type CartChartKeys = keyof Omit<CartChartData, 'schema_validation_placeholder'>;
+type CartChartKeys = keyof Omit<
+  CartChartData,
+  'schema_validation_placeholder' | '__typename'
+>;
 
 export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
   const { loading, error, data } = useQuery(GetCartOverviewDataDocument, {
@@ -140,20 +143,15 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                   margin: '0px 16px',
                 }}
               >
-                <TabList
+                <StyledTabs
                   onChange={handleChange}
                   aria-label="lab API tabs example"
+                  value={value}
                 >
-                  {chartKeys.map((item, index) => {
-                    return (
-                      <Tab
-                        label={upperCase(item)}
-                        value={index}
-                        key={`${item}`}
-                      />
-                    );
-                  })}
-                </TabList>
+                  {chartKeys.map(item => (
+                    <StyledTab label={upperCase(item)} key={toString(item)} />
+                  ))}
+                </StyledTabs>
               </Box>
               <Chart
                 chartData={charts[chartKeys[value]]}

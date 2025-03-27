@@ -1,5 +1,5 @@
 import { TabPanel } from '@mui/lab';
-import { Dialog, DialogContent, Tab, DialogTitle } from '@mui/material';
+import { Dialog, DialogContent, Tab, DialogTitle, Tabs } from '@mui/material';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 
@@ -27,14 +27,21 @@ export const StyledDialog = styled(Dialog)({
 });
 
 export const StyledDialogContent = styled(DialogContent)({
-  '&.MuiDialogContent-root': {
+  '& .MuiDialogContent-root': {
     padding: '32px 16px',
     overflowY: 'hidden',
   },
 });
 
+export const StyledTabs = styled(Tabs)({
+  '& .MuiTabs-indicator': {
+    height: '5px ',
+    background: '#0296C9',
+  },
+});
+
 export const StyledTab = styled(Tab)({
-  '&.MuiTab-root': {
+  '& .MuiTab-root': {
     fontFamily: 'Roboto',
     fontWeight: 500,
     fontSize: '14px',
@@ -43,7 +50,7 @@ export const StyledTab = styled(Tab)({
 });
 
 export const StyledDialogTitle = styled(DialogTitle)({
-  '&.MuiDialogTitle-root': {
+  '& .MuiDialogTitle-root': {
     borderBottom: '1px solid #d1dbe0',
     display: 'flex',
     alignItems: 'center',
@@ -52,33 +59,26 @@ export const StyledDialogTitle = styled(DialogTitle)({
 });
 
 export const StyledTabPanel = styled(TabPanel)({
-  '&.MuiTabPanel-root': {
+  '& .MuiTabPanel-root': {
     display: 'flex',
     height: '100%',
-    // '& .recharts-responsive-container': {
-    //   width: '580px',
-    // },
     '& > div': {
       display: 'flex',
       alignItems: 'center',
       flex: 1,
     },
-    // '@media (max-width: 959px)': {
-    //   height: '100%',
-    // },
   },
 });
 
 export const Container = styled.div({
-  padding: '24px 38px',
+  padding: '0 98px',
   flex: 1,
 });
 
 export const Wrapper = styled.div({
-  // background: "yellow",
   display: 'grid',
   gridTemplateColumns: '1fr 2fr',
-  borderRadius: '8px',
+  borderRadius: '20px',
   border: '1px solid black',
   height: '60px',
 });
@@ -108,18 +108,17 @@ export const LeftPanelSection = styled.div({
   borderRight: '1px solid black',
   display: 'flex',
   flexDirection: 'column',
-  padding: '24px',
+  padding: '40px',
   alignItems: 'center',
   '& .left-panel-title': {
-    marginBottom: '16px',
+    marginBottom: '30px',
     color: '#CB8311',
     fontSize: '23px',
     fontWeight: '700',
     fontFamily: 'Lato',
     textAlign: 'center',
-    lineHeight: '19px',
+    letterSpacing: '0%',
   },
-  // gap: "16px",
 });
 export const RightPanelSection = styled.div({
   display: 'flex',
@@ -155,8 +154,8 @@ export const IconAndTextWrapper = styled.div({
 });
 export const IconAndTextContainer = styled.div({
   display: 'grid',
-  // minHeight: '347px',
   gridTemplateRows: '1fr 1fr 1fr',
+  padding: '0 120px',
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',

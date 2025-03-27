@@ -71,7 +71,7 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
     <>
       <Box
         sx={{
-          color: '#DC762F',
+          color: '#B85300',
           textDecoration: 'underline',
           cursor: 'pointer',
           marginLeft: '45px',

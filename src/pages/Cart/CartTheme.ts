@@ -1,5 +1,3 @@
-import { root } from "postcss";
-
 export const headerTheme = ({ primaryColor = '#004c73' }: any) => ({
   tblHeader: {
     MuiTypography: {
@@ -337,13 +335,13 @@ const toolbar = {
 };
 
 const tblBody = {
-    MuiTableRow: {
-        root: {
-            '&:nth-child(even)': {
-                background: '#EEF7FE'
-            }
-        }
+  MuiTableRow: {
+    root: {
+      '&:nth-child(even)': {
+        background: '#EEF7FE',
+      },
     },
+  },
   MuiTooltip: {
     tooltip: {
       backgroundColor: '#ffffff',

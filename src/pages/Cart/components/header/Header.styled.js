@@ -5,7 +5,6 @@ import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 export const CartHeader = styled('div')({
-  marginBottom: '14px',
   width: '100%',
   height: '85px',
   borderBottom: '3px solid #686F7F',
@@ -19,31 +18,61 @@ export const CartHeaderLogo = styled('div')({
   lineHeight: '100px',
   color: '#C25700',
   width: '225px',
+  margin: '0 24px',
+  alignItems: 'center',
+});
+
+export const FileCartCount = styled.div({
+  width: '220px',
+  height: '33px',
+  border: '3px solid #81A6B9',
+  background: '#F6F4F4',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginRight: '85px',
+  padding: '4px 0',
+  fontFamily: 'Roboto',
+  fontWeight: '700',
+  fontSize: '13px',
+  lineHeight: '14px',
+  letterSpacing: '0.15px',
+
+  '& span': {
+    color: '#B85300',
+    fontFamily: 'Roboto',
+    fontWeight: '900',
+  },
 });
 
 export const OverviewWidgetWrapper = styled.div({
-  marginBottom: '16px',
   display: 'flex',
+  margin: '40px 0 32px',
   flex: 1,
 });
 
 export const CartHeaderLogoIcon = styled('img')({
   width: '85px',
-  marginRight: '15px',
+  marginRight: '16px',
   zIndex: '100',
 });
 
 export const PageTitle = styled('span')({
   marginLeft: '10px',
   color: '#C25700',
-  fontFamily: 'Lato',
+  fontFamily: 'Raleway',
+  lineHeight: '25px',
+  letterSpacing: '0%',
   fontSize: '25px',
-  fontWeight: 700,
+  fontWeight: 500,
 });
 
 export const ReadMeBtnDiv = styled('div')({
-  paddingTop: '35px',
-  marginLeft: '5px',
+  display: 'flex',
+  height: '100%',
+  paddingTop: '18px',
+  alignItems: 'center',
+  justifyContent: 'space-between',
 });
 
 export const ReadMeButton = styled(Button)({
@@ -52,11 +81,13 @@ export const ReadMeButton = styled(Button)({
   fontSize: '16px',
   fontWeight: 400,
   fontStyle: 'normal',
+  letterSpacing: '0%',
   boxShadow: 'none',
   background: '#3C597C',
   borderRadius: '8px',
   border: '1.25px solid #0B3556',
   height: '38px',
+  width: '141px',
 });
 
 export const SelectFilesActionContainer = styled(Box)({

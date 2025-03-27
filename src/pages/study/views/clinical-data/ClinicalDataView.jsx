@@ -5,7 +5,7 @@ import PaginatedTableView from '../../../../components/PaginatedTable/TableView'
 import { table, tableLayOut } from '../../../../bento/studyDetailsData';
 import { themeConfig } from './DataTheme';
 import DownloadBtn from './components/downloadBtn';
-import { downloadAndZipJson } from '../../../fileCentricCart/utils';
+import { downloadAndZipJson } from '../../../Cart/utils';
 
 const ClinicalDataView = ({ tblRows, classes, studyCode }) => {
   const downloadAndZipCvsFiles = () => {

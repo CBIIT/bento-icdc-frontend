@@ -12,12 +12,12 @@ import styled from '@emotion/styled';
 import { CartChartItem } from '../../../../generated-types/types';
 
 export const Container = styled.div({
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    padding: '32px',
-  })
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-around',
+  padding: '32px',
+});
 
 export const CustomTooltipWrapper = styled.div({
   backgroundColor: '#fff',
@@ -44,7 +44,9 @@ export const LegendWrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
   marginLeft: '32px',
+  height: '550px',
   '& .icon-and-text-wrapper': {
+    height: '100%',
     display: 'flex',
     gap: '16px',
     justifyContent: 'space-between',
@@ -55,6 +57,7 @@ export const LegendWrapper = styled.div({
     '& .icon-and-label': {
       display: 'flex',
       gap: '8px',
+      height: '100%',
       '& .label-text': {
         fontFamily: 'Inter',
         fontWeight: '400',
@@ -128,7 +131,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
             style={{
               backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'transparent',
               fontWeight: hoveredGroup === entry.label ? 'bold' : 'normal',
-              height: '36px',
+              height: '100%',
               boxShadow:
                 hoveredGroup === entry.label
                   ? '0px 0px 10px rgba(0,0,0,0.5)'
@@ -138,8 +141,8 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
             <div className="icon-and-label">
               <div
                 style={{
-                  width: '36px',
-                  height: '36px',
+                  width: '42px',
+                  height: '100%',
                   background: colors[index % colors.length],
                 }}
               />

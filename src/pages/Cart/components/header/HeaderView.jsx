@@ -4,13 +4,22 @@ import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
 import ReadMoreSVG from '../readMore';
 import env from '../../../../utils/env';
-import * as Styled from './Header.styled';
+import {
+  CartHeader,
+  CartHeaderLogo,
+  CartHeaderLogoIcon,
+  FileCartCount,
+  ReadMeBtnDiv,
+  ReadMeButton,
+  PageTitle,
+  OverviewWidgetWrapper,
+} from './Header.styled';
 import { OverviewWidget } from '../overview-widget';
+import { defaultTo } from 'lodash';
 
 const HeaderView = ({ filesId }) => {
   const [displayReadMe, setDisplayReadMe] = useState(false);
   const [content, setContent] = useState(undefined);
-
 
   const getReadMe = async url => {
     const { data } = await axios.get(url);
@@ -27,29 +36,36 @@ const HeaderView = ({ filesId }) => {
 
   return (
     <>
-      <Styled.CartHeader>
-        <Styled.CartHeaderLogo>
-          <Styled.CartHeaderLogoIcon
+      <CartHeader>
+        <CartHeaderLogo>
+          <CartHeaderLogoIcon
             src={myFilesPageData.headerIconSrc}
             alt={myFilesPageData.headerIconAlt}
           />
-          <Styled.PageTitle>My Files</Styled.PageTitle>
-        </Styled.CartHeaderLogo>
-        <Styled.ReadMeBtnDiv>
-          <Styled.ReadMeButton
+          <PageTitle>My Files</PageTitle>
+        </CartHeaderLogo>
+        <ReadMeBtnDiv>
+          <ReadMeButton
             onClick={displayReadMeHandler}
             color="primary"
             variant="contained"
             endIcon={<ReadMoreSVG />}
           >
             README
-          </Styled.ReadMeButton>
-        </Styled.ReadMeBtnDiv>
-      </Styled.CartHeader>
+          </ReadMeButton>
 
-      <Styled.OverviewWidgetWrapper>
+          <FileCartCount>
+            <div>
+              <span>{defaultTo(filesId, []).length || 0}</span> Files in your
+              cart
+            </div>
+          </FileCartCount>
+        </ReadMeBtnDiv>
+      </CartHeader>
+
+      <OverviewWidgetWrapper>
         <OverviewWidget fileIds={filesId} />
-      </Styled.OverviewWidgetWrapper> 
+      </OverviewWidgetWrapper>
 
       <ReadMeDialogComponent
         content={content}
