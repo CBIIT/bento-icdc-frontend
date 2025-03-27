@@ -50,9 +50,6 @@ module.exports = {
     extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: paths.appHtml,
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV), // Injects environment variables
     }),
