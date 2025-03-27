@@ -41,6 +41,49 @@ const LayoutView = () => {
       setOpen(true);
     }
   }, [open]);
+
+  useEffect(() => {
+    const adjustForSiteAlert = () => {
+      const hostDiv = document.body.children[0];
+      if (!hostDiv || !hostDiv.shadowRoot) {
+        document.documentElement.style.setProperty(
+          '--site-alert-offset',
+          '0px'
+        );
+        return;
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      const siteAlert = hostDiv.shadowRoot.querySelector(
+        '.usa-site-alert'
+      ) as HTMLDivElement;
+      if (siteAlert) {
+        // document.documentElement.style.setProperty('--site-alert-offset', `${siteAlert.offsetHeight}px`);
+
+        // Adjust site alert styling to also be fixed
+        siteAlert.style.position = 'fixed';
+        siteAlert.style.top = '0';
+        siteAlert.style.left = '0';
+        siteAlert.style.width = '100%';
+        siteAlert.style.zIndex = '9999';
+      }
+    };
+
+    // Initial check
+    adjustForSiteAlert();
+    const observer = new MutationObserver(adjustForSiteAlert);
+
+    observer.observe(document.body, {
+      childList: true,
+    });
+    window.addEventListener('resize', adjustForSiteAlert);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', adjustForSiteAlert);
+    };
+  }, []);
+
   const location = useLocation();
   const headerRef = useRef(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -58,15 +101,10 @@ const LayoutView = () => {
           body {
             height: 100%;
             margin: 0;
-            display: flex;
           }
           body {
-            flex: 1;
           }
           #root {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
           }
           *::-webkit-scrollbar {
             width: none;
