@@ -26,7 +26,6 @@ import styles from "./LayoutStyle";
 import CartView from "../../pages/Cart/CartController";
 import SysInfo from "../../pages/sysinfo/sysInfo";
 import Error from "../../pages/error/Error";
-// import CartView from '../../pages/fileCentricCart/CartController';
 
 const LayoutView = ({ classes }) => {
   const location = useLocation();
@@ -46,7 +45,6 @@ const LayoutView = ({ classes }) => {
       if (siteAlert) {
         const contentDiv = document.body.children[2].children[2];
         const layoutContainerDiv = document.body.children[2].children[1];
-        // document.documentElement.style.setProperty('--site-alert-offset', `${siteAlert.offsetHeight}px`);
 
         // Adjust site alert styling to also be fixed
         siteAlert.style.position = "fixed";
@@ -54,15 +52,7 @@ const LayoutView = ({ classes }) => {
         siteAlert.style.left = "0";
         siteAlert.style.width = "100%";
         siteAlert.style.zIndex = "9999";
-        // contentDiv.style.marginTop = '298px'
-        layoutContainerDiv.style = {
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 999,
-          marginTop: "118px",
-        };
+        layoutContainerDiv.style.marginTop
       }
     };
 
