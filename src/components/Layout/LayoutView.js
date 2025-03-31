@@ -52,7 +52,7 @@ const LayoutView = ({ classes }) => {
         siteAlert.style.left = "0";
         siteAlert.style.width = "100%";
         siteAlert.style.zIndex = "9999";
-        layoutContainerDiv.style.marginTop
+        layoutContainerDiv.style.marginTop = '118px';
       }
     };
 
