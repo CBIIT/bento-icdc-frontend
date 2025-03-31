@@ -47,6 +47,7 @@ const LayoutView = ({ classes }) => {
         const layoutContainerDiv = document.body.children[2].children[1];
 
         // Adjust site alert styling to also be fixed
+        document.body.style.overflowY = "hidden"
         siteAlert.style.position = "fixed";
         siteAlert.style.top = "0";
         siteAlert.style.left = "0";
