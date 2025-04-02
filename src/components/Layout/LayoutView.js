@@ -45,15 +45,18 @@ const LayoutView = ({ classes }) => {
       if (siteAlert) {
         const contentDiv = document.body.children[2].children[2];
         const layoutContainerDiv = document.body.children[2].children[1];
+        const headerSectionDiv = document.body.children[2].children[1].children[0];
 
-        // Adjust site alert styling to also be fixed
-        document.body.style.overflowY = "hidden"
         siteAlert.style.position = "fixed";
         siteAlert.style.top = "0";
         siteAlert.style.left = "0";
         siteAlert.style.width = "100%";
         siteAlert.style.zIndex = "9999";
         layoutContainerDiv.style.marginTop = '118px';
+        headerSectionDiv.style.position = 'fixed';
+        headerSectionDiv.style.left = 0;
+        headerSectionDiv.style.right = 0;
+        contentDiv.style.marginTop = '180px';
       }
     };
 
