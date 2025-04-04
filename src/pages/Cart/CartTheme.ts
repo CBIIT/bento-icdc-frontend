@@ -57,7 +57,7 @@ export const headerTheme = ({ primaryColor = '#004c73' }: any) => ({
       head: {
         height: '40px',
         borderBottom: `3px solid ${primaryColor}`,
-        background: '#f5f5f5',
+        background: '#EEF7FE',
         '&.column_grouping': {
           background: '#fff',
           padding: '0',
@@ -94,10 +94,15 @@ export const headerTheme = ({ primaryColor = '#004c73' }: any) => ({
 
 export const tblContainer = {
   overrides: {
+    MuiBox: {
+      root: {
+        minWidth: '1279px',
+      },
+    },
     MuiGrid: {
       container: {
         margin: '0px 0px 20px 0px',
-        background: '#f3f3f4',
+        background: '#EEF7FE',
         padding: '9px 30px 30px 30px',
         borderTopLeftRadius: '20px',
         borderTopRightRadius: '20px',
@@ -330,6 +335,13 @@ const toolbar = {
 };
 
 const tblBody = {
+  MuiTableRow: {
+    root: {
+      '&:nth-child(even)': {
+        background: '#EEF7FE',
+      },
+    },
+  },
   MuiTooltip: {
     tooltip: {
       backgroundColor: '#ffffff',

@@ -59,8 +59,7 @@ import { BreadcrumbData } from '../caseDetails/caseDetailsView';
 
 function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
   return arr.some(
-    obj =>
-      obj && Object.values(obj).some(value => value && (value as number) > 0)
+    obj => obj && Object.values(obj).some(value => value && value > 0)
   );
 }
 

@@ -1,12 +1,12 @@
-import React from "react";
-import { withStyles } from "@material-ui/styles";
-import downloadIcon from "../../../../assets/icons/clinical_data_csv_icon.svg";
-import { downloadJson } from "../../../../pages/fileCentricCart/utils";
-import { ToolTip } from "../../../../bento-core";
+import React from 'react';
+import { withStyles } from '@material-ui/styles';
+import downloadIcon from '../../../../assets/icons/clinical_data_csv_icon.svg';
+import { downloadJson } from '../../../../pages/Cart/utils';
+import { ToolTip } from '../../../../bento-core';
 
 const CsvDownlaod = ({ classes, csvDataRow = [], manifest, fileName }) => {
   const handleCSVDownload = () => {
-    downloadJson(csvDataRow, "", fileName, manifest);
+    downloadJson(csvDataRow, '', fileName, manifest);
   };
   return (
     <>
@@ -38,11 +38,11 @@ const CsvDownlaod = ({ classes, csvDataRow = [], manifest, fileName }) => {
 
 const styles = {
   icon: {
-    width: "24.71px",
-    height: "24.72px",
+    width: '24.71px',
+    height: '24.72px',
   },
   tooltipImageWrapper: {
-    cursor: "pointer",
+    cursor: 'pointer',
   },
 };
 

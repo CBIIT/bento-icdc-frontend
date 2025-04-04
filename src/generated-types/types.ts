@@ -25736,6 +25736,40 @@ export type GetStoreManifestDataQueryQuery = {
   } | null> | null;
 };
 
+export type GetCartOverviewDataQueryVariables = Exact<{
+  file_uuids?: InputMaybe<
+    Array<Scalars['String']['input']> | Scalars['String']['input']
+  >;
+}>;
+
+export type GetCartOverviewDataQuery = {
+  __typename?: 'QueryType';
+  cartOverview?: {
+    __typename?: 'CartOverviewData';
+    totalNumberOfFiles?: number | null;
+    studiesInCart?: Array<string | null> | null;
+    totalNumberOfCases?: number | null;
+    charts?: {
+      __typename?: 'CartChartData';
+      fileType?: Array<{
+        __typename?: 'CartChartItem';
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+      fileAssociation?: Array<{
+        __typename?: 'CartChartItem';
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+      fileFormat?: Array<{
+        __typename?: 'CartChartItem';
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+    } | null;
+  } | null;
+};
+
 export type GetGlobalStatsDataQueryQueryVariables = Exact<{
   [key: string]: never;
 }>;
