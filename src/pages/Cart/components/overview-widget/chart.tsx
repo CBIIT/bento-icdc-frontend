@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   TooltipPayload,
+  Cell,
 } from 'recharts';
 import styled from '@emotion/styled';
 import { CartChartItem } from '../../../../generated-types/types';
@@ -44,7 +45,7 @@ export const LegendWrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
   marginLeft: '32px',
-  height: '550px',
+  height: '202px',
   '& .icon-and-text-wrapper': {
     height: '100%',
     display: 'flex',
@@ -58,6 +59,7 @@ export const LegendWrapper = styled.div({
       display: 'flex',
       gap: '8px',
       height: '100%',
+      marginBottom: '8px',
       '& .label-text': {
         fontFamily: 'Inter',
         fontWeight: '400',
@@ -103,9 +105,14 @@ export const palette = [
 interface ChartProps {
   chartData: CartChartItem[];
   yAxisLabel: string;
+  isTransparent: boolean;
 }
 
-export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
+export const Chart: React.FC<ChartProps> = ({
+  chartData,
+  yAxisLabel,
+  isTransparent,
+}) => {
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
 
   const tickFormatter = (_value: string) => {
@@ -149,7 +156,9 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
               <div className="label-text">{entry.label}</div>
             </div>
             <div>
-              <div className="value-text">{entry.value}</div>
+              <div className="value-text">
+                {!isTransparent ? entry.value : '                     '}
+              </div>
             </div>
           </div>
         ))}
@@ -181,12 +190,12 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
   };
 
   return (
-    <Container>
+    <Container style={{ opacity: isTransparent ? '0.5' : '1' }}>
       <BarChart
         layout="vertical" // Make the bars horizontal
         data={chartData}
-        height={600}
-        width={800}
+        height={223}
+        width={617}
         margin={{
           top: 5,
           right: 30,
@@ -197,38 +206,50 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           type="number"
-          label={{
-            value: 'File Count',
-            offset: -5,
-            position: 'insideBottom',
-            style: {
-              fontFamily: 'Inter',
-              fontWeight: '500',
-              fontSize: '13px',
-              color: '#444444',
-            },
-          }}
+          tick={isTransparent ? () => null : true}
+          label={
+            !isTransparent && {
+              value: 'File Count',
+              offset: -2,
+              position: 'insideBottom',
+              style: {
+                fontFamily: 'Inter',
+                fontWeight: '500',
+                fontSize: '13px',
+                color: '#444444',
+              },
+            }
+          }
         />
         <YAxis
           tickFormatter={tickFormatter}
           type="category"
           dataKey="label"
           interval={0}
-          label={{
-            value: yAxisLabel,
-            angle: -90,
-            position: 'inside',
-            offset: 5,
-            style: {
-              fontFamily: 'Inter',
-              fontWeight: '500',
-              color: '#444444',
-              fontSize: '13px',
-            },
-          }}
+          label={
+            !isTransparent && {
+              value: yAxisLabel,
+              angle: -90,
+              position: 'inside',
+              offset: 5,
+              style: {
+                fontFamily: 'Inter',
+                fontWeight: '500',
+                color: '#444444',
+                fontSize: '13px',
+              },
+            }
+          }
         />
         <Tooltip content={<CustomTooltip />} />
-        <Bar dataKey="value" fill="#8884d8" barSize={50} />
+        <Bar dataKey="value" fill="#8884d8" barSize={50}>
+          {chartData.map((_entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={palette[index % palette.length]}
+            />
+          ))}
+        </Bar>
       </BarChart>
       <CustomLegend data={chartData} colors={palette} />
     </Container>

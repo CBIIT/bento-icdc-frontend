@@ -73,6 +73,7 @@ export const StyledTabPanel = styled(TabPanel)({
 export const Container = styled.div({
   padding: '0 98px',
   flex: 1,
+  maxHeight: '413px',
 });
 
 export const Wrapper = styled.div({
@@ -106,10 +107,12 @@ export const RightContainerSection = styled.div({
 });
 export const LeftPanelSection = styled.div({
   borderRight: '1px solid black',
+  maxHeight: '413px',
   display: 'flex',
-  flexDirection: 'column',
-  padding: '40px',
   alignItems: 'center',
+  // padding: '40px',
+  flexDirection: 'column',
+  // alignItems: 'center',
   '& .left-panel-title': {
     marginBottom: '30px',
     color: '#CB8311',
@@ -122,20 +125,39 @@ export const LeftPanelSection = styled.div({
 });
 export const RightPanelSection = styled.div({
   display: 'flex',
+  position: 'relative',
   flexDirection: 'column',
+  '& .error-overlay': {
+    position: 'absolute',
+    width: '100%',
+    textAlign: 'center',
+    fontFamily: 'Roboto',
+    fontWeight: 500,
+    fontSize: '20px',
+    letterSpacing: '0.15px',
+    color: '#000',
+    zIndex: '999',
+    alignSelf: 'anchor-center',
+  },
 });
 export const IconAndTextWrapper = styled.div({
-  display: 'flex',
-  gap: '32px',
-  marginBottom: '32px',
+  display: 'grid',
+  gridTemplateColumns: '55px 1fr',
+  alignItems: 'center',
+  marginBottom: '60px',
+  width: '300px',
+  justifyContent: 'center',
   '& .icon': {
     height: '50px',
     width: '50px',
+    marginLeft: '20px',
+    alignSelf: 'start',
   },
   '& .title-wrapper': {
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',
+    marginLeft: '40px',
   },
   '& .title': {
     color: '#6A6A6A',
@@ -153,11 +175,10 @@ export const IconAndTextWrapper = styled.div({
   },
 });
 export const IconAndTextContainer = styled.div({
-  display: 'grid',
-  gridTemplateRows: '1fr 1fr 1fr',
-  padding: '0 120px',
-  justifyContent: 'center',
+  display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
-  height: '100%',
+  overflowY: 'auto',
   width: '100%',
+  marginBottom: '50px',
 });
