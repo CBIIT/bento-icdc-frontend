@@ -107,6 +107,7 @@ export const RightContainerSection = styled.div({
 });
 export const LeftPanelSection = styled.div({
   borderRight: '1px solid black',
+  paddingTop: '16px',
   maxHeight: '413px',
   display: 'flex',
   alignItems: 'center',
@@ -180,5 +181,5 @@ export const IconAndTextContainer = styled.div({
   alignItems: 'center',
   overflowY: 'auto',
   width: '100%',
-  marginBottom: '50px',
+  marginBottom: '35px',
 });
