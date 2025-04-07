@@ -46,8 +46,8 @@ export const LegendWrapper = styled.div({
   flexDirection: 'column',
   marginLeft: '32px',
   height: '202px',
+  justifyContent: 'center',
   '& .icon-and-text-wrapper': {
-    height: '100%',
     display: 'flex',
     gap: '16px',
     justifyContent: 'space-between',
@@ -138,7 +138,7 @@ export const Chart: React.FC<ChartProps> = ({
             style={{
               backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'transparent',
               fontWeight: hoveredGroup === entry.label ? 'bold' : 'normal',
-              height: '100%',
+              height: '36px',
               boxShadow:
                 hoveredGroup === entry.label
                   ? '0px 0px 10px rgba(0,0,0,0.5)'
@@ -148,8 +148,8 @@ export const Chart: React.FC<ChartProps> = ({
             <div className="icon-and-label">
               <div
                 style={{
-                  width: '42px',
-                  height: '100%',
+                  width: '20px',
+                  // height: '100%',
                   background: colors[index % colors.length],
                 }}
               />
