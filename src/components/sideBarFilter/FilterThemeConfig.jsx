@@ -224,7 +224,6 @@ const theme = {
           fontWeight: '400',
           fontSize: '14px',
           wordBreak: 'break-word',
-          width: '160px',
         },
         padding: '10px 2px 10px 0px !important',
         '&.filter_by_casesCheckedEven': {
