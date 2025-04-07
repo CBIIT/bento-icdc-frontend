@@ -25738,6 +25738,40 @@ export type GetStoreManifestDataQueryQuery = {
   } | null> | null;
 };
 
+export type GetCartOverviewDataQueryVariables = Exact<{
+  file_uuids?: InputMaybe<
+    Array<Scalars['String']['input']> | Scalars['String']['input']
+  >;
+}>;
+
+export type GetCartOverviewDataQuery = {
+  __typename?: 'QueryType';
+  cartOverview?: {
+    __typename?: 'CartOverviewData';
+    totalNumberOfFiles?: number | null;
+    studiesInCart?: Array<string | null> | null;
+    totalNumberOfCases?: number | null;
+    charts?: {
+      __typename?: 'CartChartData';
+      fileType?: Array<{
+        __typename?: 'CartChartItem';
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+      fileAssociation?: Array<{
+        __typename?: 'CartChartItem';
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+      fileFormat?: Array<{
+        __typename?: 'CartChartItem';
+        label?: string | null;
+        value?: number | null;
+      } | null> | null;
+    } | null;
+  } | null;
+};
+
 export type GetGlobalStatsDataQueryQueryVariables = Exact<{
   [key: string]: never;
 }>;
@@ -38253,6 +38287,134 @@ export const GetStoreManifestDataQueryDocument = {
 } as unknown as DocumentNode<
   GetStoreManifestDataQueryQuery,
   GetStoreManifestDataQueryQueryVariables
+>;
+export const GetCartOverviewDataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'getCartOverviewData' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'file_uuids' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'String' },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'cartOverview' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'file_uuids' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'file_uuids' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'totalNumberOfFiles' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'studiesInCart' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'totalNumberOfCases' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'charts' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fileType' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fileAssociation' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'fileFormat' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'label' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetCartOverviewDataQuery,
+  GetCartOverviewDataQueryVariables
 >;
 export const GetGlobalStatsDataQueryDocument = {
   kind: 'Document',
