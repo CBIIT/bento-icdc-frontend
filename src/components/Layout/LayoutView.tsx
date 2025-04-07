@@ -45,20 +45,16 @@ const LayoutView = () => {
   useEffect(() => {
     const adjustForSiteAlert = () => {
       const hostDiv = document.body.children[0];
-      if (!hostDiv || !hostDiv.shadowRoot) {
-        document.documentElement.style.setProperty(
-          '--site-alert-offset',
-          '0px'
-        );
-        return;
-      }
+      if (!hostDiv || !hostDiv.shadowRoot) return;
 
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       const siteAlert = hostDiv.shadowRoot.querySelector(
         '.usa-site-alert'
       ) as HTMLDivElement;
       if (siteAlert) {
-        // document.documentElement.style.setProperty('--site-alert-offset', `${siteAlert.offsetHeight}px`);
+        const rootDiv = document.body.children[2] as HTMLDivElement;
+        const contentDiv = document.body.children[2]
+          .children[0] as HTMLDivElement;
 
         // Adjust site alert styling to also be fixed
         siteAlert.style.position = 'fixed';
@@ -66,6 +62,8 @@ const LayoutView = () => {
         siteAlert.style.left = '0';
         siteAlert.style.width = '100%';
         siteAlert.style.zIndex = '9999';
+        rootDiv.style.marginTop = '295px';
+        contentDiv.style.marginTop = '117px';
       }
     };
 
