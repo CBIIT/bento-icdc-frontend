@@ -63,7 +63,9 @@ const LayoutView = () => {
         siteAlert.style.width = '100%';
         siteAlert.style.zIndex = '9999';
         rootDiv.style.marginTop = '295px';
-        contentDiv.style.marginTop = '117px';
+        if (contentDiv?.style) {
+          contentDiv.style.marginTop = '117px';
+        }
       }
     };
 
