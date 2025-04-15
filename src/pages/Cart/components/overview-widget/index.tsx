@@ -105,7 +105,9 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
     <Container>
       {!isPanelVisible && (
         <Wrapper onClick={handleTogglePanel}>
-          <LeftContainerSection error={!!error}></LeftContainerSection>
+          <LeftContainerSection error={!!error}>
+            Case Count Overview
+          </LeftContainerSection>
 
           <RightContainerSection>
             <div
