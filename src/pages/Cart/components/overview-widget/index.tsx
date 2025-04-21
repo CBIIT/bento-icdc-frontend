@@ -8,7 +8,7 @@ import Files from '../../assets/files.svg';
 import Studies from '../../assets/studies.svg';
 import Cases from '../../assets/cases.svg';
 import { defaultTo, startCase, toString, upperCase } from 'lodash';
-import { useQuery } from '@apollo/client';
+import { useQuery, ApolloError } from '@apollo/client';
 import { GetCartOverviewDataDocument } from '../../../../generated-types/graphql';
 import {
   Container,
@@ -24,7 +24,10 @@ import {
   StyledTabs,
 } from './overview-widget.styled';
 import { SkeletonLoader } from '../../../../components/Skeleton';
-import { CartChartData } from '../../../../generated-types/types';
+import {
+  CartChartData,
+  GetCartOverviewDataQuery,
+} from '../../../../generated-types/types';
 
 const emptyStateChartData = [
   {
@@ -55,12 +58,17 @@ type CartChartKeys = keyof Omit<
 >;
 
 export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
-  const { loading, error, data } = useQuery(GetCartOverviewDataDocument, {
-    variables: {
-      file_uuids: defaultTo(fileIds, []),
-    },
-    skip: !fileIds,
-  });
+  const {
+    loading,
+    error,
+    data,
+  }: { loading: boolean; error?: ApolloError; data: GetCartOverviewDataQuery } =
+    useQuery(GetCartOverviewDataDocument, {
+      variables: {
+        file_uuids: defaultTo(fileIds, []),
+      },
+      skip: !fileIds,
+    });
 
   const cartOverviewData = useMemo(
     () => defaultTo(data?.cartOverview, {}),
@@ -106,7 +114,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
       {!isPanelVisible && (
         <Wrapper onClick={handleTogglePanel}>
           <LeftContainerSection error={!!error}>
-            Case Count Overview
+            Cart Overview
           </LeftContainerSection>
 
           <RightContainerSection>
@@ -124,7 +132,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
       {isPanelVisible && (
         <Panel>
           <LeftPanelSection onClick={handleTogglePanel}>
-            <div className="left-panel-title">Case Count Overview</div>
+            <div className="left-panel-title">Cart Overview</div>
             <IconAndTextContainer
               style={{ opacity: isTransparent ? '0.5' : '1' }}
             >
