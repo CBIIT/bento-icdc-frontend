@@ -34,30 +34,6 @@ type CartChartKeys = keyof Omit<
   'schema_validation_placeholder' | '__typename'
 >;
 
-export const mockCartOverviewData: GetCartOverviewDataQuery = {
-  cartOverview: {
-    totalNumberOfFiles: 123,
-    totalNumberOfCases: 45,
-    studiesInCart: ['Study A', 'Study B', 'Study C'],
-    charts: {
-      fileType: [
-        { label: 'WGS', value: 50 },
-        { label: 'RNA-Seq', value: 30 },
-        { label: 'Other', value: 43 },
-      ],
-      fileAssociation: [
-        { label: 'Clinical', value: 60 },
-        { label: 'Genomic', value: 63 },
-      ],
-      fileFormat: [
-        { label: 'BAM', value: 40 },
-        { label: 'VCF', value: 50 },
-        { label: 'TXT', value: 33 },
-      ],
-    },
-  },
-};
-
 export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
   const {
     loading,
@@ -72,7 +48,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
     });
 
   const cartOverviewData = useMemo(
-    () => defaultTo(mockCartOverviewData?.cartOverview, {}),
+    () => defaultTo(data?.cartOverview, {}),
     [data]
   );
 
