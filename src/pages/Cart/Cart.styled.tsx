@@ -32,7 +32,7 @@ export const Container = styled(Grid)({
 
 export const TableContainer = styled(Grid)({
   padding: '0px 98px',
-  marginBottom: '42px',
+  margin: '42px 0',
   minWidth: '1279px',
 });
 
@@ -46,7 +46,7 @@ export const BodyWrapper = styled.div({
 
 export const ActionsContainer = styled.div({
   width: '100%',
-  minWidth: '1279px',
+  // minWidth: '1279px',
   textAlign: 'right',
   paddingRight: '80px',
   justifyContent: 'flex-end',

@@ -377,6 +377,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 style={{
                   minWidth: '1404px',
                 }}
+                innerDivStyle={{
+                  flex: '1',
+                }}
                 value={currentTab}
                 index={index}
               >
@@ -400,6 +403,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 style={{
                   minWidth: '1404px',
                 }}
+                innerDivStyle={{
+                  flex: '1',
+                }}
                 value={currentTab}
                 index={index}
               >
@@ -412,6 +418,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 style={{
                   minWidth: '1404px',
                 }}
+                innerDivStyle={{
+                  flex: '1',
+                }}
                 value={currentTab}
                 index={index}
               >
@@ -423,6 +432,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
               <TabPanel
                 style={{
                   minWidth: '1404px',
+                }}
+                innerDivStyle={{
+                  flex: '1',
                 }}
                 value={currentTab}
                 index={index}
@@ -438,6 +450,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
               <TabPanel
                 style={{
                   minWidth: '1404px',
+                }}
+                innerDivStyle={{
+                  flex: '1',
                 }}
                 value={currentTab}
                 index={index}

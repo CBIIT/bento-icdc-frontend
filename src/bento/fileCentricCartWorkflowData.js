@@ -543,11 +543,11 @@ export const GET_CART_OVERVIEW_DATA = gql`
           label
           value
         }
-        fileAssociation {
+        fileFormat {
           label
           value
         }
-        fileFormat {
+        fileAssociation {
           label
           value
         }

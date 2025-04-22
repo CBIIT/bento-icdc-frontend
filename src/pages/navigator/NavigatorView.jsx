@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 import { withStyles } from '@material-ui/styles';
 import { ReduxDataDictionary, getModelExploreData } from 'data-model-navigator';
@@ -12,6 +12,7 @@ import {
 } from '../../bento/dataDictionaryData';
 import env from '../../utils/env';
 import { Typography } from '../../components/Wrappers/Wrappers';
+import { SkeletonLoader } from '../../components/Skeleton';
 
 const DATA_MODEL = env.REACT_APP_DATA_MODEL;
 const DATA_MODEL_PROPS = env.REACT_APP_DATA_MODEL_PROPS;
@@ -50,6 +51,8 @@ async function getData() {
 // added for demo - will be replaced with ReadMe file url for DMN
 
 const NavigatorView = ({ classes }) => {
+  const [loading, setLoading] = useState(true);
+
   if (!DATA_MODEL || !DATA_MODEL_PROPS || !DATA_MODEL_README) {
     return (
       <Typography variant="h4" color="error" size="sm">
@@ -61,7 +64,11 @@ const NavigatorView = ({ classes }) => {
       </Typography>
     );
   }
-  getData();
+  getData().then(() => setLoading(false));
+
+  if (loading) {
+    return <SkeletonLoader variant="withSidebar" />;
+  }
   return (
     <div className={classes.container}>
       <ReduxDataDictionary pdfDownloadConfig={pdfDownloadConfig} />
