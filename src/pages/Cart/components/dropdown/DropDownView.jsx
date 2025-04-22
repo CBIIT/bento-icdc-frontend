@@ -403,6 +403,9 @@ const DropDownView = ({ filesId = [], allFiles }) => {
           placement="bottom-start"
           transition
           disablePortal
+          sx={{
+            zIndex: '1000',
+          }}
         >
           {({ TransitionProps, placement }) => (
             <Styled.MuiStyledGrow placement={placement} {...TransitionProps}>
