@@ -63,9 +63,11 @@ const HeaderView = ({ filesId }) => {
         </ReadMeBtnDiv>
       </CartHeader>
 
-      <OverviewWidgetWrapper>
-        <OverviewWidget fileIds={filesId} />
-      </OverviewWidgetWrapper>
+      {!!defaultTo(filesId, []).length && (
+        <OverviewWidgetWrapper>
+          <OverviewWidget fileIds={filesId} />
+        </OverviewWidgetWrapper>
+      )}
 
       <ReadMeDialogComponent
         content={content}

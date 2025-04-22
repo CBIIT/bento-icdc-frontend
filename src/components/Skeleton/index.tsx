@@ -18,7 +18,9 @@ const CartOverviewWidgetContainer = styled.div({
   flex: 1,
   '& .wrapper': {
     width: '100%',
-    height: '60px',
+    height: '413px',
+    borderRadius: '12px',
+    border: '1px solid #D5D5D5',
   },
 });
 
