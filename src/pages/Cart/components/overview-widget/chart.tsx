@@ -105,14 +105,9 @@ export const palette = [
 interface ChartProps {
   chartData: CartChartItem[];
   yAxisLabel: string;
-  isTransparent: boolean;
 }
 
-export const Chart: React.FC<ChartProps> = ({
-  chartData,
-  yAxisLabel,
-  isTransparent,
-}) => {
+export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
 
   const tickFormatter = (_value: string) => {
@@ -156,9 +151,7 @@ export const Chart: React.FC<ChartProps> = ({
               <div className="label-text">{entry.label}</div>
             </div>
             <div>
-              <div className="value-text">
-                {!isTransparent ? entry.value : '                     '}
-              </div>
+              <div className="value-text">{entry.value}</div>
             </div>
           </div>
         ))}
@@ -190,7 +183,7 @@ export const Chart: React.FC<ChartProps> = ({
   };
 
   return (
-    <Container style={{ opacity: isTransparent ? '0.5' : '1' }}>
+    <Container>
       <BarChart
         layout="vertical" // Make the bars horizontal
         data={chartData}
@@ -206,40 +199,36 @@ export const Chart: React.FC<ChartProps> = ({
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           type="number"
-          tick={isTransparent ? () => null : true}
-          label={
-            !isTransparent && {
-              value: 'File Count',
-              offset: -2,
-              position: 'insideBottom',
-              style: {
-                fontFamily: 'Inter',
-                fontWeight: '500',
-                fontSize: '13px',
-                color: '#444444',
-              },
-            }
-          }
+          tick={true}
+          label={{
+            value: 'File Count',
+            offset: -2,
+            position: 'insideBottom',
+            style: {
+              fontFamily: 'Inter',
+              fontWeight: '500',
+              fontSize: '13px',
+              color: '#444444',
+            },
+          }}
         />
         <YAxis
           tickFormatter={tickFormatter}
           type="category"
           dataKey="label"
           interval={0}
-          label={
-            !isTransparent && {
-              value: yAxisLabel,
-              angle: -90,
-              position: 'inside',
-              offset: 5,
-              style: {
-                fontFamily: 'Inter',
-                fontWeight: '500',
-                color: '#444444',
-                fontSize: '13px',
-              },
-            }
-          }
+          label={{
+            value: yAxisLabel,
+            angle: -90,
+            position: 'inside',
+            offset: 5,
+            style: {
+              fontFamily: 'Inter',
+              fontWeight: '500',
+              color: '#444444',
+              fontSize: '13px',
+            },
+          }}
         />
         <Tooltip content={<CustomTooltip />} />
         <Bar dataKey="value" fill="#8884d8" barSize={50}>

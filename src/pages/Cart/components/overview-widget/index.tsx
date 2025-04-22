@@ -29,33 +29,34 @@ import {
   GetCartOverviewDataQuery,
 } from '../../../../generated-types/types';
 
-const emptyStateChartData = [
-  {
-    label: '',
-    value: 1,
-  },
-  {
-    label: '',
-    value: 1,
-  },
-  {
-    label: '',
-    value: 1,
-  },
-  {
-    label: '',
-    value: 1,
-  },
-  {
-    label: '',
-    value: 1,
-  },
-];
-
 type CartChartKeys = keyof Omit<
   CartChartData,
   'schema_validation_placeholder' | '__typename'
 >;
+
+export const mockCartOverviewData: GetCartOverviewDataQuery = {
+  cartOverview: {
+    totalNumberOfFiles: 123,
+    totalNumberOfCases: 45,
+    studiesInCart: ['Study A', 'Study B', 'Study C'],
+    charts: {
+      fileType: [
+        { label: 'WGS', value: 50 },
+        { label: 'RNA-Seq', value: 30 },
+        { label: 'Other', value: 43 },
+      ],
+      fileAssociation: [
+        { label: 'Clinical', value: 60 },
+        { label: 'Genomic', value: 63 },
+      ],
+      fileFormat: [
+        { label: 'BAM', value: 40 },
+        { label: 'VCF', value: 50 },
+        { label: 'TXT', value: 33 },
+      ],
+    },
+  },
+};
 
 export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
   const {
@@ -71,17 +72,12 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
     });
 
   const cartOverviewData = useMemo(
-    () => defaultTo(data?.cartOverview, {}),
+    () => defaultTo(mockCartOverviewData?.cartOverview, {}),
     [data]
   );
 
   const { totalNumberOfFiles, totalNumberOfCases, studiesInCart, charts } =
     cartOverviewData;
-
-  const isTransparent = useMemo(
-    () => !!error || totalNumberOfFiles === 0,
-    [error, totalNumberOfFiles]
-  );
 
   const chartKeys = useMemo(
     () =>
@@ -106,7 +102,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
   };
 
   if (loading) {
-    return <SkeletonLoader />;
+    return <SkeletonLoader variant="cartOverviewWidget" />;
   }
 
   return (
@@ -131,17 +127,15 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
       )}
       {isPanelVisible && (
         <Panel>
-          <LeftPanelSection onClick={handleTogglePanel}>
+          <LeftPanelSection>
             <div className="left-panel-title">Cart Overview</div>
-            <IconAndTextContainer
-              style={{ opacity: isTransparent ? '0.5' : '1' }}
-            >
+            <IconAndTextContainer>
               <IconAndTextWrapper>
                 <img className="icon" src={Files} />
                 <div className="title-wrapper">
                   <div className="title">Total Number of Files</div>
                   <div className="subtitle">
-                    {isTransparent ? 'NA' : `${totalNumberOfFiles} Files`}{' '}
+                    {`${totalNumberOfFiles} Files`}
                   </div>
                 </div>
               </IconAndTextWrapper>
@@ -150,9 +144,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                 <img className="icon" src={Studies} />
                 <div className="title-wrapper">
                   <div className="title">Studies in this Cart</div>
-                  <div className="subtitle">
-                    {isTransparent ? 'NA' : studiesInCart.join(', ')}{' '}
-                  </div>
+                  <div className="subtitle">{studiesInCart.join(', ')}</div>
                 </div>
               </IconAndTextWrapper>
 
@@ -161,7 +153,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                 <div className="title-wrapper">
                   <div className="title">Total Number of Cases</div>
                   <div className="subtitle">
-                    {isTransparent ? 'NA' : `${totalNumberOfCases} Cases`}{' '}
+                    {`${totalNumberOfCases} Cases`}
                   </div>
                 </div>
               </IconAndTextWrapper>
@@ -169,14 +161,6 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
           </LeftPanelSection>
 
           <RightPanelSection>
-            {isTransparent && (
-              <div className="error-overlay">
-                {error
-                  ? 'Overview Data failed to be displayed'
-                  : totalNumberOfFiles === 0 &&
-                    'Add files to the cart to see available metrics'}
-              </div>
-            )}
             <div
               style={{
                 alignSelf: 'end',
@@ -192,7 +176,6 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                   borderBottom: 1,
                   borderColor: 'divider',
                   margin: '0px 16px',
-                  opacity: isTransparent ? '0.5' : '1',
                 }}
               >
                 <StyledTabs
@@ -206,11 +189,8 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                 </StyledTabs>
               </Box>
               <Chart
-                chartData={
-                  isTransparent ? emptyStateChartData : charts[chartKeys[value]]
-                }
+                chartData={charts[chartKeys[value]]}
                 yAxisLabel={startCase(chartKeys[value])}
-                isTransparent={isTransparent}
               />
             </TabContext>
           </RightPanelSection>

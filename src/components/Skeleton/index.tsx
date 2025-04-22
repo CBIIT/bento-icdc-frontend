@@ -9,6 +9,19 @@ const FullHeightFlex = styled.div`
   gap: 8px;
 `;
 
+const CartOverviewWidgetContainer = styled.div({
+  minWidth: '1279px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '0 90px',
+  flex: 1,
+  '& .wrapper': {
+    width: '100%',
+    height: '60px',
+  },
+});
+
 const SidebarContainer = styled.div`
   width: 200px;
 `;
@@ -45,7 +58,7 @@ const FullFlex = styled.div`
 export const SkeletonLoader = ({
   variant,
 }: {
-  variant?: 'withRounded' | 'withSidebar';
+  variant?: 'withRounded' | 'withSidebar' | 'cartOverviewWidget';
 }) => {
   switch (variant) {
     case 'withSidebar':
@@ -79,6 +92,20 @@ export const SkeletonLoader = ({
             </ContentBlock>
           </MainContent>
         </FullHeightFlex>
+      );
+
+    case 'cartOverviewWidget':
+      return (
+        <CartOverviewWidgetContainer>
+          <div className="wrapper">
+            <Skeleton
+              animation="wave"
+              variant="rounded"
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </CartOverviewWidgetContainer>
       );
 
     case 'withRounded':
