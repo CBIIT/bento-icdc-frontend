@@ -71,7 +71,7 @@ const DashTemplateController = props => {
   const { dashData, activeFilters } = getDashData(props);
 
   if (!dashData) {
-    return <SkeletonLoader />;
+    return <SkeletonLoader variant="withSidebar" />;
   }
 
   // set dashfilter tooltip text
