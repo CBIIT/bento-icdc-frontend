@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Grid } from '@mui/material';
+import humanRelevanceImage from '../../../../../public/images/human-relevance-card-bg-img.png';
 
 export const Container = styled.div({
   fontFamily: 'Raleway, sans-serif',
@@ -143,5 +144,39 @@ export const AdditionalDataLink = styled.button({
   '& .number': {
     color: '#B85300',
     textDecoration: 'underline',
+  },
+});
+
+export const HumanRelevanceCard = styled.div({
+  maxWidth: '674px',
+  height: '349px',
+  border: '3px solid #B85300',
+  borderRadius: '15px',
+  backgroundImage: `url(${humanRelevanceImage})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  marginBottom: '30px',
+  padding: '32px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+
+  '& .text': {
+    fontFamily: 'Open Sans',
+    color: '#FFFFFF',
+  },
+  '& .header': {
+    fontWeight: 700,
+    fontSize: '19px',
+    letterSpacing: '0.29px',
+    textTransform: 'uppercase',
+    lineHeight: '25px',
+  },
+  '& .content': {
+    fontWeight: 400,
+    fontSize: '18px',
+    letterSpacing: '0.2px',
+    lineHeight: '30px',
   },
 });

@@ -2,8 +2,9 @@ import React from 'react';
 import { customSorting, studyDisposition } from '../../utils';
 import SampleProfile from '../SampleProfile';
 import OverviewThemeProvider from './overviewThemeConfig';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { Study, StudyQuery } from '../../../../generated-types/types';
+import LaunchIcon from '@mui/icons-material/Launch';
 import {
   Container,
   DetailContainer,
@@ -26,6 +27,7 @@ import {
   MarginTopTenGrid,
   TitleCDGrid,
   AdditionalDataLink,
+  HumanRelevanceCard,
 } from './overview.styled';
 
 interface OverviewProps {
@@ -58,6 +60,29 @@ const Overview: React.FC<OverviewProps> = ({
           <Grid container>
             <BorderRightGrid item lg={6} md={6} sm={6} xs={12}>
               <DetailContainerLeftGrid container spacing={1} direction="row">
+                <HumanRelevanceCard>
+                  <div className="text header">
+                    Relevance of this work to human Cancer
+                  </div>
+
+                  <div className="text content">
+                    {`This study in dogs with bone cancer provides new information on treatment approaches for humans.
+                     Bone cancer in humans is rare and affects mostly children and young adults. 
+                     Dogs provide a way to study this disease and provide new insight into how it can be treated more effectively in humans.`}
+                  </div>
+
+                  <Button
+                    sx={{
+                      borderColor: '#FFFFFF',
+                      color: '#FFFFFF',
+                      maxWidth: '180px',
+                    }}
+                    variant="outlined"
+                    endIcon={<LaunchIcon sx={{ color: '#ffffff' }} />}
+                  >
+                    Resource Link
+                  </Button>
+                </HumanRelevanceCard>
                 <ContainerHeaderGrid item xs={12}>
                   <DetailContainerHeaderText>
                     Description
