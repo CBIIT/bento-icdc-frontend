@@ -101,6 +101,7 @@ const LayoutView = () => {
           body {
             height: 100%;
             margin: 0;
+            display: flex;
           }
           body {
           }

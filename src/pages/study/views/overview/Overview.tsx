@@ -71,13 +71,13 @@ const Overview: React.FC<OverviewProps> = ({
                   </div>
 
                   <div className="text content">
-                    {humanRelevanceCardData.human_relevance_statement ?? ''}
+                    {humanRelevanceCardData?.human_relevance_statement ?? ''}
                   </div>
 
                   <Button
                     target="_blank"
                     href={
-                      humanRelevanceCardData.nci_link_to_relevant_human_cancer ??
+                      humanRelevanceCardData?.nci_link_to_relevant_human_cancer ??
                       ''
                     }
                     sx={{

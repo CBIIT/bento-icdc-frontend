@@ -6,7 +6,7 @@ export const Container = styled.div({
   fontFamily: 'Raleway, sans-serif',
   paddingLeft: '33px',
   paddingRight: '33px',
-  paddingBottom: '25px',
+  paddingBottom: '80px',
 });
 
 export const DetailContainer = styled.div({
@@ -28,7 +28,6 @@ export const DetailContainerLeftGrid = styled(Grid)({
   display: 'block',
   padding: '28px 20px 5px 10px',
   minHeight: '500px',
-  maxHeight: '500px',
   overflowY: 'auto',
   overflowX: 'hidden',
   width: 'calc(100% + 8px) !important',
@@ -149,7 +148,8 @@ export const AdditionalDataLink = styled.button({
 
 export const HumanRelevanceCard = styled.div({
   maxWidth: '674px',
-  height: '349px',
+  width: '100%',
+  minHeight: '349px',
   border: '3px solid #B85300',
   borderRadius: '15px',
   backgroundImage: `url(${humanRelevanceImage})`,
@@ -178,5 +178,6 @@ export const HumanRelevanceCard = styled.div({
     fontSize: '18px',
     letterSpacing: '0.2px',
     lineHeight: '30px',
+    margin: '20px 0',
   },
 });
