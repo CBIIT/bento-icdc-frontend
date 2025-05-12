@@ -40,6 +40,10 @@ interface OverviewProps {
   setCurrentTab: React.Dispatch<React.SetStateAction<number>>;
   supportingDataTabIndex: number;
   clinicalDataTabIndex: number;
+  humanRelevanceCardData: {
+    human_relevance_statement: string;
+    nci_link_to_relevant_human_cancer: string;
+  };
 }
 
 const Overview: React.FC<OverviewProps> = ({
@@ -52,6 +56,7 @@ const Overview: React.FC<OverviewProps> = ({
   clinicalDataTabIndex,
   supportingDataTabIndex,
   setCurrentTab,
+  humanRelevanceCardData,
 }) => {
   return (
     <OverviewThemeProvider>
@@ -66,12 +71,15 @@ const Overview: React.FC<OverviewProps> = ({
                   </div>
 
                   <div className="text content">
-                    {`This study in dogs with bone cancer provides new information on treatment approaches for humans.
-                     Bone cancer in humans is rare and affects mostly children and young adults. 
-                     Dogs provide a way to study this disease and provide new insight into how it can be treated more effectively in humans.`}
+                    {humanRelevanceCardData.human_relevance_statement ?? ''}
                   </div>
 
                   <Button
+                    target="_blank"
+                    href={
+                      humanRelevanceCardData.nci_link_to_relevant_human_cancer ??
+                      ''
+                    }
                     sx={{
                       borderColor: '#FFFFFF',
                       color: '#FFFFFF',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
@@ -12,6 +12,7 @@ import {
   embargoHeaderIcon,
   embargoFileIcon,
   tab,
+  GET_HUMAN_RELEVANCE_DATA_BY_NODE,
 } from '../../bento/studyDetailsData';
 import Tab from '../../components/Tab/Tab';
 import Overview from './views/overview/Overview';
@@ -108,6 +109,26 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
         GetStudiesByProgramStudyDetailsDocument
       ),
   });
+
+  const study_codes = data.study[0].clinical_study_designation;
+  const { data: humanRelevanceData } = useQuery<{
+    humanRelevanceNodeData: {
+      human_relevance_statement: string;
+      nci_link_to_relevant_human_cancer: string;
+    }[];
+  }>({
+    queryKey: ['humanRelevance'],
+    queryFn: async () =>
+      request(
+        (env as Record<string, string>).REACT_APP_BACKEND_API,
+        GET_HUMAN_RELEVANCE_DATA_BY_NODE,
+        { study_codes }
+      ),
+  });
+  const humanRelevanceCardData = useMemo(
+    () => humanRelevanceData?.humanRelevanceNodeData[0],
+    [humanRelevanceData]
+  );
 
   const studyData = data.study[0];
   const { clinical_study_designation: studyCode } = studyData;
@@ -393,6 +414,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   setCurrentTab={setCurrentTab}
                   supportingDataTabIndex={supportingDataTabIndex}
                   clinicalDataTabIndex={clinicalDataTabIndex}
+                  humanRelevanceCardData={humanRelevanceCardData}
                 />
               </TabPanel>
             );

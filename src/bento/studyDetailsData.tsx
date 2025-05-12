@@ -274,6 +274,16 @@ export const GET_ALL_FILEIDS_ON_FILESTAB_FOR_SELECT_ALL = gql`
   }
 `;
 
+export const GET_HUMAN_RELEVANCE_DATA_BY_NODE = gql`
+  query getHumanRelevanceDataByNode($study_codes: [String]) {
+    humanRelevanceNodeData(study_codes: $study_codes) {
+      human_relevance_record_id
+      human_relevance_statement
+      nci_link_to_relevant_human_cancer
+    }
+  }
+`;
+
 // ---------------- File table configuration -----------
 export const fileTable = {
   // Set 'display' to false to hide the table entirely
