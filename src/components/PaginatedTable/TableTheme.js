@@ -154,11 +154,9 @@ const tblBody = {
       },
     },
   },
-  MuiCheckbox: {
-    colorSecondary: {
-      '&.Mui-checked': {
-        color: '#0B3556',
-      },
+  MuiSvgIcon: {
+    root: {
+      color: '#0B3556',
     },
   },
 };
