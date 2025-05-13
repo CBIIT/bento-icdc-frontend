@@ -65,32 +65,34 @@ const Overview: React.FC<OverviewProps> = ({
           <Grid container>
             <BorderRightGrid item lg={6} md={6} sm={6} xs={12}>
               <DetailContainerLeftGrid container spacing={1} direction="row">
-                <HumanRelevanceCard>
-                  <div className="text header">
-                    Relevance of this work to human Cancer
-                  </div>
+                {humanRelevanceCardData && (
+                  <HumanRelevanceCard>
+                    <div className="text header">
+                      Relevance of this work to human Cancer
+                    </div>
 
-                  <div className="text content">
-                    {humanRelevanceCardData?.human_relevance_statement ?? ''}
-                  </div>
+                    <div className="text content">
+                      {humanRelevanceCardData?.human_relevance_statement ?? ''}
+                    </div>
 
-                  <Button
-                    target="_blank"
-                    href={
-                      humanRelevanceCardData?.nci_link_to_relevant_human_cancer ??
-                      ''
-                    }
-                    sx={{
-                      borderColor: '#FFFFFF',
-                      color: '#FFFFFF',
-                      maxWidth: '180px',
-                    }}
-                    variant="outlined"
-                    endIcon={<LaunchIcon sx={{ color: '#ffffff' }} />}
-                  >
-                    Resource Link
-                  </Button>
-                </HumanRelevanceCard>
+                    <Button
+                      target="_blank"
+                      href={
+                        humanRelevanceCardData?.nci_link_to_relevant_human_cancer ??
+                        ''
+                      }
+                      sx={{
+                        borderColor: '#FFFFFF',
+                        color: '#FFFFFF',
+                        maxWidth: '180px',
+                      }}
+                      variant="outlined"
+                      endIcon={<LaunchIcon sx={{ color: '#ffffff' }} />}
+                    >
+                      Resource Link
+                    </Button>
+                  </HumanRelevanceCard>
+                )}{' '}
                 <ContainerHeaderGrid item xs={12}>
                   <DetailContainerHeaderText>
                     Description
