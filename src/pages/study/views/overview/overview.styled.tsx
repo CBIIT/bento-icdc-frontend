@@ -28,7 +28,6 @@ export const DetailContainerLeftGrid = styled(Grid)({
   display: 'block',
   padding: '28px 20px 5px 10px',
   minHeight: '500px',
-  maxHeight: '500px',
   overflowY: 'auto',
   overflowX: 'hidden',
   width: 'calc(100% + 8px) !important',
