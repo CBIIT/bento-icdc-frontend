@@ -2,8 +2,9 @@ import React from 'react';
 import { customSorting, studyDisposition } from '../../utils';
 import SampleProfile from '../SampleProfile';
 import OverviewThemeProvider from './overviewThemeConfig';
-import { Grid } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import { Study, StudyQuery } from '../../../../generated-types/types';
+import LaunchIcon from '@mui/icons-material/Launch';
 import {
   Container,
   DetailContainer,
@@ -26,6 +27,7 @@ import {
   MarginTopTenGrid,
   TitleCDGrid,
   AdditionalDataLink,
+  HumanRelevanceCard,
 } from './overview.styled';
 
 interface OverviewProps {
@@ -38,6 +40,10 @@ interface OverviewProps {
   setCurrentTab: React.Dispatch<React.SetStateAction<number>>;
   supportingDataTabIndex: number;
   clinicalDataTabIndex: number;
+  humanRelevanceCardData: {
+    human_relevance_statement: string;
+    nci_link_to_relevant_human_cancer: string;
+  };
 }
 
 const Overview: React.FC<OverviewProps> = ({
@@ -50,6 +56,7 @@ const Overview: React.FC<OverviewProps> = ({
   clinicalDataTabIndex,
   supportingDataTabIndex,
   setCurrentTab,
+  humanRelevanceCardData,
 }) => {
   return (
     <OverviewThemeProvider>
@@ -58,6 +65,34 @@ const Overview: React.FC<OverviewProps> = ({
           <Grid container>
             <BorderRightGrid item lg={6} md={6} sm={6} xs={12}>
               <DetailContainerLeftGrid container spacing={1} direction="row">
+                {humanRelevanceCardData && (
+                  <HumanRelevanceCard>
+                    <div className="text header">
+                      Relevance of this work to human Cancer
+                    </div>
+
+                    <div className="text content">
+                      {humanRelevanceCardData?.human_relevance_statement ?? ''}
+                    </div>
+
+                    <Button
+                      target="_blank"
+                      href={
+                        humanRelevanceCardData?.nci_link_to_relevant_human_cancer ??
+                        ''
+                      }
+                      sx={{
+                        borderColor: '#FFFFFF',
+                        color: '#FFFFFF',
+                        maxWidth: '180px',
+                      }}
+                      variant="outlined"
+                      endIcon={<LaunchIcon sx={{ color: '#ffffff' }} />}
+                    >
+                      Resource Link
+                    </Button>
+                  </HumanRelevanceCard>
+                )}
                 <ContainerHeaderGrid item xs={12}>
                   <DetailContainerHeaderText>
                     Description
