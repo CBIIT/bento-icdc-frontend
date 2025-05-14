@@ -101,11 +101,12 @@ const LayoutView = () => {
           body {
             height: 100%;
             margin: 0;
-          }
-          body {
+            display: flex;
+            width: 100%;
           }
           #root {
             height: 100%;
+            flex: 1;
           }
           *::-webkit-scrollbar {
             width: none;
