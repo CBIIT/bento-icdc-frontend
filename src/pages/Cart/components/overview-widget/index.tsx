@@ -9,7 +9,6 @@ import Studies from '../../assets/studies.svg';
 import Cases from '../../assets/cases.svg';
 import { defaultTo, startCase, toString, upperCase } from 'lodash';
 import { useQuery, ApolloError } from '@apollo/client';
-import { GetCartOverviewDataDocument } from '../../../../generated-types/graphql';
 import {
   Container,
   Wrapper,
@@ -28,6 +27,7 @@ import {
   CartChartData,
   GetCartOverviewDataQuery,
 } from '../../../../generated-types/types';
+import { GET_CART_OVERVIEW_DATA } from '../../../../bento/fileCentricCartWorkflowData';
 
 type CartChartKeys = keyof Omit<
   CartChartData,
@@ -40,7 +40,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
     error,
     data,
   }: { loading: boolean; error?: ApolloError; data: GetCartOverviewDataQuery } =
-    useQuery(GetCartOverviewDataDocument, {
+    useQuery(GET_CART_OVERVIEW_DATA, {
       variables: {
         file_uuids: defaultTo(fileIds, []),
       },
