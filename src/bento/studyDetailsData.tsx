@@ -31,6 +31,26 @@ const sampleProfileTabTextStyle = {
   fontSize: '14px',
   color: '#000000',
 };
+
+export const sampleProfileChartData = {
+  tabs: ['site', 'type', 'pathology'],
+  site: {
+    value: 'studySampleSiteCount',
+    xAxisLabel: 'Sample site',
+    yAxisLabel: 'Sample count',
+  },
+  type: {
+    value: 'studySampleTypeCount',
+    xAxisLabel: 'Sample type',
+    yAxisLabel: 'Sample count',
+  },
+  pathology: {
+    value: 'studySamplePathologyCount',
+    xAxisLabel: 'Sample pathology',
+    yAxisLabel: 'Sample count',
+  },
+};
+
 export const sampleProfile = {
   tabs: [
     {
@@ -308,6 +328,7 @@ export const fileTable = {
       downloadFileName: 'ICDC_Study_Files_download',
       downloadCsv: 'Download Table Contents As CSV',
     },
+    pagination: true,
     manageViewColumns: {
       title: 'View Columns',
     },
@@ -433,6 +454,7 @@ export const table1 = {
   // Set 'selectableRows' to true to show the row selection
   groupBy: 'arm',
   extendedViewConfig: {
+    pagination: true,
     download: {
       customDownload: false,
       downloadFileName: 'ICDC_ARMS_AND_COHORTS_download',

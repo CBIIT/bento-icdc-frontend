@@ -30,6 +30,8 @@ export const Header = styled.div({
       justifyContent: 'space-between',
       flex: 1,
       marginRight: '18px',
+      position: 'relative',
+      top: '10px',
     },
   },
 });
@@ -42,6 +44,8 @@ export const Breadcrumb = styled.div({
 export const Logo = styled.div({
   width: '94px',
   margin: '0 18px',
+  position: 'relative',
+  top: '10px',
 });
 
 export const HeaderTitle = styled.div({
@@ -60,6 +64,15 @@ export const HeaderMainTitle = styled.div({
   marginBottom: '8px',
   display: 'flex',
   alignItems: 'center',
+  gap: '70px',
+  '& .clinical-study-designation': {
+    fontFamily: 'Open Sans',
+    fontWeight: 700,
+    fontSize: '19px',
+    lineHeight: '17px',
+    letterSpacing: '0.32px',
+    color: '#025F7E',
+  },
 
   '& .title-wrapper': {
     display: 'flex',
@@ -69,6 +82,10 @@ export const HeaderMainTitle = styled.div({
 
 export const HeaderPropertyName = styled.div({
   fontWeight: '600',
+  fontFamily: 'Raleway',
+  fontSize: '19px',
+  lineHeight: '17px',
+  letterSpacing: '0.32px',
   color: '#025F7E',
   marginRight: '4px',
 });
@@ -85,54 +102,54 @@ export const HeaderAccessionItem = styled.div({
   fontSize: '15px',
   display: 'flex',
   alignItems: 'center',
-  height: 'fit-content',
-  padding: '4px',
+  padding: '4px 8px',
+  gap: '8px',
 });
 
 export const AccessionLabel = styled.div({
-  fontSize: '14px',
+  fontFamily: 'Open Sans',
+  fontSize: '10px',
   fontWeight: '600',
   color: '#385966',
+  lineHeight: '17px',
+  letterSpacing: '0.32px',
+  textTransform: 'uppercase',
 });
 
 export const AccessionValue = styled.div({
-  fontSize: '13px',
-  fontWeight: '800',
+  fontSize: '10px',
+  fontFamily: 'Open Sans',
+  fontWeight: '700',
+  lineHeight: '17px',
+  letterSpacing: '0.32px',
+  color: '#027AA2',
 });
 
 export const NameWrapper = styled.div<{ isLong: boolean }>(({ isLong }) => {
   const base: CSSProperties = {
     paddingTop: '8px',
+    fontFamily: 'Inter',
+    fontWeight: 400,
+    fontSize: '16px',
+    lineHeight: '20.02px',
+    letterSpacing: '0',
+    color: '#606061',
+    textOverflow: 'ellipsis',
   };
 
   if (isLong) {
     return {
       ...base,
-      color: '#606061',
-      fontWeight: '400',
-      fontFamily: 'Sans-Serif',
-      textTransform: 'uppercase',
-      fontSize: '14px',
       paddingLeft: '3px',
-      lineHeight: '17px',
-      textOverflow: 'ellipsis',
       paddingRight: '200px',
-      letterSpacing: '0.01em',
       marginBottom: '-9px',
     };
   }
 
   return {
     ...base,
-    color: '#606061',
-    fontWeight: '400',
-    fontFamily: 'Sans-Serif',
-    textTransform: 'uppercase',
-    letterSpacing: '0.025em',
-    fontSize: '14px',
     maxHeight: '45px',
     paddingLeft: '3px',
-    textOverflow: 'ellipsis',
     paddingRight: '200px',
   };
 });
@@ -186,44 +203,41 @@ export const HeaderButton = styled.div({
   border: '3px solid #81a6b9',
   width: '220px',
   height: '33px',
-  textAlign: 'center',
   background: '#f6f4f4',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
-export const HeaderButtonLinkSpan = styled.span({
-  fontFamily: 'Open Sans',
-  width: '200px',
-  fontSize: '13px',
-  display: 'inherit',
-  height: '15px',
-});
+export const HeaderButtonLinkSpan = styled.span({});
 
 export const HeaderButtonLink = styled(Link)({
   textDecoration: 'none',
-  lineHeight: '14px',
-  fontWeight: 'bold',
-  position: 'relative',
-  top: '2px',
+  // lineHeight: '14px',
+  // fontWeight: 'bold',
+  // position: 'relative',
+  // top: '2px',
+  display: 'flex',
+  gap: '8px',
   '&:hover': {
     textDecoration: 'none',
   },
 });
 
 export const HeaderButtonLinkNumber = styled.div({
-  fontFamily: 'sans-serif',
+  fontFamily: 'Roboto',
   fontSize: '13px',
-  paddingBottom: '3px',
-  display: 'inherit',
-  fontWeight: '900',
+  fontWeight: 700,
+  lineHeight: '14px',
+  letterSpacing: '0.15px',
   color: '#B85300',
 });
 
 export const HeaderButtonLinkText = styled.span({
-  fontFamily: 'Open Sans',
+  fontFamily: 'Roboto',
   color: '#0B3556',
   fontSize: '13px',
-  fontStyle: 'normal',
-  fontWeight: '400',
+  fontWeight: 400,
   lineHeight: '14px',
   letterSpacing: '0.15px',
 });

@@ -1,19 +1,19 @@
-import React from "react";
-import _ from "lodash";
-import { Grid, withStyles } from "@material-ui/core";
-import FileTableView from "./FileView/FileTableView";
-import { TableContextProvider } from "../../../bento-core";
-import themes from "../../../themes";
-import { studyDisposition } from "../utils";
-import { fileTable } from "../../../bento/studyDetailsData";
+import React from 'react';
+import _ from 'lodash';
+import { Grid, withStyles } from '@material-ui/core';
+import FileTableView from './FileView/FileTableView';
+import { TableContextProvider } from '../../../bento-core';
+import themes from '../../../themes';
+import { studyDisposition } from '../utils';
+import { fileTable } from '../../../bento/studyDetailsData';
 
 const StudyFiles = ({ data, studyData, classes }) => {
   const fileTableData =
-    data.studyFiles === null || data.studyFiles === ""
+    data.studyFiles === null || data.studyFiles === ''
       ? []
-      : data.studyFiles.map((file) => {
+      : data.studyFiles.map(file => {
           const cFile = { ...file };
-          cFile.parent = "study";
+          cFile.parent = 'study';
           cFile.studyDesignation = studyData.clinical_study_designation;
           return cFile;
         });
@@ -21,11 +21,11 @@ const StudyFiles = ({ data, studyData, classes }) => {
   themesLight.overrides.MuiTableCell = {
     ...themesLight.overrides.MuiTableCell,
     root: {
-      "&:first-child": {
-        paddingLeft: "30px",
+      '&:first-child': {
+        paddingLeft: '30px',
       },
-      "&:lastchild": {
-        paddingRight: "30px",
+      '&:lastchild': {
+        paddingRight: '30px',
       },
     },
   };
@@ -33,9 +33,9 @@ const StudyFiles = ({ data, studyData, classes }) => {
   themesLight.overrides.MUIDataTableToolbar = {
     ...themesLight.overrides.MUIDataTableToolbar,
     actions: {
-      "& span": {
-        "& button": {
-          right: "0px",
+      '& span': {
+        '& button': {
+          right: '0px',
         },
       },
     },
@@ -67,52 +67,56 @@ const StudyFiles = ({ data, studyData, classes }) => {
   );
 };
 
-const styles = (theme) => ({
+const styles = theme => ({
   tableContainer2: {
-    background: "#fff",
-    minHeight: "500px",
+    background: '#fff',
+    minHeight: '500px',
   },
   tableDiv: {
-    padding: "20px 55px 0px 55px",
-    margin: "10px auto auto auto",
+    padding: '20px 55px 0px 55px',
+    margin: '10px auto auto auto',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: "17px",
-    letterSpacing: "0.017em",
+    fontSize: '17px',
+    letterSpacing: '0.017em',
     // color: '#ff17f15',
-    paddingBottom: "20px",
+    paddingBottom: '20px',
   },
   tableHeader: {
-    color: "#0296c9",
+    color: '#0296c9',
   },
   tableContainer: {
     // background: '#f3f3f3',
-    minHeight: "500px",
+    minHeight: '500px',
   },
   detailContainer: {
-    margin: "auto",
-    paddingTop: "10px",
-    paddingLeft: "36px",
-    paddingRight: "36px",
+    margin: 'auto',
+    paddingTop: '10px',
+    paddingLeft: '36px',
+    paddingRight: '36px',
     fontFamily: theme.custom.fontFamilySans,
-    letterSpacing: "0.014em",
-    color: "#000000",
-    size: "12px",
-    lineHeight: "23px",
+    letterSpacing: '0.014em',
+    color: '#000000',
+    size: '12px',
+    lineHeight: '23px',
   },
   noAssociatedFiles: {
-    paddingLeft: "32px",
-    marginTop: "20px",
-    fontSize: "12px",
-    minHeight: "500px",
+    paddingLeft: '32px',
+    marginTop: '20px',
+    fontSize: '18px',
+    fontWeight: 400,
+    fontFamily: 'Open Sans',
+    lineHeight: '30px',
+    letterSpacing: '0.2px',
+    minHeight: '500px',
   },
   customTooltip: {
-    border: "#a7afb3 2px solid",
+    border: '#a7afb3 2px solid',
   },
   customArrow: {
-    "&::before": {
-      border: "#a7afb3 2px solid",
+    '&::before': {
+      border: '#a7afb3 2px solid',
     },
   },
 });
