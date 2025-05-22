@@ -14,7 +14,6 @@ import {
 import styled from '@emotion/styled';
 
 const Container = styled.div((props: { isModal: boolean }) => {
-  console.log('check props', props);
   const { isModal } = props;
 
   if (isModal)

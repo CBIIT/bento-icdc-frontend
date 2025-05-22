@@ -70,18 +70,11 @@ const SampleProfile: React.FC<SampleProfileProps> = ({ data }) => {
       0
   );
 
-  // const tabCount = sampleProfile.tabs.filter(
-  //   tab =>
-  //     data[tab.value as keyof StudyQuery] &&
-  //     (data[tab.value as keyof StudyQuery] as []).length > 0
-  // );
-
   const linkToDashboard = async () => {
     navigatedToDashboard(filterStudy);
     await actions.changeCurrentTab(1);
   };
 
-  console.log('checking -->', sampleProfileChartData);
   return (
     <>
       {tabCount?.length > 0 ? (
