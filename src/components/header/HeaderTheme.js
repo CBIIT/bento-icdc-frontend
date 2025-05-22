@@ -6,6 +6,11 @@ import searchIcon from '../../assets/header/global_search_input_find.svg';
 const HeaderThemeProvider = ({ children }) => {
   const computedTheme = createTheme({
     overrides: {
+      MuiPaper: {
+        root: {
+          zIndex: '900',
+        },
+      },
       MuiGrid: {
         container: {
           '& div#header': {

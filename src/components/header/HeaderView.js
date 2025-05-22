@@ -18,7 +18,7 @@ const customStyle = {
   },
   headerBar: {
     top: '0px',
-    zIndex: '999',
+    zIndex: '600',
     position: 'relative',
   },
 };
