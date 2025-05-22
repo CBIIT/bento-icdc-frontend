@@ -20,7 +20,6 @@ const Container = styled.div((props: { isModal: boolean }) => {
     return {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
     };
   return {};
 });
