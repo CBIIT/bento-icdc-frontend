@@ -1,5 +1,4 @@
 // import env from '../utils/env';
-
 export const navBarstyling = {
   cart: {
     iconSize: '44px',

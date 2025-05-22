@@ -25,7 +25,7 @@ export const DetailContainerHeader = styled.span({
 export const HeaderButton = styled.div({
   fontFamily: 'Open Snans',
   border: '3px solid #81a6b9',
-  marginTop: '15px',
+  // margin: '0 auto',
   width: '220px',
   height: '35px',
   textAlign: 'center',
@@ -60,16 +60,16 @@ export const HeaderButtonLinkNumber = styled.div({
   margin: '0',
   color: '#B85300',
   display: 'inherit',
-  fontWeight: '900',
+  fontWeight: 900,
   marginRight: '4px',
+  letterSpacing: '0.15px',
 });
 
 export const HeaderButtonLinkText = styled.span({
   fontFamily: 'Roboto',
   color: '#0B3556',
   fontSize: '13px',
-  fontStyle: 'normal',
-  fontWeight: '900',
+  fontWeight: 700,
   lineHeight: '14px',
   letterSpacing: '0.15px',
 });
@@ -86,5 +86,10 @@ export const BarChartWrapper = styled.div({
 });
 
 export const Content = styled.div({
-  fontSize: '12px',
+  fontSize: '18px',
+  fontWeight: 400,
+  lineHeight: '30px',
+  letterSpacing: '0.2px',
+  color: '#000000',
+  marginTop: '25px',
 });

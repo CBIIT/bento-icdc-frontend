@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React from 'react';
@@ -74,10 +76,10 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
           color: '#B85300',
           textDecoration: 'underline',
           cursor: 'pointer',
-          marginLeft: '45px',
           fontFamily: 'Open Sans',
           fontWeight: '600',
           fontSize: '16px',
+          paddingLeft: '134px',
         }}
         component={'div'}
         onClick={showModal}
@@ -105,6 +107,10 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
                   justifyContent: 'space-between',
                   paddingRight: '16px',
                   gap: '32px',
+                  '& .MuiTabs-indicator': {
+                    background: '#0296C9',
+                    height: '5px',
+                  },
                 }}
               >
                 <TabList
@@ -158,8 +164,10 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
                           fontSize: '13px',
                           paddingBottom: '3px',
                           margin: '0',
+                          letterSpacing: '0.15px',
+                          lineHeight: '14px',
                           display: 'inherit',
-                          fontWeight: '900',
+                          fontWeight: 900,
                           marginRight: '4px',
                         }}
                       >
@@ -171,8 +179,7 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
                           fontFamily: 'Roboto',
                           color: '#0B3556',
                           fontSize: '13px',
-                          fontStyle: 'normal',
-                          fontWeight: '900',
+                          fontWeight: 700,
                           lineHeight: '14px',
                           letterSpacing: '0.15px',
                         }}
@@ -201,6 +208,7 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
                       value={String(index + 1)}
                     >
                       <BarChartV2
+                        isModal
                         chartData={data[item.value as keyof StudyQuery]}
                         palette={palette}
                         yAxisLabel={item.yAxisLabel}

@@ -1,26 +1,26 @@
-import React, { useContext } from "react";
-import { Grid, Typography, withStyles } from "@material-ui/core";
-import { table1 } from "../../../../bento/studyDetailsData";
-import { studyDisposition, isStudyUnderEmbargo } from "../../utils";
+import React, { useContext } from 'react';
+import { Grid, Typography, withStyles } from '@material-ui/core';
+import { table1 } from '../../../../bento/studyDetailsData';
+import { studyDisposition, isStudyUnderEmbargo } from '../../utils';
 // import CohortThemeProvider from './armsAndCohortThemeConfig';
-import { TableContext, TableView } from "../../../../bento-core";
-import { themeConfig } from "./Theme";
-import { CustomizeCellView } from "../../../../components/PaginatedTable/Customize/CellView";
-import { ExtendedViewConfig } from "../../../../components/PaginatedTable/Customize/ExtendedView";
+import { TableContext, TableView } from '../../../../bento-core';
+import { themeConfig } from './Theme';
+import { CustomizeCellView } from '../../../../components/PaginatedTable/Customize/CellView';
+import { ExtendedViewConfig } from '../../../../components/PaginatedTable/Customize/ExtendedView';
 
 const ArmsAndCohort = ({ classes, studyData }) => {
   const { noArmsCohort, noArmsCohort2, defaultSortField } = table1;
 
-  const sortRow = (rows) => {
+  const sortRow = rows => {
     return rows.sort((a, b) =>
       `${a[defaultSortField]}`.localeCompare(
         `${b[defaultSortField]}`,
         undefined,
         {
           numeric: true,
-          sensitivity: "base",
-        },
-      ),
+          sensitivity: 'base',
+        }
+      )
     );
   };
 
@@ -35,8 +35,8 @@ const ArmsAndCohort = ({ classes, studyData }) => {
         const { cohort_dose: dose, cohort_description: cohortDesc } = cohort;
         // Row grouping display arm and description at zero index
         tableRows.push({
-          arm: "This study is not divided into arms",
-          description: "",
+          arm: 'This study is not divided into arms',
+          description: '',
           does: dose,
           cohortDescription: cohortDesc,
         });
@@ -116,7 +116,7 @@ const ArmsAndCohort = ({ classes, studyData }) => {
   //   cohortAndDosingTableData.push(cohortAndDosing);
   // }
 
-  const initTblState = (initailState) => ({
+  const initTblState = initailState => ({
     ...initailState,
     title: table1.name,
     columns: CustomizeCellView(table1),
@@ -174,43 +174,54 @@ const ArmsAndCohort = ({ classes, studyData }) => {
   );
 };
 
-const styles = (theme) => ({
+const styles = theme => ({
   tableContainer: {
-    minHeight: "500px",
+    minHeight: '500px',
   },
   tableDiv: {
-    padding: "20px 70px 0px 65px",
-    margin: "20px auto auto auto",
+    padding: '20px 70px 0px 65px',
+    margin: '20px auto auto auto',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: "17px",
-    letterSpacing: "0.017em",
-    color: "#ff17f15",
-    paddingBottom: "20px",
+    fontSize: '17px',
+    letterSpacing: '0.017em',
+    color: '#ff17f15',
+    paddingBottom: '20px',
   },
   tableHeader: {
-    color: "#0296c9",
+    color: '#0296c9',
   },
   detailContainer: {
-    margin: "auto",
-    paddingTop: "10px",
-    paddingLeft: "36px",
-    paddingRight: "36px",
+    margin: 'auto',
+    paddingTop: '10px',
+    paddingLeft: '36px',
+    paddingRight: '36px',
     fontFamily: theme.custom.fontFamilySans,
-    letterSpacing: "0.014em",
-    color: "#000000",
-    size: "12px",
-    lineHeight: "23px",
+    letterSpacing: '0.014em',
+    color: '#000000',
+    size: '12px',
+    lineHeight: '23px',
   },
   noAssociatedFiles: {
-    paddingLeft: "32px",
-    marginTop: "20px",
-    fontSize: "12px",
-    minHeight: "500px",
+    paddingLeft: '32px',
+    marginTop: '20px',
+    fontSize: '18px',
+    minHeight: '500px',
+    fontFamily: 'Open Sans',
+    fontWeight: 400,
+    letterSpacing: '0.2px',
+    color: '#000000',
   },
   tableText: {
-    marginBottom: "-40px",
+    fontSize: '18px',
+    fontFamily: 'Open Sans',
+    fontWeight: 400,
+    letterSpacing: '0.2px',
+    color: '#000000',
+    width: 'fit-content',
+    position: 'absolute',
+    top: '69px',
   },
 });
 

@@ -1,3 +1,5 @@
+// @ts-check
+/* eslint-disable */
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import {
@@ -9,53 +11,65 @@ import {
   Tooltip,
   Cell,
 } from 'recharts';
+import styled from '@emotion/styled';
 
-const styles = theme => ({
-  legendWrapper: {
-    paddingLeft: '20px',
-  },
-  legend: {
-    // marginBottom: '10px',
+const Container = styled.div((props: { isModal: boolean }) => {
+  const { isModal } = props;
+
+  if (isModal)
+    return {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    };
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  };
+});
+
+const LegendWrapper = styled.div({
+  paddingLeft: '20px',
+  '& .legend': {
     padding: '0px 8px',
     display: 'flex',
     gap: '8px',
-  },
-  legendIcon: {},
-  groupText: {
-    fontFamily: 'Inter',
-    fontWeight: '400',
-    fontSize: '14px',
-    color: '#444444',
-  },
-  countText: {
-    fontFamily: 'Inter',
-    fontWeight: '700',
-    fontSize: '14px',
-    color: '#444444',
-  },
-  tooltipWrapper: {
-    backgroundColor: '#fff',
-    padding: '10px',
-    border: '1px solid #ccc',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    display: 'flex',
-    gap: '4px',
-  },
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
+
+    '& .legendIcon': {
+      height: '20px',
+      width: '20px',
+    },
+    '& .groupText': {
+      fontFamily: 'Inter',
+      fontWeight: '400',
+      fontSize: '14px',
+      color: '#444444',
+    },
+    '& .countText': {
+      fontFamily: 'Inter',
+      fontWeight: '700',
+      fontSize: '14px',
+      color: '#444444',
     },
   },
-  groupTooltipText: {
+});
+
+const TooltipWrapper = styled.div({
+  backgroundColor: '#fff',
+  padding: '10px',
+  border: '1px solid #ccc',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  display: 'flex',
+  gap: '4px',
+  '& .groupTooltipText': {
     fontFamily: 'Inter',
     fontWeight: 400,
     fontSize: '13px',
     color: '#444444',
   },
-  countTooltipText: {
+  '& .countTooltipText': {
     fontFamily: 'Inter',
     fontWeight: 700,
     fontSize: '13px',
@@ -72,6 +86,7 @@ const BarChartV2 = ({
   width,
   height,
   showLegend = false,
+  isModal = false,
 }) => {
   const [hoveredGroup, setHoveredGroup] = useState(null);
 
@@ -81,10 +96,10 @@ const BarChartV2 = ({
       setHoveredGroup(data.group);
 
       return (
-        <div className={classes.tooltipWrapper}>
-          <p className={classes.groupTooltipText}>{`${data.group},`}</p>
-          <p className={classes.countTooltipText}>{`${data.count}`}</p>
-        </div>
+        <TooltipWrapper>
+          <p className="groupTooltipText">{`${data.group},`}</p>
+          <p className="countTooltipText">{`${data.count}`}</p>
+        </TooltipWrapper>
       );
     }
 
@@ -93,11 +108,11 @@ const BarChartV2 = ({
   };
 
   const CustomLegend = ({ data, colors }) => (
-    <div className={classes.legendWrapper}>
+    <LegendWrapper>
       {data.map((entry, index) => (
         <div
           key={`item-${index}`}
-          className={classes.legend}
+          className="legend"
           style={{
             backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'transparent',
             fontWeight: hoveredGroup === entry.group ? 'bold' : 'normal',
@@ -107,21 +122,19 @@ const BarChartV2 = ({
                 : 'none',
           }}
         >
-          <span
-            className={classes.legendIcon}
-            style={{ color: colors[index % colors.length] }}
-          >
-            ■
-          </span>
-          <div className={classes.groupText}>{entry.group}</div>{' '}
-          <div className={classes.countText}>{entry.count}</div>
+          <div
+            className="legendIcon"
+            style={{ background: colors[index % colors.length] }}
+          ></div>
+          <div className="groupText">{entry.group}</div>{' '}
+          <div className="countText">{entry.count}</div>
         </div>
       ))}
-    </div>
+    </LegendWrapper>
   );
 
   return (
-    <div className={classes.container}>
+    <Container isModal={isModal}>
       <BarChart
         width={width}
         height={height}
@@ -162,8 +175,8 @@ const BarChartV2 = ({
         </Bar>
       </BarChart>
       {showLegend && <CustomLegend data={chartData} colors={palette} />}
-    </div>
+    </Container>
   );
 };
 
-export default withStyles(styles)(BarChartV2);
+export default BarChartV2;

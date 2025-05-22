@@ -176,6 +176,8 @@ export const tblHeader = {
     root: {
       backgroundColor: '#f5f5f5',
       color: '#194563',
+      borderTop: '3px solid #606060',
+      borderBottom: '3px solid #606060',
     },
   },
   MuiTooltip: {
@@ -225,7 +227,7 @@ const tblBody = {
 };
 
 export const extendedView = ({
-  primaryColor = '#FF9742',
+  primaryColor = '#606060',
   selectedRows = [],
 }) => {
   const hidden = selectedRows.length > 0;
@@ -273,6 +275,9 @@ export const extendedView = ({
           display: 'block',
           position: 'relative',
           textAlign: 'right',
+          width: 'fit-content',
+          margin: '0 0 0 auto',
+          top: '20px',
           '&.downloadAndColumnView': {
             '& button': {
               '&.download-icon': {
@@ -296,8 +301,8 @@ const tblPgn = {
   MuiTablePagination: {
     root: {
       background: '#ffffff',
-      borderTop: '3px solid #42779a',
-      borderBottom: '3px solid #42779a',
+      borderTop: '3px solid #606060',
+      borderBottom: '1px solid #606060',
       '&:last-child': {
         paddingRight: '43px',
       },

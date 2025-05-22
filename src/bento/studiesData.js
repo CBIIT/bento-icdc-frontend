@@ -30,7 +30,6 @@ export const pageData = {
     defaultSortField: 'clinical_study_designation',
     defaultSortDirection: 'asc',
     extendedViewConfig: {
-      searchInput: true,
       download: {
         customDownload: false,
         // downloaded File Name

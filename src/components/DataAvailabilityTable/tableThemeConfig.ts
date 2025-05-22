@@ -113,7 +113,7 @@ export const tblBody = (table: TableConfig) => {
       },
       MuiCheckbox: {
         colorSecondary: {
-          '&Mui-checked': {
+          '&.Mui-checked': {
             color: '#0B3556',
           },
         },
@@ -365,6 +365,9 @@ export const extendedView = {
         strokeWidth: '1.1px',
         marginRight: '8px',
         marginTop: '5px',
+      },
+      '&.checkBoxIcon': {
+        color: '#0B3556',
       },
     },
   },

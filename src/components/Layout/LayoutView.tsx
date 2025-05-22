@@ -61,7 +61,7 @@ const LayoutView = () => {
         siteAlert.style.top = '0';
         siteAlert.style.left = '0';
         siteAlert.style.width = '100%';
-        siteAlert.style.zIndex = '9999';
+        siteAlert.style.zIndex = '999';
         rootDiv.style.marginTop = '295px';
         if (contentDiv?.style) {
           contentDiv.style.marginTop = '117px';
@@ -116,11 +116,19 @@ const LayoutView = () => {
             border-radius: 0px;
             background-color: #ffffff;
           }
-          ,
           *::-webkit-scrollbar-thumb {
             background-color: rgba(94, 140, 165);
             outline: 1px solid slategrey;
             border-radius: 0px;
+          }
+          .custom-study-details-scrollbar::-webkit-scrollbar {
+            width: 8px;
+          }
+          .custom-study-details-scrollbar::-webkit-scrollbar-track {
+            background: #f2f2f2;
+          }
+          .custom-study-details-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #01769d;
           }
         `}
       />
