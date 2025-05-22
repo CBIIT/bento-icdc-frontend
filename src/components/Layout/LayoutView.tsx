@@ -61,7 +61,7 @@ const LayoutView = () => {
         siteAlert.style.top = '0';
         siteAlert.style.left = '0';
         siteAlert.style.width = '100%';
-        siteAlert.style.zIndex = '9999';
+        siteAlert.style.zIndex = '999';
         rootDiv.style.marginTop = '295px';
         if (contentDiv?.style) {
           contentDiv.style.marginTop = '117px';

@@ -165,29 +165,28 @@ export const TableContainer = styled.div({
     margin: '0 auto',
   },
 
-  '& .show-icons': {
-    '& .download-icon': {
-      zIndex: '2',
-      position: 'absolute',
-      top: '32px',
-      right: '80px',
-    },
+  // '& .show-icons': {
+  //   '& .download-icon': {
+  //     zIndex: '2',
+  //     position: 'absolute',
+  //     top: '32px',
+  //     right: '80px',
+  //   },
 
-    '& .manageViewColumnBtn': {
-      zIndex: '2',
-      position: 'absolute',
-      top: '32px',
-      right: '32px',
-    },
-  },
+  // '& .manageViewColumnBtn': {
+  //   zIndex: '2',
+  //   position: 'absolute',
+  //   top: '32px',
+  //   right: '32px',
+  // },
+  // },
 
-  '& .hide-icons': {
-    '& .download-icon': {
-      display: 'none',
-    },
+  // '& .hide-icons': {
+  //   '& .download-icon': {
+  //     display: 'none',
+  //   },
 
-    '& .manageViewColumnBtn': {
-      display: 'none',
-    },
-  },
+  //   '& .manageViewColumnBtn': {
+  //     display: 'none',
+  //   },
 });

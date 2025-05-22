@@ -107,7 +107,7 @@ const styles = () => ({
   },
   backdrop: {
     // position: 'absolute',
-    zIndex: 99999,
+    zIndex: 900,
     background: 'rgba(0, 0, 0, 0.1)',
   },
   filterIcon: {

@@ -238,11 +238,7 @@ const tblBody = {
   },
 };
 
-export const extendedView = ({
-  primaryColor = '#FF9742',
-  selectedRows = [],
-}) => {
-  const hidden = selectedRows.length > 0;
+export const extendedView = ({ primaryColor = '#FF9742' }) => {
   return {
     extendedView: {
       MuiContainer: {
@@ -289,14 +285,18 @@ export const extendedView = ({
           textAlign: 'right',
           '&.downloadAndColumnView': {
             '& button': {
+              zIndex: '10',
               '&.download-icon': {
                 marginRight: '-10px',
-                display: hidden ? 'none' : '',
+                position: 'absolute',
+                top: '32px',
+                right: '80px',
               },
               '&.manageViewColumnBtn': {
-                display: hidden ? 'none' : '',
                 marginBottom: '0px',
-                zIndex: '10',
+                position: 'absolute',
+                top: '32px',
+                right: '32px',
               },
             },
           },
