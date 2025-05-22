@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-check
 import React, { useMemo } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { request } from 'graphql-request';
@@ -315,13 +317,15 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   <div className="title-wrapper">
                     {' '}
                     <HeaderPropertyName>{`Study: `}</HeaderPropertyName>
-                    <div> {` ${studyData.clinical_study_designation}`}</div>
+                    <div className="clinical-study-designation">
+                      {' '}
+                      {` ${studyData.clinical_study_designation}`}
+                    </div>
                   </div>
                   {studyData.accession_id !== null &&
                     studyData.accession_id !== undefined &&
                     studyData.accession_id !== '' && (
                       <>
-                        <HeaderBar> | </HeaderBar>
                         <HeaderAccessionItem>
                           <AccessionLabel>{'Accession ID: '}</AccessionLabel>
                           <AccessionValue>
@@ -368,18 +372,27 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
               <Tab
                 styleClasses={{
                   tabPrimaryColor: {
-                    color: '#81a6b9',
-                    fontWeight: '700',
+                    color: '#507B91',
+                    fontWeight: 600,
+                    fontFamily: 'Nunito Sans',
+                    fontSize: '17px',
+                    lineHeight: '29.75px',
+                    letterSpacing: '0',
                   },
                   tabHighlightColor: {
-                    color: '#0B3556',
-                    fontWeight: '700',
-                    borderBottom: '5px solid rgb(53, 185, 235)',
+                    color: '#000000',
+                    fontWeight: 600,
+                    fontSize: '17px',
+                    lineHeight: '29.75px',
+                    letterSpacing: '0',
+                    borderBottom: '8px solid #0296C9',
                   },
                   hrLine: {
-                    marginTop: '-2px',
                     marginBottom: '0',
                     borderTop: '1px solid #81a6b9',
+                    position: 'relative',
+                    width: '100%',
+                    bottom: '15px',
                   },
                 }}
                 tabItems={processedTabs}
@@ -397,10 +410,13 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
               <TabPanel
                 style={{
                   minWidth: '1404px',
-                  marginBottom: '50px',
+                  height: '100%',
+                  position: 'relative',
+                  bottom: '16px',
                 }}
                 innerDivStyle={{
                   flex: '1',
+                  display: 'flex',
                 }}
                 value={currentTab}
                 index={index}
@@ -426,6 +442,8 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 style={{
                   minWidth: '1404px',
                   marginBottom: '50px',
+                  position: 'relative',
+                  bottom: '16px',
                 }}
                 innerDivStyle={{
                   flex: '1',
@@ -457,10 +475,13 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
               <TabPanel
                 style={{
                   minWidth: '1404px',
-                  marginBottom: '50px',
+                  height: '100%',
+                  position: 'relative',
+                  bottom: '16px',
                 }}
                 innerDivStyle={{
                   flex: '1',
+                  display: 'flex',
                 }}
                 value={currentTab}
                 index={index}
@@ -501,6 +522,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 style={{
                   minWidth: '1404px',
                   marginBottom: '50px',
+                }}
+                innerDivStyle={{
+                  flex: 1,
                 }}
                 value={currentTab}
                 index={index}

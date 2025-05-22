@@ -116,11 +116,19 @@ const LayoutView = () => {
             border-radius: 0px;
             background-color: #ffffff;
           }
-          ,
           *::-webkit-scrollbar-thumb {
             background-color: rgba(94, 140, 165);
             outline: 1px solid slategrey;
             border-radius: 0px;
+          }
+          .custom-study-details-scrollbar::-webkit-scrollbar {
+            width: 8px;
+          }
+          .custom-study-details-scrollbar::-webkit-scrollbar-track {
+            background: #f2f2f2;
+          }
+          .custom-study-details-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #01769d;
           }
         `}
       />
