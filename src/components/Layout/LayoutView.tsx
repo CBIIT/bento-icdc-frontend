@@ -61,7 +61,7 @@ const LayoutView = () => {
           siteAlert.style.top = `${totalHeight - 2}px`;
           siteAlert.style.left = '0';
           siteAlert.style.width = '100%';
-          siteAlert.style.zIndex = '9999';
+          siteAlert.style.zIndex = '1000';
 
           totalHeight += bannerHeight;
         }
