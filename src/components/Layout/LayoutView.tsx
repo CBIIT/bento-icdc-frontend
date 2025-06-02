@@ -58,7 +58,7 @@ const LayoutView = () => {
           const bannerHeight = siteAlert.offsetHeight;
 
           siteAlert.style.position = 'fixed';
-          siteAlert.style.top = `${totalHeight - 1}px`;
+          siteAlert.style.top = `${totalHeight - 2}px`;
           siteAlert.style.left = '0';
           siteAlert.style.width = '100%';
           siteAlert.style.zIndex = '9999';
@@ -69,7 +69,7 @@ const LayoutView = () => {
 
       document.documentElement.style.setProperty(
         '--site-alert-offset',
-        `${totalHeight - 1}px`
+        `${totalHeight - 2}px`
       );
     }
 
