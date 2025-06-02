@@ -43,42 +43,48 @@ const LayoutView = () => {
   }, [open]);
 
   useEffect(() => {
-    const adjustForSiteAlert = () => {
-      const hostDiv = document.body.children[0];
-      if (!hostDiv || !hostDiv.shadowRoot) return;
+    function adjustForSiteAlert() {
+      const bodyChildren = Array.from(document.body.children);
+      const bannerHosts = bodyChildren.filter(
+        el => el.id !== 'root' && el.shadowRoot
+      );
 
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-      const siteAlert = hostDiv.shadowRoot.querySelector(
-        '.usa-site-alert'
-      ) as HTMLDivElement;
-      if (siteAlert) {
-        const rootDiv = document.body.children[2] as HTMLDivElement;
-        const contentDiv = document.body.children[2]
-          .children[0] as HTMLDivElement;
+      let totalHeight = 0;
 
-        // Adjust site alert styling to also be fixed
-        siteAlert.style.position = 'fixed';
-        siteAlert.style.top = '0';
-        siteAlert.style.left = '0';
-        siteAlert.style.width = '100%';
-        siteAlert.style.zIndex = '999';
-        rootDiv.style.marginTop = '295px';
-        if (contentDiv?.style) {
-          contentDiv.style.marginTop = '117px';
+      bannerHosts.forEach(host => {
+        const siteAlert: HTMLDivElement =
+          host.shadowRoot.querySelector('.usa-site-alert');
+        if (siteAlert) {
+          const bannerHeight = siteAlert.offsetHeight;
+
+          siteAlert.style.position = 'fixed';
+          siteAlert.style.top = `${totalHeight - 2}px`;
+          siteAlert.style.left = '0';
+          siteAlert.style.width = '100%';
+          siteAlert.style.zIndex = '9999';
+
+          totalHeight += bannerHeight;
         }
-      }
-    };
+      });
 
-    // Initial check
-    adjustForSiteAlert();
+      document.documentElement.style.setProperty(
+        '--site-alert-offset',
+        `${totalHeight - 2}px`
+      );
+    }
+
+    const rafId = requestAnimationFrame(adjustForSiteAlert);
+
     const observer = new MutationObserver(adjustForSiteAlert);
-
     observer.observe(document.body, {
       childList: true,
+      subtree: true,
     });
+
     window.addEventListener('resize', adjustForSiteAlert);
 
     return () => {
+      cancelAnimationFrame(rafId);
       observer.disconnect();
       window.removeEventListener('resize', adjustForSiteAlert);
     };
@@ -107,6 +113,12 @@ const LayoutView = () => {
           #root {
             height: 100%;
             flex: 1;
+          }
+          #root > div:nth-child(1) {
+            top: var(--site-alert-offset);
+          }
+          #root > div:nth-child(2) {
+            margin-top: calc(179px + var(--site-alert-offset));
           }
           *::-webkit-scrollbar {
             width: none;
