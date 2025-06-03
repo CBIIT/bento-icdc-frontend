@@ -72,13 +72,46 @@ const LayoutView = () => {
           '--site-alert-offset',
           `${totalHeight - 2}px`
         );
+        if (open) {
+          document.documentElement.style.setProperty(
+            '--header-offset',
+            `0px`
+          );
+
+          document.documentElement.style.setProperty(
+            '--content-offset',
+            `119px`
+          );
+        } else {
+          document.documentElement.style.setProperty(
+            '--header-offset',
+            `179px`
+          );
+
+        }
+      } else {
         document.documentElement.style.setProperty(
-          '--header-offset',
+          '--content-offset',
           `179px`
         );
-      } else {
-        document.documentElement.style.removeProperty('--site-alert-offset');
-        document.documentElement.style.removeProperty('--header-offset');
+        document.documentElement.style.setProperty(
+          '--site-alert-offset',
+          '0px'
+        );
+        if (open) {
+          document.documentElement.style.setProperty(
+            '--header-offset',
+            `0px`
+          );
+
+
+        } else {
+          document.documentElement.style.setProperty(
+            '--header-offset',
+            `179px`
+          );
+
+        }
 
       }
     }
@@ -103,7 +136,7 @@ const LayoutView = () => {
       observer.disconnect();
       window.removeEventListener('resize', adjustForSiteAlert);
     };
-  }, []);
+  }, [open]);
 
 
   const location = useLocation();
@@ -135,7 +168,10 @@ const LayoutView = () => {
             position: fixed;
           }
           #root > div:nth-child(2) {
-            margin-top: calc(var(--site-alert-offset));
+            margin-top: calc(var(--header-offset) + var(--site-alert-offset));
+          }
+          #root > div:nth-child(3) {
+            margin-top: calc(var(--content-offset) + var(--site-alert-offset));
           }
           *::-webkit-scrollbar {
             width: none;
