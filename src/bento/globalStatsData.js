@@ -12,6 +12,7 @@ export const statsStyling = {
     height: '60px',
     zIndex: '100',
     alignItems: 'center',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
   },
   statsGroup: {
     margin: '0px',
