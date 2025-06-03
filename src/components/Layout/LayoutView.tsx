@@ -20,7 +20,6 @@ import ProgramDetail from '../../pages/programDetail/program-detail-controller';
 import StudyDetail from '../../pages/study/studyDetailController';
 import CaseDetails from '../../pages/caseDetails/caseDetailsController';
 import OverlayWindow from '../OverlayWindow/OverlayWindow';
-import ShutdownBanner from '../ShutdownBanner/ShutdownBanner';
 import { navBarExclusions } from '../../bento/navigationBarData';
 import CartView from '../../pages/Cart/CartController';
 import SysInfo from '../../pages/sysinfo/sysInfo';
@@ -50,10 +49,10 @@ const LayoutView = () => {
       );
 
       let totalHeight = 0;
+      let hasBanner = false;
 
       bannerHosts.forEach(host => {
-        const siteAlert: HTMLDivElement =
-          host.shadowRoot.querySelector('.usa-site-alert');
+        const siteAlert = host.shadowRoot?.querySelector('.usa-site-alert') as HTMLDivElement | null;
         if (siteAlert) {
           const bannerHeight = siteAlert.offsetHeight;
 
@@ -64,18 +63,34 @@ const LayoutView = () => {
           siteAlert.style.zIndex = '1000';
 
           totalHeight += bannerHeight;
+          hasBanner = true;
         }
       });
 
-      document.documentElement.style.setProperty(
-        '--site-alert-offset',
-        `${totalHeight - 2}px`
-      );
+      if (hasBanner) {
+        document.documentElement.style.setProperty(
+          '--site-alert-offset',
+          `${totalHeight - 2}px`
+        );
+        document.documentElement.style.setProperty(
+          '--header-offset',
+          `179px`
+        );
+      } else {
+        document.documentElement.style.removeProperty('--site-alert-offset');
+        document.documentElement.style.removeProperty('--header-offset');
+
+      }
     }
 
-    const rafId = requestAnimationFrame(adjustForSiteAlert);
+    const rafId = requestAnimationFrame(() => {
+      setTimeout(adjustForSiteAlert, 0);
+    });
 
-    const observer = new MutationObserver(adjustForSiteAlert);
+    const observer = new MutationObserver(() => {
+      requestAnimationFrame(adjustForSiteAlert);
+    });
+
     observer.observe(document.body, {
       childList: true,
       subtree: true,
@@ -89,6 +104,7 @@ const LayoutView = () => {
       window.removeEventListener('resize', adjustForSiteAlert);
     };
   }, []);
+
 
   const location = useLocation();
   const headerRef = useRef(null);
@@ -116,9 +132,10 @@ const LayoutView = () => {
           }
           #root > div:nth-child(1) {
             top: var(--site-alert-offset);
+            position: fixed;
           }
           #root > div:nth-child(2) {
-            margin-top: calc(179px + var(--site-alert-offset));
+            margin-top: calc(var(--site-alert-offset));
           }
           *::-webkit-scrollbar {
             width: none;
@@ -147,7 +164,6 @@ const LayoutView = () => {
       <HashRouter>
         {open && <OverlayWindow open={open} handleClose={handleClose} />}
         <HeaderContainer ref={headerRef}>
-          <ShutdownBanner src="https://cbiit.github.io/crdc-alert-elements/banners/government-shutdown.html" />
           <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
           <Header />
           {!navBarExclusions.find(item => item === location.hash) && <NavBar />}
