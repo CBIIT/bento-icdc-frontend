@@ -80,7 +80,7 @@ const LayoutView = () => {
 
           document.documentElement.style.setProperty(
             '--content-offset',
-            `119px`
+            `180px`
           );
         } else {
           document.documentElement.style.setProperty(
