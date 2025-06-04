@@ -52,7 +52,8 @@ const LayoutView = () => {
       let hasBanner = false;
 
       bannerHosts.forEach(host => {
-        const siteAlert = host.shadowRoot?.querySelector('.usa-site-alert') as HTMLDivElement | null;
+        const siteAlert: HTMLDivElement | null =
+          host.shadowRoot?.querySelector('.usa-site-alert');
         if (siteAlert) {
           const bannerHeight = siteAlert.offsetHeight;
 
@@ -73,10 +74,7 @@ const LayoutView = () => {
           `${totalHeight - 2}px`
         );
         if (open) {
-          document.documentElement.style.setProperty(
-            '--header-offset',
-            `0px`
-          );
+          document.documentElement.style.setProperty('--header-offset', `0px`);
 
           document.documentElement.style.setProperty(
             '--content-offset',
@@ -87,32 +85,21 @@ const LayoutView = () => {
             '--header-offset',
             `179px`
           );
-
         }
       } else {
-        document.documentElement.style.setProperty(
-          '--content-offset',
-          `179px`
-        );
+        document.documentElement.style.setProperty('--content-offset', `179px`);
         document.documentElement.style.setProperty(
           '--site-alert-offset',
           '0px'
         );
         if (open) {
-          document.documentElement.style.setProperty(
-            '--header-offset',
-            `0px`
-          );
-
-
+          document.documentElement.style.setProperty('--header-offset', `0px`);
         } else {
           document.documentElement.style.setProperty(
             '--header-offset',
             `179px`
           );
-
         }
-
       }
     }
 
@@ -137,7 +124,6 @@ const LayoutView = () => {
       window.removeEventListener('resize', adjustForSiteAlert);
     };
   }, [open]);
-
 
   const location = useLocation();
   const headerRef = useRef(null);
