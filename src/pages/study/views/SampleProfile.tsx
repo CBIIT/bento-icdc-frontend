@@ -90,7 +90,6 @@ const SampleProfile: React.FC<SampleProfileProps> = ({ data }) => {
               <HeaderButtonLinkSpan>
                 <HeaderButtonLink
                   to={() => ({ pathname: '/explore' })}
-                  // eslint-disable-next-line @typescript-eslint/no-misused-promises
                   onClick={async () => await linkToDashboard()}
                 >
                   <HeaderButtonLinkNumber>

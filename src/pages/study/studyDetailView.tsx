@@ -346,7 +346,6 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   <HeaderButtonLinkSpan>
                     <HeaderButtonLink
                       to={location => ({ ...location, pathname: '/explore' })}
-                      // eslint-disable-next-line @typescript-eslint/no-misused-promises
                       onClick={async () => {
                         await actions.changeCurrentTab(0);
                         navigatedToDashboard(filterStudy);
