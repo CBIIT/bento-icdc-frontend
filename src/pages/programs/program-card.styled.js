@@ -49,9 +49,11 @@ export const ProgramBody = styled('span')({
 });
 
 export const ProgramImage = styled('img')({
-  margin: '2px 0 0 8px',
+  // margin: '2px 0 0 8px',
   height: '158px',
-  objectFit: 'cover',
+  // objectFit: 'cover',
+  // width: '100%',
+  // maxWidth: '500px'
 });
 
 export const ProgramDescription = styled('p')({
@@ -115,5 +117,5 @@ export const ActionButtonTwo = styled(Button)({
 });
 
 export const ExternalIcon = styled('img')({
-  width: '20px'
+  width: '20px',
 });
