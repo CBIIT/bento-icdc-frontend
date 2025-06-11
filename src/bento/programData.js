@@ -79,7 +79,7 @@ const pageDataV2 = {
     {
       prgramName: 'CSU FACC',
       primaryImage:
-        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/add-facc-program-image/icdc/images/png/csu-facc-program.png',
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/png/csu-facc-program.png',
       primaryImageAlt: 'FACC-primary-image',
       // secondaryImage:
       //   'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg',
