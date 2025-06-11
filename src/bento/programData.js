@@ -76,6 +76,15 @@ const pageDataV2 = {
         'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg',
       video: 'https://www.youtube.com/watch?v=oVs7kXSzv3U',
     },
+    {
+      prgramName: 'CSU FACC',
+      primaryImage:
+        'https://raw.githubusercontent.com/CBIIT/datacommons-assets/add-facc-program-image/icdc/images/png/csu-facc-program.png',
+      primaryImageAlt: 'FACC-primary-image',
+      // secondaryImage:
+      //   'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programDetail_Image.pccr.jpg',
+      video: 'https://youtu.be/bIWaMKZ9pl4',
+    },
   ],
 };
 
