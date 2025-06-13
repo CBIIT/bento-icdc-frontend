@@ -47,9 +47,19 @@ const DashboardTabsView = ({
   const getTextFilterRequestParam = ({
     searchTextRequestKey,
     searchTextResultKey,
-  }) => ({
-    [searchTextRequestKey]: searchResultIds[searchTextResultKey],
-  });
+  }) => {
+    if (
+      !searchResultIds ||
+      (typeof searchResultIds === 'object' &&
+        !(searchTextResultKey in searchResultIds))
+    ) {
+      return;
+    }
+
+    return {
+      [searchTextRequestKey]: searchResultIds[searchTextResultKey],
+    };
+  };
 
   return (
     <DashboardThemeProvider>
@@ -90,6 +100,7 @@ const DashboardTabsView = ({
                 activeFilters={{
                   ...activeFilters,
                   ...tab?.queryParam,
+                  ...unifiedQueryParam,
                   ...getTextFilterRequestParam(tab),
                 }}
                 overriedTableState={dashboardTableInitActions}
