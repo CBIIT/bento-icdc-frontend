@@ -125,18 +125,22 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
 
           {programDetail.program_external_url && (
             <ProgramDetailHeaderExternalLinkWrapper>
-              <ProgramDetailHeaderExternalLinkButton
-                href={programDetail.program_external_url}
-                variant="contained"
-                endIcon={
-                  <img
-                    src={pageData.externalLinkIcon}
-                    alt="external link icon"
-                  />
-                }
-              >
-                Go to Site
-              </ProgramDetailHeaderExternalLinkButton>
+              <a style={{ textDecoration: 'none' }} href={programDetail.program_external_url}
+                target='_blank' rel="noopener noreferrer">
+                <ProgramDetailHeaderExternalLinkButton
+                  variant="contained"
+                  endIcon={
+                    <img
+                      src={pageData.externalLinkIcon}
+                      alt="external link icon"
+                    />
+                  }
+                >
+
+                  Go to Site
+                </ProgramDetailHeaderExternalLinkButton>
+              </a>
+
             </ProgramDetailHeaderExternalLinkWrapper>
           )}
         </ProgramDetailHeader>
