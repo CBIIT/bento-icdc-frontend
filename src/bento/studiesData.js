@@ -125,7 +125,7 @@ export const pageData = {
       },
       {
         dataField: 'CRDCLinks',
-        header: 'icon',
+        header: 'Additional CRDC Nodes',
         display: true,
         columnDefaultValues: {
           0: 'Not Applicable',
