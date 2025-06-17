@@ -65,7 +65,7 @@ const pageDataV2 = {
       primaryImageAlt: 'CMCP-primary-image',
       secondaryImage:
         'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg',
-      video: 'https://www.youtube.com/watch?v=sHUvbPM8H7A',
+      video: 'https://youtu.be/bIWaMKZ9pl4',
     },
     {
       prgramName: 'PCCR',

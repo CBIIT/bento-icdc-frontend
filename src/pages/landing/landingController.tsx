@@ -13,7 +13,7 @@ const NEWS_CONTENT_URL = (env as Record<string, string>).REACT_APP_NEWS_DATA;
 const NEWS_PATH = '/news';
 
 const LandingController = ({ match }: RouteComponentProps) => {
-  const [newsData, setNewsData] = useState<Record<string, unknown> | undefined>(
+  const [newsData, setNewsData] = useState<Record<string, any> | undefined>(
     undefined
   );
   const [landingPageData, setLandingPageData] = useState<
@@ -49,12 +49,7 @@ const LandingController = ({ match }: RouteComponentProps) => {
   }
 
   if (newsData && match.path === NEWS_PATH) {
-    return (
-      <NewsView
-        availableSoonImage={newsData && newsData.availableSoonImage}
-        news={newsData && newsData}
-      />
-    );
+    return <NewsView news={newsData && newsData} />;
   }
 
   return <LandingView pageData={landingPageData && landingPageData} />;
