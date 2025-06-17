@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import _ from 'lodash';
 import { Grid, withStyles } from '@material-ui/core';
@@ -7,11 +8,19 @@ import themes from '../../../themes';
 import { studyDisposition } from '../utils';
 import { fileTable } from '../../../bento/studyDetailsData';
 
-const StudyFiles = ({ data, studyData, classes }) => {
+const StudyFiles = ({
+  data,
+  studyData,
+  classes,
+}: {
+  data: any;
+  studyData: any;
+  classes: any;
+}) => {
   const fileTableData =
     data.studyFiles === null || data.studyFiles === ''
       ? []
-      : data.studyFiles.map(file => {
+      : data.studyFiles.map((file: any) => {
           const cFile = { ...file };
           cFile.parent = 'study';
           cFile.studyDesignation = studyData.clinical_study_designation;
@@ -67,7 +76,7 @@ const StudyFiles = ({ data, studyData, classes }) => {
   );
 };
 
-const styles = theme => ({
+const styles = (theme: any) => ({
   tableContainer2: {
     background: '#fff',
     minHeight: '500px',
