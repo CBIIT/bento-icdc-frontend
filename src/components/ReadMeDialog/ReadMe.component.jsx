@@ -145,7 +145,13 @@ const ReadMeDialogComponent = ({
           </DialogActionContent>
         </TitleContent>
         <ReadMeContentContainer id="readMe_content">
-          <ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              a: ({ ...props }) => (
+                <a {...props} target="_blank" rel="noopener noreferrer" />
+              ),
+            }}
+          >
             {content.replace(/<!-- PAGE BREAK -->/g, '')}
           </ReactMarkdown>
         </ReadMeContentContainer>
