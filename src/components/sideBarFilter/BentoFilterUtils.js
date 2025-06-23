@@ -3,10 +3,10 @@ import {
   updateAutocompleteData,
   updateUploadData,
   updateUploadMetadata,
-} from "../../bento-core";
-import store from "../../store";
-import client from "../../utils/graphqlClient";
-import { GET_IDS_BY_TYPE, GET_SUBJECT_IDS } from "../../bento/localSearchData";
+} from '../../bento-core';
+import store from '../../store';
+import client from '../../utils/graphqlClient';
+import { GET_IDS_BY_TYPE, GET_SUBJECT_IDS } from '../../bento/localSearchData';
 
 export const getFacetValues = (facet, facetValue) => ({
   [facet]: { [facetValue]: true },
@@ -20,8 +20,8 @@ export const onClearAllAndSelectFacetValue = (facet, facetValue) => {
   store.dispatch(clearAllAndSelectFacet(filterValue));
 };
 
-export const setActiveFilterByPathQuery = (match) => {
-  const query = decodeURI(match.params.filterQuery || "");
+export const setActiveFilterByPathQuery = match => {
+  const query = decodeURIComponent(match.params.filterQuery || '');
   const filterObject = JSON.parse(query);
   const { autocomplete = [], upload = [], uploadMetadata } = filterObject;
 
@@ -32,7 +32,7 @@ export const setActiveFilterByPathQuery = (match) => {
           ...value,
           [item]: true,
         }),
-        {},
+        {}
       );
       return {
         ...curr,
@@ -60,7 +60,7 @@ export async function getAllIds(type) {
       query: GET_IDS_BY_TYPE(type),
       variables: {},
     })
-    .then((result) => result.data.caseOverview.map((item) => item[type]))
+    .then(result => result.data.caseOverview.map(item => item[type]))
     .catch(() => []);
 
   return allids;
@@ -80,7 +80,7 @@ export async function getAllSubjectIds(subjectIdsArray) {
         case_ids: subjectIdsArray,
       },
     })
-    .then((result) => result.data.caseOverview)
+    .then(result => result.data.caseOverview)
     .catch(() => []);
   return allids;
 }
