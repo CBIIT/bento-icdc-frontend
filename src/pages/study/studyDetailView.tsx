@@ -119,7 +119,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
       nci_link_to_relevant_human_cancer: string;
     }[];
   }>({
-    queryKey: ['humanRelevance'],
+    queryKey: ['humanRelevance', study_codes],
     queryFn: async () =>
       request(
         (env as Record<string, string>).REACT_APP_BACKEND_API,
