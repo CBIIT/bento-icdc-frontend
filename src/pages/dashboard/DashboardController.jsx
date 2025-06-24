@@ -66,6 +66,8 @@ const DashTemplateController = props => {
     setActiveFilterByPathQuery(match);
     const redirectUrl = '/explore';
     history.push(redirectUrl);
+
+    return null;
   }
 
   const { dashData, activeFilters } = getDashData(props);
