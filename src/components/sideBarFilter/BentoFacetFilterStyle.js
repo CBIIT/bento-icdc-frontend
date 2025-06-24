@@ -113,7 +113,6 @@ export const customStyles = {
     fontFamily: 'Roboto',
     fontSize: '14px',
     fontFamily: 'Open Sans',
-    textDecoration: 'underline',
     '&:hover': {
       color: '#9E4700',
     },
