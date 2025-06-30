@@ -172,6 +172,11 @@ const LayoutView = () => {
             outline: 1px solid slategrey;
             border-radius: 0px;
           }
+          .custom-study-details-scrollbar {
+            direction: rtl;
+            text-align: left;
+            padding-left: 32px;
+          }
           .custom-study-details-scrollbar::-webkit-scrollbar {
             width: 8px;
           }
