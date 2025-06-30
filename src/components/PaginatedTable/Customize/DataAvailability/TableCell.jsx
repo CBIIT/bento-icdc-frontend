@@ -1,22 +1,22 @@
-import React from "react";
-import { withStyles, Tooltip } from "@material-ui/core";
-import { FiberManualRecordRounded } from "@material-ui/icons";
-import Styles from "./CellStyle";
-import CustomThemeProvider from "./CustomTheme";
+import React from 'react';
+import { withStyles, Tooltip } from '@material-ui/core';
+import { FiberManualRecordRounded } from '@material-ui/icons';
+import Styles from './CellStyle';
+import CustomThemeProvider from './CustomTheme';
 
 export function studyDisposition(value) {
-  const embargo = "under embargo";
-  const pending = "pending";
+  const embargo = 'under embargo';
+  const pending = 'pending';
   if (value.toString().toLowerCase() === embargo) {
-    return "embargo";
+    return 'embargo';
   }
   if (value.toString().toLowerCase() === pending) {
-    return "pending";
+    return 'pending';
   }
   return undefined;
 }
 
-const DataAvailabilityCellView = (props) => {
+const DataAvailabilityCellView = props => {
   const {
     classes,
     column,
@@ -32,7 +32,7 @@ const DataAvailabilityCellView = (props) => {
     <ul className={classes.crdcLinks}>
       {linksArray.map((link, index) => (
         <li key={`${link.repository}-${index}`}>
-          {link.url.toLowerCase() !== "api failed" ? (
+          {link.url.toLowerCase() !== 'api failed' ? (
             <a
               className={classes.crdcLinkStyle}
               target="_blank"
@@ -42,7 +42,7 @@ const DataAvailabilityCellView = (props) => {
               {`${link.repository} | ICDC-${clinicalStudyDesignation}`}
               <img
                 style={{
-                  width: "1.5em",
+                  width: '1.5em',
                 }}
                 src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/ExternalLink.svg"
                 alt="external link icon"
@@ -60,20 +60,20 @@ const DataAvailabilityCellView = (props) => {
   const studyData = interOpData?.studiesByProgram;
   const generateIndicatorTooltipTitle = () => {
     switch (dataField) {
-      case "numberOfCaseFiles":
+      case 'numberOfCaseFiles':
         return `${numberOfCaseFiles} Case File(s)`;
-      case "numberOfStudyFiles":
+      case 'numberOfStudyFiles':
         return `${numberOfStudyFiles} Study File(s)`;
-      case "numberOfImageCollections":
+      case 'numberOfImageCollections':
         return `${studyData.length && studyData[0].numberOfImageCollections} Image Collection(s)`;
-      case "numberOfPublications":
+      case 'numberOfPublications':
         return `${numberOfPublications} Publication(s)`;
       default: {
         return (
           studyData.length &&
           generateCRDCLinks(
             studyData[0].CRDCLinks,
-            studyData[0].clinical_study_designation,
+            studyData[0].clinical_study_designation
           )
         );
       }
@@ -82,10 +82,13 @@ const DataAvailabilityCellView = (props) => {
 
   const value = props[dataField];
   const currentStudyData = interOpData?.studiesByProgram.filter(
-    (study) => study.clinical_study_designation === studyDesignation,
+    study => study.clinical_study_designation === studyDesignation
   );
   let flag;
-  if (dataField === "CRDCLinks" && currentStudyData?.[0]?.CRDCLinks.length) {
+  if (
+    dataField === 'CRDCLinksText' &&
+    currentStudyData?.[0]?.CRDCLinks.length
+  ) {
     flag = true;
   } else {
     flag = Array.isArray(value) ? value.length > 0 : value > 0;
@@ -98,12 +101,12 @@ const DataAvailabilityCellView = (props) => {
           <Tooltip
             classes={{
               tooltip:
-                dataField === "CRDCLinks"
+                dataField === 'CRDCLinksText'
                   ? classes.externalLinkDalTooltip
                   : classes.defaultDalTooltip,
             }}
             title={title}
-            interactive={dataField === "CRDCLinks"}
+            interactive={dataField === 'CRDCLinksText'}
           >
             <FiberManualRecordRounded
               className={classes.dataAvailIndicatorIcon}

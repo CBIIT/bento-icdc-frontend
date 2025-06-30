@@ -6,7 +6,7 @@ const dynamicDataAvailColStyling = (table: TableConfig, isBody = false) => {
     'numberofstudyfiles',
     'numberofimagecollections',
     'numberofpublications',
-    'crdclinks',
+    'crdclinkstext',
   ];
   const { columns = [] } = table;
   const displayDavaAvailCols = columns.filter(
