@@ -1,13 +1,9 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
-import { request } from 'graphql-request';
-import { useQuery } from '@tanstack/react-query';
 import { getOptions } from '@bento-core/util';
 import Stats from '../../components/Stats/StatsView';
 import { table, pageData, tableLayOut } from '../../bento/programDetailData';
 import { pageDataV2 as programImageConfig } from '../../bento/programData';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
-import env from '../../utils/env';
 import { TableContextProvider } from '../../bento-core';
 import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
 import {
@@ -25,35 +21,19 @@ import {
 } from './program-detail-view.styled';
 import PhotoView from './components/photo-view';
 import VideoView from './components/video-view';
-import {
-  GetStudiesByProgramProgramDetailTwoDocument,
-  ProgramQuery,
-} from '../../generated-types/graphql';
-import { SkeletonLoader } from '../../components/Skeleton';
+import { ProgramQuery } from '../../generated-types/graphql';
 
 interface ProgramDetailViewProps {
   data: ProgramQuery;
   classes?: any;
+  interOpData: any;
 }
 
 const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
   classes,
   data,
+  interOpData,
 }) => {
-  const {
-    data: interOpData,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['studiesByProgram'],
-    queryFn: async () =>
-      request(
-        /* eslint-disable-next-line */
-        env.REACT_APP_INTEROP_SERVICE_URL,
-        GetStudiesByProgramProgramDetailTwoDocument
-      ),
-  });
-
   const programDetail = data.program[0];
 
   const stat = {
@@ -95,18 +75,6 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
       `${programDetail.program_acronym}`
     );
 
-  if (isLoading) {
-    return <SkeletonLoader variant="withRounded" />;
-  }
-
-  if (isError) {
-    return (
-      <Typography component="h5" color="error">
-        An error has occurred in interoperability api
-      </Typography>
-    );
-  }
-
   return (
     <>
       <Stats data={stat} />
@@ -125,8 +93,12 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
 
           {programDetail.program_external_url && (
             <ProgramDetailHeaderExternalLinkWrapper>
-              <a style={{ textDecoration: 'none' }} href={programDetail.program_external_url}
-                target='_blank' rel="noopener noreferrer">
+              <a
+                style={{ textDecoration: 'none' }}
+                href={programDetail.program_external_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ProgramDetailHeaderExternalLinkButton
                   variant="contained"
                   endIcon={
@@ -136,11 +108,9 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
                     />
                   }
                 >
-
                   Go to Site
                 </ProgramDetailHeaderExternalLinkButton>
               </a>
-
             </ProgramDetailHeaderExternalLinkWrapper>
           )}
         </ProgramDetailHeader>
@@ -164,6 +134,7 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
           <TableContextProvider>
             <StudiesTable
               data={data.studiesByProgramId}
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
               interOpData={interOpData}
               table={table}
               tableLayOut={tableLayOut}
