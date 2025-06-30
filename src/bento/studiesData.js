@@ -124,7 +124,7 @@ export const pageData = {
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
       },
       {
-        dataField: 'CRDCLinks',
+        dataField: 'CRDCLinksText',
         header: 'Additional CRDC Nodes',
         display: true,
         columnDefaultValues: {

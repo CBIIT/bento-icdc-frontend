@@ -239,17 +239,20 @@ const Overview: React.FC<OverviewProps> = ({
         {!studyDisposition(studyData.study_disposition) && (
           <>
             <DiagnosesWrapper>
-              <DetailContainerHeaderText>Diagnoses</DetailContainerHeaderText>
+              <DetailContainerHeaderText isDiagnosis={true}>
+                Diagnoses
+              </DetailContainerHeaderText>
               <div className="list custom-study-details-scrollbar">
                 {diagnoses
                   .sort((a, b) => customSorting(a, b, 'alphabetical'))
-                  .map((diagnosis, index) => (
+                  .map(diagnosis => (
                     <Content>{diagnosis}</Content>
                   ))}
               </div>
               <HrLine
                 style={{
-                  marginLeft: '0',
+                  marginLeft: '32px',
+                  marginTop: '32px',
                 }}
               />
             </DiagnosesWrapper>
