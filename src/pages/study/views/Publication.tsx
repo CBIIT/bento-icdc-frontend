@@ -3,50 +3,43 @@ import React, { useCallback } from 'react';
 import { externalIcon } from '../../../bento/studyDetailsData';
 import styled from '@emotion/styled';
 
-const Container = styled.div<{ isEmpty: boolean }>(({ isEmpty }) => ({
-  display: 'flex',
-  flex: 1,
-  height: '100%',
-  padding: isEmpty ? '25px 45px' : '0 82px',
-  paddingBottom: '20px',
-
-}))
-const LeftPanel = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid #81a6b9;
-  padding: 50px 50px 50px 0;
-`;
-
-const RightPanel = styled.div`
-  width: 100%;
+const PublicationsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 300px 1fr;
-  padding: 50px;
+  padding: 0 80px;
 `;
 
-const PublicationList = styled.div`
+const PublicationList = styled.div<{ hasBorder: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border-right: ${({ hasBorder }) =>
+    hasBorder ? '1px solid #81A6B9' : 'none'};
+`;
+
+const PublicationContent = styled.div`
+  border-bottom: 0.75px solid #81a6b9;
+  padding: 24px 0;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-bottom: 100px;
 `;
 
 const PublicationTitle = styled.div`
   font-family: 'Open Sans';
-  font-weight: 400;
+  font-weight: 700;
   font-size: 18px;
-  line-height: 30px;
+  line-height: 23px;
   letter-spacing: 0.2px;
-  color: #000000;
+  color: #005c7a;
 `;
 
 const MetadataWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  padding-left: 16px;
+  gap: 8px;
 `;
 
 const MetadataItem = styled.div`
@@ -57,7 +50,7 @@ const MetadataItem = styled.div`
 `;
 
 const MetadataKey = styled.div`
-  color: #01769d;
+  color: #027da7;
   font-family: 'Open Sans';
   font-size: 14px;
   line-height: 23px;
@@ -72,26 +65,24 @@ const MetadataValue = styled.div`
   line-height: 30px;
   letter-spacing: 0.2px;
   font-family: 'Open Sans';
-  color: #000000;
+  color: #000;
 `;
 
-const LinkWrapper = styled.a`
-  font-size: 12px;
+const LinkContent = styled.a`
+  font-size: 18px;
   color: #b85300;
-  cursor: pointer;
   font-family: 'Open Sans';
-  font-weight: 600;
-  text-decoration: underline;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  width: fit-content;
 
   &:hover {
     color: #9e4700;
   }
-`;
-
-const LinkContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;
 
 const LinkIcon = styled.img`
@@ -110,6 +101,12 @@ const NoPublicationsMessage = styled.div`
   color: #000;
 `;
 
+const Placeholder = styled.div<{ hasBorder?: boolean }>`
+  height: 100px;
+  border-right: ${({ hasBorder }) =>
+    hasBorder ? '1px solid #81A6B9' : 'none'};
+`;
+
 interface Publication {
   publication_title: string;
   authorship: string;
@@ -119,11 +116,10 @@ interface Publication {
   pubmed_id?: string;
 }
 
-
 interface DisplayAttribute {
   label: string;
   key: keyof Publication;
-  type: "text" | "link";
+  type: 'text' | 'link';
   url?: string;
 }
 
@@ -131,89 +127,60 @@ type DisplayConfig = DisplayAttribute[];
 
 interface Display {
   numbOfPublishPerView: number;
-  views: DisplayConfig
+  views: DisplayConfig;
 }
 
-
-const Publication = ({ publications, display }: {
-  publications: Publication[],
-  display: Display
+const Publication = ({
+  publications,
+  display,
+}: {
+  publications: Publication[];
+  display: Display;
 }) => {
-  const sortPublicationList = [...publications].sort(
-    (a, b) =>
-      b.year_of_publication - a.year_of_publication ||
-      a.publication_title.localeCompare(b.publication_title)
-  );
-
-  const splitPublications = useCallback(() => {
-    const first: Publication[] = [];
-    const second: Publication[] = [];
-
-    sortPublicationList.forEach((item, index) => {
-      if (index % 2 === 0) {
-        first.push(item);
-      } else {
-        second.push(item);
-      }
-    });
-
-    return [first, second];
-  }, [sortPublicationList]);
-
-  const [leftPanelList, rightPanelList] = splitPublications();
-
   const getURL = (id: string | number, url: string) => url.concat(String(id));
 
-  const renderPublicationList = (publication: Publication, index: number) => (
-    <PublicationList key={`publication-${index}`}>
-      <PublicationTitle>{publication.publication_title}</PublicationTitle>
-      <MetadataWrapper>
-        {display.views.map((attr, attrIndex) => (
-          <MetadataItem key={`metadata-${index}-${attrIndex}`}>
-            <MetadataKey>{attr.label}</MetadataKey>
-            {attr.type === 'link' ? (
-              <LinkWrapper
-                href={getURL(publication[attr.key], attr.url)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <LinkContent>
-                  <div>{publication[attr.key]}</div>
-                  <LinkIcon src={externalIcon} alt="external link" />
-                </LinkContent>
-              </LinkWrapper>
-            ) : (
-              <MetadataValue>{publication[attr.key]}</MetadataValue>
-            )}
-          </MetadataItem>
-        ))}
-      </MetadataWrapper>
-    </PublicationList>
+  const renderPublication = useCallback(
+    (pub: Publication, idx: number) => (
+      <PublicationList key={`publication-${idx}`} hasBorder={idx % 2 === 0}>
+        <PublicationContent>
+          <PublicationTitle>{pub.publication_title}</PublicationTitle>
+          <MetadataWrapper>
+            {display.views.map((attr, aIdx) => (
+              <MetadataItem key={`meta-${idx}-${aIdx}`}>
+                <MetadataKey>{attr.label}</MetadataKey>
+                {attr.type === 'link' && attr.url ? (
+                  <LinkContent
+                    href={getURL(pub[attr.key], attr.url)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div>{pub[attr.key]}</div>
+                    <LinkIcon src={externalIcon} alt="external link" />
+                  </LinkContent>
+                ) : (
+                  <MetadataValue>{pub[attr.key]}</MetadataValue>
+                )}
+              </MetadataItem>
+            ))}
+          </MetadataWrapper>
+        </PublicationContent>
+      </PublicationList>
+    ),
+    [display.views]
   );
 
   return (
-    <Container isEmpty={!publications.length}>
-      {
-        !publications.length ? (
-          <NoPublicationsMessage>
-            This study currently has no associated publications
-          </NoPublicationsMessage>
-
-        ) : (
-          <>
-            <LeftPanel>
-              {
-                leftPanelList.map(renderPublicationList)
-              }
-            </LeftPanel>
-            <RightPanel>
-              {rightPanelList.map(renderPublicationList)}
-            </RightPanel>
-
-          </>
-        )
-      }
-    </Container>
+    <PublicationsContainer>
+      {publications.length ? (
+        publications.map(renderPublication)
+      ) : (
+        <NoPublicationsMessage>
+          This study currently has no associated publications
+        </NoPublicationsMessage>
+      )}
+      <Placeholder hasBorder />
+      <Placeholder />
+    </PublicationsContainer>
   );
 };
 
