@@ -37,18 +37,19 @@ export const ContainerHeaderGrid = styled(Grid)({
   maxWidth: '635px',
 });
 
-export const DetailContainerHeaderText = styled.span<{ isDiagnosis?: boolean }>(
-  ({ isDiagnosis }) => ({
-    textTransform: 'uppercase',
-    fontFamily: 'Open Sans',
-    fontSize: '17px',
-    lineHeight: '29.75px',
-    letterSpacing: '0.29px',
-    color: '#01769D',
-    fontWeight: 400,
-    paddingLeft: isDiagnosis ? '32px' : 0,
-  })
-);
+export const DetailContainerHeaderText = styled.span<{
+  isDiagnosis?: boolean;
+  willOverflow?: boolean;
+}>(({ isDiagnosis, willOverflow }) => ({
+  textTransform: 'uppercase',
+  fontFamily: 'Open Sans',
+  fontSize: '17px',
+  lineHeight: '29.75px',
+  letterSpacing: '0.29px',
+  color: '#01769D',
+  fontWeight: 400,
+  paddingLeft: isDiagnosis && willOverflow ? '32px' : 0,
+}));
 
 export const StudyDescriptionGrid = styled(Grid)({
   paddingTop: '0px !important',

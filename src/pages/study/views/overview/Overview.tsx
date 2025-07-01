@@ -126,14 +126,21 @@ const MetadataWrapperV2 = styled.div({
   },
 });
 
-const DiagnosesWrapper = styled.div({
-  '& .list': {
-    overflowY: 'auto',
-    maxHeight: '235px',
-    maxWidth: '50%',
-    height: '100%',
-  },
-});
+const DiagnosesWrapper = styled.div<{ willOverflow?: boolean }>(
+  ({ willOverflow }) => ({
+    '& .list': {
+      overflowY: 'auto',
+      maxHeight: '235px',
+      maxWidth: '50%',
+      height: '100%',
+    },
+    '& .custom-study-details-scrollbar': {
+      direction: 'rtl',
+      textAlign: 'left',
+      paddingLeft: willOverflow ? '32px' : 0,
+    },
+  })
+);
 
 const Overview: React.FC<OverviewProps> = ({
   studyData,
@@ -147,6 +154,8 @@ const Overview: React.FC<OverviewProps> = ({
   setCurrentTab,
   humanRelevanceCardData,
 }) => {
+  const willOverflow = diagnoses.length >= 8;
+
   return (
     <Container>
       <LeftPanel>
@@ -238,8 +247,11 @@ const Overview: React.FC<OverviewProps> = ({
       <RightPanel>
         {!studyDisposition(studyData.study_disposition) && (
           <>
-            <DiagnosesWrapper>
-              <DetailContainerHeaderText isDiagnosis={true}>
+            <DiagnosesWrapper willOverflow={diagnoses.length >= 8}>
+              <DetailContainerHeaderText
+                isDiagnosis={true}
+                willOverflow={willOverflow}
+              >
                 Diagnoses
               </DetailContainerHeaderText>
               <div className="list custom-study-details-scrollbar">
@@ -251,7 +263,7 @@ const Overview: React.FC<OverviewProps> = ({
               </div>
               <HrLine
                 style={{
-                  marginLeft: '32px',
+                  marginLeft: willOverflow ? '32px' : 0,
                   marginTop: '32px',
                 }}
               />
