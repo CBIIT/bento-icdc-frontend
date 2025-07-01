@@ -90,6 +90,7 @@ const LinkIcon = styled.img`
 `;
 
 const NoPublicationsMessage = styled.div`
+  grid-column: 1 / -1;
   padding-left: 32px;
   margin-top: 20px;
   font-size: 18px;
@@ -101,7 +102,7 @@ const NoPublicationsMessage = styled.div`
   color: #000;
 `;
 
-const Placeholder = styled.div<{ hasBorder?: boolean }>`
+const Placeholder = styled.div<{ hasBorder: boolean }>`
   height: 100px;
   border-right: ${({ hasBorder }) =>
     hasBorder ? '1px solid #81A6B9' : 'none'};
@@ -169,19 +170,30 @@ const Publication = ({
     [display.views]
   );
 
-  return (
-    <PublicationsContainer>
-      {publications.length ? (
-        publications.map(renderPublication)
-      ) : (
+  if (publications.length === 0) {
+    return (
+      <PublicationsContainer>
         <NoPublicationsMessage>
           This study currently has no associated publications
         </NoPublicationsMessage>
-      )}
-      <Placeholder hasBorder />
-      <Placeholder />
-    </PublicationsContainer>
+      </PublicationsContainer>
+    );
+  }
+
+  const items = publications.map(renderPublication);
+
+  // If odd number of publications, fill the last row
+  if (publications.length % 2 === 1) {
+    items.push(<Placeholder key="placeholder-fill" hasBorder={false} />);
+  }
+
+  // Always add two placeholders
+  items.push(
+    <Placeholder key="placeholder-left" hasBorder={true} />,
+    <Placeholder key="placeholder-right" hasBorder={false} />
   );
+
+  return <PublicationsContainer>{items}</PublicationsContainer>;
 };
 
 export default Publication;
