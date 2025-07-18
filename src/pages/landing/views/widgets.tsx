@@ -3,7 +3,6 @@ import React from 'react';
 import { Grid, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { pageData } from '../../../bento/landingPageData';
 
 // Styled Components
 const StyledGrid = styled(Grid)`
@@ -31,21 +30,28 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  background: #ffffff;
-  color: #103556;
+  font-family: Lato;
+  font-weight: 700;
+  font-style: Bold;
   font-size: 18px;
-  font-weight: 900;
+  line-height: 18px;
+  letter-spacing: 0%;
+  color: #000000;
+  background: #ffffff;
   border-radius: 13px;
   height: 30px;
   padding-top: 5px;
-  line-height: 25px;
 `;
 
 const Description = styled.div`
-  font-size: 13px;
   padding: 1px 5px 10px 5px;
   color: #000000;
-  height: 25px;
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 13px;
+  line-height: 17px;
+  letter-spacing: 0%;
 `;
 
 const ImageContainer = styled.div`
@@ -64,7 +70,9 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Widgets = ({ activeTemplate }: { activeTemplate: string }) => {
+const Widgets = ({ pageData }: { pageData: any }) => {
+  const activeTemplate = pageData.tabs[3].content.template;
+
   return (
     <StyledGrid
       activeTemplate={activeTemplate}
@@ -72,7 +80,7 @@ const Widgets = ({ activeTemplate }: { activeTemplate: string }) => {
       rowSpacing={1}
       columnSpacing={{ xs: 1, sm: 1, md: 1 }}
     >
-      {pageData.widgets.map((widget, index) => (
+      {pageData.widgets.map((widget: any, index: any) => (
         <StyledWidgetGrid key={`landingWidget-${index}`} item xs={3}>
           <Item>
             <StyledLink to={widget.callToActionLink}>

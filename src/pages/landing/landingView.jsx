@@ -8,7 +8,6 @@ import {
 import withStyles from '@mui/styles/withStyles';
 import { Link } from 'react-router-dom';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
-import ReactPlayer from 'react-player/youtube';
 import starImg from '../../assets/landing/Spark.png';
 import flare from '../../assets/landing/flare_bkgd.png';
 import dogImg from '../../assets/landing/canine_bubble.png';
@@ -25,12 +24,12 @@ import {
   CallToActionButton,
   WidgetsContainer,
   TwitterViewContainer,
-  YoutubeViewContainer,
   ImageWithCaptionView,
   ImageWithNoCaptionView,
   SmallIconView,
   LargeIconView,
 } from './landingView.styled';
+import VideoSpotlight from './views/VideoSpotlight';
 
 const custumTheme = createTheme(
   adaptV4Theme({
@@ -53,15 +52,7 @@ const generateSpotlightContent = (template, item) => {
         </TwitterViewContainer>
       );
     case 'youtube':
-      return (
-        <YoutubeViewContainer>
-          <ReactPlayer
-            url="https://www.youtube.com/watch?v=bIWaMKZ9pl4"
-            height="100%"
-            width="100%"
-          />
-        </YoutubeViewContainer>
-      );
+      return <VideoSpotlight />;
     case 'imageWithCaption':
       return (
         <ImageWithCaptionView>
@@ -98,7 +89,7 @@ const generateSpotlightContent = (template, item) => {
 
 const LandingView = ({ pageData }) => {
   const [currentTab, setCurrentTab] = React.useState(0);
-  const handleTabChange = (event, value) => {
+  const handleTabChange = (_event, value) => {
     setCurrentTab(value);
   };
 
@@ -124,7 +115,7 @@ const LandingView = ({ pageData }) => {
                   tabHighlightColor: {
                     color: '#ffffff',
                     fontWeight: '700',
-                    fontSize: '18px',
+                    fontSize: '14px',
                     height: '175px',
                     '& img': {
                       margin: 'auto',
@@ -151,11 +142,17 @@ const LandingView = ({ pageData }) => {
                   index={index}
                   innerDivStyle={{
                     flex: 1,
-                    height: '100%',
                     display: 'flex',
+                    gap: '32px',
                     width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    minWidth: '1127px',
+                    minHeight: '616px',
+                    borderRadius: '20px',
+                    padding: '48px',
+                    background:
+                      'linear-gradient(to right, rgba(25, 28, 32, 0.6), rgba(25, 28, 32, 0.1))',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '20px',
                   }}
                   style={{
                     flex: 1,
@@ -197,7 +194,7 @@ const LandingView = ({ pageData }) => {
                     </div>
                   </div>
                   <div className="right-section">
-                    {index === 0 && (
+                    {index === 1 && (
                       <div className="dog-and-human-icon-animation-container">
                         <div className="dog-and-human-icon-wrapper">
                           <SlideDown>
@@ -219,7 +216,7 @@ const LandingView = ({ pageData }) => {
                         </div>
                       </div>
                     )}
-                    {index === 1 && (
+                    {index === 0 && (
                       <div className="tab-1-image-wrappper">
                         <img
                           src={item.content.image}
@@ -235,6 +232,11 @@ const LandingView = ({ pageData }) => {
                           alt="icdc_studies"
                           className="tab-2-image"
                         />
+                        <img
+                          src={item.content.image}
+                          alt="icdc_studies"
+                          className="tab-2-second-image"
+                        />
                       </div>
                     )}
                     {index === 3 &&
@@ -248,7 +250,7 @@ const LandingView = ({ pageData }) => {
             </div>
           </TabsWidgetContainer>
           <WidgetsContainer>
-            <Widgets activeTemplate={pageData.tabs[3].content.template} />
+            <Widgets pageData={pageData} />
           </WidgetsContainer>
         </Container>
       </ThemeProvider>

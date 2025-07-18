@@ -109,46 +109,44 @@ export const TabsWidgetContainer = styled.div({
   },
 
   '& .right-panel': {
-    flex: '1',
-    maxWidth: 'calc(100%)', // 200px + 64px margin from left panel
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-
     '& .left-section': {
+      maxWidth: '550px',
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
+      alignItems: 'flex-start',
 
       '& .title-and-divider': {
-        position: 'relative',
-        marginBottom: '32px',
+        marginBottom: '40px',
 
         '& .title': {
-          fontSize: '32px',
+          fontSize: '35px',
           color: '#fff',
           fontFamily: 'Raleway',
           fontWeight: 'bold',
-          lineHeight: '40px',
-          marginBottom: '48px',
+          lineHeight: '35px',
+          marginBottom: '24px',
         },
 
         '& .divider': {
-          border: '2px solid #F5A313',
-          width: '40px',
-          position: 'absolute',
+          border: 'none',
+          borderTop: '3px solid #FFFFFF',
+          width: '60px',
+          margin: 0,
         },
       },
 
       '& .description': {
-        marginBottom: '16px',
+        marginBottom: '40px',
+        zIndex: '1',
         color: '#fff',
-        fontSize: '17px',
+        fontSize: '18px',
         fontFamily: 'Raleway',
-        fontWeight: 600,
-        lineHeight: '22px',
+        fontWeight: 500,
+        fontStyle: 'medium',
+        lineHeight: '25px',
+        maxWidth: '480px',
       },
     },
 
@@ -158,17 +156,13 @@ export const TabsWidgetContainer = styled.div({
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: '800px',
-
+      alignSelf: 'center',
       '& .dog-and-human-icon-animation-container': {
         flex: '1',
         height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative',
-        left: '32px',
-
         '& .dog-and-human-icon-wrapper': {
           position: 'relative',
           display: 'flex',
@@ -188,16 +182,22 @@ export const TabsWidgetContainer = styled.div({
       },
 
       '& .tab-1-image-wrappper': {
-        position: 'relative',
-        right: '64px',
-
         '& .tab-1-image': {
-          width: '800px',
+          maxHeight: '415px',
+          maxWidth: '560px',
         },
       },
 
       '& .tab-2-image': {
-        width: '800px',
+        maxHeight: '415px',
+        maxWidth: '560px',
+        visibility: 'hidden',
+      },
+
+      '& .tab-2-second-image': {
+        position: 'absolute',
+        left: '180px',
+        top: '0px',
       },
     },
   },
@@ -209,20 +209,22 @@ export const WidgetsContainer = styled.div({
 
 export const CallToActionButton = styled(Button)(() => {
   return {
-    borderRadius: '17px',
-    width: '178px',
-    height: '37px',
+    borderRadius: '10px',
+    padding: '12px 28px',
     lineHeight: '18px',
-    fontSize: '14px',
-    fontWeight: 'bolder',
+    fontSize: '16px',
+    fontWeight: '400',
+    zIndex: '1',
+    fontStyle: 'regular',
     color: '#ffffff',
-    textTransform: 'uppercase',
-    backgroundColor: '#A0680D',
-    fontFamily: 'Open Sans',
+    textTransform: 'none',
+    backgroundColor: '#B57D2C',
+    fontFamily: 'Lato',
     textDecoration: 'none',
+    border: '1px solid #D49A3F',
     boxShadow: 'none !important',
     '&:hover': {
-      backgroundColor: '#CB8311',
+      backgroundColor: '#D49A3F',
       color: '#ffffff',
     },
   };
