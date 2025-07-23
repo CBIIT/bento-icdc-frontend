@@ -160,31 +160,52 @@ const Overview: React.FC<OverviewProps> = ({
     <Container>
       <LeftPanel>
         {humanRelevanceCardData && (
-          <HumanRelevanceCard>
-            <div className="text header">
-              Relevance of this work to human Cancer
-            </div>
-
-            <div className="text content">
-              {humanRelevanceCardData?.human_relevance_statement ?? ''}
-            </div>
-
-            <Button
-              target="_blank"
-              href={
-                humanRelevanceCardData?.nci_link_to_relevant_human_cancer ?? ''
-              }
-              sx={{
-                borderColor: '#FFFFFF',
-                color: '#FFFFFF',
-                maxWidth: '180px',
+          <div
+            style={{
+              position: 'relative',
+            }}
+          >
+            <img
+              src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/ICDC-3961/icdc/images/svgs/study-details-human-rel-icon.svg"
+              alt="human-rel-icon"
+              style={{
+                width: '54px',
+                height: '54px',
+                position: 'absolute',
+                top: '20px',
+                left: '-35px',
               }}
-              variant="outlined"
-              endIcon={<LaunchIcon sx={{ color: '#ffffff' }} />}
-            >
-              Resource Link
-            </Button>
-          </HumanRelevanceCard>
+            />
+            <HumanRelevanceCard>
+              <div className="text header">
+                Relevance of this work to human Cancer
+              </div>
+
+              <div className="text content">
+                {humanRelevanceCardData?.human_relevance_statement ?? ''}
+              </div>
+
+              <Button
+                target="_blank"
+                href={
+                  humanRelevanceCardData?.nci_link_to_relevant_human_cancer ??
+                  ''
+                }
+                sx={{
+                  borderColor: '#FFFFFF',
+                  color: '#FFFFFF',
+                  maxWidth: '180px',
+                  '&:hover': {
+                    backgroundColor: '#1E1E1E', // Change background color on hover
+                  },
+                }}
+                variant="outlined"
+                endIcon={<LaunchIcon sx={{ color: '#ffffff' }} />}
+              >
+                Resource Link
+              </Button>
+            </HumanRelevanceCard>
+          </div>
         )}
 
         {/* Description */}

@@ -22,7 +22,7 @@ export const embargoFileIcon =
 export const embargoHeaderIcon =
   'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-embargo-study-header.svg';
 export const headerIcon =
-  'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg';
+  'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/ICDC-3961/icdc/images/svgs/study-details-page-icon.svg';
 export const externalIcon =
   'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/cart_ExternalLink.svg';
 const sampleProfileTabTextStyle = {
