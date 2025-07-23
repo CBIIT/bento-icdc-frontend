@@ -368,6 +368,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
           <Grid container>
             <Grid item xs={12}>
               <Tab
+                tabPadding="12px 0"
                 styleClasses={{
                   tabPrimaryColor: {
                     color: '#507B91',
