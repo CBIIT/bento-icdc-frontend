@@ -6,7 +6,7 @@ export const Container = styled.div({
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
-  marginBottom: '8px',
+  marginBottom: '-16px',
   whiteSpace: 'nowrap',
 });
 

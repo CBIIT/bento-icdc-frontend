@@ -9,6 +9,19 @@ const StyledLine = styled.hr<{ styles: CSSProperties }>(({ styles }) => {
   };
 });
 
+const StyledTabs = styled(Tabs)({
+  '& .MuiTabs-list': {
+    gap: '32px !important',
+  },
+});
+
+const StyledTab = styled(Tab)({
+  '&.MuiTab-root': {
+    padding: '12px 16px',
+    minWidth: '0',
+  },
+});
+
 interface TabItemsProps {
   styleClasses: {
     tabPrimaryColor: CSSProperties;
@@ -51,7 +64,7 @@ const TabItems: React.FC<TabItemsProps> = ({
   }
 
   const TABs = tabItems.map((tab, index) => (
-    <Tab
+    <StyledTab
       label={getTabLalbel(tab.label, tab.icon, index)}
       key={index}
       disableRipple
@@ -60,14 +73,14 @@ const TabItems: React.FC<TabItemsProps> = ({
 
   return (
     <>
-      <Tabs
+      <StyledTabs
         onChange={(event, value) => handleTabChange(event, value)}
         value={currentTab}
         TabIndicatorProps={{ style: { background: 'none' } }}
         orientation={orientation}
       >
         {TABs}
-      </Tabs>
+      </StyledTabs>
       <StyledLine styles={styleClasses.hrLine} />
     </>
   );

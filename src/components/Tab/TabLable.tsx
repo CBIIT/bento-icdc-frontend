@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import styled from '@emotion/styled';
+import { startCase } from 'lodash';
 
 const Wrapper = styled.div<{ primaryColorStyles: CSSProperties }>(
   ({ primaryColorStyles }) => {
@@ -30,7 +31,7 @@ const TabLabel: React.FC<TabLabelProps> = ({
 }) => (
   <Wrapper primaryColorStyles={primaryColorStyles}>
     {icon && <img src={icon} alt="icdc_carousel_tabs" />}
-    <span>{title} </span>
+    <span>{startCase(title.toLowerCase())} </span>
   </Wrapper>
 );
 

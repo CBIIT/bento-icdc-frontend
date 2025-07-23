@@ -110,6 +110,8 @@ const LandingView = ({ pageData }) => {
                       width: '90px',
                       display: 'block',
                       margin: 'auto',
+                      border: '1px solid #fff',
+                      borderRadius: '50%',
                     },
                   },
                   tabHighlightColor: {
@@ -121,6 +123,8 @@ const LandingView = ({ pageData }) => {
                       margin: 'auto',
                       width: '113px',
                       display: 'block',
+                      border: '1px solid #fff',
+                      borderRadius: '50%',
                     },
                   },
                   hrLine: {

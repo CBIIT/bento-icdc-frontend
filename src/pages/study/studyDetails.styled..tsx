@@ -31,7 +31,7 @@ export const Header = styled.div({
       flex: 1,
       marginRight: '18px',
       position: 'relative',
-      top: '10px',
+      top: '5px',
     },
   },
 });
@@ -51,6 +51,7 @@ export const Logo = styled.div({
 export const HeaderTitle = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  gap: '8px',
 });
 
 export const HeaderMainTitle = styled.div({
@@ -61,10 +62,9 @@ export const HeaderMainTitle = styled.div({
   fontSize: '19px',
   height: '12px',
   lineHeight: '17px',
-  marginBottom: '8px',
   display: 'flex',
   alignItems: 'center',
-  gap: '70px',
+  gap: '32px',
   '& .clinical-study-designation': {
     fontFamily: 'Open Sans',
     fontWeight: 700,
@@ -104,6 +104,7 @@ export const HeaderAccessionItem = styled.div({
   alignItems: 'center',
   padding: '4px 8px',
   gap: '8px',
+  height: '21px',
 });
 
 export const AccessionLabel = styled.div({
@@ -127,7 +128,6 @@ export const AccessionValue = styled.div({
 
 export const NameWrapper = styled.div<{ isLong: boolean }>(({ isLong }) => {
   const base: CSSProperties = {
-    paddingTop: '8px',
     fontFamily: 'Inter',
     fontWeight: 400,
     fontSize: '16px',
@@ -140,7 +140,6 @@ export const NameWrapper = styled.div<{ isLong: boolean }>(({ isLong }) => {
   if (isLong) {
     return {
       ...base,
-      paddingLeft: '3px',
       paddingRight: '200px',
       marginBottom: '-9px',
     };
@@ -149,7 +148,6 @@ export const NameWrapper = styled.div<{ isLong: boolean }>(({ isLong }) => {
   return {
     ...base,
     maxHeight: '45px',
-    paddingLeft: '3px',
     paddingRight: '200px',
   };
 });
@@ -245,8 +243,8 @@ export const HeaderButtonLinkText = styled.span({
 export const DetailContainer = styled.div({
   margin: 'auto',
   paddingTop: '30px',
-  paddingLeft: '50px',
-  paddingRight: '50px',
+  paddingLeft: '56px',
+  paddingRight: '56px',
   fontFamily: 'Open Sans',
   letterSpacing: '0.014em',
   color: '#000000',
