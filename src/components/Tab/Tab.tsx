@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Tabs, Tab, Orientation } from '@mui/material';
+import { Tabs, Tab, Orientation, TabProps } from '@mui/material';
 import TabLabel from './TabLable';
 import styled from '@emotion/styled';
 
@@ -15,14 +15,19 @@ const StyledTabs = styled(Tabs)({
   },
 });
 
-const StyledTab = styled(Tab)({
+interface StyledTabProps extends TabProps {
+  paddingValue?: string;
+}
+
+const StyledTab = styled(Tab)<StyledTabProps>(({ paddingValue }) => ({
   '&.MuiTab-root': {
-    padding: '12px 16px',
+    padding: paddingValue || '12px 16px',
     minWidth: '0',
   },
-});
+}));
 
 interface TabItemsProps {
+  tabPadding?: string;
   styleClasses: {
     tabPrimaryColor: CSSProperties;
     tabHighlightColor: CSSProperties;
@@ -48,6 +53,7 @@ const TabItems: React.FC<TabItemsProps> = ({
   handleTabChange,
   currentTab,
   orientation,
+  tabPadding,
 }) => {
   function getTabLalbel(title: string, image: string, index: number) {
     return (
@@ -68,6 +74,7 @@ const TabItems: React.FC<TabItemsProps> = ({
       label={getTabLalbel(tab.label, tab.icon, index)}
       key={index}
       disableRipple
+      paddingValue={tabPadding}
     />
   ));
 
