@@ -34,7 +34,6 @@ import {
   FileIcon,
   Header,
   HeaderAccessionItem,
-  HeaderBar,
   HeaderButton,
   HeaderButtonLink,
   HeaderButtonLinkNumber,
@@ -201,7 +200,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     initTab === 'file' ? 2 : 0
   );
   const handleTabChange = (
-    event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element, Event>,
     value: number
   ) => {
     setCurrentTab(value);
@@ -384,7 +383,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                     fontSize: '17px',
                     lineHeight: '29.75px',
                     letterSpacing: '0',
-                    borderBottom: '8px solid #0296C9',
+                    borderBottom: '5px solid #0296C9',
                   },
                   hrLine: {
                     marginBottom: '0',

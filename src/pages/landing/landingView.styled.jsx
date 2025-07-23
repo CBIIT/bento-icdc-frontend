@@ -218,10 +218,10 @@ export const CallToActionButton = styled(Button)(() => {
     fontStyle: 'regular',
     color: '#ffffff',
     textTransform: 'none',
-    backgroundColor: '#B57D2C',
+    backgroundColor: '#B35000',
     fontFamily: 'Lato',
     textDecoration: 'none',
-    border: '1px solid #D49A3F',
+    border: '1px solid #C9956F',
     boxShadow: 'none !important',
     '&:hover': {
       backgroundColor: '#D49A3F',
