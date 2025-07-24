@@ -73,7 +73,7 @@ const PlaylistItem = styled.li`
   align-items: center;
   padding: 16px;
   background-color: #222222;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #fff;
   color: #ffffff;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
