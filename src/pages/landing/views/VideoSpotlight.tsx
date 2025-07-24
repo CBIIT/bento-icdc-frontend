@@ -52,7 +52,7 @@ const Playlist = styled.ul`
   padding-left: 10px;
 
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 9px;
   }
   &::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
@@ -72,7 +72,7 @@ const PlaylistItem = styled.li`
   display: flex;
   align-items: center;
   padding: 16px;
-  background-color: rgba(25, 28, 32, 0.7);
+  background-color: #222222;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
   font-family: 'Open Sans', sans-serif;
@@ -121,8 +121,9 @@ const VideoTitle = styled.span`
 const videoData = [
   {
     id: 1,
-    title: '60 Minutes Spotlight on Comparative Oncology',
-    videoId: '8wWeaGKT3Ak',
+    title:
+      'NCI Cancer Research Data Commons – Harmonizing Research & Data Science for Better Clinical Outcomes',
+    videoId: 'tk1nEX2gnqk',
   },
   {
     id: 2,
