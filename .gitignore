@@ -13,10 +13,11 @@
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env
+.env.development*
+.env.local*
+.env.test*
+.env.production*
 .idea/*.*
 .idea/*
 launch.json
@@ -31,3 +32,7 @@ src/bento/.localSearchData.js.swp
 *.swp
 src/bento/.localSearchData.js.swp
 public/injectEnv.js
+
+
+.envrc
+.direnv/

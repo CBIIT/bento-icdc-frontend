@@ -1,7 +1,5 @@
-import zIndex from "@material-ui/core/styles/zIndex";
-
 export default () => ({
-  dropDownBtnContainer : {
+  dropDownBtnContainer: {
     float: 'right',
   },
   disableDropDownBtn: {
@@ -99,7 +97,7 @@ export default () => ({
   },
   downloadFileManifestTooltip: {
     // display: 'flex',
-    gap: '8px'
+    gap: '8px',
   },
   cgcIcon: {
     marginTop: '10px',

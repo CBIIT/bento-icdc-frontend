@@ -1,7 +1,7 @@
 # DAL Custodian Configuration
 
 Configuration options for the DAL on the **ProgramDetailPage** can be found in
-``` /src/bento/programDetailData.js```
+` /src/bento/programDetailData.js`
 from line 37-68
 
 ```
@@ -40,7 +40,7 @@ from line 37-68
 ```
 
 Configuration options for the DAL on the **StudiesViewPage** can be found in
-``` /src/bento/studiesData.js```
+` /src/bento/studiesData.js`
 from line 53-102
 
 ```
@@ -79,14 +79,15 @@ from line 53-102
 ```
 
 ### Config options
+
 - display: Toggles on and off display of indicator.
 - icon: accepts a path to an image for the indicator icon.
 - header: text displayed in tooltip on hover.
 
 To configure the order in which the indicators appear, just rearrange th order in the custodianConfig object.
-eg: 
+eg:
 
-```    
+```
 {
       dataField: 'numberOfStudyFiles',
       header: 'Study File(s)',
@@ -98,10 +99,10 @@ eg:
       header: 'Image Collection(s)',
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-ImageCollection.svg',
-    }, 
+    },
 ```
 
-to 
+to
 
 ```
     {
@@ -115,7 +116,7 @@ to
       header: 'Study File(s)',
       display: true,
       icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/StudyFiles_.svg',
-    }, 
+    },
 ```
 
 will switch positions.

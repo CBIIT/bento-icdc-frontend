@@ -10,7 +10,9 @@ export const statsStyling = {
   },
   statsSection: {
     height: '60px',
+    zIndex: '100',
     alignItems: 'center',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
   },
   statsGroup: {
     margin: '0px',
@@ -37,7 +39,7 @@ export const statsStyling = {
     textTransform: 'none',
     margin: '0px 0px 0px 8px',
     float: 'left',
-    fontWeight: 'normal'
+    fontWeight: 'normal',
   },
 };
 
@@ -47,14 +49,16 @@ export const globalStatsData = [
     statTitle: 'Data Volume',
     type: 'field',
     statAPI: 'volumeOfData',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Data_Vol_.svg',
+    statIconSrc:
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Data_Vol_.svg',
     statIconAlt: 'Data Volume Stats Bar Icon',
   },
   {
     statTitle: 'Programs',
     type: 'field',
     statAPI: 'numberOfPrograms',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Programs_.svg',
+    statIconSrc:
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Programs_.svg',
     // statIconSrc: '../assets/glo-icons/Programs.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
@@ -62,35 +66,40 @@ export const globalStatsData = [
     statTitle: 'Studies',
     type: 'field',
     statAPI: 'numberOfStudies',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Studies_.svg',
+    statIconSrc:
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Studies_.svg',
     statIconAlt: 'Studies Stats Bar Icon',
   },
   {
     statTitle: 'Cases',
     type: 'field',
     statAPI: 'numberOfCases',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Cases-v2.svg',
+    statIconSrc:
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Cases-v2.svg',
     statIconAlt: 'Studies Stats Bar Icon',
   },
   {
     statTitle: 'Samples',
     type: 'field',
     statAPI: 'numberOfSamples',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Samples_.svg',
+    statIconSrc:
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Samples_.svg',
     statIconAlt: 'Samples Stats Bar Icon',
   },
   {
     statTitle: 'Case Files',
     type: 'field',
     statAPI: 'numberOfFiles',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
+    statIconSrc:
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/CaseFiles_.svg',
     statIconAlt: 'Files Stats Bar Icon',
   },
   {
     statTitle: 'Study Files',
     type: 'field',
     statAPI: 'numberOfStudyFiles',
-    statIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyFiles_.svg',
+    statIconSrc:
+      'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyFiles_.svg',
     // statIconSrc: 'http://localhost:3000/src/assets/glo-icons/StudyFiles.svg',
     statIconAlt: 'Study Files Stats Bar Icon',
   },
@@ -104,14 +113,15 @@ export const globalStatsData = [
 ];
 
 // --------------- GraphQL query - Retrieve stats details --------------
-export const GET_GLOBAL_STATS_DATA_QUERY = gql`{
-  numberOfStudies
-  numberOfCases
-  numberOfSamples
-  numberOfFiles
-  numberOfStudyFiles
-  numberOfPrograms
-  numberOfAliquots
-  volumeOfData
+export const GET_GLOBAL_STATS_DATA_QUERY = gql`
+  query getGlobalStatsDataQuery {
+    numberOfStudies
+    numberOfCases
+    numberOfSamples
+    numberOfFiles
+    numberOfStudyFiles
+    numberOfPrograms
+    numberOfAliquots
+    volumeOfData
   }
-  `;
+`;

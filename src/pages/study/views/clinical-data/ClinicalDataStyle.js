@@ -7,12 +7,18 @@ export default () => ({
   },
   paragraph: {
     fontFamily: 'Open Sans',
-    fontSize: '16px',
-    fontWeight: '400',
-    lineHeight: '23px',
+    fontSize: '18px',
+    fontWeight: 400,
+    lineHeight: '30px',
     letterSpacing: '0.2px',
+    color: '#000',
   },
   topDownloadBtn: {
     textAlign: 'right',
+  },
+  paginatedTableWrapper: {
+    overflowY: 'auto',
+    marginBottom: '32px',
+    border: '2px solid #f2f2f2',
   },
 });

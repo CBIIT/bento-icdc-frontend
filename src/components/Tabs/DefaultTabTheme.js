@@ -21,7 +21,7 @@ const customTheme = {
       textTransform: 'none',
       fontFamily: 'Lato',
       borderTop: '7px solid #c6c9cd',
-      '&.Mui-selected': {
+      '&$selected': {
         '&.cases': {
           color: '#AD4E00 !important',
           borderTop: '7px solid #FF9742',

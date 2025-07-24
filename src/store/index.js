@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import { ddgraph, moduleReducers as submission, versionInfo } from 'data-model-navigator';
+import {
+  ddgraph,
+  moduleReducers as submission,
+  versionInfo,
+} from 'data-model-navigator';
 import {
   sideBarReducerGenerator,
   cartReducerGenerator,
@@ -9,6 +13,7 @@ import {
 } from '../bento-core';
 import { jbrowseView } from '../pages/JbrowseDetail/store/jborwse.reducer';
 import stats from '../components/Stats/StatsState';
+import { dashboardReducer } from '../pages/dashboard/store/Reducers';
 
 const { localFind } = LocalFindReducerGenerator();
 const { statusReducer } = sideBarReducerGenerator();
@@ -22,7 +27,8 @@ const reducers = {
   statusReducer,
   cartReducer,
   jbrowseView,
-  stats
+  stats,
+  dashboardReducer,
 };
 
 const store = configureStore({

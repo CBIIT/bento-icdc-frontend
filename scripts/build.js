@@ -6,7 +6,7 @@ process.env.NODE_ENV = 'production';
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   throw err;
 });
 
@@ -52,7 +52,7 @@ const config = configFactory('production');
 function copyPublicFolder() {
   fs.copySync(paths.appPublic, paths.appBuild, {
     dereference: true,
-    filter: (file) => file !== paths.appHtml,
+    filter: file => file !== paths.appHtml,
   });
 }
 
@@ -66,21 +66,21 @@ checkBrowsers(paths.appPath, isInteractive)
     // This lets us display how much they changed later.
     return measureFileSizesBeforeBuild(paths.appBuild);
   })
-  .then((previousFileSizes) => {
+  .then(previousFileSizes => {
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
     fs.emptyDirSync(paths.appBuild);
     // Merge with the public folder
     copyPublicFolder();
     // Start the webpack build
-    // eslint-disable-next-line no-use-before-define
+
     return build(previousFileSizes);
   })
   .then(
     ({ stats, previousFileSizes, warnings }) => {
       if (warnings.length) {
         /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-       
+
         console.warn(chalk.yellow('Compiled with warnings.\n'));
         console.warn(warnings.join('\n\n'));
         console.warn(
@@ -93,14 +93,14 @@ checkBrowsers(paths.appPath, isInteractive)
             chalk.cyan('// eslint-disable-next-line') +
             ' to the line before.\n'
         );
-      } 
+      }
 
       printFileSizesAfterBuild(
         stats,
         previousFileSizes,
         paths.appBuild,
         WARN_AFTER_BUNDLE_GZIP_SIZE,
-        WARN_AFTER_CHUNK_GZIP_SIZE,
+        WARN_AFTER_CHUNK_GZIP_SIZE
       );
 
       const appPackage = require(paths.appPackageJson);
@@ -112,21 +112,17 @@ checkBrowsers(paths.appPath, isInteractive)
         publicUrl,
         publicPath,
         buildFolder,
-        useYarn,
+        useYarn
       );
     },
-    (err) => {
-      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-
+    err => {
       console.error(chalk.red('Failed to compile.\n'));
       printBuildError(err);
       process.exit(1);
-    },
+    }
   )
-  .catch((err) => {
+  .catch(err => {
     if (err && err.message) {
-      /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-
       console.error(err.message);
     }
     process.exit(1);
@@ -134,7 +130,6 @@ checkBrowsers(paths.appPath, isInteractive)
 
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
-
   let compiler = webpack(config);
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
@@ -166,13 +161,11 @@ function build(previousFileSizes) {
           process.env.CI.toLowerCase() !== 'false') &&
         messages.warnings.length
       ) {
-        /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-
         console.warn(
           chalk.yellow(
             '\nTreating warnings as errors because process.env.CI = true.\n' +
               'Most CI servers set it automatically.\n'
-          ),
+          )
         );
         return reject(new Error(messages.warnings.join('\n\n')));
       }
@@ -186,7 +179,7 @@ function build(previousFileSizes) {
         return bfj
           .write(paths.appBuild + '/bundle-stats.json', stats.toJson())
           .then(() => resolve(resolveArgs))
-          .catch((error) => reject(new Error(error)));
+          .catch(error => reject(new Error(error)));
       }
 
       return resolve(resolveArgs);

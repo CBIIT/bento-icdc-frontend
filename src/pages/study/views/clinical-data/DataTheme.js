@@ -94,8 +94,8 @@ export const tblHeader = {
 const tblContainer = {
   MuiTableContainer: {
     root: {
-      overflowY: 'scroll',
       boxShadow: 'none',
+      overflowX: 'none',
       borderRadius: '0',
       maxHeight: '600px',
       marginBottom: '40px',
@@ -125,8 +125,7 @@ export const customTheme = {
   MuiTableContainer: {
     root: {
       width: '100%',
-      overflowX: 'auto',
-      transform: 'rotateX(180deg)',
+      // transform: 'rotateX(180deg)',
       boxShadow: 'none',
       borderRadius: '0',
       maxHeight: '400px',

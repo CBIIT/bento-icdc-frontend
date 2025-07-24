@@ -4,6 +4,8 @@ import {
   GET_MY_CART_DATA_QUERY_DESC,
   cartTable,
 } from '../../../bento/fileCentricCartWorkflowData';
+import { onInputSearchQueryChange } from '../../../pages/dashboard/store/Actions';
+import store from '../../../store';
 
 // pagination table behavior
 // customizeOnRowSelect,
@@ -13,44 +15,51 @@ import {
 // customizeChangeRowsPerPage,
 // customizeColumnViewChange,
 
-export const myFileTablePaginationOptions = (context) => ({
+export const myFileTablePaginationOptions = context => ({
   customizeSortByColumn: (column, order) => {
     const { dispatch, sortBy } = context;
-    const sort = (order === 'asc' && sortBy === column) ? 'desc' : 'asc';
+    const sort = order === 'asc' && sortBy === column ? 'desc' : 'asc';
     const value = {
       sortOrder: sort,
       sortBy: column,
-      query: sort === 'asc' ? GET_MY_CART_DATA_QUERY : GET_MY_CART_DATA_QUERY_DESC,
-      paginationAPIField: sort === 'asc' ? cartTable.paginationAPIField
-        : cartTable.paginationAPIFieldDesc,
+      query:
+        sort === 'asc' ? GET_MY_CART_DATA_QUERY : GET_MY_CART_DATA_QUERY_DESC,
+      paginationAPIField:
+        sort === 'asc'
+          ? cartTable.paginationAPIField
+          : cartTable.paginationAPIFieldDesc,
     };
     dispatch(customPaginationAction(value));
   },
   customizeToggleSelectAll: (event, Ids, includeIds, rows) => {
     event.stopPropagation();
-    const {
-      dispatch,
-      selectedRows = [], 
-      selectedFileIds = [],
-    } = context;
+    const { dispatch, selectedRows = [], selectedFileIds = [] } = context;
     let updateFilesId = [...selectedFileIds];
-    const fileIds = rows.map(({file_uuid: fileId}) => fileId);
+    const fileIds = rows.map(({ file_uuid: fileId }) => fileId);
     if (event.target.checked && !includeIds) {
       // select all
       const selecedFilesName = Ids.concat(selectedRows);
       updateFilesId = updateFilesId.concat(fileIds);
-      dispatch(customPaginationAction({
-        selectedRows: selecedFilesName,
-        selectedFileIds: updateFilesId,
-      }));
+      dispatch(
+        customPaginationAction({
+          selectedRows: selecedFilesName,
+          selectedFileIds: updateFilesId,
+        })
+      );
     } else {
       // unchecked all
-      const excludeFilesName = selectedRows.filter((flName) => !Ids.includes(flName));
-      const excludeFilesId = selectedFileIds.filter((uuid) => !fileIds.includes(uuid));
-      dispatch(customPaginationAction({
-        selectedRows: excludeFilesName,
-        selectedFileIds: excludeFilesId,
-      }));
+      const excludeFilesName = selectedRows.filter(
+        flName => !Ids.includes(flName)
+      );
+      const excludeFilesId = selectedFileIds.filter(
+        uuid => !fileIds.includes(uuid)
+      );
+      dispatch(
+        customPaginationAction({
+          selectedRows: excludeFilesName,
+          selectedFileIds: excludeFilesId,
+        })
+      );
     }
   },
   customizeOnRowSelect: (event, row) => {
@@ -58,29 +67,25 @@ export const myFileTablePaginationOptions = (context) => ({
     // file_name and file_uuid are required to view in JBrowse
     // and download files respectively.
     event.stopPropagation();
-    const { dispatch, 
-      selectedRows = [], 
-      selectedFileIds = [],
-    } = context;
+    const { dispatch, selectedRows = [], selectedFileIds = [] } = context;
     let selectedFilesName = [...selectedRows];
     let updateFilesId = [...selectedFileIds];
-    const {
-      file_name: fileName,
-      file_uuid: fileId,
-    } = row;
+    const { file_name: fileName, file_uuid: fileId } = row;
 
     if (!row.isChecked) {
       selectedFilesName.push(fileName);
       updateFilesId.push(fileId);
     } else {
-      selectedFilesName = selectedFilesName.filter((file) => fileName !== file);
-      updateFilesId = updateFilesId.filter((id) => fileId !== id);
+      selectedFilesName = selectedFilesName.filter(file => fileName !== file);
+      updateFilesId = updateFilesId.filter(id => fileId !== id);
     }
-    dispatch(customPaginationAction({
-      selectedRows: selectedFilesName,
-      selectedFileIds: updateFilesId,
-    }));
-  }
+    dispatch(
+      customPaginationAction({
+        selectedRows: selectedFilesName,
+        selectedFileIds: updateFilesId,
+      })
+    );
+  },
 });
 
 export const paginationOptions = (context, config) => {
@@ -88,6 +93,17 @@ export const paginationOptions = (context, config) => {
     case 'myFiles':
       return {
         ...myFileTablePaginationOptions(context),
+      };
+    case 'case':
+    case 'samples':
+    case 'studyFiles':
+    case 'caseFiles':
+      return {
+        customizeSearchQueryChange: query => {
+          // dashboard uses global redux to update the searchQuery
+          // to update the search text
+          store.dispatch(onInputSearchQueryChange(query));
+        },
       };
     default:
       return {};

@@ -21,7 +21,8 @@ import Bosco from '../assets/landing/Bosco.jpg';
 
 export const pageData = {
   callToActionTitle: 'Integrated Canine Data Commons',
-  callToActionDescription: 'Exploring, analyzing, and understanding the biological relationships between human and canine cancers.',
+  callToActionDescription:
+    'Exploring, analyzing, and understanding the biological relationships between human and canine cancers.',
   callToActionButtonText: 'EXPLORE',
   callToActionLink: '/explore',
   landingPageStatsBar: [],
@@ -29,7 +30,8 @@ export const pageData = {
     alt: 'ICDC about',
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_About.png',
     titleText: 'About the Integrated Canine Data Commons (ICDC)',
-    descriptionText: 'NCI\'s Division of Cancer Treatment and Diagnosis (DCTD) designated the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects.',
+    descriptionText:
+      "NCI's Division of Cancer Treatment and Diagnosis (DCTD) designated the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of canine cancer data. ICDC was established to further research on human cancers by enabling comparative analysis with canine cancer. The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects.",
     callToActionText: 'READ MORE',
     callToActionLink: '/purpose', // This links to the "About" static page.
   },
@@ -61,7 +63,8 @@ export const pageData = {
     alt: 'ICDC cases',
     img: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/landingPage_Cases.png',
     titleText: 'Cases',
-    descriptionText: 'Search across cases and build cohorts from the programs and studies in ICDC. The data files from these cohorts can then be analyzed in the Cloud Resources.',
+    descriptionText:
+      'Search across cases and build cohorts from the programs and studies in ICDC. The data files from these cohorts can then be analyzed in the Cloud Resources.',
     callToActionText: 'EXPLORE',
     callToActionLink: '/explore', // This links to the cases dashboard.
   },
@@ -73,7 +76,8 @@ export const pageData = {
       icon: 'https://github.com/CBIIT/datacommons-assets/blob/main/icdc/images/png/Button.Explore.Active.png?raw=true',
       content: {
         callToActionTitle: 'Integrated\n Canine\n Data\n Commons',
-        callToActionDescription: 'Exploring, analyzing, and\n understanding the biological\n relationships between human\n and canine cancers.',
+        callToActionDescription:
+          'Exploring, analyzing, and\n understanding the biological\n relationships between human\n and canine cancers.',
         callToActionButtonText: 'EXPLORE ICDC',
         callToActionLink: '/explore',
         image: '',
@@ -86,7 +90,8 @@ export const pageData = {
       icon: datadictionaryIcon,
       content: {
         callToActionTitle: 'Delve\ninto the\n Data\n Model',
-        callToActionDescription: 'The ICDC data model provides a\n visual representation of how all the\n constituent nodes and values are arranged relative to each other.',
+        callToActionDescription:
+          'The ICDC data model provides a\n visual representation of how all the\n constituent nodes and values are arranged relative to each other.',
         callToActionButtonText: 'Data Model Explorer',
         callToActionLink: '/icdc-data-model',
         image: datadictionary,
@@ -99,7 +104,8 @@ export const pageData = {
       icon: studyActive,
       content: {
         callToActionTitle: 'ICDC\n Studies',
-        callToActionDescription: 'Browse the ICDC Studies with\n detailed overviews, sample\n profiles, associated publications\n and additional information.',
+        callToActionDescription:
+          'Browse the ICDC Studies with\n detailed overviews, sample\n profiles, associated publications\n and additional information.',
         callToActionButtonText: 'STUDIES LISTING',
         callToActionLink: '/studies',
         image: studies,
@@ -111,8 +117,10 @@ export const pageData = {
       value: 'icdc',
       icon: spotLight,
       content: {
-        callToActionTitle: 'Spotlight:\n New Canine\n Urothelial Carcinoma\n study now available',
-        callToActionDescription: 'Featured in EACR\'s \n Top 10 Cancer Research \n publications.',
+        callToActionTitle:
+          'Spotlight:\n New Canine\n Urothelial Carcinoma\n study now available',
+        callToActionDescription:
+          "Featured in EACR's \n Top 10 Cancer Research \n publications.",
         callToActionButtonText: 'VIEW THE STUDY',
         callToActionLink: '/study/UBC01',
         image: spotlightStudy,
@@ -125,7 +133,8 @@ export const pageData = {
         },
         imageWithCaption: {
           img: DogAtVet,
-          caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          caption:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         },
         noCaptionImage: {
           img: DogAtVet,

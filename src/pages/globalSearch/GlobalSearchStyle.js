@@ -13,7 +13,6 @@ const styles = () => ({
   },
   indicator: {
     backgroundColor: '#1C75BC',
-
   },
   tabContainter: {
     display: 'flex',
@@ -48,9 +47,7 @@ const styles = () => ({
       marginRight: '0px',
     },
   },
-  notchedOutline: {
-
-  },
+  notchedOutline: {},
   input: {
     borderRadius: '8px',
     borderColor: '#616161',
@@ -66,7 +63,6 @@ const styles = () => ({
   },
   autocomplete: {
     margin: '0 auto',
-    paddingTop: '57px',
   },
   chipSection: {
     display: 'flex',
@@ -93,7 +89,7 @@ const styles = () => ({
     marginBottom: '32px',
     marginRight: '24px',
     borderWidth: '1px',
-    borderColor: 'black',
+    borderColor: '#000000',
   },
   bodyContainer: {
     background: '#FFFFFF',
@@ -111,7 +107,7 @@ const styles = () => ({
   },
   backdrop: {
     // position: 'absolute',
-    zIndex: 99999,
+    zIndex: 900,
     background: 'rgba(0, 0, 0, 0.1)',
   },
   filterIcon: {

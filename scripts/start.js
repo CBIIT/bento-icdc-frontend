@@ -8,7 +8,7 @@ process.env.NODE_ENV = 'development';
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   throw err;
 });
 
@@ -66,7 +66,7 @@ checkBrowsers(paths.appPath, isInteractive)
     // run on a different port. `choosePort()` Promise resolves to the next free port.
     return choosePort(HOST, DEFAULT_PORT);
   })
-  .then((port) => {
+  .then(port => {
     if (port == null) {
       // We have not found a port.
       return;
@@ -76,7 +76,13 @@ checkBrowsers(paths.appPath, isInteractive)
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(protocol, HOST, port);
     // Create a webpack compiler that is configured with custom messages.
-    const compiler = createCompiler({ webpack, config, appName, urls, useYarn });
+    const compiler = createCompiler({
+      webpack,
+      config,
+      appName,
+      urls,
+      useYarn,
+    });
     // Load proxy config
     // const proxySetting = require(paths.appPackageJson).proxy;
     // const proxyConfig = prepareProxy(proxySetting, paths.appPublic);
@@ -85,8 +91,11 @@ checkBrowsers(paths.appPath, isInteractive)
     //   proxyConfig,
     //   urls.lanUrlForConfig
     // );
-    
-    const devServer = new WebpackDevServer({ port: port, open: true, liveReload: true }, compiler);
+
+    const devServer = new WebpackDevServer(
+      { port: port, open: true, liveReload: true },
+      compiler
+    );
     // Launch WebpackDevServer.
     devServer.start();
     // devServer.onListening(port, HOST, function(err){
@@ -106,7 +115,7 @@ checkBrowsers(paths.appPath, isInteractive)
     //   });
     // });
   })
-  .catch((err) => {
+  .catch(err => {
     if (err && err.message) {
       console.error(err.message);
     }

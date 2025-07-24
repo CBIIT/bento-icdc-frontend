@@ -11,5 +11,4 @@ export const facetSectionVariables = {
   },
 };
 
-export const query = {
-};
+export const query = {};

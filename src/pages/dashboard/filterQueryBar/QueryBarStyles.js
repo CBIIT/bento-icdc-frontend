@@ -96,30 +96,17 @@ export const customStyles = {
   localFind: {
     color: '#80430A',
   },
-  // localFindBackground: {
-  //   color: '#000',
-  //   padding: '2px 5px 2px 5px',
-  //   borderRadius: '5px',
-  //   border: '0.5px solid #646464',
-  //   backgroundColor: '#fdf3eb',
-  //   fontFamily: 'Nunito',
-  //   fontSize: '12px',
-  //   fontWeight: '600',
-  //   lineHeight: '16px',
-  //   letterSpacing: '0em',
-  // },
   divider: {
     borderRight: '1px solid #969696',
     marginRight: 0,
     marginLeft: 7,
     height: 26,
-    top: 24,
+    top: 15,
     position: 'absolute',
   },
   localFindBackground: {
     color: '#000',
     borderRadius: '5px',
-    // backgroundColor: '#FFB170',
   },
   standAloneInputSet: {
     color: '#80430A',

@@ -1,6 +1,13 @@
 import gql from 'graphql-tag';
 
-export const assemblyNames = ['canFam6', 'canFam5', 'canFam4', 'canFam3', 'canFam2', 'canFam1'];
+export const assemblyNames = [
+  'canFam6',
+  'canFam5',
+  'canFam4',
+  'canFam3',
+  'canFam2',
+  'canFam1',
+];
 
 export const BamAdapter = 'BamAdapter';
 export const VariantAdapter = 'VcfTabixAdapter';
@@ -10,7 +17,12 @@ export const FILE_TYPE_BAM = 'bam';
 export const FILE_TYPE_BAI = 'bai';
 export const FILE_TYPE_VCF = 'gz';
 export const FILE_TYPE_VCF_INDEX = 'tbi';
-export const JbrowserFiles = [FILE_TYPE_BAM, FILE_TYPE_BAI, FILE_TYPE_VCF, FILE_TYPE_VCF_INDEX];
+export const JbrowserFiles = [
+  FILE_TYPE_BAM,
+  FILE_TYPE_BAI,
+  FILE_TYPE_VCF,
+  FILE_TYPE_VCF_INDEX,
+];
 export const alignemntLocation = 'chr1:60,632,043..60,636,011';
 export const variantLocation = 'chr1:60,032,043..60,636,011';
 export const maxDisplayedBpPerPx = 50000;
@@ -35,15 +47,18 @@ export const DISABLE_RIPPLE = true;
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
   src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
+  alt: 'help icon',
 };
 
-export const jbrowseIconSrc = 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/jbrowseIcons/jbrowseLogo.svg';
+export const jbrowseIconSrc =
+  'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/jbrowseIcons/jbrowseLogo.svg';
 
 export const tooltipMsg1 = 'Select compatible files';
 
 export const tooltipMsg2 = 'View selected files in Jbrowse, up to 3 files max';
 
-export const tooltipErrMsg = 'Compatible files selected exceed the limit that can be loaded into a single session of JBrowse';
+export const tooltipErrMsg =
+  'Compatible files selected exceed the limit that can be loaded into a single session of JBrowse';
 
 export const alignment = {
   trackId: 'my_alignments_track',
@@ -70,7 +85,8 @@ export const annotation = {
   maxDisplayedBpPerPx: 50000,
   height: 200,
   metadata: {
-    source: 'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/002/285/GCF_000002285.3_CanFam3.1/',
+    source:
+      'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/002/285/GCF_000002285.3_CanFam3.1/',
     dateaccessed: '4/5/2022',
   },
   adapter: {
@@ -124,7 +140,8 @@ export const liftover = {
   maxDisplayedBpPerPx: 50000,
   height: 200,
   metadata: {
-    source: 'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.26_GRCh38/',
+    source:
+      'https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.26_GRCh38/',
     dateaccessed: '1/30/2023',
   },
   adapter: {
@@ -166,11 +183,7 @@ export const jBrowseOptions = {
   jBrowse: true,
   variants: true,
   alignments: true,
-  additionalTracks: [
-    annotation,
-    ensembl,
-    liftover,
-  ],
+  additionalTracks: [annotation, ensembl, liftover],
   optionalTracks: [
     {
       display: false,
@@ -254,242 +267,243 @@ export const jBrowseOptions = {
   ],
 };
 
-export const assemblies = [{
-  name: 'canFam3',
-  aliases: ['Broad CanFam3.1'],
-  sequence: {
-    type: 'ReferenceSequenceTrack',
-    trackId: 'reference_id_canFam3',
-    adapter: {
-      type: 'TwoBitAdapter',
-      twoBitLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.2bit',
-        locationType: 'UriLocation',
+export const assemblies = [
+  {
+    name: 'canFam3',
+    aliases: ['Broad CanFam3.1'],
+    sequence: {
+      type: 'ReferenceSequenceTrack',
+      trackId: 'reference_id_canFam3',
+      adapter: {
+        type: 'TwoBitAdapter',
+        twoBitLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.2bit',
+          locationType: 'UriLocation',
+        },
+        chromSizesLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chrom.sizes',
+          locationType: 'UriLocation',
+        },
       },
-      chromSizesLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chrom.sizes',
-        locationType: 'UriLocation',
+    },
+    refNameAliases: {
+      adapter: {
+        type: 'RefNameAliasAdapter',
+        location: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chromAlias.txt',
+          locationType: 'UriLocation',
+        },
       },
     },
   },
-  refNameAliases: {
-    adapter: {
-      type: 'RefNameAliasAdapter',
-      location: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam3/bigZips/canFam3.chromAlias.txt',
-        locationType: 'UriLocation',
+  {
+    name: 'canFam6',
+    aliases: ['Dog10K_Boxer_Tasha'],
+    sequence: {
+      type: 'ReferenceSequenceTrack',
+      trackId: 'reference_id_canFam6',
+      adapter: {
+        type: 'TwoBitAdapter',
+        twoBitLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam6/bigZips/canFam6.2bit',
+          locationType: 'UriLocation',
+        },
+        chromSizesLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam6/bigZips/canFam6.chrom.sizes',
+          locationType: 'UriLocation',
+        },
+      },
+    },
+    refNameAliases: {
+      adapter: {
+        type: 'RefNameAliasAdapter',
+        location: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam6/bigZips/canFam6.chromAlias.txt',
+          locationType: 'UriLocation',
+        },
       },
     },
   },
-},
-{
-  name: 'canFam6',
-  aliases: ['Dog10K_Boxer_Tasha'],
-  sequence: {
-    type: 'ReferenceSequenceTrack',
-    trackId: 'reference_id_canFam6',
-    adapter: {
-      type: 'TwoBitAdapter',
-      twoBitLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam6/bigZips/canFam6.2bit',
-        locationType: 'UriLocation',
+  {
+    name: 'canFam5',
+    aliases: ['UMICH_Zoey_3.1'],
+    sequence: {
+      type: 'ReferenceSequenceTrack',
+      trackId: 'reference_id_canFam5',
+      adapter: {
+        type: 'TwoBitAdapter',
+        twoBitLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam5/bigZips/canFam5.2bit',
+          locationType: 'UriLocation',
+        },
+        chromSizesLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam5/bigZips/canFam5.chrom.sizes',
+          locationType: 'UriLocation',
+        },
       },
-      chromSizesLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam6/bigZips/canFam6.chrom.sizes',
-        locationType: 'UriLocation',
+    },
+    refNameAliases: {
+      adapter: {
+        type: 'RefNameAliasAdapter',
+        location: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam5/bigZips/canFam5.chromAlias.txt',
+          locationType: 'UriLocation',
+        },
       },
     },
   },
-  refNameAliases: {
-    adapter: {
-      type: 'RefNameAliasAdapter',
-      location: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam6/bigZips/canFam6.chromAlias.txt',
-        locationType: 'UriLocation',
+  {
+    name: 'canFam4',
+    aliases: ['UU_Cfam_GSD_1.0'],
+    sequence: {
+      type: 'ReferenceSequenceTrack',
+      trackId: 'reference_id_canFam4',
+      adapter: {
+        type: 'TwoBitAdapter',
+        twoBitLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam4/bigZips/canFam4.2bit',
+          locationType: 'UriLocation',
+        },
+        chromSizesLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam4/bigZips/canFam4.chrom.sizes',
+          locationType: 'UriLocation',
+        },
+      },
+    },
+    refNameAliases: {
+      adapter: {
+        type: 'RefNameAliasAdapter',
+        location: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam4/bigZips/canFam4.chromAlias.txt',
+          locationType: 'UriLocation',
+        },
       },
     },
   },
-},
-{
-  name: 'canFam5',
-  aliases: ['UMICH_Zoey_3.1'],
-  sequence: {
-    type: 'ReferenceSequenceTrack',
-    trackId: 'reference_id_canFam5',
-    adapter: {
-      type: 'TwoBitAdapter',
-      twoBitLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam5/bigZips/canFam5.2bit',
-        locationType: 'UriLocation',
-      },
-      chromSizesLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam5/bigZips/canFam5.chrom.sizes',
-        locationType: 'UriLocation',
-      },
-    },
-  },
-  refNameAliases: {
-    adapter: {
-      type: 'RefNameAliasAdapter',
-      location: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam5/bigZips/canFam5.chromAlias.txt',
-        locationType: 'UriLocation',
+  {
+    name: 'canFam2',
+    aliases: ['Broad'],
+    sequence: {
+      type: 'ReferenceSequenceTrack',
+      trackId: 'reference_id_canFam2',
+      adapter: {
+        type: 'TwoBitAdapter',
+        twoBitLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam2/bigZips/canFam2.2bit',
+          locationType: 'UriLocation',
+        },
+        chromSizesLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam2/bigZips/canFam2.chrom.sizes',
+          locationType: 'UriLocation',
+        },
       },
     },
+    refNames: [
+      'chr1',
+      'chr2',
+      'chr3',
+      'chr4',
+      'chr5',
+      'chr6',
+      'chr7',
+      'chr8',
+      'chr9',
+      'chr10',
+      'chr11',
+      'chr12',
+      'chr13',
+      'chr14',
+      'chr15',
+      'chr16',
+      'chr17',
+      'chr18',
+      'chr19',
+      'chr20',
+      'chr21',
+      'chr22',
+      'chr23',
+      'chr24',
+      'chr25',
+      'chr26',
+      'chr27',
+      'chr28',
+      'chr29',
+      'chr30',
+      'chr31',
+      'chr32',
+      'chr33',
+      'chr34',
+      'chr35',
+      'chr36',
+      'chr37',
+      'chr38',
+      'chrM',
+      'chrUn',
+      'chrM',
+    ],
   },
-},
-{
-  name: 'canFam4',
-  aliases: ['UU_Cfam_GSD_1.0'],
-  sequence: {
-    type: 'ReferenceSequenceTrack',
-    trackId: 'reference_id_canFam4',
-    adapter: {
-      type: 'TwoBitAdapter',
-      twoBitLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam4/bigZips/canFam4.2bit',
-        locationType: 'UriLocation',
-      },
-      chromSizesLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam4/bigZips/canFam4.chrom.sizes',
-        locationType: 'UriLocation',
+  {
+    name: 'canFam1',
+    aliases: ['Broad'],
+    sequence: {
+      type: 'ReferenceSequenceTrack',
+      trackId: 'reference_id_canFam1',
+      adapter: {
+        type: 'TwoBitAdapter',
+        twoBitLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam1/bigZips/canFam1.2bit',
+          locationType: 'UriLocation',
+        },
+        chromSizesLocation: {
+          uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam1/bigZips/canFam1.chrom.sizes',
+          locationType: 'UriLocation',
+        },
       },
     },
+    refNames: [
+      'chr1',
+      'chr2',
+      'chr3',
+      'chr4',
+      'chr5',
+      'chr6',
+      'chr7',
+      'chr8',
+      'chr9',
+      'chr10',
+      'chr11',
+      'chr12',
+      'chr13',
+      'chr14',
+      'chr15',
+      'chr16',
+      'chr17',
+      'chr18',
+      'chr19',
+      'chr20',
+      'chr21',
+      'chr22',
+      'chr23',
+      'chr24',
+      'chr25',
+      'chr26',
+      'chr27',
+      'chr28',
+      'chr29',
+      'chr30',
+      'chr31',
+      'chr32',
+      'chr33',
+      'chr34',
+      'chr35',
+      'chr36',
+      'chr37',
+      'chr38',
+      'chrM',
+      'chrUn',
+      'chrM',
+    ],
   },
-  refNameAliases: {
-    adapter: {
-      type: 'RefNameAliasAdapter',
-      location: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam4/bigZips/canFam4.chromAlias.txt',
-        locationType: 'UriLocation',
-      },
-    },
-  },
-},
-{
-  name: 'canFam2',
-  aliases: ['Broad'],
-  sequence: {
-    type: 'ReferenceSequenceTrack',
-    trackId: 'reference_id_canFam2',
-    adapter: {
-      type: 'TwoBitAdapter',
-      twoBitLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam2/bigZips/canFam2.2bit',
-        locationType: 'UriLocation',
-      },
-      chromSizesLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam2/bigZips/canFam2.chrom.sizes',
-        locationType: 'UriLocation',
-      },
-    },
-  },
-  refNames: [
-    'chr1',
-    'chr2',
-    'chr3',
-    'chr4',
-    'chr5',
-    'chr6',
-    'chr7',
-    'chr8',
-    'chr9',
-    'chr10',
-    'chr11',
-    'chr12',
-    'chr13',
-    'chr14',
-    'chr15',
-    'chr16',
-    'chr17',
-    'chr18',
-    'chr19',
-    'chr20',
-    'chr21',
-    'chr22',
-    'chr23',
-    'chr24',
-    'chr25',
-    'chr26',
-    'chr27',
-    'chr28',
-    'chr29',
-    'chr30',
-    'chr31',
-    'chr32',
-    'chr33',
-    'chr34',
-    'chr35',
-    'chr36',
-    'chr37',
-    'chr38',
-    'chrM',
-    'chrUn',
-    'chrM',
-  ],
-},
-{
-  name: 'canFam1',
-  aliases: ['Broad'],
-  sequence: {
-    type: 'ReferenceSequenceTrack',
-    trackId: 'reference_id_canFam1',
-    adapter: {
-      type: 'TwoBitAdapter',
-      twoBitLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam1/bigZips/canFam1.2bit',
-        locationType: 'UriLocation',
-      },
-      chromSizesLocation: {
-        uri: 'https://hgdownload.soe.ucsc.edu/goldenPath/canFam1/bigZips/canFam1.chrom.sizes',
-        locationType: 'UriLocation',
-      },
-    },
-  },
-  refNames: [
-    'chr1',
-    'chr2',
-    'chr3',
-    'chr4',
-    'chr5',
-    'chr6',
-    'chr7',
-    'chr8',
-    'chr9',
-    'chr10',
-    'chr11',
-    'chr12',
-    'chr13',
-    'chr14',
-    'chr15',
-    'chr16',
-    'chr17',
-    'chr18',
-    'chr19',
-    'chr20',
-    'chr21',
-    'chr22',
-    'chr23',
-    'chr24',
-    'chr25',
-    'chr26',
-    'chr27',
-    'chr28',
-    'chr29',
-    'chr30',
-    'chr31',
-    'chr32',
-    'chr33',
-    'chr34',
-    'chr35',
-    'chr36',
-    'chr37',
-    'chr38',
-    'chrM',
-    'chrUn',
-    'chrM',
-  ],
-},
 ];
 
 export const tracks = [
@@ -500,8 +514,14 @@ export const tracks = [
     type: 'AlignmentsTrack',
     adapter: {
       type: 'BamAdapter',
-      bamLocation: { uri: 'https://s3.amazonaws.com/bento-bam-vcf-files/HCC1143.gathered.bam' },
-      index: { location: { uri: 'https://s3.amazonaws.com/bento-bam-vcf-files/HCC1143.gathered.bam.bai' } },
+      bamLocation: {
+        uri: 'https://s3.amazonaws.com/bento-bam-vcf-files/HCC1143.gathered.bam',
+      },
+      index: {
+        location: {
+          uri: 'https://s3.amazonaws.com/bento-bam-vcf-files/HCC1143.gathered.bam.bai',
+        },
+      },
     },
   },
   {
@@ -511,8 +531,14 @@ export const tracks = [
     assemblyNames: [...assemblyNames],
     adapter: {
       type: 'VcfTabixAdapter',
-      vcfGzLocation: { uri: 'https://bento-bam-vcf-files.s3.amazonaws.com/NA20811.10.sorted.vcf.gz' },
-      index: { location: { uri: 'https://bento-bam-vcf-files.s3.amazonaws.com/NA20811.10.sorted.vcf.gz.tbi' } },
+      vcfGzLocation: {
+        uri: 'https://bento-bam-vcf-files.s3.amazonaws.com/NA20811.10.sorted.vcf.gz',
+      },
+      index: {
+        location: {
+          uri: 'https://bento-bam-vcf-files.s3.amazonaws.com/NA20811.10.sorted.vcf.gz.tbi',
+        },
+      },
     },
   },
   {
@@ -561,7 +587,7 @@ export const defaultSession = {
 
 export const GET_JBROWSE_DETAIL_DATA_QUERY = gql`
   query Sample($sample_id: String!) {
-    filesBySampleId(sample_id:$sample_id){
+    filesBySampleId(sample_id: $sample_id) {
       file_type
       uuid
       file_format
@@ -572,12 +598,12 @@ export const GET_JBROWSE_DETAIL_DATA_QUERY = gql`
 `;
 
 export const GET_FILES_ID_BY_NAME = gql`
-query subjectOverViewPaged($file_name: [String]){
-  fileIdsFromFileName(file_name: $file_name) {
-   file_uuid
-   file_name
+  query getFileIdByName($file_name: [String]) {
+    fileIdsFromFileName(file_name: $file_name) {
+      file_uuid
+      file_name
+    }
   }
-}
 `;
 
 export const theme = {

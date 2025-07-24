@@ -23,7 +23,6 @@ export const customTheme = {
     root: {
       background: '#f3f3f3',
       paddingTop: '5px',
-      paddingLeft: '19px !important',
       '& .add_selected_file_tooltip_icon': {
         width: '17px !important',
       },
@@ -146,42 +145,68 @@ export const customTheme = {
   },
 };
 
-export const tblHeader = {
-  MuiTableSortLabel: {
-    root: {
-      color: '#13344A',
-      position: 'relative',
-      fontSize: '11pt',
-      fontFamily: "'Lato', 'Raleway', sans-serif",
-      fontWeight: 'bold',
-      letterSpacing: '0.06em',
-      textDecoration: 'none',
-      '&:hover': {
-        color: '#13344A',
+export const tblHeader = ({ selectedRows = [] }) => {
+  const hasSelectedRows = Boolean(selectedRows?.length);
+
+  return {
+    MuiTypography: {
+      root: {
+        height: 0,
+        width: 0,
       },
     },
-  },
-  MuiTableCell: {
-    root: {
-      backgroundColor: '#f5f5f5',
-      color: '#194563',
+    MuiTableSortLabel: {
+      root: {
+        color: '#13344A',
+        position: 'relative',
+        fontSize: '11pt',
+        fontFamily: "'Lato', 'Raleway', sans-serif",
+        fontWeight: 'bold',
+        letterSpacing: '0.06em',
+        textDecoration: 'none',
+        '&:hover': {
+          color: '#13344A',
+        },
+      },
     },
-  },
-  MuiTooltip: {
-    tooltip: {
-      backgroundColor: '#ffffff',
-      color: '#1c2023',
-      maxWidth: '220px',
-      fontSize: '0.75rem',
-      border: '2px solid #a7afb3',
-      fontFamily: 'Open Sans',
-      fontWeight: '600',
-      textAlign: 'left',
-      lineHeight: '1.6',
-      padding: '10px 12px',
-      borderRadius: '0px',
+    MuiTableRow: {
+      head: {
+        borderStyle: 'solid',
+        borderWidth: !hasSelectedRows ? '3px 0' : '0 0 3px',
+        borderColor: '#606060',
+      },
     },
-  },
+    MuiTableCell: {
+      head: {
+        '& span': {
+          color: '#194563',
+          fontSize: '15px',
+          fontFamily: 'Raleway',
+          fontWeight: 600,
+          lineHeight: '15px',
+        },
+      },
+      root: {
+        backgroundColor: '#f5f5f5',
+        color: '#194563',
+      },
+    },
+    MuiTooltip: {
+      tooltip: {
+        backgroundColor: '#ffffff',
+        color: '#1c2023',
+        maxWidth: '220px',
+        fontSize: '0.75rem',
+        border: '2px solid #a7afb3',
+        fontFamily: 'Open Sans',
+        fontWeight: '600',
+        textAlign: 'left',
+        lineHeight: '1.6',
+        padding: '10px 12px',
+        borderRadius: '0px',
+      },
+    },
+  };
 };
 
 const tblBody = {
@@ -199,11 +224,11 @@ const tblBody = {
   },
   MuiTypography: {
     body1: {
-      fontSize: '10pt',
-      fontFamily: "'Open Sans', sans-serif",
-      fontWeight: '600',
-      color: '#13344A',
-      letterSpacing: '0.025em',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
+      fontSize: '13px',
+      lineHeight: '19px',
+      color: '#22104c',
     },
   },
   MuiSvgIcon: {
@@ -213,11 +238,7 @@ const tblBody = {
   },
 };
 
-export const extendedView = ({
-  primaryColor = '#FF9742',
-  selectedRows = [],
-}) => {
-  const hidden = selectedRows.length > 0;
+export const extendedView = ({ primaryColor = '#FF9742' }) => {
   return {
     extendedView: {
       MuiContainer: {
@@ -264,14 +285,18 @@ export const extendedView = ({
           textAlign: 'right',
           '&.downloadAndColumnView': {
             '& button': {
+              zIndex: '10',
               '&.download-icon': {
                 marginRight: '-10px',
-                display: hidden ? 'none' : '',
+                position: 'absolute',
+                top: '32px',
+                right: '80px',
               },
               '&.manageViewColumnBtn': {
-                display: hidden ? 'none' : '',
                 marginBottom: '0px',
-                zIndex: '10',
+                position: 'absolute',
+                top: '32px',
+                right: '32px',
               },
             },
           },
@@ -281,19 +306,36 @@ export const extendedView = ({
   };
 };
 
-export const tblePaginationTheme = (data) => ({
+export const tblePaginationTheme = data => ({
   tblPgn: {
     MuiTablePagination: {
       root: {
         paddingRight: '43px',
-        borderTop: '3px solid #004c73',
+        background: '#fff',
+        borderTop: '3px solid #606060',
         paddingTop: '0',
         paddingBottom: '0',
         display: `${data.length > 0 ? '' : 'none'}`,
-        borderBottom: `3px solid ${data.length > 0 ? '#004c73' : '#e7e5e5'}`,
+        borderBottom: `3px solid ${data.length > 0 ? '#606060' : '#e7e5e5'}`,
         '&:last-child': {
           paddingRight: '43px',
         },
+      },
+      caption: {
+        color: '#000',
+        fontFamily: 'Open Sans',
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '14px',
+        textTransform: 'uppercase',
+      },
+      input: {
+        color: '#000',
+        fontFamily: 'Open Sans',
+        fontWeight: 400,
+        fontSize: '14px',
+        lineHeight: '14px',
+        textTransform: 'uppercase',
       },
       toolbar: {
         minHeight: '45px',
@@ -307,7 +349,7 @@ const tblContainer = {
     root: {
       width: '100%',
       overflowX: 'auto',
-      transform: 'rotateX(180deg)',
+      // transform: 'rotateX(180deg)',
       boxShadow: 'none',
       borderRadius: '0',
     },
@@ -332,7 +374,7 @@ const tblContainer = {
 export const themeConfig = (table, data) => ({
   customTheme,
   tblBody,
-  tblHeader,
+  tblHeader: tblHeader(table),
   ...tblePaginationTheme(data),
   tblContainer,
   ...extendedView(table),

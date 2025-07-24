@@ -12,11 +12,21 @@ export const headerTheme = ({ primaryColor = '#004c73' }) => ({
         '&:hover': {
           color: '#13344A',
         },
-        '&:hover $svg': {
-        },
+        '&:hover $svg': {},
+      },
+    },
+    MuiTypography: {
+      root: {
+        height: 0,
+        width: 0,
       },
     },
     MuiTableCell: {
+      head: {
+        '& span': {
+          color: '#0B3556',
+        },
+      },
       root: {
         paddingLeft: '5px',
         paddingRight: '5px',
@@ -102,18 +112,25 @@ const tblBody = {
       color: '#004C73',
       borderBottom: 'none',
       '& a': {
-        color: '#DC762F',
+        color: '#B85300',
         cursor: 'pointer',
+        fontFamily: 'Open Sans',
+        fontWeight: '600',
         textDecoration: 'underline',
+        '&:hover': {
+          color: '#9E4700',
+        },
         '& p': {
-          fontSize: '15px',
+          fontFamily: 'Open Sans',
+          fontWeight: '700',
+          fontSize: '13px',
+          letterSpacing: '0.025em',
         },
       },
       '& p': {
-        fontSize: '10pt',
-        fontStyle: 'normal',
-        fontFamily: 'Open Sans, sans-serif',
-        fontWeight: 'bold',
+        fontFamily: 'Open Sans',
+        fontWeight: '600',
+        fontSize: '13px',
         letterSpacing: '0.025em',
       },
     },
@@ -137,13 +154,6 @@ const tblBody = {
       },
     },
   },
-  MuiCheckbox: {
-    colorSecondary: {
-      '&.Mui-checked': {
-        color: '#0B3556',
-      },
-    },
-  },
   MuiSvgIcon: {
     root: {
       color: '#0B3556',
@@ -151,15 +161,13 @@ const tblBody = {
   },
 };
 
-export const extendedView = ({
-  primaryColor = '#FF9742',
-}) => ({
+export const extendedView = ({ primaryColor = '#FF9742' }) => ({
   extendedView: {
     tblTopPgn: {
       MuiTablePagination: {
         root: {
           paddingRight: '43px',
-          borderTop: `3px solid ${primaryColor}`,
+          // borderTop: `3px solid ${primaryColor}`,
         },
       },
     },
@@ -195,6 +203,7 @@ export const extendedView = ({
         position: 'relative',
         textAlign: 'right',
         '&.downloadAndColumnView': {
+          borderBottom: `3px solid ${primaryColor}`,
           maxHeight: '2px',
           minHeight: '0px',
           '& button': {
@@ -207,6 +216,69 @@ export const extendedView = ({
               zIndex: '10',
             },
           },
+        },
+      },
+    },
+    MuiFormControl: {
+      root: {
+        '&.filterTextInput': {
+          float: 'left',
+          width: '275px',
+          marginTop: '10px',
+        },
+      },
+    },
+    MuiInputBase: {
+      root: {
+        fontFamily: 'Open Sans',
+        fontSize: '13.5px',
+        fontWeight: 400,
+        padding: '0px',
+        fontStyle: '1rem',
+        lineHeight: '16px',
+        texttransform: 'uppercase',
+      },
+      input: {
+        fontSize: '1rem',
+        color: '#25557E',
+      },
+    },
+    MuiOutlinedInput: {
+      root: {
+        border: '#4A8ECB solid 1px',
+        borderRadius: '8px',
+      },
+      notchedOutline: {
+        border: 'none',
+      },
+      inputAdornedEnd: {
+        height: '35px',
+        padding: '0 8px !important',
+      },
+    },
+    MuiInputAdornment: {
+      root: {
+        '&.filterTextSearchButton': {
+          width: '12px',
+        },
+      },
+    },
+    MuiSvgIcon: {
+      root: {
+        cursor: 'pointer',
+        '&.filterTextCrossIcon': {
+          color: '#25557E',
+          stroke: '#4A8ECB',
+        },
+        '&.filterTextSearchIcon': {
+          color: '#25557E',
+          stroke: '#4A8ECB',
+          strokeWidth: '1.1px',
+          marginRight: '8px',
+          marginTop: '5px',
+        },
+        '&.checkBoxIcon': {
+          color: '#0B3556',
         },
       },
     },
@@ -238,7 +310,7 @@ export const tblContainer = ({ primaryColor = '#004c73' }) => ({
       root: {
         width: '100%',
         overflowX: 'auto',
-        transform: 'rotateX(180deg)',
+        // transform: 'rotateX(180deg)',
         boxShadow: 'none',
         borderRadius: '0',
       },
@@ -316,23 +388,13 @@ export const customTheme = {
         backgroundColor: '#142D64',
         textTransform: 'none',
       },
-      '&#jbrowse_multi_view_button': {
-        padding: '0px',
-        color: '#ffffff',
-        height: '43px',
-        marginLeft: '22px',
-        textTransform: 'inherit',
-        '& img': {
-          width: '2.25em',
-        },
-      },
       '&.add_selected_button': {
         marginRight: '10px',
         marginLeft: '25px',
         color: '#fff',
         borderRadius: '10px',
         fontSize: '16px',
-        backgroundColor: '#ff7f15',
+        backgroundColor: '#B35000',
         textTransform: 'none',
         '& img': {
           width: '2.25em',
@@ -346,7 +408,7 @@ export const customTheme = {
         width: '133px',
         height: '45px',
         cursor: 'pointer',
-        background: '#98a19e',
+        background: '#757575',
       },
       '&.noBtn': {
         width: '133px',

@@ -3,7 +3,7 @@ import { downloadJson } from '../utils';
 
 export const extendedViewConfigtest = '';
 
-export const ExtendedViewConfig = (config) => {
+export const ExtendedViewConfig = config => {
   const { extendedViewConfig } = config;
   if (!extendedViewConfig) {
     return null;
@@ -15,9 +15,9 @@ export const ExtendedViewConfig = (config) => {
     return extendedViewConfig;
   }
   /**
-  * configure custom table download
-  * extended data add or hide column different from table data
-  */
+   * configure custom table download
+   * extended data add or hide column different from table data
+   */
   if (download) {
     const getQueryVeriables = (filters = {}) => {
       const variables = { ...filters };
@@ -37,12 +37,9 @@ export const ExtendedViewConfig = (config) => {
             ...queryVariables,
           },
         })
-        .then((result) => {
+        .then(result => {
           if (result.data[config.paginationAPIField]) {
-            downloadJson(
-              result.data[config.paginationAPIField],
-              download,
-            );
+            downloadJson(result.data[config.paginationAPIField], download);
           }
         });
     };

@@ -6,8 +6,12 @@ export function customSorting(a, b, flag, i = 0) {
     if (!b[i] && a[i]) {
       return 1;
     }
-    if (b[i] > a[i]) { return -1; }
-    if (b[i] < a[i]) { return 1; }
+    if (b[i] > a[i]) {
+      return -1;
+    }
+    if (b[i] < a[i]) {
+      return 1;
+    }
     if (b[i] === a[i]) {
       if (b[i] && a[i]) {
         return customSorting(a, b, flag, i + 1);
@@ -44,17 +48,21 @@ export function fromArmTOCohorDoes(cohorts, cohortDosing) {
   let arrayDoes = [];
   const arrayCohortDes = [];
   // get cohort_does and cohort_description
-  cohorts.forEach((cohort) => {
+  cohorts.forEach(cohort => {
     // get cohort_does
-    if (cohort.cohort_dose
-              && cohort.cohort_dose !== ''
-              && cohort.cohort_dose !== null) {
+    if (
+      cohort.cohort_dose &&
+      cohort.cohort_dose !== '' &&
+      cohort.cohort_dose !== null
+    ) {
       arrayDoes.push(cohort.cohort_dose);
     }
     // get cohort_description
-    if (cohort.cohort_description
-              && cohort.cohort_description !== ''
-                && cohort.cohort_description !== null) {
+    if (
+      cohort.cohort_description &&
+      cohort.cohort_description !== '' &&
+      cohort.cohort_description !== null
+    ) {
       arrayCohortDes.push(cohort.cohort_description);
     }
   });
@@ -64,10 +72,14 @@ export function fromArmTOCohorDoes(cohorts, cohortDosing) {
     } else {
       // replace cohort does with cohort desc
       arrayDoes = arrayCohortDes;
-      cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
+      cohortAndDosing.does = arrayDoes
+        .sort((a, b) => studyDetailSorting(a, b))
+        .join('#');
     }
   } else {
-    cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
+    cohortAndDosing.does = arrayDoes
+      .sort((a, b) => studyDetailSorting(a, b))
+      .join('#');
   }
   return cohortAndDosing;
 }
@@ -96,7 +108,7 @@ export function FileDisableRowSelection() {
 */
 
 export function FileOnRowsSelect(data, allRowsSelected) {
-  return allRowsSelected.map((row) => data[row.dataIndex].uuid);
+  return allRowsSelected.map(row => data[row.dataIndex].uuid);
 }
 
 export function isStudyUnderEmbargo(value) {
@@ -127,11 +139,10 @@ export function studyDisposition(value) {
 export const reorderObjectKeys = (dataObject, orderObject) => {
   const orderedData = {};
 
-  Object.keys(orderObject).forEach((key) => {
+  Object.keys(orderObject).forEach(key => {
     // eslint-disable-next-line no-prototype-builtins
     if (dataObject && dataObject.hasOwnProperty(key)) {
       orderedData[key] = dataObject[key];
-      // eslint-disable-next-line no-param-reassign
       delete dataObject[key];
     }
   });

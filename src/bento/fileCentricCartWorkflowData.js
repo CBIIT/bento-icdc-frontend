@@ -1,15 +1,12 @@
 import gql from 'graphql-tag';
-import {
-  cellTypes,
-  dataFormatTypes,
-  types,
-} from '../bento-core';
+import { cellTypes, dataFormatTypes, types } from '../bento-core';
 import { customMyFilesTabDownloadCSV } from './tableDownloadCSV';
 
 export const navBarCartData = {
   cartLabel: 'Cart',
   cartLink: '/fileCentricCart',
-  cartIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
+  cartIcon:
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
   cartIconAlt: 'cart_logo',
 };
 
@@ -25,13 +22,17 @@ export const myFilesPageData = {
   mainTitle: 'My Files',
   subTitle: '',
   downButtonText: 'DOWNLOAD MANIFEST',
-  headerIconSrc: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
+  headerIconSrc:
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-MyCases.svg',
   headerIconAlt: 'Bento MyFiles header logo',
   manifestFileName: 'ICDC File Manifest',
-  tooltipIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
+  tooltipIcon:
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Tooltip.SpeechBubble.svg',
   tooltipAlt: 'tooltip icon',
-  downloadBtnTooltipMessage: 'To access and analyze files: select and remove unwanted files,  click the “Download File Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
-  userCommentsTooltipMessage: 'If you wish to annotate the file manifest with comments regarding the files included, enter them here. Comments will be saved as part of the file manifest.',
+  downloadBtnTooltipMessage:
+    'To access and analyze files: select and remove unwanted files,  click the “Download File Manifest” button, and upload the resulting Manifest file to your Seven Bridges Genomics account.',
+  userCommentsTooltipMessage:
+    'If you wish to annotate the file manifest with comments regarding the files included, enter them here. Comments will be saved as part of the file manifest.',
   textareaPlaceholder: 'User Comments',
   errorMessage: 'An error has occurred in loading CART',
   popUpWindow: {
@@ -83,7 +84,10 @@ export const manifestData = [
   { field: 'histology_cytopathology', title: 'Histology/Cytopathology' },
   { field: 'histological_grade', title: 'Histological Grade' },
   { field: 'best_response', title: 'Response to Treatment' },
-  { field: 'pathology_report', title: 'Detailed Pathology Evaluation Available' },
+  {
+    field: 'pathology_report',
+    title: 'Detailed Pathology Evaluation Available',
+  },
   { field: 'treatment_data', title: 'Treatment Data Available' },
   { field: 'follow_up_data', title: 'Follow Data Available' },
   { field: 'concurrent_disease', title: 'Concurrent Disease(s)' },
@@ -92,129 +96,159 @@ export const manifestData = [
   { field: 'arm', title: 'Arm' },
   { field: 'other_cases', title: 'Matching Cases' },
   { field: 'user_comments', title: 'User Comments' },
-
 ];
 
 export const CREATE_MANIFEST = gql`
-query createManifest($uuid: [String], $offset: Int = 0, $first: Int = 10, $order_by:String ="") {
-    createManifest(uuid: $uuid, offset: $offset, first: $first, order_by: $order_by)
-}
-`
-
+  query createManifest(
+    $uuid: [String]
+    $offset: Int = 0
+    $first: Int = 10
+    $order_by: String = ""
+  ) {
+    createManifest(
+      uuid: $uuid
+      offset: $offset
+      first: $first
+      order_by: $order_by
+    )
+  }
+`;
 
 // --------------- GraphQL query - Retrieve selected cases info --------------
 export const GET_MY_CART_DATA_QUERY = gql`
-query filesInList($uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  filesInList(uuids: $uuids, offset: $offset,first: $first, order_by: $order_by){
-    file_name
-    drs_uri
-    study_code
-    case_id
-    file_type
-    association
-    file_description
-    file_format
-    file_size
-    case_id
-    file_uuid
-    individual_id
-    breed
-    diagnosis
-    study_code
-    sample_id
-    sample_site
-    physical_sample_type
-    general_sample_pathology
-    tumor_sample_origin
-    summarized_sample_type
-    specific_sample_pathology
-    date_of_sample_collection
-    tumor_grade
-    sample_chronology
-    percentage_tumor
-    necropsy_sample
-    sample_preservation
-    comment
-    patient_age_at_enrollment
-    sex
-    neutered_indicator
-    weight
-    weight_unit
-    primary_disease_site
-    stage_of_disease
-    date_of_diagnosis
-    histology_cytopathology
-    histological_grade
-    best_response
-    pathology_report
-    treatment_data
-    follow_up_data
-    concurrent_disease
-    concurrent_disease_type
-    arm
-    other_cases
-    cohort_description
- }
-}`;
+  query getMyCartDataQuery(
+    $uuids: [String]
+    $offset: Int = 0
+    $first: Int = 10
+    $order_by: String = ""
+  ) {
+    filesInList(
+      uuids: $uuids
+      offset: $offset
+      first: $first
+      order_by: $order_by
+    ) {
+      file_name
+      drs_uri
+      study_code
+      case_id
+      file_type
+      association
+      file_description
+      file_format
+      file_size
+      case_id
+      file_uuid
+      individual_id
+      breed
+      diagnosis
+      study_code
+      sample_id
+      sample_site
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      summarized_sample_type
+      specific_sample_pathology
+      date_of_sample_collection
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      comment
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      weight_unit
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      arm
+      other_cases
+      cohort_description
+    }
+  }
+`;
 
 // --------------- GraphQL query - Retrieve selected files info Desc --------------
 export const GET_MY_CART_DATA_QUERY_DESC = gql`
-query filesInListDesc($uuids: [String], $offset: Int = 0, $first: Int = 10, $order_by:String =""){
-  filesInListDesc(uuids: $uuids, offset: $offset,first: $first, order_by: $order_by){
-    file_name
-    drs_uri
-    study_code
-    case_id
-    file_type
-    association
-    file_description
-    file_format
-    file_size
-    case_id
-    file_uuid
-    individual_id
-    breed
-    diagnosis
-    study_code
-    sample_id
-    sample_site
-    physical_sample_type
-    general_sample_pathology
-    tumor_sample_origin
-    summarized_sample_type
-    specific_sample_pathology
-    date_of_sample_collection
-    tumor_grade
-    sample_chronology
-    percentage_tumor
-    necropsy_sample
-    sample_preservation
-    comment
-    patient_age_at_enrollment
-    sex
-    neutered_indicator
-    weight
-    weight_unit
-    primary_disease_site
-    stage_of_disease
-    date_of_diagnosis
-    histology_cytopathology
-    histological_grade
-    best_response
-    pathology_report
-    treatment_data
-    follow_up_data
-    concurrent_disease
-    concurrent_disease_type
-    arm
-    other_cases
-    cohort_description
- }
-}`;
+  query getMyCartDataQueryDesc(
+    $uuids: [String]
+    $offset: Int = 0
+    $first: Int = 10
+    $order_by: String = ""
+  ) {
+    filesInListDesc(
+      uuids: $uuids
+      offset: $offset
+      first: $first
+      order_by: $order_by
+    ) {
+      file_name
+      drs_uri
+      study_code
+      case_id
+      file_type
+      association
+      file_description
+      file_format
+      file_size
+      case_id
+      file_uuid
+      individual_id
+      breed
+      diagnosis
+      study_code
+      sample_id
+      sample_site
+      physical_sample_type
+      general_sample_pathology
+      tumor_sample_origin
+      summarized_sample_type
+      specific_sample_pathology
+      date_of_sample_collection
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      necropsy_sample
+      sample_preservation
+      comment
+      patient_age_at_enrollment
+      sex
+      neutered_indicator
+      weight
+      weight_unit
+      primary_disease_site
+      stage_of_disease
+      date_of_diagnosis
+      histology_cytopathology
+      histological_grade
+      best_response
+      pathology_report
+      treatment_data
+      follow_up_data
+      concurrent_disease
+      concurrent_disease_type
+      arm
+      other_cases
+      cohort_description
+    }
+  }
+`;
 
 export const GET_STORE_MANIFEST_DATA_QUERY = gql`
-  query filesInList($uuids: [String]){
-    filesInList(uuids: $uuids){
+  query getStoreManifestDataQuery($uuids: [String]) {
+    filesInList(uuids: $uuids) {
       file_name
       file_type
       association
@@ -232,7 +266,8 @@ export const GET_STORE_MANIFEST_DATA_QUERY = gql`
       name
       drs_uri
     }
-  }`;
+  }
+`;
 
 export const myFileViewFlag = true;
 // --------------- File table configuration --------------
@@ -260,14 +295,18 @@ export const table = {
       documentDownloadProps: {
         maxFileSize: 12000000,
         toolTipTextFileDownload: 'Download a copy of this file',
-        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+        toolTipTextFilePreview:
+          'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
         fileSizeColumn: 'file_size',
         fileFormatColumn: 'file_format',
         fileLocationColumn: 'file_uuid',
         caseIdColumn: 'file_name',
-        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+        iconFilePreview:
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+        iconFileDownload:
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer:
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
     },
     {
@@ -368,14 +407,18 @@ export const cartTable = {
       documentDownloadProps: {
         maxFileSize: 12000000,
         toolTipTextFileDownload: 'Download a copy of this file',
-        toolTipTextFilePreview: 'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
+        toolTipTextFilePreview:
+          'Because of its size and/or format, this file is unavailable for download and must be accessed via the My Files workflow',
         fileSizeColumn: 'file_size',
         fileFormatColumn: 'file_format',
         fileLocationColumn: 'file_uuid',
         caseIdColumn: 'file_name',
-        iconFilePreview: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
-        iconFileDownload: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
-        iconFileViewer: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
+        iconFilePreview:
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadCloud.svg',
+        iconFileDownload:
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/bento/images/icons/svgs/DocumentDownloadPDF.svg',
+        iconFileViewer:
+          'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DocumentDownloadBAM.svg',
       },
       role: cellTypes.DISPLAY,
       tooltipText: 'sort',
@@ -481,12 +524,34 @@ export const tableLayOut = [
     container: 'buttons',
     size: 'xl',
     clsName: 'container_button',
-    items: [
-      jBrowseBtn,
-    ],
+    items: [jBrowseBtn],
   },
   {
     container: 'paginatedTable',
     paginatedTable: true,
   },
 ];
+
+export const GET_CART_OVERVIEW_DATA = gql`
+  query getCartOverviewData($file_uuids: [String!]) {
+    cartOverview(file_uuids: $file_uuids) {
+      totalNumberOfFiles
+      studiesInCart
+      totalNumberOfCases
+      charts {
+        fileType {
+          label
+          value
+        }
+        fileFormat {
+          label
+          value
+        }
+        fileAssociation {
+          label
+          value
+        }
+      }
+    }
+  }
+`;

@@ -1,4 +1,4 @@
-const sessionStorageTransfer = (event) => {
+const sessionStorageTransfer = event => {
   let $event = event;
   if (!$event) {
     $event = window.event;
@@ -12,7 +12,7 @@ const sessionStorageTransfer = (event) => {
   } else if ($event.key === 'sessionStorage' && !sessionStorage.length) {
     // another tab sent data <- get it
     const data = JSON.parse($event.newValue);
-    Object.keys(data).forEach((key) => {
+    Object.keys(data).forEach(key => {
       sessionStorage.setItem(key, data[key]);
     });
   } else if ($event.key === 'logout') {

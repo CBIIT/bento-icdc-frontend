@@ -1,6 +1,4 @@
-import {
-  cellTypes,
-} from '../../../../bento-core';
+import { cellTypes } from '../../../../bento-core';
 
 export const table = {
   title: 'Imaging Data Commons (IDC)',
@@ -85,12 +83,6 @@ export const table = {
       nodeCount: 'follow_up',
       caseCount: 'follow_up',
       csvDownload: 'followUpNodeData',
-    },
-    {
-      title: 'lab exam',
-      nodeCount: 'lab_exam',
-      caseCount: 'lab_exam',
-      csvDownload: 'labExamNodeData',
     },
     {
       title: 'off_study',

@@ -57,13 +57,14 @@ export const pageData = {
 };
 
 // --------------- GraphQL query - Retrieve program info --------------
-export const GET_STUDY_DATA_QUERY = gql`{
+export const GET_STUDY_DATA_QUERY = gql`
+  query getStudyDataQueryProgramDetails {
     studiesByProgram {
-        program_id
-        clinical_study_designation
-        clinical_study_name
-         clinical_study_type
-         numberOfCases
+      program_id
+      clinical_study_designation
+      clinical_study_name
+      clinical_study_type
+      numberOfCases
     }
   }
-  `;
+`;

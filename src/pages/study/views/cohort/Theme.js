@@ -163,6 +163,8 @@ export const tblHeader = {
   MuiTableCell: {
     root: {
       backgroundColor: '#f5f5f5',
+      borderTop: '3px solid #606060',
+      borderBottom: '3px solid #606060',
       '& li': {
         color: '#194563',
       },
@@ -216,7 +218,7 @@ const tblBody = {
 };
 
 export const extendedView = ({
-  primaryColor = '#FF9742',
+  primaryColor = '#606060',
   selectedRows = [],
 }) => {
   const hidden = selectedRows.length > 0;
@@ -264,6 +266,9 @@ export const extendedView = ({
           display: 'block',
           position: 'relative',
           textAlign: 'right',
+          width: 'fit-content',
+          margin: '0 0 0 auto',
+          top: '20px',
           '&.downloadAndColumnView': {
             '& button': {
               '&.download-icon': {
@@ -287,13 +292,13 @@ const tblPgn = {
   MuiTablePagination: {
     root: {
       backgroundColor: '#ffffff',
-      borderTop: '3px solid #42779a',
-      borderBottom: '1px solid #e7e5e5',
+      borderTop: '3px solid #606060',
+      borderBottom: '1px solid #606060',
     },
   },
 };
 
-export const themeConfig = (table) => ({
+export const themeConfig = table => ({
   customTheme,
   tblBody,
   tblHeader,

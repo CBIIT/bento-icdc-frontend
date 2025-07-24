@@ -1,6 +1,4 @@
-import {
-  cellTypes,
-} from '../../../../bento-core';
+import { cellTypes } from '../../../../bento-core';
 
 export const supportDataList = [
   {
@@ -79,7 +77,8 @@ export const supportDataList = [
     title: 'The Cancer Imaging Archive (TCIA)',
     defaultExpand: true,
     repository: 'TCIA',
-    repositoryUrl: 'https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=70227341#702273419937cb85808048c99e4b55fd520d63f2',
+    repositoryUrl:
+      'https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=70227341#702273419937cb85808048c99e4b55fd520d63f2',
     table: {
       // defaultSortField: 'property',
       // 'asc' or 'desc'

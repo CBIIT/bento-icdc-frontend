@@ -25,7 +25,7 @@ export const reducers = {
       jbrowseFiles: item,
     };
   },
-  RECEIVE_FILES: (state) => ({
+  RECEIVE_FILES: state => ({
     ...state,
     jbrowseFiles: JSON.parse(localStorage.getItem('jbrowseFiles') || []),
   }),
@@ -33,8 +33,7 @@ export const reducers = {
 
 export const jbrowseView = (state = initialState, { type, payload }) => {
   return reducers[type] ? reducers[type](state, payload) : state;
-}
-
+};
 
 // const storeKey = 'jbrowseView';
 // // INJECT-REDUCERS INTO REDUX STORE

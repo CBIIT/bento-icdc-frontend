@@ -1,8 +1,5 @@
 import gql from 'graphql-tag';
-import {
-  cellTypes,
-  headerTypes,
-} from '../bento-core';
+import { cellTypes, headerTypes } from '../bento-core';
 
 export const tableLayOut = [
   {
@@ -12,7 +9,8 @@ export const tableLayOut = [
 ];
 
 export const pageData = {
-  embargoFileIcon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-Embargo-File.svg',
+  embargoFileIcon:
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/Icon-Embargo-File.svg',
   studyListingIcon: {
     src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/Icon-StudiesDetail.svg',
     alt: 'ICDC Studies detail header logo',
@@ -126,8 +124,8 @@ export const pageData = {
         icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/StudyDataAvail-Publications.svg',
       },
       {
-        dataField: 'CRDCLinks',
-        header: 'icon',
+        dataField: 'CRDCLinksText',
+        header: 'Additional CRDC Nodes',
         display: true,
         columnDefaultValues: {
           0: 'Not Applicable',
@@ -184,6 +182,9 @@ export const pageData = {
         columnIndexes: [8, 11],
       },
     ],
+    tableMsg: {
+      noMatch: 'Sorry, no matching records found',
+    },
   },
 };
 
@@ -200,24 +201,25 @@ export const textLabels = {
 };
 
 // --------------- GraphQL query - Retrieve program info --------------
-export const GET_STUDY_DATA_QUERY = gql`{
+export const GET_STUDY_DATA_QUERY = gql`
+  query getStudyDataQueryStudiesData {
     studiesByProgram {
-        program_id
-        clinical_study_designation
-        clinical_study_name
-        clinical_study_type
-        numberOfCases
-        numberOfCaseFiles
-        numberOfStudyFiles
-        numberOfImageCollections
-        numberOfPublications
-        accession_id
-        study_disposition
-        numberOfCRDCNodes
-        CRDCLinks {
-          text
-          url
-        }
+      program_id
+      clinical_study_designation
+      clinical_study_name
+      clinical_study_type
+      numberOfCases
+      numberOfCaseFiles
+      numberOfStudyFiles
+      numberOfImageCollections
+      numberOfPublications
+      accession_id
+      study_disposition
+      numberOfCRDCNodes
+      CRDCLinks {
+        text
+        url
+      }
     }
   }
-  `;
+`;

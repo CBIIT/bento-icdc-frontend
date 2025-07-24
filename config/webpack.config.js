@@ -12,7 +12,7 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-module.exports = function(webpackEnv) {
+module.exports = function (webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
 
@@ -20,7 +20,8 @@ module.exports = function(webpackEnv) {
   // It requires a trailing slash, or the file assets will get an incorrect path.
   // In development, we always serve from the root. This makes config easier.
   const publicPath = isEnvProduction
-    ? paths.servedPath : isEnvDevelopment && '/';
+    ? paths.servedPath
+    : isEnvDevelopment && '/';
 
   // `publicUrl` is just like `publicPath`, but we will provide it to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -46,8 +47,8 @@ module.exports = function(webpackEnv) {
     output: {
       path: paths.appBuild,
       filename: isEnvProduction
-          ? 'static/js/[name].[chunkhash:8].js'
-          : isEnvDevelopment && 'static/js/bundle.js',
+        ? 'static/js/[name].[chunkhash:8].js'
+        : isEnvDevelopment && 'static/js/bundle.js',
       publicPath: publicPath,
     },
     module: {
@@ -62,7 +63,7 @@ module.exports = function(webpackEnv) {
             customize: require.resolve(
               'babel-preset-react-app/webpack-overrides'
             ),
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
             plugins: [
               [
                 require.resolve('babel-plugin-named-asset-import'),
@@ -93,21 +94,19 @@ module.exports = function(webpackEnv) {
             // },
             'css-loader',
             {
-              loader: "postcss-loader",
+              loader: 'postcss-loader',
               options: {
                 postcssOptions: {
-                  plugins: [
-                    "postcss-preset-env",
-                  ]
-                }
-              }
-            }
+                  plugins: ['postcss-preset-env'],
+                },
+              },
+            },
           ],
         },
         {
           test: /\.(woff(2)?|ttf|eot|png|jpe?g|JPG|svg)(\?v=\d+\.\d+\.\d+)?$/,
           type: 'asset/inline',
-        }
+        },
       ],
     },
     plugins: [
@@ -122,6 +121,6 @@ module.exports = function(webpackEnv) {
         filename: 'static/css/[name].[contenthash:8].css',
         chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
       }),
-    ]
+    ],
   };
 };

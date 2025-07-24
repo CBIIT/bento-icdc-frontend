@@ -27,10 +27,9 @@ function readyStats() {
 function receiveStats(json) {
   return {
     type: RECIEVE_STATS,
-    payload:
-{
-  data: json.data,
-},
+    payload: {
+      data: json.data,
+    },
   };
 }
 
@@ -42,12 +41,13 @@ function errorhandler(error, type) {
 }
 
 function fetchStats(statQuery) {
-  return (dispatch) => client
-    .query({
-      query: statQuery,
-    })
-    .then((result) => dispatch(receiveStats(result)))
-    .catch((error) => dispatch(errorhandler(error, STATS_QUERY_ERR)));
+  return dispatch =>
+    client
+      .query({
+        query: statQuery,
+      })
+      .then(result => dispatch(receiveStats(result)))
+      .catch(error => dispatch(errorhandler(error, STATS_QUERY_ERR)));
 }
 
 export function fetchDataForStats() {

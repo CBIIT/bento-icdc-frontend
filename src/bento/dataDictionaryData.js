@@ -1,4 +1,13 @@
-export const categories = ['Admistrative', 'Study', 'Clinical Trial', 'Case', 'Biospecimen', 'Clinical', 'Analysis', 'Data File'];
+export const categories = [
+  'Admistrative',
+  'Study',
+  'Clinical Trial',
+  'Case',
+  'Biospecimen',
+  'Clinical',
+  'Analysis',
+  'Data File',
+];
 
 export const types = {
   CATEGORY: 'category',
@@ -203,7 +212,8 @@ export const graphViewConfig = {
     styles: {
       legendExpand: {
         position: 'absolute',
-        top: '340px',
+        top: '500px',
+        right: '18px',
         backgroundColor: '#494949',
         border: '2px solid #5486AF',
         borderTopLeftRadius: '10px 10px',
@@ -212,7 +222,7 @@ export const graphViewConfig = {
       },
       legendCollapse: {
         position: 'absolute',
-        top: '340px',
+        top: '500px',
         backgroundColor: '#18588C',
         border: '1px solid #125C5D',
         borderTopLeftRadius: '10px 10px',

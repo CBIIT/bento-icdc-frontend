@@ -20,16 +20,14 @@ export default () => ({
     maginLeft: '10px',
   },
   container: {
-    padding: "30px 30px",
+    padding: '30px 30px',
   },
   logo: {
     width: '85px',
     marginRight: '15px',
     zIndex: '100',
   },
-  header: {
-
-  },
+  header: {},
   divider: {
     height: '3px',
     background: '#686F7F',

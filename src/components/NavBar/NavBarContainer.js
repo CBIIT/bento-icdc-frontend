@@ -7,19 +7,18 @@ import { toggleSidebar } from '../Layout/LayoutState';
 export default compose(
   withRouter,
   connect(
-    (state) => ({
+    state => ({
       cartFieldIds: state.cartReducer.filesId,
     }),
-    { toggleSidebar },
+    { toggleSidebar }
   ),
   lifecycle({
-    componentDidMount() {
-    },
+    componentDidMount() {},
     shouldComponentUpdate({ location: nextLocation }) {
       const pathName = this.props.location.pathname;
       return (
         pathName !== nextLocation || false // if the path is same don't update
       );
     },
-  }),
+  })
 )(NavBarView);

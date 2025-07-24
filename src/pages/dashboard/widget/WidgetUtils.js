@@ -1,9 +1,4 @@
-/* eslint-disable camelcase */
-/* eslint-disable import/prefer-default-export */
-
-import {
-  transformInitialDataForSunburst,
-} from '../../../bento-core';
+import { transformInitialDataForSunburst } from '../../../bento-core';
 
 /**
  * Removes empty subjects from donut data.
@@ -11,8 +6,8 @@ import {
  * @param {object} data
  * @returns {object} filtered data
  */
-const removeEmptyCountFromDonutData = (data) => {
-  const convertCasesToSubjects = data.map((item) => ({
+const removeEmptyCountFromDonutData = data => {
+  const convertCasesToSubjects = data.map(item => ({
     subjects: item.count,
     group: item.group,
   }));
@@ -21,7 +16,7 @@ const removeEmptyCountFromDonutData = (data) => {
     if (a.group > b.group) return -1;
     return 0;
   });
-  return convertCasesToSubjects.filter((item) => item.subjects !== 0);
+  return convertCasesToSubjects.filter(item => item.subjects !== 0);
 };
 /**
  * Returns the widgets data formatted as key:dataset pairs
@@ -33,12 +28,24 @@ const removeEmptyCountFromDonutData = (data) => {
 export function formatWidgetData(data, custodianConfig) {
   const formatted = custodianConfig.reduce((acc, widget) => {
     const {
-      type, dataName, datatable_level1_field, datatable_level2_field,
-      datatable_level1_colors, datatable_level2_colors,
+      type,
+      dataName,
+      datatable_level1_field,
+      datatable_level2_field,
+      datatable_level1_colors,
+      datatable_level2_colors,
     } = widget;
-    const dataset = type === 'sunburst'
-      ? transformInitialDataForSunburst(data[dataName], datatable_level1_field, datatable_level2_field, 'studies', datatable_level1_colors, datatable_level2_colors)
-      : removeEmptyCountFromDonutData(data[dataName]);
+    const dataset =
+      type === 'sunburst'
+        ? transformInitialDataForSunburst(
+            data[dataName],
+            datatable_level1_field,
+            datatable_level2_field,
+            'studies',
+            datatable_level1_colors,
+            datatable_level2_colors
+          )
+        : removeEmptyCountFromDonutData(data[dataName]);
 
     return { ...acc, [dataName]: dataset };
   }, {});
