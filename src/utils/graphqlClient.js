@@ -7,7 +7,8 @@ import {
 import env from "./env";
 
 const BACKEND = env.REACT_APP_BACKEND_API;
-const INTEROP_SERVICE = `${env.REACT_APP_INTEROP_SERVICE_URL}`;
+// const INTEROP_SERVICE = `${env.REACT_APP_INTEROP_SERVICE_URL}`;
+const INTEROP_SERVICE = env.REACT_APP_INTEROP_SERVICE_URL;
 
 const backendService = new HttpLink({
   uri: BACKEND,
@@ -17,13 +18,25 @@ const interopService = new HttpLink({
   uri: INTEROP_SERVICE,
 });
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: BACKEND,
-  link: ApolloLink.split(
-    (op) => op.getContext().clientName === "interopService",
+// const client = new ApolloClient({
+//   cache: new InMemoryCache(),
+//   uri: BACKEND,
+//   link: ApolloLink.split(
+//     (op) => op.getContext().clientName === "interopService",
+//     interopService,
+//     backendService,
+//   ),
+// });
+
+const serviceLink = ApolloLink.split(
+  (op) => op.getContext().clientName === "interopService",
     interopService,
     backendService,
-  ),
+);
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: serviceLink,
 });
+
 export default client;
