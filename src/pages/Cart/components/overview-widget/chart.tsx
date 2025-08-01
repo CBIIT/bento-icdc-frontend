@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import {
   BarChart,
@@ -6,7 +7,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  TooltipPayload,
   Cell,
 } from 'recharts';
 import styled from '@emotion/styled';
@@ -14,16 +14,26 @@ import { CartChartItem } from '../../../../generated-types/types';
 
 export const Container = styled.div({
   flex: 1,
+  height: '100%',
+  width: '100%',
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-around',
   padding: '32px',
+  '& .recharts-wrapper': {
+    height: '245px !important',
+  },
+  '& .chart-bar': {
+    fill: '#F2F2F2',
+
+    '&:hover': {
+      fill: '#FFF',
+    },
+  },
 });
 
 export const CustomTooltipWrapper = styled.div({
   backgroundColor: '#fff',
   padding: '10px',
-  border: '1px solid #ccc',
+  border: '1px solid #333',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   display: 'flex',
   gap: '4px',
@@ -43,39 +53,41 @@ export const CustomTooltipWrapper = styled.div({
 
 export const LegendWrapper = styled.div({
   display: 'flex',
+  maxWidth: '221px',
+  marginTop: '8px',
   flexDirection: 'column',
   marginLeft: '32px',
   height: '202px',
-  justifyContent: 'center',
+  overflowY: 'auto',
+  justifyContent: 'flex-start',
+  boxSizing: 'border-box',
+  paddingBottom: '5px',
+  gap: '8px',
   '& .icon-and-text-wrapper': {
     display: 'flex',
-    gap: '16px',
+    alignItems: 'stretch',
+    flexShrink: 0,
+  },
+  '& .legend-text-content': {
+    display: 'flex',
+    flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    overflow: 'hidden', // Prevent overflow
-    textOverflow: 'ellipsis', // Add ellipsis for long text
-    whiteSpace: 'nowrap', // Prevent wrapping
-    '& .icon-and-label': {
-      display: 'flex',
-      gap: '8px',
-      height: '100%',
-      marginBottom: '8px',
-      '& .label-text': {
-        fontFamily: 'Inter',
-        fontWeight: '400',
-        display: 'flex',
-        alignItems: 'center',
-        fontSize: '14px',
-        color: '#444444',
-      },
-    },
-    '& .value-text': {
-      fontFamily: 'Inter',
-      fontWeight: '700',
-      fontSize: '14px',
-      margin: '0 16px',
-      color: '#444444',
-    },
+    padding: '8px 16px',
+    gap: '16px',
+  },
+  '& .label-text': {
+    fontFamily: 'Inter',
+    fontWeight: '400',
+    fontSize: '14px',
+    color: '#444444',
+  },
+  '& .value-text': {
+    fontFamily: 'Inter',
+    fontWeight: '700',
+    fontSize: '14px',
+    color: '#444444',
+    flexShrink: 0,
   },
 });
 
@@ -111,9 +123,6 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
 
   const tickFormatter = (_value: string) => {
-    // const limit = 10; // put your maximum character
-    // if (value.length < limit) return value;
-    // return `${value.substring(0, limit)}...`;
     return '';
   };
 
@@ -133,24 +142,21 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
             style={{
               backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'transparent',
               fontWeight: hoveredGroup === entry.label ? 'bold' : 'normal',
-              height: '36px',
               boxShadow:
                 hoveredGroup === entry.label
                   ? '0px 0px 10px rgba(0,0,0,0.5)'
                   : 'none',
             }}
           >
-            <div className="icon-and-label">
-              <div
-                style={{
-                  width: '20px',
-                  // height: '100%',
-                  background: colors[index % colors.length],
-                }}
-              />
+            <div // Color icon
+              style={{
+                width: '20px',
+                background: colors[index % colors.length],
+                flexShrink: 0,
+              }}
+            />
+            <div className="legend-text-content">
               <div className="label-text">{entry.label}</div>
-            </div>
-            <div>
               <div className="value-text">{entry.value}</div>
             </div>
           </div>
@@ -164,7 +170,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
     payload,
   }: {
     active?: boolean;
-    payload?: TooltipPayload[];
+    payload?: any[];
   }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload as CartChartItem;
@@ -187,7 +193,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
       <BarChart
         layout="vertical" // Make the bars horizontal
         data={chartData}
-        height={223}
+        height={233}
         width={617}
         margin={{
           top: 5,
@@ -202,7 +208,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
           tick={true}
           label={{
             value: 'File Count',
-            offset: -2,
+            offset: -10,
             position: 'insideBottom',
             style: {
               fontFamily: 'Inter',
@@ -221,7 +227,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
             value: yAxisLabel,
             angle: -90,
             position: 'inside',
-            offset: 5,
+            offset: 10,
             style: {
               fontFamily: 'Inter',
               fontWeight: '500',
@@ -231,7 +237,11 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
           }}
         />
         <Tooltip content={<CustomTooltip />} />
-        <Bar dataKey="value" fill="#8884d8" barSize={50}>
+        <Bar
+          dataKey="value"
+          barSize={50}
+          background={{ className: 'chart-bar' }}
+        >
           {chartData.map((_entry, index) => (
             <Cell
               key={`cell-${index}`}
