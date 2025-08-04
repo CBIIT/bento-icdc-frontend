@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   BarChart,
   Bar,
@@ -69,6 +69,7 @@ export const LegendWrapper = styled.div({
     display: 'flex',
     alignItems: 'stretch',
     flexShrink: 0,
+    transition: 'box-shadow 0.2s ease-in-out', // Smooth transition for shadow
   },
   '& .legend-text-content': {
     display: 'flex',
@@ -123,6 +124,20 @@ interface ChartProps {
 
 export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
+  const legendItemRefs = useRef<Map<string, HTMLDivElement | null>>(new Map());
+
+  // Effect to scroll the legend item into view when it's hovered on the chart
+  useEffect(() => {
+    if (hoveredGroup) {
+      const itemRef = legendItemRefs.current.get(hoveredGroup);
+      if (itemRef) {
+        itemRef.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest', // Use 'nearest' to avoid unnecessary scrolling
+        });
+      }
+    }
+  }, [hoveredGroup]);
 
   const tickFormatter = (_value: string) => {
     return '';
@@ -139,6 +154,8 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
       <LegendWrapper>
         {data.map((entry, index) => (
           <div
+            // Add a ref to each legend item, mapping it by its label
+            ref={el => legendItemRefs.current.set(entry.label, el)}
             key={`item-${index}`}
             className="icon-and-text-wrapper"
             style={{
@@ -176,8 +193,6 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
   }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload as CartChartItem;
-      setHoveredGroup(data.label);
-
       return (
         <CustomTooltipWrapper>
           <p className="label-text">{`${data.label},`}</p>
@@ -185,15 +200,13 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
         </CustomTooltipWrapper>
       );
     }
-
-    setHoveredGroup(null);
     return null;
   };
 
   return (
     <Container>
       <BarChart
-        layout="vertical" // Make the bars horizontal
+        layout="vertical"
         data={chartData}
         height={233}
         width={617}
@@ -238,11 +251,20 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
             },
           }}
         />
-        <Tooltip content={<CustomTooltip />} />
+        <Tooltip
+          content={<CustomTooltip />}
+          // When the tooltip is no longer active, clear the hovered group
+          wrapperStyle={{ zIndex: 1000 }} // Ensure tooltip is on top
+          allowEscapeViewBox={{ x: true, y: true }}
+        />
         <Bar
           dataKey="value"
           barSize={50}
           background={{ className: 'chart-bar' }}
+          // Set the hovered group on mouse enter
+          onMouseEnter={data => setHoveredGroup(data.label)}
+          // Clear the hovered group on mouse leave
+          onMouseLeave={() => setHoveredGroup(null)}
         >
           {chartData.map((_entry, index) => (
             <Cell
