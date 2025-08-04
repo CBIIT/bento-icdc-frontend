@@ -17,6 +17,8 @@ export const Container = styled.div({
   height: '100%',
   width: '100%',
   display: 'flex',
+  justifyContent: 'center',
+  gap: '16px',
   padding: '32px',
   '& .recharts-wrapper': {
     height: '245px !important',
