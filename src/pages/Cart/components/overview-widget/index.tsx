@@ -120,7 +120,9 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                 <img className="icon" src={Studies} />
                 <div className="title-wrapper">
                   <div className="title">Studies in this Cart</div>
-                  <div className="subtitle">{studiesInCart.join(', ')}</div>
+                  <div className="subtitle studies-subtitle">
+                    {studiesInCart.join(', ')}
+                  </div>
                 </div>
               </IconAndTextWrapper>
 
