@@ -47,7 +47,7 @@ export const FileCartCount = styled.div({
 
 export const OverviewWidgetWrapper = styled.div({
   display: 'flex',
-  margin: '40px 0 32px',
+  margin: '40px 0 0',
   flex: 1,
 });
 

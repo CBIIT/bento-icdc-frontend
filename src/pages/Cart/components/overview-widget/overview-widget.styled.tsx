@@ -45,7 +45,6 @@ export const StyledTab = styled(Tab)({
     fontFamily: 'Roboto',
     fontWeight: 500,
     fontSize: '14px',
-    color: '#000',
   },
 });
 
@@ -73,14 +72,14 @@ export const StyledTabPanel = styled(TabPanel)({
 export const Container = styled.div({
   padding: '0 98px',
   flex: 1,
-  maxHeight: '413px',
+  // maxHeight: '413px',
 });
 
 export const Wrapper = styled.div({
   display: 'grid',
   gridTemplateColumns: '1fr 2fr',
   borderRadius: '20px',
-  border: '1px solid black',
+  border: '1px solid #D5D5D5',
   height: '60px',
 });
 
@@ -108,7 +107,7 @@ export const RightContainerSection = styled.div({
 export const LeftPanelSection = styled.div({
   borderRight: '1px solid black',
   paddingTop: '16px',
-  maxHeight: '413px',
+  // maxHeight: '413px',
   display: 'flex',
   alignItems: 'center',
   // padding: '40px',
@@ -116,6 +115,8 @@ export const LeftPanelSection = styled.div({
   // alignItems: 'center',
   '& .left-panel-title': {
     marginBottom: '30px',
+    position: 'relative',
+    right: '70px',
     color: '#CB8311',
     fontSize: '23px',
     fontWeight: '700',
@@ -146,7 +147,7 @@ export const IconAndTextWrapper = styled.div({
   gridTemplateColumns: '55px 1fr',
   alignItems: 'center',
   marginBottom: '60px',
-  width: '300px',
+  width: '345px',
   justifyContent: 'center',
   '& .icon': {
     height: '50px',
@@ -169,10 +170,15 @@ export const IconAndTextWrapper = styled.div({
   },
   '& .subtitle': {
     color: '#383838',
-    fontSize: '24px',
+    fontSize: '20px',
     fontWeight: '700',
     fontFamily: 'Lato',
     lineHeight: '32px',
+  },
+  '& .studies-subtitle': {
+    maxHeight: '80px',
+    overflowY: 'auto',
+    wordBreak: 'break-word',
   },
 });
 export const IconAndTextContainer = styled.div({
