@@ -1,302 +1,287 @@
-import { test, expect, Page } from '@playwright/test';
-
-// Helper functions
-const handleWarningDialog = async (page: Page) => {
-  const warningDialog = page.getByRole('dialog', { name: 'Warning' });
-  if (await warningDialog.isVisible()) {
-    await page.getByRole('button', { name: 'Continue' }).click();
-  }
-};
-
-const waitForContentLoad = async (page: Page) => {
-  await page.waitForFunction(
-    () => {
-      const skeletons = document.querySelectorAll('[class*="MuiSkeleton"]');
-      return skeletons.length === 0;
-    },
-    { timeout: 30000 }
-  );
-};
-
-const navigateToLandingPage = async (page: Page) => {
-  await page.goto('http://localhost:7000/#/');
-  await handleWarningDialog(page);
-  await waitForContentLoad(page);
-};
+import { test, expect } from '../../fixtures';
+import { Assertions, Navigation, TestData } from '../../utils';
 
 test.describe('Landing Page', () => {
-  test.beforeEach(async ({ page }) => {
-    await navigateToLandingPage(page);
+  test.beforeEach(async ({ landingPage }) => {
+    await landingPage.navigate();
   });
 
-  test('should load the landing page successfully', async ({ page }) => {
+  test('should load the landing page successfully', async ({ landingPage }) => {
     // Check that we're on the correct URL
-    expect(page.url()).toMatch(/localhost:7000/);
+    Assertions.assertUrlMatches(
+      landingPage.page,
+      Navigation.URL_PATTERNS.LOCALHOST
+    );
 
     // Check that the main container is visible
-    await expect(page.locator('body')).toBeVisible();
+    await expect(landingPage.body).toBeVisible();
 
     // Verify the page has loaded without errors
-    await expect(page.locator('[class*="Container"]').first()).toBeVisible();
+    await expect(landingPage.mainContainer).toBeVisible();
   });
 
-  test('should display Human tab content and navigation', async ({ page }) => {
+  test('should display Human tab content and navigation', async ({
+    landingPage,
+  }) => {
+    const humanContent = TestData.TAB_CONTENT.HUMAN;
+
     // Verify Human tab is selected by default and content is visible
-    await expect(page.getByRole('img', { name: 'icdc_studies' })).toBeVisible();
-    await expect(page.getByRole('tabpanel')).toContainText(
-      'Why Canine Cancer data? ICDC studies highlight the impact of canine research on human cancer research'
+    await expect(
+      landingPage.page.getByRole('img', { name: TestData.IMAGES.ICDC_STUDIES })
+    ).toBeVisible();
+    await Assertions.assertElementContainsText(
+      landingPage.tabPanel,
+      humanContent.title
     );
-    await expect(page.getByRole('tabpanel')).toContainText(
-      'Canine cancer research plays a pivotal role in advancing human cancer research. Explore how pet dogs with spontaneous tumors offer unique opportunities for the cancer research community to gain significant insights into understanding cancer biology, developing new treatments, mitigating toxicities, and improving outcomes for both canines and humans.'
+    await Assertions.assertElementContainsText(
+      landingPage.tabPanel,
+      humanContent.description
     );
 
     // Test Read More button navigation
-    await expect(page.getByRole('button', { name: 'Read More' })).toBeVisible();
-    await page.getByRole('button', { name: 'Read More' }).click();
-    await expect(page).toHaveURL('http://localhost:7000/#/human-relevance');
+    const readMoreButton = landingPage.page.getByRole('button', {
+      name: humanContent.buttonText,
+    });
+    await Assertions.assertElementIsInteractable(readMoreButton);
+    await readMoreButton.click();
+    await Assertions.assertUrlEquals(
+      landingPage.page,
+      humanContent.expectedUrl
+    );
   });
 
   test('should display Explore tab content and navigation', async ({
-    page,
+    landingPage,
   }) => {
-    await page.getByRole('tab', { name: 'icdc_carousel_tabs Explore' }).click();
+    const exploreContent = TestData.TAB_CONTENT.EXPLORE;
+
+    await landingPage.clickTab('explore');
 
     // Verify Explore tab content
+    await Assertions.assertElementContainsText(
+      landingPage.tabPanel,
+      exploreContent.title
+    );
     await expect(
-      page
-        .getByRole('tabpanel')
-        .locator('div')
-        .filter({ hasText: 'Using Canine Cancers to drive' })
-        .first()
+      landingPage.page.getByRole('img', { name: TestData.IMAGES.HUMAN })
     ).toBeVisible();
-    await expect(page.getByRole('img', { name: 'human' })).toBeVisible();
-    await expect(page.getByRole('img', { name: 'Dog' })).toBeVisible();
+    await expect(
+      landingPage.page.getByRole('img', { name: TestData.IMAGES.DOG })
+    ).toBeVisible();
 
     // Test Explore ICDC Data button navigation
-    await expect(
-      page.getByRole('button', { name: 'Explore ICDC Data' })
-    ).toBeVisible();
-    await page.getByRole('button', { name: 'Explore ICDC Data' }).click();
-    await expect(page).toHaveURL('http://localhost:7000/#/explore');
+    const exploreButton = landingPage.page.getByRole('button', {
+      name: exploreContent.buttonText,
+    });
+    await Assertions.assertElementIsInteractable(exploreButton);
+    await exploreButton.click();
+    await Assertions.assertUrlEquals(
+      landingPage.page,
+      exploreContent.expectedUrl
+    );
   });
 
   test('should display Data Model tab content and navigation', async ({
-    page,
+    landingPage,
   }) => {
-    await page
-      .getByRole('tab', { name: 'icdc_carousel_tabs Data Model' })
-      .click();
+    const dataModelContent = TestData.TAB_CONTENT.DATA_MODEL;
+
+    await landingPage.clickTab('dataModel');
 
     // Verify Data Model tab content
     await expect(
-      page
-        .getByRole('tabpanel')
-        .locator('div')
-        .filter({ hasText: 'The Data Model NavigatorThe' })
-        .first()
+      landingPage.page.getByRole('img', { name: TestData.IMAGES.ICDC_STUDIES })
     ).toBeVisible();
-    await expect(page.getByRole('img', { name: 'icdc_studies' })).toBeVisible();
-    await expect(page.getByRole('tabpanel')).toContainText(
-      'The Data Model Navigator'
+    await Assertions.assertElementContainsText(
+      landingPage.tabPanel,
+      dataModelContent.title
     );
-    await expect(page.getByRole('tabpanel')).toContainText(
-      'The ICDC data model provides a visual representation of how all the constituent nodes and values are arranged relative to each other.'
+    await Assertions.assertElementContainsText(
+      landingPage.tabPanel,
+      dataModelContent.description
     );
 
     // Test Navigate the ICDC Data Model button navigation
-    await expect(
-      page.getByRole('button', { name: 'Navigate the ICDC Data Model' })
-    ).toBeVisible();
-    await page
-      .getByRole('button', { name: 'Navigate the ICDC Data Model' })
-      .click();
-    await expect(page).toHaveURL('http://localhost:7000/#/icdc-data-model');
+    const dataModelButton = landingPage.page.getByRole('button', {
+      name: dataModelContent.buttonText,
+    });
+    await Assertions.assertElementIsInteractable(dataModelButton);
+    await dataModelButton.click();
+    await Assertions.assertUrlEquals(
+      landingPage.page,
+      dataModelContent.expectedUrl
+    );
   });
 
-  test('should display Videos tab content and navigation', async ({ page }) => {
-    await page.getByRole('tab', { name: 'icdc_carousel_tabs Videos' }).click();
+  test('should display Videos tab content and navigation', async ({
+    landingPage,
+  }) => {
+    const videosContent = TestData.TAB_CONTENT.VIDEOS;
+
+    await landingPage.clickTab('videos');
 
     // Verify Videos tab content
     await expect(
-      page
-        .getByRole('tabpanel')
-        .locator('div')
-        .filter({ hasText: 'Why Canine Cancer data? ICDC' })
-        .first()
+      landingPage.page.getByText(videosContent.videoSpotlight)
     ).toBeVisible();
-    await expect(page.getByText('VIDEO SPOTLIGHTSNCI Cancer')).toBeVisible();
-    await expect(page.getByRole('tabpanel')).toContainText(
-      'Why Canine Cancer data? ICDC studies highlight the impact of canine research on human cancer research'
+    await Assertions.assertElementContainsText(
+      landingPage.tabPanel,
+      videosContent.title
     );
-    await expect(page.getByRole('tabpanel')).toContainText(
-      'Canine cancer research plays a pivotal role in advancing human cancer research. Explore how pet dogs with spontaneous tumors offer unique opportunities for the cancer research community to gain significant insights into understanding cancer biology, developing new treatments, mitigating toxicities, and improving outcomes for both canines and humans.'
+    await Assertions.assertElementContainsText(
+      landingPage.tabPanel,
+      videosContent.description
     );
 
     // Test View ICDC Studies button navigation
-    await expect(
-      page.getByRole('button', { name: 'View ICDC Studies' })
-    ).toBeVisible();
-    await page.getByRole('button', { name: 'View ICDC Studies' }).click();
-    await expect(page).toHaveURL('http://localhost:7000/#/studies');
+    const studiesButton = landingPage.page.getByRole('button', {
+      name: videosContent.buttonText,
+    });
+    await Assertions.assertElementIsInteractable(studiesButton);
+    await studiesButton.click();
+    await Assertions.assertUrlEquals(
+      landingPage.page,
+      videosContent.expectedUrl
+    );
   });
 
-  test('should navigate to Submit Data page from widget', async ({ page }) => {
-    await expect(
-      page.getByRole('link', { name: 'Submit Data ICDC submit' })
-    ).toBeVisible();
-    await page.getByRole('link', { name: 'Submit Data ICDC submit' }).click();
-    await expect(page).toHaveURL('http://localhost:7000/#/submit');
+  test('should navigate to Submit Data page from widget', async ({
+    landingPage,
+  }) => {
+    const submitData = TestData.WIDGETS.SUBMIT_DATA;
+    await Assertions.assertElementIsInteractable(landingPage.submitDataLink);
+    await landingPage.navigateViaWidget('submitData');
+    await Assertions.assertUrlEquals(landingPage.page, submitData.expectedUrl);
   });
 
-  test('should navigate to Programs page from widget', async ({ page }) => {
-    await expect(
-      page.getByRole('link', { name: 'Programs ICDC Programs' })
-    ).toBeVisible();
-    await page.getByRole('link', { name: 'Programs ICDC Programs' }).click();
-    await expect(page).toHaveURL('http://localhost:7000/#/programs');
+  test('should navigate to Programs page from widget', async ({
+    landingPage,
+  }) => {
+    const programs = TestData.WIDGETS.PROGRAMS;
+    await Assertions.assertElementIsInteractable(landingPage.programsLink);
+    await landingPage.navigateViaWidget('programs');
+    await Assertions.assertUrlEquals(landingPage.page, programs.expectedUrl);
   });
 
-  test('should navigate to About page from widget', async ({ page }) => {
-    await expect(
-      page.getByRole('link', { name: 'About the ICDC About ICDC' })
-    ).toBeVisible();
-    await page.getByRole('link', { name: 'About the ICDC About ICDC' }).click();
-    await expect(page).toHaveURL('http://localhost:7000/#/purpose');
+  test('should navigate to About page from widget', async ({ landingPage }) => {
+    const about = TestData.WIDGETS.ABOUT;
+    await Assertions.assertElementIsInteractable(landingPage.aboutLink);
+    await landingPage.navigateViaWidget('about');
+    await Assertions.assertUrlEquals(landingPage.page, about.expectedUrl);
   });
 
   test('should navigate to ICDC Spotlight page from widget', async ({
-    page,
+    landingPage,
   }) => {
-    await expect(
-      page.getByRole('link', { name: 'ICDC Spotlight ICDC Spotlight' })
-    ).toBeVisible();
-    await page
-      .getByRole('link', { name: 'ICDC Spotlight ICDC Spotlight' })
-      .click();
-    await expect(page).toHaveURL('http://localhost:7000/#/news');
+    const spotlight = TestData.WIDGETS.SPOTLIGHT;
+    await Assertions.assertElementIsInteractable(landingPage.spotlightLink);
+    await landingPage.navigateViaWidget('spotlight');
+    await Assertions.assertUrlEquals(landingPage.page, spotlight.expectedUrl);
   });
 
-  test('should display all carousel tabs', async ({ page }) => {
+  test('should display all carousel tabs', async ({ landingPage }) => {
     // Verify all expected tabs are visible
-    await expect(
-      page.getByRole('tab', { name: 'icdc_carousel_tabs Human' })
-    ).toBeVisible();
-    await expect(
-      page.getByRole('tab', { name: 'icdc_carousel_tabs Explore' })
-    ).toBeVisible();
-    await expect(
-      page.getByRole('tab', { name: 'icdc_carousel_tabs Data Model' })
-    ).toBeVisible();
-    await expect(
-      page.getByRole('tab', { name: 'icdc_carousel_tabs Videos' })
-    ).toBeVisible();
+    const allTabsVisible = await landingPage.areAllTabsVisible();
+    expect(allTabsVisible).toBe(true);
+
+    // Verify individual tabs
+    await expect(landingPage.humanTab).toBeVisible();
+    await expect(landingPage.exploreTab).toBeVisible();
+    await expect(landingPage.dataModelTab).toBeVisible();
+    await expect(landingPage.videosTab).toBeVisible();
   });
 
-  test('should handle video spotlight functionality', async ({ page }) => {
+  test('should handle video spotlight functionality', async ({
+    landingPage,
+  }) => {
     // Navigate to Videos tab
-    await page.getByRole('tab', { name: 'icdc_carousel_tabs Videos' }).click();
+    await landingPage.clickTab('videos');
 
     // Look for video-related elements
-    const videoElements = page.locator(
-      'iframe[src*="youtube"], .video-player, [class*="VideoPlayer"]'
-    );
+    const videoElements = landingPage.getVideoElements();
 
     if ((await videoElements.count()) > 0) {
       await expect(videoElements.first()).toBeVisible();
 
       // Check for playlist if it exists
-      const playlist = page.locator('[class*="Playlist"], .playlist');
+      const playlist = landingPage.getPlaylistElements();
       if ((await playlist.count()) > 0) {
         await expect(playlist.first()).toBeVisible();
 
         // Check for playlist items
-        const playlistItems = page.locator(
-          '[class*="PlaylistItem"], .playlist-item'
-        );
+        const playlistItems = landingPage.getPlaylistItemElements();
         if ((await playlistItems.count()) > 1) {
           // Click on a different playlist item
           await playlistItems.nth(1).click();
-          await page.waitForTimeout(1000);
+          await landingPage.waitForAnimations();
 
           // Verify the video source changed
-          const iframe = page.locator('iframe[src*="youtube"]').first();
+          const iframe = landingPage.page
+            .locator('iframe[src*="youtube"]')
+            .first();
           if ((await iframe.count()) > 0) {
-            const src = await iframe.getAttribute('src');
-            expect(src).toContain('youtube.com/embed/');
+            await Assertions.assertValidYouTubeVideo(iframe);
           }
         }
       }
     }
   });
 
-  test('should display Twitter embed when available', async ({ page }) => {
+  test('should display Twitter embed when available', async ({
+    landingPage,
+  }) => {
     // Navigate to Videos tab where Twitter content might be
-    await page.getByRole('tab', { name: 'icdc_carousel_tabs Videos' }).click();
+    await landingPage.clickTab('videos');
 
     // Look for Twitter embed elements
-    const twitterElements = page.locator(
-      '[class*="TwitterViewContainer"], .twitter-tweet, iframe[src*="twitter"]'
-    );
+    const twitterElements = landingPage.getTwitterElements();
 
     if ((await twitterElements.count()) > 0) {
       await expect(twitterElements.first()).toBeVisible();
     }
   });
 
-  test('should be responsive on mobile devices', async ({ page }) => {
-    // Set mobile viewport
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.reload();
-    await page.waitForLoadState('domcontentloaded');
-
-    // Re-initialize page for mobile
-    await handleWarningDialog(page);
-    await waitForContentLoad(page);
+  test('should be responsive on mobile devices', async ({ landingPage }) => {
+    // Set mobile viewport and reload
+    await landingPage.navigateOnMobile();
 
     // Check that main content is still visible and accessible
-    await expect(page.locator('body')).toBeVisible();
+    await Assertions.assertMobileResponsive(landingPage.page);
 
     // Check that tabs are still functional on mobile
-    await expect(
-      page.getByRole('tab', { name: 'icdc_carousel_tabs Human' })
-    ).toBeVisible();
+    await expect(landingPage.humanTab).toBeVisible();
 
     // Test tab interaction on mobile
-    await page.getByRole('tab', { name: 'icdc_carousel_tabs Explore' }).click();
-    await expect(
-      page.getByRole('tab', { name: 'icdc_carousel_tabs Explore' })
-    ).toHaveAttribute('aria-selected', 'true');
+    await landingPage.clickTab('explore');
+    await Assertions.assertTabIsSelected(landingPage.exploreTab);
 
     // Verify at least one widget is still accessible on mobile
-    const widgets = page
+    const widgets = landingPage.page
       .getByRole('link')
       .filter({ hasText: /Submit Data|Programs|About|Spotlight/i });
     await expect(widgets.first()).toBeVisible();
   });
 
-  test('should handle visual elements and animations', async ({ page }) => {
+  test('should handle visual elements and animations', async ({
+    landingPage,
+  }) => {
     // Check for animated star elements
-    const starElements = page.locator('[class*="Star"]');
+    const starElements = landingPage.getStarElements();
     if ((await starElements.count()) > 0) {
       await expect(starElements.first()).toBeVisible();
     }
 
     // Check for slide animation elements
-    const slideElements = page.locator(
-      '[class*="SlideUp"], [class*="SlideDown"]'
-    );
+    const slideElements = landingPage.getSlideElements();
     if ((await slideElements.count()) > 0) {
       await expect(slideElements.first()).toBeVisible();
     }
 
     // Wait for animations to settle and verify page remains functional
-    await page.waitForTimeout(1000);
-    await expect(page.locator('body')).toBeVisible();
+    await Assertions.assertAnimationsWorkCorrectly(landingPage.page);
 
     // Test that tab navigation still works after animations
-    await page.getByRole('tab', { name: 'icdc_carousel_tabs Explore' }).click();
-    await expect(
-      page.getByRole('tab', { name: 'icdc_carousel_tabs Explore' })
-    ).toHaveAttribute('aria-selected', 'true');
+    await landingPage.clickTab('explore');
+    await Assertions.assertTabIsSelected(landingPage.exploreTab);
   });
 });

@@ -1,6 +1,6 @@
 {
   "homepage": ".",
-  "name": "ICDC-Frontend",
+  "name": "icdc-frontend",
   "version": "0.1.0",
   "dependencies": {
     "@bento-core/about": "^0.3.0",
