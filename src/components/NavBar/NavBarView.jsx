@@ -1,34 +1,36 @@
 import React from 'react';
 import { NavBar } from '@bento-core/nav-bar';
 import {
-  navBarData,
   navBarCartData,
-  navBarstyling,
-  externalLinks,
+  HeaderLinks,
+  HeaderSubLinks,
+  headerData,
 } from '../../bento/navigationBarData';
 
 import NavBarThemeProvider from './NavBarThemeConfig';
 import styled from '@emotion/styled';
 
-const NavContrainer = styled('div')({
+const NavContainer = styled('div')({
   position: 'relative',
 });
 
 const BentoNavBar = ({ cartFieldIds = [] }) => (
   <>
     <NavBarThemeProvider>
-      <NavContrainer>
+      <NavContainer>
         <NavBar
-          navBarData={navBarData}
           navBarCartData={navBarCartData}
-          navBarstyling={navBarstyling}
+          config={{
+            HeaderLinks,
+            HeaderSubLinks,
+            headerData,
+          }}
           numberOfCases={cartFieldIds.length}
-          externalLinksFlag
-          externalLinks={externalLinks}
-          externalLinksFirst
+          endComponent={true}
         />
-      </NavContrainer>
+      </NavContainer>
     </NavBarThemeProvider>
   </>
 );
+
 export default BentoNavBar;
