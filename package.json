@@ -12,7 +12,7 @@
     "@bento-core/global-search": "1.0.1-icdc.3",
     "@bento-core/header": "1.0.1-icdc.2",
     "@bento-core/local-find": "1.0.1-icdc.13",
-    "@bento-core/nav-bar": "1.0.1-icdc.3",
+    "@bento-core/nav-bar": "^1.0.1-icdc.5",
     "@bento-core/paginated-table": "1.0.1-icdc.24",
     "@bento-core/query-bar": "1.0.1-icdc.28",
     "@bento-core/stats-bar": "1.0.1-icdc.2",
@@ -186,5 +186,6 @@
     "presets": [
       "react-app"
     ]
-  }
+  },
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
 }

@@ -1,256 +1,180 @@
 // import env from '../utils/env';
-export const navBarstyling = {
-  cart: {
-    iconSize: '44px',
-  },
-  dropDownMenuButton: {
-    whiteSpace: 'nowrap',
-    color: '#FFF',
-    fontFamily: 'Open Sans',
-    fontSize: '17px',
-    fontWeight: '600',
-    letterSpacing: '0.5px',
-  },
-  cartCounter: {
-    fontSize: '16px',
-    fontFamily: 'Open Sans',
-    fontWeight: 'normal',
-    letterSpacing: '0.5px',
-  },
-  labelText: {
-    fontSize: '17px',
-    fontWeight: '600',
-    letterSpacing: '0.5px',
-  },
-  global: {
-    backgroundColor: '#0B3557',
-    minHeight: '39px',
-    padding: '9px 20px 0px 20px',
-    marginTop: '0px',
-    fontFamily: 'Open Sans',
-    activeLabel: '2px solid #35b9eb',
-    paddingLeft: '150px',
-    paddingTop: '8px',
-    labelTextFontSize: '17px',
-    paddingBottom: '8px',
-    alignItems: 'center',
-    fontWeight: '600',
-    letterSpacing: '1px',
-    position: 'relative',
-    cartLabelFontSize: '16px',
-    cartLabelFontWeight: '600',
-    cartLabelLetterSpacing: '0.5px',
-  },
-  dropdownButtonRoot: {
-    padding: '0px',
-  },
-  aboutMenu: {
-    padding: '0px 20px',
-  },
-  myCasesPosition: {},
-  buttonRootNoRightPadding: {
-    padding: '0px 38px 0px 0px',
-    border: '0',
-    cursor: 'pointer',
-    margin: '0',
-    textDecoration: 'none',
-    backgroundColor: 'transparent',
-    textTransform: 'uppercase',
-    lineHeight: '1.75',
-  },
-  buttonRoot: {
-    padding: '0px 20px 0px 20px',
-    border: '0',
-    cursor: 'pointer',
-    margin: '0',
-    display: 'inline-flex',
-    textDecoration: 'none',
-    backgroundColor: 'transparent',
-    textTransform: 'uppercase',
-    lineHeight: '1.75',
-  },
-  buttonContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '100%',
-    justifyContent: 'center',
-  },
-  myFiles: {
-    right: '8px',
-  },
-  dropDownIcon: {
-    displayIcon: true,
-    fontSize: '18px',
-    margin: '0px 0px 0px 0px',
-  },
-  dropdownMenu: {
-    paper: {
-      background: '#309EC4',
-      width: '200px',
-      padding: '5px 18px 18px 18px',
-      marginLeft: '15px',
-      position: 'absolute',
-      marginTop: '-1px',
-      borderRadius: '0',
-    },
-    link: {
-      overflowWrap: 'normal',
-      textDecoration: 'none',
-      color: '#000000',
-      fontSize: '14px',
-      fontWeight: '600',
-      lineSpacing: '1px',
-      lineHeight: '18px',
-      fontFamily: 'Raleway, sans-serif',
-      display: 'block',
-      marginTop: '10px',
-      '&:hover': {
-        cursor: 'pointer',
-        color: 'white',
-      },
-    },
-  },
+export const headerData = {
+  globalHeaderLogo:
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/icdc_nih_logo.svg',
+  globalHeaderLogoSmall:
+    'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/icdc_nih_logo.svg',
+  globalHeaderLogoLink: '/',
+  globalHeaderLogoAltText: 'ICDC Logo',
 };
 
-export const navBarData = [
+export const HeaderLinks = [
   {
-    labelText: 'home',
-    type: 'link',
+    name: 'Home',
     link: '/home',
+    id: 'navbar-dropdown-home',
+    className: 'navMobileItem',
   },
   {
-    labelText: 'explore',
-    type: 'link',
+    name: 'Explore',
     link: '/explore',
+    id: 'navbar-dropdown-explore',
+    className: 'navMobileItem',
   },
   {
-    labelText: 'programs',
-    type: 'link',
+    name: 'Programs',
     link: '/programs',
+    id: 'navbar-dropdown-programs',
+    className: 'navMobileItem',
   },
   {
-    labelText: 'Studies',
-    type: 'link',
+    name: 'Studies',
     link: '/studies',
+    id: 'navbar-dropdown-studies',
+    className: 'navMobileItem',
   },
   {
-    labelText: 'data',
-    type: 'dropdown',
-
-    dropDownLinks: [
-      {
-        labelText: 'Model Navigator',
-        link: '/icdc-data-model',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Data Use',
-        link: '/guideline',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Data Submission Guidelines',
-        link: '/submit',
-        linkActiveStyle: 'white',
-      },
-    ],
+    name: 'Data',
+    link: '#',
+    id: 'navbar-dropdown-data',
+    className: 'navMobileItem clickable',
   },
   {
-    labelText: 'resources',
-    type: 'dropdown',
-
-    dropDownLinks: [
-      {
-        labelText: 'GraphQL',
-        link: '/graphql',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Developers',
-        link: '/developers',
-        linkActiveStyle: 'white',
-      },
-    ],
+    name: 'CRDC',
+    link: '#',
+    id: 'navbar-dropdown-crdc',
+    className: 'navMobileItem clickable',
   },
   {
-    labelText: 'about',
-    type: 'dropdown',
-
-    dropDownLinks: [
-      {
-        labelText: 'Purpose',
-        link: '/purpose',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Steering Committee',
-        link: '/steeringCommittee',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: '- Data Governance Advisory Board(DGAB)',
-        link: '/DGAB',
-        sublink: true,
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: '- Best Practices Sub-Committee(BPSC)',
-        link: '/BPSC',
-        sublink: true,
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: '- Working Groups',
-        link: '/Working Groups',
-        sublink: true,
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'CRDC & Analysis',
-        link: '/crdc',
-        linkActiveStyle: 'white',
-      },
-      {
-        labelText: 'Support',
-        link: '/support',
-        linkActiveStyle: 'white',
-      },
-    ],
+    name: 'Resources',
+    link: '#',
+    id: 'navbar-dropdown-resources',
+    className: 'navMobileItem clickable',
+  },
+  {
+    name: 'About',
+    link: '#',
+    id: 'navbar-dropdown-about',
+    className: 'navMobileItem clickable',
   },
 ];
 
-/* export const externalLinks = {
-  resources: [
+export const HeaderSubLinks = {
+  Data: [
     {
-      title: 'Wiki',
-      link: 'https://wiki.nci.nih.gov/spaces/viewspace.action?key=ICDC',
+      name: 'Model Navigator',
+      link: '/icdc-data-model',
+      id: 'data-model-navigator',
     },
     {
-      title: 'Github',
-      link: 'https://github.com/CBIIT/bento-icdc-frontend',
+      name: 'Data Use',
+      link: '/guideline',
+      id: 'data-use',
     },
     {
-      title: 'Cancer Genomics Cloud',
-      link: 'https://www.cancergenomicscloud.org/',
-    },
-    {
-      title: 'Software Release Notes',
-      link: `https://github.com/CBIIT/bento-icdc-frontend/releases/tag/${env.REACT_APP_FE_VERSION}`,
-    },
-  ],
-  data: [
-    {
-      title: 'Data Submission Request Template',
-      link: 'https://github.com/CBIIT/icdc-codebase/raw/master/src/main/frontend/src/content/files/ICDC_Data_Submission_Request_Template.docx',
+      name: 'Data Submission Guidelines',
+      link: '/submit',
+      id: 'data-submission-guidelines',
     },
   ],
-}; */
-
-export const externalLinks = {
-  resources: [
+  CRDC: [
     {
-      title: 'Tutorials',
+      name: 'Cancer Research Data Commons',
+      link: 'https://datacommons.cancer.gov/',
+      id: 'crdc-home-page',
+    },
+    {
+      name: 'Genomic Data Commons',
+      link: 'https://gdc.cancer.gov/',
+      id: 'genomic-data-commons',
+    },
+    {
+      name: 'Clinical and Translational Data Commons',
+      link: 'https://clinical.datacommons.cancer.gov/#/',
+      id: 'clinical-and-reanslatonal-data-commons',
+    },
+    {
+      name: 'Proteomic Data Commons',
+      link: 'https://proteomic.datacommons.cancer.gov/pdc/',
+      id: 'proteomic-data-commons',
+    },
+    {
+      name: 'Imaging Data Commons',
+      link: '',
+      id: 'genomic-data-commons',
+    },
+    {
+      name: 'Cancer Data Aggregator',
+      link: '',
+      id: 'genomic-data-commons',
+    },
+    {
+      name: 'General Commons',
+      link: 'https://general.datacommons.cancer.gov/#/',
+      id: 'general-commons',
+    },
+  ],
+  Resources: [
+    {
+      name: 'GraphQL',
+      link: '/graphql',
+      id: 'graphQL',
+    },
+    {
+      name: 'Developers',
+      link: '/developers',
+      id: 'developers',
+    },
+    {
+      name: 'Tutorials',
       link: 'https://cbiit.github.io/icdc-bioinformatics/',
+      id: 'data-submission-guidelines',
+    },
+  ],
+  About: [
+    {
+      name: 'Purpose',
+      link: '/purpose',
+      id: 'purpose',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'Steering Committee',
+      id: 'steering-committee',
+      link: '/steeringCommittee',
+      className: 'navMobileSubItem',
+      items: [
+        {
+          name: 'Data Governance Advisory Board(DGAB)',
+          link: '/DGAB',
+          id: 'dgab',
+          className: 'navMobileSubItem',
+        },
+        {
+          name: 'Best Practices Subcommittee(BPSC)',
+          link: '/BPSC',
+          id: 'bpsc',
+          className: 'navMobileSubItem',
+        },
+        {
+          name: 'Working Groups',
+          link: '/Working%20Groups',
+          id: 'working-groups',
+          className: 'navMobileSubItem',
+        },
+      ],
+    },
+    {
+      name: 'CRDC & Analysis',
+      link: '/crdc',
+      id: 'crdc-and-analysis',
+      className: 'navMobileSubItem',
+    },
+    {
+      name: 'Support',
+      link: '/support',
+      id: 'support',
+      className: 'navMobileSubItem',
     },
   ],
 };
