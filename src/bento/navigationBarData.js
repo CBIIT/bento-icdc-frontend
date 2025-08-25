@@ -100,12 +100,7 @@ export const HeaderSubLinks = {
     },
     {
       name: 'Imaging Data Commons',
-      link: '',
-      id: 'genomic-data-commons',
-    },
-    {
-      name: 'Cancer Data Aggregator',
-      link: '',
+      link: 'https://portal.imaging.datacommons.cancer.gov/',
       id: 'genomic-data-commons',
     },
     {
