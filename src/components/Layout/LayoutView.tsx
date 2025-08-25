@@ -26,6 +26,7 @@ import SysInfo from '../../pages/sysinfo/sysInfo';
 import Error from '../../pages/error/Error';
 import { Global, css } from '@emotion/react';
 import { HeaderContainer, ContentWrapper } from './LayoutView.styled';
+import USABanner from '../USABanner';
 
 const LayoutView = () => {
   const [open, setOpen] = useState(false);
@@ -188,6 +189,7 @@ const LayoutView = () => {
         {open && <OverlayWindow open={open} handleClose={handleClose} />}
         <HeaderContainer ref={headerRef}>
           <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
+          <USABanner />
           <Header />
           {!navBarExclusions.find(item => item === location.hash) && <NavBar />}
         </HeaderContainer>
