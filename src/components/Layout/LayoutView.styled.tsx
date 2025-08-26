@@ -18,5 +18,6 @@ export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
+    margin-top: 48px;
   }
 `;

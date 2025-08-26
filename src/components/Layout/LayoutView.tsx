@@ -72,7 +72,7 @@ const LayoutView = () => {
       if (hasBanner) {
         document.documentElement.style.setProperty(
           '--site-alert-offset',
-          `${totalHeight - 2}px`
+          `${totalHeight - 4}px`
         );
         if (open) {
           document.documentElement.style.setProperty('--header-offset', `0px`);
