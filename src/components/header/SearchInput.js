@@ -11,6 +11,7 @@ const Root = styled(Box)`
 
 const Input = styled(TextField)(({ theme }) => ({
   flex: '0 0 254px',
+  height: '46px',
   width: 254,
   '& .MuiOutlinedInput-root': {
     height: 48,
@@ -30,7 +31,7 @@ const Input = styled(TextField)(({ theme }) => ({
 }));
 
 const SearchButton = styled(Button)`
-  height: 48px;
+  height: 46px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 10px;
