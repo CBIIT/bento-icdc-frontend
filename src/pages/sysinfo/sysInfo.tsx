@@ -29,7 +29,12 @@ import { TableContext, TableView, cellTypes } from '../../bento-core';
 import { CustomizeCellView } from '../../components/PaginatedTable/Customize/CellView';
 import { ExtendedViewConfig } from '../../components/PaginatedTable/Customize/ExtendedView';
 import { themeConfig } from './theme';
-import { downloadVersionsCsv, downloadVersionsJson, Row } from './downloadCsv';
+import {
+  downloadVersionsCsv,
+  downloadVersionsJson,
+  Row,
+  formatNowForFilename,
+} from './downloadCsv';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 type VersionResponse = { version: string };
@@ -222,14 +227,14 @@ const SysInfo: React.FC = () => {
         coreMicroServicesTable,
         extendedMicroServicesTable,
         dependenciesTable,
-        'ICDC-Systems-Info.csv'
+        `ICDC-Systems-Info-${formatNowForFilename()}.csv`
       );
     } else if (option === 'Download JSON') {
       downloadVersionsJson(
         coreMicroServicesTable,
         extendedMicroServicesTable,
         dependenciesTable,
-        'ICDC-Systems-Info.json'
+        `ICDC-Systems-Info-${formatNowForFilename()}.json`
       );
     }
   }, [
