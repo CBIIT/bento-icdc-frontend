@@ -62,10 +62,16 @@ export const table1 = {
       tooltipText: 'sort',
       role: cellTypes.DISPLAY,
     },
-    {},
     {
       dataField: 'currentVersion',
       header: 'Current Version',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'apiEndpoint',
+      header: 'API Endpoint',
       display: true,
       tooltipText: 'sort',
       role: cellTypes.DISPLAY,
@@ -161,14 +167,17 @@ const SysInfo: React.FC = () => {
       {
         name: 'Frontend',
         currentVersion: env.REACT_APP_FE_VERSION ?? '',
+        apiEndpoint: 'NA',
       },
       {
         name: 'Backend',
         currentVersion: backendRes?.data ?? '',
+        apiEndpoint: env.REACT_APP_BACKEND_API,
       },
       {
         name: 'Bento Core',
         currentVersion: bentoCorePackageJson.version ?? '',
+        apiEndpoint: 'NA',
       },
     ],
     [backendRes?.data]
@@ -179,10 +188,12 @@ const SysInfo: React.FC = () => {
       {
         name: 'File',
         currentVersion: fileServiceRes?.data ?? '',
+        apiEndpoint: env.REACT_APP_FILE_SERVICE_API,
       },
       {
         name: 'Interoperation',
         currentVersion: interOpRes?.data ?? '',
+        apiEndpoint: env.REACT_APP_INTEROP_SERVICE_URL,
       },
     ],
     [fileServiceRes?.data, interOpRes?.data]
@@ -193,10 +204,12 @@ const SysInfo: React.FC = () => {
       {
         name: 'Node',
         currentVersion: dependencyRequirements.node,
+        apiEndpoint: 'NA',
       },
       {
         name: 'NPM',
         currentVersion: dependencyRequirements.npm,
+        apiEndpoint: 'NA',
       },
     ],
     []

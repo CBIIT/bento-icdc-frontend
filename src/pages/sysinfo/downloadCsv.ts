@@ -2,6 +2,7 @@
 export type Row = {
   name: string;
   currentVersion?: string | number | null | undefined;
+  apiEndpoint?: string | number | null | undefined;
 };
 
 type Section = {
@@ -27,10 +28,22 @@ function sectionsToCsv(sections: Section[]): string {
     // Section header as a single-column line
     lines.push(toCsvCell(section.title));
     // Column headers
-    lines.push([toCsvCell('Name'), toCsvCell('Current Version')].join(','));
+    lines.push(
+      [
+        toCsvCell('Name'),
+        toCsvCell('Current Version'),
+        toCsvCell('API Endpoint'),
+      ].join(',')
+    );
     // Rows
     for (const r of section.rows) {
-      lines.push([toCsvCell(r.name), toCsvCell(r.currentVersion)].join(','));
+      lines.push(
+        [
+          toCsvCell(r.name),
+          toCsvCell(r.currentVersion),
+          toCsvCell(r.apiEndpoint),
+        ].join(',')
+      );
     }
     // Blank line between sections
     lines.push('');
