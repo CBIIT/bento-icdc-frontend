@@ -2,6 +2,7 @@
 export type Row = {
   name: string;
   currentVersion?: string | number | null | undefined;
+  apiEndpoint?: string | number | null | undefined;
 };
 
 type Section = {
@@ -27,10 +28,22 @@ function sectionsToCsv(sections: Section[]): string {
     // Section header as a single-column line
     lines.push(toCsvCell(section.title));
     // Column headers
-    lines.push([toCsvCell('Name'), toCsvCell('Current Version')].join(','));
+    lines.push(
+      [
+        toCsvCell('Name'),
+        toCsvCell('Current Version'),
+        toCsvCell('API Endpoint'),
+      ].join(',')
+    );
     // Rows
     for (const r of section.rows) {
-      lines.push([toCsvCell(r.name), toCsvCell(r.currentVersion)].join(','));
+      lines.push(
+        [
+          toCsvCell(r.name),
+          toCsvCell(r.currentVersion),
+          toCsvCell(r.apiEndpoint),
+        ].join(',')
+      );
     }
     // Blank line between sections
     lines.push('');
@@ -97,4 +110,20 @@ export function downloadVersionsJson(
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+export function formatNowForFilename(): string {
+  const d = new Date();
+
+  const pad = (n: number) => String(n).padStart(2, '0');
+
+  const year = d.getFullYear();
+  const month = pad(d.getMonth() + 1); // 0-based
+  const day = pad(d.getDate());
+
+  const hours = pad(d.getHours());
+  const minutes = pad(d.getMinutes());
+  const seconds = pad(d.getSeconds());
+
+  return `${year}-${month}-${day} ${hours}-${minutes}-${seconds}`;
 }
