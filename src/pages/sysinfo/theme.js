@@ -168,7 +168,7 @@ export const tblHeader = {
       '& li': {
         color: '#194563',
       },
-      width: '50%',
+      width: '33%',
     },
     head: {
       // textAlign: 'center'
