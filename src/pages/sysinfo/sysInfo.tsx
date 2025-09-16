@@ -88,6 +88,48 @@ export const table1 = {
   // noArmsCohort2: "This study is not currently divided into Arms or Cohorts",
 } as const;
 
+export const table2 = {
+  display: true,
+  tableTitle: 'This study is organized as follows:',
+  defaultSortField: 'name',
+  defaultSortDirection: 'asc',
+  extendedViewConfig: {
+    download: {
+      customDownload: false,
+      downloadFileName: 'ICDC_ARMS_AND_COHORTS_download',
+      downloadCsv: 'Download Table Contents As CSV',
+    },
+    manageViewColumns: { title: 'View Columns' },
+  },
+  columns: [
+    {
+      dataField: 'name',
+      header: 'Name',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    {
+      dataField: 'currentVersion',
+      header: 'Current Version',
+      display: true,
+      tooltipText: 'sort',
+      role: cellTypes.DISPLAY,
+    },
+    // {
+    //   dataField: 'apiEndpoint',
+    //   header: 'API Endpoint',
+    //   display: true,
+    //   tooltipText: 'sort',
+    //   role: cellTypes.DISPLAY,
+    // },
+  ],
+  // noArmMessage: "This study is not divided into arms",
+  // noCohortMessage: "This study is not divided into cohorts",
+  // noArmsCohort: "This study is not divided into Arms or Cohorts",
+  // noArmsCohort2: "This study is not currently divided into Arms or Cohorts",
+} as const;
+
 const Header = styled.div({
   display: 'flex',
   justifyContent: 'center',
@@ -209,12 +251,10 @@ const SysInfo: React.FC = () => {
       {
         name: 'Node',
         currentVersion: dependencyRequirements.node,
-        apiEndpoint: 'NA',
       },
       {
         name: 'NPM',
         currentVersion: dependencyRequirements.npm,
-        apiEndpoint: 'NA',
       },
     ],
     []
@@ -268,18 +308,18 @@ const SysInfo: React.FC = () => {
   }, []);
 
   const initTblState = useCallback(
-    (initialState: any) => ({
+    (initialState: any, tableConfig: any) => ({
       ...initialState,
-      title: table1.tableTitle,
-      columns: CustomizeCellView(table1),
+      title: tableConfig.tableTitle,
+      columns: CustomizeCellView(tableConfig),
       selectedRows: [],
       // tableMsg: table1?.noArmsCohort ?? undefined,
-      sortBy: table1.defaultSortField,
-      groupBy: (table1 as any).groupBy,
-      sortOrder: table1.defaultSortDirection,
+      sortBy: tableConfig.defaultSortField,
+      groupBy: tableConfig.groupBy,
+      sortOrder: tableConfig.defaultSortDirection,
       rowsPerPage: 25,
-      dataKey: (table1 as any).dataKey,
-      extendedViewConfig: ExtendedViewConfig(table1),
+      dataKey: tableConfig.dataKey,
+      extendedViewConfig: ExtendedViewConfig(tableConfig),
       page: 0,
     }),
     []
@@ -410,7 +450,7 @@ const SysInfo: React.FC = () => {
         <TableWrapper>
           <div className="title">Core Microservices</div>
           <TableView
-            initState={initTblState}
+            initState={() => initTblState({}, table1)}
             tblRows={coreMicroServicesTable}
             totalRowCount={coreMicroServicesTable.length}
             server={false}
@@ -421,7 +461,7 @@ const SysInfo: React.FC = () => {
         <TableWrapper>
           <div className="title">Extended Microservices</div>
           <TableView
-            initState={initTblState}
+            initState={() => initTblState({}, table1)}
             tblRows={extendedMicroServicesTable}
             totalRowCount={extendedMicroServicesTable.length}
             server={false}
@@ -432,7 +472,7 @@ const SysInfo: React.FC = () => {
         <TableWrapper>
           <div className="title">Dependencies</div>
           <TableView
-            initState={initTblState}
+            initState={() => initTblState({}, table2)}
             tblRows={dependenciesTable}
             totalRowCount={dependenciesTable.length}
             server={false}
