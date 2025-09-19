@@ -85,6 +85,7 @@ function SearchBar({ ...params }) {
           fontWeight: 600,
           fontSize: '16px',
           color: '#fff',
+          textTransform: 'none',
         }}
         onClick={go}
         disabled={disabled || loading}
