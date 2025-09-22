@@ -32,7 +32,7 @@ function sectionsToCsv(sections: Section[]): string {
       [
         toCsvCell('Name'),
         toCsvCell('Current Version'),
-        toCsvCell('API Endpoint'),
+        section.title !== 'Dependencies' ? toCsvCell('API Endpoint') : null,
       ].join(',')
     );
     // Rows
@@ -41,7 +41,7 @@ function sectionsToCsv(sections: Section[]): string {
         [
           toCsvCell(r.name),
           toCsvCell(r.currentVersion),
-          toCsvCell(r.apiEndpoint),
+          section.title !== 'Dependencies' ? toCsvCell(r.apiEndpoint) : null,
         ].join(',')
       );
     }
