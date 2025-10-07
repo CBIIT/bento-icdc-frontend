@@ -167,7 +167,7 @@ const Overview: React.FC<OverviewProps> = ({
           >
             <img
               src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/study-details-human-rel-icon.svg"
-              alt="human-rel-icon"
+              alt="Human relevance icon"
               style={{
                 width: '54px',
                 height: '54px',

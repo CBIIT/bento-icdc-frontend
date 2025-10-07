@@ -170,6 +170,11 @@ export const tab = {
       label: 'SUPPORTING DATA',
       value: 'supporting_data',
     },
+    {
+      index: 6,
+      label: 'HUMAN RELEVANCE',
+      value: 'human_relevance',
+    },
   ],
   publication: {
     numbOfPublishPerView: 2,
@@ -299,6 +304,10 @@ export const GET_HUMAN_RELEVANCE_DATA_BY_NODE = gql`
     humanRelevanceNodeData(study_codes: $study_codes) {
       human_relevance_record_id
       human_relevance_statement
+      relevant_human_cancer
+      relevant_experimental_therapeutic_intervention
+      relevant_human_genes
+      relevant_human_pathways
       nci_link_to_relevant_human_cancer
     }
   }
