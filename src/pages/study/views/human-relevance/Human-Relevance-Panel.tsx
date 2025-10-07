@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   }
 
   display: flex;
-  padding: 40px 83px;
+  padding: 24px 83px 50px;
   flex-direction: column;
   gap: 24px;
 `;
