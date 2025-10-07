@@ -58,6 +58,67 @@ import {
 import { ClinicalDataNodeCounts } from '../../generated-types/types';
 import { SkeletonLoader } from '../../components/Skeleton';
 import { BreadcrumbData } from '../caseDetails/caseDetailsView';
+import { HumanRelevancePanel } from './views/human-relevance';
+
+const BLADDER_CANCER_STUDIES = [
+  'UBC01',
+  'UBC02',
+  'UBC03',
+  'UC01',
+  'TCL01',
+  'ORGANOIDS01',
+];
+
+const BONE_CANCER_STUDIES = [
+  'COTC021',
+  'COTC022',
+  'OSA01',
+  'OSA02',
+  'OSA03',
+  'OSA04',
+  'PRECINT01',
+  'NCATS-COP01',
+];
+
+const getCancerType = (study_code: string) => {
+  let type: 'bladder' | 'bone' | undefined = undefined;
+
+  if (BLADDER_CANCER_STUDIES.includes(study_code)) {
+    type = 'bladder';
+  } else if (BONE_CANCER_STUDIES.includes(study_code)) {
+    type = 'bone';
+  }
+
+  return type;
+};
+
+const getHumanRelevanceTabImage = (cancer_type: 'bladder' | 'bone') => {
+  switch (cancer_type) {
+    case 'bone':
+      return {
+        src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/human_rel_tab_bone.svg',
+        alt: 'Side-by-side X-ray images showing the human pelvis and upper legs on the left, and the full skeleton of a dog on the right, illustrating bone structure similarities relevant to osteosarcoma research.',
+        caption:
+          'In humans, osteosarcoma is also the most common bone cancer, primarily affecting children and adolescents, with about 400-800 new cases diagnosed annually in the U.S. alone. Research shows that osteosarcoma in dogs and humans share 95% of their genetic mutations, making canine studies incredibly valuable for understanding the disease and testing new treatments.',
+      };
+    case 'bladder':
+      return {
+        src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_bladder.svg',
+        alt: 'Diagram showing human anatomy and a dog with the bladder highlighted to illustrate sites affected by bladder cancer.',
+        caption:
+          'Bladder cancer in dogs closely resembles human muscle invasive bladder cancer, serving as a valuable preclinical model.',
+      };
+  }
+};
+
+const getHumanRelevanceTabTitle = (cancer_type: 'bladder' | 'bone') => {
+  switch (cancer_type) {
+    case 'bone':
+      return 'Relevance of this work to human Bone Cancer';
+    case 'bladder':
+      return 'Relevance of this work to human Bladder Cancer';
+  }
+};
 
 function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
   return arr.some(
@@ -114,7 +175,12 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   const study_codes = data.study[0].clinical_study_designation;
   const { data: humanRelevanceData } = useQuery<{
     humanRelevanceNodeData: {
+      human_relevance_record_id: string;
       human_relevance_statement: string;
+      relevant_human_cancer: string[];
+      relevant_experimental_therapeutic_intervention: string[];
+      relevant_human_genes: string[];
+      relevant_human_pathways: string[];
       nci_link_to_relevant_human_cancer: string;
     }[];
   }>({
@@ -126,6 +192,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
         { study_codes }
       ),
   });
+
   const humanRelevanceCardData = useMemo(
     () => humanRelevanceData?.humanRelevanceNodeData[0],
     [humanRelevanceData]
@@ -299,6 +366,18 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   const clinicalDataTabIndex = processedTabs.findIndex(
     tab => tab.label === 'CLINICAL DATA'
   );
+
+  const cancer_type = getCancerType(study_codes);
+  const humanRelevanceTabFigure = getHumanRelevanceTabImage(cancer_type);
+  const humanRelevanceTabTitle = getHumanRelevanceTabTitle(cancer_type);
+  const {
+    human_relevance_record_id,
+    human_relevance_statement,
+    nci_link_to_relevant_human_cancer,
+    relevant_human_pathways,
+    relevant_human_genes,
+    relevant_experimental_therapeutic_intervention,
+  } = humanRelevanceCardData || {};
 
   return (
     <StudyThemeProvider>
@@ -530,6 +609,40 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
               >
                 {currentStudy && (
                   <SupportingData data={currentStudy} isLoading={isLoading} />
+                )}
+              </TabPanel>
+            );
+          case 'HUMAN RELEVANCE':
+            return (
+              <TabPanel
+                style={{
+                  minWidth: '1404px',
+                  marginBottom: '50px',
+                }}
+                innerDivStyle={{
+                  flex: 1,
+                }}
+                value={currentTab}
+                index={index}
+              >
+                {true && (
+                  <HumanRelevancePanel
+                    idPrefix={human_relevance_record_id}
+                    title={humanRelevanceTabTitle}
+                    overview={human_relevance_statement}
+                    nciLink={{
+                      href: nci_link_to_relevant_human_cancer,
+                      label: nci_link_to_relevant_human_cancer,
+                    }}
+                    figure={{
+                      src: humanRelevanceTabFigure.src,
+                      alt: humanRelevanceTabFigure.alt,
+                      caption: humanRelevanceTabFigure.caption,
+                    }}
+                    genes={relevant_human_genes}
+                    pathways={relevant_human_pathways}
+                    therapies={relevant_experimental_therapeutic_intervention}
+                  />
                 )}
               </TabPanel>
             );
