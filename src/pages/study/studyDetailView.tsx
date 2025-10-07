@@ -1,14 +1,30 @@
 /* eslint-disable */
 // @ts-check
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _, { defaultTo } from 'lodash';
+
 import StatsView from '../../components/Stats/StatsView';
+import StudyThemeProvider from './studyDetailsThemeConfig';
+import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import Tab from '../../components/Tab/Tab';
+import TabPanel from '../../components/Tab/TabPanel';
+import { SkeletonLoader } from '../../components/Skeleton';
+
+import Overview from './views/overview/Overview';
+import Publication from './views/Publication';
+import ArmsAndCohort from './views/cohort/ArmsAndCohort';
+import StudyFiles from './views/StudyFiles';
+import SupportingData from './views/supporting-data/SupportingDataView';
+import ClinicalData from './views/clinical-data/ClinicalDataController';
+import { HumanRelevancePanel } from './views/human-relevance';
+
 import { studyDisposition } from './utils';
 import { navigatedToDashboard } from '../../utils/utils';
-import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
+
 import {
   headerIcon,
   embargoHeaderIcon,
@@ -16,14 +32,10 @@ import {
   tab,
   GET_HUMAN_RELEVANCE_DATA_BY_NODE,
 } from '../../bento/studyDetailsData';
-import Tab from '../../components/Tab/Tab';
-import Overview from './views/overview/Overview';
-import Publication from './views/Publication';
-import ArmsAndCohort from './views/cohort/ArmsAndCohort';
-import StudyFiles from './views/StudyFiles';
-import TabPanel from '../../components/Tab/TabPanel';
+
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+
 import {
   AccessionLabel,
   AccessionValue,
@@ -46,18 +58,136 @@ import {
   NameWrapper,
   PendingWrapper,
 } from './studyDetails.styled.';
-import StudyThemeProvider from './studyDetailsThemeConfig';
-import SupportingData from './views/supporting-data/SupportingDataView';
+
 import env from '../../utils/env';
-import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
-import ClinicalData from './views/clinical-data/ClinicalDataController';
+
 import {
   GetStudiesByProgramStudyDetailsDocument,
   StudyQuery,
 } from '../../generated-types/graphql';
 import { ClinicalDataNodeCounts } from '../../generated-types/types';
-import { SkeletonLoader } from '../../components/Skeleton';
 import { BreadcrumbData } from '../caseDetails/caseDetailsView';
+
+/* ---------------------------------- */
+/* Tightened types & unions           */
+/* ---------------------------------- */
+
+const BLADDER_CANCER_STUDIES = [
+  'UBC01',
+  'UBC02',
+  'UBC03',
+  'UC01',
+  'TCL01',
+  'ORGANOIDS01',
+] as const;
+const BONE_CANCER_STUDIES = [
+  'COTC021',
+  'COTC022',
+  'OSA01',
+  'OSA02',
+  'OSA03',
+  'OSA04',
+  'PRECINT01',
+  'NCATS-COP01',
+] as const;
+
+type CancerType = 'bladder' | 'bone' | undefined;
+
+export const TAB_LABELS = {
+  OVERVIEW: 'OVERVIEW',
+  ARMS_COHORTS: 'ARMS & COHORTS',
+  STUDY_FILES: 'STUDY FILES',
+  PUBLICATIONS: 'PUBLICATIONS',
+  CLINICAL_DATA: 'CLINICAL DATA',
+  SUPPORTING_DATA: 'SUPPORTING DATA',
+  HUMAN_RELEVANCE: 'HUMAN RELEVANCE',
+} as const;
+
+type TabLabel = (typeof TAB_LABELS)[keyof typeof TAB_LABELS];
+
+interface StudyDetailViewProps {
+  data: StudyQuery;
+  initTab: string;
+}
+
+type HumanRelevanceNode = {
+  human_relevance_record_id: string;
+  human_relevance_statement: string;
+  relevant_human_cancer: string[];
+  relevant_experimental_therapeutic_intervention: string[];
+  relevant_human_genes: string[];
+  relevant_human_pathways: string[];
+  nci_link_to_relevant_human_cancer: string;
+};
+
+type HumanRelevanceQuery = {
+  humanRelevanceNodeData: HumanRelevanceNode[];
+};
+
+/* ---------------------------------- */
+/* Env typing helper                  */
+/* ---------------------------------- */
+
+type Env = {
+  REACT_APP_INTEROP_SERVICE_URL: string;
+  REACT_APP_BACKEND_API: string;
+};
+
+const getEnv = () => env as unknown as Env;
+
+/* ---------------------------------- */
+/* Centralized image URLs             */
+/* ---------------------------------- */
+
+const HUMAN_REL_IMAGES = {
+  bone: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/human_rel_tab_bone.svg',
+    alt: 'Side-by-side X-ray images showing the human pelvis and upper legs on the left, and the full skeleton of a dog on the right, illustrating bone structure similarities relevant to osteosarcoma research.',
+    caption:
+      'In humans, osteosarcoma is also the most common bone cancer, primarily affecting children and adolescents, with about 400-800 new cases diagnosed annually in the U.S. alone. Research shows that osteosarcoma in dogs and humans share 95% of their genetic mutations, making canine studies incredibly valuable for understanding the disease and testing new treatments.',
+  },
+  bladder: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_bladder.svg',
+    alt: 'Diagram showing human anatomy and a dog with the bladder highlighted to illustrate sites affected by bladder cancer.',
+    caption:
+      'Bladder cancer in dogs closely resembles human muscle invasive bladder cancer, serving as a valuable preclinical model.',
+  },
+} as const;
+
+/* ---------------------------------- */
+/* Helpers        */
+/* ---------------------------------- */
+
+const getCancerType = (study_code: string): CancerType => {
+  if (
+    BLADDER_CANCER_STUDIES.includes(
+      study_code as (typeof BLADDER_CANCER_STUDIES)[number]
+    )
+  )
+    return 'bladder';
+  if (
+    BONE_CANCER_STUDIES.includes(
+      study_code as (typeof BONE_CANCER_STUDIES)[number]
+    )
+  )
+    return 'bone';
+  return undefined;
+};
+
+const getHumanRelevanceTabImage = (
+  cancer_type: Exclude<CancerType, undefined>
+) => HUMAN_REL_IMAGES[cancer_type];
+
+const getHumanRelevanceTabTitle = (
+  cancer_type: Exclude<CancerType, undefined>
+) => {
+  switch (cancer_type) {
+    case 'bone':
+      return 'Relevance of this work to human Bone Cancer';
+    case 'bladder':
+      return 'Relevance of this work to human Bladder Cancer';
+  }
+};
 
 function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
   return arr.some(
@@ -80,6 +210,7 @@ const processData = (
     if (nodeCaseCount === 0 && nodeCount === 0) {
       return {
         name,
+        // Preserve original "iEmpty" flag to avoid downstream behavior change.
         iEmpty: true,
       };
     }
@@ -91,13 +222,67 @@ const processData = (
     };
   });
 
-interface StudyDetailViewProps {
-  data: StudyQuery;
-  initTab: string;
-}
+/* ---------------------------------- */
+/* Shared style constants             */
+/* ---------------------------------- */
+
+const PANEL_MIN_WIDTH = '1404px' as const;
+const PANEL_BOTTOM_OFFSET = '16px' as const;
+
+/* ---------------------------------- */
+/* Small render helpers               */
+/* ---------------------------------- */
+
+const HeaderIcon: React.FC<{ disposition?: string | null }> = ({
+  disposition,
+}) => {
+  const d = studyDisposition(defaultTo(disposition, ''));
+  if (d === 'embargo')
+    return <img src={embargoHeaderIcon} alt="Embargo Header Icon" />;
+  if (d === 'pending')
+    return <img src={pendingHeaderIcon} alt="Pending Header Icon" />;
+  return <img src={headerIcon} alt="Default Header Icon" />;
+};
+
+const renderDispositionLabel = (disposition?: string | null) => {
+  const d = studyDisposition(defaultTo(disposition, ''));
+  if (d === 'embargo') {
+    return (
+      <EmbargoWrapper>
+        <p> UNDER EMBARGO </p>
+        <FileIcon src={embargoFileIcon} alt="Embargo File Icon" />
+      </EmbargoWrapper>
+    );
+  }
+  if (d === 'pending') {
+    return (
+      <PendingWrapper>
+        <p>RELEASE PENDING</p>
+        <FileIcon src={pendingFileIcon} alt="Pending File Icon" />
+      </PendingWrapper>
+    );
+  }
+  return null;
+};
+
+/* ---------------------------------- */
+/* Component                          */
+/* ---------------------------------- */
 
 const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   const [, actions] = useDashboardTabs();
+
+  const studyData = data.study[0];
+  const {
+    clinical_study_designation: studyCode,
+    accession_id: accessionId,
+    clinical_study_name,
+    study_disposition,
+    publications,
+  } = studyData;
+
+  const { REACT_APP_INTEROP_SERVICE_URL, REACT_APP_BACKEND_API } = getEnv();
+
   const {
     data: interOpData,
     isLoading,
@@ -106,141 +291,201 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     queryKey: ['studiesByProgram'],
     queryFn: async () =>
       request(
-        (env as Record<string, string>).REACT_APP_INTEROP_SERVICE_URL,
+        REACT_APP_INTEROP_SERVICE_URL,
         GetStudiesByProgramStudyDetailsDocument
       ),
+    staleTime: 5 * 60 * 1000,
   });
 
-  const study_codes = data.study[0].clinical_study_designation;
-  const { data: humanRelevanceData } = useQuery<{
-    humanRelevanceNodeData: {
-      human_relevance_statement: string;
-      nci_link_to_relevant_human_cancer: string;
-    }[];
-  }>({
-    queryKey: ['humanRelevance', study_codes],
-    queryFn: async () =>
-      request(
-        (env as Record<string, string>).REACT_APP_BACKEND_API,
-        GET_HUMAN_RELEVANCE_DATA_BY_NODE,
-        { study_codes }
+  const study_codes = studyCode;
+
+  const { data: humanRelevanceCardData, isLoading: isLoadingHumanRelData } =
+    useQuery<HumanRelevanceQuery, unknown, HumanRelevanceNode | undefined>({
+      queryKey: ['humanRelevance', study_codes],
+      queryFn: async () =>
+        request(REACT_APP_BACKEND_API, GET_HUMAN_RELEVANCE_DATA_BY_NODE, {
+          study_codes,
+        }),
+      enabled: Boolean(study_codes),
+      select: (res: HumanRelevanceQuery) => res.humanRelevanceNodeData?.[0],
+      staleTime: 5 * 60 * 1000,
+    });
+
+  const diagnoses = useMemo(
+    () => [
+      ...new Set(
+        defaultTo(studyData.cases, []).reduce<string[]>(
+          (output, caseData) =>
+            output.concat(
+              caseData?.diagnoses
+                ? caseData.diagnoses.map(d =>
+                    d?.disease_term ? d.disease_term : ''
+                  )
+                : []
+            ),
+          []
+        )
       ),
-  });
-  const humanRelevanceCardData = useMemo(
-    () => humanRelevanceData?.humanRelevanceNodeData[0],
-    [humanRelevanceData]
+    ],
+    [studyData.cases]
   );
 
-  const studyData = data.study[0];
-  const { clinical_study_designation: studyCode } = studyData;
-  const diagnoses = [
-    ...new Set(
-      defaultTo(studyData.cases, []).reduce<string[]>(
-        (output, caseData) =>
-          output.concat(
-            caseData?.diagnoses
-              ? caseData.diagnoses.map(diagnosis =>
-                  diagnosis?.disease_term ? diagnosis.disease_term : ''
-                )
-              : []
-          ),
-        []
-      )
-    ),
-  ];
-  const studyFileTypes = [
-    ...new Set(defaultTo(data.studyFiles, []).map(f => f?.file_type)),
-  ];
-  const caseFileTypes = [
-    ...new Set(
-      defaultTo(data.filesOfStudy, [])
-        .map(f => f.file_type)
-        .filter(f => !studyFileTypes.includes(f))
-    ),
-  ];
+  const studyFileTypes = useMemo(
+    () => [...new Set(defaultTo(data.studyFiles, []).map(f => f?.file_type))],
+    [data.studyFiles]
+  );
+
+  const caseFileTypes = useMemo(
+    () => [
+      ...new Set(
+        defaultTo(data.filesOfStudy, [])
+          .map(f => f.file_type)
+          .filter(f => !studyFileTypes.includes(f))
+      ),
+    ],
+    [data.filesOfStudy, studyFileTypes]
+  );
+
   const {
     clinicalDataNodeNames,
     clinicalDataNodeCounts,
     clinicalDataNodeCaseCounts,
   } = data;
-  const clinicalDataTabData = {
-    names: clinicalDataNodeNames,
-    nodeCount: clinicalDataNodeCounts,
-    nodeCaseCount: clinicalDataNodeCaseCounts,
-  };
+
   const hasClinicalData = hasPositiveValue([
     clinicalDataNodeCounts,
     clinicalDataNodeCaseCounts,
   ]);
 
-  const stat = {
-    numberOfStudies: 1,
-    numberOfCases: data.caseCountOfStudy,
-    numberOfSamples: data.sampleCountOfStudy,
-    numberOfFiles: data.fileCountOfStudy,
-    numberOfStudyFiles: data.fileCountOfStudyFiles,
-    numberOfPrograms: data.programCountOfStudy,
-    numberOfAliquots: data.aliquotCountOfStudy ? data.aliquotCountOfStudy : 0,
-    volumeOfData: data.volumeOfDataOfStudy,
-  };
-
-  const breadCrumbJson: BreadcrumbData[] = [
-    {
-      name: 'All Studies',
-      to: '/studies',
-      isALink: true,
-    },
-    {
-      name: studyData.clinical_study_designation,
-      isALink: false,
-    },
-  ];
-
-  const [currentTab, setCurrentTab] = React.useState(
-    initTab === 'file' ? 2 : 0
+  const stat = useMemo(
+    () => ({
+      numberOfStudies: 1,
+      numberOfCases: data.caseCountOfStudy,
+      numberOfSamples: data.sampleCountOfStudy,
+      numberOfFiles: data.fileCountOfStudy,
+      numberOfStudyFiles: data.fileCountOfStudyFiles,
+      numberOfPrograms: data.programCountOfStudy,
+      numberOfAliquots: data.aliquotCountOfStudy ? data.aliquotCountOfStudy : 0,
+      volumeOfData: data.volumeOfDataOfStudy,
+    }),
+    [
+      data.caseCountOfStudy,
+      data.sampleCountOfStudy,
+      data.fileCountOfStudy,
+      data.fileCountOfStudyFiles,
+      data.programCountOfStudy,
+      data.aliquotCountOfStudy,
+      data.volumeOfDataOfStudy,
+    ]
   );
-  const handleTabChange = (
-    _event: React.SyntheticEvent<Element, Event>,
-    value: number
-  ) => {
-    setCurrentTab(value);
-  };
 
-  const renderHeaderIcon = () => {
-    const disposition = studyDisposition(
-      defaultTo(studyData.study_disposition, '')
-    );
-    if (disposition === 'embargo')
-      return <img src={embargoHeaderIcon} alt="Embargo Header Icon" />;
-    if (disposition === 'pending')
-      return <img src={pendingHeaderIcon} alt="Pending Header Icon" />;
-    return <img src={headerIcon} alt="Default Header Icon" />;
-  };
+  const breadCrumbJson: BreadcrumbData[] = useMemo(
+    () => [
+      { name: 'All Studies', to: '/studies', isALink: true },
+      { name: studyCode, isALink: false },
+    ],
+    [studyCode]
+  );
 
-  const renderLabel = () => {
-    const disposition = studyDisposition(
-      defaultTo(studyData.study_disposition, '')
-    );
-    if (disposition === 'embargo') {
-      return (
-        <EmbargoWrapper>
-          <p> UNDER EMBARGO </p>
-          <FileIcon src={embargoFileIcon} alt="Embargo File Icon" />
-        </EmbargoWrapper>
-      );
+  const [currentTab, setCurrentTab] = useState(initTab === 'file' ? 2 : 0);
+
+  const tabStyleClasses = useMemo(
+    () => ({
+      tabPrimaryColor: {
+        color: '#507B91',
+        fontWeight: 600,
+        fontFamily: 'Nunito Sans',
+        fontSize: '17px',
+        lineHeight: '29.75px',
+        letterSpacing: '0',
+      },
+      tabHighlightColor: {
+        color: '#000000',
+        fontWeight: 600,
+        fontSize: '17px',
+        lineHeight: '29.75px',
+        letterSpacing: '0',
+        borderBottom: '5px solid #0296C9',
+      },
+      hrLine: {
+        marginBottom: '0',
+        borderTop: '1px solid #81a6b9',
+        position: 'relative',
+        width: '100%',
+        bottom: '15px',
+      },
+    }),
+    []
+  );
+
+  const currentStudy = interOpData?.studiesByProgram?.find(
+    item => item?.clinical_study_designation === studyCode
+  );
+
+  const processedTabs = useMemo(() => {
+    let items = currentStudy
+      ? tab.items
+      : tab.items.filter(i => i.label !== TAB_LABELS.SUPPORTING_DATA);
+    if (!hasClinicalData) {
+      items = items.filter(i => i.label !== TAB_LABELS.CLINICAL_DATA);
     }
-    if (disposition === 'pending') {
-      return (
-        <PendingWrapper>
-          <p>RELEASE PENDING</p>
-          <FileIcon src={pendingFileIcon} alt="Pending File Icon" />
-        </PendingWrapper>
-      );
+    if (!getCancerType(studyCode)) {
+      items = items.filter(i => i.label !== TAB_LABELS.HUMAN_RELEVANCE);
     }
-    return null;
-  };
+    return items;
+  }, [currentStudy, hasClinicalData, studyCode]);
 
-  if (isLoading) {
+  const processedClinicalDataTabData = useMemo(
+    () =>
+      processData(
+        clinicalDataNodeNames,
+        clinicalDataNodeCounts,
+        clinicalDataNodeCaseCounts
+      ),
+    [clinicalDataNodeNames, clinicalDataNodeCounts, clinicalDataNodeCaseCounts]
+  );
+
+  let clinicalDataNodeCount = 0;
+  const clinicalDataDownloadFlags: Record<string, boolean> = {};
+  defaultTo(processedClinicalDataTabData, []).forEach(el => {
+    if (el?.isEmpty === false) {
+      clinicalDataNodeCount += 1;
+      clinicalDataDownloadFlags[el?.name || ''] = true;
+    } else {
+      clinicalDataDownloadFlags[el?.name || ''] = false;
+    }
+  });
+
+  const supportingDataCount = useMemo(
+    () => currentStudy?.CRDCLinks?.length,
+    [currentStudy]
+  );
+
+  const supportingDataTabIndex = processedTabs.findIndex(
+    t => t.label === TAB_LABELS.SUPPORTING_DATA
+  );
+  const clinicalDataTabIndex = processedTabs.findIndex(
+    t => t.label === TAB_LABELS.CLINICAL_DATA
+  );
+
+  const cancer_type = getCancerType(studyCode);
+  const humanRelevanceTabFigure = cancer_type
+    ? getHumanRelevanceTabImage(cancer_type)
+    : undefined;
+  const humanRelevanceTabTitle = cancer_type
+    ? getHumanRelevanceTabTitle(cancer_type)
+    : undefined;
+
+  const {
+    human_relevance_record_id,
+    human_relevance_statement,
+    nci_link_to_relevant_human_cancer,
+    relevant_human_pathways,
+    relevant_human_genes,
+    relevant_experimental_therapeutic_intervention,
+  } = humanRelevanceCardData || {};
+
+  if (isLoading || isLoadingHumanRelData) {
     return <SkeletonLoader variant="withRounded" />;
   }
 
@@ -252,53 +497,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     );
   }
 
-  const { accession_id: accessionId } = data.study[0];
   const filterStudy = `${studyCode} (${accessionId})`;
-
-  const currentStudy = interOpData?.studiesByProgram?.find(
-    item =>
-      item?.clinical_study_designation === studyData.clinical_study_designation
-  );
-
-  let processedTabs: typeof tab.items;
-  if (!currentStudy) {
-    processedTabs = tab.items.filter(item => item.label !== 'SUPPORTING DATA');
-  } else {
-    processedTabs = tab.items;
-  }
-
-  if (!hasClinicalData) {
-    processedTabs = processedTabs.filter(
-      item => item.label !== 'CLINICAL DATA'
-    );
-  }
-
-  const processedClinicalDataTabData = processData(
-    clinicalDataTabData.names,
-    clinicalDataTabData.nodeCount,
-    clinicalDataTabData.nodeCaseCount
-  );
-
-  let clinicalDataNodeCount = 0;
-  const supportingDataCount = currentStudy?.CRDCLinks?.length;
-
-  const clinicalDataDownloadFlags: Record<string, boolean> = {};
-
-  defaultTo(processedClinicalDataTabData, []).forEach(el => {
-    if (el?.isEmpty === false) {
-      clinicalDataNodeCount += 1;
-      clinicalDataDownloadFlags[el?.name || ''] = true;
-    } else {
-      clinicalDataDownloadFlags[el?.name || ''] = false;
-    }
-  });
-
-  const supportingDataTabIndex = processedTabs.findIndex(
-    tab => tab.label === 'SUPPORTING DATA'
-  );
-  const clinicalDataTabIndex = processedTabs.findIndex(
-    tab => tab.label === 'CLINICAL DATA'
-  );
 
   return (
     <StudyThemeProvider>
@@ -307,40 +506,37 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
         <Breadcrumb>
           <CustomBreadcrumb data={breadCrumbJson} />
         </Breadcrumb>
+
         <Header>
           <div className="header-content">
-            <Logo>{renderHeaderIcon()}</Logo>
+            <Logo>
+              <HeaderIcon disposition={study_disposition} />
+            </Logo>
+
             <div className="title-and-button">
               <HeaderTitle>
                 <HeaderMainTitle>
                   <div className="title-wrapper">
-                    {' '}
                     <HeaderPropertyName>{`Study: `}</HeaderPropertyName>
-                    <div className="clinical-study-designation">
-                      {' '}
-                      {` ${studyData.clinical_study_designation}`}
-                    </div>
+                    <div className="clinical-study-designation">{` ${studyCode}`}</div>
                   </div>
-                  {studyData.accession_id !== null &&
-                    studyData.accession_id !== undefined &&
-                    studyData.accession_id !== '' && (
-                      <>
-                        <HeaderAccessionItem>
-                          <AccessionLabel>{'Accession ID: '}</AccessionLabel>
-                          <AccessionValue>
-                            {studyData.accession_id}
-                          </AccessionValue>
-                        </HeaderAccessionItem>
-                      </>
+
+                  {accessionId !== null &&
+                    accessionId !== undefined &&
+                    accessionId !== '' && (
+                      <HeaderAccessionItem>
+                        <AccessionLabel>{'Accession ID: '}</AccessionLabel>
+                        <AccessionValue>{accessionId}</AccessionValue>
+                      </HeaderAccessionItem>
                     )}
                 </HeaderMainTitle>
-                <NameWrapper
-                  isLong={String(studyData.clinical_study_name).length > 85}
-                >
-                  <span> {studyData.clinical_study_name}</span>
+
+                <NameWrapper isLong={String(clinical_study_name).length > 85}>
+                  <span> {clinical_study_name}</span>
                 </NameWrapper>
               </HeaderTitle>
-              {renderLabel() || (
+
+              {renderDispositionLabel(study_disposition) || (
                 <HeaderButton>
                   <HeaderButtonLinkSpan>
                     <HeaderButtonLink
@@ -350,9 +546,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                         navigatedToDashboard(filterStudy);
                       }}
                     >
-                      <HeaderButtonLinkNumber>
-                        {`${data.caseCountOfStudy} `}
-                      </HeaderButtonLinkNumber>
+                      <HeaderButtonLinkNumber>{`${data.caseCountOfStudy} `}</HeaderButtonLinkNumber>
                       <HeaderButtonLinkText>
                         Associated Cases
                       </HeaderButtonLinkText>
@@ -369,54 +563,29 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
             <Grid item xs={12}>
               <Tab
                 tabPadding="12px 0"
-                styleClasses={{
-                  tabPrimaryColor: {
-                    color: '#507B91',
-                    fontWeight: 600,
-                    fontFamily: 'Nunito Sans',
-                    fontSize: '17px',
-                    lineHeight: '29.75px',
-                    letterSpacing: '0',
-                  },
-                  tabHighlightColor: {
-                    color: '#000000',
-                    fontWeight: 600,
-                    fontSize: '17px',
-                    lineHeight: '29.75px',
-                    letterSpacing: '0',
-                    borderBottom: '5px solid #0296C9',
-                  },
-                  hrLine: {
-                    marginBottom: '0',
-                    borderTop: '1px solid #81a6b9',
-                    position: 'relative',
-                    width: '100%',
-                    bottom: '15px',
-                  },
-                }}
+                styleClasses={tabStyleClasses}
                 tabItems={processedTabs}
                 currentTab={currentTab}
-                handleTabChange={handleTabChange}
+                handleTabChange={(_e, v) => setCurrentTab(v)}
               />
             </Grid>
           </Grid>
         </DetailContainer>
       </Container>
+
       {processedTabs.map((processedTab, index) => {
-        switch (processedTab.label) {
-          case 'OVERVIEW':
+        switch (processedTab.label as TabLabel) {
+          case TAB_LABELS.OVERVIEW:
             return (
               <TabPanel
+                key={`tab-${processedTab.label}`}
                 style={{
-                  minWidth: '1404px',
+                  minWidth: PANEL_MIN_WIDTH,
                   height: '100%',
                   position: 'relative',
-                  bottom: '16px',
+                  bottom: PANEL_BOTTOM_OFFSET,
                 }}
-                innerDivStyle={{
-                  flex: '1',
-                  display: 'flex',
-                }}
+                innerDivStyle={{ flex: '1', display: 'flex' }}
                 value={currentTab}
                 index={index}
               >
@@ -435,72 +604,64 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
               </TabPanel>
             );
 
-          case 'ARMS & COHORTS':
+          case TAB_LABELS.ARMS_COHORTS:
             return (
               <TabPanel
+                key={`tab-${processedTab.label}`}
                 style={{
-                  minWidth: '1404px',
+                  minWidth: PANEL_MIN_WIDTH,
                   marginBottom: '50px',
                   position: 'relative',
-                  bottom: '16px',
+                  bottom: PANEL_BOTTOM_OFFSET,
                 }}
-                innerDivStyle={{
-                  flex: '1',
-                }}
+                innerDivStyle={{ flex: '1' }}
                 value={currentTab}
                 index={index}
               >
                 <ArmsAndCohort studyData={studyData} />
               </TabPanel>
             );
-          case 'STUDY FILES':
+
+          case TAB_LABELS.STUDY_FILES:
             return (
               <TabPanel
-                style={{
-                  minWidth: '1404px',
-                  marginBottom: '50px',
-                }}
-                innerDivStyle={{
-                  flex: '1',
-                }}
+                key={`tab-${processedTab.label}`}
+                style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
+                innerDivStyle={{ flex: '1' }}
                 value={currentTab}
                 index={index}
               >
                 <StudyFiles data={data} studyData={studyData} />
               </TabPanel>
             );
-          case 'PUBLICATIONS':
+
+          case TAB_LABELS.PUBLICATIONS:
             return (
               <TabPanel
+                key={`tab-${processedTab.label}`}
                 style={{
-                  minWidth: '1404px',
+                  minWidth: PANEL_MIN_WIDTH,
                   height: '100%',
                   position: 'relative',
-                  bottom: '16px',
+                  bottom: PANEL_BOTTOM_OFFSET,
                 }}
-                innerDivStyle={{
-                  flex: '1',
-                  display: 'flex',
-                }}
+                innerDivStyle={{ flex: '1', display: 'flex' }}
                 value={currentTab}
                 index={index}
               >
                 <Publication
-                  publications={studyData.publications}
+                  publications={publications}
                   display={tab.publication}
                 />
               </TabPanel>
             );
-          case 'CLINICAL DATA':
+
+          case TAB_LABELS.CLINICAL_DATA:
             return (
               <TabPanel
-                style={{
-                  minWidth: '1404px',
-                  marginBottom: '50px',
-                }}
-                innerDivStyle={{
-                  flex: '1',
-                }}
+                key={`tab-${processedTab.label}`}
+                style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
+                innerDivStyle={{ flex: '1' }}
                 value={currentTab}
                 index={index}
               >
@@ -515,16 +676,13 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 )}
               </TabPanel>
             );
-          case 'SUPPORTING DATA':
+
+          case TAB_LABELS.SUPPORTING_DATA:
             return (
               <TabPanel
-                style={{
-                  minWidth: '1404px',
-                  marginBottom: '50px',
-                }}
-                innerDivStyle={{
-                  flex: 1,
-                }}
+                key={`tab-${processedTab.label}`}
+                style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
+                innerDivStyle={{ flex: 1 }}
                 value={currentTab}
                 index={index}
               >
@@ -533,6 +691,38 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 )}
               </TabPanel>
             );
+
+          case TAB_LABELS.HUMAN_RELEVANCE:
+            return (
+              <TabPanel
+                key={`tab-${processedTab.label}`}
+                style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
+                innerDivStyle={{ flex: 1 }}
+                value={currentTab}
+                index={index}
+              >
+                {cancer_type && (
+                  <HumanRelevancePanel
+                    idPrefix={human_relevance_record_id}
+                    title={humanRelevanceTabTitle}
+                    overview={human_relevance_statement}
+                    nciLink={{
+                      href: nci_link_to_relevant_human_cancer,
+                      label: nci_link_to_relevant_human_cancer,
+                    }}
+                    figure={{
+                      src: humanRelevanceTabFigure?.src,
+                      alt: humanRelevanceTabFigure?.alt,
+                      caption: humanRelevanceTabFigure?.caption,
+                    }}
+                    genes={relevant_human_genes}
+                    pathways={relevant_human_pathways}
+                    therapies={relevant_experimental_therapeutic_intervention}
+                  />
+                )}
+              </TabPanel>
+            );
+
           default:
             return null;
         }
