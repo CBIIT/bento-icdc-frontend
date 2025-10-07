@@ -91,7 +91,8 @@ const ContentContainer = styled.div`
     line-height: 2;
     letter-spacing: calc((0.2 / 16) * 1em);
     color: hsla(195, 99%, 31%, 1);
-    min-width: 200px;
+    min-width: 250px;
+    text-transform: uppercase;
   }
 
   .key-value-wrapper .nci-link {
