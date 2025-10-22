@@ -71,7 +71,10 @@ const NavigatorView = ({ classes }) => {
   }
   return (
     <div className={classes.container}>
-      <ReduxDataDictionary pdfDownloadConfig={pdfDownloadConfig} />
+      <ReduxDataDictionary
+        pdfDownloadConfig={pdfDownloadConfig}
+        versionHistoryUrl={env.REACT_APP_DMN_VERSIONS_FILE}
+      />
     </div>
   );
 };
