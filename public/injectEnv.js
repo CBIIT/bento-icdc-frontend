@@ -19,5 +19,5 @@ window.injectedEnv = {
   REACT_APP_INTEROP_SERVICE_URL: 'https://caninecommons-dev.cancer.gov/api/interoperation/graphql',
   REACT_APP_INTEROP_SERVICE_VERSION: 'https://caninecommons-dev.cancer.gov/api/interoperation/version',
   REACT_APP_FILE_CENTRIC_CART_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/My_Files_Cart_Page_README.md',
-  REACT_APP_DMN_VERSIONS_FILE: '',
+  REACT_APP_DMN_VERSIONS_FILE: 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/refs/heads/develop/model-desc/version.md',
 };
