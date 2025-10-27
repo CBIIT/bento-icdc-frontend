@@ -1,10 +1,11 @@
 /* eslint-disable */
 // @ts-check
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
-import _, { defaultTo } from 'lodash';
+import _, { defaultTo, noop } from 'lodash';
+import { toast, Toaster } from 'sonner';
 
 import StatsView from '../../components/Stats/StatsView';
 import StudyThemeProvider from './studyDetailsThemeConfig';
@@ -299,6 +300,17 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
   const study_codes = studyCode;
 
+  useEffect(() => {
+    if (isError) {
+      toast.error('An error has occurred in interoperability api', {
+        action: {
+          label: 'X',
+          onClick: () => undefined,
+        },
+      });
+    }
+  }, [isError]);
+
   const { data: humanRelevanceCardData, isLoading: isLoadingHumanRelData } =
     useQuery<HumanRelevanceQuery, unknown, HumanRelevanceNode | undefined>({
       queryKey: ['humanRelevance', study_codes],
@@ -485,22 +497,17 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     relevant_experimental_therapeutic_intervention,
   } = humanRelevanceCardData || {};
 
+  // Error is now handled by the useEffect above
+
   if (isLoading || isLoadingHumanRelData) {
     return <SkeletonLoader variant="withRounded" />;
-  }
-
-  if (isError) {
-    return (
-      <Typography variant="h5" color="error">
-        An error has occurred in interoperability api
-      </Typography>
-    );
   }
 
   const filterStudy = `${studyCode} (${accessionId})`;
 
   return (
     <StudyThemeProvider>
+      <Toaster richColors />
       <StatsView data={stat} />
       <Container>
         <Breadcrumb>
