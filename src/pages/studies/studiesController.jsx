@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useQuery as apolloUseQuery } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 import Studies from './studiesView';
@@ -8,6 +8,7 @@ import { convertCRDCLinksToValue } from '../../utils/utils';
 import { SkeletonLoader } from '../../components/Skeleton';
 import { request, gql } from 'graphql-request';
 import env from '../../utils/env';
+import { Toaster, toast } from 'sonner';
 
 const studiesByProgram = gql`
   query getStudiesByProgramStudiesView {
@@ -35,6 +36,16 @@ const studiesContainer = ({ invalid }) => {
       request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
   });
 
+  useEffect(() => {
+    if (isError)
+      toast.error('An error has occurred in interoperability api', {
+        action: {
+          label: 'X',
+          onClick: () => undefined,
+        },
+      });
+  }, [isError]);
+
   const repositories = useMemo(() => {
     const links = interOpData?.studiesByProgram?.[0]?.CRDCLinks;
     return links?.map(link => link.repository) || [];
@@ -50,20 +61,15 @@ const studiesContainer = ({ invalid }) => {
       </Typography>
     );
 
-  if (isError) {
-    return (
-      <Typography variant="h5" color="error" size="sm">
-        An error has occurred in interoperability api
-      </Typography>
-    );
-  }
-
   return (
-    <Studies
-      data={convertCRDCLinksToValue(data, undefined, repositories)}
-      invalid={invalid}
-      interOpData={interOpData}
-    />
+    <>
+      <Toaster richColors />
+      <Studies
+        data={convertCRDCLinksToValue(data, undefined, repositories)}
+        invalid={invalid}
+        interOpData={!isError ? interOpData : []}
+      />
+    </>
   );
 };
 

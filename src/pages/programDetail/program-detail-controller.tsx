@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useQuery as apolloUseQuery } from '@apollo/client';
 import ProgramDetailView from './program-detail-view';
 import { convertCRDCLinksToValue } from '../../utils/utils';
@@ -14,6 +14,7 @@ import { SkeletonLoader } from '../../components/Skeleton';
 import request from 'graphql-request';
 import env from '../../utils/env';
 import { useQuery } from '@tanstack/react-query';
+import { toast, Toaster } from 'sonner';
 
 interface ProgramDetailControllerProps {
   match: RouteComponentProps<{ id: string }>['match'];
@@ -42,6 +43,16 @@ const ProgramDetailController: React.FC<ProgramDetailControllerProps> = ({
       ),
   });
 
+  useEffect(() => {
+    if (isError)
+      toast.error('An error has occurred in interoperability api', {
+        action: {
+          label: 'X',
+          onClick: () => undefined,
+        },
+      });
+  }, [isError]);
+
   const repositories = useMemo(() => {
     const links = interOpData?.studiesByProgram?.[0]?.CRDCLinks;
     return links?.map(link => link.repository) || [];
@@ -58,25 +69,20 @@ const ProgramDetailController: React.FC<ProgramDetailControllerProps> = ({
     );
   }
 
-  if (isError) {
-    return (
-      <Typography component="h5" color="error">
-        An error has occurred in interoperability api
-      </Typography>
-    );
-  }
-
   return (
-    <ProgramDetailView
-      data={
-        convertCRDCLinksToValue(
-          data,
-          'studiesByProgramId',
-          repositories
-        ) as ProgramQuery
-      }
-      interOpData={interOpData}
-    />
+    <>
+      <Toaster richColors />
+      <ProgramDetailView
+        data={
+          convertCRDCLinksToValue(
+            data,
+            'studiesByProgramId',
+            repositories
+          ) as ProgramQuery
+        }
+        interOpData={interOpData}
+      />
+    </>
   );
 };
 

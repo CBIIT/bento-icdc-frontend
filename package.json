@@ -59,6 +59,7 @@
     "react-twitter-embed": "^4.0.4",
     "recharts": "^3.1.0",
     "recompose": "^0.30.0",
+    "sonner": "^2.0.7",
     "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
