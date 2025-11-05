@@ -26,11 +26,7 @@ const studiesByProgram = gql`
 
 const studiesContainer = ({ invalid }) => {
   const { loading, error, data } = apolloUseQuery(GET_STUDY_DATA_QUERY);
-  const {
-    data: interOpData,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: interOpData, isError } = useQuery({
     queryKey: ['studiesByProgram'],
     queryFn: async () =>
       request(env.REACT_APP_INTEROP_SERVICE_URL, studiesByProgram),
@@ -51,7 +47,7 @@ const studiesContainer = ({ invalid }) => {
     return links?.map(link => link.repository) || [];
   }, [interOpData]);
 
-  if (loading || isLoading) return <SkeletonLoader variant="withRounded" />;
+  if (loading) return <SkeletonLoader variant="withRounded" />;
   if (error)
     return (
       <Typography variant="h2" color="error" size="sm">

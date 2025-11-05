@@ -73,14 +73,14 @@ import { BreadcrumbData } from '../caseDetails/caseDetailsView';
 /* Tightened types & unions           */
 /* ---------------------------------- */
 
-const BLADDER_CANCER_STUDIES = [
-  'UBC01',
-  'UBC02',
-  'UBC03',
-  'UC01',
-  'TCL01',
-  'ORGANOIDS01',
-] as const;
+const BRAIN_CANCER_STUDIES = ['GLIOMA01'] as const;
+
+const BREAST_CANCER_STUDIES = ['MGT01', 'TCL01'] as const;
+
+const SOFT_TISSUE_SARCOMA_CANCER_STUDIES = ['STS01', 'TCL01'] as const;
+
+const LYMPHOMA_CANCER_STUDIES = ['COTC007B'] as const;
+
 const BONE_CANCER_STUDIES = [
   'COTC021',
   'COTC022',
@@ -88,11 +88,29 @@ const BONE_CANCER_STUDIES = [
   'OSA02',
   'OSA03',
   'OSA04',
-  'PRECINT01',
-  'NCATS-COP01',
 ] as const;
 
-type CancerType = 'bladder' | 'bone' | undefined;
+const BLADDER_CANCER_STUDIES = [
+  'ORGANOIDS01',
+  'UC01',
+  'UBC01',
+  'UBC02',
+  'UBC03',
+] as const;
+
+const MELANOMA_CANCER_STUDIES = ['PRECINCT01'] as const;
+
+const MULTIPLE_CANCER_STUDIES = ['NCATS', 'TCL01'] as const;
+
+type CancerType =
+  | 'bladder'
+  | 'bone'
+  | 'brain'
+  | 'breast'
+  | 'soft_tissue_sarcoma'
+  | 'lymphoma'
+  | 'melanoma'
+  | 'multiple';
 
 export const TAB_LABELS = {
   OVERVIEW: 'OVERVIEW',
@@ -153,6 +171,42 @@ const HUMAN_REL_IMAGES = {
     caption:
       'Bladder cancer in dogs closely resembles human muscle invasive bladder cancer, serving as a valuable preclinical model.',
   },
+  brain: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_brain.svg',
+    alt: 'Brain and glioma model in human and canine anatomy',
+    caption:
+      'In humans, gliomas account for the majority of malignant brain tumors and are notoriously difficult to treat due to their invasive growth. Naturally occurring gliomas in dogs exhibit nearly identical molecular and histological features, providing a valuable model for studying tumor progression and evaluating novel therapies targeting the brain.',
+  },
+  breast: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_breast.svg',
+    alt: 'Breast cancer illustration in human and canine models',
+    caption:
+      'Breast cancer is the most common cancer in women worldwide, driven by hormonal and genetic factors. Canine mammary tumors share similar hormone receptor patterns, mutations, and tumor microenvironments, making dogs an important comparative model for understanding breast cancer biology and improving treatment strategies.',
+  },
+  soft_tissue_sarcoma: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_soft_tissue_sarcoma.svg',
+    alt: 'Soft tissue sarcoma illustration showing human and canine muscle anatomy',
+    caption:
+      'Soft tissue sarcomas in humans encompass diverse connective tissue tumors with limited targeted therapy options. Canine STS show overlapping genetic mutations and PDGFB fusions that mirror human disease, supporting the use of canine models to identify molecular drivers and test precision-based cancer treatments.',
+  },
+  thyroid: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_thyroid.svg',
+    alt: 'Thyroid cancer in human neck and canine anatomical model',
+    caption:
+      'Thyroid cancer is the most common endocrine malignancy in humans, often linked to dysregulation in MAPK and PI3K pathways. Spontaneous thyroid tumors in dogs display similar molecular changes, providing a comparative model to explore targeted approaches for thyroid cancer treatment.',
+  },
+  lymphoma: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_lymphoma.svg',
+    alt: 'Lymphoma model highlighting lymphatic system in human and canine',
+    caption:
+      'Human non-Hodgkin lymphoma and canine lymphoma share remarkably similar cellular origins and gene expression profiles. Studies in dogs with spontaneous lymphoma enable real-time evaluation of immune-targeted therapies that can inform and accelerate advances in human lymphoma treatment.',
+  },
+  melanoma: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_melanoma.svg',
+    alt: 'Melanoma and lung cancer depiction in human and canine anatomy',
+    caption:
+      'Both melanoma and lung cancer remain among the leading causes of cancer death in humans. Dogs naturally develop these tumors with comparable immune environments and mutational landscapes, offering crucial insights into tumor resistance mechanisms and the development of immunotherapies.',
+  },
 } as const;
 
 /* ---------------------------------- */
@@ -166,12 +220,56 @@ const getCancerType = (study_code: string): CancerType => {
     )
   )
     return 'bladder';
+
   if (
     BONE_CANCER_STUDIES.includes(
       study_code as (typeof BONE_CANCER_STUDIES)[number]
     )
   )
     return 'bone';
+
+  if (
+    BRAIN_CANCER_STUDIES.includes(
+      study_code as (typeof BRAIN_CANCER_STUDIES)[number]
+    )
+  )
+    return 'brain';
+
+  if (
+    BREAST_CANCER_STUDIES.includes(
+      study_code as (typeof BREAST_CANCER_STUDIES)[number]
+    )
+  )
+    return 'breast';
+
+  if (
+    SOFT_TISSUE_SARCOMA_CANCER_STUDIES.includes(
+      study_code as (typeof SOFT_TISSUE_SARCOMA_CANCER_STUDIES)[number]
+    )
+  )
+    return 'soft_tissue_sarcoma';
+
+  if (
+    LYMPHOMA_CANCER_STUDIES.includes(
+      study_code as (typeof LYMPHOMA_CANCER_STUDIES)[number]
+    )
+  )
+    return 'lymphoma';
+
+  if (
+    MELANOMA_CANCER_STUDIES.includes(
+      study_code as (typeof MELANOMA_CANCER_STUDIES)[number]
+    )
+  )
+    return 'melanoma';
+
+  if (
+    MULTIPLE_CANCER_STUDIES.includes(
+      study_code as (typeof MULTIPLE_CANCER_STUDIES)[number]
+    )
+  )
+    return 'multiple';
+
   return undefined;
 };
 
@@ -187,6 +285,20 @@ const getHumanRelevanceTabTitle = (
       return 'Relevance of this work to human Bone Cancer';
     case 'bladder':
       return 'Relevance of this work to human Bladder Cancer';
+    case 'brain':
+      return 'Relevance of this work to human Glioma';
+    case 'breast':
+      return 'Relevance of this work to human Breast Cancer';
+    case 'soft_tissue_sarcoma':
+      return 'Relevance of this work to human Soft Tissue Sarcoma';
+    case 'lymphoma':
+      return 'Relevance of this work to human Lymphoma';
+    case 'melanoma':
+      return 'Relevance of this work to human Melanoma';
+    case 'multiple':
+      return 'Relevance of this work to Multiple Human Cancers';
+    default:
+      return 'Relevance of this work to human cancer';
   }
 };
 
@@ -497,9 +609,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     relevant_experimental_therapeutic_intervention,
   } = humanRelevanceCardData || {};
 
-  // Error is now handled by the useEffect above
-
-  if (isLoading || isLoadingHumanRelData) {
+  if (isLoadingHumanRelData) {
     return <SkeletonLoader variant="withRounded" />;
   }
 
