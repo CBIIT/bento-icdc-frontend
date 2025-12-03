@@ -1,0 +1,32 @@
+name: Test
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - "test"
+    pull_request:
+        branches:
+            - "*"
+permissions:
+    contents: read
+jobs:
+    test:
+        name: Test Changes
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                # TODO: Change this to the version of Node you want to use
+                node-version: "22.x"
+                cache: "npm"
+            - name: Install Dependencies
+              run: npm ci
+            - name: Run Tests
+              run: npm run test
+              # TODO: Change this to your CI test command
+            # Upload test coverage reports to Coveralls
+            - name: Coveralls GitHub Action
+              uses: coverallsapp/github-action@v2
