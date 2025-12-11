@@ -39,6 +39,7 @@
     "antd": "^5.22.3",
     "axios": "^1.8.3",
     "bento-jbrowse": "^1.0.1",
+    "caniuse-lite": "^1.0.30001760",
     "clsx": "^2.1.1",
     "data-model-navigator": "^1.1.46",
     "graphiql": "^3.7.2",
