@@ -1,5 +1,5 @@
-import gql from 'graphql-tag';
 import { cellTypes, headerTypes } from '../bento-core';
+import { ProgramDocument } from '../generated-types/graphql';
 
 export interface TableLayoutItem {
   container: string;
@@ -281,45 +281,8 @@ const textLabels = {
 };
 
 // --------------- GraphQL query - Retrieve program details --------------
-const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
-  query program($programTitle: String!) {
-    sampleCountOfProgram(program_id: $programTitle)
-    fileCountOfProgram(program_id: $programTitle)
-    studyFileCountOfProgram(program_id: $programTitle)
-    aliquotCountOfProgram(program_id: $programTitle)
-    studyCountOfProgram(program_id: $programTitle)
-    caseCountOfProgram(program_id: $programTitle)
-    volumeOfDataOfProgram(program_id: $programTitle)
-
-    program(program_acronym: $programTitle) {
-      program_name
-      program_acronym
-      program_short_description
-      program_full_description
-      program_external_url
-      program_sort_order
-    }
-    studiesByProgramId(program_id: $programTitle) {
-      program_id
-      clinical_study_id
-      clinical_study_designation
-      clinical_study_name
-      clinical_study_description
-      clinical_study_type
-      numberOfCases
-      numberOfCaseFiles
-      numberOfStudyFiles
-      numberOfImageCollections
-      numberOfPublications
-      accession_id
-      study_disposition
-      numberOfCRDCNodes
-      CRDCLinks {
-        text
-        url
-      }
-    }
-  }
-`;
+// Note: Using generated ProgramDocument from codegen
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const GET_PROGRAM_DETAIL_DATA_QUERY = ProgramDocument;
 
 export { pageData, GET_PROGRAM_DETAIL_DATA_QUERY, table, textLabels };

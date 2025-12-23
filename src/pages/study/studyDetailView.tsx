@@ -1,11 +1,10 @@
 /* eslint-disable */
 // @ts-check
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
-import _, { defaultTo, noop } from 'lodash';
-import { toast, Toaster } from 'sonner';
+import _, { defaultTo } from 'lodash';
 
 import StatsView from '../../components/Stats/StatsView';
 import StudyThemeProvider from './studyDetailsThemeConfig';
@@ -62,10 +61,7 @@ import {
 
 import env from '../../utils/env';
 
-import {
-  GetStudiesByProgramStudyDetailsDocument,
-  StudyQuery,
-} from '../../generated-types/graphql';
+import { StudyQuery } from '../../generated-types/graphql';
 import { ClinicalDataNodeCounts } from '../../generated-types/types';
 import { BreadcrumbData } from '../caseDetails/caseDetailsView';
 
@@ -394,34 +390,12 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     publications,
   } = studyData;
 
-  const { REACT_APP_INTEROP_SERVICE_URL, REACT_APP_BACKEND_API } = getEnv();
+  const { REACT_APP_BACKEND_API } = getEnv();
 
-  const {
-    data: interOpData,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['studiesByProgram'],
-    queryFn: async () =>
-      request(
-        REACT_APP_INTEROP_SERVICE_URL,
-        GetStudiesByProgramStudyDetailsDocument
-      ),
-    staleTime: 5 * 60 * 1000,
-  });
+  // External data is now part of the main data query
+  const interOpData = data;
 
   const study_codes = studyCode;
-
-  useEffect(() => {
-    if (isError) {
-      toast.error('An error has occurred in interoperability api', {
-        action: {
-          label: 'X',
-          onClick: () => undefined,
-        },
-      });
-    }
-  }, [isError]);
 
   const { data: humanRelevanceCardData, isLoading: isLoadingHumanRelData } =
     useQuery<HumanRelevanceQuery, unknown, HumanRelevanceNode | undefined>({
@@ -542,7 +516,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     []
   );
 
-  const currentStudy = interOpData?.studiesByProgram?.find(
+  const currentStudy = interOpData?.externalDataOverview?.find(
     item => item?.clinical_study_designation === studyCode
   );
 
@@ -617,7 +591,6 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
   return (
     <StudyThemeProvider>
-      <Toaster richColors />
       <StatsView data={stat} />
       <Container>
         <Breadcrumb>

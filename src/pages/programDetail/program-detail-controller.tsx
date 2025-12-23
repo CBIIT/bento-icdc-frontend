@@ -1,20 +1,15 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useQuery as apolloUseQuery } from '@apollo/client';
 import ProgramDetailView from './program-detail-view';
 import { convertCRDCLinksToValue } from '../../utils/utils';
 import { RouteComponentProps } from 'react-router';
 import { Typography } from '@mui/material';
 import {
-  GetStudiesByProgramProgramDetailTwoDocument,
   ProgramDocument,
   ProgramQuery,
   ProgramQueryVariables,
 } from '../../generated-types/graphql';
 import { SkeletonLoader } from '../../components/Skeleton';
-import request from 'graphql-request';
-import env from '../../utils/env';
-import { useQuery } from '@tanstack/react-query';
-import { toast, Toaster } from 'sonner';
 
 interface ProgramDetailControllerProps {
   match: RouteComponentProps<{ id: string }>['match'];
@@ -22,67 +17,48 @@ interface ProgramDetailControllerProps {
 const ProgramDetailController: React.FC<ProgramDetailControllerProps> = ({
   match,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { loading, error, data } = apolloUseQuery<
     ProgramQuery,
     ProgramQueryVariables
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   >(ProgramDocument, {
     variables: { programTitle: match.params.id },
   });
 
-  const {
-    data: interOpData,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['studiesByProgram'],
-    queryFn: async () =>
-      request(
-        /* eslint-disable-next-line */
-        env.REACT_APP_INTEROP_SERVICE_URL,
-        GetStudiesByProgramProgramDetailTwoDocument
-      ),
-  });
-
-  useEffect(() => {
-    if (isError)
-      toast.error('An error has occurred in interoperability api', {
-        action: {
-          label: 'X',
-          onClick: () => undefined,
-        },
-      });
-  }, [isError]);
-
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const repositories = useMemo(() => {
-    const links = interOpData?.studiesByProgram?.[0]?.CRDCLinks;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    const links = data?.externalDataOverview?.[0]?.CRDCLinks;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     return links?.map(link => link.repository) || [];
-  }, [interOpData]);
+  }, [data]);
 
-  if (loading || isLoading) return <SkeletonLoader variant="withRounded" />;
+  if (loading) return <SkeletonLoader variant="withRounded" />;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (!data || data.program.length === 0) {
     return (
       <Typography color="error">
         {error
-          ? `An error has occurred in loading stats component: ${error.message}`
+          ? `An error has occurred in loading stats component: ${error?.message}`
           : 'Recieved wrong data'}
       </Typography>
     );
   }
 
   return (
-    <>
-      <Toaster richColors />
-      <ProgramDetailView
-        data={
-          convertCRDCLinksToValue(
-            data,
-            'studiesByProgramId',
-            repositories
-          ) as ProgramQuery
-        }
-        interOpData={interOpData}
-      />
-    </>
+    <ProgramDetailView
+      data={
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        convertCRDCLinksToValue(
+          data,
+          'studiesByProgramId',
+          repositories
+        ) as ProgramQuery
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      interOpData={data}
+    />
   );
 };
 

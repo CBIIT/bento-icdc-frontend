@@ -57,7 +57,7 @@ const DataAvailabilityCellView = props => {
       ))}
     </ul>
   );
-  const studyData = interOpData?.studiesByProgram ?? [];
+  const studyData = interOpData?.externalDataOverview ?? [];
   const generateIndicatorTooltipTitle = () => {
     switch (dataField) {
       case 'numberOfCaseFiles':
@@ -81,7 +81,7 @@ const DataAvailabilityCellView = props => {
   };
 
   const value = props[dataField];
-  const currentStudyData = interOpData?.studiesByProgram?.filter(
+  const currentStudyData = interOpData?.externalDataOverview?.filter(
     study => study.clinical_study_designation === studyDesignation
   );
   let flag;

@@ -28,6 +28,8 @@ export type Scalars = {
   Int: { input: number; output: number };
   Float: { input: number; output: number };
   DynamicProperties: { input: any; output: any };
+  /** Arbitrary JSON */
+  JSON: { input: any; output: any };
 };
 
 export type AdverseEventNodeData = {
@@ -88,6 +90,13 @@ export type BreedCaseCount = {
   __typename?: 'BreedCaseCount';
   breed?: Maybe<Scalars['String']['output']>;
   cases?: Maybe<Scalars['Int']['output']>;
+};
+
+export type CrdcLink = {
+  __typename?: 'CRDCLink';
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  repository?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type CartChartData = {
@@ -332,6 +341,14 @@ export type DiseaseExtentNodeData = {
   previously_irradiated?: Maybe<Scalars['String']['output']>;
   previously_treated?: Maybe<Scalars['String']['output']>;
   target_lesion?: Maybe<Scalars['String']['output']>;
+};
+
+export type ExternalDataOverview = {
+  __typename?: 'ExternalDataOverview';
+  CRDCLinks?: Maybe<Array<Maybe<CrdcLink>>>;
+  clinical_study_designation?: Maybe<Scalars['String']['output']>;
+  numberOfCRDCNodes?: Maybe<Scalars['Int']['output']>;
+  numberOfImageCollections?: Maybe<Scalars['Int']['output']>;
 };
 
 export type FileDetail = {
@@ -699,6 +716,19 @@ export type GroupCountEs = {
   group?: Maybe<Scalars['String']['output']>;
 };
 
+export type HumanRelevanceNodeData = {
+  __typename?: 'HumanRelevanceNodeData';
+  human_relevance_record_id?: Maybe<Scalars['String']['output']>;
+  human_relevance_statement?: Maybe<Scalars['String']['output']>;
+  nci_link_to_relevant_human_cancer?: Maybe<Scalars['String']['output']>;
+  relevant_experimental_therapeutic_intervention?: Maybe<
+    Array<Maybe<Scalars['String']['output']>>
+  >;
+  relevant_human_cancer?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  relevant_human_genes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  relevant_human_pathways?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
 export type IdcMetadata = {
   __typename?: 'IDCMetadata';
   cancer_type?: Maybe<Scalars['String']['output']>;
@@ -755,6 +785,7 @@ export type Mutation = {
   createFilesOfCase: FilesOfCase;
   createFollowUpNodeData: FollowUpNodeData;
   createGroupCount: GroupCount;
+  createHumanRelevanceNodeData: HumanRelevanceNodeData;
   createLink: Link;
   createMultiStudyCases: MultiStudyCases;
   createOffStudyNodeData: OffStudyNodeData;
@@ -785,6 +816,7 @@ export type Mutation = {
   createenrollment: Enrollment;
   createfile: File;
   createfollow_up: Follow_Up;
+  createhuman_relevance: Human_Relevance;
   createimage: Image;
   createimage_collection: Image_Collection;
   createlab_exam: Lab_Exam;
@@ -1202,6 +1234,24 @@ export type MutationCreateGroupCountArgs = {
   group?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type MutationCreateHumanRelevanceNodeDataArgs = {
+  human_relevance_record_id?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_experimental_therapeutic_intervention?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_cancer?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_genes?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_pathways?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+};
+
 export type MutationCreateLinkArgs = {
   text?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
@@ -1606,6 +1656,18 @@ export type MutationCreatefollow_UpArgs = {
   treatment_since_last_contact?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type MutationCreatehuman_RelevanceArgs = {
+  human_relevance_record_id?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_experimental_therapeutic_intervention?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type MutationCreateimageArgs = {
   schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1979,6 +2041,7 @@ export type QueryType = {
   diseaseExtentNodeData?: Maybe<Array<Maybe<DiseaseExtentNodeData>>>;
   disease_extent: Array<Disease_Extent>;
   enrollment: Array<Enrollment>;
+  externalDataOverview?: Maybe<Array<Maybe<ExternalDataOverview>>>;
   file: Array<File>;
   fileCountOfCase?: Maybe<Scalars['Int']['output']>;
   fileCountOfProgram?: Maybe<Scalars['Int']['output']>;
@@ -2003,6 +2066,8 @@ export type QueryType = {
   follow_up: Array<Follow_Up>;
   globalSearch?: Maybe<GlobalSearchResult>;
   groupCount: Array<GroupCount>;
+  humanRelevanceNodeData?: Maybe<Array<Maybe<HumanRelevanceNodeData>>>;
+  human_relevance: Array<Human_Relevance>;
   image: Array<Image>;
   image_collection: Array<Image_Collection>;
   lab_exam: Array<Lab_Exam>;
@@ -2493,6 +2558,14 @@ export type QueryTypeEnrollmentArgs = {
   veterinary_medical_center?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type QueryTypeExternalDataOverviewArgs = {
+  clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Scalars['String']['input']>;
+  sort_direction?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type QueryTypeFileArgs = {
   file_description?: InputMaybe<Scalars['String']['input']>;
   file_format?: InputMaybe<Scalars['String']['input']>;
@@ -2766,6 +2839,30 @@ export type QueryTypeGroupCountArgs = {
   group?: InputMaybe<Scalars['String']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_GroupCountOrdering>>;
+};
+
+export type QueryTypeHumanRelevanceNodeDataArgs = {
+  filter?: InputMaybe<_HumanRelevanceNodeDataFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_HumanRelevanceNodeDataOrdering>>;
+  study_codes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type QueryTypeHuman_RelevanceArgs = {
+  filter?: InputMaybe<_Human_RelevanceFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  human_relevance_record_id?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Human_RelevanceOrdering>>;
+  relevant_experimental_therapeutic_intervention?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryTypeImageArgs = {
@@ -10615,6 +10712,248 @@ export enum _GroupCountOrdering {
   GroupDesc = 'group_desc',
 }
 
+export type _HumanRelevanceNodeDataFilter = {
+  AND?: InputMaybe<Array<_HumanRelevanceNodeDataFilter>>;
+  NOT?: InputMaybe<Array<_HumanRelevanceNodeDataFilter>>;
+  OR?: InputMaybe<Array<_HumanRelevanceNodeDataFilter>>;
+  human_relevance_record_id?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_contains?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_gt?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_gte?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  human_relevance_record_id_lt?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_lte?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_matches?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_not?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_record_id_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_record_id_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  human_relevance_record_id_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_record_id_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_statement?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_contains?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_ends_with?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_gt?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_gte?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  human_relevance_statement_lt?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_lte?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_matches?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_not?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_statement_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_statement_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  human_relevance_statement_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_statement_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_gt?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  nci_link_to_relevant_human_cancer_lt?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  nci_link_to_relevant_human_cancer_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_gt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_experimental_therapeutic_intervention_lt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_experimental_therapeutic_intervention_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_gt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_gte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_cancer_lt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_lte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_matches?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_not?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_not_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_cancer_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_cancer_starts_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_gt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_gte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_genes_lt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_lte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_matches?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_not?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_not_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_genes_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_starts_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_gt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_gte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_pathways_lt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_lte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_matches?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_not?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_not_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_pathways_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_pathways_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_pathways_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type _HumanRelevanceNodeDataInput = {
+  human_relevance_record_id?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_experimental_therapeutic_intervention?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_cancer?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_genes?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_pathways?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+};
+
+export enum _HumanRelevanceNodeDataOrdering {
+  HumanRelevanceRecordIdAsc = 'human_relevance_record_id_asc',
+  HumanRelevanceRecordIdDesc = 'human_relevance_record_id_desc',
+  HumanRelevanceStatementAsc = 'human_relevance_statement_asc',
+  HumanRelevanceStatementDesc = 'human_relevance_statement_desc',
+  NciLinkToRelevantHumanCancerAsc = 'nci_link_to_relevant_human_cancer_asc',
+  NciLinkToRelevantHumanCancerDesc = 'nci_link_to_relevant_human_cancer_desc',
+  RelevantExperimentalTherapeuticInterventionAsc = 'relevant_experimental_therapeutic_intervention_asc',
+  RelevantExperimentalTherapeuticInterventionDesc = 'relevant_experimental_therapeutic_intervention_desc',
+  RelevantHumanCancerAsc = 'relevant_human_cancer_asc',
+  RelevantHumanCancerDesc = 'relevant_human_cancer_desc',
+  RelevantHumanGenesAsc = 'relevant_human_genes_asc',
+  RelevantHumanGenesDesc = 'relevant_human_genes_desc',
+  RelevantHumanPathwaysAsc = 'relevant_human_pathways_asc',
+  RelevantHumanPathwaysDesc = 'relevant_human_pathways_desc',
+}
+
 export type _LinkFilter = {
   AND?: InputMaybe<Array<_LinkFilter>>;
   NOT?: InputMaybe<Array<_LinkFilter>>;
@@ -18293,6 +18632,252 @@ export enum _Follow_UpOrdering {
   TreatmentSinceLastContactDesc = 'treatment_since_last_contact_desc',
 }
 
+export type _Human_RelevanceFilter = {
+  AND?: InputMaybe<Array<_Human_RelevanceFilter>>;
+  NOT?: InputMaybe<Array<_Human_RelevanceFilter>>;
+  OR?: InputMaybe<Array<_Human_RelevanceFilter>>;
+  human_relevance_record_id?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_contains?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_gt?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_gte?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  human_relevance_record_id_lt?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_lte?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_matches?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_not?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_record_id_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_record_id_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_record_id_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  human_relevance_record_id_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_record_id_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_statement?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_contains?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_ends_with?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_gt?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_gte?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  human_relevance_statement_lt?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_lte?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_matches?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_not?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_statement_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_statement_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  human_relevance_statement_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  human_relevance_statement_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_gt?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  nci_link_to_relevant_human_cancer_lt?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  nci_link_to_relevant_human_cancer_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  nci_link_to_relevant_human_cancer_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_gt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_experimental_therapeutic_intervention_lt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_experimental_therapeutic_intervention_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_experimental_therapeutic_intervention_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_gt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_gte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_cancer_lt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_lte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_matches?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_not?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_not_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_cancer_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_cancer_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_cancer_starts_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_gt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_gte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_genes_lt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_lte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_matches?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_not?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_not_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_genes_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes_starts_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_ends_with?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_gt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_gte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_pathways_lt?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_lte?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_matches?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_not?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_not_contains?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_pathways_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  relevant_human_pathways_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_pathways_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** Filters only those `human_relevance` for which the `study`-relationship matches this filter. If `null` is passed to this field, only those `human_relevance` will be filtered which has no `study`-relations */
+  study?: InputMaybe<_StudyFilter>;
+  /** @deprecated Use the `study_not`-field */
+  study_none?: InputMaybe<_StudyFilter>;
+  /** Filters only those `human_relevance` for which the `study`-relationship does not match this filter. If `null` is passed to this field, only those `human_relevance` will be filtered which has any `study`-relation */
+  study_not?: InputMaybe<_StudyFilter>;
+  /** @deprecated Use the `study`-field directly (without any suffix) */
+  study_single?: InputMaybe<_StudyFilter>;
+  /** @deprecated Use the `study`-field directly (without any suffix) */
+  study_some?: InputMaybe<_StudyFilter>;
+};
+
+export type _Human_RelevanceInput = {
+  human_relevance_record_id?: InputMaybe<Scalars['String']['input']>;
+  human_relevance_statement?: InputMaybe<Scalars['String']['input']>;
+  nci_link_to_relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_experimental_therapeutic_intervention?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  relevant_human_cancer?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_genes?: InputMaybe<Scalars['String']['input']>;
+  relevant_human_pathways?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _Human_RelevanceOrdering {
+  HumanRelevanceRecordIdAsc = 'human_relevance_record_id_asc',
+  HumanRelevanceRecordIdDesc = 'human_relevance_record_id_desc',
+  HumanRelevanceStatementAsc = 'human_relevance_statement_asc',
+  HumanRelevanceStatementDesc = 'human_relevance_statement_desc',
+  NciLinkToRelevantHumanCancerAsc = 'nci_link_to_relevant_human_cancer_asc',
+  NciLinkToRelevantHumanCancerDesc = 'nci_link_to_relevant_human_cancer_desc',
+  RelevantExperimentalTherapeuticInterventionAsc = 'relevant_experimental_therapeutic_intervention_asc',
+  RelevantExperimentalTherapeuticInterventionDesc = 'relevant_experimental_therapeutic_intervention_desc',
+  RelevantHumanCancerAsc = 'relevant_human_cancer_asc',
+  RelevantHumanCancerDesc = 'relevant_human_cancer_desc',
+  RelevantHumanGenesAsc = 'relevant_human_genes_asc',
+  RelevantHumanGenesDesc = 'relevant_human_genes_desc',
+  RelevantHumanPathwaysAsc = 'relevant_human_pathways_asc',
+  RelevantHumanPathwaysDesc = 'relevant_human_pathways_desc',
+}
+
 export type _ImageFilter = {
   AND?: InputMaybe<Array<_ImageFilter>>;
   NOT?: InputMaybe<Array<_ImageFilter>>;
@@ -21417,6 +22002,16 @@ export type _StudyFilter = {
   files_single?: InputMaybe<_FileFilter>;
   /** Filters only those `study` for which at least one `files`-relationship matches this filter */
   files_some?: InputMaybe<_FileFilter>;
+  /** Filters only those `study` for which the `human_relevance`-relationship matches this filter. If `null` is passed to this field, only those `study` will be filtered which has no `human_relevance`-relations */
+  human_relevance?: InputMaybe<_Human_RelevanceFilter>;
+  /** @deprecated Use the `human_relevance_not`-field */
+  human_relevance_none?: InputMaybe<_Human_RelevanceFilter>;
+  /** Filters only those `study` for which the `human_relevance`-relationship does not match this filter. If `null` is passed to this field, only those `study` will be filtered which has any `human_relevance`-relation */
+  human_relevance_not?: InputMaybe<_Human_RelevanceFilter>;
+  /** @deprecated Use the `human_relevance`-field directly (without any suffix) */
+  human_relevance_single?: InputMaybe<_Human_RelevanceFilter>;
+  /** @deprecated Use the `human_relevance`-field directly (without any suffix) */
+  human_relevance_some?: InputMaybe<_Human_RelevanceFilter>;
   /** Filters only those `study` for which all `image_collections`-relationship matches this filter. If `null` is passed to this field, only those `study` will be filtered which has no `image_collections`-relations */
   image_collections?: InputMaybe<_Image_CollectionFilter>;
   /** Filters only those `study` for which all `image_collections`-relationships matches this filter */
@@ -23067,6 +23662,20 @@ export type Follow_Up = {
   treatment_since_last_contact?: Maybe<Scalars['Boolean']['output']>;
 };
 
+export type Human_Relevance = {
+  __typename?: 'human_relevance';
+  human_relevance_record_id?: Maybe<Scalars['String']['output']>;
+  human_relevance_statement?: Maybe<Scalars['String']['output']>;
+  nci_link_to_relevant_human_cancer?: Maybe<Scalars['String']['output']>;
+  relevant_experimental_therapeutic_intervention?: Maybe<
+    Scalars['String']['output']
+  >;
+  relevant_human_cancer?: Maybe<Scalars['String']['output']>;
+  relevant_human_genes?: Maybe<Scalars['String']['output']>;
+  relevant_human_pathways?: Maybe<Scalars['String']['output']>;
+  study?: Maybe<Study>;
+};
+
 export type Image = {
   __typename?: 'image';
   assay?: Maybe<Assay>;
@@ -23300,6 +23909,7 @@ export type Study = {
   date_of_iacuc_approval?: Maybe<Scalars['String']['output']>;
   dates_of_conduct?: Maybe<Scalars['String']['output']>;
   files?: Maybe<Array<Maybe<File>>>;
+  human_relevance?: Maybe<Human_Relevance>;
   image_collections?: Maybe<Array<Maybe<Image_Collection>>>;
   principal_investigators?: Maybe<Array<Maybe<Principal_Investigator>>>;
   program?: Maybe<Program>;
@@ -25758,12 +26368,12 @@ export type GetCartOverviewDataQuery = {
         label?: string | null;
         value?: number | null;
       } | null> | null;
-      fileAssociation?: Array<{
+      fileFormat?: Array<{
         __typename?: 'CartChartItem';
         label?: string | null;
         value?: number | null;
       } | null> | null;
-      fileFormat?: Array<{
+      fileAssociation?: Array<{
         __typename?: 'CartChartItem';
         label?: string | null;
         value?: number | null;
@@ -25829,52 +26439,6 @@ export type GetProgramsDataQueryQuery = {
       clinical_study_designation?: string | null;
     } | null> | null;
   }>;
-};
-
-export type ProgramQueryVariables = Exact<{
-  programTitle: Scalars['String']['input'];
-}>;
-
-export type ProgramQuery = {
-  __typename?: 'QueryType';
-  sampleCountOfProgram?: number | null;
-  fileCountOfProgram?: number | null;
-  studyFileCountOfProgram?: number | null;
-  aliquotCountOfProgram?: number | null;
-  studyCountOfProgram?: number | null;
-  caseCountOfProgram?: number | null;
-  volumeOfDataOfProgram?: number | null;
-  program: Array<{
-    __typename?: 'program';
-    program_name?: string | null;
-    program_acronym?: string | null;
-    program_short_description?: string | null;
-    program_full_description?: string | null;
-    program_external_url?: string | null;
-    program_sort_order?: number | null;
-  }>;
-  studiesByProgramId?: Array<{
-    __typename?: 'StudyOfProgram';
-    program_id?: string | null;
-    clinical_study_id?: string | null;
-    clinical_study_designation?: string | null;
-    clinical_study_name?: string | null;
-    clinical_study_description?: string | null;
-    clinical_study_type?: string | null;
-    numberOfCases?: number | null;
-    numberOfCaseFiles?: number | null;
-    numberOfStudyFiles?: number | null;
-    numberOfImageCollections?: number | null;
-    numberOfPublications?: number | null;
-    accession_id?: string | null;
-    study_disposition?: string | null;
-    numberOfCRDCNodes?: number | null;
-    CRDCLinks?: Array<{
-      __typename?: 'Link';
-      text?: string | null;
-      url?: string | null;
-    } | null> | null;
-  } | null> | null;
 };
 
 export type GetStudyDataQueryProgramDetailsQueryVariables = Exact<{
@@ -26112,34 +26676,6 @@ export type SearchPageResultAboutQuery = {
   } | null;
 };
 
-export type GetStudyDataQueryStudiesDataQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetStudyDataQueryStudiesDataQuery = {
-  __typename?: 'QueryType';
-  studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
-    program_id?: string | null;
-    clinical_study_designation?: string | null;
-    clinical_study_name?: string | null;
-    clinical_study_type?: string | null;
-    numberOfCases?: number | null;
-    numberOfCaseFiles?: number | null;
-    numberOfStudyFiles?: number | null;
-    numberOfImageCollections?: number | null;
-    numberOfPublications?: number | null;
-    accession_id?: string | null;
-    study_disposition?: string | null;
-    numberOfCRDCNodes?: number | null;
-    CRDCLinks?: Array<{
-      __typename?: 'Link';
-      text?: string | null;
-      url?: string | null;
-    } | null> | null;
-  } | null> | null;
-};
-
 export type GetAllFileIdsStudyDetailsQueryVariables = Exact<{
   file_level?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
@@ -26232,6 +26768,29 @@ export type GetAllFileIdsStudyDetailsQuery = {
   fileOverview?: Array<{
     __typename?: 'FileOverviewES';
     file_uuid?: string | null;
+  } | null> | null;
+};
+
+export type GetHumanRelevanceDataByNodeQueryVariables = Exact<{
+  study_codes?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >;
+}>;
+
+export type GetHumanRelevanceDataByNodeQuery = {
+  __typename?: 'QueryType';
+  humanRelevanceNodeData?: Array<{
+    __typename?: 'HumanRelevanceNodeData';
+    human_relevance_record_id?: string | null;
+    human_relevance_statement?: string | null;
+    relevant_human_cancer?: Array<string | null> | null;
+    relevant_experimental_therapeutic_intervention?: Array<
+      string | null
+    > | null;
+    relevant_human_genes?: Array<string | null> | null;
+    relevant_human_pathways?: Array<string | null> | null;
+    nci_link_to_relevant_human_cancer?: string | null;
   } | null> | null;
 };
 
@@ -26378,6 +26937,18 @@ export type StudyQuery = {
       } | null> | null;
     } | null> | null;
   }>;
+  externalDataOverview?: Array<{
+    __typename?: 'ExternalDataOverview';
+    clinical_study_designation?: string | null;
+    numberOfCRDCNodes?: number | null;
+    numberOfImageCollections?: number | null;
+    CRDCLinks?: Array<{
+      __typename?: 'CRDCLink';
+      repository?: string | null;
+      url?: string | null;
+      metadata?: any | null;
+    } | null> | null;
+  } | null> | null;
 };
 
 export type CycleNodeDataQueryVariables = Exact<{
@@ -26419,48 +26990,6 @@ export type VisitNodeDataQuery = {
     __typename?: 'VisitNodeData';
     visit_id?: string | null;
     visit_date?: string | null;
-  } | null> | null;
-};
-
-export type GetStudiesByProgramStudyDetailsQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetStudiesByProgramStudyDetailsQuery = {
-  __typename?: 'QueryType';
-  studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
-    clinical_study_designation?: string | null;
-    numberOfCRDCNodes?: number | null;
-    numberOfImageCollections?: number | null;
-    CRDCLinks?: Array<{
-      __typename?: 'Link';
-      url?: string | null;
-      repository?: string | null;
-      metadata?:
-        | {
-            __typename?: 'IDCMetadata';
-            collection_id?: string | null;
-            cancer_type?: string | null;
-            date_updated?: string | null;
-            description?: string | null;
-            doi?: string | null;
-            image_types?: string | null;
-            location?: string | null;
-            species?: string | null;
-            subject_count?: number | null;
-            supporting_data?: string | null;
-          }
-        | {
-            __typename?: 'TCIAMetadata';
-            Collection?: string | null;
-            Aggregate_PatientID?: number | null;
-            Aggregate_Modality?: string | null;
-            Aggregate_BodyPartExamined?: Array<string | null> | null;
-            Aggregate_ImageCount?: number | null;
-          }
-        | null;
-    } | null> | null;
   } | null> | null;
 };
 
@@ -27504,53 +28033,6 @@ export type GetMyCartQuery = {
     arm?: string | null;
     sample_id?: string | null;
     other_cases?: Array<string | null> | null;
-  } | null> | null;
-};
-
-export type StoreManifestQueryVariables = Exact<{
-  manifest: Scalars['String']['input'];
-}>;
-
-export type StoreManifestQuery = {
-  __typename?: 'QueryType';
-  storeManifest?: string | null;
-};
-
-export type GetStudiesByProgramProgramDetailTwoQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetStudiesByProgramProgramDetailTwoQuery = {
-  __typename?: 'QueryType';
-  studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
-    clinical_study_designation?: string | null;
-    numberOfCRDCNodes?: number | null;
-    numberOfImageCollections?: number | null;
-    CRDCLinks?: Array<{
-      __typename?: 'Link';
-      url?: string | null;
-      repository?: string | null;
-    } | null> | null;
-  } | null> | null;
-};
-
-export type GetStudiesByProgramStudiesViewQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetStudiesByProgramStudiesViewQuery = {
-  __typename?: 'QueryType';
-  studiesByProgram?: Array<{
-    __typename?: 'StudyOfProgram';
-    clinical_study_designation?: string | null;
-    numberOfCRDCNodes?: number | null;
-    numberOfImageCollections?: number | null;
-    CRDCLinks?: Array<{
-      __typename?: 'Link';
-      url?: string | null;
-      repository?: string | null;
-    } | null> | null;
   } | null> | null;
 };
 
@@ -38370,7 +38852,7 @@ export const GetCartOverviewDataDocument = {
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'fileAssociation' },
+                        name: { kind: 'Name', value: 'fileFormat' },
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
@@ -38387,7 +38869,7 @@ export const GetCartOverviewDataDocument = {
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'fileFormat' },
+                        name: { kind: 'Name', value: 'fileAssociation' },
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
@@ -38604,261 +39086,6 @@ export const GetProgramsDataQueryDocument = {
   GetProgramsDataQueryQuery,
   GetProgramsDataQueryQueryVariables
 >;
-export const ProgramDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'program' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'programTitle' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'String' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'sampleCountOfProgram' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'fileCountOfProgram' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'studyFileCountOfProgram' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'aliquotCountOfProgram' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'studyCountOfProgram' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'caseCountOfProgram' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'volumeOfDataOfProgram' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'program' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_acronym' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'program_name' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'program_acronym' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'program_short_description' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'program_full_description' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'program_external_url' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'program_sort_order' },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'studiesByProgramId' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'program_id' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'programTitle' },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'program_id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_id' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_designation' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_name' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_description' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_type' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCases' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCaseFiles' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfStudyFiles' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfImageCollections' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfPublications' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'accession_id' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'study_disposition' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'CRDCLinks' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'text' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<ProgramQuery, ProgramQueryVariables>;
 export const GetStudyDataQueryProgramDetailsDocument = {
   kind: 'Document',
   definitions: [
@@ -39890,89 +40117,6 @@ export const SearchPageResultAboutDocument = {
   SearchPageResultAboutQuery,
   SearchPageResultAboutQueryVariables
 >;
-export const GetStudyDataQueryStudiesDataDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getStudyDataQueryStudiesData' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'studiesByProgram' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'program_id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_designation' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_name' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_type' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCases' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCaseFiles' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfStudyFiles' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfImageCollections' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfPublications' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'accession_id' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'study_disposition' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'CRDCLinks' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'text' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetStudyDataQueryStudiesDataQuery,
-  GetStudyDataQueryStudiesDataQueryVariables
->;
 export const GetAllFileIdsStudyDetailsDocument = {
   kind: 'Document',
   definitions: [
@@ -40516,6 +40660,93 @@ export const GetAllFileIdsStudyDetailsDocument = {
 } as unknown as DocumentNode<
   GetAllFileIdsStudyDetailsQuery,
   GetAllFileIdsStudyDetailsQueryVariables
+>;
+export const GetHumanRelevanceDataByNodeDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'getHumanRelevanceDataByNode' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'study_codes' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'humanRelevanceNodeData' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'study_codes' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'study_codes' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'human_relevance_record_id' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'human_relevance_statement' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'relevant_human_cancer' },
+                },
+                {
+                  kind: 'Field',
+                  name: {
+                    kind: 'Name',
+                    value: 'relevant_experimental_therapeutic_intervention',
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'relevant_human_genes' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'relevant_human_pathways' },
+                },
+                {
+                  kind: 'Field',
+                  name: {
+                    kind: 'Name',
+                    value: 'nci_link_to_relevant_human_cancer',
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetHumanRelevanceDataByNodeQuery,
+  GetHumanRelevanceDataByNodeQueryVariables
 >;
 export const StudyDocument = {
   kind: 'Document',
@@ -41192,6 +41423,45 @@ export const StudyDocument = {
               ],
             },
           },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'externalDataOverview' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_designation' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'CRDCLinks' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'repository' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'metadata' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfImageCollections' },
+                },
+              ],
+            },
+          },
         ],
       },
     },
@@ -41368,185 +41638,6 @@ export const VisitNodeDataDocument = {
     },
   ],
 } as unknown as DocumentNode<VisitNodeDataQuery, VisitNodeDataQueryVariables>;
-export const GetStudiesByProgramStudyDetailsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getStudiesByProgramStudyDetails' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'studiesByProgram' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_designation' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'CRDCLinks' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'repository' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'metadata' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'InlineFragment',
-                              typeCondition: {
-                                kind: 'NamedType',
-                                name: { kind: 'Name', value: 'IDCMetadata' },
-                              },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'collection_id',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'cancer_type',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'date_updated',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'description',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'doi' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'image_types',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'location' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'species' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'subject_count',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'supporting_data',
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              kind: 'InlineFragment',
-                              typeCondition: {
-                                kind: 'NamedType',
-                                name: { kind: 'Name', value: 'TCIAMetadata' },
-                              },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'Collection' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'Aggregate_PatientID',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'Aggregate_Modality',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'Aggregate_BodyPartExamined',
-                                    },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'Aggregate_ImageCount',
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfImageCollections' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetStudiesByProgramStudyDetailsQuery,
-  GetStudiesByProgramStudyDetailsQueryVariables
->;
 export const PriorTherapyNodeDataDocument = {
   kind: 'Document',
   definitions: [
@@ -46227,154 +46318,3 @@ export const GetMyCartDocument = {
     },
   ],
 } as unknown as DocumentNode<GetMyCartQuery, GetMyCartQueryVariables>;
-export const StoreManifestDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'storeManifest' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'manifest' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'String' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'storeManifest' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'manifest' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'manifest' },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<StoreManifestQuery, StoreManifestQueryVariables>;
-export const GetStudiesByProgramProgramDetailTwoDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getStudiesByProgramProgramDetailTwo' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'studiesByProgram' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_designation' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'CRDCLinks' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'repository' },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfImageCollections' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetStudiesByProgramProgramDetailTwoQuery,
-  GetStudiesByProgramProgramDetailTwoQueryVariables
->;
-export const GetStudiesByProgramStudiesViewDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'getStudiesByProgramStudiesView' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'studiesByProgram' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_designation' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'CRDCLinks' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'repository' },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfImageCollections' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetStudiesByProgramStudiesViewQuery,
-  GetStudiesByProgramStudiesViewQueryVariables
->;
