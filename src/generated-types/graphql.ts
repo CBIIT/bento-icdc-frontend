@@ -26441,19 +26441,57 @@ export type GetProgramsDataQueryQuery = {
   }>;
 };
 
-export type GetStudyDataQueryProgramDetailsQueryVariables = Exact<{
-  [key: string]: never;
+export type ProgramQueryVariables = Exact<{
+  programTitle: Scalars['String']['input'];
 }>;
 
-export type GetStudyDataQueryProgramDetailsQuery = {
+export type ProgramQuery = {
   __typename?: 'QueryType';
-  studiesByProgram?: Array<{
+  sampleCountOfProgram?: number | null;
+  fileCountOfProgram?: number | null;
+  studyFileCountOfProgram?: number | null;
+  aliquotCountOfProgram?: number | null;
+  studyCountOfProgram?: number | null;
+  caseCountOfProgram?: number | null;
+  volumeOfDataOfProgram?: number | null;
+  program: Array<{
+    __typename?: 'program';
+    program_name?: string | null;
+    program_acronym?: string | null;
+    program_short_description?: string | null;
+    program_full_description?: string | null;
+    program_external_url?: string | null;
+    program_sort_order?: number | null;
+  }>;
+  studiesByProgramId?: Array<{
     __typename?: 'StudyOfProgram';
     program_id?: string | null;
+    clinical_study_id?: string | null;
     clinical_study_designation?: string | null;
     clinical_study_name?: string | null;
+    clinical_study_description?: string | null;
     clinical_study_type?: string | null;
     numberOfCases?: number | null;
+    numberOfCaseFiles?: number | null;
+    numberOfStudyFiles?: number | null;
+    numberOfImageCollections?: number | null;
+    numberOfPublications?: number | null;
+    accession_id?: string | null;
+    study_disposition?: string | null;
+    numberOfCRDCNodes?: number | null;
+    CRDCLinks?: Array<{
+      __typename?: 'Link';
+      text?: string | null;
+      url?: string | null;
+    } | null> | null;
+  } | null> | null;
+  externalDataOverview?: Array<{
+    __typename?: 'ExternalDataOverview';
+    CRDCLinks?: Array<{
+      __typename?: 'CRDCLink';
+      repository?: string | null;
+      url?: string | null;
+    } | null> | null;
   } | null> | null;
 };
 
@@ -26674,6 +26712,42 @@ export type SearchPageResultAboutQuery = {
       text?: string | null;
     } | null> | null;
   } | null;
+};
+
+export type GetStudyDataQueryStudiesDataQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetStudyDataQueryStudiesDataQuery = {
+  __typename?: 'QueryType';
+  studiesByProgram?: Array<{
+    __typename?: 'StudyOfProgram';
+    program_id?: string | null;
+    clinical_study_designation?: string | null;
+    clinical_study_name?: string | null;
+    clinical_study_type?: string | null;
+    numberOfCases?: number | null;
+    numberOfCaseFiles?: number | null;
+    numberOfStudyFiles?: number | null;
+    numberOfImageCollections?: number | null;
+    numberOfPublications?: number | null;
+    accession_id?: string | null;
+    study_disposition?: string | null;
+    numberOfCRDCNodes?: number | null;
+    CRDCLinks?: Array<{
+      __typename?: 'Link';
+      text?: string | null;
+      url?: string | null;
+    } | null> | null;
+  } | null> | null;
+  externalDataOverview?: Array<{
+    __typename?: 'ExternalDataOverview';
+    CRDCLinks?: Array<{
+      __typename?: 'CRDCLink';
+      repository?: string | null;
+      url?: string | null;
+    } | null> | null;
+  } | null> | null;
 };
 
 export type GetAllFileIdsStudyDetailsQueryVariables = Exact<{
@@ -39086,23 +39160,194 @@ export const GetProgramsDataQueryDocument = {
   GetProgramsDataQueryQuery,
   GetProgramsDataQueryQueryVariables
 >;
-export const GetStudyDataQueryProgramDetailsDocument = {
+export const ProgramDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'getStudyDataQueryProgramDetails' },
+      name: { kind: 'Name', value: 'program' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'programTitle' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'studiesByProgram' },
+            name: { kind: 'Name', value: 'sampleCountOfProgram' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'fileCountOfProgram' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'studyFileCountOfProgram' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'aliquotCountOfProgram' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'studyCountOfProgram' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'caseCountOfProgram' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'volumeOfDataOfProgram' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'program' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_acronym' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'program_name' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'program_acronym' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'program_short_description' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'program_full_description' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'program_external_url' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'program_sort_order' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'studiesByProgramId' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'program_id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'programTitle' },
+                },
+              },
+            ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'program_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_id' },
+                },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'clinical_study_designation' },
@@ -39113,11 +39358,77 @@ export const GetStudyDataQueryProgramDetailsDocument = {
                 },
                 {
                   kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_description' },
+                },
+                {
+                  kind: 'Field',
                   name: { kind: 'Name', value: 'clinical_study_type' },
                 },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'numberOfCases' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfCaseFiles' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfStudyFiles' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfImageCollections' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfPublications' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'accession_id' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'study_disposition' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'CRDCLinks' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'text' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'externalDataOverview' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'CRDCLinks' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'repository' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
                 },
               ],
             },
@@ -39126,10 +39437,7 @@ export const GetStudyDataQueryProgramDetailsDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<
-  GetStudyDataQueryProgramDetailsQuery,
-  GetStudyDataQueryProgramDetailsQueryVariables
->;
+} as unknown as DocumentNode<ProgramQuery, ProgramQueryVariables>;
 export const StudesProgramDocument = {
   kind: 'Document',
   definitions: [
@@ -40116,6 +40424,112 @@ export const SearchPageResultAboutDocument = {
 } as unknown as DocumentNode<
   SearchPageResultAboutQuery,
   SearchPageResultAboutQueryVariables
+>;
+export const GetStudyDataQueryStudiesDataDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'getStudyDataQueryStudiesData' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'studiesByProgram' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'program_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_designation' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_name' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_type' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfCases' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfCaseFiles' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfStudyFiles' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfImageCollections' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfPublications' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'accession_id' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'study_disposition' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'CRDCLinks' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'text' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'externalDataOverview' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'CRDCLinks' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'repository' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetStudyDataQueryStudiesDataQuery,
+  GetStudyDataQueryStudiesDataQueryVariables
 >;
 export const GetAllFileIdsStudyDetailsDocument = {
   kind: 'Document',

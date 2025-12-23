@@ -1,5 +1,5 @@
 import { cellTypes, headerTypes } from '../bento-core';
-import { GetStudyDataQueryStudiesDataDocument } from '../generated-types/graphql';
+import gql from 'graphql-tag';
 
 export const tableLayOut = [
   {
@@ -201,5 +201,31 @@ export const textLabels = {
 };
 
 // --------------- GraphQL query - Retrieve program info --------------
-// Note: Using generated GetStudyDataQueryStudiesDataDocument from codegen
-export const GET_STUDY_DATA_QUERY = GetStudyDataQueryStudiesDataDocument;
+export const GET_STUDY_DATA_QUERY = gql`
+  query getStudyDataQueryStudiesData {
+    studiesByProgram {
+      program_id
+      clinical_study_designation
+      clinical_study_name
+      clinical_study_type
+      numberOfCases
+      numberOfCaseFiles
+      numberOfStudyFiles
+      numberOfImageCollections
+      numberOfPublications
+      accession_id
+      study_disposition
+      numberOfCRDCNodes
+      CRDCLinks {
+        text
+        url
+      }
+    }
+    externalDataOverview {
+      CRDCLinks {
+        repository
+        url
+      }
+    }
+  }
+`;

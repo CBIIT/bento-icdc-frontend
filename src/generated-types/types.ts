@@ -26439,19 +26439,57 @@ export type GetProgramsDataQueryQuery = {
   }>;
 };
 
-export type GetStudyDataQueryProgramDetailsQueryVariables = Exact<{
-  [key: string]: never;
+export type ProgramQueryVariables = Exact<{
+  programTitle: Scalars['String']['input'];
 }>;
 
-export type GetStudyDataQueryProgramDetailsQuery = {
+export type ProgramQuery = {
   __typename?: 'QueryType';
-  studiesByProgram?: Array<{
+  sampleCountOfProgram?: number | null;
+  fileCountOfProgram?: number | null;
+  studyFileCountOfProgram?: number | null;
+  aliquotCountOfProgram?: number | null;
+  studyCountOfProgram?: number | null;
+  caseCountOfProgram?: number | null;
+  volumeOfDataOfProgram?: number | null;
+  program: Array<{
+    __typename?: 'program';
+    program_name?: string | null;
+    program_acronym?: string | null;
+    program_short_description?: string | null;
+    program_full_description?: string | null;
+    program_external_url?: string | null;
+    program_sort_order?: number | null;
+  }>;
+  studiesByProgramId?: Array<{
     __typename?: 'StudyOfProgram';
     program_id?: string | null;
+    clinical_study_id?: string | null;
     clinical_study_designation?: string | null;
     clinical_study_name?: string | null;
+    clinical_study_description?: string | null;
     clinical_study_type?: string | null;
     numberOfCases?: number | null;
+    numberOfCaseFiles?: number | null;
+    numberOfStudyFiles?: number | null;
+    numberOfImageCollections?: number | null;
+    numberOfPublications?: number | null;
+    accession_id?: string | null;
+    study_disposition?: string | null;
+    numberOfCRDCNodes?: number | null;
+    CRDCLinks?: Array<{
+      __typename?: 'Link';
+      text?: string | null;
+      url?: string | null;
+    } | null> | null;
+  } | null> | null;
+  externalDataOverview?: Array<{
+    __typename?: 'ExternalDataOverview';
+    CRDCLinks?: Array<{
+      __typename?: 'CRDCLink';
+      repository?: string | null;
+      url?: string | null;
+    } | null> | null;
   } | null> | null;
 };
 
@@ -26672,6 +26710,42 @@ export type SearchPageResultAboutQuery = {
       text?: string | null;
     } | null> | null;
   } | null;
+};
+
+export type GetStudyDataQueryStudiesDataQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetStudyDataQueryStudiesDataQuery = {
+  __typename?: 'QueryType';
+  studiesByProgram?: Array<{
+    __typename?: 'StudyOfProgram';
+    program_id?: string | null;
+    clinical_study_designation?: string | null;
+    clinical_study_name?: string | null;
+    clinical_study_type?: string | null;
+    numberOfCases?: number | null;
+    numberOfCaseFiles?: number | null;
+    numberOfStudyFiles?: number | null;
+    numberOfImageCollections?: number | null;
+    numberOfPublications?: number | null;
+    accession_id?: string | null;
+    study_disposition?: string | null;
+    numberOfCRDCNodes?: number | null;
+    CRDCLinks?: Array<{
+      __typename?: 'Link';
+      text?: string | null;
+      url?: string | null;
+    } | null> | null;
+  } | null> | null;
+  externalDataOverview?: Array<{
+    __typename?: 'ExternalDataOverview';
+    CRDCLinks?: Array<{
+      __typename?: 'CRDCLink';
+      repository?: string | null;
+      url?: string | null;
+    } | null> | null;
+  } | null> | null;
 };
 
 export type GetAllFileIdsStudyDetailsQueryVariables = Exact<{

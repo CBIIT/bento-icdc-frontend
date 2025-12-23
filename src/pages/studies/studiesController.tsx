@@ -14,18 +14,13 @@ interface StudiesContainerProps {
 }
 
 const studiesContainer: React.FC<StudiesContainerProps> = ({ invalid }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { loading, error, data } =
     apolloUseQuery<GetStudyDataQueryStudiesDataQuery>(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       GetStudyDataQueryStudiesDataDocument
     );
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const repositories = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     const links = data?.externalDataOverview?.[0]?.CRDCLinks;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     return links?.map(link => link.repository) || [];
   }, [data]);
 
@@ -42,7 +37,6 @@ const studiesContainer: React.FC<StudiesContainerProps> = ({ invalid }) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       data={convertCRDCLinksToValue(data, undefined, repositories)}
       invalid={invalid}
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       interOpData={data || {}}
     />
   );

@@ -17,25 +17,19 @@ interface ProgramDetailControllerProps {
 const ProgramDetailController: React.FC<ProgramDetailControllerProps> = ({
   match,
 }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { loading, error, data } = apolloUseQuery<
     ProgramQuery,
     ProgramQueryVariables
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   >(ProgramDocument, {
     variables: { programTitle: match.params.id },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const repositories = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     const links = data?.externalDataOverview?.[0]?.CRDCLinks;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     return links?.map(link => link.repository) || [];
   }, [data]);
 
   if (loading) return <SkeletonLoader variant="withRounded" />;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (!data || data.program.length === 0) {
     return (
       <Typography color="error">
@@ -49,14 +43,12 @@ const ProgramDetailController: React.FC<ProgramDetailControllerProps> = ({
   return (
     <ProgramDetailView
       data={
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         convertCRDCLinksToValue(
           data,
           'studiesByProgramId',
           repositories
         ) as ProgramQuery
       }
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       interOpData={data}
     />
   );
