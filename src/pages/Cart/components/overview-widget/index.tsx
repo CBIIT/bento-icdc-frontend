@@ -26,8 +26,9 @@ import { SkeletonLoader } from '../../../../components/Skeleton';
 import {
   CartChartData,
   GetCartOverviewDataQuery,
+  GetCartOverviewDataQueryVariables,
 } from '../../../../generated-types/types';
-import { GET_CART_OVERVIEW_DATA } from '../../../../bento/fileCentricCartWorkflowData';
+import { GetCartOverviewDataDocument } from '../../../../generated-types/graphql';
 
 type CartChartKeys = keyof Omit<
   CartChartData,
@@ -40,12 +41,15 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
     error,
     data,
   }: { loading: boolean; error?: ApolloError; data: GetCartOverviewDataQuery } =
-    useQuery(GET_CART_OVERVIEW_DATA, {
-      variables: {
-        file_uuids: defaultTo(fileIds, []),
-      },
-      skip: !fileIds,
-    });
+    useQuery<GetCartOverviewDataQuery, GetCartOverviewDataQueryVariables>(
+      GetCartOverviewDataDocument,
+      {
+        variables: {
+          file_uuids: defaultTo(fileIds, []),
+        },
+        skip: !fileIds,
+      }
+    );
 
   const cartOverviewData = useMemo(
     () => defaultTo(data?.cartOverview, {}),

@@ -657,6 +657,16 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
         }
       }
     }
+    externalDataOverview {
+      clinical_study_designation
+      CRDCLinks {
+        repository
+        url
+        metadata
+      }
+      numberOfCRDCNodes
+      numberOfImageCollections
+    }
   }
 `;
 
@@ -1073,41 +1083,6 @@ export const GET_VISIT_CLINICAL_DATA = gql`
     visitNodeData(study_code: $study_code) {
       visit_id
       visit_date
-    }
-  }
-`;
-
-export const studiesByProgram = gql`
-  query getStudiesByProgramStudyDetails {
-    studiesByProgram {
-      clinical_study_designation
-      CRDCLinks {
-        url
-        repository
-        metadata {
-          ... on IDCMetadata {
-            collection_id
-            cancer_type
-            date_updated
-            description
-            doi
-            image_types
-            location
-            species
-            subject_count
-            supporting_data
-          }
-          ... on TCIAMetadata {
-            Collection
-            Aggregate_PatientID
-            Aggregate_Modality
-            Aggregate_BodyPartExamined
-            Aggregate_ImageCount
-          }
-        }
-      }
-      numberOfCRDCNodes
-      numberOfImageCollections
     }
   }
 `;

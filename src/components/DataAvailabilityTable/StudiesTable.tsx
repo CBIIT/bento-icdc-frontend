@@ -36,6 +36,7 @@ const StudiesTable: React.FC<StudiesTableProps> = ({
       tblRows={data}
       config={{
         ...table,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         interOpData,
       }}
       tableLayOut={tableLayOut}

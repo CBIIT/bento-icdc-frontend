@@ -1,5 +1,5 @@
-import gql from 'graphql-tag';
 import { cellTypes, headerTypes } from '../bento-core';
+import gql from 'graphql-tag';
 
 export interface TableLayoutItem {
   container: string;
@@ -281,7 +281,7 @@ const textLabels = {
 };
 
 // --------------- GraphQL query - Retrieve program details --------------
-const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
+export const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
   query program($programTitle: String!) {
     sampleCountOfProgram(program_id: $programTitle)
     fileCountOfProgram(program_id: $programTitle)
@@ -319,7 +319,13 @@ const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
         url
       }
     }
+    externalDataOverview {
+      CRDCLinks {
+        repository
+        url
+      }
+    }
   }
 `;
 
-export { pageData, GET_PROGRAM_DETAIL_DATA_QUERY, table, textLabels };
+export { pageData, table, textLabels };
