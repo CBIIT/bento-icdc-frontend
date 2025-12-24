@@ -183,6 +183,11 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
     return customF;
   });
 
+  const filterStudy = `${caseDetail.study.clinical_study_designation} (${caseDetail.study.accession_id})`;
+  const filterQuery = encodeURIComponent(
+    JSON.stringify({ study: [filterStudy] })
+  );
+
   const breadCrumbJson: BreadcrumbData[] = [
     {
       name: 'ALL PROGRAMS',
@@ -196,7 +201,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
     },
     {
       name: `${caseDetail.study.clinical_study_designation} CASES`,
-      to: '/explore',
+      to: `/explore/${filterQuery}`,
       isALink: true,
     },
     {
