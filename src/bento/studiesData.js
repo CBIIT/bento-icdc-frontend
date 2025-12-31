@@ -1,5 +1,5 @@
-import gql from 'graphql-tag';
 import { cellTypes, headerTypes } from '../bento-core';
+import gql from 'graphql-tag';
 
 export const tableLayOut = [
   {
@@ -218,6 +218,12 @@ export const GET_STUDY_DATA_QUERY = gql`
       numberOfCRDCNodes
       CRDCLinks {
         text
+        url
+      }
+    }
+    externalDataOverview {
+      CRDCLinks {
+        repository
         url
       }
     }

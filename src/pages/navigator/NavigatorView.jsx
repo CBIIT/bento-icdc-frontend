@@ -17,6 +17,8 @@ import { SkeletonLoader } from '../../components/Skeleton';
 const DATA_MODEL = env.REACT_APP_DATA_MODEL;
 const DATA_MODEL_PROPS = env.REACT_APP_DATA_MODEL_PROPS;
 const DATA_MODEL_README = env.REACT_APP_DMN_README;
+const DATA_MODEL_EXAMPLE_LOADING_FILES =
+  env.REACT_APP_DMN_EXAMPLE_LOADING_FILES;
 
 async function getData() {
   const response = await getModelExploreData(DATA_MODEL, DATA_MODEL_PROPS);
@@ -39,6 +41,10 @@ async function getData() {
         ctrlVocabConfig: controlVocabConfig,
         pdfDownloadConfig,
         graphViewConfig,
+        loadingExampleConfig: {
+          type: 'static',
+          url: DATA_MODEL_EXAMPLE_LOADING_FILES,
+        },
       },
     }),
     store.dispatch({

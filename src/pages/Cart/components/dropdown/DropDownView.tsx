@@ -4,7 +4,6 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { useQuery } from '@apollo/client';
 import { noop } from 'lodash';
 import axios from 'axios';
-import gql from 'graphql-tag';
 import { TableContext, ToolTip as Tooltip } from '../../../../bento-core';
 import cgcIcon from '../../assets/cgc.svg';
 import linkIcon from '../../assets/linkIcon.svg';
@@ -12,9 +11,14 @@ import arrowDownPng from '../../assets/arrowDown.png';
 import arrowUpPng from '../../assets/arrowUp.png';
 import { defaultTo } from 'lodash';
 import {
-  CREATE_MANIFEST,
-  myFilesPageData,
-} from '../../../../bento/fileCentricCartWorkflowData';
+  CreateManifestDocument,
+  CreateManifestQuery,
+  CreateManifestQueryVariables,
+  GetStoreManifestDataQueryDocument,
+  GetStoreManifestDataQueryQuery,
+  GetStoreManifestDataQueryQueryVariables,
+} from '../../../../generated-types/graphql';
+import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import { downloadCsvString } from '../../utils';
 import env from '../../../../utils/env';
@@ -29,29 +33,38 @@ const { EXPORT_TO_CANCER_GENOMICS_CLOUD, DOWNLOAD_FILE_MANIFEST } = {
 
 const OPTIONS = [EXPORT_TO_CANCER_GENOMICS_CLOUD];
 
-const getReadMe = async (setContent, url) => {
-  const { data } = await axios.get(url);
+const getReadMe = async (
+  setContent: React.Dispatch<React.SetStateAction<string | undefined>>,
+  url: string
+) => {
+  const { data } = await axios.get<string>(url);
   setContent(data);
 };
-
-const STORE_MANIFEST_QUERY = gql`
-  query storeManifest($manifest: String!) {
-    storeManifest(manifest: $manifest)
-  }
-`;
 
 const emptyCartTooltipContent = 'Add some files to the cart to get started.';
 const noSelectedRowsTooltipContent =
   'Select at least one file from the table below.';
 
-const DropDownView = ({ filesId = [], allFiles }) => {
+interface DropDownViewProps {
+  filesId?: string[];
+  allFiles: boolean;
+}
+
+const DropDownView: React.FC<DropDownViewProps> = ({
+  filesId = [],
+  allFiles,
+}) => {
   const [open, setOpen] = useState(false);
-  const anchorRef = React.useRef(null);
+  const anchorRef = React.useRef<HTMLButtonElement>(null);
 
   // download all or selected files
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const tableContext = useContext(TableContext);
   const { context } = tableContext;
-  const { selectedRows = [], selectedFileIds = [] } = context;
+  const { selectedRows = [], selectedFileIds = [] } = context as {
+    selectedRows: unknown[];
+    selectedFileIds: string[];
+  };
   const noSelectedRows = useMemo(
     () => selectedRows.length === 0,
     [selectedRows]
@@ -59,18 +72,24 @@ const DropDownView = ({ filesId = [], allFiles }) => {
   const cartIsEmpty = useMemo(() => filesId.length === 0, [filesId]);
   const [manifest, setManifest] = useState('');
 
-  useQuery(CREATE_MANIFEST, {
-    variables: {
-      uuid: allFiles ? filesId : selectedFileIds,
-      first: allFiles ? filesId.length : selectedFileIds.length,
-    },
-    skip: allFiles ? !filesId : !selectedFileIds,
-    onCompleted: ({ createManifest }) => {
-      setManifest(createManifest);
-    },
-  });
+  useQuery<CreateManifestQuery, CreateManifestQueryVariables>(
+    CreateManifestDocument,
+    {
+      variables: {
+        uuid: allFiles ? filesId : selectedFileIds,
+        first: allFiles ? filesId.length : selectedFileIds.length,
+      },
+      skip: allFiles ? !filesId : !selectedFileIds,
+      onCompleted: ({ createManifest }) => {
+        setManifest(createManifest || '');
+      },
+    }
+  );
 
-  const { data } = useQuery(STORE_MANIFEST_QUERY, {
+  const { data } = useQuery<
+    GetStoreManifestDataQueryQuery,
+    GetStoreManifestDataQueryQueryVariables
+  >(GetStoreManifestDataQueryDocument, {
     variables: {
       manifest,
     },
@@ -79,7 +98,12 @@ const DropDownView = ({ filesId = [], allFiles }) => {
     fetchPolicy: 'no-cache',
   });
 
-  const sbgUrl = useMemo(() => defaultTo(data?.storeManifest, ''), [data]);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const sbgUrl = useMemo(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    () => defaultTo(data?.storeManifest, ''),
+    [data]
+  );
 
   const isDropDownDisabled = useMemo(() => {
     switch (allFiles) {
@@ -240,15 +264,15 @@ const DropDownView = ({ filesId = [], allFiles }) => {
     <img src={arrowDownPng} alt="arrow down icon" />
   );
 
-  const handleClose = event => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+  const handleClose = (event: MouseEvent | TouchEvent) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;
     }
 
     setOpen(false);
   };
 
-  function handleListKeyDown(event) {
+  function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
@@ -259,28 +283,30 @@ const DropDownView = ({ filesId = [], allFiles }) => {
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
+      anchorRef.current?.focus();
     }
 
     prevOpen.current = open;
   }, [open]);
 
-  const [label] = useState(LABEL);
+  const [label] = useState<string>(LABEL);
   // TODO: Is this useState necessary
-  const [_content, setContent] = useState(undefined);
+  const [_content, setContent] = useState<string | undefined>(undefined);
   const [downloadFileManifestDialogOpen, setDownloadFileManifestDialogOpen] =
     React.useState(false);
 
   useEffect(() => {
     //TODO: investigate this env usage
-    getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    void getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
   }, []);
 
-  const initiateDownload = async currLabel => {
+  const initiateDownload = (currLabel: string) => {
     switch (currLabel) {
       case EXPORT_TO_CANCER_GENOMICS_CLOUD: {
         if (sbgUrl) {
           window.open(
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             `https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`,
             '_blank'
           );
@@ -306,7 +332,7 @@ const DropDownView = ({ filesId = [], allFiles }) => {
     setDownloadFileManifestDialogOpen(false);
   };
 
-  const getMenuItem = _type => {
+  const getMenuItem = (_type: string) => {
     /*let icon;
     switch (type) {
       case EXPORT_TO_CANCER_GENOMICS_CLOUD:

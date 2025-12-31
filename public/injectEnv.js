@@ -14,10 +14,11 @@ window.injectedEnv = {
   REACT_APP_DATA_MODEL_PROPS: 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/develop/model-desc/icdc-model-props.yml',
   REACT_APP_LANDING_DATA: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/landingView.yaml',
   REACT_APP_NEWS_DATA: 'https://raw.githubusercontent.com/CBIIT/bento-icdc-static-content/develop/newsView.yaml',
-  REACT_APP_DMN_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/Data_Model_Navigator_README.md',
+  REACT_APP_DMN_README: 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/refs/heads/develop/model-desc/Data_Model_Navigator_README.md',
   REACT_APP_FOOTER_PRIVACY_POLICY: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/Privacy_Policy.md',
   REACT_APP_INTEROP_SERVICE_URL: 'https://caninecommons-dev.cancer.gov/api/interoperation/graphql',
   REACT_APP_INTEROP_SERVICE_VERSION: 'https://caninecommons-dev.cancer.gov/api/interoperation/version',
   REACT_APP_FILE_CENTRIC_CART_README: 'https://raw.githubusercontent.com/CBIIT/icdc-readMe-content/dev/My_Files_Cart_Page_README.md',
   REACT_APP_DMN_VERSIONS_FILE: 'https://raw.githubusercontent.com/CBIIT/icdc-model-tool/refs/heads/develop/model-desc/version.md',
+  REACT_APP_DMN_EXAMPLE_LOADING_FILES: 'https://github.com/CBIIT/icdc-model-tool/raw/refs/heads/develop/model-desc/ICDC_Example_Files.zip'
 };

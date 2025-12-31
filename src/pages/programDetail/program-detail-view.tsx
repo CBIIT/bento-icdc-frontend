@@ -38,14 +38,20 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
 
   const stat = {
     numberOfStudies: data.studyCountOfProgram,
+
     numberOfCases: data.caseCountOfProgram,
+
     numberOfSamples: data.sampleCountOfProgram,
+
     numberOfFiles: data.fileCountOfProgram,
+
     numberOfStudyFiles: data.studyFileCountOfProgram,
     numberOfPrograms: 1,
+
     numberOfAliquots: data.aliquotCountOfProgram
       ? data.aliquotCountOfProgram
       : 0,
+
     volumeOfData: data.volumeOfDataOfProgram,
   };
 
@@ -72,6 +78,7 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     tableOptions.downloadOptions.filename.replace(
       'Program',
+
       `${programDetail.program_acronym}`
     );
 
@@ -86,11 +93,13 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
             <ProgramDetailTitle>
               <div>Programs:</div>
               <ProgramDetailSubTitle>
+                {}
                 {`${programDetail.program_name} (${programDetail.program_acronym})`}
               </ProgramDetailSubTitle>
             </ProgramDetailTitle>
           </IconTitleWrapper>
 
+          {}
           {programDetail.program_external_url && (
             <ProgramDetailHeaderExternalLinkWrapper>
               <a
@@ -134,7 +143,7 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
           <TableContextProvider>
             <StudiesTable
               data={data.studiesByProgramId}
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               interOpData={interOpData}
               table={table}
               tableLayOut={tableLayOut}

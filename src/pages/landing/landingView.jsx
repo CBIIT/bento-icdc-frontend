@@ -131,6 +131,7 @@ const LandingView = ({ pageData }) => {
                     display: 'none',
                   },
                 }}
+                iconSpacing="8px"
                 disableRipple
                 tabItems={pageData.tabs}
                 currentTab={currentTab}

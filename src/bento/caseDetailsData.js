@@ -493,6 +493,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
       study {
         clinical_study_name
         clinical_study_designation
+        accession_id
         program {
           program_acronym
         }
