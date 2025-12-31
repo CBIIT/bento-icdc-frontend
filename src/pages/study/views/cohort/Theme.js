@@ -298,7 +298,7 @@ const tblPgn = {
   },
 };
 
-export const themeConfig = table => ({
+export const themeConfig = (table = {}) => ({
   customTheme,
   tblBody,
   tblHeader,

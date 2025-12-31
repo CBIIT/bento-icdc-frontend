@@ -125,7 +125,8 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                 <div className="title-wrapper">
                   <div className="title">Studies in this Cart</div>
                   <div className="subtitle studies-subtitle">
-                    {studiesInCart.join(', ')}
+                    {defaultTo(studiesInCart, []).filter(Boolean).join(', ') ||
+                      'No studies'}
                   </div>
                 </div>
               </IconAndTextWrapper>

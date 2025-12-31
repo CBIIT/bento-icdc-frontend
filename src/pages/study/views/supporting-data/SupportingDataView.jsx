@@ -15,12 +15,8 @@ import { customTheme, themeConfig } from './DataTheme';
 import hyperlinkIcon from '../../../../assets/icons/hyperlink.svg';
 import { ToolTip } from '../../../../bento-core';
 import CustomAccordion from './accordian/CustomAccordion';
-import { SkeletonLoader } from '../../../../components/Skeleton';
 
-const SupportingData = ({ classes, data, isLoading }) => {
-  if (isLoading) {
-    return <SkeletonLoader />;
-  }
+const SupportingData = ({ classes, data }) => {
   /**
    * Generate Custom Accordian Section Component
    */
