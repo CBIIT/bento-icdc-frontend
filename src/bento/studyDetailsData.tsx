@@ -2,6 +2,20 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { cellTypes, dataFormatTypes, types, btnTypes } from '../bento-core';
+import { Publication } from '../generated-types/types';
+
+// Publication display config types
+interface DisplayAttribute {
+  label: string;
+  key: keyof Publication;
+  type: 'text' | 'link';
+  url?: string;
+}
+
+interface Display {
+  numbOfPublishPerView: number;
+  views: DisplayAttribute[];
+}
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
@@ -206,8 +220,8 @@ export const tab = {
         type: 'link',
         url: 'https://pubmed.ncbi.nlm.nih.gov/',
       },
-    ],
-  },
+    ] satisfies DisplayAttribute[],
+  } satisfies Display,
 };
 
 export const addAssociatedFilesBtn = {
