@@ -1,7 +1,7 @@
-/* eslint-disable */
 import React from 'react';
 import styled from '@emotion/styled';
 import { externalIcon } from '../../../bento/studyDetailsData';
+import { Publication } from '../../../generated-types/types';
 
 const PublicationsContainer = styled.div`
   display: grid;
@@ -104,15 +104,6 @@ const Placeholder = styled.div<{
   ${({ hasBottom }) =>
     hasBottom ? 'border-bottom: 0.75px solid #81A6B9;' : ''}
 `;
-
-interface Publication {
-  publication_title: string;
-  authorship: string;
-  year_of_publication: number;
-  journal_citation: string;
-  digital_object_id?: string;
-  pubmed_id?: string;
-}
 
 interface DisplayAttribute {
   label: string;

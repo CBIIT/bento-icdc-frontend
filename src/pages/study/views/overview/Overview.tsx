@@ -3,7 +3,11 @@ import React from 'react';
 import { customSorting, studyDisposition } from '../../utils';
 import SampleProfile from '../SampleProfile';
 import { Grid, Button } from '@mui/material';
-import { Study, StudyQuery } from '../../../../generated-types/types';
+import {
+  Study,
+  StudyQuery,
+  HumanRelevanceNodeData,
+} from '../../../../generated-types/types';
 import LaunchIcon from '@mui/icons-material/Launch';
 import pluralize from 'pluralize';
 import styled from '@emotion/styled';
@@ -24,10 +28,7 @@ interface OverviewProps {
   setCurrentTab: React.Dispatch<React.SetStateAction<number>>;
   supportingDataTabIndex: number;
   clinicalDataTabIndex: number;
-  humanRelevanceCardData: {
-    human_relevance_statement: string;
-    nci_link_to_relevant_human_cancer: string;
-  };
+  humanRelevanceCardData: HumanRelevanceNodeData | undefined;
 }
 
 const Container = styled.div({

@@ -1,7 +1,5 @@
-/* eslint-disable */
-// @ts-check
-import React, { useMemo, useState } from 'react';
-import { Grid, Typography } from '@mui/material';
+import React, { useMemo, useState, CSSProperties } from 'react';
+import { Grid } from '@mui/material';
 import { request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 import _, { defaultTo } from 'lodash';
@@ -62,12 +60,12 @@ import {
 import env from '../../utils/env';
 
 import { StudyQuery } from '../../generated-types/graphql';
-import { ClinicalDataNodeCounts } from '../../generated-types/types';
+import {
+  ClinicalDataNodeCounts,
+  HumanRelevanceNodeData,
+  GetHumanRelevanceDataByNodeQuery,
+} from '../../generated-types/types';
 import { BreadcrumbData } from '../caseDetails/caseDetailsView';
-
-/* ---------------------------------- */
-/* Tightened types & unions           */
-/* ---------------------------------- */
 
 const BRAIN_CANCER_STUDIES = ['GLIOMA01'] as const;
 
@@ -124,24 +122,6 @@ interface StudyDetailViewProps {
   data: StudyQuery;
   initTab: string;
 }
-
-type HumanRelevanceNode = {
-  human_relevance_record_id: string;
-  human_relevance_statement: string;
-  relevant_human_cancer: string[];
-  relevant_experimental_therapeutic_intervention: string[];
-  relevant_human_genes: string[];
-  relevant_human_pathways: string[];
-  nci_link_to_relevant_human_cancer: string;
-};
-
-type HumanRelevanceQuery = {
-  humanRelevanceNodeData: HumanRelevanceNode[];
-};
-
-/* ---------------------------------- */
-/* Env typing helper                  */
-/* ---------------------------------- */
 
 type Env = {
   REACT_APP_INTEROP_SERVICE_URL: string;
@@ -205,11 +185,9 @@ const HUMAN_REL_IMAGES = {
   },
 } as const;
 
-/* ---------------------------------- */
-/* Helpers        */
-/* ---------------------------------- */
+type HumanRelevanceImageKey = keyof typeof HUMAN_REL_IMAGES;
 
-const getCancerType = (study_code: string): CancerType => {
+const getCancerType = (study_code: string): CancerType | undefined => {
   if (
     BLADDER_CANCER_STUDIES.includes(
       study_code as (typeof BLADDER_CANCER_STUDIES)[number]
@@ -270,8 +248,9 @@ const getCancerType = (study_code: string): CancerType => {
 };
 
 const getHumanRelevanceTabImage = (
-  cancer_type: Exclude<CancerType, undefined>
-) => HUMAN_REL_IMAGES[cancer_type];
+  cancer_type: HumanRelevanceImageKey
+): (typeof HUMAN_REL_IMAGES)[HumanRelevanceImageKey] =>
+  HUMAN_REL_IMAGES[cancer_type];
 
 const getHumanRelevanceTabTitle = (
   cancer_type: Exclude<CancerType, undefined>
@@ -300,7 +279,9 @@ const getHumanRelevanceTabTitle = (
 
 function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
   return arr.some(
-    obj => obj && Object.values(obj).some(value => value && value > 0)
+    obj =>
+      obj &&
+      Object.values(obj).some(value => typeof value === 'number' && value > 0)
   );
 }
 
@@ -319,8 +300,7 @@ const processData = (
     if (nodeCaseCount === 0 && nodeCount === 0) {
       return {
         name,
-        // Preserve original "iEmpty" flag to avoid downstream behavior change.
-        iEmpty: true,
+        isEmpty: true,
       };
     }
     return {
@@ -335,8 +315,8 @@ const processData = (
 /* Shared style constants             */
 /* ---------------------------------- */
 
-const PANEL_MIN_WIDTH = '1404px' as const;
-const PANEL_BOTTOM_OFFSET = '16px' as const;
+const PANEL_MIN_WIDTH = '1404px';
+const PANEL_BOTTOM_OFFSET = '16px';
 
 /* ---------------------------------- */
 /* Small render helpers               */
@@ -395,17 +375,22 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   // External data is now part of the main data query
   const interOpData = data;
 
-  const study_codes = studyCode;
+  const study_codes = [studyCode];
 
   const { data: humanRelevanceCardData, isLoading: isLoadingHumanRelData } =
-    useQuery<HumanRelevanceQuery, unknown, HumanRelevanceNode | undefined>({
+    useQuery<
+      GetHumanRelevanceDataByNodeQuery,
+      unknown,
+      HumanRelevanceNodeData | undefined
+    >({
       queryKey: ['humanRelevance', study_codes],
       queryFn: async () =>
         request(REACT_APP_BACKEND_API, GET_HUMAN_RELEVANCE_DATA_BY_NODE, {
           study_codes,
         }),
       enabled: Boolean(study_codes),
-      select: (res: HumanRelevanceQuery) => res.humanRelevanceNodeData?.[0],
+      select: (res: GetHumanRelevanceDataByNodeQuery) =>
+        res.humanRelevanceNodeData?.[0],
       staleTime: 5 * 60 * 1000,
     });
 
@@ -488,7 +473,11 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   const [currentTab, setCurrentTab] = useState(initTab === 'file' ? 2 : 0);
 
   const tabStyleClasses = useMemo(
-    () => ({
+    (): {
+      tabPrimaryColor: CSSProperties;
+      tabHighlightColor: CSSProperties;
+      hrLine: CSSProperties;
+    } => ({
       tabPrimaryColor: {
         color: '#507B91',
         fontWeight: 600,
@@ -546,7 +535,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   let clinicalDataNodeCount = 0;
   const clinicalDataDownloadFlags: Record<string, boolean> = {};
   defaultTo(processedClinicalDataTabData, []).forEach(el => {
-    if (el?.isEmpty === false) {
+    if (!el?.isEmpty) {
       clinicalDataNodeCount += 1;
       clinicalDataDownloadFlags[el?.name || ''] = true;
     } else {
@@ -567,9 +556,10 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   );
 
   const cancer_type = getCancerType(studyCode);
-  const humanRelevanceTabFigure = cancer_type
-    ? getHumanRelevanceTabImage(cancer_type)
-    : undefined;
+  const humanRelevanceTabFigure =
+    cancer_type && cancer_type in HUMAN_REL_IMAGES
+      ? getHumanRelevanceTabImage(cancer_type as HumanRelevanceImageKey)
+      : undefined;
   const humanRelevanceTabTitle = cancer_type
     ? getHumanRelevanceTabTitle(cancer_type)
     : undefined;
@@ -631,8 +621,8 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   <HeaderButtonLinkSpan>
                     <HeaderButtonLink
                       to={location => ({ ...location, pathname: '/explore' })}
-                      onClick={async () => {
-                        await actions.changeCurrentTab(0);
+                      onClick={() => {
+                        void actions.changeCurrentTab(0);
                         navigatedToDashboard(filterStudy);
                       }}
                     >
@@ -656,7 +646,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 styleClasses={tabStyleClasses}
                 tabItems={processedTabs}
                 currentTab={currentTab}
-                handleTabChange={(_e, v) => setCurrentTab(v)}
+                handleTabChange={(_e, v: number) => setCurrentTab(v)}
               />
             </Grid>
           </Grid>
@@ -776,9 +766,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 value={currentTab}
                 index={index}
               >
-                {currentStudy && (
-                  <SupportingData data={currentStudy} isLoading={isLoading} />
-                )}
+                {currentStudy && <SupportingData data={currentStudy} />}
               </TabPanel>
             );
 
