@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { MultipleCancerTypesImage } from './MultipleCancerTypesImage';
 
 type NciLink = {
   href: string;
@@ -22,6 +23,7 @@ export interface HumanRelevancePanelProps
   genes?: string[];
   pathways?: string[];
   therapies?: string[];
+  isMultipleCancerTypes?: boolean;
 }
 
 const Wrapper = styled.div`
@@ -165,6 +167,7 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
   genes = [],
   pathways = [],
   therapies = [],
+  isMultipleCancerTypes = false,
   className,
   style,
   ...divProps
@@ -233,20 +236,26 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
           )}
         </section>
 
-        {figure?.src && (
-          <figure className="relevance-figure">
-            <img
-              src={figure.src}
-              alt={figure.alt ?? ''}
-              className="relevance-image"
+        {figure?.src &&
+          (isMultipleCancerTypes ? (
+            <MultipleCancerTypesImage
+              caption={figure.caption}
+              alt={figure.alt}
             />
-            {figure.caption && (
-              <figcaption className="relevance-caption">
-                {figure.caption}
-              </figcaption>
-            )}
-          </figure>
-        )}
+          ) : (
+            <figure className="relevance-figure">
+              <img
+                src={figure.src}
+                alt={figure.alt ?? ''}
+                className="relevance-image"
+              />
+              {figure.caption && (
+                <figcaption className="relevance-caption">
+                  {figure.caption}
+                </figcaption>
+              )}
+            </figure>
+          ))}
 
         <section
           className="key-value-wrapper genes-section"

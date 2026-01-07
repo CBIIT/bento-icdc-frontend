@@ -33,6 +33,7 @@ import {
 
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+import humanSkeletonImage from './views/human-relevance/assets/human-skeleton.jpg';
 
 import {
   AccessionLabel,
@@ -69,9 +70,9 @@ import { BreadcrumbData } from '../caseDetails/caseDetailsView';
 
 const BRAIN_CANCER_STUDIES = ['GLIOMA01'] as const;
 
-const BREAST_CANCER_STUDIES = ['MGT01', 'TCL01'] as const;
+const BREAST_CANCER_STUDIES = ['MGT01'] as const;
 
-const SOFT_TISSUE_SARCOMA_CANCER_STUDIES = ['STS01', 'TCL01'] as const;
+const SOFT_TISSUE_SARCOMA_CANCER_STUDIES = ['STS01'] as const;
 
 const LYMPHOMA_CANCER_STUDIES = ['COTC007B'] as const;
 
@@ -94,7 +95,7 @@ const BLADDER_CANCER_STUDIES = [
 
 const MELANOMA_CANCER_STUDIES = ['PRECINCT01'] as const;
 
-const MULTIPLE_CANCER_STUDIES = ['NCATS', 'TCL01'] as const;
+const MULTIPLE_CANCER_STUDIES = ['TCL01'] as const;
 
 type CancerType =
   | 'bladder'
@@ -182,6 +183,12 @@ const HUMAN_REL_IMAGES = {
     alt: 'Melanoma and lung cancer depiction in human and canine anatomy',
     caption:
       'Both melanoma and lung cancer remain among the leading causes of cancer death in humans. Dogs naturally develop these tumors with comparable immune environments and mutational landscapes, offering crucial insights into tumor resistance mechanisms and the development of immunotherapies.',
+  },
+  multiple: {
+    src: humanSkeletonImage,
+    alt: 'Human body diagram showing various cancer sites including B Cell Lymphoma, Bladder Cancer, Fibrosarcoma, Hemangiosarcoma, Histiocytic Sarcoma, Lipoma, Lymphoma, Mammary Cancer, Mast Cell Tumor, Melanoma, Osteosarcoma, Soft Tissue Sarcoma, Splenic Hemosarcoma, T Cell Leukemia, and Thyroid Cancer',
+    caption:
+      'Mouse models play a key role in cancer research, allowing for a wide range of cancer types to be studied under controlled conditions. This study identifies genetic similarities across a panel of canine cancer cell lines that are similar to those found in human cancers. By understanding these genetic similarities, researchers can use canine models to test new targeted therapies and drug combinations, improving the success rate of human clinical trials and advancing cancer treatment.',
   },
 } as const;
 
@@ -402,8 +409,8 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
             output.concat(
               caseData?.diagnoses
                 ? caseData.diagnoses.map(d =>
-                    d?.disease_term ? d.disease_term : ''
-                  )
+                  d?.disease_term ? d.disease_term : ''
+                )
                 : []
             ),
           []
@@ -796,6 +803,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                     genes={relevant_human_genes}
                     pathways={relevant_human_pathways}
                     therapies={relevant_experimental_therapeutic_intervention}
+                    isMultipleCancerTypes={cancer_type === 'multiple'}
                   />
                 )}
               </TabPanel>
