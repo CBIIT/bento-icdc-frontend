@@ -377,7 +377,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
   const study_codes = [studyCode];
 
-  const { data: humanRelevanceCardData, isLoading: isLoadingHumanRelData } =
+  const { data: humanRelevanceCardData, isLoading: isLoadingHumanRelData, error, isError } =
     useQuery<
       GetHumanRelevanceDataByNodeQuery,
       unknown,
@@ -412,11 +412,14 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     ],
     [studyData.cases]
   );
-  console.log('check debug-i', {
-    study_codes,
-    humanRelevanceCardData,
-    enabled: Boolean(study_codes)
-  })
+
+  console.log('🔍 Query Debug:', {
+    isLoading: isLoadingHumanRelData,
+    isError,
+    error,
+    data: humanRelevanceCardData,
+    backendAPI: REACT_APP_BACKEND_API
+  });
 
   const studyFileTypes = useMemo(
     () => [...new Set(defaultTo(data.studyFiles, []).map(f => f?.file_type))],
