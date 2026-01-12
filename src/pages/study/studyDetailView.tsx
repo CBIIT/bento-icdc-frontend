@@ -402,8 +402,8 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
             output.concat(
               caseData?.diagnoses
                 ? caseData.diagnoses.map(d =>
-                    d?.disease_term ? d.disease_term : ''
-                  )
+                  d?.disease_term ? d.disease_term : ''
+                )
                 : []
             ),
           []
@@ -412,6 +412,11 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     ],
     [studyData.cases]
   );
+  console.log('check debug-i', {
+    study_codes,
+    humanRelevanceCardData,
+    enabled: Boolean(study_codes)
+  })
 
   const studyFileTypes = useMemo(
     () => [...new Set(defaultTo(data.studyFiles, []).map(f => f?.file_type))],
