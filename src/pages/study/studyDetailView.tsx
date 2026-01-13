@@ -67,9 +67,6 @@ import {
 } from '../../generated-types/types';
 import { BreadcrumbData } from '../caseDetails/caseDetailsView';
 
-
-console.log('check env -->', { env })
-
 const BRAIN_CANCER_STUDIES = ['GLIOMA01'] as const;
 
 const BREAST_CANCER_STUDIES = ['MGT01', 'TCL01'] as const;
@@ -414,8 +411,8 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
             output.concat(
               caseData?.diagnoses
                 ? caseData.diagnoses.map(d =>
-                  d?.disease_term ? d.disease_term : ''
-                )
+                    d?.disease_term ? d.disease_term : ''
+                  )
                 : []
             ),
           []
