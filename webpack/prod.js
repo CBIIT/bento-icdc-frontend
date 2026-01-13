@@ -36,7 +36,7 @@ module.exports = merge(common, {
         terserOptions: {
           compress: {
             drop_console: false,
-            pure_funcs: ['console.info', 'console.debug'],
+            pure_funcs: ['console.log', 'console.info', 'console.debug'],
           },
         },
       }),
