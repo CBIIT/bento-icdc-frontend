@@ -377,6 +377,11 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
   const study_codes = [studyCode];
 
+  // Convert relative URL to absolute URL for graphql-request
+  const backendApiUrl = REACT_APP_BACKEND_API.startsWith('http')
+    ? REACT_APP_BACKEND_API
+    : `${window.location.origin}${REACT_APP_BACKEND_API}`;
+
   const { data: humanRelevanceCardData, isLoading: isLoadingHumanRelData, error, isError } =
     useQuery<
       GetHumanRelevanceDataByNodeQuery,
@@ -385,7 +390,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     >({
       queryKey: ['humanRelevance', study_codes],
       queryFn: async () =>
-        request(REACT_APP_BACKEND_API, GET_HUMAN_RELEVANCE_DATA_BY_NODE, {
+        request(backendApiUrl, GET_HUMAN_RELEVANCE_DATA_BY_NODE, {
           study_codes,
         }),
       enabled: Boolean(study_codes),
@@ -418,7 +423,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     isError,
     error,
     data: humanRelevanceCardData,
-    backendAPI: REACT_APP_BACKEND_API
+    backendAPI: backendApiUrl
   });
 
   const studyFileTypes = useMemo(
