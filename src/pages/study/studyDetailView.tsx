@@ -384,22 +384,31 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
   const study_codes = [studyCode];
 
-  const { data: humanRelevanceCardData, isLoading: isLoadingHumanRelData } =
-    useQuery<
-      GetHumanRelevanceDataByNodeQuery,
-      unknown,
-      HumanRelevanceNodeData | undefined
-    >({
-      queryKey: ['humanRelevance', study_codes],
-      queryFn: async () =>
-        request(REACT_APP_BACKEND_API, GET_HUMAN_RELEVANCE_DATA_BY_NODE, {
-          study_codes,
-        }),
-      enabled: Boolean(study_codes),
-      select: (res: GetHumanRelevanceDataByNodeQuery) =>
-        res.humanRelevanceNodeData?.[0],
-      staleTime: 5 * 60 * 1000,
-    });
+  // Convert relative URL to absolute URL for graphql-request
+  const backendApiUrl = REACT_APP_BACKEND_API.startsWith('http')
+    ? REACT_APP_BACKEND_API
+    : `${window.location.origin}${REACT_APP_BACKEND_API}`;
+
+  const {
+    data: humanRelevanceCardData,
+    isLoading: isLoadingHumanRelData,
+    error,
+    isError,
+  } = useQuery<
+    GetHumanRelevanceDataByNodeQuery,
+    unknown,
+    HumanRelevanceNodeData | undefined
+  >({
+    queryKey: ['humanRelevance', study_codes],
+    queryFn: async () =>
+      request(backendApiUrl, GET_HUMAN_RELEVANCE_DATA_BY_NODE, {
+        study_codes,
+      }),
+    enabled: Boolean(study_codes),
+    select: (res: GetHumanRelevanceDataByNodeQuery) =>
+      res.humanRelevanceNodeData?.[0],
+    staleTime: 5 * 60 * 1000,
+  });
 
   const diagnoses = useMemo(
     () => [
@@ -409,8 +418,8 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
             output.concat(
               caseData?.diagnoses
                 ? caseData.diagnoses.map(d =>
-                  d?.disease_term ? d.disease_term : ''
-                )
+                    d?.disease_term ? d.disease_term : ''
+                  )
                 : []
             ),
           []
@@ -419,6 +428,8 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     ],
     [studyData.cases]
   );
+
+  if (isError) console.error('humanRelevanceNodeData Error', { error });
 
   const studyFileTypes = useMemo(
     () => [...new Set(defaultTo(data.studyFiles, []).map(f => f?.file_type))],
