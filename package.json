@@ -164,6 +164,8 @@
     "test": "jest --coverage --watch=false",
     "lint": "npx eslint src",
     "format": "npx prettier --write src/",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
     "dev": "npm i --legacy-peer-deps && NODE_ENV=development webpack-dev-server --config ./webpack/dev.js",
     "build": "NODE_ENV=production webpack --config ./webpack/prod.js",
     "serve": "http-server dist",
