@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import humanSkeletonImage from './assets/human-skeleton.jpg';
 
@@ -17,17 +17,19 @@ const ContentWrapper = styled.div`
   display: flex;
   background: #000000;
   position: relative;
-  align-items: center;
-  justify-content: space-evenly;
+  align-items: stretch;
+  justify-content: space-between;
   min-height: 644px;
+  overflow: visible;
 `;
 
 const ImageContainer = styled.div`
-  flex: 0 0 auto;
+  flex: 0 0 583px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 0;
+  position: relative;
 `;
 
 const ImageWrapper = styled.div`
@@ -79,79 +81,114 @@ const Hotspot = styled.div<{ isActive: boolean; top: string; left: string }>`
   }
 `;
 
-const EnhancedTooltip = styled.div<{ show: boolean; top: string; left: string }>`
-  position: absolute;
-  top: ${props => props.top};
-  left: ${props => props.left};
-  transform: translate(-50%, calc(-100% - 20px));
+const DetailPanel = styled.div<{ show: boolean }>`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
   background-color: #000000;
-  color: #ffffff;
-  border-radius: 8px;
-  border: 2px solid #ff6b35;
-  font-family: 'Open Sans', sans-serif;
-  pointer-events: none;
-  opacity: ${props => (props.show ? 1 : 0)};
-  visibility: ${props => (props.show ? 'visible' : 'hidden')};
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-  z-index: 1000;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 107, 53, 0.3);
-  min-width: 420px;
-  max-width: 500px;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 10px;
-    border-style: solid;
-    border-color: #ff6b35 transparent transparent transparent;
-  }
+  opacity: ${props => (props.show ? 1 : 0.3)};
+  transition: opacity 0.3s ease-in-out;
+  position: relative;
 `;
 
-const TooltipHeader = styled.div`
-  padding: 10px 16px;
+const ConnectorLinesContainer = styled.svg<{ show: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: ${props => (props.show ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+`;
+
+const DetailPanelHeader = styled.div`
+  padding: 16px 24px;
   background: linear-gradient(135deg, rgba(0, 100, 180, 0.4) 0%, rgba(0, 60, 120, 0.4) 100%);
-  border-bottom: 1px solid rgba(255, 107, 53, 0.5);
-  font-size: calc((15 / 16) * 1rem);
+  border: 2px solid #ff6b35;
+  border-radius: 8px 8px 0 0;
+  font-size: calc((16 / 16) * 1rem);
   font-weight: 600;
   letter-spacing: 0.02em;
   color: #ffffff;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 2;
 `;
 
-const TooltipContent = styled.div`
-  padding: 12px;
+const DetailPanelContent = styled.div`
+  padding: 24px;
   display: flex;
-  gap: 8px;
-  align-items: stretch;
-  justify-content: space-between;
-  background-color: #000000;
-`;
-
-const TooltipImageWrapper = styled.div`
-  flex: 1;
-  display: flex;
+  flex-direction: column;
+  gap: 16px;
   align-items: center;
+  background-color: #000000;
+  border: 2px solid #ff6b35;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 107, 53, 0.3);
+`;
+
+const DetailImageRow = styled.div`
+  display: flex;
+  gap: 12px;
+  width: 100%;
   justify-content: center;
 `;
 
-const TooltipImage = styled.img`
+const DetailImageWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+`;
+
+const DetailImageLabel = styled.div`
+  font-family: 'Open Sans', sans-serif;
+  font-size: calc((12 / 16) * 1rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+`;
+
+const DetailImage = styled.img`
   width: 100%;
+  max-width: 180px;
   height: 140px;
   object-fit: contain;
   border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+`;
+
+const EmptyState = styled.div`
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Open Sans', sans-serif;
+  font-size: calc((14 / 16) * 1rem);
+  font-style: italic;
+  text-align: center;
+  padding: 40px 20px;
 `;
 
 const CancerTypesList = styled.div`
-  flex: 0 0 300px;
+  flex: 0 0 280px;
   background: #000000;
-  padding: 40px 30px;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 8px;
+  position: relative;
 `;
 
 const CancerTypeItem = styled.div<{ isActive: boolean }>`
@@ -163,13 +200,13 @@ const CancerTypeItem = styled.div<{ isActive: boolean }>`
   padding: 8px 12px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  border-left: 3px solid transparent;
+  border-bottom: 1px solid ${props => (props.isActive ? '#ff0000' : 'rgba(255, 255, 255, 0.2)')};
+  background: ${props => (props.isActive ? 'rgba(255, 107, 53, 0.1)' : 'transparent')};
 
   &:hover {
     color: #ffffff;
     font-weight: 600;
-    border-left-color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 107, 53, 0.1);
   }
 `;
 
@@ -296,29 +333,91 @@ export const MultipleCancerTypesImage: React.FC<
   MultipleCancerTypesImageProps
 > = ({ caption, alt }) => {
   const [activeCancerType, setActiveCancerType] = useState<string | null>(null);
-  const [hoveredHotspot, setHoveredHotspot] = useState<string | null>(null);
+  const [lineCoordinates, setLineCoordinates] = useState<{
+    listToPanel: { x1: number; y1: number; x2: number; y2: number } | null;
+    panelToHotspot: { x1: number; y1: number; x2: number; y2: number } | null;
+  }>({ listToPanel: null, panelToHotspot: null });
 
-  const handleCancerTypeClick = (cancerType: string) => {
-    setActiveCancerType(cancerType === activeCancerType ? null : cancerType);
-  };
+  const contentWrapperRef = useRef<HTMLDivElement>(null);
+  const detailPanelRef = useRef<HTMLDivElement>(null);
+  const listItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const hotspotRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const handleHotspotClick = (cancerType: string) => {
-    setActiveCancerType(cancerType === activeCancerType ? null : cancerType);
-  };
-
-  const handleHotspotMouseEnter = (cancerType: string) => {
+  const handleCancerTypeInteraction = (cancerType: string) => {
     setActiveCancerType(cancerType);
-    setHoveredHotspot(cancerType);
   };
 
-  const handleHotspotMouseLeave = () => {
+  const handleCancerTypeLeave = () => {
     setActiveCancerType(null);
-    setHoveredHotspot(null);
   };
+
+  const activeCancer = CANCER_TYPES.find(
+    type => type.name === activeCancerType
+  );
+
+  useEffect(() => {
+    if (!activeCancerType || !contentWrapperRef.current || !detailPanelRef.current) {
+      setLineCoordinates({ listToPanel: null, panelToHotspot: null });
+      return;
+    }
+
+    const wrapperRect = contentWrapperRef.current.getBoundingClientRect();
+    const panelRect = detailPanelRef.current.getBoundingClientRect();
+    const listItem = listItemRefs.current[activeCancerType];
+    const hotspot = hotspotRefs.current[activeCancerType];
+
+    if (!listItem || !hotspot) {
+      return;
+    }
+
+    const listItemRect = listItem.getBoundingClientRect();
+    const hotspotRect = hotspot.getBoundingClientRect();
+
+    // Calculate line from list item to detail panel (left edge of red line under text to right edge of panel)
+    const listToPanel = {
+      x1: listItemRect.left - wrapperRect.left,
+      y1: listItemRect.bottom - wrapperRect.top - 1, // Bottom of list item (where red line is)
+      x2: panelRect.right - wrapperRect.left,
+      y2: panelRect.top + panelRect.height / 2 - wrapperRect.top, // Middle of panel
+    };
+
+    // Calculate line from detail panel to hotspot (left edge of panel to center of hotspot)
+    const panelToHotspot = {
+      x1: panelRect.left - wrapperRect.left,
+      y1: panelRect.top + panelRect.height / 2 - wrapperRect.top, // Middle of panel
+      x2: hotspotRect.left + hotspotRect.width / 2 - wrapperRect.left, // Center of hotspot
+      y2: hotspotRect.top + hotspotRect.height / 2 - wrapperRect.top, // Center of hotspot
+    };
+
+    setLineCoordinates({ listToPanel, panelToHotspot });
+  }, [activeCancerType]);
 
   return (
     <FigureContainer className="relevance-figure multiple-cancer-types">
-      <ContentWrapper>
+      <ContentWrapper ref={contentWrapperRef}>
+        <ConnectorLinesContainer show={!!activeCancer && !!lineCoordinates.listToPanel}>
+          {lineCoordinates.listToPanel && (
+            <line
+              x1={lineCoordinates.listToPanel.x1}
+              y1={lineCoordinates.listToPanel.y1}
+              x2={lineCoordinates.listToPanel.x2}
+              y2={lineCoordinates.listToPanel.y2}
+              stroke="#ff0000"
+              strokeWidth="2"
+            />
+          )}
+          {lineCoordinates.panelToHotspot && (
+            <line
+              x1={lineCoordinates.panelToHotspot.x1}
+              y1={lineCoordinates.panelToHotspot.y1}
+              x2={lineCoordinates.panelToHotspot.x2}
+              y2={lineCoordinates.panelToHotspot.y2}
+              stroke="#ff0000"
+              strokeWidth="2"
+            />
+          )}
+        </ConnectorLinesContainer>
+
         <ImageContainer>
           <ImageWrapper>
             <img
@@ -331,57 +430,60 @@ export const MultipleCancerTypesImage: React.FC<
             />
             <HotspotsOverlay>
               {CANCER_TYPES.map(cancerType => (
-                <React.Fragment key={cancerType.name}>
-                  <Hotspot
-                    isActive={activeCancerType === cancerType.name}
-                    top={cancerType.position.top}
-                    left={cancerType.position.left}
-                    onClick={() => handleHotspotClick(cancerType.name)}
-                    onMouseEnter={() => handleHotspotMouseEnter(cancerType.name)}
-                    onMouseLeave={handleHotspotMouseLeave}
-                  />
-                  <EnhancedTooltip
-                    show={hoveredHotspot === cancerType.name}
-                    top={cancerType.position.top}
-                    left={cancerType.position.left}
-                  >
-                    <TooltipHeader>
-                      {cancerType.studyCode}: {cancerType.name}
-                    </TooltipHeader>
-                    <TooltipContent>
-                      <TooltipImageWrapper>
-                        <TooltipImage
-                          src={cancerType.images.human}
-                          alt={`Human anatomy - ${cancerType.name}`}
-                        />
-                      </TooltipImageWrapper>
-                      <TooltipImageWrapper>
-                        <TooltipImage
-                          src={cancerType.images.canine}
-                          alt={`Canine model - ${cancerType.name}`}
-                        />
-                      </TooltipImageWrapper>
-                    </TooltipContent>
-                  </EnhancedTooltip>
-                </React.Fragment>
+                <Hotspot
+                  key={cancerType.name}
+                  ref={(el) => (hotspotRefs.current[cancerType.name] = el)}
+                  isActive={activeCancerType === cancerType.name}
+                  top={cancerType.position.top}
+                  left={cancerType.position.left}
+                  onMouseEnter={() => handleCancerTypeInteraction(cancerType.name)}
+                  onMouseLeave={handleCancerTypeLeave}
+                />
               ))}
             </HotspotsOverlay>
           </ImageWrapper>
         </ImageContainer>
+
+        <DetailPanel ref={detailPanelRef} show={!!activeCancer}>
+          {activeCancer ? (
+            <>
+              <DetailPanelHeader>
+                {activeCancer.studyCode}: {activeCancer.name}
+              </DetailPanelHeader>
+              <DetailPanelContent>
+                <DetailImageRow>
+                  <DetailImageWrapper>
+                    <DetailImageLabel>Human</DetailImageLabel>
+                    <DetailImage
+                      src={activeCancer.images.human}
+                      alt={`Human anatomy - ${activeCancer.name}`}
+                    />
+                  </DetailImageWrapper>
+                  <DetailImageWrapper>
+                    <DetailImageLabel>Canine</DetailImageLabel>
+                    <DetailImage
+                      src={activeCancer.images.canine}
+                      alt={`Canine model - ${activeCancer.name}`}
+                    />
+                  </DetailImageWrapper>
+                </DetailImageRow>
+              </DetailPanelContent>
+            </>
+          ) : (
+            <EmptyState>
+              Hover over a cancer type or hotspot to view details
+            </EmptyState>
+          )}
+        </DetailPanel>
+
         <CancerTypesList>
           {CANCER_TYPES.map(cancerType => (
             <CancerTypeItem
               key={cancerType.name}
+              ref={(el) => (listItemRefs.current[cancerType.name] = el)}
               isActive={activeCancerType === cancerType.name}
-              onClick={() => handleCancerTypeClick(cancerType.name)}
-              onMouseEnter={() => {
-                setActiveCancerType(cancerType.name);
-                setHoveredHotspot(null);
-              }}
-              onMouseLeave={() => {
-                setActiveCancerType(null);
-                setHoveredHotspot(null);
-              }}
+              onMouseEnter={() => handleCancerTypeInteraction(cancerType.name)}
+              onMouseLeave={handleCancerTypeLeave}
             >
               {cancerType.name}
             </CancerTypeItem>
