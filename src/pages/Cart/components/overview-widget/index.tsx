@@ -25,6 +25,7 @@ import {
 import { SkeletonLoader } from '../../../../components/Skeleton';
 import {
   CartChartData,
+  CartChartItem,
   GetCartOverviewDataQuery,
   GetCartOverviewDataQueryVariables,
 } from '../../../../generated-types/types';
@@ -51,21 +52,44 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
       }
     );
 
-  const cartOverviewData = useMemo(
-    () => defaultTo(data?.cartOverview, {}),
-    [data]
-  );
+  const cartOverviewData = data?.cartOverview;
 
   const { totalNumberOfFiles, totalNumberOfCases, studiesInCart, charts } =
-    cartOverviewData;
+    cartOverviewData || {};
 
   const chartKeys = useMemo(
     () =>
-      Object.keys(defaultTo(charts, {})).filter(
-        item => item !== '__typename'
-      ) as CartChartKeys[],
+      charts
+        ? (Object.keys(charts).filter(
+            item => item !== '__typename'
+          ) as CartChartKeys[])
+        : [],
     [charts]
   );
+
+  const selectedChartData = useMemo<CartChartItem[]>(() => {
+    if (!charts || chartKeys.length === 0 || value >= chartKeys.length) {
+      return [];
+    }
+    const key = chartKeys[value];
+    // Type-safe access to CartChartData properties
+    let data: typeof charts.fileAssociation | undefined;
+    switch (key) {
+      case 'fileAssociation':
+        data = charts.fileAssociation;
+        break;
+      case 'fileFormat':
+        data = charts.fileFormat;
+        break;
+      case 'fileType':
+        data = charts.fileType;
+        break;
+      default:
+        data = undefined;
+    }
+    // Filter out null/undefined values and return as CartChartItem[]
+    return data?.filter((item): item is CartChartItem => item != null) ?? [];
+  }, [charts, chartKeys, value]);
 
   const [isPanelVisible, setIsPanelVisible] = useState(true);
   const [value, setValue] = React.useState<number>(0);
@@ -172,7 +196,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                 </StyledTabs>
               </Box>
               <Chart
-                chartData={charts[chartKeys[value]]}
+                chartData={selectedChartData}
                 yAxisLabel={startCase(chartKeys[value])}
               />
             </TabContext>
