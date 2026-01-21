@@ -1,14 +1,14 @@
-import React from "react";
-import { withStyles, Chip } from "@material-ui/core";
-import styles from "./unifiedStyle";
-import StatsView from "../../components/Stats/StatsView";
-import BentoFacetFilter from "../../components/sideBarFilter/BentoFacetFilter";
-import { facetSectionVariables } from "../../bento/unifiedViewData";
-import { facetsConfig } from "../../bento/dashboardData";
-import unifiedViewIcon from "../../assets/unifiedViewIcon.svg";
-import { multiStudyData as custodianMultiStudyData } from "../../bento/dashboardTabData";
-import { updateStat } from "../../components/Stats/utils";
-import DashboardTabsView from "../dashboard/components/DashboardTabs";
+import React from 'react';
+import { withStyles, Chip } from '@material-ui/core';
+import styles from './unifiedStyle';
+import StatsView from '../../components/Stats/StatsView';
+import BentoFacetFilter from '../../components/sideBarFilter/BentoFacetFilter';
+import { facetSectionVariables } from '../../bento/unifiedViewData';
+import { facetsConfig } from '../../bento/dashboardData';
+import unifiedViewIcon from '../../assets/unifiedViewIcon.svg';
+import { multiStudyData as custodianMultiStudyData } from '../../bento/dashboardTabData';
+import { updateStat } from '../../components/Stats/utils';
+import DashboardTabsView from '../dashboard/components/DashboardTabs';
 
 const Dashboard = ({ classes, unifiedViewData, isUnifiedView = true }) => (
   <div className={classes.dashboardContainer}>
@@ -45,7 +45,7 @@ const Dashboard = ({ classes, unifiedViewData, isUnifiedView = true }) => (
               dashboardStats={updateStat(unifiedViewData)}
               activeFilters={[]}
               unifiedQueryParam={{
-                case_ids: unifiedViewData.caseIds,
+                case_ids: unifiedViewData.caseRecordIds,
               }}
             />
           </div>

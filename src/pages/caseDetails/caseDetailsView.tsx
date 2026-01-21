@@ -89,7 +89,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
   );
 
   const diagnosesCard = useMemo(() => {
-    const primaryDiagnosis = caseDetail?.diagnoses[0];
+    const primaryDiagnosis = caseDetail?.diagnosis;
 
     return {
       title: 'Diagnoses',
@@ -176,7 +176,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
     .filter((f): f is FilesOfCase => f !== null && f !== undefined)
     .map(f => {
       const customF: CustomF = { ...f };
-      const parentSample = data.samplesByCaseId.filter(s =>
+      const parentSample = data.samplesByCaseRecordId.filter(s =>
         s.files.map(sf => sf.uuid).includes(f.uuid)
       );
       if (parentSample && parentSample.length > 0) {
@@ -207,7 +207,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
       isALink: true,
     },
     {
-      name: caseDetail.case_id,
+      name: caseDetail.case_record_id,
     },
   ];
 
@@ -234,7 +234,8 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
               <div className="main-title">
                 <span>
                   {' '}
-                  <span className="prefix">Case:</span> {caseDetail.case_id}
+                  <span className="prefix">Case:</span>{' '}
+                  {caseDetail.case_record_id}
                 </span>
               </div>
             </div>
@@ -243,7 +244,8 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
               <div className="main-title">
                 <span>
                   {' '}
-                  <span className="prefix">Case:</span> {caseDetail.case_id}
+                  <span className="prefix">Case:</span>{' '}
+                  {caseDetail.case_record_id}
                 </span>
               </div>
               <div className="sub-title">
@@ -274,12 +276,12 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
             </div>
           )}
           {data.multiStudyCases &&
-            data.multiStudyCases.caseIds &&
-            data.multiStudyCases.caseIds.length > 1 && (
+            data.multiStudyCases.caseRecordIds &&
+            data.multiStudyCases.caseRecordIds.length > 1 && (
               <>
                 <MultiStudyCases
-                  cases={data.multiStudyCases.caseIds}
-                  caseID={caseDetail.case_id}
+                  cases={data.multiStudyCases.caseRecordIds}
+                  caseID={caseDetail.case_record_id}
                 />
               </>
             )}
@@ -340,7 +342,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
       <TableContainer id="case_detail_table_associated_samples">
         <div className="table-wrapper hide-icons">
           <TableContextProvider>
-            <SampleTableView data={data.samplesByCaseId} />
+            <SampleTableView data={data.samplesByCaseRecordId} />
           </TableContextProvider>
         </div>
       </TableContainer>

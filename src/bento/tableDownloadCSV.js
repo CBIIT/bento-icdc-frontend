@@ -1,8 +1,8 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const GET_CASES_TAB = gql`
   query getCasesTab(
-    $case_ids: [String]
+    $case_record_ids: [String]
     $biobank: [String]
     $breed: [String]
     $diagnosis: [String]
@@ -24,7 +24,7 @@ export const GET_CASES_TAB = gql`
     $first: Int = 10000000
   ) {
     caseOverview(
-      case_ids: $case_ids
+      case_record_ids: $case_record_ids
       biobank: $biobank
       breed: $breed
       diagnosis: $diagnosis
@@ -45,7 +45,7 @@ export const GET_CASES_TAB = gql`
       study_type: $study_type
       first: $first
     ) {
-      case_id
+      case_record_id
       study_code
       study_type
       cohort
@@ -76,63 +76,63 @@ export const GET_CASES_TAB = gql`
 `;
 const customCasesOptionalDataFields = {
   keysToInclude: [
-    "individual_id",
-    "other_cases",
-    "primary_disease_site",
-    "date_of_diagnosis",
-    "histology_cytopathology",
-    "histological_grade",
-    "pathology_report",
-    "treatment_data",
-    "follow_up_data",
-    "concurrent_disease",
-    "concurrent_disease_type",
-    "arm",
+    'individual_id',
+    'other_cases',
+    'primary_disease_site',
+    'date_of_diagnosis',
+    'histology_cytopathology',
+    'histological_grade',
+    'pathology_report',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'arm',
   ],
   header: [
-    "Canine ID",
-    "Matching Cases",
-    "Disease Site",
-    "Date of Diagnosis",
-    "Histology/Cytopathology",
-    "Histological Grade",
-    "Detailed Pathology Evaluation Available",
-    "Treatment Data Available",
-    "Follow Up Data Available",
-    "Concurrent Disease(s)",
-    "Concurrent Disease Specifics",
-    "Arm",
+    'Canine ID',
+    'Matching Cases',
+    'Disease Site',
+    'Date of Diagnosis',
+    'Histology/Cytopathology',
+    'Histological Grade',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
+    'Arm',
   ],
 };
 
 const customCasesTabCoreDataFields = {
   keysToInclude: [
-    "case_id",
-    "study_code",
-    "study_type",
-    "breed",
-    "diagnosis",
-    "stage_of_disease",
-    "age",
-    "sex",
-    "neutered_status",
-    "weight",
-    "response_to_treatment",
-    "cohort",
+    'case_record_id',
+    'study_code',
+    'study_type',
+    'breed',
+    'diagnosis',
+    'stage_of_disease',
+    'age',
+    'sex',
+    'neutered_status',
+    'weight',
+    'response_to_treatment',
+    'cohort',
   ],
   header: [
-    "Case ID",
-    "Study Code",
-    "Study Type",
-    "Breed",
-    "Diagnosis",
-    "Stage Of Disease",
-    "Age",
-    "Sex",
-    "Neutered Status",
-    "Weight (kg)",
-    "Response to Treatment",
-    "Cohort",
+    'Case ID',
+    'Study Code',
+    'Study Type',
+    'Breed',
+    'Diagnosis',
+    'Stage Of Disease',
+    'Age',
+    'Sex',
+    'Neutered Status',
+    'Weight (kg)',
+    'Response to Treatment',
+    'Cohort',
   ],
 };
 
@@ -146,14 +146,14 @@ export const customCasesTabDownloadCSV = {
     ...customCasesOptionalDataFields.header,
   ],
   query: GET_CASES_TAB,
-  apiVariable: "caseOverview",
-  fileName: "ICDC_Cases_download",
-  manifestFileName: "ICDC_Cases_download",
+  apiVariable: 'caseOverview',
+  fileName: 'ICDC_Cases_download',
+  manifestFileName: 'ICDC_Cases_download',
 };
 
 export const GET_SAMPLES_TAB = gql`
   query sampleOverview(
-    $case_ids: [String]
+    $case_record_ids: [String]
     $sample_ids: [String]
     $biobank: [String]
     $breed: [String]
@@ -178,7 +178,7 @@ export const GET_SAMPLES_TAB = gql`
     $order_by: String = ""
   ) {
     sampleOverview(
-      case_ids: $case_ids
+      case_record_ids: $case_record_ids
       sample_ids: $sample_ids
       biobank: $biobank
       breed: $breed
@@ -203,7 +203,7 @@ export const GET_SAMPLES_TAB = gql`
       order_by: $order_by
     ) {
       sample_id
-      case_id
+      case_record_id
       breed
       diagnosis
       sample_site
@@ -244,85 +244,85 @@ export const GET_SAMPLES_TAB = gql`
 
 const customSamplesOptionalDataFields = {
   keysToInclude: [
-    "physical_sample_type",
-    "general_sample_pathology",
-    "tumor_sample_origin",
-    "comment",
-    "individual_id",
-    "other_cases",
-    "patient_age_at_enrollment",
-    "sex",
-    "neutered_indicator",
-    "weight",
-    "primary_disease_site",
-    "stage_of_disease",
-    "date_of_diagnosis",
-    "histology_cytopathology",
-    "histological_grade",
-    "best_response",
-    "pathology_report",
-    "treatment_data",
-    "follow_up_data",
-    "concurrent_disease",
-    "concurrent_disease_type",
-    "cohort_description",
-    "arm",
+    'physical_sample_type',
+    'general_sample_pathology',
+    'tumor_sample_origin',
+    'comment',
+    'individual_id',
+    'other_cases',
+    'patient_age_at_enrollment',
+    'sex',
+    'neutered_indicator',
+    'weight',
+    'primary_disease_site',
+    'stage_of_disease',
+    'date_of_diagnosis',
+    'histology_cytopathology',
+    'histological_grade',
+    'best_response',
+    'pathology_report',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'cohort_description',
+    'arm',
   ],
   header: [
-    "Physical Sample Type",
-    "General Sample Pathology",
-    "Tumor Sample Origin",
-    "Sample Comments",
-    "Canine ID",
-    "Matching Cases",
-    "Age",
-    "Sex",
-    "Neutered Status",
-    "Weight (kg)",
-    "Disease Site",
-    "Stage of Disease",
-    "Date of Diagnosis",
-    "Histology/Cytopathology",
-    "Histological Grade",
-    "Response to Treatment",
-    "Detailed Pathology Evaluation Available",
-    "Treatment Data Available",
-    "Follow Up Data Available",
-    "Concurrent Disease(s)",
-    "Concurrent Disease Specifics",
-    "Cohort",
-    "Arm",
+    'Physical Sample Type',
+    'General Sample Pathology',
+    'Tumor Sample Origin',
+    'Sample Comments',
+    'Canine ID',
+    'Matching Cases',
+    'Age',
+    'Sex',
+    'Neutered Status',
+    'Weight (kg)',
+    'Disease Site',
+    'Stage of Disease',
+    'Date of Diagnosis',
+    'Histology/Cytopathology',
+    'Histological Grade',
+    'Response to Treatment',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
+    'Cohort',
+    'Arm',
   ],
 };
 
 const customSampleTabCoreDataFields = {
   keysToInclude: [
-    "sample_id",
-    "case_id",
-    "breed",
-    "diagnosis",
-    "sample_site",
-    "sample_type",
-    "sample_pathology",
-    "tumor_grade",
-    "sample_chronology",
-    "percentage_tumor",
-    "necropsy_sample",
-    "sample_preservation",
+    'sample_id',
+    'case_record_id',
+    'breed',
+    'diagnosis',
+    'sample_site',
+    'sample_type',
+    'sample_pathology',
+    'tumor_grade',
+    'sample_chronology',
+    'percentage_tumor',
+    'necropsy_sample',
+    'sample_preservation',
   ],
   header: [
-    "Sample ID",
-    "Case ID",
-    "Breed",
-    "Diagnosis",
-    "Sample Site",
-    "Sample Type",
-    "Pathology/Morphology",
-    "Tumor Grade",
-    "Sample Chronology",
-    "Percentage Tumor",
-    "Necropsy Sample",
-    "Sample Preservation",
+    'Sample ID',
+    'Case ID',
+    'Breed',
+    'Diagnosis',
+    'Sample Site',
+    'Sample Type',
+    'Pathology/Morphology',
+    'Tumor Grade',
+    'Sample Chronology',
+    'Percentage Tumor',
+    'Necropsy Sample',
+    'Sample Preservation',
   ],
 };
 
@@ -336,14 +336,14 @@ export const customSamplesTabDownloadCSV = {
     ...customSamplesOptionalDataFields.header,
   ],
   query: GET_SAMPLES_TAB,
-  apiVariable: "sampleOverview",
-  fileName: "ICDC_Samples_download",
-  manifestFileName: "ICDC_Samples_download",
+  apiVariable: 'sampleOverview',
+  fileName: 'ICDC_Samples_download',
+  manifestFileName: 'ICDC_Samples_download',
 };
 
 export const GET_FILES_TAB = gql`
   query getFilesTabTableDownloadCSV(
-    $case_ids: [String]
+    $case_record_ids: [String]
     $file_level: [String] = ["case"]
     $biobank: [String]
     $breed: [String]
@@ -368,7 +368,7 @@ export const GET_FILES_TAB = gql`
     $order_by: String = "file_name"
   ) {
     fileOverview(
-      case_ids: $case_ids
+      case_record_ids: $case_record_ids
       biobank: $biobank
       breed: $breed
       diagnosis: $diagnosis
@@ -399,7 +399,7 @@ export const GET_FILES_TAB = gql`
       file_description
       file_format
       file_size
-      case_id
+      case_record_id
       breed
       diagnosis
       study_code
@@ -442,7 +442,7 @@ export const GET_FILES_TAB = gql`
 
 export const GET_FILES_TAB_STUDY_FILES = gql`
   query getFilesTabForStudyFiles(
-    $case_ids: [String]
+    $case_record_ids: [String]
     $file_level: [String] = ["study"]
     $biobank: [String]
     $breed: [String]
@@ -467,7 +467,7 @@ export const GET_FILES_TAB_STUDY_FILES = gql`
     $order_by: String = "file_name"
   ) {
     fileOverview(
-      case_ids: $case_ids
+      case_record_ids: $case_record_ids
       biobank: $biobank
       breed: $breed
       diagnosis: $diagnosis
@@ -498,7 +498,7 @@ export const GET_FILES_TAB_STUDY_FILES = gql`
       file_description
       file_format
       file_size
-      case_id
+      case_record_id
       breed
       diagnosis
       study_code
@@ -542,103 +542,103 @@ export const GET_FILES_TAB_STUDY_FILES = gql`
 // extended metadata attributes for file download
 const customFilesTabOptionalDataFields = {
   keysToInclude: [
-    "sample_site",
-    "physical_sample_type",
-    "general_sample_pathology",
-    "tumor_sample_origin",
-    "summarized_sample_type",
-    "specific_sample_pathology",
-    "date_of_sample_collection",
-    "tumor_grade",
-    "sample_chronology",
-    "percentage_tumor",
-    "necropsy_sample",
-    "sample_preservation",
-    "comment",
-    "individual_id",
-    "patient_age_at_enrollment",
-    "sex",
-    "neutered_indicator",
-    "weight",
-    "primary_disease_site",
-    "stage_of_disease",
-    "date_of_diagnosis",
-    "histology_cytopathology",
-    "histological_grade",
-    "best_response",
-    "pathology_report",
-    "treatment_data",
-    "follow_up_data",
-    "concurrent_disease",
-    "concurrent_disease_type",
-    "cohort_description",
-    "arm",
-    "other_cases",
+    'sample_site',
+    'physical_sample_type',
+    'general_sample_pathology',
+    'tumor_sample_origin',
+    'summarized_sample_type',
+    'specific_sample_pathology',
+    'date_of_sample_collection',
+    'tumor_grade',
+    'sample_chronology',
+    'percentage_tumor',
+    'necropsy_sample',
+    'sample_preservation',
+    'comment',
+    'individual_id',
+    'patient_age_at_enrollment',
+    'sex',
+    'neutered_indicator',
+    'weight',
+    'primary_disease_site',
+    'stage_of_disease',
+    'date_of_diagnosis',
+    'histology_cytopathology',
+    'histological_grade',
+    'best_response',
+    'pathology_report',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'cohort_description',
+    'arm',
+    'other_cases',
   ],
   header: [
-    "Sample Site",
-    "Physical Sample Type",
-    "General Sample Pathology",
-    "Tumor Sample Origin",
-    "Sample Type",
-    "Pathology/Morphology",
-    "Sample Collection Date",
-    "Tumor Grade",
-    "Sample Chronology",
-    "Percentage Tumor",
-    "Necropsy Sample",
-    "Sample Preservation",
-    "Sample Comments",
-    "Canine ID",
-    "Age",
-    "Sex",
-    "Neutered Status",
-    "Weight (kg)",
-    "Disease Site",
-    "Stage of Disease",
-    "Date of Diagnosis",
-    "Histology/Cytopathology",
-    "Histological Grade",
-    "Response to Treatment",
-    "Detailed Pathology Evaluation Available",
-    "Treatment Data Available",
-    "Follow Up Data Available",
-    "Concurrent Disease(s)",
-    "Concurrent Disease Specifics",
-    "Cohort",
-    "Arm",
-    "Matching Cases",
+    'Sample Site',
+    'Physical Sample Type',
+    'General Sample Pathology',
+    'Tumor Sample Origin',
+    'Sample Type',
+    'Pathology/Morphology',
+    'Sample Collection Date',
+    'Tumor Grade',
+    'Sample Chronology',
+    'Percentage Tumor',
+    'Necropsy Sample',
+    'Sample Preservation',
+    'Sample Comments',
+    'Canine ID',
+    'Age',
+    'Sex',
+    'Neutered Status',
+    'Weight (kg)',
+    'Disease Site',
+    'Stage of Disease',
+    'Date of Diagnosis',
+    'Histology/Cytopathology',
+    'Histological Grade',
+    'Response to Treatment',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
+    'Cohort',
+    'Arm',
+    'Matching Cases',
   ],
 };
 
 const customFilesTabCoreDataFields = {
   keysToInclude: [
-    "file_name",
-    "file_type",
-    "association",
-    "file_description",
-    "file_format",
-    "file_size",
-    "sample_id",
-    "case_id",
-    "file_uuid",
-    "breed",
-    "diagnosis",
-    "study_code",
+    'file_name',
+    'file_type',
+    'association',
+    'file_description',
+    'file_format',
+    'file_size',
+    'sample_id',
+    'case_record_id',
+    'file_uuid',
+    'breed',
+    'diagnosis',
+    'study_code',
   ],
   header: [
-    "File Name",
-    "File Type",
-    "Association",
-    "Description",
-    "Format",
-    "Size",
-    "Sample ID",
-    "Case ID",
-    "File UUID",
-    "Breed",
-    "Diagnosis",
-    "Study Code",
+    'File Name',
+    'File Type',
+    'Association',
+    'Description',
+    'Format',
+    'Size',
+    'Sample ID',
+    'Case ID',
+    'File UUID',
+    'Breed',
+    'Diagnosis',
+    'Study Code',
   ],
 };
 
@@ -652,29 +652,29 @@ export const customFilesTabDownloadCSV = {
     ...customFilesTabOptionalDataFields.header,
   ],
   query: GET_FILES_TAB,
-  apiVariable: "fileOverview",
-  fileName: "ICDC_Files_download",
-  manifestFileName: "ICDC_Files_download",
+  apiVariable: 'fileOverview',
+  fileName: 'ICDC_Files_download',
+  manifestFileName: 'ICDC_Files_download',
 };
 
 const customStudyFilesTabCoreDataFields = {
   keysToInclude: [
-    "file_name",
-    "file_type",
-    "association",
-    "file_description",
-    "file_format",
-    "file_size",
-    "study_code",
+    'file_name',
+    'file_type',
+    'association',
+    'file_description',
+    'file_format',
+    'file_size',
+    'study_code',
   ],
   header: [
-    "File Name",
-    "File Type",
-    "Association",
-    "Description",
-    "Format",
-    "Size",
-    "Study Code",
+    'File Name',
+    'File Type',
+    'Association',
+    'Description',
+    'Format',
+    'Size',
+    'Study Code',
   ],
 };
 
@@ -682,9 +682,9 @@ export const customStudyFilesTabDownloadCSV = {
   keysToInclude: [...customStudyFilesTabCoreDataFields.keysToInclude],
   header: [...customStudyFilesTabCoreDataFields.header],
   query: GET_FILES_TAB_STUDY_FILES,
-  apiVariable: "fileOverview",
-  fileName: "ICDC_Study_Files_download",
-  manifestFileName: "ICDC_Study_Files_download",
+  apiVariable: 'fileOverview',
+  fileName: 'ICDC_Study_Files_download',
+  manifestFileName: 'ICDC_Study_Files_download',
 };
 
 export const MY_CART = gql`
@@ -696,7 +696,7 @@ export const MY_CART = gql`
       file_description
       file_format
       file_size
-      case_id
+      case_record_id
       individual_id
       breed
       diagnosis
@@ -742,103 +742,103 @@ export const MY_CART = gql`
 
 const customMyFilesOptionalDataFields = {
   keysToInclude: [
-    "sample_site",
-    "physical_sample_type",
-    "general_sample_pathology",
-    "tumor_sample_origin",
-    "summarized_sample_type",
-    "specific_sample_pathology",
-    "date_of_sample_collection",
-    "tumor_grade",
-    "sample_chronology",
-    "percentage_tumor",
-    "necropsy_sample",
-    "sample_preservation",
-    "comment",
-    "patient_age_at_enrollment",
-    "sex",
-    "neutered_indicator",
-    "weight",
-    "primary_disease_site",
-    "stage_of_disease",
-    "date_of_diagnosis",
-    "histology_cytopathology",
-    "histological_grade",
-    "best_response",
-    "pathology_report",
-    "treatment_data",
-    "follow_up_data",
-    "concurrent_disease",
-    "concurrent_disease_type",
-    "cohort_description",
-    "arm",
-    "other_cases",
+    'sample_site',
+    'physical_sample_type',
+    'general_sample_pathology',
+    'tumor_sample_origin',
+    'summarized_sample_type',
+    'specific_sample_pathology',
+    'date_of_sample_collection',
+    'tumor_grade',
+    'sample_chronology',
+    'percentage_tumor',
+    'necropsy_sample',
+    'sample_preservation',
+    'comment',
+    'patient_age_at_enrollment',
+    'sex',
+    'neutered_indicator',
+    'weight',
+    'primary_disease_site',
+    'stage_of_disease',
+    'date_of_diagnosis',
+    'histology_cytopathology',
+    'histological_grade',
+    'best_response',
+    'pathology_report',
+    'treatment_data',
+    'follow_up_data',
+    'concurrent_disease',
+    'concurrent_disease_type',
+    'cohort_description',
+    'arm',
+    'other_cases',
   ],
   header: [
-    "Sample Site",
-    "Physical Sample Type",
-    "General Sample Pathology",
-    "Tumor Sample Origin",
-    "Sample Type",
-    "Pathology/Morphology",
-    "Sample Collection Date",
-    "Tumor Grade",
-    "Sample Chronology",
-    "Percentage Tumor",
-    "Necropsy Sample",
-    "Sample Preservation",
-    "Sample Comments",
-    "Age",
-    "Sex",
-    "Neutered Status",
-    "Weight (kg)",
-    "Disease Site",
-    "Stage of Disease",
-    "Date of Diagnosis",
-    "Histology/Cytopathology",
-    "Histological Grade",
-    "Response to Treatment",
-    "Detailed Pathology Evaluation Available",
-    "Treatment Data Available",
-    "Follow Up Data Available",
-    "Concurrent Disease(s)",
-    "Concurrent Disease Specifics",
-    "Cohort",
-    "Arm",
-    "Matching Cases",
+    'Sample Site',
+    'Physical Sample Type',
+    'General Sample Pathology',
+    'Tumor Sample Origin',
+    'Sample Type',
+    'Pathology/Morphology',
+    'Sample Collection Date',
+    'Tumor Grade',
+    'Sample Chronology',
+    'Percentage Tumor',
+    'Necropsy Sample',
+    'Sample Preservation',
+    'Sample Comments',
+    'Age',
+    'Sex',
+    'Neutered Status',
+    'Weight (kg)',
+    'Disease Site',
+    'Stage of Disease',
+    'Date of Diagnosis',
+    'Histology/Cytopathology',
+    'Histological Grade',
+    'Response to Treatment',
+    'Detailed Pathology Evaluation Available',
+    'Treatment Data Available',
+    'Follow Up Data Available',
+    'Concurrent Disease(s)',
+    'Concurrent Disease Specifics',
+    'Cohort',
+    'Arm',
+    'Matching Cases',
   ],
 };
 
 const customMyFilesCoreDataFields = {
   keysToInclude: [
-    "file_name",
-    "file_type",
-    "association",
-    "file_description",
-    "file_format",
-    "file_size",
-    "case_id",
-    "file_uuid",
-    "individual_id",
-    "breed",
-    "diagnosis",
-    "study_code",
-    "sample_id",
+    'file_name',
+    'file_type',
+    'association',
+    'file_description',
+    'file_format',
+    'file_size',
+    'case_record_id',
+    'file_uuid',
+    'individual_id',
+    'breed',
+    'diagnosis',
+    'study_code',
+    'sample_id',
   ],
   header: [
-    "File Name",
-    "File Type",
-    "Association",
-    "Description",
-    "Format",
-    "Size",
-    "Case ID",
-    "File UUID",
-    "Canine ID",
-    "Breed",
-    "Diagnosis",
-    "Study Code",
-    "Sample ID",
+    'File Name',
+    'File Type',
+    'Association',
+    'Description',
+    'Format',
+    'Size',
+    'Case ID',
+    'File UUID',
+    'Canine ID',
+    'Breed',
+    'Diagnosis',
+    'Study Code',
+    'Sample ID',
   ],
 };
 
@@ -852,6 +852,6 @@ export const customMyFilesTabDownloadCSV = {
     ...customMyFilesOptionalDataFields.header,
   ],
   query: MY_CART,
-  apiVariable: "filesInList",
-  fileName: "ICDC_My_Files_download",
+  apiVariable: 'filesInList',
+  fileName: 'ICDC_My_Files_download',
 };
