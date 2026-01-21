@@ -1,16 +1,16 @@
-import React from "react";
-import { Grid, withStyles } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import styles from "./CaseCardStyle";
+import React from 'react';
+import { Grid, withStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import styles from './CaseCardStyle';
 
 const CaseCardView = ({ data = {}, classes, index }) => {
   const {
-    case_id: caseId = "",
-    program_name: programName = "",
+    case_record_id: caseId = '',
+    program_name: programName = '',
     programId,
-    clinical_study_designation: studyDesignation = "",
-    disease_term: term = "",
-    breed = "",
+    clinical_study_designation: studyDesignation = '',
+    disease_term: term = '',
+    breed = '',
   } = data;
 
   return (

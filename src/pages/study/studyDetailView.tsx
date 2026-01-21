@@ -406,17 +406,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   const diagnoses = useMemo(
     () => [
       ...new Set(
-        defaultTo(studyData.cases, []).reduce<string[]>(
-          (output, caseData) =>
-            output.concat(
-              caseData?.diagnoses
-                ? caseData.diagnoses.map(d =>
-                    d?.disease_term ? d.disease_term : ''
-                  )
-                : []
-            ),
-          []
-        )
+        defaultTo(studyData.cases, [])
+          .map(caseData => caseData?.diagnosis?.disease_term)
+          .filter((term): term is string => Boolean(term))
       ),
     ],
     [studyData.cases]
