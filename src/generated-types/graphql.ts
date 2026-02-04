@@ -24818,6 +24818,7 @@ export type ProgramQuery = {
   } | null> | null;
   externalDataOverview?: Array<{
     __typename?: 'ExternalDataOverview';
+    clinical_study_designation?: string | null;
     CRDCLinks?: Array<{
       __typename?: 'CRDCLink';
       repository?: string | null;
@@ -25073,6 +25074,7 @@ export type GetStudyDataQueryStudiesDataQuery = {
   } | null> | null;
   externalDataOverview?: Array<{
     __typename?: 'ExternalDataOverview';
+    clinical_study_designation?: string | null;
     CRDCLinks?: Array<{
       __typename?: 'CRDCLink';
       repository?: string | null;
@@ -37769,6 +37771,10 @@ export const ProgramDocument = {
               selections: [
                 {
                   kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_designation' },
+                },
+                {
+                  kind: 'Field',
                   name: { kind: 'Name', value: 'CRDCLinks' },
                   selectionSet: {
                     kind: 'SelectionSet',
@@ -38857,6 +38863,10 @@ export const GetStudyDataQueryStudiesDataDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_designation' },
+                },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'CRDCLinks' },

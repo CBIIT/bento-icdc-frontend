@@ -222,6 +222,7 @@ export const GET_STUDY_DATA_QUERY = gql`
       }
     }
     externalDataOverview {
+      clinical_study_designation
       CRDCLinks {
         repository
         url
