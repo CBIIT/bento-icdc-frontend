@@ -52,6 +52,7 @@ const HotspotsOverlay = styled.div`
   top: 0;
   left: 0;
   pointer-events: none;
+  z-index: 20;
 `;
 
 const Hotspot = styled.div<{ isActive: boolean; top: string; left: string }>`
@@ -103,12 +104,25 @@ const ConnectorLinesContainer = styled.svg<{ show: boolean }>`
   pointer-events: none;
   opacity: ${props => (props.show ? 1 : 0)};
   transition: opacity 0.3s ease-in-out;
-  z-index: 1;
+  z-index: 10;
+`;
+
+const DetailCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 15;
 `;
 
 const DetailPanelHeader = styled.div`
   padding: 16px 24px;
-  background: linear-gradient(135deg, rgba(0, 100, 180, 0.4) 0%, rgba(0, 60, 120, 0.4) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 100, 180, 0.4) 0%,
+    rgba(0, 60, 120, 0.4) 100%
+  );
   border: 2px solid #ff6b35;
   border-radius: 8px 8px 0 0;
   font-size: calc((16 / 16) * 1rem);
@@ -118,9 +132,6 @@ const DetailPanelHeader = styled.div`
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   width: 100%;
-  max-width: 400px;
-  position: relative;
-  z-index: 2;
 `;
 
 const DetailPanelContent = styled.div`
@@ -134,8 +145,9 @@ const DetailPanelContent = styled.div`
   border-top: none;
   border-radius: 0 0 8px 8px;
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 107, 53, 0.3);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(255, 107, 53, 0.3);
 `;
 
 const DetailImageRow = styled.div`
@@ -189,6 +201,7 @@ const CancerTypesList = styled.div`
   justify-content: center;
   gap: 8px;
   position: relative;
+  z-index: 5;
 `;
 
 const CancerTypeItem = styled.div<{ isActive: boolean }>`
@@ -200,8 +213,10 @@ const CancerTypeItem = styled.div<{ isActive: boolean }>`
   padding: 8px 12px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  border-bottom: 1px solid ${props => (props.isActive ? '#ff0000' : 'rgba(255, 255, 255, 0.2)')};
-  background: ${props => (props.isActive ? 'rgba(255, 107, 53, 0.1)' : 'transparent')};
+  border-bottom: 1px solid
+    ${props => (props.isActive ? '#ff0000' : 'rgba(255, 255, 255, 0.2)')};
+  background: ${props =>
+    props.isActive ? 'rgba(255, 107, 53, 0.1)' : 'transparent'};
 
   &:hover {
     color: #ffffff;
@@ -234,7 +249,8 @@ interface CancerType {
 }
 
 // Placeholder image - will be replaced with actual X-ray images
-const placeholderImage = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="140"%3E%3Crect fill="%231a2a3a" width="200" height="140"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%236495ed" font-family="Open Sans" font-size="12"%3EPlaceholder Image%3C/text%3E%3C/svg%3E';
+const placeholderImage =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="140"%3E%3Crect fill="%231a2a3a" width="200" height="140"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%236495ed" font-family="Open Sans" font-size="12"%3EPlaceholder Image%3C/text%3E%3C/svg%3E';
 
 const CANCER_TYPES: CancerType[] = [
   {
@@ -340,6 +356,7 @@ export const MultipleCancerTypesImage: React.FC<
 
   const contentWrapperRef = useRef<HTMLDivElement>(null);
   const detailPanelRef = useRef<HTMLDivElement>(null);
+  const detailCardRef = useRef<HTMLDivElement>(null);
   const listItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const hotspotRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -356,13 +373,17 @@ export const MultipleCancerTypesImage: React.FC<
   );
 
   useEffect(() => {
-    if (!activeCancerType || !contentWrapperRef.current || !detailPanelRef.current) {
+    if (
+      !activeCancerType ||
+      !contentWrapperRef.current ||
+      !detailCardRef.current
+    ) {
       setLineCoordinates({ listToPanel: null, panelToHotspot: null });
       return;
     }
 
     const wrapperRect = contentWrapperRef.current.getBoundingClientRect();
-    const panelRect = detailPanelRef.current.getBoundingClientRect();
+    const cardRect = detailCardRef.current.getBoundingClientRect();
     const listItem = listItemRefs.current[activeCancerType];
     const hotspot = hotspotRefs.current[activeCancerType];
 
@@ -373,18 +394,18 @@ export const MultipleCancerTypesImage: React.FC<
     const listItemRect = listItem.getBoundingClientRect();
     const hotspotRect = hotspot.getBoundingClientRect();
 
-    // Calculate line from list item to detail panel (left edge of red line under text to right edge of panel)
+    // Calculate line from list item to detail card (left edge of list item to right edge of visual card)
     const listToPanel = {
       x1: listItemRect.left - wrapperRect.left,
       y1: listItemRect.bottom - wrapperRect.top - 1, // Bottom of list item (where red line is)
-      x2: panelRect.right - wrapperRect.left,
-      y2: panelRect.top + panelRect.height / 2 - wrapperRect.top, // Middle of panel
+      x2: cardRect.right - wrapperRect.left,
+      y2: cardRect.top + cardRect.height / 2 - wrapperRect.top, // Middle of visual card
     };
 
-    // Calculate line from detail panel to hotspot (left edge of panel to center of hotspot)
+    // Calculate line from detail card to hotspot (left edge of visual card to center of hotspot)
     const panelToHotspot = {
-      x1: panelRect.left - wrapperRect.left,
-      y1: panelRect.top + panelRect.height / 2 - wrapperRect.top, // Middle of panel
+      x1: cardRect.left - wrapperRect.left,
+      y1: cardRect.top + cardRect.height / 2 - wrapperRect.top, // Middle of visual card
       x2: hotspotRect.left + hotspotRect.width / 2 - wrapperRect.left, // Center of hotspot
       y2: hotspotRect.top + hotspotRect.height / 2 - wrapperRect.top, // Center of hotspot
     };
@@ -395,7 +416,9 @@ export const MultipleCancerTypesImage: React.FC<
   return (
     <FigureContainer className="relevance-figure multiple-cancer-types">
       <ContentWrapper ref={contentWrapperRef}>
-        <ConnectorLinesContainer show={!!activeCancer && !!lineCoordinates.listToPanel}>
+        <ConnectorLinesContainer
+          show={!!activeCancer && !!lineCoordinates.listToPanel}
+        >
           {lineCoordinates.listToPanel && (
             <line
               x1={lineCoordinates.listToPanel.x1}
@@ -432,11 +455,13 @@ export const MultipleCancerTypesImage: React.FC<
               {CANCER_TYPES.map(cancerType => (
                 <Hotspot
                   key={cancerType.name}
-                  ref={(el) => (hotspotRefs.current[cancerType.name] = el)}
+                  ref={el => (hotspotRefs.current[cancerType.name] = el)}
                   isActive={activeCancerType === cancerType.name}
                   top={cancerType.position.top}
                   left={cancerType.position.left}
-                  onMouseEnter={() => handleCancerTypeInteraction(cancerType.name)}
+                  onMouseEnter={() =>
+                    handleCancerTypeInteraction(cancerType.name)
+                  }
                   onMouseLeave={handleCancerTypeLeave}
                 />
               ))}
@@ -446,7 +471,7 @@ export const MultipleCancerTypesImage: React.FC<
 
         <DetailPanel ref={detailPanelRef} show={!!activeCancer}>
           {activeCancer ? (
-            <>
+            <DetailCard ref={detailCardRef}>
               <DetailPanelHeader>
                 {activeCancer.studyCode}: {activeCancer.name}
               </DetailPanelHeader>
@@ -468,7 +493,7 @@ export const MultipleCancerTypesImage: React.FC<
                   </DetailImageWrapper>
                 </DetailImageRow>
               </DetailPanelContent>
-            </>
+            </DetailCard>
           ) : (
             <EmptyState>
               Hover over a cancer type or hotspot to view details
@@ -480,7 +505,7 @@ export const MultipleCancerTypesImage: React.FC<
           {CANCER_TYPES.map(cancerType => (
             <CancerTypeItem
               key={cancerType.name}
-              ref={(el) => (listItemRefs.current[cancerType.name] = el)}
+              ref={el => (listItemRefs.current[cancerType.name] = el)}
               isActive={activeCancerType === cancerType.name}
               onMouseEnter={() => handleCancerTypeInteraction(cancerType.name)}
               onMouseLeave={handleCancerTypeLeave}
