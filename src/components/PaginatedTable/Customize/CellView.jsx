@@ -1,52 +1,52 @@
-import React from "react";
-import { Link, Typography, styled } from "@material-ui/core";
-import { cellTypes, headerTypes } from "../../../bento-core";
-import DocumentDownload from "../../DocumentDownload/DocumentDownloadView";
-import { hasMultiStudyParticipants } from "../../../utils/columnsUtil";
-import MultiStudyTooltip from "./components/multiStudyTooltip";
+import React from 'react';
+import { Link, Typography, styled } from '@material-ui/core';
+import { cellTypes, headerTypes } from '../../../bento-core';
+import DocumentDownload from '../../DocumentDownload/DocumentDownloadView';
+import { hasMultiStudyParticipants } from '../../../utils/columnsUtil';
+import MultiStudyTooltip from './components/multiStudyTooltip';
 import {
   customizeColumn,
   customizeHeader,
   customizeLandScapeView,
-} from "./Types";
-import DataAvailabilityCellView from "./DataAvailability/TableCell";
-import DataAvailabilityHeader from "./DataAvailability/HeaderCell";
-import NumberOfCasesView from "./components/NumberOfCases";
-import StudyLink from "./components/StudyLink";
-import CustomHeaderRemover from "./components/CustomHeaderRemover";
-import DeleteButton from "./components/DeleteButton";
-import DataValue from "./components/DataValue";
-import CsvDownload from "./components/CsvDownload";
-import { defaultTo } from "lodash";
+} from './Types';
+import DataAvailabilityCellView from './DataAvailability/TableCell';
+import DataAvailabilityHeader from './DataAvailability/HeaderCell';
+import NumberOfCasesView from './components/NumberOfCases';
+import StudyLink from './components/StudyLink';
+import CustomHeaderRemover from './components/CustomHeaderRemover';
+import DeleteButton from './components/DeleteButton';
+import DataValue from './components/DataValue';
+import CsvDownload from './components/CsvDownload';
+import { defaultTo } from 'lodash';
 
-const ClinicalDataNodeWrapper = styled("span")({
-  fontFamily: "Open Sans",
-  fontSize: "15px",
-  fontWeight: "600",
-  lineHeight: "20px",
-  letterSpacing: "0em",
-  textTransform: "uppercase",
+const ClinicalDataNodeWrapper = styled('span')({
+  fontFamily: 'Open Sans',
+  fontSize: '15px',
+  fontWeight: '600',
+  lineHeight: '20px',
+  letterSpacing: '0em',
+  textTransform: 'uppercase',
 });
 
-const ClinicalDataDescriptionWrapper = styled("span")({
-  fontFamily: "Open Sans",
-  fontSize: "16px",
-  fontWeight: "400",
-  lineHeight: "20px",
-  letterSpacing: "0em",
+const ClinicalDataDescriptionWrapper = styled('span')({
+  fontFamily: 'Open Sans',
+  fontSize: '16px',
+  fontWeight: '400',
+  lineHeight: '20px',
+  letterSpacing: '0em',
 });
 
-const CaseIdLink = (props) => {
+const CaseIdLink = props => {
   const {
     other_cases: otherCases,
     linkAttr = {},
-    case_id: caseId,
+    case_record_id: caseId,
     unifiedView,
   } = props;
   const { rootPath, pathParams } = linkAttr;
-  const url = pathParams.map((attr) => `#${rootPath}/`.concat(props[attr]));
+  const url = pathParams.map(attr => `#${rootPath}/`.concat(props[attr]));
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: 'flex' }}>
       <Link href={url} className={cellTypes.LINK}>
         <Typography>{caseId}</Typography>
       </Link>
@@ -59,26 +59,26 @@ const CaseIdLink = (props) => {
   );
 };
 
-const ArmsCohortList = (props) => {
+const ArmsCohortList = props => {
   const { dataField } = props;
   const value = props[dataField];
-  return value.split("#").map((desc, index) =>
-    desc === "" ? (
-      ""
+  return value.split('#').map((desc, index) =>
+    desc === '' ? (
+      ''
     ) : (
-      <li key={`${desc}-${index}`} style={{ listStyleType: "none" }}>
+      <li key={`${desc}-${index}`} style={{ listStyleType: 'none' }}>
         {desc}
       </li>
-    ),
+    )
   );
 };
 
-const ArmView = (props) => {
+const ArmView = props => {
   const { groupIndex } = props;
   return <>{groupIndex === 0 && <span> {props.arm} </span>}</>;
 };
 
-const ArmDescView = (props) => {
+const ArmDescView = props => {
   const { groupIndex } = props;
   return <>{groupIndex === 0 && <span> {props.armDescription} </span>}</>;
 };
@@ -104,7 +104,7 @@ const DocumentDownloadView = ({
   />
 );
 
-export const CustomCellView = (props) => {
+export const CustomCellView = props => {
   const {
     dataField,
     clinicalDataDescription,
@@ -113,7 +113,7 @@ export const CustomCellView = (props) => {
     csvDataRow,
   } = props;
   const hasNoValues =
-    caseCount === " " && defaultTo(csvDataRow, []).length === 0;
+    caseCount === ' ' && defaultTo(csvDataRow, []).length === 0;
 
   switch (dataField) {
     case customizeColumn.DOCUMENT_DOWNLOAD:
@@ -144,7 +144,7 @@ export const CustomCellView = (props) => {
     case customizeColumn.clinicalDataNode:
       return (
         <ClinicalDataNodeWrapper
-          style={{ color: hasNoValues ? "#A1A1A1" : "#0296C9" }}
+          style={{ color: hasNoValues ? '#A1A1A1' : '#0296C9' }}
         >
           {clinicalDataNode}
         </ClinicalDataNodeWrapper>
@@ -152,7 +152,7 @@ export const CustomCellView = (props) => {
     case customizeColumn.clinicalDataDescription:
       return (
         <ClinicalDataDescriptionWrapper
-          style={{ color: hasNoValues ? "#A1A1A1" : "#0B3556" }}
+          style={{ color: hasNoValues ? '#A1A1A1' : '#0B3556' }}
         >
           {clinicalDataDescription}
         </ClinicalDataDescriptionWrapper>
@@ -162,7 +162,7 @@ export const CustomCellView = (props) => {
   }
 };
 
-export const CustomHeaderCellView = (props) => {
+export const CustomHeaderCellView = props => {
   const { dataField, icon, openDialogBox, cellType } = props;
   switch (dataField || cellType) {
     case customizeHeader.CASE_FILES:
@@ -195,11 +195,11 @@ export const CustomizeCellView = ({
    * set custom cell render for column
    */
   // const displayColumns = columns.filter((col) => col.display);
-  const displayCustomView = [...columns].map((column) => {
+  const displayCustomView = [...columns].map(column => {
     if (column.cellType === cellTypes.CUSTOM_ELEM) {
       return {
         ...column,
-        customCellRender: (props) => (
+        customCellRender: props => (
           <CustomCellView
             {...props}
             unifiedView={unifiedView}
@@ -228,18 +228,18 @@ export const CustomizeCellView = ({
   /**
    * custom header view configuration
    */
-  const displayCustomHeader = [...displayCustomView].map((column) => {
+  const displayCustomHeader = [...displayCustomView].map(column => {
     if (column.headerType === headerTypes.CUSTOM_ELEM) {
       return {
         ...column,
-        customColHeaderRender: (props) => <CustomHeaderCellView {...props} />,
+        customColHeaderRender: props => <CustomHeaderCellView {...props} />,
       };
     }
     if (column.headerType === headerTypes.DELETE) {
       return {
         ...column,
         headerEventHandler: deleteAllFiles,
-        customColHeaderRender: (toggleDisplay) => (
+        customColHeaderRender: toggleDisplay => (
           <CustomHeaderCellView openDialogBox={toggleDisplay} {...column} />
         ),
       };

@@ -70,7 +70,7 @@ const { SearchBox } = SearchBoxGenerator({
   config: {
     inputPlaceholder: 'e.g. ICDC-CASE-06, ICDC-CASE-22',
     noOptionsText: 'No matching items found',
-    searchType: 'case_id',
+    searchType: 'case_record_id',
   },
   customStyles,
 });
@@ -93,7 +93,9 @@ const { UploadModal } = UploadModalGenerator({
 
         // Combine the results and remove duplicates
         const unmatched = new Set(inputArray);
-        matched.forEach(obj => unmatched.delete(obj?.case_id.toUpperCase()));
+        matched.forEach(obj =>
+          unmatched.delete(obj?.case_record_id.toUpperCase())
+        );
         return { matched, unmatched: [...unmatched] };
       } catch (_e) {
         return { matched: [], unmatched: [] };

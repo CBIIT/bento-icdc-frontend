@@ -1,17 +1,17 @@
-import React from "react";
-import { Grid, withStyles } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import styles from "./SampleCardStyle";
+import React from 'react';
+import { Grid, withStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import styles from './SampleCardStyle';
 
 const SampleCardView = ({ data = {}, classes, index }) => {
   const {
-    sample_id: sampleID = "",
-    program_name: programName = "",
-    case_id: caseID = "",
-    clinical_study_designation: studyDesignation = "",
-    sample_site: sampleSite = "",
-    physical_sample_type: sampleType = "",
-    general_sample_pathology: pathology = "",
+    sample_id: sampleID = '',
+    program_name: programName = '',
+    case_record_id: caseID = '',
+    clinical_study_designation: studyDesignation = '',
+    sample_site: sampleSite = '',
+    physical_sample_type: sampleType = '',
+    general_sample_pathology: pathology = '',
     programId,
   } = data;
   return (

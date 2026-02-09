@@ -27,7 +27,7 @@ const UnifiedController: React.FC<UnifiedControllerProps> = ({ match }) => {
     CaseQuery,
     CaseQueryVariables
   >(CaseDocument, {
-    variables: { case_id: caseID },
+    variables: { case_record_id: caseID },
   });
 
   const { data: unifiedViewStats, loading: unifiedViewStatsLoading } = useQuery<
@@ -35,11 +35,11 @@ const UnifiedController: React.FC<UnifiedControllerProps> = ({ match }) => {
     UnifiedViewDataQueryVariables
   >(UnifiedViewDataDocument, {
     variables: {
-      case_ids: multiStudyData?.case?.[0]?.case_id
-        ? [multiStudyData.case[0].case_id]
+      case_record_ids: multiStudyData?.case?.[0]?.case_record_id
+        ? [multiStudyData.case[0].case_record_id]
         : [],
     },
-    skip: !multiStudyData?.case?.[0]?.case_id,
+    skip: !multiStudyData?.case?.[0]?.case_record_id,
   });
 
   if (multistudyLoading || unifiedViewStatsLoading) {

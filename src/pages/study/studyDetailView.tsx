@@ -374,8 +374,29 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     accession_id: accessionId,
     clinical_study_name,
     study_disposition,
-    publications,
+    publications: rawPublications,
   } = studyData;
+
+  // Sort publications: primarily by year (descending), then by title (ascending)
+  const publications = useMemo(() => {
+    if (!rawPublications) return [];
+
+    return [...rawPublications].sort((a, b) => {
+      // First, sort by year in descending order (most recent first)
+      const yearA = a?.year_of_publication ?? 0;
+      const yearB = b?.year_of_publication ?? 0;
+
+      if (yearA !== yearB) {
+        return yearB - yearA; // Descending order (newer first)
+      }
+
+      // If years are the same, sort by title in ascending alphabetical order
+      const titleA = a?.publication_title ?? '';
+      const titleB = b?.publication_title ?? '';
+
+      return titleA.localeCompare(titleB); // Ascending alphabetical order
+    });
+  }, [rawPublications]);
 
   const { REACT_APP_BACKEND_API } = getEnv();
 
@@ -413,17 +434,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   const diagnoses = useMemo(
     () => [
       ...new Set(
-        defaultTo(studyData.cases, []).reduce<string[]>(
-          (output, caseData) =>
-            output.concat(
-              caseData?.diagnoses
-                ? caseData.diagnoses.map(d =>
-                    d?.disease_term ? d.disease_term : ''
-                  )
-                : []
-            ),
-          []
-        )
+        defaultTo(studyData.cases, [])
+          .map(caseData => caseData?.diagnosis?.disease_term)
+          .filter((term): term is string => Boolean(term))
       ),
     ],
     [studyData.cases]
