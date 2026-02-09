@@ -24,6 +24,11 @@ export interface HumanRelevancePanelProps
   pathways?: string[];
   therapies?: string[];
   isMultipleCancerTypes?: boolean;
+  cancerTypes?: string[];
+  cancerTypeImages?: Record<
+    string,
+    { src: string; alt?: string; caption?: string }
+  >;
 }
 
 const Wrapper = styled.div`
@@ -168,6 +173,8 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
   pathways = [],
   therapies = [],
   isMultipleCancerTypes = false,
+  cancerTypes = [],
+  cancerTypeImages = {},
   className,
   style,
   ...divProps
@@ -241,6 +248,8 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
             <MultipleCancerTypesImage
               caption={figure.caption}
               alt={figure.alt}
+              cancerTypes={cancerTypes}
+              cancerTypeImages={cancerTypeImages}
             />
           ) : (
             <figure className="relevance-figure">

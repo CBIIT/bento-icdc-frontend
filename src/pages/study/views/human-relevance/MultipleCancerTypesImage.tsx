@@ -5,6 +5,11 @@ import humanSkeletonImage from './assets/human-skeleton.jpg';
 export interface MultipleCancerTypesImageProps {
   caption?: string;
   alt?: string;
+  cancerTypes?: string[];
+  cancerTypeImages?: Record<
+    string,
+    { src: string; alt?: string; caption?: string }
+  >;
 }
 
 const FigureContainer = styled.figure`
@@ -150,37 +155,12 @@ const DetailPanelContent = styled.div`
     0 0 20px rgba(255, 107, 53, 0.3);
 `;
 
-const DetailImageRow = styled.div`
-  display: flex;
-  gap: 12px;
-  width: 100%;
-  justify-content: center;
-`;
-
-const DetailImageWrapper = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-`;
-
-const DetailImageLabel = styled.div`
-  font-family: 'Open Sans', sans-serif;
-  font-size: calc((12 / 16) * 1rem);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
-
 const DetailImage = styled.img`
   width: 100%;
-  max-width: 180px;
-  height: 140px;
+  max-width: 400px;
+  height: auto;
   object-fit: contain;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: block;
 `;
 
 const EmptyState = styled.div`
@@ -238,116 +218,61 @@ const Caption = styled.figcaption`
   padding: 16px;
 `;
 
-interface CancerType {
+interface CancerTypeDisplay {
+  key: string;
   name: string;
-  studyCode: string;
   position: { top: string; left: string };
-  images: {
-    human: string;
-    canine: string;
-  };
 }
 
 // Placeholder image - will be replaced with actual X-ray images
 const placeholderImage =
   'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="140"%3E%3Crect fill="%231a2a3a" width="200" height="140"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%236495ed" font-family="Open Sans" font-size="12"%3EPlaceholder Image%3C/text%3E%3C/svg%3E';
 
-const CANCER_TYPES: CancerType[] = [
-  {
-    name: 'B Cell Lymphoma',
-    studyCode: 'TCL01',
-    position: { top: '14%', left: '52%' },
-    images: { human: placeholderImage, canine: placeholderImage },
+/**
+ * Maps backend cancer type keys to display information
+ * These are positioned on the human skeleton image for the interactive visualization
+ */
+const CANCER_TYPE_DISPLAY_INFO: Record<
+  string,
+  { name: string; position: { top: string; left: string } }
+> = {
+  bone: {
+    name: 'Bone Cancer (Osteosarcoma)',
+    position: { top: '70%', left: '54%' },
   },
-  {
+  bladder: {
     name: 'Bladder Cancer',
-    studyCode: 'TCL01',
     position: { top: '54%', left: '50%' },
-    images: { human: placeholderImage, canine: placeholderImage },
   },
-  {
-    name: 'Fibrosarcoma',
-    studyCode: 'TCL01',
-    position: { top: '64%', left: '36%' },
-    images: { human: placeholderImage, canine: placeholderImage },
+  brain: {
+    name: 'Brain Cancer (Glioma)',
+    position: { top: '8%', left: '50%' },
   },
-  {
-    name: 'Hemangiosarcoma',
-    studyCode: 'TCL01',
-    position: { top: '48%', left: '40%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
-    name: 'Histiocytic Sarcoma',
-    studyCode: 'TCL01',
-    position: { top: '40%', left: '58%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
-    name: 'Lipoma',
-    studyCode: 'TCL01',
-    position: { top: '52%', left: '64%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
-    name: 'Lymphoma',
-    studyCode: 'TCL01',
-    position: { top: '26%', left: '54%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
-    name: 'Mammary Cancer',
-    studyCode: 'TCL01',
+  breast: {
+    name: 'Breast Cancer (Mammary)',
     position: { top: '34%', left: '44%' },
-    images: { human: placeholderImage, canine: placeholderImage },
   },
-  {
-    name: 'Mast Cell Tumor',
-    studyCode: 'TCL01',
-    position: { top: '60%', left: '42%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
-    name: 'Melanoma',
-    studyCode: 'TCL01',
-    position: { top: '92%', left: '50%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
-    name: 'Osteosarcoma',
-    studyCode: 'TCL01',
-    position: { top: '80%', left: '54%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
+  soft_tissue_sarcoma: {
     name: 'Soft Tissue Sarcoma',
-    studyCode: 'TCL01',
-    position: { top: '70%', left: '60%' },
-    images: { human: placeholderImage, canine: placeholderImage },
+    position: { top: '48%', left: '60%' },
   },
-  {
-    name: 'Splenic Hemosarcoma',
-    studyCode: 'TCL01',
-    position: { top: '36%', left: '38%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
-    name: 'T Cell Leukemia',
-    studyCode: 'TCL01',
-    position: { top: '20%', left: '56%' },
-    images: { human: placeholderImage, canine: placeholderImage },
-  },
-  {
+  thyroid: {
     name: 'Thyroid Cancer',
-    studyCode: 'TCL01',
-    position: { top: '10%', left: '50%' },
-    images: { human: placeholderImage, canine: placeholderImage },
+    position: { top: '12%', left: '50%' },
   },
-];
+  lymphoma: {
+    name: 'Lymphoma',
+    position: { top: '26%', left: '54%' },
+  },
+  melanoma: {
+    name: 'Melanoma',
+    position: { top: '88%', left: '50%' },
+  },
+};
 
 export const MultipleCancerTypesImage: React.FC<
   MultipleCancerTypesImageProps
-> = ({ caption, alt }) => {
+> = ({ caption, alt, cancerTypes = [], cancerTypeImages = {} }) => {
   const [activeCancerType, setActiveCancerType] = useState<string | null>(null);
   const [lineCoordinates, setLineCoordinates] = useState<{
     listToPanel: { x1: number; y1: number; x2: number; y2: number } | null;
@@ -360,16 +285,31 @@ export const MultipleCancerTypesImage: React.FC<
   const listItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const hotspotRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const handleCancerTypeInteraction = (cancerType: string) => {
-    setActiveCancerType(cancerType);
+  // Dynamically create cancer type display list from backend data
+  const relevantCancerTypes: CancerTypeDisplay[] = cancerTypes
+    .filter(key => key in CANCER_TYPE_DISPLAY_INFO)
+    .map(key => ({
+      key,
+      name: CANCER_TYPE_DISPLAY_INFO[key].name,
+      position: CANCER_TYPE_DISPLAY_INFO[key].position,
+    }));
+
+  // Get the actual image for a cancer type, or fall back to placeholder
+  const getCancerImage = (cancerTypeKey: string) => {
+    const imageData = cancerTypeImages[cancerTypeKey];
+    return imageData?.src || placeholderImage;
+  };
+
+  const handleCancerTypeInteraction = (cancerTypeKey: string) => {
+    setActiveCancerType(cancerTypeKey);
   };
 
   const handleCancerTypeLeave = () => {
     setActiveCancerType(null);
   };
 
-  const activeCancer = CANCER_TYPES.find(
-    type => type.name === activeCancerType
+  const activeCancer = relevantCancerTypes.find(
+    type => type.key === activeCancerType
   );
 
   useEffect(() => {
@@ -452,15 +392,15 @@ export const MultipleCancerTypesImage: React.FC<
               className="relevance-image"
             />
             <HotspotsOverlay>
-              {CANCER_TYPES.map(cancerType => (
+              {relevantCancerTypes.map(cancerType => (
                 <Hotspot
-                  key={cancerType.name}
-                  ref={el => (hotspotRefs.current[cancerType.name] = el)}
-                  isActive={activeCancerType === cancerType.name}
+                  key={cancerType.key}
+                  ref={el => (hotspotRefs.current[cancerType.key] = el)}
+                  isActive={activeCancerType === cancerType.key}
                   top={cancerType.position.top}
                   left={cancerType.position.left}
                   onMouseEnter={() =>
-                    handleCancerTypeInteraction(cancerType.name)
+                    handleCancerTypeInteraction(cancerType.key)
                   }
                   onMouseLeave={handleCancerTypeLeave}
                 />
@@ -472,26 +412,15 @@ export const MultipleCancerTypesImage: React.FC<
         <DetailPanel ref={detailPanelRef} show={!!activeCancer}>
           {activeCancer ? (
             <DetailCard ref={detailCardRef}>
-              <DetailPanelHeader>
-                {activeCancer.studyCode}: {activeCancer.name}
-              </DetailPanelHeader>
+              <DetailPanelHeader>{activeCancer.name}</DetailPanelHeader>
               <DetailPanelContent>
-                <DetailImageRow>
-                  <DetailImageWrapper>
-                    <DetailImageLabel>Human</DetailImageLabel>
-                    <DetailImage
-                      src={activeCancer.images.human}
-                      alt={`Human anatomy - ${activeCancer.name}`}
-                    />
-                  </DetailImageWrapper>
-                  <DetailImageWrapper>
-                    <DetailImageLabel>Canine</DetailImageLabel>
-                    <DetailImage
-                      src={activeCancer.images.canine}
-                      alt={`Canine model - ${activeCancer.name}`}
-                    />
-                  </DetailImageWrapper>
-                </DetailImageRow>
+                <DetailImage
+                  src={getCancerImage(activeCancer.key)}
+                  alt={
+                    cancerTypeImages[activeCancer.key]?.alt ||
+                    `${activeCancer.name} comparison`
+                  }
+                />
               </DetailPanelContent>
             </DetailCard>
           ) : (
@@ -502,12 +431,12 @@ export const MultipleCancerTypesImage: React.FC<
         </DetailPanel>
 
         <CancerTypesList>
-          {CANCER_TYPES.map(cancerType => (
+          {relevantCancerTypes.map(cancerType => (
             <CancerTypeItem
-              key={cancerType.name}
-              ref={el => (listItemRefs.current[cancerType.name] = el)}
-              isActive={activeCancerType === cancerType.name}
-              onMouseEnter={() => handleCancerTypeInteraction(cancerType.name)}
+              key={cancerType.key}
+              ref={el => (listItemRefs.current[cancerType.key] = el)}
+              isActive={activeCancerType === cancerType.key}
+              onMouseEnter={() => handleCancerTypeInteraction(cancerType.key)}
               onMouseLeave={handleCancerTypeLeave}
             >
               {cancerType.name}
