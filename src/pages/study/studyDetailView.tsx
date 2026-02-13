@@ -33,6 +33,7 @@ import {
 
 import pendingHeaderIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Main.svg';
 import pendingFileIcon from '../../assets/icons/PendingRelease-icons.StudiesDetail-Box.svg';
+import humanSkeletonImage from './views/human-relevance/assets/human-skeleton.jpg';
 
 import {
   AccessionLabel,
@@ -67,44 +68,73 @@ import {
 } from '../../generated-types/types';
 import { BreadcrumbData } from '../caseDetails/caseDetailsView';
 
-const BRAIN_CANCER_STUDIES = ['GLIOMA01'] as const;
-
-const BREAST_CANCER_STUDIES = ['MGT01', 'TCL01'] as const;
-
-const SOFT_TISSUE_SARCOMA_CANCER_STUDIES = ['STS01', 'TCL01'] as const;
-
-const LYMPHOMA_CANCER_STUDIES = ['COTC007B'] as const;
-
-const BONE_CANCER_STUDIES = [
-  'COTC021',
-  'COTC022',
-  'OSA01',
-  'OSA02',
-  'OSA03',
-  'OSA04',
-] as const;
-
-const BLADDER_CANCER_STUDIES = [
-  'ORGANOIDS01',
-  'UC01',
-  'UBC01',
-  'UBC02',
-  'UBC03',
-] as const;
-
-const MELANOMA_CANCER_STUDIES = ['PRECINCT01'] as const;
-
-const MULTIPLE_CANCER_STUDIES = ['NCATS', 'TCL01'] as const;
-
 type CancerType =
   | 'bladder'
   | 'bone'
   | 'brain'
   | 'breast'
   | 'soft_tissue_sarcoma'
+  | 'thyroid'
   | 'lymphoma'
   | 'melanoma'
   | 'multiple';
+
+/**
+ * Maps study codes to their associated cancer types.
+ * Studies that research multiple cancer types will be displayed with
+ * the interactive multi-cancer visualization.
+ *
+ * Reference data:
+ * - Bone: COTC021, COTC022, OSA01-OSA04, PRECINCT01, NCATS-COP01, TCL01
+ * - Bladder: UBC01-UBC03, UC01, TCL01, ORGANOIDS01
+ * - Brain: GLIOMA01
+ * - Breast: MGT01, TCL01
+ * - Soft Tissue Sarcoma: STS01, TCL01
+ * - Thyroid: TCL01
+ * - Lymphoma: COTC007B, NCATS-COP01, TCL01
+ * - Melanoma/Lung: NCATS-COP01, PRECINCT01, TCL01
+ */
+const STUDY_TO_CANCER_TYPES: Record<string, CancerType[]> = {
+  // Bone cancer studies
+  COTC021: ['bone'],
+  COTC022: ['bone'],
+  OSA01: ['bone'],
+  OSA02: ['bone'],
+  OSA03: ['bone'],
+  OSA04: ['bone'],
+
+  // Bladder cancer studies
+  UBC01: ['bladder'],
+  UBC02: ['bladder'],
+  UBC03: ['bladder'],
+  UC01: ['bladder'],
+  ORGANOIDS01: ['bladder'],
+
+  // Brain cancer studies
+  GLIOMA01: ['brain'],
+
+  // Breast cancer studies
+  MGT01: ['breast'],
+
+  // Soft tissue sarcoma studies
+  STS01: ['soft_tissue_sarcoma'],
+
+  // Lymphoma studies
+  COTC007B: ['lymphoma'],
+
+  // Studies researching multiple cancer types
+  PRECINCT01: ['bone', 'melanoma'],
+  'NCATS-COP01': ['bone', 'lymphoma', 'melanoma'],
+  TCL01: [
+    'bone',
+    'bladder',
+    'breast',
+    'soft_tissue_sarcoma',
+    'thyroid',
+    'lymphoma',
+    'melanoma',
+  ],
+};
 
 export const TAB_LABELS = {
   OVERVIEW: 'OVERVIEW',
@@ -183,68 +213,43 @@ const HUMAN_REL_IMAGES = {
     caption:
       'Both melanoma and lung cancer remain among the leading causes of cancer death in humans. Dogs naturally develop these tumors with comparable immune environments and mutational landscapes, offering crucial insights into tumor resistance mechanisms and the development of immunotherapies.',
   },
+  multiple: {
+    src: humanSkeletonImage,
+    alt: 'Human body diagram showing various cancer sites including B Cell Lymphoma, Bladder Cancer, Fibrosarcoma, Hemangiosarcoma, Histiocytic Sarcoma, Lipoma, Lymphoma, Mammary Cancer, Mast Cell Tumor, Melanoma, Osteosarcoma, Soft Tissue Sarcoma, Splenic Hemosarcoma, T Cell Leukemia, and Thyroid Cancer',
+    caption:
+      'Mouse models play a key role in cancer research, allowing for a wide range of cancer types to be studied under controlled conditions. This study identifies genetic similarities across a panel of canine cancer cell lines that are similar to those found in human cancers. By understanding these genetic similarities, researchers can use canine models to test new targeted therapies and drug combinations, improving the success rate of human clinical trials and advancing cancer treatment.',
+  },
 } as const;
 
 type HumanRelevanceImageKey = keyof typeof HUMAN_REL_IMAGES;
 
+/**
+ * Returns all cancer types associated with a given study code.
+ * Useful for studies that research multiple cancer types.
+ */
+const getStudyCancerTypes = (study_code: string): CancerType[] => {
+  return STUDY_TO_CANCER_TYPES[study_code] || [];
+};
+
+/**
+ * Returns the cancer type for a given study code.
+ * - Returns the specific cancer type if the study focuses on one type
+ * - Returns 'multiple' if the study researches multiple cancer types
+ * - Returns undefined if the study doesn't have human relevance data
+ */
 const getCancerType = (study_code: string): CancerType | undefined => {
-  if (
-    BLADDER_CANCER_STUDIES.includes(
-      study_code as (typeof BLADDER_CANCER_STUDIES)[number]
-    )
-  )
-    return 'bladder';
+  const cancerTypes = STUDY_TO_CANCER_TYPES[study_code];
 
-  if (
-    BONE_CANCER_STUDIES.includes(
-      study_code as (typeof BONE_CANCER_STUDIES)[number]
-    )
-  )
-    return 'bone';
+  if (!cancerTypes || cancerTypes.length === 0) {
+    return undefined;
+  }
 
-  if (
-    BRAIN_CANCER_STUDIES.includes(
-      study_code as (typeof BRAIN_CANCER_STUDIES)[number]
-    )
-  )
-    return 'brain';
-
-  if (
-    BREAST_CANCER_STUDIES.includes(
-      study_code as (typeof BREAST_CANCER_STUDIES)[number]
-    )
-  )
-    return 'breast';
-
-  if (
-    SOFT_TISSUE_SARCOMA_CANCER_STUDIES.includes(
-      study_code as (typeof SOFT_TISSUE_SARCOMA_CANCER_STUDIES)[number]
-    )
-  )
-    return 'soft_tissue_sarcoma';
-
-  if (
-    LYMPHOMA_CANCER_STUDIES.includes(
-      study_code as (typeof LYMPHOMA_CANCER_STUDIES)[number]
-    )
-  )
-    return 'lymphoma';
-
-  if (
-    MELANOMA_CANCER_STUDIES.includes(
-      study_code as (typeof MELANOMA_CANCER_STUDIES)[number]
-    )
-  )
-    return 'melanoma';
-
-  if (
-    MULTIPLE_CANCER_STUDIES.includes(
-      study_code as (typeof MULTIPLE_CANCER_STUDIES)[number]
-    )
-  )
+  // Studies researching multiple cancer types get the special 'multiple' view
+  if (cancerTypes.length > 1) {
     return 'multiple';
+  }
 
-  return undefined;
+  return cancerTypes[0];
 };
 
 const getHumanRelevanceTabImage = (
@@ -266,6 +271,8 @@ const getHumanRelevanceTabTitle = (
       return 'Relevance of this work to human Breast Cancer';
     case 'soft_tissue_sarcoma':
       return 'Relevance of this work to human Soft Tissue Sarcoma';
+    case 'thyroid':
+      return 'Relevance of this work to human Thyroid Cancer';
     case 'lymphoma':
       return 'Relevance of this work to human Lymphoma';
     case 'melanoma':
@@ -580,6 +587,8 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   );
 
   const cancer_type = getCancerType(studyCode);
+  const studyCancerTypes = getStudyCancerTypes(studyCode);
+
   const humanRelevanceTabFigure =
     cancer_type && cancer_type in HUMAN_REL_IMAGES
       ? getHumanRelevanceTabImage(cancer_type as HumanRelevanceImageKey)
@@ -587,6 +596,23 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   const humanRelevanceTabTitle = cancer_type
     ? getHumanRelevanceTabTitle(cancer_type)
     : undefined;
+
+  // For multiple cancer type studies, prepare the cancer type images
+  const cancerTypeImages =
+    cancer_type === 'multiple'
+      ? studyCancerTypes.reduce(
+          (acc, type) => {
+            if (type in HUMAN_REL_IMAGES) {
+              acc[type] = HUMAN_REL_IMAGES[type as HumanRelevanceImageKey];
+            }
+            return acc;
+          },
+          {} as Record<
+            string,
+            (typeof HUMAN_REL_IMAGES)[HumanRelevanceImageKey]
+          >
+        )
+      : undefined;
 
   const {
     human_relevance_record_id,
@@ -820,6 +846,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                     genes={relevant_human_genes}
                     pathways={relevant_human_pathways}
                     therapies={relevant_experimental_therapeutic_intervention}
+                    isMultipleCancerTypes={cancer_type === 'multiple'}
+                    cancerTypes={studyCancerTypes}
+                    cancerTypeImages={cancerTypeImages}
                   />
                 )}
               </TabPanel>
