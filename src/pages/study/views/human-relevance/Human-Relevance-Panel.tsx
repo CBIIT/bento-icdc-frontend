@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { MultipleCancerTypesImage } from './MultipleCancerTypesImage';
 
 type NciLink = {
   href: string;
@@ -22,6 +23,12 @@ export interface HumanRelevancePanelProps
   genes?: string[];
   pathways?: string[];
   therapies?: string[];
+  isMultipleCancerTypes?: boolean;
+  cancerTypes?: string[];
+  cancerTypeImages?: Record<
+    string,
+    { src: string; alt?: string; caption?: string }
+  >;
 }
 
 const Wrapper = styled.div`
@@ -138,21 +145,20 @@ const ContentContainer = styled.div`
     }
   }
 
-  figure img {
-    width: 100%;
+  figure.single-cancer-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    padding: 24px;
+    max-height: 450px;
   }
 
-  figcaption {
-    background: hsla(200, 84%, 23%, 1);
-    color: hsla(0, 0%, 100%, 1);
-    text-align: center;
-    margin-top: -8px;
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-style: italic;
-    font-size: calc((14 / 16) * 1rem);
-    line-height: 2;
-    padding: 16px;
+  figure.single-cancer-type img {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    object-fit: contain;
   }
 `;
 
@@ -165,6 +171,9 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
   genes = [],
   pathways = [],
   therapies = [],
+  isMultipleCancerTypes = false,
+  cancerTypes = [],
+  cancerTypeImages = {},
   className,
   style,
   ...divProps
@@ -233,20 +242,23 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
           )}
         </section>
 
-        {figure?.src && (
-          <figure className="relevance-figure">
-            <img
-              src={figure.src}
-              alt={figure.alt ?? ''}
-              className="relevance-image"
+        {figure?.src &&
+          (isMultipleCancerTypes ? (
+            <MultipleCancerTypesImage
+              caption={figure.caption}
+              alt={figure.alt}
+              cancerTypes={cancerTypes}
+              cancerTypeImages={cancerTypeImages}
             />
-            {figure.caption && (
-              <figcaption className="relevance-caption">
-                {figure.caption}
-              </figcaption>
-            )}
-          </figure>
-        )}
+          ) : (
+            <figure className="relevance-figure single-cancer-type">
+              <img
+                src={figure.src}
+                alt={figure.alt ?? ''}
+                className="relevance-image"
+              />
+            </figure>
+          ))}
 
         <section
           className="key-value-wrapper genes-section"
