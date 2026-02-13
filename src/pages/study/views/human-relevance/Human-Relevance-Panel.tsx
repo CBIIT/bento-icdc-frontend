@@ -145,21 +145,20 @@ const ContentContainer = styled.div`
     }
   }
 
-  figure img {
-    width: 100%;
+  figure.single-cancer-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    padding: 24px;
+    max-height: 450px;
   }
 
-  figcaption {
-    background: hsla(200, 84%, 23%, 1);
-    color: hsla(0, 0%, 100%, 1);
-    text-align: center;
-    margin-top: -8px;
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-style: italic;
-    font-size: calc((14 / 16) * 1rem);
-    line-height: 2;
-    padding: 16px;
+  figure.single-cancer-type img {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    object-fit: contain;
   }
 `;
 
@@ -252,17 +251,12 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
               cancerTypeImages={cancerTypeImages}
             />
           ) : (
-            <figure className="relevance-figure">
+            <figure className="relevance-figure single-cancer-type">
               <img
                 src={figure.src}
                 alt={figure.alt ?? ''}
                 className="relevance-image"
               />
-              {figure.caption && (
-                <figcaption className="relevance-caption">
-                  {figure.caption}
-                </figcaption>
-              )}
             </figure>
           ))}
 

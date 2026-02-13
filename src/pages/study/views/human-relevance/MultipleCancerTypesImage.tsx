@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
+import { CircularProgress } from '@mui/material';
 import humanSkeletonImage from './assets/human-skeleton.jpg';
 
 export interface MultipleCancerTypesImageProps {
@@ -122,21 +123,20 @@ const DetailCard = styled.div`
 `;
 
 const DetailPanelHeader = styled.div`
-  padding: 16px 24px;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 100, 180, 0.4) 0%,
-    rgba(0, 60, 120, 0.4) 100%
-  );
-  border: 2px solid #ff6b35;
-  border-radius: 8px 8px 0 0;
-  font-size: calc((16 / 16) * 1rem);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  padding: 12px 24px;
+  background: hsla(213, 86%, 17%, 1);
+  border: 2px solid hsla(18, 86%, 60%, 1);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  font-size: calc((15 / 16) * 1rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
   color: #ffffff;
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  width: 100%;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+  width: fit-content;
 `;
 
 const DetailPanelContent = styled.div`
@@ -146,21 +146,28 @@ const DetailPanelContent = styled.div`
   gap: 16px;
   align-items: center;
   background-color: #000000;
-  border: 2px solid #ff6b35;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+  border: 2px solid hsla(18, 86%, 60%, 1);
+  border-radius: 0 16px 16px 16px;
   width: 100%;
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.6),
     0 0 20px rgba(255, 107, 53, 0.3);
 `;
 
-const DetailImage = styled.img`
+const DetailImage = styled.img<{ isLoaded: boolean }>`
   width: 100%;
   max-width: 400px;
   height: auto;
   object-fit: contain;
-  display: block;
+  display: ${props => (props.isLoaded ? 'block' : 'none')};
+`;
+
+const SpinnerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
 `;
 
 const EmptyState = styled.div`
@@ -185,37 +192,27 @@ const CancerTypesList = styled.div`
 `;
 
 const CancerTypeItem = styled.div<{ isActive: boolean }>`
-  color: ${props => (props.isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.8)')};
-  font-family: 'Open Sans', sans-serif;
-  font-size: calc((16 / 16) * 1rem);
-  font-weight: ${props => (props.isActive ? '600' : '400')};
-  line-height: 1.5;
+  color: ${props =>
+    props.isActive ? 'hsla(18, 86%, 60%, 1)' : 'hsla(0, 0%, 100%, 1)'};
+  font-family: 'Nunito', sans-serif;
+  font-size: calc((15 / 16) * 1rem);
+  font-weight: ${props => (props.isActive ? 700 : 500)};
+  line-height: 1;
+  letter-spacing: 0;
   padding: 8px 12px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   border-bottom: 1px solid
-    ${props => (props.isActive ? '#ff0000' : 'rgba(255, 255, 255, 0.2)')};
+    ${props =>
+      props.isActive ? 'hsla(18, 86%, 60%, 1)' : 'rgba(255, 255, 255, 0.2)'};
   background: ${props =>
     props.isActive ? 'rgba(255, 107, 53, 0.1)' : 'transparent'};
 
   &:hover {
-    color: #ffffff;
-    font-weight: 600;
+    color: hsla(18, 86%, 60%, 1);
+    font-weight: 700;
     background: rgba(255, 107, 53, 0.1);
   }
-`;
-
-const Caption = styled.figcaption`
-  background: hsla(200, 84%, 23%, 1);
-  color: hsla(0, 0%, 100%, 1);
-  text-align: center;
-  margin-top: -8px;
-  font-family: 'Open Sans';
-  font-weight: 400;
-  font-style: italic;
-  font-size: calc((14 / 16) * 1rem);
-  line-height: 2;
-  padding: 16px;
 `;
 
 interface CancerTypeDisplay {
@@ -238,11 +235,11 @@ const CANCER_TYPE_DISPLAY_INFO: Record<
 > = {
   bone: {
     name: 'Bone Cancer (Osteosarcoma)',
-    position: { top: '70%', left: '54%' },
+    position: { top: '70%', left: '53%' },
   },
   bladder: {
     name: 'Bladder Cancer',
-    position: { top: '54%', left: '50%' },
+    position: { top: '50%', left: '49%' },
   },
   brain: {
     name: 'Brain Cancer (Glioma)',
@@ -250,15 +247,15 @@ const CANCER_TYPE_DISPLAY_INFO: Record<
   },
   breast: {
     name: 'Breast Cancer (Mammary)',
-    position: { top: '34%', left: '44%' },
+    position: { top: '26%', left: '44%' },
   },
   soft_tissue_sarcoma: {
     name: 'Soft Tissue Sarcoma',
-    position: { top: '48%', left: '60%' },
+    position: { top: '20%', left: '60%' },
   },
   thyroid: {
     name: 'Thyroid Cancer',
-    position: { top: '12%', left: '50%' },
+    position: { top: '17%', left: '49%' },
   },
   lymphoma: {
     name: 'Lymphoma',
@@ -266,14 +263,15 @@ const CANCER_TYPE_DISPLAY_INFO: Record<
   },
   melanoma: {
     name: 'Melanoma',
-    position: { top: '88%', left: '50%' },
+    position: { top: '88%', left: '53%' },
   },
 };
 
 export const MultipleCancerTypesImage: React.FC<
   MultipleCancerTypesImageProps
-> = ({ caption, alt, cancerTypes = [], cancerTypeImages = {} }) => {
+> = ({ caption: _caption, alt, cancerTypes = [], cancerTypeImages = {} }) => {
   const [activeCancerType, setActiveCancerType] = useState<string | null>(null);
+  const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({});
   const [lineCoordinates, setLineCoordinates] = useState<{
     listToPanel: { x1: number; y1: number; x2: number; y2: number } | null;
     panelToHotspot: { x1: number; y1: number; x2: number; y2: number } | null;
@@ -414,11 +412,27 @@ export const MultipleCancerTypesImage: React.FC<
             <DetailCard ref={detailCardRef}>
               <DetailPanelHeader>{activeCancer.name}</DetailPanelHeader>
               <DetailPanelContent>
+                {!imageLoaded[activeCancer.key] && (
+                  <SpinnerContainer>
+                    <CircularProgress
+                      sx={{
+                        color: 'hsla(18, 86%, 60%, 1)',
+                      }}
+                    />
+                  </SpinnerContainer>
+                )}
                 <DetailImage
+                  isLoaded={!!imageLoaded[activeCancer.key]}
                   src={getCancerImage(activeCancer.key)}
                   alt={
                     cancerTypeImages[activeCancer.key]?.alt ||
                     `${activeCancer.name} comparison`
+                  }
+                  onLoad={() =>
+                    setImageLoaded(prev => ({
+                      ...prev,
+                      [activeCancer.key]: true,
+                    }))
                   }
                 />
               </DetailPanelContent>
@@ -444,7 +458,6 @@ export const MultipleCancerTypesImage: React.FC<
           ))}
         </CancerTypesList>
       </ContentWrapper>
-      {caption && <Caption className="relevance-caption">{caption}</Caption>}
     </FigureContainer>
   );
 };
