@@ -32,6 +32,17 @@ type CaseDetailProps = {
 interface CustomF extends FilesOfCase {
   sample_id?: string;
 }
+
+type DiagnosisShape = {
+  disease_term?: string | null;
+  stage_of_disease?: string | null;
+  date_of_diagnosis?: string | null;
+  primary_disease_site?: string | null;
+  histology_cytopathology?: string | null;
+  histological_grade?: string | null;
+  best_response?: string | null;
+};
+
 const CaseDetail = ({ data }: CaseDetailProps) => {
   const stat = {
     numberOfStudies: 1,
@@ -89,7 +100,8 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
   );
 
   const diagnosesCard = useMemo(() => {
-    const primaryDiagnosis = caseDetail?.diagnosis;
+    const primaryDiagnosis: DiagnosisShape | null =
+      (caseDetail?.diagnosis as DiagnosisShape | null) ?? null;
 
     return {
       title: 'Diagnoses',
@@ -176,7 +188,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
     .filter((f): f is FilesOfCase => f !== null && f !== undefined)
     .map(f => {
       const customF: CustomF = { ...f };
-      const parentSample = data.samplesByCaseRecordId.filter(s =>
+      const parentSample = data.samplesByCaseId.filter(s =>
         s.files.map(sf => sf.uuid).includes(f.uuid)
       );
       if (parentSample && parentSample.length > 0) {
@@ -207,7 +219,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
       isALink: true,
     },
     {
-      name: caseDetail.case_record_id,
+      name: caseDetail.case_id,
     },
   ];
 
@@ -234,8 +246,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
               <div className="main-title">
                 <span>
                   {' '}
-                  <span className="prefix">Case:</span>{' '}
-                  {caseDetail.case_record_id}
+                  <span className="prefix">Case:</span> {caseDetail.case_id}
                 </span>
               </div>
             </div>
@@ -244,8 +255,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
               <div className="main-title">
                 <span>
                   {' '}
-                  <span className="prefix">Case:</span>{' '}
-                  {caseDetail.case_record_id}
+                  <span className="prefix">Case:</span> {caseDetail.case_id}
                 </span>
               </div>
               <div className="sub-title">
@@ -276,12 +286,12 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
             </div>
           )}
           {data.multiStudyCases &&
-            data.multiStudyCases.caseRecordIds &&
-            data.multiStudyCases.caseRecordIds.length > 1 && (
+            data.multiStudyCases.caseIds &&
+            data.multiStudyCases.caseIds.length > 1 && (
               <>
                 <MultiStudyCases
-                  cases={data.multiStudyCases.caseRecordIds}
-                  caseID={caseDetail.case_record_id}
+                  cases={data.multiStudyCases.caseIds}
+                  caseID={caseDetail.case_id}
                 />
               </>
             )}
@@ -342,7 +352,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
       <TableContainer id="case_detail_table_associated_samples">
         <div className="table-wrapper hide-icons">
           <TableContextProvider>
-            <SampleTableView data={data.samplesByCaseRecordId} />
+            <SampleTableView data={data.samplesByCaseId} />
           </TableContextProvider>
         </div>
       </TableContainer>

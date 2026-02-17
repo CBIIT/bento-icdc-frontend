@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_CASES_TAB = gql`
   query getCasesTab(
-    $case_record_ids: [String]
+    $case_ids: [String]
     $biobank: [String]
     $breed: [String]
     $diagnosis: [String]
@@ -24,7 +24,7 @@ export const GET_CASES_TAB = gql`
     $first: Int = 10000000
   ) {
     caseOverview(
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       biobank: $biobank
       breed: $breed
       diagnosis: $diagnosis
@@ -45,7 +45,7 @@ export const GET_CASES_TAB = gql`
       study_type: $study_type
       first: $first
     ) {
-      case_record_id
+      case_id
       study_code
       study_type
       cohort
@@ -107,7 +107,7 @@ const customCasesOptionalDataFields = {
 
 const customCasesTabCoreDataFields = {
   keysToInclude: [
-    'case_record_id',
+    'case_id',
     'study_code',
     'study_type',
     'breed',
@@ -153,7 +153,7 @@ export const customCasesTabDownloadCSV = {
 
 export const GET_SAMPLES_TAB = gql`
   query sampleOverview(
-    $case_record_ids: [String]
+    $case_ids: [String]
     $sample_ids: [String]
     $biobank: [String]
     $breed: [String]
@@ -178,7 +178,7 @@ export const GET_SAMPLES_TAB = gql`
     $order_by: String = ""
   ) {
     sampleOverview(
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       sample_ids: $sample_ids
       biobank: $biobank
       breed: $breed
@@ -203,7 +203,7 @@ export const GET_SAMPLES_TAB = gql`
       order_by: $order_by
     ) {
       sample_id
-      case_record_id
+      case_id
       breed
       diagnosis
       sample_site
@@ -298,7 +298,7 @@ const customSamplesOptionalDataFields = {
 const customSampleTabCoreDataFields = {
   keysToInclude: [
     'sample_id',
-    'case_record_id',
+    'case_id',
     'breed',
     'diagnosis',
     'sample_site',
@@ -343,7 +343,7 @@ export const customSamplesTabDownloadCSV = {
 
 export const GET_FILES_TAB = gql`
   query getFilesTabTableDownloadCSV(
-    $case_record_ids: [String]
+    $case_ids: [String]
     $file_level: [String] = ["case"]
     $biobank: [String]
     $breed: [String]
@@ -368,7 +368,7 @@ export const GET_FILES_TAB = gql`
     $order_by: String = "file_name"
   ) {
     fileOverview(
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       biobank: $biobank
       breed: $breed
       diagnosis: $diagnosis
@@ -399,7 +399,7 @@ export const GET_FILES_TAB = gql`
       file_description
       file_format
       file_size
-      case_record_id
+      case_id
       breed
       diagnosis
       study_code
@@ -442,7 +442,7 @@ export const GET_FILES_TAB = gql`
 
 export const GET_FILES_TAB_STUDY_FILES = gql`
   query getFilesTabForStudyFiles(
-    $case_record_ids: [String]
+    $case_ids: [String]
     $file_level: [String] = ["study"]
     $biobank: [String]
     $breed: [String]
@@ -467,7 +467,7 @@ export const GET_FILES_TAB_STUDY_FILES = gql`
     $order_by: String = "file_name"
   ) {
     fileOverview(
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       biobank: $biobank
       breed: $breed
       diagnosis: $diagnosis
@@ -498,7 +498,7 @@ export const GET_FILES_TAB_STUDY_FILES = gql`
       file_description
       file_format
       file_size
-      case_record_id
+      case_id
       breed
       diagnosis
       study_code
@@ -620,7 +620,7 @@ const customFilesTabCoreDataFields = {
     'file_format',
     'file_size',
     'sample_id',
-    'case_record_id',
+    'case_id',
     'file_uuid',
     'breed',
     'diagnosis',
@@ -696,7 +696,7 @@ export const MY_CART = gql`
       file_description
       file_format
       file_size
-      case_record_id
+      case_id
       individual_id
       breed
       diagnosis
@@ -817,7 +817,7 @@ const customMyFilesCoreDataFields = {
     'file_description',
     'file_format',
     'file_size',
-    'case_record_id',
+    'case_id',
     'file_uuid',
     'individual_id',
     'breed',

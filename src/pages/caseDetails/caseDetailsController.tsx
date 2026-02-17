@@ -18,7 +18,7 @@ const CaseDetailContainer = ({ match }: RouteComponentProps<MatchParams>) => {
   const { loading, error, data } = useQuery<CaseQuery, CaseQueryVariables>(
     CaseDocument,
     {
-      variables: { case_record_id: match.params.id },
+      variables: { case_id: match.params.id },
     }
   );
 

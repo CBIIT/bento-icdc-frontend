@@ -424,11 +424,15 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     staleTime: 5 * 60 * 1000,
   });
 
+  type CaseWithDx = {
+    diagnosis?: { disease_term?: string | null } | null;
+  } | null;
+
   const diagnoses = useMemo(
     () => [
       ...new Set(
-        defaultTo(studyData.cases, [])
-          .map(caseData => caseData?.diagnosis?.disease_term)
+        defaultTo(studyData.cases as CaseWithDx[], [])
+          .map((caseData: CaseWithDx) => caseData?.diagnosis?.disease_term)
           .filter((term): term is string => Boolean(term))
       ),
     ],

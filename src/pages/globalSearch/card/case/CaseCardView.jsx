@@ -5,7 +5,7 @@ import styles from './CaseCardStyle';
 
 const CaseCardView = ({ data = {}, classes, index }) => {
   const {
-    case_record_id: caseId = '',
+    case_id: caseId = '',
     program_name: programName = '',
     programId,
     clinical_study_designation: studyDesignation = '',
