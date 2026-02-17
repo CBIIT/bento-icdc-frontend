@@ -100,9 +100,11 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
   );
 
   const diagnosesCard = useMemo(() => {
-    const primaryDiagnosis: Diagnosis | null =
-      (caseDetail?.diagnosis as Diagnosis | null) ?? null;
-
+    const diagnosisList = caseDetail?.diagnoses as
+      | Diagnosis[]
+      | null
+      | undefined;
+    const primaryDiagnosis = diagnosisList?.[0] ?? null;
     return {
       title: 'Diagnoses',
       fields: [

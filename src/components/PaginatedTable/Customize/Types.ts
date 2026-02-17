@@ -1,5 +1,5 @@
 export const customizeColumn = {
-  MULTI_STUDY_PARTICIPATION: 'case_record_id',
+  MULTI_STUDY_PARTICIPATION: 'case_id',
   DOCUMENT_DOWNLOAD: 'access_file',
   numberOfCases: 'numberOfCases',
   studyDesignation: 'clinical_study_designation',
