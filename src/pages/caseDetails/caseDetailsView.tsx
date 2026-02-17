@@ -33,7 +33,7 @@ interface CustomF extends FilesOfCase {
   sample_id?: string;
 }
 
-type DiagnosisShape = {
+type Diagnosis = {
   disease_term?: string | null;
   stage_of_disease?: string | null;
   date_of_diagnosis?: string | null;
@@ -100,8 +100,8 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
   );
 
   const diagnosesCard = useMemo(() => {
-    const primaryDiagnosis: DiagnosisShape | null =
-      (caseDetail?.diagnosis as DiagnosisShape | null) ?? null;
+    const primaryDiagnosis: Diagnosis | null =
+      (caseDetail?.diagnosis as Diagnosis | null) ?? null;
 
     return {
       title: 'Diagnoses',
