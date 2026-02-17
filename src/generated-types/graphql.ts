@@ -45,7 +45,7 @@ export type AdverseEventNodeData = {
   attribution_to_ind?: Maybe<Scalars['String']['output']>;
   attribution_to_other?: Maybe<Scalars['String']['output']>;
   attribution_to_research?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   date_of_onset?: Maybe<Scalars['String']['output']>;
   date_of_resolution?: Maybe<Scalars['String']['output']>;
   day_in_cycle?: Maybe<Scalars['Int']['output']>;
@@ -147,7 +147,7 @@ export type CaseDetail = {
   arm?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
   clinical_study_name?: Maybe<Scalars['String']['output']>;
   cohort_description?: Maybe<Scalars['String']['output']>;
@@ -176,7 +176,7 @@ export type CaseOverview = {
   __typename?: 'CaseOverview';
   age?: Maybe<Scalars['Float']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   data_types?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   demographic?: Maybe<Demographic>;
   diagnosis?: Maybe<Scalars['String']['output']>;
@@ -213,7 +213,7 @@ export type CaseOverview2 = {
   age?: Maybe<Scalars['Float']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   cohort?: Maybe<Scalars['String']['output']>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
   concurrent_disease_type?: Maybe<Scalars['String']['output']>;
@@ -243,8 +243,8 @@ export type CaseOverviewEs = {
   age?: Maybe<Scalars['Float']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
-  case_record_id_lc?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  case_id_lc?: Maybe<Scalars['String']['output']>;
   cohort?: Maybe<Scalars['String']['output']>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
   concurrent_disease_type?: Maybe<Scalars['String']['output']>;
@@ -274,7 +274,7 @@ export type CaseOverviewEs2 = {
   age?: Maybe<Scalars['Float']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   cohort?: Maybe<Scalars['String']['output']>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
   concurrent_disease_type?: Maybe<Scalars['String']['output']>;
@@ -319,7 +319,7 @@ export type ClinicalDataNodeCounts = {
 
 export type CycleNodeData = {
   __typename?: 'CycleNodeData';
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   crf_id?: Maybe<Scalars['String']['output']>;
   cycle_number?: Maybe<Scalars['Int']['output']>;
   date_of_cycle_end?: Maybe<Scalars['String']['output']>;
@@ -328,7 +328,7 @@ export type CycleNodeData = {
 
 export type DiseaseExtentNodeData = {
   __typename?: 'DiseaseExtentNodeData';
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   date_of_evaluation?: Maybe<Scalars['String']['output']>;
   evaluation_code?: Maybe<Scalars['String']['output']>;
   evaluation_number?: Maybe<Scalars['String']['output']>;
@@ -357,7 +357,7 @@ export type FileDetail = {
   acl?: Maybe<Scalars['String']['output']>;
   arm?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
   clinical_study_name?: Maybe<Scalars['String']['output']>;
   cohort_description?: Maybe<Scalars['String']['output']>;
@@ -406,7 +406,6 @@ export type FileInList = {
   breed?: Maybe<Scalars['String']['output']>;
   case_id?: Maybe<Scalars['String']['output']>;
   case_name?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
   cohort_description?: Maybe<Scalars['String']['output']>;
   cohort_dose?: Maybe<Scalars['String']['output']>;
   cohort_id?: Maybe<Scalars['String']['output']>;
@@ -480,7 +479,7 @@ export type FileOverview = {
   association?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   cohort_description?: Maybe<Scalars['String']['output']>;
   comment?: Maybe<Scalars['String']['output']>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
@@ -542,8 +541,8 @@ export type FileOverviewEs = {
   association?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
-  case_record_id_lc?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  case_id_lc?: Maybe<Scalars['String']['output']>;
   cohort_description?: Maybe<Scalars['String']['output']>;
   comment?: Maybe<Scalars['String']['output']>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
@@ -587,7 +586,7 @@ export type FileOverviewEs = {
 
 export type FilesOfCase = {
   __typename?: 'FilesOfCase';
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   file_description?: Maybe<Scalars['String']['output']>;
   file_format?: Maybe<Scalars['String']['output']>;
   file_location?: Maybe<Scalars['String']['output']>;
@@ -623,7 +622,7 @@ export type Gs_About = {
 export type Gs_Cases = {
   __typename?: 'GS_Cases';
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
   disease_term?: Maybe<Scalars['String']['output']>;
   program_name?: Maybe<Scalars['String']['output']>;
@@ -632,7 +631,7 @@ export type Gs_Cases = {
 
 export type Gs_File = {
   __typename?: 'GS_File';
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
   file_association?: Maybe<Scalars['String']['output']>;
   file_name?: Maybe<Scalars['String']['output']>;
@@ -666,7 +665,7 @@ export type Gs_Program = {
 
 export type Gs_Sample = {
   __typename?: 'GS_Sample';
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   clinical_study_designation?: Maybe<Scalars['String']['output']>;
   general_sample_pathology?: Maybe<Scalars['String']['output']>;
   physical_sample_type?: Maybe<Scalars['String']['output']>;
@@ -756,7 +755,7 @@ export type Metadata = IdcMetadata | TciaMetadata;
 
 export type MultiStudyCases = {
   __typename?: 'MultiStudyCases';
-  caseRecordIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  caseIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   fileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   individualId?: Maybe<Scalars['String']['output']>;
   sampleIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
@@ -803,18 +802,26 @@ export type Mutation = {
   createVisitNodeData: VisitNodeData;
   createVitalSignsNodeData: VitalSignsNodeData;
   createadverse_event: Adverse_Event;
+  createagent: Agent;
+  createagent_administration: Agent_Administration;
+  createassay: Assay;
   createbiospecimen_source: Biospecimen_Source;
   createcanine_individual: Canine_Individual;
   createcase: Case;
   createcohort: Cohort;
-  createconsent_group: Consent_Group;
   createcycle: Cycle;
   createdemographic: Demographic;
   creatediagnosis: Diagnosis;
   createdisease_extent: Disease_Extent;
   createenrollment: Enrollment;
   createfile: File;
+  createfollow_up: Follow_Up;
   createhuman_relevance: Human_Relevance;
+  createimage: Image;
+  createimage_collection: Image_Collection;
+  createlab_exam: Lab_Exam;
+  createoff_study: Off_Study;
+  createoff_treatment: Off_Treatment;
   createphysical_exam: Physical_Exam;
   createprincipal_investigator: Principal_Investigator;
   createprior_surgery: Prior_Surgery;
@@ -844,7 +851,7 @@ export type MutationCreateAdverseEventNodeDataArgs = {
   attribution_to_ind?: InputMaybe<Scalars['String']['input']>;
   attribution_to_other?: InputMaybe<Scalars['String']['input']>;
   attribution_to_research?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_onset?: InputMaybe<Scalars['String']['input']>;
   date_of_resolution?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
@@ -907,7 +914,7 @@ export type MutationCreateCaseDetailArgs = {
   arm?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
   clinical_study_name?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
@@ -935,7 +942,7 @@ export type MutationCreateCaseDetailArgs = {
 export type MutationCreateCaseOverviewArgs = {
   age?: InputMaybe<Scalars['Float']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   data_types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   diagnosis?: InputMaybe<Scalars['String']['input']>;
   disease_site?: InputMaybe<Scalars['String']['input']>;
@@ -953,7 +960,7 @@ export type MutationCreateCaseOverview2Args = {
   age?: InputMaybe<Scalars['Float']['input']>;
   arm?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   cohort?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
@@ -996,7 +1003,7 @@ export type MutationCreateClinicalDataNodeCountsArgs = {
 };
 
 export type MutationCreateCycleNodeDataArgs = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   crf_id?: InputMaybe<Scalars['String']['input']>;
   cycle_number?: InputMaybe<Scalars['Int']['input']>;
   date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
@@ -1004,7 +1011,7 @@ export type MutationCreateCycleNodeDataArgs = {
 };
 
 export type MutationCreateDiseaseExtentNodeDataArgs = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
   evaluation_code?: InputMaybe<Scalars['String']['input']>;
   evaluation_number?: InputMaybe<Scalars['String']['input']>;
@@ -1024,7 +1031,7 @@ export type MutationCreateFileDetailArgs = {
   acl?: InputMaybe<Scalars['String']['input']>;
   arm?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
   clinical_study_name?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
@@ -1070,8 +1077,8 @@ export type MutationCreateFileInListArgs = {
   association?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   case_name?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_dose?: InputMaybe<Scalars['String']['input']>;
   cohort_id?: InputMaybe<Scalars['String']['input']>;
@@ -1143,7 +1150,7 @@ export type MutationCreateFileOverviewArgs = {
   association?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   comment?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
@@ -1199,7 +1206,7 @@ export type MutationCreateFileOverview2Args = {
 };
 
 export type MutationCreateFilesOfCaseArgs = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   file_description?: InputMaybe<Scalars['String']['input']>;
   file_format?: InputMaybe<Scalars['String']['input']>;
   file_location?: InputMaybe<Scalars['String']['input']>;
@@ -1253,7 +1260,7 @@ export type MutationCreateLinkArgs = {
 };
 
 export type MutationCreateMultiStudyCasesArgs = {
-  caseRecordIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  caseIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fileIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   individualId?: InputMaybe<Scalars['String']['input']>;
   sampleIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -1290,7 +1297,7 @@ export type MutationCreateOffTreatmentNodeDataArgs = {
 export type MutationCreatePhysicalExamNodeDataArgs = {
   assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
   pe_comment?: InputMaybe<Scalars['String']['input']>;
@@ -1300,7 +1307,7 @@ export type MutationCreatePhysicalExamNodeDataArgs = {
 
 export type MutationCreatePriorSurgeryNodeDataArgs = {
   anatomical_site_of_surgery?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery?: InputMaybe<Scalars['String']['input']>;
   procedure?: InputMaybe<Scalars['String']['input']>;
   residual_disease?: InputMaybe<Scalars['String']['input']>;
@@ -1349,7 +1356,7 @@ export type MutationCreateSampleOverviewArgs = {
   arm?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   comment?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
@@ -1434,7 +1441,7 @@ export type MutationCreateUnifiedCountsArgs = {
 };
 
 export type MutationCreateVisitNodeDataArgs = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   visit_date?: InputMaybe<Scalars['String']['input']>;
   visit_id?: InputMaybe<Scalars['String']['input']>;
   visit_number?: InputMaybe<Scalars['Int']['input']>;
@@ -1449,7 +1456,7 @@ export type MutationCreateVitalSignsNodeDataArgs = {
   body_temperature_original?: InputMaybe<Scalars['Float']['input']>;
   body_temperature_original_unit?: InputMaybe<Scalars['String']['input']>;
   body_temperature_unit?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
   modified_ecog?: InputMaybe<Scalars['String']['input']>;
   patient_weight?: InputMaybe<Scalars['Float']['input']>;
@@ -1476,14 +1483,12 @@ export type MutationCreateadverse_EventArgs = {
   adverse_event_description?: InputMaybe<Scalars['String']['input']>;
   adverse_event_grade?: InputMaybe<Scalars['String']['input']>;
   adverse_event_grade_description?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id?: InputMaybe<Scalars['String']['input']>;
   adverse_event_term?: InputMaybe<Scalars['String']['input']>;
   attribution_to_commercial?: InputMaybe<Scalars['String']['input']>;
   attribution_to_disease?: InputMaybe<Scalars['String']['input']>;
   attribution_to_ind?: InputMaybe<Scalars['String']['input']>;
   attribution_to_other?: InputMaybe<Scalars['String']['input']>;
   attribution_to_research?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_onset?: InputMaybe<Scalars['String']['input']>;
   date_of_resolution?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
@@ -1494,20 +1499,61 @@ export type MutationCreateadverse_EventArgs = {
   unexpected_adverse_event?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type MutationCreateagentArgs = {
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateagent_AdministrationArgs = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  dose_level?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number?: InputMaybe<Scalars['String']['input']>;
+  medication_duration?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration?: InputMaybe<Scalars['String']['input']>;
+  start_time?: InputMaybe<Scalars['String']['input']>;
+  stop_time?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateassayArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type MutationCreatebiospecimen_SourceArgs = {
   biospecimen_repository_acronym?: InputMaybe<Scalars['String']['input']>;
   biospecimen_repository_full_name?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreatecanine_IndividualArgs = {
   canine_individual_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreatecaseArgs = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   patient_first_name?: InputMaybe<Scalars['String']['input']>;
   patient_id?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1515,21 +1561,11 @@ export type MutationCreatecaseArgs = {
 export type MutationCreatecohortArgs = {
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_dose?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type MutationCreateconsent_GroupArgs = {
-  consent_group_name?: InputMaybe<Scalars['String']['input']>;
-  consent_group_number?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  cohort_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreatecycleArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   cycle_number?: InputMaybe<Scalars['Int']['input']>;
-  cycle_record_id?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_start?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1537,9 +1573,8 @@ export type MutationCreatecycleArgs = {
 export type MutationCreatedemographicArgs = {
   additional_breed_detail?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_birth?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id?: InputMaybe<Scalars['String']['input']>;
+  demographic_id?: InputMaybe<Scalars['String']['input']>;
   neutered_indicator?: InputMaybe<Scalars['String']['input']>;
   patient_age_at_enrollment?: InputMaybe<Scalars['Float']['input']>;
   patient_age_at_enrollment_original?: InputMaybe<Scalars['Float']['input']>;
@@ -1558,10 +1593,9 @@ export type MutationCreatediagnosisArgs = {
   best_response?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
   date_of_histology_confirmation?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id?: InputMaybe<Scalars['String']['input']>;
   disease_term?: InputMaybe<Scalars['String']['input']>;
   follow_up_data?: InputMaybe<Scalars['String']['input']>;
   histological_grade?: InputMaybe<Scalars['String']['input']>;
@@ -1573,13 +1607,11 @@ export type MutationCreatediagnosisArgs = {
 };
 
 export type MutationCreatedisease_ExtentArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id?: InputMaybe<Scalars['String']['input']>;
   evaluation_code?: InputMaybe<Scalars['String']['input']>;
-  evaluation_number?: InputMaybe<Scalars['Int']['input']>;
+  evaluation_number?: InputMaybe<Scalars['String']['input']>;
   lesion_description?: InputMaybe<Scalars['String']['input']>;
-  lesion_number?: InputMaybe<Scalars['Int']['input']>;
+  lesion_number?: InputMaybe<Scalars['String']['input']>;
   lesion_site?: InputMaybe<Scalars['String']['input']>;
   longest_measurement?: InputMaybe<Scalars['Float']['input']>;
   longest_measurement_original?: InputMaybe<Scalars['Float']['input']>;
@@ -1593,10 +1625,9 @@ export type MutationCreatedisease_ExtentArgs = {
 };
 
 export type MutationCreateenrollmentArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_informed_consent?: InputMaybe<Scalars['String']['input']>;
   date_of_registration?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id?: InputMaybe<Scalars['String']['input']>;
   initials?: InputMaybe<Scalars['String']['input']>;
   patient_subgroup?: InputMaybe<Scalars['String']['input']>;
   registering_institution?: InputMaybe<Scalars['String']['input']>;
@@ -1605,16 +1636,26 @@ export type MutationCreateenrollmentArgs = {
 };
 
 export type MutationCreatefileArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   file_description?: InputMaybe<Scalars['String']['input']>;
   file_format?: InputMaybe<Scalars['String']['input']>;
   file_location?: InputMaybe<Scalars['String']['input']>;
   file_name?: InputMaybe<Scalars['String']['input']>;
-  file_size?: InputMaybe<Scalars['Int']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
   file_status?: InputMaybe<Scalars['String']['input']>;
   file_type?: InputMaybe<Scalars['String']['input']>;
   md5sum?: InputMaybe<Scalars['String']['input']>;
   uuid?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatefollow_UpArgs = {
+  contact_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status?: InputMaybe<Scalars['String']['input']>;
+  patient_status?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_performed?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_since_last_contact?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type MutationCreatehuman_RelevanceArgs = {
@@ -1629,21 +1670,60 @@ export type MutationCreatehuman_RelevanceArgs = {
   relevant_human_pathways?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type MutationCreateimageArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateimage_CollectionArgs = {
+  collection_access?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url?: InputMaybe<Scalars['String']['input']>;
+  image_type_included?: InputMaybe<Scalars['String']['input']>;
+  repository_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreatelab_ExamArgs = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateoff_StudyArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_study?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MutationCreateoff_TreatmentArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type MutationCreatephysical_ExamArgs = {
-  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
   pe_comment?: InputMaybe<Scalars['String']['input']>;
   pe_finding?: InputMaybe<Scalars['String']['input']>;
   phase_pe?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreateprincipal_InvestigatorArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  person_record_id?: InputMaybe<Scalars['String']['input']>;
   pi_first_name?: InputMaybe<Scalars['String']['input']>;
   pi_last_name?: InputMaybe<Scalars['String']['input']>;
   pi_middle_initial?: InputMaybe<Scalars['String']['input']>;
@@ -1651,9 +1731,7 @@ export type MutationCreateprincipal_InvestigatorArgs = {
 
 export type MutationCreateprior_SurgeryArgs = {
   anatomical_site_of_surgery?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id?: InputMaybe<Scalars['String']['input']>;
   procedure?: InputMaybe<Scalars['String']['input']>;
   residual_disease?: InputMaybe<Scalars['String']['input']>;
   surgical_finding?: InputMaybe<Scalars['String']['input']>;
@@ -1665,7 +1743,6 @@ export type MutationCreateprior_TherapyArgs = {
   agent_units_of_measure?: InputMaybe<Scalars['String']['input']>;
   any_therapy?: InputMaybe<Scalars['Boolean']['input']>;
   best_response_to_prior_therapy?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_first_dose?: InputMaybe<Scalars['String']['input']>;
   date_of_last_dose?: InputMaybe<Scalars['String']['input']>;
   date_of_last_dose_any_therapy?: InputMaybe<Scalars['String']['input']>;
@@ -1681,7 +1758,6 @@ export type MutationCreateprior_TherapyArgs = {
   number_of_prior_regimens_steroid?: InputMaybe<Scalars['Int']['input']>;
   prior_nsaid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
   prior_steroid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
-  prior_therapy_record_id?: InputMaybe<Scalars['String']['input']>;
   prior_therapy_type?: InputMaybe<Scalars['String']['input']>;
   therapy_type?: InputMaybe<Scalars['String']['input']>;
   total_dose?: InputMaybe<Scalars['Float']['input']>;
@@ -1699,7 +1775,6 @@ export type MutationCreateprior_TherapyArgs = {
 };
 
 export type MutationCreateprogramArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   program_acronym?: InputMaybe<Scalars['String']['input']>;
   program_external_url?: InputMaybe<Scalars['String']['input']>;
   program_full_description?: InputMaybe<Scalars['String']['input']>;
@@ -1710,7 +1785,6 @@ export type MutationCreateprogramArgs = {
 
 export type MutationCreatepublicationArgs = {
   authorship?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   digital_object_id?: InputMaybe<Scalars['String']['input']>;
   journal_citation?: InputMaybe<Scalars['String']['input']>;
   publication_title?: InputMaybe<Scalars['String']['input']>;
@@ -1719,14 +1793,12 @@ export type MutationCreatepublicationArgs = {
 };
 
 export type MutationCreateregistrationArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  registration_id?: InputMaybe<Scalars['String']['input']>;
   registration_origin?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreatesampleArgs = {
   comment?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
   general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
   length_of_tumor?: InputMaybe<Scalars['Float']['input']>;
@@ -1762,7 +1834,6 @@ export type MutationCreatestudyArgs = {
   clinical_study_id?: InputMaybe<Scalars['String']['input']>;
   clinical_study_name?: InputMaybe<Scalars['String']['input']>;
   clinical_study_type?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_iacuc_approval?: InputMaybe<Scalars['String']['input']>;
   dates_of_conduct?: InputMaybe<Scalars['String']['input']>;
   study_disposition?: InputMaybe<Scalars['String']['input']>;
@@ -1772,25 +1843,23 @@ export type MutationCreatestudy_ArmArgs = {
   arm?: InputMaybe<Scalars['String']['input']>;
   arm_description?: InputMaybe<Scalars['String']['input']>;
   arm_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreatestudy_SiteArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   registering_institution?: InputMaybe<Scalars['String']['input']>;
   site_short_name?: InputMaybe<Scalars['String']['input']>;
   veterinary_medical_center?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreatevisitArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   visit_date?: InputMaybe<Scalars['String']['input']>;
-  visit_number?: InputMaybe<Scalars['Int']['input']>;
-  visit_record_id?: InputMaybe<Scalars['String']['input']>;
+  visit_id?: InputMaybe<Scalars['String']['input']>;
+  visit_number?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreatevital_SignsArgs = {
-  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
   body_surface_area?: InputMaybe<Scalars['Float']['input']>;
   body_surface_area_original?: InputMaybe<Scalars['Float']['input']>;
   body_surface_area_original_unit?: InputMaybe<Scalars['String']['input']>;
@@ -1799,7 +1868,6 @@ export type MutationCreatevital_SignsArgs = {
   body_temperature_original?: InputMaybe<Scalars['Float']['input']>;
   body_temperature_original_unit?: InputMaybe<Scalars['String']['input']>;
   body_temperature_unit?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
   ecg?: InputMaybe<Scalars['String']['input']>;
   modified_ecog?: InputMaybe<Scalars['String']['input']>;
@@ -1807,6 +1875,7 @@ export type MutationCreatevital_SignsArgs = {
   patient_weight_original?: InputMaybe<Scalars['Float']['input']>;
   patient_weight_original_unit?: InputMaybe<Scalars['String']['input']>;
   patient_weight_unit?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
   pulse?: InputMaybe<Scalars['Int']['input']>;
   pulse_original?: InputMaybe<Scalars['Int']['input']>;
   pulse_original_unit?: InputMaybe<Scalars['String']['input']>;
@@ -1824,7 +1893,6 @@ export type MutationCreatevital_SignsArgs = {
   systolic_bp_original?: InputMaybe<Scalars['Int']['input']>;
   systolic_bp_original_unit?: InputMaybe<Scalars['String']['input']>;
   systolic_bp_unit?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationDeleteCartChartDataArgs = {
@@ -1860,7 +1928,7 @@ export type PhysicalExamNodeData = {
   __typename?: 'PhysicalExamNodeData';
   assessment_timepoint?: Maybe<Scalars['Int']['output']>;
   body_system?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   date_of_examination?: Maybe<Scalars['String']['output']>;
   day_in_cycle?: Maybe<Scalars['Int']['output']>;
   pe_comment?: Maybe<Scalars['String']['output']>;
@@ -1871,7 +1939,7 @@ export type PhysicalExamNodeData = {
 export type PriorSurgeryNodeData = {
   __typename?: 'PriorSurgeryNodeData';
   anatomical_site_of_surgery?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   date_of_surgery?: Maybe<Scalars['String']['output']>;
   procedure?: Maybe<Scalars['String']['output']>;
   residual_disease?: Maybe<Scalars['String']['output']>;
@@ -1941,13 +2009,16 @@ export type QueryType = {
   __typename?: 'QueryType';
   adverseEventNodeData?: Maybe<Array<Maybe<AdverseEventNodeData>>>;
   adverse_event: Array<Adverse_Event>;
+  agent: Array<Agent>;
   agentAdministrationNodeData?: Maybe<
     Array<Maybe<AgentAdministrationNodeData>>
   >;
   agentNodeData?: Maybe<Array<Maybe<AgentNodeData>>>;
+  agent_administration: Array<Agent_Administration>;
   aliquotCountOfCase?: Maybe<Scalars['Int']['output']>;
   aliquotCountOfProgram?: Maybe<Scalars['Int']['output']>;
   aliquotCountOfStudy?: Maybe<Scalars['Int']['output']>;
+  assay: Array<Assay>;
   biospecimen_source: Array<Biospecimen_Source>;
   breedCaseCount: Array<BreedCaseCount>;
   canine_individual: Array<Canine_Individual>;
@@ -1968,7 +2039,6 @@ export type QueryType = {
   clinicalDataNodeCounts?: Maybe<ClinicalDataNodeCounts>;
   clinicalDataNodeNames?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   cohort: Array<Cohort>;
-  consent_group: Array<Consent_Group>;
   createManifest?: Maybe<Scalars['String']['output']>;
   cycle: Array<Cycle>;
   cycleNodeData?: Maybe<Array<Maybe<CycleNodeData>>>;
@@ -1999,10 +2069,14 @@ export type QueryType = {
   filesOfCases?: Maybe<Array<Maybe<FilesOfCase>>>;
   filesOfStudy?: Maybe<Array<Maybe<File>>>;
   followUpNodeData?: Maybe<Array<Maybe<FollowUpNodeData>>>;
+  follow_up: Array<Follow_Up>;
   globalSearch?: Maybe<GlobalSearchResult>;
   groupCount: Array<GroupCount>;
   humanRelevanceNodeData?: Maybe<Array<Maybe<HumanRelevanceNodeData>>>;
   human_relevance: Array<Human_Relevance>;
+  image: Array<Image>;
+  image_collection: Array<Image_Collection>;
+  lab_exam: Array<Lab_Exam>;
   link: Array<Link>;
   multiStudyCases?: Maybe<MultiStudyCases>;
   numberOfAliquots?: Maybe<Scalars['Int']['output']>;
@@ -2015,6 +2089,8 @@ export type QueryType = {
   numberOfStudyFiles?: Maybe<Scalars['Int']['output']>;
   offStudyNodeData?: Maybe<Array<Maybe<OffStudyNodeData>>>;
   offTreatmentNodeData?: Maybe<Array<Maybe<OffTreatmentNodeData>>>;
+  off_study: Array<Off_Study>;
+  off_treatment: Array<Off_Treatment>;
   physicalExamNodeData?: Maybe<Array<Maybe<PhysicalExamNodeData>>>;
   physical_exam: Array<Physical_Exam>;
   principal_investigator: Array<Principal_Investigator>;
@@ -2044,7 +2120,7 @@ export type QueryType = {
   /** Count with parameter */
   sampleCountOfStudy?: Maybe<Scalars['Int']['output']>;
   sampleOverview?: Maybe<Array<Maybe<SampleOverviewEs>>>;
-  samplesByCaseRecordId?: Maybe<Array<Maybe<Sample>>>;
+  samplesByCaseId?: Maybe<Array<Maybe<Sample>>>;
   /** Version */
   schemaVersion?: Maybe<Scalars['String']['output']>;
   searchCases?: Maybe<SearchResult>;
@@ -2093,14 +2169,12 @@ export type QueryTypeAdverse_EventArgs = {
   adverse_event_description?: InputMaybe<Scalars['String']['input']>;
   adverse_event_grade?: InputMaybe<Scalars['String']['input']>;
   adverse_event_grade_description?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id?: InputMaybe<Scalars['String']['input']>;
   adverse_event_term?: InputMaybe<Scalars['String']['input']>;
   attribution_to_commercial?: InputMaybe<Scalars['String']['input']>;
   attribution_to_disease?: InputMaybe<Scalars['String']['input']>;
   attribution_to_ind?: InputMaybe<Scalars['String']['input']>;
   attribution_to_other?: InputMaybe<Scalars['String']['input']>;
   attribution_to_research?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_onset?: InputMaybe<Scalars['String']['input']>;
   date_of_resolution?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
@@ -2113,6 +2187,15 @@ export type QueryTypeAdverse_EventArgs = {
   orderBy?: InputMaybe<Array<_Adverse_EventOrdering>>;
   other_attribution_description?: InputMaybe<Scalars['String']['input']>;
   unexpected_adverse_event?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeAgentArgs = {
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_AgentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AgentOrdering>>;
 };
 
 export type QueryTypeAgentAdministrationNodeDataArgs = {
@@ -2131,8 +2214,47 @@ export type QueryTypeAgentNodeDataArgs = {
   study_code: Scalars['String']['input'];
 };
 
+export type QueryTypeAgent_AdministrationArgs = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  dose_level?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Agent_AdministrationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number?: InputMaybe<Scalars['String']['input']>;
+  medication_duration?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Agent_AdministrationOrdering>>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration?: InputMaybe<Scalars['String']['input']>;
+  start_time?: InputMaybe<Scalars['String']['input']>;
+  stop_time?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type QueryTypeAliquotCountOfCaseArgs = {
-  case_record_id: Scalars['String']['input'];
+  case_id: Scalars['String']['input'];
 };
 
 export type QueryTypeAliquotCountOfProgramArgs = {
@@ -2143,10 +2265,17 @@ export type QueryTypeAliquotCountOfStudyArgs = {
   study_code: Scalars['String']['input'];
 };
 
+export type QueryTypeAssayArgs = {
+  filter?: InputMaybe<_AssayFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AssayOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type QueryTypeBiospecimen_SourceArgs = {
   biospecimen_repository_acronym?: InputMaybe<Scalars['String']['input']>;
   biospecimen_repository_full_name?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_Biospecimen_SourceFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2164,7 +2293,6 @@ export type QueryTypeBreedCaseCountArgs = {
 
 export type QueryTypeCanine_IndividualArgs = {
   canine_individual_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_Canine_IndividualFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2203,8 +2331,7 @@ export type QueryTypeCartOverviewDataArgs = {
 };
 
 export type QueryTypeCaseArgs = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_CaseFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2222,13 +2349,13 @@ export type QueryTypeCaseCountOfStudyArgs = {
 };
 
 export type QueryTypeCaseDetailArgs = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryTypeCaseOverviewArgs = {
   biobank?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   diagnosis?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   disease_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   file_association?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -2259,7 +2386,7 @@ export type QueryTypeCaseOverview2Args = {
   age?: InputMaybe<Scalars['Float']['input']>;
   arm?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   cohort?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
@@ -2297,7 +2424,7 @@ export type QueryTypeCasesByStudyIdArgs = {
 };
 
 export type QueryTypeCasesInListArgs = {
-  case_record_ids: Array<Scalars['String']['input']>;
+  case_ids: Array<Scalars['String']['input']>;
   filter?: InputMaybe<_CaseOverviewFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2315,23 +2442,11 @@ export type QueryTypeClinicalDataNodeCountsArgs = {
 export type QueryTypeCohortArgs = {
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_dose?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  cohort_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_CohortFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_CohortOrdering>>;
-};
-
-export type QueryTypeConsent_GroupArgs = {
-  consent_group_name?: InputMaybe<Scalars['String']['input']>;
-  consent_group_number?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<_Consent_GroupFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<_Consent_GroupOrdering>>;
 };
 
 export type QueryTypeCreateManifestArgs = {
@@ -2343,9 +2458,7 @@ export type QueryTypeCreateManifestArgs = {
 };
 
 export type QueryTypeCycleArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   cycle_number?: InputMaybe<Scalars['Int']['input']>;
-  cycle_record_id?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_start?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_CycleFilter>;
@@ -2365,9 +2478,8 @@ export type QueryTypeCycleNodeDataArgs = {
 export type QueryTypeDemographicArgs = {
   additional_breed_detail?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_birth?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id?: InputMaybe<Scalars['String']['input']>;
+  demographic_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_DemographicFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   neutered_indicator?: InputMaybe<Scalars['String']['input']>;
@@ -2390,10 +2502,9 @@ export type QueryTypeDiagnosisArgs = {
   best_response?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
   date_of_histology_confirmation?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id?: InputMaybe<Scalars['String']['input']>;
   disease_term?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_DiagnosisFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2417,15 +2528,13 @@ export type QueryTypeDiseaseExtentNodeDataArgs = {
 };
 
 export type QueryTypeDisease_ExtentArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id?: InputMaybe<Scalars['String']['input']>;
   evaluation_code?: InputMaybe<Scalars['String']['input']>;
-  evaluation_number?: InputMaybe<Scalars['Int']['input']>;
+  evaluation_number?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_Disease_ExtentFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   lesion_description?: InputMaybe<Scalars['String']['input']>;
-  lesion_number?: InputMaybe<Scalars['Int']['input']>;
+  lesion_number?: InputMaybe<Scalars['String']['input']>;
   lesion_site?: InputMaybe<Scalars['String']['input']>;
   longest_measurement?: InputMaybe<Scalars['Float']['input']>;
   longest_measurement_original?: InputMaybe<Scalars['Float']['input']>;
@@ -2441,10 +2550,9 @@ export type QueryTypeDisease_ExtentArgs = {
 };
 
 export type QueryTypeEnrollmentArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_informed_consent?: InputMaybe<Scalars['String']['input']>;
   date_of_registration?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_EnrollmentFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   initials?: InputMaybe<Scalars['String']['input']>;
@@ -2465,12 +2573,11 @@ export type QueryTypeExternalDataOverviewArgs = {
 };
 
 export type QueryTypeFileArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   file_description?: InputMaybe<Scalars['String']['input']>;
   file_format?: InputMaybe<Scalars['String']['input']>;
   file_location?: InputMaybe<Scalars['String']['input']>;
   file_name?: InputMaybe<Scalars['String']['input']>;
-  file_size?: InputMaybe<Scalars['Int']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
   file_status?: InputMaybe<Scalars['String']['input']>;
   file_type?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_FileFilter>;
@@ -2482,7 +2589,7 @@ export type QueryTypeFileArgs = {
 };
 
 export type QueryTypeFileCountOfCaseArgs = {
-  case_record_id: Scalars['String']['input'];
+  case_id: Scalars['String']['input'];
 };
 
 export type QueryTypeFileCountOfProgramArgs = {
@@ -2529,8 +2636,8 @@ export type QueryTypeFileInListArgs = {
   association?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   case_name?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_dose?: InputMaybe<Scalars['String']['input']>;
   cohort_id?: InputMaybe<Scalars['String']['input']>;
@@ -2604,7 +2711,7 @@ export type QueryTypeFileInfoArgs = {
 export type QueryTypeFileOverviewArgs = {
   biobank?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   diagnosis?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   disease_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   file_association?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -2678,7 +2785,7 @@ export type QueryTypeFilesInListDescArgs = {
 };
 
 export type QueryTypeFilesOfCaseArgs = {
-  case_record_id: Scalars['String']['input'];
+  case_id: Scalars['String']['input'];
   filter?: InputMaybe<_FilesOfCaseFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2686,7 +2793,7 @@ export type QueryTypeFilesOfCaseArgs = {
 };
 
 export type QueryTypeFilesOfCasesArgs = {
-  case_record_ids: Array<Scalars['String']['input']>;
+  case_ids: Array<Scalars['String']['input']>;
   filter?: InputMaybe<_FilesOfCaseFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2707,6 +2814,21 @@ export type QueryTypeFollowUpNodeDataArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_FollowUpNodeDataOrdering>>;
   study_code: Scalars['String']['input'];
+};
+
+export type QueryTypeFollow_UpArgs = {
+  contact_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Follow_UpFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Follow_UpOrdering>>;
+  patient_status?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_performed?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_since_last_contact?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type QueryTypeGlobalSearchArgs = {
@@ -2749,6 +2871,34 @@ export type QueryTypeHuman_RelevanceArgs = {
   relevant_human_pathways?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type QueryTypeImageArgs = {
+  filter?: InputMaybe<_ImageFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_ImageOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeImage_CollectionArgs = {
+  collection_access?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Image_CollectionFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  image_collection_name?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url?: InputMaybe<Scalars['String']['input']>;
+  image_type_included?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Image_CollectionOrdering>>;
+  repository_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeLab_ExamArgs = {
+  filter?: InputMaybe<_Lab_ExamFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Lab_ExamOrdering>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type QueryTypeLinkArgs = {
   filter?: InputMaybe<_LinkFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2759,7 +2909,7 @@ export type QueryTypeLinkArgs = {
 };
 
 export type QueryTypeMultiStudyCasesArgs = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryTypeOffStudyNodeDataArgs = {
@@ -2778,6 +2928,41 @@ export type QueryTypeOffTreatmentNodeDataArgs = {
   study_code: Scalars['String']['input'];
 };
 
+export type QueryTypeOff_StudyArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_study?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Off_StudyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Off_StudyOrdering>>;
+  reason_off_study?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypeOff_TreatmentArgs = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<_Off_TreatmentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Off_TreatmentOrdering>>;
+  reason_off_treatment?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type QueryTypePhysicalExamNodeDataArgs = {
   filter?: InputMaybe<_PhysicalExamNodeDataFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2787,9 +2972,8 @@ export type QueryTypePhysicalExamNodeDataArgs = {
 };
 
 export type QueryTypePhysical_ExamArgs = {
-  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
   filter?: InputMaybe<_Physical_ExamFilter>;
@@ -2799,16 +2983,13 @@ export type QueryTypePhysical_ExamArgs = {
   pe_comment?: InputMaybe<Scalars['String']['input']>;
   pe_finding?: InputMaybe<Scalars['String']['input']>;
   phase_pe?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryTypePrincipal_InvestigatorArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_Principal_InvestigatorFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_Principal_InvestigatorOrdering>>;
-  person_record_id?: InputMaybe<Scalars['String']['input']>;
   pi_first_name?: InputMaybe<Scalars['String']['input']>;
   pi_last_name?: InputMaybe<Scalars['String']['input']>;
   pi_middle_initial?: InputMaybe<Scalars['String']['input']>;
@@ -2836,13 +3017,11 @@ export type QueryTypePriorTherapyNodeDataArgs = {
 
 export type QueryTypePrior_SurgeryArgs = {
   anatomical_site_of_surgery?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_Prior_SurgeryFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_Prior_SurgeryOrdering>>;
-  prior_surgery_record_id?: InputMaybe<Scalars['String']['input']>;
   procedure?: InputMaybe<Scalars['String']['input']>;
   residual_disease?: InputMaybe<Scalars['String']['input']>;
   surgical_finding?: InputMaybe<Scalars['String']['input']>;
@@ -2854,7 +3033,6 @@ export type QueryTypePrior_TherapyArgs = {
   agent_units_of_measure?: InputMaybe<Scalars['String']['input']>;
   any_therapy?: InputMaybe<Scalars['Boolean']['input']>;
   best_response_to_prior_therapy?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_first_dose?: InputMaybe<Scalars['String']['input']>;
   date_of_last_dose?: InputMaybe<Scalars['String']['input']>;
   date_of_last_dose_any_therapy?: InputMaybe<Scalars['String']['input']>;
@@ -2874,7 +3052,6 @@ export type QueryTypePrior_TherapyArgs = {
   orderBy?: InputMaybe<Array<_Prior_TherapyOrdering>>;
   prior_nsaid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
   prior_steroid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
-  prior_therapy_record_id?: InputMaybe<Scalars['String']['input']>;
   prior_therapy_type?: InputMaybe<Scalars['String']['input']>;
   therapy_type?: InputMaybe<Scalars['String']['input']>;
   total_dose?: InputMaybe<Scalars['Float']['input']>;
@@ -2892,7 +3069,6 @@ export type QueryTypePrior_TherapyArgs = {
 };
 
 export type QueryTypeProgramArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_ProgramFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -2910,12 +3086,11 @@ export type QueryTypeProgramCountOfStudyArgs = {
 };
 
 export type QueryTypeProgramsCountOfCaseArgs = {
-  case_record_id: Scalars['String']['input'];
+  case_id: Scalars['String']['input'];
 };
 
 export type QueryTypePublicationArgs = {
   authorship?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   digital_object_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_PublicationFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2928,18 +3103,16 @@ export type QueryTypePublicationArgs = {
 };
 
 export type QueryTypeRegistrationArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_RegistrationFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_RegistrationOrdering>>;
+  registration_id?: InputMaybe<Scalars['String']['input']>;
   registration_origin?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryTypeSampleArgs = {
   comment?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_SampleFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -2973,7 +3146,7 @@ export type QueryTypeSampleArgs = {
 };
 
 export type QueryTypeSampleCountOfCaseArgs = {
-  case_record_id: Scalars['String']['input'];
+  case_id: Scalars['String']['input'];
 };
 
 export type QueryTypeSampleCountOfProgramArgs = {
@@ -2987,7 +3160,7 @@ export type QueryTypeSampleCountOfStudyArgs = {
 export type QueryTypeSampleOverviewArgs = {
   biobank?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   diagnosis?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   disease_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   file_association?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3015,8 +3188,8 @@ export type QueryTypeSampleOverviewArgs = {
   study_type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type QueryTypeSamplesByCaseRecordIdArgs = {
-  case_record_id: Scalars['String']['input'];
+export type QueryTypeSamplesByCaseIdArgs = {
+  case_id: Scalars['String']['input'];
   filter?: InputMaybe<_SampleFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -3026,7 +3199,7 @@ export type QueryTypeSamplesByCaseRecordIdArgs = {
 export type QueryTypeSearchCasesArgs = {
   biobank?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   diagnosis?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   disease_site?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   file_association?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -3076,7 +3249,6 @@ export type QueryTypeStudyArgs = {
   clinical_study_id?: InputMaybe<Scalars['String']['input']>;
   clinical_study_name?: InputMaybe<Scalars['String']['input']>;
   clinical_study_type?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_iacuc_approval?: InputMaybe<Scalars['String']['input']>;
   dates_of_conduct?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_StudyFilter>;
@@ -3099,7 +3271,7 @@ export type QueryTypeStudyDetailArgs = {
 };
 
 export type QueryTypeStudyFileCountOfCaseArgs = {
-  case_record_id: Scalars['String']['input'];
+  case_id: Scalars['String']['input'];
 };
 
 export type QueryTypeStudyFileCountOfProgramArgs = {
@@ -3188,7 +3360,7 @@ export type QueryTypeStudy_ArmArgs = {
   arm?: InputMaybe<Scalars['String']['input']>;
   arm_description?: InputMaybe<Scalars['String']['input']>;
   arm_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_Study_ArmFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -3196,7 +3368,6 @@ export type QueryTypeStudy_ArmArgs = {
 };
 
 export type QueryTypeStudy_SiteArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_Study_SiteFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -3222,18 +3393,17 @@ export type QueryTypeUnifiedCountsArgs = {
 };
 
 export type QueryTypeUnifiedViewDataArgs = {
-  case_record_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type QueryTypeVisitArgs = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_VisitFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_VisitOrdering>>;
   visit_date?: InputMaybe<Scalars['String']['input']>;
-  visit_number?: InputMaybe<Scalars['Int']['input']>;
-  visit_record_id?: InputMaybe<Scalars['String']['input']>;
+  visit_id?: InputMaybe<Scalars['String']['input']>;
+  visit_number?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryTypeVisitNodeDataArgs = {
@@ -3253,7 +3423,7 @@ export type QueryTypeVitalSignsNodeDataArgs = {
 };
 
 export type QueryTypeVital_SignsArgs = {
-  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
   body_surface_area?: InputMaybe<Scalars['Float']['input']>;
   body_surface_area_original?: InputMaybe<Scalars['Float']['input']>;
   body_surface_area_original_unit?: InputMaybe<Scalars['String']['input']>;
@@ -3262,7 +3432,6 @@ export type QueryTypeVital_SignsArgs = {
   body_temperature_original?: InputMaybe<Scalars['Float']['input']>;
   body_temperature_original_unit?: InputMaybe<Scalars['String']['input']>;
   body_temperature_unit?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
   ecg?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<_Vital_SignsFilter>;
@@ -3274,6 +3443,7 @@ export type QueryTypeVital_SignsArgs = {
   patient_weight_original?: InputMaybe<Scalars['Float']['input']>;
   patient_weight_original_unit?: InputMaybe<Scalars['String']['input']>;
   patient_weight_unit?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
   pulse?: InputMaybe<Scalars['Int']['input']>;
   pulse_original?: InputMaybe<Scalars['Int']['input']>;
   pulse_original_unit?: InputMaybe<Scalars['String']['input']>;
@@ -3291,11 +3461,10 @@ export type QueryTypeVital_SignsArgs = {
   systolic_bp_original?: InputMaybe<Scalars['Int']['input']>;
   systolic_bp_original_unit?: InputMaybe<Scalars['String']['input']>;
   systolic_bp_unit?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryTypeVolumeOfDataOfCaseArgs = {
-  case_record_id: Scalars['String']['input'];
+  case_id: Scalars['String']['input'];
 };
 
 export type QueryTypeVolumeOfDataOfProgramArgs = {
@@ -3317,7 +3486,7 @@ export type SampleOverview = {
   arm?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   cohort_description?: Maybe<Scalars['String']['output']>;
   comment?: Maybe<Scalars['String']['output']>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
@@ -3357,8 +3526,8 @@ export type SampleOverviewEs = {
   arm?: Maybe<Scalars['String']['output']>;
   best_response?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
-  case_record_id_lc?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
+  case_id_lc?: Maybe<Scalars['String']['output']>;
   cohort_description?: Maybe<Scalars['String']['output']>;
   comment?: Maybe<Scalars['String']['output']>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
@@ -3407,7 +3576,7 @@ export type SearchResult = {
   caseCountByStudyCode?: Maybe<Array<Maybe<GroupCountEs>>>;
   caseCountByStudyParticipation?: Maybe<Array<Maybe<GroupCountEs>>>;
   caseCountByStudyType?: Maybe<Array<Maybe<GroupCountEs>>>;
-  caseRecordIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  caseIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   fileIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   filterCaseCountByBiobank?: Maybe<Array<Maybe<GroupCountEs>>>;
   filterCaseCountByBreed?: Maybe<Array<Maybe<GroupCountEs>>>;
@@ -3525,7 +3694,7 @@ export type UnifiedCounts = {
 
 export type VisitNodeData = {
   __typename?: 'VisitNodeData';
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   visit_date?: Maybe<Scalars['String']['output']>;
   visit_id?: Maybe<Scalars['String']['output']>;
   visit_number?: Maybe<Scalars['Int']['output']>;
@@ -3541,7 +3710,7 @@ export type VitalSignsNodeData = {
   body_temperature_original?: Maybe<Scalars['Float']['output']>;
   body_temperature_original_unit?: Maybe<Scalars['String']['output']>;
   body_temperature_unit?: Maybe<Scalars['String']['output']>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   date_of_vital_signs?: Maybe<Scalars['String']['output']>;
   modified_ecog?: Maybe<Scalars['String']['output']>;
   patient_weight?: Maybe<Scalars['Float']['output']>;
@@ -3823,23 +3992,21 @@ export type _AdverseEventNodeDataFilter = {
     Scalars['String']['input']
   >;
   attribution_to_research_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_onset?: InputMaybe<Scalars['String']['input']>;
   date_of_onset_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_onset_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -4019,7 +4186,7 @@ export type _AdverseEventNodeDataInput = {
   attribution_to_ind?: InputMaybe<Scalars['String']['input']>;
   attribution_to_other?: InputMaybe<Scalars['String']['input']>;
   attribution_to_research?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_onset?: InputMaybe<Scalars['String']['input']>;
   date_of_resolution?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
@@ -4053,8 +4220,8 @@ export enum _AdverseEventNodeDataOrdering {
   AttributionToOtherDesc = 'attribution_to_other_desc',
   AttributionToResearchAsc = 'attribution_to_research_asc',
   AttributionToResearchDesc = 'attribution_to_research_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   DateOfOnsetAsc = 'date_of_onset_asc',
   DateOfOnsetDesc = 'date_of_onset_desc',
   DateOfResolutionAsc = 'date_of_resolution_asc',
@@ -4858,23 +5025,21 @@ export type _CaseDetailFilter = {
   breed_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   breed_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation_contains?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -5299,7 +5464,7 @@ export type _CaseDetailInput = {
   arm?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
   clinical_study_name?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
@@ -5331,8 +5496,8 @@ export enum _CaseDetailOrdering {
   BestResponseDesc = 'best_response_desc',
   BreedAsc = 'breed_asc',
   BreedDesc = 'breed_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   ClinicalStudyDesignationAsc = 'clinical_study_designation_asc',
   ClinicalStudyDesignationDesc = 'clinical_study_designation_desc',
   ClinicalStudyNameAsc = 'clinical_study_name_asc',
@@ -5421,23 +5586,21 @@ export type _CaseOverview2Filter = {
   breed_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   breed_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   cohort?: InputMaybe<Scalars['String']['input']>;
   cohort_contains?: InputMaybe<Scalars['String']['input']>;
   cohort_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -5827,7 +5990,7 @@ export type _CaseOverview2Input = {
   age?: InputMaybe<Scalars['Float']['input']>;
   arm?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   cohort?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
@@ -5859,8 +6022,8 @@ export enum _CaseOverview2Ordering {
   ArmDesc = 'arm_desc',
   BreedAsc = 'breed_asc',
   BreedDesc = 'breed_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   CohortAsc = 'cohort_asc',
   CohortDesc = 'cohort_desc',
   ConcurrentDiseaseAsc = 'concurrent_disease_asc',
@@ -5934,23 +6097,21 @@ export type _CaseOverviewFilter = {
   breed_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   breed_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   data_types?: InputMaybe<Scalars['String']['input']>;
   data_types_contains?: InputMaybe<Scalars['String']['input']>;
   data_types_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -6177,7 +6338,7 @@ export type _CaseOverviewFilter = {
 export type _CaseOverviewInput = {
   age?: InputMaybe<Scalars['Float']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   data_types?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   diagnosis?: InputMaybe<Scalars['String']['input']>;
   disease_site?: InputMaybe<Scalars['String']['input']>;
@@ -6196,8 +6357,8 @@ export enum _CaseOverviewOrdering {
   AgeDesc = 'age_desc',
   BreedAsc = 'breed_asc',
   BreedDesc = 'breed_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   DataTypesAsc = 'data_types_asc',
   DataTypesDesc = 'data_types_desc',
   DiagnosisAsc = 'diagnosis_asc',
@@ -6398,23 +6559,21 @@ export type _CycleNodeDataFilter = {
   AND?: InputMaybe<Array<_CycleNodeDataFilter>>;
   NOT?: InputMaybe<Array<_CycleNodeDataFilter>>;
   OR?: InputMaybe<Array<_CycleNodeDataFilter>>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   crf_id?: InputMaybe<Scalars['String']['input']>;
   crf_id_contains?: InputMaybe<Scalars['String']['input']>;
   crf_id_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -6479,7 +6638,7 @@ export type _CycleNodeDataFilter = {
 };
 
 export type _CycleNodeDataInput = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   crf_id?: InputMaybe<Scalars['String']['input']>;
   cycle_number?: InputMaybe<Scalars['Int']['input']>;
   date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
@@ -6487,8 +6646,8 @@ export type _CycleNodeDataInput = {
 };
 
 export enum _CycleNodeDataOrdering {
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   CrfIdAsc = 'crf_id_asc',
   CrfIdDesc = 'crf_id_desc',
   CycleNumberAsc = 'cycle_number_asc',
@@ -6503,23 +6662,21 @@ export type _DiseaseExtentNodeDataFilter = {
   AND?: InputMaybe<Array<_DiseaseExtentNodeDataFilter>>;
   NOT?: InputMaybe<Array<_DiseaseExtentNodeDataFilter>>;
   OR?: InputMaybe<Array<_DiseaseExtentNodeDataFilter>>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -6736,7 +6893,7 @@ export type _DiseaseExtentNodeDataFilter = {
 };
 
 export type _DiseaseExtentNodeDataInput = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
   evaluation_code?: InputMaybe<Scalars['String']['input']>;
   evaluation_number?: InputMaybe<Scalars['String']['input']>;
@@ -6752,8 +6909,8 @@ export type _DiseaseExtentNodeDataInput = {
 };
 
 export enum _DiseaseExtentNodeDataOrdering {
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   DateOfEvaluationAsc = 'date_of_evaluation_asc',
   DateOfEvaluationDesc = 'date_of_evaluation_desc',
   EvaluationCodeAsc = 'evaluation_code_asc',
@@ -6844,23 +7001,21 @@ export type _FileDetailFilter = {
   breed_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   breed_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation_contains?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -7459,7 +7614,7 @@ export type _FileDetailInput = {
   acl?: InputMaybe<Scalars['String']['input']>;
   arm?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   clinical_study_designation?: InputMaybe<Scalars['String']['input']>;
   clinical_study_name?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
@@ -7508,8 +7663,8 @@ export enum _FileDetailOrdering {
   ArmDesc = 'arm_desc',
   BreedAsc = 'breed_asc',
   BreedDesc = 'breed_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   ClinicalStudyDesignationAsc = 'clinical_study_designation_asc',
   ClinicalStudyDesignationDesc = 'clinical_study_designation_desc',
   ClinicalStudyNameAsc = 'clinical_study_name_asc',
@@ -7677,6 +7832,21 @@ export type _FileInListFilter = {
   breed_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   breed_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   case_name?: InputMaybe<Scalars['String']['input']>;
   case_name_contains?: InputMaybe<Scalars['String']['input']>;
   case_name_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -7692,23 +7862,6 @@ export type _FileInListFilter = {
   case_name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   case_name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   case_name_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_description_contains?: InputMaybe<Scalars['String']['input']>;
   cohort_description_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -8718,8 +8871,8 @@ export type _FileInListInput = {
   association?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   case_name?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_dose?: InputMaybe<Scalars['String']['input']>;
   cohort_id?: InputMaybe<Scalars['String']['input']>;
@@ -8789,10 +8942,10 @@ export enum _FileInListOrdering {
   BestResponseDesc = 'best_response_desc',
   BreedAsc = 'breed_asc',
   BreedDesc = 'breed_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   CaseNameAsc = 'case_name_asc',
   CaseNameDesc = 'case_name_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
   CohortDescriptionAsc = 'cohort_description_asc',
   CohortDescriptionDesc = 'cohort_description_desc',
   CohortDoseAsc = 'cohort_dose_asc',
@@ -9265,23 +9418,21 @@ export type _FileOverviewFilter = {
   breed_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   breed_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_description_contains?: InputMaybe<Scalars['String']['input']>;
   cohort_description_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -10009,7 +10160,7 @@ export type _FileOverviewInput = {
   association?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   comment?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
@@ -10060,8 +10211,8 @@ export enum _FileOverviewOrdering {
   BestResponseDesc = 'best_response_desc',
   BreedAsc = 'breed_asc',
   BreedDesc = 'breed_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   CohortDescriptionAsc = 'cohort_description_asc',
   CohortDescriptionDesc = 'cohort_description_desc',
   CommentAsc = 'comment_asc',
@@ -10146,23 +10297,21 @@ export type _FilesOfCaseFilter = {
   AND?: InputMaybe<Array<_FilesOfCaseFilter>>;
   NOT?: InputMaybe<Array<_FilesOfCaseFilter>>;
   OR?: InputMaybe<Array<_FilesOfCaseFilter>>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   file_description?: InputMaybe<Scalars['String']['input']>;
   file_description_contains?: InputMaybe<Scalars['String']['input']>;
   file_description_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -10319,7 +10468,7 @@ export type _FilesOfCaseFilter = {
 };
 
 export type _FilesOfCaseInput = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   file_description?: InputMaybe<Scalars['String']['input']>;
   file_format?: InputMaybe<Scalars['String']['input']>;
   file_location?: InputMaybe<Scalars['String']['input']>;
@@ -10333,8 +10482,8 @@ export type _FilesOfCaseInput = {
 };
 
 export enum _FilesOfCaseOrdering {
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   FileDescriptionAsc = 'file_description_asc',
   FileDescriptionDesc = 'file_description_desc',
   FileFormatAsc = 'file_format_asc',
@@ -10845,23 +10994,21 @@ export type _MultiStudyCasesFilter = {
   AND?: InputMaybe<Array<_MultiStudyCasesFilter>>;
   NOT?: InputMaybe<Array<_MultiStudyCasesFilter>>;
   OR?: InputMaybe<Array<_MultiStudyCasesFilter>>;
-  caseRecordIds?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_contains?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_ends_with?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_gt?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_gte?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  caseRecordIds_lt?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_lte?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_matches?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_not?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_not_contains?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  caseRecordIds_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  caseRecordIds_starts_with?: InputMaybe<Scalars['String']['input']>;
+  caseIds?: InputMaybe<Scalars['String']['input']>;
+  caseIds_contains?: InputMaybe<Scalars['String']['input']>;
+  caseIds_ends_with?: InputMaybe<Scalars['String']['input']>;
+  caseIds_gt?: InputMaybe<Scalars['String']['input']>;
+  caseIds_gte?: InputMaybe<Scalars['String']['input']>;
+  caseIds_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  caseIds_lt?: InputMaybe<Scalars['String']['input']>;
+  caseIds_lte?: InputMaybe<Scalars['String']['input']>;
+  caseIds_matches?: InputMaybe<Scalars['String']['input']>;
+  caseIds_not?: InputMaybe<Scalars['String']['input']>;
+  caseIds_not_contains?: InputMaybe<Scalars['String']['input']>;
+  caseIds_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  caseIds_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  caseIds_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  caseIds_starts_with?: InputMaybe<Scalars['String']['input']>;
   fileIds?: InputMaybe<Scalars['String']['input']>;
   fileIds_contains?: InputMaybe<Scalars['String']['input']>;
   fileIds_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -10929,7 +11076,7 @@ export type _MultiStudyCasesFilter = {
 };
 
 export type _MultiStudyCasesInput = {
-  caseRecordIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  caseIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   fileIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   individualId?: InputMaybe<Scalars['String']['input']>;
   sampleIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -10937,8 +11084,8 @@ export type _MultiStudyCasesInput = {
 };
 
 export enum _MultiStudyCasesOrdering {
-  CaseRecordIdsAsc = 'caseRecordIds_asc',
-  CaseRecordIdsDesc = 'caseRecordIds_desc',
+  CaseIdsAsc = 'caseIds_asc',
+  CaseIdsDesc = 'caseIds_desc',
   FileIdsAsc = 'fileIds_asc',
   FileIdsDesc = 'fileIds_desc',
   IndividualIdAsc = 'individualId_asc',
@@ -11717,23 +11864,21 @@ export type _PhysicalExamNodeDataFilter = {
   >;
   body_system_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   body_system_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   date_of_examination_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_examination_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -11804,7 +11949,7 @@ export type _PhysicalExamNodeDataFilter = {
 export type _PhysicalExamNodeDataInput = {
   assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
   pe_comment?: InputMaybe<Scalars['String']['input']>;
@@ -11817,8 +11962,8 @@ export enum _PhysicalExamNodeDataOrdering {
   AssessmentTimepointDesc = 'assessment_timepoint_desc',
   BodySystemAsc = 'body_system_asc',
   BodySystemDesc = 'body_system_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   DateOfExaminationAsc = 'date_of_examination_asc',
   DateOfExaminationDesc = 'date_of_examination_desc',
   DayInCycleAsc = 'day_in_cycle_asc',
@@ -11862,23 +12007,21 @@ export type _PriorSurgeryNodeDataFilter = {
   anatomical_site_of_surgery_starts_with?: InputMaybe<
     Scalars['String']['input']
   >;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -11976,7 +12119,7 @@ export type _PriorSurgeryNodeDataFilter = {
 
 export type _PriorSurgeryNodeDataInput = {
   anatomical_site_of_surgery?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery?: InputMaybe<Scalars['String']['input']>;
   procedure?: InputMaybe<Scalars['String']['input']>;
   residual_disease?: InputMaybe<Scalars['String']['input']>;
@@ -11987,8 +12130,8 @@ export type _PriorSurgeryNodeDataInput = {
 export enum _PriorSurgeryNodeDataOrdering {
   AnatomicalSiteOfSurgeryAsc = 'anatomical_site_of_surgery_asc',
   AnatomicalSiteOfSurgeryDesc = 'anatomical_site_of_surgery_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   DateOfSurgeryAsc = 'date_of_surgery_asc',
   DateOfSurgeryDesc = 'date_of_surgery_desc',
   ProcedureAsc = 'procedure_asc',
@@ -12619,23 +12762,21 @@ export type _SampleOverviewFilter = {
   breed_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   breed_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   breed_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_description_contains?: InputMaybe<Scalars['String']['input']>;
   cohort_description_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -13234,7 +13375,7 @@ export type _SampleOverviewInput = {
   arm?: InputMaybe<Scalars['String']['input']>;
   best_response?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   comment?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
@@ -13276,8 +13417,8 @@ export enum _SampleOverviewOrdering {
   BestResponseDesc = 'best_response_desc',
   BreedAsc = 'breed_asc',
   BreedDesc = 'breed_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   CohortDescriptionAsc = 'cohort_description_asc',
   CohortDescriptionDesc = 'cohort_description_desc',
   CommentAsc = 'comment_asc',
@@ -14029,23 +14170,21 @@ export type _VisitNodeDataFilter = {
   AND?: InputMaybe<Array<_VisitNodeDataFilter>>;
   NOT?: InputMaybe<Array<_VisitNodeDataFilter>>;
   OR?: InputMaybe<Array<_VisitNodeDataFilter>>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   visit_date?: InputMaybe<Scalars['String']['input']>;
   visit_date_contains?: InputMaybe<Scalars['String']['input']>;
   visit_date_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -14087,15 +14226,15 @@ export type _VisitNodeDataFilter = {
 };
 
 export type _VisitNodeDataInput = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   visit_date?: InputMaybe<Scalars['String']['input']>;
   visit_id?: InputMaybe<Scalars['String']['input']>;
   visit_number?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export enum _VisitNodeDataOrdering {
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   VisitDateAsc = 'visit_date_asc',
   VisitDateDesc = 'visit_date_desc',
   VisitIdAsc = 'visit_id_asc',
@@ -14264,23 +14403,21 @@ export type _VitalSignsNodeDataFilter = {
     Scalars['String']['input']
   >;
   body_temperature_unit_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -14628,7 +14765,7 @@ export type _VitalSignsNodeDataInput = {
   body_temperature_original?: InputMaybe<Scalars['Float']['input']>;
   body_temperature_original_unit?: InputMaybe<Scalars['String']['input']>;
   body_temperature_unit?: InputMaybe<Scalars['String']['input']>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
   modified_ecog?: InputMaybe<Scalars['String']['input']>;
   patient_weight?: InputMaybe<Scalars['Float']['input']>;
@@ -14666,8 +14803,8 @@ export enum _VitalSignsNodeDataOrdering {
   BodyTemperatureOriginalUnitDesc = 'body_temperature_original_unit_desc',
   BodyTemperatureUnitAsc = 'body_temperature_unit_asc',
   BodyTemperatureUnitDesc = 'body_temperature_unit_desc',
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   DateOfVitalSignsAsc = 'date_of_vital_signs_asc',
   DateOfVitalSignsDesc = 'date_of_vital_signs_desc',
   ModifiedEcogAsc = 'modified_ecog_asc',
@@ -14839,29 +14976,6 @@ export type _Adverse_EventFilter = {
   >;
   adverse_event_grade_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   adverse_event_grade_starts_with?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  adverse_event_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id_not_ends_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  adverse_event_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  adverse_event_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  adverse_event_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   adverse_event_term?: InputMaybe<Scalars['String']['input']>;
   adverse_event_term_contains?: InputMaybe<Scalars['String']['input']>;
   adverse_event_term_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -14881,6 +14995,16 @@ export type _Adverse_EventFilter = {
   >;
   adverse_event_term_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   adverse_event_term_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** Filters only those `adverse_event` for which the `agent`-relationship matches this filter. If `null` is passed to this field, only those `adverse_event` will be filtered which has no `agent`-relations */
+  agent?: InputMaybe<_AgentFilter>;
+  /** @deprecated Use the `agent_not`-field */
+  agent_none?: InputMaybe<_AgentFilter>;
+  /** Filters only those `adverse_event` for which the `agent`-relationship does not match this filter. If `null` is passed to this field, only those `adverse_event` will be filtered which has any `agent`-relation */
+  agent_not?: InputMaybe<_AgentFilter>;
+  /** @deprecated Use the `agent`-field directly (without any suffix) */
+  agent_single?: InputMaybe<_AgentFilter>;
+  /** @deprecated Use the `agent`-field directly (without any suffix) */
+  agent_some?: InputMaybe<_AgentFilter>;
   attribution_to_commercial?: InputMaybe<Scalars['String']['input']>;
   attribution_to_commercial_contains?: InputMaybe<Scalars['String']['input']>;
   attribution_to_commercial_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -15012,21 +15136,6 @@ export type _Adverse_EventFilter = {
   cases_single?: InputMaybe<_CaseFilter>;
   /** Filters only those `adverse_event` for which at least one `cases`-relationship matches this filter */
   cases_some?: InputMaybe<_CaseFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_onset?: InputMaybe<Scalars['String']['input']>;
   date_of_onset_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_onset_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -15220,14 +15329,12 @@ export type _Adverse_EventInput = {
   adverse_event_description?: InputMaybe<Scalars['String']['input']>;
   adverse_event_grade?: InputMaybe<Scalars['String']['input']>;
   adverse_event_grade_description?: InputMaybe<Scalars['String']['input']>;
-  adverse_event_record_id?: InputMaybe<Scalars['String']['input']>;
   adverse_event_term?: InputMaybe<Scalars['String']['input']>;
   attribution_to_commercial?: InputMaybe<Scalars['String']['input']>;
   attribution_to_disease?: InputMaybe<Scalars['String']['input']>;
   attribution_to_ind?: InputMaybe<Scalars['String']['input']>;
   attribution_to_other?: InputMaybe<Scalars['String']['input']>;
   attribution_to_research?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_onset?: InputMaybe<Scalars['String']['input']>;
   date_of_resolution?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
@@ -15249,8 +15356,6 @@ export enum _Adverse_EventOrdering {
   AdverseEventGradeDesc = 'adverse_event_grade_desc',
   AdverseEventGradeDescriptionAsc = 'adverse_event_grade_description_asc',
   AdverseEventGradeDescriptionDesc = 'adverse_event_grade_description_desc',
-  AdverseEventRecordIdAsc = 'adverse_event_record_id_asc',
-  AdverseEventRecordIdDesc = 'adverse_event_record_id_desc',
   AdverseEventTermAsc = 'adverse_event_term_asc',
   AdverseEventTermDesc = 'adverse_event_term_desc',
   AttributionToCommercialAsc = 'attribution_to_commercial_asc',
@@ -15263,8 +15368,6 @@ export enum _Adverse_EventOrdering {
   AttributionToOtherDesc = 'attribution_to_other_desc',
   AttributionToResearchAsc = 'attribution_to_research_asc',
   AttributionToResearchDesc = 'attribution_to_research_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfOnsetAsc = 'date_of_onset_asc',
   DateOfOnsetDesc = 'date_of_onset_desc',
   DateOfResolutionAsc = 'date_of_resolution_asc',
@@ -15281,6 +15384,978 @@ export enum _Adverse_EventOrdering {
   OtherAttributionDescriptionDesc = 'other_attribution_description_desc',
   UnexpectedAdverseEventAsc = 'unexpected_adverse_event_asc',
   UnexpectedAdverseEventDesc = 'unexpected_adverse_event_desc',
+}
+
+export type _AgentFilter = {
+  AND?: InputMaybe<Array<_AgentFilter>>;
+  NOT?: InputMaybe<Array<_AgentFilter>>;
+  OR?: InputMaybe<Array<_AgentFilter>>;
+  /** Filters only those `agent` for which all `adverse_events`-relationship matches this filter. If `null` is passed to this field, only those `agent` will be filtered which has no `adverse_events`-relations */
+  adverse_events?: InputMaybe<_Adverse_EventFilter>;
+  /** Filters only those `agent` for which all `adverse_events`-relationships matches this filter */
+  adverse_events_every?: InputMaybe<_Adverse_EventFilter>;
+  /** Filters only those `agent` for which none of the `adverse_events`-relationships matches this filter */
+  adverse_events_none?: InputMaybe<_Adverse_EventFilter>;
+  /** Filters only those `agent` for which all `adverse_events`-relationship does not match this filter. If `null` is passed to this field, only those `agent` will be filtered which has any `adverse_events`-relation */
+  adverse_events_not?: InputMaybe<_Adverse_EventFilter>;
+  /** Filters only those `agent` for which exactly one `adverse_events`-relationship matches this filter */
+  adverse_events_single?: InputMaybe<_Adverse_EventFilter>;
+  /** Filters only those `agent` for which at least one `adverse_events`-relationship matches this filter */
+  adverse_events_some?: InputMaybe<_Adverse_EventFilter>;
+  /** Filters only those `agent` for which all `agent_administrations`-relationship matches this filter. If `null` is passed to this field, only those `agent` will be filtered which has no `agent_administrations`-relations */
+  agent_administrations?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `agent` for which all `agent_administrations`-relationships matches this filter */
+  agent_administrations_every?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `agent` for which none of the `agent_administrations`-relationships matches this filter */
+  agent_administrations_none?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `agent` for which all `agent_administrations`-relationship does not match this filter. If `null` is passed to this field, only those `agent` will be filtered which has any `agent_administrations`-relation */
+  agent_administrations_not?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `agent` for which exactly one `agent_administrations`-relationship matches this filter */
+  agent_administrations_single?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `agent` for which at least one `agent_administrations`-relationship matches this filter */
+  agent_administrations_some?: InputMaybe<_Agent_AdministrationFilter>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  document_number_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_gt?: InputMaybe<Scalars['String']['input']>;
+  document_number_gte?: InputMaybe<Scalars['String']['input']>;
+  document_number_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_lt?: InputMaybe<Scalars['String']['input']>;
+  document_number_lte?: InputMaybe<Scalars['String']['input']>;
+  document_number_matches?: InputMaybe<Scalars['String']['input']>;
+  document_number_not?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  medication_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  medication_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_not?: InputMaybe<Scalars['String']['input']>;
+  medication_not_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  medication_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** Filters only those `agent` for which all `study_arms`-relationship matches this filter. If `null` is passed to this field, only those `agent` will be filtered which has no `study_arms`-relations */
+  study_arms?: InputMaybe<_Study_ArmFilter>;
+  /** Filters only those `agent` for which all `study_arms`-relationships matches this filter */
+  study_arms_every?: InputMaybe<_Study_ArmFilter>;
+  /** Filters only those `agent` for which none of the `study_arms`-relationships matches this filter */
+  study_arms_none?: InputMaybe<_Study_ArmFilter>;
+  /** Filters only those `agent` for which all `study_arms`-relationship does not match this filter. If `null` is passed to this field, only those `agent` will be filtered which has any `study_arms`-relation */
+  study_arms_not?: InputMaybe<_Study_ArmFilter>;
+  /** Filters only those `agent` for which exactly one `study_arms`-relationship matches this filter */
+  study_arms_single?: InputMaybe<_Study_ArmFilter>;
+  /** Filters only those `agent` for which at least one `study_arms`-relationship matches this filter */
+  study_arms_some?: InputMaybe<_Study_ArmFilter>;
+};
+
+export type _AgentInput = {
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _AgentOrdering {
+  DocumentNumberAsc = 'document_number_asc',
+  DocumentNumberDesc = 'document_number_desc',
+  MedicationAsc = 'medication_asc',
+  MedicationDesc = 'medication_desc',
+}
+
+export type _Agent_AdministrationFilter = {
+  AND?: InputMaybe<Array<_Agent_AdministrationFilter>>;
+  NOT?: InputMaybe<Array<_Agent_AdministrationFilter>>;
+  OR?: InputMaybe<Array<_Agent_AdministrationFilter>>;
+  /** Filters only those `agent_administration` for which the `agent`-relationship matches this filter. If `null` is passed to this field, only those `agent_administration` will be filtered which has no `agent`-relations */
+  agent?: InputMaybe<_AgentFilter>;
+  /** @deprecated Use the `agent_not`-field */
+  agent_none?: InputMaybe<_AgentFilter>;
+  /** Filters only those `agent_administration` for which the `agent`-relationship does not match this filter. If `null` is passed to this field, only those `agent_administration` will be filtered which has any `agent`-relation */
+  agent_not?: InputMaybe<_AgentFilter>;
+  /** @deprecated Use the `agent`-field directly (without any suffix) */
+  agent_single?: InputMaybe<_AgentFilter>;
+  /** @deprecated Use the `agent`-field directly (without any suffix) */
+  agent_some?: InputMaybe<_AgentFilter>;
+  comment?: InputMaybe<Scalars['String']['input']>;
+  comment_contains?: InputMaybe<Scalars['String']['input']>;
+  comment_ends_with?: InputMaybe<Scalars['String']['input']>;
+  comment_gt?: InputMaybe<Scalars['String']['input']>;
+  comment_gte?: InputMaybe<Scalars['String']['input']>;
+  comment_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  comment_lt?: InputMaybe<Scalars['String']['input']>;
+  comment_lte?: InputMaybe<Scalars['String']['input']>;
+  comment_matches?: InputMaybe<Scalars['String']['input']>;
+  comment_not?: InputMaybe<Scalars['String']['input']>;
+  comment_not_contains?: InputMaybe<Scalars['String']['input']>;
+  comment_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  comment_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  comment_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  comment_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_gt?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_gte?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_missed_dose_lt?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_lte?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_matches?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_not?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_not_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_missed_dose_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  document_number_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_gt?: InputMaybe<Scalars['String']['input']>;
+  document_number_gte?: InputMaybe<Scalars['String']['input']>;
+  document_number_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_lt?: InputMaybe<Scalars['String']['input']>;
+  document_number_lte?: InputMaybe<Scalars['String']['input']>;
+  document_number_matches?: InputMaybe<Scalars['String']['input']>;
+  document_number_not?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_starts_with?: InputMaybe<Scalars['String']['input']>;
+  dose_level?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_gt?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_gte?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  dose_level_lt?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_lte?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_not?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  dose_level_original?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_gt?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_gte?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  dose_level_original_lt?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_lte?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_not?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  dose_level_original_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_contains?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_ends_with?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_gt?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_gte?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  dose_level_original_unit_lt?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_lte?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_matches?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_not?: InputMaybe<Scalars['String']['input']>;
+  dose_level_original_unit_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  dose_level_original_unit_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  dose_level_original_unit_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  dose_level_original_unit_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  dose_level_original_unit_starts_with?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_contains?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_ends_with?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_gt?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_gte?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  dose_level_unit_lt?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_lte?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_matches?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_not?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_not_contains?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  dose_level_unit_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit_starts_with?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_contains?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_ends_with?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_gt?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_gte?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  dose_units_of_measure_lt?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_lte?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_matches?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_not?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_not_contains?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  dose_units_of_measure_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  dose_units_of_measure_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_gt?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_gte?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  medication_actual_dose_lt?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_lte?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_not?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  medication_actual_dose_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_gt?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_gte?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  medication_actual_dose_original_lt?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_lte?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_not?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  medication_actual_dose_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_original_unit_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_gt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_actual_dose_original_unit_lt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_actual_dose_original_unit_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_original_unit_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_unit_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_actual_dose_unit_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit_not?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_unit_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_unit_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_actual_dose_unit_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_dose_unit_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_units_of_measure_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_gt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_actual_units_of_measure_lt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_actual_units_of_measure_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_actual_units_of_measure_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_course_number_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_not?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_course_number_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_course_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_course_number_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_course_number_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication_duration?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_gt?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_gte?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  medication_duration_lt?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_lte?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_not?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  medication_duration_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_gt?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_gte?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  medication_duration_original_lt?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_lte?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_not?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  medication_duration_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_original_unit_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_original_unit_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_duration_original_unit_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_original_unit_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_duration_original_unit_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_original_unit_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_duration_unit_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_not?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_unit_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_unit_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_duration_unit_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_duration_unit_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  medication_lot_number?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_lot_number_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_not?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_lot_number_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_lot_number_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_missed_dose_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_not?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_not_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_missed_dose_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_missed_dose_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication_not?: InputMaybe<Scalars['String']['input']>;
+  medication_not_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  medication_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_units_of_measure_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_units_of_measure_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure_not?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_units_of_measure_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_units_of_measure_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_units_of_measure_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_units_of_measure_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  medication_vial_id?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_gt?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_gte?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_vial_id_lt?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_lte?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_matches?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_not?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  medication_vial_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_gt?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_gte?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  missed_dose_amount_lt?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_lte?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_not?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  missed_dose_amount_original?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_gt?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_gte?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  missed_dose_amount_original_lt?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_lte?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_not?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
+  missed_dose_amount_original_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_original_unit_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_original_unit_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_original_unit_gt?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_original_unit_gte?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_original_unit_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  missed_dose_amount_original_unit_lt?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_original_unit_lte?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_original_unit_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_original_unit_not?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_original_unit_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_original_unit_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_original_unit_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  missed_dose_amount_original_unit_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_original_unit_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_contains?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_ends_with?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_gt?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_gte?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  missed_dose_amount_unit_lt?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_lte?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_matches?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_not?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_not_contains?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_unit_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  missed_dose_amount_unit_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_amount_unit_starts_with?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_units_of_measure_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_units_of_measure_gt?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure_gte?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  missed_dose_units_of_measure_lt?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure_lte?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure_matches?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure_not?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_units_of_measure_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_units_of_measure_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  missed_dose_units_of_measure_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  missed_dose_units_of_measure_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  phase_contains?: InputMaybe<Scalars['String']['input']>;
+  phase_ends_with?: InputMaybe<Scalars['String']['input']>;
+  phase_gt?: InputMaybe<Scalars['String']['input']>;
+  phase_gte?: InputMaybe<Scalars['String']['input']>;
+  phase_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  phase_lt?: InputMaybe<Scalars['String']['input']>;
+  phase_lte?: InputMaybe<Scalars['String']['input']>;
+  phase_matches?: InputMaybe<Scalars['String']['input']>;
+  phase_not?: InputMaybe<Scalars['String']['input']>;
+  phase_not_contains?: InputMaybe<Scalars['String']['input']>;
+  phase_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  phase_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  phase_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  phase_starts_with?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_contains?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_ends_with?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_gt?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_gte?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  route_of_administration_lt?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_lte?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_matches?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_not?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_not_contains?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  route_of_administration_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  route_of_administration_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  route_of_administration_starts_with?: InputMaybe<Scalars['String']['input']>;
+  start_time?: InputMaybe<Scalars['String']['input']>;
+  start_time_contains?: InputMaybe<Scalars['String']['input']>;
+  start_time_ends_with?: InputMaybe<Scalars['String']['input']>;
+  start_time_gt?: InputMaybe<Scalars['String']['input']>;
+  start_time_gte?: InputMaybe<Scalars['String']['input']>;
+  start_time_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  start_time_lt?: InputMaybe<Scalars['String']['input']>;
+  start_time_lte?: InputMaybe<Scalars['String']['input']>;
+  start_time_matches?: InputMaybe<Scalars['String']['input']>;
+  start_time_not?: InputMaybe<Scalars['String']['input']>;
+  start_time_not_contains?: InputMaybe<Scalars['String']['input']>;
+  start_time_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  start_time_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  start_time_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  start_time_starts_with?: InputMaybe<Scalars['String']['input']>;
+  stop_time?: InputMaybe<Scalars['String']['input']>;
+  stop_time_contains?: InputMaybe<Scalars['String']['input']>;
+  stop_time_ends_with?: InputMaybe<Scalars['String']['input']>;
+  stop_time_gt?: InputMaybe<Scalars['String']['input']>;
+  stop_time_gte?: InputMaybe<Scalars['String']['input']>;
+  stop_time_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  stop_time_lt?: InputMaybe<Scalars['String']['input']>;
+  stop_time_lte?: InputMaybe<Scalars['String']['input']>;
+  stop_time_matches?: InputMaybe<Scalars['String']['input']>;
+  stop_time_not?: InputMaybe<Scalars['String']['input']>;
+  stop_time_not_contains?: InputMaybe<Scalars['String']['input']>;
+  stop_time_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  stop_time_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  stop_time_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  stop_time_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** Filters only those `agent_administration` for which the `visit`-relationship matches this filter. If `null` is passed to this field, only those `agent_administration` will be filtered which has no `visit`-relations */
+  visit?: InputMaybe<_VisitFilter>;
+  /** @deprecated Use the `visit_not`-field */
+  visit_none?: InputMaybe<_VisitFilter>;
+  /** Filters only those `agent_administration` for which the `visit`-relationship does not match this filter. If `null` is passed to this field, only those `agent_administration` will be filtered which has any `visit`-relation */
+  visit_not?: InputMaybe<_VisitFilter>;
+  /** @deprecated Use the `visit`-field directly (without any suffix) */
+  visit_single?: InputMaybe<_VisitFilter>;
+  /** @deprecated Use the `visit`-field directly (without any suffix) */
+  visit_some?: InputMaybe<_VisitFilter>;
+};
+
+export type _Agent_AdministrationInput = {
+  comment?: InputMaybe<Scalars['String']['input']>;
+  date_of_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  dose_level?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original?: InputMaybe<Scalars['Float']['input']>;
+  dose_level_original_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_level_unit?: InputMaybe<Scalars['String']['input']>;
+  dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_actual_dose_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_dose_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_actual_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_course_number?: InputMaybe<Scalars['String']['input']>;
+  medication_duration?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original?: InputMaybe<Scalars['Float']['input']>;
+  medication_duration_original_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_duration_unit?: InputMaybe<Scalars['String']['input']>;
+  medication_lot_number?: InputMaybe<Scalars['String']['input']>;
+  medication_missed_dose?: InputMaybe<Scalars['String']['input']>;
+  medication_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  medication_vial_id?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original?: InputMaybe<Scalars['Float']['input']>;
+  missed_dose_amount_original_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_amount_unit?: InputMaybe<Scalars['String']['input']>;
+  missed_dose_units_of_measure?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  route_of_administration?: InputMaybe<Scalars['String']['input']>;
+  start_time?: InputMaybe<Scalars['String']['input']>;
+  stop_time?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _Agent_AdministrationOrdering {
+  CommentAsc = 'comment_asc',
+  CommentDesc = 'comment_desc',
+  DateOfMissedDoseAsc = 'date_of_missed_dose_asc',
+  DateOfMissedDoseDesc = 'date_of_missed_dose_desc',
+  DocumentNumberAsc = 'document_number_asc',
+  DocumentNumberDesc = 'document_number_desc',
+  DoseLevelAsc = 'dose_level_asc',
+  DoseLevelDesc = 'dose_level_desc',
+  DoseLevelOriginalAsc = 'dose_level_original_asc',
+  DoseLevelOriginalDesc = 'dose_level_original_desc',
+  DoseLevelOriginalUnitAsc = 'dose_level_original_unit_asc',
+  DoseLevelOriginalUnitDesc = 'dose_level_original_unit_desc',
+  DoseLevelUnitAsc = 'dose_level_unit_asc',
+  DoseLevelUnitDesc = 'dose_level_unit_desc',
+  DoseUnitsOfMeasureAsc = 'dose_units_of_measure_asc',
+  DoseUnitsOfMeasureDesc = 'dose_units_of_measure_desc',
+  MedicationActualDoseAsc = 'medication_actual_dose_asc',
+  MedicationActualDoseDesc = 'medication_actual_dose_desc',
+  MedicationActualDoseOriginalAsc = 'medication_actual_dose_original_asc',
+  MedicationActualDoseOriginalDesc = 'medication_actual_dose_original_desc',
+  MedicationActualDoseOriginalUnitAsc = 'medication_actual_dose_original_unit_asc',
+  MedicationActualDoseOriginalUnitDesc = 'medication_actual_dose_original_unit_desc',
+  MedicationActualDoseUnitAsc = 'medication_actual_dose_unit_asc',
+  MedicationActualDoseUnitDesc = 'medication_actual_dose_unit_desc',
+  MedicationActualUnitsOfMeasureAsc = 'medication_actual_units_of_measure_asc',
+  MedicationActualUnitsOfMeasureDesc = 'medication_actual_units_of_measure_desc',
+  MedicationAsc = 'medication_asc',
+  MedicationCourseNumberAsc = 'medication_course_number_asc',
+  MedicationCourseNumberDesc = 'medication_course_number_desc',
+  MedicationDesc = 'medication_desc',
+  MedicationDurationAsc = 'medication_duration_asc',
+  MedicationDurationDesc = 'medication_duration_desc',
+  MedicationDurationOriginalAsc = 'medication_duration_original_asc',
+  MedicationDurationOriginalDesc = 'medication_duration_original_desc',
+  MedicationDurationOriginalUnitAsc = 'medication_duration_original_unit_asc',
+  MedicationDurationOriginalUnitDesc = 'medication_duration_original_unit_desc',
+  MedicationDurationUnitAsc = 'medication_duration_unit_asc',
+  MedicationDurationUnitDesc = 'medication_duration_unit_desc',
+  MedicationLotNumberAsc = 'medication_lot_number_asc',
+  MedicationLotNumberDesc = 'medication_lot_number_desc',
+  MedicationMissedDoseAsc = 'medication_missed_dose_asc',
+  MedicationMissedDoseDesc = 'medication_missed_dose_desc',
+  MedicationUnitsOfMeasureAsc = 'medication_units_of_measure_asc',
+  MedicationUnitsOfMeasureDesc = 'medication_units_of_measure_desc',
+  MedicationVialIdAsc = 'medication_vial_id_asc',
+  MedicationVialIdDesc = 'medication_vial_id_desc',
+  MissedDoseAmountAsc = 'missed_dose_amount_asc',
+  MissedDoseAmountDesc = 'missed_dose_amount_desc',
+  MissedDoseAmountOriginalAsc = 'missed_dose_amount_original_asc',
+  MissedDoseAmountOriginalDesc = 'missed_dose_amount_original_desc',
+  MissedDoseAmountOriginalUnitAsc = 'missed_dose_amount_original_unit_asc',
+  MissedDoseAmountOriginalUnitDesc = 'missed_dose_amount_original_unit_desc',
+  MissedDoseAmountUnitAsc = 'missed_dose_amount_unit_asc',
+  MissedDoseAmountUnitDesc = 'missed_dose_amount_unit_desc',
+  MissedDoseUnitsOfMeasureAsc = 'missed_dose_units_of_measure_asc',
+  MissedDoseUnitsOfMeasureDesc = 'missed_dose_units_of_measure_desc',
+  PhaseAsc = 'phase_asc',
+  PhaseDesc = 'phase_desc',
+  RouteOfAdministrationAsc = 'route_of_administration_asc',
+  RouteOfAdministrationDesc = 'route_of_administration_desc',
+  StartTimeAsc = 'start_time_asc',
+  StartTimeDesc = 'start_time_desc',
+  StopTimeAsc = 'stop_time_asc',
+  StopTimeDesc = 'stop_time_desc',
+}
+
+export type _AssayFilter = {
+  AND?: InputMaybe<Array<_AssayFilter>>;
+  NOT?: InputMaybe<Array<_AssayFilter>>;
+  OR?: InputMaybe<Array<_AssayFilter>>;
+  /** Filters only those `assay` for which all `files`-relationship matches this filter. If `null` is passed to this field, only those `assay` will be filtered which has no `files`-relations */
+  files?: InputMaybe<_FileFilter>;
+  /** Filters only those `assay` for which all `files`-relationships matches this filter */
+  files_every?: InputMaybe<_FileFilter>;
+  /** Filters only those `assay` for which none of the `files`-relationships matches this filter */
+  files_none?: InputMaybe<_FileFilter>;
+  /** Filters only those `assay` for which all `files`-relationship does not match this filter. If `null` is passed to this field, only those `assay` will be filtered which has any `files`-relation */
+  files_not?: InputMaybe<_FileFilter>;
+  /** Filters only those `assay` for which exactly one `files`-relationship matches this filter */
+  files_single?: InputMaybe<_FileFilter>;
+  /** Filters only those `assay` for which at least one `files`-relationship matches this filter */
+  files_some?: InputMaybe<_FileFilter>;
+  /** Filters only those `assay` for which all `images`-relationship matches this filter. If `null` is passed to this field, only those `assay` will be filtered which has no `images`-relations */
+  images?: InputMaybe<_ImageFilter>;
+  /** Filters only those `assay` for which all `images`-relationships matches this filter */
+  images_every?: InputMaybe<_ImageFilter>;
+  /** Filters only those `assay` for which none of the `images`-relationships matches this filter */
+  images_none?: InputMaybe<_ImageFilter>;
+  /** Filters only those `assay` for which all `images`-relationship does not match this filter. If `null` is passed to this field, only those `assay` will be filtered which has any `images`-relation */
+  images_not?: InputMaybe<_ImageFilter>;
+  /** Filters only those `assay` for which exactly one `images`-relationship matches this filter */
+  images_single?: InputMaybe<_ImageFilter>;
+  /** Filters only those `assay` for which at least one `images`-relationship matches this filter */
+  images_some?: InputMaybe<_ImageFilter>;
+  /** Filters only those `assay` for which the `sample`-relationship matches this filter. If `null` is passed to this field, only those `assay` will be filtered which has no `sample`-relations */
+  sample?: InputMaybe<_SampleFilter>;
+  /** @deprecated Use the `sample_not`-field */
+  sample_none?: InputMaybe<_SampleFilter>;
+  /** Filters only those `assay` for which the `sample`-relationship does not match this filter. If `null` is passed to this field, only those `assay` will be filtered which has any `sample`-relation */
+  sample_not?: InputMaybe<_SampleFilter>;
+  /** @deprecated Use the `sample`-field directly (without any suffix) */
+  sample_single?: InputMaybe<_SampleFilter>;
+  /** @deprecated Use the `sample`-field directly (without any suffix) */
+  sample_some?: InputMaybe<_SampleFilter>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_gt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_gte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_lt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_lte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+};
+
+export type _AssayInput = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _AssayOrdering {
+  SchemaValidationPlaceholderAsc = 'schema_validation_placeholder_asc',
+  SchemaValidationPlaceholderDesc = 'schema_validation_placeholder_desc',
 }
 
 export type _Biospecimen_SourceFilter = {
@@ -15353,27 +16428,11 @@ export type _Biospecimen_SourceFilter = {
   biospecimen_repository_full_name_starts_with?: InputMaybe<
     Scalars['String']['input']
   >;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type _Biospecimen_SourceInput = {
   biospecimen_repository_acronym?: InputMaybe<Scalars['String']['input']>;
   biospecimen_repository_full_name?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _Biospecimen_SourceOrdering {
@@ -15381,8 +16440,6 @@ export enum _Biospecimen_SourceOrdering {
   BiospecimenRepositoryAcronymDesc = 'biospecimen_repository_acronym_desc',
   BiospecimenRepositoryFullNameAsc = 'biospecimen_repository_full_name_asc',
   BiospecimenRepositoryFullNameDesc = 'biospecimen_repository_full_name_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
 }
 
 export type _Canine_IndividualFilter = {
@@ -15420,33 +16477,15 @@ export type _Canine_IndividualFilter = {
   cases_single?: InputMaybe<_CaseFilter>;
   /** Filters only those `canine_individual` for which at least one `cases`-relationship matches this filter */
   cases_some?: InputMaybe<_CaseFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type _Canine_IndividualInput = {
   canine_individual_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _Canine_IndividualOrdering {
   CanineIndividualIdAsc = 'canine_individual_id_asc',
   CanineIndividualIdDesc = 'canine_individual_id_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
 }
 
 export type _CaseFilter = {
@@ -15485,23 +16524,21 @@ export type _CaseFilter = {
   canine_individual_single?: InputMaybe<_Canine_IndividualFilter>;
   /** @deprecated Use the `canine_individual`-field directly (without any suffix) */
   canine_individual_some?: InputMaybe<_Canine_IndividualFilter>;
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  case_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  case_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  case_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
+  case_id_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_gt?: InputMaybe<Scalars['String']['input']>;
+  case_id_gte?: InputMaybe<Scalars['String']['input']>;
+  case_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_lt?: InputMaybe<Scalars['String']['input']>;
+  case_id_lte?: InputMaybe<Scalars['String']['input']>;
+  case_id_matches?: InputMaybe<Scalars['String']['input']>;
+  case_id_not?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  case_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  case_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** Filters only those `case` for which the `cohort`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `cohort`-relations */
   cohort?: InputMaybe<_CohortFilter>;
   /** @deprecated Use the `cohort_not`-field */
@@ -15512,31 +16549,6 @@ export type _CaseFilter = {
   cohort_single?: InputMaybe<_CohortFilter>;
   /** @deprecated Use the `cohort`-field directly (without any suffix) */
   cohort_some?: InputMaybe<_CohortFilter>;
-  /** Filters only those `case` for which the `consent_group`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `consent_group`-relations */
-  consent_group?: InputMaybe<_Consent_GroupFilter>;
-  /** @deprecated Use the `consent_group_not`-field */
-  consent_group_none?: InputMaybe<_Consent_GroupFilter>;
-  /** Filters only those `case` for which the `consent_group`-relationship does not match this filter. If `null` is passed to this field, only those `case` will be filtered which has any `consent_group`-relation */
-  consent_group_not?: InputMaybe<_Consent_GroupFilter>;
-  /** @deprecated Use the `consent_group`-field directly (without any suffix) */
-  consent_group_single?: InputMaybe<_Consent_GroupFilter>;
-  /** @deprecated Use the `consent_group`-field directly (without any suffix) */
-  consent_group_some?: InputMaybe<_Consent_GroupFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** Filters only those `case` for which all `cycles`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `cycles`-relations */
   cycles?: InputMaybe<_CycleFilter>;
   /** Filters only those `case` for which all `cycles`-relationships matches this filter */
@@ -15559,16 +16571,18 @@ export type _CaseFilter = {
   demographic_single?: InputMaybe<_DemographicFilter>;
   /** @deprecated Use the `demographic`-field directly (without any suffix) */
   demographic_some?: InputMaybe<_DemographicFilter>;
-  /** Filters only those `case` for which the `diagnosis`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `diagnosis`-relations */
-  diagnosis?: InputMaybe<_DiagnosisFilter>;
-  /** @deprecated Use the `diagnosis_not`-field */
-  diagnosis_none?: InputMaybe<_DiagnosisFilter>;
-  /** Filters only those `case` for which the `diagnosis`-relationship does not match this filter. If `null` is passed to this field, only those `case` will be filtered which has any `diagnosis`-relation */
-  diagnosis_not?: InputMaybe<_DiagnosisFilter>;
-  /** @deprecated Use the `diagnosis`-field directly (without any suffix) */
-  diagnosis_single?: InputMaybe<_DiagnosisFilter>;
-  /** @deprecated Use the `diagnosis`-field directly (without any suffix) */
-  diagnosis_some?: InputMaybe<_DiagnosisFilter>;
+  /** Filters only those `case` for which all `diagnoses`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `diagnoses`-relations */
+  diagnoses?: InputMaybe<_DiagnosisFilter>;
+  /** Filters only those `case` for which all `diagnoses`-relationships matches this filter */
+  diagnoses_every?: InputMaybe<_DiagnosisFilter>;
+  /** Filters only those `case` for which none of the `diagnoses`-relationships matches this filter */
+  diagnoses_none?: InputMaybe<_DiagnosisFilter>;
+  /** Filters only those `case` for which all `diagnoses`-relationship does not match this filter. If `null` is passed to this field, only those `case` will be filtered which has any `diagnoses`-relation */
+  diagnoses_not?: InputMaybe<_DiagnosisFilter>;
+  /** Filters only those `case` for which exactly one `diagnoses`-relationship matches this filter */
+  diagnoses_single?: InputMaybe<_DiagnosisFilter>;
+  /** Filters only those `case` for which at least one `diagnoses`-relationship matches this filter */
+  diagnoses_some?: InputMaybe<_DiagnosisFilter>;
   /** Filters only those `case` for which the `enrollment`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `enrollment`-relations */
   enrollment?: InputMaybe<_EnrollmentFilter>;
   /** @deprecated Use the `enrollment_not`-field */
@@ -15591,6 +16605,38 @@ export type _CaseFilter = {
   files_single?: InputMaybe<_FileFilter>;
   /** Filters only those `case` for which at least one `files`-relationship matches this filter */
   files_some?: InputMaybe<_FileFilter>;
+  /** Filters only those `case` for which all `follow_ups`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `follow_ups`-relations */
+  follow_ups?: InputMaybe<_Follow_UpFilter>;
+  /** Filters only those `case` for which all `follow_ups`-relationships matches this filter */
+  follow_ups_every?: InputMaybe<_Follow_UpFilter>;
+  /** Filters only those `case` for which none of the `follow_ups`-relationships matches this filter */
+  follow_ups_none?: InputMaybe<_Follow_UpFilter>;
+  /** Filters only those `case` for which all `follow_ups`-relationship does not match this filter. If `null` is passed to this field, only those `case` will be filtered which has any `follow_ups`-relation */
+  follow_ups_not?: InputMaybe<_Follow_UpFilter>;
+  /** Filters only those `case` for which exactly one `follow_ups`-relationship matches this filter */
+  follow_ups_single?: InputMaybe<_Follow_UpFilter>;
+  /** Filters only those `case` for which at least one `follow_ups`-relationship matches this filter */
+  follow_ups_some?: InputMaybe<_Follow_UpFilter>;
+  /** Filters only those `case` for which the `off_study`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `off_study`-relations */
+  off_study?: InputMaybe<_Off_StudyFilter>;
+  /** @deprecated Use the `off_study_not`-field */
+  off_study_none?: InputMaybe<_Off_StudyFilter>;
+  /** Filters only those `case` for which the `off_study`-relationship does not match this filter. If `null` is passed to this field, only those `case` will be filtered which has any `off_study`-relation */
+  off_study_not?: InputMaybe<_Off_StudyFilter>;
+  /** @deprecated Use the `off_study`-field directly (without any suffix) */
+  off_study_single?: InputMaybe<_Off_StudyFilter>;
+  /** @deprecated Use the `off_study`-field directly (without any suffix) */
+  off_study_some?: InputMaybe<_Off_StudyFilter>;
+  /** Filters only those `case` for which the `off_treatment`-relationship matches this filter. If `null` is passed to this field, only those `case` will be filtered which has no `off_treatment`-relations */
+  off_treatment?: InputMaybe<_Off_TreatmentFilter>;
+  /** @deprecated Use the `off_treatment_not`-field */
+  off_treatment_none?: InputMaybe<_Off_TreatmentFilter>;
+  /** Filters only those `case` for which the `off_treatment`-relationship does not match this filter. If `null` is passed to this field, only those `case` will be filtered which has any `off_treatment`-relation */
+  off_treatment_not?: InputMaybe<_Off_TreatmentFilter>;
+  /** @deprecated Use the `off_treatment`-field directly (without any suffix) */
+  off_treatment_single?: InputMaybe<_Off_TreatmentFilter>;
+  /** @deprecated Use the `off_treatment`-field directly (without any suffix) */
+  off_treatment_some?: InputMaybe<_Off_TreatmentFilter>;
   patient_first_name?: InputMaybe<Scalars['String']['input']>;
   patient_first_name_contains?: InputMaybe<Scalars['String']['input']>;
   patient_first_name_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -15684,17 +16730,14 @@ export type _CaseFilter = {
 };
 
 export type _CaseInput = {
-  case_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  case_id?: InputMaybe<Scalars['String']['input']>;
   patient_first_name?: InputMaybe<Scalars['String']['input']>;
   patient_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _CaseOrdering {
-  CaseRecordIdAsc = 'case_record_id_asc',
-  CaseRecordIdDesc = 'case_record_id_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
+  CaseIdAsc = 'case_id_asc',
+  CaseIdDesc = 'case_id_desc',
   PatientFirstNameAsc = 'patient_first_name_asc',
   PatientFirstNameDesc = 'patient_first_name_desc',
   PatientIdAsc = 'patient_id_asc',
@@ -15753,40 +16796,21 @@ export type _CohortFilter = {
   >;
   cohort_dose_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   cohort_dose_starts_with?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  cohort_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  cohort_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  cohort_id?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_contains?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_gt?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_gte?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  cohort_id_lt?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_lte?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_matches?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_not?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  cohort_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  cohort_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** Filters only those `cohort` for which the `study`-relationship matches this filter. If `null` is passed to this field, only those `cohort` will be filtered which has no `study`-relations */
   study?: InputMaybe<_StudyFilter>;
   /** Filters only those `cohort` for which the `study_arm`-relationship matches this filter. If `null` is passed to this field, only those `cohort` will be filtered which has no `study_arm`-relations */
@@ -15812,8 +16836,7 @@ export type _CohortFilter = {
 export type _CohortInput = {
   cohort_description?: InputMaybe<Scalars['String']['input']>;
   cohort_dose?: InputMaybe<Scalars['String']['input']>;
-  cohort_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  cohort_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _CohortOrdering {
@@ -15821,125 +16844,8 @@ export enum _CohortOrdering {
   CohortDescriptionDesc = 'cohort_description_desc',
   CohortDoseAsc = 'cohort_dose_asc',
   CohortDoseDesc = 'cohort_dose_desc',
-  CohortRecordIdAsc = 'cohort_record_id_asc',
-  CohortRecordIdDesc = 'cohort_record_id_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
-}
-
-export type _Consent_GroupFilter = {
-  AND?: InputMaybe<Array<_Consent_GroupFilter>>;
-  NOT?: InputMaybe<Array<_Consent_GroupFilter>>;
-  OR?: InputMaybe<Array<_Consent_GroupFilter>>;
-  /** Filters only those `consent_group` for which all `cases`-relationship matches this filter. If `null` is passed to this field, only those `consent_group` will be filtered which has no `cases`-relations */
-  cases?: InputMaybe<_CaseFilter>;
-  /** Filters only those `consent_group` for which all `cases`-relationships matches this filter */
-  cases_every?: InputMaybe<_CaseFilter>;
-  /** Filters only those `consent_group` for which none of the `cases`-relationships matches this filter */
-  cases_none?: InputMaybe<_CaseFilter>;
-  /** Filters only those `consent_group` for which all `cases`-relationship does not match this filter. If `null` is passed to this field, only those `consent_group` will be filtered which has any `cases`-relation */
-  cases_not?: InputMaybe<_CaseFilter>;
-  /** Filters only those `consent_group` for which exactly one `cases`-relationship matches this filter */
-  cases_single?: InputMaybe<_CaseFilter>;
-  /** Filters only those `consent_group` for which at least one `cases`-relationship matches this filter */
-  cases_some?: InputMaybe<_CaseFilter>;
-  consent_group_name?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_contains?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_ends_with?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_gt?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_gte?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  consent_group_name_lt?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_lte?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_matches?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_not?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_not_contains?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  consent_group_name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  consent_group_name_starts_with?: InputMaybe<Scalars['String']['input']>;
-  consent_group_number?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_number_gt?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_number_gte?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_number_in?: InputMaybe<
-    Array<InputMaybe<Scalars['Int']['input']>>
-  >;
-  consent_group_number_lt?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_number_lte?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_number_not?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_number_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['Int']['input']>>
-  >;
-  consent_group_record_id?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  consent_group_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  consent_group_record_id_not_ends_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  consent_group_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  consent_group_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  consent_group_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** Filters only those `consent_group` for which the `study`-relationship matches this filter. If `null` is passed to this field, only those `consent_group` will be filtered which has no `study`-relations */
-  study?: InputMaybe<_StudyFilter>;
-  /** @deprecated Use the `study_not`-field */
-  study_none?: InputMaybe<_StudyFilter>;
-  /** Filters only those `consent_group` for which the `study`-relationship does not match this filter. If `null` is passed to this field, only those `consent_group` will be filtered which has any `study`-relation */
-  study_not?: InputMaybe<_StudyFilter>;
-  /** @deprecated Use the `study`-field directly (without any suffix) */
-  study_single?: InputMaybe<_StudyFilter>;
-  /** @deprecated Use the `study`-field directly (without any suffix) */
-  study_some?: InputMaybe<_StudyFilter>;
-};
-
-export type _Consent_GroupInput = {
-  consent_group_name?: InputMaybe<Scalars['String']['input']>;
-  consent_group_number?: InputMaybe<Scalars['Int']['input']>;
-  consent_group_record_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-};
-
-export enum _Consent_GroupOrdering {
-  ConsentGroupNameAsc = 'consent_group_name_asc',
-  ConsentGroupNameDesc = 'consent_group_name_desc',
-  ConsentGroupNumberAsc = 'consent_group_number_asc',
-  ConsentGroupNumberDesc = 'consent_group_number_desc',
-  ConsentGroupRecordIdAsc = 'consent_group_record_id_asc',
-  ConsentGroupRecordIdDesc = 'consent_group_record_id_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
+  CohortIdAsc = 'cohort_id_asc',
+  CohortIdDesc = 'cohort_id_desc',
 }
 
 export type _CycleFilter = {
@@ -15956,21 +16862,6 @@ export type _CycleFilter = {
   case_single?: InputMaybe<_CaseFilter>;
   /** @deprecated Use the `case`-field directly (without any suffix) */
   case_some?: InputMaybe<_CaseFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   cycle_number?: InputMaybe<Scalars['Int']['input']>;
   cycle_number_gt?: InputMaybe<Scalars['Int']['input']>;
   cycle_number_gte?: InputMaybe<Scalars['Int']['input']>;
@@ -15979,25 +16870,6 @@ export type _CycleFilter = {
   cycle_number_lte?: InputMaybe<Scalars['Int']['input']>;
   cycle_number_not?: InputMaybe<Scalars['Int']['input']>;
   cycle_number_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  cycle_record_id?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  cycle_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  cycle_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  cycle_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_end_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_end_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -16051,20 +16923,14 @@ export type _CycleFilter = {
 };
 
 export type _CycleInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   cycle_number?: InputMaybe<Scalars['Int']['input']>;
-  cycle_record_id?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_end?: InputMaybe<Scalars['String']['input']>;
   date_of_cycle_start?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _CycleOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   CycleNumberAsc = 'cycle_number_asc',
   CycleNumberDesc = 'cycle_number_desc',
-  CycleRecordIdAsc = 'cycle_record_id_asc',
-  CycleRecordIdDesc = 'cycle_record_id_desc',
   DateOfCycleEndAsc = 'date_of_cycle_end_asc',
   DateOfCycleEndDesc = 'date_of_cycle_end_desc',
   DateOfCycleStartAsc = 'date_of_cycle_start_asc',
@@ -16123,21 +16989,6 @@ export type _DemographicFilter = {
   case_single?: InputMaybe<_CaseFilter>;
   /** @deprecated Use the `case`-field directly (without any suffix) */
   case_some?: InputMaybe<_CaseFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_birth?: InputMaybe<Scalars['String']['input']>;
   date_of_birth_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_birth_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -16155,27 +17006,23 @@ export type _DemographicFilter = {
   >;
   date_of_birth_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_birth_starts_with?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_in?: InputMaybe<
+  demographic_id?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_contains?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_gt?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_gte?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  demographic_id_lt?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_lte?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_matches?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_not?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_not_in?: InputMaybe<
     Array<InputMaybe<Scalars['String']['input']>>
   >;
-  demographic_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  demographic_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  demographic_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  demographic_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   neutered_indicator?: InputMaybe<Scalars['String']['input']>;
   neutered_indicator_contains?: InputMaybe<Scalars['String']['input']>;
   neutered_indicator_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -16377,9 +17224,8 @@ export type _DemographicFilter = {
 export type _DemographicInput = {
   additional_breed_detail?: InputMaybe<Scalars['String']['input']>;
   breed?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_birth?: InputMaybe<Scalars['String']['input']>;
-  demographic_record_id?: InputMaybe<Scalars['String']['input']>;
+  demographic_id?: InputMaybe<Scalars['String']['input']>;
   neutered_indicator?: InputMaybe<Scalars['String']['input']>;
   patient_age_at_enrollment?: InputMaybe<Scalars['Float']['input']>;
   patient_age_at_enrollment_original?: InputMaybe<Scalars['Float']['input']>;
@@ -16399,12 +17245,10 @@ export enum _DemographicOrdering {
   AdditionalBreedDetailDesc = 'additional_breed_detail_desc',
   BreedAsc = 'breed_asc',
   BreedDesc = 'breed_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfBirthAsc = 'date_of_birth_asc',
   DateOfBirthDesc = 'date_of_birth_desc',
-  DemographicRecordIdAsc = 'demographic_record_id_asc',
-  DemographicRecordIdDesc = 'demographic_record_id_desc',
+  DemographicIdAsc = 'demographic_id_asc',
+  DemographicIdDesc = 'demographic_id_desc',
   NeuteredIndicatorAsc = 'neutered_indicator_asc',
   NeuteredIndicatorDesc = 'neutered_indicator_desc',
   PatientAgeAtEnrollmentAsc = 'patient_age_at_enrollment_asc',
@@ -16500,21 +17344,6 @@ export type _DiagnosisFilter = {
     Scalars['String']['input']
   >;
   concurrent_disease_type_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
   date_of_diagnosis_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_diagnosis_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -16567,25 +17396,23 @@ export type _DiagnosisFilter = {
   date_of_histology_confirmation_starts_with?: InputMaybe<
     Scalars['String']['input']
   >;
-  diagnosis_record_id?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_in?: InputMaybe<
+  diagnosis_id?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_contains?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_gt?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_gte?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  diagnosis_id_lt?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_lte?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_matches?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_not?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_not_in?: InputMaybe<
     Array<InputMaybe<Scalars['String']['input']>>
   >;
-  diagnosis_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  diagnosis_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   disease_term?: InputMaybe<Scalars['String']['input']>;
   disease_term_contains?: InputMaybe<Scalars['String']['input']>;
   disease_term_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -16754,10 +17581,9 @@ export type _DiagnosisInput = {
   best_response?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease?: InputMaybe<Scalars['String']['input']>;
   concurrent_disease_type?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_diagnosis?: InputMaybe<Scalars['String']['input']>;
   date_of_histology_confirmation?: InputMaybe<Scalars['String']['input']>;
-  diagnosis_record_id?: InputMaybe<Scalars['String']['input']>;
+  diagnosis_id?: InputMaybe<Scalars['String']['input']>;
   disease_term?: InputMaybe<Scalars['String']['input']>;
   follow_up_data?: InputMaybe<Scalars['String']['input']>;
   histological_grade?: InputMaybe<Scalars['String']['input']>;
@@ -16775,14 +17601,12 @@ export enum _DiagnosisOrdering {
   ConcurrentDiseaseDesc = 'concurrent_disease_desc',
   ConcurrentDiseaseTypeAsc = 'concurrent_disease_type_asc',
   ConcurrentDiseaseTypeDesc = 'concurrent_disease_type_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfDiagnosisAsc = 'date_of_diagnosis_asc',
   DateOfDiagnosisDesc = 'date_of_diagnosis_desc',
   DateOfHistologyConfirmationAsc = 'date_of_histology_confirmation_asc',
   DateOfHistologyConfirmationDesc = 'date_of_histology_confirmation_desc',
-  DiagnosisRecordIdAsc = 'diagnosis_record_id_asc',
-  DiagnosisRecordIdDesc = 'diagnosis_record_id_desc',
+  DiagnosisIdAsc = 'diagnosis_id_asc',
+  DiagnosisIdDesc = 'diagnosis_id_desc',
   DiseaseTermAsc = 'disease_term_asc',
   DiseaseTermDesc = 'disease_term_desc',
   FollowUpDataAsc = 'follow_up_data_asc',
@@ -16805,21 +17629,6 @@ export type _Disease_ExtentFilter = {
   AND?: InputMaybe<Array<_Disease_ExtentFilter>>;
   NOT?: InputMaybe<Array<_Disease_ExtentFilter>>;
   OR?: InputMaybe<Array<_Disease_ExtentFilter>>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -16839,31 +17648,6 @@ export type _Disease_ExtentFilter = {
   >;
   date_of_evaluation_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation_starts_with?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  disease_extent_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id_not_contains?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  disease_extent_record_id_not_ends_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  disease_extent_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  disease_extent_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  disease_extent_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   evaluation_code?: InputMaybe<Scalars['String']['input']>;
   evaluation_code_contains?: InputMaybe<Scalars['String']['input']>;
   evaluation_code_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -16883,16 +17667,25 @@ export type _Disease_ExtentFilter = {
   >;
   evaluation_code_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   evaluation_code_starts_with?: InputMaybe<Scalars['String']['input']>;
-  evaluation_number?: InputMaybe<Scalars['Int']['input']>;
-  evaluation_number_gt?: InputMaybe<Scalars['Int']['input']>;
-  evaluation_number_gte?: InputMaybe<Scalars['Int']['input']>;
-  evaluation_number_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  evaluation_number_lt?: InputMaybe<Scalars['Int']['input']>;
-  evaluation_number_lte?: InputMaybe<Scalars['Int']['input']>;
-  evaluation_number_not?: InputMaybe<Scalars['Int']['input']>;
-  evaluation_number_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['Int']['input']>>
+  evaluation_number?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_contains?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_gt?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_gte?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
   >;
+  evaluation_number_lt?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_lte?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_matches?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_not?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  evaluation_number_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  evaluation_number_starts_with?: InputMaybe<Scalars['String']['input']>;
   lesion_description?: InputMaybe<Scalars['String']['input']>;
   lesion_description_contains?: InputMaybe<Scalars['String']['input']>;
   lesion_description_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -16912,14 +17705,23 @@ export type _Disease_ExtentFilter = {
   >;
   lesion_description_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   lesion_description_starts_with?: InputMaybe<Scalars['String']['input']>;
-  lesion_number?: InputMaybe<Scalars['Int']['input']>;
-  lesion_number_gt?: InputMaybe<Scalars['Int']['input']>;
-  lesion_number_gte?: InputMaybe<Scalars['Int']['input']>;
-  lesion_number_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  lesion_number_lt?: InputMaybe<Scalars['Int']['input']>;
-  lesion_number_lte?: InputMaybe<Scalars['Int']['input']>;
-  lesion_number_not?: InputMaybe<Scalars['Int']['input']>;
-  lesion_number_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  lesion_number?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_contains?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_gt?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_gte?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lesion_number_lt?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_lte?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_matches?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_not?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  lesion_number_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  lesion_number_starts_with?: InputMaybe<Scalars['String']['input']>;
   lesion_site?: InputMaybe<Scalars['String']['input']>;
   lesion_site_contains?: InputMaybe<Scalars['String']['input']>;
   lesion_site_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -17131,13 +17933,11 @@ export type _Disease_ExtentFilter = {
 };
 
 export type _Disease_ExtentInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_evaluation?: InputMaybe<Scalars['String']['input']>;
-  disease_extent_record_id?: InputMaybe<Scalars['String']['input']>;
   evaluation_code?: InputMaybe<Scalars['String']['input']>;
-  evaluation_number?: InputMaybe<Scalars['Int']['input']>;
+  evaluation_number?: InputMaybe<Scalars['String']['input']>;
   lesion_description?: InputMaybe<Scalars['String']['input']>;
-  lesion_number?: InputMaybe<Scalars['Int']['input']>;
+  lesion_number?: InputMaybe<Scalars['String']['input']>;
   lesion_site?: InputMaybe<Scalars['String']['input']>;
   longest_measurement?: InputMaybe<Scalars['Float']['input']>;
   longest_measurement_original?: InputMaybe<Scalars['Float']['input']>;
@@ -17151,12 +17951,8 @@ export type _Disease_ExtentInput = {
 };
 
 export enum _Disease_ExtentOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfEvaluationAsc = 'date_of_evaluation_asc',
   DateOfEvaluationDesc = 'date_of_evaluation_desc',
-  DiseaseExtentRecordIdAsc = 'disease_extent_record_id_asc',
-  DiseaseExtentRecordIdDesc = 'disease_extent_record_id_desc',
   EvaluationCodeAsc = 'evaluation_code_asc',
   EvaluationCodeDesc = 'evaluation_code_desc',
   EvaluationNumberAsc = 'evaluation_number_asc',
@@ -17201,21 +17997,6 @@ export type _EnrollmentFilter = {
   case_single?: InputMaybe<_CaseFilter>;
   /** @deprecated Use the `case`-field directly (without any suffix) */
   case_some?: InputMaybe<_CaseFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_informed_consent?: InputMaybe<Scalars['String']['input']>;
   date_of_informed_consent_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_informed_consent_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -17260,25 +18041,23 @@ export type _EnrollmentFilter = {
   >;
   date_of_registration_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_registration_starts_with?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_in?: InputMaybe<
+  enrollment_id?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_contains?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_gt?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_gte?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  enrollment_id_lt?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_lte?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_matches?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_not?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_not_in?: InputMaybe<
     Array<InputMaybe<Scalars['String']['input']>>
   >;
-  enrollment_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  enrollment_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   initials?: InputMaybe<Scalars['String']['input']>;
   initials_contains?: InputMaybe<Scalars['String']['input']>;
   initials_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -17421,10 +18200,9 @@ export type _EnrollmentFilter = {
 };
 
 export type _EnrollmentInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_informed_consent?: InputMaybe<Scalars['String']['input']>;
   date_of_registration?: InputMaybe<Scalars['String']['input']>;
-  enrollment_record_id?: InputMaybe<Scalars['String']['input']>;
+  enrollment_id?: InputMaybe<Scalars['String']['input']>;
   initials?: InputMaybe<Scalars['String']['input']>;
   patient_subgroup?: InputMaybe<Scalars['String']['input']>;
   registering_institution?: InputMaybe<Scalars['String']['input']>;
@@ -17433,14 +18211,12 @@ export type _EnrollmentInput = {
 };
 
 export enum _EnrollmentOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfInformedConsentAsc = 'date_of_informed_consent_asc',
   DateOfInformedConsentDesc = 'date_of_informed_consent_desc',
   DateOfRegistrationAsc = 'date_of_registration_asc',
   DateOfRegistrationDesc = 'date_of_registration_desc',
-  EnrollmentRecordIdAsc = 'enrollment_record_id_asc',
-  EnrollmentRecordIdDesc = 'enrollment_record_id_desc',
+  EnrollmentIdAsc = 'enrollment_id_asc',
+  EnrollmentIdDesc = 'enrollment_id_desc',
   InitialsAsc = 'initials_asc',
   InitialsDesc = 'initials_desc',
   PatientSubgroupAsc = 'patient_subgroup_asc',
@@ -17457,6 +18233,16 @@ export type _FileFilter = {
   AND?: InputMaybe<Array<_FileFilter>>;
   NOT?: InputMaybe<Array<_FileFilter>>;
   OR?: InputMaybe<Array<_FileFilter>>;
+  /** Filters only those `file` for which the `assay`-relationship matches this filter. If `null` is passed to this field, only those `file` will be filtered which has no `assay`-relations */
+  assay?: InputMaybe<_AssayFilter>;
+  /** @deprecated Use the `assay_not`-field */
+  assay_none?: InputMaybe<_AssayFilter>;
+  /** Filters only those `file` for which the `assay`-relationship does not match this filter. If `null` is passed to this field, only those `file` will be filtered which has any `assay`-relation */
+  assay_not?: InputMaybe<_AssayFilter>;
+  /** @deprecated Use the `assay`-field directly (without any suffix) */
+  assay_single?: InputMaybe<_AssayFilter>;
+  /** @deprecated Use the `assay`-field directly (without any suffix) */
+  assay_some?: InputMaybe<_AssayFilter>;
   /** Filters only those `file` for which the `case`-relationship matches this filter. If `null` is passed to this field, only those `file` will be filtered which has no `case`-relations */
   case?: InputMaybe<_CaseFilter>;
   /** @deprecated Use the `case_not`-field */
@@ -17467,21 +18253,6 @@ export type _FileFilter = {
   case_single?: InputMaybe<_CaseFilter>;
   /** @deprecated Use the `case`-field directly (without any suffix) */
   case_some?: InputMaybe<_CaseFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** Filters only those `file` for which the `diagnosis`-relationship matches this filter. If `null` is passed to this field, only those `file` will be filtered which has no `diagnosis`-relations */
   diagnosis?: InputMaybe<_DiagnosisFilter>;
   /** @deprecated Use the `diagnosis_not`-field */
@@ -17560,14 +18331,14 @@ export type _FileFilter = {
   file_name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   file_name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   file_name_starts_with?: InputMaybe<Scalars['String']['input']>;
-  file_size?: InputMaybe<Scalars['Int']['input']>;
-  file_size_gt?: InputMaybe<Scalars['Int']['input']>;
-  file_size_gte?: InputMaybe<Scalars['Int']['input']>;
-  file_size_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  file_size_lt?: InputMaybe<Scalars['Int']['input']>;
-  file_size_lte?: InputMaybe<Scalars['Int']['input']>;
-  file_size_not?: InputMaybe<Scalars['Int']['input']>;
-  file_size_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
+  file_size_gt?: InputMaybe<Scalars['Float']['input']>;
+  file_size_gte?: InputMaybe<Scalars['Float']['input']>;
+  file_size_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  file_size_lt?: InputMaybe<Scalars['Float']['input']>;
+  file_size_lte?: InputMaybe<Scalars['Float']['input']>;
+  file_size_not?: InputMaybe<Scalars['Float']['input']>;
+  file_size_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
   file_status?: InputMaybe<Scalars['String']['input']>;
   file_status_contains?: InputMaybe<Scalars['String']['input']>;
   file_status_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -17653,12 +18424,11 @@ export type _FileFilter = {
 };
 
 export type _FileInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   file_description?: InputMaybe<Scalars['String']['input']>;
   file_format?: InputMaybe<Scalars['String']['input']>;
   file_location?: InputMaybe<Scalars['String']['input']>;
   file_name?: InputMaybe<Scalars['String']['input']>;
-  file_size?: InputMaybe<Scalars['Int']['input']>;
+  file_size?: InputMaybe<Scalars['Float']['input']>;
   file_status?: InputMaybe<Scalars['String']['input']>;
   file_type?: InputMaybe<Scalars['String']['input']>;
   md5sum?: InputMaybe<Scalars['String']['input']>;
@@ -17666,8 +18436,6 @@ export type _FileInput = {
 };
 
 export enum _FileOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   FileDescriptionAsc = 'file_description_asc',
   FileDescriptionDesc = 'file_description_desc',
   FileFormatAsc = 'file_format_asc',
@@ -17686,6 +18454,170 @@ export enum _FileOrdering {
   Md5sumDesc = 'md5sum_desc',
   UuidAsc = 'uuid_asc',
   UuidDesc = 'uuid_desc',
+}
+
+export type _Follow_UpFilter = {
+  AND?: InputMaybe<Array<_Follow_UpFilter>>;
+  NOT?: InputMaybe<Array<_Follow_UpFilter>>;
+  OR?: InputMaybe<Array<_Follow_UpFilter>>;
+  /** Filters only those `follow_up` for which the `case`-relationship matches this filter. If `null` is passed to this field, only those `follow_up` will be filtered which has no `case`-relations */
+  case?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case_not`-field */
+  case_none?: InputMaybe<_CaseFilter>;
+  /** Filters only those `follow_up` for which the `case`-relationship does not match this filter. If `null` is passed to this field, only those `follow_up` will be filtered which has any `case`-relation */
+  case_not?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case`-field directly (without any suffix) */
+  case_single?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case`-field directly (without any suffix) */
+  case_some?: InputMaybe<_CaseFilter>;
+  contact_type?: InputMaybe<Scalars['String']['input']>;
+  contact_type_contains?: InputMaybe<Scalars['String']['input']>;
+  contact_type_ends_with?: InputMaybe<Scalars['String']['input']>;
+  contact_type_gt?: InputMaybe<Scalars['String']['input']>;
+  contact_type_gte?: InputMaybe<Scalars['String']['input']>;
+  contact_type_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  contact_type_lt?: InputMaybe<Scalars['String']['input']>;
+  contact_type_lte?: InputMaybe<Scalars['String']['input']>;
+  contact_type_matches?: InputMaybe<Scalars['String']['input']>;
+  contact_type_not?: InputMaybe<Scalars['String']['input']>;
+  contact_type_not_contains?: InputMaybe<Scalars['String']['input']>;
+  contact_type_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  contact_type_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  contact_type_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  contact_type_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_gt?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_gte?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_last_contact_lt?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_lte?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_matches?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_not?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_not_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_last_contact_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  document_number_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_gt?: InputMaybe<Scalars['String']['input']>;
+  document_number_gte?: InputMaybe<Scalars['String']['input']>;
+  document_number_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_lt?: InputMaybe<Scalars['String']['input']>;
+  document_number_lte?: InputMaybe<Scalars['String']['input']>;
+  document_number_matches?: InputMaybe<Scalars['String']['input']>;
+  document_number_not?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_starts_with?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_contains?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_ends_with?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_gt?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_gte?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  explain_unknown_status_lt?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_lte?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_matches?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_not?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_not_contains?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  explain_unknown_status_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  explain_unknown_status_starts_with?: InputMaybe<Scalars['String']['input']>;
+  patient_status?: InputMaybe<Scalars['String']['input']>;
+  patient_status_contains?: InputMaybe<Scalars['String']['input']>;
+  patient_status_ends_with?: InputMaybe<Scalars['String']['input']>;
+  patient_status_gt?: InputMaybe<Scalars['String']['input']>;
+  patient_status_gte?: InputMaybe<Scalars['String']['input']>;
+  patient_status_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  patient_status_lt?: InputMaybe<Scalars['String']['input']>;
+  patient_status_lte?: InputMaybe<Scalars['String']['input']>;
+  patient_status_matches?: InputMaybe<Scalars['String']['input']>;
+  patient_status_not?: InputMaybe<Scalars['String']['input']>;
+  patient_status_not_contains?: InputMaybe<Scalars['String']['input']>;
+  patient_status_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  patient_status_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  patient_status_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  patient_status_starts_with?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_contains?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_ends_with?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_gt?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_gte?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  physical_exam_changes_lt?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_lte?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_matches?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_not?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_not_contains?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  physical_exam_changes_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  physical_exam_changes_starts_with?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_performed?: InputMaybe<Scalars['Boolean']['input']>;
+  physical_exam_performed_not?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_since_last_contact?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_since_last_contact_not?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type _Follow_UpInput = {
+  contact_type?: InputMaybe<Scalars['String']['input']>;
+  date_of_last_contact?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  explain_unknown_status?: InputMaybe<Scalars['String']['input']>;
+  patient_status?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_changes?: InputMaybe<Scalars['String']['input']>;
+  physical_exam_performed?: InputMaybe<Scalars['Boolean']['input']>;
+  treatment_since_last_contact?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export enum _Follow_UpOrdering {
+  ContactTypeAsc = 'contact_type_asc',
+  ContactTypeDesc = 'contact_type_desc',
+  DateOfLastContactAsc = 'date_of_last_contact_asc',
+  DateOfLastContactDesc = 'date_of_last_contact_desc',
+  DocumentNumberAsc = 'document_number_asc',
+  DocumentNumberDesc = 'document_number_desc',
+  ExplainUnknownStatusAsc = 'explain_unknown_status_asc',
+  ExplainUnknownStatusDesc = 'explain_unknown_status_desc',
+  PatientStatusAsc = 'patient_status_asc',
+  PatientStatusDesc = 'patient_status_desc',
+  PhysicalExamChangesAsc = 'physical_exam_changes_asc',
+  PhysicalExamChangesDesc = 'physical_exam_changes_desc',
+  PhysicalExamPerformedAsc = 'physical_exam_performed_asc',
+  PhysicalExamPerformedDesc = 'physical_exam_performed_desc',
+  TreatmentSinceLastContactAsc = 'treatment_since_last_contact_asc',
+  TreatmentSinceLastContactDesc = 'treatment_since_last_contact_desc',
 }
 
 export type _Human_RelevanceFilter = {
@@ -17934,29 +18866,856 @@ export enum _Human_RelevanceOrdering {
   RelevantHumanPathwaysDesc = 'relevant_human_pathways_desc',
 }
 
+export type _ImageFilter = {
+  AND?: InputMaybe<Array<_ImageFilter>>;
+  NOT?: InputMaybe<Array<_ImageFilter>>;
+  OR?: InputMaybe<Array<_ImageFilter>>;
+  /** Filters only those `image` for which the `assay`-relationship matches this filter. If `null` is passed to this field, only those `image` will be filtered which has no `assay`-relations */
+  assay?: InputMaybe<_AssayFilter>;
+  /** @deprecated Use the `assay_not`-field */
+  assay_none?: InputMaybe<_AssayFilter>;
+  /** Filters only those `image` for which the `assay`-relationship does not match this filter. If `null` is passed to this field, only those `image` will be filtered which has any `assay`-relation */
+  assay_not?: InputMaybe<_AssayFilter>;
+  /** @deprecated Use the `assay`-field directly (without any suffix) */
+  assay_single?: InputMaybe<_AssayFilter>;
+  /** @deprecated Use the `assay`-field directly (without any suffix) */
+  assay_some?: InputMaybe<_AssayFilter>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_gt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_gte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_lt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_lte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+};
+
+export type _ImageInput = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _ImageOrdering {
+  SchemaValidationPlaceholderAsc = 'schema_validation_placeholder_asc',
+  SchemaValidationPlaceholderDesc = 'schema_validation_placeholder_desc',
+}
+
+export type _Image_CollectionFilter = {
+  AND?: InputMaybe<Array<_Image_CollectionFilter>>;
+  NOT?: InputMaybe<Array<_Image_CollectionFilter>>;
+  OR?: InputMaybe<Array<_Image_CollectionFilter>>;
+  collection_access?: InputMaybe<Scalars['String']['input']>;
+  collection_access_contains?: InputMaybe<Scalars['String']['input']>;
+  collection_access_ends_with?: InputMaybe<Scalars['String']['input']>;
+  collection_access_gt?: InputMaybe<Scalars['String']['input']>;
+  collection_access_gte?: InputMaybe<Scalars['String']['input']>;
+  collection_access_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  collection_access_lt?: InputMaybe<Scalars['String']['input']>;
+  collection_access_lte?: InputMaybe<Scalars['String']['input']>;
+  collection_access_matches?: InputMaybe<Scalars['String']['input']>;
+  collection_access_not?: InputMaybe<Scalars['String']['input']>;
+  collection_access_not_contains?: InputMaybe<Scalars['String']['input']>;
+  collection_access_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  collection_access_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  collection_access_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  collection_access_starts_with?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_contains?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_ends_with?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_gt?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_gte?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  image_collection_name_lt?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_lte?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_matches?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_not?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  image_collection_name_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  image_collection_name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_contains?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_ends_with?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_gt?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_gte?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  image_collection_url_lt?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_lte?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_matches?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_not?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_not_contains?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  image_collection_url_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url_starts_with?: InputMaybe<Scalars['String']['input']>;
+  image_type_included?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_contains?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_ends_with?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_gt?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_gte?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  image_type_included_lt?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_lte?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_matches?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_not?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_not_contains?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  image_type_included_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  image_type_included_starts_with?: InputMaybe<Scalars['String']['input']>;
+  repository_name?: InputMaybe<Scalars['String']['input']>;
+  repository_name_contains?: InputMaybe<Scalars['String']['input']>;
+  repository_name_ends_with?: InputMaybe<Scalars['String']['input']>;
+  repository_name_gt?: InputMaybe<Scalars['String']['input']>;
+  repository_name_gte?: InputMaybe<Scalars['String']['input']>;
+  repository_name_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  repository_name_lt?: InputMaybe<Scalars['String']['input']>;
+  repository_name_lte?: InputMaybe<Scalars['String']['input']>;
+  repository_name_matches?: InputMaybe<Scalars['String']['input']>;
+  repository_name_not?: InputMaybe<Scalars['String']['input']>;
+  repository_name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  repository_name_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  repository_name_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  repository_name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  repository_name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** Filters only those `image_collection` for which the `study`-relationship matches this filter. If `null` is passed to this field, only those `image_collection` will be filtered which has no `study`-relations */
+  study?: InputMaybe<_StudyFilter>;
+  /** @deprecated Use the `study_not`-field */
+  study_none?: InputMaybe<_StudyFilter>;
+  /** Filters only those `image_collection` for which the `study`-relationship does not match this filter. If `null` is passed to this field, only those `image_collection` will be filtered which has any `study`-relation */
+  study_not?: InputMaybe<_StudyFilter>;
+  /** @deprecated Use the `study`-field directly (without any suffix) */
+  study_single?: InputMaybe<_StudyFilter>;
+  /** @deprecated Use the `study`-field directly (without any suffix) */
+  study_some?: InputMaybe<_StudyFilter>;
+};
+
+export type _Image_CollectionInput = {
+  collection_access?: InputMaybe<Scalars['String']['input']>;
+  image_collection_name?: InputMaybe<Scalars['String']['input']>;
+  image_collection_url?: InputMaybe<Scalars['String']['input']>;
+  image_type_included?: InputMaybe<Scalars['String']['input']>;
+  repository_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _Image_CollectionOrdering {
+  CollectionAccessAsc = 'collection_access_asc',
+  CollectionAccessDesc = 'collection_access_desc',
+  ImageCollectionNameAsc = 'image_collection_name_asc',
+  ImageCollectionNameDesc = 'image_collection_name_desc',
+  ImageCollectionUrlAsc = 'image_collection_url_asc',
+  ImageCollectionUrlDesc = 'image_collection_url_desc',
+  ImageTypeIncludedAsc = 'image_type_included_asc',
+  ImageTypeIncludedDesc = 'image_type_included_desc',
+  RepositoryNameAsc = 'repository_name_asc',
+  RepositoryNameDesc = 'repository_name_desc',
+}
+
+export type _Lab_ExamFilter = {
+  AND?: InputMaybe<Array<_Lab_ExamFilter>>;
+  NOT?: InputMaybe<Array<_Lab_ExamFilter>>;
+  OR?: InputMaybe<Array<_Lab_ExamFilter>>;
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_gt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_gte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_lt?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_lte?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not?: InputMaybe<Scalars['String']['input']>;
+  schema_validation_placeholder_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  schema_validation_placeholder_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  schema_validation_placeholder_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  /** Filters only those `lab_exam` for which the `visit`-relationship matches this filter. If `null` is passed to this field, only those `lab_exam` will be filtered which has no `visit`-relations */
+  visit?: InputMaybe<_VisitFilter>;
+  /** @deprecated Use the `visit_not`-field */
+  visit_none?: InputMaybe<_VisitFilter>;
+  /** Filters only those `lab_exam` for which the `visit`-relationship does not match this filter. If `null` is passed to this field, only those `lab_exam` will be filtered which has any `visit`-relation */
+  visit_not?: InputMaybe<_VisitFilter>;
+  /** @deprecated Use the `visit`-field directly (without any suffix) */
+  visit_single?: InputMaybe<_VisitFilter>;
+  /** @deprecated Use the `visit`-field directly (without any suffix) */
+  visit_some?: InputMaybe<_VisitFilter>;
+};
+
+export type _Lab_ExamInput = {
+  schema_validation_placeholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _Lab_ExamOrdering {
+  SchemaValidationPlaceholderAsc = 'schema_validation_placeholder_asc',
+  SchemaValidationPlaceholderDesc = 'schema_validation_placeholder_desc',
+}
+
+export type _Off_StudyFilter = {
+  AND?: InputMaybe<Array<_Off_StudyFilter>>;
+  NOT?: InputMaybe<Array<_Off_StudyFilter>>;
+  OR?: InputMaybe<Array<_Off_StudyFilter>>;
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_best_response_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_gt?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_best_response_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  best_resp_vet_tx_tp_best_response_lt?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_best_response_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  best_resp_vet_tx_tp_best_response_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_gt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  best_resp_vet_tx_tp_secondary_response_lt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  best_resp_vet_tx_tp_secondary_response_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  /** Filters only those `off_study` for which the `case`-relationship matches this filter. If `null` is passed to this field, only those `off_study` will be filtered which has no `case`-relations */
+  case?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case_not`-field */
+  case_none?: InputMaybe<_CaseFilter>;
+  /** Filters only those `off_study` for which the `case`-relationship does not match this filter. If `null` is passed to this field, only those `off_study` will be filtered which has any `case`-relation */
+  case_not?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case`-field directly (without any suffix) */
+  case_single?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case`-field directly (without any suffix) */
+  case_some?: InputMaybe<_CaseFilter>;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_last_medication_administration_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_gt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_last_medication_administration_lt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_last_medication_administration_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_gt?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_gte?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_best_response_lt?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_lte?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_matches?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_not?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_not_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_best_response_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_best_response_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_disease_progression_gt?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_gte?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_disease_progression_lt?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_lte?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_matches?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_not?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_disease_progression_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_disease_progression_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_disease_progression_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_disease_progression_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_off_study?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_contains?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_gt?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_gte?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  date_off_study_lt?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_lte?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_matches?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_not?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_not_contains?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_off_study_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_study_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_contains?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_gt?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_gte?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_off_treatment_lt?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_lte?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_matches?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_not?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_not_contains?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_off_treatment_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  document_number_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_gt?: InputMaybe<Scalars['String']['input']>;
+  document_number_gte?: InputMaybe<Scalars['String']['input']>;
+  document_number_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_lt?: InputMaybe<Scalars['String']['input']>;
+  document_number_lte?: InputMaybe<Scalars['String']['input']>;
+  document_number_matches?: InputMaybe<Scalars['String']['input']>;
+  document_number_not?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_starts_with?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_contains?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_ends_with?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_gt?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_gte?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  reason_off_study_lt?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_lte?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_matches?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_not?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_not_contains?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  reason_off_study_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type _Off_StudyInput = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_study?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  reason_off_study?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _Off_StudyOrdering {
+  BestRespVetTxTpBestResponseAsc = 'best_resp_vet_tx_tp_best_response_asc',
+  BestRespVetTxTpBestResponseDesc = 'best_resp_vet_tx_tp_best_response_desc',
+  BestRespVetTxTpSecondaryResponseAsc = 'best_resp_vet_tx_tp_secondary_response_asc',
+  BestRespVetTxTpSecondaryResponseDesc = 'best_resp_vet_tx_tp_secondary_response_desc',
+  DateLastMedicationAdministrationAsc = 'date_last_medication_administration_asc',
+  DateLastMedicationAdministrationDesc = 'date_last_medication_administration_desc',
+  DateOfBestResponseAsc = 'date_of_best_response_asc',
+  DateOfBestResponseDesc = 'date_of_best_response_desc',
+  DateOfDiseaseProgressionAsc = 'date_of_disease_progression_asc',
+  DateOfDiseaseProgressionDesc = 'date_of_disease_progression_desc',
+  DateOffStudyAsc = 'date_off_study_asc',
+  DateOffStudyDesc = 'date_off_study_desc',
+  DateOffTreatmentAsc = 'date_off_treatment_asc',
+  DateOffTreatmentDesc = 'date_off_treatment_desc',
+  DocumentNumberAsc = 'document_number_asc',
+  DocumentNumberDesc = 'document_number_desc',
+  ReasonOffStudyAsc = 'reason_off_study_asc',
+  ReasonOffStudyDesc = 'reason_off_study_desc',
+}
+
+export type _Off_TreatmentFilter = {
+  AND?: InputMaybe<Array<_Off_TreatmentFilter>>;
+  NOT?: InputMaybe<Array<_Off_TreatmentFilter>>;
+  OR?: InputMaybe<Array<_Off_TreatmentFilter>>;
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_best_response_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_gt?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_best_response_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  best_resp_vet_tx_tp_best_response_lt?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_best_response_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  best_resp_vet_tx_tp_best_response_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_best_response_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_gt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  best_resp_vet_tx_tp_secondary_response_lt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  best_resp_vet_tx_tp_secondary_response_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  best_resp_vet_tx_tp_secondary_response_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  /** Filters only those `off_treatment` for which the `case`-relationship matches this filter. If `null` is passed to this field, only those `off_treatment` will be filtered which has no `case`-relations */
+  case?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case_not`-field */
+  case_none?: InputMaybe<_CaseFilter>;
+  /** Filters only those `off_treatment` for which the `case`-relationship does not match this filter. If `null` is passed to this field, only those `off_treatment` will be filtered which has any `case`-relation */
+  case_not?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case`-field directly (without any suffix) */
+  case_single?: InputMaybe<_CaseFilter>;
+  /** @deprecated Use the `case`-field directly (without any suffix) */
+  case_some?: InputMaybe<_CaseFilter>;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_last_medication_administration_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_gt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_gte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_last_medication_administration_lt?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_lte?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_not?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_last_medication_administration_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_gt?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_gte?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_best_response_lt?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_lte?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_matches?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_not?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_not_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_best_response_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_best_response_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_contains?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_disease_progression_gt?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_gte?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_disease_progression_lt?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_lte?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_matches?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_not?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_disease_progression_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_disease_progression_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_of_disease_progression_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_of_disease_progression_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_contains?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_gt?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_gte?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_off_treatment_lt?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_lte?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_matches?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_not?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_not_contains?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  date_off_treatment_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  document_number_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_gt?: InputMaybe<Scalars['String']['input']>;
+  document_number_gte?: InputMaybe<Scalars['String']['input']>;
+  document_number_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_lt?: InputMaybe<Scalars['String']['input']>;
+  document_number_lte?: InputMaybe<Scalars['String']['input']>;
+  document_number_matches?: InputMaybe<Scalars['String']['input']>;
+  document_number_not?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  document_number_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  document_number_starts_with?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_contains?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_ends_with?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_gt?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_gte?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  reason_off_treatment_lt?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_lte?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_matches?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_not?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_not_contains?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  reason_off_treatment_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment_starts_with?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type _Off_TreatmentInput = {
+  best_resp_vet_tx_tp_best_response?: InputMaybe<Scalars['String']['input']>;
+  best_resp_vet_tx_tp_secondary_response?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  date_last_medication_administration?: InputMaybe<Scalars['String']['input']>;
+  date_of_best_response?: InputMaybe<Scalars['String']['input']>;
+  date_of_disease_progression?: InputMaybe<Scalars['String']['input']>;
+  date_off_treatment?: InputMaybe<Scalars['String']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  reason_off_treatment?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum _Off_TreatmentOrdering {
+  BestRespVetTxTpBestResponseAsc = 'best_resp_vet_tx_tp_best_response_asc',
+  BestRespVetTxTpBestResponseDesc = 'best_resp_vet_tx_tp_best_response_desc',
+  BestRespVetTxTpSecondaryResponseAsc = 'best_resp_vet_tx_tp_secondary_response_asc',
+  BestRespVetTxTpSecondaryResponseDesc = 'best_resp_vet_tx_tp_secondary_response_desc',
+  DateLastMedicationAdministrationAsc = 'date_last_medication_administration_asc',
+  DateLastMedicationAdministrationDesc = 'date_last_medication_administration_desc',
+  DateOfBestResponseAsc = 'date_of_best_response_asc',
+  DateOfBestResponseDesc = 'date_of_best_response_desc',
+  DateOfDiseaseProgressionAsc = 'date_of_disease_progression_asc',
+  DateOfDiseaseProgressionDesc = 'date_of_disease_progression_desc',
+  DateOffTreatmentAsc = 'date_off_treatment_asc',
+  DateOffTreatmentDesc = 'date_off_treatment_desc',
+  DocumentNumberAsc = 'document_number_asc',
+  DocumentNumberDesc = 'document_number_desc',
+  ReasonOffTreatmentAsc = 'reason_off_treatment_asc',
+  ReasonOffTreatmentDesc = 'reason_off_treatment_desc',
+}
+
 export type _Physical_ExamFilter = {
   AND?: InputMaybe<Array<_Physical_ExamFilter>>;
   NOT?: InputMaybe<Array<_Physical_ExamFilter>>;
   OR?: InputMaybe<Array<_Physical_ExamFilter>>;
-  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_contains?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_ends_with?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_gt?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_gte?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_gt?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_gte?: InputMaybe<Scalars['Int']['input']>;
   assessment_timepoint_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
+    Array<InputMaybe<Scalars['Int']['input']>>
   >;
-  assessment_timepoint_lt?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_lte?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_matches?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_not?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_not_contains?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_lt?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_lte?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_not?: InputMaybe<Scalars['Int']['input']>;
   assessment_timepoint_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
+    Array<InputMaybe<Scalars['Int']['input']>>
   >;
-  assessment_timepoint_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_starts_with?: InputMaybe<Scalars['String']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
   body_system_contains?: InputMaybe<Scalars['String']['input']>;
   body_system_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -17974,21 +19733,6 @@ export type _Physical_ExamFilter = {
   >;
   body_system_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   body_system_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   date_of_examination_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_examination_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -18071,29 +19815,6 @@ export type _Physical_ExamFilter = {
   phase_pe_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   phase_pe_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   phase_pe_starts_with?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  physical_exam_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id_not_ends_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  physical_exam_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  physical_exam_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  physical_exam_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** Filters only those `physical_exam` for which the `visit`-relationship matches this filter. If `null` is passed to this field, only those `physical_exam` will be filtered which has no `visit`-relations */
   visit?: InputMaybe<_VisitFilter>;
   /** @deprecated Use the `visit_not`-field */
@@ -18107,15 +19828,13 @@ export type _Physical_ExamFilter = {
 };
 
 export type _Physical_ExamInput = {
-  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
   pe_comment?: InputMaybe<Scalars['String']['input']>;
   pe_finding?: InputMaybe<Scalars['String']['input']>;
   phase_pe?: InputMaybe<Scalars['String']['input']>;
-  physical_exam_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _Physical_ExamOrdering {
@@ -18123,8 +19842,6 @@ export enum _Physical_ExamOrdering {
   AssessmentTimepointDesc = 'assessment_timepoint_desc',
   BodySystemAsc = 'body_system_asc',
   BodySystemDesc = 'body_system_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfExaminationAsc = 'date_of_examination_asc',
   DateOfExaminationDesc = 'date_of_examination_desc',
   DayInCycleAsc = 'day_in_cycle_asc',
@@ -18135,48 +19852,12 @@ export enum _Physical_ExamOrdering {
   PeFindingDesc = 'pe_finding_desc',
   PhasePeAsc = 'phase_pe_asc',
   PhasePeDesc = 'phase_pe_desc',
-  PhysicalExamRecordIdAsc = 'physical_exam_record_id_asc',
-  PhysicalExamRecordIdDesc = 'physical_exam_record_id_desc',
 }
 
 export type _Principal_InvestigatorFilter = {
   AND?: InputMaybe<Array<_Principal_InvestigatorFilter>>;
   NOT?: InputMaybe<Array<_Principal_InvestigatorFilter>>;
   OR?: InputMaybe<Array<_Principal_InvestigatorFilter>>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
-  person_record_id?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  person_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  person_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  person_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   pi_first_name?: InputMaybe<Scalars['String']['input']>;
   pi_first_name_contains?: InputMaybe<Scalars['String']['input']>;
   pi_first_name_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -18245,18 +19926,12 @@ export type _Principal_InvestigatorFilter = {
 };
 
 export type _Principal_InvestigatorInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  person_record_id?: InputMaybe<Scalars['String']['input']>;
   pi_first_name?: InputMaybe<Scalars['String']['input']>;
   pi_last_name?: InputMaybe<Scalars['String']['input']>;
   pi_middle_initial?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _Principal_InvestigatorOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
-  PersonRecordIdAsc = 'person_record_id_asc',
-  PersonRecordIdDesc = 'person_record_id_desc',
   PiFirstNameAsc = 'pi_first_name_asc',
   PiFirstNameDesc = 'pi_first_name_desc',
   PiLastNameAsc = 'pi_last_name_asc',
@@ -18296,21 +19971,6 @@ export type _Prior_SurgeryFilter = {
   anatomical_site_of_surgery_starts_with?: InputMaybe<
     Scalars['String']['input']
   >;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -18360,29 +20020,6 @@ export type _Prior_SurgeryFilter = {
   prior_prior_surgery_single?: InputMaybe<_Prior_SurgeryFilter>;
   /** @deprecated Use the `prior_prior_surgery`-field directly (without any suffix) */
   prior_prior_surgery_some?: InputMaybe<_Prior_SurgeryFilter>;
-  prior_surgery_record_id?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  prior_surgery_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id_not_ends_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  prior_surgery_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  prior_surgery_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  prior_surgery_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   procedure?: InputMaybe<Scalars['String']['input']>;
   procedure_contains?: InputMaybe<Scalars['String']['input']>;
   procedure_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -18461,9 +20098,7 @@ export type _Prior_SurgeryFilter = {
 
 export type _Prior_SurgeryInput = {
   anatomical_site_of_surgery?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_surgery?: InputMaybe<Scalars['String']['input']>;
-  prior_surgery_record_id?: InputMaybe<Scalars['String']['input']>;
   procedure?: InputMaybe<Scalars['String']['input']>;
   residual_disease?: InputMaybe<Scalars['String']['input']>;
   surgical_finding?: InputMaybe<Scalars['String']['input']>;
@@ -18473,12 +20108,8 @@ export type _Prior_SurgeryInput = {
 export enum _Prior_SurgeryOrdering {
   AnatomicalSiteOfSurgeryAsc = 'anatomical_site_of_surgery_asc',
   AnatomicalSiteOfSurgeryDesc = 'anatomical_site_of_surgery_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfSurgeryAsc = 'date_of_surgery_asc',
   DateOfSurgeryDesc = 'date_of_surgery_desc',
-  PriorSurgeryRecordIdAsc = 'prior_surgery_record_id_asc',
-  PriorSurgeryRecordIdDesc = 'prior_surgery_record_id_desc',
   ProcedureAsc = 'procedure_asc',
   ProcedureDesc = 'procedure_desc',
   ResidualDiseaseAsc = 'residual_disease_asc',
@@ -18564,21 +20195,6 @@ export type _Prior_TherapyFilter = {
   best_response_to_prior_therapy_starts_with?: InputMaybe<
     Scalars['String']['input']
   >;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_first_dose?: InputMaybe<Scalars['String']['input']>;
   date_of_first_dose_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_first_dose_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -18863,29 +20479,6 @@ export type _Prior_TherapyFilter = {
   prior_prior_therapy_some?: InputMaybe<_Prior_TherapyFilter>;
   prior_steroid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
   prior_steroid_exposure_not?: InputMaybe<Scalars['Boolean']['input']>;
-  prior_therapy_record_id?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  prior_therapy_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  prior_therapy_record_id_not_ends_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  prior_therapy_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  prior_therapy_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  prior_therapy_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   prior_therapy_type?: InputMaybe<Scalars['String']['input']>;
   prior_therapy_type_contains?: InputMaybe<Scalars['String']['input']>;
   prior_therapy_type_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -19062,7 +20655,6 @@ export type _Prior_TherapyInput = {
   agent_units_of_measure?: InputMaybe<Scalars['String']['input']>;
   any_therapy?: InputMaybe<Scalars['Boolean']['input']>;
   best_response_to_prior_therapy?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_first_dose?: InputMaybe<Scalars['String']['input']>;
   date_of_last_dose?: InputMaybe<Scalars['String']['input']>;
   date_of_last_dose_any_therapy?: InputMaybe<Scalars['String']['input']>;
@@ -19078,7 +20670,6 @@ export type _Prior_TherapyInput = {
   number_of_prior_regimens_steroid?: InputMaybe<Scalars['Int']['input']>;
   prior_nsaid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
   prior_steroid_exposure?: InputMaybe<Scalars['Boolean']['input']>;
-  prior_therapy_record_id?: InputMaybe<Scalars['String']['input']>;
   prior_therapy_type?: InputMaybe<Scalars['String']['input']>;
   therapy_type?: InputMaybe<Scalars['String']['input']>;
   total_dose?: InputMaybe<Scalars['Float']['input']>;
@@ -19104,8 +20695,6 @@ export enum _Prior_TherapyOrdering {
   AnyTherapyDesc = 'any_therapy_desc',
   BestResponseToPriorTherapyAsc = 'best_response_to_prior_therapy_asc',
   BestResponseToPriorTherapyDesc = 'best_response_to_prior_therapy_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfFirstDoseAsc = 'date_of_first_dose_asc',
   DateOfFirstDoseDesc = 'date_of_first_dose_desc',
   DateOfLastDoseAnyTherapyAsc = 'date_of_last_dose_any_therapy_asc',
@@ -19132,8 +20721,6 @@ export enum _Prior_TherapyOrdering {
   PriorNsaidExposureDesc = 'prior_nsaid_exposure_desc',
   PriorSteroidExposureAsc = 'prior_steroid_exposure_asc',
   PriorSteroidExposureDesc = 'prior_steroid_exposure_desc',
-  PriorTherapyRecordIdAsc = 'prior_therapy_record_id_asc',
-  PriorTherapyRecordIdDesc = 'prior_therapy_record_id_desc',
   PriorTherapyTypeAsc = 'prior_therapy_type_asc',
   PriorTherapyTypeDesc = 'prior_therapy_type_desc',
   TherapyTypeAsc = 'therapy_type_asc',
@@ -19164,21 +20751,6 @@ export type _ProgramFilter = {
   AND?: InputMaybe<Array<_ProgramFilter>>;
   NOT?: InputMaybe<Array<_ProgramFilter>>;
   OR?: InputMaybe<Array<_ProgramFilter>>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   program_acronym?: InputMaybe<Scalars['String']['input']>;
   program_acronym_contains?: InputMaybe<Scalars['String']['input']>;
   program_acronym_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -19313,7 +20885,6 @@ export type _ProgramFilter = {
 };
 
 export type _ProgramInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   program_acronym?: InputMaybe<Scalars['String']['input']>;
   program_external_url?: InputMaybe<Scalars['String']['input']>;
   program_full_description?: InputMaybe<Scalars['String']['input']>;
@@ -19323,8 +20894,6 @@ export type _ProgramInput = {
 };
 
 export enum _ProgramOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   ProgramAcronymAsc = 'program_acronym_asc',
   ProgramAcronymDesc = 'program_acronym_desc',
   ProgramExternalUrlAsc = 'program_external_url_asc',
@@ -19358,21 +20927,6 @@ export type _PublicationFilter = {
   authorship_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   authorship_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   authorship_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   digital_object_id?: InputMaybe<Scalars['String']['input']>;
   digital_object_id_contains?: InputMaybe<Scalars['String']['input']>;
   digital_object_id_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -19464,7 +21018,6 @@ export type _PublicationFilter = {
 
 export type _PublicationInput = {
   authorship?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   digital_object_id?: InputMaybe<Scalars['String']['input']>;
   journal_citation?: InputMaybe<Scalars['String']['input']>;
   publication_title?: InputMaybe<Scalars['String']['input']>;
@@ -19475,8 +21028,6 @@ export type _PublicationInput = {
 export enum _PublicationOrdering {
   AuthorshipAsc = 'authorship_asc',
   AuthorshipDesc = 'authorship_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DigitalObjectIdAsc = 'digital_object_id_asc',
   DigitalObjectIdDesc = 'digital_object_id_desc',
   JournalCitationAsc = 'journal_citation_asc',
@@ -19505,21 +21056,25 @@ export type _RegistrationFilter = {
   cases_single?: InputMaybe<_CaseFilter>;
   /** Filters only those `registration` for which at least one `cases`-relationship matches this filter */
   cases_some?: InputMaybe<_CaseFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  registration_id?: InputMaybe<Scalars['String']['input']>;
+  registration_id_contains?: InputMaybe<Scalars['String']['input']>;
+  registration_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  registration_id_gt?: InputMaybe<Scalars['String']['input']>;
+  registration_id_gte?: InputMaybe<Scalars['String']['input']>;
+  registration_id_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  registration_id_lt?: InputMaybe<Scalars['String']['input']>;
+  registration_id_lte?: InputMaybe<Scalars['String']['input']>;
+  registration_id_matches?: InputMaybe<Scalars['String']['input']>;
+  registration_id_not?: InputMaybe<Scalars['String']['input']>;
+  registration_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  registration_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  registration_id_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  registration_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  registration_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   registration_origin?: InputMaybe<Scalars['String']['input']>;
   registration_origin_contains?: InputMaybe<Scalars['String']['input']>;
   registration_origin_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -19539,48 +21094,36 @@ export type _RegistrationFilter = {
   >;
   registration_origin_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   registration_origin_starts_with?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  registration_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  registration_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  registration_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type _RegistrationInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  registration_id?: InputMaybe<Scalars['String']['input']>;
   registration_origin?: InputMaybe<Scalars['String']['input']>;
-  registration_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _RegistrationOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
+  RegistrationIdAsc = 'registration_id_asc',
+  RegistrationIdDesc = 'registration_id_desc',
   RegistrationOriginAsc = 'registration_origin_asc',
   RegistrationOriginDesc = 'registration_origin_desc',
-  RegistrationRecordIdAsc = 'registration_record_id_asc',
-  RegistrationRecordIdDesc = 'registration_record_id_desc',
 }
 
 export type _SampleFilter = {
   AND?: InputMaybe<Array<_SampleFilter>>;
   NOT?: InputMaybe<Array<_SampleFilter>>;
   OR?: InputMaybe<Array<_SampleFilter>>;
+  /** Filters only those `sample` for which all `assays`-relationship matches this filter. If `null` is passed to this field, only those `sample` will be filtered which has no `assays`-relations */
+  assays?: InputMaybe<_AssayFilter>;
+  /** Filters only those `sample` for which all `assays`-relationships matches this filter */
+  assays_every?: InputMaybe<_AssayFilter>;
+  /** Filters only those `sample` for which none of the `assays`-relationships matches this filter */
+  assays_none?: InputMaybe<_AssayFilter>;
+  /** Filters only those `sample` for which all `assays`-relationship does not match this filter. If `null` is passed to this field, only those `sample` will be filtered which has any `assays`-relation */
+  assays_not?: InputMaybe<_AssayFilter>;
+  /** Filters only those `sample` for which exactly one `assays`-relationship matches this filter */
+  assays_single?: InputMaybe<_AssayFilter>;
+  /** Filters only those `sample` for which at least one `assays`-relationship matches this filter */
+  assays_some?: InputMaybe<_AssayFilter>;
   /** Filters only those `sample` for which the `case`-relationship matches this filter. If `null` is passed to this field, only those `sample` will be filtered which has no `case`-relations */
   case?: InputMaybe<_CaseFilter>;
   /** @deprecated Use the `case_not`-field */
@@ -19606,21 +21149,6 @@ export type _SampleFilter = {
   comment_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   comment_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   comment_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
   date_of_sample_collection_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_sample_collection_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -20169,7 +21697,6 @@ export type _SampleFilter = {
 
 export type _SampleInput = {
   comment?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_sample_collection?: InputMaybe<Scalars['String']['input']>;
   general_sample_pathology?: InputMaybe<Scalars['String']['input']>;
   length_of_tumor?: InputMaybe<Scalars['Float']['input']>;
@@ -20201,8 +21728,6 @@ export type _SampleInput = {
 export enum _SampleOrdering {
   CommentAsc = 'comment_asc',
   CommentDesc = 'comment_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfSampleCollectionAsc = 'date_of_sample_collection_asc',
   DateOfSampleCollectionDesc = 'date_of_sample_collection_desc',
   GeneralSamplePathologyAsc = 'general_sample_pathology_asc',
@@ -20259,18 +21784,6 @@ export enum _SampleOrdering {
 
 export type _StudyFilter = {
   AND?: InputMaybe<Array<_StudyFilter>>;
-  /** Filters only those `study` for which all `NONE`-relationship matches this filter. If `null` is passed to this field, only those `study` will be filtered which has no `NONE`-relations */
-  NONE?: InputMaybe<_Consent_GroupFilter>;
-  /** Filters only those `study` for which all `NONE`-relationships matches this filter */
-  NONE_every?: InputMaybe<_Consent_GroupFilter>;
-  /** Filters only those `study` for which none of the `NONE`-relationships matches this filter */
-  NONE_none?: InputMaybe<_Consent_GroupFilter>;
-  /** Filters only those `study` for which all `NONE`-relationship does not match this filter. If `null` is passed to this field, only those `study` will be filtered which has any `NONE`-relation */
-  NONE_not?: InputMaybe<_Consent_GroupFilter>;
-  /** Filters only those `study` for which exactly one `NONE`-relationship matches this filter */
-  NONE_single?: InputMaybe<_Consent_GroupFilter>;
-  /** Filters only those `study` for which at least one `NONE`-relationship matches this filter */
-  NONE_some?: InputMaybe<_Consent_GroupFilter>;
   NOT?: InputMaybe<Array<_StudyFilter>>;
   OR?: InputMaybe<Array<_StudyFilter>>;
   accession_id?: InputMaybe<Scalars['String']['input']>;
@@ -20425,21 +21938,6 @@ export type _StudyFilter = {
   cohorts_single?: InputMaybe<_CohortFilter>;
   /** Filters only those `study` for which at least one `cohorts`-relationship matches this filter */
   cohorts_some?: InputMaybe<_CohortFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_iacuc_approval?: InputMaybe<Scalars['String']['input']>;
   date_of_iacuc_approval_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_iacuc_approval_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -20502,6 +22000,18 @@ export type _StudyFilter = {
   human_relevance_single?: InputMaybe<_Human_RelevanceFilter>;
   /** @deprecated Use the `human_relevance`-field directly (without any suffix) */
   human_relevance_some?: InputMaybe<_Human_RelevanceFilter>;
+  /** Filters only those `study` for which all `image_collections`-relationship matches this filter. If `null` is passed to this field, only those `study` will be filtered which has no `image_collections`-relations */
+  image_collections?: InputMaybe<_Image_CollectionFilter>;
+  /** Filters only those `study` for which all `image_collections`-relationships matches this filter */
+  image_collections_every?: InputMaybe<_Image_CollectionFilter>;
+  /** Filters only those `study` for which none of the `image_collections`-relationships matches this filter */
+  image_collections_none?: InputMaybe<_Image_CollectionFilter>;
+  /** Filters only those `study` for which all `image_collections`-relationship does not match this filter. If `null` is passed to this field, only those `study` will be filtered which has any `image_collections`-relation */
+  image_collections_not?: InputMaybe<_Image_CollectionFilter>;
+  /** Filters only those `study` for which exactly one `image_collections`-relationship matches this filter */
+  image_collections_single?: InputMaybe<_Image_CollectionFilter>;
+  /** Filters only those `study` for which at least one `image_collections`-relationship matches this filter */
+  image_collections_some?: InputMaybe<_Image_CollectionFilter>;
   /** Filters only those `study` for which all `principal_investigators`-relationship matches this filter. If `null` is passed to this field, only those `study` will be filtered which has no `principal_investigators`-relations */
   principal_investigators?: InputMaybe<_Principal_InvestigatorFilter>;
   /** Filters only those `study` for which all `principal_investigators`-relationships matches this filter */
@@ -20588,7 +22098,6 @@ export type _StudyInput = {
   clinical_study_id?: InputMaybe<Scalars['String']['input']>;
   clinical_study_name?: InputMaybe<Scalars['String']['input']>;
   clinical_study_type?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_iacuc_approval?: InputMaybe<Scalars['String']['input']>;
   dates_of_conduct?: InputMaybe<Scalars['String']['input']>;
   study_disposition?: InputMaybe<Scalars['String']['input']>;
@@ -20607,8 +22116,6 @@ export enum _StudyOrdering {
   ClinicalStudyNameDesc = 'clinical_study_name_desc',
   ClinicalStudyTypeAsc = 'clinical_study_type_asc',
   ClinicalStudyTypeDesc = 'clinical_study_type_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfIacucApprovalAsc = 'date_of_iacuc_approval_asc',
   DateOfIacucApprovalDesc = 'date_of_iacuc_approval_desc',
   DatesOfConductAsc = 'dates_of_conduct_asc',
@@ -20621,6 +22128,18 @@ export type _Study_ArmFilter = {
   AND?: InputMaybe<Array<_Study_ArmFilter>>;
   NOT?: InputMaybe<Array<_Study_ArmFilter>>;
   OR?: InputMaybe<Array<_Study_ArmFilter>>;
+  /** Filters only those `study_arm` for which all `agents`-relationship matches this filter. If `null` is passed to this field, only those `study_arm` will be filtered which has no `agents`-relations */
+  agents?: InputMaybe<_AgentFilter>;
+  /** Filters only those `study_arm` for which all `agents`-relationships matches this filter */
+  agents_every?: InputMaybe<_AgentFilter>;
+  /** Filters only those `study_arm` for which none of the `agents`-relationships matches this filter */
+  agents_none?: InputMaybe<_AgentFilter>;
+  /** Filters only those `study_arm` for which all `agents`-relationship does not match this filter. If `null` is passed to this field, only those `study_arm` will be filtered which has any `agents`-relation */
+  agents_not?: InputMaybe<_AgentFilter>;
+  /** Filters only those `study_arm` for which exactly one `agents`-relationship matches this filter */
+  agents_single?: InputMaybe<_AgentFilter>;
+  /** Filters only those `study_arm` for which at least one `agents`-relationship matches this filter */
+  agents_some?: InputMaybe<_AgentFilter>;
   arm?: InputMaybe<Scalars['String']['input']>;
   arm_contains?: InputMaybe<Scalars['String']['input']>;
   arm_description?: InputMaybe<Scalars['String']['input']>;
@@ -20694,21 +22213,39 @@ export type _Study_ArmFilter = {
   cohorts_single?: InputMaybe<_CohortFilter>;
   /** Filters only those `study_arm` for which at least one `cohorts`-relationship matches this filter */
   cohorts_some?: InputMaybe<_CohortFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  ctep_treatment_assignment_code_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  ctep_treatment_assignment_code_gt?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code_gte?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  ctep_treatment_assignment_code_lt?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code_lte?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code_matches?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  ctep_treatment_assignment_code_not?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code_not_contains?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  ctep_treatment_assignment_code_not_ends_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  ctep_treatment_assignment_code_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  ctep_treatment_assignment_code_not_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
+  ctep_treatment_assignment_code_starts_with?: InputMaybe<
+    Scalars['String']['input']
+  >;
   /** Filters only those `study_arm` for which the `study`-relationship matches this filter. If `null` is passed to this field, only those `study_arm` will be filtered which has no `study`-relations */
   study?: InputMaybe<_StudyFilter>;
   /** @deprecated Use the `study_not`-field */
@@ -20725,7 +22262,7 @@ export type _Study_ArmInput = {
   arm?: InputMaybe<Scalars['String']['input']>;
   arm_description?: InputMaybe<Scalars['String']['input']>;
   arm_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
+  ctep_treatment_assignment_code?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _Study_ArmOrdering {
@@ -20735,29 +22272,14 @@ export enum _Study_ArmOrdering {
   ArmDescriptionDesc = 'arm_description_desc',
   ArmIdAsc = 'arm_id_asc',
   ArmIdDesc = 'arm_id_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
+  CtepTreatmentAssignmentCodeAsc = 'ctep_treatment_assignment_code_asc',
+  CtepTreatmentAssignmentCodeDesc = 'ctep_treatment_assignment_code_desc',
 }
 
 export type _Study_SiteFilter = {
   AND?: InputMaybe<Array<_Study_SiteFilter>>;
   NOT?: InputMaybe<Array<_Study_SiteFilter>>;
   OR?: InputMaybe<Array<_Study_SiteFilter>>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   registering_institution?: InputMaybe<Scalars['String']['input']>;
   registering_institution_contains?: InputMaybe<Scalars['String']['input']>;
   registering_institution_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -20842,15 +22364,12 @@ export type _Study_SiteFilter = {
 };
 
 export type _Study_SiteInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   registering_institution?: InputMaybe<Scalars['String']['input']>;
   site_short_name?: InputMaybe<Scalars['String']['input']>;
   veterinary_medical_center?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _Study_SiteOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   RegisteringInstitutionAsc = 'registering_institution_asc',
   RegisteringInstitutionDesc = 'registering_institution_desc',
   SiteShortNameAsc = 'site_short_name_asc',
@@ -20863,6 +22382,18 @@ export type _VisitFilter = {
   AND?: InputMaybe<Array<_VisitFilter>>;
   NOT?: InputMaybe<Array<_VisitFilter>>;
   OR?: InputMaybe<Array<_VisitFilter>>;
+  /** Filters only those `visit` for which all `agent_administrations`-relationship matches this filter. If `null` is passed to this field, only those `visit` will be filtered which has no `agent_administrations`-relations */
+  agent_administrations?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `visit` for which all `agent_administrations`-relationships matches this filter */
+  agent_administrations_every?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `visit` for which none of the `agent_administrations`-relationships matches this filter */
+  agent_administrations_none?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `visit` for which all `agent_administrations`-relationship does not match this filter. If `null` is passed to this field, only those `visit` will be filtered which has any `agent_administrations`-relation */
+  agent_administrations_not?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `visit` for which exactly one `agent_administrations`-relationship matches this filter */
+  agent_administrations_single?: InputMaybe<_Agent_AdministrationFilter>;
+  /** Filters only those `visit` for which at least one `agent_administrations`-relationship matches this filter */
+  agent_administrations_some?: InputMaybe<_Agent_AdministrationFilter>;
   /** Filters only those `visit` for which the `case`-relationship matches this filter. If `null` is passed to this field, only those `visit` will be filtered which has no `case`-relations */
   case?: InputMaybe<_CaseFilter>;
   /** @deprecated Use the `case_not`-field */
@@ -20873,21 +22404,6 @@ export type _VisitFilter = {
   case_single?: InputMaybe<_CaseFilter>;
   /** @deprecated Use the `case`-field directly (without any suffix) */
   case_some?: InputMaybe<_CaseFilter>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** Filters only those `visit` for which the `cycle`-relationship matches this filter. If `null` is passed to this field, only those `visit` will be filtered which has no `cycle`-relations */
   cycle?: InputMaybe<_CycleFilter>;
   /** @deprecated Use the `cycle_not`-field */
@@ -20910,6 +22426,18 @@ export type _VisitFilter = {
   disease_extents_single?: InputMaybe<_Disease_ExtentFilter>;
   /** Filters only those `visit` for which at least one `disease_extents`-relationship matches this filter */
   disease_extents_some?: InputMaybe<_Disease_ExtentFilter>;
+  /** Filters only those `visit` for which all `lab_exams`-relationship matches this filter. If `null` is passed to this field, only those `visit` will be filtered which has no `lab_exams`-relations */
+  lab_exams?: InputMaybe<_Lab_ExamFilter>;
+  /** Filters only those `visit` for which all `lab_exams`-relationships matches this filter */
+  lab_exams_every?: InputMaybe<_Lab_ExamFilter>;
+  /** Filters only those `visit` for which none of the `lab_exams`-relationships matches this filter */
+  lab_exams_none?: InputMaybe<_Lab_ExamFilter>;
+  /** Filters only those `visit` for which all `lab_exams`-relationship does not match this filter. If `null` is passed to this field, only those `visit` will be filtered which has any `lab_exams`-relation */
+  lab_exams_not?: InputMaybe<_Lab_ExamFilter>;
+  /** Filters only those `visit` for which exactly one `lab_exams`-relationship matches this filter */
+  lab_exams_single?: InputMaybe<_Lab_ExamFilter>;
+  /** Filters only those `visit` for which at least one `lab_exams`-relationship matches this filter */
+  lab_exams_some?: InputMaybe<_Lab_ExamFilter>;
   /** Filters only those `visit` for which the `next_visit`-relationship matches this filter. If `null` is passed to this field, only those `visit` will be filtered which has no `next_visit`-relations */
   next_visit?: InputMaybe<_VisitFilter>;
   /** @deprecated Use the `next_visit_not`-field */
@@ -20969,33 +22497,38 @@ export type _VisitFilter = {
   visit_date_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   visit_date_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   visit_date_starts_with?: InputMaybe<Scalars['String']['input']>;
-  visit_number?: InputMaybe<Scalars['Int']['input']>;
-  visit_number_gt?: InputMaybe<Scalars['Int']['input']>;
-  visit_number_gte?: InputMaybe<Scalars['Int']['input']>;
-  visit_number_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  visit_number_lt?: InputMaybe<Scalars['Int']['input']>;
-  visit_number_lte?: InputMaybe<Scalars['Int']['input']>;
-  visit_number_not?: InputMaybe<Scalars['Int']['input']>;
-  visit_number_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  visit_record_id?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_in?: InputMaybe<
+  visit_id?: InputMaybe<Scalars['String']['input']>;
+  visit_id_contains?: InputMaybe<Scalars['String']['input']>;
+  visit_id_ends_with?: InputMaybe<Scalars['String']['input']>;
+  visit_id_gt?: InputMaybe<Scalars['String']['input']>;
+  visit_id_gte?: InputMaybe<Scalars['String']['input']>;
+  visit_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  visit_id_lt?: InputMaybe<Scalars['String']['input']>;
+  visit_id_lte?: InputMaybe<Scalars['String']['input']>;
+  visit_id_matches?: InputMaybe<Scalars['String']['input']>;
+  visit_id_not?: InputMaybe<Scalars['String']['input']>;
+  visit_id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  visit_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  visit_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  visit_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  visit_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  visit_number?: InputMaybe<Scalars['String']['input']>;
+  visit_number_contains?: InputMaybe<Scalars['String']['input']>;
+  visit_number_ends_with?: InputMaybe<Scalars['String']['input']>;
+  visit_number_gt?: InputMaybe<Scalars['String']['input']>;
+  visit_number_gte?: InputMaybe<Scalars['String']['input']>;
+  visit_number_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  visit_number_lt?: InputMaybe<Scalars['String']['input']>;
+  visit_number_lte?: InputMaybe<Scalars['String']['input']>;
+  visit_number_matches?: InputMaybe<Scalars['String']['input']>;
+  visit_number_not?: InputMaybe<Scalars['String']['input']>;
+  visit_number_not_contains?: InputMaybe<Scalars['String']['input']>;
+  visit_number_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  visit_number_not_in?: InputMaybe<
     Array<InputMaybe<Scalars['String']['input']>>
   >;
-  visit_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  visit_record_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  visit_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
+  visit_number_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  visit_number_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** Filters only those `visit` for which all `vital_signs`-relationship matches this filter. If `null` is passed to this field, only those `visit` will be filtered which has no `vital_signs`-relations */
   vital_signs?: InputMaybe<_Vital_SignsFilter>;
   /** Filters only those `visit` for which all `vital_signs`-relationships matches this filter */
@@ -21011,46 +22544,36 @@ export type _VisitFilter = {
 };
 
 export type _VisitInput = {
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   visit_date?: InputMaybe<Scalars['String']['input']>;
-  visit_number?: InputMaybe<Scalars['Int']['input']>;
-  visit_record_id?: InputMaybe<Scalars['String']['input']>;
+  visit_id?: InputMaybe<Scalars['String']['input']>;
+  visit_number?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _VisitOrdering {
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   VisitDateAsc = 'visit_date_asc',
   VisitDateDesc = 'visit_date_desc',
+  VisitIdAsc = 'visit_id_asc',
+  VisitIdDesc = 'visit_id_desc',
   VisitNumberAsc = 'visit_number_asc',
   VisitNumberDesc = 'visit_number_desc',
-  VisitRecordIdAsc = 'visit_record_id_asc',
-  VisitRecordIdDesc = 'visit_record_id_desc',
 }
 
 export type _Vital_SignsFilter = {
   AND?: InputMaybe<Array<_Vital_SignsFilter>>;
   NOT?: InputMaybe<Array<_Vital_SignsFilter>>;
   OR?: InputMaybe<Array<_Vital_SignsFilter>>;
-  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_contains?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_ends_with?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_gt?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_gte?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_gt?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_gte?: InputMaybe<Scalars['Int']['input']>;
   assessment_timepoint_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
+    Array<InputMaybe<Scalars['Int']['input']>>
   >;
-  assessment_timepoint_lt?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_lte?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_matches?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_not?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_not_contains?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_lt?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_lte?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_not?: InputMaybe<Scalars['Int']['input']>;
   assessment_timepoint_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
+    Array<InputMaybe<Scalars['Int']['input']>>
   >;
-  assessment_timepoint_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  assessment_timepoint_starts_with?: InputMaybe<Scalars['String']['input']>;
   body_surface_area?: InputMaybe<Scalars['Float']['input']>;
   body_surface_area_gt?: InputMaybe<Scalars['Float']['input']>;
   body_surface_area_gte?: InputMaybe<Scalars['Float']['input']>;
@@ -21207,21 +22730,6 @@ export type _Vital_SignsFilter = {
     Scalars['String']['input']
   >;
   body_temperature_unit_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_gte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_lt?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_lte?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_matches?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  crdc_id_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  crdc_id_starts_with?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs_contains?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -21345,6 +22853,21 @@ export type _Vital_SignsFilter = {
   >;
   patient_weight_unit_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   patient_weight_unit_starts_with?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
+  phase_contains?: InputMaybe<Scalars['String']['input']>;
+  phase_ends_with?: InputMaybe<Scalars['String']['input']>;
+  phase_gt?: InputMaybe<Scalars['String']['input']>;
+  phase_gte?: InputMaybe<Scalars['String']['input']>;
+  phase_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  phase_lt?: InputMaybe<Scalars['String']['input']>;
+  phase_lte?: InputMaybe<Scalars['String']['input']>;
+  phase_matches?: InputMaybe<Scalars['String']['input']>;
+  phase_not?: InputMaybe<Scalars['String']['input']>;
+  phase_not_contains?: InputMaybe<Scalars['String']['input']>;
+  phase_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  phase_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  phase_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  phase_starts_with?: InputMaybe<Scalars['String']['input']>;
   pulse?: InputMaybe<Scalars['Int']['input']>;
   pulse_gt?: InputMaybe<Scalars['Int']['input']>;
   pulse_gte?: InputMaybe<Scalars['Int']['input']>;
@@ -21626,31 +23149,10 @@ export type _Vital_SignsFilter = {
   visit_single?: InputMaybe<_VisitFilter>;
   /** @deprecated Use the `visit`-field directly (without any suffix) */
   visit_some?: InputMaybe<_VisitFilter>;
-  vital_signs_record_id?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_contains?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_ends_with?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_gt?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_gte?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  vital_signs_record_id_lt?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_lte?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_matches?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_not?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_not_contains?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['String']['input']>>
-  >;
-  vital_signs_record_id_not_starts_with?: InputMaybe<
-    Scalars['String']['input']
-  >;
-  vital_signs_record_id_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type _Vital_SignsInput = {
-  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
   body_surface_area?: InputMaybe<Scalars['Float']['input']>;
   body_surface_area_original?: InputMaybe<Scalars['Float']['input']>;
   body_surface_area_original_unit?: InputMaybe<Scalars['String']['input']>;
@@ -21659,7 +23161,6 @@ export type _Vital_SignsInput = {
   body_temperature_original?: InputMaybe<Scalars['Float']['input']>;
   body_temperature_original_unit?: InputMaybe<Scalars['String']['input']>;
   body_temperature_unit?: InputMaybe<Scalars['String']['input']>;
-  crdc_id?: InputMaybe<Scalars['String']['input']>;
   date_of_vital_signs?: InputMaybe<Scalars['String']['input']>;
   ecg?: InputMaybe<Scalars['String']['input']>;
   modified_ecog?: InputMaybe<Scalars['String']['input']>;
@@ -21667,6 +23168,7 @@ export type _Vital_SignsInput = {
   patient_weight_original?: InputMaybe<Scalars['Float']['input']>;
   patient_weight_original_unit?: InputMaybe<Scalars['String']['input']>;
   patient_weight_unit?: InputMaybe<Scalars['String']['input']>;
+  phase?: InputMaybe<Scalars['String']['input']>;
   pulse?: InputMaybe<Scalars['Int']['input']>;
   pulse_original?: InputMaybe<Scalars['Int']['input']>;
   pulse_original_unit?: InputMaybe<Scalars['String']['input']>;
@@ -21684,7 +23186,6 @@ export type _Vital_SignsInput = {
   systolic_bp_original?: InputMaybe<Scalars['Int']['input']>;
   systolic_bp_original_unit?: InputMaybe<Scalars['String']['input']>;
   systolic_bp_unit?: InputMaybe<Scalars['String']['input']>;
-  vital_signs_record_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _Vital_SignsOrdering {
@@ -21706,8 +23207,6 @@ export enum _Vital_SignsOrdering {
   BodyTemperatureOriginalUnitDesc = 'body_temperature_original_unit_desc',
   BodyTemperatureUnitAsc = 'body_temperature_unit_asc',
   BodyTemperatureUnitDesc = 'body_temperature_unit_desc',
-  CrdcIdAsc = 'crdc_id_asc',
-  CrdcIdDesc = 'crdc_id_desc',
   DateOfVitalSignsAsc = 'date_of_vital_signs_asc',
   DateOfVitalSignsDesc = 'date_of_vital_signs_desc',
   EcgAsc = 'ecg_asc',
@@ -21722,6 +23221,8 @@ export enum _Vital_SignsOrdering {
   PatientWeightOriginalUnitDesc = 'patient_weight_original_unit_desc',
   PatientWeightUnitAsc = 'patient_weight_unit_asc',
   PatientWeightUnitDesc = 'patient_weight_unit_desc',
+  PhaseAsc = 'phase_asc',
+  PhaseDesc = 'phase_desc',
   PulseAsc = 'pulse_asc',
   PulseDesc = 'pulse_desc',
   PulseOriginalAsc = 'pulse_original_asc',
@@ -21756,8 +23257,6 @@ export enum _Vital_SignsOrdering {
   SystolicBpOriginalUnitDesc = 'systolic_bp_original_unit_desc',
   SystolicBpUnitAsc = 'systolic_bp_unit_asc',
   SystolicBpUnitDesc = 'systolic_bp_unit_desc',
-  VitalSignsRecordIdAsc = 'vital_signs_record_id_asc',
-  VitalSignsRecordIdDesc = 'vital_signs_record_id_desc',
 }
 
 export type Adverse_Event = {
@@ -21767,8 +23266,8 @@ export type Adverse_Event = {
   adverse_event_description?: Maybe<Scalars['String']['output']>;
   adverse_event_grade?: Maybe<Scalars['String']['output']>;
   adverse_event_grade_description?: Maybe<Scalars['String']['output']>;
-  adverse_event_record_id?: Maybe<Scalars['String']['output']>;
   adverse_event_term?: Maybe<Scalars['String']['output']>;
+  agent?: Maybe<Agent>;
   attribution_to_commercial?: Maybe<Scalars['String']['output']>;
   attribution_to_disease?: Maybe<Scalars['String']['output']>;
   attribution_to_ind?: Maybe<Scalars['String']['output']>;
@@ -21776,7 +23275,6 @@ export type Adverse_Event = {
   attribution_to_research?: Maybe<Scalars['String']['output']>;
   case?: Maybe<Case>;
   cases?: Maybe<Array<Maybe<Case>>>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_onset?: Maybe<Scalars['String']['output']>;
   date_of_resolution?: Maybe<Scalars['String']['output']>;
   day_in_cycle?: Maybe<Scalars['Int']['output']>;
@@ -21796,18 +23294,106 @@ export type Adverse_EventCasesArgs = {
   orderBy?: InputMaybe<Array<_CaseOrdering>>;
 };
 
+export type Agent = {
+  __typename?: 'agent';
+  adverse_events?: Maybe<Array<Maybe<Adverse_Event>>>;
+  agent_administrations?: Maybe<Array<Maybe<Agent_Administration>>>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  medication?: Maybe<Scalars['String']['output']>;
+  study_arms?: Maybe<Array<Maybe<Study_Arm>>>;
+};
+
+export type AgentAdverse_EventsArgs = {
+  filter?: InputMaybe<_Adverse_EventFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Adverse_EventOrdering>>;
+};
+
+export type AgentAgent_AdministrationsArgs = {
+  filter?: InputMaybe<_Agent_AdministrationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Agent_AdministrationOrdering>>;
+};
+
+export type AgentStudy_ArmsArgs = {
+  filter?: InputMaybe<_Study_ArmFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Study_ArmOrdering>>;
+};
+
+export type Agent_Administration = {
+  __typename?: 'agent_administration';
+  agent?: Maybe<Agent>;
+  comment?: Maybe<Scalars['String']['output']>;
+  date_of_missed_dose?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  dose_level?: Maybe<Scalars['Float']['output']>;
+  dose_level_original?: Maybe<Scalars['Float']['output']>;
+  dose_level_original_unit?: Maybe<Scalars['String']['output']>;
+  dose_level_unit?: Maybe<Scalars['String']['output']>;
+  dose_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication?: Maybe<Scalars['String']['output']>;
+  medication_actual_dose?: Maybe<Scalars['Float']['output']>;
+  medication_actual_dose_original?: Maybe<Scalars['Float']['output']>;
+  medication_actual_dose_original_unit?: Maybe<Scalars['String']['output']>;
+  medication_actual_dose_unit?: Maybe<Scalars['String']['output']>;
+  medication_actual_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication_course_number?: Maybe<Scalars['String']['output']>;
+  medication_duration?: Maybe<Scalars['Float']['output']>;
+  medication_duration_original?: Maybe<Scalars['Float']['output']>;
+  medication_duration_original_unit?: Maybe<Scalars['String']['output']>;
+  medication_duration_unit?: Maybe<Scalars['String']['output']>;
+  medication_lot_number?: Maybe<Scalars['String']['output']>;
+  medication_missed_dose?: Maybe<Scalars['String']['output']>;
+  medication_units_of_measure?: Maybe<Scalars['String']['output']>;
+  medication_vial_id?: Maybe<Scalars['String']['output']>;
+  missed_dose_amount?: Maybe<Scalars['Float']['output']>;
+  missed_dose_amount_original?: Maybe<Scalars['Float']['output']>;
+  missed_dose_amount_original_unit?: Maybe<Scalars['String']['output']>;
+  missed_dose_amount_unit?: Maybe<Scalars['String']['output']>;
+  missed_dose_units_of_measure?: Maybe<Scalars['String']['output']>;
+  phase?: Maybe<Scalars['String']['output']>;
+  route_of_administration?: Maybe<Scalars['String']['output']>;
+  start_time?: Maybe<Scalars['String']['output']>;
+  stop_time?: Maybe<Scalars['String']['output']>;
+  visit?: Maybe<Visit>;
+};
+
+export type Assay = {
+  __typename?: 'assay';
+  files?: Maybe<Array<Maybe<File>>>;
+  images?: Maybe<Array<Maybe<Image>>>;
+  sample?: Maybe<Sample>;
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type AssayFilesArgs = {
+  filter?: InputMaybe<_FileFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_FileOrdering>>;
+};
+
+export type AssayImagesArgs = {
+  filter?: InputMaybe<_ImageFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_ImageOrdering>>;
+};
+
 export type Biospecimen_Source = {
   __typename?: 'biospecimen_source';
   biospecimen_repository_acronym?: Maybe<Scalars['String']['output']>;
   biospecimen_repository_full_name?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
 };
 
 export type Canine_Individual = {
   __typename?: 'canine_individual';
   canine_individual_id?: Maybe<Scalars['String']['output']>;
   cases?: Maybe<Array<Maybe<Case>>>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
 };
 
 export type Canine_IndividualCasesArgs = {
@@ -21822,15 +23408,16 @@ export type Case = {
   adverse_event?: Maybe<Adverse_Event>;
   adverse_events?: Maybe<Array<Maybe<Adverse_Event>>>;
   canine_individual?: Maybe<Canine_Individual>;
-  case_record_id?: Maybe<Scalars['String']['output']>;
+  case_id?: Maybe<Scalars['String']['output']>;
   cohort?: Maybe<Cohort>;
-  consent_group?: Maybe<Consent_Group>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   cycles?: Maybe<Array<Maybe<Cycle>>>;
   demographic?: Maybe<Demographic>;
-  diagnosis?: Maybe<Diagnosis>;
+  diagnoses?: Maybe<Array<Maybe<Diagnosis>>>;
   enrollment?: Maybe<Enrollment>;
   files?: Maybe<Array<Maybe<File>>>;
+  follow_ups?: Maybe<Array<Maybe<Follow_Up>>>;
+  off_study?: Maybe<Off_Study>;
+  off_treatment?: Maybe<Off_Treatment>;
   patient_first_name?: Maybe<Scalars['String']['output']>;
   patient_id?: Maybe<Scalars['String']['output']>;
   registrations?: Maybe<Array<Maybe<Registration>>>;
@@ -21854,11 +23441,25 @@ export type CaseCyclesArgs = {
   orderBy?: InputMaybe<Array<_CycleOrdering>>;
 };
 
+export type CaseDiagnosesArgs = {
+  filter?: InputMaybe<_DiagnosisFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_DiagnosisOrdering>>;
+};
+
 export type CaseFilesArgs = {
   filter?: InputMaybe<_FileFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_FileOrdering>>;
+};
+
+export type CaseFollow_UpsArgs = {
+  filter?: InputMaybe<_Follow_UpFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Follow_UpOrdering>>;
 };
 
 export type CaseRegistrationsArgs = {
@@ -21887,8 +23488,7 @@ export type Cohort = {
   cases?: Maybe<Array<Maybe<Case>>>;
   cohort_description?: Maybe<Scalars['String']['output']>;
   cohort_dose?: Maybe<Scalars['String']['output']>;
-  cohort_record_id?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
+  cohort_id?: Maybe<Scalars['String']['output']>;
   study?: Maybe<Study>;
   study_arm?: Maybe<Study_Arm>;
 };
@@ -21900,29 +23500,10 @@ export type CohortCasesArgs = {
   orderBy?: InputMaybe<Array<_CaseOrdering>>;
 };
 
-export type Consent_Group = {
-  __typename?: 'consent_group';
-  cases?: Maybe<Array<Maybe<Case>>>;
-  consent_group_name?: Maybe<Scalars['String']['output']>;
-  consent_group_number?: Maybe<Scalars['Int']['output']>;
-  consent_group_record_id?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
-  study?: Maybe<Study>;
-};
-
-export type Consent_GroupCasesArgs = {
-  filter?: InputMaybe<_CaseFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<_CaseOrdering>>;
-};
-
 export type Cycle = {
   __typename?: 'cycle';
   case?: Maybe<Case>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   cycle_number?: Maybe<Scalars['Int']['output']>;
-  cycle_record_id?: Maybe<Scalars['String']['output']>;
   date_of_cycle_end?: Maybe<Scalars['String']['output']>;
   date_of_cycle_start?: Maybe<Scalars['String']['output']>;
   visits?: Maybe<Array<Maybe<Visit>>>;
@@ -21940,9 +23521,8 @@ export type Demographic = {
   additional_breed_detail?: Maybe<Scalars['String']['output']>;
   breed?: Maybe<Scalars['String']['output']>;
   case?: Maybe<Case>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_birth?: Maybe<Scalars['String']['output']>;
-  demographic_record_id?: Maybe<Scalars['String']['output']>;
+  demographic_id?: Maybe<Scalars['String']['output']>;
   neutered_indicator?: Maybe<Scalars['String']['output']>;
   patient_age_at_enrollment?: Maybe<Scalars['Float']['output']>;
   patient_age_at_enrollment_original?: Maybe<Scalars['Float']['output']>;
@@ -21961,10 +23541,9 @@ export type Diagnosis = {
   case?: Maybe<Case>;
   concurrent_disease?: Maybe<Scalars['String']['output']>;
   concurrent_disease_type?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_diagnosis?: Maybe<Scalars['String']['output']>;
   date_of_histology_confirmation?: Maybe<Scalars['String']['output']>;
-  diagnosis_record_id?: Maybe<Scalars['String']['output']>;
+  diagnosis_id?: Maybe<Scalars['String']['output']>;
   disease_term?: Maybe<Scalars['String']['output']>;
   files?: Maybe<Array<Maybe<File>>>;
   follow_up_data?: Maybe<Scalars['String']['output']>;
@@ -21985,13 +23564,11 @@ export type DiagnosisFilesArgs = {
 
 export type Disease_Extent = {
   __typename?: 'disease_extent';
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_evaluation?: Maybe<Scalars['String']['output']>;
-  disease_extent_record_id?: Maybe<Scalars['String']['output']>;
   evaluation_code?: Maybe<Scalars['String']['output']>;
-  evaluation_number?: Maybe<Scalars['Int']['output']>;
+  evaluation_number?: Maybe<Scalars['String']['output']>;
   lesion_description?: Maybe<Scalars['String']['output']>;
-  lesion_number?: Maybe<Scalars['Int']['output']>;
+  lesion_number?: Maybe<Scalars['String']['output']>;
   lesion_site?: Maybe<Scalars['String']['output']>;
   longest_measurement?: Maybe<Scalars['Float']['output']>;
   longest_measurement_original?: Maybe<Scalars['Float']['output']>;
@@ -22008,10 +23585,9 @@ export type Disease_Extent = {
 export type Enrollment = {
   __typename?: 'enrollment';
   case?: Maybe<Case>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_informed_consent?: Maybe<Scalars['String']['output']>;
   date_of_registration?: Maybe<Scalars['String']['output']>;
-  enrollment_record_id?: Maybe<Scalars['String']['output']>;
+  enrollment_id?: Maybe<Scalars['String']['output']>;
   initials?: Maybe<Scalars['String']['output']>;
   patient_subgroup?: Maybe<Scalars['String']['output']>;
   physical_exams?: Maybe<Array<Maybe<Physical_Exam>>>;
@@ -22045,20 +23621,33 @@ export type EnrollmentPrior_TherapiesArgs = {
 
 export type File = {
   __typename?: 'file';
+  assay?: Maybe<Assay>;
   case?: Maybe<Case>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   diagnosis?: Maybe<Diagnosis>;
   file_description?: Maybe<Scalars['String']['output']>;
   file_format?: Maybe<Scalars['String']['output']>;
   file_location?: Maybe<Scalars['String']['output']>;
   file_name?: Maybe<Scalars['String']['output']>;
-  file_size?: Maybe<Scalars['Int']['output']>;
+  file_size?: Maybe<Scalars['Float']['output']>;
   file_status?: Maybe<Scalars['String']['output']>;
   file_type?: Maybe<Scalars['String']['output']>;
   md5sum?: Maybe<Scalars['String']['output']>;
   sample?: Maybe<Sample>;
   study?: Maybe<Study>;
   uuid?: Maybe<Scalars['String']['output']>;
+};
+
+export type Follow_Up = {
+  __typename?: 'follow_up';
+  case?: Maybe<Case>;
+  contact_type?: Maybe<Scalars['String']['output']>;
+  date_of_last_contact?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  explain_unknown_status?: Maybe<Scalars['String']['output']>;
+  patient_status?: Maybe<Scalars['String']['output']>;
+  physical_exam_changes?: Maybe<Scalars['String']['output']>;
+  physical_exam_performed?: Maybe<Scalars['Boolean']['output']>;
+  treatment_since_last_contact?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type Human_Relevance = {
@@ -22075,25 +23664,70 @@ export type Human_Relevance = {
   study?: Maybe<Study>;
 };
 
+export type Image = {
+  __typename?: 'image';
+  assay?: Maybe<Assay>;
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type Image_Collection = {
+  __typename?: 'image_collection';
+  collection_access?: Maybe<Scalars['String']['output']>;
+  image_collection_name?: Maybe<Scalars['String']['output']>;
+  image_collection_url?: Maybe<Scalars['String']['output']>;
+  image_type_included?: Maybe<Scalars['String']['output']>;
+  repository_name?: Maybe<Scalars['String']['output']>;
+  study?: Maybe<Study>;
+};
+
+export type Lab_Exam = {
+  __typename?: 'lab_exam';
+  schema_validation_placeholder?: Maybe<Scalars['String']['output']>;
+  visit?: Maybe<Visit>;
+};
+
+export type Off_Study = {
+  __typename?: 'off_study';
+  best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
+  best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
+  case?: Maybe<Case>;
+  date_last_medication_administration?: Maybe<Scalars['String']['output']>;
+  date_of_best_response?: Maybe<Scalars['String']['output']>;
+  date_of_disease_progression?: Maybe<Scalars['String']['output']>;
+  date_off_study?: Maybe<Scalars['String']['output']>;
+  date_off_treatment?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  reason_off_study?: Maybe<Scalars['String']['output']>;
+};
+
+export type Off_Treatment = {
+  __typename?: 'off_treatment';
+  best_resp_vet_tx_tp_best_response?: Maybe<Scalars['String']['output']>;
+  best_resp_vet_tx_tp_secondary_response?: Maybe<Scalars['String']['output']>;
+  case?: Maybe<Case>;
+  date_last_medication_administration?: Maybe<Scalars['String']['output']>;
+  date_of_best_response?: Maybe<Scalars['String']['output']>;
+  date_of_disease_progression?: Maybe<Scalars['String']['output']>;
+  date_off_treatment?: Maybe<Scalars['String']['output']>;
+  document_number?: Maybe<Scalars['String']['output']>;
+  reason_off_treatment?: Maybe<Scalars['String']['output']>;
+};
+
 export type Physical_Exam = {
   __typename?: 'physical_exam';
-  assessment_timepoint?: Maybe<Scalars['String']['output']>;
+  assessment_timepoint?: Maybe<Scalars['Int']['output']>;
   body_system?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_examination?: Maybe<Scalars['String']['output']>;
   day_in_cycle?: Maybe<Scalars['Int']['output']>;
   enrollment?: Maybe<Enrollment>;
   pe_comment?: Maybe<Scalars['String']['output']>;
   pe_finding?: Maybe<Scalars['String']['output']>;
   phase_pe?: Maybe<Scalars['String']['output']>;
-  physical_exam_record_id?: Maybe<Scalars['String']['output']>;
   visit?: Maybe<Visit>;
 };
 
 export type Principal_Investigator = {
   __typename?: 'principal_investigator';
-  crdc_id?: Maybe<Scalars['String']['output']>;
-  person_record_id?: Maybe<Scalars['String']['output']>;
   pi_first_name?: Maybe<Scalars['String']['output']>;
   pi_last_name?: Maybe<Scalars['String']['output']>;
   pi_middle_initial?: Maybe<Scalars['String']['output']>;
@@ -22110,12 +23744,10 @@ export type Principal_InvestigatorStudiesArgs = {
 export type Prior_Surgery = {
   __typename?: 'prior_surgery';
   anatomical_site_of_surgery?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_surgery?: Maybe<Scalars['String']['output']>;
   enrollment?: Maybe<Enrollment>;
   next_prior_surgery?: Maybe<Prior_Surgery>;
   prior_prior_surgery?: Maybe<Prior_Surgery>;
-  prior_surgery_record_id?: Maybe<Scalars['String']['output']>;
   procedure?: Maybe<Scalars['String']['output']>;
   residual_disease?: Maybe<Scalars['String']['output']>;
   surgical_finding?: Maybe<Scalars['String']['output']>;
@@ -22128,7 +23760,6 @@ export type Prior_Therapy = {
   agent_units_of_measure?: Maybe<Scalars['String']['output']>;
   any_therapy?: Maybe<Scalars['Boolean']['output']>;
   best_response_to_prior_therapy?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_first_dose?: Maybe<Scalars['String']['output']>;
   date_of_last_dose?: Maybe<Scalars['String']['output']>;
   date_of_last_dose_any_therapy?: Maybe<Scalars['String']['output']>;
@@ -22145,7 +23776,6 @@ export type Prior_Therapy = {
   prior_nsaid_exposure?: Maybe<Scalars['Boolean']['output']>;
   prior_prior_therapy?: Maybe<Prior_Therapy>;
   prior_steroid_exposure?: Maybe<Scalars['Boolean']['output']>;
-  prior_therapy_record_id?: Maybe<Scalars['String']['output']>;
   prior_therapy_type?: Maybe<Scalars['String']['output']>;
   therapy_type?: Maybe<Scalars['String']['output']>;
   total_dose?: Maybe<Scalars['Float']['output']>;
@@ -22162,7 +23792,6 @@ export type Prior_Therapy = {
 
 export type Program = {
   __typename?: 'program';
-  crdc_id?: Maybe<Scalars['String']['output']>;
   program_acronym?: Maybe<Scalars['String']['output']>;
   program_external_url?: Maybe<Scalars['String']['output']>;
   program_full_description?: Maybe<Scalars['String']['output']>;
@@ -22182,7 +23811,6 @@ export type ProgramStudiesArgs = {
 export type Publication = {
   __typename?: 'publication';
   authorship?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   digital_object_id?: Maybe<Scalars['String']['output']>;
   journal_citation?: Maybe<Scalars['String']['output']>;
   publication_title?: Maybe<Scalars['String']['output']>;
@@ -22194,9 +23822,8 @@ export type Publication = {
 export type Registration = {
   __typename?: 'registration';
   cases?: Maybe<Array<Maybe<Case>>>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
+  registration_id?: Maybe<Scalars['String']['output']>;
   registration_origin?: Maybe<Scalars['String']['output']>;
-  registration_record_id?: Maybe<Scalars['String']['output']>;
 };
 
 export type RegistrationCasesArgs = {
@@ -22208,9 +23835,9 @@ export type RegistrationCasesArgs = {
 
 export type Sample = {
   __typename?: 'sample';
+  assays?: Maybe<Array<Maybe<Assay>>>;
   case?: Maybe<Case>;
   comment?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_sample_collection?: Maybe<Scalars['String']['output']>;
   files?: Maybe<Array<Maybe<File>>>;
   general_sample_pathology?: Maybe<Scalars['String']['output']>;
@@ -22243,6 +23870,13 @@ export type Sample = {
   width_of_tumor_unit?: Maybe<Scalars['String']['output']>;
 };
 
+export type SampleAssaysArgs = {
+  filter?: InputMaybe<_AssayFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AssayOrdering>>;
+};
+
 export type SampleFilesArgs = {
   filter?: InputMaybe<_FileFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -22252,7 +23886,6 @@ export type SampleFilesArgs = {
 
 export type Study = {
   __typename?: 'study';
-  NONE?: Maybe<Array<Maybe<Consent_Group>>>;
   accession_id?: Maybe<Scalars['String']['output']>;
   cases?: Maybe<Array<Maybe<Case>>>;
   clinical_study_description?: Maybe<Scalars['String']['output']>;
@@ -22261,24 +23894,17 @@ export type Study = {
   clinical_study_name?: Maybe<Scalars['String']['output']>;
   clinical_study_type?: Maybe<Scalars['String']['output']>;
   cohorts?: Maybe<Array<Maybe<Cohort>>>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_iacuc_approval?: Maybe<Scalars['String']['output']>;
   dates_of_conduct?: Maybe<Scalars['String']['output']>;
   files?: Maybe<Array<Maybe<File>>>;
   human_relevance?: Maybe<Human_Relevance>;
+  image_collections?: Maybe<Array<Maybe<Image_Collection>>>;
   principal_investigators?: Maybe<Array<Maybe<Principal_Investigator>>>;
   program?: Maybe<Program>;
   publications?: Maybe<Array<Maybe<Publication>>>;
   study_arms?: Maybe<Array<Maybe<Study_Arm>>>;
   study_disposition?: Maybe<Scalars['String']['output']>;
   study_sites?: Maybe<Array<Maybe<Study_Site>>>;
-};
-
-export type StudyNoneArgs = {
-  filter?: InputMaybe<_Consent_GroupFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<_Consent_GroupOrdering>>;
 };
 
 export type StudyCasesArgs = {
@@ -22300,6 +23926,13 @@ export type StudyFilesArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_FileOrdering>>;
+};
+
+export type StudyImage_CollectionsArgs = {
+  filter?: InputMaybe<_Image_CollectionFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Image_CollectionOrdering>>;
 };
 
 export type StudyPrincipal_InvestigatorsArgs = {
@@ -22332,13 +23965,21 @@ export type StudyStudy_SitesArgs = {
 
 export type Study_Arm = {
   __typename?: 'study_arm';
+  agents?: Maybe<Array<Maybe<Agent>>>;
   arm?: Maybe<Scalars['String']['output']>;
   arm_description?: Maybe<Scalars['String']['output']>;
   arm_id?: Maybe<Scalars['String']['output']>;
   cases?: Maybe<Array<Maybe<Case>>>;
   cohorts?: Maybe<Array<Maybe<Cohort>>>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
+  ctep_treatment_assignment_code?: Maybe<Scalars['String']['output']>;
   study?: Maybe<Study>;
+};
+
+export type Study_ArmAgentsArgs = {
+  filter?: InputMaybe<_AgentFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_AgentOrdering>>;
 };
 
 export type Study_ArmCasesArgs = {
@@ -22357,7 +23998,6 @@ export type Study_ArmCohortsArgs = {
 
 export type Study_Site = {
   __typename?: 'study_site';
-  crdc_id?: Maybe<Scalars['String']['output']>;
   registering_institution?: Maybe<Scalars['String']['output']>;
   site_short_name?: Maybe<Scalars['String']['output']>;
   studies?: Maybe<Array<Maybe<Study>>>;
@@ -22373,18 +24013,26 @@ export type Study_SiteStudiesArgs = {
 
 export type Visit = {
   __typename?: 'visit';
+  agent_administrations?: Maybe<Array<Maybe<Agent_Administration>>>;
   case?: Maybe<Case>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   cycle?: Maybe<Cycle>;
   disease_extents?: Maybe<Array<Maybe<Disease_Extent>>>;
+  lab_exams?: Maybe<Array<Maybe<Lab_Exam>>>;
   next_visit?: Maybe<Visit>;
   physical_exams?: Maybe<Array<Maybe<Physical_Exam>>>;
   prior_visit?: Maybe<Visit>;
   samples?: Maybe<Array<Maybe<Sample>>>;
   visit_date?: Maybe<Scalars['String']['output']>;
-  visit_number?: Maybe<Scalars['Int']['output']>;
-  visit_record_id?: Maybe<Scalars['String']['output']>;
+  visit_id?: Maybe<Scalars['String']['output']>;
+  visit_number?: Maybe<Scalars['String']['output']>;
   vital_signs?: Maybe<Array<Maybe<Vital_Signs>>>;
+};
+
+export type VisitAgent_AdministrationsArgs = {
+  filter?: InputMaybe<_Agent_AdministrationFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Agent_AdministrationOrdering>>;
 };
 
 export type VisitDisease_ExtentsArgs = {
@@ -22392,6 +24040,13 @@ export type VisitDisease_ExtentsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<_Disease_ExtentOrdering>>;
+};
+
+export type VisitLab_ExamsArgs = {
+  filter?: InputMaybe<_Lab_ExamFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<_Lab_ExamOrdering>>;
 };
 
 export type VisitPhysical_ExamsArgs = {
@@ -22417,7 +24072,7 @@ export type VisitVital_SignsArgs = {
 
 export type Vital_Signs = {
   __typename?: 'vital_signs';
-  assessment_timepoint?: Maybe<Scalars['String']['output']>;
+  assessment_timepoint?: Maybe<Scalars['Int']['output']>;
   body_surface_area?: Maybe<Scalars['Float']['output']>;
   body_surface_area_original?: Maybe<Scalars['Float']['output']>;
   body_surface_area_original_unit?: Maybe<Scalars['String']['output']>;
@@ -22426,7 +24081,6 @@ export type Vital_Signs = {
   body_temperature_original?: Maybe<Scalars['Float']['output']>;
   body_temperature_original_unit?: Maybe<Scalars['String']['output']>;
   body_temperature_unit?: Maybe<Scalars['String']['output']>;
-  crdc_id?: Maybe<Scalars['String']['output']>;
   date_of_vital_signs?: Maybe<Scalars['String']['output']>;
   ecg?: Maybe<Scalars['String']['output']>;
   modified_ecog?: Maybe<Scalars['String']['output']>;
@@ -22434,6 +24088,7 @@ export type Vital_Signs = {
   patient_weight_original?: Maybe<Scalars['Float']['output']>;
   patient_weight_original_unit?: Maybe<Scalars['String']['output']>;
   patient_weight_unit?: Maybe<Scalars['String']['output']>;
+  phase?: Maybe<Scalars['String']['output']>;
   pulse?: Maybe<Scalars['Int']['output']>;
   pulse_original?: Maybe<Scalars['Int']['output']>;
   pulse_original_unit?: Maybe<Scalars['String']['output']>;
@@ -22452,7 +24107,6 @@ export type Vital_Signs = {
   systolic_bp_original_unit?: Maybe<Scalars['String']['output']>;
   systolic_bp_unit?: Maybe<Scalars['String']['output']>;
   visit?: Maybe<Visit>;
-  vital_signs_record_id?: Maybe<Scalars['String']['output']>;
 };
 
 export type SampleQueryVariables = Exact<{
@@ -22583,7 +24237,7 @@ export type GetAllFileIdsCaseDetailsQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -22689,7 +24343,7 @@ export type GetAllFileIdsOnFileTabForSelectAllQuery = {
 };
 
 export type CaseQueryVariables = Exact<{
-  case_record_id: Scalars['String']['input'];
+  case_id: Scalars['String']['input'];
 }>;
 
 export type CaseQuery = {
@@ -22702,7 +24356,7 @@ export type CaseQuery = {
   volumeOfDataOfCase?: number | null;
   multiStudyCases?: {
     __typename?: 'MultiStudyCases';
-    caseRecordIds?: Array<string | null> | null;
+    caseIds?: Array<string | null> | null;
     sampleIds?: Array<string | null> | null;
     fileIds?: Array<string | null> | null;
     studyFileIds?: Array<string | null> | null;
@@ -22710,14 +24364,13 @@ export type CaseQuery = {
   } | null;
   case: Array<{
     __typename?: 'case';
-    case_record_id?: string | null;
+    case_id?: string | null;
     patient_id?: string | null;
     patient_first_name?: string | null;
     study?: {
       __typename?: 'study';
       clinical_study_name?: string | null;
       clinical_study_designation?: string | null;
-      accession_id?: string | null;
       program?: {
         __typename?: 'program';
         program_acronym?: string | null;
@@ -22735,7 +24388,11 @@ export type CaseQuery = {
     cohort?: {
       __typename?: 'cohort';
       cohort_description?: string | null;
-      study_arm?: { __typename?: 'study_arm'; arm?: string | null } | null;
+      study_arm?: {
+        __typename?: 'study_arm';
+        arm?: string | null;
+        ctep_treatment_assignment_code?: string | null;
+      } | null;
     } | null;
     enrollment?: {
       __typename?: 'enrollment';
@@ -22745,7 +24402,7 @@ export type CaseQuery = {
       date_of_informed_consent?: string | null;
       initials?: string | null;
     } | null;
-    diagnosis?: {
+    diagnoses?: Array<{
       __typename?: 'diagnosis';
       best_response?: string | null;
       disease_term?: string | null;
@@ -22754,7 +24411,7 @@ export type CaseQuery = {
       primary_disease_site?: string | null;
       histological_grade?: string | null;
       histology_cytopathology?: string | null;
-    } | null;
+    } | null> | null;
   }>;
   filesOfCase?: Array<{
     __typename?: 'FilesOfCase';
@@ -22767,7 +24424,7 @@ export type CaseQuery = {
     md5sum?: string | null;
     uuid?: string | null;
   } | null> | null;
-  samplesByCaseRecordId?: Array<{
+  samplesByCaseId?: Array<{
     __typename?: 'sample';
     sample_id?: string | null;
     sample_site?: string | null;
@@ -22855,7 +24512,7 @@ export type DashboardSearchQueryQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -22874,7 +24531,7 @@ export type DashboardSearchQueryQuery = {
     numberOfPrograms?: number | null;
     numberOfAliquots?: number | null;
     volumeOfData?: number | null;
-    caseRecordIds?: Array<string | null> | null;
+    caseIds?: Array<string | null> | null;
     sampleIds?: Array<string | null> | null;
     fileIds?: Array<string | null> | null;
     studyFileIds?: Array<string | null> | null;
@@ -23010,7 +24667,7 @@ export type DashboardSearchQueryQuery = {
     numberOfSamples?: number | null;
     numberOfFiles?: number | null;
     numberOfStudyFiles?: number | null;
-    caseRecordIds?: Array<string | null> | null;
+    caseIds?: Array<string | null> | null;
     sampleIds?: Array<string | null> | null;
     fileIds?: Array<string | null> | null;
     studyFileIds?: Array<string | null> | null;
@@ -23338,7 +24995,7 @@ export type GetFilesOverviewQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -23434,7 +25091,7 @@ export type GetFilesOverviewQuery = {
     file_description?: string | null;
     file_format?: string | null;
     file_size?: number | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
     study_code?: string | null;
@@ -23568,7 +25225,7 @@ export type GetFileOverviewDescQuery = {
     file_description?: string | null;
     file_format?: string | null;
     file_size?: number | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
     study_code?: string | null;
@@ -23610,7 +25267,7 @@ export type GetFileOverviewDescQuery = {
 };
 
 export type GetSampleOverviewQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -23701,7 +25358,7 @@ export type GetSampleOverviewQuery = {
   sampleOverview?: Array<{
     __typename?: 'SampleOverviewES';
     sample_id?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
     sample_site?: string | null;
@@ -23823,7 +25480,7 @@ export type GetSamplesOverviewDescQueryQuery = {
   sampleOverview?: Array<{
     __typename?: 'SampleOverviewES';
     sample_id?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
     sample_site?: string | null;
@@ -23862,7 +25519,7 @@ export type GetSamplesOverviewDescQueryQuery = {
 };
 
 export type GetCasesOverviewQueryDashboardTabQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -23948,7 +25605,7 @@ export type GetCasesOverviewQueryDashboardTabQuery = {
   __typename?: 'QueryType';
   caseOverview?: Array<{
     __typename?: 'CaseOverviewES';
-    case_record_id?: string | null;
+    case_id?: string | null;
     study_code?: string | null;
     study_type?: string | null;
     cohort?: string | null;
@@ -24060,7 +25717,7 @@ export type GetCasesOverviewDescQueryQuery = {
   __typename?: 'QueryType';
   caseOverview?: Array<{
     __typename?: 'CaseOverviewES';
-    case_record_id?: string | null;
+    case_id?: string | null;
     study_code?: string | null;
     study_type?: string | null;
     cohort?: string | null;
@@ -24090,7 +25747,7 @@ export type GetCasesOverviewDescQueryQuery = {
 };
 
 export type CaseOverviewQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -24181,7 +25838,7 @@ export type CaseOverviewQuery = {
 };
 
 export type GetAllFileIdsForSampleTabForSelectAllQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -24280,7 +25937,7 @@ export type GetAllFileIdsDashboardTabQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -24383,7 +26040,7 @@ export type GetAllFiledsForSampleTabForSelectAllQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -24536,7 +26193,7 @@ export type GetMyCartDataQueryQuery = {
     file_name?: string | null;
     drs_uri?: string | null;
     study_code?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     file_type?: string | null;
     association?: string | null;
     file_description?: string | null;
@@ -24599,7 +26256,7 @@ export type GetMyCartDataQueryDescQuery = {
     file_name?: string | null;
     drs_uri?: string | null;
     study_code?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     file_type?: string | null;
     association?: string | null;
     file_description?: string | null;
@@ -24662,7 +26319,7 @@ export type GetStoreManifestDataQueryQuery = {
     file_description?: string | null;
     file_format?: string | null;
     file_size?: number | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
     study_code?: string | null;
@@ -24726,7 +26383,7 @@ export type GetGlobalStatsDataQueryQuery = {
 };
 
 export type UnifiedViewDataQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -24744,7 +26401,7 @@ export type UnifiedViewDataQuery = {
     numberOfPrograms?: number | null;
     numberOfAliquots?: number | null;
     volumeOfData?: number | null;
-    caseRecordIds?: Array<string | null> | null;
+    caseIds?: Array<string | null> | null;
     sampleIds?: Array<string | null> | null;
     fileIds?: Array<string | null> | null;
     studyFileIds?: Array<string | null> | null;
@@ -24855,7 +26512,7 @@ export type SearchPublicQuery = {
     } | null> | null;
     cases?: Array<{
       __typename?: 'GS_Cases';
-      case_record_id?: string | null;
+      case_id?: string | null;
     } | null> | null;
     samples?: Array<{
       __typename?: 'GS_Sample';
@@ -24903,7 +26560,7 @@ export type SearchPageResultCasesQuery = {
     cases?: Array<{
       __typename?: 'GS_Cases';
       type?: string | null;
-      case_record_id?: string | null;
+      case_id?: string | null;
       program_name?: string | null;
       clinical_study_designation?: string | null;
       disease_term?: string | null;
@@ -24925,7 +26582,7 @@ export type SearchPageResultSamplesQuery = {
     samples?: Array<{
       __typename?: 'GS_Sample';
       type?: string | null;
-      case_record_id?: string | null;
+      case_id?: string | null;
       sample_id?: string | null;
       program_name?: string | null;
       clinical_study_designation?: string | null;
@@ -24952,7 +26609,7 @@ export type SearchPageResultFilesQuery = {
       file_name?: string | null;
       file_type?: string | null;
       file_association?: string | null;
-      case_record_id?: string | null;
+      case_id?: string | null;
       sample_id?: string | null;
       program_name?: string | null;
       clinical_study_designation?: string | null;
@@ -25086,7 +26743,7 @@ export type GetAllFileIdsStudyDetailsQueryVariables = Exact<{
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -25326,18 +26983,15 @@ export type StudyQuery = {
     } | null> | null;
     cases?: Array<{
       __typename?: 'case';
-      case_record_id?: string | null;
-      diagnosis?: {
+      case_id?: string | null;
+      diagnoses?: Array<{
         __typename?: 'diagnosis';
         disease_term?: string | null;
-      } | null;
+      } | null> | null;
     } | null> | null;
   }>;
   externalDataOverview?: Array<{
     __typename?: 'ExternalDataOverview';
-    clinical_study_designation?: string | null;
-    numberOfCRDCNodes?: number | null;
-    numberOfImageCollections?: number | null;
     CRDCLinks?: Array<{
       __typename?: 'CRDCLink';
       repository?: string | null;
@@ -25359,7 +27013,7 @@ export type CycleNodeDataQuery = {
     date_of_cycle_start?: string | null;
     date_of_cycle_end?: string | null;
     crf_id?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
   } | null> | null;
 };
 
@@ -25485,7 +27139,7 @@ export type PhysicalExamNodeDataQuery = {
     date_of_examination?: string | null;
     pe_comment?: string | null;
     body_system?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     pe_finding?: string | null;
   } | null> | null;
 };
@@ -25509,7 +27163,7 @@ export type VitalSignsNodeDataQuery = {
     body_surface_area_original_unit?: string | null;
     patient_weight?: number | null;
     patient_weight_unit?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     time_of_observation?: string | null;
     pulse_original_unit?: string | null;
     respiration_rate_original_unit?: string | null;
@@ -25654,11 +27308,11 @@ export type StudyClinicalDataQuery = {
     date_of_cycle_start?: string | null;
     date_of_cycle_end?: string | null;
     crf_id?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
   } | null> | null;
   visitNodeData?: Array<{
     __typename?: 'VisitNodeData';
-    case_record_id?: string | null;
+    case_id?: string | null;
     visit_date?: string | null;
     visit_number?: number | null;
     visit_id?: string | null;
@@ -25694,7 +27348,7 @@ export type StudyClinicalDataQuery = {
   } | null> | null;
   priorSurgeryNodeData?: Array<{
     __typename?: 'PriorSurgeryNodeData';
-    case_record_id?: string | null;
+    case_id?: string | null;
     date_of_surgery?: string | null;
     procedure?: string | null;
     anatomical_site_of_surgery?: string | null;
@@ -25707,7 +27361,7 @@ export type StudyClinicalDataQuery = {
     case_count?: number | null;
     prior_surgeries?: Array<{
       __typename?: 'PriorSurgeryNodeData';
-      case_record_id?: string | null;
+      case_id?: string | null;
       date_of_surgery?: string | null;
       procedure?: string | null;
       anatomical_site_of_surgery?: string | null;
@@ -25741,7 +27395,7 @@ export type StudyClinicalDataQuery = {
   } | null> | null;
   physicalExamNodeData?: Array<{
     __typename?: 'PhysicalExamNodeData';
-    case_record_id?: string | null;
+    case_id?: string | null;
     date_of_examination?: string | null;
     day_in_cycle?: number | null;
     body_system?: string | null;
@@ -25763,7 +27417,7 @@ export type StudyClinicalDataQuery = {
     body_surface_area_original_unit?: string | null;
     patient_weight?: number | null;
     patient_weight_unit?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     time_of_observation?: string | null;
     pulse_original_unit?: string | null;
     respiration_rate_original_unit?: string | null;
@@ -25782,7 +27436,7 @@ export type StudyClinicalDataQuery = {
   } | null> | null;
   adverseEventNodeData?: Array<{
     __typename?: 'AdverseEventNodeData';
-    case_record_id?: string | null;
+    case_id?: string | null;
     day_in_cycle?: number | null;
     dose_limiting_toxicity?: string | null;
     unexpected_adverse_event?: string | null;
@@ -25805,7 +27459,7 @@ export type StudyClinicalDataQuery = {
   } | null> | null;
   diseaseExtentNodeData?: Array<{
     __typename?: 'DiseaseExtentNodeData';
-    case_record_id?: string | null;
+    case_id?: string | null;
     lesion_number?: number | null;
     lesion_site?: string | null;
     lesion_description?: string | null;
@@ -25856,7 +27510,7 @@ export type StudyClinicalDataQuery = {
 };
 
 export type GetCasesTabQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -25939,7 +27593,7 @@ export type GetCasesTabQuery = {
   __typename?: 'QueryType';
   caseOverview?: Array<{
     __typename?: 'CaseOverviewES';
-    case_record_id?: string | null;
+    case_id?: string | null;
     study_code?: string | null;
     study_type?: string | null;
     cohort?: string | null;
@@ -25969,7 +27623,7 @@ export type GetCasesTabQuery = {
 };
 
 export type SampleOverviewQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -26059,7 +27713,7 @@ export type SampleOverviewQuery = {
   sampleOverview?: Array<{
     __typename?: 'SampleOverviewES';
     sample_id?: string | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
     sample_site?: string | null;
@@ -26098,7 +27752,7 @@ export type SampleOverviewQuery = {
 };
 
 export type GetFilesTabTableDownloadCsvQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -26194,7 +27848,7 @@ export type GetFilesTabTableDownloadCsvQuery = {
     file_description?: string | null;
     file_format?: string | null;
     file_size?: number | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
     study_code?: string | null;
@@ -26235,7 +27889,7 @@ export type GetFilesTabTableDownloadCsvQuery = {
 };
 
 export type GetFilesTabForStudyFilesQueryVariables = Exact<{
-  case_record_ids?: InputMaybe<
+  case_ids?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
     | InputMaybe<Scalars['String']['input']>
   >;
@@ -26331,7 +27985,7 @@ export type GetFilesTabForStudyFilesQuery = {
     file_description?: string | null;
     file_format?: string | null;
     file_size?: number | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
     study_code?: string | null;
@@ -26389,7 +28043,7 @@ export type GetMyCartQuery = {
     file_description?: string | null;
     file_format?: string | null;
     file_size?: number | null;
-    case_record_id?: string | null;
+    case_id?: string | null;
     individual_id?: string | null;
     breed?: string | null;
     diagnosis?: string | null;
@@ -27093,7 +28747,7 @@ export const GetAllFileIdsCaseDetailsDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -27412,10 +29066,10 @@ export const GetAllFileIdsCaseDetailsDocument = {
               },
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -27676,7 +29330,7 @@ export const CaseDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_id' },
+            name: { kind: 'Name', value: 'case_id' },
           },
           type: {
             kind: 'NonNullType',
@@ -27696,10 +29350,10 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -27710,10 +29364,10 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -27724,10 +29378,10 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -27738,10 +29392,10 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -27752,10 +29406,10 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -27766,10 +29420,10 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -27780,10 +29434,10 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -27794,20 +29448,17 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'caseRecordIds' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'caseIds' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'sampleIds' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'fileIds' } },
                 {
@@ -27827,20 +29478,17 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'patient_id' } },
                 {
                   kind: 'Field',
@@ -27862,10 +29510,6 @@ export const CaseDocument = {
                           kind: 'Name',
                           value: 'clinical_study_designation',
                         },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'accession_id' },
                       },
                       {
                         kind: 'Field',
@@ -27936,6 +29580,13 @@ export const CaseDocument = {
                               kind: 'Field',
                               name: { kind: 'Name', value: 'arm' },
                             },
+                            {
+                              kind: 'Field',
+                              name: {
+                                kind: 'Name',
+                                value: 'ctep_treatment_assignment_code',
+                              },
+                            },
                           ],
                         },
                       },
@@ -27976,7 +29627,7 @@ export const CaseDocument = {
                 },
                 {
                   kind: 'Field',
-                  name: { kind: 'Name', value: 'diagnosis' },
+                  name: { kind: 'Name', value: 'diagnoses' },
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
@@ -28023,10 +29674,10 @@ export const CaseDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -28049,14 +29700,14 @@ export const CaseDocument = {
           },
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'samplesByCaseRecordId' },
+            name: { kind: 'Name', value: 'samplesByCaseId' },
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_id' },
+                name: { kind: 'Name', value: 'case_id' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_id' },
+                  name: { kind: 'Name', value: 'case_id' },
                 },
               },
             ],
@@ -28370,7 +30021,7 @@ export const DashboardSearchQueryDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -28545,10 +30196,10 @@ export const DashboardSearchQueryDocument = {
               },
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
             ],
@@ -28587,10 +30238,7 @@ export const DashboardSearchQueryDocument = {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'volumeOfData' },
                 },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'caseRecordIds' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'caseIds' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'sampleIds' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'fileIds' } },
                 {
@@ -29056,10 +30704,10 @@ export const DashboardSearchQueryDocument = {
               },
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -29090,10 +30738,7 @@ export const DashboardSearchQueryDocument = {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'numberOfStudyFiles' },
                 },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'caseRecordIds' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'caseIds' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'sampleIds' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'fileIds' } },
                 {
@@ -30457,7 +32102,7 @@ export const GetFilesOverviewDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -30791,10 +32436,10 @@ export const GetFilesOverviewDocument = {
               },
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -30994,10 +32639,7 @@ export const GetFilesOverviewDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_format' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_size' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'breed' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'diagnosis' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
@@ -31639,10 +33281,7 @@ export const GetFileOverviewDescDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_format' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_size' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'breed' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'diagnosis' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
@@ -31778,7 +33417,7 @@ export const GetSampleOverviewDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -32104,10 +33743,10 @@ export const GetSampleOverviewDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -32299,10 +33938,7 @@ export const GetSampleOverviewDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'sample_id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'breed' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'diagnosis' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'sample_site' } },
@@ -32904,10 +34540,7 @@ export const GetSamplesOverviewDescQueryDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'sample_id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'breed' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'diagnosis' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'sample_site' } },
@@ -33034,7 +34667,7 @@ export const GetCasesOverviewQueryDashboardTabDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -33302,11 +34935,7 @@ export const GetCasesOverviewQueryDashboardTabDocument = {
             name: { kind: 'Name', value: 'order_by' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          defaultValue: {
-            kind: 'StringValue',
-            value: 'case_record_id',
-            block: false,
-          },
+          defaultValue: { kind: 'StringValue', value: 'case_id', block: false },
         },
         {
           kind: 'VariableDefinition',
@@ -33521,20 +35150,17 @@ export const GetCasesOverviewQueryDashboardTabDocument = {
               },
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
             ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_type' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'cohort' } },
@@ -33878,11 +35504,7 @@ export const GetCasesOverviewDescQueryDocument = {
             name: { kind: 'Name', value: 'order_by' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          defaultValue: {
-            kind: 'StringValue',
-            value: 'case_record_id',
-            block: false,
-          },
+          defaultValue: { kind: 'StringValue', value: 'case_id', block: false },
         },
         {
           kind: 'VariableDefinition',
@@ -34099,10 +35721,7 @@ export const GetCasesOverviewDescQueryDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_type' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'cohort' } },
@@ -34193,7 +35812,7 @@ export const CaseOverviewDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -34461,11 +36080,7 @@ export const CaseOverviewDocument = {
             name: { kind: 'Name', value: 'order_by' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          defaultValue: {
-            kind: 'StringValue',
-            value: 'case_record_id',
-            block: false,
-          },
+          defaultValue: { kind: 'StringValue', value: 'case_id', block: false },
         },
         {
           kind: 'VariableDefinition',
@@ -34504,10 +36119,10 @@ export const CaseOverviewDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -34711,7 +36326,7 @@ export const GetAllFileIdsForSampleTabForSelectAllDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -35037,10 +36652,10 @@ export const GetAllFileIdsForSampleTabForSelectAllDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -35270,7 +36885,7 @@ export const GetAllFileIdsDashboardTabDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -35619,10 +37234,10 @@ export const GetAllFileIdsDashboardTabDocument = {
               },
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -35860,7 +37475,7 @@ export const GetAllFiledsForSampleTabForSelectAllDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -36180,10 +37795,10 @@ export const GetAllFiledsForSampleTabForSelectAllDocument = {
               },
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -36731,10 +38346,7 @@ export const GetMyCartDataQueryDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'file_name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'drs_uri' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_type' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'association' } },
                 {
@@ -36743,10 +38355,7 @@ export const GetMyCartDataQueryDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_format' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_size' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_uuid' } },
                 {
                   kind: 'Field',
@@ -36967,10 +38576,7 @@ export const GetMyCartDataQueryDescDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'file_name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'drs_uri' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_type' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'association' } },
                 {
@@ -36979,10 +38585,7 @@ export const GetMyCartDataQueryDescDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_format' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_size' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_uuid' } },
                 {
                   kind: 'Field',
@@ -37158,10 +38761,7 @@ export const GetStoreManifestDataQueryDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_format' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_size' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'breed' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'diagnosis' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
@@ -37354,7 +38954,7 @@ export const UnifiedViewDataDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -37374,10 +38974,10 @@ export const UnifiedViewDataDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
             ],
@@ -37416,10 +39016,7 @@ export const UnifiedViewDataDocument = {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'volumeOfData' },
                 },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'caseRecordIds' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'caseIds' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'sampleIds' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'fileIds' } },
                 {
@@ -37891,7 +39488,7 @@ export const SearchPublicDocument = {
                     selections: [
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'case_record_id' },
+                        name: { kind: 'Name', value: 'case_id' },
                       },
                     ],
                   },
@@ -38080,7 +39677,7 @@ export const SearchPageResultCasesDocument = {
                       { kind: 'Field', name: { kind: 'Name', value: 'type' } },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'case_record_id' },
+                        name: { kind: 'Name', value: 'case_id' },
                       },
                       {
                         kind: 'Field',
@@ -38189,7 +39786,7 @@ export const SearchPageResultSamplesDocument = {
                       { kind: 'Field', name: { kind: 'Name', value: 'type' } },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'case_record_id' },
+                        name: { kind: 'Name', value: 'case_id' },
                       },
                       {
                         kind: 'Field',
@@ -38324,7 +39921,7 @@ export const SearchPageResultFilesDocument = {
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'case_record_id' },
+                        name: { kind: 'Name', value: 'case_id' },
                       },
                       {
                         kind: 'Field',
@@ -38909,7 +40506,7 @@ export const GetAllFileIdsStudyDetailsDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -39228,10 +40825,10 @@ export const GetAllFileIdsStudyDetailsDocument = {
               },
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -40131,11 +41728,11 @@ export const StudyDocument = {
                     selections: [
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'case_record_id' },
+                        name: { kind: 'Name', value: 'case_id' },
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'diagnosis' },
+                        name: { kind: 'Name', value: 'diagnoses' },
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
@@ -40160,10 +41757,6 @@ export const StudyDocument = {
               selections: [
                 {
                   kind: 'Field',
-                  name: { kind: 'Name', value: 'clinical_study_designation' },
-                },
-                {
-                  kind: 'Field',
                   name: { kind: 'Name', value: 'CRDCLinks' },
                   selectionSet: {
                     kind: 'SelectionSet',
@@ -40179,14 +41772,6 @@ export const StudyDocument = {
                       },
                     ],
                   },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfCRDCNodes' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'numberOfImageCollections' },
                 },
               ],
             },
@@ -40251,10 +41836,7 @@ export const CycleNodeDataDocument = {
                   name: { kind: 'Name', value: 'date_of_cycle_end' },
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'crf_id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
               ],
             },
           },
@@ -40785,10 +42367,7 @@ export const PhysicalExamNodeDataDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'pe_comment' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'body_system' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'pe_finding' } },
               ],
             },
@@ -40890,10 +42469,7 @@ export const VitalSignsNodeDataDocument = {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'patient_weight_unit' },
                 },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'time_of_observation' },
@@ -41546,10 +43122,7 @@ export const StudyClinicalDataDocument = {
                   name: { kind: 'Name', value: 'date_of_cycle_end' },
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'crf_id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
               ],
             },
           },
@@ -41569,10 +43142,7 @@ export const StudyClinicalDataDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'visit_date' } },
                 {
                   kind: 'Field',
@@ -41739,10 +43309,7 @@ export const StudyClinicalDataDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'date_of_surgery' },
@@ -41792,7 +43359,7 @@ export const StudyClinicalDataDocument = {
                     selections: [
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'case_record_id' },
+                        name: { kind: 'Name', value: 'case_id' },
                       },
                       {
                         kind: 'Field',
@@ -41927,10 +43494,7 @@ export const StudyClinicalDataDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'date_of_examination' },
@@ -42013,10 +43577,7 @@ export const StudyClinicalDataDocument = {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'patient_weight_unit' },
                 },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'time_of_observation' },
@@ -42096,10 +43657,7 @@ export const StudyClinicalDataDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'day_in_cycle' },
@@ -42201,10 +43759,7 @@ export const StudyClinicalDataDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'lesion_number' },
@@ -42448,7 +44003,7 @@ export const GetCasesTabDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -42726,10 +44281,10 @@ export const GetCasesTabDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -42888,10 +44443,7 @@ export const GetCasesTabDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_type' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'cohort' } },
@@ -42979,7 +44531,7 @@ export const SampleOverviewDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -43289,10 +44841,10 @@ export const SampleOverviewDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -43476,10 +45028,7 @@ export const SampleOverviewDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'sample_id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'breed' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'diagnosis' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'sample_site' } },
@@ -43603,7 +45152,7 @@ export const GetFilesTabTableDownloadCsvDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -43921,10 +45470,10 @@ export const GetFilesTabTableDownloadCsvDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -44117,10 +45666,7 @@ export const GetFilesTabTableDownloadCsvDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_format' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_size' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'breed' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'diagnosis' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
@@ -44255,7 +45801,7 @@ export const GetFilesTabForStudyFilesDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'case_record_ids' },
+            name: { kind: 'Name', value: 'case_ids' },
           },
           type: {
             kind: 'ListType',
@@ -44573,10 +46119,10 @@ export const GetFilesTabForStudyFilesDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'case_record_ids' },
+                name: { kind: 'Name', value: 'case_ids' },
                 value: {
                   kind: 'Variable',
-                  name: { kind: 'Name', value: 'case_record_ids' },
+                  name: { kind: 'Name', value: 'case_ids' },
                 },
               },
               {
@@ -44769,10 +46315,7 @@ export const GetFilesTabForStudyFilesDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_format' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_size' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'breed' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'diagnosis' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'study_code' } },
@@ -44963,10 +46506,7 @@ export const GetMyCartDocument = {
                 },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_format' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_size' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'case_record_id' },
-                },
+                { kind: 'Field', name: { kind: 'Name', value: 'case_id' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'individual_id' },

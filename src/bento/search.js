@@ -110,7 +110,7 @@ export const studies = [
 export const cases = [
   {
     type: 'case',
-    case_record_id: 'MGT01-406434',
+    case_id: 'MGT01-406434',
     program_name: 'Comparative Oncology Program',
     clinical_study_designation: 'MGT01',
     disease_term: 'Mammary Cancer',
@@ -118,7 +118,7 @@ export const cases = [
   },
   {
     type: 'case',
-    case_record_id: 'MGT01-402421',
+    case_id: 'MGT01-402421',
     program_name: 'Comparative Oncology Program',
     clinical_study_designation: 'MGT01',
     disease_term: 'Mammary Cancer',
@@ -126,7 +126,7 @@ export const cases = [
   },
   {
     type: 'case',
-    case_record_id: 'COTC007B-0201',
+    case_id: 'COTC007B-0201',
     program_name: 'Comparative Oncology Program',
     clinical_study_designation: 'COTC007B',
     disease_term: 'Lymphoma',
@@ -140,7 +140,7 @@ export const samples = [
     sample_id: 'GLIOMA01-i_03A6-T1-A1-J02',
     program_name: 'Comparative Oncology Program',
     clinical_study_designation: 'GLIOMA01',
-    case_record_id: 'GLIOMA01-i_03A6',
+    case_id: 'GLIOMA01-i_03A6',
     sample_site: 'Hemispheric',
     physical_sample_type: 'Primary Malignant Tumor Tissue',
     general_sample_pathology: 'Oligodendroglioma',
@@ -150,7 +150,7 @@ export const samples = [
     sample_id: 'UC01-UD-113',
     program_name: 'CMCP',
     clinical_study_designation: 'UC01',
-    case_record_id: 'UC01-UD-113',
+    case_id: 'UC01-UD-113',
     sample_site: 'Hemispheric',
     physical_sample_type: 'Primary Malignant Tumor Tissue',
     general_sample_pathology: 'Oligodendroglioma',
@@ -164,7 +164,7 @@ export const files = [
     file_type: 'RNA Sequence File',
     program_name: 'COP',
     clinical_study_designation: 'NCATS-COP01',
-    case_record_id: 'NCATS-COP01-CCB010015',
+    case_id: 'NCATS-COP01-CCB010015',
     sample_id: 'NCATS-COP01-CCB010015 0103',
   },
 ];
@@ -206,7 +206,7 @@ export const SEARCH_PUBLIC = gql`
         clinical_study_designation
       }
       cases {
-        case_record_id
+        case_id
       }
       samples {
         sample_id
@@ -240,7 +240,7 @@ export const SEARCH_PAGE_RESULT_CASES = gql`
     globalSearch(input: $input, first: $first, offset: $offset) {
       cases {
         type
-        case_record_id
+        case_id
         program_name
         clinical_study_designation
         disease_term
@@ -255,7 +255,7 @@ export const SEARCH_PAGE_RESULT_SAMPLES = gql`
     globalSearch(input: $input, first: $first, offset: $offset) {
       samples {
         type
-        case_record_id
+        case_id
         sample_id
         program_name
         clinical_study_designation
@@ -275,7 +275,7 @@ export const SEARCH_PAGE_RESULT_FILES = gql`
         file_name
         file_type
         file_association
-        case_record_id
+        case_id
         sample_id
         program_name
         clinical_study_designation
@@ -502,7 +502,7 @@ export const searchKeys = [
 export const searchFields = [
   'program_acronym',
   'clinical_study_designation',
-  'case_record_id',
+  'case_id',
   'sample_id',
   'file_name',
   'node_name',
@@ -520,7 +520,7 @@ export const SEARCH_DATAFIELDS = {
   private: [
     'program_acronym',
     'clinical_study_designation',
-    'case_record_id',
+    'case_id',
     'sample_id',
     'file_name',
   ],

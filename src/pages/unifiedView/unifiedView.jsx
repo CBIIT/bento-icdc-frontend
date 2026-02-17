@@ -45,7 +45,7 @@ const Dashboard = ({ classes, unifiedViewData, isUnifiedView = true }) => (
               dashboardStats={updateStat(unifiedViewData)}
               activeFilters={[]}
               unifiedQueryParam={{
-                case_ids: unifiedViewData.caseRecordIds,
+                case_ids: unifiedViewData.caseIds,
               }}
             />
           </div>

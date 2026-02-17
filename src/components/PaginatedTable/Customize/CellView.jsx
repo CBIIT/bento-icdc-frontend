@@ -40,7 +40,7 @@ const CaseIdLink = props => {
   const {
     other_cases: otherCases,
     linkAttr = {},
-    case_record_id: caseId,
+    case_id: caseId,
     unifiedView,
   } = props;
   const { rootPath, pathParams } = linkAttr;
