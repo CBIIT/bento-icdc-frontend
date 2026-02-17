@@ -250,7 +250,7 @@ export const fileWrapperConfig = [
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   query getAllFileIdsStudyDetails(
     $file_level: [String] = []
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -276,7 +276,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   ) {
     fileOverview(
       file_level: $file_level
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       program: $program
       study: $study
       study_type: $study_type
@@ -657,21 +657,18 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
         pubmed_id
       }
       cases {
-        case_record_id
-        diagnosis {
+        case_id
+        diagnoses {
           disease_term
         }
       }
     }
     externalDataOverview {
-      clinical_study_designation
       CRDCLinks {
         repository
         url
         metadata
       }
-      numberOfCRDCNodes
-      numberOfImageCollections
     }
   }
 `;
@@ -683,14 +680,14 @@ export const agentNodeMetadata = {
 
 export const cycleNodeMetadata = {
   keysToInclude: [
-    'case_record_id',
+    'case_id',
     'cycle_number',
     'date_of_cycle_start',
     'date_of_cycle_end',
     'crf_id',
   ],
   header: [
-    'case_record_id',
+    'case_id',
     'cycle_number',
     'date_of_cycle_start',
     'date_of_cycle_end',
@@ -699,8 +696,8 @@ export const cycleNodeMetadata = {
 };
 
 export const visitNodeMetadata = {
-  keysToInclude: ['case_record_id', 'visit_date', 'visit_number', 'visit_id'],
-  header: ['case_record_id', 'visit_date', 'visit_number', 'visit_id'],
+  keysToInclude: ['case_id', 'visit_date', 'visit_number', 'visit_id'],
+  header: ['case_id', 'visit_date', 'visit_number', 'visit_id'],
 };
 
 export const priorTherapyNodeMetadata = {
@@ -764,7 +761,7 @@ export const priorTherapyNodeMetadata = {
 
 export const priorSurgeryNodeMetadata = {
   keysToInclude: [
-    'case_record_id',
+    'case_id',
     'date_of_surgery',
     'procedure',
     'anatomical_site_of_surgery',
@@ -773,7 +770,7 @@ export const priorSurgeryNodeMetadata = {
     'therapeutic_indicator',
   ],
   header: [
-    'case_record_id',
+    'case_id',
     'date_of_surgery',
     'procedure',
     'anatomical_site_of_surgery',
@@ -843,7 +840,7 @@ export const vitalSignsNodeMetadata = {
     'body_surface_area_original_unit',
     'patient_weight',
     'patient_weight_unit',
-    'case_record_id',
+    'case_id',
     'time_of_observation',
     'pulse_original_unit',
     'respiration_rate_original_unit',
@@ -872,7 +869,7 @@ export const vitalSignsNodeMetadata = {
     'body_surface_area_original_unit',
     'patient_weight',
     'patient_weight_unit',
-    'case_record_id',
+    'case_id',
     'time_of_observation',
     'pulse_original_unit',
     'respiration_rate_original_unit',
@@ -893,7 +890,7 @@ export const vitalSignsNodeMetadata = {
 
 export const physicalExamNodeMetadata = {
   keysToInclude: [
-    'case_record_id',
+    'case_id',
     'date_of_examination',
     'day_in_cycle',
     'body_system',
@@ -902,7 +899,7 @@ export const physicalExamNodeMetadata = {
     'assessment_timepoint',
   ],
   header: [
-    'case_record_id',
+    'case_id',
     'date_of_examination',
     'day_in_cycle',
     'body_system',
@@ -914,7 +911,7 @@ export const physicalExamNodeMetadata = {
 
 export const adverseEventNodeMetadata = {
   keysToInclude: [
-    'case_record_id',
+    'case_id',
     'day_in_cycle',
     'date_of_onset',
     'existing_adverse_event',
@@ -936,7 +933,7 @@ export const adverseEventNodeMetadata = {
     'unexpected_adverse_event',
   ],
   header: [
-    'case_record_id',
+    'case_id',
     'day_in_cycle',
     'date_of_onset',
     'existing_adverse_event',
@@ -961,7 +958,7 @@ export const adverseEventNodeMetadata = {
 
 export const diseaseExtentNodeMetadata = {
   keysToInclude: [
-    'case_record_id',
+    'case_id',
     'lesion_number',
     'lesion_site',
     'lesion_description',
@@ -976,7 +973,7 @@ export const diseaseExtentNodeMetadata = {
     'evaluation_code',
   ],
   header: [
-    'case_record_id',
+    'case_id',
     'lesion_number',
     'lesion_site',
     'lesion_description',
@@ -1070,7 +1067,7 @@ export const GET_CYCLE_CLINICAL_DATA = gql`
       date_of_cycle_start
       date_of_cycle_end
       crf_id
-      case_record_id
+      case_id
     }
   }
 `;
@@ -1172,7 +1169,7 @@ export const GET_PHYSICAL_EXAM_CLINICAL_DATA = gql`
       date_of_examination
       pe_comment
       body_system
-      case_record_id
+      case_id
       pe_finding
     }
   }
@@ -1192,7 +1189,7 @@ export const GET_VITAL_SIGNS_CLINICAL_DATA = gql`
       body_surface_area_original_unit
       patient_weight
       patient_weight_unit
-      case_record_id
+      case_id
       time_of_observation
       pulse_original_unit
       respiration_rate_original_unit
@@ -1312,10 +1309,10 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       date_of_cycle_start
       date_of_cycle_end
       crf_id
-      case_record_id
+      case_id
     }
     visitNodeData(study_code: $study_code) {
-      case_record_id
+      case_id
       visit_date
       visit_number
       visit_id
@@ -1349,7 +1346,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       treatment_performed_in_minimal_residual
     }
     priorSurgeryNodeData(study_code: $study_code) {
-      case_record_id
+      case_id
       date_of_surgery
       procedure
       anatomical_site_of_surgery
@@ -1360,7 +1357,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
     priorSurgeryNodeDataOverview(study_code: $study_code) {
       case_count
       prior_surgeries {
-        case_record_id
+        case_id
         date_of_surgery
         procedure
         anatomical_site_of_surgery
@@ -1392,7 +1389,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       comment
     }
     physicalExamNodeData(study_code: $study_code) {
-      case_record_id
+      case_id
       date_of_examination
       day_in_cycle
       body_system
@@ -1413,7 +1410,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       body_surface_area_original_unit
       patient_weight
       patient_weight_unit
-      case_record_id
+      case_id
       time_of_observation
       pulse_original_unit
       respiration_rate_original_unit
@@ -1431,7 +1428,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       body_temperature_original
     }
     adverseEventNodeData(study_code: $study_code) {
-      case_record_id
+      case_id
       day_in_cycle
       dose_limiting_toxicity
       unexpected_adverse_event
@@ -1453,7 +1450,7 @@ export const GET_CILICAL_DATA_OF_STUDY = gql`
       other_attribution_description
     }
     diseaseExtentNodeData(study_code: $study_code) {
-      case_record_id
+      case_id
       lesion_number
       lesion_site
       lesion_description

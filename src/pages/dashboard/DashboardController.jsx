@@ -42,7 +42,7 @@ const getDashData = states => {
     ...getFilters(filterState),
     search_text: searchText || '',
     case_ids: [
-      ...(localFindUpload || []).map(obj => obj.case_record_id),
+      ...(localFindUpload || []).map(obj => obj.case_id),
       ...(localFindAutocomplete || []).map(obj => obj.title),
     ],
   };
@@ -85,7 +85,7 @@ const DashTemplateController = props => {
   } = dashData;
 
   const {
-    caseRecordIds,
+    caseIds,
     sampleIds,
     fileIds: caseFileIds,
     studyFileIds,
@@ -95,7 +95,7 @@ const DashTemplateController = props => {
     <DashboardView
       {...props}
       searchResultIds={{
-        caseIds: caseRecordIds,
+        caseIds: caseIds,
         sampleIds,
         caseFileIds,
         studyFileIds,

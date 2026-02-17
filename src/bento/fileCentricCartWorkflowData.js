@@ -50,7 +50,7 @@ export const manifestData = [
   { field: 'file_name', title: 'name' },
   { field: 'drs_uri', title: 'drs_uri' },
   { field: 'study_code', title: 'study_code' },
-  { field: 'case_record_id', title: 'case_record_id' },
+  { field: 'case_id', title: 'case_id' },
   { field: 'file_type', title: 'File Type' },
   { field: 'association', title: 'Association' },
   { field: 'file_description', title: 'Description' },
@@ -131,13 +131,13 @@ export const GET_MY_CART_DATA_QUERY = gql`
       file_name
       drs_uri
       study_code
-      case_record_id
+      case_id
       file_type
       association
       file_description
       file_format
       file_size
-      case_record_id
+      case_id
       file_uuid
       individual_id
       breed
@@ -197,13 +197,13 @@ export const GET_MY_CART_DATA_QUERY_DESC = gql`
       file_name
       drs_uri
       study_code
-      case_record_id
+      case_id
       file_type
       association
       file_description
       file_format
       file_size
-      case_record_id
+      case_id
       file_uuid
       individual_id
       breed
@@ -255,7 +255,7 @@ export const GET_STORE_MANIFEST_DATA_QUERY = gql`
       file_description
       file_format
       file_size
-      case_record_id
+      case_id
       breed
       diagnosis
       study_code
@@ -336,7 +336,7 @@ export const table = {
       header: 'Sample ID',
     },
     {
-      dataField: 'case_record_id',
+      dataField: 'case_id',
       header: 'Case ID',
       viewColumns: false,
     },
@@ -469,7 +469,7 @@ export const cartTable = {
       tooltipText: 'sort',
     },
     {
-      dataField: 'case_record_id',
+      dataField: 'case_id',
       header: 'Case ID',
       display: true,
       tooltipText: 'sort',

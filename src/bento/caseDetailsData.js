@@ -153,7 +153,7 @@ export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   query getAllFileIdsCaseDetails(
     $file_level: [String] = []
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -179,7 +179,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   ) {
     fileOverview(
       file_level: $file_level
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       program: $program
       study: $study
       study_type: $study_type
@@ -469,29 +469,28 @@ export const textLabels = {
 
 // --------------- GraphQL query configuration --------------
 export const GET_CASE_DETAIL_DATA_QUERY = gql`
-  query Case($case_record_id: String!) {
-    sampleCountOfCase(case_record_id: $case_record_id)
-    fileCountOfCase(case_record_id: $case_record_id)
-    aliquotCountOfCase(case_record_id: $case_record_id)
-    fileCountOfCase(case_record_id: $case_record_id)
-    studyFileCountOfCase(case_record_id: $case_record_id)
-    programsCountOfCase(case_record_id: $case_record_id)
-    volumeOfDataOfCase(case_record_id: $case_record_id)
-    multiStudyCases(case_record_id: $case_record_id) {
-      caseRecordIds
+  query Case($case_id: String!) {
+    sampleCountOfCase(case_id: $case_id)
+    fileCountOfCase(case_id: $case_id)
+    aliquotCountOfCase(case_id: $case_id)
+    fileCountOfCase(case_id: $case_id)
+    studyFileCountOfCase(case_id: $case_id)
+    programsCountOfCase(case_id: $case_id)
+    volumeOfDataOfCase(case_id: $case_id)
+    multiStudyCases(case_id: $case_id) {
+      caseIds
       sampleIds
       fileIds
       studyFileIds
       individualId
     }
-    case(case_record_id: $case_record_id) {
-      case_record_id
+    case(case_id: $case_id) {
+      case_id
       patient_id
       patient_first_name
       study {
         clinical_study_name
         clinical_study_designation
-        accession_id
         program {
           program_acronym
         }
@@ -508,6 +507,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
         cohort_description
         study_arm {
           arm
+          ctep_treatment_assignment_code
         }
       }
       enrollment {
@@ -517,7 +517,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
         date_of_informed_consent
         initials
       }
-      diagnosis {
+      diagnoses {
         best_response
         disease_term
         stage_of_disease
@@ -527,7 +527,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
         histology_cytopathology
       }
     }
-    filesOfCase(case_record_id: $case_record_id) {
+    filesOfCase(case_id: $case_id) {
       parent
       file_name
       file_type
@@ -537,7 +537,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
       md5sum
       uuid
     }
-    samplesByCaseRecordId(case_record_id: $case_record_id) {
+    samplesByCaseId(case_id: $case_id) {
       sample_id
       sample_site
       summarized_sample_type

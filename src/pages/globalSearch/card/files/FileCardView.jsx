@@ -8,7 +8,7 @@ const FileCardView = ({ data = {}, classes, index }) => {
     file_name: fileName = '',
     file_type: fileType = '',
     file_association: fileAssociation = '',
-    case_record_id: caseID = '',
+    case_id: caseID = '',
     program_name: programName = '',
     clinical_study_designation: studyDesignation = '',
     sample_id: sampleID = '',
