@@ -424,20 +424,20 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     staleTime: 5 * 60 * 1000,
   });
 
-  type CaseWithDx = {
-    diagnosis?: { disease_term?: string | null } | null;
-  } | null;
+  const diagnoses = useMemo(() => {
+    type CaseWithDx = {
+      diagnosis?: { disease_term?: string | null } | null;
+    } | null;
 
-  const diagnoses = useMemo(
-    () => [
+    const cases = defaultTo(studyData.cases as CaseWithDx[], []);
+    return [
       ...new Set(
-        defaultTo(studyData.cases as CaseWithDx[], [])
+        cases
           .map((caseData: CaseWithDx) => caseData?.diagnosis?.disease_term)
           .filter((term): term is string => Boolean(term))
       ),
-    ],
-    [studyData.cases]
-  );
+    ];
+  }, [studyData.cases]);
 
   if (isError) console.error('humanRelevanceNodeData Error', { error });
 
