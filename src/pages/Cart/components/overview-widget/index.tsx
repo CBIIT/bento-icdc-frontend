@@ -8,7 +8,7 @@ import Files from '../../assets/files.svg';
 import Studies from '../../assets/studies.svg';
 import Cases from '../../assets/cases.svg';
 import { defaultTo, startCase, toString, upperCase } from 'lodash';
-import { useQuery, ApolloError } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import {
   Container,
   Wrapper,
@@ -37,25 +37,23 @@ type CartChartKeys = keyof Omit<
 >;
 
 export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
-  const {
-    loading,
-    error,
-    data,
-  }: { loading: boolean; error?: ApolloError; data: GetCartOverviewDataQuery } =
-    useQuery<GetCartOverviewDataQuery, GetCartOverviewDataQueryVariables>(
-      GetCartOverviewDataDocument,
-      {
-        variables: {
-          file_uuids: defaultTo(fileIds, []),
-        },
-        skip: !fileIds,
-      }
-    );
+  const { loading, error, data } = useQuery<
+    GetCartOverviewDataQuery,
+    GetCartOverviewDataQueryVariables
+  >(GetCartOverviewDataDocument, {
+    variables: {
+      file_uuids: defaultTo(fileIds, []),
+    },
+    skip: !fileIds,
+  });
 
   const cartOverviewData = data?.cartOverview;
 
   const { totalNumberOfFiles, totalNumberOfCases, studiesInCart, charts } =
     cartOverviewData || {};
+
+  const [isPanelVisible, setIsPanelVisible] = useState(true);
+  const [value, setValue] = React.useState<number>(0);
 
   const chartKeys = useMemo(
     () =>
@@ -90,9 +88,6 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
     // Filter out null/undefined values and return as CartChartItem[]
     return data?.filter((item): item is CartChartItem => item != null) ?? [];
   }, [charts, chartKeys, value]);
-
-  const [isPanelVisible, setIsPanelVisible] = useState(true);
-  const [value, setValue] = React.useState<number>(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
