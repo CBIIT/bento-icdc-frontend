@@ -155,7 +155,9 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
         {data.map((entry, index) => (
           <div
             // Add a ref to each legend item, mapping it by its label
-            ref={el => legendItemRefs.current.set(entry.label, el)}
+            ref={el => {
+              legendItemRefs.current.set(entry.label ?? '', el);
+            }}
             key={`item-${index}`}
             className="icon-and-text-wrapper"
             style={{
@@ -262,7 +264,9 @@ export const Chart: React.FC<ChartProps> = ({ chartData, yAxisLabel }) => {
           barSize={50}
           background={{ className: 'chart-bar' }}
           // Set the hovered group on mouse enter
-          onMouseEnter={data => setHoveredGroup(data.label)}
+          onMouseEnter={data =>
+            setHoveredGroup((data as unknown as CartChartItem).label ?? null)
+          }
           // Clear the hovered group on mouse leave
           onMouseLeave={() => setHoveredGroup(null)}
         >
