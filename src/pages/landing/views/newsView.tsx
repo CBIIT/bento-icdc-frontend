@@ -1,12 +1,16 @@
 /* eslint-disable */
 import React from 'react';
-import { List, ImageList } from '@mui/material';
+import { ImageList } from '@mui/material';
 import styled from '@emotion/styled';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import lbg from '../../../assets/landing/Background.png';
+import newsBanner from './news-view-update-banner.png';
 import NewsItem from './NewsListItem';
 import NewsViewImage from './NewsViewImage';
 import NewsViewVideo from './NewsViewVideo';
+import env from '../../../utils/env';
 
 // Styled Components
 const Page = styled.div`
@@ -68,25 +72,46 @@ const NewsListTitle = styled.div`
   border-top-left-radius: 0.5em;
   -webkit-border-top-left-radius: 0.5em;
   -webkit-border-top-right-radius: 0.5em;
-  background-color: #1977cc;
+  background-image: url(${newsBanner});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-size: 1.2em;
   margin: 0;
-  height: 2.28em;
+  min-height: 74px;
   display: flex;
   align-items: center;
-  padding-left: 0.5em;
+  justify-content: center;
+  padding: 0;
 `;
 
-const NewsList = styled(List)`
+const NewsList = styled.div`
   width: 30em;
   height: 65.8em;
-  background-color: #fff;
+  background-color: #f5f5f5;
   overflow: auto;
   overflow-x: hidden;
   border-bottom-right-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
   -webkit-border-bottom-left-radius: 0.5em;
   -webkit-border-bottom-right-radius: 0.5em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 `;
 
 const TwitterAndImageSection = styled.div`
@@ -279,12 +304,121 @@ function TwitterSectionComponent({
   );
 }
 
+const PUBLICATIONS_QUERY = `
+  query getPublications {
+    publication(
+      orderBy: year_of_publication_desc
+      first: 4
+    ) {
+      publication_title
+      pubmed_id
+      year_of_publication
+    }
+  }
+`;
+
 const NewsView = ({
   news,
 }: {
   news: Record<string, any> | undefined;
   availableSoonImage: string;
 }) => {
+  const [dataModelReleases, setDataModelReleases] = React.useState<any[]>([]);
+  const [softwareReleases, setSoftwareReleases] = React.useState<any[]>([]);
+  const [publications, setPublications] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    // Fetch GitHub releases for Data Model
+    fetch('https://api.github.com/repos/CBIIT/icdc-model-tool/releases')
+      .then(response => response.json())
+      .then(releases => {
+        const formattedReleases = releases.slice(0, 4).map((release: any) => ({
+          label: 'VERSION',
+          value: release.name || release.tag_name,
+          date: new Date(release.published_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          }),
+        }));
+        setDataModelReleases(formattedReleases);
+      })
+      .catch(error => {
+        console.error('Error fetching data model releases:', error);
+      });
+
+    // Fetch GitHub releases for Software
+    fetch('https://api.github.com/repos/CBIIT/bento-icdc-frontend/releases')
+      .then(response => response.json())
+      .then(releases => {
+        const formattedReleases = releases.slice(0, 4).map((release: any) => ({
+          label: 'VERSION',
+          value: release.name || release.tag_name,
+          date: new Date(release.published_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          }),
+        }));
+        setSoftwareReleases(formattedReleases);
+      })
+      .catch(error => {
+        console.error('Error fetching software releases:', error);
+      });
+
+    // Fetch Publications from GraphQL API
+    const backendAPI = (env as Record<string, string>).REACT_APP_BACKEND_API;
+    if (backendAPI) {
+      axios
+        .post(backendAPI, {
+          query: PUBLICATIONS_QUERY,
+        })
+        .then(response => {
+          console.log('Publications API response:', response.data);
+          const pubs = response.data?.data?.publication || [];
+          console.log('Publications data:', pubs);
+          const formattedPubs = pubs.map((pub: any) => ({
+            title: pub.publication_title,
+            url: pub.pubmed_id
+              ? `https://pubmed.ncbi.nlm.nih.gov/${pub.pubmed_id}/`
+              : '#',
+          }));
+          console.log('Formatted publications:', formattedPubs);
+          setPublications(formattedPubs);
+        })
+        .catch(error => {
+          console.error('Error fetching publications:', error);
+        });
+    } else {
+      console.warn('REACT_APP_BACKEND_API not configured');
+    }
+  }, []);
+
+  // News content items - combines fetched data from various sources
+  const newsContent = React.useMemo(
+    () => [
+      {
+        title: 'Data Model Releases',
+        icon: 'https://via.placeholder.com/40/1977cc/ffffff?text=M',
+        type: 'table',
+        items: dataModelReleases,
+      },
+      {
+        title: 'Software Releases',
+        icon: 'https://via.placeholder.com/40/1977cc/ffffff?text=S',
+        type: 'table',
+        items: softwareReleases,
+      },
+      {
+        title: 'Publications',
+        icon: 'https://via.placeholder.com/40/1977cc/ffffff?text=P',
+        type: 'publications',
+        items: publications,
+      },
+    ],
+    [dataModelReleases, softwareReleases, publications]
+  );
+
   return (
     <Page>
       <PageBanner>
@@ -294,109 +428,115 @@ const NewsView = ({
       <OutterContainer>
         <ListSection>
           <div>
-            <NewsListHeading>{news.tile1.heading}</NewsListHeading>
+            <NewsListHeading>
+              {news?.tile1?.heading || 'News Updates'}
+            </NewsListHeading>
 
             <NewsListTitleBar>
               <NewsListTitle>
-                <h6 style={{ color: 'white', fontSize: '1em' }}>
-                  {news.tile1.subHeading}
+                <h6
+                  style={{
+                    color: 'white',
+                    fontSize: '1.2em',
+                    fontWeight: 'bold',
+                    margin: 0,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  Updates
                 </h6>
               </NewsListTitle>
               <NewsList>
-                {news.content.map(
-                  (
-                    {
-                      paragraph,
-                      label,
-                      blurb,
-                    }: { paragraph: string; label: string; blurb: string },
-                    index: number
-                  ) => (
-                    <span key={`news-item-news-view-${index}`}>
-                      <NewsItem
-                        paragraph={paragraph}
-                        index={index + 1}
-                        total={news.content.length}
-                        label={label}
-                        blurb={blurb}
-                      />
-                    </span>
-                  )
-                )}
+                {newsContent.map((item: any, index: number) => (
+                  <NewsItem
+                    key={`news-item-news-view-${index}`}
+                    title={item.title}
+                    icon={item.icon}
+                    items={item.items}
+                    type={item.type || 'table'}
+                  />
+                ))}
               </NewsList>
             </NewsListTitleBar>
           </div>
 
           <TwitterAndImageSection>
+            {news?.tile2 && (
+              <div>
+                <TwitterSectionHeading>
+                  {news.tile2.heading}
+                </TwitterSectionHeading>
+                <TwitterSectionComponent news={news} />
+              </div>
+            )}
+
+            {news?.tile3 && news?.images && (
+              <ImageSectionContainer>
+                <ImageSectionHeading>{news.tile3.heading}</ImageSectionHeading>
+
+                <Root>
+                  <StyledImageList cols={20}>
+                    {news.images.map(
+                      (item: Record<string, any>, index: number) => (
+                        <span key={`image-list-news-view-${index}`}>
+                          <NewsViewImage
+                            img={item.img}
+                            label={item.label}
+                            caption={item.caption}
+                          />
+                        </span>
+                      )
+                    )}
+                  </StyledImageList>
+                </Root>
+              </ImageSectionContainer>
+            )}
+          </TwitterAndImageSection>
+        </ListSection>
+
+        {news?.tile4 && news?.youtube && (
+          <VideoSectionContainer>
+            <VideoSectionHeading>{news.tile4.heading}</VideoSectionHeading>
             <div>
-              <TwitterSectionHeading>
-                {news.tile2.heading}
-              </TwitterSectionHeading>
-              <TwitterSectionComponent news={news} />
-            </div>
+              <VideoSectionSubHeadingContainer>
+                <div>
+                  <VideoSectionSubHeading>
+                    {news.tile4.subHeading1}
+                  </VideoSectionSubHeading>
+                </div>
+                <div>
+                  <VideoSectionSubHeading>
+                    {news.tile4.subHeading2}
+                  </VideoSectionSubHeading>
+                </div>
+              </VideoSectionSubHeadingContainer>
 
-            <ImageSectionContainer>
-              <ImageSectionHeading>{news.tile3.heading}</ImageSectionHeading>
-
-              <Root>
-                <StyledImageList cols={20}>
-                  {news.images.map(
-                    (item: Record<string, any>, index: number) => (
-                      <span key={`image-list-news-view-${index}`}>
-                        <NewsViewImage
-                          img={item.img}
-                          label={item.label}
-                          caption={item.caption}
+              <FeaturedVideo>
+                <div>
+                  <NewsViewVideo
+                    url={news.youtube.main.vid}
+                    label={news.youtube.main.label}
+                    description={news.youtube.main.description}
+                  />
+                </div>
+                <OtherVideos>
+                  {news.youtube.others.map(
+                    (vid: Record<string, any>, index: number) => (
+                      <span key={`news-view-video-news-view-${index}`}>
+                        <NewsViewVideo
+                          url={vid.vid}
+                          label={vid.label}
+                          description={news.youtube.main.description}
                         />
                       </span>
                     )
                   )}
-                </StyledImageList>
-              </Root>
-            </ImageSectionContainer>
-          </TwitterAndImageSection>
-        </ListSection>
-
-        <VideoSectionContainer>
-          <VideoSectionHeading>{news.tile4.heading}</VideoSectionHeading>
-          <div>
-            <VideoSectionSubHeadingContainer>
-              <div>
-                <VideoSectionSubHeading>
-                  {news.tile4.subHeading1}
-                </VideoSectionSubHeading>
-              </div>
-              <div>
-                <VideoSectionSubHeading>
-                  {news.tile4.subHeading2}
-                </VideoSectionSubHeading>
-              </div>
-            </VideoSectionSubHeadingContainer>
-
-            <FeaturedVideo>
-              <div>
-                <NewsViewVideo
-                  url={news.youtube.main.vid}
-                  label={news.youtube.main.label}
-                  description={news.youtube.main.description}
-                />
-              </div>
-              <OtherVideos>
-                {news.youtube.others.map(
-                  (vid: Record<string, any>, index: number) => (
-                    <span key={`news-view-video-news-view-${index}`}>
-                      <NewsViewVideo
-                        url={vid.vid}
-                        label={vid.label}
-                        description={news.youtube.main.description}
-                      />
-                    </span>
-                  )
-                )}
-              </OtherVideos>
-            </FeaturedVideo>
-          </div>
-        </VideoSectionContainer>
+                </OtherVideos>
+              </FeaturedVideo>
+            </div>
+          </VideoSectionContainer>
+        )}
       </OutterContainer>
     </Page>
   );
