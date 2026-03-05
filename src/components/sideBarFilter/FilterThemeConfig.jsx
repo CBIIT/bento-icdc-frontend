@@ -420,115 +420,12 @@ const theme = {
         marginBottom: '7px',
       },
     },
-    MuiCssBaseline: {
-      '@global': {
-        '.sortGroup': {
-          display: 'flex !important',
-          alignItems: 'center !important',
-          justifyContent: 'flex-start !important',
-          paddingTop: '10px',
-          marginBottom: '5px',
-          borderTop: '1px solid #B1B1B1',
-          textAlign: 'left',
-          marginLeft: '0 !important',
-        },
-        '.sortGroupIcon': {
-          cursor: 'pointer',
-          fontFamily: 'Nunito',
-          fontSize: '10px',
-          marginRight: '12px !important',
-          marginLeft: '16px !important',
-          display: 'inline-flex !important',
-          alignItems: 'center !important',
-          height: '12px',
-          '& img': {
-            display: 'block',
-          },
-        },
-        '.sortGroupItem': {
-          cursor: 'pointer',
-          fontFamily: 'Nunito',
-          fontSize: '11px',
-          marginRight: '0 !important',
-          display: 'inline-flex !important',
-          alignItems: 'center !important',
-          lineHeight: '12px',
-        },
-        '.sortGroupItemCounts': {
-          cursor: 'pointer',
-          fontFamily: 'Nunito',
-          fontSize: '11px',
-          marginLeft: 'auto !important',
-          marginRight: '10px !important',
-          marginTop: '0 !important',
-          float: 'none !important',
-          display: 'inline-flex !important',
-          alignItems: 'center !important',
-          lineHeight: '12px',
-        },
-      },
-    },
   },
 };
 
 const FilterThemeProvider = ({ children }) => {
-  const computedTheme = createTheme({
-    ...theme,
-    overrides: {
-      ...theme.overrides,
-      MuiCssBaseline: {
-        '@global': {
-          '.sortGroup': {
-            display: 'flex !important',
-            alignItems: 'center !important',
-            justifyContent: 'flex-start !important',
-          },
-          '.sortGroupIcon': {
-            display: 'inline-flex !important',
-            alignItems: 'center !important',
-          },
-          '.sortGroupItem': {
-            display: 'inline-flex !important',
-            alignItems: 'center !important',
-          },
-          '.sortGroupItemCounts': {
-            display: 'inline-flex !important',
-            alignItems: 'center !important',
-            marginTop: '0 !important',
-            float: 'none !important',
-            marginLeft: 'auto !important',
-          },
-        },
-      },
-    },
-  });
-  return (
-    <ThemeProvider theme={computedTheme}>
-      <style>{`
-        .sortGroup {
-          display: flex !important;
-          align-items: center !important;
-          justify-content: flex-start !important;
-        }
-        .sortGroupIcon {
-          display: inline-flex !important;
-          align-items: center !important;
-        }
-        .sortGroupItem {
-          display: inline-flex !important;
-          align-items: center !important;
-        }
-        .sortGroupItemCounts {
-          display: inline-flex !important;
-          align-items: center !important;
-          margin-top: 0 !important;
-          float: none !important;
-          margin-left: auto !important;
-        }
-      `}</style>
-      {children}
-    </ThemeProvider>
-  );
+  const computedTheme = createTheme(theme);
+  return <ThemeProvider theme={computedTheme}>{children}</ThemeProvider>;
 };
 
 export default FilterThemeProvider;
