@@ -20,7 +20,10 @@ const studiesContainer: React.FC<StudiesContainerProps> = ({ invalid }) => {
     );
 
   const repositories = useMemo(() => {
-    const links = data?.externalDataOverview?.[0]?.CRDCLinks;
+    // const links = data?.externalDataOverview?.[0]?.CRDCLinks;
+    const links = data?.externalDataOverview?.flatMap(
+      item => item?.CRDCLinks || []
+    );
     return links?.map(link => link.repository) || [];
   }, [data]);
 

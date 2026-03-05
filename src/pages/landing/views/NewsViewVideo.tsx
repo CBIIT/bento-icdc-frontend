@@ -95,7 +95,7 @@ const NewsViewVideo = ({
           <VideoContainer>
             <ReactPlayer
               playing
-              onTimeUpdate={e => {
+              onTimeUpdate={(e: React.SyntheticEvent<HTMLVideoElement>) => {
                 if (!open) {
                   setSecondsElapsed(e.currentTarget.currentTime);
                 }

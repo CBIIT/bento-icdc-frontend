@@ -57,7 +57,10 @@ const DataAvailabilityCellView = props => {
       ))}
     </ul>
   );
+
   const studyData = interOpData?.externalDataOverview ?? [];
+  const crdcLinks =
+    studyData.length > 0 ? studyData.flatMap(item => item.CRDCLinks || []) : [];
   const generateIndicatorTooltipTitle = () => {
     switch (dataField) {
       case 'numberOfCaseFiles':
@@ -71,10 +74,7 @@ const DataAvailabilityCellView = props => {
       default: {
         return (
           studyData.length &&
-          generateCRDCLinks(
-            studyData[0].CRDCLinks,
-            studyData[0].clinical_study_designation
-          )
+          generateCRDCLinks(crdcLinks, studyData[0].clinical_study_designation)
         );
       }
     }
