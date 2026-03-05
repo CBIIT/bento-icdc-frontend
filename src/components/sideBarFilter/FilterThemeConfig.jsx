@@ -209,14 +209,67 @@ const theme = {
         marginLeft: '0 !important',
       },
     },
+    MuiListItemText: {
+      root: {
+        flex: '0 0 auto',
+        margin: 0,
+      },
+    },
     MuiListItem: {
       root: {
         color: '#000000',
         fontFamily: 'Nunito',
         fontWeight: '400',
         fontSize: '14px',
+        display: 'flex',
+        alignItems: 'baseline',
+        flexWrap: 'nowrap',
+        gap: '8px',
         '& CheckBoxView-checkboxRoot': {
           marginLeft: '0',
+        },
+        '& .MuiCheckbox-root': {
+          flex: '0 0 auto',
+          alignSelf: 'flex-start',
+          marginTop: '1px',
+        },
+        '& .MuiTooltip-root': {
+          flex: '1 1 0',
+          minWidth: 0,
+          overflow: 'hidden',
+          '& > div': {
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word',
+            fontSize: '14px',
+            lineHeight: '120%',
+            flex: '1 1 0',
+            minWidth: 0,
+          },
+        },
+        '& > div.program, & > div.biobank, & > div[class*="biospecimen"]': {
+          flex: '1 1 0',
+          minWidth: 0,
+          wordWrap: 'break-word',
+          overflowWrap: 'break-word',
+        },
+        '& > div[class*="panelDetailText"]': {
+          flex: '1 1 0',
+          minWidth: 0,
+          '& .MuiTypography-root': {
+            margin: '0 !important',
+            marginTop: '0 !important',
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word',
+            fontSize: '14px',
+            lineHeight: '120%',
+          },
+        },
+        '& .MuiListItemText-root': {
+          flex: '0 0 auto',
+        },
+        '& > p': {
+          flex: '0 0 auto',
+          marginLeft: 'auto',
         },
         '& p': {
           color: '#000000',
@@ -294,6 +347,9 @@ const theme = {
           fontWeight: '400',
           marginRight: '0px',
           color: '#565656',
+          whiteSpace: 'nowrap',
+          lineHeight: '120%',
+          margin: '0',
         },
         '&.filter_by_samplesSubjects': {
           fontSize: '13px',
@@ -301,6 +357,9 @@ const theme = {
           fontWeight: '400',
           marginRight: '0px',
           color: '#565656',
+          whiteSpace: 'nowrap',
+          lineHeight: '120%',
+          margin: '0',
         },
         '&.filter_by_filesSubjects': {
           fontSize: '13px',
@@ -308,6 +367,9 @@ const theme = {
           fontWeight: '400',
           marginRight: '0px',
           color: '#565656',
+          whiteSpace: 'nowrap',
+          lineHeight: '120%',
+          margin: '0',
         },
       },
     },
@@ -358,12 +420,115 @@ const theme = {
         marginBottom: '7px',
       },
     },
+    MuiCssBaseline: {
+      '@global': {
+        '.sortGroup': {
+          display: 'flex !important',
+          alignItems: 'center !important',
+          justifyContent: 'flex-start !important',
+          paddingTop: '10px',
+          marginBottom: '5px',
+          borderTop: '1px solid #B1B1B1',
+          textAlign: 'left',
+          marginLeft: '0 !important',
+        },
+        '.sortGroupIcon': {
+          cursor: 'pointer',
+          fontFamily: 'Nunito',
+          fontSize: '10px',
+          marginRight: '12px !important',
+          marginLeft: '16px !important',
+          display: 'inline-flex !important',
+          alignItems: 'center !important',
+          height: '12px',
+          '& img': {
+            display: 'block',
+          },
+        },
+        '.sortGroupItem': {
+          cursor: 'pointer',
+          fontFamily: 'Nunito',
+          fontSize: '11px',
+          marginRight: '0 !important',
+          display: 'inline-flex !important',
+          alignItems: 'center !important',
+          lineHeight: '12px',
+        },
+        '.sortGroupItemCounts': {
+          cursor: 'pointer',
+          fontFamily: 'Nunito',
+          fontSize: '11px',
+          marginLeft: 'auto !important',
+          marginRight: '10px !important',
+          marginTop: '0 !important',
+          float: 'none !important',
+          display: 'inline-flex !important',
+          alignItems: 'center !important',
+          lineHeight: '12px',
+        },
+      },
+    },
   },
 };
 
 const FilterThemeProvider = ({ children }) => {
-  const computedTheme = createTheme(theme);
-  return <ThemeProvider theme={computedTheme}>{children}</ThemeProvider>;
+  const computedTheme = createTheme({
+    ...theme,
+    overrides: {
+      ...theme.overrides,
+      MuiCssBaseline: {
+        '@global': {
+          '.sortGroup': {
+            display: 'flex !important',
+            alignItems: 'center !important',
+            justifyContent: 'flex-start !important',
+          },
+          '.sortGroupIcon': {
+            display: 'inline-flex !important',
+            alignItems: 'center !important',
+          },
+          '.sortGroupItem': {
+            display: 'inline-flex !important',
+            alignItems: 'center !important',
+          },
+          '.sortGroupItemCounts': {
+            display: 'inline-flex !important',
+            alignItems: 'center !important',
+            marginTop: '0 !important',
+            float: 'none !important',
+            marginLeft: 'auto !important',
+          },
+        },
+      },
+    },
+  });
+  return (
+    <ThemeProvider theme={computedTheme}>
+      <style>{`
+        .sortGroup {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: flex-start !important;
+        }
+        .sortGroupIcon {
+          display: inline-flex !important;
+          align-items: center !important;
+        }
+        .sortGroupItem {
+          display: inline-flex !important;
+          align-items: center !important;
+        }
+        .sortGroupItemCounts {
+          display: inline-flex !important;
+          align-items: center !important;
+          margin-top: 0 !important;
+          float: none !important;
+          margin-left: auto !important;
+        }
+      `}</style>
+      {children}
+    </ThemeProvider>
+  );
 };
 
 export default FilterThemeProvider;
