@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material';
-import ReactPlayer from 'react-player/youtube';
+import ReactPlayer from 'react-player';
 import { Close } from '@mui/icons-material';
 import styled from '@emotion/styled';
 
@@ -95,10 +95,12 @@ const NewsViewVideo = ({
           <VideoContainer>
             <ReactPlayer
               playing
-              onProgress={({ playedSeconds }) =>
-                open || setSecondsElapsed(playedSeconds)
-              }
-              url={`${url}&start=${secondsElapsed}`}
+              onTimeUpdate={e => {
+                if (!open) {
+                  setSecondsElapsed(e.currentTarget.currentTime);
+                }
+              }}
+              src={`${url}&start=${secondsElapsed}`}
               height="30em"
               width="100%"
             />
@@ -111,7 +113,7 @@ const NewsViewVideo = ({
         playing={playing}
         muted
         onPlay={handleClickOpen}
-        url={url}
+        src={url}
         height="100%"
         width="100%"
       />

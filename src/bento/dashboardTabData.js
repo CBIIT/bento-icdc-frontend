@@ -166,7 +166,7 @@ export const DASHBOARD_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $search_text: String = ""
   ) {
     dashboard: searchCases(
@@ -188,7 +188,7 @@ export const DASHBOARD_QUERY = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
     ) {
       numberOfStudies
       numberOfCases
@@ -198,7 +198,7 @@ export const DASHBOARD_QUERY = gql`
       numberOfPrograms
       numberOfAliquots
       volumeOfData
-      caseRecordIds
+      caseIds
       sampleIds
       fileIds
       studyFileIds
@@ -323,14 +323,14 @@ export const DASHBOARD_QUERY = gql`
       file_format: $file_format
       biobank: $biobank
       study_participation: $study_participation
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       search_text: $search_text
     ) {
       numberOfCases
       numberOfSamples
       numberOfFiles
       numberOfStudyFiles
-      caseRecordIds
+      caseIds
       sampleIds
       fileIds
       studyFileIds
@@ -563,7 +563,7 @@ export const FILTER_QUERY = gql`
 export const GET_FILES_OVERVIEW_QUERY = gql`
   query getFilesOverview(
     $file_level: [String] = []
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $file_uuids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -590,7 +590,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
   ) {
     fileOverview(
       file_level: $file_level
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       file_uuids: $file_uuids
       program: $program
       study: $study
@@ -621,7 +621,7 @@ export const GET_FILES_OVERVIEW_QUERY = gql`
       file_description
       file_format
       file_size
-      case_record_id
+      case_id
       breed
       diagnosis
       study_code
@@ -720,7 +720,7 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
       file_description
       file_format
       file_size
-      case_record_id
+      case_id
       breed
       diagnosis
       study_code
@@ -765,7 +765,7 @@ export const GET_FILES_OVERVIEW_DESC_QUERY = gql`
 // --------------- GraphQL query - Retrieve sample tab details --------------
 export const GET_SAMPLES_OVERVIEW_QUERY = gql`
   query getSampleOverview(
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -791,7 +791,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
     $offset: Int = 0
   ) {
     sampleOverview(
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       sample_ids: $sample_ids
       program: $program
       study: $study
@@ -817,7 +817,7 @@ export const GET_SAMPLES_OVERVIEW_QUERY = gql`
       offset: $offset
     ) {
       sample_id
-      case_record_id
+      case_id
       breed
       diagnosis
       sample_site
@@ -908,7 +908,7 @@ export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
       offset: $offset
     ) {
       sample_id
-      case_record_id
+      case_id
       breed
       diagnosis
       sample_site
@@ -951,7 +951,7 @@ export const GET_SAMPLES_OVERVIEW_DESC_QUERY = gql`
 
 export const GET_CASES_OVERVIEW_QUERY = gql`
   query getCasesOverviewQueryDashboardTab(
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -970,7 +970,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $order_by: String = "case_record_id"
+    $order_by: String = "case_id"
     $sort_direction: String = "ASC"
     $first: Int = 15
     $offset: Int = 0
@@ -998,9 +998,9 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
       sort_direction: $sort_direction
       first: $first
       offset: $offset
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
     ) {
-      case_record_id
+      case_id
       study_code
       study_type
       cohort
@@ -1051,7 +1051,7 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $order_by: String = "case_record_id"
+    $order_by: String = "case_id"
     $sort_direction: String = "DESC"
     $first: Int = 10
     $offset: Int = 0
@@ -1080,7 +1080,7 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
       first: $first
       offset: $offset
     ) {
-      case_record_id
+      case_id
       study_code
       study_type
       cohort
@@ -1112,7 +1112,7 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
 
 export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
   query caseOverview(
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $program: [String] = []
     $study: [String]
     $study_type: [String]
@@ -1131,13 +1131,13 @@ export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $order_by: String = "case_record_id"
+    $order_by: String = "case_id"
     $sort_direction: String = "ASC"
     $first: Int = 10
     $offset: Int = 0
   ) {
     caseOverview(
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       program: $program
       study: $study
       study_type: $study_type
@@ -1168,7 +1168,7 @@ export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
   query getAllFileIdsForSampleTabForSelectAll(
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -1194,7 +1194,7 @@ export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
     $offset: Int = 0
   ) {
     sampleOverview(
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       sample_ids: $sample_ids
       program: $program
       study: $study
@@ -1227,7 +1227,7 @@ export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
 export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   query getAllFileIdsDashboardTab(
     $file_level: [String] = []
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $file_uuids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
@@ -1255,7 +1255,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
   ) {
     fileOverview(
       file_level: $file_level
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       sample_ids: $sample_ids
       file_uuids: $file_uuids
       program: $program
@@ -1289,7 +1289,7 @@ export const GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL = gql`
 export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
   query getAllFiledsForSampleTabForSelectAll(
     $file_level: [String] = []
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -1315,7 +1315,7 @@ export const GET_ALL_FILEIDS_SAMPLE_TAB_FOR_SELECT_ALL = gql`
   ) {
     fileOverview(
       file_level: $file_level
-      case_record_ids: $case_record_ids
+      case_ids: $case_ids
       sample_ids: $sample_ids
       program: $program
       study: $study
@@ -1392,11 +1392,11 @@ export const tableContainers = [
     paginationAPIField: 'caseOverview',
     count: 'numberOfCases',
     tableCount: 'numberOfTextFilteredCases',
-    dataKey: 'case_record_id',
-    defaultSortField: 'case_record_id',
+    dataKey: 'case_id',
+    defaultSortField: 'case_id',
     defaultSortDirection: 'asc',
-    searchTextRequestKey: 'case_record_ids',
-    searchTextResultKey: 'caseRecordIds',
+    searchTextRequestKey: 'case_ids',
+    searchTextResultKey: 'caseIds',
     extendedViewConfig: {
       searchInput: true,
       pagination: true,
@@ -1416,7 +1416,7 @@ export const tableContainers = [
         role: cellTypes.CHECKBOX,
       },
       {
-        dataField: 'case_record_id',
+        dataField: 'case_id',
         header: 'Case ID',
         sort: 'asc',
         primary: true,
@@ -1424,7 +1424,7 @@ export const tableContainers = [
         cellType: cellTypes.CUSTOM_ELEM,
         linkAttr: {
           rootPath: '/case',
-          pathParams: ['case_record_id'],
+          pathParams: ['case_id'],
         },
         tooltipText: 'sort',
       },
@@ -1529,7 +1529,7 @@ export const tableContainers = [
     queryParam: {
       file_level: ['case'],
     },
-    addFilesRequestVariableKey: 'case_record_ids',
+    addFilesRequestVariableKey: 'case_ids',
     addFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFilesResponseKeys: ['fileOverview', 'file_uuid'],
     addAllFileQuery: GET_ALL_FILEIDS_FILESTAB_FOR_SELECT_ALL,
@@ -1579,12 +1579,12 @@ export const tableContainers = [
         tooltipText: 'sort',
       },
       {
-        dataField: 'case_record_id',
+        dataField: 'case_id',
         header: 'Case ID',
         cellType: cellTypes.LINK,
         linkAttr: {
           rootPath: '/case',
-          pathParams: ['case_record_id'],
+          pathParams: ['case_id'],
         },
         display: true,
         viewColumns: false,
@@ -1794,12 +1794,12 @@ export const tableContainers = [
         tooltipText: 'sort',
       },
       {
-        dataField: 'case_record_id',
+        dataField: 'case_id',
         header: 'Case ID',
         cellType: cellTypes.LINK,
         linkAttr: {
           rootPath: '/case',
-          pathParams: ['case_record_id'],
+          pathParams: ['case_id'],
         },
         display: true,
       },

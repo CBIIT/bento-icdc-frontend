@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 export const GET_ALL_IDS = gql`
   {
     idsLists {
-      caseRecordIds
+      caseIds
       sampleIds
       fileIds
       fileNames
@@ -14,16 +14,12 @@ export const GET_ALL_IDS = gql`
 
 export const GET_SUBJECT_IDS = gql`
   query caseOverview(
-    $case_record_ids: [String] = []
+    $case_ids: [String] = []
     $first: Int = 1000
     $offset: Int = 0
   ) {
-    caseOverview(
-      first: $first
-      offset: $offset
-      case_record_ids: $case_record_ids
-    ) {
-      case_record_id
+    caseOverview(first: $first, offset: $offset, case_ids: $case_ids) {
+      case_id
       study_code
     }
   }
@@ -582,7 +578,7 @@ export const localFindConfig = {
   uploadTooltip: 'Select a .tsv or .txt file from your computer',
   accept: '.csv,.txt',
   maxSearchTerms: 1000,
-  matchedId: 'case_record_id',
+  matchedId: 'case_id',
   matchedLabel: 'Submitted Case ID',
   associateId: 'study_code',
   associateLabel: 'Associated Study',

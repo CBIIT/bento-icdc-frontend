@@ -7,7 +7,7 @@ const SampleCardView = ({ data = {}, classes, index }) => {
   const {
     sample_id: sampleID = '',
     program_name: programName = '',
-    case_record_id: caseID = '',
+    case_id: caseID = '',
     clinical_study_designation: studyDesignation = '',
     sample_site: sampleSite = '',
     physical_sample_type: sampleType = '',
