@@ -31,6 +31,7 @@ import styles, {
 import { getAllIds, getAllSubjectIds } from './BentoFilterUtils';
 import store from '../../store';
 import { localFindConfig } from '../../bento/localSearchData';
+import './facetSortOverrides.css';
 
 const CustomExpansionPanelSummary = withStyles({
   root: {

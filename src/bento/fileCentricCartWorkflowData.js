@@ -555,3 +555,9 @@ export const GET_CART_OVERVIEW_DATA = gql`
     }
   }
 `;
+
+export const STORE_MANIFEST_QUERY = gql`
+  query storeManifest($manifest: String!) {
+    storeManifest(manifest: $manifest)
+  }
+`;

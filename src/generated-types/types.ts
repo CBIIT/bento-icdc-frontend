@@ -26364,6 +26364,15 @@ export type GetCartOverviewDataQuery = {
   } | null;
 };
 
+export type StoreManifestQueryVariables = Exact<{
+  manifest: Scalars['String']['input'];
+}>;
+
+export type StoreManifestQuery = {
+  __typename?: 'QueryType';
+  storeManifest?: string | null;
+};
+
 export type GetGlobalStatsDataQueryQueryVariables = Exact<{
   [key: string]: never;
 }>;

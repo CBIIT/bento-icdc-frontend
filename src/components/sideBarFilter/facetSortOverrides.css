@@ -1,0 +1,26 @@
+/* Override bento-core FacetStyle.js generated classes */
+div[class*="sortGroup"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin-right: 4px !important;
+}
+
+span[class*="sortGroupIcon"] {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+span[class*="sortGroupItem"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-right: 0 !important;
+}
+
+span[class*="sortGroupItemCounts"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-top: 0 !important;
+  float: none !important;
+  margin-left: auto !important;
+}

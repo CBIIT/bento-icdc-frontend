@@ -45,10 +45,10 @@ const UnifiedController: React.FC<UnifiedControllerProps> = ({ match }) => {
   if (multistudyLoading || unifiedViewStatsLoading) {
     return <CircularProgress />;
   }
-
   const unifiedViewData = {
     ...multiStudyData?.case?.[0],
     ...unifiedViewStats?.searchCases,
+    individualId: multiStudyData?.multiStudyCases?.individualId,
   };
 
   return <Dashboard unifiedViewData={unifiedViewData} />;
