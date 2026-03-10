@@ -14,9 +14,12 @@ import {
   CreateManifestDocument,
   CreateManifestQuery,
   CreateManifestQueryVariables,
-  GetStoreManifestDataQueryDocument,
-  GetStoreManifestDataQueryQuery,
-  GetStoreManifestDataQueryQueryVariables,
+  StoreManifestDocument,
+  StoreManifestQuery,
+  StoreManifestQueryVariables,
+  // GetStoreManifestDataQueryDocument,
+  // GetStoreManifestDataQueryQuery,
+  // GetStoreManifestDataQueryQueryVariables,
 } from '../../../../generated-types/graphql';
 import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
@@ -86,17 +89,29 @@ const DropDownView: React.FC<DropDownViewProps> = ({
     }
   );
 
-  const { data } = useQuery<
-    GetStoreManifestDataQueryQuery,
-    GetStoreManifestDataQueryQueryVariables
-  >(GetStoreManifestDataQueryDocument, {
-    variables: {
-      manifest,
-    },
-    skip: !manifest,
-    context: { clientName: 'interopService' },
-    fetchPolicy: 'no-cache',
-  });
+  // const { data } = useQuery<
+  //   GetStoreManifestDataQueryQuery,
+  //   GetStoreManifestDataQueryQueryVariables
+  // >(GetStoreManifestDataQueryDocument, {
+  //   variables: {
+  //     manifest,
+  //   },
+  //   skip: !manifest,
+  //   context: { clientName: 'interopService' },
+  //   fetchPolicy: 'no-cache',
+  // });
+
+  const { data } = useQuery<StoreManifestQuery, StoreManifestQueryVariables>(
+    StoreManifestDocument,
+    {
+      variables: {
+        manifest,
+      },
+      skip: !manifest,
+      context: { clientName: 'interopService' },
+      fetchPolicy: 'no-cache',
+    }
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const sbgUrl = useMemo(
