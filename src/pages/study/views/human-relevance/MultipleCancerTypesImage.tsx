@@ -7,6 +7,7 @@ export interface MultipleCancerTypesImageProps {
   caption?: string;
   alt?: string;
   cancerTypes?: string[];
+  cancerTypeToImageKey?: (_cancerType: string) => string | undefined;
   cancerTypeImages?: Record<
     string,
     { src: string; alt?: string; caption?: string }
@@ -217,6 +218,7 @@ const CancerTypeItem = styled.div<{ isActive: boolean }>`
 
 interface CancerTypeDisplay {
   key: string;
+  imageKey: string;
   name: string;
   position: { top: string; left: string };
 }
@@ -234,7 +236,7 @@ const CANCER_TYPE_DISPLAY_INFO: Record<
   { name: string; position: { top: string; left: string } }
 > = {
   bone: {
-    name: 'Bone Cancer (Osteosarcoma)',
+    name: 'Osteosarcoma',
     position: { top: '70%', left: '53%' },
   },
   bladder: {
@@ -263,13 +265,19 @@ const CANCER_TYPE_DISPLAY_INFO: Record<
   },
   melanoma: {
     name: 'Melanoma',
-    position: { top: '88%', left: '53%' },
+    position: { top: '26%', left: '54%' },
   },
 };
 
 export const MultipleCancerTypesImage: React.FC<
   MultipleCancerTypesImageProps
-> = ({ caption: _caption, alt, cancerTypes = [], cancerTypeImages = {} }) => {
+> = ({
+  caption: _caption,
+  alt,
+  cancerTypes = [],
+  cancerTypeToImageKey,
+  cancerTypeImages = {},
+}) => {
   const [activeCancerType, setActiveCancerType] = useState<string | null>(null);
   const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({});
   const [lineCoordinates, setLineCoordinates] = useState<{
@@ -283,23 +291,33 @@ export const MultipleCancerTypesImage: React.FC<
   const listItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const hotspotRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  // Dynamically create cancer type display list from backend data
+  // Map cancer type names to image keys and filter out unmapped types
   const relevantCancerTypes: CancerTypeDisplay[] = cancerTypes
-    .filter(key => key in CANCER_TYPE_DISPLAY_INFO)
-    .map(key => ({
-      key,
-      name: CANCER_TYPE_DISPLAY_INFO[key].name,
-      position: CANCER_TYPE_DISPLAY_INFO[key].position,
-    }));
+    .map(cancerName => {
+      const imageKey = cancerTypeToImageKey?.(cancerName);
+      if (!imageKey || !(imageKey in CANCER_TYPE_DISPLAY_INFO)) {
+        return null;
+      }
+      return {
+        key: cancerName,
+        imageKey,
+        name: cancerName,
+        position: CANCER_TYPE_DISPLAY_INFO[imageKey].position,
+      };
+    })
+    .filter((item): item is CancerTypeDisplay => item !== null);
 
-  // Get the actual image for a cancer type, or fall back to placeholder
-  const getCancerImage = (cancerTypeKey: string) => {
-    const imageData = cancerTypeImages[cancerTypeKey];
+  const uniqueImageKeys = Array.from(
+    new Set(relevantCancerTypes.map(ct => ct.imageKey))
+  );
+
+  const getCancerImage = (imageKey: string) => {
+    const imageData = cancerTypeImages[imageKey];
     return imageData?.src || placeholderImage;
   };
 
-  const handleCancerTypeInteraction = (cancerTypeKey: string) => {
-    setActiveCancerType(cancerTypeKey);
+  const handleCancerTypeInteraction = (cancerName: string) => {
+    setActiveCancerType(cancerName);
   };
 
   const handleCancerTypeLeave = () => {
@@ -323,7 +341,12 @@ export const MultipleCancerTypesImage: React.FC<
     const wrapperRect = contentWrapperRef.current.getBoundingClientRect();
     const cardRect = detailCardRef.current.getBoundingClientRect();
     const listItem = listItemRefs.current[activeCancerType];
-    const hotspot = hotspotRefs.current[activeCancerType];
+
+    const activeCancerData = relevantCancerTypes.find(
+      ct => ct.key === activeCancerType
+    );
+    const imageKey = activeCancerData?.imageKey;
+    const hotspot = imageKey ? hotspotRefs.current[imageKey] : null;
 
     if (!listItem || !hotspot) {
       return;
@@ -349,7 +372,7 @@ export const MultipleCancerTypesImage: React.FC<
     };
 
     setLineCoordinates({ listToPanel, panelToHotspot });
-  }, [activeCancerType]);
+  }, [activeCancerType, relevantCancerTypes]);
 
   return (
     <FigureContainer className="relevance-figure multiple-cancer-types">
@@ -390,19 +413,32 @@ export const MultipleCancerTypesImage: React.FC<
               className="relevance-image"
             />
             <HotspotsOverlay>
-              {relevantCancerTypes.map(cancerType => (
-                <Hotspot
-                  key={cancerType.key}
-                  ref={el => (hotspotRefs.current[cancerType.key] = el)}
-                  isActive={activeCancerType === cancerType.key}
-                  top={cancerType.position.top}
-                  left={cancerType.position.left}
-                  onMouseEnter={() =>
-                    handleCancerTypeInteraction(cancerType.key)
-                  }
-                  onMouseLeave={handleCancerTypeLeave}
-                />
-              ))}
+              {uniqueImageKeys.map(imageKey => {
+                const position = CANCER_TYPE_DISPLAY_INFO[imageKey].position;
+                const isActive = relevantCancerTypes.some(
+                  ct => ct.imageKey === imageKey && ct.key === activeCancerType
+                );
+                const firstCancerForKey = relevantCancerTypes.find(
+                  ct => ct.imageKey === imageKey
+                );
+
+                return (
+                  <Hotspot
+                    key={imageKey}
+                    ref={el => {
+                      hotspotRefs.current[imageKey] = el;
+                    }}
+                    isActive={isActive}
+                    top={position.top}
+                    left={position.left}
+                    onMouseEnter={() =>
+                      firstCancerForKey &&
+                      handleCancerTypeInteraction(firstCancerForKey.key)
+                    }
+                    onMouseLeave={handleCancerTypeLeave}
+                  />
+                );
+              })}
             </HotspotsOverlay>
           </ImageWrapper>
         </ImageContainer>
@@ -412,7 +448,7 @@ export const MultipleCancerTypesImage: React.FC<
             <DetailCard ref={detailCardRef}>
               <DetailPanelHeader>{activeCancer.name}</DetailPanelHeader>
               <DetailPanelContent>
-                {!imageLoaded[activeCancer.key] && (
+                {!imageLoaded[activeCancer.imageKey] && (
                   <SpinnerContainer>
                     <CircularProgress
                       sx={{
@@ -422,16 +458,16 @@ export const MultipleCancerTypesImage: React.FC<
                   </SpinnerContainer>
                 )}
                 <DetailImage
-                  isLoaded={!!imageLoaded[activeCancer.key]}
-                  src={getCancerImage(activeCancer.key)}
+                  isLoaded={!!imageLoaded[activeCancer.imageKey]}
+                  src={getCancerImage(activeCancer.imageKey)}
                   alt={
-                    cancerTypeImages[activeCancer.key]?.alt ||
+                    cancerTypeImages[activeCancer.imageKey]?.alt ||
                     `${activeCancer.name} comparison`
                   }
                   onLoad={() =>
                     setImageLoaded(prev => ({
                       ...prev,
-                      [activeCancer.key]: true,
+                      [activeCancer.imageKey]: true,
                     }))
                   }
                 />
@@ -448,7 +484,9 @@ export const MultipleCancerTypesImage: React.FC<
           {relevantCancerTypes.map(cancerType => (
             <CancerTypeItem
               key={cancerType.key}
-              ref={el => (listItemRefs.current[cancerType.key] = el)}
+              ref={el => {
+                listItemRefs.current[cancerType.key] = el;
+              }}
               isActive={activeCancerType === cancerType.key}
               onMouseEnter={() => handleCancerTypeInteraction(cancerType.key)}
               onMouseLeave={handleCancerTypeLeave}

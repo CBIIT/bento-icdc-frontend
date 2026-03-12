@@ -68,74 +68,6 @@ import {
 } from '../../generated-types/types';
 import { BreadcrumbData } from '../caseDetails/caseDetailsView';
 
-type CancerType =
-  | 'bladder'
-  | 'bone'
-  | 'brain'
-  | 'breast'
-  | 'soft_tissue_sarcoma'
-  | 'thyroid'
-  | 'lymphoma'
-  | 'melanoma'
-  | 'multiple';
-
-/**
- * Maps study codes to their associated cancer types.
- * Studies that research multiple cancer types will be displayed with
- * the interactive multi-cancer visualization.
- *
- * Reference data:
- * - Bone: COTC021, COTC022, OSA01-OSA04, PRECINCT01, NCATS-COP01, TCL01
- * - Bladder: UBC01-UBC03, UC01, TCL01, ORGANOIDS01
- * - Brain: GLIOMA01
- * - Breast: MGT01, TCL01
- * - Soft Tissue Sarcoma: STS01, TCL01
- * - Thyroid: TCL01
- * - Lymphoma: COTC007B, NCATS-COP01, TCL01
- * - Melanoma/Lung: NCATS-COP01, PRECINCT01, TCL01
- */
-const STUDY_TO_CANCER_TYPES: Record<string, CancerType[]> = {
-  // Bone cancer studies
-  COTC021: ['bone'],
-  COTC022: ['bone'],
-  OSA01: ['bone'],
-  OSA02: ['bone'],
-  OSA03: ['bone'],
-  OSA04: ['bone'],
-
-  // Bladder cancer studies
-  UBC01: ['bladder'],
-  UBC02: ['bladder'],
-  UBC03: ['bladder'],
-  UC01: ['bladder'],
-  ORGANOIDS01: ['bladder'],
-
-  // Brain cancer studies
-  GLIOMA01: ['brain'],
-
-  // Breast cancer studies
-  MGT01: ['breast'],
-
-  // Soft tissue sarcoma studies
-  STS01: ['soft_tissue_sarcoma'],
-
-  // Lymphoma studies
-  COTC007B: ['lymphoma'],
-
-  // Studies researching multiple cancer types
-  PRECINCT01: ['bone', 'melanoma'],
-  'NCATS-COP01': ['bone', 'lymphoma', 'melanoma'],
-  TCL01: [
-    'bone',
-    'bladder',
-    'breast',
-    'soft_tissue_sarcoma',
-    'thyroid',
-    'lymphoma',
-    'melanoma',
-  ],
-};
-
 export const TAB_LABELS = {
   OVERVIEW: 'OVERVIEW',
   ARMS_COHORTS: 'ARMS & COHORTS',
@@ -223,66 +155,109 @@ const HUMAN_REL_IMAGES = {
 
 type HumanRelevanceImageKey = keyof typeof HUMAN_REL_IMAGES;
 
-/**
- * Returns all cancer types associated with a given study code.
- * Useful for studies that research multiple cancer types.
- */
-const getStudyCancerTypes = (study_code: string): CancerType[] => {
-  return STUDY_TO_CANCER_TYPES[study_code] || [];
+// Maps database cancer type values to image keys
+const CANCER_TYPE_TO_IMAGE_KEY: Record<string, HumanRelevanceImageKey> = {
+  // Bone cancer variations
+  'Bone Cancer': 'bone',
+  Osteosarcoma: 'bone',
+  bone: 'bone',
+
+  // Bladder cancer variations
+  'Bladder Cancer': 'bladder',
+  'Urothelial Carcinoma': 'bladder',
+  bladder: 'bladder',
+
+  // Brain cancer variations
+  'Brain Cancer': 'brain',
+  Glioma: 'brain',
+  brain: 'brain',
+
+  // Breast cancer variations
+  'Breast Cancer': 'breast',
+  'Mammary Cancer': 'breast',
+  'Mammary Tumor': 'breast',
+  breast: 'breast',
+
+  // Soft tissue sarcoma variations
+  'Soft Tissue Sarcoma': 'soft_tissue_sarcoma',
+  Fibrosarcoma: 'soft_tissue_sarcoma',
+  Hemangiosarcoma: 'soft_tissue_sarcoma',
+  'Histiocytic Sarcoma': 'soft_tissue_sarcoma',
+  Fibrolipoma: 'soft_tissue_sarcoma',
+  Lipoma: 'soft_tissue_sarcoma',
+  'Mast Cell Tumor': 'soft_tissue_sarcoma',
+  'Splenic Hematoma': 'soft_tissue_sarcoma',
+  'Splenic Hyperplasia': 'soft_tissue_sarcoma',
+  soft_tissue_sarcoma: 'soft_tissue_sarcoma',
+
+  // Thyroid cancer variations
+  'Thyroid Cancer': 'thyroid',
+  'Thryoid Cancer': 'thyroid', // Typo in database
+  thyroid: 'thyroid',
+
+  // Lymphoma variations
+  Lymphoma: 'lymphoma',
+  'B Cell Lymphoma': 'lymphoma',
+  'B Cell Lymhoma': 'lymphoma', // Typo in database
+  'T Cell Lymphoma': 'lymphoma',
+  'T Cell Leukemia': 'lymphoma',
+  lymphoma: 'lymphoma',
+
+  // Melanoma variations
+  Melanoma: 'melanoma',
+  melanoma: 'melanoma',
 };
 
-/**
- * Returns the cancer type for a given study code.
- * - Returns the specific cancer type if the study focuses on one type
- * - Returns 'multiple' if the study researches multiple cancer types
- * - Returns undefined if the study doesn't have human relevance data
- */
-const getCancerType = (study_code: string): CancerType | undefined => {
-  const cancerTypes = STUDY_TO_CANCER_TYPES[study_code];
+// Parses relevant_human_cancer field: handles arrays, comma-separated strings, or multiple strings
+const parseRelevantHumanCancer = (
+  relevant_human_cancer?: Array<string | null | undefined> | null
+): string[] => {
+  if (!relevant_human_cancer || relevant_human_cancer.length === 0) {
+    return [];
+  }
 
-  if (!cancerTypes || cancerTypes.length === 0) {
+  // Flatten and split by commas, then clean up
+  return relevant_human_cancer
+    .filter((item): item is string => Boolean(item))
+    .flatMap(item => item.split(','))
+    .map(item => item.trim())
+    .filter(item => item.length > 0);
+};
+
+const getImageKeyForCancerType = (
+  cancerType: string
+): HumanRelevanceImageKey | undefined => {
+  return CANCER_TYPE_TO_IMAGE_KEY[cancerType];
+};
+
+// Generates title: single type or "Multiple Human Cancers"
+const getDynamicHumanRelevanceTitle = (
+  relevant_human_cancer?: Array<string | null | undefined> | null
+): string | undefined => {
+  const cancerTypes = parseRelevantHumanCancer(relevant_human_cancer);
+
+  if (cancerTypes.length === 0) {
     return undefined;
   }
 
-  // Studies researching multiple cancer types get the special 'multiple' view
-  if (cancerTypes.length > 1) {
-    return 'multiple';
+  if (cancerTypes.length === 1) {
+    return `Relevance of this work to ${cancerTypes[0]}`;
   }
 
-  return cancerTypes[0];
+  return 'Relevance of this work to Multiple Human Cancers';
+};
+
+const hasMultipleCancerTypes = (
+  relevant_human_cancer?: Array<string | null | undefined> | null
+): boolean => {
+  const cancerTypes = parseRelevantHumanCancer(relevant_human_cancer);
+  return cancerTypes.length > 1;
 };
 
 const getHumanRelevanceTabImage = (
   cancer_type: HumanRelevanceImageKey
 ): (typeof HUMAN_REL_IMAGES)[HumanRelevanceImageKey] =>
   HUMAN_REL_IMAGES[cancer_type];
-
-const getHumanRelevanceTabTitle = (
-  cancer_type: Exclude<CancerType, undefined>
-) => {
-  switch (cancer_type) {
-    case 'bone':
-      return 'Relevance of this work to human Bone Cancer';
-    case 'bladder':
-      return 'Relevance of this work to human Bladder Cancer';
-    case 'brain':
-      return 'Relevance of this work to human Glioma';
-    case 'breast':
-      return 'Relevance of this work to human Breast Cancer';
-    case 'soft_tissue_sarcoma':
-      return 'Relevance of this work to human Soft Tissue Sarcoma';
-    case 'thyroid':
-      return 'Relevance of this work to human Thyroid Cancer';
-    case 'lymphoma':
-      return 'Relevance of this work to human Lymphoma';
-    case 'melanoma':
-      return 'Relevance of this work to human Melanoma';
-    case 'multiple':
-      return 'Relevance of this work to Multiple Human Cancers';
-    default:
-      return 'Relevance of this work to human cancer';
-  }
-};
 
 function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
   return arr.some(
@@ -555,11 +530,12 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     if (!hasClinicalData) {
       items = items.filter(i => i.label !== TAB_LABELS.CLINICAL_DATA);
     }
-    if (!getCancerType(studyCode)) {
+    // Show Human Relevance tab only if we have data from the query
+    if (!humanRelevanceCardData?.human_relevance_record_id) {
       items = items.filter(i => i.label !== TAB_LABELS.HUMAN_RELEVANCE);
     }
     return items;
-  }, [currentStudy, hasClinicalData, studyCode]);
+  }, [currentStudy, hasClinicalData, humanRelevanceCardData]);
 
   const processedClinicalDataTabData = useMemo(
     () =>
@@ -594,34 +570,6 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     t => t.label === TAB_LABELS.CLINICAL_DATA
   );
 
-  const cancer_type = getCancerType(studyCode);
-  const studyCancerTypes = getStudyCancerTypes(studyCode);
-
-  const humanRelevanceTabFigure =
-    cancer_type && cancer_type in HUMAN_REL_IMAGES
-      ? getHumanRelevanceTabImage(cancer_type as HumanRelevanceImageKey)
-      : undefined;
-  const humanRelevanceTabTitle = cancer_type
-    ? getHumanRelevanceTabTitle(cancer_type)
-    : undefined;
-
-  // For multiple cancer type studies, prepare the cancer type images
-  const cancerTypeImages =
-    cancer_type === 'multiple'
-      ? studyCancerTypes.reduce(
-          (acc, type) => {
-            if (type in HUMAN_REL_IMAGES) {
-              acc[type] = HUMAN_REL_IMAGES[type as HumanRelevanceImageKey];
-            }
-            return acc;
-          },
-          {} as Record<
-            string,
-            (typeof HUMAN_REL_IMAGES)[HumanRelevanceImageKey]
-          >
-        )
-      : undefined;
-
   const {
     human_relevance_record_id,
     human_relevance_statement,
@@ -629,7 +577,45 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     relevant_human_pathways,
     relevant_human_genes,
     relevant_experimental_therapeutic_intervention,
+    relevant_human_cancer,
   } = humanRelevanceCardData || {};
+
+  const cancerTypesFromData = parseRelevantHumanCancer(relevant_human_cancer);
+  const isMultipleCancers = hasMultipleCancerTypes(relevant_human_cancer);
+  const humanRelevanceTabTitle = getDynamicHumanRelevanceTitle(
+    relevant_human_cancer
+  );
+
+  let humanRelevanceTabFigure:
+    | (typeof HUMAN_REL_IMAGES)[HumanRelevanceImageKey]
+    | undefined;
+  if (isMultipleCancers) {
+    humanRelevanceTabFigure = getHumanRelevanceTabImage('multiple');
+  } else if (cancerTypesFromData.length === 1) {
+    const imageKey = getImageKeyForCancerType(cancerTypesFromData[0]);
+    if (imageKey) {
+      humanRelevanceTabFigure = getHumanRelevanceTabImage(imageKey);
+    }
+  }
+
+  // Deduplicate image keys for multiple cancer types (e.g., B Cell Lymphoma & T Cell Lymphoma both map to 'lymphoma')
+  const uniqueImageKeys = Array.from(
+    new Set(
+      cancerTypesFromData
+        .map(getImageKeyForCancerType)
+        .filter((key): key is HumanRelevanceImageKey => key !== undefined)
+    )
+  );
+
+  const cancerTypeImages = isMultipleCancers
+    ? uniqueImageKeys.reduce(
+        (acc, imageKey) => {
+          acc[imageKey] = HUMAN_REL_IMAGES[imageKey];
+          return acc;
+        },
+        {} as Record<string, (typeof HUMAN_REL_IMAGES)[HumanRelevanceImageKey]>
+      )
+    : undefined;
 
   if (isLoadingHumanRelData) {
     return <SkeletonLoader variant="withRounded" />;
@@ -837,25 +823,32 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                 value={currentTab}
                 index={index}
               >
-                {cancer_type && (
+                {humanRelevanceCardData && (
                   <HumanRelevancePanel
-                    idPrefix={human_relevance_record_id}
+                    idPrefix={human_relevance_record_id ?? undefined}
                     title={humanRelevanceTabTitle}
-                    overview={human_relevance_statement}
+                    overview={human_relevance_statement ?? undefined}
                     nciLink={{
-                      href: nci_link_to_relevant_human_cancer,
-                      label: nci_link_to_relevant_human_cancer,
+                      href: nci_link_to_relevant_human_cancer ?? '',
+                      label: nci_link_to_relevant_human_cancer ?? undefined,
                     }}
                     figure={{
-                      src: humanRelevanceTabFigure?.src,
+                      src: humanRelevanceTabFigure?.src ?? '',
                       alt: humanRelevanceTabFigure?.alt,
                       caption: humanRelevanceTabFigure?.caption,
                     }}
-                    genes={relevant_human_genes}
-                    pathways={relevant_human_pathways}
-                    therapies={relevant_experimental_therapeutic_intervention}
-                    isMultipleCancerTypes={cancer_type === 'multiple'}
-                    cancerTypes={studyCancerTypes}
+                    genes={relevant_human_genes?.filter(
+                      (g): g is string => g != null
+                    )}
+                    pathways={relevant_human_pathways?.filter(
+                      (p): p is string => p != null
+                    )}
+                    therapies={relevant_experimental_therapeutic_intervention?.filter(
+                      (t): t is string => t != null
+                    )}
+                    isMultipleCancerTypes={isMultipleCancers}
+                    cancerTypes={cancerTypesFromData}
+                    cancerTypeToImageKey={getImageKeyForCancerType}
                     cancerTypeImages={cancerTypeImages}
                   />
                 )}
