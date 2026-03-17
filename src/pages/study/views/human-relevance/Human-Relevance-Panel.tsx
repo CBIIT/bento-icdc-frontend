@@ -25,6 +25,7 @@ export interface HumanRelevancePanelProps
   therapies?: string[];
   isMultipleCancerTypes?: boolean;
   cancerTypes?: string[];
+  cancerTypeToImageKey?: (_cancerType: string) => string | undefined;
   cancerTypeImages?: Record<
     string,
     { src: string; alt?: string; caption?: string }
@@ -135,7 +136,8 @@ const ContentContainer = styled.div`
   }
 
   .key-value-wrapper li {
-    white-space: nowrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .key-value-wrapper li:not(:last-child) {
@@ -173,6 +175,7 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
   therapies = [],
   isMultipleCancerTypes = false,
   cancerTypes = [],
+  cancerTypeToImageKey,
   cancerTypeImages = {},
   className,
   style,
@@ -248,6 +251,7 @@ export const HumanRelevancePanel: React.FC<HumanRelevancePanelProps> = ({
               caption={figure.caption}
               alt={figure.alt}
               cancerTypes={cancerTypes}
+              cancerTypeToImageKey={cancerTypeToImageKey}
               cancerTypeImages={cancerTypeImages}
             />
           ) : (
