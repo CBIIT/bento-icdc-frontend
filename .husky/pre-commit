@@ -1,2 +1,3 @@
 npm run generate
+git add src/generated-types/
 npx lint-staged
