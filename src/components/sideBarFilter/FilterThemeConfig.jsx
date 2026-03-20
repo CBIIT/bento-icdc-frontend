@@ -19,19 +19,19 @@ const theme = {
     },
     MuiCollapse: {
       wrapperInner: {
-        '&> div': {
-          '&> div:nth-child(1)': {
-            '&> span:nth-child(2)': {
-              color: '#62737F',
-              fontFamily: 'Nunito',
-              fontWeight: 'bold',
-            },
-            '&> span:nth-child(3)': {
-              color: '#62737F',
-              fontFamily: 'Nunito',
-              fontWeight: 'bold',
-            },
-          },
+        '& span:nth-child(2)': {
+          color: '#62737F',
+          fontFamily: 'Nunito',
+          fontWeight: 'bold',
+          marginRight: '10px',
+        },
+        '& span:nth-child(3)': {
+          color: '#62737F',
+          fontFamily: 'Nunito',
+          fontWeight: 'bold',
+        },
+        '& span:nth-child(3) .highlight': {
+          color: '#537A9D',
         },
       },
     },
