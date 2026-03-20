@@ -25,8 +25,8 @@ const Header = styled.div`
 `;
 
 const HeaderImage = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: 2px solid white;
   object-fit: cover;
@@ -128,9 +128,7 @@ const LinkText = styled.a`
   text-decoration-style: solid;
   text-underline-offset: 0%;
   text-decoration-thickness: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.15em;
+  display: inline;
   text-align: left;
 
   &:hover {
@@ -139,6 +137,9 @@ const LinkText = styled.a`
 
   svg {
     font-size: 14px;
+    vertical-align: middle;
+    display: inline;
+    margin-left: 2px;
   }
 `;
 
@@ -158,9 +159,16 @@ type NewsItemProps = {
   icon: string;
   items: NewsItemData[] | PublicationData[];
   type?: 'table' | 'publications';
+  error?: boolean;
 };
 
-const NewsItem = ({ title, icon, items, type = 'table' }: NewsItemProps) => {
+const NewsItem = ({
+  title,
+  icon,
+  items,
+  type = 'table',
+  error = false,
+}: NewsItemProps) => {
   if (!items || !Array.isArray(items)) {
     items = [];
   }
@@ -173,7 +181,19 @@ const NewsItem = ({ title, icon, items, type = 'table' }: NewsItemProps) => {
       </Header>
 
       <ContentWrapper>
-        {items.length === 0 ? (
+        {error ? (
+          <TableRow isEven={false}>
+            <Value
+              style={{
+                gridColumn: '1 / -1',
+                justifyContent: 'center',
+                color: '#d32f2f',
+              }}
+            >
+              Failed to load data. Please try again later.
+            </Value>
+          </TableRow>
+        ) : items.length === 0 ? (
           <TableRow isEven={false}>
             <Value
               style={{

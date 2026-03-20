@@ -6,11 +6,14 @@ import { TwitterTweetEmbed } from 'react-twitter-embed';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import lbg from '../../../assets/landing/Background.png';
-import newsBanner from './news-view-update-banner.png';
 import NewsItem from './NewsListItem';
 import NewsViewImage from './NewsViewImage';
 import NewsViewVideo from './NewsViewVideo';
 import env from '../../../utils/env';
+import { newsViewTweetIds } from '../../../bento/landingPageData';
+
+const newsBanner =
+  'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/png/icdc-news-page-update-banner.png';
 
 // Styled Components
 const Page = styled.div`
@@ -74,11 +77,12 @@ const NewsListTitle = styled.div`
   -webkit-border-top-right-radius: 0.5em;
   background-image: url(${newsBanner});
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   font-size: 1.2em;
   margin: 0;
   min-height: 74px;
+  height: 74px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,12 +276,6 @@ function TwitterSectionComponent({
 }: {
   news: Record<string, any>;
 }) {
-  const tweetIds = [
-    '1878806460668285313',
-    '1837431704799105198',
-    '1593639418149093376',
-  ];
-
   return (
     <TwitterSectionContainer {...props}>
       <TwitterSectionSubHeadingContainer>
@@ -295,7 +293,7 @@ function TwitterSectionComponent({
 
       <TwitterSectionWrapper>
         <TwitterSection>
-          {tweetIds.map(tweetId => (
+          {newsViewTweetIds.map(tweetId => (
             <TwitterTweetEmbed key={tweetId} tweetId={tweetId} />
           ))}
         </TwitterSection>
@@ -308,7 +306,6 @@ const PUBLICATIONS_QUERY = `
   query getPublications {
     publication(
       orderBy: year_of_publication_desc
-      first: 4
     ) {
       publication_title
       pubmed_id
@@ -326,13 +323,17 @@ const NewsView = ({
   const [dataModelReleases, setDataModelReleases] = React.useState<any[]>([]);
   const [softwareReleases, setSoftwareReleases] = React.useState<any[]>([]);
   const [publications, setPublications] = React.useState<any[]>([]);
+  const [dataModelError, setDataModelError] = React.useState<boolean>(false);
+  const [softwareError, setSoftwareError] = React.useState<boolean>(false);
+  const [publicationsError, setPublicationsError] =
+    React.useState<boolean>(false);
 
   React.useEffect(() => {
     // Fetch GitHub releases for Data Model
     fetch('https://api.github.com/repos/CBIIT/icdc-model-tool/releases')
       .then(response => response.json())
       .then(releases => {
-        const formattedReleases = releases.slice(0, 4).map((release: any) => ({
+        const formattedReleases = releases.map((release: any) => ({
           label: 'VERSION',
           value: release.name || release.tag_name,
           date: new Date(release.published_at).toLocaleDateString('en-US', {
@@ -342,16 +343,17 @@ const NewsView = ({
           }),
         }));
         setDataModelReleases(formattedReleases);
+        setDataModelError(false);
       })
-      .catch(error => {
-        console.error('Error fetching data model releases:', error);
+      .catch(() => {
+        setDataModelError(true);
       });
 
     // Fetch GitHub releases for Software
     fetch('https://api.github.com/repos/CBIIT/bento-icdc-frontend/releases')
       .then(response => response.json())
       .then(releases => {
-        const formattedReleases = releases.slice(0, 4).map((release: any) => ({
+        const formattedReleases = releases.map((release: any) => ({
           label: 'VERSION',
           value: release.name || release.tag_name,
           date: new Date(release.published_at).toLocaleDateString('en-US', {
@@ -361,9 +363,10 @@ const NewsView = ({
           }),
         }));
         setSoftwareReleases(formattedReleases);
+        setSoftwareError(false);
       })
-      .catch(error => {
-        console.error('Error fetching software releases:', error);
+      .catch(() => {
+        setSoftwareError(true);
       });
 
     // Fetch Publications from GraphQL API
@@ -374,23 +377,19 @@ const NewsView = ({
           query: PUBLICATIONS_QUERY,
         })
         .then(response => {
-          console.log('Publications API response:', response.data);
           const pubs = response.data?.data?.publication || [];
-          console.log('Publications data:', pubs);
           const formattedPubs = pubs.map((pub: any) => ({
             title: pub.publication_title,
             url: pub.pubmed_id
               ? `https://pubmed.ncbi.nlm.nih.gov/${pub.pubmed_id}/`
               : '#',
           }));
-          console.log('Formatted publications:', formattedPubs);
           setPublications(formattedPubs);
+          setPublicationsError(false);
         })
-        .catch(error => {
-          console.error('Error fetching publications:', error);
+        .catch(() => {
+          setPublicationsError(true);
         });
-    } else {
-      console.warn('REACT_APP_BACKEND_API not configured');
     }
   }, []);
 
@@ -399,24 +398,34 @@ const NewsView = ({
     () => [
       {
         title: 'Data Model Releases',
-        icon: 'https://via.placeholder.com/40/1977cc/ffffff?text=M',
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/icdc-news-page-update-data-model-release.svg',
         type: 'table',
         items: dataModelReleases,
+        error: dataModelError,
       },
       {
         title: 'Software Releases',
-        icon: 'https://via.placeholder.com/40/1977cc/ffffff?text=S',
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/icdc-news-page-update-software-release.svg',
         type: 'table',
         items: softwareReleases,
+        error: softwareError,
       },
       {
         title: 'Publications',
-        icon: 'https://via.placeholder.com/40/1977cc/ffffff?text=P',
+        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/icdc-news-page-update-publications.svg',
         type: 'publications',
         items: publications,
+        error: publicationsError,
       },
     ],
-    [dataModelReleases, softwareReleases, publications]
+    [
+      dataModelReleases,
+      softwareReleases,
+      publications,
+      dataModelError,
+      softwareError,
+      publicationsError,
+    ]
   );
 
   return (
@@ -437,11 +446,12 @@ const NewsView = ({
                 <h6
                   style={{
                     color: 'white',
-                    fontSize: '1.2em',
-                    fontWeight: 'bold',
+                    fontSize: '1.8em',
+                    fontWeight: '900',
                     margin: 0,
                     textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
+                    letterSpacing: '0.05em',
+                    fontFamily: 'Raleway',
                   }}
                 >
                   Updates
@@ -455,6 +465,7 @@ const NewsView = ({
                     icon={item.icon}
                     items={item.items}
                     type={item.type || 'table'}
+                    error={item.error}
                   />
                 ))}
               </NewsList>
