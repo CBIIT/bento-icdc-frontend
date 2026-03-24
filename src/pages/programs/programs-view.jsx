@@ -1,7 +1,7 @@
-import React from "react";
-import { ProgramCard } from "./program-card";
-import Stats from "../../components/Stats/AllStatsController";
-import { pageDataV2 as pageData } from "../../bento/programData";
+import React from 'react';
+import { ProgramCard } from './program-card';
+import Stats from '../../components/Stats/AllStatsController';
+import { pageDataV2 as pageData } from '../../bento/programData';
 import {
   ProgramsContainer,
   ProgramsHeader,
@@ -9,7 +9,7 @@ import {
   ClipboardIcon,
   ProgramsTitle,
   ProgramsContent,
-} from "./programs-view.styled";
+} from './programs-view.styled';
 
 const Programs = ({ data }) => {
   return (
@@ -30,8 +30,7 @@ const Programs = ({ data }) => {
                 key={index}
                 {...programData}
                 {...pageData.programs.find(
-                  (program) =>
-                    program.prgramName === programData.program_acronym,
+                  program => program.programName === programData.program_acronym
                 )}
               />
             );
