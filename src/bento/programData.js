@@ -7,7 +7,7 @@ const pageData = {
   externalIcon:
     'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/svgs/program_ExternalLink.svg',
   COP: {
-    prgramName: 'COP',
+    programName: 'COP',
     primaryImage:
       'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png',
     primaryImageAlt:
@@ -16,7 +16,7 @@ const pageData = {
       'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.cop.jpg',
   },
   CMCP: {
-    prgramName: 'CMCP',
+    programName: 'CMCP',
     primaryImage:
       'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png',
     primaryImageAlt:
@@ -25,7 +25,7 @@ const pageData = {
       'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/Program_Detail_Image.ccmp.jpg',
   },
   PCCR: {
-    prgramName: 'PCCR',
+    programName: 'PCCR',
     primaryImage:
       'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png',
     primaryImageAlt:
@@ -43,7 +43,7 @@ const pageDataV2 = {
     'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/programs-listing-external-link-icon.svg',
   programs: [
     {
-      prgramName: 'COP',
+      programName: 'COP',
       primaryImage:
         'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.cop.png',
       primaryImageAlt: 'COP-primary-image',
@@ -52,14 +52,14 @@ const pageDataV2 = {
       video: 'https://www.youtube.com/watch?v=tU5N5jCZxcY',
     },
     {
-      prgramName: 'PRECINCT',
+      programName: 'PRECINCT',
       primaryImageAlt: 'PRECINT-primary-image',
       primaryImage:
         'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/precint_program_listing.png',
       video: 'https://www.youtube.com/watch?v=Gpy3EWeYy3Y',
     },
     {
-      prgramName: 'CMCP',
+      programName: 'CMCP',
       primaryImage:
         'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.ccmp.png',
       primaryImageAlt: 'CMCP-primary-image',
@@ -68,7 +68,7 @@ const pageDataV2 = {
       video: 'https://youtu.be/bIWaMKZ9pl4',
     },
     {
-      prgramName: 'PCCR',
+      programName: 'PCCR',
       primaryImage:
         'https://raw.githubusercontent.com/CBIIT/datacommons-assets/master/icdc/images/png/programListing_Image.pccr.png',
       primaryImageAlt: 'PCCR-primary-image',
@@ -77,7 +77,7 @@ const pageDataV2 = {
       video: 'https://www.youtube.com/watch?v=oVs7kXSzv3U',
     },
     {
-      prgramName: 'CSU FACC',
+      programName: 'CSU FACC',
       primaryImage:
         'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/png/csu-facc-program.png',
       primaryImageAlt: 'FACC-primary-image',
