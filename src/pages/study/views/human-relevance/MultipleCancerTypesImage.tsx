@@ -267,6 +267,10 @@ const CANCER_TYPE_DISPLAY_INFO: Record<
     name: 'Melanoma',
     position: { top: '26%', left: '54%' },
   },
+  lung: {
+    name: 'Lung Cancer',
+    position: { top: '26%', left: '54%' },
+  },
 };
 
 export const MultipleCancerTypesImage: React.FC<

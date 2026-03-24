@@ -145,6 +145,12 @@ const HUMAN_REL_IMAGES = {
     caption:
       'Both melanoma and lung cancer remain among the leading causes of cancer death in humans. Dogs naturally develop these tumors with comparable immune environments and mutational landscapes, offering crucial insights into tumor resistance mechanisms and the development of immunotherapies.',
   },
+  lung: {
+    src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_melanoma.svg',
+    alt: 'Lung cancer illustration showing respiratory system in human and canine anatomy',
+    caption:
+      'Lung cancer is one of the leading causes of cancer-related deaths in humans. Dogs naturally develop pulmonary neoplasms with comparable immune environments and mutational landscapes, offering crucial insights into tumor biology and the development of targeted therapies and immunotherapies.',
+  },
   multiple: {
     src: humanSkeletonImage,
     alt: 'Human body diagram showing various cancer sites including B Cell Lymphoma, Bladder Cancer, Fibrosarcoma, Hemangiosarcoma, Histiocytic Sarcoma, Lipoma, Lymphoma, Mammary Cancer, Mast Cell Tumor, Melanoma, Osteosarcoma, Soft Tissue Sarcoma, Splenic Hemosarcoma, T Cell Leukemia, and Thyroid Cancer',
@@ -192,7 +198,7 @@ const CANCER_TYPE_TO_IMAGE_KEY: Record<string, HumanRelevanceImageKey> = {
 
   // Thyroid cancer variations
   'Thyroid Cancer': 'thyroid',
-  'Thryoid Cancer': 'thyroid', // Typo in database
+  'Thryroid Cancer': 'thyroid', // Typo in database
   thyroid: 'thyroid',
 
   // Lymphoma variations
@@ -206,6 +212,11 @@ const CANCER_TYPE_TO_IMAGE_KEY: Record<string, HumanRelevanceImageKey> = {
   // Melanoma variations
   Melanoma: 'melanoma',
   melanoma: 'melanoma',
+
+  // Lung cancer variations
+  'Lung Cancer': 'lung',
+  'Pulmonary Neoplasms': 'lung',
+  lung: 'lung',
 };
 
 // Parses relevant_human_cancer field: handles arrays, comma-separated strings, or multiple strings
