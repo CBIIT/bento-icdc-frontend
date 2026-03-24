@@ -67,7 +67,7 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
   ];
 
   const programConfig = programImageConfig.programs.find(
-    element => element.prgramName === programDetail.program_acronym
+    element => element.programName === programDetail.program_acronym
   );
   const programImage = programConfig ? programConfig.secondaryImage : '';
   const programVideo = programConfig?.video ? programConfig.video : '';
