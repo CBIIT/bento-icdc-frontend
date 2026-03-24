@@ -55,10 +55,6 @@ const HUMAN_REL_IMAGES = {
 - **alt**: Accessible description of the image
 - **caption**: Educational content about the cancer type (2-3 sentences)
 
-**⚠️ Important:** Verify the SVG exists at the URL before deploying! If it doesn't exist:
-1. Request the asset from the design/assets team
-2. Use a similar cancer type's SVG as temporary fallback
-3. Add a TODO comment explaining the temporary solution
 
 ---
 
@@ -113,12 +109,6 @@ Make changes in the order listed above:
 2. Add image config to `HUMAN_REL_IMAGES`
 3. Add display info to `CANCER_TYPE_DISPLAY_INFO`
 
-### 4. Verify Asset Availability
-```bash
-curl -I https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_<cancer_type>.svg
-```
-
-If 404, use a fallback and document it with a TODO comment.
 
 ### 5. Test Locally
 - Run the application
@@ -127,35 +117,10 @@ If 404, use a fallback and document it with a TODO comment.
 - Verify hotspot positioning on skeleton
 - Verify detail panel displays correctly
 
-### 6. Document Asset Request
-If using a fallback SVG, create a ticket/issue requesting the proper asset from the design team.
 
----
 
-## Example: Adding "Lung Cancer / Pulmonary Neoplasms"
 
-See commit [hash] for the complete implementation of lung cancer support, including:
-- Three mapping variations
-- Temporary fallback to melanoma SVG
-- Chest-level positioning at 30%
-- Educational caption about pulmonary neoplasms
 
----
-
-## Validation Script
-
-Run the validation script to check for missing mappings:
-```bash
-npm run validate:cancer-types
-```
-
-This will:
-- Fetch all cancer types from the API
-- Check for missing mappings
-- Report unmapped cancer types
-- Verify SVG assets exist
-
----
 
 ## Future Improvements (Planned)
 
@@ -171,12 +136,4 @@ This will:
 - Content management without deployment
 - Automated validation
 
----
 
-## Questions or Issues?
-
-If you encounter issues or have questions about adding cancer types:
-1. Check existing mappings for similar cancer types
-2. Review the Human Relevance visualization component code
-3. Consult with the backend team about data quality issues
-4. Request assets from the design team early in the process
