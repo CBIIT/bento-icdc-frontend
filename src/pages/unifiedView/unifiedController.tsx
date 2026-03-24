@@ -35,11 +35,13 @@ const UnifiedController: React.FC<UnifiedControllerProps> = ({ match }) => {
     UnifiedViewDataQueryVariables
   >(UnifiedViewDataDocument, {
     variables: {
-      case_ids: multiStudyData?.case?.[0]?.case_id
-        ? [multiStudyData.case[0].case_id]
+      case_ids: multiStudyData?.multiStudyCases?.caseIds
+        ? multiStudyData.multiStudyCases.caseIds.filter(
+            (id): id is string => id !== null
+          )
         : [],
     },
-    skip: !multiStudyData?.case?.[0]?.case_id,
+    skip: !multiStudyData?.multiStudyCases?.caseIds?.length,
   });
 
   if (multistudyLoading || unifiedViewStatsLoading) {
