@@ -267,6 +267,10 @@ const CANCER_TYPE_DISPLAY_INFO: Record<
     name: 'Melanoma',
     position: { top: '26%', left: '54%' },
   },
+  lung: {
+    name: 'Lung Cancer',
+    position: { top: '26%', left: '54%' },
+  },
 };
 
 export const MultipleCancerTypesImage: React.FC<
@@ -406,10 +410,7 @@ export const MultipleCancerTypesImage: React.FC<
           <ImageWrapper>
             <img
               src={humanSkeletonImage}
-              alt={
-                alt ||
-                'Human body diagram showing various cancer sites including B Cell Lymphoma, Bladder Cancer, Fibrosarcoma, Hemangiosarcoma, Histiocytic Sarcoma, Lipoma, Lymphoma, Mammary Cancer, Mast Cell Tumor, Melanoma, Osteosarcoma, Soft Tissue Sarcoma, Splenic Hemosarcoma, T Cell Leukemia, and Thyroid Cancer'
-              }
+              alt={alt || 'Human body diagram showing various cancer sites'}
               className="relevance-image"
             />
             <HotspotsOverlay>
