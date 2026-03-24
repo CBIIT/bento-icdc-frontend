@@ -147,7 +147,7 @@ const HUMAN_REL_IMAGES = {
   },
   lung: {
     src: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/human_rel_tab_melanoma.svg',
-    alt: 'Lung cancer illustration showing respiratory system in human and canine anatomy',
+    alt: 'Melanoma and lung cancer depiction in human and canine anatomy',
     caption:
       'Lung cancer is one of the leading causes of cancer-related deaths in humans. Dogs naturally develop pulmonary neoplasms with comparable immune environments and mutational landscapes, offering crucial insights into tumor biology and the development of targeted therapies and immunotherapies.',
   },
