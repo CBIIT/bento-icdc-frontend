@@ -27001,6 +27001,7 @@ export type StudyQuery = {
   }>;
   externalDataOverview?: Array<{
     __typename?: 'ExternalDataOverview';
+    clinical_study_designation?: string | null;
     CRDCLinks?: Array<{
       __typename?: 'CRDCLink';
       repository?: string | null;

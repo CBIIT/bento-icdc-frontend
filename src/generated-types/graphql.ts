@@ -27003,6 +27003,7 @@ export type StudyQuery = {
   }>;
   externalDataOverview?: Array<{
     __typename?: 'ExternalDataOverview';
+    clinical_study_designation?: string | null;
     CRDCLinks?: Array<{
       __typename?: 'CRDCLink';
       repository?: string | null;
@@ -41819,6 +41820,10 @@ export const StudyDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'clinical_study_designation' },
+                },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'CRDCLinks' },
