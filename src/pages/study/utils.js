@@ -1,5 +1,5 @@
 export function customSorting(a, b, flag, i = 0) {
-  if (flag === "alphabetical") {
+  if (flag === 'alphabetical') {
     if (b[i] && !a[i]) {
       return -1;
     }
@@ -40,7 +40,7 @@ export function studyDetailSorting(a, b) {
     }
   }
 
-  return customSorting(a, b, "alphabetical", 0);
+  return customSorting(a, b, 'alphabetical', 0);
 }
 
 export function fromArmTOCohorDoes(cohorts, cohortDosing) {
@@ -48,11 +48,11 @@ export function fromArmTOCohorDoes(cohorts, cohortDosing) {
   let arrayDoes = [];
   const arrayCohortDes = [];
   // get cohort_does and cohort_description
-  cohorts.forEach((cohort) => {
+  cohorts.forEach(cohort => {
     // get cohort_does
     if (
       cohort.cohort_dose &&
-      cohort.cohort_dose !== "" &&
+      cohort.cohort_dose !== '' &&
       cohort.cohort_dose !== null
     ) {
       arrayDoes.push(cohort.cohort_dose);
@@ -60,7 +60,7 @@ export function fromArmTOCohorDoes(cohorts, cohortDosing) {
     // get cohort_description
     if (
       cohort.cohort_description &&
-      cohort.cohort_description !== "" &&
+      cohort.cohort_description !== '' &&
       cohort.cohort_description !== null
     ) {
       arrayCohortDes.push(cohort.cohort_description);
@@ -68,18 +68,18 @@ export function fromArmTOCohorDoes(cohorts, cohortDosing) {
   });
   if (arrayDoes.length === 0) {
     if (arrayCohortDes.length === 0) {
-      cohortAndDosing.does = "";
+      cohortAndDosing.does = '';
     } else {
       // replace cohort does with cohort desc
       arrayDoes = arrayCohortDes;
       cohortAndDosing.does = arrayDoes
         .sort((a, b) => studyDetailSorting(a, b))
-        .join("#");
+        .join('#');
     }
   } else {
     cohortAndDosing.does = arrayDoes
       .sort((a, b) => studyDetailSorting(a, b))
-      .join("#");
+      .join('#');
   }
   return cohortAndDosing;
 }
@@ -108,11 +108,11 @@ export function FileDisableRowSelection() {
 */
 
 export function FileOnRowsSelect(data, allRowsSelected) {
-  return allRowsSelected.map((row) => data[row.dataIndex].uuid);
+  return allRowsSelected.map(row => data[row.dataIndex].uuid);
 }
 
 export function isStudyUnderEmbargo(value) {
-  const studyDispositionn = "under embargo";
+  const studyDispositionn = 'under embargo';
   if (value === null || value === undefined) {
     return false;
   }
@@ -125,29 +125,33 @@ export function isStudyUnderEmbargo(value) {
  * @return {String}
  */
 export function studyDisposition(value) {
-  const embargo = "under embargo";
-  const pending = "pending";
+  const embargo = 'under embargo';
+  const pending = 'pending';
   if (value.toString().toLowerCase() === embargo) {
-    return "embargo";
+    return 'embargo';
   }
   if (value.toString().toLowerCase() === pending) {
-    return "pending";
+    return 'pending';
   }
   return undefined;
 }
 
 export const reorderObjectKeys = (dataObject, orderObject) => {
+  const formatData = Array.isArray(dataObject)
+    ? dataObject[0] || {}
+    : dataObject;
   const orderedData = {};
+  const remainingData = { ...formatData };
 
-  Object.keys(orderObject).forEach((key) => {
+  Object.keys(orderObject).forEach(key => {
     // eslint-disable-next-line no-prototype-builtins
     if (dataObject && dataObject.hasOwnProperty(key)) {
       orderedData[key] = dataObject[key];
-      delete dataObject[key];
+      delete remainingData[key];
     }
   });
 
   Object.assign(orderedData, dataObject);
 
-  return orderedData;
+  return { ...orderedData, ...remainingData };
 };

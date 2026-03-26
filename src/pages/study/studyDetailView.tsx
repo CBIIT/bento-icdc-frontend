@@ -347,6 +347,25 @@ const renderDispositionLabel = (disposition?: string | null) => {
   return null;
 };
 
+type CRDCMetadata = Record<string, unknown> | null;
+
+type CRDCLink = {
+  url?: string;
+  repository?: string;
+  metadata?: CRDCMetadata;
+};
+
+type ExternalDataOverview = {
+  clinical_study_designation?: string;
+  CRDCLinks?: CRDCLink[];
+};
+
+type FormattedLink = {
+  url: string;
+  repository: string;
+  metadata: CRDCMetadata;
+};
+
 /* ---------------------------------- */
 /* Component                          */
 /* ---------------------------------- */
@@ -530,9 +549,27 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     []
   );
 
-  const currentStudy = interOpData?.externalDataOverview?.find(
+  const externalDataOverview = (interOpData?.externalDataOverview ??
+    []) as ExternalDataOverview[];
+  const formatted = externalDataOverview?.filter(
     item => item?.clinical_study_designation === studyCode
   );
+
+  const formattedLinks: { CRDCLinks: FormattedLink[] } = {
+    CRDCLinks:
+      formatted?.flatMap(item =>
+        (item?.CRDCLinks || []).map(link => ({
+          url: link?.url || 'API failed',
+          repository: link?.repository || 'Unknown',
+          metadata: link?.metadata ?? null,
+        }))
+      ) || [],
+  };
+
+  const currentStudy = {
+    clinical_study_designation: studyCode,
+    CRDCLinks: formattedLinks.CRDCLinks,
+  };
 
   const processedTabs = useMemo(() => {
     let items = currentStudy
