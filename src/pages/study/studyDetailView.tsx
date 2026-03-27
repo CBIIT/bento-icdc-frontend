@@ -551,13 +551,14 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
   const externalDataOverview = (interOpData?.externalDataOverview ??
     []) as ExternalDataOverview[];
-  const formatted = externalDataOverview?.filter(
+
+  const findStudy = externalDataOverview?.filter(
     item => item?.clinical_study_designation === studyCode
   );
 
   const formattedLinks: { CRDCLinks: FormattedLink[] } = {
     CRDCLinks:
-      formatted?.flatMap(item =>
+      findStudy?.flatMap(item =>
         (item?.CRDCLinks || []).map(link => ({
           url: link?.url || 'API failed',
           repository: link?.repository || 'Unknown',
@@ -572,9 +573,10 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   };
 
   const processedTabs = useMemo(() => {
-    let items = currentStudy
-      ? tab.items
-      : tab.items.filter(i => i.label !== TAB_LABELS.SUPPORTING_DATA);
+    let items =
+      findStudy?.length > 0
+        ? tab.items
+        : tab.items.filter(i => i.label !== TAB_LABELS.SUPPORTING_DATA);
     if (!hasClinicalData) {
       items = items.filter(i => i.label !== TAB_LABELS.CLINICAL_DATA);
     }
