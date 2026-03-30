@@ -159,6 +159,7 @@ const VideoSpotlight = () => {
         <iframe
           src={`https://www.youtube.com/embed/${currentVideo.videoId}?modestbranding=1&rel=0`}
           title={currentVideo.title}
+          sandbox="allow-scripts allow-same-origin"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
