@@ -24369,6 +24369,7 @@ export type CaseQuery = {
       __typename?: 'study';
       clinical_study_name?: string | null;
       clinical_study_designation?: string | null;
+      accession_id?: string | null;
       program?: {
         __typename?: 'program';
         program_acronym?: string | null;

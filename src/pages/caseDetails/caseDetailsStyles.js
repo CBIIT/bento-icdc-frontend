@@ -56,8 +56,9 @@ export const Container = styled.div({
 export const Header = styled.div({
   paddingLeft: '35px',
   paddingRight: '35px',
+  paddingTop: '20px',
   borderBottom: '#81a6b9 4px solid',
-  height: '90px',
+  height: '110px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
