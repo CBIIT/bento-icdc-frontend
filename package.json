@@ -147,6 +147,12 @@
     "webpack-merge": "^6.0.1",
     "workbox-webpack-plugin": "^7.1.0"
   },
+  "overrides": {
+    "bento-components": "1.0.11",
+    "@jbrowse/react-linear-genome-view": "2.18.0",
+    "@jbrowse/plugin-data-management": "2.18.0",
+    "react-vtree": "2.0.4"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
