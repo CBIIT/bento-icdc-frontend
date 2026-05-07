@@ -177,7 +177,8 @@
     "build": "NODE_ENV=production webpack --config ./webpack/prod.js",
     "serve": "http-server dist",
     "prepare": "husky",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "test:ci": "TZ=UTC CI=true jest --passWithNoTests --coverage --collectCoverageFrom=src/**/*.{js,ts,jsx,tsx} --maxWorkers=2 --maxConcurrent=2"
   },
   "eslintConfig": {
     "extends": "react-app"
