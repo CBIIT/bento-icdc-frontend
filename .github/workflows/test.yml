@@ -4,9 +4,11 @@ on:
     push:
         branches:
             - "feature/test"
+            - "*.*.*"
+            - development
     pull_request:
         branches:
-            - "feature/test"
+            - "*"
 permissions:
     contents: read
 jobs:
@@ -20,12 +22,12 @@ jobs:
               uses: actions/setup-node@v4
               with:
                 # TODO: Change this to the version of Node you want to use
-                node-version: "22.20.0"
+                node-version: "22.x"
                 cache: "npm"
             - name: Install Dependencies
               run: npm ci --legacy-peer-deps
             - name: Run Tests
-              run: npm run test
+              run: npm run test:ci
               # TODO: Change this to your CI test command
             # Upload test coverage reports to Coveralls
             - name: Coveralls GitHub Action
