@@ -165,10 +165,27 @@ describe('TableTheme module', () => {
       expect(theme.tblBody.MuiTableCell.body['&.acl'].textAlign).toBe('center');
     });
 
-    it('throws error if called with undefined table argument (due to object spread on undefined)', () => {
-      // styles has a default of {}, but spreading undefined "table" will throw
-      expect(() => themeConfig()).toThrow(TypeError);
-      expect(() => themeConfig({})).toThrow(TypeError);
+    it('does not throw when table argument is omitted and uses defaults', () => {
+      expect(() => themeConfig()).not.toThrow();
+
+      const theme = themeConfig();
+
+      expect(theme.tblHeader.MuiTableRow.head.borderBottom).toBe(
+        '3px solid #004c73'
+      );
+      expect(theme.tblContainer.MuiTable.root.borderTop).toBe(
+        '3px solid #004c73'
+      );
+      expect(theme.tblPgn.MuiTablePagination.root.borderTop).toBe(
+        '3px solid #004c73'
+      );
+      expect(theme.tblPgn.MuiTablePagination.root.borderBottom).toBe(
+        '3px solid #004c73'
+      );
+      expect(
+        theme.extendedView.MuiToolbar.root['&.downloadAndColumnView']
+          .borderBottom
+      ).toBe('3px solid #FF9742');
     });
 
     it('does not throw when table is an empty object', () => {
