@@ -1,25 +1,50 @@
+// import React from 'react';
+// import styled from '@emotion/styled';
+
+// export const Container = styled.div(props => ({
+//   ...props.styles,
+// }));
+
+// export const InnerContaner = styled.div(props => ({
+//   ...props.styles,
+// }));
+
+// const TabPanel = ({ children, value, index, style, innerDivStyle }) => (
+//   <Container
+//     role="tabpanel"
+//     hidden={value !== index}
+//     styles={
+//       style
+//         ? { ...style, display: value !== index ? 'none' : 'flex' }
+//         : undefined
+//     }
+//   >
+//     <InnerContaner styles={{ ...innerDivStyle }}>{children}</InnerContaner>
+//   </Container>
+// );
+
+// export default TabPanel;
+
 import React from 'react';
 import styled from '@emotion/styled';
 
-export const Container = styled.div(props => ({
-  ...props.styles,
-}));
+export const Container = styled.div({});
 
-export const InnerContaner = styled.div(props => ({
-  ...props.styles,
-}));
+export const InnerContainer = styled.div({});
 
 const TabPanel = ({ children, value, index, style, innerDivStyle }) => (
   <Container
     role="tabpanel"
     hidden={value !== index}
-    styles={
+    style={
       style
         ? { ...style, display: value !== index ? 'none' : 'flex' }
-        : undefined
+        : value !== index
+          ? { display: 'none' }
+          : undefined
     }
   >
-    <InnerContaner styles={{ ...innerDivStyle }}>{children}</InnerContaner>
+    <InnerContainer style={innerDivStyle}>{children}</InnerContainer>
   </Container>
 );
 
