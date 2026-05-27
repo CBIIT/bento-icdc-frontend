@@ -17,6 +17,6 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["dom", "dom.iterable", "esnext"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "__mocks__"],
   "exclude": ["node_modules", "dist", "build"]
 }

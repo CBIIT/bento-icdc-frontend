@@ -6,16 +6,12 @@ import {
   TableConfig as TableConfigPD,
   TableLayoutItem,
 } from '../../bento/programDetailData';
-import {
-  GetStudiesByProgramProgramDetailTwoQuery,
-  StudyOfProgram,
-} from '../../generated-types/types';
+import { StudyOfProgram } from '../../generated-types/types';
 import { TableConfig as TableConfigDAL } from './types';
 
 interface StudiesTableProps {
   table: TableConfigPD;
   tableLayOut: TableLayoutItem[];
-  interOpData: GetStudiesByProgramProgramDetailTwoQuery;
   rowsPerPage?: number;
   data: StudyOfProgram[];
 }
@@ -23,7 +19,6 @@ const StudiesTable: React.FC<StudiesTableProps> = ({
   table,
   tableLayOut,
   data,
-  interOpData,
   rowsPerPage,
 }) => {
   // access table state
@@ -36,8 +31,6 @@ const StudiesTable: React.FC<StudiesTableProps> = ({
       tblRows={data}
       config={{
         ...table,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        interOpData,
       }}
       tableLayOut={tableLayOut}
       totalRowCount={data.length || 0}
