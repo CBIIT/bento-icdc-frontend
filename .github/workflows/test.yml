@@ -27,7 +27,7 @@ jobs:
             - name: Install Dependencies
               run: npm ci --legacy-peer-deps
             - name: Run Tests
-              run: npm run test:ci
+              run: npm run test
               # TODO: Change this to your CI test command
             # Upload test coverage reports to Coveralls
             - name: Coveralls GitHub Action
