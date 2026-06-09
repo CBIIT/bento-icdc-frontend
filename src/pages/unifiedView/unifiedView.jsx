@@ -9,11 +9,12 @@ import unifiedViewIcon from '../../assets/unifiedViewIcon.svg';
 import { multiStudyData as custodianMultiStudyData } from '../../bento/dashboardTabData';
 import { updateStat } from '../../components/Stats/utils';
 import DashboardTabsView from '../dashboard/components/DashboardTabs';
+import PageContent from '../../components/Layout/PageContent';
 
 const Dashboard = ({ classes, unifiedViewData, isUnifiedView = true }) => (
   <div className={classes.dashboardContainer}>
     <StatsView data={unifiedViewData} />
-    <div>
+    <PageContent>
       <div className={classes.content}>
         <div className={classes.sideBar}>
           <BentoFacetFilter
@@ -51,7 +52,7 @@ const Dashboard = ({ classes, unifiedViewData, isUnifiedView = true }) => (
           </div>
         </div>
       </div>
-    </div>
+    </PageContent>
   </div>
 );
 

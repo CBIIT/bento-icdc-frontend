@@ -7,7 +7,8 @@ export const Container = styled.div({
   fontFamily: 'Raleway, sans-serif',
   paddingLeft: '27px',
   paddingRight: '27px',
-  minWidth: '1404px',
+  width: '100%',
+  boxSizing: 'border-box',
 });
 
 export const Header = styled.div({
@@ -245,10 +246,13 @@ export const DetailContainer = styled.div({
   paddingTop: '30px',
   paddingLeft: '56px',
   paddingRight: '56px',
+  width: '100%',
+  maxWidth: '100%',
+  minWidth: 0,
+  boxSizing: 'border-box',
   fontFamily: 'Open Sans',
   letterSpacing: '0.014em',
   color: '#000000',
   size: '12px',
   lineHeight: '23px',
-  minWidth: '1404px',
 });

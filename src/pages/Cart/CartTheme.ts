@@ -93,11 +93,6 @@ export const headerTheme = ({ primaryColor = '#004c73' }: any) => ({
 
 export const tblContainer = {
   overrides: {
-    MuiBox: {
-      root: {
-        minWidth: '1279px',
-      },
-    },
     MuiGrid: {
       container: {
         margin: '0px 0px 20px 0px',

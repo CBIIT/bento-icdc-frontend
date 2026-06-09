@@ -8,6 +8,7 @@ import StudiesThemeProvider from './studiesMuiThemConfig';
 import { TableContextProvider } from '../../bento-core';
 import StudiesTable from '../../components/DataAvailabilityTable/StudiesTable';
 import { TableContainer } from './studiesView.styled';
+import PageContent from '../../components/Layout/PageContent';
 
 const Studies = ({ data, invalid, interOpData }) => {
   const overlay = useSelector(state =>
@@ -19,35 +20,37 @@ const Studies = ({ data, invalid, interOpData }) => {
       <Stats />
       {invalid && !overlay ? <InvalidAccesionModal /> : null}
       <TableContainer>
-        <div className="container">
-          <div className="header">
-            <div className="logo-and-title-wrapper">
-              <div className="logo">
-                <img
-                  src={pageData.studyListingIcon.src}
-                  alt={pageData.studyListingIcon.alt}
-                />
+        <PageContent noPadding>
+          <div className="container">
+            <div className="header">
+              <div className="logo-and-title-wrapper">
+                <div className="logo">
+                  <img
+                    src={pageData.studyListingIcon.src}
+                    alt={pageData.studyListingIcon.alt}
+                  />
+                </div>
+                <div className="header-title">{pageData.table.title}</div>
               </div>
-              <div className="header-title">{pageData.table.title}</div>
+            </div>
+
+            <div className="table-div">
+              <Grid container>
+                <Grid item xs={12} id="table_studies">
+                  <TableContextProvider>
+                    <StudiesTable
+                      data={data.studiesByProgram}
+                      interOpData={interOpData}
+                      table={pageData.table}
+                      tableLayOut={tableLayOut}
+                      rowsPerPage={pageData.table.numbOfRowPerPage || 10}
+                    />
+                  </TableContextProvider>
+                </Grid>
+              </Grid>
             </div>
           </div>
-
-          <div className="table-div">
-            <Grid container>
-              <Grid item xs={12} id="table_studies">
-                <TableContextProvider>
-                  <StudiesTable
-                    data={data.studiesByProgram}
-                    interOpData={interOpData}
-                    table={pageData.table}
-                    tableLayOut={tableLayOut}
-                    rowsPerPage={pageData.table.numbOfRowPerPage || 10}
-                  />
-                </TableContextProvider>
-              </Grid>
-            </Grid>
-          </div>
-        </div>
+        </PageContent>
       </TableContainer>
     </StudiesThemeProvider>
   );
