@@ -30,6 +30,7 @@ import {
   LargeIconView,
 } from './landingView.styled';
 import VideoSpotlight from './views/VideoSpotlight';
+import PageContent from '../../components/Layout/PageContent';
 
 const custumTheme = createTheme(
   adaptV4Theme({
@@ -97,166 +98,175 @@ const LandingView = ({ pageData }) => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={custumTheme}>
         <Container>
-          <TabsWidgetContainer>
-            <div className="left-panel">
-              <Tab
-                styleClasses={{
-                  tabPrimaryColor: {
-                    color: '#ffffff',
-                    fontWeight: '700',
-                    fontSize: '14px',
-                    height: '140px',
-                    '& img': {
-                      width: '90px',
-                      display: 'block',
-                      margin: 'auto',
-                      border: '1px solid #fff',
-                      borderRadius: '50%',
+          <PageContent>
+            <TabsWidgetContainer>
+              <div className="left-panel">
+                <Tab
+                  styleClasses={{
+                    tabPrimaryColor: {
+                      color: '#ffffff',
+                      fontWeight: '700',
+                      fontSize: '14px',
+                      height: '140px',
+                      '& img': {
+                        width: '90px',
+                        display: 'block',
+                        margin: 'auto',
+                        border: '1px solid #fff',
+                        borderRadius: '50%',
+                      },
                     },
-                  },
-                  tabHighlightColor: {
-                    color: '#ffffff',
-                    fontWeight: '700',
-                    fontSize: '14px',
-                    height: '175px',
-                    '& img': {
-                      margin: 'auto',
-                      width: '113px',
-                      display: 'block',
-                      border: '1px solid #fff',
-                      borderRadius: '50%',
+                    tabHighlightColor: {
+                      color: '#ffffff',
+                      fontWeight: '700',
+                      fontSize: '14px',
+                      height: '175px',
+                      '& img': {
+                        margin: 'auto',
+                        width: '113px',
+                        display: 'block',
+                        border: '1px solid #fff',
+                        borderRadius: '50%',
+                      },
                     },
-                  },
-                  hrLine: {
-                    display: 'none',
-                  },
-                }}
-                iconSpacing="8px"
-                disableRipple
-                tabItems={pageData.tabs}
-                currentTab={currentTab}
-                handleTabChange={handleTabChange}
-                orientation="vertical"
-              />
-            </div>
-            <div className="right-panel">
-              {pageData.tabs.map((item, index) => (
-                <TabPanel
-                  key={`tab-panel-landing-view-${index}`}
-                  value={currentTab}
-                  index={index}
-                  innerDivStyle={{
-                    flex: 1,
-                    display: 'flex',
-                    gap: '32px',
-                    width: '100%',
-                    minWidth: '1127px',
-                    minHeight: '616px',
-                    borderRadius: '20px',
-                    padding: '48px',
-                    background:
-                      'linear-gradient(to right, rgba(25, 28, 32, 0.6), rgba(25, 28, 32, 0.1))',
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: '20px',
+                    hrLine: {
+                      display: 'none',
+                    },
                   }}
-                  style={{
-                    flex: 1,
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <div className="left-section">
-                    <div className="title-and-divider">
-                      <div className="title">
-                        {item.content.callToActionTitle}
-                      </div>
-                      <hr className="divider" />
-                    </div>
-                    <div className="description">
-                      {item.content.callToActionDescription}
-                    </div>
-                    <div>
-                      {item.content.externalLink ? (
-                        <a
-                          href={item.content.callToActionLink}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <CallToActionButton variant="contained">
-                            {item.content.callToActionButtonText}
-                          </CallToActionButton>
-                        </a>
-                      ) : (
-                        <Link to={item.content.callToActionLink}>
-                          <CallToActionButton variant="contained">
-                            {item.content.callToActionButtonText}
-                          </CallToActionButton>
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                  <div className="right-section">
-                    {index === 1 && (
-                      <div className="dog-and-human-icon-animation-container">
-                        <div className="dog-and-human-icon-wrapper">
-                          <SlideDown>
-                            <img src={dogImg} alt="Dog" />
-                          </SlideDown>
-                          <SlideUp>
-                            <img src={humanImg} alt="human" />
-                          </SlideUp>
-                          <Star>
-                            <div className="star-and-flare">
-                              <img
-                                src={starImg}
-                                alt="star"
-                                className="star-image"
-                              />
-                              <img src={flare} alt="flare" className="flare" />
-                            </div>
-                          </Star>
+                  iconSpacing="8px"
+                  disableRipple
+                  tabItems={pageData.tabs}
+                  currentTab={currentTab}
+                  handleTabChange={handleTabChange}
+                  orientation="vertical"
+                />
+              </div>
+              <div className="right-panel">
+                {pageData.tabs.map((item, index) => (
+                  <TabPanel
+                    key={`tab-panel-landing-view-${index}`}
+                    value={currentTab}
+                    index={index}
+                    innerDivStyle={{
+                      flex: 1,
+                      display: 'flex',
+                      gap: '32px',
+                      width: '100%',
+                      minWidth: 0,
+                      minHeight: '616px',
+                      borderRadius: '20px',
+                      padding: '48px',
+                      boxSizing: 'border-box',
+                      background:
+                        'linear-gradient(to right, rgba(25, 28, 32, 0.6), rgba(25, 28, 32, 0.1))',
+                      backdropFilter: 'blur(10px)',
+                    }}
+                    style={{
+                      flex: 1,
+                      minWidth: 0,
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div className="left-section">
+                      <div className="title-and-divider">
+                        <div className="title">
+                          {item.content.callToActionTitle}
                         </div>
+                        <hr className="divider" />
                       </div>
-                    )}
-                    {index === 0 && (
-                      <div className="tab-1-image-wrappper">
-                        <img
-                          src={item.content.image}
-                          alt="icdc_studies"
-                          className="tab-1-image"
-                        />
+                      <div className="description">
+                        {item.content.callToActionDescription}
                       </div>
-                    )}
-                    {index === 2 && (
                       <div>
-                        <img
-                          src={item.content.image}
-                          alt="icdc_studies"
-                          className="tab-2-image"
-                        />
-                        <img
-                          src={item.content.image}
-                          alt="icdc_studies"
-                          className="tab-2-second-image"
-                        />
+                        {item.content.externalLink ? (
+                          <a
+                            href={item.content.callToActionLink}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <CallToActionButton variant="contained">
+                              {item.content.callToActionButtonText}
+                            </CallToActionButton>
+                          </a>
+                        ) : (
+                          <Link to={item.content.callToActionLink}>
+                            <CallToActionButton variant="contained">
+                              {item.content.callToActionButtonText}
+                            </CallToActionButton>
+                          </Link>
+                        )}
                       </div>
-                    )}
-                    {index === 3 &&
-                      generateSpotlightContent(
-                        item.content.template,
-                        item.content[item.content.template]
+                    </div>
+                    <div className="right-section">
+                      {index === 1 && (
+                        <div className="dog-and-human-icon-animation-container">
+                          <div className="dog-and-human-icon-wrapper">
+                            <SlideDown>
+                              <img src={dogImg} alt="Dog" />
+                            </SlideDown>
+                            <SlideUp>
+                              <img src={humanImg} alt="human" />
+                            </SlideUp>
+                            <Star>
+                              <div className="star-and-flare">
+                                <img
+                                  src={starImg}
+                                  alt="star"
+                                  className="star-image"
+                                />
+                                <img
+                                  src={flare}
+                                  alt="flare"
+                                  className="flare"
+                                />
+                              </div>
+                            </Star>
+                          </div>
+                        </div>
                       )}
-                  </div>
-                </TabPanel>
-              ))}
-            </div>
-          </TabsWidgetContainer>
-          <WidgetsContainer>
-            <Widgets pageData={pageData} />
-          </WidgetsContainer>
+                      {index === 0 && (
+                        <div className="tab-1-image-wrappper">
+                          <img
+                            src={item.content.image}
+                            alt="icdc_studies"
+                            className="tab-1-image"
+                          />
+                        </div>
+                      )}
+                      {index === 2 && (
+                        <div>
+                          <img
+                            src={item.content.image}
+                            alt="icdc_studies"
+                            className="tab-2-image"
+                          />
+                          <img
+                            src={item.content.image}
+                            alt="icdc_studies"
+                            className="tab-2-second-image"
+                          />
+                        </div>
+                      )}
+                      {index === 3 &&
+                        generateSpotlightContent(
+                          item.content.template,
+                          item.content[item.content.template]
+                        )}
+                    </div>
+                  </TabPanel>
+                ))}
+              </div>
+            </TabsWidgetContainer>
+          </PageContent>
+          <PageContent>
+            <WidgetsContainer>
+              <Widgets pageData={pageData} />
+            </WidgetsContainer>
+          </PageContent>
         </Container>
       </ThemeProvider>
     </StyledEngineProvider>

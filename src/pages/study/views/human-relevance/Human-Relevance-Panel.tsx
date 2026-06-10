@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   display: flex;
   padding: 24px 83px 50px;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px;
 `;
 
 const TitleContainer = styled.div`
@@ -61,7 +61,7 @@ const TitleContainer = styled.div`
   h2 {
     font-family: 'Open Sans';
     font-weight: 700;
-    font-size: calc((var(--font-size) / 16) * 1rem);
+    font-size: 19px;
     line-height: 1.5;
     letter-spacing: calc((0.29 / 16) * 1em);
     text-transform: uppercase;
@@ -88,7 +88,7 @@ const ContentContainer = styled.div`
 
   .key-value-wrapper {
     display: flex;
-    gap: 120px;
+    gap: 0px;
     align-items: baseline;
   }
 
@@ -152,7 +152,7 @@ const ContentContainer = styled.div`
     justify-content: center;
     align-items: center;
     background: #000000;
-    padding: 24px;
+    padding: 0 24px;
     max-height: 450px;
   }
 
