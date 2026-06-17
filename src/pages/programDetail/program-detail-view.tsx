@@ -22,6 +22,7 @@ import {
 import PhotoView from './components/photo-view';
 import VideoView from './components/video-view';
 import { ProgramQuery } from '../../generated-types/graphql';
+import PageContent from '../../components/Layout/PageContent';
 
 interface ProgramDetailViewProps {
   data: ProgramQuery;
@@ -86,70 +87,74 @@ const ProgramDetailView: React.FC<ProgramDetailViewProps> = ({
     <>
       <Stats data={stat} />
       <ProgramDetailContainer>
-        <CustomBreadcrumb data={breadCrumbJson} />
-        <ProgramDetailHeader>
-          <IconTitleWrapper>
-            <ClipboardIcon src={pageData.headerIcon} alt="Clipboard Icon" />
-            <ProgramDetailTitle>
-              <div>Programs:</div>
-              <ProgramDetailSubTitle>
-                {}
-                {`${programDetail.program_name} (${programDetail.program_acronym})`}
-              </ProgramDetailSubTitle>
-            </ProgramDetailTitle>
-          </IconTitleWrapper>
+        <PageContent noPadding>
+          <CustomBreadcrumb data={breadCrumbJson} />
+          <ProgramDetailHeader>
+            <IconTitleWrapper>
+              <ClipboardIcon src={pageData.headerIcon} alt="Clipboard Icon" />
+              <ProgramDetailTitle>
+                <div>Programs:</div>
+                <ProgramDetailSubTitle>
+                  {}
+                  {`${programDetail.program_name} (${programDetail.program_acronym})`}
+                </ProgramDetailSubTitle>
+              </ProgramDetailTitle>
+            </IconTitleWrapper>
 
-          {}
-          {programDetail.program_external_url && (
-            <ProgramDetailHeaderExternalLinkWrapper>
-              <a
-                style={{ textDecoration: 'none' }}
-                href={programDetail.program_external_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ProgramDetailHeaderExternalLinkButton
-                  variant="contained"
-                  endIcon={
-                    <img
-                      src={pageData.externalLinkIcon}
-                      alt="external link icon"
-                    />
-                  }
+            {}
+            {programDetail.program_external_url && (
+              <ProgramDetailHeaderExternalLinkWrapper>
+                <a
+                  style={{ textDecoration: 'none' }}
+                  href={programDetail.program_external_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Go to Site
-                </ProgramDetailHeaderExternalLinkButton>
-              </a>
-            </ProgramDetailHeaderExternalLinkWrapper>
-          )}
-        </ProgramDetailHeader>
-        <ProgramDetailContent>
-          {programVideo ? (
-            <VideoView
-              programDetail={programDetail}
-              programVideo={programVideo}
-            />
-          ) : (
-            <PhotoView
-              programDetail={programDetail}
-              programImage={programImage}
-            />
-          )}
-        </ProgramDetailContent>
+                  <ProgramDetailHeaderExternalLinkButton
+                    variant="contained"
+                    endIcon={
+                      <img
+                        src={pageData.externalLinkIcon}
+                        alt="external link icon"
+                      />
+                    }
+                  >
+                    Go to Site
+                  </ProgramDetailHeaderExternalLinkButton>
+                </a>
+              </ProgramDetailHeaderExternalLinkWrapper>
+            )}
+          </ProgramDetailHeader>
+          <ProgramDetailContent>
+            {programVideo ? (
+              <VideoView
+                programDetail={programDetail}
+                programVideo={programVideo}
+              />
+            ) : (
+              <PhotoView
+                programDetail={programDetail}
+                programImage={programImage}
+              />
+            )}
+          </ProgramDetailContent>
+        </PageContent>
       </ProgramDetailContainer>
       <TableContainer>
-        <TableContainerTitle>STUDIES IN THIS PROGRAM</TableContainerTitle>
-        <div>
-          <TableContextProvider>
-            <StudiesTable
-              data={data.studiesByProgramId}
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              interOpData={interOpData}
-              table={table}
-              tableLayOut={tableLayOut}
-            />
-          </TableContextProvider>
-        </div>
+        <PageContent noPadding>
+          <TableContainerTitle>STUDIES IN THIS PROGRAM</TableContainerTitle>
+          <div>
+            <TableContextProvider>
+              <StudiesTable
+                data={data.studiesByProgramId}
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                interOpData={interOpData}
+                table={table}
+                tableLayOut={tableLayOut}
+              />
+            </TableContextProvider>
+          </div>
+        </PageContent>
       </TableContainer>
     </>
   );

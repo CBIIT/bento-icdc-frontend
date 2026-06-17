@@ -12,6 +12,17 @@ import styled from '@emotion/styled';
 
 const NavContainer = styled('div')({
   position: 'relative',
+  width: '100%',
+  maxWidth: '100%',
+  minWidth: 0,
+  boxSizing: 'border-box',
+  '& *': {
+    boxSizing: 'border-box',
+  },
+  '& ul': {
+    maxWidth: '100%',
+    minWidth: 0,
+  },
 });
 
 const BentoNavBar = ({ cartFieldIds = [] }) => (

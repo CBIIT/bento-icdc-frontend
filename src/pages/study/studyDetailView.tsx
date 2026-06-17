@@ -10,6 +10,7 @@ import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import Tab from '../../components/Tab/Tab';
 import TabPanel from '../../components/Tab/TabPanel';
 import { SkeletonLoader } from '../../components/Skeleton';
+import PageContent from '../../components/Layout/PageContent';
 
 import Overview from './views/overview/Overview';
 import Publication from './views/Publication';
@@ -308,7 +309,7 @@ const processData = (
 /* Shared style constants             */
 /* ---------------------------------- */
 
-const PANEL_MIN_WIDTH = '1404px';
+const PANEL_MIN_WIDTH = 0;
 const PANEL_BOTTOM_OFFSET = '16px';
 
 /* ---------------------------------- */
@@ -677,238 +678,242 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     <StudyThemeProvider>
       <StatsView data={stat} />
       <Container>
-        <Breadcrumb>
-          <CustomBreadcrumb data={breadCrumbJson} />
-        </Breadcrumb>
+        <PageContent noPadding>
+          <Breadcrumb>
+            <CustomBreadcrumb data={breadCrumbJson} />
+          </Breadcrumb>
 
-        <Header>
-          <div className="header-content">
-            <Logo>
-              <HeaderIcon disposition={study_disposition} />
-            </Logo>
+          <Header>
+            <div className="header-content">
+              <Logo>
+                <HeaderIcon disposition={study_disposition} />
+              </Logo>
 
-            <div className="title-and-button">
-              <HeaderTitle>
-                <HeaderMainTitle>
-                  <div className="title-wrapper">
-                    <HeaderPropertyName>{`Study: `}</HeaderPropertyName>
-                    <div className="clinical-study-designation">{` ${studyCode}`}</div>
-                  </div>
+              <div className="title-and-button">
+                <HeaderTitle>
+                  <HeaderMainTitle>
+                    <div className="title-wrapper">
+                      <HeaderPropertyName>{`Study: `}</HeaderPropertyName>
+                      <div className="clinical-study-designation">{` ${studyCode}`}</div>
+                    </div>
 
-                  {accessionId !== null &&
-                    accessionId !== undefined &&
-                    accessionId !== '' && (
-                      <HeaderAccessionItem>
-                        <AccessionLabel>{'Accession ID: '}</AccessionLabel>
-                        <AccessionValue>{accessionId}</AccessionValue>
-                      </HeaderAccessionItem>
-                    )}
-                </HeaderMainTitle>
+                    {accessionId !== null &&
+                      accessionId !== undefined &&
+                      accessionId !== '' && (
+                        <HeaderAccessionItem>
+                          <AccessionLabel>{'Accession ID: '}</AccessionLabel>
+                          <AccessionValue>{accessionId}</AccessionValue>
+                        </HeaderAccessionItem>
+                      )}
+                  </HeaderMainTitle>
 
-                <NameWrapper isLong={String(clinical_study_name).length > 85}>
-                  <span> {clinical_study_name}</span>
-                </NameWrapper>
-              </HeaderTitle>
+                  <NameWrapper isLong={String(clinical_study_name).length > 85}>
+                    <span> {clinical_study_name}</span>
+                  </NameWrapper>
+                </HeaderTitle>
 
-              {renderDispositionLabel(study_disposition) || (
-                <HeaderButton>
-                  <HeaderButtonLinkSpan>
-                    <HeaderButtonLink
-                      to={location => ({ ...location, pathname: '/explore' })}
-                      onClick={() => {
-                        void actions.changeCurrentTab(0);
-                        navigatedToDashboard(filterStudy);
-                      }}
-                    >
-                      <HeaderButtonLinkNumber>{`${data.caseCountOfStudy} `}</HeaderButtonLinkNumber>
-                      <HeaderButtonLinkText>
-                        Associated Cases
-                      </HeaderButtonLinkText>
-                    </HeaderButtonLink>
-                  </HeaderButtonLinkSpan>
-                </HeaderButton>
-              )}
+                {renderDispositionLabel(study_disposition) || (
+                  <HeaderButton>
+                    <HeaderButtonLinkSpan>
+                      <HeaderButtonLink
+                        to={location => ({ ...location, pathname: '/explore' })}
+                        onClick={() => {
+                          void actions.changeCurrentTab(0);
+                          navigatedToDashboard(filterStudy);
+                        }}
+                      >
+                        <HeaderButtonLinkNumber>{`${data.caseCountOfStudy} `}</HeaderButtonLinkNumber>
+                        <HeaderButtonLinkText>
+                          Associated Cases
+                        </HeaderButtonLinkText>
+                      </HeaderButtonLink>
+                    </HeaderButtonLinkSpan>
+                  </HeaderButton>
+                )}
+              </div>
             </div>
-          </div>
-        </Header>
+          </Header>
 
-        <DetailContainer>
-          <Grid container>
-            <Grid item xs={12}>
-              <Tab
-                tabPadding="12px 0"
-                styleClasses={tabStyleClasses}
-                tabItems={processedTabs}
-                currentTab={currentTab}
-                handleTabChange={(_e, v: number) => setCurrentTab(v)}
-              />
+          <DetailContainer>
+            <Grid container>
+              <Grid item xs={12}>
+                <Tab
+                  tabPadding="12px 0"
+                  styleClasses={tabStyleClasses}
+                  tabItems={processedTabs}
+                  currentTab={currentTab}
+                  handleTabChange={(_e, v: number) => setCurrentTab(v)}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </DetailContainer>
+          </DetailContainer>
+        </PageContent>
       </Container>
 
-      {processedTabs.map((processedTab, index) => {
-        switch (processedTab.label as TabLabel) {
-          case TAB_LABELS.OVERVIEW:
-            return (
-              <TabPanel
-                key={`tab-${processedTab.label}`}
-                style={{
-                  minWidth: PANEL_MIN_WIDTH,
-                  height: '100%',
-                  position: 'relative',
-                  bottom: PANEL_BOTTOM_OFFSET,
-                }}
-                innerDivStyle={{ flex: '1', display: 'flex' }}
-                value={currentTab}
-                index={index}
-              >
-                <Overview
-                  studyData={studyData}
-                  diagnoses={diagnoses}
-                  caseFileTypes={caseFileTypes}
-                  data={data}
-                  nodeCount={clinicalDataNodeCount}
-                  supportingDataCount={supportingDataCount}
-                  setCurrentTab={setCurrentTab}
-                  supportingDataTabIndex={supportingDataTabIndex}
-                  clinicalDataTabIndex={clinicalDataTabIndex}
-                  humanRelevanceCardData={humanRelevanceCardData}
-                />
-              </TabPanel>
-            );
-
-          case TAB_LABELS.ARMS_COHORTS:
-            return (
-              <TabPanel
-                key={`tab-${processedTab.label}`}
-                style={{
-                  minWidth: PANEL_MIN_WIDTH,
-                  marginBottom: '50px',
-                  position: 'relative',
-                  bottom: PANEL_BOTTOM_OFFSET,
-                }}
-                innerDivStyle={{ flex: '1' }}
-                value={currentTab}
-                index={index}
-              >
-                <ArmsAndCohort studyData={studyData} />
-              </TabPanel>
-            );
-
-          case TAB_LABELS.STUDY_FILES:
-            return (
-              <TabPanel
-                key={`tab-${processedTab.label}`}
-                style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
-                innerDivStyle={{ flex: '1' }}
-                value={currentTab}
-                index={index}
-              >
-                <StudyFiles data={data} studyData={studyData} />
-              </TabPanel>
-            );
-
-          case TAB_LABELS.PUBLICATIONS:
-            return (
-              <TabPanel
-                key={`tab-${processedTab.label}`}
-                style={{
-                  minWidth: PANEL_MIN_WIDTH,
-                  height: '100%',
-                  position: 'relative',
-                  bottom: PANEL_BOTTOM_OFFSET,
-                }}
-                innerDivStyle={{ flex: '1', display: 'flex' }}
-                value={currentTab}
-                index={index}
-              >
-                <Publication
-                  publications={publications}
-                  display={tab.publication}
-                />
-              </TabPanel>
-            );
-
-          case TAB_LABELS.CLINICAL_DATA:
-            return (
-              <TabPanel
-                key={`tab-${processedTab.label}`}
-                style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
-                innerDivStyle={{ flex: '1' }}
-                value={currentTab}
-                index={index}
-              >
-                {hasClinicalData && currentTab === index && (
-                  <ClinicalData
-                    dataCount={{
-                      caseCount: clinicalDataNodeCaseCounts,
-                      nodeCount: clinicalDataNodeCounts,
-                    }}
-                    studyCode={studyCode}
+      <PageContent noPadding>
+        {processedTabs.map((processedTab, index) => {
+          switch (processedTab.label as TabLabel) {
+            case TAB_LABELS.OVERVIEW:
+              return (
+                <TabPanel
+                  key={`tab-${processedTab.label}`}
+                  style={{
+                    minWidth: PANEL_MIN_WIDTH,
+                    height: '100%',
+                    position: 'relative',
+                    bottom: PANEL_BOTTOM_OFFSET,
+                  }}
+                  innerDivStyle={{ flex: '1', display: 'flex' }}
+                  value={currentTab}
+                  index={index}
+                >
+                  <Overview
+                    studyData={studyData}
+                    diagnoses={diagnoses}
+                    caseFileTypes={caseFileTypes}
+                    data={data}
+                    nodeCount={clinicalDataNodeCount}
+                    supportingDataCount={supportingDataCount}
+                    setCurrentTab={setCurrentTab}
+                    supportingDataTabIndex={supportingDataTabIndex}
+                    clinicalDataTabIndex={clinicalDataTabIndex}
+                    humanRelevanceCardData={humanRelevanceCardData}
                   />
-                )}
-              </TabPanel>
-            );
+                </TabPanel>
+              );
 
-          case TAB_LABELS.SUPPORTING_DATA:
-            return (
-              <TabPanel
-                key={`tab-${processedTab.label}`}
-                style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
-                innerDivStyle={{ flex: 1 }}
-                value={currentTab}
-                index={index}
-              >
-                {currentStudy && <SupportingData data={currentStudy} />}
-              </TabPanel>
-            );
+            case TAB_LABELS.ARMS_COHORTS:
+              return (
+                <TabPanel
+                  key={`tab-${processedTab.label}`}
+                  style={{
+                    minWidth: PANEL_MIN_WIDTH,
+                    marginBottom: '50px',
+                    position: 'relative',
+                    bottom: PANEL_BOTTOM_OFFSET,
+                  }}
+                  innerDivStyle={{ flex: '1' }}
+                  value={currentTab}
+                  index={index}
+                >
+                  <ArmsAndCohort studyData={studyData} />
+                </TabPanel>
+              );
 
-          case TAB_LABELS.HUMAN_RELEVANCE:
-            return (
-              <TabPanel
-                key={`tab-${processedTab.label}`}
-                style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
-                innerDivStyle={{ flex: 1 }}
-                value={currentTab}
-                index={index}
-              >
-                {humanRelevanceCardData && (
-                  <HumanRelevancePanel
-                    idPrefix={human_relevance_record_id ?? undefined}
-                    title={humanRelevanceTabTitle}
-                    overview={human_relevance_statement ?? undefined}
-                    nciLink={{
-                      href: nci_link_to_relevant_human_cancer ?? '',
-                      label: nci_link_to_relevant_human_cancer ?? undefined,
-                    }}
-                    figure={{
-                      src: humanRelevanceTabFigure?.src ?? '',
-                      alt: humanRelevanceTabFigure?.alt,
-                      caption: humanRelevanceTabFigure?.caption,
-                    }}
-                    genes={relevant_human_genes?.filter(
-                      (g): g is string => g != null
-                    )}
-                    pathways={relevant_human_pathways?.filter(
-                      (p): p is string => p != null
-                    )}
-                    therapies={relevant_experimental_therapeutic_intervention?.filter(
-                      (t): t is string => t != null
-                    )}
-                    isMultipleCancerTypes={isMultipleCancers}
-                    cancerTypes={cancerTypesFromData}
-                    cancerTypeToImageKey={getImageKeyForCancerType}
-                    cancerTypeImages={cancerTypeImages}
+            case TAB_LABELS.STUDY_FILES:
+              return (
+                <TabPanel
+                  key={`tab-${processedTab.label}`}
+                  style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
+                  innerDivStyle={{ flex: '1' }}
+                  value={currentTab}
+                  index={index}
+                >
+                  <StudyFiles data={data} studyData={studyData} />
+                </TabPanel>
+              );
+
+            case TAB_LABELS.PUBLICATIONS:
+              return (
+                <TabPanel
+                  key={`tab-${processedTab.label}`}
+                  style={{
+                    minWidth: PANEL_MIN_WIDTH,
+                    height: '100%',
+                    position: 'relative',
+                    bottom: PANEL_BOTTOM_OFFSET,
+                  }}
+                  innerDivStyle={{ flex: '1', display: 'flex' }}
+                  value={currentTab}
+                  index={index}
+                >
+                  <Publication
+                    publications={publications}
+                    display={tab.publication}
                   />
-                )}
-              </TabPanel>
-            );
+                </TabPanel>
+              );
 
-          default:
-            return null;
-        }
-      })}
+            case TAB_LABELS.CLINICAL_DATA:
+              return (
+                <TabPanel
+                  key={`tab-${processedTab.label}`}
+                  style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
+                  innerDivStyle={{ flex: '1' }}
+                  value={currentTab}
+                  index={index}
+                >
+                  {hasClinicalData && currentTab === index && (
+                    <ClinicalData
+                      dataCount={{
+                        caseCount: clinicalDataNodeCaseCounts,
+                        nodeCount: clinicalDataNodeCounts,
+                      }}
+                      studyCode={studyCode}
+                    />
+                  )}
+                </TabPanel>
+              );
+
+            case TAB_LABELS.SUPPORTING_DATA:
+              return (
+                <TabPanel
+                  key={`tab-${processedTab.label}`}
+                  style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
+                  innerDivStyle={{ flex: 1 }}
+                  value={currentTab}
+                  index={index}
+                >
+                  {currentStudy && <SupportingData data={currentStudy} />}
+                </TabPanel>
+              );
+
+            case TAB_LABELS.HUMAN_RELEVANCE:
+              return (
+                <TabPanel
+                  key={`tab-${processedTab.label}`}
+                  style={{ minWidth: PANEL_MIN_WIDTH, marginBottom: '50px' }}
+                  innerDivStyle={{ flex: 1 }}
+                  value={currentTab}
+                  index={index}
+                >
+                  {humanRelevanceCardData && (
+                    <HumanRelevancePanel
+                      idPrefix={human_relevance_record_id ?? undefined}
+                      title={humanRelevanceTabTitle}
+                      overview={human_relevance_statement ?? undefined}
+                      nciLink={{
+                        href: nci_link_to_relevant_human_cancer ?? '',
+                        label: nci_link_to_relevant_human_cancer ?? undefined,
+                      }}
+                      figure={{
+                        src: humanRelevanceTabFigure?.src ?? '',
+                        alt: humanRelevanceTabFigure?.alt,
+                        caption: humanRelevanceTabFigure?.caption,
+                      }}
+                      genes={relevant_human_genes?.filter(
+                        (g): g is string => g != null
+                      )}
+                      pathways={relevant_human_pathways?.filter(
+                        (p): p is string => p != null
+                      )}
+                      therapies={relevant_experimental_therapeutic_intervention?.filter(
+                        (t): t is string => t != null
+                      )}
+                      isMultipleCancerTypes={isMultipleCancers}
+                      cancerTypes={cancerTypesFromData}
+                      cancerTypeToImageKey={getImageKeyForCancerType}
+                      cancerTypeImages={cancerTypeImages}
+                    />
+                  )}
+                </TabPanel>
+              );
+
+            default:
+              return null;
+          }
+        })}
+      </PageContent>
     </StudyThemeProvider>
   );
 };
