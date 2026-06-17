@@ -74,7 +74,7 @@ const DataAvailabilityCellView = props => {
       default: {
         return (
           studyData.length &&
-          generateCRDCLinks(crdcLinks, studyData[0].clinical_study_designation)
+          generateCRDCLinks(crdcLinks, studyDesignation)
         );
       }
     }

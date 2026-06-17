@@ -62,5 +62,11 @@ export const newsViewVideoData = [
   },
 ];
 
+export const newsViewTweetIds = [
+  '1878806460668285313',
+  '1837431704799105198',
+  '1593639418149093376',
+];
+
 // --------------- GraphQL query - Retrieve Landing page data --------------
 export const GET_LANDING_PAGE_DATA_QUERY = false;
