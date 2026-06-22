@@ -12,12 +12,14 @@ export const ContentWrapper = styled.div`
   height: 100%;
   display: flex;
   flex: 1;
+  min-width: 0;
   flex-direction: column;
 
   .switchWrapper {
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-width: 0;
     margin-top: 48px;
   }
 `;

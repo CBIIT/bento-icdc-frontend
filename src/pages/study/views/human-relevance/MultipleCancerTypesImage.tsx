@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import styled from '@emotion/styled';
 import { CircularProgress } from '@mui/material';
 import humanSkeletonImage from './assets/human-skeleton.jpg';
@@ -78,8 +78,8 @@ const Hotspot = styled.div<{ isActive: boolean; top: string; left: string }>`
   left: ${props => props.left};
   transform: translate(-50%, -50%);
   transition: all 0.2s ease-in-out;
-  pointer-events: all;
-  cursor: pointer;
+  pointer-events: none;
+  cursor: default;
 
   &:hover {
     background-color: #ffffff;
@@ -87,6 +87,75 @@ const Hotspot = styled.div<{ isActive: boolean; top: string; left: string }>`
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
     transform: translate(-50%, -50%) scale(1.3);
   }
+`;
+
+const BodyGlow = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.95;
+  background:
+    radial-gradient(
+      ellipse 16% 10% at 50% 7%,
+      hsla(18, 86%, 60%, 0.34),
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 18% 28% at 35% 25%,
+      hsla(18, 86%, 60%, 0.36),
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 18% 28% at 65% 25%,
+      hsla(18, 86%, 60%, 0.36),
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 16% 34% at 28% 43%,
+      hsla(18, 86%, 60%, 0.34),
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 16% 34% at 72% 43%,
+      hsla(18, 86%, 60%, 0.34),
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 16% 20% at 24% 55%,
+      hsla(18, 86%, 60%, 0.3),
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 16% 20% at 76% 55%,
+      hsla(18, 86%, 60%, 0.3),
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 18% 34% at 39% 76%,
+      hsla(18, 86%, 60%, 0.3),
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 18% 34% at 61% 76%,
+      hsla(18, 86%, 60%, 0.3),
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 28% 46% at 50% 42%,
+      hsla(18, 86%, 60%, 0.14),
+      transparent 74%
+    );
+  filter: blur(18px);
+`;
+
+const BodyGlowLineAnchor = styled.div<{ top: string; left: string }>`
+  position: absolute;
+  top: ${props => props.top};
+  left: ${props => props.left};
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
 `;
 
 const DetailPanel = styled.div<{ show: boolean }>`
@@ -141,7 +210,7 @@ const DetailPanelHeader = styled.div`
 `;
 
 const DetailPanelContent = styled.div`
-  padding: 24px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -150,6 +219,7 @@ const DetailPanelContent = styled.div`
   border: 2px solid hsla(18, 86%, 60%, 1);
   border-radius: 0 16px 16px 16px;
   width: 100%;
+  overflow: hidden;
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.6),
     0 0 20px rgba(255, 107, 53, 0.3);
@@ -157,7 +227,7 @@ const DetailPanelContent = styled.div`
 
 const DetailImage = styled.img<{ isLoaded: boolean }>`
   width: 100%;
-  max-width: 400px;
+  max-width: none;
   height: auto;
   object-fit: contain;
   display: ${props => (props.isLoaded ? 'block' : 'none')};
@@ -169,15 +239,6 @@ const SpinnerContainer = styled.div`
   justify-content: center;
   width: 100%;
   height: 200px;
-`;
-
-const EmptyState = styled.div`
-  color: rgba(255, 255, 255, 0.5);
-  font-family: 'Open Sans', sans-serif;
-  font-size: calc((14 / 16) * 1rem);
-  font-style: italic;
-  text-align: center;
-  padding: 40px 20px;
 `;
 
 const CancerTypesList = styled.div`
@@ -222,6 +283,23 @@ interface CancerTypeDisplay {
   name: string;
   position: { top: string; left: string };
 }
+
+type ConnectorLine = { x1: number; y1: number; x2: number; y2: number };
+
+type LineCoordinates = {
+  listToPanel: ConnectorLine | null;
+  panelToHotspot: ConnectorLine | null;
+};
+
+const emptyLineCoordinates: LineCoordinates = {
+  listToPanel: null,
+  panelToHotspot: null,
+};
+
+const BODY_GLOW_LINE_ANCHOR = {
+  top: '48%',
+  left: '79%',
+};
 
 // Placeholder image - will be replaced with actual X-ray images
 const placeholderImage =
@@ -284,35 +362,34 @@ export const MultipleCancerTypesImage: React.FC<
 }) => {
   const [activeCancerType, setActiveCancerType] = useState<string | null>(null);
   const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({});
-  const [lineCoordinates, setLineCoordinates] = useState<{
-    listToPanel: { x1: number; y1: number; x2: number; y2: number } | null;
-    panelToHotspot: { x1: number; y1: number; x2: number; y2: number } | null;
-  }>({ listToPanel: null, panelToHotspot: null });
+  const [lineCoordinates, setLineCoordinates] =
+    useState<LineCoordinates>(emptyLineCoordinates);
 
   const contentWrapperRef = useRef<HTMLDivElement>(null);
   const detailPanelRef = useRef<HTMLDivElement>(null);
   const detailCardRef = useRef<HTMLDivElement>(null);
   const listItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const hotspotRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const bodyGlowLineAnchorRef = useRef<HTMLDivElement>(null);
 
   // Map cancer type names to image keys and filter out unmapped types
-  const relevantCancerTypes: CancerTypeDisplay[] = cancerTypes
-    .map(cancerName => {
-      const imageKey = cancerTypeToImageKey?.(cancerName);
-      if (!imageKey || !(imageKey in CANCER_TYPE_DISPLAY_INFO)) {
-        return null;
-      }
-      return {
-        key: cancerName,
-        imageKey,
-        name: cancerName,
-        position: CANCER_TYPE_DISPLAY_INFO[imageKey].position,
-      };
-    })
-    .filter((item): item is CancerTypeDisplay => item !== null);
-
-  const uniqueImageKeys = Array.from(
-    new Set(relevantCancerTypes.map(ct => ct.imageKey))
+  const relevantCancerTypes: CancerTypeDisplay[] = useMemo(
+    () =>
+      cancerTypes
+        .map(cancerName => {
+          const imageKey = cancerTypeToImageKey?.(cancerName);
+          if (!imageKey || !(imageKey in CANCER_TYPE_DISPLAY_INFO)) {
+            return null;
+          }
+          return {
+            key: cancerName,
+            imageKey,
+            name: cancerName,
+            position: CANCER_TYPE_DISPLAY_INFO[imageKey].position,
+          };
+        })
+        .filter((item): item is CancerTypeDisplay => item !== null),
+    [cancerTypeToImageKey, cancerTypes]
   );
 
   const getCancerImage = (imageKey: string) => {
@@ -331,6 +408,11 @@ export const MultipleCancerTypesImage: React.FC<
   const activeCancer = relevantCancerTypes.find(
     type => type.key === activeCancerType
   );
+  const usesBodyGlow = activeCancer?.imageKey === 'soft_tissue_sarcoma';
+  const activeHotspotPosition =
+    activeCancer && !usesBodyGlow
+      ? CANCER_TYPE_DISPLAY_INFO[activeCancer.imageKey].position
+      : null;
 
   useEffect(() => {
     if (
@@ -338,7 +420,9 @@ export const MultipleCancerTypesImage: React.FC<
       !contentWrapperRef.current ||
       !detailCardRef.current
     ) {
-      setLineCoordinates({ listToPanel: null, panelToHotspot: null });
+      setLineCoordinates(prev =>
+        prev.listToPanel || prev.panelToHotspot ? emptyLineCoordinates : prev
+      );
       return;
     }
 
@@ -350,14 +434,21 @@ export const MultipleCancerTypesImage: React.FC<
       ct => ct.key === activeCancerType
     );
     const imageKey = activeCancerData?.imageKey;
-    const hotspot = imageKey ? hotspotRefs.current[imageKey] : null;
+    const lineTarget = usesBodyGlow
+      ? bodyGlowLineAnchorRef.current
+      : imageKey
+        ? hotspotRefs.current[imageKey]
+        : null;
 
-    if (!listItem || !hotspot) {
+    if (!listItem || !lineTarget) {
+      setLineCoordinates(prev =>
+        prev.listToPanel || prev.panelToHotspot ? emptyLineCoordinates : prev
+      );
       return;
     }
 
     const listItemRect = listItem.getBoundingClientRect();
-    const hotspotRect = hotspot.getBoundingClientRect();
+    const lineTargetRect = lineTarget.getBoundingClientRect();
 
     // Calculate line from list item to detail card (left edge of list item to right edge of visual card)
     const listToPanel = {
@@ -367,16 +458,16 @@ export const MultipleCancerTypesImage: React.FC<
       y2: cardRect.top + cardRect.height / 2 - wrapperRect.top, // Middle of visual card
     };
 
-    // Calculate line from detail card to hotspot (left edge of visual card to center of hotspot)
+    // Calculate line from detail card to the hotspot, or to the soft-glow edge.
     const panelToHotspot = {
       x1: cardRect.left - wrapperRect.left,
       y1: cardRect.top + cardRect.height / 2 - wrapperRect.top, // Middle of visual card
-      x2: hotspotRect.left + hotspotRect.width / 2 - wrapperRect.left, // Center of hotspot
-      y2: hotspotRect.top + hotspotRect.height / 2 - wrapperRect.top, // Center of hotspot
+      x2: lineTargetRect.left + lineTargetRect.width / 2 - wrapperRect.left,
+      y2: lineTargetRect.top + lineTargetRect.height / 2 - wrapperRect.top,
     };
 
     setLineCoordinates({ listToPanel, panelToHotspot });
-  }, [activeCancerType, relevantCancerTypes]);
+  }, [activeCancerType, relevantCancerTypes, usesBodyGlow]);
 
   return (
     <FigureContainer className="relevance-figure multiple-cancer-types">
@@ -413,33 +504,34 @@ export const MultipleCancerTypesImage: React.FC<
               alt={alt || 'Human body diagram showing various cancer sites'}
               className="relevance-image"
             />
+            {usesBodyGlow && (
+              <>
+                <BodyGlow
+                  aria-hidden="true"
+                  data-testid="human-relevance-body-glow"
+                />
+                <BodyGlowLineAnchor
+                  ref={bodyGlowLineAnchorRef}
+                  aria-hidden="true"
+                  data-testid="human-relevance-body-glow-line-anchor"
+                  top={BODY_GLOW_LINE_ANCHOR.top}
+                  left={BODY_GLOW_LINE_ANCHOR.left}
+                />
+              </>
+            )}
             <HotspotsOverlay>
-              {uniqueImageKeys.map(imageKey => {
-                const position = CANCER_TYPE_DISPLAY_INFO[imageKey].position;
-                const isActive = relevantCancerTypes.some(
-                  ct => ct.imageKey === imageKey && ct.key === activeCancerType
-                );
-                const firstCancerForKey = relevantCancerTypes.find(
-                  ct => ct.imageKey === imageKey
-                );
-
-                return (
-                  <Hotspot
-                    key={imageKey}
-                    ref={el => {
-                      hotspotRefs.current[imageKey] = el;
-                    }}
-                    isActive={isActive}
-                    top={position.top}
-                    left={position.left}
-                    onMouseEnter={() =>
-                      firstCancerForKey &&
-                      handleCancerTypeInteraction(firstCancerForKey.key)
-                    }
-                    onMouseLeave={handleCancerTypeLeave}
-                  />
-                );
-              })}
+              {activeCancer && activeHotspotPosition && (
+                <Hotspot
+                  key={activeCancer.imageKey}
+                  ref={el => {
+                    hotspotRefs.current[activeCancer.imageKey] = el;
+                  }}
+                  data-testid="human-relevance-hotspot"
+                  isActive
+                  top={activeHotspotPosition.top}
+                  left={activeHotspotPosition.left}
+                />
+              )}
             </HotspotsOverlay>
           </ImageWrapper>
         </ImageContainer>
@@ -474,11 +566,7 @@ export const MultipleCancerTypesImage: React.FC<
                 />
               </DetailPanelContent>
             </DetailCard>
-          ) : (
-            <EmptyState>
-              Hover over a cancer type or hotspot to view details
-            </EmptyState>
-          )}
+          ) : null}
         </DetailPanel>
 
         <CancerTypesList>

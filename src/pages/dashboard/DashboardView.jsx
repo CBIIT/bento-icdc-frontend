@@ -11,6 +11,7 @@ import QueryBarView from './filterQueryBar/QueryBarView';
 import DashboardTabs from './components/DashboardTabs';
 import { updateStat } from '../../components/Stats/utils';
 import * as Styled from './Dashboard.styled';
+import PageContent from '../../components/Layout/PageContent';
 
 const Dashboard = ({
   searchCases,
@@ -23,7 +24,7 @@ const Dashboard = ({
 }) => (
   <Styled.DashboardContainer>
     <StatsView data={searchCases} />
-    <div>
+    <PageContent>
       <Styled.Content>
         <Styled.SideBar>
           <BentoFacetFilter
@@ -49,7 +50,7 @@ const Dashboard = ({
           />
         </Styled.WidgetTableContent>
       </Styled.Content>
-    </div>
+    </PageContent>
   </Styled.DashboardContainer>
 );
 

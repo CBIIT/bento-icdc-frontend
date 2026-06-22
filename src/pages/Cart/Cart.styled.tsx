@@ -28,12 +28,18 @@ export const SelectFilesBtn = styled(FormControlLabel)({
 
 export const Container = styled(Grid)({
   padding: '24px',
+  width: '100%',
+  maxWidth: '100%',
+  minWidth: 0,
+  boxSizing: 'border-box',
 });
 
 export const TableContainer = styled(Grid)({
   padding: '0px 98px',
   margin: '42px 0',
-  minWidth: '1279px',
+  minWidth: 0,
+  width: '100%',
+  boxSizing: 'border-box',
 });
 
 export const BodyWrapper = styled.div({
@@ -45,13 +51,22 @@ export const BodyWrapper = styled.div({
 });
 
 export const ActionsContainer = styled.div({
-  width: '100%',
-  // minWidth: '1279px',
+  width: 'auto',
+  maxWidth: 'calc(100% - 86px)',
+  minWidth: 0,
   textAlign: 'right',
-  paddingRight: '80px',
   justifyContent: 'flex-end',
   display: 'flex',
+  flexWrap: 'wrap',
+  gap: '12px',
+  boxSizing: 'border-box',
   position: 'absolute',
   top: '20px',
   left: '43px',
+  right: '43px',
+  '@media (max-width: 900px)': {
+    left: '24px',
+    right: '24px',
+    maxWidth: 'calc(100% - 48px)',
+  },
 });

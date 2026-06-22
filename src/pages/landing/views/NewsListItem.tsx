@@ -1,172 +1,233 @@
 import React from 'react';
-import {
-  ListItem,
-  ListItemText,
-  Typography,
-  Divider,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  IconButton,
-} from '@mui/material';
-import { Close } from '@mui/icons-material';
 import styled from '@emotion/styled';
+import { OpenInNew } from '@mui/icons-material';
 
 // Styled Components
 const Container = styled.div`
+  min-height: 179px;
+  flex: 1;
+  border-radius: 13px;
+  border: 1.5px solid hsla(212, 86%, 17%, 1);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: white;
 `;
 
-const StyledListItem = styled(ListItem)`
-  padding: 0.5em 1em 0.5em 1em;
-`;
-
-const ListItemContent = styled.div`
+const Header = styled.div`
+  height: 35px;
+  min-height: 35px;
+  background-color: hsla(213, 86%, 17%, 1);
   display: flex;
-  gap: 1em;
   align-items: center;
+  gap: 0.75em;
+  padding: 0 1em;
 `;
 
-const ListItemCount = styled.div`
-  color: #fff;
-  background-color: #1977cc;
-  padding: 1.2em;
-  border-radius: 100%;
-  height: 4em;
-  width: 4em;
+const HeaderImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+`;
+
+const HeaderText = styled.span`
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: 0%;
+  color: white;
+`;
+
+const ContentWrapper = styled.div`
+  overflow-y: auto;
+  flex: 1;
+  background-color: white;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+`;
+
+const TableRow = styled.div<{ isEven?: boolean }>`
+  display: grid;
+  grid-template-columns: 80px 1fr 180px;
+  gap: 1em;
+  padding: 0.5em 1em;
+  background-color: ${props => (props.isEven ? '#f5f5f5' : 'white')};
+  align-items: center;
+  text-align: center;
+
+  & > span:last-child {
+    justify-self: center;
+  }
+`;
+
+const Label = styled.span`
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.05em;
+  color: hsla(209, 27%, 33%, 1);
+  text-transform: uppercase;
   text-align: center;
 `;
 
-const ListItemBody = styled(Typography)`
-  color: #000;
-  font-family: 'Inter';
-  font-size: 1em;
-  font-weight: 300;
+const Value = styled.span`
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 16px;
+  letter-spacing: 0%;
+  color: hsla(258, 65%, 18%, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
 
-const ReadMoreButton = styled(Button)`
-  color: #fff;
-  background-color: #cb8311;
-  width: 8em;
-  align-self: end;
-  margin: 1em;
-  font-size: 0.8em;
+const Date = styled.span`
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0%;
+  color: hsla(258, 65%, 18%, 1);
+  white-space: nowrap;
+  text-align: left;
+`;
+
+const LinkRow = styled.div<{ isEven?: boolean }>`
+  padding: 0.5em 1em;
+  background-color: ${props => (props.isEven ? '#f5f5f5' : 'white')};
+  text-align: center;
+  display: flex;
+  justify-content: center;
+`;
+
+const LinkText = styled.a`
+  font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-family: 'Raleway';
-  border-radius: 3em;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0%;
+  color: hsla(27, 100%, 36%, 1);
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 0%;
+  text-decoration-thickness: auto;
+  display: inline;
+  text-align: left;
 
   &:hover {
-    background-color: #cb8311;
+    text-decoration: underline;
+  }
+
+  svg {
+    font-size: 14px;
+    vertical-align: middle;
+    display: inline;
+    margin-left: 2px;
   }
 `;
 
-const StyledDialogTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 1.3em;
-  height: 4.5em;
-`;
+type NewsItemData = {
+  label: string;
+  value: string;
+  date: string;
+};
 
-const DialogParagraph = styled.p`
-  font-family: 'Inter';
-  font-weight: 300;
-  font-size: 1.21em;
-`;
+type PublicationData = {
+  title: string;
+  url: string;
+};
 
-const StyledDialogContent = styled(DialogContent)`
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-`;
-
-const StyledDialog = styled(Dialog)`
-  & .MuiDialog-paperWidthSm {
-    max-width: 800px;
-  }
-`;
-
-const Title = styled.h3`
-  font-weight: 600;
-  font-family: 'Raleway';
-  font-size: 1.3em;
-`;
-
-const CloseIconButton = styled(IconButton)`
-  color: black;
-  height: fit-content;
-`;
-
-const CloseIcon = styled(Close)`
-  width: 1.4em;
-  height: 1.4em;
-`;
+type NewsItemProps = {
+  title: string;
+  icon: string;
+  items: NewsItemData[] | PublicationData[];
+  type?: 'table' | 'publications';
+  error?: boolean;
+};
 
 const NewsItem = ({
-  paragraph,
-  index,
-  total,
-  label,
-  blurb,
-}: {
-  paragraph: string;
-  index: string;
-  total: string;
-  label: string;
-  blurb: string;
-}) => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  title,
+  icon,
+  items,
+  type = 'table',
+  error = false,
+}: NewsItemProps) => {
+  if (!items || !Array.isArray(items)) {
+    items = [];
+  }
 
   return (
     <Container>
-      <StyledListItem alignItems="flex-start">
-        <ListItemContent>
-          <ListItemCount>{`${index}/${total}`}</ListItemCount>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <ListItemText
-              secondary={
-                <ListItemBody variant="body2" color="text.primary">
-                  {`${blurb}...`}
-                </ListItemBody>
-              }
-            />
-          </div>
-        </ListItemContent>
-      </StyledListItem>
+      <Header>
+        <HeaderImage src={icon} alt={title} />
+        <HeaderText>{title}</HeaderText>
+      </Header>
 
-      <ReadMoreButton onClick={handleClickOpen}>READ MORE</ReadMoreButton>
-
-      <StyledDialog
-        component="span"
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <StyledDialogTitle>
-          <DialogTitle id="customized-dialog-title">
-            <Title>{`Update: ${label}`}</Title>
-          </DialogTitle>
-          <CloseIconButton onClick={handleClose}>
-            <CloseIcon />
-          </CloseIconButton>
-        </StyledDialogTitle>
-
-        <StyledDialogContent dividers>
-          <DialogParagraph>{paragraph}</DialogParagraph>
-        </StyledDialogContent>
-      </StyledDialog>
-
-      <Divider />
+      <ContentWrapper>
+        {error ? (
+          <TableRow isEven={false}>
+            <Value
+              style={{
+                gridColumn: '1 / -1',
+                justifyContent: 'center',
+                color: '#d32f2f',
+              }}
+            >
+              Failed to load data. Please try again later.
+            </Value>
+          </TableRow>
+        ) : items.length === 0 ? (
+          <TableRow isEven={false}>
+            <Value
+              style={{
+                gridColumn: '1 / -1',
+                justifyContent: 'center',
+                color: '#666',
+              }}
+            >
+              Loading...
+            </Value>
+          </TableRow>
+        ) : type === 'table' ? (
+          (items as NewsItemData[]).map((item, index) => (
+            <TableRow key={index} isEven={index % 2 === 1}>
+              <Label>{item.label}</Label>
+              <Value>{item.value}</Value>
+              <Date>{item.date}</Date>
+            </TableRow>
+          ))
+        ) : (
+          (items as PublicationData[]).map((item, index) => (
+            <LinkRow key={index} isEven={index % 2 === 1}>
+              <LinkText
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {item.title}
+                <OpenInNew />
+              </LinkText>
+            </LinkRow>
+          ))
+        )}
+      </ContentWrapper>
     </Container>
   );
 };
