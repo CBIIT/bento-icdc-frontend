@@ -25,7 +25,7 @@ const Input = styled(TextField)(({ theme }) => ({
     borderColor: '#5a657a',
   },
   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    borderColor: theme?.palette?.primary?.main ?? '#1976d2',
+    borderColor: theme.palette.primary.main,
     borderWidth: 1,
   },
 }));
@@ -41,41 +41,39 @@ const SearchButton = styled(Button)`
   min-width: 112px;
 `;
 
-function SearchBar({
-  loading = false,
-  placeholder = '',
-  onClick,
-  onEnter,
-  defaultValue = '',
-  disabled = false,
-  buttonText = 'Search',
-  className,
-  ariaLabel = 'Search',
-}) {
+function SearchBar({ ...params }) {
+  const {
+    loading = false,
+    placeholder,
+    onClick,
+    onEnter,
+    defaultValue = '',
+    disabled = false,
+    buttonText = 'Search',
+    className,
+    ariaLabel = 'Search',
+  } = params;
+
   const [value, setValue] = useState(defaultValue);
 
-  const isDisabled = disabled || loading;
-
   const go = useCallback(() => {
-    if (!isDisabled && onClick) onClick(value);
-  }, [isDisabled, onClick, value]);
+    if (!loading && onClick) onClick(value);
+  }, [loading, onClick, value]);
 
-  const handleKeyDown = e => {
-    if (e.key === 'Enter' && !isDisabled && onEnter) {
-      e.preventDefault();
-      onEnter(value);
-    }
+  const onKeyDown = e => {
+    if (e.key === 'Enter' && !loading && onEnter) onEnter(value);
   };
 
   return (
     <Root className={className}>
       <Input
-        placeholder={placeholder}
+        {...params}
+        placeholder={placeholder ?? ''}
         value={value}
         onChange={e => setValue(e.target.value)}
-        onKeyDown={handleKeyDown}
-        inputProps={{ 'aria-label': ariaLabel }}
-        disabled={isDisabled}
+        onKeyDown={onKeyDown}
+        aria-label={ariaLabel}
+        disabled={disabled || loading}
         size="small"
         variant="outlined"
       />
@@ -90,7 +88,7 @@ function SearchBar({
           textTransform: 'none',
         }}
         onClick={go}
-        disabled={isDisabled}
+        disabled={disabled || loading}
       >
         {loading ? <CircularProgress color="inherit" size={20} /> : buttonText}
       </SearchButton>

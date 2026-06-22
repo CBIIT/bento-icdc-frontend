@@ -16,45 +16,32 @@ interface StudiesContainerProps {
 const studiesContainer: React.FC<StudiesContainerProps> = ({ invalid }) => {
   const { loading, error, data } =
     apolloUseQuery<GetStudyDataQueryStudiesDataQuery>(
-      GetStudyDataQueryStudiesDataDocument,
-      {
-        errorPolicy: 'all',
-      }
+      GetStudyDataQueryStudiesDataDocument
     );
 
   const repositories = useMemo(() => {
-    return (
-      data?.externalDataOverview
-        ?.flatMap(item => item?.CRDCLinks ?? [])
-        .map(link => link?.repository)
-        .filter((repo): repo is string => Boolean(repo)) ?? []
+    // const links = data?.externalDataOverview?.[0]?.CRDCLinks;
+    const links = data?.externalDataOverview?.flatMap(
+      item => item?.CRDCLinks || []
     );
+    return links?.map(link => link.repository) || [];
   }, [data]);
 
-  const safeData = useMemo(() => {
-    return {
-      ...data,
-      studiesByProgram: data?.studiesByProgram ?? [],
-      externalDataOverview: data?.externalDataOverview ?? [],
-    };
-  }, [data]);
-
-  if (loading && !data) return <SkeletonLoader variant="withRounded" />;
+  if (loading) return <SkeletonLoader variant="withRounded" />;
+  if (error)
+    return (
+      <Typography variant="h2" color="error" size="sm">
+        An error has occurred in loading stats component: {error.message}
+      </Typography>
+    );
 
   return (
-    <>
-      {error && (
-        <Typography variant="h2" color="error" size="sm">
-          Some data could not be loaded.
-        </Typography>
-      )}
-
-      <Studies
-        data={convertCRDCLinksToValue(safeData as GetStudyDataQueryStudiesDataQuery, undefined, repositories)}
-        invalid={invalid}
-        interOpData={safeData}
-      />
-    </>
+    <Studies
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      data={convertCRDCLinksToValue(data, undefined, repositories)}
+      invalid={invalid}
+      interOpData={data || {}}
+    />
   );
 };
 

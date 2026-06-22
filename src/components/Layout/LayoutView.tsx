@@ -28,7 +28,7 @@ import { Global, css } from '@emotion/react';
 import { HeaderContainer, ContentWrapper } from './LayoutView.styled';
 import USABanner from '../USABanner';
 
-const LayoutContent = () => {
+const LayoutView = () => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -40,22 +40,21 @@ const LayoutContent = () => {
     if (!sessionStorage.length) {
       setOpen(true);
     }
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     function adjustForSiteAlert() {
       const bodyChildren = Array.from(document.body.children);
       const bannerHosts = bodyChildren.filter(
-        el => el.id !== 'root' && (el as HTMLElement).shadowRoot
+        el => el.id !== 'root' && el.shadowRoot
       );
 
       let totalHeight = 0;
       let hasBanner = false;
 
       bannerHosts.forEach(host => {
-        const siteAlert = (
-          host as HTMLElement
-        ).shadowRoot?.querySelector<HTMLElement>('.usa-site-alert');
+        const siteAlert: HTMLDivElement | null =
+          host.shadowRoot?.querySelector('.usa-site-alert');
         if (siteAlert) {
           const bannerHeight = siteAlert.offsetHeight;
 
@@ -76,29 +75,30 @@ const LayoutContent = () => {
           `${totalHeight - 4}px`
         );
         if (open) {
-          document.documentElement.style.setProperty('--header-offset', '0px');
+          document.documentElement.style.setProperty('--header-offset', `0px`);
+
           document.documentElement.style.setProperty(
             '--content-offset',
-            '180px'
+            `180px`
           );
         } else {
           document.documentElement.style.setProperty(
             '--header-offset',
-            '179px'
+            `179px`
           );
         }
       } else {
-        document.documentElement.style.setProperty('--content-offset', '179px');
+        document.documentElement.style.setProperty('--content-offset', `179px`);
         document.documentElement.style.setProperty(
           '--site-alert-offset',
           '0px'
         );
         if (open) {
-          document.documentElement.style.setProperty('--header-offset', '0px');
+          document.documentElement.style.setProperty('--header-offset', `0px`);
         } else {
           document.documentElement.style.setProperty(
             '--header-offset',
-            '179px'
+            `179px`
           );
         }
       }
@@ -127,15 +127,12 @@ const LayoutContent = () => {
   }, [open]);
 
   const location = useLocation();
-  const headerRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  if (contentRef.current) {
+  if (contentRef && contentRef.current) {
     contentRef.current.scrollTo(0, 0);
   }
-
-  const currentHash = `#${location.pathname}${location.search}${location.hash}`;
-  const hideNavBar = navBarExclusions.includes(currentHash);
 
   return (
     <>
@@ -188,59 +185,56 @@ const LayoutContent = () => {
           }
         `}
       />
-      {open && <OverlayWindow open={open} handleClose={handleClose} />}
-      <HeaderContainer ref={headerRef}>
-        <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
-        <USABanner />
-        <Header />
-        {!hideNavBar && <NavBar />}
-      </HeaderContainer>
-
-      <ContentWrapper ref={contentRef}>
-        <div className="switchWrapper">
-          <Switch>
-            <Route exact path="/ICDC/" component={Home} />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/news" component={Home} />
-            <Route exact path="/explore" component={Dashboard} />
-            <Route path="/explore/:filterQuery" component={Dashboard} />
-            <Route path="/unifiedView/:id" component={UnifiedDash} />
-            <Route path="/fileCentricCart" component={CartView} />
-            <Route path="/studies" component={Studies} />
-            <Route path="/search/:id" component={GlobalSearchView} />
-            <Route exact path="/search" component={GlobalSearchView} />
-            <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
-            <Route path="/programs" component={Programs} />
-            <Route path="/program/:id" component={ProgramDetail} />
-            <Route path="/icdc-data-model" component={NavigatorView} />
-            <Route path="/graphql" component={GraphQLView} />
-            <Route path="/study/:fileType/:id" component={StudyDetail} />
-            <Route path="/study/:id" component={StudyDetail} />
-            <Route path="/case/:id" component={CaseDetails} />
-            <Route path="/sysinfo" component={SysInfo} />
-            {aboutPageRoutes.map((aboutPageRoute, index) => (
-              <Route
-                key={`about-route-path-${index}`}
-                path={aboutPageRoute}
-                component={About}
-              />
-            ))}
-            <Route component={Error} />
-          </Switch>
-        </div>
-        <div>
-          <Footer />
-        </div>
-      </ContentWrapper>
+      <HashRouter>
+        {open && <OverlayWindow open={open} handleClose={handleClose} />}
+        <HeaderContainer ref={headerRef}>
+          <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
+          <USABanner />
+          <Header />
+          {!navBarExclusions.find(item => item === location.hash) && <NavBar />}
+        </HeaderContainer>
+        {/* Reminder: Ajay need to replace the ICDC with env variable and
+          change build npm to read env variable */}
+        <ContentWrapper ref={contentRef}>
+          <div className="switchWrapper">
+            <Switch>
+              <Route exact path="/ICDC/" component={Home} />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/news" component={Home} />
+              <Route exact path="/explore" component={Dashboard} />
+              <Route path="/explore/:filterQuery" component={Dashboard} />
+              <Route path="/unifiedView/:id" component={UnifiedDash} />
+              <Route path="/fileCentricCart" component={CartView} />
+              <Route path="/studies" component={Studies} />
+              <Route path="/search/:id" component={GlobalSearchView} />
+              <Route exact path="/search" component={GlobalSearchView} />
+              <Route path="/jBrowse/:diplayMode" component={JbrowseView} />
+              <Route path="/programs" component={Programs} />
+              <Route path="/program/:id" component={ProgramDetail} />
+              <Route path="/icdc-data-model" component={NavigatorView} />
+              <Route path="/graphql" component={GraphQLView} />
+              <Route path="/study/:fileType/:id" component={StudyDetail} />
+              <Route path="/study/:id" component={StudyDetail} />
+              <Route path="/case/:id" component={CaseDetails} />
+              <Route path="/sysinfo" component={SysInfo} />
+              {aboutPageRoutes.map((aboutPageRoute, index) => (
+                <Route
+                  key={`about-route-path-${index}`}
+                  path={aboutPageRoute}
+                  component={About}
+                />
+              ))}
+              <Route component={Error} />
+            </Switch>
+          </div>
+          <div>
+            <Footer />
+          </div>
+        </ContentWrapper>
+      </HashRouter>
     </>
   );
 };
-
-const LayoutView = () => (
-  <HashRouter>
-    <LayoutContent />
-  </HashRouter>
-);
 
 export default LayoutView;
