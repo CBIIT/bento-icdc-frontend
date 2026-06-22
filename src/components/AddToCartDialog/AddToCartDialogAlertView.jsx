@@ -1,25 +1,15 @@
-import React, { useEffect } from 'react';
-import { Dialog, DialogContent, DialogContentText } from '@material-ui/core';
-import DialogThemeProvider from './dialogThemeConfig';
+import React from "react";
+import { Dialog, DialogContent, DialogContentText } from "@material-ui/core";
+import DialogThemeProvider from "./dialogThemeConfig";
 
 function AddToCartDialogAlertView(props) {
   const { open, classes, onClose } = props;
   const closeAlertModelTimer = 4000;
 
   const alertMessage =
-    'The cart is limited to 2,000 files. Please narrow the search criteria or remove some files from the cart to add more.';
+    "The cart is limited to 2,000 files. Please narrow the search criteria or remove some files from the cart to add more.";
 
-  useEffect(() => {
-    if (!open) return undefined;
-
-    const timerId = setTimeout(() => {
-      onClose();
-    }, closeAlertModelTimer);
-
-    return () => clearTimeout(timerId);
-  }, [open, onClose]);
-
-  return (
+  const AlertDialog = (
     <DialogThemeProvider>
       <Dialog
         open={open}
@@ -35,6 +25,14 @@ function AddToCartDialogAlertView(props) {
       </Dialog>
     </DialogThemeProvider>
   );
+
+  if (open === true) {
+    //  close the Dialog after 3 seconds.
+    setTimeout(() => {
+      onClose();
+    }, closeAlertModelTimer);
+  }
+  return AlertDialog;
 }
 
 export default AddToCartDialogAlertView;
