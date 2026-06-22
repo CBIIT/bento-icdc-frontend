@@ -152,7 +152,6 @@ const LayoutContent = () => {
           #root {
             height: 100%;
             flex: 1;
-            min-width: 0;
           }
           #root > div:nth-child(1) {
             top: var(--site-alert-offset);
