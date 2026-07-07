@@ -40,6 +40,19 @@ const VideoContainer = styled.div`
   justify-content: center;
 `;
 
+const PreviewFrame = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  background: #111;
+  overflow: hidden;
+
+  iframe,
+  video {
+    display: block;
+  }
+`;
+
 const DialogParagraph = styled.p`
   font-family: 'Inter';
   font-weight: 300;
@@ -109,14 +122,16 @@ const NewsViewVideo = ({
         </StyledDialogContent>
       </StyledDialog>
 
-      <ReactPlayer
-        playing={playing}
-        muted
-        onPlay={handleClickOpen}
-        src={url}
-        height="100%"
-        width="100%"
-      />
+      <PreviewFrame>
+        <ReactPlayer
+          playing={playing}
+          muted
+          onPlay={handleClickOpen}
+          src={url}
+          height="100%"
+          width="100%"
+        />
+      </PreviewFrame>
     </>
   );
 };

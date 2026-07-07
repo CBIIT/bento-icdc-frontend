@@ -4,32 +4,35 @@ import { OpenInNew } from '@mui/icons-material';
 
 // Styled Components
 const Container = styled.div`
-  min-height: 179px;
-  flex: 1;
-  border-radius: 13px;
+  flex: 1 1 0;
+  min-height: 166px;
+  border-radius: 8px;
   border: 1.5px solid hsla(212, 86%, 17%, 1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   background-color: white;
+  box-sizing: border-box;
 `;
 
 const Header = styled.div`
-  height: 35px;
-  min-height: 35px;
+  height: 34px;
+  min-height: 34px;
   background-color: hsla(213, 86%, 17%, 1);
   display: flex;
   align-items: center;
-  gap: 0.75em;
-  padding: 0 1em;
+  gap: 10px;
+  padding: 0 11px;
+  box-sizing: border-box;
 `;
 
 const HeaderImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: 2px solid white;
   object-fit: cover;
+  flex: 0 0 auto;
 `;
 
 const HeaderText = styled.span`
@@ -39,12 +42,16 @@ const HeaderText = styled.span`
   line-height: 15px;
   letter-spacing: 0%;
   color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const ContentWrapper = styled.div`
   overflow-y: auto;
   flex: 1;
   background-color: white;
+  min-height: 0;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -62,15 +69,25 @@ const ContentWrapper = styled.div`
 
 const TableRow = styled.div<{ isEven?: boolean }>`
   display: grid;
-  grid-template-columns: 80px 1fr 180px;
-  gap: 1em;
-  padding: 0.5em 1em;
+  grid-template-columns: 56px minmax(0, 1fr) 108px;
+  gap: 8px;
+  padding: 6px 9px;
   background-color: ${props => (props.isEven ? '#f5f5f5' : 'white')};
   align-items: center;
   text-align: center;
+  box-sizing: border-box;
 
   & > span:last-child {
     justify-self: center;
+  }
+
+  @media (max-width: 420px) {
+    grid-template-columns: 52px minmax(0, 1fr);
+
+    & > span:last-child {
+      grid-column: 2;
+      justify-self: center;
+    }
   }
 `;
 
@@ -88,7 +105,7 @@ const Label = styled.span`
 const Value = styled.span`
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 16px;
   letter-spacing: 0%;
   color: hsla(258, 65%, 18%, 1);
@@ -96,12 +113,14 @@ const Value = styled.span`
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-width: 0;
+  overflow-wrap: anywhere;
 `;
 
 const Date = styled.span`
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 16px;
   letter-spacing: 0%;
   color: hsla(258, 65%, 18%, 1);
@@ -110,7 +129,7 @@ const Date = styled.span`
 `;
 
 const LinkRow = styled.div<{ isEven?: boolean }>`
-  padding: 0.5em 1em;
+  padding: 7px 12px;
   background-color: ${props => (props.isEven ? '#f5f5f5' : 'white')};
   text-align: center;
   display: flex;
@@ -120,7 +139,7 @@ const LinkRow = styled.div<{ isEven?: boolean }>`
 const LinkText = styled.a`
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 16px;
   letter-spacing: 0%;
   color: hsla(27, 100%, 36%, 1);
