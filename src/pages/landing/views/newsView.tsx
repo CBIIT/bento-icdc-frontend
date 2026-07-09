@@ -443,19 +443,19 @@ const NewsView = ({
 
             <NewsListTitleBar>
               <NewsListTitle>
-                <h6
-                  style={{
-                    color: 'white',
-                    fontSize: '1.8em',
-                    fontWeight: '900',
-                    margin: 0,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    fontFamily: 'Raleway',
-                  }}
-                >
-                  Updates
-                </h6>
+                {/* <h6 */}
+                {/*   style={{ */}
+                {/*     color: 'white', */}
+                {/*     fontSize: '1.8em', */}
+                {/*     fontWeight: '900', */}
+                {/*     margin: 0, */}
+                {/*     textTransform: 'uppercase', */}
+                {/*     letterSpacing: '0.05em', */}
+                {/*     fontFamily: 'Raleway', */}
+                {/*   }} */}
+                {/* > */}
+                {/*   Updates */}
+                {/* </h6> */}
               </NewsListTitle>
               <NewsList>
                 {newsContent.map((item: any, index: number) => (
