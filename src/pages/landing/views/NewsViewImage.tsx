@@ -1,19 +1,24 @@
 import React from 'react';
-import {
-  IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  ImageListItem,
-} from '@mui/material';
+import { IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import styled from '@emotion/styled';
 
 // Styled Components
-const StyledImageListItem = styled(ImageListItem)`
-  height: 100%;
-  width: 13.6em;
+const ThumbnailButton = styled.button`
+  appearance: none;
+  border: 0;
+  background: transparent;
+  height: 174px;
+  width: 174px;
+  flex: 0 0 174px;
+  padding: 0;
   cursor: pointer;
+  overflow: hidden;
+
+  &:focus-visible {
+    outline: 3px solid #2f83b7;
+    outline-offset: 2px;
+  }
 `;
 
 const StyledDialogTitle = styled.div`
@@ -27,6 +32,8 @@ const StyledDialogTitle = styled.div`
 const StyledImage = styled.img`
   height: 100%;
   width: 100%;
+  display: block;
+  object-fit: cover;
 `;
 
 const Title = styled.h3`
@@ -54,7 +61,13 @@ const StyledDialogContent = styled(DialogContent)`
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
-  height: 58em;
+  max-height: 70vh;
+
+  img {
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+  }
 `;
 
 const DialogParagraph = styled.p`
@@ -76,7 +89,7 @@ const NewsViewImage = ({
 }: {
   img: string;
   label: string;
-  caption: string;
+  caption?: string;
 }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -108,13 +121,17 @@ const NewsViewImage = ({
           <ImageContainer>
             <StyledImage src={img} alt="icdc news" />
           </ImageContainer>
-          <DialogParagraph>{caption}</DialogParagraph>
+          {caption && <DialogParagraph>{caption}</DialogParagraph>}
         </StyledDialogContent>
       </StyledDialog>
 
-      <StyledImageListItem onClick={handleClickOpen} key={img}>
+      <ThumbnailButton
+        aria-label={`Open image: ${label}`}
+        onClick={handleClickOpen}
+        type="button"
+      >
         <StyledImage src={img} alt={label} />
-      </StyledImageListItem>
+      </ThumbnailButton>
     </>
   );
 };
