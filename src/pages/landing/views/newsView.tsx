@@ -120,22 +120,8 @@ const AnnouncementHero = styled.div`
   background-position: center top;
   background-repeat: no-repeat;
   height: 86px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   bottom: 4px;
-`;
-
-const AnnouncementHeroText = styled.div`
-  color: #fff;
-  font-family: 'Raleway', sans-serif;
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1;
-  text-transform: uppercase;
-  text-shadow: 0 1px 6px rgba(22, 32, 52, 0.45);
 `;
 
 const NewsList = styled.div`
@@ -457,9 +443,7 @@ const NewsView = ({
             </SectionHeading>
 
             <AnnouncementBody>
-              <AnnouncementHero>
-                <AnnouncementHeroText>Update</AnnouncementHeroText>
-              </AnnouncementHero>
+              <AnnouncementHero />
 
               <NewsList>
                 {newsContent.map((item: any, index: number) => (
