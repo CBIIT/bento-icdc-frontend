@@ -1,9 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import { ImageList } from '@mui/material';
 import styled from '@emotion/styled';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import lbg from '../../../assets/landing/Background.png';
 import NewsItem from './NewsListItem';
@@ -17,92 +15,125 @@ const newsBanner =
 
 // Styled Components
 const Page = styled.div`
-  background: #5e8ca5;
-  background-image: url(${lbg});
+  min-height: 100%;
+  background-color: #173d4d;
+  background-image: linear-gradient(
+      90deg,
+      rgba(3, 19, 32, 0.26),
+      rgba(3, 19, 32, 0.08)
+    ),
+    url(${lbg});
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-`;
-
-const PageBanner = styled.div`
-  background-color: rgba(25, 119, 204, 0.61);
-  height: 12.8em;
-  margin-top: -3.3em;
-  display: flex;
-  align-items: center;
-  padding-left: 35em;
-  position: relative;
-  font-family: 'Raleway';
-`;
-
-const PageBannerText = styled.h1`
-  color: white;
-  font-weight: bold;
-  font-family: 'Raleway';
-  font-size: 3.7em;
+  background-position: center top;
+  padding: clamp(42px, 6vw, 76px) 16px 72px;
+  box-sizing: border-box;
 `;
 
 const OutterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 5em;
-  padding-bottom: 5em;
-  gap: 2em;
-  height: 100%;
+  width: min(1088px, 100%);
+  margin: 0 auto;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 5, 23, 0.5) 30%,
+    rgba(95, 131, 175, 0.36) 56%,
+    rgba(95, 131, 175, 0) 76%
+  );
+  background-blend-mode: darken;
+  border-radius: 8px;
+  box-shadow: 0 22px 56px rgba(4, 13, 24, 0.35);
+  box-sizing: border-box;
+  padding: 40px clamp(18px, 5vw, 62px) 44px;
+
+  @supports (backdrop-filter: blur(20px)) {
+    backdrop-filter: blur(20px);
+  }
+`;
+
+const PageTitle = styled.h1`
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-size: 35px;
+  font-weight: 700;
+  leading-trim: none;
+  line-height: 35px;
+  letter-spacing: 0;
+  margin: 0 0 30px;
+  text-align: center;
+  vertical-align: middle;
 `;
 
 const ListSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 3em;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(420px, 1.38fr);
+  gap: 24px 30px;
+  align-items: stretch;
+
+  @media (max-width: 940px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const NewsListHeading = styled.h4`
-  color: #fff;
-  font-size: 2em;
-  font-family: 'Raleway';
-  margin: 0;
-`;
-
-const NewsListTitleBar = styled.div`
+const SectionBlock = styled.section`
+  min-width: 0;
   display: flex;
   flex-direction: column;
 `;
 
-const NewsListTitle = styled.div`
-  border-top-right-radius: 0.5em;
-  border-top-left-radius: 0.5em;
-  -webkit-border-top-left-radius: 0.5em;
-  -webkit-border-top-right-radius: 0.5em;
+const SectionHeading = styled.h2`
+  min-height: 31px;
+  display: flex;
+  align-items: center;
+  background: #2f83b7;
+  border-radius: 6px 6px 0 0;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-size: 17px;
+  font-weight: 600;
+  leading-trim: none;
+  line-height: 25px;
+  letter-spacing: 0;
+  margin: 0;
+  padding: 0 12px;
+`;
+
+const SectionBody = styled.div`
+  background: #fff;
+  border-radius: 0 0 6px 6px;
+  overflow: hidden;
+`;
+
+const AnnouncementBody = styled(SectionBody)`
+  background: #f2f3f5;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
+const AnnouncementHero = styled.div`
   background-image: url(${newsBanner});
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  font-size: 1.2em;
-  margin: 0;
-  min-height: 74px;
-  height: 74px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+  height: 86px;
+  position: relative;
+  bottom: 4px;
 `;
 
 const NewsList = styled.div`
-  width: 30em;
-  height: 65.8em;
-  background-color: #f5f5f5;
+  flex: 1;
+  min-height: 0;
   overflow: auto;
   overflow-x: hidden;
-  border-bottom-right-radius: 0.5em;
-  border-bottom-left-radius: 0.5em;
-  -webkit-border-bottom-left-radius: 0.5em;
-  -webkit-border-bottom-right-radius: 0.5em;
-  padding: 1em;
+  padding: 12px 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 14px;
+  box-sizing: border-box;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -121,55 +152,32 @@ const NewsList = styled.div`
 const TwitterAndImageSection = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const TwitterSectionHeading = styled.h4`
-  color: #fff;
-  font-size: 2em;
-  font-family: 'Raleway';
-  margin: 0;
-`;
-
-const TwitterSectionContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  background: #fff;
-  flex-direction: column;
-  border-radius: 0.5em;
+  gap: 22px;
+  min-width: 0;
 `;
 
 const TwitterSectionWrapper = styled.div`
   display: flex;
   justify-content: center;
-`;
-
-const TwitterSectionSubHeadingContainer = styled.div`
-  display: flex;
-  background: #1977cc;
-  justify-content: space-between;
-  padding: 0.5em 12.2em 0.5em 1em;
-  color: #fff;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  -webkit-border-top-left-radius: 0.5em;
-  -webkit-border-top-right-radius: 0.5em;
-`;
-
-const TwitterSectionSubHeading = styled.h6`
-  font-size: 1.2em;
-  margin: 0;
+  padding: 12px 10px 14px;
 `;
 
 const TwitterSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  height: 44em;
+  gap: 12px;
+  height: 520px;
   width: 100%;
-  max-width: 550px;
+  max-width: 500px;
   overflow-y: auto;
-  border-radius: 0.5em;
   background: #fff;
+  box-sizing: border-box;
+
+  & .twitter-tweet,
+  & iframe {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -192,105 +200,101 @@ const TwitterSection = styled.div`
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 `;
 
-const ImageSectionContainer = styled.div`
-  position: relative;
-  top: 1.1em;
+const ImagePackBody = styled(SectionBody)`
+  padding: 8px;
+  box-sizing: border-box;
 `;
 
-const ImageSectionHeading = styled.h4`
-  color: #fff;
-  font-size: 2em;
-  font-family: 'Raleway';
-  margin: 0;
+const ImageStrip = styled.div`
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 `;
 
 const VideoSectionContainer = styled.div`
-  width: 81em;
-`;
-
-const VideoSectionHeading = styled.h4`
-  color: #fff;
-  font-size: 2em;
-  font-family: 'Raleway';
-  margin: 0;
+  grid-column: 1 / -1;
+  min-width: 0;
 `;
 
 const VideoSectionSubHeadingContainer = styled.div`
-  display: flex;
-  background: #1977cc;
-  justify-content: space-between;
-  padding: 0.5em 19.5em 0.5em 1em;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(235px, 1fr);
+  background: #2f83b7;
   color: #fff;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  -webkit-border-top-left-radius: 0.5em;
-  -webkit-border-top-right-radius: 0.5em;
+  border-radius: 6px 6px 0 0;
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const VideoSectionSubHeading = styled.h6`
-  font-size: 1.2em;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 31px;
   margin: 0;
+  padding: 0 12px;
 `;
 
 const FeaturedVideo = styled.div`
   display: grid;
-  justify-content: center;
-  grid-template-columns: 2fr 1fr;
-  gap: 1em;
-  padding: 1em;
+  grid-template-columns: minmax(0, 2fr) minmax(235px, 1fr);
+  gap: 10px;
+  align-items: stretch;
+  padding: 10px;
   background-color: #fff;
+  border-radius: 0 0 6px 6px;
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FeaturedVideoFrame = styled.div`
+  height: 100%;
+  min-height: 220px;
+  background: #111;
+  overflow: hidden;
+
+  @media (max-width: 760px) {
+    min-height: 0;
+  }
 `;
 
 const OtherVideos = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 10px;
+  min-width: 0;
 `;
 
-const Root = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+const OtherVideoFrame = styled.div`
+  aspect-ratio: 16 / 9;
+  min-height: 105px;
+  background: #111;
   overflow: hidden;
-  width: 48em;
-  background-color: #fff;
-  border-radius: 0.5em;
-  padding: 1em;
-`;
-
-const StyledImageList = styled(ImageList)`
-  flex-wrap: nowrap;
-  transform: translateZ(0);
-  height: 15em;
-  gap: 0.5em;
-
-  & li {
-    width: 13.1em;
-  }
 `;
 
 // Twitter Section Component
-function TwitterSectionComponent({
-  news,
-  ...props
-}: {
-  news: Record<string, any>;
-}) {
+function TwitterSectionComponent() {
   return (
-    <TwitterSectionContainer {...props}>
-      <TwitterSectionSubHeadingContainer>
-        <div>
-          <TwitterSectionSubHeading>
-            {news.tile2.subHeading1}
-          </TwitterSectionSubHeading>
-        </div>
-        <div>
-          <TwitterSectionSubHeading>
-            {news.tile2.subHeading2}
-          </TwitterSectionSubHeading>
-        </div>
-      </TwitterSectionSubHeadingContainer>
-
+    <SectionBody>
       <TwitterSectionWrapper>
         <TwitterSection>
           {newsViewTweetIds.map(tweetId => (
@@ -298,7 +302,7 @@ function TwitterSectionComponent({
           ))}
         </TwitterSection>
       </TwitterSectionWrapper>
-    </TwitterSectionContainer>
+    </SectionBody>
   );
 }
 
@@ -318,7 +322,6 @@ const NewsView = ({
   news,
 }: {
   news: Record<string, any> | undefined;
-  availableSoonImage: string;
 }) => {
   const [dataModelReleases, setDataModelReleases] = React.useState<any[]>([]);
   const [softwareReleases, setSoftwareReleases] = React.useState<any[]>([]);
@@ -430,33 +433,18 @@ const NewsView = ({
 
   return (
     <Page>
-      <PageBanner>
-        <PageBannerText>ICDC News</PageBannerText>
-      </PageBanner>
-
       <OutterContainer>
-        <ListSection>
-          <div>
-            <NewsListHeading>
-              {news?.tile1?.heading || 'News Updates'}
-            </NewsListHeading>
+        <PageTitle>ICDC News</PageTitle>
 
-            <NewsListTitleBar>
-              <NewsListTitle>
-                <h6
-                  style={{
-                    color: 'white',
-                    fontSize: '1.8em',
-                    fontWeight: '900',
-                    margin: 0,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    fontFamily: 'Raleway',
-                  }}
-                >
-                  Updates
-                </h6>
-              </NewsListTitle>
+        <ListSection>
+          <SectionBlock>
+            <SectionHeading>
+              {news?.tile1?.heading || 'ICDC Announcements'}
+            </SectionHeading>
+
+            <AnnouncementBody>
+              <AnnouncementHero />
+
               <NewsList>
                 {newsContent.map((item: any, index: number) => (
                   <NewsItem
@@ -469,85 +457,77 @@ const NewsView = ({
                   />
                 ))}
               </NewsList>
-            </NewsListTitleBar>
-          </div>
+            </AnnouncementBody>
+          </SectionBlock>
 
           <TwitterAndImageSection>
             {news?.tile2 && (
-              <div>
-                <TwitterSectionHeading>
-                  {news.tile2.heading}
-                </TwitterSectionHeading>
-                <TwitterSectionComponent news={news} />
-              </div>
+              <SectionBlock>
+                <SectionHeading>{news.tile2.heading}</SectionHeading>
+                <TwitterSectionComponent />
+              </SectionBlock>
             )}
 
             {news?.tile3 && news?.images && (
-              <ImageSectionContainer>
-                <ImageSectionHeading>{news.tile3.heading}</ImageSectionHeading>
+              <SectionBlock>
+                <SectionHeading>{news.tile3.heading}</SectionHeading>
 
-                <Root>
-                  <StyledImageList cols={20}>
+                <ImagePackBody>
+                  <ImageStrip>
                     {news.images.map(
                       (item: Record<string, any>, index: number) => (
-                        <span key={`image-list-news-view-${index}`}>
-                          <NewsViewImage
-                            img={item.img}
-                            label={item.label}
-                            caption={item.caption}
-                          />
-                        </span>
+                        <NewsViewImage
+                          key={`image-list-news-view-${index}`}
+                          img={item.img}
+                          label={item.label}
+                          caption={item.caption}
+                        />
                       )
                     )}
-                  </StyledImageList>
-                </Root>
-              </ImageSectionContainer>
+                  </ImageStrip>
+                </ImagePackBody>
+              </SectionBlock>
             )}
           </TwitterAndImageSection>
-        </ListSection>
 
-        {news?.tile4 && news?.youtube && (
-          <VideoSectionContainer>
-            <VideoSectionHeading>{news.tile4.heading}</VideoSectionHeading>
-            <div>
+          {news?.tile4 && news?.youtube && (
+            <VideoSectionContainer>
               <VideoSectionSubHeadingContainer>
-                <div>
-                  <VideoSectionSubHeading>
-                    {news.tile4.subHeading1}
-                  </VideoSectionSubHeading>
-                </div>
-                <div>
-                  <VideoSectionSubHeading>
-                    {news.tile4.subHeading2}
-                  </VideoSectionSubHeading>
-                </div>
+                <VideoSectionSubHeading>
+                  {news.tile4.subHeading1 || 'Featured Video'}
+                </VideoSectionSubHeading>
+                <VideoSectionSubHeading>
+                  {news.tile4.subHeading2 || 'Other Videos'}
+                </VideoSectionSubHeading>
               </VideoSectionSubHeadingContainer>
 
               <FeaturedVideo>
-                <div>
+                <FeaturedVideoFrame>
                   <NewsViewVideo
                     url={news.youtube.main.vid}
                     label={news.youtube.main.label}
                     description={news.youtube.main.description}
                   />
-                </div>
+                </FeaturedVideoFrame>
                 <OtherVideos>
                   {news.youtube.others.map(
                     (vid: Record<string, any>, index: number) => (
-                      <span key={`news-view-video-news-view-${index}`}>
+                      <OtherVideoFrame
+                        key={`news-view-video-news-view-${index}`}
+                      >
                         <NewsViewVideo
                           url={vid.vid}
                           label={vid.label}
                           description={news.youtube.main.description}
                         />
-                      </span>
+                      </OtherVideoFrame>
                     )
                   )}
                 </OtherVideos>
               </FeaturedVideo>
-            </div>
-          </VideoSectionContainer>
-        )}
+            </VideoSectionContainer>
+          )}
+        </ListSection>
       </OutterContainer>
     </Page>
   );
