@@ -1,15 +1,20 @@
-import React, { useMemo, useState, CSSProperties } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  CSSProperties,
+} from 'react';
 import { Grid } from '@mui/material';
-import { request } from 'graphql-request';
+import { ClientError, request } from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
-import _, { defaultTo } from 'lodash';
+import { defaultTo } from 'lodash';
 
 import StatsView from '../../components/Stats/StatsView';
 import StudyThemeProvider from './studyDetailsThemeConfig';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import Tab from '../../components/Tab/Tab';
 import TabPanel from '../../components/Tab/TabPanel';
-import { SkeletonLoader } from '../../components/Skeleton';
 import PageContent from '../../components/Layout/PageContent';
 
 import Overview from './views/overview/Overview';
@@ -21,6 +26,9 @@ import ClinicalData from './views/clinical-data/ClinicalDataController';
 import { HumanRelevancePanel } from './views/human-relevance';
 
 import { studyDisposition } from './utils';
+import compact from './utils/compact';
+import { logStudyDiagnostic } from './studyDiagnostics';
+import StudySectionErrorBoundary from './StudySectionErrorBoundary';
 import { navigatedToDashboard } from '../../utils/utils';
 import useDashboardTabs from '../dashboard/components/dashboard-tabs-store';
 
@@ -78,6 +86,29 @@ export const TAB_LABELS = {
   SUPPORTING_DATA: 'SUPPORTING DATA',
   HUMAN_RELEVANCE: 'HUMAN RELEVANCE',
 } as const;
+
+type ClinicalCountKey = Exclude<keyof ClinicalDataNodeCounts, '__typename'>;
+
+const CLINICAL_COUNT_KEYS: ClinicalCountKey[] = [
+  'adverse_event',
+  'agent',
+  'agent_administration',
+  'cycle',
+  'disease_extent',
+  'follow_up',
+  'off_study',
+  'off_treatment',
+  'physical_exam',
+  'prior_surgery',
+  'prior_therapy',
+  'visit',
+  'vital_signs',
+];
+
+const hasUsableHumanRelevance = (
+  value: HumanRelevanceNodeData | null | undefined
+): value is HumanRelevanceNodeData =>
+  Boolean(value?.human_relevance_record_id?.trim());
 
 type TabLabel = (typeof TAB_LABELS)[keyof typeof TAB_LABELS];
 
@@ -271,40 +302,6 @@ const getHumanRelevanceTabImage = (
 ): (typeof HUMAN_REL_IMAGES)[HumanRelevanceImageKey] =>
   HUMAN_REL_IMAGES[cancer_type];
 
-function hasPositiveValue(arr: (ClinicalDataNodeCounts | null | undefined)[]) {
-  return arr.some(
-    obj =>
-      obj &&
-      Object.values(obj).some(value => typeof value === 'number' && value > 0)
-  );
-}
-
-const processData = (
-  names: (string | null)[] | null | undefined,
-  nodeCountArg: ClinicalDataNodeCounts | undefined | null,
-  nodeCaseCountArg: ClinicalDataNodeCounts | undefined | null
-) =>
-  names?.map(name => {
-    const objMatcher = _.toLower(
-      _.replace(name || '', ' ', '_')
-    ) as keyof ClinicalDataNodeCounts;
-    const nodeCount = nodeCountArg?.[objMatcher];
-    const nodeCaseCount = nodeCaseCountArg?.[objMatcher];
-
-    if (nodeCaseCount === 0 && nodeCount === 0) {
-      return {
-        name,
-        isEmpty: true,
-      };
-    }
-    return {
-      name,
-      nodeCount,
-      nodeCaseCount,
-      isEmpty: false,
-    };
-  });
-
 /* ---------------------------------- */
 /* Shared style constants             */
 /* ---------------------------------- */
@@ -385,9 +382,7 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
 
   // Sort publications: primarily by year (descending), then by title (ascending)
   const publications = useMemo(() => {
-    if (!rawPublications) return [];
-
-    return [...rawPublications].sort((a, b) => {
+    return compact(rawPublications).sort((a, b) => {
       // First, sort by year in descending order (most recent first)
       const yearA = a?.year_of_publication ?? 0;
       const yearB = b?.year_of_publication ?? 0;
@@ -409,19 +404,15 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
   // External data is now part of the main data query
   const interOpData = data;
 
-  const study_codes = [studyCode];
+  const humanRelevanceStudyCode = studyCode?.trim() || undefined;
+  const study_codes = humanRelevanceStudyCode ? [humanRelevanceStudyCode] : [];
 
   // Convert relative URL to absolute URL for graphql-request
   const backendApiUrl = REACT_APP_BACKEND_API.startsWith('http')
     ? REACT_APP_BACKEND_API
     : `${window.location.origin}${REACT_APP_BACKEND_API}`;
 
-  const {
-    data: humanRelevanceCardData,
-    isLoading: isLoadingHumanRelData,
-    error,
-    isError,
-  } = useQuery<
+  const { data: humanRelevanceCardData, error: humanRelevanceError } = useQuery<
     GetHumanRelevanceDataByNodeQuery,
     unknown,
     HumanRelevanceNodeData | undefined
@@ -431,11 +422,45 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
       request(backendApiUrl, GET_HUMAN_RELEVANCE_DATA_BY_NODE, {
         study_codes,
       }),
-    enabled: Boolean(study_codes),
-    select: (res: GetHumanRelevanceDataByNodeQuery) =>
-      res.humanRelevanceNodeData?.[0],
+    enabled: Boolean(humanRelevanceStudyCode),
+    select: (res: GetHumanRelevanceDataByNodeQuery) => {
+      const result = res.humanRelevanceNodeData?.[0] ?? undefined;
+      return hasUsableHumanRelevance(result) ? result : undefined;
+    },
     staleTime: 5 * 60 * 1000,
   });
+
+  useEffect(() => {
+    if (!humanRelevanceError) return;
+
+    if (humanRelevanceError instanceof ClientError) {
+      const graphQLErrors = humanRelevanceError.response.errors?.map(
+        graphQLError => ({
+          message: graphQLError.message,
+          ...(graphQLError.path ? { path: [...graphQLError.path] } : {}),
+        })
+      );
+
+      logStudyDiagnostic({
+        operation: 'getHumanRelevanceDataByNode',
+        studyCode: humanRelevanceStudyCode,
+        section: 'Human Relevance',
+        ...(graphQLErrors?.length ? { graphQLErrors } : {}),
+        httpStatus: humanRelevanceError.response.status,
+      });
+      return;
+    }
+
+    logStudyDiagnostic({
+      operation: 'getHumanRelevanceDataByNode',
+      studyCode: humanRelevanceStudyCode,
+      section: 'Human Relevance',
+      errorMessage:
+        humanRelevanceError instanceof Error
+          ? humanRelevanceError.message
+          : 'Human Relevance request failed',
+    });
+  }, [humanRelevanceError, humanRelevanceStudyCode]);
 
   const diagnoses = useMemo(() => {
     type CaseWithDx =
@@ -456,34 +481,61 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     ];
   }, [studyData.cases]);
 
-  if (isError) console.error('humanRelevanceNodeData Error', { error });
+  const studyFiles = useMemo(() => compact(data.studyFiles), [data.studyFiles]);
 
   const studyFileTypes = useMemo(
-    () => [...new Set(defaultTo(data.studyFiles, []).map(f => f?.file_type))],
-    [data.studyFiles]
+    () => [
+      ...new Set(
+        studyFiles
+          .map(file => file.file_type)
+          .filter((fileType): fileType is string => fileType != null)
+      ),
+    ],
+    [studyFiles]
   );
 
   const caseFileTypes = useMemo(
     () => [
       ...new Set(
-        defaultTo(data.filesOfStudy, [])
-          .map(f => f.file_type)
-          .filter(f => !studyFileTypes.includes(f))
+        compact(data.filesOfStudy)
+          .map(file => file.file_type)
+          .filter(
+            (fileType): fileType is string =>
+              fileType != null && !studyFileTypes.includes(fileType)
+          )
       ),
     ],
     [data.filesOfStudy, studyFileTypes]
   );
 
-  const {
-    clinicalDataNodeNames,
-    clinicalDataNodeCounts,
-    clinicalDataNodeCaseCounts,
-  } = data;
+  const { clinicalDataNodeCounts, clinicalDataNodeCaseCounts } = data;
 
-  const hasClinicalData = hasPositiveValue([
+  const clinicalCountObjects = [
     clinicalDataNodeCounts,
     clinicalDataNodeCaseCounts,
-  ]);
+  ];
+
+  const clinicalCountsConfirmedZero = clinicalCountObjects.every(
+    counts =>
+      counts != null &&
+      CLINICAL_COUNT_KEYS.every(countKey => counts[countKey] === 0)
+  );
+
+  const hasClinicalData = !clinicalCountsConfirmedZero;
+
+  const hasCompleteClinicalCounts = clinicalCountObjects.every(
+    counts =>
+      counts != null &&
+      CLINICAL_COUNT_KEYS.every(countKey => counts[countKey] != null)
+  );
+
+  const clinicalDataNodeCount = hasCompleteClinicalCounts
+    ? CLINICAL_COUNT_KEYS.filter(
+        countKey =>
+          (clinicalDataNodeCounts?.[countKey] ?? 0) > 0 ||
+          (clinicalDataNodeCaseCounts?.[countKey] ?? 0) > 0
+      ).length
+    : null;
 
   const stat = useMemo(
     () => ({
@@ -515,7 +567,9 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     [studyCode]
   );
 
-  const [currentTab, setCurrentTab] = useState(initTab === 'file' ? 2 : 0);
+  const [selectedTab, setSelectedTab] = useState(
+    initTab === 'file' ? 'study_files' : 'overview'
+  );
 
   const tabStyleClasses = useMemo(
     (): {
@@ -572,54 +626,43 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
     clinical_study_designation: studyCode,
     CRDCLinks: formattedLinks.CRDCLinks,
   };
+  const hasSupportingData = findStudy.length > 0;
 
   const processedTabs = useMemo(() => {
-    let items =
-      findStudy?.length > 0
-        ? tab.items
-        : tab.items.filter(i => i.label !== TAB_LABELS.SUPPORTING_DATA);
+    let items = hasSupportingData
+      ? tab.items
+      : tab.items.filter(i => i.label !== TAB_LABELS.SUPPORTING_DATA);
     if (!hasClinicalData) {
       items = items.filter(i => i.label !== TAB_LABELS.CLINICAL_DATA);
     }
     // Show Human Relevance tab only if we have data from the query
-    if (!humanRelevanceCardData?.human_relevance_record_id) {
+    if (!humanRelevanceCardData) {
       items = items.filter(i => i.label !== TAB_LABELS.HUMAN_RELEVANCE);
     }
     return items;
-  }, [currentStudy, hasClinicalData, humanRelevanceCardData]);
+  }, [hasSupportingData, hasClinicalData, humanRelevanceCardData]);
 
-  const processedClinicalDataTabData = useMemo(
-    () =>
-      processData(
-        clinicalDataNodeNames,
-        clinicalDataNodeCounts,
-        clinicalDataNodeCaseCounts
-      ),
-    [clinicalDataNodeNames, clinicalDataNodeCounts, clinicalDataNodeCaseCounts]
+  const selectedTabIndex = processedTabs.findIndex(
+    processedTab => processedTab.value === selectedTab
   );
+  const currentTab = selectedTabIndex >= 0 ? selectedTabIndex : 0;
 
-  let clinicalDataNodeCount = 0;
-  const clinicalDataDownloadFlags: Record<string, boolean> = {};
-  defaultTo(processedClinicalDataTabData, []).forEach(el => {
-    if (!el?.isEmpty) {
-      clinicalDataNodeCount += 1;
-      clinicalDataDownloadFlags[el?.name || ''] = true;
-    } else {
-      clinicalDataDownloadFlags[el?.name || ''] = false;
+  useEffect(() => {
+    if (selectedTabIndex < 0) {
+      setSelectedTab('overview');
     }
-  });
+  }, [selectedTabIndex]);
 
-  const supportingDataCount = useMemo(
-    () => currentStudy?.CRDCLinks?.length,
-    [currentStudy]
+  const selectClinicalDataTab = useCallback(
+    () => setSelectedTab('clinical_data'),
+    []
+  );
+  const selectSupportingDataTab = useCallback(
+    () => setSelectedTab('supporting_data'),
+    []
   );
 
-  const supportingDataTabIndex = processedTabs.findIndex(
-    t => t.label === TAB_LABELS.SUPPORTING_DATA
-  );
-  const clinicalDataTabIndex = processedTabs.findIndex(
-    t => t.label === TAB_LABELS.CLINICAL_DATA
-  );
+  const supportingDataCount = currentStudy.CRDCLinks.length;
 
   const {
     human_relevance_record_id,
@@ -668,15 +711,17 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
       )
     : undefined;
 
-  if (isLoadingHumanRelData) {
-    return <SkeletonLoader variant="withRounded" />;
-  }
-
   const filterStudy = `${studyCode} (${accessionId})`;
 
   return (
     <StudyThemeProvider>
-      <StatsView data={stat} />
+      <StudySectionErrorBoundary
+        key={`${studyCode}:Stats`}
+        studyCode={studyCode ?? undefined}
+        section="Stats"
+      >
+        <StatsView data={stat} />
+      </StudySectionErrorBoundary>
       <Container>
         <PageContent noPadding>
           <Breadcrumb>
@@ -742,7 +787,10 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   styleClasses={tabStyleClasses}
                   tabItems={processedTabs}
                   currentTab={currentTab}
-                  handleTabChange={(_e, v: number) => setCurrentTab(v)}
+                  handleTabChange={(_e, v: number) => {
+                    const nextTab = processedTabs[v];
+                    if (nextTab) setSelectedTab(nextTab.value);
+                  }}
                 />
               </Grid>
             </Grid>
@@ -767,18 +815,23 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   value={currentTab}
                   index={index}
                 >
-                  <Overview
-                    studyData={studyData}
-                    diagnoses={diagnoses}
-                    caseFileTypes={caseFileTypes}
-                    data={data}
-                    nodeCount={clinicalDataNodeCount}
-                    supportingDataCount={supportingDataCount}
-                    setCurrentTab={setCurrentTab}
-                    supportingDataTabIndex={supportingDataTabIndex}
-                    clinicalDataTabIndex={clinicalDataTabIndex}
-                    humanRelevanceCardData={humanRelevanceCardData}
-                  />
+                  <StudySectionErrorBoundary
+                    key={`${studyCode}:Overview`}
+                    studyCode={studyCode ?? undefined}
+                    section="Overview"
+                  >
+                    <Overview
+                      studyData={studyData}
+                      diagnoses={diagnoses}
+                      caseFileTypes={caseFileTypes}
+                      data={data}
+                      nodeCount={clinicalDataNodeCount}
+                      supportingDataCount={supportingDataCount}
+                      onSelectSupportingData={selectSupportingDataTab}
+                      onSelectClinicalData={selectClinicalDataTab}
+                      humanRelevanceCardData={humanRelevanceCardData}
+                    />
+                  </StudySectionErrorBoundary>
                 </TabPanel>
               );
 
@@ -796,7 +849,13 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   value={currentTab}
                   index={index}
                 >
-                  <ArmsAndCohort studyData={studyData} />
+                  <StudySectionErrorBoundary
+                    key={`${studyCode}:Arms & Cohorts`}
+                    studyCode={studyCode ?? undefined}
+                    section="Arms & Cohorts"
+                  >
+                    <ArmsAndCohort studyData={studyData} />
+                  </StudySectionErrorBoundary>
                 </TabPanel>
               );
 
@@ -809,7 +868,13 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   value={currentTab}
                   index={index}
                 >
-                  <StudyFiles data={data} studyData={studyData} />
+                  <StudySectionErrorBoundary
+                    key={`${studyCode}:Study Files`}
+                    studyCode={studyCode ?? undefined}
+                    section="Study Files"
+                  >
+                    <StudyFiles data={data} studyData={studyData} />
+                  </StudySectionErrorBoundary>
                 </TabPanel>
               );
 
@@ -827,10 +892,16 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   value={currentTab}
                   index={index}
                 >
-                  <Publication
-                    publications={publications}
-                    display={tab.publication}
-                  />
+                  <StudySectionErrorBoundary
+                    key={`${studyCode}:Publications`}
+                    studyCode={studyCode ?? undefined}
+                    section="Publications"
+                  >
+                    <Publication
+                      publications={publications}
+                      display={tab.publication}
+                    />
+                  </StudySectionErrorBoundary>
                 </TabPanel>
               );
 
@@ -844,13 +915,19 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   index={index}
                 >
                   {hasClinicalData && currentTab === index && (
-                    <ClinicalData
-                      dataCount={{
-                        caseCount: clinicalDataNodeCaseCounts,
-                        nodeCount: clinicalDataNodeCounts,
-                      }}
-                      studyCode={studyCode}
-                    />
+                    <StudySectionErrorBoundary
+                      key={`${studyCode}:Clinical Data`}
+                      studyCode={studyCode ?? undefined}
+                      section="Clinical Data"
+                    >
+                      <ClinicalData
+                        dataCount={{
+                          caseCount: clinicalDataNodeCaseCounts,
+                          nodeCount: clinicalDataNodeCounts,
+                        }}
+                        studyCode={studyCode}
+                      />
+                    </StudySectionErrorBoundary>
                   )}
                 </TabPanel>
               );
@@ -864,7 +941,15 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   value={currentTab}
                   index={index}
                 >
-                  {currentStudy && <SupportingData data={currentStudy} />}
+                  {currentStudy && (
+                    <StudySectionErrorBoundary
+                      key={`${studyCode}:Supporting Data`}
+                      studyCode={studyCode ?? undefined}
+                      section="Supporting Data"
+                    >
+                      <SupportingData data={currentStudy} />
+                    </StudySectionErrorBoundary>
+                  )}
                 </TabPanel>
               );
 
@@ -878,33 +963,39 @@ const StudyDetailView: React.FC<StudyDetailViewProps> = ({ data, initTab }) => {
                   index={index}
                 >
                   {humanRelevanceCardData && (
-                    <HumanRelevancePanel
-                      idPrefix={human_relevance_record_id ?? undefined}
-                      title={humanRelevanceTabTitle}
-                      overview={human_relevance_statement ?? undefined}
-                      nciLink={{
-                        href: nci_link_to_relevant_human_cancer ?? '',
-                        label: nci_link_to_relevant_human_cancer ?? undefined,
-                      }}
-                      figure={{
-                        src: humanRelevanceTabFigure?.src ?? '',
-                        alt: humanRelevanceTabFigure?.alt,
-                        caption: humanRelevanceTabFigure?.caption,
-                      }}
-                      genes={relevant_human_genes?.filter(
-                        (g): g is string => g != null
-                      )}
-                      pathways={relevant_human_pathways?.filter(
-                        (p): p is string => p != null
-                      )}
-                      therapies={relevant_experimental_therapeutic_intervention?.filter(
-                        (t): t is string => t != null
-                      )}
-                      isMultipleCancerTypes={isMultipleCancers}
-                      cancerTypes={cancerTypesFromData}
-                      cancerTypeToImageKey={getImageKeyForCancerType}
-                      cancerTypeImages={cancerTypeImages}
-                    />
+                    <StudySectionErrorBoundary
+                      key={`${studyCode}:Human Relevance`}
+                      studyCode={studyCode ?? undefined}
+                      section="Human Relevance"
+                    >
+                      <HumanRelevancePanel
+                        idPrefix={human_relevance_record_id ?? undefined}
+                        title={humanRelevanceTabTitle}
+                        overview={human_relevance_statement ?? undefined}
+                        nciLink={{
+                          href: nci_link_to_relevant_human_cancer ?? '',
+                          label: nci_link_to_relevant_human_cancer ?? undefined,
+                        }}
+                        figure={{
+                          src: humanRelevanceTabFigure?.src ?? '',
+                          alt: humanRelevanceTabFigure?.alt,
+                          caption: humanRelevanceTabFigure?.caption,
+                        }}
+                        genes={relevant_human_genes?.filter(
+                          (g): g is string => g != null
+                        )}
+                        pathways={relevant_human_pathways?.filter(
+                          (p): p is string => p != null
+                        )}
+                        therapies={relevant_experimental_therapeutic_intervention?.filter(
+                          (t): t is string => t != null
+                        )}
+                        isMultipleCancerTypes={isMultipleCancers}
+                        cancerTypes={cancerTypesFromData}
+                        cancerTypeToImageKey={getImageKeyForCancerType}
+                        cancerTypeImages={cancerTypeImages}
+                      />
+                    </StudySectionErrorBoundary>
                   )}
                 </TabPanel>
               );

@@ -1295,14 +1295,14 @@ export type MutationCreateOffTreatmentNodeDataArgs = {
 };
 
 export type MutationCreatePhysicalExamNodeDataArgs = {
-  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
   case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
   pe_comment?: InputMaybe<Scalars['String']['input']>;
   pe_finding?: InputMaybe<Scalars['String']['input']>;
-  phase_pe?: InputMaybe<Scalars['Int']['input']>;
+  phase_pe?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationCreatePriorSurgeryNodeDataArgs = {
@@ -1714,7 +1714,7 @@ export type MutationCreateoff_TreatmentArgs = {
 };
 
 export type MutationCreatephysical_ExamArgs = {
-  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
@@ -1926,14 +1926,14 @@ export type OffTreatmentNodeData = {
 
 export type PhysicalExamNodeData = {
   __typename?: 'PhysicalExamNodeData';
-  assessment_timepoint?: Maybe<Scalars['Int']['output']>;
+  assessment_timepoint?: Maybe<Scalars['String']['output']>;
   body_system?: Maybe<Scalars['String']['output']>;
   case_id?: Maybe<Scalars['String']['output']>;
   date_of_examination?: Maybe<Scalars['String']['output']>;
   day_in_cycle?: Maybe<Scalars['Int']['output']>;
   pe_comment?: Maybe<Scalars['String']['output']>;
   pe_finding?: Maybe<Scalars['String']['output']>;
-  phase_pe?: Maybe<Scalars['Int']['output']>;
+  phase_pe?: Maybe<Scalars['String']['output']>;
 };
 
 export type PriorSurgeryNodeData = {
@@ -2972,7 +2972,7 @@ export type QueryTypePhysicalExamNodeDataArgs = {
 };
 
 export type QueryTypePhysical_ExamArgs = {
-  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
@@ -11835,18 +11835,25 @@ export type _PhysicalExamNodeDataFilter = {
   AND?: InputMaybe<Array<_PhysicalExamNodeDataFilter>>;
   NOT?: InputMaybe<Array<_PhysicalExamNodeDataFilter>>;
   OR?: InputMaybe<Array<_PhysicalExamNodeDataFilter>>;
-  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
-  assessment_timepoint_gt?: InputMaybe<Scalars['Int']['input']>;
-  assessment_timepoint_gte?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_contains?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_ends_with?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_gt?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_gte?: InputMaybe<Scalars['String']['input']>;
   assessment_timepoint_in?: InputMaybe<
-    Array<InputMaybe<Scalars['Int']['input']>>
+    Array<InputMaybe<Scalars['String']['input']>>
   >;
-  assessment_timepoint_lt?: InputMaybe<Scalars['Int']['input']>;
-  assessment_timepoint_lte?: InputMaybe<Scalars['Int']['input']>;
-  assessment_timepoint_not?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_lt?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_lte?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_matches?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_not?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_not_contains?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_not_ends_with?: InputMaybe<Scalars['String']['input']>;
   assessment_timepoint_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['Int']['input']>>
+    Array<InputMaybe<Scalars['String']['input']>>
   >;
+  assessment_timepoint_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_starts_with?: InputMaybe<Scalars['String']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
   body_system_contains?: InputMaybe<Scalars['String']['input']>;
   body_system_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -11936,25 +11943,32 @@ export type _PhysicalExamNodeDataFilter = {
   pe_finding_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   pe_finding_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   pe_finding_starts_with?: InputMaybe<Scalars['String']['input']>;
-  phase_pe?: InputMaybe<Scalars['Int']['input']>;
-  phase_pe_gt?: InputMaybe<Scalars['Int']['input']>;
-  phase_pe_gte?: InputMaybe<Scalars['Int']['input']>;
-  phase_pe_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  phase_pe_lt?: InputMaybe<Scalars['Int']['input']>;
-  phase_pe_lte?: InputMaybe<Scalars['Int']['input']>;
-  phase_pe_not?: InputMaybe<Scalars['Int']['input']>;
-  phase_pe_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  phase_pe?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_contains?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_ends_with?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_gt?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_gte?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  phase_pe_lt?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_lte?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_matches?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_not?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_not_contains?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  phase_pe_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  phase_pe_starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type _PhysicalExamNodeDataInput = {
-  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
   case_id?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
   pe_comment?: InputMaybe<Scalars['String']['input']>;
   pe_finding?: InputMaybe<Scalars['String']['input']>;
-  phase_pe?: InputMaybe<Scalars['Int']['input']>;
+  phase_pe?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum _PhysicalExamNodeDataOrdering {
@@ -19704,18 +19718,25 @@ export type _Physical_ExamFilter = {
   AND?: InputMaybe<Array<_Physical_ExamFilter>>;
   NOT?: InputMaybe<Array<_Physical_ExamFilter>>;
   OR?: InputMaybe<Array<_Physical_ExamFilter>>;
-  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
-  assessment_timepoint_gt?: InputMaybe<Scalars['Int']['input']>;
-  assessment_timepoint_gte?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_contains?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_ends_with?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_gt?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_gte?: InputMaybe<Scalars['String']['input']>;
   assessment_timepoint_in?: InputMaybe<
-    Array<InputMaybe<Scalars['Int']['input']>>
+    Array<InputMaybe<Scalars['String']['input']>>
   >;
-  assessment_timepoint_lt?: InputMaybe<Scalars['Int']['input']>;
-  assessment_timepoint_lte?: InputMaybe<Scalars['Int']['input']>;
-  assessment_timepoint_not?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint_lt?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_lte?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_matches?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_not?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_not_contains?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_not_ends_with?: InputMaybe<Scalars['String']['input']>;
   assessment_timepoint_not_in?: InputMaybe<
-    Array<InputMaybe<Scalars['Int']['input']>>
+    Array<InputMaybe<Scalars['String']['input']>>
   >;
+  assessment_timepoint_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  assessment_timepoint_starts_with?: InputMaybe<Scalars['String']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
   body_system_contains?: InputMaybe<Scalars['String']['input']>;
   body_system_ends_with?: InputMaybe<Scalars['String']['input']>;
@@ -19828,7 +19849,7 @@ export type _Physical_ExamFilter = {
 };
 
 export type _Physical_ExamInput = {
-  assessment_timepoint?: InputMaybe<Scalars['Int']['input']>;
+  assessment_timepoint?: InputMaybe<Scalars['String']['input']>;
   body_system?: InputMaybe<Scalars['String']['input']>;
   date_of_examination?: InputMaybe<Scalars['String']['input']>;
   day_in_cycle?: InputMaybe<Scalars['Int']['input']>;
@@ -23715,7 +23736,7 @@ export type Off_Treatment = {
 
 export type Physical_Exam = {
   __typename?: 'physical_exam';
-  assessment_timepoint?: Maybe<Scalars['Int']['output']>;
+  assessment_timepoint?: Maybe<Scalars['String']['output']>;
   body_system?: Maybe<Scalars['String']['output']>;
   date_of_examination?: Maybe<Scalars['String']['output']>;
   day_in_cycle?: Maybe<Scalars['Int']['output']>;
@@ -27414,8 +27435,8 @@ export type StudyClinicalDataQuery = {
     body_system?: string | null;
     pe_finding?: string | null;
     pe_comment?: string | null;
-    phase_pe?: number | null;
-    assessment_timepoint?: number | null;
+    phase_pe?: string | null;
+    assessment_timepoint?: string | null;
   } | null> | null;
   vitalSignsNodeData?: Array<{
     __typename?: 'VitalSignsNodeData';
