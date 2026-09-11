@@ -1,100 +1,143 @@
 /* eslint-disable */
 import React from 'react';
-import { ImageList } from '@mui/material';
 import styled from '@emotion/styled';
+import { ErrorOutline } from '@mui/icons-material';
+import { Skeleton } from '@mui/material';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import lbg from '../../../assets/landing/Background.png';
-import NewsItem from './NewsListItem';
 import NewsViewImage from './NewsViewImage';
 import NewsViewVideo from './NewsViewVideo';
-import env from '../../../utils/env';
-import { newsViewTweetIds } from '../../../bento/landingPageData';
-
-const newsBanner =
-  'https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/png/icdc-news-page-update-banner.png';
+import newsIcon from '../../../assets/icons/ICDC_News.png';
+import { AnnouncementCard } from './news/AnnouncementCard';
+import { PublicationCard } from './news/PublicationCard';
+import { ReleaseCard } from './news/ReleaseCard';
+import {
+  NEWS_ASSET_URLS,
+  NEWS_COLORS,
+  NEWS_COPY,
+  NEWS_FONT_FAMILIES,
+  NEWS_HTML_ATTRIBUTES,
+  NEWS_PANEL_TOKENS,
+  NEWS_TEST_IDS,
+  RELEASE_CARD_CONFIGS,
+  TWEET_LOAD_TIMEOUT_MS,
+} from './news/constants';
+import type { NewsPageData, NewsSection } from './news/types';
 
 // Styled Components
 const Page = styled.div`
-  background: #5e8ca5;
+  min-height: 100%;
+  padding: 3em 0 5em;
+  background: ${NEWS_COLORS.pageBackground};
   background-image: url(${lbg});
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
 `;
 
-const PageBanner = styled.div`
-  background-color: rgba(25, 119, 204, 0.61);
-  height: 12.8em;
-  margin-top: -3.3em;
+const NewsPanel = styled.main`
+  box-sizing: border-box;
   display: flex;
-  align-items: center;
-  padding-left: 35em;
-  position: relative;
-  font-family: 'Raleway';
+  width: min(1200px, calc(100% - 32px));
+  flex-direction: column;
+  margin: 0 auto;
+  padding: ${NEWS_PANEL_TOKENS.desktopPadding};
+  border-radius: 15px;
+  background: ${NEWS_PANEL_TOKENS.fallbackGradient};
+  background-blend-mode: darken;
+
+  @supports (
+    (-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px))
+  ) {
+    background: ${NEWS_PANEL_TOKENS.translucentGradient};
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+
+  @media (max-width: 900px) {
+    padding: ${NEWS_PANEL_TOKENS.mobilePadding};
+  }
 `;
 
 const PageBannerText = styled.h1`
-  color: white;
-  font-weight: bold;
-  font-family: 'Raleway';
-  font-size: 3.7em;
+  margin: 0 0 28px;
+  color: ${NEWS_COLORS.cardSurface};
+  font-family: ${NEWS_FONT_FAMILIES.raleway};
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 35px;
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
 `;
 
 const OutterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 5em;
-  padding-bottom: 5em;
   gap: 2em;
-  height: 100%;
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto;
 `;
 
 const ListSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 3em;
-`;
+  display: grid;
+  grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+  gap: 28px;
+  width: 100%;
 
-const NewsListHeading = styled.h4`
-  color: #fff;
-  font-size: 2em;
-  font-family: 'Raleway';
-  margin: 0;
+  @media (max-width: 900px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3em;
+  }
 `;
 
 const NewsListTitleBar = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 946px;
+
+  @media (max-width: 900px) {
+    width: min(30em, calc(100vw - 2em));
+  }
 `;
 
-const NewsListTitle = styled.div`
-  border-top-right-radius: 0.5em;
-  border-top-left-radius: 0.5em;
-  -webkit-border-top-left-radius: 0.5em;
-  -webkit-border-top-right-radius: 0.5em;
-  background-image: url(${newsBanner});
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  font-size: 1.2em;
-  margin: 0;
-  min-height: 74px;
-  height: 74px;
+const SectionHeader = styled.h2`
+  min-height: 37px;
+  height: 37px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0;
+  margin: 0;
+  padding: 0 12px;
+  background: ${NEWS_COLORS.sectionHeader};
+  border-radius: 8px 8px 0 0;
+  color: ${NEWS_COLORS.cardSurface};
+  font-family: ${NEWS_FONT_FAMILIES.roboto};
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 25px;
+  letter-spacing: 0;
+`;
+
+const NewsListBanner = styled.div`
+  background-image: url(${NEWS_ASSET_URLS.banner});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 7em;
 `;
 
 const NewsList = styled.div`
-  width: 30em;
-  height: 65.8em;
-  background-color: #f5f5f5;
-  overflow: auto;
-  overflow-x: hidden;
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+  background-color: ${NEWS_COLORS.listSurface};
   border-bottom-right-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
   -webkit-border-bottom-left-radius: 0.5em;
@@ -103,13 +146,17 @@ const NewsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: ${NEWS_COLORS.scrollbarDark} transparent;
 
   &::-webkit-scrollbar {
     width: 8px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: ${NEWS_COLORS.scrollbarDark};
     border-radius: 4px;
   }
 
@@ -121,55 +168,52 @@ const NewsList = styled.div`
 const TwitterAndImageSection = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 18px;
+  min-width: 0;
 `;
 
-const TwitterSectionHeading = styled.h4`
-  color: #fff;
-  font-size: 2em;
-  font-family: 'Raleway';
-  margin: 0;
+const SectionCard = styled.section`
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-self: center;
+  background: ${NEWS_COLORS.cardSurface};
+  border-radius: 8px;
+  overflow: hidden;
 `;
 
-const TwitterSectionContainer = styled.div`
+const TwitterSectionContainer = styled(SectionCard)`
   display: flex;
-  justify-content: center;
-  background: #fff;
   flex-direction: column;
-  border-radius: 0.5em;
+  height: 653px;
 `;
 
 const TwitterSectionWrapper = styled.div`
   display: flex;
+  flex: 1;
+  min-height: 0;
   justify-content: center;
-`;
-
-const TwitterSectionSubHeadingContainer = styled.div`
-  display: flex;
-  background: #1977cc;
-  justify-content: space-between;
-  padding: 0.5em 12.2em 0.5em 1em;
-  color: #fff;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  -webkit-border-top-left-radius: 0.5em;
-  -webkit-border-top-right-radius: 0.5em;
-`;
-
-const TwitterSectionSubHeading = styled.h6`
-  font-size: 1.2em;
-  margin: 0;
+  padding: 12px 10px 14px;
+  box-sizing: border-box;
 `;
 
 const TwitterSection = styled.div`
   display: flex;
+  flex: 1;
+  min-height: 0;
   flex-direction: column;
-  gap: 1em;
-  height: 44em;
+  gap: 12px;
   width: 100%;
-  max-width: 550px;
+  max-width: 500px;
   overflow-y: auto;
-  border-radius: 0.5em;
-  background: #fff;
+  background: ${NEWS_COLORS.cardSurface};
+  box-sizing: border-box;
+
+  & .twitter-tweet,
+  & iframe {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -177,7 +221,7 @@ const TwitterSection = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: ${NEWS_COLORS.scrollbarLight};
     border-radius: 4px;
     border: 2px solid transparent;
     background-clip: content-box;
@@ -189,47 +233,134 @@ const TwitterSection = styled.div`
   }
 
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  scrollbar-color: ${NEWS_COLORS.scrollbarLight} transparent;
 `;
 
-const ImageSectionContainer = styled.div`
-  position: relative;
-  top: 1.1em;
-`;
-
-const ImageSectionHeading = styled.h4`
-  color: #fff;
-  font-size: 2em;
-  font-family: 'Raleway';
-  margin: 0;
-`;
-
-const VideoSectionContainer = styled.div`
-  width: 81em;
-`;
-
-const VideoSectionHeading = styled.h4`
-  color: #fff;
-  font-size: 2em;
-  font-family: 'Raleway';
-  margin: 0;
-`;
-
-const VideoSectionSubHeadingContainer = styled.div`
+const TweetSkeletonCard = styled.div`
+  box-sizing: border-box;
   display: flex;
-  background: #1977cc;
-  justify-content: space-between;
-  padding: 0.5em 19.5em 0.5em 1em;
-  color: #fff;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-  -webkit-border-top-left-radius: 0.5em;
-  -webkit-border-top-right-radius: 0.5em;
+  flex: 0 0 220px;
+  flex-direction: column;
+  gap: 14px;
+  height: 220px;
+  padding: 16px;
+  border: 1px solid ${NEWS_COLORS.imageSkeletonBorder};
+  border-radius: 12px;
+  background: ${NEWS_COLORS.cardSurface};
 `;
 
-const VideoSectionSubHeading = styled.h6`
-  font-size: 1.2em;
+const TweetSkeletonHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const TweetSkeletonLines = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 9px;
+`;
+
+const TweetErrorCard = styled(TweetSkeletonCard)`
+  align-items: center;
+  justify-content: center;
+  color: ${NEWS_COLORS.secondaryText};
+  text-align: center;
+`;
+
+const TweetErrorIcon = styled(ErrorOutline)`
+  color: ${NEWS_COLORS.closeControl};
+  font-size: 30px;
+`;
+
+const TweetErrorMessage = styled.p`
+  max-width: 260px;
   margin: 0;
+  font-family: ${NEWS_FONT_FAMILIES.openSans};
+  font-size: 15px;
+  line-height: 22px;
+`;
+
+const RetryButton = styled.button`
+  padding: 6px 12px;
+  border: 1px solid ${NEWS_COLORS.closeControl};
+  border-radius: 4px;
+  background: ${NEWS_COLORS.cardSurface};
+  color: ${NEWS_COLORS.retryText};
+  cursor: pointer;
+  font-family: ${NEWS_FONT_FAMILIES.openSans};
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background: ${NEWS_COLORS.retryHover};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${NEWS_COLORS.focusOutline};
+    outline-offset: 2px;
+  }
+`;
+
+const AnimatedSkeleton = styled(Skeleton)`
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
+
+const ScreenReaderStatus = styled.span`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`;
+
+const ImageSectionContainer = styled(SectionCard)`
+  height: 275px;
+`;
+
+const ImagePackBody = styled.div`
+  height: calc(100% - 37px);
+  box-sizing: border-box;
+  padding: 11px 10px 17px;
+  overflow: hidden;
+`;
+
+const ImageStrip = styled.div`
+  display: flex;
+  width: 100%;
+  height: 210px;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const VideoSectionContainer = styled(SectionCard)`
+  width: 100%;
+`;
+
+const VideoSectionHeader = styled(SectionHeader)`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 0;
+
+  span {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+  }
 `;
 
 const FeaturedVideo = styled.div`
@@ -238,7 +369,7 @@ const FeaturedVideo = styled.div`
   grid-template-columns: 2fr 1fr;
   gap: 1em;
   padding: 1em;
-  background-color: #fff;
+  background-color: ${NEWS_COLORS.cardSurface};
 `;
 
 const OtherVideos = styled.div`
@@ -247,54 +378,150 @@ const OtherVideos = styled.div`
   gap: 1em;
 `;
 
-const Root = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  overflow: hidden;
-  width: 48em;
-  background-color: #fff;
-  border-radius: 0.5em;
-  padding: 1em;
-`;
+const TweetSkeleton = () => (
+  <TweetSkeletonCard aria-hidden="true">
+    <TweetSkeletonHeader>
+      <AnimatedSkeleton
+        variant="circular"
+        width={40}
+        height={40}
+        animation="wave"
+      />
+      <div>
+        <AnimatedSkeleton width={120} height={16} animation="wave" />
+        <AnimatedSkeleton width={84} height={14} animation="wave" />
+      </div>
+    </TweetSkeletonHeader>
+    <TweetSkeletonLines>
+      <AnimatedSkeleton width="100%" height={15} animation="wave" />
+      <AnimatedSkeleton width="92%" height={15} animation="wave" />
+      <AnimatedSkeleton width="76%" height={15} animation="wave" />
+    </TweetSkeletonLines>
+  </TweetSkeletonCard>
+);
 
-const StyledImageList = styled(ImageList)`
-  flex-wrap: nowrap;
-  transform: translateZ(0);
-  height: 15em;
-  gap: 0.5em;
+type TweetProps = {
+  tweetId: string;
+  onSettled: (tweetId: string) => void;
+  onPending: (tweetId: string) => void;
+};
 
-  & li {
-    width: 13.1em;
+const Tweet = ({ tweetId, onSettled, onPending }: TweetProps) => {
+  const [hasLoaded, setHasLoaded] = React.useState(false);
+  const [hasTimedOut, setHasTimedOut] = React.useState(false);
+  const [isRetrying, setIsRetrying] = React.useState(false);
+  const [attempt, setAttempt] = React.useState(0);
+
+  React.useEffect(() => {
+    if (hasLoaded || hasTimedOut) return undefined;
+
+    const timeoutId = window.setTimeout(() => {
+      setHasTimedOut(true);
+      setIsRetrying(false);
+      onSettled(tweetId);
+    }, TWEET_LOAD_TIMEOUT_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [attempt, hasLoaded, hasTimedOut, onSettled, tweetId]);
+
+  const handleRetry = () => {
+    setHasLoaded(false);
+    setHasTimedOut(false);
+    setIsRetrying(true);
+    setAttempt(currentAttempt => currentAttempt + 1);
+    onPending(tweetId);
+  };
+
+  if (hasTimedOut) {
+    return (
+      <TweetErrorCard>
+        <TweetErrorIcon aria-hidden="true" />
+        <TweetErrorMessage>
+          {NEWS_COPY.socialMediaPostLoadFailed}
+        </TweetErrorMessage>
+        <RetryButton
+          type={NEWS_HTML_ATTRIBUTES.buttonType}
+          onClick={handleRetry}
+        >
+          {NEWS_COPY.tryAgain}
+        </RetryButton>
+      </TweetErrorCard>
+    );
   }
-`;
+
+  return (
+    <>
+      {isRetrying && (
+        <ScreenReaderStatus role="status">
+          {NEWS_COPY.retrySocialMediaPost}
+        </ScreenReaderStatus>
+      )}
+      {!hasLoaded && <TweetSkeleton />}
+      <div hidden={!hasLoaded}>
+        <TwitterTweetEmbed
+          key={attempt}
+          tweetId={tweetId}
+          onLoad={() => {
+            setHasLoaded(true);
+            setIsRetrying(false);
+            onSettled(tweetId);
+          }}
+        />
+      </div>
+    </>
+  );
+};
 
 // Twitter Section Component
 function TwitterSectionComponent({
-  news,
+  title,
+  posts,
   ...props
 }: {
-  news: Record<string, any>;
+  title: string;
+  posts: string[];
 }) {
+  const [settledTweetIds, setSettledTweetIds] = React.useState<string[]>([]);
+  const [hasCompletedInitialLoad, setHasCompletedInitialLoad] =
+    React.useState(false);
+  const isLoading = settledTweetIds.length < posts.length;
+
+  const markTweetAsSettled = React.useCallback((tweetId: string) => {
+    setSettledTweetIds(currentTweetIds =>
+      currentTweetIds.includes(tweetId)
+        ? currentTweetIds
+        : [...currentTweetIds, tweetId]
+    );
+  }, []);
+
+  const markTweetAsPending = React.useCallback((tweetId: string) => {
+    setSettledTweetIds(currentTweetIds =>
+      currentTweetIds.filter(currentTweetId => currentTweetId !== tweetId)
+    );
+  }, []);
+
+  React.useEffect(() => {
+    if (!isLoading) setHasCompletedInitialLoad(true);
+  }, [isLoading]);
+
   return (
     <TwitterSectionContainer {...props}>
-      <TwitterSectionSubHeadingContainer>
-        <div>
-          <TwitterSectionSubHeading>
-            {news.tile2.subHeading1}
-          </TwitterSectionSubHeading>
-        </div>
-        <div>
-          <TwitterSectionSubHeading>
-            {news.tile2.subHeading2}
-          </TwitterSectionSubHeading>
-        </div>
-      </TwitterSectionSubHeadingContainer>
+      <SectionHeader>{title}</SectionHeader>
 
       <TwitterSectionWrapper>
-        <TwitterSection>
-          {newsViewTweetIds.map(tweetId => (
-            <TwitterTweetEmbed key={tweetId} tweetId={tweetId} />
+        <TwitterSection aria-busy={isLoading}>
+          {isLoading && !hasCompletedInitialLoad && (
+            <ScreenReaderStatus role="status">
+              {NEWS_COPY.loadingSocialMediaPosts}
+            </ScreenReaderStatus>
+          )}
+          {posts.map(tweetId => (
+            <Tweet
+              key={tweetId}
+              tweetId={tweetId}
+              onSettled={markTweetAsSettled}
+              onPending={markTweetAsPending}
+            />
           ))}
         </TwitterSection>
       </TwitterSectionWrapper>
@@ -302,253 +529,147 @@ function TwitterSectionComponent({
   );
 }
 
-const PUBLICATIONS_QUERY = `
-  query getPublications {
-    publication(
-      orderBy: year_of_publication_desc
-    ) {
-      publication_title
-      pubmed_id
-      year_of_publication
-    }
-  }
-`;
-
-const NewsView = ({
-  news,
-}: {
-  news: Record<string, any> | undefined;
-  availableSoonImage: string;
-}) => {
-  const [dataModelReleases, setDataModelReleases] = React.useState<any[]>([]);
-  const [softwareReleases, setSoftwareReleases] = React.useState<any[]>([]);
-  const [publications, setPublications] = React.useState<any[]>([]);
-  const [dataModelError, setDataModelError] = React.useState<boolean>(false);
-  const [softwareError, setSoftwareError] = React.useState<boolean>(false);
-  const [publicationsError, setPublicationsError] =
-    React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    // Fetch GitHub releases for Data Model
-    fetch('https://api.github.com/repos/CBIIT/icdc-model-tool/releases')
-      .then(response => response.json())
-      .then(releases => {
-        const formattedReleases = releases.map((release: any) => ({
-          label: 'VERSION',
-          value: release.name || release.tag_name,
-          date: new Date(release.published_at).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          }),
-        }));
-        setDataModelReleases(formattedReleases);
-        setDataModelError(false);
-      })
-      .catch(() => {
-        setDataModelError(true);
-      });
-
-    // Fetch GitHub releases for Software
-    fetch('https://api.github.com/repos/CBIIT/bento-icdc-frontend/releases')
-      .then(response => response.json())
-      .then(releases => {
-        const formattedReleases = releases.map((release: any) => ({
-          label: 'VERSION',
-          value: release.name || release.tag_name,
-          date: new Date(release.published_at).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          }),
-        }));
-        setSoftwareReleases(formattedReleases);
-        setSoftwareError(false);
-      })
-      .catch(() => {
-        setSoftwareError(true);
-      });
-
-    // Fetch Publications from GraphQL API
-    const backendAPI = (env as Record<string, string>).REACT_APP_BACKEND_API;
-    if (backendAPI) {
-      axios
-        .post(backendAPI, {
-          query: PUBLICATIONS_QUERY,
-        })
-        .then(response => {
-          const pubs = response.data?.data?.publication || [];
-          const formattedPubs = pubs.map((pub: any) => ({
-            title: pub.publication_title,
-            url: pub.pubmed_id
-              ? `https://pubmed.ncbi.nlm.nih.gov/${pub.pubmed_id}/`
-              : '#',
-          }));
-          setPublications(formattedPubs);
-          setPublicationsError(false);
-        })
-        .catch(() => {
-          setPublicationsError(true);
-        });
-    }
-  }, []);
-
-  // News content items - combines fetched data from various sources
-  const newsContent = React.useMemo(
-    () => [
-      {
-        title: 'Data Model Releases',
-        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/icdc-news-page-update-data-model-release.svg',
-        type: 'table',
-        items: dataModelReleases,
-        error: dataModelError,
-      },
-      {
-        title: 'Software Releases',
-        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/icdc-news-page-update-software-release.svg',
-        type: 'table',
-        items: softwareReleases,
-        error: softwareError,
-      },
-      {
-        title: 'Publications',
-        icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/icdc-news-page-update-publications.svg',
-        type: 'publications',
-        items: publications,
-        error: publicationsError,
-      },
-    ],
-    [
-      dataModelReleases,
-      softwareReleases,
-      publications,
-      dataModelError,
-      softwareError,
-      publicationsError,
-    ]
+const findSection = <T extends NewsSection['type']>(
+  sections: NewsSection[],
+  type: T
+) =>
+  sections.find(
+    (section): section is Extract<NewsSection, { type: T }> =>
+      section.type === type
   );
+
+const NewsView = ({ news }: { news: NewsPageData }) => {
+  const announcements = findSection(news.sections, 'announcements');
 
   return (
     <Page>
-      <PageBanner>
-        <PageBannerText>ICDC News</PageBannerText>
-      </PageBanner>
+      <NewsPanel>
+        <PageBannerText>{news.pageTitle}</PageBannerText>
 
-      <OutterContainer>
-        <ListSection>
-          <div>
-            <NewsListHeading>
-              {news?.tile1?.heading || 'News Updates'}
-            </NewsListHeading>
-
-            <NewsListTitleBar>
-              <NewsListTitle>
-                {/* <h6 */}
-                {/*   style={{ */}
-                {/*     color: 'white', */}
-                {/*     fontSize: '1.8em', */}
-                {/*     fontWeight: '900', */}
-                {/*     margin: 0, */}
-                {/*     textTransform: 'uppercase', */}
-                {/*     letterSpacing: '0.05em', */}
-                {/*     fontFamily: 'Raleway', */}
-                {/*   }} */}
-                {/* > */}
-                {/*   Updates */}
-                {/* </h6> */}
-              </NewsListTitle>
-              <NewsList>
-                {newsContent.map((item: any, index: number) => (
-                  <NewsItem
-                    key={`news-item-news-view-${index}`}
-                    title={item.title}
-                    icon={item.icon}
-                    items={item.items}
-                    type={item.type || 'table'}
-                    error={item.error}
-                  />
-                ))}
-              </NewsList>
-            </NewsListTitleBar>
-          </div>
-
-          <TwitterAndImageSection>
-            {news?.tile2 && (
-              <div>
-                <TwitterSectionHeading>
-                  {news.tile2.heading}
-                </TwitterSectionHeading>
-                <TwitterSectionComponent news={news} />
-              </div>
-            )}
-
-            {news?.tile3 && news?.images && (
-              <ImageSectionContainer>
-                <ImageSectionHeading>{news.tile3.heading}</ImageSectionHeading>
-
-                <Root>
-                  <StyledImageList cols={20}>
-                    {news.images.map(
-                      (item: Record<string, any>, index: number) => (
-                        <span key={`image-list-news-view-${index}`}>
-                          <NewsViewImage
-                            img={item.img}
-                            label={item.label}
-                            caption={item.caption}
-                          />
-                        </span>
-                      )
-                    )}
-                  </StyledImageList>
-                </Root>
-              </ImageSectionContainer>
-            )}
-          </TwitterAndImageSection>
-        </ListSection>
-
-        {news?.tile4 && news?.youtube && (
-          <VideoSectionContainer>
-            <VideoSectionHeading>{news.tile4.heading}</VideoSectionHeading>
+        <OutterContainer data-testid={NEWS_TEST_IDS.content}>
+          <ListSection>
             <div>
-              <VideoSectionSubHeadingContainer>
-                <div>
-                  <VideoSectionSubHeading>
-                    {news.tile4.subHeading1}
-                  </VideoSectionSubHeading>
-                </div>
-                <div>
-                  <VideoSectionSubHeading>
-                    {news.tile4.subHeading2}
-                  </VideoSectionSubHeading>
-                </div>
-              </VideoSectionSubHeadingContainer>
+              <NewsListTitleBar>
+                <SectionHeader>{announcements?.title}</SectionHeader>
+                <NewsListBanner />
+                <NewsList>
+                  {news.sections.map(section => {
+                    switch (section.type) {
+                      case 'dataModelReleases':
+                        return (
+                          <ReleaseCard
+                            key={section.type}
+                            title={section.title}
+                            config={RELEASE_CARD_CONFIGS.dataModel}
+                          />
+                        );
+                      case 'softwareReleases':
+                        return (
+                          <ReleaseCard
+                            key={section.type}
+                            title={section.title}
+                            config={RELEASE_CARD_CONFIGS.software}
+                          />
+                        );
+                      case 'publications':
+                        return (
+                          <PublicationCard
+                            key={section.type}
+                            title={section.title}
+                          />
+                        );
+                      case 'announcements':
+                        if (!section.enabled) return null;
 
-              <FeaturedVideo>
-                <div>
-                  <NewsViewVideo
-                    url={news.youtube.main.vid}
-                    label={news.youtube.main.label}
-                    description={news.youtube.main.description}
-                  />
-                </div>
-                <OtherVideos>
-                  {news.youtube.others.map(
-                    (vid: Record<string, any>, index: number) => (
-                      <span key={`news-view-video-news-view-${index}`}>
+                        return (
+                          <AnnouncementCard
+                            key={section.type}
+                            title={section.cardTitle}
+                            icon={newsIcon}
+                            announcements={section.items}
+                          />
+                        );
+                      default:
+                        return null;
+                    }
+                  })}
+                </NewsList>
+              </NewsListTitleBar>
+            </div>
+
+            <TwitterAndImageSection>
+              {news.sections.map(section => {
+                if (section.type === 'social') {
+                  return (
+                    <TwitterSectionComponent
+                      key={section.type}
+                      title={section.title}
+                      posts={section.posts}
+                    />
+                  );
+                }
+
+                if (section.type === 'images') {
+                  return (
+                    <ImageSectionContainer key={section.type}>
+                      <SectionHeader>{section.title}</SectionHeader>
+                      <ImagePackBody>
+                        <ImageStrip aria-label={section.title}>
+                          {section.items.map(item => (
+                            <NewsViewImage
+                              key={item.img}
+                              img={item.img}
+                              label={item.label}
+                              alt={item.alt}
+                              caption={item.caption}
+                            />
+                          ))}
+                        </ImageStrip>
+                      </ImagePackBody>
+                    </ImageSectionContainer>
+                  );
+                }
+
+                return null;
+              })}
+            </TwitterAndImageSection>
+          </ListSection>
+
+          {news.sections.map(section => {
+            if (section.type !== 'videos') return null;
+
+            return (
+              <VideoSectionContainer key={section.type}>
+                <VideoSectionHeader>
+                  <span>{section.featuredHeading}</span>
+                  <span>{section.otherHeading}</span>
+                </VideoSectionHeader>
+
+                <FeaturedVideo>
+                  <div>
+                    <NewsViewVideo
+                      url={section.featured.vid}
+                      label={section.featured.label}
+                      description={section.featured.description}
+                    />
+                  </div>
+                  <OtherVideos>
+                    {section.others.map(video => (
+                      <span key={video.id || video.vid}>
                         <NewsViewVideo
-                          url={vid.vid}
-                          label={vid.label}
-                          description={news.youtube.main.description}
+                          url={video.vid}
+                          label={video.label}
+                          description={video.description}
                         />
                       </span>
-                    )
-                  )}
-                </OtherVideos>
-              </FeaturedVideo>
-            </div>
-          </VideoSectionContainer>
-        )}
-      </OutterContainer>
+                    ))}
+                  </OtherVideos>
+                </FeaturedVideo>
+              </VideoSectionContainer>
+            );
+          })}
+        </OutterContainer>
+      </NewsPanel>
     </Page>
   );
 };

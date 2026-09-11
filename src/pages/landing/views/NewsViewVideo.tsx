@@ -1,8 +1,14 @@
 import React from 'react';
-import { IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import ReactPlayer from 'react-player';
-import { Close } from '@mui/icons-material';
 import styled from '@emotion/styled';
+import {
+  DIALOG_IDS,
+  NEWS_COPY,
+  NEWS_FONT_FAMILIES,
+  NEWS_LABEL_PREFIXES,
+} from './news/constants';
+import { DialogCloseButton } from './news/DialogCloseButton';
 
 // Styled Components
 const StyledDialogTitle = styled.div`
@@ -15,18 +21,8 @@ const StyledDialogTitle = styled.div`
 
 const Title = styled.h3`
   font-weight: 600;
-  font-family: 'Raleway';
+  font-family: ${NEWS_FONT_FAMILIES.raleway};
   font-size: 1.3em;
-`;
-
-const CloseIconButton = styled(IconButton)`
-  color: black;
-  height: fit-content;
-`;
-
-const CloseIcon = styled(Close)`
-  width: 1.4em;
-  height: 1.4em;
 `;
 
 const StyledDialogContent = styled(DialogContent)`
@@ -41,7 +37,7 @@ const VideoContainer = styled.div`
 `;
 
 const DialogParagraph = styled.p`
-  font-family: 'Inter';
+  font-family: ${NEWS_FONT_FAMILIES.inter};
   font-weight: 300;
   font-size: 1.21em;
 `;
@@ -59,7 +55,7 @@ const NewsViewVideo = ({
 }: {
   url: string;
   label: string;
-  description: string;
+  description?: string;
 }) => {
   const [open, setOpen] = React.useState(false);
   const [secondsElapsed, setSecondsElapsed] = React.useState(0);
@@ -79,16 +75,17 @@ const NewsViewVideo = ({
     <>
       <StyledDialog
         onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+        aria-labelledby={DIALOG_IDS.video}
         open={open}
       >
         <StyledDialogTitle>
-          <DialogTitle id="customized-dialog-title">
-            <Title>{`Video: ${label}`}</Title>
+          <DialogTitle id={DIALOG_IDS.video}>
+            <Title>{`${NEWS_COPY.video}: ${label}`}</Title>
           </DialogTitle>
-          <CloseIconButton onClick={handleClose}>
-            <CloseIcon />
-          </CloseIconButton>
+          <DialogCloseButton
+            aria-label={`${NEWS_LABEL_PREFIXES.close} ${NEWS_COPY.video}: ${label}`}
+            onClick={handleClose}
+          />
         </StyledDialogTitle>
 
         <StyledDialogContent dividers>
@@ -105,7 +102,7 @@ const NewsViewVideo = ({
               width="100%"
             />
           </VideoContainer>
-          <DialogParagraph>{description}</DialogParagraph>
+          {description && <DialogParagraph>{description}</DialogParagraph>}
         </StyledDialogContent>
       </StyledDialog>
 

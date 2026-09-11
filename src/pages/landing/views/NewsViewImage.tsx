@@ -1,120 +1,153 @@
 import React from 'react';
-import {
-  IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  ImageListItem,
-} from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Dialog } from '@mui/material';
 import styled from '@emotion/styled';
+import {
+  DIALOG_ID_PREFIXES,
+  NEWS_COLORS,
+  NEWS_COPY,
+  NEWS_FONT_FAMILIES,
+  NEWS_HTML_ATTRIBUTES,
+  NEWS_LABEL_PREFIXES,
+} from './news/constants';
+import { DialogCloseButton } from './news/DialogCloseButton';
 
-// Styled Components
-const StyledImageListItem = styled(ImageListItem)`
-  height: 100%;
-  width: 13.6em;
+const ThumbnailButton = styled.button`
+  display: block;
+  width: 183px;
+  min-width: 183px;
+  max-width: 183px;
+  height: 210px;
+  min-height: 210px;
+  max-height: 210px;
+  flex: 0 0 183px;
+  overflow: hidden;
   cursor: pointer;
-`;
+  border: 0;
+  padding: 0;
+  background: transparent;
 
-const StyledDialogTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 1.3em;
-  height: 4.5em;
-`;
-
-const StyledImage = styled.img`
-  height: 100%;
-  width: 100%;
-`;
-
-const Title = styled.h3`
-  font-weight: 600;
-  font-family: 'Raleway';
-  font-size: 1.3em;
-`;
-
-const CloseIconButton = styled(IconButton)`
-  color: black;
-  height: fit-content;
-`;
-
-const CloseIcon = styled(Close)`
-  width: 1.4em;
-  height: 1.4em;
-`;
-
-const StyledDialogContent = styled(DialogContent)`
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 58em;
-`;
-
-const DialogParagraph = styled.p`
-  font-family: 'Inter';
-  font-weight: 300;
-  font-size: 1.21em;
-`;
-
-const StyledDialog = styled(Dialog)`
-  & .MuiDialog-paperWidthSm {
-    max-width: 800px;
+  &:focus-visible {
+    outline: 2px solid ${NEWS_COLORS.closeControl};
+    outline-offset: 2px;
   }
 `;
 
-const NewsViewImage = ({
-  img,
-  label,
-  caption,
-}: {
+const Thumbnail = styled.img`
+  display: block;
+  width: 183px;
+  height: 210px;
+  object-fit: cover;
+`;
+
+const ImageDialog = styled(Dialog)`
+  & .MuiDialog-paper {
+    width: min(1000px, calc(100% - 32px));
+    max-width: 1000px;
+    height: min(910px, calc(100% - 32px));
+    max-height: calc(100% - 32px);
+    box-sizing: border-box;
+    margin: 16px;
+    padding: 24px 32px;
+    background: ${NEWS_COLORS.cardSurface};
+    border-radius: 8px;
+    box-shadow: none;
+    overflow: hidden;
+  }
+`;
+
+const DialogHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 24px;
+  gap: 20px;
+`;
+
+const DialogTitle = styled.h2`
+  margin: 0;
+  color: ${NEWS_COLORS.black};
+  font-family: ${NEWS_FONT_FAMILIES.raleway};
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+`;
+
+const DialogImageContainer = styled.div`
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+`;
+
+const DialogImage = styled.img`
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+`;
+
+const DialogCaption = styled.p`
+  margin: 16px 0 0;
+  color: ${NEWS_COLORS.secondaryText};
+  font-family: ${NEWS_FONT_FAMILIES.openSans};
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+type NewsViewImageProps = {
   img: string;
   label: string;
-  caption: string;
-}) => {
+  alt: string;
+  caption?: string;
+};
+
+const NewsViewImage = ({ img, label, alt, caption }: NewsViewImageProps) => {
   const [open, setOpen] = React.useState(false);
+  const [hasImageError, setHasImageError] = React.useState(false);
+  const imageLabel = alt || NEWS_COPY.imageDefaultLabel;
+  const dialogTitle = `${NEWS_COPY.image}: ${label}`;
+  const dialogId = `${DIALOG_ID_PREFIXES.image}-${label}`;
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  if (hasImageError) return null;
 
   return (
     <>
-      <StyledDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+      <ImageDialog
         open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby={dialogId}
+        maxWidth={false}
       >
-        <StyledDialogTitle>
-          <DialogTitle id="customized-dialog-title">
-            <Title>{`Image: ${label}`}</Title>
-          </DialogTitle>
-          <CloseIconButton onClick={handleClose}>
-            <CloseIcon />
-          </CloseIconButton>
-        </StyledDialogTitle>
+        <DialogHeader>
+          <DialogTitle id={dialogId}>{dialogTitle}</DialogTitle>
+          <DialogCloseButton
+            aria-label={`${NEWS_LABEL_PREFIXES.close} ${dialogTitle}`}
+            onClick={() => setOpen(false)}
+          />
+        </DialogHeader>
+        <DialogImageContainer>
+          <DialogImage
+            src={img}
+            alt={imageLabel}
+            onError={() => setHasImageError(true)}
+          />
+        </DialogImageContainer>
+        {caption && <DialogCaption>{caption}</DialogCaption>}
+      </ImageDialog>
 
-        <StyledDialogContent dividers>
-          <ImageContainer>
-            <StyledImage src={img} alt="icdc news" />
-          </ImageContainer>
-          <DialogParagraph>{caption}</DialogParagraph>
-        </StyledDialogContent>
-      </StyledDialog>
-
-      <StyledImageListItem onClick={handleClickOpen} key={img}>
-        <StyledImage src={img} alt={label} />
-      </StyledImageListItem>
+      <ThumbnailButton
+        type={NEWS_HTML_ATTRIBUTES.buttonType}
+        aria-label={`${NEWS_LABEL_PREFIXES.expand} ${imageLabel}`}
+        onClick={() => setOpen(true)}
+      >
+        <Thumbnail
+          src={img}
+          alt={imageLabel}
+          onError={() => setHasImageError(true)}
+        />
+      </ThumbnailButton>
     </>
   );
 };
