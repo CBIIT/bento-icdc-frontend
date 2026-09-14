@@ -1,6 +1,7 @@
-import { Button, CircularProgress, withStyles } from "@material-ui/core";
-import React from "react";
-import { ToolTip as Tooltip } from "../../../../../bento-core";
+import { Button, CircularProgress, withStyles } from '@material-ui/core';
+import React from 'react';
+import { ToolTip as Tooltip } from '../../../../../bento-core';
+import { CLINICAL_DATA_MESSAGES } from '../../../constants/clinicalData';
 
 const DownloadBtn = ({ classes, loading, handleCSVDownload }) => (
   <div className={classes.downloadAllBtnContainer}>
@@ -9,15 +10,19 @@ const DownloadBtn = ({ classes, loading, handleCSVDownload }) => (
       classes={{ root: classes.downloadAllBtn }}
       onClick={handleCSVDownload}
     >
-      {loading ? <CircularProgress size={25} /> : "Download All"}
+      {loading ? (
+        <CircularProgress size={25} />
+      ) : (
+        CLINICAL_DATA_MESSAGES.downloadAllLabel
+      )}
       {!loading && (
         <img
           src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
           alt="download icon"
           style={{
-            width: "20px",
-            height: "20px",
-            marginLeft: "20px",
+            width: '20px',
+            height: '20px',
+            marginLeft: '20px',
           }}
         />
       )}
@@ -44,33 +49,33 @@ const DownloadBtn = ({ classes, loading, handleCSVDownload }) => (
 
 const styles = {
   downloadAllBtn: {
-    width: "190px",
-    fontSize: "16px",
-    lineHeight: "16px",
+    width: '190px',
+    fontSize: '16px',
+    lineHeight: '16px',
     fontWeight: 400,
-    fontStyle: "normal",
-    fontFamily: "Lato",
-    background: "#1A8CCB",
-    color: "#FFF",
-    border: "1px solid #000",
-    borderRadius: "10px",
-    textTransform: "capitalize",
+    fontStyle: 'normal',
+    fontFamily: 'Lato',
+    background: '#1A8CCB',
+    color: '#FFF',
+    border: '1px solid #000',
+    borderRadius: '10px',
+    textTransform: 'capitalize',
   },
   tooltipText: {
-    fontFamily: "Nunito",
-    fontStyle: "normal",
+    fontFamily: 'Nunito',
+    fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: "12px",
+    fontSize: '12px',
   },
   downloadAllBtnContainer: {
-    margin: "36px 0 20px 0",
+    margin: '36px 0 20px 0',
   },
   headerCellTooltip: {
-    width: "12px",
-    marginBottom: "5px",
-    position: "relative",
-    left: "8px",
-    bottom: "10px",
+    width: '12px',
+    marginBottom: '5px',
+    position: 'relative',
+    left: '8px',
+    bottom: '10px',
   },
 };
 export default withStyles(styles)(DownloadBtn);
