@@ -7,9 +7,12 @@ import { TableContext, TableView } from '../../../../bento-core';
 import { themeConfig } from './Theme';
 import { CustomizeCellView } from '../../../../components/PaginatedTable/Customize/CellView';
 import { ExtendedViewConfig } from '../../../../components/PaginatedTable/Customize/ExtendedView';
+import compact from '../../utils/compact';
 
 const ArmsAndCohort = ({ classes, studyData }) => {
   const { noArmsCohort, noArmsCohort2, defaultSortField } = table1;
+  const studyArms = compact(studyData.study_arms);
+  const cohortsWithoutArm = compact(studyData.cohorts);
 
   const sortRow = rows => {
     return rows.sort((a, b) =>
@@ -26,7 +29,6 @@ const ArmsAndCohort = ({ classes, studyData }) => {
 
   const getTableData = () => {
     // Cohort types 1. without arms 2. with arms
-    const { study_arms: studyArms, cohorts: cohortsWithoutArm } = studyData;
     const tableRows = [];
     // 1. cohort without arms
     if (studyArms.length === 0 && cohortsWithoutArm.length > 0) {
@@ -47,7 +49,8 @@ const ArmsAndCohort = ({ classes, studyData }) => {
     // 2. cohort with Arm
     // iterate over arms
     studyArms.forEach((item, _armIndex) => {
-      const { arm, cohorts: armChorts, arm_description: desc } = item;
+      const { arm, arm_description: desc } = item;
+      const armChorts = compact(item.cohorts);
       if (armChorts.length === 0) {
         return tableRows.push({ arm: arm, description: desc });
       }
@@ -140,7 +143,7 @@ const ArmsAndCohort = ({ classes, studyData }) => {
   return (
     <>
       {!isStudyUnderEmbargo(studyData.study_disposition) &&
-      (studyData.cohorts.length > 0 || studyData.study_arms.length > 0) ? (
+      (cohortsWithoutArm.length > 0 || studyArms.length > 0) ? (
         <div className={classes.tableContainer}>
           <div className={classes.tableDiv}>
             <Typography className={classes.tableText}>

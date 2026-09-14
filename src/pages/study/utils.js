@@ -121,12 +121,15 @@ export function isStudyUnderEmbargo(value) {
 
 /**
  * Returns study disposition of a study
- * @param {String} value
- * @return {String}
+ * @param {string | null | undefined} value
+ * @return {'embargo' | 'pending' | undefined}
  */
 export function studyDisposition(value) {
   const embargo = 'under embargo';
   const pending = 'pending';
+  if (value === null || value === undefined) {
+    return undefined;
+  }
   if (value.toString().toLowerCase() === embargo) {
     return 'embargo';
   }

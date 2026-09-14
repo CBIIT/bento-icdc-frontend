@@ -117,10 +117,10 @@ describe('updateStat', () => {
     expect(result.numberOfFiles).toBe(1);
   });
 
-  test('handles missing properties by defaulting to 0 files and empty volume string', () => {
+  test('keeps the file count unavailable when its source counts are missing', () => {
     const result = utils.updateStat({});
 
-    expect(result.numberOfFiles).toBe(0);
+    expect(result.numberOfFiles).toBeUndefined();
     expect(result.volumeOfData).toBe('');
   });
 

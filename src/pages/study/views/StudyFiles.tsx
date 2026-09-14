@@ -6,6 +6,7 @@ import FileTableView from './FileView/FileTableView';
 import { TableContextProvider } from '../../../bento-core';
 import themes from '../../../themes';
 import { studyDisposition } from '../utils';
+import compact from '../utils/compact';
 import { fileTable } from '../../../bento/studyDetailsData';
 
 const StudyFiles = ({
@@ -17,15 +18,12 @@ const StudyFiles = ({
   studyData: any;
   classes: any;
 }) => {
-  const fileTableData =
-    data.studyFiles === null || data.studyFiles === ''
-      ? []
-      : data.studyFiles.map((file: any) => {
-          const cFile = { ...file };
-          cFile.parent = 'study';
-          cFile.studyDesignation = studyData.clinical_study_designation;
-          return cFile;
-        });
+  const fileTableData = compact(data.studyFiles).map((file: any) => {
+    const cFile = { ...file };
+    cFile.parent = 'study';
+    cFile.studyDesignation = studyData.clinical_study_designation;
+    return cFile;
+  });
   const themesLight = _.cloneDeep(themes.light);
   themesLight.overrides.MuiTableCell = {
     ...themesLight.overrides.MuiTableCell,

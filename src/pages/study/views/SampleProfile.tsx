@@ -24,6 +24,7 @@ import {
   HeaderButtonLinkSpan,
   HeaderButtonLinkNumber,
 } from './sample-profile.styled';
+import compact from '../utils/compact';
 
 export const StyledTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
@@ -60,15 +61,14 @@ const SampleProfile: React.FC<SampleProfileProps> = ({ data }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const { tabs } = sampleProfileChartData;
 
+  const getChartData = (tab: string) =>
+    compact(data[sampleProfileChartData[tab].value as keyof StudyQuery]);
+
   const handleTabChange = (activeKey: string) => {
     setCurrentTab(parseInt(activeKey, 10));
   };
 
-  const tabCount = tabs.filter(
-    tab =>
-      data?.[sampleProfileChartData?.[tab]?.value as keyof StudyQuery]?.length >
-      0
-  );
+  const tabCount = tabs.filter(tab => getChartData(tab).length > 0);
 
   const linkToDashboard = async () => {
     navigatedToDashboard(filterStudy);
@@ -122,11 +122,7 @@ const SampleProfile: React.FC<SampleProfileProps> = ({ data }) => {
               </StyledTabs>
             </Box>
             <BarChartV2
-              chartData={
-                data[
-                  sampleProfileChartData[tabs[value]].value as keyof StudyQuery
-                ]
-              }
+              chartData={getChartData(tabs[value])}
               palette={palette}
               yAxisLabel={sampleProfileChartData[tabs[value]].yAxisLabel}
               xAxisLabel={sampleProfileChartData[tabs[value]].xAxisLabel}

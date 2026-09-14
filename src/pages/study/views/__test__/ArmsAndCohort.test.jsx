@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import ArmsAndCohort from '../cohort/ArmsAndCohort';
 import * as mockStudyData from './data.json';
+import { table1 } from '../../../../bento/studyDetailsData';
 
 // 👇 Add this mock BEFORE imports that use Footer’s types at runtime
 jest.mock('@bento-core/footer', () => ({
@@ -36,13 +37,6 @@ describe('ArmsCohort', () => {
     expect(component).toBeDefined();
   });
 
-  // it('should render conponent for study without Arms or Cohorts', () => {
-  //   mockStudyData.cohorts = [];
-  //   mockStudyData.study_arms = [];
-  //   const component = getComponent(mockStudyData);
-  //   expect(component).toMatchSnapshot();
-  //   screen.getByText('This study is not divided into Arms or Cohorts');
-  // });
   it('should render conponent for study without Arms or Cohorts', () => {
     mockStudyData.study_arms = [];
     const component = getComponent(mockStudyData);
@@ -51,6 +45,16 @@ describe('ArmsCohort', () => {
       expect(component).toMatchSnapshot();
     }
 
-    screen.getByText('This study is not divided into Arms or Cohorts');
+    screen.getByText(table1.noArmsCohort);
+  });
+
+  it('shows the empty state when nullable arm and cohort lists have no usable entries', () => {
+    getComponent({
+      study_arms: [null],
+      cohorts: [null],
+      study_disposition: null,
+    });
+
+    expect(screen.getByText(table1.noArmsCohort)).toBeTruthy();
   });
 });
