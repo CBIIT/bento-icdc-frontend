@@ -16,22 +16,36 @@ if (envMatch) {
   injectedEnv = eval(`(${envMatch[1]})`) as Record<string, string>;
 }
 
+const backendSchema =
+  process.env.REACT_APP_BACKEND_API || injectedEnv.REACT_APP_BACKEND_API;
+const interopSchema =
+  process.env.REACT_APP_INTEROP_SERVICE_URL ||
+  injectedEnv.REACT_APP_INTEROP_SERVICE_URL;
+const backendDocuments = ['src/**/*.{js,jsx,ts,tsx}'];
+const interopDocuments = ['src/graphql/interop/storeManifest.graphql'];
+
 const config: CodegenConfig = {
-  schema: [
-    process.env.REACT_APP_BACKEND_API || injectedEnv.REACT_APP_BACKEND_API,
-    process.env.REACT_APP_INTEROP_SERVICE_URL ||
-      injectedEnv.REACT_APP_INTEROP_SERVICE_URL,
-  ].filter(Boolean),
-  documents: ['src/**/*.{js,jsx,ts,tsx}'],
   generates: {
     './src/generated-types/': {
+      schema: backendSchema,
+      documents: backendDocuments,
       preset: 'client',
       presetConfig: {
         gqlTagName: 'gql',
       },
     },
     './src/generated-types/types.ts': {
+      schema: backendSchema,
+      documents: backendDocuments,
       plugins: ['typescript', 'typescript-operations'],
+    },
+    './src/generated-types/interop/': {
+      schema: interopSchema,
+      documents: interopDocuments,
+      preset: 'client',
+      presetConfig: {
+        gqlTagName: 'gql',
+      },
     },
   },
 };
