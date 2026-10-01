@@ -14,13 +14,12 @@ import {
   CreateManifestDocument,
   CreateManifestQuery,
   CreateManifestQueryVariables,
+} from '../../../../generated-types/graphql';
+import {
   StoreManifestDocument,
   StoreManifestQuery,
   StoreManifestQueryVariables,
-  // GetStoreManifestDataQueryDocument,
-  // GetStoreManifestDataQueryQuery,
-  // GetStoreManifestDataQueryQueryVariables,
-} from '../../../../generated-types/graphql';
+} from '../../../../generated-types/interop/graphql';
 import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import { downloadCsvString } from '../../utils';
@@ -89,18 +88,6 @@ const DropDownView: React.FC<DropDownViewProps> = ({
     }
   );
 
-  // const { data } = useQuery<
-  //   GetStoreManifestDataQueryQuery,
-  //   GetStoreManifestDataQueryQueryVariables
-  // >(GetStoreManifestDataQueryDocument, {
-  //   variables: {
-  //     manifest,
-  //   },
-  //   skip: !manifest,
-  //   context: { clientName: 'interopService' },
-  //   fetchPolicy: 'no-cache',
-  // });
-
   const { data } = useQuery<StoreManifestQuery, StoreManifestQueryVariables>(
     StoreManifestDocument,
     {
@@ -113,9 +100,7 @@ const DropDownView: React.FC<DropDownViewProps> = ({
     }
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const sbgUrl = useMemo(
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     () => defaultTo(data?.storeManifest, ''),
     [data]
   );
@@ -321,7 +306,6 @@ const DropDownView: React.FC<DropDownViewProps> = ({
       case EXPORT_TO_CANCER_GENOMICS_CLOUD: {
         if (sbgUrl) {
           window.open(
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             `https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`,
             '_blank'
           );
