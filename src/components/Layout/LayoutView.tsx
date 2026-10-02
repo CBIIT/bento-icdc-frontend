@@ -86,6 +86,10 @@ const LayoutView = () => {
             '--header-offset',
             `179px`
           );
+          document.documentElement.style.setProperty(
+            '--content-offset',
+            `179px`
+          );
         }
       } else {
         document.documentElement.style.setProperty('--content-offset', `179px`);
@@ -150,14 +154,11 @@ const LayoutView = () => {
             height: 100%;
             flex: 1;
           }
-          #root > div:nth-child(1) {
+          #root > [data-layout-header] {
             top: var(--site-alert-offset);
             position: fixed;
           }
-          #root > div:nth-child(2) {
-            margin-top: calc(var(--header-offset) + var(--site-alert-offset));
-          }
-          #root > div:nth-child(3) {
+          #root > [data-layout-content] {
             margin-top: calc(var(--content-offset) + var(--site-alert-offset));
           }
           *::-webkit-scrollbar {
@@ -187,7 +188,7 @@ const LayoutView = () => {
       />
       <HashRouter>
         {open && <OverlayWindow open={open} handleClose={handleClose} />}
-        <HeaderContainer ref={headerRef}>
+        <HeaderContainer ref={headerRef} data-layout-header>
           <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
           <USABanner />
           <Header />
@@ -195,7 +196,7 @@ const LayoutView = () => {
         </HeaderContainer>
         {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
-        <ContentWrapper ref={contentRef}>
+        <ContentWrapper ref={contentRef} data-layout-content>
           <div className="switchWrapper">
             <Switch>
               <Route exact path="/ICDC/" component={Home} />
