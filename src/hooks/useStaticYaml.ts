@@ -4,6 +4,7 @@ import { parse } from 'yaml';
 
 type StaticYamlQueryOptions = {
   enabled?: boolean;
+  staleTime?: number;
 };
 
 const fetchStaticYaml = async <T>(url: string, signal?: AbortSignal) => {
@@ -20,6 +21,6 @@ export const useStaticYaml = <T>(
     queryKey,
     queryFn: ({ signal }) => fetchStaticYaml<T>(url, signal),
     enabled: options.enabled ?? true,
-    staleTime: 0,
+    staleTime: options.staleTime ?? 0,
     retry: 3,
   });
