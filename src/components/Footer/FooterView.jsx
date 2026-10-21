@@ -1,48 +1,40 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useLocation } from "react-router";
-import FooterData from "../../bento/globalFooterData";
-import env from "../../utils/env";
-import CustomThemeProvider from "./FooterThemConfig";
-import { Footer } from "../../bento-core";
-// const FILE_SERVICE_API = env.REACT_APP_FILE_SERVICE_VERSION;
+import React from 'react';
+import { useLocation } from 'react-router';
+import FooterData from '../../bento/globalFooterData';
+import { useServiceVersions } from '../../hooks/useServiceVersions';
+import CustomThemeProvider from './FooterThemConfig';
+import { Footer } from '../../bento-core';
 
 const ICDC_FOOTER_STYLE = {
-  padding: "24px 294px 45px",
+  padding: '24px 294px 45px',
 };
 
 const ICDCFooter = () => {
   const location = useLocation();
   const { pathname } = location;
 
-  const [footerUpdatedData, setFooterUpdatedData] = useState(FooterData);
+  const [backend, fileService] = useServiceVersions(['backend', 'fileService']);
+  const footerUpdatedData = {
+    ...FooterData,
+    link_sections: FooterData.link_sections.map(section => {
+      if (!section.systemInfoInLinkSection) return section;
+      return {
+        ...section,
+        items: [
+          ...section.items.map(item =>
+            item.text?.startsWith('BE Version:') && backend.data !== undefined
+              ? { ...item, text: `BE Version: ${backend.data}` }
+              : item
+          ),
+          ...(fileService.data !== undefined
+            ? [{ text: `FS Version: ${fileService.data}` }]
+            : []),
+        ],
+      };
+    }),
+  };
 
-  useEffect(() => {
-    const getSystems = async () => {
-      const response = await axios.get(env.REACT_APP_FILE_SERVICE_VERSION);
-      try {
-        const { data } = response;
-        // const FSverison = { FileServiceVersion: data.version || '' };
-        const SystemInfo = FooterData.link_sections[2];
-        SystemInfo.items.push({ text: `FS Version: ${data.version}` });
-        setFooterUpdatedData({ ...FooterData, ...SystemInfo });
-      } catch (_error) {
-        const FSverison = {
-          FileServiceVersion: "Error in getting File service verison",
-        };
-        setFooterUpdatedData({ ...FooterData, ...FSverison });
-      }
-    };
-    getSystems();
-    const setBEVersion = async () => {
-      const data = await (await axios.get(env.REACT_APP_BACKEND_VERSION)).data;
-      const BEversion = FooterData?.link_sections[2]?.items;
-      BEversion[2] = { text: `BE Version: ${data.version || ""}` };
-    };
-    setBEVersion();
-  }, [FooterData]);
-
-  if (pathname.includes("/jBrowse/")) {
+  if (pathname.includes('/jBrowse/')) {
     return null;
   }
 
