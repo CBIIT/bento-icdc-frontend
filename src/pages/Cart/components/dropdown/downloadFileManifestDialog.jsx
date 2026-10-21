@@ -1,88 +1,92 @@
-import React, { useState, useContext } from "react";
-import { useApolloClient } from "@apollo/client";
-import { makeStyles } from "@material-ui/core/styles";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
+import React, { useState, useContext } from 'react';
+import { useApolloClient } from '@apollo/client';
+import { makeStyles } from '@material-ui/core/styles';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 import {
   Button,
   IconButton,
   DialogContent,
   DialogContentText,
   withStyles,
-} from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
-import CloseIcon from "@material-ui/icons/Close";
-import DownloadFileManifestIcon from "../../assets/dwnldFileManifest.svg";
+} from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import CloseIcon from '@material-ui/icons/Close';
+import DownloadFileManifestIcon from '../../assets/dwnldFileManifest.svg';
 import {
   CREATE_MANIFEST,
   myFilesPageData,
-} from "../../../../bento/fileCentricCartWorkflowData";
-import { downloadCsvString } from "../../utils";
-import { TableContext } from "../../../../bento-core";
+} from '../../../../bento/fileCentricCartWorkflowData';
+import { downloadCsvString } from '../../utils';
+import { TableContext } from '../../../../bento-core';
 
 const useStyles = makeStyles({
   dialogContainer: {
-    maxWidth: "700px",
+    maxWidth: '700px',
   },
   contentText: {
-    display: "flex",
-    justifyContent: "center",
-    textAlign: "justify",
-    fontFamily: "Nunito",
-    fontStyle: "normal",
+    display: 'flex',
+    justifyContent: 'center',
+    textAlign: 'justify',
+    fontFamily: 'Nunito',
+    fontStyle: 'normal',
     fontWeight: 300,
-    fontSize: "14px",
-    color: "#000",
+    fontSize: '14px',
+    color: '#000',
   },
   textArea: {
-    width: "100%",
-    height: "215px",
-    border: "3px solid #B2C0C6",
-    borderRadius: "12px",
-    backgroundColor: "#ECF3F7",
-    "& .MuiInputBase-input": {
-      height: "172px !important",
-      border: "0px !important",
+    width: '100%',
+    height: '215px',
+    border: '3px solid #B2C0C6',
+    borderRadius: '12px',
+    backgroundColor: '#ECF3F7',
+    '& .MuiInputBase-input': {
+      height: '172px !important',
+      border: '0px !important',
     },
   },
   downloadFileManifestBtn: {
-    width: "fit-content",
-    marginTop: "23px",
+    width: 'fit-content',
+    marginTop: '23px',
   },
   dialogHeaderSection: {
-    display: "flex",
-    alignItems: "center",
-    paddingRight: "46px",
+    display: 'flex',
+    alignItems: 'center',
+    paddingRight: '46px',
   },
   closeBtn: {
-    color: "#0d71a3",
+    color: '#0d71a3',
   },
   dialogTitle: {
-    fontFamily: "Lato",
-    fontStyle: "normal",
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
     fontWeight: 700,
-    width: "100%",
-    fontSize: "18px",
-    color: "#7896A9",
-    display: "flex",
-    justifyContent: "space-between",
+    width: '100%',
+    fontSize: '18px',
+    color: '#7896A9',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 });
 
 const CustomDialogContent = withStyles(() => ({
   root: {
-    backgroundColor: "#fff",
-    margin: "15px 61px 30px 61px",
-    overflowY: "initial",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    backgroundColor: '#fff',
+    margin: '15px 61px 30px 61px',
+    overflowY: 'initial',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
-}))((props) => <DialogContent {...props} />);
+}))(props => <DialogContent {...props} />);
 
 const DownloadFileManifestDialog = React.forwardRef(
+  /**
+   * @param {{ onClose: (_value?: unknown) => void, selectedValue?: unknown, open: boolean, filesId?: string[], allFiles: boolean }} props
+   * @param {React.ForwardedRef<{ getValue: () => string }>} ref
+   */
   ({ onClose, selectedValue, open, filesId, allFiles }, ref) => {
-    const [comment, setComment] = useState("");
+    const [comment, setComment] = useState('');
     const classes = useStyles();
 
     React.useImperativeHandle(ref, () => ({
@@ -95,7 +99,7 @@ const DownloadFileManifestDialog = React.forwardRef(
       onClose(selectedValue);
     };
 
-    const handleTextFieldChange = (event) => {
+    const handleTextFieldChange = event => {
       setComment(event.target.value);
     };
 
@@ -114,7 +118,7 @@ const DownloadFileManifestDialog = React.forwardRef(
             uuid: downloadFilesId,
           },
         })
-        .then((response) => response.data.createManifest);
+        .then(response => response.data.createManifest);
       downloadCsvString(result, myFilesPageData.manifestFileName);
     }
 
@@ -165,9 +169,9 @@ const DownloadFileManifestDialog = React.forwardRef(
         </CustomDialogContent>
       </Dialog>
     );
-  },
+  }
 );
 
-DownloadFileManifestDialog.displayName = "DownloadFileManifestDialog";
+DownloadFileManifestDialog.displayName = 'DownloadFileManifestDialog';
 
 export default DownloadFileManifestDialog;

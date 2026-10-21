@@ -8,7 +8,6 @@ import cgcIcon from '../../assets/cgc.svg';
 import linkIcon from '../../assets/linkIcon.svg';
 import arrowDownPng from '../../assets/arrowDown.png';
 import arrowUpPng from '../../assets/arrowUp.png';
-import { defaultTo } from 'lodash';
 import {
   CreateManifestDocument,
   CreateManifestQuery,
@@ -51,7 +50,7 @@ const DropDownView: React.FC<DropDownViewProps> = ({
 
   // download all or selected files
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  const tableContext = useContext(TableContext);
+  const tableContext = useContext<{ context: unknown }>(TableContext);
   const { context } = tableContext;
   const { selectedRows = [], selectedFileIds = [] } = context as {
     selectedRows: unknown[];
@@ -62,23 +61,32 @@ const DropDownView: React.FC<DropDownViewProps> = ({
     [selectedRows]
   );
   const cartIsEmpty = useMemo(() => filesId.length === 0, [filesId]);
-  const [manifest, setManifest] = useState('');
+  const manifestFileIds = allFiles ? filesId : selectedFileIds;
 
-  useQuery<CreateManifestQuery, CreateManifestQueryVariables>(
+  const {
+    data: manifestData,
+    loading: manifestLoading,
+    error: manifestError,
+  } = useQuery<CreateManifestQuery, CreateManifestQueryVariables>(
     CreateManifestDocument,
     {
       variables: {
-        uuid: allFiles ? filesId : selectedFileIds,
-        first: allFiles ? filesId.length : selectedFileIds.length,
+        uuid: manifestFileIds,
+        first: manifestFileIds.length,
       },
-      skip: allFiles ? !filesId : !selectedFileIds,
-      onCompleted: ({ createManifest }) => {
-        setManifest(createManifest || '');
-      },
+      skip: manifestFileIds.length === 0,
     }
   );
+  const manifest =
+    manifestFileIds.length > 0 && !manifestLoading && !manifestError
+      ? (manifestData?.createManifest ?? '')
+      : '';
 
-  const { data } = useQuery<StoreManifestQuery, StoreManifestQueryVariables>(
+  const {
+    data,
+    loading: storeLoading,
+    error: storeError,
+  } = useQuery<StoreManifestQuery, StoreManifestQueryVariables>(
     StoreManifestDocument,
     {
       variables: {
@@ -90,7 +98,8 @@ const DropDownView: React.FC<DropDownViewProps> = ({
     }
   );
 
-  const sbgUrl = useMemo(() => defaultTo(data?.storeManifest, ''), [data]);
+  const sbgUrl =
+    manifest && !storeLoading && !storeError ? (data?.storeManifest ?? '') : '';
 
   const isDropDownDisabled = useMemo(() => {
     switch (allFiles) {
@@ -292,7 +301,8 @@ const DropDownView: React.FC<DropDownViewProps> = ({
         break;
       }
       case DOWNLOAD_FILE_MANIFEST: {
-        downloadCsvString(manifest, myFilesPageData.manifestFileName);
+        if (manifest)
+          downloadCsvString(manifest, myFilesPageData.manifestFileName);
         break;
       }
       default:
