@@ -2,7 +2,7 @@
 
 The dashboard tests use Mock Service Worker, or MSW, to mock GraphQL responses. They render the dashboard with real Redux reducers, Apollo caching, filters, query-bar chips, tables, routing, and toast notifications.
 
-Apollo sends requests through `HttpLink`. MSW intercepts them and returns test data, so the tests need no running backend. Jest uses `setupServer` from `msw/node`. It does not install a browser service worker or start an HTTP server.
+See the [shared MSW testing guide](../../../../test/README.md) for the Jest environment, server lifecycle, client cleanup, and assertion guidelines. This page covers the dashboard fixtures and scenarios.
 
 ## Run the tests
 
@@ -18,7 +18,7 @@ To run the regression test for returning to an earlier search with the same resu
 npm test -- --runInBand --coverage=false src/pages/dashboard/__test__/Dashboard.test.jsx -t 'restores an earlier search'
 ```
 
-## Files and setup
+## Dashboard setup
 
 | File                                                             | Purpose                                                                                 |
 | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
@@ -27,26 +27,13 @@ npm test -- --runInBand --coverage=false src/pages/dashboard/__test__/Dashboard.
 | [test/msw-environment.cjs](../../../../test/msw-environment.cjs) | Supplies Node's Fetch API, streams, and related globals inside jsdom.                   |
 | [package.json](../../../../package.json)                         | Declares MSW and the Jest transforms for its ES-module dependencies.                    |
 
-The test file selects the custom environment with this leading comment:
-
-```js
-/**
- * @jest-environment ./test/msw-environment.cjs
- * @jest-environment-options {"customExportConditions":["node","node-addons"]}
- */
-```
-
-The export conditions let Jest resolve `msw/node`. The custom environment keeps jsdom's DOM and supplies Node's Fetch API implementations. This setup was verified with Node 20.19.0. Jest transforms `rettime`, `until-async`, and `@open-draft/deferred-promise` to CommonJS because they ship ES modules.
-
-## Request handling and cleanup
-
-Importing `mocks/server.js` registers hooks that start interception before the suite, reset handler overrides after each test, and stop interception after the suite. MSW treats requests without a matching handler as errors because the server uses `onUnhandledRequest: 'error'`.
+Importing `mocks/server.js` starts interception before the suite, resets handlers after each test, and stops interception after the suite. Requests without a matching handler fail.
 
 Each test gets a fresh Redux store and Apollo client with its own cache. Cleanup stops the client, dismisses toasts, and restores environment spies.
 
 The default GraphQL handler targets `http://localhost/graphql`. Its test data contains two cases with samples, case files, and study files. The handler filters results using request variables and returns the fields requested by each operation. It handles both dashboard summaries and table requests.
 
-The shared application test setup mocks many UI components. This suite restores the real Apollo and Bento modules it needs. It excludes charts and routes calls through the application store singleton to the test's Redux store. A `getComputedStyle` shim handles jsdom's lack of pseudo-element styling.
+The shared test setup mocks many UI components. This suite restores the real Apollo and Bento modules it needs and leaves charts mocked. Calls to the application's shared store use the test's Redux store. A `getComputedStyle` shim handles jsdom's lack of pseudo-element styling.
 
 ## Add a scenario
 
@@ -60,11 +47,11 @@ server.use(
 );
 ```
 
-MSW uses this override before the default handler. After the failed request, the default handler responds when the user clicks Retry. Use `HttpResponse.json({ errors: [{ message: 'Unavailable' }] })` to simulate a GraphQL error response instead of a network failure.
+MSW uses this override before the default handler. After the failed request, the default handler responds when the user clicks Retry.
 
 To test responses arriving out of order, use the suite's deferred promises to hold and release a response. Avoid arbitrary sleeps. Release held responses in cleanup if the test can fail before it reaches the release step.
 
-Assert on user behavior. Check displayed rows and counts, click filter chips and Retry, enter searches, or open a saved-query URL. Do not assert on hook usage, Redux actions, component props, query-variable construction, cache internals, or request counts. An MSW handler can read request variables to model the API. Assertions about those variables would test implementation details.
+Check displayed rows and counts, click filter chips and Retry, enter searches, or open a saved-query URL. The handler reads request variables to model filtering, sorting, and pagination. Tests assert on the resulting UI.
 
 ## Current coverage
 
