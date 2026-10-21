@@ -1,4 +1,5 @@
 export const APP_QUERY_KEYS = {
+  dataDictionary: (url: string) => ['data-dictionary', url] as const,
   cart: {
     readMe: (url: string) => ['cart-readme', url] as const,
   },

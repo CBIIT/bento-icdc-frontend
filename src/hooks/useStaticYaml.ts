@@ -2,9 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { parse } from 'yaml';
 
-type StaticYamlQueryOptions = {
+type StaticYamlQueryOptions<T, TSelected> = {
   enabled?: boolean;
   staleTime?: number;
+  retry?: boolean | number;
+  select?: (_data: T) => TSelected;
 };
 
 const fetchStaticYaml = async <T>(url: string, signal?: AbortSignal) => {
@@ -12,15 +14,16 @@ const fetchStaticYaml = async <T>(url: string, signal?: AbortSignal) => {
   return parse(response.data) as T;
 };
 
-export const useStaticYaml = <T>(
+export const useStaticYaml = <T, TSelected = T>(
   queryKey: readonly string[],
   url: string,
-  options: StaticYamlQueryOptions = {}
+  options: StaticYamlQueryOptions<T, TSelected> = {}
 ) =>
-  useQuery<T, Error>({
+  useQuery<T, Error, TSelected>({
     queryKey,
     queryFn: ({ signal }) => fetchStaticYaml<T>(url, signal),
     enabled: options.enabled ?? true,
     staleTime: options.staleTime ?? 0,
-    retry: 3,
+    retry: options.retry ?? 3,
+    select: options.select,
   });

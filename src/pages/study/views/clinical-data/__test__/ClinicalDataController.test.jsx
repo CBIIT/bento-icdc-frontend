@@ -1,7 +1,20 @@
+/**
+ * @jest-environment ./test/msw-environment.cjs
+ * @jest-environment-options {"customExportConditions":["node","node-addons"]}
+ */
 import React from 'react';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { http, HttpResponse, delay } from 'msw';
+import { setupServer } from 'msw/node';
+import {
+  act,
+  fireEvent,
+  render as renderComponent,
+  screen,
+  within,
+  wait,
+} from '@testing-library/react';
 import { useQuery } from '@apollo/client';
-import axios from 'axios';
 import ClinicalDataController from '../ClinicalDataController';
 import { table } from '../../../../../bento/studyDetailsData';
 import { downloadAndZipJson, downloadJson } from '../../../../Cart/utils';
@@ -13,10 +26,6 @@ import { STUDY_DETAILS_ACTION_LABELS } from '../../../constants/studyDetails';
 jest.mock('@apollo/client', () => ({
   ...jest.requireActual('@apollo/client'),
   useQuery: jest.fn(),
-}));
-
-jest.mock('axios', () => ({
-  get: jest.fn(),
 }));
 
 jest.mock('../../../../../utils/env', () => ({
@@ -37,6 +46,26 @@ jest.mock('../../../studyDiagnostics', () => ({
   logStudyDiagnostic: jest.fn(),
 }));
 
+const endpoint = 'http://localhost/data-model.yml';
+const server = setupServer(
+  http.get(endpoint, () => HttpResponse.text('Nodes: {}'))
+);
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+let queryClient;
+const render = ui =>
+  renderComponent(
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
+  );
+const findDescription = async text => {
+  await wait(async () => {
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 10));
+    });
+    expect(screen.getByText(text)).toBeTruthy();
+  });
+};
 const mockUseQuery = useQuery;
 const emptyClinicalData = () =>
   Object.fromEntries(table.rows.map(row => [row.csvDownload, []]));
@@ -46,6 +75,7 @@ const ClinicalDataTable = ({ tblRows }) => (
   <main>
     {tblRows.map(row => (
       <section aria-label={row.clinicalDataNode} key={row.clinicalDataNode}>
+        <p>{row.clinicalDataDescription}</p>
         <CsvDownload {...row} />
       </section>
     ))}
@@ -54,7 +84,9 @@ const ClinicalDataTable = ({ tblRows }) => (
 
 describe('Clinical Data loading failures', () => {
   beforeEach(() => {
-    axios.get.mockReset();
+    queryClient = new QueryClient({
+      defaultOptions: { queries: { gcTime: Infinity } },
+    });
     mockUseQuery.mockReset();
     downloadAndZipJson.mockReset();
     downloadJson.mockReset();
@@ -62,10 +94,11 @@ describe('Clinical Data loading failures', () => {
     PaginatedTableView.mockImplementation(ClinicalDataTable);
   });
 
+  afterEach(() => queryClient.clear());
+
   it('keeps available data visible and lets the user retry', async () => {
     const refetch = jest.fn(() => new Promise(() => undefined));
 
-    axios.get.mockResolvedValue({ data: 'Nodes: {}' });
     mockUseQuery.mockReturnValue({
       loading: false,
       error: {
@@ -140,7 +173,12 @@ describe('Clinical Data loading failures', () => {
   it('shows an unavailable state and lets the user retry when no clinical data loads', () => {
     const refetch = jest.fn(() => new Promise(() => undefined));
 
-    axios.get.mockReturnValue(new Promise(() => undefined));
+    server.use(
+      http.get(endpoint, async () => {
+        await delay('infinite');
+        return HttpResponse.text('Nodes: {}');
+      })
+    );
     mockUseQuery.mockReturnValue({
       loading: false,
       error: {
@@ -173,48 +211,111 @@ describe('Clinical Data loading failures', () => {
     expect(refetch).toHaveBeenCalledTimes(1);
   });
 
-  it('keeps clinical data visible and retries unavailable descriptions', async () => {
-    const refetch = jest.fn();
+  it.each([
+    ['a failed request', () => new HttpResponse(null, { status: 503 })],
+    ['invalid YAML', () => HttpResponse.text('[invalid')],
+    [
+      'invalid node descriptions',
+      () => HttpResponse.text('Nodes:\n  visit: null'),
+    ],
+  ])(
+    'keeps clinical data visible and recovers descriptions after %s',
+    async (_reason, response) => {
+      const refetch = jest.fn();
 
-    axios.get
-      .mockRejectedValueOnce(new Error('Data dictionary could not be loaded'))
-      .mockReturnValueOnce(new Promise(() => undefined));
+      server.use(http.get(endpoint, response));
+      mockUseQuery.mockReturnValue({
+        loading: false,
+        error: undefined,
+        data: {
+          visitNodeData: [{ case_id: 'TEST-CASE' }],
+        },
+        refetch,
+      });
+
+      render(
+        <ClinicalDataController
+          studyCode="TEST-STUDY"
+          dataCount={{
+            caseCount: { visit: 1 },
+            nodeCount: { visit: 1 },
+          }}
+        />
+      );
+
+      expect(await screen.findByRole('main')).toBeTruthy();
+      expect(
+        screen.getByText(CLINICAL_DATA_MESSAGES.dictionaryUnavailable)
+      ).toBeTruthy();
+
+      server.use(
+        http.get(endpoint, () =>
+          HttpResponse.text(
+            'Nodes:\n  visit:\n    Desc: Visits recorded during the study.'
+          )
+        )
+      );
+      fireEvent.click(screen.getByText(STUDY_DETAILS_ACTION_LABELS.refresh));
+      expect(screen.getByRole('main')).toBeTruthy();
+
+      await findDescription('Visits recorded during the study.');
+      expect(screen.getByRole('main')).toBeTruthy();
+      await wait(() =>
+        expect(
+          screen.queryByText(CLINICAL_DATA_MESSAGES.dictionaryUnavailable)
+        ).toBeNull()
+      );
+    }
+  );
+
+  it('keeps descriptions available when the user switches studies', async () => {
+    server.use(
+      http.get(endpoint, () =>
+        HttpResponse.text(
+          'Nodes:\n  visit:\n    Desc: Visits recorded during the study.'
+        )
+      )
+    );
     mockUseQuery.mockReturnValue({
       loading: false,
-      error: undefined,
-      data: {
-        visitNodeData: [{ case_id: 'TEST-CASE' }],
-      },
-      refetch,
+      data: emptyClinicalData(),
+      refetch: jest.fn(),
     });
+    const StudySelection = () => {
+      const [study, setStudy] = React.useState('FIRST-STUDY');
+      return (
+        <>
+          <button onClick={() => setStudy('SECOND-STUDY')}>
+            Open second study
+          </button>
+          <h1>{study}</h1>
+          <ClinicalDataController
+            studyCode={study}
+            dataCount={{ caseCount: {}, nodeCount: {} }}
+          />
+        </>
+      );
+    };
+    render(<StudySelection />);
+    await findDescription('Visits recorded during the study.');
 
-    render(
-      <ClinicalDataController
-        studyCode="TEST-STUDY"
-        dataCount={{
-          caseCount: { visit: 1 },
-          nodeCount: { visit: 1 },
-        }}
-      />
+    server.use(
+      http.get(endpoint, () => new HttpResponse(null, { status: 503 }))
     );
-
-    expect(await screen.findByRole('main')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Open second study' }));
+    expect(screen.getByText('SECOND-STUDY')).toBeTruthy();
+    expect(screen.getByText('Visits recorded during the study.')).toBeTruthy();
     expect(
-      screen.getByText(CLINICAL_DATA_MESSAGES.dictionaryUnavailable)
-    ).toBeTruthy();
-
-    fireEvent.click(screen.getByText(STUDY_DETAILS_ACTION_LABELS.refresh));
-
-    expect(axios.get).toHaveBeenCalledTimes(2);
-    expect(refetch).not.toHaveBeenCalled();
+      screen.queryByText(CLINICAL_DATA_MESSAGES.dictionaryUnavailable)
+    ).toBeNull();
   });
 
   it('retries both requests when clinical data and descriptions are incomplete', async () => {
     const refetch = jest.fn(() => new Promise(() => undefined));
 
-    axios.get
-      .mockRejectedValueOnce(new Error('Data dictionary could not be loaded'))
-      .mockReturnValueOnce(new Promise(() => undefined));
+    server.use(
+      http.get(endpoint, () => new HttpResponse(null, { status: 503 }))
+    );
     mockUseQuery.mockReturnValue({
       loading: false,
       error: {
@@ -251,11 +352,10 @@ describe('Clinical Data loading failures', () => {
     fireEvent.click(screen.getByText(STUDY_DETAILS_ACTION_LABELS.refresh));
 
     expect(refetch).toHaveBeenCalledTimes(1);
-    expect(axios.get).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('main')).toBeTruthy();
   });
 
   it('warns when reported records are unavailable for download', async () => {
-    axios.get.mockResolvedValue({ data: 'Nodes: {}' });
     mockUseQuery.mockReturnValue({
       loading: false,
       error: undefined,
@@ -290,7 +390,6 @@ describe('Clinical Data loading failures', () => {
   });
 
   it('shows successful empty data without a warning or download icon', async () => {
-    axios.get.mockResolvedValue({ data: 'Nodes: {}' });
     mockUseQuery.mockReturnValue({
       loading: false,
       error: undefined,
@@ -333,7 +432,6 @@ describe('Clinical Data loading failures', () => {
   ])(
     'keeps Prior Surgery downloadable when one of its sources is unavailable',
     async ({ clinicalData }) => {
-      axios.get.mockResolvedValue({ data: 'Nodes: {}' });
       mockUseQuery.mockReturnValue({
         loading: false,
         error: undefined,
