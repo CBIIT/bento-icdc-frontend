@@ -1,11 +1,15 @@
+/**
+ * @jest-environment ./test/msw-environment.cjs
+ * @jest-environment-options {"customExportConditions":["node","node-addons"]}
+ */
 import React from 'react';
 import { act, fireEvent, render, screen, wait } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import axios from 'axios';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 import { Toaster, toast } from 'sonner';
 import HeaderView from '../HeaderView';
 
-jest.mock('axios', () => ({ get: jest.fn() }));
 jest.mock('html2pdf.js', () => jest.fn());
 jest.mock('marked', () => ({ marked: jest.fn() }));
 jest.mock('../../overview-widget', () => ({ OverviewWidget: () => null }));
@@ -13,6 +17,13 @@ jest.mock('../../../../../utils/env', () => ({
   __esModule: true,
   default: { REACT_APP_FILE_CENTRIC_CART_README: '/cart-readme.md' },
 }));
+
+const endpoint = 'http://localhost/cart-readme.md';
+const server = setupServer();
+
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 const content = 'Select files in your cart to download a manifest.';
 
@@ -37,7 +48,6 @@ describe('Cart README', () => {
     );
 
   beforeEach(() => {
-    axios.get.mockReset();
     client = new QueryClient({
       defaultOptions: { queries: { retry: false, gcTime: Infinity } },
     });
@@ -49,7 +59,7 @@ describe('Cart README', () => {
   });
 
   it('lets the user open, close, and reopen the README', async () => {
-    axios.get.mockResolvedValue({ data: content });
+    server.use(http.get(endpoint, () => HttpResponse.text(content)));
     renderHeader();
     fireEvent.click(screen.getByRole('button', { name: 'README' }));
     await findText(content);
@@ -67,12 +77,14 @@ describe('Cart README', () => {
   });
 
   it('lets the user retry a failed README request without leaving the cart', async () => {
-    axios.get.mockRejectedValue(new Error('Unavailable'));
+    server.use(
+      http.get(endpoint, () => new HttpResponse(null, { status: 503 }))
+    );
     renderHeader();
     await findText('Unable to load README content.');
     expect(screen.getByText('My Files')).toBeTruthy();
 
-    axios.get.mockResolvedValue({ data: content });
+    server.use(http.get(endpoint, () => HttpResponse.text(content)));
     fireEvent.click(screen.getByRole('button', { name: 'Retry' }));
     fireEvent.click(screen.getByRole('button', { name: 'README' }));
     await findText(content);

@@ -1,20 +1,28 @@
 /**
+ * @jest-environment ./test/msw-environment.cjs
  * @jest-environment-options {"customExportConditions":["node","node-addons"]}
  */
 import React from 'react';
 import { act, fireEvent, render, screen, wait } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Link, MemoryRouter, Route } from 'react-router-dom';
-import axios from 'axios';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 import { Toaster, toast } from 'sonner';
 import About from '../aboutController';
 
-jest.mock('axios', () => ({ get: jest.fn() }));
 jest.mock('../../../utils/env', () => ({
   __esModule: true,
   default: { REACT_APP_ABOUT_CONTENT_URL: '/about.yml' },
 }));
 jest.mock('../../../components/Stats/AllStatsController', () => () => null);
+
+const endpoint = 'http://localhost/about.yml';
+const server = setupServer();
+
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 const content =
   '- page: /about\n  title: About ICDC\n- page: /support\n  title: Contact support';
@@ -49,7 +57,6 @@ describe('About pages', () => {
     );
 
   beforeEach(() => {
-    axios.get.mockReset();
     client = new QueryClient({
       defaultOptions: { queries: { retryDelay: 0, gcTime: Infinity } },
     });
@@ -61,7 +68,7 @@ describe('About pages', () => {
   });
 
   it('shows the selected page when navigating between About and Support', async () => {
-    axios.get.mockResolvedValue({ data: content });
+    server.use(http.get(endpoint, () => HttpResponse.text(content)));
     renderPage();
     await findText('About ICDC');
 
@@ -77,11 +84,14 @@ describe('About pages', () => {
   it.each([
     [
       'the server is unavailable',
-      () => axios.get.mockRejectedValue(new Error('Unavailable')),
+      () =>
+        server.use(
+          http.get(endpoint, () => new HttpResponse(null, { status: 503 }))
+        ),
     ],
     [
       'the content cannot be parsed',
-      () => axios.get.mockResolvedValue({ data: '[invalid' }),
+      () => server.use(http.get(endpoint, () => HttpResponse.text('[invalid'))),
     ],
   ])('lets the user retry when %s', async (_description, failRequest) => {
     failRequest();
@@ -89,7 +99,7 @@ describe('About pages', () => {
     await findText('Unable to load page content.');
     expect(screen.queryByText('About ICDC')).toBeNull();
 
-    axios.get.mockResolvedValue({ data: content });
+    server.use(http.get(endpoint, () => HttpResponse.text(content)));
     fireEvent.click(screen.getByRole('button', { name: 'Retry' }));
     await findText('About ICDC');
     await wait(() =>
