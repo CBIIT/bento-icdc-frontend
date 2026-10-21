@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { withStyles } from '@material-ui/core';
-import axios from 'axios';
-import yaml from 'js-yaml';
 import { useQuery } from '@apollo/client';
 import ClinicalDataView from './ClinicalDataView';
 import styles from './ClinicalDataStyle';
@@ -13,49 +11,42 @@ import env from '../../../../utils/env';
 import { SkeletonLoader } from '../../../../components/Skeleton';
 import compact from '../../utils/compact';
 import { logStudyDiagnostic } from '../../studyDiagnostics';
+import { useStaticYaml } from '../../../../hooks/useStaticYaml';
+import { APP_QUERY_KEYS } from '../../../../utils/queryKeys';
+
+const selectNodeDescriptions = dictionary => {
+  const { Nodes: allNodes } = dictionary;
+  return Object.keys(allNodes || {}).reduce((descriptions, node) => {
+    descriptions[node] = allNodes[node].Desc;
+    return descriptions;
+  }, {});
+};
 
 const ClinicalDataController = ({ studyCode, classes, dataCount }) => {
-  /**
-   * Set node description from ymal files
-   */
-  const [description, setDescription] = useState(null);
-  const [hasDictionaryError, setHasDictionaryError] = useState(false);
   const DATA_MODEL = env.REACT_APP_DATA_MODEL;
-
-  const getNodeDescription = useCallback(async () => {
-    try {
-      const response = await axios.get(DATA_MODEL);
-      const dictionary = yaml.load(response.data);
-      const { Nodes: allNodes } = dictionary;
-      const nodeDescription = Object.keys(allNodes || {}).reduce(
-        (acc, node) => {
-          acc[node] = allNodes[node].Desc;
-          return acc;
-        },
-        {}
-      );
-
-      setDescription(nodeDescription);
-      setHasDictionaryError(false);
-    } catch (error) {
-      setDescription({});
-      setHasDictionaryError(true);
-      logStudyDiagnostic({
-        operation: 'loadStudyDataDictionary',
-        studyCode,
-        section: 'Clinical Data',
-        dictionaryUrl: DATA_MODEL,
-        errorMessage:
-          error instanceof Error
-            ? error.message
-            : 'Data dictionary request failed',
-      });
-    }
-  }, [DATA_MODEL, studyCode]);
+  const {
+    data: description,
+    error: dictionaryError,
+    isError: hasDictionaryError,
+    isFetched: hasDictionaryResponse,
+    refetch: refreshDataDictionary,
+  } = useStaticYaml(APP_QUERY_KEYS.dataDictionary(DATA_MODEL), DATA_MODEL, {
+    staleTime: 30 * 60 * 1000,
+    retry: false,
+    select: selectNodeDescriptions,
+  });
 
   useEffect(() => {
-    void getNodeDescription();
-  }, [getNodeDescription]);
+    if (!dictionaryError) return;
+
+    logStudyDiagnostic({
+      operation: 'loadStudyDataDictionary',
+      studyCode,
+      section: 'Clinical Data',
+      dictionaryUrl: DATA_MODEL,
+      errorMessage: dictionaryError.message,
+    });
+  }, [dictionaryError, DATA_MODEL, studyCode]);
 
   /**
    * table CSV download data
@@ -100,7 +91,7 @@ const ClinicalDataController = ({ studyCode, classes, dataCount }) => {
 
   if (
     (loading && !hasClinicalResponse) ||
-    (!isClinicalDataUnavailable && description === null)
+    (!isClinicalDataUnavailable && !hasDictionaryResponse)
   ) {
     return (
       <div className={classes.container}>
@@ -167,7 +158,7 @@ const ClinicalDataController = ({ studyCode, classes, dataCount }) => {
       hasDownloadCountMismatch={hasDownloadCountMismatch}
       hasDictionaryError={hasDictionaryError}
       refreshClinicalData={refetch}
-      refreshDataDictionary={getNodeDescription}
+      refreshDataDictionary={refreshDataDictionary}
     />
   );
 };

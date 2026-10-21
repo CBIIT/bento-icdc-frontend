@@ -1,43 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useApolloClient } from '@apollo/client';
+import React, { useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 import { connect } from 'react-redux';
+import { toast } from 'sonner';
 import { getFilters } from '../../bento-core';
 import DashboardView from './DashboardView';
 import { DASHBOARD_QUERY } from '../../bento/dashboardTabData';
 import { setActiveFilterByPathQuery } from '../../components/sideBarFilter/BentoFilterUtils';
 import { SkeletonLoader } from '../../components/Skeleton';
 
-const getDashData = states => {
+const DashboardDataController = props => {
   const { filterState, localFindUpload, localFindAutocomplete, searchText } =
-    states;
-  const client = useApolloClient();
-  async function getData(activeFilters) {
-    const result = await client
-      .query({
-        query: DASHBOARD_QUERY,
-        variables: activeFilters,
-      })
-      .then(response => {
-        if (response.data) {
-          const {
-            dashboard: searchCases,
-            searchTextResults,
-            biospecimen_source,
-            program,
-          } = response.data;
-          return {
-            searchCases,
-            searchTextResults,
-            biospecimen_source,
-            program,
-          };
-        }
-      });
-    return result;
-  }
-
-  const [dashData, setDashData] = useState(null);
-
+    props;
   const activeFilters = {
     ...getFilters(filterState),
     search_text: searchText || '',
@@ -47,32 +20,34 @@ const getDashData = states => {
     ],
   };
 
+  const { data, previousData, loading, error, refetch } = useQuery(
+    DASHBOARD_QUERY,
+    {
+      variables: activeFilters,
+      notifyOnNetworkStatusChange: true,
+    }
+  );
+
   useEffect(() => {
-    const controller = new AbortController();
-    getData(activeFilters).then(result => {
-      if (result) {
-        setDashData(result);
-      }
+    if (!error) return;
+
+    const message = 'Unable to load dashboard data.';
+    toast.error(message, {
+      id: message,
+      duration: Infinity,
+      action: {
+        label: 'Retry',
+        onClick: () => {
+          toast.dismiss(message);
+          void refetch().catch(() => undefined);
+        },
+      },
     });
-    return () => controller.abort();
-  }, [filterState, localFindUpload, localFindAutocomplete, searchText]);
+    return () => toast.dismiss(message);
+  }, [error, refetch]);
 
-  return { dashData, activeFilters };
-};
-
-const DashTemplateController = props => {
-  const { match, history } = props;
-  if (match.params.filterQuery) {
-    setActiveFilterByPathQuery(match);
-    const redirectUrl = '/explore';
-    history.push(redirectUrl);
-
-    return null;
-  }
-
-  const { dashData, activeFilters } = getDashData(props);
-
-  if (!dashData) {
+  const displayData = data || previousData;
+  if (!displayData) {
     return <SkeletonLoader variant="withSidebar" />;
   }
 
@@ -80,9 +55,9 @@ const DashTemplateController = props => {
   const {
     biospecimen_source: biospecimenSource,
     program,
-    searchCases,
+    dashboard: searchCases,
     searchTextResults,
-  } = dashData;
+  } = displayData;
 
   const {
     caseIds,
@@ -94,6 +69,7 @@ const DashTemplateController = props => {
   return (
     <DashboardView
       {...props}
+      loading={loading || !!error}
       searchResultIds={{
         caseIds: caseIds,
         sampleIds,
@@ -106,6 +82,20 @@ const DashTemplateController = props => {
       activeFilters={activeFilters}
     />
   );
+};
+
+const DashTemplateController = props => {
+  const { match, history } = props;
+  const filterQuery = match.params.filterQuery;
+
+  useEffect(() => {
+    if (filterQuery) {
+      setActiveFilterByPathQuery({ params: { filterQuery } });
+      history.push('/explore');
+    }
+  }, [filterQuery, history]);
+
+  return filterQuery ? null : <DashboardDataController {...props} />;
 };
 
 const mapStateToProps = state => ({

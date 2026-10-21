@@ -77,15 +77,20 @@ export const DownloadFileManifestLinkIcon = styled('img')({
   marginLeft: '3px',
 });
 
-export const MenuItem = styled(MuiMenuItem)(({ isDropDownDisabled }) => ({
-  textAlign: 'left',
-  cursor: isDropDownDisabled && 'not-allowed',
-  backgroundColor: '#3C597C',
-  marginTop: '1px',
-  '&: hover': {
-    backgroundColor: '#1A3D69',
-  },
-}));
+export const MenuItem = styled(MuiMenuItem)(
+  /** @param {{ isDropDownDisabled?: boolean }} props
+   * @returns {import('@emotion/react').CSSObject}
+   */
+  ({ isDropDownDisabled }) => ({
+    textAlign: 'left',
+    cursor: isDropDownDisabled && 'not-allowed',
+    backgroundColor: '#3C597C',
+    marginTop: '1px',
+    '&: hover': {
+      backgroundColor: '#1A3D69',
+    },
+  })
+);
 
 export const DropDownMenuList = styled(MenuList)({
   paddingTop: '0px',
@@ -96,59 +101,61 @@ export const DropDownMenuList = styled(MenuList)({
   border: '2px solid #0d71a3',
 });
 
-export const DisplayLinksDropDownButton = styled(Button)(({
-  open,
-  isDropDownDisabled,
-}) => {
-  const onDropdownStyles = open
-    ? {
-        borderTop: '1px solid #155F97',
-        borderRight: '1px solid #155F97',
-        borderLeft: '1px solid #155F97',
-        borderTopRightRadius: '8px',
-        borderTopLeftRadius: '8px',
-        borderBottomRightRadius: '0px',
-        borderBottomLeftRadius: '0px',
-      }
-    : {
-        border: '1px solid #155F97',
-        borderRadius: '8px',
-        textWrap: 'nowrap',
-      };
+export const DisplayLinksDropDownButton = styled(Button)(
+  /** @param {{ open: boolean, isDropDownDisabled?: boolean }} props
+   * @returns {import('@emotion/react').CSSObject}
+   */
+  ({ open, isDropDownDisabled }) => {
+    const onDropdownStyles = open
+      ? {
+          borderTop: '1px solid #155F97',
+          borderRight: '1px solid #155F97',
+          borderLeft: '1px solid #155F97',
+          borderTopRightRadius: '8px',
+          borderTopLeftRadius: '8px',
+          borderBottomRightRadius: '0px',
+          borderBottomLeftRadius: '0px',
+        }
+      : {
+          border: '1px solid #155F97',
+          borderRadius: '8px',
+          textWrap: 'nowrap',
+        };
 
-  const disableStyles = isDropDownDisabled
-    ? {
-        opacity: '0.5',
-        cursor: 'not-allowed',
-      }
-    : {
-        opacity: '1',
-        cursor: 'pointer',
-      };
+    const disableStyles = isDropDownDisabled
+      ? {
+          opacity: '0.5',
+          cursor: 'not-allowed',
+        }
+      : {
+          opacity: '1',
+          cursor: 'pointer',
+        };
 
-  return {
-    color: '#09557B',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    fontSize: '15px',
-    fontFamily: 'Lato',
-    textTransform: 'none',
-    paddingRight: '6px',
-    backgroundColor: '#F2F2F2',
-    width: '250px',
-    boxShadow: 'none',
-    '&:hover': {
+    return {
+      color: '#09557B',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: '15px',
+      fontFamily: 'Lato',
+      textTransform: 'none',
+      paddingRight: '6px',
       backgroundColor: '#F2F2F2',
+      width: '250px',
       boxShadow: 'none',
-    },
-    '& .MuiButton-icon': {
-      marginRight: '12px',
-      marginLeft: '30px',
-    },
-    ...disableStyles,
-    ...onDropdownStyles,
-  };
-});
+      '&:hover': {
+        backgroundColor: '#F2F2F2',
+        boxShadow: 'none',
+      },
+      '& .MuiButton-icon': {
+        marginRight: '12px',
+        marginLeft: '30px',
+      },
+      ...disableStyles,
+      ...onDropdownStyles,
+    };
+  }
+);
 
 export const DropDownMenuContainer = styled('div')({
   float: 'right',
@@ -161,6 +168,9 @@ export const MuiStyledPaper = styled(Paper)({
   zIndex: '100',
 });
 
-export const MuiStyledGrow = styled(Grow)(({ placement }) => ({
-  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
-}));
+export const MuiStyledGrow = styled(Grow)(
+  /** @param {{ placement?: string }} props */
+  ({ placement }) => ({
+    transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+  })
+);

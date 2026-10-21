@@ -10,8 +10,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useQueries, UseQueryResult } from '@tanstack/react-query';
-import axios from 'axios';
+import { useServiceVersions } from '../../hooks/useServiceVersions';
 import env from '../../utils/env';
 import bentoCorePackageJson from '../../../node_modules/@bento-core/all/package.json';
 import styled from '@emotion/styled';
@@ -37,8 +36,6 @@ import {
   formatNowForFilename,
 } from './downloadCsv';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
-type VersionResponse = { version: string };
 
 const OPTIONS = ['Download JSON', 'Download CSV'] as const;
 
@@ -175,40 +172,19 @@ const TableWrapper = styled.div({
   },
 });
 
-const VERSION_QUERIES = [
-  { key: ['backend', 'version'] as const, url: 'REACT_APP_BACKEND_VERSION' },
-  {
-    key: ['fileService', 'version'] as const,
-    url: 'REACT_APP_FILE_SERVICE_VERSION',
-  },
-  {
-    key: ['interop', 'version'] as const,
-    url: 'REACT_APP_INTEROP_SERVICE_VERSION',
-  },
-] as const;
-
-const isAxiosUrlDefined = (v?: string): v is string =>
-  typeof v === 'string' && v.length > 0;
-
 const SysInfo: React.FC = () => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(1);
-  const { context } = useContext(TableContext);
+  const { context } = useContext(TableContext) as {
+    context: Record<string, unknown>;
+  };
 
-  const [backendRes, fileServiceRes, interOpRes] = useQueries<
-    UseQueryResult<string, unknown>[]
-  >({
-    queries: VERSION_QUERIES.map(({ key, url }) => ({
-      queryKey: key,
-      queryFn: async () => {
-        const endpoint = (env as Record<string, string | undefined>)[url];
-        if (!isAxiosUrlDefined(endpoint)) return '';
-        const { data } = await axios.get<VersionResponse>(endpoint);
-        return data.version ?? '';
-      },
-    })),
-  });
+  const [backendRes, fileServiceRes, interOpRes] = useServiceVersions([
+    'backend',
+    'fileService',
+    'interop',
+  ]);
 
   const coreMicroServicesTable: Row[] = useMemo(
     () => [

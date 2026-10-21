@@ -115,6 +115,7 @@
     "jest-svg-transformer": "^1.0.0",
     "lint-staged": "^15.5.0",
     "mini-css-extract-plugin": "^2.9.2",
+    "msw": "^2.15.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "path": "^0.12.7",
     "pnp-webpack-plugin": "^1.7.0",
@@ -202,6 +203,24 @@
       "**/__test__/**/*.test.[jt]s?(x)"
     ],
     "transform": {
+      "node_modules/(rettime|until-async|@open-draft/deferred-promise)/.+\\.m?js$": [
+        "babel-jest",
+        {
+          "babelrc": false,
+          "configFile": false,
+          "presets": [
+            [
+              "@babel/preset-env",
+              {
+                "targets": {
+                  "node": "current"
+                },
+                "modules": "commonjs"
+              }
+            ]
+          ]
+        }
+      ],
       "^.+\\.(ts|tsx)$": "ts-jest",
       "^.+\\.(js|jsx)$": "babel-jest"
     },
@@ -210,6 +229,9 @@
     },
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.tsx"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(rettime|until-async|@open-draft/deferred-promise)/)"
     ]
   },
   "babel": {
