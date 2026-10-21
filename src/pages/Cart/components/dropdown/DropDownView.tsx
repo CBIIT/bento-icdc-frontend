@@ -3,7 +3,6 @@ import Popper from '@mui/material/Popper';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { useQuery } from '@apollo/client';
 import { noop } from 'lodash';
-import axios from 'axios';
 import { TableContext, ToolTip as Tooltip } from '../../../../bento-core';
 import cgcIcon from '../../assets/cgc.svg';
 import linkIcon from '../../assets/linkIcon.svg';
@@ -23,7 +22,6 @@ import {
 import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import DownloadFileManifestDialog from './downloadFileManifestDialog';
 import { downloadCsvString } from '../../utils';
-import env from '../../../../utils/env';
 import * as Styled from './DropDown.styled';
 
 const LABEL = 'Export and Download';
@@ -34,14 +32,6 @@ const { EXPORT_TO_CANCER_GENOMICS_CLOUD, DOWNLOAD_FILE_MANIFEST } = {
 };
 
 const OPTIONS = [EXPORT_TO_CANCER_GENOMICS_CLOUD];
-
-const getReadMe = async (
-  setContent: React.Dispatch<React.SetStateAction<string | undefined>>,
-  url: string
-) => {
-  const { data } = await axios.get<string>(url);
-  setContent(data);
-};
 
 const emptyCartTooltipContent = 'Add some files to the cart to get started.';
 const noSelectedRowsTooltipContent =
@@ -100,10 +90,7 @@ const DropDownView: React.FC<DropDownViewProps> = ({
     }
   );
 
-  const sbgUrl = useMemo(
-    () => defaultTo(data?.storeManifest, ''),
-    [data]
-  );
+  const sbgUrl = useMemo(() => defaultTo(data?.storeManifest, ''), [data]);
 
   const isDropDownDisabled = useMemo(() => {
     switch (allFiles) {
@@ -290,16 +277,8 @@ const DropDownView: React.FC<DropDownViewProps> = ({
   }, [open]);
 
   const [label] = useState<string>(LABEL);
-  // TODO: Is this useState necessary
-  const [_content, setContent] = useState<string | undefined>(undefined);
   const [downloadFileManifestDialogOpen, setDownloadFileManifestDialogOpen] =
     React.useState(false);
-
-  useEffect(() => {
-    //TODO: investigate this env usage
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-    void getReadMe(setContent, env.REACT_APP_FILE_CENTRIC_CART_README);
-  }, []);
 
   const initiateDownload = (currLabel: string) => {
     switch (currLabel) {
