@@ -12,6 +12,7 @@ import DashboardTabs from './components/DashboardTabs';
 import { updateStat } from '../../components/Stats/utils';
 import * as Styled from './Dashboard.styled';
 import PageContent from '../../components/Layout/PageContent';
+import LoadingSection from './components/LoadingSection';
 
 const Dashboard = ({
   searchCases,
@@ -21,9 +22,12 @@ const Dashboard = ({
   localFindAutocomplete,
   searchText,
   searchResultIds,
+  loading = false,
 }) => (
   <Styled.DashboardContainer>
-    <StatsView data={searchCases} />
+    <LoadingSection loading={loading} initialHeight={80}>
+      <StatsView data={searchCases} />
+    </LoadingSection>
     <PageContent>
       <Styled.Content>
         <Styled.SideBar>
@@ -40,9 +44,12 @@ const Dashboard = ({
         <Styled.WidgetTableContent>
           <div>
             <QueryBarView data={searchCases} />
-            <WidgetView data={searchCases} activeFilters={activeFilters} />
+            <LoadingSection loading={loading}>
+              <WidgetView data={searchCases} activeFilters={activeFilters} />
+            </LoadingSection>
           </div>
           <DashboardTabs
+            loading={loading}
             dashboardStats={updateStat(searchCases)}
             activeFilters={activeFilters}
             searchText={searchText}

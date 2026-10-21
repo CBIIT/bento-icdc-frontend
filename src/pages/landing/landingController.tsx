@@ -6,7 +6,7 @@ import NewsView from './views/newsView';
 import env from '../../utils/env';
 import { RouteComponentProps } from 'react-router-dom';
 import type { NewsPageData } from './views/news/types';
-import { useStaticYaml } from './useStaticYaml';
+import { useStaticYaml } from '../../hooks/useStaticYaml';
 import { APP_QUERY_KEYS } from '../../utils/queryKeys';
 
 const LANDING_CONTENT_URL = (env as Record<string, string>)

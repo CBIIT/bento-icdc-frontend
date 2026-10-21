@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   withStyles,
   AccordionDetails,
@@ -30,11 +30,7 @@ const SupportingData = ({ classes, data }) => {
       styledClasses,
     }) => {
       const { rows } = table;
-      const [tableRows, setRows] = useState(null);
-      useEffect(() => {
-        const tblRows = useOrderSupportingDataByRepo(data, repository, rows);
-        setRows(tblRows);
-      }, []);
+      const tableRows = useOrderSupportingDataByRepo(data, repository, rows);
 
       const [expand, setExpand] = useState(defaultExpand);
       const onExpandSection = () => {

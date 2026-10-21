@@ -5,6 +5,7 @@
 - [Overview](#overview)
 - [Quickstart](#quickstart)
 - [Scripts](#scripts)
+- [Testing](#testing)
 - [Contribution Workflow](#contribution-workflow)
 - [TypeScript](#typescript)
     - [Learning resources](#learning-resources)
@@ -59,6 +60,10 @@ We use **NVM (Node Version Manager)** to ensure everyone is using the correct No
 | Create production bundle | `npm run build`    |
 | Start production server  | `npm run serve`    |
 
+
+## Testing
+
+See the [MSW testing guide](test/README.md) for the shared Jest setup, REST and GraphQL handlers, client cleanup, and tests of user behavior. The [dashboard test guide](src/pages/dashboard/__test__/README.md) covers its fixtures and scenarios.
 
 ## Contribution Workflow
 - Create a new branch for your feature or fix.
