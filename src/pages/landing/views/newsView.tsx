@@ -457,11 +457,17 @@ const Tweet = ({ tweetId, onSettled, onPending }: TweetProps) => {
         </ScreenReaderStatus>
       )}
       {!hasLoaded && <TweetSkeleton />}
-      <div hidden={!hasLoaded}>
+      <div>
         <TwitterTweetEmbed
           key={attempt}
           tweetId={tweetId}
-          onLoad={() => {
+          onLoad={element => {
+            if (!element) {
+              setHasTimedOut(true);
+              setIsRetrying(false);
+              onSettled(tweetId);
+              return;
+            }
             setHasLoaded(true);
             setIsRetrying(false);
             onSettled(tweetId);
