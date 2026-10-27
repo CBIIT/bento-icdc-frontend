@@ -26,6 +26,7 @@ const DataAvailabilityCellView = props => {
     numberOfCaseFiles = 0,
     numberOfStudyFiles = 0,
     numberOfPublications = 0,
+    numberOfImageCollections = 0,
     // header,
   } = props;
   const generateCRDCLinks = (linksArray, clinicalStudyDesignation) => (
@@ -68,13 +69,12 @@ const DataAvailabilityCellView = props => {
       case 'numberOfStudyFiles':
         return `${numberOfStudyFiles} Study File(s)`;
       case 'numberOfImageCollections':
-        return `${studyData.length && studyData[0].numberOfImageCollections} Image Collection(s)`;
+        return `${numberOfImageCollections} Image Collection(s)`;
       case 'numberOfPublications':
         return `${numberOfPublications} Publication(s)`;
       default: {
         return (
-          studyData.length &&
-          generateCRDCLinks(crdcLinks, studyDesignation)
+          studyData.length && generateCRDCLinks(crdcLinks, studyDesignation)
         );
       }
     }
