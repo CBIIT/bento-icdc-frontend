@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 // --------------- GraphQL query - Retrieve stats details --------------
 export const GET_ALL_IDS = gql`
@@ -25,7 +25,7 @@ export const GET_SUBJECT_IDS = gql`
   }
 `;
 
-export const GET_IDS_BY_TYPE = (type) => gql`{
+export const GET_IDS_BY_TYPE = type => gql`{
     caseOverview(case_ids: [], first: 1000) {
     ${type}
   }
@@ -530,59 +530,59 @@ export const SUBJECT_OVERVIEW_QUERY = gql`
 // sliceTitle: string (optional)
 export const widgetsSearchData = [
   {
-    type: "sunburst",
-    title: "Programs and Arms",
-    dataName: "armsByPrograms",
-    mapWithDashboardWidget: "armsByPrograms",
-    datatable_level1_field: "program",
-    datatable_level2_field: "arm",
+    type: 'sunburst',
+    title: 'Programs and Arms',
+    dataName: 'armsByPrograms',
+    mapWithDashboardWidget: 'armsByPrograms',
+    datatable_level1_field: 'program',
+    datatable_level2_field: 'arm',
   },
   {
-    type: "donut",
-    title: "Diagnosis",
-    dataName: "subjectCountByDiagnosesFromLists",
-    mapWithDashboardWidget: "subjectCountByDiagnoses",
+    type: 'donut',
+    title: 'Diagnosis',
+    dataName: 'subjectCountByDiagnosesFromLists',
+    mapWithDashboardWidget: 'subjectCountByDiagnoses',
   },
   {
-    type: "donut",
-    title: "Recurrence Score",
-    dataName: "subjectCountByRecurrenceScoreFromLists",
-    mapWithDashboardWidget: "subjectCountByRecurrenceScore",
+    type: 'donut',
+    title: 'Recurrence Score',
+    dataName: 'subjectCountByRecurrenceScoreFromLists',
+    mapWithDashboardWidget: 'subjectCountByRecurrenceScore',
   },
   {
-    type: "donut",
-    title: "Tumor Size",
-    dataName: "subjectCountByTumorSizeFromLists",
-    mapWithDashboardWidget: "subjectCountByTumorSize",
+    type: 'donut',
+    title: 'Tumor Size',
+    dataName: 'subjectCountByTumorSizeFromLists',
+    mapWithDashboardWidget: 'subjectCountByTumorSize',
   },
   {
-    type: "donut",
-    title: "Chemotherapy",
-    dataName: "subjectCountByChemotherapyRegimenFromLists",
-    mapWithDashboardWidget: "subjectCountByChemotherapyRegimen",
+    type: 'donut',
+    title: 'Chemotherapy',
+    dataName: 'subjectCountByChemotherapyRegimenFromLists',
+    mapWithDashboardWidget: 'subjectCountByChemotherapyRegimen',
   },
   {
-    type: "donut",
-    title: "Endocrine Therapy",
-    dataName: "subjectCountByEndocrineTherapyFromLists",
-    mapWithDashboardWidget: "subjectCountByEndocrineTherapy",
+    type: 'donut',
+    title: 'Endocrine Therapy',
+    dataName: 'subjectCountByEndocrineTherapyFromLists',
+    mapWithDashboardWidget: 'subjectCountByEndocrineTherapy',
   },
 ];
 
 export const ageAtIndex = 10;
 
 export const localFindConfig = {
-  title: "Upload Case Set",
-  inputPlaceholder: "eg. ICDC-CASE-06, ICDC-CASE-22",
-  inputTooltip: "Enter valid Case IDs",
-  uploadTooltip: "Select a .tsv or .txt file from your computer",
-  accept: ".csv,.txt",
+  title: 'Upload Case Set',
+  inputPlaceholder: 'eg. ICDC-CASE-06, ICDC-CASE-22',
+  inputTooltip: 'Enter valid Case IDs',
+  uploadTooltip: 'Select a .tsv or .txt file from your computer',
+  accept: '.csv,.txt',
   maxSearchTerms: 1000,
-  matchedId: "case_id",
-  matchedLabel: "Submitted Case ID",
-  associateId: "study_code",
-  associateLabel: "Associated Study",
-  projectName: "ICDC",
-  uploadTooltipIcon: "SPEECH_BUBBLE",
-  listTitleIds: "Add a list of Case IDs:",
+  matchedId: 'case_id',
+  matchedLabel: 'Submitted Case ID',
+  associateId: 'study_code',
+  associateLabel: 'Associated Study',
+  projectName: 'ICDC',
+  uploadTooltipIcon: 'SPEECH_BUBBLE',
+  listTitleIds: 'Add a list of Case IDs:',
 };

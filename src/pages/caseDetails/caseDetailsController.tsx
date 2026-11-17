@@ -4,16 +4,23 @@ import CaseDetailView from './caseDetailsView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { SkeletonLoader } from '../../components/Skeleton';
 import { RouteComponentProps } from 'react-router';
-import { CaseDocument } from '../../generated-types/graphql';
+import {
+  CaseDocument,
+  CaseQuery,
+  CaseQueryVariables,
+} from '../../generated-types/graphql';
 
 type MatchParams = {
   id: string;
 };
 
 const CaseDetailContainer = ({ match }: RouteComponentProps<MatchParams>) => {
-  const { loading, error, data } = useQuery(CaseDocument, {
-    variables: { case_id: match.params.id },
-  });
+  const { loading, error, data } = useQuery<CaseQuery, CaseQueryVariables>(
+    CaseDocument,
+    {
+      variables: { case_id: match.params.id },
+    }
+  );
 
   if (loading) return <SkeletonLoader variant="withRounded" />;
   if (error) {

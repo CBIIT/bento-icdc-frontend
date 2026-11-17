@@ -19,19 +19,19 @@ const theme = {
     },
     MuiCollapse: {
       wrapperInner: {
-        '&> div': {
-          '&> div:nth-child(1)': {
-            '&> span:nth-child(2)': {
-              color: '#62737F',
-              fontFamily: 'Nunito',
-              fontWeight: 'bold',
-            },
-            '&> span:nth-child(3)': {
-              color: '#62737F',
-              fontFamily: 'Nunito',
-              fontWeight: 'bold',
-            },
-          },
+        '& span:nth-child(2)': {
+          color: '#62737F',
+          fontFamily: 'Nunito',
+          fontWeight: 'bold',
+          marginRight: '10px',
+        },
+        '& span:nth-child(3)': {
+          color: '#62737F',
+          fontFamily: 'Nunito',
+          fontWeight: 'bold',
+        },
+        '& span:nth-child(3) .highlight': {
+          color: '#537A9D',
         },
       },
     },
@@ -292,8 +292,13 @@ const theme = {
           fontSize: '13px',
           fontFamily: 'Nunito',
           fontWeight: '400',
+          textAlign: 'right',
+          minWidth: '25px',
+          whiteSpace: 'nowrap',
           marginRight: '0px',
           color: '#565656',
+          flex: '0 0 auto',
+          marginLeft: '5px',
         },
         '&.filter_by_samplesSubjects': {
           fontSize: '13px',
@@ -301,6 +306,11 @@ const theme = {
           fontWeight: '400',
           marginRight: '0px',
           color: '#565656',
+          textAlign: 'right',
+          minWidth: '25px',
+          whiteSpace: 'nowrap',
+          flex: '0 0 auto',
+          marginLeft: '5px',
         },
         '&.filter_by_filesSubjects': {
           fontSize: '13px',
@@ -308,6 +318,11 @@ const theme = {
           fontWeight: '400',
           marginRight: '0px',
           color: '#565656',
+          textAlign: 'right',
+          minWidth: '25px',
+          whiteSpace: 'nowrap',
+          flex: '0 0 auto',
+          marginLeft: '5px',
         },
       },
     },

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { toast } from 'sonner';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import {
@@ -11,13 +12,12 @@ import {
 } from '../../bento/JBrowseData';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import Error from '../error/Error';
-import { getAllFilesUri } from './util';
+import { useJbrowseFileUrls } from './useJbrowseFileUrls';
 import JbrowseDetailView from './JbrowseDetailView';
 import { SkeletonLoader } from '../../components/Skeleton';
 
 const JbrowseController = ({ match }) => {
   const { params } = match;
-  const [jbrowseFiles, setJbrowseFiles] = useState([]);
   const allFiles = useSelector(state =>
     state.jbrowseView &&
     state.jbrowseView.jbrowseFiles &&
@@ -25,9 +25,6 @@ const JbrowseController = ({ match }) => {
       ? state.jbrowseView.jbrowseFiles.filesName
       : JSON.parse(localStorage.getItem('jbrowseFiles'))
   );
-  if (!allFiles) {
-    return <SkeletonLoader />;
-  }
 
   /**
    * 1. Generate possible jbrowse index files
@@ -56,9 +53,10 @@ const JbrowseController = ({ match }) => {
     return files;
   };
 
-  const generateFiles = generateIndexFile(allFiles);
-  const { loading, error, data } = useQuery(GET_FILES_ID_BY_NAME, {
+  const generateFiles = generateIndexFile(allFiles || []);
+  const { loading, error, data, refetch } = useQuery(GET_FILES_ID_BY_NAME, {
     variables: { file_name: generateFiles },
+    skip: generateFiles.length === 0,
   });
 
   const formatFiles = (files, selectedFiles) => {
@@ -83,34 +81,51 @@ const JbrowseController = ({ match }) => {
     return formatedFiles;
   };
 
-  const getFiles = async () => {
-    if (data && data.fileIdsFromFileName) {
-      const promiseArr = data.fileIdsFromFileName.map(getAllFilesUri);
-      const responses = await Promise.all(promiseArr);
-      const formatedFiles = formatFiles(responses, allFiles);
-      setJbrowseFiles(formatedFiles);
-    }
-  };
+  const fileUrls = useJbrowseFileUrls(
+    data?.fileIdsFromFileName ?? [],
+    generateFiles.length > 0 && !loading && !error
+  );
+  const jbrowseFiles = useMemo(
+    () => (fileUrls.data ? formatFiles(fileUrls.data, allFiles || []) : []),
+    [fileUrls.data, allFiles]
+  );
+  const { error: urlError, refetch: refetchUrls } = fileUrls;
 
   useEffect(() => {
-    if (data && data.fileIdsFromFileName && !loading) {
-      getFiles();
-    }
-  }, [data]);
+    if (!error && !urlError) return;
+    const message = 'Unable to load JBrowse files.';
+    toast.error(message, {
+      id: message,
+      duration: Infinity,
+      action: {
+        label: 'Retry',
+        onClick: () => {
+          toast.dismiss(message);
+          void (error ? refetch() : refetchUrls()).catch(() => undefined);
+        },
+      },
+    });
+    return () => toast.dismiss(message);
+  }, [error, urlError, refetch, refetchUrls]);
 
-  if (loading || jbrowseFiles.length === 0) return <SkeletonLoader />;
-  if (data.fileIdsFromFileName && data.fileIdsFromFileName.length === 0) {
-    return <Error />;
-  }
-  if (error || !data.fileIdsFromFileName) {
+  if (error || urlError) {
     return (
       <Typography variant="h5" color="error" size="sm">
-        {error
-          ? `An error has occurred in loading component: ${error}`
-          : 'Recieved wrong data'}
+        {`An error has occurred in loading component: ${error || urlError}`}
       </Typography>
     );
   }
+  if (generateFiles.length === 0) return <Error />;
+  if (loading) return <SkeletonLoader />;
+  if (!data?.fileIdsFromFileName) {
+    return (
+      <Typography variant="h5" color="error" size="sm">
+        Recieved wrong data
+      </Typography>
+    );
+  }
+  if (data.fileIdsFromFileName.length === 0) return <Error />;
+  if (fileUrls.isPending) return <SkeletonLoader />;
 
   return (
     <>

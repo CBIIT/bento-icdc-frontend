@@ -20,6 +20,7 @@ import {
   StyledTab,
   StyledTabPanel,
 } from './sample-profile-modal.styled';
+import compact from '../utils/compact';
 
 const tabLabels = ['Site', 'Type', 'Pathology'];
 
@@ -209,7 +210,9 @@ const SampleProfileModal: React.FC<SampleProfileModalProps> = ({
                     >
                       <BarChartV2
                         isModal
-                        chartData={data[item.value as keyof StudyQuery]}
+                        chartData={compact(
+                          data[item.value as keyof StudyQuery]
+                        )}
                         palette={palette}
                         yAxisLabel={item.yAxisLabel}
                         xAxisLabel={item.xAxisLabel}

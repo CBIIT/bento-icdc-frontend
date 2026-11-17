@@ -1,9 +1,14 @@
 /* eslint-disable */
 import React from 'react';
+import { STUDY_DETAILS_MESSAGES } from '../../constants/studyDetails';
 import { customSorting, studyDisposition } from '../../utils';
 import SampleProfile from '../SampleProfile';
 import { Grid, Button } from '@mui/material';
-import { Study, StudyQuery } from '../../../../generated-types/types';
+import {
+  Study,
+  StudyQuery,
+  HumanRelevanceNodeData,
+} from '../../../../generated-types/types';
 import LaunchIcon from '@mui/icons-material/Launch';
 import pluralize from 'pluralize';
 import styled from '@emotion/styled';
@@ -13,21 +18,18 @@ import {
   HrLine,
   HumanRelevanceCard,
 } from './overview.styled';
+import compact from '../../utils/compact';
 
 interface OverviewProps {
   studyData: Study;
   diagnoses: string[];
   caseFileTypes: string[];
   data: StudyQuery;
-  nodeCount: number;
+  nodeCount: number | null;
   supportingDataCount: number;
-  setCurrentTab: React.Dispatch<React.SetStateAction<number>>;
-  supportingDataTabIndex: number;
-  clinicalDataTabIndex: number;
-  humanRelevanceCardData: {
-    human_relevance_statement: string;
-    nci_link_to_relevant_human_cancer: string;
-  };
+  onSelectSupportingData: () => void;
+  onSelectClinicalData: () => void;
+  humanRelevanceCardData: HumanRelevanceNodeData | undefined;
 }
 
 const Container = styled.div({
@@ -120,7 +122,7 @@ const MetadataWrapperV2 = styled.div({
         fontWeight: 600,
         color: '#B85300',
         textDecoration: 'underline',
-        pointer: 'cursor',
+        cursor: 'pointer',
       },
     },
   },
@@ -149,12 +151,12 @@ const Overview: React.FC<OverviewProps> = ({
   data,
   nodeCount,
   supportingDataCount,
-  clinicalDataTabIndex,
-  supportingDataTabIndex,
-  setCurrentTab,
+  onSelectSupportingData,
+  onSelectClinicalData,
   humanRelevanceCardData,
 }) => {
   const willOverflow = diagnoses.length >= 8;
+  const principalInvestigators = compact(studyData.principal_investigators);
 
   return (
     <Container>
@@ -167,7 +169,7 @@ const Overview: React.FC<OverviewProps> = ({
           >
             <img
               src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/study-details-human-rel-icon.svg"
-              alt="human-rel-icon"
+              alt="Human relevance icon"
               style={{
                 width: '54px',
                 height: '54px',
@@ -236,18 +238,13 @@ const Overview: React.FC<OverviewProps> = ({
           <div className="item">
             <div className="key">Principal Investigators:</div>
             <div className="value">
-              {studyData.principal_investigators
-                ? studyData.principal_investigators.map(
-                    (principalInvestigator, index) => {
-                      if (
-                        index + 1 ===
-                        studyData.principal_investigators.length
-                      ) {
-                        return `${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name}`;
-                      }
-                      return `${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `;
+              {principalInvestigators.length > 0
+                ? principalInvestigators.map((principalInvestigator, index) => {
+                    if (index + 1 === principalInvestigators.length) {
+                      return `${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name}`;
                     }
-                  )
+                    return `${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `;
+                  })
                 : ''}
             </div>
           </div>
@@ -329,31 +326,45 @@ const Overview: React.FC<OverviewProps> = ({
                 Additional data
               </DetailContainerHeaderText>
               <div>
-                {supportingDataCount > 0 || nodeCount > 0 ? (
+                {supportingDataCount > 0 ||
+                nodeCount === null ||
+                nodeCount > 0 ? (
                   <MetadataWrapperV2>
-                    {nodeCount > 0 && (
+                    {nodeCount === null ? (
+                      <div className="item">
+                        <div className="key">Clinical Data:</div>
+                        <div className="value">
+                          <span
+                            className="number-span"
+                            onClick={onSelectClinicalData}
+                          >
+                            {
+                              STUDY_DETAILS_MESSAGES.clinicalNodeCountUnavailable
+                            }
+                          </span>
+                        </div>
+                      </div>
+                    ) : nodeCount > 0 ? (
                       <div className="item">
                         <div className="key">Clinical Data in:</div>
                         <div className="value">
                           <span
                             className="number-span"
-                            onClick={() => setCurrentTab(clinicalDataTabIndex)}
+                            onClick={onSelectClinicalData}
                           >
                             {nodeCount}
                           </span>{' '}
                           {pluralize('Node', nodeCount)}
                         </div>
                       </div>
-                    )}
+                    ) : null}
                     {supportingDataCount > 0 && (
                       <div className="item">
                         <div className="key">Supporting Data in:</div>
                         <div className="value">
                           <span
                             className="number-span"
-                            onClick={() =>
-                              setCurrentTab(supportingDataTabIndex)
-                            }
+                            onClick={onSelectSupportingData}
                           >
                             {supportingDataCount}
                           </span>{' '}

@@ -23,15 +23,24 @@ interface TabLabelProps {
   title: string;
   primaryColorStyles: CSSProperties;
   icon?: string;
+  iconSpacing?: string;
 }
 const TabLabel: React.FC<TabLabelProps> = ({
   title,
   primaryColorStyles,
   icon,
+  iconSpacing = '0',
 }) => (
   <Wrapper primaryColorStyles={primaryColorStyles}>
-    {icon && <img src={icon} alt="icdc_carousel_tabs" />}
-    <span>{startCase(title.toLowerCase())} </span>
+    {icon && (
+      <>
+        <img src={icon} alt="icdc_carousel_tabs" />
+        <div style={{ height: iconSpacing }}></div>
+      </>
+    )}
+    <span>
+      {title.includes('ICDC') ? title : startCase(title.toLowerCase())}
+    </span>
   </Wrapper>
 );
 

@@ -26,6 +26,7 @@ const DataAvailabilityCellView = props => {
     numberOfCaseFiles = 0,
     numberOfStudyFiles = 0,
     numberOfPublications = 0,
+    numberOfImageCollections = 0,
     // header,
   } = props;
   const generateCRDCLinks = (linksArray, clinicalStudyDesignation) => (
@@ -57,7 +58,10 @@ const DataAvailabilityCellView = props => {
       ))}
     </ul>
   );
-  const studyData = interOpData?.studiesByProgram;
+
+  const studyData = interOpData?.externalDataOverview ?? [];
+  const crdcLinks =
+    studyData.length > 0 ? studyData.flatMap(item => item.CRDCLinks || []) : [];
   const generateIndicatorTooltipTitle = () => {
     switch (dataField) {
       case 'numberOfCaseFiles':
@@ -65,23 +69,19 @@ const DataAvailabilityCellView = props => {
       case 'numberOfStudyFiles':
         return `${numberOfStudyFiles} Study File(s)`;
       case 'numberOfImageCollections':
-        return `${studyData.length && studyData[0].numberOfImageCollections} Image Collection(s)`;
+        return `${numberOfImageCollections} Image Collection(s)`;
       case 'numberOfPublications':
         return `${numberOfPublications} Publication(s)`;
       default: {
         return (
-          studyData.length &&
-          generateCRDCLinks(
-            studyData[0].CRDCLinks,
-            studyData[0].clinical_study_designation
-          )
+          studyData.length && generateCRDCLinks(crdcLinks, studyDesignation)
         );
       }
     }
   };
 
   const value = props[dataField];
-  const currentStudyData = interOpData?.studiesByProgram.filter(
+  const currentStudyData = interOpData?.externalDataOverview?.filter(
     study => study.clinical_study_designation === studyDesignation
   );
   let flag;

@@ -96,7 +96,6 @@ export const multiStudyIcon = {
 
 export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
   query getAllFieldIdsSamplesTabForSelectAll(
-    $case_ids: [String] = []
     $sample_ids: [String] = []
     $program: [String] = []
     $study: [String]
@@ -122,7 +121,6 @@ export const GET_ALL_FILEIDS_SAMPLESTAB_FOR_SELECT_ALL = gql`
     $offset: Int = 0
   ) {
     sampleOverview(
-      case_ids: $case_ids
       sample_ids: $sample_ids
       program: $program
       study: $study
@@ -493,6 +491,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
       study {
         clinical_study_name
         clinical_study_designation
+        accession_id
         program {
           program_acronym
         }

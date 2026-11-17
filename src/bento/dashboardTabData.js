@@ -970,7 +970,7 @@ export const GET_CASES_OVERVIEW_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $order_by: String = "case_ids"
+    $order_by: String = "case_id"
     $sort_direction: String = "ASC"
     $first: Int = 15
     $offset: Int = 0
@@ -1051,7 +1051,7 @@ export const GET_CASES_OVERVIEW_DESC_QUERY = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $order_by: String = "case_ids"
+    $order_by: String = "case_id"
     $sort_direction: String = "DESC"
     $first: Int = 10
     $offset: Int = 0
@@ -1131,7 +1131,7 @@ export const GET_ALL_FILEIDS_CASESTAB_FOR_SELECT_ALL = gql`
     $file_format: [String]
     $biobank: [String]
     $study_participation: [String]
-    $order_by: String = "case_ids"
+    $order_by: String = "case_id"
     $sort_direction: String = "ASC"
     $first: Int = 10
     $offset: Int = 0
@@ -1419,6 +1419,7 @@ export const tableContainers = [
         dataField: 'case_id',
         header: 'Case ID',
         sort: 'asc',
+        primary: true,
         display: true,
         cellType: cellTypes.CUSTOM_ELEM,
         linkAttr: {

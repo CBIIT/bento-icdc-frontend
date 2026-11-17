@@ -1,32 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import yaml from 'js-yaml';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { toast } from 'sonner';
 import env from '../../utils/env';
 import AboutView from './aboutView';
 import { SkeletonLoader } from '../../components/Skeleton';
+import { useStaticYaml } from '../../hooks/useStaticYaml';
+import { APP_QUERY_KEYS } from '../../utils/queryKeys';
 
 const ABOUT_CONTENT_URL = env.REACT_APP_ABOUT_CONTENT_URL;
 
 const About = ({ match }) => {
-  const [data, setData] = useState([]);
+  const {
+    data: pages,
+    isError,
+    refetch,
+  } = useStaticYaml(
+    APP_QUERY_KEYS.about.staticContent(ABOUT_CONTENT_URL),
+    ABOUT_CONTENT_URL,
+    { staleTime: 30 * 60 * 1000 }
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-      let resultData = [];
-      let result = [];
-      try {
-        result = await axios.get(ABOUT_CONTENT_URL);
-        resultData = yaml.load(result.data);
-      } catch (_error) {
-        // result = await axios.get(YAMLData);
-        // resultData = yaml.safeLoad(result.data);
-      }
+    if (!isError) return;
 
-      const supportObj = resultData.find(({ page }) => page === match.path);
-      setData(supportObj);
-    };
-    fetchData();
-  }, [match.path]);
+    const message = 'Unable to load page content.';
+    toast.error(message, {
+      id: message,
+      duration: Infinity,
+      action: {
+        label: 'Retry',
+        onClick: () => {
+          toast.dismiss(message);
+          void refetch();
+        },
+      },
+    });
+  }, [isError, refetch]);
+
+  const data = Array.isArray(pages)
+    ? pages.find(page => page?.page === match.path)
+    : undefined;
   if (!data) {
     return <SkeletonLoader />;
   }

@@ -3,36 +3,63 @@ import { withStyles } from '@material-ui/styles';
 import downloadIcon from '../../../../assets/icons/clinical_data_csv_icon.svg';
 import { downloadJson } from '../../../../pages/Cart/utils';
 import { ToolTip } from '../../../../bento-core';
+import {
+  CLINICAL_DATA_MESSAGES,
+  getDownloadCountMismatchTooltip,
+  getDownloadUnavailableTooltip,
+} from '../../../../pages/study/constants/clinicalData';
 
-const CsvDownlaod = ({ classes, csvDataRow = [], manifest, fileName }) => {
+const CsvDownlaod = ({
+  classes,
+  csvDataRow = [],
+  csvDownloadUnavailable = false,
+  csvDownloadCountMismatch = false,
+  clinicalDataNode,
+  manifest,
+  fileName,
+}) => {
   const handleCSVDownload = () => {
     downloadJson(csvDataRow, '', fileName, manifest);
   };
+
+  if (csvDataRow.length === 0 && !csvDownloadUnavailable) return null;
+
+  const unavailableNode = clinicalDataNode
+    ? `${clinicalDataNode.charAt(0).toUpperCase()}${clinicalDataNode.slice(1)}`
+    : CLINICAL_DATA_MESSAGES.fallbackNodeLabel;
+
   return (
-    <>
-      {csvDataRow.length > 0 && (
-        <ToolTip
-          maxWidth="auto"
-          lineHeight="1.5"
-          fontFamily="Nunito"
-          fontSize="14px"
-          fontWeight="500"
-          padding="10px 19px"
-          title="Click to download the contents of this node"
-        >
-          <div
-            className={classes.tooltipImageWrapper}
-            onClick={() => handleCSVDownload()}
-          >
-            <img
-              src={downloadIcon}
-              alt="csv download icon"
-              className={classes.icon}
-            />
-          </div>
-        </ToolTip>
-      )}
-    </>
+    <ToolTip
+      maxWidth="auto"
+      lineHeight="1.5"
+      fontFamily="Nunito"
+      fontSize="14px"
+      fontWeight="500"
+      padding="10px 19px"
+      title={
+        csvDownloadCountMismatch
+          ? getDownloadCountMismatchTooltip(unavailableNode)
+          : csvDownloadUnavailable
+            ? getDownloadUnavailableTooltip(unavailableNode)
+            : CLINICAL_DATA_MESSAGES.downloadAvailableTooltip
+      }
+    >
+      <span
+        className={
+          csvDownloadUnavailable
+            ? classes.disabledTooltipImageWrapper
+            : classes.tooltipImageWrapper
+        }
+        aria-disabled={csvDownloadUnavailable || undefined}
+        onClick={csvDownloadUnavailable ? undefined : handleCSVDownload}
+      >
+        <img
+          src={downloadIcon}
+          alt={CLINICAL_DATA_MESSAGES.downloadIconAlt}
+          className={classes.icon}
+        />
+      </span>
+    </ToolTip>
   );
 };
 
@@ -42,7 +69,15 @@ const styles = {
     height: '24.72px',
   },
   tooltipImageWrapper: {
+    display: 'inline-flex',
+    lineHeight: 0,
     cursor: 'pointer',
+  },
+  disabledTooltipImageWrapper: {
+    display: 'inline-flex',
+    lineHeight: 0,
+    cursor: 'not-allowed',
+    opacity: 0.4,
   },
 };
 

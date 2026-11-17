@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { toast } from 'sonner';
+import { useCartReadMe } from '../../useCartReadMe';
 import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
 import ReadMeDialogComponent from '../../../../components/ReadMeDialog/ReadMe.controller';
 import ReadMoreSVG from '../readMore';
@@ -19,16 +20,28 @@ import { defaultTo } from 'lodash';
 
 const HeaderView = ({ filesId }) => {
   const [displayReadMe, setDisplayReadMe] = useState(false);
-  const [content, setContent] = useState(undefined);
-
-  const getReadMe = async url => {
-    const { data } = await axios.get(url);
-    setContent(data);
-  };
+  const {
+    data: content,
+    isError,
+    refetch,
+  } = useCartReadMe(env.REACT_APP_FILE_CENTRIC_CART_README);
 
   useEffect(() => {
-    getReadMe(env.REACT_APP_FILE_CENTRIC_CART_README);
-  }, []);
+    if (!isError) return;
+
+    const message = 'Unable to load README content.';
+    toast.error(message, {
+      id: message,
+      duration: Infinity,
+      action: {
+        label: 'Retry',
+        onClick: () => {
+          toast.dismiss(message);
+          void refetch();
+        },
+      },
+    });
+  }, [isError, refetch]);
 
   const displayReadMeHandler = () => {
     setDisplayReadMe(!displayReadMe);

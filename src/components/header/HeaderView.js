@@ -8,6 +8,7 @@ import { Header } from '../../bento-core';
 import { SEARCH_PUBLIC, searchKeys, searchFields } from '../../bento/search';
 import client from '../../utils/graphqlClient';
 import HeaderThemeProvider from './HeaderTheme';
+import SearchInput from './SearchInput';
 
 const customStyle = {
   nihLogoImg: {
@@ -43,6 +44,7 @@ const ICDCHeader = () => {
       placeholder: 'SEARCH THE ICDC',
       searchKeys,
       searchFields,
+      inputComponent: SearchInput,
     },
     classes: withStyles({}),
   };

@@ -15,6 +15,15 @@ const HeaderThemeProvider = ({ children }) => {
         container: {
           '& div#header': {
             zIndex: 0,
+            maxWidth: '100%',
+            minWidth: 0,
+            boxSizing: 'border-box',
+            '& *': {
+              boxSizing: 'border-box',
+            },
+            '& > div': {
+              minWidth: 0,
+            },
           },
         },
       },

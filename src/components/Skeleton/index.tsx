@@ -7,20 +7,27 @@ const FullHeightFlex = styled.div`
   display: flex;
   height: 100vh;
   gap: 8px;
+  min-width: 0;
 `;
 
 const CartOverviewWidgetContainer = styled.div({
-  minWidth: '1279px',
+  width: '100%',
+  maxWidth: '100%',
+  minWidth: 0,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   padding: '0 90px',
   flex: 1,
+  boxSizing: 'border-box',
   '& .wrapper': {
     width: '100%',
     height: '413px',
     borderRadius: '12px',
     border: '1px solid #D5D5D5',
+  },
+  '@media (max-width: 900px)': {
+    padding: '0 24px',
   },
 });
 
@@ -30,6 +37,7 @@ const SidebarContainer = styled.div`
 
 const MainContent = styled.div`
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, createTheme, ThemeProvider } from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@material-ui/core';
 import AboutHeader from './aboutHeader';
 import Stats from '../../components/Stats/AllStatsController';
 import { AboutBody } from '../../bento-core';
@@ -8,6 +8,7 @@ import {
   Image as StyledImage,
 } from './about.styled';
 import externalLinkLogo from '../../assets/icons/externalLink.svg';
+import PageContent from '../../components/Layout/PageContent';
 
 const AboutView = ({ data }) => {
   const getImage = (imgPath, alt) => (
@@ -16,12 +17,6 @@ const AboutView = ({ data }) => {
 
   const theme = {
     overrides: {
-      '@media (min-width: 1920px)': {
-        maxWidth: '100%',
-      },
-      '@media (min-width: 1280px)': {
-        maxWidth: '100%',
-      },
       MuiGrid: {
         root: {
           '& a': {
@@ -44,7 +39,7 @@ const AboutView = ({ data }) => {
       <Stats />
       <StyledContainer>
         <AboutHeader title={data.title} />
-        <Container>
+        <PageContent>
           <AboutBody
             linkColor="#027DA7"
             externalIconImage={externalLinkLogo}
@@ -68,7 +63,7 @@ const AboutView = ({ data }) => {
                 : null,
             }}
           />
-        </Container>
+        </PageContent>
       </StyledContainer>
     </ThemeProvider>
   );

@@ -6,31 +6,37 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 export const CartHeader = styled('div')({
   width: '100%',
-  height: '85px',
+  minHeight: '85px',
   borderBottom: '3px solid #686F7F',
-  minWidth: '1500px',
+  minWidth: 0,
+  display: 'flex',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+  boxSizing: 'border-box',
 });
 
 export const CartHeaderLogo = styled('div')({
-  float: 'left',
   display: 'flex',
-  height: '100px',
-  lineHeight: '100px',
+  height: '85px',
+  lineHeight: '85px',
   color: '#C25700',
   width: '225px',
+  flex: '0 0 auto',
   margin: '0 24px',
   alignItems: 'center',
+  minWidth: 0,
 });
 
 export const FileCartCount = styled.div({
   width: '220px',
+  maxWidth: '100%',
+  flex: '0 1 220px',
   height: '33px',
   border: '3px solid #81A6B9',
   background: '#F6F4F4',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginRight: '85px',
   padding: '4px 0',
   fontFamily: 'Roboto',
   fontWeight: '700',
@@ -69,10 +75,18 @@ export const PageTitle = styled('span')({
 
 export const ReadMeBtnDiv = styled('div')({
   display: 'flex',
-  height: '100%',
-  paddingTop: '18px',
+  flex: 1,
+  minWidth: 0,
+  padding: '18px 85px 12px 0',
   alignItems: 'center',
   justifyContent: 'space-between',
+  flexWrap: 'wrap',
+  gap: '16px',
+  boxSizing: 'border-box',
+  '@media (max-width: 900px)': {
+    flexBasis: '100%',
+    padding: '0 24px 16px',
+  },
 });
 
 export const ReadMeButton = styled(Button)({
@@ -92,9 +106,14 @@ export const ReadMeButton = styled(Button)({
 
 export const SelectFilesActionContainer = styled(Box)({
   width: '100%',
-  minWidth: '1279px',
+  maxWidth: '100%',
+  minWidth: 0,
   textAlign: 'right',
   paddingRight: '80px',
+  boxSizing: 'border-box',
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '12px',
   justifyContent: 'flex-end',
 });
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   withStyles,
   AccordionDetails,
@@ -15,12 +15,8 @@ import { customTheme, themeConfig } from './DataTheme';
 import hyperlinkIcon from '../../../../assets/icons/hyperlink.svg';
 import { ToolTip } from '../../../../bento-core';
 import CustomAccordion from './accordian/CustomAccordion';
-import { SkeletonLoader } from '../../../../components/Skeleton';
 
-const SupportingData = ({ classes, data, isLoading }) => {
-  if (isLoading) {
-    return <SkeletonLoader />;
-  }
+const SupportingData = ({ classes, data }) => {
   /**
    * Generate Custom Accordian Section Component
    */
@@ -34,11 +30,7 @@ const SupportingData = ({ classes, data, isLoading }) => {
       styledClasses,
     }) => {
       const { rows } = table;
-      const [tableRows, setRows] = useState(null);
-      useEffect(() => {
-        const tblRows = useOrderSupportingDataByRepo(data, repository, rows);
-        setRows(tblRows);
-      }, []);
+      const tableRows = useOrderSupportingDataByRepo(data, repository, rows);
 
       const [expand, setExpand] = useState(defaultExpand);
       const onExpandSection = () => {

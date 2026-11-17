@@ -33,6 +33,7 @@ const DashboardThemeProvider = ({ children }) => {
           root: {
             '&#jbrowse_help_icon_btn': {
               marginTop: '7px',
+              zIndex: '10',
             },
           },
         },

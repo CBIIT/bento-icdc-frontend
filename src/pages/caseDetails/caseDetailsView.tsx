@@ -16,6 +16,7 @@ import {
 import { defaultTo } from 'lodash';
 import { SkeletonLoader } from '../../components/Skeleton';
 import { CaseQuery, FilesOfCase } from '../../generated-types/types';
+import PageContent from '../../components/Layout/PageContent';
 
 const noValue = '';
 
@@ -32,6 +33,17 @@ type CaseDetailProps = {
 interface CustomF extends FilesOfCase {
   sample_id?: string;
 }
+
+type Diagnosis = {
+  disease_term?: string | null;
+  stage_of_disease?: string | null;
+  date_of_diagnosis?: string | null;
+  primary_disease_site?: string | null;
+  histology_cytopathology?: string | null;
+  histological_grade?: string | null;
+  best_response?: string | null;
+};
+
 const CaseDetail = ({ data }: CaseDetailProps) => {
   const stat = {
     numberOfStudies: 1,
@@ -89,8 +101,11 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
   );
 
   const diagnosesCard = useMemo(() => {
-    const primaryDiagnosis = caseDetail?.diagnoses[0];
-
+    const diagnosisList = caseDetail?.diagnoses as
+      | Diagnosis[]
+      | null
+      | undefined;
+    const primaryDiagnosis = diagnosisList?.[0] ?? null;
     return {
       title: 'Diagnoses',
       fields: [
@@ -172,16 +187,23 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
     [caseDetail]
   );
 
-  const files = [...data.filesOfCase].map(f => {
-    const customF: CustomF = { ...f };
-    const parentSample = data.samplesByCaseId.filter(s =>
-      s.files.map(sf => sf.uuid).includes(f.uuid)
-    );
-    if (parentSample && parentSample.length > 0) {
-      customF.sample_id = parentSample[0].sample_id;
-    }
-    return customF;
-  });
+  const files = [...data.filesOfCase]
+    .filter((f): f is FilesOfCase => f !== null && f !== undefined)
+    .map(f => {
+      const customF: CustomF = { ...f };
+      const parentSample = data.samplesByCaseId.filter(s =>
+        s.files.map(sf => sf.uuid).includes(f.uuid)
+      );
+      if (parentSample && parentSample.length > 0) {
+        customF.sample_id = parentSample[0].sample_id;
+      }
+      return customF;
+    });
+
+  const filterStudy = `${caseDetail.study.clinical_study_designation} (${caseDetail.study.accession_id})`;
+  const filterQuery = encodeURIComponent(
+    JSON.stringify({ study: [filterStudy] })
+  );
 
   const breadCrumbJson: BreadcrumbData[] = [
     {
@@ -196,7 +218,7 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
     },
     {
       name: `${caseDetail.study.clinical_study_designation} CASES`,
-      to: '/explore',
+      to: `/explore/${filterQuery}`,
       isALink: true,
     },
     {
@@ -208,134 +230,143 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
     <>
       <StatsView data={stat} />
       <Container>
-        <div className="breadcrumbs-wrapper">
-          <CustomBreadcrumb data={breadCrumbJson} />
-        </div>
-        <Header>
-          <div className="logo">
-            <img src={headerIcon} alt="ICDC case detail header logo" />
+        <PageContent noPadding>
+          <div className="breadcrumbs-wrapper">
+            <CustomBreadcrumb data={breadCrumbJson} />
           </div>
-
-          {(caseDetail.patient_first_name === '' ||
-            caseDetail.patient_first_name === null) &&
-          !(
-            caseDetail.enrollment &&
-            caseDetail.enrollment.initials !== '' &&
-            caseDetail.enrollment.initials !== null
-          ) ? (
-            <div className="header-title">
-              <div className="main-title">
-                <span>
-                  {' '}
-                  <span className="prefix">Case:</span> {caseDetail.case_id}
-                </span>
-              </div>
+          <Header>
+            <div className="logo">
+              <img src={headerIcon} alt="ICDC case detail header logo" />
             </div>
-          ) : (
-            <div className="header-title">
-              <div className="main-title">
-                <span>
-                  {' '}
-                  <span className="prefix">Case:</span> {caseDetail.case_id}
-                </span>
-              </div>
-              <div className="sub-title">
-                {caseDetail.patient_first_name === '' ||
-                caseDetail.patient_first_name === null ? (
-                  ''
-                ) : (
-                  <span className="case-wrapper">
-                    <span className="case-key">CASE NAME - </span>
-                    <span className="case-value">
-                      {caseDetail.patient_first_name}
-                    </span>
+
+            {(caseDetail.patient_first_name === '' ||
+              caseDetail.patient_first_name === null) &&
+            !(
+              caseDetail.enrollment &&
+              caseDetail.enrollment.initials !== '' &&
+              caseDetail.enrollment.initials !== null
+            ) ? (
+              <div className="header-title">
+                <div className="main-title">
+                  <span>
+                    {' '}
+                    <span className="prefix">Case:</span> {caseDetail.case_id}
                   </span>
-                )}
-                {caseDetail.enrollment &&
-                caseDetail.enrollment.initials !== '' &&
-                caseDetail.enrollment.initials !== null ? (
-                  <span className="case-wrapper">
-                    <span>INITIALS </span>
-                    <span className="initial-value">
-                      {caseDetail.enrollment.initials}
-                    </span>
-                  </span>
-                ) : (
-                  ''
-                )}
-              </div>
-            </div>
-          )}
-          {data.multiStudyCases &&
-            data.multiStudyCases.caseIds &&
-            data.multiStudyCases.caseIds.length > 1 && (
-              <>
-                <MultiStudyCases
-                  cases={data.multiStudyCases.caseIds}
-                  caseID={caseDetail.case_id}
-                />
-              </>
-            )}
-        </Header>
-
-        <CaseDetailCardsContainer>
-          <div className="card-with-right-border">
-            <div className="card-inner-container">
-              <p className="header-text">{descriptionCard.title}</p>
-
-              {defaultTo(descriptionCard.fields, []).map(
-                ({ key, value }, index) => (
-                  <div
-                    key={`${value}-${index}`}
-                    className="key-value-container"
-                  >
-                    <div className="key">{key}:</div>
-                    <div className="value">{value}</div>
-                  </div>
-                )
-              )}
-            </div>
-          </div>
-
-          <div className="card-with-right-border">
-            <div className="card-inner-container">
-              <p className="header-text">{diagnosesCard?.title}</p>
-
-              {defaultTo(diagnosesCard.fields, []).map(
-                ({ key, value }, index) => (
-                  <div
-                    key={`${value}-${index}`}
-                    className="key-value-container"
-                  >
-                    <div className="key">{key}:</div>
-                    <div className="value">{value}</div>
-                  </div>
-                )
-              )}
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="card-inner-container">
-              <p className="header-text">{studyCard?.title}</p>
-
-              {defaultTo(studyCard.fields, []).map(({ key, value }, index) => (
-                <div key={`${value}-${index}`} className="key-value-container">
-                  <div className="key">{key}:</div>
-                  <div className="value">{value}</div>
                 </div>
-              ))}
+              </div>
+            ) : (
+              <div className="header-title">
+                <div className="main-title">
+                  <span>
+                    {' '}
+                    <span className="prefix">Case:</span> {caseDetail.case_id}
+                  </span>
+                </div>
+                <div className="sub-title">
+                  {caseDetail.patient_first_name === '' ||
+                  caseDetail.patient_first_name === null ? (
+                    ''
+                  ) : (
+                    <span className="case-wrapper">
+                      <span className="case-key">CASE NAME - </span>
+                      <span className="case-value">
+                        {caseDetail.patient_first_name}
+                      </span>
+                    </span>
+                  )}
+                  {caseDetail.enrollment &&
+                  caseDetail.enrollment.initials !== '' &&
+                  caseDetail.enrollment.initials !== null ? (
+                    <span className="case-wrapper">
+                      <span>INITIALS </span>
+                      <span className="initial-value">
+                        {caseDetail.enrollment.initials}
+                      </span>
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </div>
+            )}
+            {data.multiStudyCases &&
+              data.multiStudyCases.caseIds &&
+              data.multiStudyCases.caseIds.length > 1 && (
+                <>
+                  <MultiStudyCases
+                    cases={data.multiStudyCases.caseIds}
+                    caseID={caseDetail.case_id}
+                  />
+                </>
+              )}
+          </Header>
+
+          <CaseDetailCardsContainer>
+            <div className="card-with-right-border">
+              <div className="card-inner-container">
+                <p className="header-text">{descriptionCard.title}</p>
+
+                {defaultTo(descriptionCard.fields, []).map(
+                  ({ key, value }, index) => (
+                    <div
+                      key={`${value}-${index}`}
+                      className="key-value-container"
+                    >
+                      <div className="key">{key}:</div>
+                      <div className="value">{value}</div>
+                    </div>
+                  )
+                )}
+              </div>
             </div>
-          </div>
-        </CaseDetailCardsContainer>
+
+            <div className="card-with-right-border">
+              <div className="card-inner-container">
+                <p className="header-text">{diagnosesCard?.title}</p>
+
+                {defaultTo(diagnosesCard.fields, []).map(
+                  ({ key, value }, index) => (
+                    <div
+                      key={`${value}-${index}`}
+                      className="key-value-container"
+                    >
+                      <div className="key">{key}:</div>
+                      <div className="value">{value}</div>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="card-inner-container">
+                <p className="header-text">{studyCard?.title}</p>
+
+                {defaultTo(studyCard.fields, []).map(
+                  ({ key, value }, index) => (
+                    <div
+                      key={`${value}-${index}`}
+                      className="key-value-container"
+                    >
+                      <div className="key">{key}:</div>
+                      <div className="value">{value}</div>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          </CaseDetailCardsContainer>
+        </PageContent>
       </Container>
 
       <TableContainer id="case_detail_table_associated_samples">
-        <div className="table-wrapper hide-icons">
-          <TableContextProvider>
-            <SampleTableView data={data.samplesByCaseId} />
-          </TableContextProvider>
-        </div>
+        <PageContent noPadding>
+          <div className="table-wrapper hide-icons">
+            <TableContextProvider>
+              <SampleTableView data={data.samplesByCaseId} />
+            </TableContextProvider>
+          </div>
+        </PageContent>
       </TableContainer>
 
       <TableContainer
@@ -344,11 +375,13 @@ const CaseDetail = ({ data }: CaseDetailProps) => {
           paddingBottom: '72px',
         }}
       >
-        <div className="table-wrapper show-icons">
-          <TableContextProvider>
-            <FileTableView data={files} />
-          </TableContextProvider>
-        </div>
+        <PageContent noPadding>
+          <div className="table-wrapper show-icons">
+            <TableContextProvider>
+              <FileTableView data={files} />
+            </TableContextProvider>
+          </div>
+        </PageContent>
       </TableContainer>
     </>
   );

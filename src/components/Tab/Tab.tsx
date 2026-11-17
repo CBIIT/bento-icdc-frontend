@@ -28,6 +28,7 @@ const StyledTab = styled(Tab)<StyledTabProps>(({ paddingValue }) => ({
 
 interface TabItemsProps {
   tabPadding?: string;
+  iconSpacing?: string;
   styleClasses: {
     tabPrimaryColor: CSSProperties;
     tabHighlightColor: CSSProperties;
@@ -54,12 +55,14 @@ const TabItems: React.FC<TabItemsProps> = ({
   currentTab,
   orientation,
   tabPadding,
+  iconSpacing,
 }) => {
   function getTabLalbel(title: string, image: string, index: number) {
     return (
       <TabLabel
         title={title}
         icon={image}
+        iconSpacing={iconSpacing}
         primaryColorStyles={
           currentTab === index
             ? styleClasses.tabHighlightColor

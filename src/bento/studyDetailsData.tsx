@@ -2,6 +2,20 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { cellTypes, dataFormatTypes, types, btnTypes } from '../bento-core';
+import { Publication } from '../generated-types/types';
+
+// Publication display config types
+interface DisplayAttribute {
+  label: string;
+  key: keyof Publication;
+  type: 'text' | 'link';
+  url?: string;
+}
+
+interface Display {
+  numbOfPublishPerView: number;
+  views: DisplayAttribute[];
+}
 
 // --------------- Tooltip configuration --------------
 export const tooltipContent = {
@@ -78,26 +92,26 @@ export const sampleProfile = {
 };
 
 export const palette = [
-  '#294b83',
-  '#9f2b23',
-  '#a8c4df',
-  '#cc703e',
-  '#dfc798',
-  '#c2c1c0',
-  '#517d98',
-  '#0b3556',
-  '#1d79a8',
-  '#ff7f15',
-  '#39c0f0',
-  '#8e9cef',
-  '#667b86',
-  '#4bc41e',
-  '#ca8312',
-  '#00b6d4',
-  '#00785a',
-  '#1c75bc',
-  '#b532a9',
-  '#02ad0f',
+  'hsla(218, 51%, 34%, 1)',
+  'hsla(3, 64%, 38%, 1)',
+  'hsla(209, 46%, 77%, 1)',
+  'hsla(21, 58%, 52%, 1)',
+  'hsla(40, 53%, 74%, 1)',
+  'hsla(30, 2%, 76%, 1)',
+  'hsla(203, 30%, 46%, 1)',
+  'hsla(206, 77%, 19%, 1)',
+  'hsla(200, 71%, 39%, 1)',
+  'hsla(27, 100%, 54%, 1)',
+  'hsla(196, 86%, 58%, 1)',
+  'hsla(231, 75%, 75%, 1)',
+  'hsla(204, 14%, 46%, 1)',
+  'hsla(104, 73%, 44%, 1)',
+  'hsla(37, 85%, 43%, 1)',
+  'hsla(189, 100%, 41%, 1)',
+  'hsla(165, 100%, 24%, 1)',
+  'hsla(207, 74%, 42%, 1)',
+  'hsla(306, 56%, 45%, 1)',
+  'hsla(125, 100%, 34%, 1)',
 ];
 
 export const argumentConfiguration = (text: string) => ({
@@ -170,6 +184,11 @@ export const tab = {
       label: 'SUPPORTING DATA',
       value: 'supporting_data',
     },
+    {
+      index: 6,
+      label: 'HUMAN RELEVANCE',
+      value: 'human_relevance',
+    },
   ],
   publication: {
     numbOfPublishPerView: 2,
@@ -201,8 +220,8 @@ export const tab = {
         type: 'link',
         url: 'https://pubmed.ncbi.nlm.nih.gov/',
       },
-    ],
-  },
+    ] satisfies DisplayAttribute[],
+  } satisfies Display,
 };
 
 export const addAssociatedFilesBtn = {
@@ -299,6 +318,10 @@ export const GET_HUMAN_RELEVANCE_DATA_BY_NODE = gql`
     humanRelevanceNodeData(study_codes: $study_codes) {
       human_relevance_record_id
       human_relevance_statement
+      relevant_human_cancer
+      relevant_experimental_therapeutic_intervention
+      relevant_human_genes
+      relevant_human_pathways
       nci_link_to_relevant_human_cancer
     }
   }
@@ -615,7 +638,6 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
       study_arms {
         arm
         arm_description
-        ctep_treatment_assignment_code
         cohorts {
           cohort_dose
           cohort_description
@@ -634,18 +656,19 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
         digital_object_id
         pubmed_id
       }
-      image_collections {
-        image_collection_name
-        image_collection_url
-        repository_name
-        image_type_included
-        collection_access
-      }
       cases {
         case_id
         diagnoses {
           disease_term
         }
+      }
+    }
+    externalDataOverview {
+      clinical_study_designation
+      CRDCLinks {
+        repository
+        url
+        metadata
       }
     }
   }
@@ -1064,41 +1087,6 @@ export const GET_VISIT_CLINICAL_DATA = gql`
     visitNodeData(study_code: $study_code) {
       visit_id
       visit_date
-    }
-  }
-`;
-
-export const studiesByProgram = gql`
-  query getStudiesByProgramStudyDetails {
-    studiesByProgram {
-      clinical_study_designation
-      CRDCLinks {
-        url
-        repository
-        metadata {
-          ... on IDCMetadata {
-            collection_id
-            cancer_type
-            date_updated
-            description
-            doi
-            image_types
-            location
-            species
-            subject_count
-            supporting_data
-          }
-          ... on TCIAMetadata {
-            Collection
-            Aggregate_PatientID
-            Aggregate_Modality
-            Aggregate_BodyPartExamined
-            Aggregate_ImageCount
-          }
-        }
-      }
-      numberOfCRDCNodes
-      numberOfImageCollections
     }
   }
 `;

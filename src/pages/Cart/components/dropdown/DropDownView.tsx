@@ -1,0 +1,451 @@
+import React, { useEffect, useState, useContext, useMemo } from 'react';
+import Popper from '@mui/material/Popper';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import { useQuery } from '@apollo/client';
+import { noop } from 'lodash';
+import { TableContext, ToolTip as Tooltip } from '../../../../bento-core';
+import cgcIcon from '../../assets/cgc.svg';
+import linkIcon from '../../assets/linkIcon.svg';
+import arrowDownPng from '../../assets/arrowDown.png';
+import arrowUpPng from '../../assets/arrowUp.png';
+import {
+  CreateManifestDocument,
+  CreateManifestQuery,
+  CreateManifestQueryVariables,
+} from '../../../../generated-types/graphql';
+import {
+  StoreManifestDocument,
+  StoreManifestQuery,
+  StoreManifestQueryVariables,
+} from '../../../../generated-types/interop/graphql';
+import { myFilesPageData } from '../../../../bento/fileCentricCartWorkflowData';
+import DownloadFileManifestDialog from './downloadFileManifestDialog';
+import { downloadCsvString } from '../../utils';
+import * as Styled from './DropDown.styled';
+
+const LABEL = 'Export and Download';
+
+const { EXPORT_TO_CANCER_GENOMICS_CLOUD, DOWNLOAD_FILE_MANIFEST } = {
+  EXPORT_TO_CANCER_GENOMICS_CLOUD: 'Export to Cancer Genomics Cloud',
+  DOWNLOAD_FILE_MANIFEST: 'Download File Manifest',
+};
+
+const OPTIONS = [EXPORT_TO_CANCER_GENOMICS_CLOUD];
+
+const emptyCartTooltipContent = 'Add some files to the cart to get started.';
+const noSelectedRowsTooltipContent =
+  'Select at least one file from the table below.';
+
+interface DropDownViewProps {
+  filesId?: string[];
+  allFiles: boolean;
+}
+
+const DropDownView: React.FC<DropDownViewProps> = ({
+  filesId = [],
+  allFiles,
+}) => {
+  const [open, setOpen] = useState(false);
+  const anchorRef = React.useRef<HTMLButtonElement>(null);
+
+  // download all or selected files
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  const tableContext = useContext<{ context: unknown }>(TableContext);
+  const { context } = tableContext;
+  const { selectedRows = [], selectedFileIds = [] } = context as {
+    selectedRows: unknown[];
+    selectedFileIds: string[];
+  };
+  const noSelectedRows = useMemo(
+    () => selectedRows.length === 0,
+    [selectedRows]
+  );
+  const cartIsEmpty = useMemo(() => filesId.length === 0, [filesId]);
+  const manifestFileIds = allFiles ? filesId : selectedFileIds;
+
+  const {
+    data: manifestData,
+    loading: manifestLoading,
+    error: manifestError,
+  } = useQuery<CreateManifestQuery, CreateManifestQueryVariables>(
+    CreateManifestDocument,
+    {
+      variables: {
+        uuid: manifestFileIds,
+        first: manifestFileIds.length,
+      },
+      skip: manifestFileIds.length === 0,
+    }
+  );
+  const manifest =
+    manifestFileIds.length > 0 && !manifestLoading && !manifestError
+      ? (manifestData?.createManifest ?? '')
+      : '';
+
+  const {
+    data,
+    loading: storeLoading,
+    error: storeError,
+  } = useQuery<StoreManifestQuery, StoreManifestQueryVariables>(
+    StoreManifestDocument,
+    {
+      variables: {
+        manifest,
+      },
+      skip: !manifest,
+      context: { clientName: 'interopService' },
+      fetchPolicy: 'no-cache',
+    }
+  );
+
+  const sbgUrl =
+    manifest && !storeLoading && !storeError ? (data?.storeManifest ?? '') : '';
+
+  const isDropDownDisabled = useMemo(() => {
+    switch (allFiles) {
+      case true:
+        return cartIsEmpty;
+      case false:
+        return noSelectedRows;
+    }
+  }, [allFiles, filesId, noSelectedRows]);
+
+  const dropDownTooltipTitle = useMemo(() => {
+    switch (allFiles) {
+      case true:
+        return cartIsEmpty ? emptyCartTooltipContent : '';
+      case false:
+        return cartIsEmpty
+          ? emptyCartTooltipContent
+          : noSelectedRows
+            ? noSelectedRowsTooltipContent
+            : '';
+    }
+  }, [allFiles, noSelectedRows, cartIsEmpty]);
+
+  const exportToCGCTooltipTitle = useMemo(() => {
+    switch (allFiles) {
+      case true:
+        switch (cartIsEmpty) {
+          case true:
+            return (
+              <>
+                Files in the cart can be easily exported into the
+                <Styled.CancerGenomicsCloudLink
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.cancergenomicscloud.org/"
+                >
+                  <Styled.CancerGenomicsCloudLinkText>
+                    {' Cancer Genomics Cloud.'}
+                    <Styled.CancerGenomicsCloudLinkIcon
+                      src={linkIcon}
+                      alt="linkIcon"
+                    />
+                  </Styled.CancerGenomicsCloudLinkText>
+                </Styled.CancerGenomicsCloudLink>
+              </>
+            );
+          case false:
+            return '';
+          default:
+            break;
+        }
+        break;
+
+      case false:
+        switch (noSelectedRows) {
+          case true:
+            return (
+              <>
+                Files in the cart can be easily exported into the
+                <Styled.CancerGenomicsCloudLink
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.cancergenomicscloud.org/"
+                >
+                  <Styled.CancerGenomicsCloudLinkText>
+                    {' Cancer Genomics Cloud.'}
+                    <Styled.CancerGenomicsCloudLinkIcon
+                      src={linkIcon}
+                      alt="linkIcon"
+                    />
+                  </Styled.CancerGenomicsCloudLinkText>
+                </Styled.CancerGenomicsCloudLink>
+              </>
+            );
+          case false:
+            return '';
+          default:
+            break;
+        }
+        break;
+    }
+  }, [cartIsEmpty, noSelectedRows, allFiles]);
+
+  const downloadFileManifestTooltipTitle = useMemo(() => {
+    switch (allFiles) {
+      case true:
+        switch (cartIsEmpty) {
+          case true:
+            return (
+              <>
+                Files in the cart can be downloaded as a file manifest with{' '}
+                <Styled.DownloadFileManifestLink
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.ga4gh.org/product/data-repository-service-drs/"
+                >
+                  <Styled.DownloadFileManifestLinkText>
+                    {'DRS'}
+                    <Styled.DownloadFileManifestLinkIcon
+                      src={linkIcon}
+                      alt="linkIcon"
+                    />
+                  </Styled.DownloadFileManifestLinkText>
+                </Styled.DownloadFileManifestLink>{' '}
+                identifiers and other useful metadata.
+              </>
+            );
+          case false:
+            return '';
+          default:
+            break;
+        }
+        break;
+
+      case false:
+        switch (noSelectedRows) {
+          case true:
+            return (
+              <>
+                Files in the cart can be downloaded as a file manifest with{' '}
+                <Styled.DownloadFileManifestLink
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.ga4gh.org/product/data-repository-service-drs/"
+                >
+                  <Styled.DownloadFileManifestLinkText>
+                    {'DRS'}
+                    <Styled.DownloadFileManifestLinkIcon
+                      src={linkIcon}
+                      alt="linkIcon"
+                    />
+                  </Styled.DownloadFileManifestLinkText>
+                </Styled.DownloadFileManifestLink>{' '}
+                identifiers and other useful metadata.
+              </>
+            );
+          case false:
+            return '';
+          default:
+            break;
+        }
+        break;
+    }
+  }, [cartIsEmpty, noSelectedRows, allFiles]);
+
+  // close dropdown if allFile is false and any row is not selected
+  useEffect(() => {
+    setOpen(false);
+  }, [selectedRows]);
+
+  const handleToggle = () => {
+    setOpen(prevOpen => !prevOpen);
+  };
+
+  const dropDownIcon = open ? (
+    <img src={arrowUpPng} alt="arrow up icon" />
+  ) : (
+    <img src={arrowDownPng} alt="arrow down icon" />
+  );
+
+  const handleClose = (event: MouseEvent | TouchEvent) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event: React.KeyboardEvent) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current?.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
+  const [label] = useState<string>(LABEL);
+  const [downloadFileManifestDialogOpen, setDownloadFileManifestDialogOpen] =
+    React.useState(false);
+
+  const initiateDownload = (currLabel: string) => {
+    switch (currLabel) {
+      case EXPORT_TO_CANCER_GENOMICS_CLOUD: {
+        if (sbgUrl) {
+          window.open(
+            `https://cgc.sbgenomics.com/import-redirect/drs/csv?URL=${encodeURIComponent(sbgUrl)}`,
+            '_blank'
+          );
+        }
+        break;
+      }
+      case DOWNLOAD_FILE_MANIFEST: {
+        if (manifest)
+          downloadCsvString(manifest, myFilesPageData.manifestFileName);
+        break;
+      }
+      default:
+        noop(data);
+        break;
+    }
+    noop();
+  };
+
+  /*const handleDownloadFileManifestDialogOpen = () => {
+    setDownloadFileManifestDialogOpen(true);
+  };*/
+
+  const handleDownloadFileManifestDialogClose = () => {
+    setDownloadFileManifestDialogOpen(false);
+  };
+
+  const getMenuItem = (_type: string) => {
+    /*let icon;
+    switch (type) {
+      case EXPORT_TO_CANCER_GENOMICS_CLOUD:
+        icon = cgcIcon;
+        break;
+      default:
+        // TODO: investigate this component
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        icon = undefined;
+        break;
+    }*/
+    return (
+      <>
+        <Styled.MenuItem isDropDownDisabled={isDropDownDisabled}>
+          <Tooltip
+            arrow
+            interactive
+            title={exportToCGCTooltipTitle}
+            placement="right"
+          >
+            <Styled.CancerGenomicsCloudButton
+              onClick={() => {
+                if (isDropDownDisabled) {
+                  return noop();
+                }
+                initiateDownload(EXPORT_TO_CANCER_GENOMICS_CLOUD);
+                setOpen(false);
+              }}
+            >
+              <Styled.CancerGenomicsCloudButtonLabel>
+                {EXPORT_TO_CANCER_GENOMICS_CLOUD}
+              </Styled.CancerGenomicsCloudButtonLabel>
+              <Styled.CancerGenomicsCloudButtonIcon src={cgcIcon} alt="icon" />
+            </Styled.CancerGenomicsCloudButton>
+          </Tooltip>
+        </Styled.MenuItem>
+        <Styled.MenuItem isDropDownDisabled={isDropDownDisabled}>
+          <Tooltip
+            arrow
+            interactive
+            maxWidth={250}
+            title={downloadFileManifestTooltipTitle}
+            placement="right"
+          >
+            <Styled.DownloadFileManifestButton
+              onClick={() => {
+                if (isDropDownDisabled) {
+                  return noop();
+                }
+                initiateDownload(DOWNLOAD_FILE_MANIFEST);
+              }}
+            >
+              <Styled.DownloadFileManifestButtonLabel>
+                Download File Manifest
+              </Styled.DownloadFileManifestButtonLabel>
+              <Styled.DownloadFileManifestButtonIcon
+                src="https://raw.githubusercontent.com/CBIIT/datacommons-assets/main/icdc/images/svgs/DMN_title_bar_download_icon.svg"
+                alt="icon"
+              />
+            </Styled.DownloadFileManifestButton>
+          </Tooltip>
+        </Styled.MenuItem>
+      </>
+    );
+  };
+
+  const options = OPTIONS.map(item => getMenuItem(item));
+
+  return (
+    <>
+      <Styled.DropDownMenuContainer>
+        <Tooltip
+          arrow
+          maxWidth={200}
+          placement="left"
+          title={dropDownTooltipTitle}
+        >
+          <Styled.DisplayLinksDropDownButton
+            open={open}
+            isDropDownDisabled={isDropDownDisabled}
+            endIcon={dropDownIcon}
+            ref={anchorRef}
+            aria-controls={open ? 'menu-list-grow' : undefined}
+            aria-haspopup="true"
+            onClick={handleToggle}
+          >
+            {label}
+          </Styled.DisplayLinksDropDownButton>
+        </Tooltip>
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+          sx={{
+            zIndex: '1000',
+          }}
+        >
+          {({ TransitionProps, placement }) => (
+            <Styled.MuiStyledGrow placement={placement} {...TransitionProps}>
+              <Styled.MuiStyledPaper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <Styled.DropDownMenuList
+                    autoFocusItem={open}
+                    id="menu-list-grow"
+                    onKeyDown={handleListKeyDown}
+                  >
+                    {options}
+                  </Styled.DropDownMenuList>
+                </ClickAwayListener>
+              </Styled.MuiStyledPaper>
+            </Styled.MuiStyledGrow>
+          )}
+        </Popper>
+      </Styled.DropDownMenuContainer>
+      <DownloadFileManifestDialog
+        onClose={handleDownloadFileManifestDialogClose}
+        open={downloadFileManifestDialogOpen}
+        filesId={filesId}
+        allFiles={allFiles}
+      />
+    </>
+  );
+};
+
+export default DropDownView;

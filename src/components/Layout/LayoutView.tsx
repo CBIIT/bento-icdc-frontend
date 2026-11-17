@@ -26,6 +26,7 @@ import SysInfo from '../../pages/sysinfo/sysInfo';
 import Error from '../../pages/error/Error';
 import { Global, css } from '@emotion/react';
 import { HeaderContainer, ContentWrapper } from './LayoutView.styled';
+import USABanner from '../USABanner';
 
 const LayoutView = () => {
   const [open, setOpen] = useState(false);
@@ -71,7 +72,7 @@ const LayoutView = () => {
       if (hasBanner) {
         document.documentElement.style.setProperty(
           '--site-alert-offset',
-          `${totalHeight - 2}px`
+          `${totalHeight - 4}px`
         );
         if (open) {
           document.documentElement.style.setProperty('--header-offset', `0px`);
@@ -83,6 +84,10 @@ const LayoutView = () => {
         } else {
           document.documentElement.style.setProperty(
             '--header-offset',
+            `179px`
+          );
+          document.documentElement.style.setProperty(
+            '--content-offset',
             `179px`
           );
         }
@@ -149,14 +154,11 @@ const LayoutView = () => {
             height: 100%;
             flex: 1;
           }
-          #root > div:nth-child(1) {
+          #root > [data-layout-header] {
             top: var(--site-alert-offset);
             position: fixed;
           }
-          #root > div:nth-child(2) {
-            margin-top: calc(var(--header-offset) + var(--site-alert-offset));
-          }
-          #root > div:nth-child(3) {
+          #root > [data-layout-content] {
             margin-top: calc(var(--content-offset) + var(--site-alert-offset));
           }
           *::-webkit-scrollbar {
@@ -186,14 +188,15 @@ const LayoutView = () => {
       />
       <HashRouter>
         {open && <OverlayWindow open={open} handleClose={handleClose} />}
-        <HeaderContainer ref={headerRef}>
+        <HeaderContainer ref={headerRef} data-layout-header>
           <LinkBar url="https://datacommons.cancer.gov/?cid=caninecommons.cancer.gov" />
+          <USABanner />
           <Header />
           {!navBarExclusions.find(item => item === location.hash) && <NavBar />}
         </HeaderContainer>
         {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
-        <ContentWrapper ref={contentRef}>
+        <ContentWrapper ref={contentRef} data-layout-content>
           <div className="switchWrapper">
             <Switch>
               <Route exact path="/ICDC/" component={Home} />

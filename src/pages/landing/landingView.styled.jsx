@@ -94,10 +94,12 @@ export const Container = styled.div({
 export const TabsWidgetContainer = styled.div({
   flex: '1',
   display: 'flex',
-  width: '40%',
+  width: '100%',
   alignItems: 'center',
   justifyContent: 'center',
+  gap: '64px',
   marginTop: '64px',
+  minWidth: 0,
 
   '& .left-panel': {
     height: '100%',
@@ -105,12 +107,15 @@ export const TabsWidgetContainer = styled.div({
     alignItems: 'center',
     justifyContent: 'center',
     width: '200px',
-    marginRight: '150px',
+    flex: '0 0 200px',
   },
 
   '& .right-panel': {
+    flex: 1,
+    minWidth: 0,
     '& .left-section': {
       maxWidth: '550px',
+      minWidth: 0,
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -152,6 +157,7 @@ export const TabsWidgetContainer = styled.div({
 
     '& .right-section': {
       flex: 1,
+      minWidth: 0,
       height: '100%',
       display: 'flex',
       justifyContent: 'center',
@@ -204,7 +210,7 @@ export const TabsWidgetContainer = styled.div({
 });
 
 export const WidgetsContainer = styled.div({
-  margin: '64px',
+  margin: '64px 0',
 });
 
 export const CallToActionButton = styled(Button)(() => {

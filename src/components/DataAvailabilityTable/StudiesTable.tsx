@@ -6,16 +6,13 @@ import {
   TableConfig as TableConfigPD,
   TableLayoutItem,
 } from '../../bento/programDetailData';
-import {
-  GetStudiesByProgramProgramDetailTwoQuery,
-  StudyOfProgram,
-} from '../../generated-types/types';
+import { ProgramQuery, StudyOfProgram } from '../../generated-types/graphql';
 import { TableConfig as TableConfigDAL } from './types';
 
 interface StudiesTableProps {
   table: TableConfigPD;
   tableLayOut: TableLayoutItem[];
-  interOpData: GetStudiesByProgramProgramDetailTwoQuery;
+  interOpData: ProgramQuery;
   rowsPerPage?: number;
   data: StudyOfProgram[];
 }

@@ -8,7 +8,7 @@ import Files from '../../assets/files.svg';
 import Studies from '../../assets/studies.svg';
 import Cases from '../../assets/cases.svg';
 import { defaultTo, startCase, toString, upperCase } from 'lodash';
-import { useQuery, ApolloError } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import {
   Container,
   Wrapper,
@@ -25,9 +25,11 @@ import {
 import { SkeletonLoader } from '../../../../components/Skeleton';
 import {
   CartChartData,
+  CartChartItem,
   GetCartOverviewDataQuery,
+  GetCartOverviewDataQueryVariables,
 } from '../../../../generated-types/types';
-import { GET_CART_OVERVIEW_DATA } from '../../../../bento/fileCentricCartWorkflowData';
+import { GetCartOverviewDataDocument } from '../../../../generated-types/graphql';
 
 type CartChartKeys = keyof Omit<
   CartChartData,
@@ -35,36 +37,57 @@ type CartChartKeys = keyof Omit<
 >;
 
 export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
-  const {
-    loading,
-    error,
-    data,
-  }: { loading: boolean; error?: ApolloError; data: GetCartOverviewDataQuery } =
-    useQuery(GET_CART_OVERVIEW_DATA, {
-      variables: {
-        file_uuids: defaultTo(fileIds, []),
-      },
-      skip: !fileIds,
-    });
+  const { loading, error, data } = useQuery<
+    GetCartOverviewDataQuery,
+    GetCartOverviewDataQueryVariables
+  >(GetCartOverviewDataDocument, {
+    variables: {
+      file_uuids: defaultTo(fileIds, []),
+    },
+    skip: !fileIds,
+  });
 
-  const cartOverviewData = useMemo(
-    () => defaultTo(data?.cartOverview, {}),
-    [data]
-  );
+  const cartOverviewData = data?.cartOverview;
 
   const { totalNumberOfFiles, totalNumberOfCases, studiesInCart, charts } =
-    cartOverviewData;
-
-  const chartKeys = useMemo(
-    () =>
-      Object.keys(defaultTo(charts, {})).filter(
-        item => item !== '__typename'
-      ) as CartChartKeys[],
-    [charts]
-  );
+    cartOverviewData || {};
 
   const [isPanelVisible, setIsPanelVisible] = useState(true);
   const [value, setValue] = React.useState<number>(0);
+
+  const chartKeys = useMemo(
+    () =>
+      charts
+        ? (Object.keys(charts).filter(
+            item => item !== '__typename'
+          ) as CartChartKeys[])
+        : [],
+    [charts]
+  );
+
+  const selectedChartData = useMemo<CartChartItem[]>(() => {
+    if (!charts || chartKeys.length === 0 || value >= chartKeys.length) {
+      return [];
+    }
+    const key = chartKeys[value];
+    // Type-safe access to CartChartData properties
+    let data: typeof charts.fileAssociation | undefined;
+    switch (key) {
+      case 'fileAssociation':
+        data = charts.fileAssociation;
+        break;
+      case 'fileFormat':
+        data = charts.fileFormat;
+        break;
+      case 'fileType':
+        data = charts.fileType;
+        break;
+      default:
+        data = undefined;
+    }
+    // Filter out null/undefined values and return as CartChartItem[]
+    return data?.filter((item): item is CartChartItem => item != null) ?? [];
+  }, [charts, chartKeys, value]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -121,7 +144,8 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                 <div className="title-wrapper">
                   <div className="title">Studies in this Cart</div>
                   <div className="subtitle studies-subtitle">
-                    {studiesInCart.join(', ')}
+                    {defaultTo(studiesInCart, []).filter(Boolean).join(', ') ||
+                      'No studies'}
                   </div>
                 </div>
               </IconAndTextWrapper>
@@ -167,7 +191,7 @@ export const OverviewWidget = ({ fileIds }: { fileIds: string[] }) => {
                 </StyledTabs>
               </Box>
               <Chart
-                chartData={charts[chartKeys[value]]}
+                chartData={selectedChartData}
                 yAxisLabel={startCase(chartKeys[value])}
               />
             </TabContext>

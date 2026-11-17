@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import { TableView, Wrapper, TableContext } from '../../bento-core';
 import styles from './TableStyle';
@@ -29,10 +29,13 @@ const PaginatedTableView = props => {
     customthemeConfig,
     tableReduxActions,
     overriedTableState,
+    preservePreferences = false,
+    searchText,
   } = props;
   // access table state
   const tableContext = useContext(TableContext);
   const { context } = tableContext;
+  const preferences = preservePreferences ? context : {};
   /*
    * useReducer table state
    * paginated table update data when state change
@@ -64,41 +67,29 @@ const PaginatedTableView = props => {
     query: config.api,
     paginationAPIField: config.paginationAPIField,
     dataKey: config.dataKey,
-    columns: CustomizeCellView({ ...config, ...tableReduxActions }),
+    columns: CustomizeCellView({ ...config, ...tableReduxActions }).map(
+      column => ({
+        ...column,
+        display:
+          (column.dataField &&
+            preferences.columns?.find(
+              saved => saved.dataField === column.dataField
+            )?.display) ??
+          column.display,
+      })
+    ),
     count: totalRowCount,
     selectedRows: [],
     selectedFileIds: [],
     tableMsg: config.tableMsg,
-    sortBy: config.defaultSortField,
-    sortOrder: config.defaultSortDirection,
+    sortBy: preferences.sortBy ?? config.defaultSortField,
+    sortOrder: preferences.sortOrder ?? config.defaultSortDirection,
     extendedViewConfig: ExtendedViewConfig(config),
     columnGroups: ColumnGrouping(config.columnGroups),
-    rowsPerPage,
+    rowsPerPage: preferences.rowsPerPage ?? rowsPerPage,
     page: 0,
+    ...(searchText === undefined ? {} : { searchQuery: searchText }),
   });
-  /**
-   * 1. update active Filter query for table only after
-   * dashboard state change
-   * prevents table from making additional call
-   */
-  const getQueryVariables = () => {
-    const [queryVeriables, setQueryVariables] = useState(activeFilters);
-    // searchCases query should be resolve first before updating the table row/data
-    // only when total count of cases/samples/files (totalRowCount) changed
-    // update the queryVeriables state to reload the table
-    // (state update will rerender the component),
-    // this will prevent backend call when table state is invalid
-    // invalid table state will display empty table
-    useEffect(() => {
-      setQueryVariables({
-        ...activeFilters,
-      });
-    }, [totalRowCount]);
-    return {
-      ...queryVeriables,
-    };
-  };
-
   // override table state
   if (overriedTableState) {
     overriedTableState(context);
@@ -129,7 +120,7 @@ const PaginatedTableView = props => {
                 ...themeConfig(tabStyles, context),
                 ...customthemeConfig,
               }}
-              queryVariables={getQueryVariables()}
+              queryVariables={activeFilters ?? {}}
               totalRowCount={totalRowCount}
               activeTab={activeTab}
               tblRows={tblRows}

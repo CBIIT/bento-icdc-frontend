@@ -16,6 +16,9 @@ export default () => ({
   topDownloadBtn: {
     textAlign: 'right',
   },
+  snackbarActionButton: {
+    textTransform: 'none',
+  },
   paginatedTableWrapper: {
     overflowY: 'auto',
     marginBottom: '32px',
