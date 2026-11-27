@@ -43,6 +43,7 @@ export type SoftwareReleaseContent = ReleaseListContent & {
 
 export type ReleaseCardConfig = {
   singularTitle: string;
+  releaseLabel: string;
   icon: string;
   repository: string;
   showsBuildVersions: boolean;

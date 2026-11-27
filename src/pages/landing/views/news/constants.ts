@@ -85,12 +85,14 @@ export const NEWS_PANEL_TOKENS = {
 export const RELEASE_CARD_CONFIGS = {
   dataModel: {
     singularTitle: 'Data Model Release',
+    releaseLabel: 'VERSION',
     icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/icdc-news-page-update-data-model-release.svg',
     repository: 'CBIIT/icdc-model-tool',
     showsBuildVersions: false,
   },
   software: {
     singularTitle: 'Software Release',
+    releaseLabel: 'RELEASE',
     icon: 'https://raw.githubusercontent.com/CBIIT/datacommons-assets/refs/heads/main/icdc/images/svgs/icdc-news-page-update-software-release.svg',
     repository: 'CBIIT/bento-icdc-frontend',
     showsBuildVersions: true,
