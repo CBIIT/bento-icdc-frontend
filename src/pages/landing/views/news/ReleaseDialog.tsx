@@ -182,8 +182,8 @@ const Content = styled(DialogContent)`
     h2,
     h3,
     h4 {
-    font-size: 14px;
-    line-height: 22px;
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 `;
@@ -305,7 +305,7 @@ export const ReleaseDialog = ({
     >
       <DialogHeader>
         <Title id={dialogTitleId}>
-          <ReleaseLabel>{config.singularTitle}:</ReleaseLabel>
+          <ReleaseLabel>{config.releaseLabel}:</ReleaseLabel>
           <ReleaseName>{release?.value}</ReleaseName>
           <ReleaseDate>{release?.date}</ReleaseDate>
         </Title>

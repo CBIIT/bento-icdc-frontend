@@ -107,7 +107,7 @@ export const ReleaseCard = ({ title, config }: ReleaseCardProps) => {
             hasPrevious={index > 0}
             onClick={() => setSelectedRelease(release)}
           >
-            <Label>{release.label}</Label>
+            <Label>{config.releaseLabel}:</Label>
             <Value>{release.value}</Value>
             <Date>{release.date}</Date>
           </Row>
